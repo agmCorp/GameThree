@@ -94,4 +94,4 @@ Eso me da las coordenadas x, y en donde va a estar el enemigo, que son las del v
 Luego cuando se crea el enemigo, el setbounds usa el tamano de la textura / PPM para definir el tamano.
 Ese tamanio son pixels / (pixels / metro) o sea, metros.
 Entonces no importaria el tamano del rectangulo en las layers.
-github
+github 2
