@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="61">
+ <tileset firstgid="1" source="background.tsx"/>
+ <layer name="floor" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzt1OVZFgwYhmFf6Z4BaVCYgZKGGWhQhBmQ7hloJWegG2eQslBW+M4lvn/Pj3OC+7ivxKtXr16TRDIppJJGOhlkkkU2OeSSRz5vKKCQIoopoZQyyqngLe+opIpqaqiljnre00AjTTTTQitttNNBJ11000MvffQzwCAf+MgQnxhmhFE+M8Y4E0wyxTQzzDLHPAssssQyK6yyxjobbPKFr2yxzQ677LHPAYccccwJp5xxzgWXXHHNDbd84zt33PPAI0/84Ce/+M0fnvnLP15IJOxLEsmkkEoa6WSQSRbZ5JBLHvm8oYBCiiimhFLKKKeCt7yjkiqqqaGWOup5TwONNNFMC6200U4HnXTRTQ+99NHPAIN84CNDfGKYEUb5zBjjTDDJFNPMMMsc8yywyBLLrLDKGutssMkXvrLFNjvsssc+BxxyxDEnnHLGORdccsU1N9zyje/ccc8Djzzxg5/84jd/eOYv/3gh4byvSSKZFFJJI50MMskimxxyySOfNxRQSBHFlFBKGeVU8JZ3VFJFNTXUUkc972mgkSaaaaGVNtrpoJMuuumhlz76GWCQD3xkiE8MM8IonxljnAkmmWKaGWaZY54FFllimRVWWWOdDTb5wle22GaHXfbY54BDjjjmhFPOOOeCS6645oZbvvGdO+554JEnfvCTX/zmD8/85R8vJIT5NUkkk0IqaaSTQSZZZJNDLnkkou3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tP1/aPt/4i2sXQ==
+  </data>
+ </layer>
+ <layer name="graphics" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzt1csNglAUBmHoALERxUZAGxFtBKURlEZ8NOKjAWfpynAMJi7mS2Z3/ru9SSJJkiRJkiRJkiRJkiRJkiRJkvQfsjRJJpTTNI1tZ9zPqaBFcFtyX9GSVsHtmvuaNrQNbhvud7SnNrjtuD/QkfrgVuNpaEd7aoPbjg50pD64PdGZLnQNbm90pwc9g1tJn2U0ofyL7YzmVHyxLami5cD729u/saaaNgNuf+HX72t8L12XGzQ=
+  </data>
+ </layer>
+ <objectgroup name="borders">
+  <object id="5" name="left" x="0" y="0" width="1" height="8000"/>
+  <object id="11" name="right" x="479" y="0" width="1" height="8000"/>
+  <object id="12" name="top" x="1" y="0" width="478" height="1"/>
+  <object id="13" name="bottom" x="1" y="7999" width="478" height="1"/>
+ </objectgroup>
+ <objectgroup name="obstacles">
+  <object id="20" name="obs2" x="114.5" y="7043.5" width="108" height="114.5"/>
+  <object id="22" name="obs1" x="311" y="7593" width="62.5" height="108"/>
+  <object id="26" name="obs3" x="355" y="6674" width="63" height="170.5"/>
+ </objectgroup>
+ <objectgroup name="items">
+  <object id="28" name="item3" x="191.75" y="7680" width="32" height="32"/>
+  <object id="29" name="item2" x="64.25" y="7712" width="32" height="32"/>
+  <object id="33" name="item1" x="352.25" y="7744.25" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="enemyOne">
+  <object id="46" name="enemyOne1" x="224" y="7264" width="32" height="32"/>
+  <object id="48" name="enemyOne2" x="352" y="7264" width="32" height="32"/>
+  <object id="49" name="enemyOne3" x="64" y="7264" width="32" height="32"/>
+  <object id="50" name="enemyOne4" x="128" y="7328" width="32" height="32"/>
+  <object id="51" name="enemyOne5" x="288" y="7000" width="32" height="32"/>
+  <object id="56" x="100.667" y="6886" width="32" height="30.6667"/>
+  <object id="57" x="152.667" y="6826" width="36.6667" height="22.6667"/>
+  <object id="58" x="62.6667" y="6771.33" width="29.3333" height="28"/>
+  <object id="59" x="295.333" y="6737.33" width="28" height="26.6667"/>
+  <object id="60" x="222" y="6573.33" width="29.3333" height="27.3333"/>
+ </objectgroup>
+</map>
