@@ -104,4 +104,31 @@ MUNDO (10 metros de ancho por 15 metros de largo): su origen está en la esquina
 TOUCH EVENTOS: su origen está en la esquina superior izquierda
 
 
-hola verano
+7)
+Para levantar en el trabajo:
+instalar java 8
+instalar git
+instalar android studio
+instalar android sdk
+instalar maven y leer readme.txt y ver la variable de entorno.
+setear los proxies:
+- en android studio (settings / proxy)
+- en git: git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
+setear variables de sistema JAVA_HOME, ANDROID_HOME
+
+abrir android studio, open new project y seleccionar la carpeta androidStudioProjects.
+Luego checkout desde github: https://github.com/agmCorp/GameThree
+
+cerrar andoid studio
+
+ir a dos, dentro de gamethree:
+gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 fetchNatives
+
+
+abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy y meter mi proxy poderoso.
+
+luego view/windows tools/gradle
+
+luego dalre sincronizar, esperar que finalice todo y la indexacion
+
+crear el run deskotp, luego darle run y pide module, ponerle desktop.
