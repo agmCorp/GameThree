@@ -95,4 +95,10 @@ Luego cuando se crea el enemigo, el setbounds usa el tamano de la textura / PPM 
 Ese tamanio son pixels / (pixels / metro) o sea, metros.
 Entonces no importaria el tamano del rectangulo en las layers.
 
-ACTUALIZATE
+5)
+Para traerme las cosas de github que modifiqué en el trabajo, hacer pull.
+
+6)
+PERSONAJE: position(x,y) indica su centro
+MUNDO (10 metros de ancho por 15 metros de largo): su origen está en la esquina inferior izquierda
+TOUCH EVENTOS: su origen está en la esquina superior izquierda
