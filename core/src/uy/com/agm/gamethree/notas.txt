@@ -109,10 +109,10 @@ Para levantar en el trabajo:
 instalar java 8
 instalar git
 instalar android studio
-instalar android sdk
+instalar android sdk (pues lo usa la variable de entorno que la usa git)
 instalar maven y leer readme.txt y ver la variable de entorno.
 setear los proxies:
-- en android studio (settings / proxy)
+- en android studio (settings / proxy, el poderoso)
 - en git: git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
 setear variables de sistema JAVA_HOME, ANDROID_HOME
 
