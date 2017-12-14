@@ -57,7 +57,6 @@ public class WorldContactListener implements ContactListener {
                 ((EnemyOne) fixA.getUserData()).reverseVelocity(true, false);
                 ((EnemyOne) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            //hola
         }
     }
 
