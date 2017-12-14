@@ -139,4 +139,7 @@ En fuente A.java borro el hola y pongo chau
 hago commit
 En fuente A.java borro el chau y pongo zapato.
 hago commit
-Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente A.java me lo sobreescriba y diga hola)
+Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente A.java me lo sobreescriba con lo que haya en github)
+
+Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo caso hago un pull y me lo traigo?
+Nadie tocó ese fuente y por ende yo fui el último que lo subió a github.
