@@ -131,3 +131,12 @@ luego view/windows tools/gradle
 luego dalre sincronizar, esperar que finalice todo y la indexacion
 
 crear el run deskotp, luego darle run y pide module, ponerle desktop.
+**********************
+no entiendo git:
+En fuente A.java escribo hola
+Hago commit y hago push a github
+En fuente A.java borro el hola y pongo chau
+hago commit
+En fuente A.java borro el chau y pongo zapato.
+hago commit
+Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente A.java me lo sobreescriba y diga hola)
