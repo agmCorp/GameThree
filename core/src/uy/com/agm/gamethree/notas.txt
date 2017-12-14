@@ -145,4 +145,4 @@ Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente
 Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo caso hago un pull y me lo traigo?
 Nadie tocó ese fuente y por ende yo fui el último que lo subió a github, no se como traerlo (checkout?)
 ADEMAS QUIERO HACER ESTO PARA TODAS LAS DIFERENCIAS DEL PROYECTO, O SEA, QUIERO REFRESCARLO CON LO ULTIMO DE GITHUB
-ES UNA REVERENDA BASURA
+ES UNA REVERENDA BASURA, amen
