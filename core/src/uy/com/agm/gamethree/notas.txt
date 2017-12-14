@@ -146,3 +146,4 @@ Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo ca
 Nadie tocó ese fuente y por ende yo fui el último que lo subió a github, no se como traerlo (checkout?)
 ADEMAS QUIERO HACER ESTO PARA TODAS LAS DIFERENCIAS DEL PROYECTO, O SEA, QUIERO REFRESCARLO CON LO ULTIMO DE GITHUB
 ES UNA REVERENDA BASURA, amen
+a ver si me puedo traer esta poronga
