@@ -24,7 +24,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    public enum State {STANDING, MOVING_UP, MOVING_DOWN, SHUTTING};
+    public enum State {STANDING, MOVING_UP, MOVING_DOWN, SHUTTING}
     public State currentState;
     public State previousState;
     public World world;
@@ -190,7 +190,7 @@ if ( y > 0) {
         //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
         boolean clockwise = true;
         float angulo = 90;
-        float height = this.getWidth();
+        float height = this.getWidth(); // si multiplico ambos por 0.8f es el 80% del sprite del archivo .png
         float width = this.getHeight();
         float temp;
 

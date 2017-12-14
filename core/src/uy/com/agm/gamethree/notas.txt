@@ -102,3 +102,5 @@ Para traerme las cosas de github que modifiqué en el trabajo, hacer pull.
 PERSONAJE: position(x,y) indica su centro
 MUNDO (10 metros de ancho por 15 metros de largo): su origen está en la esquina inferior izquierda
 TOUCH EVENTOS: su origen está en la esquina superior izquierda
+
+hola
