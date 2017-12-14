@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.sprites.Obstacle;
  */
 
 public class B2WorldCreator {
+    //modificado
     private static final String TAG = B2WorldCreator.class.getName();
 
     private Array<EnemyOne> enemiesOne;
