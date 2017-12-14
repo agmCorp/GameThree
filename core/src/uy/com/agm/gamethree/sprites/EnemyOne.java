@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -14,6 +15,8 @@ import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -33,17 +36,13 @@ public class EnemyOne extends Enemy {
         super(screen, x, y);
         Gdx.app.debug(TAG, "** TAMANO constructor X, Y " + x + " " + y );
 
-        Array<TextureAtlas.AtlasRegion> regions = screen.getAtlas().findRegions("enemyOne");
-        enemyOneAnimation = new Animation(1.0f / 8.0f, regions);
-        regions.clear();
-
-        regions = screen.getAtlas().findRegions("explosion");
-        explosionAnimation = new Animation(1.0f / 25.0f, regions);
+        enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
+        explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
 
         stateTime = 0;
 
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
-        TextureRegion enemyOne = screen.getAtlas().findRegion("enemyOne", 1);
+        TextureRegion enemyOne = Assets.instance.enemyOne.enemyOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
         Gdx.app.debug(TAG, "** TAMANO bounds X, Y, WIDTH, EIGHT " + getX() + " " + getY() + " " + enemyOne.getRegionWidth() / GameThree.PPM + " " + enemyOne.getRegionHeight() / GameThree.PPM);
         setBounds(getX(), getY(), enemyOne.getRegionWidth() / GameThree.PPM, enemyOne.getRegionHeight() / GameThree.PPM);
@@ -74,6 +73,7 @@ public class EnemyOne extends Enemy {
             case INJURED:
                 world.destroyBody(b2body);
                 currentState = State.EXPLODING;
+                AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
                 stateTime = 0;
                 break;
             case EXPLODING:

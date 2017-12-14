@@ -5,10 +5,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 public class GameThree extends Game {
 	private static final String TAG = GameThree.class.getName();
@@ -31,6 +34,13 @@ public class GameThree extends Game {
 	@Override
 	public void create () {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
+		// Load assets
+		Assets.instance.init(new AssetManager());
+
+		// Load preferences for audio settings and start playing music
+		//GamePreferences.instance.load();
+		AudioManager.instance.play(Assets.instance.music.songLevel1);
 
 		batch = new SpriteBatch();
 		playScreen = new PlayScreen(this);

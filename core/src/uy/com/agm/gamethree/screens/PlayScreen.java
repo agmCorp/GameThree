@@ -30,7 +30,6 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen implements Screen {
     private static final String TAG = PlayScreen.class.getName();
     private GameThree game;
-    private TextureAtlas atlas;
     public OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -47,7 +46,6 @@ public class PlayScreen implements Screen {
     public EnemyOne enemyOne;
 
     public PlayScreen(GameThree game) {
-        atlas = new TextureAtlas("characters/characters.pack");
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(GameThree.V_WIDTH / GameThree.PPM, GameThree.V_HEIGHT / GameThree.PPM, gameCam);
@@ -67,10 +65,6 @@ public class PlayScreen implements Screen {
         player = new Hero(this, 1.0f, 1.0f);
 
         world.setContactListener(new WorldContactListener());
-    }
-
-    public TextureAtlas getAtlas() {
-        return atlas;
     }
 
     @Override

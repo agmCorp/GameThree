@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.Assets;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -35,21 +36,16 @@ public class Hero extends Sprite {
     private float stateTimer;
 
     public Hero(PlayScreen screen, float x, float y) {
-        super(screen.getAtlas().findRegion("heroUp", 1));
+        super(Assets.instance.hero.heroStand);
 
         this.world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
 
-        Array<TextureAtlas.AtlasRegion> regions = screen.getAtlas().findRegions("heroUp");
-        heroMovingUp = new Animation(1.0f / 6.0f, regions);
-        regions.clear();
-
-        regions = screen.getAtlas().findRegions("heroDown");
-        heroMovingDown = new Animation(1.0f / 6.0f, regions);
-
-        heroStand = screen.getAtlas().findRegion("heroUp", 1);
+        heroMovingUp = Assets.instance.hero.heroMovingUp;
+        heroMovingDown = Assets.instance.hero.heroMovingDown;
+        heroStand = Assets.instance.hero.heroStand;
         setPosition(x, y);
 
         defineHero();

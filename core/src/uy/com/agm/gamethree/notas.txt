@@ -22,7 +22,10 @@ invisible que vaya avanzando con la camara y listo. creo es lo mejor.
 DUDAS
 -----
 - Que se ejecuta primero el update o el draw?
-For instance, within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled by the distance traveled in time "delta" (it doesn't render them, just moves their position variables). Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta), which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
+For instance, within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled by the distance
+traveled in time "delta" (it doesn't render them, just moves their position variables).
+Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
+which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
 
 VIDEO
 -----
@@ -40,7 +43,7 @@ Voy por el 21.
 video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
 
 
-
+quitar scrren.getatlas porque ya tengo assets
 
 HERRAMIENTAS
 ------------
@@ -105,34 +108,32 @@ TOUCH EVENTOS: su origen está en la esquina superior izquierda
 
 7)
 Para levantar en el trabajo:
-instalar java 8
-instalar git
-instalar android studio
-instalar android sdk (pues lo usa la variable de entorno que la usa git)
-instalar maven y leer readme.txt y ver la variable de entorno.
-setear los proxies:
-- en android studio (settings / proxy, el poderoso)
-- en git: git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
-setear variables de sistema JAVA_HOME, ANDROID_HOME
+- instalar java 8 y definir JAVA_HOME
+- instalar android sdk y definir ANDROID_HOME (pues la usa git)
+- instalar git y agregarlo al PATH. Definir su proxy:
+git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
+- instalar maven y agregarlo al PATH
+- instalar android studio y en settings apuntar a la instalación de git. Definir su proxy, puse el del bse.
+- abrir android studio, open new project y seleccionar la carpeta androidStudioProjects.
+- luego checkout (vcs/checkout from version control) desde github: https://github.com/agmCorp/GameThree (https://github.com/BrentAureli/SuperMario)
+- cerrar andoid studio
+/* esto podría no ser necesario
+- ir a dos, dentro de gamethree:
+gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 build
+Si es para supermario, puede ser que me falte alguna cosa de android, ahí tengo que abrir el sdk manager y bajarla.
+*/
+- abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy meter el del bse.
+- en settings deshabilitar configuration on demand
+- luego view/windows tools/gradle
+- luego dalre sincronizar, esperar que finalice  la indexacion
+Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en c\users\amorales\appdata\local\android\sdk.
+Sino el sdk Manager está en el menú tools/Android y ahí las cargo yo a mano hasta resolver todos los problemas.
+Tuve que editar el build.grandle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
+- cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
+- la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
 
-abrir android studio, open new project y seleccionar la carpeta androidStudioProjects.
-Luego checkout desde github: https://github.com/agmCorp/GameThree
 
-cerrar andoid studio
-
-ir a dos, dentro de gamethree:
-gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 fetchNatives
-
-
-abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy y meter mi proxy poderoso.
-
-luego view/windows tools/gradle
-
-luego dalre sincronizar, esperar que finalice todo y la indexacion
-
-crear el run deskotp, luego darle run y pide module, ponerle desktop.
-**********************
-**********************
+********************************************
 no entiendo git:
 En fuente A.java escribo hola
 Hago commit y hago push a github
@@ -145,5 +146,3 @@ Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente
 Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo caso hago un pull y me lo traigo?
 Nadie tocó ese fuente y por ende yo fui el último que lo subió a github, no se como traerlo (checkout?)
 ADEMAS QUIERO HACER ESTO PARA TODAS LAS DIFERENCIAS DEL PROYECTO, O SEA, QUIERO REFRESCARLO CON LO ULTIMO DE GITHUB
-ES UNA REVERENDA BASURA, amen
-a ver si me puedo traer esta poronga.
