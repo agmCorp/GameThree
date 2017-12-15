@@ -81,7 +81,6 @@ public class PowerOne extends Item {
                 }
                 break;
             case TOUCHED:
-                world.destroyBody(b2body);
                 currentState = TOUCHED;
                 AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
                 stateTime = 0;
