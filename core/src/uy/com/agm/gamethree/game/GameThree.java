@@ -22,8 +22,8 @@ public class GameThree extends Game {
 	public static final short DEFAULT_BIT = 1; // bordes
 	public static final short HERO_BIT = 2;
 	public static final short OBSTACLE_BIT = 4; // arboles
-	public static final short ITEM_BIT = 8;
-	public static final short TAKEN_BIT = 16; // lo quiero sacar
+	public static final short COINBOX_BIT = 8;
+	public static final short COINBOXOPENED_BIT = 16; // lo quiero sacar
 	public static final short ENEMY_BIT = 32;
 
 

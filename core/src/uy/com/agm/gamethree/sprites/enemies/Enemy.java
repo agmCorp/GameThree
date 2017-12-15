@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites;
+package uy.com.agm.gamethree.sprites.enemies;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;

@@ -11,10 +11,10 @@ import com.badlogic.gdx.utils.Array;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.Borders;
-import uy.com.agm.gamethree.sprites.EnemyOne;
-import uy.com.agm.gamethree.sprites.Item;
-import uy.com.agm.gamethree.sprites.Obstacle;
+import uy.com.agm.gamethree.sprites.tileObjects.Borders;
+import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.tileObjects.CoinBox;
+import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -43,10 +43,10 @@ public class B2WorldCreator {
             new Obstacle(screen, rect);
         }
 
-        // Layer: items
-        for(MapObject object : map.getLayers().get("items").getObjects().getByType(RectangleMapObject.class)) {
+        // Layer: coinboxes
+        for(MapObject object : map.getLayers().get("coinbox").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Item(screen, rect);
+            new CoinBox(screen, rect);
         }
 
         // Layer: enemyOne

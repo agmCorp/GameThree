@@ -8,9 +8,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.game.GameThree;
-import uy.com.agm.gamethree.sprites.Enemy;
-import uy.com.agm.gamethree.sprites.EnemyOne;
-import uy.com.agm.gamethree.sprites.InteractiveTileObject;
+import uy.com.agm.gamethree.sprites.enemies.Enemy;
+import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.tileObjects.InteractiveTileObject;
 
 /**
  * Created by AGM on 12/8/2017.
@@ -36,8 +36,8 @@ public class WorldContactListener implements ContactListener {
                 fixC = fixA.getFilterData().categoryBits == GameThree.OBSTACLE_BIT ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onHit();
                 break;
-            case GameThree.HERO_BIT | GameThree.ITEM_BIT:
-                fixC = fixA.getFilterData().categoryBits == GameThree.ITEM_BIT ? fixA : fixB;
+            case GameThree.HERO_BIT | GameThree.COINBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == GameThree.COINBOX_BIT ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onHit();
                 break;
             case GameThree.HERO_BIT | GameThree.ENEMY_BIT:

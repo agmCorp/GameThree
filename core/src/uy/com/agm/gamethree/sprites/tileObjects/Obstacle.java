@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites;
+package uy.com.agm.gamethree.sprites.tileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;

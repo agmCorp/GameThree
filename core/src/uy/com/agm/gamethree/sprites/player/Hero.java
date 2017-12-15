@@ -1,10 +1,9 @@
-package uy.com.agm.gamethree.sprites;
+package uy.com.agm.gamethree.sprites.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -172,7 +170,7 @@ if ( y > 0) {
         shape.setRadius(29 / GameThree.PPM);
         fdef.filter.categoryBits = GameThree.HERO_BIT; // Que es
         fdef.filter.maskBits = GameThree.DEFAULT_BIT |
-                GameThree.ITEM_BIT |
+                GameThree.COINBOX_BIT |
                 GameThree.OBSTACLE_BIT |
                 GameThree.ENEMY_BIT; // Con que puede colisionar
 

@@ -1,9 +1,7 @@
-package uy.com.agm.gamethree.sprites;
+package uy.com.agm.gamethree.sprites.tileObjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 

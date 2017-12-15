@@ -30,7 +30,6 @@ which uses delta to get the right frames for sprite animations, and actually dra
 VIDEO
 -----
 HACER REFACTORING Y COMENTAR UN POCO.
-HACER CLASE ASSETS.
 LUEGO:
 EL LOCO LE LLAMA COIN A LOS BRICKS QUE SE ROMPEN, YO LE LLAME ITEM.
 CREO QUE LO QUE DEBERIA HACER ES UN BRICK QUE SE ROMPE Y SUELTA UN ITEM QUE ME DA PODERES.
@@ -39,11 +38,8 @@ LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
 (VIDEO 13: Obtiene una tile (brick) y la hace desaparecer cuando es golpeada.
 No me sirve porque mis dibujos tienen tiles variables.)
 
-Voy por el 21.
+Voy por el 22.
 video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
-
-
-quitar scrren.getatlas porque ya tengo assets
 
 HERRAMIENTAS
 ------------
@@ -132,6 +128,14 @@ Tuve que editar el build.grandle de super mario y poner com.android.tools.build:
 - cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
 - la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
 
+8)
+   git fetch origin
+   git reset --hard origin/master
+
+   Puedo hacer un git pull, pero capaz lo mejor es hacer:
+   git fetch // trae cambios pero no los aplica
+   git diff // me muestra los cambios
+   git merge // ejecuta cambios
 
 ********************************************
 no entiendo git:

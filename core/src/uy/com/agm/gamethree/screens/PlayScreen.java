@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -13,13 +12,19 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
-import uy.com.agm.gamethree.sprites.EnemyOne;
-import uy.com.agm.gamethree.sprites.Hero;
+import uy.com.agm.gamethree.sprites.Items.Item;
+import uy.com.agm.gamethree.sprites.Items.ItemDef;
+import uy.com.agm.gamethree.sprites.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -45,6 +50,9 @@ public class PlayScreen implements Screen {
     public Hero player;
     public EnemyOne enemyOne;
 
+    private Array<Item> items;
+    private LinkedBlockingQueue<ItemDef> itemsToSpawn;
+
     public PlayScreen(GameThree game) {
         this.game = game;
         gameCam = new OrthographicCamera();
@@ -65,6 +73,22 @@ public class PlayScreen implements Screen {
         player = new Hero(this, 1.0f, 1.0f);
 
         world.setContactListener(new WorldContactListener());
+
+        items = new Array<Item>();
+        itemsToSpawn = new LinkedBlockingQueue<ItemDef>();
+    }
+
+    public void spawnItem(ItemDef idef) {
+        itemsToSpawn.add(idef);
+    }
+
+    public void handleSpawningItems() {
+        if (!itemsToSpawn.isEmpty()) {
+            ItemDef idef = itemsToSpawn.poll(); // similar to pop but for a queue
+            if (idef.type == PowerOne.class) {
+                items.add(new PowerOne(this, idef.position.x, idef.position.y));
+            }
+        }
     }
 
     @Override
@@ -96,6 +120,7 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
         handleInput(dt);
+        handleSpawningItems();
 
         world.step(1 / 60f, 6, 2);
 
@@ -107,9 +132,16 @@ public class PlayScreen implements Screen {
                 enemyOne.b2body.setActive(true);
             }
         }
+
+
+        for(Item item: items) {
+            item.update(dt);
+        }
+
+
         hud.update(dt);
         //gameCam.position.x = player.b2body.getPosition().x;
-        gameCam.position.y += 0.5 * dt;
+        //gameCam.position.y += 0.5 * dt;
 
         // Intento controlar que no se vaya de los limites (este codigo no deberia ir aca, deberia ir en la clase del heroe)
         float width = player.b2body.getFixtureList().get(0).getShape().getRadius();
@@ -147,6 +179,11 @@ public class PlayScreen implements Screen {
         for(EnemyOne enemyOne : creator.getEnemiesOne()) {
             enemyOne.draw(game.batch);
         }
+
+        for(Item item: items) {
+            item.draw(game.batch);
+        }
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -161,6 +198,9 @@ public class PlayScreen implements Screen {
         player.renderDebug(shapeRenderer);
         for(EnemyOne enemyOne : creator.getEnemiesOne()) {
             enemyOne.renderDebug(shapeRenderer);
+        }
+        for(Item item: items) {
+            item.renderDebug(shapeRenderer);
         }
         shapeRenderer.end();
         //}

@@ -1,9 +1,8 @@
-package uy.com.agm.gamethree.sprites;
+package uy.com.agm.gamethree.sprites.enemies;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -11,10 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -22,7 +21,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
  * Created by AGM on 12/9/2017.
  */
 
-public class EnemyOne extends Enemy {
+public class EnemyOne extends uy.com.agm.gamethree.sprites.enemies.Enemy {
     private static final String TAG = Obstacle.class.getName();
     private float stateTime;
     private Animation enemyOneAnimation;
