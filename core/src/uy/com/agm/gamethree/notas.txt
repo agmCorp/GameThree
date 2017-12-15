@@ -41,6 +41,9 @@ No me sirve porque mis dibujos tienen tiles variables.)
 Voy por el 22.
 video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
 
+- revisar lo que hice, renombrar el spawn (engendrar).
+buscar un brick de asset y buscar un premio.
+
 HERRAMIENTAS
 ------------
 - TiledEditor: para crear el nivel
