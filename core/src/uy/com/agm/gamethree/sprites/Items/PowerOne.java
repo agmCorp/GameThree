@@ -36,14 +36,14 @@ public class PowerOne extends Item {
 
     public PowerOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        // TODO CAMBIAR
-        powerOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
+
+        powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
         stateTime = 0;
         stateWaiting = 0;
         stateFading = 0;
 
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
-        TextureRegion powerOne = Assets.instance.enemyOne.enemyOneStand;
+        TextureRegion powerOne = Assets.instance.powerOne.powerOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
         setBounds(getX(), getY(), powerOne.getRegionWidth() / GameThree.PPM, powerOne.getRegionHeight() / GameThree.PPM);
 
@@ -68,6 +68,8 @@ public class PowerOne extends Item {
 
     @Override
     public void update(float dt) {
+        float alpha;
+
         switch (currentState) {
             case WAITING:
                 stateTime += dt;
@@ -92,7 +94,12 @@ public class PowerOne extends Item {
                 setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
                 setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
                 // 0 invisible, 1 visible
-                this.setAlpha(1 - stateFading / 5.0f);
+
+                alpha = 1 - stateFading / 5.0f;
+                if (alpha >= 0) {
+                    Gdx.app.debug(TAG, "SETEO ALFA " + alpha);
+                    this.setAlpha(alpha);
+                }
                 // maximo 5 segundos de fading
                 if (stateFading > 5.0f) {
                     currentState = WASTED;

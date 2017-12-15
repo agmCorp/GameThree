@@ -8,7 +8,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -28,7 +27,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetFonts fonts;
     public AssetHero hero;
     public AssetEnemyOne enemyOne;
-    //public AssetItem item;
+    public AssetPowerOne powerOne;
 
     public AssetSounds sounds;
     public AssetMusic music;
@@ -104,6 +103,23 @@ public class Assets implements Disposable, AssetErrorListener {
         }
     }
 
+    public class AssetPowerOne {
+        public final TextureRegion powerOneStand;
+        public final Animation powerOneAnimation;
+
+        public AssetPowerOne (TextureAtlas atlas) {
+            powerOneStand = atlas.findRegion("powerOne", 1);
+
+            Array<TextureAtlas.AtlasRegion> regions = null;
+            TextureAtlas.AtlasRegion region = null;
+
+            // TODO PARAMETRIZAR LAS DURACIONES DE LAS ANIMACIONES
+            regions = atlas.findRegions("powerOne");
+            powerOneAnimation = new Animation(1.0f / 16.0f, regions);
+            regions.clear();
+        }
+    }
+
     public class AssetSounds {
         public final Sound hit;
         public final Sound pickupItem;
@@ -152,7 +168,7 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
-        //item = new AssetItem(atlas);
+        powerOne = new AssetPowerOne(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
     }
