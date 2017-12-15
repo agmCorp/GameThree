@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Assets;
-import uy.com.agm.gamethree.tools.AudioManager;
 
 import static uy.com.agm.gamethree.sprites.Items.Item.State.TAKEN;
 import static uy.com.agm.gamethree.sprites.Items.Item.State.TOUCHED;
@@ -83,9 +81,11 @@ public class PowerOne extends Item {
                 }
                 break;
             case TOUCHED:
+                /*
                 currentState = TOUCHED;
                 AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
                 stateTime = 0;
+                */
                 break;
             case FADING:
                 stateTime += dt;
@@ -93,11 +93,11 @@ public class PowerOne extends Item {
                 b2body.setLinearVelocity(velocity);
                 setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
                 setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
-                // 0 invisible, 1 visible
 
                 alpha = 1 - stateFading / 5.0f;
                 if (alpha >= 0) {
                     Gdx.app.debug(TAG, "SETEO ALFA " + alpha);
+                    // 0 invisible, 1 visible
                     this.setAlpha(alpha);
                 }
                 // maximo 5 segundos de fading
