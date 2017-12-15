@@ -14,8 +14,9 @@ import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Assets;
 
-import static uy.com.agm.gamethree.sprites.Items.Item.State.TAKEN;
+import static uy.com.agm.gamethree.sprites.Items.Item.State.FADING;
 import static uy.com.agm.gamethree.sprites.Items.Item.State.TOUCHED;
+import static uy.com.agm.gamethree.sprites.Items.Item.State.WAITING;
 import static uy.com.agm.gamethree.sprites.Items.Item.State.WASTED;
 
 /**
@@ -125,7 +126,7 @@ public class PowerOne extends Item {
     }
 
     public void draw(Batch batch) {
-        if (currentState != TAKEN && currentState != WASTED) {
+        if (currentState == WAITING || currentState == FADING) {
             super.draw(batch);
         }
     }
