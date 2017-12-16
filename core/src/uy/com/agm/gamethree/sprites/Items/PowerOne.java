@@ -108,12 +108,12 @@ public class PowerOne extends Item {
                 // maximo 5 segundos de fading
                 if (stateFading > 5.0f) {
                     world.destroyBody(b2body);
-                    currentState = FINISHED;
+                    currentState = State.FINISHED;
                 }
                 break;
             case TAKEN:
                 world.destroyBody(b2body);
-                currentState = FINISHED;
+                currentState = State.FINISHED;
                 AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
                 break;
             case FINISHED:
@@ -131,12 +131,12 @@ public class PowerOne extends Item {
         es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
         No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
          */
-        currentState = TAKEN;
+        currentState = State.TAKEN;
         Gdx.app.debug(TAG, "TOMO ITEM");
     }
 
     public void draw(Batch batch) {
-        if (currentState == WAITING || currentState == FADING) {
+        if (currentState == State.WAITING || currentState == State.FADING) {
             super.draw(batch);
         }
     }
