@@ -54,6 +54,7 @@ public class EnemyOne extends Enemy {
     public boolean isDestroyed() {
         return currentState == State.DEAD || currentState == State.EXPLODING;
     }
+
     public void reverseVelocity(boolean x, boolean y) {
         if (x) {
             velocity.x *= -1;
