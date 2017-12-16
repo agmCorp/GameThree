@@ -34,8 +34,6 @@ public class Hero extends Sprite {
     private float stateTimer;
 
     public Hero(PlayScreen screen, float x, float y) {
-        super(Assets.instance.hero.heroStand);
-
         this.world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;

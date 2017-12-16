@@ -84,8 +84,7 @@ public class EnemyOne extends Enemy {
                 stateTime = 0;
                 break;
             case EXPLODING:
-                // Tiempo total de animacion
-                if (stateTime > 1.0f) {
+                if (explosionAnimation.isAnimationFinished(stateTime)) {
                     currentState = State.DEAD;
                 } else {
                     stateTime += dt;
