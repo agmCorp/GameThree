@@ -127,7 +127,7 @@ public class PlayScreen implements Screen {
         for(EnemyOne enemyOne : creator.getEnemiesOne()) {
             enemyOne.update(dt);
             // Cuando el enemyOne entra en la camara, se activa (se mueve y puede colisionar)
-            if (enemyOne.getY() <= gameCam.position.y + gamePort.getWorldHeight() / 2 ) {
+            if (!enemyOne.isDestroyed() && enemyOne.getY() <= gameCam.position.y + gamePort.getWorldHeight() / 2 ) {
                 enemyOne.b2body.setActive(true);
             }
         }

@@ -17,11 +17,6 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 
-import static uy.com.agm.gamethree.sprites.Items.Item.State.FADING;
-import static uy.com.agm.gamethree.sprites.Items.Item.State.TAKEN;
-import static uy.com.agm.gamethree.sprites.Items.Item.State.WAITING;
-import static uy.com.agm.gamethree.sprites.Items.Item.State.FINISHED;
-
 /**
  * Created by AGM on 12/14/2017.
  */
