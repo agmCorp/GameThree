@@ -6,8 +6,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.Items.Item;
+import uy.com.agm.gamethree.sprites.Items.ItemDef;
+import uy.com.agm.gamethree.sprites.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.tileObjects.Borders;
@@ -21,9 +26,13 @@ import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 public class B2WorldCreator {
     private static final String TAG = B2WorldCreator.class.getName();
 
+    private PlayScreen screen;
     private Array<Enemy> enemies;
+    private Array<Item> items;
+    private LinkedBlockingQueue<ItemDef> itemsToCreate;
 
     public B2WorldCreator(PlayScreen screen) {
+        this.screen = screen;
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
         Hud hud = screen.getHud();
@@ -42,6 +51,9 @@ public class B2WorldCreator {
         for(MapObject object : map.getLayers().get("coinbox").getObjects().getByType(RectangleMapObject.class)) {
             new CoinBox(screen, object);
         }
+        // Items
+        items = new Array<Item>();
+        itemsToCreate = new LinkedBlockingQueue<ItemDef>();
 
         // Layer: enemyOne
         enemies = new Array<Enemy>();
@@ -52,5 +64,20 @@ public class B2WorldCreator {
 
     public Array<Enemy> getEnemies() {
         return enemies;
+    }
+    public Array<Item> getItems() {
+        return items;
+    }
+    public void createItem(ItemDef idef) {
+        itemsToCreate.add(idef);
+    }
+
+    public void handleCreatingItems() {
+        if (!itemsToCreate.isEmpty()) {
+            ItemDef idef = itemsToCreate.poll(); // similar to pop but for a queue, removes the element
+            if (idef.type == PowerOne.class) {
+                items.add(new PowerOne(screen, idef.position.x, idef.position.y));
+            }
+        }
     }
 }

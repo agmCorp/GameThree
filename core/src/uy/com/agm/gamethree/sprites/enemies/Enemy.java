@@ -47,7 +47,7 @@ public abstract class Enemy extends Sprite {
     protected void getItemOnHit() {
         float MARGEN = 32; // TODO ARREGLAR ESTO
         if(object.getProperties().containsKey("powerOne")) {
-            screen.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
+            screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
         }
     }
 

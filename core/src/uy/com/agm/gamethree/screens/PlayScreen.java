@@ -12,17 +12,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.sprites.Items.Item;
-import uy.com.agm.gamethree.sprites.Items.ItemDef;
-import uy.com.agm.gamethree.sprites.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
@@ -45,12 +40,12 @@ public class PlayScreen implements Screen {
 
     private World world;
     private Box2DDebugRenderer b2dr;
-    private B2WorldCreator creator;
+    public B2WorldCreator creator;
 
     public Hero player;
 
-    private Array<Item> items;
-    private LinkedBlockingQueue<ItemDef> itemsToCreate;
+
+
 
     public PlayScreen(GameThree game) {
         this.game = game;
@@ -73,21 +68,6 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        items = new Array<Item>();
-        itemsToCreate = new LinkedBlockingQueue<ItemDef>();
-    }
-
-    public void createItem(ItemDef idef) {
-        itemsToCreate.add(idef);
-    }
-
-    public void handleCreatingItems() {
-        if (!itemsToCreate.isEmpty()) {
-            ItemDef idef = itemsToCreate.poll(); // similar to pop but for a queue, removes the element
-            if (idef.type == PowerOne.class) {
-                items.add(new PowerOne(this, idef.position.x, idef.position.y));
-            }
-        }
     }
 
     @Override
@@ -119,7 +99,7 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
         handleInput(dt);
-        handleCreatingItems();
+        creator.handleCreatingItems();
 
         world.step(1 / 60f, 6, 2);
 
@@ -136,7 +116,7 @@ public class PlayScreen implements Screen {
         }
 
         // Items
-        for(Item item: items) {
+        for(Item item: creator.getItems()) {
             item.update(dt);
         }
 
@@ -182,7 +162,7 @@ public class PlayScreen implements Screen {
             enemy.draw(game.batch);
         }
 
-        for(Item item: items) {
+        for(Item item: creator.getItems()) {
             item.draw(game.batch);
         }
 
@@ -201,7 +181,7 @@ public class PlayScreen implements Screen {
         for(Enemy enemy : creator.getEnemies()) {
             enemy.renderDebug(shapeRenderer);
         }
-        for(Item item: items) {
+        for(Item item: creator.getItems()) {
             item.renderDebug(shapeRenderer);
         }
         shapeRenderer.end();

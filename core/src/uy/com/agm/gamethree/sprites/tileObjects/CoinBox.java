@@ -21,6 +21,7 @@ public class CoinBox extends InteractiveTileObject {
     private static final String TAG = CoinBox.class.getName();
     private Hud hud;
 
+
     public CoinBox(PlayScreen screen, MapObject object) {
         super(screen, object);
         this.hud = screen.getHud();
@@ -36,9 +37,11 @@ public class CoinBox extends InteractiveTileObject {
         float MARGEN = 32; // TODO ARREGLAR ESTO
 
         if(object.getProperties().containsKey("powerOne")) {
-            screen.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
+            screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
         }
         AudioManager.instance.play(Assets.instance.sounds.openCoinBox, 1, MathUtils.random(1.0f, 1.1f));
+
+
         getCell().setTile(null);
         hud.addScore(200);
     }
