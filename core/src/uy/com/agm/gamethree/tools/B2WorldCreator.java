@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.tileObjects.Borders;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.tileObjects.CoinBox;
@@ -24,7 +25,7 @@ public class B2WorldCreator {
     //modificado
     private static final String TAG = B2WorldCreator.class.getName();
 
-    private Array<EnemyOne> enemiesOne;
+    private Array<Enemy> enemies;
 
     public B2WorldCreator(PlayScreen screen) {
         World world = screen.getWorld();
@@ -50,15 +51,15 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyOne
-        enemiesOne = new Array<EnemyOne>();
+        enemies = new Array<Enemy>();
         for(MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             Gdx.app.debug(TAG, "** TAMANO B2WORLDCREATOR X, Y " + rect.getX() / GameThree.PPM + " " + rect.getY() / GameThree.PPM );
-            enemiesOne.add(new EnemyOne(screen, rect.getX() / GameThree.PPM, rect.getY() / GameThree.PPM));
+            enemies.add(new EnemyOne(screen, rect.getX() / GameThree.PPM, rect.getY() / GameThree.PPM));
         }
     }
 
-    public Array<EnemyOne> getEnemiesOne() {
-        return enemiesOne;
+    public Array<Enemy> getEnemies() {
+        return enemies;
     }
 }

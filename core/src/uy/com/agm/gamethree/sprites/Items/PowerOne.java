@@ -28,7 +28,6 @@ public class PowerOne extends Item {
     private float stateWaiting;
     private float stateFading;
     private Animation powerOneAnimation;
-    private State currentState;
 
     public PowerOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);

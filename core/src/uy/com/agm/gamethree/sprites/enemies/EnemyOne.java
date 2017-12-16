@@ -13,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -22,18 +21,16 @@ import uy.com.agm.gamethree.tools.AudioManager;
  */
 
 public class EnemyOne extends Enemy {
-    private static final String TAG = Obstacle.class.getName();
+    private static final String TAG = EnemyOne.class.getName();
+
     private float stateTime;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
-    // Usar un enumerado porque es un estado
-    private enum State {ALIVE, INJURED, EXPLODING, DEAD};
-    private State currentState;
     private Vector2 velocity;
 
     public EnemyOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        Gdx.app.debug(TAG, "** TAMANO constructor X, Y " + x + " " + y );
+        Gdx.app.debug(TAG, "** TAMANO constructor X, Y " + x + " " + y);
 
         enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
         explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
@@ -48,23 +45,30 @@ public class EnemyOne extends Enemy {
 
         currentState = State.ALIVE;
 
-        velocity = new Vector2(1,-1);
+        velocity = new Vector2(1, -1);
     }
 
-    public boolean isDestroyed() {
-        return currentState == State.DEAD || currentState == State.EXPLODING;
+    @Override
+    protected void defineEnemy() {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(getX(), getY());
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
+
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(29 / GameThree.PPM);
+        fdef.filter.categoryBits = GameThree.ENEMY_BIT; // Indica que es
+        fdef.filter.maskBits = GameThree.DEFAULT_BIT |
+                GameThree.OBSTACLE_BIT |
+                GameThree.ENEMY_BIT |
+                GameThree.HERO_BIT; // Con que puede colisionar
+
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void reverseVelocity(boolean x, boolean y) {
-        if (x) {
-            velocity.x *= -1;
-        }
-        if (y) {
-            velocity.y *= -1;
-        }
-    }
-
-
+    @Override
     public void update(float dt) {
         switch (currentState) {
             case ALIVE:
@@ -96,38 +100,6 @@ public class EnemyOne extends Enemy {
     }
 
     @Override
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
-    }
-
-    public void draw(Batch batch) {
-        if (currentState != State.DEAD) {
-            super.draw(batch);
-        }
-    }
-
-    @Override
-    protected void defineEnemy() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(29 / GameThree.PPM);
-        fdef.filter.categoryBits = GameThree.ENEMY_BIT; // Indica que es
-        fdef.filter.maskBits = GameThree.DEFAULT_BIT |
-                GameThree.OBSTACLE_BIT |
-                GameThree.ENEMY_BIT |
-                GameThree.HERO_BIT; // Con que puede colisionar
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-    }
-
-    @Override
     public void onHit() {
         /*crc:
         Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
@@ -139,7 +111,28 @@ public class EnemyOne extends Enemy {
         Gdx.app.debug(TAG, "Enemy collision");
     }
 
+    public void draw(Batch batch) {
+        if (currentState != State.DEAD) {
+            super.draw(batch);
+        }
+    }
 
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        // TODO IF CONSTANTES.DEBUG
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
+        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
+    }
 
-
+    public void reverseVelocity(boolean x, boolean y) {
+        if (x) {
+            velocity.x *= -1;
+        }
+        if (y) {
+            velocity.y *= -1;
+        }
+    }
 }
+
+
+

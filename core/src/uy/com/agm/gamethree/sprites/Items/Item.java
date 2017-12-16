@@ -16,12 +16,13 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 public abstract class Item extends Sprite {
     private static final String TAG = Item.class.getName();
 
-    protected PlayScreen screen;
     protected World world;
+    protected PlayScreen screen;
+    protected Body b2body;
+
     protected Vector2 velocity;
     protected enum State {WAITING, FADING, TAKEN, FINISHED};
-
-    protected Body b2body;
+    protected State currentState;
 
     public Item(PlayScreen screen, float x, float y) {
         this.screen = screen;

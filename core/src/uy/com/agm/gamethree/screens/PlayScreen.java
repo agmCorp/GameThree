@@ -23,7 +23,7 @@ import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.sprites.Items.Item;
 import uy.com.agm.gamethree.sprites.Items.ItemDef;
 import uy.com.agm.gamethree.sprites.Items.PowerOne;
-import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -124,16 +124,18 @@ public class PlayScreen implements Screen {
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
-        for(EnemyOne enemyOne : creator.getEnemiesOne()) {
-            enemyOne.update(dt);
+
+        // Enemies
+        for(Enemy enemy : creator.getEnemies()) {
+            enemy.update(dt);
             // Cuando el enemyOne entra en la camara, se activa (se mueve y puede colisionar)
             // Hay que tener mucho cuidado porque si el enemigo esta destruido, el body no existe y da errores aleatorios
-            if (!enemyOne.isDestroyed() && enemyOne.getY() <= gameCam.position.y + gamePort.getWorldHeight() / 2 ) {
-                enemyOne.b2body.setActive(true);
+            if (!enemy.isDestroyed() && enemy.getY() <= gameCam.position.y + gamePort.getWorldHeight() / 2 ) {
+                enemy.b2body.setActive(true);
             }
         }
 
-
+        // Items
         for(Item item: items) {
             item.update(dt);
         }
@@ -176,8 +178,8 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(EnemyOne enemyOne : creator.getEnemiesOne()) {
-            enemyOne.draw(game.batch);
+        for(Enemy enemy : creator.getEnemies()) {
+            enemy.draw(game.batch);
         }
 
         for(Item item: items) {
@@ -196,8 +198,8 @@ public class PlayScreen implements Screen {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(1, 1, 0, 1);
         player.renderDebug(shapeRenderer);
-        for(EnemyOne enemyOne : creator.getEnemiesOne()) {
-            enemyOne.renderDebug(shapeRenderer);
+        for(Enemy enemy : creator.getEnemies()) {
+            enemy.renderDebug(shapeRenderer);
         }
         for(Item item: items) {
             item.renderDebug(shapeRenderer);

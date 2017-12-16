@@ -12,9 +12,14 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  */
 
 public abstract class Enemy extends Sprite {
+    private static final String TAG = Enemy.class.getName();
+
     protected World world;
     protected PlayScreen screen;
     public Body b2body;
+
+    protected enum State {ALIVE, INJURED, EXPLODING, DEAD};
+    protected State currentState;
 
     public Enemy(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -22,6 +27,10 @@ public abstract class Enemy extends Sprite {
         setPosition(x, y);
         defineEnemy();
         b2body.setActive(false);
+    }
+
+    public boolean isDestroyed() {
+        return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
     protected abstract void defineEnemy();
