@@ -172,6 +172,7 @@ if ( y > 0) {
         fdef.filter.maskBits = GameThree.DEFAULT_BIT |
                 GameThree.COINBOX_BIT |
                 GameThree.OBSTACLE_BIT |
+                GameThree.ITEM_BIT |
                 GameThree.ENEMY_BIT; // Con que puede colisionar
 
         fdef.shape = shape;

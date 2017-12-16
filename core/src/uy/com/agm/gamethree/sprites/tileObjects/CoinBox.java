@@ -31,7 +31,7 @@ public class CoinBox extends InteractiveTileObject {
         setCategoryFilter(GameThree.COINBOXOPENED_BIT);
 
         float MARGEN = 32; // TODO ARREGLAR ESTO
-        screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
+        screen.createItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
         getCell().setTile(null);
         hud.addScore(200);
     }

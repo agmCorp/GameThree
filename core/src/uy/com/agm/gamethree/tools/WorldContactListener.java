@@ -8,8 +8,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.sprites.Items.Item;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.tileObjects.InteractiveTileObject;
 
 /**
@@ -36,7 +38,7 @@ public class WorldContactListener implements ContactListener {
                 fixC = fixA.getFilterData().categoryBits == GameThree.OBSTACLE_BIT ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onHit();
                 break;
-            case GameThree.HERO_BIT | GameThree.COINBOX_BIT:
+            case GameThree.HERO_BIT | GameThree.COINBOX_BIT: // regalos
                 fixC = fixA.getFilterData().categoryBits == GameThree.COINBOX_BIT ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onHit();
                 break;
@@ -56,6 +58,33 @@ public class WorldContactListener implements ContactListener {
             case GameThree.ENEMY_BIT | GameThree.ENEMY_BIT:
                 ((EnemyOne) fixA.getUserData()).reverseVelocity(true, false);
                 ((EnemyOne) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case GameThree.ITEM_BIT | GameThree.DEFAULT_BIT:
+                fixC = fixA.getFilterData().categoryBits == GameThree.ITEM_BIT ? fixA : fixB;
+                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                break;
+            case GameThree.ITEM_BIT | GameThree.HERO_BIT:
+                if (fixA.getFilterData().categoryBits == GameThree.ITEM_BIT) {
+                    ((Item) fixA.getUserData()).use((Hero) fixB.getUserData());
+                } else {
+                    ((Item) fixB.getUserData()).use((Hero) fixA.getUserData());
+                }
+                break;
+            case GameThree.ITEM_BIT | GameThree.OBSTACLE_BIT:
+                fixC = fixA.getFilterData().categoryBits == GameThree.ITEM_BIT ? fixA : fixB;
+                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                break;
+            case GameThree.ITEM_BIT | GameThree.ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == GameThree.ITEM_BIT ? fixA : fixB;
+                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                break;
+            case GameThree.ITEM_BIT | GameThree.COINBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == GameThree.ITEM_BIT ? fixA : fixB;
+                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                break;
+            case GameThree.ITEM_BIT | GameThree.ITEM_BIT:
+                ((Item) fixA.getUserData()).reverseVelocity(true, false);
+                ((Item) fixB.getUserData()).reverseVelocity(true, false);
                 break;
         }
     }

@@ -38,7 +38,7 @@ LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
 (VIDEO 13: Obtiene una tile (brick) y la hace desaparecer cuando es golpeada.
 No me sirve porque mis dibujos tienen tiles variables.)
 
-Voy por el 22.
+Voy por el 23.
 video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
 
 - revisar lo que hice, renombrar el spawn (engendrar).

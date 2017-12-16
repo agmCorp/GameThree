@@ -48,10 +48,9 @@ public class PlayScreen implements Screen {
     private B2WorldCreator creator;
 
     public Hero player;
-    public EnemyOne enemyOne;
 
     private Array<Item> items;
-    private LinkedBlockingQueue<ItemDef> itemsToSpawn;
+    private LinkedBlockingQueue<ItemDef> itemsToCreate;
 
     public PlayScreen(GameThree game) {
         this.game = game;
@@ -75,16 +74,16 @@ public class PlayScreen implements Screen {
         world.setContactListener(new WorldContactListener());
 
         items = new Array<Item>();
-        itemsToSpawn = new LinkedBlockingQueue<ItemDef>();
+        itemsToCreate = new LinkedBlockingQueue<ItemDef>();
     }
 
-    public void spawnItem(ItemDef idef) {
-        itemsToSpawn.add(idef);
+    public void createItem(ItemDef idef) {
+        itemsToCreate.add(idef);
     }
 
-    public void handleSpawningItems() {
-        if (!itemsToSpawn.isEmpty()) {
-            ItemDef idef = itemsToSpawn.poll(); // similar to pop but for a queue
+    public void handleCreatingItems() {
+        if (!itemsToCreate.isEmpty()) {
+            ItemDef idef = itemsToCreate.poll(); // similar to pop but for a queue, removes the element
             if (idef.type == PowerOne.class) {
                 items.add(new PowerOne(this, idef.position.x, idef.position.y));
             }
@@ -120,7 +119,7 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
         handleInput(dt);
-        handleSpawningItems();
+        handleCreatingItems();
 
         world.step(1 / 60f, 6, 2);
 

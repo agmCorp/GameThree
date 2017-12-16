@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.player.Hero;
 
 /**
  * Created by AGM on 12/11/2017.
@@ -18,7 +19,7 @@ public abstract class Item extends Sprite {
     protected PlayScreen screen;
     protected World world;
     protected Vector2 velocity;
-    protected enum State {WAITING, TOUCHED, FADING, TAKEN, WASTED};
+    protected enum State {WAITING, FADING, TAKEN, FINISHED};
 
     protected Body b2body;
 
@@ -29,8 +30,15 @@ public abstract class Item extends Sprite {
         defineItem();
     }
 
+    public void reverseVelocity(boolean x, boolean y){
+        if(x)
+            velocity.x = -velocity.x;
+        if(y)
+            velocity.y = -velocity.y;
+    }
+
     protected abstract void defineItem();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
-    public abstract void use();
+    public abstract void use(Hero hero);
 }

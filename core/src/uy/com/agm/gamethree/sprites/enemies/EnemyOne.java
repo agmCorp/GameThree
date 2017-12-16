@@ -21,7 +21,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
  * Created by AGM on 12/9/2017.
  */
 
-public class EnemyOne extends uy.com.agm.gamethree.sprites.enemies.Enemy {
+public class EnemyOne extends Enemy {
     private static final String TAG = Obstacle.class.getName();
     private float stateTime;
     private Animation enemyOneAnimation;
@@ -91,6 +91,12 @@ public class EnemyOne extends uy.com.agm.gamethree.sprites.enemies.Enemy {
         }
     }
 
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
+        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
+    }
+
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
             super.draw(batch);
@@ -129,10 +135,7 @@ public class EnemyOne extends uy.com.agm.gamethree.sprites.enemies.Enemy {
         Gdx.app.debug(TAG, "Enemy collision");
     }
 
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
-    }
+
 
 
 }
