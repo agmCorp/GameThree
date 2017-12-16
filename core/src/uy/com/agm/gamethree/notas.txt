@@ -39,9 +39,7 @@ LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
 No me sirve porque mis dibujos tienen tiles variables.)
 
 Voy por el 24.
-video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
 
-- revisar lo que hice, renombrar el spawn (engendrar).
 buscar un brick de asset y buscar un premio.
 SE CAE CUANDO HAY MULTIPLES REGALOS ABIERTOS, COMO QUE COMPARTEN ALGO..SE AFECTA EL MOVIMIENTO...VERLO...DEBE SER FACIL.
 

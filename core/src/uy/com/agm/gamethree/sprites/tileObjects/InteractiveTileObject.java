@@ -28,7 +28,7 @@ public abstract class InteractiveTileObject {
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
-    protected Body body;
+    protected Body b2body;
     protected PlayScreen screen;
     protected Fixture fixture;
     protected MapObject object;
@@ -47,10 +47,10 @@ public abstract class InteractiveTileObject {
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / GameThree.PPM, (bounds.getY() + bounds.getHeight() / 2) / GameThree.PPM);
 
-        body = world.createBody(bdef);
+        b2body = world.createBody(bdef);
         shape.setAsBox(bounds.getWidth() / 2 / GameThree.PPM, bounds.getHeight() / 2 / GameThree.PPM);
         fdef.shape = shape;
-        fixture = body.createFixture(fdef);
+        fixture = b2body.createFixture(fdef);
     }
 
     public abstract void onHit();
@@ -63,8 +63,8 @@ public abstract class InteractiveTileObject {
 
     public TiledMapTileLayer.Cell getCell() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
-        return layer.getCell((int)(body.getPosition().x * GameThree.PPM / 32),
-        (int)(body.getPosition().y * GameThree.PPM / 32));
+        return layer.getCell((int)(b2body.getPosition().x * GameThree.PPM / 32),
+        (int)(b2body.getPosition().y * GameThree.PPM / 32));
 
     }
 }

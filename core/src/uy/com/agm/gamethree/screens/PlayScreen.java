@@ -129,7 +129,7 @@ public class PlayScreen implements Screen {
         for(Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
             // Cuando el enemyOne entra en la camara, se activa (se mueve y puede colisionar)
-            // Hay que tener mucho cuidado porque si el enemigo esta destruido, el body no existe y da errores aleatorios
+            // Hay que tener mucho cuidado porque si el enemigo esta destruido, el b2body no existe y da errores aleatorios
             if (!enemy.isDestroyed() && enemy.getY() <= gameCam.position.y + gamePort.getWorldHeight() / 2 ) {
                 enemy.b2body.setActive(true);
             }

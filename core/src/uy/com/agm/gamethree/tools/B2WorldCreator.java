@@ -1,19 +1,16 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
-import uy.com.agm.gamethree.sprites.tileObjects.Borders;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.tileObjects.Borders;
 import uy.com.agm.gamethree.sprites.tileObjects.CoinBox;
 import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 
@@ -50,9 +47,7 @@ public class B2WorldCreator {
         // Layer: enemyOne
         enemies = new Array<Enemy>();
         for(MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            Gdx.app.debug(TAG, "** TAMANO B2WORLDCREATOR X, Y " + rect.getX() / GameThree.PPM + " " + rect.getY() / GameThree.PPM );
-            enemies.add(new EnemyOne(screen, rect.getX() / GameThree.PPM, rect.getY() / GameThree.PPM));
+            enemies.add(new EnemyOne(screen, object));
         }
     }
 

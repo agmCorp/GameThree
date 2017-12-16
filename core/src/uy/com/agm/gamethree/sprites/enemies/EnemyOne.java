@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -28,9 +29,8 @@ public class EnemyOne extends Enemy {
     private Animation explosionAnimation;
     private Vector2 velocity;
 
-    public EnemyOne(PlayScreen screen, float x, float y) {
-        super(screen, x, y);
-        Gdx.app.debug(TAG, "** TAMANO constructor X, Y " + x + " " + y);
+    public EnemyOne(PlayScreen screen, MapObject object) {
+        super(screen, object);
 
         enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
         explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
@@ -40,7 +40,6 @@ public class EnemyOne extends Enemy {
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
         TextureRegion enemyOne = Assets.instance.enemyOne.enemyOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        Gdx.app.debug(TAG, "** TAMANO bounds X, Y, WIDTH, EIGHT " + getX() + " " + getY() + " " + enemyOne.getRegionWidth() / GameThree.PPM + " " + enemyOne.getRegionHeight() / GameThree.PPM);
         setBounds(getX(), getY(), enemyOne.getRegionWidth() / GameThree.PPM, enemyOne.getRegionHeight() / GameThree.PPM);
 
         currentState = State.ALIVE;
@@ -106,6 +105,8 @@ public class EnemyOne extends Enemy {
         es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
         No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
          */
+
+        super.getItemOnHit();
         currentState = State.INJURED;
         Gdx.app.debug(TAG, "Enemy collision");
     }
