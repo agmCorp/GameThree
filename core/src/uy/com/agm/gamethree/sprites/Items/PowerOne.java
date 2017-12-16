@@ -108,7 +108,7 @@ public class PowerOne extends Item {
             case TAKEN:
                 world.destroyBody(b2body);
                 currentState = State.FINISHED;
-                AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+                AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
                 break;
             case FINISHED:
                 break;

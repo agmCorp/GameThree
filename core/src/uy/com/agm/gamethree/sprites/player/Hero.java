@@ -97,57 +97,6 @@ public class Hero extends Sprite {
 
         float y = b2body.getLinearVelocity().y;
         float x = b2body.getLinearVelocity().x;
-/*
-        if (x > 0 && y > 0) {
-            if (x > y) {
-                state = State.MOVING_RIGHT;
-            } else {
-                state = State.MOVING_UP;
-            }
-        } else if (x > 0 && y < 0) {
-            if (x > -y) {
-                state = State.MOVING_RIGHT;
-            } else {
-                state = State.MOVING_DOWN;
-            }
-        } else if (x < 0 && y > 0) {
-            if (-x > y) {
-                state = State.MOVING_LEFT;
-            } else {
-                state = State.MOVING_UP;
-            }
-        } else if (x < 0 && y < 0) {
-            if (-x > -y) {
-                state = State.MOVING_LEFT;
-            } else {
-                state = State.MOVING_DOWN;
-            }
-        } else {
-            if (x == 0 || y == 0) {
-                if (x == 0) {
-                    if (y > 0) {
-                        state = State.MOVING_UP;
-                    } else if (y < 0) {
-                        state = State.MOVING_DOWN;
-                    }
-                } else if (y == 0) {
-                    if (x > 0) {
-                        state = State.MOVING_RIGHT;
-                    } else if (x < 0) {
-                        state = State.MOVING_LEFT;
-                    }
-                }
-            }
-        }
-      //  Gdx.app.log("state", state.toString() + " " + b2body.getLinearVelocity());
-      */
-/*
-        if (0 <= b2body.getLinearVelocity().angle() && b2body.getLinearVelocity().angle() <= 180) {
-            state = State.MOVING_UP;
-        } else {
-            state = State.MOVING_DOWN;
-        }
-        */
 if ( y > 0) {
     state = State.MOVING_UP;
 } else if (y < 0){
@@ -222,6 +171,5 @@ if ( y > 0) {
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
-
     }
 }

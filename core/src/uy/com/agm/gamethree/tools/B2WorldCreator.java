@@ -34,20 +34,17 @@ public class B2WorldCreator {
 
         // Layer: borders
         for(MapObject object : map.getLayers().get("borders").getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Borders(screen, rect);
+            new Borders(screen, object);
         }
 
         // Layer: obstacles
         for(MapObject object : map.getLayers().get("obstacles").getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Obstacle(screen, rect);
+            new Obstacle(screen, object);
         }
 
         // Layer: coinboxes
         for(MapObject object : map.getLayers().get("coinbox").getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new CoinBox(screen, rect);
+            new CoinBox(screen, object);
         }
 
         // Layer: enemyOne

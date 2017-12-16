@@ -38,7 +38,7 @@ LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
 (VIDEO 13: Obtiene una tile (brick) y la hace desaparecer cuando es golpeada.
 No me sirve porque mis dibujos tienen tiles variables.)
 
-Voy por el 23.
+Voy por el 24.
 video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
 
 - revisar lo que hice, renombrar el spawn (engendrar).
@@ -154,3 +154,27 @@ Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente
 Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo caso hago un pull y me lo traigo?
 Nadie tocó ese fuente y por ende yo fui el último que lo subió a github, no se como traerlo (checkout?)
 ADEMAS QUIERO HACER ESTO PARA TODAS LAS DIFERENCIAS DEL PROYECTO, O SEA, QUIERO REFRESCARLO CON LO ULTIMO DE GITHUB
+*********************
+
+Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo tocan no le hacen nada
+// ************* inicio
+        // Apply Skin Color
+        float alpha = 0.7f;
+        batch.setColor(1, 1, 1, alpha);
+
+
+        Filter filter = new Filter();
+        filter.categoryBits = GameThree.HERO_BIT;
+        filter.maskBits =  GameThree.DEFAULT_BIT |
+                GameThree.COINBOX_BIT |
+                GameThree.OBSTACLE_BIT |
+                GameThree.ITEM_BIT;
+        b2body.getFixtureList().get(0).setFilterData(filter);
+// ************** fin
+        // Draws a rectangle with the texture coordinates rotated 90 degrees.
+        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
+                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
+// ************** inicio
+// Reset color to white
+        batch.setColor(1, 1, 1, 1);
+// **************   fin

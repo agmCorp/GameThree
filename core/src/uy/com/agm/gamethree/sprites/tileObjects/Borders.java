@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.sprites.tileObjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Rectangle;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -12,8 +13,8 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class Borders extends InteractiveTileObject {
     private static final String TAG = Borders.class.getName();
 
-    public Borders(PlayScreen screen, Rectangle bounds) {
-        super(screen, bounds);
+    public Borders(PlayScreen screen, MapObject object) {
+        super(screen, object);
         fixture.setUserData(this);
     }
 

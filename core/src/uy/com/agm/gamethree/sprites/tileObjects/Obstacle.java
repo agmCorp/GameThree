@@ -1,7 +1,7 @@
 package uy.com.agm.gamethree.sprites.tileObjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -13,8 +13,8 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class Obstacle extends InteractiveTileObject {
     private static final String TAG = Obstacle.class.getName();
 
-    public Obstacle(PlayScreen screen, Rectangle bounds) {
-        super(screen, bounds);
+    public Obstacle(PlayScreen screen, MapObject object) {
+        super(screen, object);
         fixture.setUserData(this);
         setCategoryFilter(GameThree.OBSTACLE_BIT);
     }
