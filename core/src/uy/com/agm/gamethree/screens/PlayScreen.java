@@ -126,25 +126,11 @@ public class PlayScreen implements Screen {
         // Enemies
         for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-            /* When an Enemy is on camara, it activates (it moves and can colide).
-             * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
-             * random errors if you try to active it.
-             */
-            if (!enemy.isDestroyed() && enemy.getY() <= gameCam.position.y + gameViewPort.getWorldHeight() / 2) {
-                enemy.b2body.setActive(true);
-            }
         }
 
         // PowerBoxes
         for (PowerBox powerBox : creator.getPowerBoxes()) {
             powerBox.update(dt);
-            /* When a Power Box is on camara, it activates (it can colide).
-             * You have to be very careful because if the power box is destroyed, its b2body does not exist and gives
-             * random errors if you try to active it.
-             */
-            if (!powerBox.isDestroyed()) {
-                powerBox.b2body.setActive(true);
-            }
         }
 
         // Items
@@ -177,7 +163,9 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         // Renderer our Box2DDebugLines
-        b2dr.render(world, gameCam.combined);
+        if (Constants.DEBUG_BOUNDARIES) {
+            b2dr.render(world, gameCam.combined);
+        }
 
         // Set our batch to now draw what the gameCam camera sees.
         game.batch.setProjectionMatrix(gameCam.combined);

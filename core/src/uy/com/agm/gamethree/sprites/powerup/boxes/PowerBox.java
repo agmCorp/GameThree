@@ -114,6 +114,18 @@ public class PowerBox extends Sprite {
             default:
                 break;
         }
+        /* When a Power Box is on camara, it activates (it can colide).
+        * You have to be very careful because if the power box is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            if (getY() - getWidth() <= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+                b2body.setActive(true);
+            }
+            if (getY() + getWidth() <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
+                b2body.setActive(false);
+            }
+        }
     }
 
     public void onHit() {

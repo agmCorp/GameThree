@@ -96,6 +96,19 @@ public class EnemyOne extends Enemy {
             default:
                 break;
         }
+
+        /* When an Enemy is on camara, it activates (it moves and can colide).
+        * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            if (getY() - getWidth() <= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+                b2body.setActive(true);
+            }
+            if (getY() + getWidth() <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
+                b2body.setActive(false);
+            }
+        }
     }
 
     @Override
