@@ -60,6 +60,7 @@ public class EnemyOne extends Enemy {
         fdef.filter.categoryBits = Constants.ENEMY_BIT; // Indica que es
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
+                Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
                 Constants.HERO_BIT; // Con que puede colisionar
