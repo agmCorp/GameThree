@@ -111,6 +111,10 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -Constants.MAX_LINEAR_VELOCITY) {
             player.b2body.setLinearVelocity(new Vector2(-Constants.LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            player.fire();
+        }
     }
 
     public void update(float dt) {

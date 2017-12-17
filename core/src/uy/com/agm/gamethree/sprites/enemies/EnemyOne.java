@@ -118,7 +118,8 @@ public class EnemyOne extends Enemy {
         Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
         Esto no se puede hacer aca porque esta siendo llamado desde el WorldContactListener que
         es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
-        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
+        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo, hay que esperar al siguiente
+        ciclo de update, por eso se cambio el estado.
          */
 
         super.getItemOnHit();
@@ -134,7 +135,6 @@ public class EnemyOne extends Enemy {
 
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
-        // TODO IF CONSTANTES.DEBUG
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
         Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
     }

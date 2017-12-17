@@ -20,7 +20,7 @@ public class Constants {
     public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
 //---------
     // Location of description file for texture atlas
-    public static final String TEXTURE_ATLAS_OBJECTS = "characters/characters.pack";
+    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.pack";
 
     // Hero's speed restrictions
     public static final float WEIGHTING_HERO_SPEED = 0.18f;
@@ -46,6 +46,7 @@ public class Constants {
     public static final short POWERBOX_BIT = 8;
     public static final short ENEMY_BIT = 16;
     public static final short ITEM_BIT = 32;
+    public static final short WEAPON_BIT = 64;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = false;

@@ -29,6 +29,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetEnemyOne enemyOne;
     public AssetPowerBox powerBox;
     public AssetPowerOne powerOne;
+    public AssetEnergyBall energyBall;
 
     public AssetSounds sounds;
     public AssetMusic music;
@@ -129,6 +130,23 @@ public class Assets implements Disposable, AssetErrorListener {
         }
     }
 
+    public class AssetEnergyBall {
+        public final TextureRegion energyBallStand;
+        public final Animation energyBallAnimation;
+
+        public AssetEnergyBall(TextureAtlas atlas) {
+            energyBallStand = atlas.findRegion("energyBall", 1);
+
+            Array<TextureAtlas.AtlasRegion> regions = null;
+            TextureAtlas.AtlasRegion region = null;
+
+            // TODO PARAMETRIZAR LAS DURACIONES DE LAS ANIMACIONES
+            regions = atlas.findRegions("energyBall");
+            energyBallAnimation = new Animation(1.0f / 4.0f, regions);
+            regions.clear();
+        }
+    }
+
     public class AssetSounds {
         public final Sound hit;
         public final Sound pickUpPowerOne;
@@ -182,6 +200,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyOne = new AssetEnemyOne(atlas);
         powerBox = new AssetPowerBox(atlas);
         powerOne = new AssetPowerOne(atlas);
+        energyBall = new AssetEnergyBall(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
     }

@@ -9,13 +9,13 @@ PENDIENTES
 ----------
 - cuando este estable comentar todo el codigo
 - ver si no tengo metodos overrited de mas
-- Definir clase constantes.
 - resolver el tema de cuando el personaje se va de la pantalla, pero con velocidad. Porque asi como esta estoy
 seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se puede pensar en algun objeto
 invisible que vaya avanzando con la camara y listo. creo es lo mejor.
 - en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
 - USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
 - termine de comentar playscreen incluido
+- hacer que los bloques se vayan rompiendo de a poco.
 
 DUDAS
 -----
@@ -25,20 +25,18 @@ traveled in time "delta" (it doesn't render them, just moves their position vari
 Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
 which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
 
+- git:
+    traer un solo fuente (con sourcetree)
+    ver diferencias de mi fuente actual con el del repositorio
+    abrir un git local (un proyecto) sin tener que hacer clone
+    No me quedo un acceso directo, sino que ejecuto el exe que baje
+
+
 VIDEO
 -----
 HACER REFACTORING Y COMENTAR UN POCO.
 LUEGO:
-EL LOCO LE LLAMA COIN A LOS BRICKS QUE SE ROMPEN, YO LE LLAME ITEM.
-CREO QUE LO QUE DEBERIA HACER ES UN BRICK QUE SE ROMPE Y SUELTA UN ITEM QUE ME DA PODERES.
-LO PUEDO IMPLEMENTAR IGUAL QUE EL Y ESO ARRANCA EN EL 21 TAL CUAL.
-LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
-(VIDEO 13: Obtiene una tile (brick) y la hace desaparecer cuando es golpeada.
-No me sirve porque mis dibujos tienen tiles variables.)
-
-Voy por el 24.
-
-buscar un brick de asset y buscar un premio.
+Arranco 27, pantalla de gameover.
 
 HERRAMIENTAS
 ------------

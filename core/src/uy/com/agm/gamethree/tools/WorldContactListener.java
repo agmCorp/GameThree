@@ -13,6 +13,7 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileObjects.InteractiveTileObject;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
 /**
  * Created by AGM on 12/8/2017.
@@ -28,7 +29,7 @@ public class WorldContactListener implements ContactListener {
         Fixture fixC;
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-
+// TODO HABRIA QUE OPTIMIAR ESTO USANDO CASES SIN BRAKES ADEMAS NO ME INTERESA REGISTRAR LOS CHOQUES CONTRA LOS BORDES Y ESO COMO POR EJEMPLO EL PRIMER CASE
         switch (collisionDef) {
             case Constants.HERO_BIT | Constants.BORDERS_BIT: // bordes
                 fixC = fixA.getFilterData().categoryBits == Constants.BORDERS_BIT ? fixA : fixB;
@@ -85,6 +86,17 @@ public class WorldContactListener implements ContactListener {
             case Constants.ITEM_BIT | Constants.ITEM_BIT:
                 ((Item) fixA.getUserData()).reverseVelocity(true, false);
                 ((Item) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+
+
+            // EnergyBall
+            case Constants.WEAPON_BIT | Constants.BORDERS_BIT:
+            case Constants.WEAPON_BIT | Constants.OBSTACLE_BIT:
+            case Constants.WEAPON_BIT | Constants.POWERBOX_BIT:
+            case Constants.WEAPON_BIT | Constants.ITEM_BIT:
+            case Constants.WEAPON_BIT | Constants.ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.WEAPON_BIT ? fixA : fixB;
+                ((Weapon) fixC.getUserData()).onTarget();
                 break;
         }
     }

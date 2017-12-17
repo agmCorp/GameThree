@@ -11,8 +11,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -35,6 +37,8 @@ public class Hero extends Sprite {
     private Animation heroMovingDown;
     private float stateTimer;
 
+    private Array<EnergyBall> energyBall;
+
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -54,6 +58,8 @@ public class Hero extends Sprite {
         // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
         setBounds(0, 0, heroStand.getRegionWidth() / Constants.PPM, heroStand.getRegionHeight() / Constants.PPM);
         setRegion(heroStand);
+
+        energyBall = new Array<EnergyBall>();
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -82,6 +88,12 @@ public class Hero extends Sprite {
         }
 
         setRegion(getFrame(dt));
+
+        for(EnergyBall energyBall : this.energyBall) {
+            energyBall.update(dt);
+            if(energyBall.isDestroyed())
+                this.energyBall.removeValue(energyBall, true);
+        }
     }
 
     public TextureRegion getFrame(float dt) {
@@ -189,5 +201,12 @@ public class Hero extends Sprite {
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
+
+        for(EnergyBall energyBall : this.energyBall)
+            energyBall.draw(batch);
+    }
+
+    public void fire() {
+        energyBall.add(new EnergyBall(screen, b2body.getPosition().x, b2body.getPosition().y));
     }
 }
