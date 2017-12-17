@@ -57,7 +57,7 @@ public abstract class InteractiveTileObject {
 
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
-        filter.categoryBits = filterBit;
+        filter.categoryBits = filterBit; // indica que es
         fixture.setFilterData(filter);
     }
 
