@@ -21,7 +21,10 @@ public abstract class Item extends Sprite {
     protected Body b2body;
 
     protected Vector2 velocity;
-    protected enum State {WAITING, FADING, TAKEN, FINISHED};
+
+    protected enum State {WAITING, FADING, TAKEN, FINISHED}
+
+    ;
     protected State currentState;
 
     public Item(PlayScreen screen, float x, float y) {
@@ -31,15 +34,18 @@ public abstract class Item extends Sprite {
         defineItem();
     }
 
-    public void reverseVelocity(boolean x, boolean y){
-        if(x)
+    public void reverseVelocity(boolean x, boolean y) {
+        if (x)
             velocity.x = -velocity.x;
-        if(y)
+        if (y)
             velocity.y = -velocity.y;
     }
 
     protected abstract void defineItem();
+
     public abstract void update(float dt);
+
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
+
     public abstract void use(Hero hero);
 }

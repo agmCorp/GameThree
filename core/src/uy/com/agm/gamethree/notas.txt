@@ -15,6 +15,7 @@ seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se p
 invisible que vaya avanzando con la camara y listo. creo es lo mejor.
 - en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
 - USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
+- termine de comentar playscreen incluido
 
 DUDAS
 -----

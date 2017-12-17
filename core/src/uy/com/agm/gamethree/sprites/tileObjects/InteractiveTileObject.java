@@ -14,8 +14,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.Constants;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -45,10 +45,10 @@ public abstract class InteractiveTileObject {
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / GameThree.PPM, (bounds.getY() + bounds.getHeight() / 2) / GameThree.PPM);
+        bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM, (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
 
         b2body = world.createBody(bdef);
-        shape.setAsBox(bounds.getWidth() / 2 / GameThree.PPM, bounds.getHeight() / 2 / GameThree.PPM);
+        shape.setAsBox(bounds.getWidth() / 2 / Constants.PPM, bounds.getHeight() / 2 / Constants.PPM);
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
     }
@@ -63,7 +63,7 @@ public abstract class InteractiveTileObject {
 
     public TiledMapTileLayer.Cell getCell() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("graphics");
-        return layer.getCell((int)(b2body.getPosition().x * GameThree.PPM / 32),
-        (int)(b2body.getPosition().y * GameThree.PPM / 32));
+        return layer.getCell((int) (b2body.getPosition().x * Constants.PPM / 32),
+                (int) (b2body.getPosition().y * Constants.PPM / 32));
     }
 }

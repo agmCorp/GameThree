@@ -12,9 +12,9 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.tools.Constants;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -24,9 +24,11 @@ public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
     public enum State {STANDING, MOVING_UP, MOVING_DOWN, SHUTTING}
+
     public State currentState;
     public State previousState;
     public World world;
+    public PlayScreen screen;
     public Body b2body;
     private TextureRegion heroStand;
     private Animation heroMovingUp;
@@ -35,6 +37,7 @@ public class Hero extends Sprite {
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
+        this.screen = screen;
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
@@ -49,7 +52,7 @@ public class Hero extends Sprite {
 
         // setbounds es el que determina el tamano del dibujito del heroe en pantalla width y heght. En proximos update, los setposicion lo ubican
         // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
-        setBounds(0, 0, heroStand.getRegionWidth() / GameThree.PPM, heroStand.getRegionHeight() / GameThree.PPM);
+        setBounds(0, 0, heroStand.getRegionWidth() / Constants.PPM, heroStand.getRegionHeight() / Constants.PPM);
         setRegion(heroStand);
     }
 
@@ -58,7 +61,26 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
+
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Intento controlar que no se vaya de los limites (este codigo no deberia ir aca, deberia ir en la clase del heroe)
+        float width = b2body.getFixtureList().get(0).getShape().getRadius();
+        if (b2body.getPosition().y + width >= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+
+            /*
+            // esto esta bien al parecer. Demora, mejor poner un objeto que vaya avanzando y topee.
+            float posicionEnDondeQuieroEstar = gameCam.position.y + gameViewPort.getWorldHeight() / 2 - width;
+            float posicionActual = player.b2body.getPosition().y;
+            float v = posicionEnDondeQuieroEstar - posicionActual;
+            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, v);
+            */
+            b2body.setTransform(b2body.getPosition().x, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2 - width, b2body.getAngle());
+        }
+        if (b2body.getPosition().y - width <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
+            b2body.setTransform(b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 + width, b2body.getAngle());
+        }
+
         setRegion(getFrame(dt));
     }
 
@@ -93,11 +115,11 @@ public class Hero extends Sprite {
 
         float y = b2body.getLinearVelocity().y;
         float x = b2body.getLinearVelocity().x;
-if ( y > 0) {
-    state = State.MOVING_UP;
-} else if (y < 0){
-    state = State.MOVING_DOWN;
-}
+        if (y > 0) {
+            state = State.MOVING_UP;
+        } else if (y < 0) {
+            state = State.MOVING_DOWN;
+        }
 
         Gdx.app.log(TAG, "ANGULO " + b2body.getLinearVelocity().angle());
         return state;
@@ -112,13 +134,13 @@ if ( y > 0) {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / GameThree.PPM);
-        fdef.filter.categoryBits = GameThree.HERO_BIT; // Que es
-        fdef.filter.maskBits = GameThree.BORDERS_BIT |
-                GameThree.POWERBOX_BIT |
-                GameThree.OBSTACLE_BIT |
-                GameThree.ITEM_BIT |
-                GameThree.ENEMY_BIT; // Con que puede colisionar
+        shape.setRadius(29 / Constants.PPM);
+        fdef.filter.categoryBits = Constants.HERO_BIT; // Que es
+        fdef.filter.maskBits = Constants.BORDERS_BIT |
+                Constants.POWERBOX_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.ITEM_BIT |
+                Constants.ENEMY_BIT; // Con que puede colisionar
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,9 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.graphics.Color;
 
-import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.tools.Constants;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -19,13 +19,18 @@ import uy.com.agm.gamethree.game.GameThree;
 
 public class Hud implements Disposable {
     private static final String TAG = Hud.class.getName();
+
+    // Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
     public Viewport viewport;
 
+    // Hero score/time Tracking Variables
     private Integer worldTimer;
+    private boolean timeUp; // True when the world timer reaches 0
     private float timeCount;
     private Integer score;
 
+    // Scene2D widgets
     private Label countdownLabel;
     private Label scoreLabel;
     private Label timeLabel;
@@ -34,17 +39,24 @@ public class Hud implements Disposable {
     private Label gameThreeLabel;
 
     public Hud(SpriteBatch sb) {
+        // Define our tracking variables
         worldTimer = 300;
         timeCount = 0;
         score = 0;
 
-        viewport = new FitViewport(GameThree.V_WIDTH, GameThree.V_HEIGHT, new OrthographicCamera());
+        // Setup the HUD viewport using a new camera separate from our gamecam
+        // Define our stage using that viewport and our games spritebatch
+        viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
+        // Define a table used to organize our hud's labels
         Table table = new Table();
+        // Top-Align table
         table.top();
+        // Make the table fill the entire stage
         table.setFillParent(true);
 
+        // Define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -52,21 +64,27 @@ public class Hud implements Disposable {
         worldLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         gameThreeLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
+        // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(gameThreeLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
+        // Add a second row to our table
         table.row();
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
-
+        // Add our table to the stage
         stage.addActor(table);
     }
 
-    public void update(float dt) {
+    public void update(float dt){
         timeCount += dt;
-        if(timeCount >= 1) {
-            worldTimer--;
+        if(timeCount >= 1){
+            if (worldTimer > 0) {
+                worldTimer--;
+            } else {
+                timeUp = true;
+            }
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
@@ -80,5 +98,9 @@ public class Hud implements Disposable {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public boolean isTimeUp() {
+        return timeUp;
     }
 }

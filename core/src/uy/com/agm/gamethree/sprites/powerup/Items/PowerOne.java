@@ -11,11 +11,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Constants;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -40,7 +40,7 @@ public class PowerOne extends Item {
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
         TextureRegion powerOne = Assets.instance.powerOne.powerOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(0, 0, powerOne.getRegionWidth() / GameThree.PPM, powerOne.getRegionHeight() / GameThree.PPM);
+        setBounds(0, 0, powerOne.getRegionWidth() / Constants.PPM, powerOne.getRegionHeight() / Constants.PPM);
 
         currentState = State.WAITING;
         velocity = new Vector2(0.7f, 0);
@@ -55,14 +55,14 @@ public class PowerOne extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / GameThree.PPM);
-        fdef.filter.categoryBits = GameThree.ITEM_BIT; // Indica que es
-        fdef.filter.maskBits = GameThree.BORDERS_BIT |
-                GameThree.OBSTACLE_BIT |
-                GameThree.ENEMY_BIT |
-                GameThree.POWERBOX_BIT |
-                GameThree.ITEM_BIT |
-                GameThree.HERO_BIT; // Con que puede colisionar
+        shape.setRadius(29 / Constants.PPM);
+        fdef.filter.categoryBits = Constants.ITEM_BIT; // Indica que es
+        fdef.filter.maskBits = Constants.BORDERS_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.ENEMY_BIT |
+                Constants.POWERBOX_BIT |
+                Constants.ITEM_BIT |
+                Constants.HERO_BIT; // Con que puede colisionar
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }

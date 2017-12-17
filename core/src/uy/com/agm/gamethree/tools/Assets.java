@@ -34,7 +34,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetMusic music;
 
     // Singleton: prevent instantiation from other classes
-    private Assets () {
+    private Assets() {
     }
 
     public class AssetFonts {
@@ -44,7 +44,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final BitmapFont defaultBig;
         */
 
-        public AssetFonts () {
+        public AssetFonts() {
             /*
             // create three fonts using Libgdx's built-in 15px bitmap font
             defaultSmall = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
@@ -65,7 +65,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public class AssetPowerBox {
         public final TextureRegion powerBoxStand;
 
-        public AssetPowerBox (TextureAtlas atlas) {
+        public AssetPowerBox(TextureAtlas atlas) {
             powerBoxStand = atlas.findRegion("powerBox");
         }
     }
@@ -75,7 +75,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation heroMovingUp;
         public final Animation heroMovingDown;
 
-        public AssetHero (TextureAtlas atlas) {
+        public AssetHero(TextureAtlas atlas) {
             heroStand = atlas.findRegion("heroUp", 1);
 
             Array<TextureAtlas.AtlasRegion> regions = null;
@@ -97,7 +97,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation enemyOneAnimation;
         public final Animation explosionAnimation;
 
-        public AssetEnemyOne (TextureAtlas atlas) {
+        public AssetEnemyOne(TextureAtlas atlas) {
             enemyOneStand = atlas.findRegion("enemyOne", 1);
 
             Array<TextureAtlas.AtlasRegion> regions = null;
@@ -116,7 +116,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TextureRegion powerOneStand;
         public final Animation powerOneAnimation;
 
-        public AssetPowerOne (TextureAtlas atlas) {
+        public AssetPowerOne(TextureAtlas atlas) {
             powerOneStand = atlas.findRegion("powerOne", 1);
 
             Array<TextureAtlas.AtlasRegion> regions = null;
@@ -134,7 +134,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Sound pickUpPowerOne;
         public final Sound openPowerBox;
 
-        public AssetSounds (AssetManager am) {
+        public AssetSounds(AssetManager am) {
             hit = am.get("audio/sounds/hit.ogg", Sound.class);
             pickUpPowerOne = am.get("audio/sounds/pickUpPowerOne.ogg", Sound.class);
             openPowerBox = am.get("audio/sounds/openPowerBox.ogg", Sound.class);
@@ -144,12 +144,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public class AssetMusic {
         public final Music songLevelOne;
 
-        public AssetMusic (AssetManager am) {
+        public AssetMusic(AssetManager am) {
             songLevelOne = am.get("audio/music/levelOne.mp3", Music.class);
         }
     }
 
-    public void init (AssetManager assetManager) {
+    public void init(AssetManager assetManager) {
         this.assetManager = assetManager;
         // set asset manager error handler
         assetManager.setErrorListener(this);
@@ -188,7 +188,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     @Override
     public void error(AssetDescriptor assetDescriptor, Throwable throwable) {
-        Gdx.app.error(TAG, "Error al cargar asset: '" + assetDescriptor.fileName + "'", (Exception)throwable);
+        Gdx.app.error(TAG, "Error al cargar asset: '" + assetDescriptor.fileName + "'", (Exception) throwable);
     }
 
     @Override

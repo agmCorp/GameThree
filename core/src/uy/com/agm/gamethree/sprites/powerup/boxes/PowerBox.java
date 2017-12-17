@@ -16,12 +16,12 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Constants;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -36,7 +36,9 @@ public class PowerBox extends Sprite {
 
     TextureRegion powerBoxStand;
 
-    protected enum State {WAITING, OPENED, FINISHED};
+    protected enum State {WAITING, OPENED, FINISHED}
+
+    ;
     protected State currentState;
     protected MapObject object;
 
@@ -49,7 +51,7 @@ public class PowerBox extends Sprite {
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
         // Seteo punto (x,y) en la parte inferior izquierda de ese rectangulo. Ese punto lo usa definePowerBox como centro de su circulo
-        setPosition(rect.getX() / GameThree.PPM, rect.getY() / GameThree.PPM);
+        setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
         definePowerBox();
         b2body.setActive(false);
 
@@ -59,7 +61,7 @@ public class PowerBox extends Sprite {
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla.
         // Es un rectangulo y recibe un punto x, y que es el vertice inferior izquierdo de ese rectangulo
         float resize = 0.7f; // TODO ARREGLAR ESTO
-        setBounds(0, 0, powerBoxStand.getRegionWidth() * resize / GameThree.PPM, powerBoxStand.getRegionHeight() * resize / GameThree.PPM);
+        setBounds(0, 0, powerBoxStand.getRegionWidth() * resize / Constants.PPM, powerBoxStand.getRegionHeight() * resize / Constants.PPM);
 
         // Ahora posicionamos ese rectangulo en el centro del circulo. Esta hecho en dos pasos porque es setBound quien define width y height
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
@@ -75,8 +77,8 @@ public class PowerBox extends Sprite {
 
     protected void getItemOnHit() {
         float MARGEN = 32; // TODO ARREGLAR ESTO
-        if(object.getProperties().containsKey("powerOne")) {
-            screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / GameThree.PPM), PowerOne.class));
+        if (object.getProperties().containsKey("powerOne")) {
+            screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), PowerOne.class));
         }
     }
 
@@ -88,11 +90,11 @@ public class PowerBox extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / GameThree.PPM);
-        fdef.filter.categoryBits = GameThree.POWERBOX_BIT; // Indica que es
-        fdef.filter.maskBits = GameThree.ENEMY_BIT |
-                GameThree.ITEM_BIT |
-                GameThree.HERO_BIT; // Con que puede colisionar
+        shape.setRadius(29 / Constants.PPM);
+        fdef.filter.categoryBits = Constants.POWERBOX_BIT; // Indica que es
+        fdef.filter.maskBits = Constants.ENEMY_BIT |
+                Constants.ITEM_BIT |
+                Constants.HERO_BIT; // Con que puede colisionar
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -135,7 +137,7 @@ public class PowerBox extends Sprite {
 
     public void draw(Batch batch) {
         if (currentState == State.WAITING) {
-           super.draw(batch);
+            super.draw(batch);
         }
     }
 }

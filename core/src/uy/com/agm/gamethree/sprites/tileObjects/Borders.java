@@ -2,7 +2,6 @@ package uy.com.agm.gamethree.sprites.tileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.Rectangle;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 

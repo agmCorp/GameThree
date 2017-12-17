@@ -39,18 +39,18 @@ public class B2WorldCreator {
         Hud hud = screen.getHud();
 
         // Layer: borders
-        for(MapObject object : map.getLayers().get("borders").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("borders").getObjects().getByType(RectangleMapObject.class)) {
             new Borders(screen, object);
         }
 
         // Layer: obstacles
-        for(MapObject object : map.getLayers().get("obstacles").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("obstacles").getObjects().getByType(RectangleMapObject.class)) {
             new Obstacle(screen, object);
         }
 
         // Layer: powerBoxes
         powerBoxes = new Array<PowerBox>();
-        for(MapObject object : map.getLayers().get("powerBox").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("powerBox").getObjects().getByType(RectangleMapObject.class)) {
             powerBoxes.add(new PowerBox(screen, object));
         }
         // Items
@@ -59,7 +59,7 @@ public class B2WorldCreator {
 
         // Layer: enemyOne
         enemies = new Array<Enemy>();
-        for(MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
             enemies.add(new EnemyOne(screen, object));
         }
     }
@@ -67,12 +67,15 @@ public class B2WorldCreator {
     public Array<Enemy> getEnemies() {
         return enemies;
     }
+
     public Array<PowerBox> getPowerBoxes() {
         return powerBoxes;
     }
+
     public Array<Item> getItems() {
         return items;
     }
+
     public void createItem(ItemDef idef) {
         itemsToCreate.add(idef);
     }
