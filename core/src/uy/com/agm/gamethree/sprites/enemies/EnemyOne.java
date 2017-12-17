@@ -40,7 +40,7 @@ public class EnemyOne extends Enemy {
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
         TextureRegion enemyOne = Assets.instance.enemyOne.enemyOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(getX(), getY(), enemyOne.getRegionWidth() / GameThree.PPM, enemyOne.getRegionHeight() / GameThree.PPM);
+        setBounds(0, 0, enemyOne.getRegionWidth() / GameThree.PPM, enemyOne.getRegionHeight() / GameThree.PPM);
 
         currentState = State.ALIVE;
 
@@ -58,8 +58,9 @@ public class EnemyOne extends Enemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(29 / GameThree.PPM);
         fdef.filter.categoryBits = GameThree.ENEMY_BIT; // Indica que es
-        fdef.filter.maskBits = GameThree.DEFAULT_BIT |
+        fdef.filter.maskBits = GameThree.BORDERS_BIT |
                 GameThree.OBSTACLE_BIT |
+                GameThree.ITEM_BIT |
                 GameThree.ENEMY_BIT |
                 GameThree.HERO_BIT; // Con que puede colisionar
 

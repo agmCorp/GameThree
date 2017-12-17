@@ -42,8 +42,6 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         final float FRICTION = 0.18f; // porcentaje de la velocidad
-        final float MIN_DELTA = 100.0f / GameThree.PPM;
-        float velocidad_camara = game.playScreen.gameCam.position.y;
 
         Vector2 delta = new Vector2(deltaX / GameThree.PPM, deltaY / GameThree.PPM);
 

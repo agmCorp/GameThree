@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.Items;
+package uy.com.agm.gamethree.sprites.powerup.Items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -40,7 +40,7 @@ public class PowerOne extends Item {
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
         TextureRegion powerOne = Assets.instance.powerOne.powerOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(getX(), getY(), powerOne.getRegionWidth() / GameThree.PPM, powerOne.getRegionHeight() / GameThree.PPM);
+        setBounds(0, 0, powerOne.getRegionWidth() / GameThree.PPM, powerOne.getRegionHeight() / GameThree.PPM);
 
         currentState = State.WAITING;
         velocity = new Vector2(0.7f, 0);
@@ -57,10 +57,10 @@ public class PowerOne extends Item {
         CircleShape shape = new CircleShape();
         shape.setRadius(29 / GameThree.PPM);
         fdef.filter.categoryBits = GameThree.ITEM_BIT; // Indica que es
-        fdef.filter.maskBits = GameThree.DEFAULT_BIT |
+        fdef.filter.maskBits = GameThree.BORDERS_BIT |
                 GameThree.OBSTACLE_BIT |
                 GameThree.ENEMY_BIT |
-                GameThree.COINBOX_BIT |
+                GameThree.POWERBOX_BIT |
                 GameThree.ITEM_BIT |
                 GameThree.HERO_BIT; // Con que puede colisionar
         fdef.shape = shape;

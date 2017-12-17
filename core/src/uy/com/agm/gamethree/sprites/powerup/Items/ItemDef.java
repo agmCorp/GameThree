@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.Items;
+package uy.com.agm.gamethree.sprites.powerup.Items;
 
 import com.badlogic.gdx.math.Vector2;
 

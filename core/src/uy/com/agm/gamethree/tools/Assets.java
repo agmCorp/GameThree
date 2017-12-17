@@ -27,6 +27,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetFonts fonts;
     public AssetHero hero;
     public AssetEnemyOne enemyOne;
+    public AssetPowerBox powerBox;
     public AssetPowerOne powerOne;
 
     public AssetSounds sounds;
@@ -58,6 +59,14 @@ public class Assets implements Disposable, AssetErrorListener {
             defaultNormal.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             defaultBig.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             */
+        }
+    }
+
+    public class AssetPowerBox {
+        public final TextureRegion powerBoxStand;
+
+        public AssetPowerBox (TextureAtlas atlas) {
+            powerBoxStand = atlas.findRegion("powerBox");
         }
     }
 
@@ -123,20 +132,20 @@ public class Assets implements Disposable, AssetErrorListener {
     public class AssetSounds {
         public final Sound hit;
         public final Sound pickUpPowerOne;
-        public final Sound openCoinBox;
+        public final Sound openPowerBox;
 
         public AssetSounds (AssetManager am) {
             hit = am.get("audio/sounds/hit.ogg", Sound.class);
             pickUpPowerOne = am.get("audio/sounds/pickUpPowerOne.ogg", Sound.class);
-            openCoinBox = am.get("audio/sounds/openCoinBox.ogg", Sound.class);
+            openPowerBox = am.get("audio/sounds/openPowerBox.ogg", Sound.class);
         }
     }
 
     public class AssetMusic {
-        public final Music songLevel1;
+        public final Music songLevelOne;
 
         public AssetMusic (AssetManager am) {
-            songLevel1 = am.get("audio/music/level1.mp3", Music.class);
+            songLevelOne = am.get("audio/music/levelOne.mp3", Music.class);
         }
     }
 
@@ -149,9 +158,9 @@ public class Assets implements Disposable, AssetErrorListener {
         // load sounds
         assetManager.load("audio/sounds/hit.ogg", Sound.class);
         assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
-        assetManager.load("audio/sounds/openCoinBox.ogg", Sound.class);
+        assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);
         // load music
-        assetManager.load("audio/music/level1.mp3", Music.class);
+        assetManager.load("audio/music/levelOne.mp3", Music.class);
         // start loading assets and wait until finished
         assetManager.finishLoading();
 
@@ -171,6 +180,7 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
+        powerBox = new AssetPowerBox(atlas);
         powerOne = new AssetPowerOne(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);

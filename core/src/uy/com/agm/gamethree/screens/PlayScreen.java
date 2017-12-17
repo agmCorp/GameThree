@@ -17,9 +17,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
-import uy.com.agm.gamethree.sprites.Items.Item;
+import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
+import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -54,7 +55,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         maploader = new TmxMapLoader();
-        map = maploader.load("level1/level1.tmx");
+        map = maploader.load("levelOne/levelOne.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / GameThree.PPM);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
@@ -115,6 +116,16 @@ public class PlayScreen implements Screen {
             }
         }
 
+        // PowerBoxes
+        for(PowerBox powerBox : creator.getPowerBoxes()) {
+            powerBox.update(dt);
+            // Cuando el powerbox entra en la camara, se activa (se mueve y puede colisionar)
+            // Hay que tener mucho cuidado porque si el enemigo esta destruido, el b2body no existe y da errores aleatorios
+            if (!powerBox.isDestroyed()) {
+                powerBox.b2body.setActive(true);
+            }
+        }
+
         // Items
         for(Item item: creator.getItems()) {
             item.update(dt);
@@ -123,7 +134,7 @@ public class PlayScreen implements Screen {
 
         hud.update(dt);
         //gameCam.position.x = player.b2body.getPosition().x;
-        //gameCam.position.y += 0.5 * dt;
+        gameCam.position.y += 0.5 * dt;
 
         // Intento controlar que no se vaya de los limites (este codigo no deberia ir aca, deberia ir en la clase del heroe)
         float width = player.b2body.getFixtureList().get(0).getShape().getRadius();
@@ -161,7 +172,9 @@ public class PlayScreen implements Screen {
         for(Enemy enemy : creator.getEnemies()) {
             enemy.draw(game.batch);
         }
-
+        for(PowerBox powerBox: creator.getPowerBoxes()) {
+            powerBox.draw(game.batch);
+        }
         for(Item item: creator.getItems()) {
             item.draw(game.batch);
         }
@@ -180,6 +193,9 @@ public class PlayScreen implements Screen {
         player.renderDebug(shapeRenderer);
         for(Enemy enemy : creator.getEnemies()) {
             enemy.renderDebug(shapeRenderer);
+        }
+        for(PowerBox powerBox: creator.getPowerBoxes()) {
+            powerBox.renderDebug(shapeRenderer);
         }
         for(Item item: creator.getItems()) {
             item.renderDebug(shapeRenderer);

@@ -10,13 +10,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.Items.Item;
-import uy.com.agm.gamethree.sprites.Items.ItemDef;
-import uy.com.agm.gamethree.sprites.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.powerup.Items.Item;
+import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileObjects.Borders;
-import uy.com.agm.gamethree.sprites.tileObjects.CoinBox;
 import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
 
 /**
@@ -28,6 +28,7 @@ public class B2WorldCreator {
 
     private PlayScreen screen;
     private Array<Enemy> enemies;
+    private Array<PowerBox> powerBoxes;
     private Array<Item> items;
     private LinkedBlockingQueue<ItemDef> itemsToCreate;
 
@@ -47,9 +48,10 @@ public class B2WorldCreator {
             new Obstacle(screen, object);
         }
 
-        // Layer: coinboxes
-        for(MapObject object : map.getLayers().get("coinbox").getObjects().getByType(RectangleMapObject.class)) {
-            new CoinBox(screen, object);
+        // Layer: powerBoxes
+        powerBoxes = new Array<PowerBox>();
+        for(MapObject object : map.getLayers().get("powerBox").getObjects().getByType(RectangleMapObject.class)) {
+            powerBoxes.add(new PowerBox(screen, object));
         }
         // Items
         items = new Array<Item>();
@@ -64,6 +66,9 @@ public class B2WorldCreator {
 
     public Array<Enemy> getEnemies() {
         return enemies;
+    }
+    public Array<PowerBox> getPowerBoxes() {
+        return powerBoxes;
     }
     public Array<Item> getItems() {
         return items;

@@ -11,8 +11,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.Items.ItemDef;
-import uy.com.agm.gamethree.sprites.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 
 /**
  * Created by AGM on 12/9/2017.

@@ -42,15 +42,13 @@ public class Hero extends Sprite {
         heroMovingUp = Assets.instance.hero.heroMovingUp;
         heroMovingDown = Assets.instance.hero.heroMovingDown;
         heroStand = Assets.instance.hero.heroStand;
+        // Es en el centro, por eso el defineHero que hace getx, getY es un circulo centrado en este punto x, y
         setPosition(x, y);
 
         defineHero();
-        /* No importa el origen (0, 0) pues se redefine en el método update según la b2box.
-           En esta clase se usa el bounds de Sprite que es un rectángulo. Si quisiera un círculo (limite = new Circle(x, y, radio))
-           debería definirlo en la clase hero y en su método update hacer limite.setPosition(...).
-         */
-        // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
-        // setbounds es el que determina el tamano del dibujito del heroe en pantalla
+
+        // setbounds es el que determina el tamano del dibujito del heroe en pantalla width y heght. En proximos update, los setposicion lo ubican
+        // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
         setBounds(0, 0, heroStand.getRegionWidth() / GameThree.PPM, heroStand.getRegionHeight() / GameThree.PPM);
         setRegion(heroStand);
     }
@@ -116,8 +114,8 @@ if ( y > 0) {
         CircleShape shape = new CircleShape();
         shape.setRadius(29 / GameThree.PPM);
         fdef.filter.categoryBits = GameThree.HERO_BIT; // Que es
-        fdef.filter.maskBits = GameThree.DEFAULT_BIT |
-                GameThree.COINBOX_BIT |
+        fdef.filter.maskBits = GameThree.BORDERS_BIT |
+                GameThree.POWERBOX_BIT |
                 GameThree.OBSTACLE_BIT |
                 GameThree.ITEM_BIT |
                 GameThree.ENEMY_BIT; // Con que puede colisionar

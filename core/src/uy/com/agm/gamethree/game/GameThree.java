@@ -19,13 +19,12 @@ public class GameThree extends Game {
 	public static final int V_HEIGHT = 800;
 	public static final float PPM = 100;
 
-	public static final short DEFAULT_BIT = 1; // bordes
+	public static final short BORDERS_BIT = 1; // bordes
 	public static final short HERO_BIT = 2;
 	public static final short OBSTACLE_BIT = 4; // arboles
-	public static final short COINBOX_BIT = 8;	// REGALOS
-	public static final short COINBOXOPENED_BIT = 16; // lo quiero sacar
-	public static final short ENEMY_BIT = 32;
-	public static final short ITEM_BIT = 64;
+	public static final short POWERBOX_BIT = 8;	// REGALOS
+	public static final short ENEMY_BIT = 16;
+	public static final short ITEM_BIT = 32;
 
 
 	public SpriteBatch batch;
@@ -40,7 +39,7 @@ public class GameThree extends Game {
 
 		// Load preferences for audio settings and start playing music
 		//GamePreferences.instance.load();
-		AudioManager.instance.play(Assets.instance.music.songLevel1);
+		AudioManager.instance.play(Assets.instance.music.songLevelOne);
 
 		batch = new SpriteBatch();
 		playScreen = new PlayScreen(this);
