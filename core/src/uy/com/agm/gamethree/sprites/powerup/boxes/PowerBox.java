@@ -35,6 +35,9 @@ public class PowerBox extends Sprite {
     public Body b2body;
 
     TextureRegion powerBoxStand;
+    TextureRegion powerBoxDamagedLittle;
+    TextureRegion powerBoxDamagedMedium;
+    TextureRegion powerBoxDamagedHard;
 
     protected enum State {WAITING, OPENED, FINISHED};
     protected State currentState;
@@ -56,7 +59,9 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         powerBoxStand = Assets.instance.powerBox.powerBoxStand;
-        setRegion(powerBoxStand);
+        powerBoxDamagedLittle = Assets.instance.powerBox.powerBoxDamagedLittle;
+        powerBoxDamagedMedium = Assets.instance.powerBox.powerBoxDamagedMedium;
+        powerBoxDamagedHard = Assets.instance.powerBox.powerBoxDamagedHard;
 
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla.
         // Es un rectangulo y recibe un punto x, y que es el vertice inferior izquierdo de ese rectangulo
@@ -104,6 +109,22 @@ public class PowerBox extends Sprite {
     public void update(float dt) {
         switch (currentState) {
             case WAITING:
+                switch (damage) {
+                    case 0:
+                        setRegion(powerBoxStand);
+                        break;
+                    case 1:
+                        setRegion(powerBoxDamagedLittle);
+                        break;
+                    case 2:
+                        setRegion(powerBoxDamagedMedium);
+                        break;
+                    case 3:
+                        setRegion(powerBoxDamagedHard);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case OPENED:
                 world.destroyBody(b2body);
@@ -137,7 +158,9 @@ public class PowerBox extends Sprite {
         No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
          */
 
-        if (object.getProperties().get("strength", -1, int.class) == (damage - 1) ){
+        int strength = object.getProperties().get("strength", 0, Integer.class);
+        Gdx.app.debug(TAG, "strength, damage " + strength + " " + damage);
+        if (damage >= strength - 1){
             getItemOnHit();
             currentState = State.OPENED;
         } else {
