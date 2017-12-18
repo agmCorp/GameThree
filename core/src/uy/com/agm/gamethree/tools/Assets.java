@@ -165,7 +165,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Music songLevelOne;
 
         public AssetMusic(AssetManager am) {
-            songLevelOne = am.get("audio/music/levelOne.mp3", Music.class);
+            songLevelOne = am.get("audio/music/levelOne.ogg", Music.class);
         }
     }
 
@@ -181,7 +181,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
         assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);
         // load music
-        assetManager.load("audio/music/levelOne.mp3", Music.class);
+        assetManager.load("audio/music/levelOne.ogg", Music.class);
         // start loading assets and wait until finished
         assetManager.finishLoading();
 
