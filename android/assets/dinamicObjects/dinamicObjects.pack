@@ -184,367 +184,388 @@ powerBox
   size: 80, 86
   orig: 80, 86
   offset: 0, 0
-  index: -1
+  index: 1
+powerBox
+  rotate: false
+  xy: 339, 82
+  size: 80, 86
+  orig: 80, 86
+  offset: 0, 0
+  index: 2
+powerBox
+  rotate: false
+  xy: 508, 251
+  size: 80, 86
+  orig: 80, 86
+  offset: 0, 0
+  index: 3
+powerBox
+  rotate: false
+  xy: 677, 420
+  size: 80, 86
+  orig: 80, 86
+  offset: 0, 0
+  index: 4
 heroDead
   rotate: false
-  xy: 339, 100
+  xy: 846, 688
   size: 78, 68
   orig: 78, 68
   offset: 0, 0
   index: 9
 heroDead
   rotate: false
-  xy: 508, 267
+  xy: 928, 774
   size: 75, 70
   orig: 75, 70
   offset: 0, 0
   index: 8
 heroDead
   rotate: false
-  xy: 677, 435
+  xy: 339, 9
   size: 64, 71
   orig: 64, 71
   offset: 0, 0
   index: 7
 heroDead
   rotate: false
-  xy: 846, 685
+  xy: 421, 97
   size: 64, 71
   orig: 64, 71
   offset: 0, 0
   index: 10
 heroDead
   rotate: false
-  xy: 928, 769
+  xy: 508, 174
   size: 59, 75
   orig: 59, 75
   offset: 0, 0
   index: 2
 heroDead
   rotate: false
-  xy: 339, 21
+  xy: 590, 260
   size: 57, 77
   orig: 57, 77
   offset: 0, 0
   index: 3
 heroDead
   rotate: false
-  xy: 508, 193
+  xy: 677, 346
   size: 62, 72
   orig: 62, 72
   offset: 0, 0
   index: 5
 heroDead
   rotate: false
-  xy: 677, 361
+  xy: 759, 434
   size: 62, 72
   orig: 62, 72
   offset: 0, 0
   index: 6
 heroDead
   rotate: false
-  xy: 846, 609
+  xy: 846, 612
   size: 59, 74
   orig: 59, 74
   offset: 0, 0
   index: 4
 heroDead
   rotate: false
-  xy: 743, 434
+  xy: 846, 538
   size: 60, 72
   orig: 60, 72
   offset: 0, 0
   index: 1
+energyBall
+  rotate: false
+  xy: 649, 262
+  size: 24, 75
+  orig: 24, 75
+  offset: 0, 0
+  index: 2
 heroDown
   rotate: false
-  xy: 846, 535
-  size: 58, 72
-  orig: 58, 72
-  offset: 0, 0
-  index: 6
-enemyOne
-  rotate: false
-  xy: 419, 113
-  size: 74, 55
-  orig: 74, 55
-  offset: 0, 0
-  index: 3
-enemyOne
-  rotate: false
-  xy: 585, 282
-  size: 74, 55
-  orig: 74, 55
-  offset: 0, 0
-  index: 4
-heroDown
-  rotate: false
-  xy: 741, 361
-  size: 58, 71
-  orig: 58, 71
-  offset: 0, 0
-  index: 5
-heroDown
-  rotate: false
-  xy: 805, 434
+  xy: 823, 434
   size: 57, 72
   orig: 57, 72
   offset: 0, 0
   index: 3
 heroDown
   rotate: false
-  xy: 801, 361
+  xy: 569, 177
+  size: 58, 72
+  orig: 58, 72
+  offset: 0, 0
+  index: 6
+energyBall
+  rotate: false
+  xy: 487, 97
+  size: 24, 71
+  orig: 24, 71
+  offset: 0, 0
+  index: 1
+heroDown
+  rotate: false
+  xy: 513, 101
   size: 57, 71
   orig: 57, 71
   offset: 0, 0
   index: 1
-energyBall
+heroDown
   rotate: false
-  xy: 989, 769
-  size: 24, 75
-  orig: 24, 75
+  xy: 572, 104
+  size: 57, 71
+  orig: 57, 71
   offset: 0, 0
   index: 2
 enemyOne
   rotate: false
-  xy: 677, 304
+  xy: 928, 717
+  size: 74, 55
+  orig: 74, 55
+  offset: 0, 0
+  index: 3
+enemyOne
+  rotate: false
+  xy: 926, 660
+  size: 74, 55
+  orig: 74, 55
+  offset: 0, 0
+  index: 4
+energyBall
+  rotate: false
+  xy: 741, 347
+  size: 24, 71
+  orig: 24, 71
+  offset: 0, 0
+  index: 3
+heroDown
+  rotate: false
+  xy: 767, 361
+  size: 58, 71
+  orig: 58, 71
+  offset: 0, 0
+  index: 5
+heroDown
+  rotate: false
+  xy: 827, 361
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: 4
+enemyOne
+  rotate: false
+  xy: 421, 40
   size: 73, 55
   orig: 73, 55
   offset: 0, 0
   index: 5
 enemyOne
   rotate: false
-  xy: 752, 304
+  xy: 767, 304
   size: 68, 55
   orig: 68, 55
   offset: 0, 0
   index: 2
 enemyOne
   rotate: false
-  xy: 822, 304
+  xy: 837, 304
   size: 66, 55
   orig: 66, 55
   offset: 0, 0
   index: 1
-heroDown
-  rotate: false
-  xy: 860, 361
-  size: 57, 71
-  orig: 57, 71
-  offset: 0, 0
-  index: 2
 energyBall
   rotate: false
-  xy: 398, 27
+  xy: 629, 187
   size: 24, 71
   orig: 24, 71
-  offset: 0, 0
-  index: 1
-heroDown
-  rotate: false
-  xy: 424, 40
-  size: 57, 71
-  orig: 57, 71
   offset: 0, 0
   index: 4
-energyBall
-  rotate: false
-  xy: 912, 685
-  size: 24, 71
-  orig: 24, 71
-  offset: 0, 0
-  index: 3
-enemyOne
-  rotate: false
-  xy: 938, 712
-  size: 68, 55
-  orig: 68, 55
-  offset: 0, 0
-  index: 6
 heroUp
   rotate: false
-  xy: 907, 614
+  xy: 655, 191
   size: 54, 69
   orig: 54, 69
   offset: 0, 0
   index: 3
 heroUp
   rotate: false
-  xy: 963, 641
+  xy: 631, 116
   size: 54, 69
   orig: 54, 69
   offset: 0, 0
   index: 6
+heroUp
+  rotate: false
+  xy: 687, 121
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: 2
 enemyOne
   rotate: false
-  xy: 508, 136
+  xy: 496, 40
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: 6
+heroUp
+  rotate: false
+  xy: 675, 269
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: 5
+heroUp
+  rotate: false
+  xy: 711, 200
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: 1
+enemyOne
+  rotate: false
+  xy: 768, 247
   size: 68, 55
   orig: 68, 55
   offset: 0, 0
   index: 7
 enemyOne
   rotate: false
-  xy: 890, 304
+  xy: 838, 247
   size: 67, 55
   orig: 67, 55
   offset: 0, 0
   index: 8
-energyBall
-  rotate: false
-  xy: 572, 194
-  size: 24, 71
-  orig: 24, 71
-  offset: 0, 0
-  index: 4
-heroUp
-  rotate: false
-  xy: 598, 213
-  size: 55, 67
-  orig: 55, 67
-  offset: 0, 0
-  index: 1
-heroUp
-  rotate: false
-  xy: 864, 465
-  size: 53, 68
-  orig: 53, 68
-  offset: 0, 0
-  index: 2
-heroUp
-  rotate: false
-  xy: 963, 572
-  size: 55, 67
-  orig: 55, 67
-  offset: 0, 0
-  index: 4
-heroUp
-  rotate: false
-  xy: 483, 43
-  size: 53, 68
-  orig: 53, 68
-  offset: 0, 0
-  index: 5
 enemyOne
   rotate: false
-  xy: 578, 137
+  xy: 768, 190
   size: 67, 55
   orig: 67, 55
   offset: 0, 0
   index: 9
+heroUp
+  rotate: false
+  xy: 837, 178
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: 4
 powerOne
   rotate: false
-  xy: 538, 82
+  xy: 742, 136
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 1
 powerOne
   rotate: false
-  xy: 592, 83
+  xy: 742, 82
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 2
 powerOne
   rotate: false
-  xy: 538, 28
+  xy: 894, 193
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 3
 powerOne
   rotate: false
-  xy: 592, 29
+  xy: 894, 139
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 4
 powerOne
   rotate: false
-  xy: 661, 250
+  xy: 796, 124
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 5
 powerOne
   rotate: false
-  xy: 715, 250
+  xy: 796, 70
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 6
 powerOne
   rotate: false
-  xy: 769, 250
+  xy: 631, 62
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 7
 powerOne
   rotate: false
-  xy: 823, 250
+  xy: 850, 85
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 8
 powerOne
   rotate: false
-  xy: 877, 250
+  xy: 904, 85
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 9
 powerOne
   rotate: false
-  xy: 655, 196
+  xy: 850, 31
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 10
 powerOne
   rotate: false
-  xy: 709, 196
+  xy: 904, 31
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 11
 powerOne
   rotate: false
-  xy: 763, 196
+  xy: 687, 67
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 12
 powerOne
   rotate: false
-  xy: 817, 196
+  xy: 741, 28
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 13
 powerOne
   rotate: false
-  xy: 871, 196
+  xy: 795, 16
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 14
 powerOne
   rotate: false
-  xy: 647, 142
+  xy: 572, 50
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 15
 powerOne
   rotate: false
-  xy: 701, 142
+  xy: 626, 8
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: 16
 powerOne
   rotate: false
-  xy: 755, 142
+  xy: 680, 8
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
