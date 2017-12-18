@@ -155,7 +155,7 @@ public class PlayScreen implements Screen {
         hud.update(dt);
 
         // Cam is moving up
-        gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+        //gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
 
         // Update our gamecam with correct coordinates after changes
         gameCam.update();

@@ -40,6 +40,8 @@ public class PowerBox extends Sprite {
     protected State currentState;
     protected MapObject object;
 
+    private int damage;
+
     public PowerBox(PlayScreen screen, MapObject object) {
         this.object = object;
         this.world = screen.getWorld();
@@ -66,7 +68,7 @@ public class PowerBox extends Sprite {
 
 
         currentState = State.WAITING;
-
+        damage = 0;
     }
 
     public boolean isDestroyed() {
@@ -135,9 +137,12 @@ public class PowerBox extends Sprite {
         No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
          */
 
-        getItemOnHit();
-        currentState = State.OPENED;
-        Gdx.app.debug(TAG, "POWERBOX collision");
+        if (object.getProperties().get("strength", -1, int.class) == (damage - 1) ){
+            getItemOnHit();
+            currentState = State.OPENED;
+        } else {
+            damage++;
+        }
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {

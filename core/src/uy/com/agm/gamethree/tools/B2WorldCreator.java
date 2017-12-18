@@ -88,8 +88,8 @@ public class B2WorldCreator {
         return weapons;
     }
 
-    public void createGameThreeActor(GameThreeActorDef idef) {
-        gameThreeActorsToCreate.add(idef);
+    public void createGameThreeActor(GameThreeActorDef gameThreeActorDef) {
+        gameThreeActorsToCreate.add(gameThreeActorDef);
     }
 
     public void handleCreatingGameThreeActors() {
