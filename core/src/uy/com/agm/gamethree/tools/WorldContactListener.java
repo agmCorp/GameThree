@@ -40,8 +40,6 @@ public class WorldContactListener implements ContactListener {
                 ((InteractiveTileObject) fixC.getUserData()).onHit();
                 break;
             case Constants.HERO_BIT | Constants.POWERBOX_BIT: // regalos
-                fixC = fixA.getFilterData().categoryBits == Constants.POWERBOX_BIT ? fixA : fixB;
-                ((PowerBox) fixC.getUserData()).onHit();
                 break;
             case Constants.HERO_BIT | Constants.ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
