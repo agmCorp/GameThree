@@ -147,6 +147,7 @@ public class PlayScreen implements Screen {
         for (Weapon weapon : creator.getWeapons()) {
             weapon.update(dt);
         }
+
         hud.update(dt);
 
         // Cam is moving up
