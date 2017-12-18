@@ -7,17 +7,17 @@ mis texturas miden 1024 x 1024
 
 PENDIENTES
 ----------
-- definir mas objetos en mi nivel (blocks, coins)
 - cuando este estable comentar todo el codigo
 - ver si no tengo metodos overrited de mas
-- usar el assetmanager, copiarlo del conejo haciendo una splash screen capaz.
-- Definir clase constantes.
 - resolver el tema de cuando el personaje se va de la pantalla, pero con velocidad. Porque asi como esta estoy
 seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se puede pensar en algun objeto
 invisible que vaya avanzando con la camara y listo. creo es lo mejor.
 - en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
-- LIMITAR SI O SI SU VELOCIDAD MAXIMA CRC
 - USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
+- termine de comentar playscreen incluido
+- RENOMBRAR LA COLECCION DE ITEMS A CONSTRUIR POR ALGO MAS GENERICO
+- hacer que los bloques se vayan rompiendo de a poco.
+- convertir mp3 a ogg en sounds y averiguar por que.
 
 DUDAS
 -----
@@ -26,24 +26,19 @@ For instance, within my game's render(), I first call my entityUpdate(delta), wh
 traveled in time "delta" (it doesn't render them, just moves their position variables).
 Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
 which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
+- convertir mp3 a ogg en sounds y averiguar por que.
+- git:
+    traer un solo fuente (con sourcetree)
+    ver diferencias de mi fuente actual con el del repositorio
+    abrir un git local (un proyecto) sin tener que hacer clone
+    No me quedo un acceso directo, sino que ejecuto el exe que baje
+
 
 VIDEO
 -----
 HACER REFACTORING Y COMENTAR UN POCO.
-HACER CLASE ASSETS.
 LUEGO:
-EL LOCO LE LLAMA COIN A LOS BRICKS QUE SE ROMPEN, YO LE LLAME ITEM.
-CREO QUE LO QUE DEBERIA HACER ES UN BRICK QUE SE ROMPE Y SUELTA UN ITEM QUE ME DA PODERES.
-LO PUEDO IMPLEMENTAR IGUAL QUE EL Y ESO ARRANCA EN EL 21 TAL CUAL.
-LUEGO DEBERIA ARREGLAR MI "COIN" PARA QUE SE COMPORTE COMO EL BRICK DE EL
-(VIDEO 13: Obtiene una tile (brick) y la hace desaparecer cuando es golpeada.
-No me sirve porque mis dibujos tienen tiles variables.)
-
-Voy por el 21.
-video 23 minuto 2.17 refactoring, pasa el tile en lugar del rectangulo.
-
-
-quitar scrren.getatlas porque ya tengo assets
+Arranco 27, pantalla de gameover.
 
 HERRAMIENTAS
 ------------
@@ -52,6 +47,8 @@ HERRAMIENTAS
 - ShoeBox: para agarrar una imagen grande con muchos sprites y separar cada sprite en un archivo distinto numerado.
 - https://ezgif.com/split: me permite separar un gif animado en frames
 - http://www.online-image-editor.com/: editor en linea
+- sourceTree para administrar git
+- conversor de mp3 a ogg: https://audio.online-convert.com/es/convertir-a-ogg
 
 METODOLOGIA
 -----------
@@ -98,9 +95,6 @@ Luego cuando se crea el enemigo, el setbounds usa el tamano de la textura / PPM 
 Ese tamanio son pixels / (pixels / metro) o sea, metros.
 Entonces no importaria el tamano del rectangulo en las layers.
 
-5)
-Para traerme las cosas de github que modifiqué en el trabajo, hacer pull.
-
 6)
 PERSONAJE: position(x,y) indica su centro
 MUNDO (10 metros de ancho por 15 metros de largo): su origen está en la esquina inferior izquierda
@@ -132,17 +126,38 @@ Tuve que editar el build.grandle de super mario y poner com.android.tools.build:
 - cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
 - la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
 
+8)
+   git fetch origin
+   git reset --hard origin/master
 
-********************************************
-no entiendo git:
-En fuente A.java escribo hola
-Hago commit y hago push a github
-En fuente A.java borro el hola y pongo chau
-hago commit
-En fuente A.java borro el chau y pongo zapato.
-hago commit
-Ahora me arrepentí de todo y quiero lo que está en github (o sea que el fuente A.java me lo sobreescriba con lo que haya en github)
+   Puedo hacer un git pull, pero capaz lo mejor es hacer:
+   git fetch // trae cambios pero no los aplica
+   git diff // me muestra los cambios
+   git merge // ejecuta cambios
 
-Hay 2 casos: Alguien tocó también ese fuente y los subió a github, en cuyo caso hago un pull y me lo traigo?
-Nadie tocó ese fuente y por ende yo fui el último que lo subió a github, no se como traerlo (checkout?)
-ADEMAS QUIERO HACER ESTO PARA TODAS LAS DIFERENCIAS DEL PROYECTO, O SEA, QUIERO REFRESCARLO CON LO ULTIMO DE GITHUB
+   uar Sourcetree: Reset current branch to this commit
+   Con eso hago un update forzado sobreescribiendo el local con el remoto.
+
+--------------------------- code copy paste ---------------------------------------
+Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo tocan no le hacen nada
+// ************* inicio
+        // Apply Skin Color
+        float alpha = 0.7f;
+        batch.setColor(1, 1, 1, alpha);
+
+
+        Filter filter = new Filter();
+        filter.categoryBits = GameThree.HERO_BIT;
+        filter.maskBits =  GameThree.DEFAULT_BIT |
+                GameThree.COINBOX_BIT |
+                GameThree.OBSTACLE_BIT |
+                GameThree.ITEM_BIT;
+        b2body.getFixtureList().get(0).setFilterData(filter);
+// ************** fin
+        // Draws a rectangle with the texture coordinates rotated 90 degrees.
+        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
+                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
+// ************** inicio
+// Reset color to white
+        batch.setColor(1, 1, 1, 1);
+// **************   fin

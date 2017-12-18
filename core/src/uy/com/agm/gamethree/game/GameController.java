@@ -6,6 +6,8 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+import uy.com.agm.gamethree.tools.Constants;
+
 /**
  * Created by AGM on 12/6/2017.
  */
@@ -20,6 +22,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
+        game.playScreen.player.onFire();
         Gdx.app.debug(TAG, "fuego!!");
         return true;
     }
@@ -41,15 +44,10 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        final float FRICTION = 0.18f; // porcentaje de la velocidad
-        final float MIN_DELTA = 100.0f / GameThree.PPM;
-        float velocidad_camara = game.playScreen.gameCam.position.y;
+        Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
 
-        Vector2 delta = new Vector2(deltaX / GameThree.PPM, deltaY / GameThree.PPM);
-
-        if (delta.len() > 5.0f / GameThree.PPM) {
-            Gdx.app.debug(TAG, "norma: " + delta.len());
-            game.playScreen.player.b2body.setLinearVelocity(deltaX * FRICTION, -deltaY * FRICTION);
+        if (delta.len() > Constants.LEN_HERO_SPEED / Constants.PPM) {
+            game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.WEIGHTING_HERO_SPEED, -deltaY * Constants.WEIGHTING_HERO_SPEED);
         } else {
             game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }

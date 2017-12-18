@@ -13,48 +13,48 @@ public class AudioManager {
     private Music playingMusic;
 
     // Singleton: prevent instantiation from other classes
-    private AudioManager () {
+    private AudioManager() {
     }
 
-    public void play (Sound sound) {
+    public void play(Sound sound) {
         play(sound, 1);
     }
 
-    public void play (Sound sound, float volume) {
+    public void play(Sound sound, float volume) {
         play(sound, volume, 1);
     }
 
-    public void play (Sound sound, float volume, float pitch) {
+    public void play(Sound sound, float volume, float pitch) {
         play(sound, volume, pitch, 0);
     }
 
-    public void play (Sound sound, float volume, float pitch, float pan) {
+    public void play(Sound sound, float volume, float pitch, float pan) {
         //if (!GamePreferences.instance.sound) return;
         //sound.play(GamePreferences.instance.volSound * volume, pitch, pan);
         // TODO definir preferencias de audio
         sound.play(volume, pitch, pan);
     }
 
-    public void play (Music music) {
+    public void play(Music music) {
         playingMusic = music;
 
         // TODO definir preferencias de audio
         //if (GamePreferences.instance.music) {
-            music.setLooping(true);
-          //  music.setVolume(GamePreferences.instance.volMusic);
-            music.play();
+        music.setLooping(true);
+        //  music.setVolume(GamePreferences.instance.volMusic);
+        music.play();
         //}
     }
 
-    public void stopMusic () {
+    public void stopMusic() {
         if (playingMusic != null) playingMusic.stop();
     }
 
-    public Music getPlayingMusic () {
+    public Music getPlayingMusic() {
         return playingMusic;
     }
 
-    public void onSettingsUpdated () {
+    public void onSettingsUpdated() {
         // TODO definir preferencias de audio
         /*
         if (playingMusic == null) return;
