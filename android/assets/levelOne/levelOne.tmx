@@ -23,7 +23,11 @@
   <object id="26" name="obs3" x="355" y="6674" width="63" height="170.5"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="63" name="powerBox4" x="64" y="7424" width="32" height="32"/>
+  <object id="63" name="powerBox4" x="64" y="7424" width="32" height="32">
+   <properties>
+    <property name="strength" type="int" value="4"/>
+   </properties>
+  </object>
   <object id="65" name="powerBox2" x="384" y="7424" width="32" height="32"/>
   <object id="75" x="384" y="7104" width="32" height="32">
    <properties>
