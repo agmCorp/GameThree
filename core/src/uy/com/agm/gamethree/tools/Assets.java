@@ -148,11 +148,13 @@ public class Assets implements Disposable, AssetErrorListener {
     }
 
     public class AssetSounds {
+        public final Sound dead;
         public final Sound hit;
         public final Sound pickUpPowerOne;
         public final Sound openPowerBox;
 
         public AssetSounds(AssetManager am) {
+            dead = am.get("audio/sounds/dead.ogg", Sound.class);
             hit = am.get("audio/sounds/hit.ogg", Sound.class);
             pickUpPowerOne = am.get("audio/sounds/pickUpPowerOne.ogg", Sound.class);
             openPowerBox = am.get("audio/sounds/openPowerBox.ogg", Sound.class);
@@ -174,6 +176,7 @@ public class Assets implements Disposable, AssetErrorListener {
         // load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
         // load sounds
+        assetManager.load("audio/sounds/dead.ogg", Sound.class);
         assetManager.load("audio/sounds/hit.ogg", Sound.class);
         assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
         assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);

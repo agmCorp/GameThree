@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -18,6 +19,8 @@ import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileObjects.Borders;
 import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
+import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -29,8 +32,10 @@ public class B2WorldCreator {
     private PlayScreen screen;
     private Array<Enemy> enemies;
     private Array<PowerBox> powerBoxes;
-    private Array<Item> items;
     private LinkedBlockingQueue<ItemDef> itemsToCreate;
+
+    private Array<Item> items;
+    private Array<Weapon> weapons;
 
     public B2WorldCreator(PlayScreen screen) {
         this.screen = screen;
@@ -55,6 +60,10 @@ public class B2WorldCreator {
         }
         // Items
         items = new Array<Item>();
+
+        // Weapons
+        weapons = new Array<Weapon>();
+
         itemsToCreate = new LinkedBlockingQueue<ItemDef>();
 
         // Layer: enemyOne
@@ -76,6 +85,10 @@ public class B2WorldCreator {
         return items;
     }
 
+    public Array<Weapon> getWeapons() {
+        return weapons;
+    }
+
     public void createItem(ItemDef idef) {
         itemsToCreate.add(idef);
     }
@@ -83,8 +96,12 @@ public class B2WorldCreator {
     public void handleCreatingItems() {
         if (!itemsToCreate.isEmpty()) {
             ItemDef idef = itemsToCreate.poll(); // similar to pop but for a queue, removes the element
+            Gdx.app.error(TAG, "voy a crar " + idef.type);
             if (idef.type == PowerOne.class) {
                 items.add(new PowerOne(screen, idef.position.x, idef.position.y));
+            }
+            if (idef.type == EnergyBall.class) {
+                weapons.add(new EnergyBall(screen, idef.position.x, idef.position.y));
             }
         }
     }

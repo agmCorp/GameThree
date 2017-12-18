@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="67">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="70">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer name="graphics" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzty9sNglAUBdFLB6iNCDYi2AhqI6CNCDTioxEfDTgVmBzih4mzkvnbOyVJkiRJkiRJkiRJkiRJkiRJkqTfkGcpzWhOiyz2XbIvqKRV8LtmX1FNm+C3Yb+lHe2D35Z9Rwc6Br8n9j0NNAa/+p6WOjrQMfg9UU8DjcHvmS50pVvwe6cHPekV/Er6LKcZzSd8l1RQOeG7porqCd+GtrSb8NV/egOvuBhh
+   eJzt0u0NwWAYRuF2g5ZFqhahFikWKRYpFvGxiI8FHPFPpPI2JKTnSs6vPrcmiCJJkiRJkiRJkiRJkiRJkiRJkqTfkMRRlFKP+nHYNuN+QDkNA7cj7sdU0CRwW3I/pRnNA7cV9wta0urFdtPweTXP1vHjZhv4Xn1ORQta0urpWdPvd1fT+n5H28D37mhPBzoGbk90pgtdA7f6T+/+i131je8loZR6LbYZDShvsR3RmIoW25KmNGuxVTfdANDUGy0=
   </data>
  </layer>
  <objectgroup name="borders">
@@ -23,46 +23,18 @@
   <object id="26" name="obs3" x="355" y="6674" width="63" height="170.5"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="28" name="powerBox9" x="191.75" y="7680" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="29" name="powerBox8" x="64.25" y="7712" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="33" name="powerBox7" x="352.25" y="7744.25" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
+  <object id="28" name="powerBox9" x="191.75" y="7680" width="32" height="32"/>
+  <object id="29" name="powerBox8" x="64.25" y="7712" width="32" height="32"/>
+  <object id="33" name="powerBox7" x="352.25" y="7744.25" width="32" height="32"/>
   <object id="61" name="powerBox6" x="224" y="7360" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="62" name="powerBox5" x="32" y="7328" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="63" name="powerBox4" x="64" y="7424" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="64" name="powerBox3" x="192" y="7456" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="65" name="powerBox2" x="384" y="7424" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
+  <object id="62" name="powerBox5" x="32" y="7328" width="32" height="32"/>
+  <object id="63" name="powerBox4" x="64" y="7424" width="32" height="32"/>
+  <object id="64" name="powerBox3" x="192" y="7456" width="32" height="32"/>
+  <object id="65" name="powerBox2" x="384" y="7424" width="32" height="32"/>
   <object id="66" name="powerBox1" x="64" y="7520" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
@@ -70,31 +42,24 @@
   </object>
  </objectgroup>
  <objectgroup name="enemyOne">
-  <object id="46" name="enemyOne1" x="224" y="7264" width="32" height="32">
+  <object id="46" name="enemyOne1" x="224" y="7264" width="32" height="32"/>
+  <object id="48" name="enemyOne2" x="352" y="7264" width="32" height="32"/>
+  <object id="49" name="enemyOne3" x="64" y="7264" width="32" height="32"/>
+  <object id="50" name="enemyOne4" x="128" y="7328" width="32" height="32"/>
+  <object id="51" name="enemyOne5" x="288" y="7000" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="48" name="enemyOne2" x="352" y="7264" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="49" name="enemyOne3" x="64" y="7264" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="50" name="enemyOne4" x="128" y="7328" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="51" name="enemyOne5" x="288" y="7000" width="32" height="32"/>
   <object id="56" x="100.667" y="6886" width="32" height="30.6667"/>
-  <object id="57" x="152.667" y="6826" width="36.6667" height="22.6667"/>
-  <object id="58" x="62.6667" y="6771.33" width="29.3333" height="28"/>
+  <object id="58" x="62.6667" y="6771.33" width="29.3333" height="28">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
   <object id="59" x="295.333" y="6737.33" width="28" height="26.6667"/>
   <object id="60" x="222" y="6573.33" width="29.3333" height="27.3333"/>
+  <object id="67" x="192" y="6752" width="32" height="32"/>
+  <object id="68" x="224" y="6848" width="32" height="32"/>
  </objectgroup>
 </map>

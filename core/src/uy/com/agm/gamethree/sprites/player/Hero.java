@@ -6,15 +6,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
+import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -24,7 +27,7 @@ import uy.com.agm.gamethree.tools.Constants;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    public enum State {STANDING, MOVING_UP, MOVING_DOWN, SHUTTING}
+    public enum State {STANDING, MOVING_UP, MOVING_DOWN, DEAD}
 
     public State currentState;
     public State previousState;
@@ -35,8 +38,7 @@ public class Hero extends Sprite {
     private Animation heroMovingUp;
     private Animation heroMovingDown;
     private float stateTimer;
-
-    private Array<EnergyBall> energyBall;
+    private boolean heroIsDead;
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -44,6 +46,8 @@ public class Hero extends Sprite {
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
+
+        heroIsDead = false;
 
         heroMovingUp = Assets.instance.hero.heroMovingUp;
         heroMovingDown = Assets.instance.hero.heroMovingDown;
@@ -57,8 +61,6 @@ public class Hero extends Sprite {
         // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
         setBounds(0, 0, heroStand.getRegionWidth() / Constants.PPM, heroStand.getRegionHeight() / Constants.PPM);
         setRegion(heroStand);
-
-        energyBall = new Array<EnergyBall>();
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -87,29 +89,25 @@ public class Hero extends Sprite {
         }
 
         setRegion(getFrame(dt));
-
-        for(EnergyBall energyBall : this.energyBall) {
-            energyBall.update(dt);
-            if(energyBall.isDestroyed())
-                this.energyBall.removeValue(energyBall, true);
-        }
     }
 
     public TextureRegion getFrame(float dt) {
         currentState = getState();
         TextureRegion region;
         switch (currentState) {
+            case STANDING:
+                region = heroStand;
+                break;
             case MOVING_DOWN:
                 region = (TextureRegion) heroMovingDown.getKeyFrame(stateTimer, true);
                 break;
             case MOVING_UP:
                 region = (TextureRegion) heroMovingUp.getKeyFrame(stateTimer, true);
                 break;
-            case SHUTTING:
+            case DEAD:
                 region = heroStand;
-                break;
-            case STANDING:
-                region = heroStand;
+                AudioManager.instance.play(Assets.instance.sounds.dead, 1);
+                heroIsDead = false;
                 break;
             default:
                 region = heroStand;
@@ -122,16 +120,20 @@ public class Hero extends Sprite {
     }
 
     public State getState() {
-        State state = State.STANDING;
+        State state;
+        if (!heroIsDead) {
+            state = State.STANDING;
 
-        float y = b2body.getLinearVelocity().y;
-        float x = b2body.getLinearVelocity().x;
-        if (y > 0) {
-            state = State.MOVING_UP;
-        } else if (y < 0) {
-            state = State.MOVING_DOWN;
+            float y = b2body.getLinearVelocity().y;
+            float x = b2body.getLinearVelocity().x;
+            if (y > 0) {
+                state = State.MOVING_UP;
+            } else if (y < 0) {
+                state = State.MOVING_DOWN;
+            }
+        } else {
+            state = State.DEAD;
         }
-
         Gdx.app.log(TAG, "ANGULO " + b2body.getLinearVelocity().angle());
         return state;
     }
@@ -200,12 +202,17 @@ public class Hero extends Sprite {
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
-
-        for(EnergyBall energyBall : this.energyBall)
-            energyBall.draw(batch);
     }
 
-    public void fire() {
-        energyBall.add(new EnergyBall(screen, b2body.getPosition().x, b2body.getPosition().y));
+    public void onFire() {
+        // TODO CONSTANTES, HAY QUE RENOMBRAR ESTO...SERIA CREATEOBJETCT Y OBJECTDEF Y TODO ASI
+        float MARGEN = 64 ;// TODO ARREGLAR ESTO
+        screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), EnergyBall.class));
+        //energyBalls.add(new EnergyBall(screen, b2body.getPosition().x, b2body.getPosition().y + 50 / Constants.PPM));
+    }
+
+    public void onDead() {
+        heroIsDead = true;
+        Gdx.app.debug(TAG, "mori");
     }
 }

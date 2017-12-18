@@ -62,6 +62,7 @@ public class EnemyOne extends Enemy {
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
+                Constants.WEAPON_BIT |
                 Constants.ENEMY_BIT |
                 Constants.HERO_BIT; // Con que puede colisionar
 

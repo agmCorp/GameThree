@@ -49,7 +49,7 @@ public class Constants {
     public static final short WEAPON_BIT = 64;
 
     // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = false;
+    public static final boolean DEBUG_BOUNDARIES = true;
 
     // Game cam velocity
     public static final float GAMECAM_VELOCITY = 0.5f;

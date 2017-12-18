@@ -44,8 +44,8 @@ public class WorldContactListener implements ContactListener {
                 ((PowerBox) fixC.getUserData()).onHit();
                 break;
             case Constants.HERO_BIT | Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).onHit();
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).onDead();
                 Gdx.app.debug(TAG, "Hero muere!");
                 break;
             case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
@@ -92,11 +92,28 @@ public class WorldContactListener implements ContactListener {
             // EnergyBall
             case Constants.WEAPON_BIT | Constants.BORDERS_BIT:
             case Constants.WEAPON_BIT | Constants.OBSTACLE_BIT:
-            case Constants.WEAPON_BIT | Constants.POWERBOX_BIT:
             case Constants.WEAPON_BIT | Constants.ITEM_BIT:
-            case Constants.WEAPON_BIT | Constants.ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
+                break;
+
+            case Constants.WEAPON_BIT | Constants.POWERBOX_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.WEAPON_BIT) {
+                    ((Weapon) fixA.getUserData()).onTarget();
+                    ((PowerBox) fixB.getUserData()).onHit();
+                } else {
+                    ((Weapon) fixB.getUserData()).onTarget();
+                    ((PowerBox) fixA.getUserData()).onHit();
+                }
+                break;
+            case Constants.WEAPON_BIT | Constants.ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.WEAPON_BIT) {
+                    ((Weapon) fixA.getUserData()).onTarget();
+                    ((Enemy) fixB.getUserData()).onHit();
+                } else {
+                    ((Weapon) fixB.getUserData()).onTarget();
+                    ((Enemy) fixA.getUserData()).onHit();
+                }
                 break;
         }
     }

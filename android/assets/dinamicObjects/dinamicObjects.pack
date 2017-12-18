@@ -1,0 +1,551 @@
+
+dinamicObjects.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosion
+  rotate: false
+  xy: 1, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 1
+explosion
+  rotate: false
+  xy: 1, 679
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 2
+explosion
+  rotate: false
+  xy: 170, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 3
+explosion
+  rotate: false
+  xy: 1, 510
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 4
+explosion
+  rotate: false
+  xy: 170, 679
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 5
+explosion
+  rotate: false
+  xy: 339, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 6
+explosion
+  rotate: false
+  xy: 1, 341
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 7
+explosion
+  rotate: false
+  xy: 170, 510
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 8
+explosion
+  rotate: false
+  xy: 339, 679
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 9
+explosion
+  rotate: false
+  xy: 508, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 10
+explosion
+  rotate: false
+  xy: 1, 172
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 11
+explosion
+  rotate: false
+  xy: 170, 341
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 12
+explosion
+  rotate: false
+  xy: 339, 510
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 13
+explosion
+  rotate: false
+  xy: 508, 679
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 14
+explosion
+  rotate: false
+  xy: 677, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 15
+explosion
+  rotate: false
+  xy: 1, 3
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 16
+explosion
+  rotate: false
+  xy: 170, 172
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 17
+explosion
+  rotate: false
+  xy: 339, 341
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 18
+explosion
+  rotate: false
+  xy: 508, 510
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 19
+explosion
+  rotate: false
+  xy: 677, 679
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 20
+explosion
+  rotate: false
+  xy: 846, 848
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 21
+explosion
+  rotate: false
+  xy: 170, 3
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 22
+explosion
+  rotate: false
+  xy: 339, 172
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 23
+explosion
+  rotate: false
+  xy: 508, 341
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 24
+explosion
+  rotate: false
+  xy: 677, 510
+  size: 167, 167
+  orig: 167, 167
+  offset: 0, 0
+  index: 25
+powerBox
+  rotate: false
+  xy: 846, 746
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+heroDead
+  rotate: false
+  xy: 948, 776
+  size: 75, 70
+  orig: 75, 70
+  offset: 0, 0
+  index: 8
+heroDead
+  rotate: false
+  xy: 339, 102
+  size: 78, 68
+  orig: 78, 68
+  offset: 0, 0
+  index: 9
+heroDead
+  rotate: false
+  xy: 508, 268
+  size: 64, 71
+  orig: 64, 71
+  offset: 0, 0
+  index: 7
+heroDead
+  rotate: false
+  xy: 677, 437
+  size: 64, 71
+  orig: 64, 71
+  offset: 0, 0
+  index: 10
+heroDead
+  rotate: false
+  xy: 846, 669
+  size: 59, 75
+  orig: 59, 75
+  offset: 0, 0
+  index: 2
+heroDead
+  rotate: false
+  xy: 339, 23
+  size: 57, 77
+  orig: 57, 77
+  offset: 0, 0
+  index: 3
+heroDead
+  rotate: false
+  xy: 508, 194
+  size: 62, 72
+  orig: 62, 72
+  offset: 0, 0
+  index: 5
+heroDead
+  rotate: false
+  xy: 677, 363
+  size: 62, 72
+  orig: 62, 72
+  offset: 0, 0
+  index: 6
+heroDead
+  rotate: false
+  xy: 846, 593
+  size: 59, 74
+  orig: 59, 74
+  offset: 0, 0
+  index: 4
+heroDead
+  rotate: false
+  xy: 574, 267
+  size: 60, 72
+  orig: 60, 72
+  offset: 0, 0
+  index: 1
+heroDown
+  rotate: false
+  xy: 846, 519
+  size: 58, 72
+  orig: 58, 72
+  offset: 0, 0
+  index: 6
+enemyOne
+  rotate: false
+  xy: 419, 115
+  size: 74, 55
+  orig: 74, 55
+  offset: 0, 0
+  index: 3
+enemyOne
+  rotate: false
+  xy: 743, 453
+  size: 74, 55
+  orig: 74, 55
+  offset: 0, 0
+  index: 4
+heroDown
+  rotate: false
+  xy: 572, 194
+  size: 58, 71
+  orig: 58, 71
+  offset: 0, 0
+  index: 5
+heroDown
+  rotate: false
+  xy: 907, 672
+  size: 57, 72
+  orig: 57, 72
+  offset: 0, 0
+  index: 3
+heroDown
+  rotate: false
+  xy: 966, 703
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: 1
+heroDown
+  rotate: false
+  xy: 966, 630
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: 2
+heroDown
+  rotate: false
+  xy: 907, 599
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: 4
+heroUp
+  rotate: false
+  xy: 636, 270
+  size: 54, 69
+  orig: 54, 69
+  offset: 0, 0
+  index: 3
+energyBall
+  rotate: false
+  xy: 398, 25
+  size: 24, 75
+  orig: 24, 75
+  offset: 0, 0
+  index: 2
+enemyOne
+  rotate: false
+  xy: 424, 58
+  size: 73, 55
+  orig: 73, 55
+  offset: 0, 0
+  index: 5
+enemyOne
+  rotate: false
+  xy: 424, 1
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: 2
+heroUp
+  rotate: false
+  xy: 692, 292
+  size: 54, 69
+  orig: 54, 69
+  offset: 0, 0
+  index: 6
+enemyOne
+  rotate: false
+  xy: 508, 137
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: 6
+enemyOne
+  rotate: false
+  xy: 578, 137
+  size: 66, 55
+  orig: 66, 55
+  offset: 0, 0
+  index: 1
+enemyOne
+  rotate: false
+  xy: 499, 80
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: 7
+enemyOne
+  rotate: false
+  xy: 569, 80
+  size: 67, 55
+  orig: 67, 55
+  offset: 0, 0
+  index: 8
+enemyOne
+  rotate: false
+  xy: 499, 23
+  size: 67, 55
+  orig: 67, 55
+  offset: 0, 0
+  index: 9
+heroUp
+  rotate: false
+  xy: 568, 11
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: 1
+energyBall
+  rotate: false
+  xy: 632, 194
+  size: 24, 71
+  orig: 24, 71
+  offset: 0, 0
+  index: 1
+heroUp
+  rotate: false
+  xy: 658, 200
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: 2
+heroUp
+  rotate: false
+  xy: 966, 561
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: 4
+heroUp
+  rotate: false
+  xy: 819, 440
+  size: 53, 68
+  orig: 53, 68
+  offset: 0, 0
+  index: 5
+energyBall
+  rotate: false
+  xy: 874, 446
+  size: 24, 71
+  orig: 24, 71
+  offset: 0, 0
+  index: 3
+energyBall
+  rotate: false
+  xy: 625, 7
+  size: 24, 71
+  orig: 24, 71
+  offset: 0, 0
+  index: 4
+powerOne
+  rotate: false
+  xy: 743, 399
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 1
+powerOne
+  rotate: false
+  xy: 797, 386
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 2
+powerOne
+  rotate: false
+  xy: 851, 386
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 3
+powerOne
+  rotate: false
+  xy: 713, 238
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 4
+powerOne
+  rotate: false
+  xy: 713, 184
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 5
+powerOne
+  rotate: false
+  xy: 646, 140
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 6
+powerOne
+  rotate: false
+  xy: 700, 130
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 7
+powerOne
+  rotate: false
+  xy: 646, 86
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 8
+powerOne
+  rotate: false
+  xy: 700, 76
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 9
+powerOne
+  rotate: false
+  xy: 754, 130
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 10
+powerOne
+  rotate: false
+  xy: 754, 76
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 11
+powerOne
+  rotate: false
+  xy: 907, 545
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 12
+powerOne
+  rotate: false
+  xy: 906, 491
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 13
+powerOne
+  rotate: false
+  xy: 961, 507
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 14
+powerOne
+  rotate: false
+  xy: 960, 453
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 15
+powerOne
+  rotate: false
+  xy: 651, 22
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 16
+powerOne
+  rotate: false
+  xy: 705, 22
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: 17

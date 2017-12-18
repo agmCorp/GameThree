@@ -33,7 +33,8 @@ public class EnergyBall extends Weapon {
 
         TextureRegion energyBall = Assets.instance.energyBall.energyBallStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(0, 0, energyBall.getRegionWidth() / Constants.PPM, energyBall.getRegionHeight() / Constants.PPM);
+        // todo constantes
+        setBounds(0, 0, energyBall.getRegionWidth() * 0.8f / Constants.PPM, energyBall.getRegionHeight() * 0.8f / Constants.PPM);
 
         currentState = State.SHOT;
 
@@ -49,12 +50,11 @@ public class EnergyBall extends Weapon {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / Constants.PPM);
+        shape.setRadius(20 / Constants.PPM);
         fdef.filter.categoryBits = Constants.WEAPON_BIT; // Indica que es
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
                 Constants.ENEMY_BIT; // cON QUE PUEDE COLISIONAR
 
         fdef.shape = shape;
@@ -117,6 +117,7 @@ public class EnergyBall extends Weapon {
 
     public void draw(Batch batch) {
         if (currentState == State.SHOT) {
+            // ACA SE CAE SEGUN ANDROID
             super.draw(batch);
         }
     }

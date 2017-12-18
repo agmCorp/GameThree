@@ -36,9 +36,7 @@ public class PowerBox extends Sprite {
 
     TextureRegion powerBoxStand;
 
-    protected enum State {WAITING, OPENED, FINISHED}
-
-    ;
+    protected enum State {WAITING, OPENED, FINISHED};
     protected State currentState;
     protected MapObject object;
 
@@ -94,6 +92,7 @@ public class PowerBox extends Sprite {
         fdef.filter.categoryBits = Constants.POWERBOX_BIT; // Indica que es
         fdef.filter.maskBits = Constants.ENEMY_BIT |
                 Constants.ITEM_BIT |
+                Constants.WEAPON_BIT |
                 Constants.HERO_BIT; // Con que puede colisionar
 
         fdef.shape = shape;

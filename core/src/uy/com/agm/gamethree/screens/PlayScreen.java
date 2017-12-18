@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -113,7 +114,7 @@ public class PlayScreen implements Screen {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            player.fire();
+            player.onFire();
         }
     }
 
@@ -142,6 +143,10 @@ public class PlayScreen implements Screen {
             item.update(dt);
         }
 
+        // Weapons
+        for (Weapon weapon : creator.getWeapons()) {
+            weapon.update(dt);
+        }
         hud.update(dt);
 
         // Cam is moving up
@@ -192,6 +197,12 @@ public class PlayScreen implements Screen {
         for (Item item : creator.getItems()) {
             item.draw(game.batch);
         }
+
+        // Weapons
+        for (Weapon weapon : creator.getWeapons()) {
+            weapon.draw(game.batch);
+        }
+
         game.batch.end();
 
         // Set our batch to now draw what the Hud camera sees.
@@ -222,6 +233,11 @@ public class PlayScreen implements Screen {
             // Items
             for (Item item : creator.getItems()) {
                 item.renderDebug(shapeRenderer);
+            }
+
+            // Weapons
+            for (Weapon weapon : creator.getWeapons()) {
+                weapon.renderDebug(shapeRenderer);
             }
             shapeRenderer.end();
         }
