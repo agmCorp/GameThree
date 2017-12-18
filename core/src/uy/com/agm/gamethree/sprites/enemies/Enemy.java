@@ -25,9 +25,10 @@ public abstract class Enemy extends Sprite {
     protected PlayScreen screen;
     public Body b2body;
 
-    protected enum State {ALIVE, INJURED, EXPLODING, DEAD}
+    protected enum State {
+        ALIVE, INJURED, EXPLODING, DEAD
+    }
 
-    ;
     protected State currentState;
     protected MapObject object;
 
@@ -36,9 +37,15 @@ public abstract class Enemy extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
 
+        // Get the rectangle drawn in TiledEditor
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
-        setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
+
+        // Set this Sprite's position on the center of that rectangle.
+        // This point will be used by defineEnemy() calling getX(), getY().
+        setPosition((rect.getX() + rect.width / 2) / Constants.PPM, (rect.getY() + rect.height / 2) / Constants.PPM);
         defineEnemy();
+
+        // By default this Enemy doesn't interact
         b2body.setActive(false);
     }
 
@@ -46,18 +53,17 @@ public abstract class Enemy extends Sprite {
         return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
+    // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        float MARGEN = 32; // TODO ARREGLAR ESTO
         if (object.getProperties().containsKey("powerOne")) {
-            screen.creator.createGameThreeActor(new GameThreeActorDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), PowerOne.class));
+            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET / Constants.PPM);
+            screen.creator.createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
         }
     }
 
     protected abstract void defineEnemy();
-
     public abstract void update(float dt);
-
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
-
     public abstract void onHit();
+    public abstract void reverseVelocity(boolean x, boolean y);
 }

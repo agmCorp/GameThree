@@ -83,17 +83,16 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation heroMovingDown;
 
         public AssetHero(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
             heroStand = atlas.findRegion("heroUp", 1);
 
-            Array<TextureAtlas.AtlasRegion> regions = null;
-            TextureAtlas.AtlasRegion region = null;
-
-            // Animation: HeroMovingUp
+            // Animation
             regions = atlas.findRegions("heroUp");
             heroMovingUp = new Animation(1.0f / 6.0f, regions);
             regions.clear();
 
-            // Animation: HeroMovingDown
+            // Animation
             regions = atlas.findRegions("heroDown");
             heroMovingDown = new Animation(1.0f / 6.0f, regions);
         }
@@ -105,15 +104,16 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation explosionAnimation;
 
         public AssetEnemyOne(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
             enemyOneStand = atlas.findRegion("enemyOne", 1);
 
-            Array<TextureAtlas.AtlasRegion> regions = null;
-            TextureAtlas.AtlasRegion region = null;
-
+            // Animation
             regions = atlas.findRegions("enemyOne");
             enemyOneAnimation = new Animation(1.0f / 8.0f, regions);
             regions.clear();
 
+            // Animation
             regions = atlas.findRegions("explosion");
             explosionAnimation = new Animation(1.0f / 25.0f, regions);
         }
@@ -124,12 +124,11 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation powerOneAnimation;
 
         public AssetPowerOne(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
             powerOneStand = atlas.findRegion("powerOne", 1);
 
-            Array<TextureAtlas.AtlasRegion> regions = null;
-            TextureAtlas.AtlasRegion region = null;
-
-            // TODO PARAMETRIZAR LAS DURACIONES DE LAS ANIMACIONES
+            // Animation
             regions = atlas.findRegions("powerOne");
             powerOneAnimation = new Animation(1.0f / 16.0f, regions);
             regions.clear();
@@ -141,12 +140,11 @@ public class Assets implements Disposable, AssetErrorListener {
         public final Animation energyBallAnimation;
 
         public AssetEnergyBall(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
             energyBallStand = atlas.findRegion("energyBall", 1);
 
-            Array<TextureAtlas.AtlasRegion> regions = null;
-            TextureAtlas.AtlasRegion region = null;
-
-            // TODO PARAMETRIZAR LAS DURACIONES DE LAS ANIMACIONES
+            // Animation
             regions = atlas.findRegions("energyBall");
             energyBallAnimation = new Animation(1.0f / 4.0f, regions);
             regions.clear();
@@ -177,33 +175,38 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public void init(AssetManager assetManager) {
         this.assetManager = assetManager;
-        // set asset manager error handler
+
+        // Set asset manager error handler
         assetManager.setErrorListener(this);
-        // load texture atlas
+
+        // Load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
-        // load sounds
+
+        // Load sounds
         assetManager.load("audio/sounds/dead.ogg", Sound.class);
         assetManager.load("audio/sounds/hit.ogg", Sound.class);
         assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
         assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);
-        // load music
+
+        // Load music
         assetManager.load("audio/music/levelOne.ogg", Music.class);
-        // start loading assets and wait until finished
+
+        // Start loading assets and wait until finished
         assetManager.finishLoading();
 
         Gdx.app.debug(TAG, "Number of assets loaded: " + assetManager.getAssetNames().size);
-        for (String a : assetManager.getAssetNames()) {
-            Gdx.app.debug(TAG, "asset: " + a);
+        for (String assetName : assetManager.getAssetNames()) {
+            Gdx.app.debug(TAG, "Asset: " + assetName);
         }
 
         TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 
-        // enable texture filtering for pixel smoothing
-        for (Texture t : atlas.getTextures()) {
-            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        // Enable texture filtering for pixel smoothing
+        for (Texture texture : atlas.getTextures()) {
+            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
-        // create game resource objects
+        // Create game resource objects
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
@@ -216,7 +219,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     @Override
     public void error(AssetDescriptor assetDescriptor, Throwable throwable) {
-        Gdx.app.error(TAG, "Error al cargar asset: '" + assetDescriptor.fileName + "'", (Exception) throwable);
+        Gdx.app.error(TAG, "Error loding asset: '" + assetDescriptor.fileName + "'", (Exception) throwable);
     }
 
     @Override

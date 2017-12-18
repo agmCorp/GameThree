@@ -29,65 +29,78 @@ public class WorldContactListener implements ContactListener {
         Fixture fixC;
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-// TODO HABRIA QUE OPTIMIAR ESTO USANDO CASES SIN BRAKES ADEMAS NO ME INTERESA REGISTRAR LOS CHOQUES CONTRA LOS BORDES Y ESO COMO POR EJEMPLO EL PRIMER CASE
         switch (collisionDef) {
-            case Constants.HERO_BIT | Constants.BORDERS_BIT: // bordes
-                fixC = fixA.getFilterData().categoryBits == Constants.BORDERS_BIT ? fixA : fixB;
-                ((InteractiveTileObject) fixC.getUserData()).onHit();
+            // Hero - InteractiveTileObjects
+            case Constants.HERO_BIT | Constants.BORDERS_BIT:
+            case Constants.HERO_BIT | Constants.OBSTACLE_BIT:
+                Gdx.app.debug(TAG, "Hero - InteractiveTileObject collision");
                 break;
-            case Constants.HERO_BIT | Constants.OBSTACLE_BIT: // arboles
-                fixC = fixA.getFilterData().categoryBits == Constants.OBSTACLE_BIT ? fixA : fixB;
-                ((InteractiveTileObject) fixC.getUserData()).onHit();
+
+            // Hero - PowerBox
+            case Constants.HERO_BIT | Constants.POWERBOX_BIT:
+                Gdx.app.debug(TAG, "Hero - PowerBox collision");
                 break;
-            case Constants.HERO_BIT | Constants.POWERBOX_BIT: // regalos
-                break;
-            case Constants.HERO_BIT | Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
-                ((Hero) fixC.getUserData()).onDead();
-                Gdx.app.debug(TAG, "Hero muere!");
-                break;
-            case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((EnemyOne) fixC.getUserData()).reverseVelocity(true, false);
-                break;
-            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((EnemyOne) fixC.getUserData()).reverseVelocity(true, false);
-                break;
-            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
-                ((EnemyOne) fixA.getUserData()).reverseVelocity(true, false);
-                ((EnemyOne) fixB.getUserData()).reverseVelocity(true, false);
-                break;
-            case Constants.ITEM_BIT | Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
-                ((Item) fixC.getUserData()).reverseVelocity(true, false);
-                break;
-            case Constants.ITEM_BIT | Constants.HERO_BIT:
+
+            // Hero - Item
+            case Constants.HERO_BIT | Constants.ITEM_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT) {
                     ((Item) fixA.getUserData()).use((Hero) fixB.getUserData());
                 } else {
                     ((Item) fixB.getUserData()).use((Hero) fixA.getUserData());
                 }
                 break;
+
+            // Hero - Enemies
+            case Constants.HERO_BIT | Constants.ENEMY_BIT:
+                Gdx.app.debug(TAG, "Hero - Enemy collision");
+
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).onDead();
+                Gdx.app.debug(TAG, "****************** Hero muere!!!");
+                break;
+
+            // Enemy - InteractiveTileObjects
+            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
+            case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
+                Gdx.app.debug(TAG, "Hero - InteractiveTileObject collision");
+
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+                ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
+                break;
+
+            // Enemy - Enemy
+            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+
+            // Item - InteractiveTileObjects
+            case Constants.ITEM_BIT | Constants.BORDERS_BIT:
             case Constants.ITEM_BIT | Constants.OBSTACLE_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
+
+
+            // Item - Enemy
             case Constants.ITEM_BIT | Constants.ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
+
+            // Item - PowerBox
             case Constants.ITEM_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
+
+            // Item - Item
             case Constants.ITEM_BIT | Constants.ITEM_BIT:
                 ((Item) fixA.getUserData()).reverseVelocity(true, false);
                 ((Item) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
-
-            // EnergyBall
+            // Weapon - InteractiveTileObjects & Items
             case Constants.WEAPON_BIT | Constants.BORDERS_BIT:
             case Constants.WEAPON_BIT | Constants.OBSTACLE_BIT:
             case Constants.WEAPON_BIT | Constants.ITEM_BIT:
@@ -95,6 +108,7 @@ public class WorldContactListener implements ContactListener {
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
+            // Weapon - PowerBox
             case Constants.WEAPON_BIT | Constants.POWERBOX_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
@@ -104,6 +118,8 @@ public class WorldContactListener implements ContactListener {
                     ((PowerBox) fixA.getUserData()).onHit();
                 }
                 break;
+
+            // Weapon - Enemy
             case Constants.WEAPON_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();

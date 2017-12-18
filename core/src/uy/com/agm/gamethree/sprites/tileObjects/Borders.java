@@ -19,6 +19,6 @@ public class Borders extends InteractiveTileObject {
 
     @Override
     public void onHit() {
-        Gdx.app.debug(TAG, "Border collision");
+        // Nothing to do here
     }
 }

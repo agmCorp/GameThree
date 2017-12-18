@@ -59,7 +59,7 @@ public class Hero extends Sprite {
 
         // setbounds es el que determina el tamano del dibujito del heroe en pantalla width y heght. En proximos update, los setposicion lo ubican
         // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
-        setBounds(0, 0, heroStand.getRegionWidth() / Constants.PPM, heroStand.getRegionHeight() / Constants.PPM);
+        setBounds(0, 0, heroStand.getRegionWidth() * Constants.HERO_RESIZE / Constants.PPM, heroStand.getRegionHeight() * Constants.HERO_RESIZE / Constants.PPM);
         setRegion(heroStand);
     }
 

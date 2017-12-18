@@ -50,7 +50,7 @@ public class PowerBox extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
 
-        // Obtengo el rectangulo que dibuje en tiled
+        // Obtengo el rectangulo que dibuje en tilededitor
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
         // Seteo punto (x,y) en la parte inferior izquierda de ese rectangulo. Ese punto lo usa definePowerBox como centro de su circulo

@@ -32,40 +32,37 @@ public class EnemyOne extends Enemy {
     public EnemyOne(PlayScreen screen, MapObject object) {
         super(screen, object);
 
+        // Animations
         enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
         explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
 
-        stateTime = 0;
-
-        // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
+        // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         TextureRegion enemyOne = Assets.instance.enemyOne.enemyOneStand;
-        // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(0, 0, enemyOne.getRegionWidth() / Constants.PPM, enemyOne.getRegionHeight() / Constants.PPM);
+        setBounds(0, 0, enemyOne.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOne.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
 
+        stateTime = 0;
         currentState = State.ALIVE;
-
-        velocity = new Vector2(1, -1);
+        velocity = new Vector2(Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
     }
 
     @Override
     protected void defineEnemy() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
+        bdef.position.set(getX(), getY()); // Center
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.ENEMY_BIT; // Indica que es
+        shape.setRadius(Constants.ENEMYONE_CIRCLESHAPE_RADIUS / Constants.PPM);
+        fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.WEAPON_BIT |
                 Constants.ENEMY_BIT |
-                Constants.HERO_BIT; // Con que puede colisionar
-
+                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -74,24 +71,13 @@ public class EnemyOne extends Enemy {
     public void update(float dt) {
         switch (currentState) {
             case ALIVE:
-                stateTime += dt;
-                b2body.setLinearVelocity(velocity);
-                setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-                setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+                updateEnemyOne(dt);
                 break;
             case INJURED:
-                world.destroyBody(b2body);
-                currentState = State.EXPLODING;
-                AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
-                stateTime = 0;
+                destroyEnemyOne();
                 break;
             case EXPLODING:
-                if (explosionAnimation.isAnimationFinished(stateTime)) {
-                    currentState = State.DEAD;
-                } else {
-                    stateTime += dt;
-                    setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
-                }
+                explodeEnemyOne(dt);
                 break;
             case DEAD:
                 break;
@@ -99,7 +85,7 @@ public class EnemyOne extends Enemy {
                 break;
         }
 
-        /* When an Enemy is on camara, it activates (it moves and can colide).
+        /* When an Enemy is on camara, it activates (it moves and can collide).
         * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
@@ -137,15 +123,38 @@ public class EnemyOne extends Enemy {
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
     }
 
+    @Override
     public void reverseVelocity(boolean x, boolean y) {
         if (x) {
             velocity.x *= -1;
         }
         if (y) {
             velocity.y *= -1;
+        }
+    }
+
+    private void destroyEnemyOne() {
+        currentState = State.EXPLODING;
+        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+        world.destroyBody(b2body);
+        stateTime = 0;
+    }
+
+    private void updateEnemyOne(float dt) {
+        stateTime += dt;
+        b2body.setLinearVelocity(velocity);
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+    }
+
+    private void explodeEnemyOne(float dt) {
+        if (explosionAnimation.isAnimationFinished(stateTime)) {
+            currentState = State.DEAD;
+        } else {
+            stateTime += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
         }
     }
 }

@@ -36,9 +36,7 @@ public class B2WorldCreator {
 
     public B2WorldCreator(PlayScreen screen) {
         this.screen = screen;
-        World world = screen.getWorld();
         TiledMap map = screen.getMap();
-        Hud hud = screen.getHud();
 
         // Layer: borders
         for (MapObject object : map.getLayers().get("borders").getObjects().getByType(RectangleMapObject.class)) {
@@ -94,7 +92,7 @@ public class B2WorldCreator {
 
     public void handleCreatingGameThreeActors() {
         if (!gameThreeActorsToCreate.isEmpty()) {
-            GameThreeActorDef gameThreeActorDef = gameThreeActorsToCreate.poll(); // similar to pop but for a queue, removes the element
+            GameThreeActorDef gameThreeActorDef = gameThreeActorsToCreate.poll(); // Similar to pop but for a queue, removes the element
             if (gameThreeActorDef.type == PowerOne.class) {
                 items.add(new PowerOne(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
             }

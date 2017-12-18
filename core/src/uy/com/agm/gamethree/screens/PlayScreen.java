@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
     public Viewport gameViewPort;
     private Hud hud;
 
-    // Tiled map variables
+    // TiledEditor map variables
     private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
@@ -125,8 +125,8 @@ public class PlayScreen implements Screen {
         // Handle creation of game actors first
         creator.handleCreatingGameThreeActors();
 
-        // Takes 1 step in the physics simulation (60 times per second)
-        world.step(1 / 60f, 6, 2);
+        // Step in the physics simulation
+        world.step(Constants.WORLD_TIME_STEP, Constants.WORLD_VELOCITY_ITERATIONS, Constants.WORLD_POSITION_ITERATIONS);
 
         // Hero
         player.update(dt);

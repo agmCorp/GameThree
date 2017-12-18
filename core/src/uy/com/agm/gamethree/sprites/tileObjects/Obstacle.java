@@ -21,6 +21,6 @@ public class Obstacle extends InteractiveTileObject {
 
     @Override
     public void onHit() {
-        Gdx.app.debug(TAG, "Obstacle collision");
+        // Nothing to do here
     }
 }
