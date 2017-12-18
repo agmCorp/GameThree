@@ -8,7 +8,7 @@
  </layer>
  <layer name="graphics" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt1NkNggAQBmHsQLERxEYAG0FtBKURjkY8GvFowGlhiTEa50vmbf/XTRJJkiRJkiRJkiRJkiRJkiRJkqTvMJ8lyYJSWs5i24z7FeW0Dm4L7kuqaBPc1txvaUf74Lbh/kBHaoPbjvueBhqDW71PQwc6UhvcdtTTQGNwe6IzXega3N7oTg96Brf6TYM/4mPmtKB0wjajFeUTtgWVVE3Y1rSl3YSt/tMLtqAZFA==
+   eJzty9sNglAUBdFLB6iNCDYi2AhqI6CNCDTioxEfDTgVmBzih4mzkvnbOyVJkiRJkiRJkiRJkiRJkiRJkqTfkGcpzWhOiyz2XbIvqKRV8LtmX1FNm+C3Yb+lHe2D35Z9Rwc6Br8n9j0NNAa/+p6WOjrQMfg9UU8DjcHvmS50pVvwe6cHPekV/Er6LKcZzSd8l1RQOeG7porqCd+GtrSb8NV/egOvuBhh
   </data>
  </layer>
  <objectgroup name="borders">
@@ -23,7 +23,7 @@
   <object id="26" name="obs3" x="355" y="6674" width="63" height="170.5"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="63" name="powerBox4" x="64" y="7424" width="32" height="32">
+  <object id="63" name="powerBox4" x="216" y="7468" width="32" height="32">
    <properties>
     <property name="strength" type="int" value="4"/>
    </properties>
