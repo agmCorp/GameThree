@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -49,7 +49,7 @@ public abstract class Enemy extends Sprite {
     protected void getItemOnHit() {
         float MARGEN = 32; // TODO ARREGLAR ESTO
         if (object.getProperties().containsKey("powerOne")) {
-            screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), PowerOne.class));
+            screen.creator.createGameThreeActor(new GameThreeActorDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), PowerOne.class));
         }
     }
 

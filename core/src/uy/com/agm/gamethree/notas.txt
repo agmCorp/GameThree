@@ -1,4 +1,5 @@
 TILESET
+-------
 map 32x32 sin margin ni spacing
 15 tiles de ancho (480/32 = 15)
 250 de alto (10 pantallas, cada una de 25 tiles, 25 x 32 = 800 = viewportheight)
@@ -10,14 +11,12 @@ PENDIENTES
 - cuando este estable comentar todo el codigo
 - ver si no tengo metodos overrited de mas
 - resolver el tema de cuando el personaje se va de la pantalla, pero con velocidad. Porque asi como esta estoy
-seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se puede pensar en algun objeto
-invisible que vaya avanzando con la camara y listo. creo es lo mejor.
-- en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
-- USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
+  seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se puede pensar en algun objeto
+  invisible que vaya avanzando con la camara y listo. creo es lo mejor.
+  en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
+  USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
 - termine de comentar playscreen incluido
-- RENOMBRAR LA COLECCION DE ITEMS A CONSTRUIR POR ALGO MAS GENERICO
 - hacer que los bloques se vayan rompiendo de a poco.
-- convertir mp3 a ogg en sounds y averiguar por que.
 
 DUDAS
 -----
@@ -26,13 +25,11 @@ For instance, within my game's render(), I first call my entityUpdate(delta), wh
 traveled in time "delta" (it doesn't render them, just moves their position variables).
 Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
 which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
-- convertir mp3 a ogg en sounds y averiguar por que.
 - git:
     traer un solo fuente (con sourcetree)
     ver diferencias de mi fuente actual con el del repositorio
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
-
 
 VIDEO
 -----
@@ -48,7 +45,7 @@ HERRAMIENTAS
 - https://ezgif.com/split: me permite separar un gif animado en frames
 - http://www.online-image-editor.com/: editor en linea
 - sourceTree para administrar git
-- conversor de mp3 a ogg: https://audio.online-convert.com/es/convertir-a-ogg
+- https://audio.online-convert.com/es/convertir-a-ogg: conversor de mp3 a ogg
 
 METODOLOGIA
 -----------
@@ -61,9 +58,9 @@ METODOLOGIA
    Vector2 velocity = new Vector2();
    Vector2 acceleration = new Vector2(0, -10);
    while(simulationRuns) {
-   float deltaTime = getDeltaTime();
-   velocity.add(acceleration.x * deltaTime, acceleration.y * deltaTime);
-   position.add(velocity.x * deltaTime, velocity.y * deltaTime);
+        float deltaTime = getDeltaTime();
+        velocity.add(acceleration.x * deltaTime, acceleration.y * deltaTime);
+        position.add(velocity.x * deltaTime, velocity.y * deltaTime);
    }
    This is called numerical Euler integration, and it is the most intuitive of the integration methods
    used in games. We start off with a position at (0,0), a velocity given as (0,0), and an acceleration

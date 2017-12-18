@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.powerup.Items.ItemDef;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -207,7 +207,7 @@ public class Hero extends Sprite {
     public void onFire() {
         // TODO CONSTANTES, HAY QUE RENOMBRAR ESTO...SERIA CREATEOBJETCT Y OBJECTDEF Y TODO ASI
         float MARGEN = 64 ;// TODO ARREGLAR ESTO
-        screen.creator.createItem(new ItemDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), EnergyBall.class));
+        screen.creator.createGameThreeActor(new GameThreeActorDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), EnergyBall.class));
         //energyBalls.add(new EnergyBall(screen, b2body.getPosition().x, b2body.getPosition().y + 50 / Constants.PPM));
     }
 

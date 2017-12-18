@@ -121,11 +121,14 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         // Handle user input first
         handleInput(dt);
-        creator.handleCreatingItems();
+
+        // Handle creation of game actors first
+        creator.handleCreatingGameThreeActors();
 
         // Takes 1 step in the physics simulation (60 times per second)
         world.step(1 / 60f, 6, 2);
 
+        // Hero
         player.update(dt);
 
         // Enemies
@@ -148,6 +151,7 @@ public class PlayScreen implements Screen {
             weapon.update(dt);
         }
 
+        // Head-up display
         hud.update(dt);
 
         // Cam is moving up
