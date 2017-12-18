@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="78">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="79">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -19,8 +19,8 @@
  </objectgroup>
  <objectgroup name="obstacles">
   <object id="20" name="obs2" x="114.5" y="7043.5" width="108" height="114.5"/>
-  <object id="22" name="obs1" x="311" y="7593" width="62.5" height="108"/>
   <object id="26" name="obs3" x="355" y="6674" width="63" height="170.5"/>
+  <object id="78" x="324" y="7601" width="41" height="90"/>
  </objectgroup>
  <objectgroup name="powerBox">
   <object id="63" name="powerBox4" x="216" y="7468" width="32" height="32">
@@ -36,6 +36,7 @@
   </object>
   <object id="77" x="96" y="7424" width="32" height="32">
    <properties>
+    <property name="powerOne" type="int" value="0"/>
     <property name="strength" type="int" value="9"/>
    </properties>
   </object>
