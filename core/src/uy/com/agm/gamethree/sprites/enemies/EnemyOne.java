@@ -38,7 +38,7 @@ public class EnemyOne extends Enemy {
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         TextureRegion enemyOneStand = Assets.instance.enemyOne.enemyOneStand;
-        setBounds(0, 0, enemyOneStand.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOneStand.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
+        setBounds(getX(), getY(), enemyOneStand.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOneStand.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
 
         stateTime = 0;
         currentState = State.ALIVE;

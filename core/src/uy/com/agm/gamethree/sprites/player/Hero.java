@@ -56,7 +56,7 @@ public class Hero extends Sprite {
         setPosition(x, y);
         defineHero();
 
-        setBounds(0, 0, heroStand.getRegionWidth() * Constants.HERO_RESIZE / Constants.PPM, heroStand.getRegionHeight() * Constants.HERO_RESIZE / Constants.PPM);
+        setBounds(getX(), getY(), heroStand.getRegionWidth() * Constants.HERO_RESIZE / Constants.PPM, heroStand.getRegionHeight() * Constants.HERO_RESIZE / Constants.PPM);
 
         currentState = State.STANDING;
         previousState = State.STANDING;

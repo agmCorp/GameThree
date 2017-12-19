@@ -40,7 +40,7 @@ public class PowerOne extends Item {
         // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
         TextureRegion powerOne = Assets.instance.powerOne.powerOneStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(0, 0, powerOne.getRegionWidth() / Constants.PPM, powerOne.getRegionHeight() / Constants.PPM);
+        setBounds(getX(), getY(), powerOne.getRegionWidth() / Constants.PPM, powerOne.getRegionHeight() / Constants.PPM);
 
         currentState = State.WAITING;
         velocity = new Vector2(0.7f, 0);

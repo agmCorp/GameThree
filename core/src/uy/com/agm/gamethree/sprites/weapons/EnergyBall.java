@@ -34,7 +34,7 @@ public class EnergyBall extends Weapon {
         TextureRegion energyBall = Assets.instance.energyBall.energyBallStand;
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
         // todo constantes
-        setBounds(0, 0, energyBall.getRegionWidth() * 0.8f / Constants.PPM, energyBall.getRegionHeight() * 0.8f / Constants.PPM);
+        setBounds(getX(), getY(), energyBall.getRegionWidth() * 0.8f / Constants.PPM, energyBall.getRegionHeight() * 0.8f / Constants.PPM);
 
         currentState = State.SHOT;
 

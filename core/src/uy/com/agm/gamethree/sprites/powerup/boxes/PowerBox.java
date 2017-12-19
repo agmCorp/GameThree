@@ -66,7 +66,7 @@ public class PowerBox extends Sprite {
         // setbounds es el que determina el tamano del dibujito del enemigo en pantalla.
         // Es un rectangulo y recibe un punto x, y que es el vertice inferior izquierdo de ese rectangulo
         float resize = 0.7f; // TODO ARREGLAR ESTO
-        setBounds(0, 0, powerBoxStand.getRegionWidth() * resize / Constants.PPM, powerBoxStand.getRegionHeight() * resize / Constants.PPM);
+        setBounds(getX(), getY(), powerBoxStand.getRegionWidth() * resize / Constants.PPM, powerBoxStand.getRegionHeight() * resize / Constants.PPM);
 
         // Ahora posicionamos ese rectangulo en el centro del circulo. Esta hecho en dos pasos porque es setBound quien define width y height
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
