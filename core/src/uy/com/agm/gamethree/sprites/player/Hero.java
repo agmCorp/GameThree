@@ -27,13 +27,17 @@ import uy.com.agm.gamethree.tools.Constants;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    public enum State {STANDING, MOVING_UP, MOVING_DOWN, DEAD}
+    private enum State {
+        STANDING, MOVING_UP, MOVING_DOWN, DEAD
+    }
+    private State currentState;
 
-    public State currentState;
-    public State previousState;
+    private State previousState;
     public World world;
     public PlayScreen screen;
+
     public Body b2body;
+
     private TextureRegion heroStand;
     private Animation heroMovingUp;
     private Animation heroMovingDown;

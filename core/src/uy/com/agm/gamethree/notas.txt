@@ -36,6 +36,7 @@ PENDIENTES
   USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
 - termine de comentar playscreen incluido
 - hacer que los bloques se vayan rompiendo de a poco.
+- subir todos mis proyectos a github
 
 DUDAS
 -----

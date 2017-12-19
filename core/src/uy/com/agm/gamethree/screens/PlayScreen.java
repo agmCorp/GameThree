@@ -71,10 +71,10 @@ public class PlayScreen implements Screen {
         map = maploader.load("levelOne/levelOne.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
-        // Initially set our gamcam to be centered correctly at the start (bottom) of of map
+        // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
 
-        // Create our Box2D world, setting no gravity in X and no gravity in Y, and allow bodies to sleep
+        // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
 
         // Allows for debug lines of our box2d world.
@@ -85,7 +85,7 @@ public class PlayScreen implements Screen {
         creator = new B2WorldCreator(this);
 
         // Create the hero in our game world
-        player = new Hero(this, 1.0f, 1.0f);
+        player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
         world.setContactListener(new WorldContactListener());
     }

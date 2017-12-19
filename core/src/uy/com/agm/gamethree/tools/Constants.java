@@ -49,13 +49,17 @@ public class Constants {
     public static final float MAX_LINEAR_VELOCITY = 400f;
     public static final float LINEAR_VELOCITY = 4.0f;
     public static final float HERO_RESIZE = 1.0f;
+    public static final float HERO_CIRCLESHAPE_RADIUS = 29.0f;
 
     // Item
     public static final float ITEM_OFFSET = 40.0f;
 
     // EnemyOne
     public static final float ENEMYONE_VELOCITY_X = 1.0f;
-    public static final float ENEMYONE_VELOCITY_Y = 1.0f;
+    public static final float ENEMYONE_VELOCITY_Y = -1.0f;
     public static final float ENEMYONE_RESIZE = 1.0f;
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS = 29.0f;
+
+    // Weapon
+    public static final float WEAPON_OFFSET = 64.0f;
 }

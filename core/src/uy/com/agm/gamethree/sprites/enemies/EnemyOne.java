@@ -37,8 +37,8 @@ public class EnemyOne extends Enemy {
         explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        TextureRegion enemyOne = Assets.instance.enemyOne.enemyOneStand;
-        setBounds(0, 0, enemyOne.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOne.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
+        TextureRegion enemyOneStand = Assets.instance.enemyOne.enemyOneStand;
+        setBounds(0, 0, enemyOneStand.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOneStand.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
 
         stateTime = 0;
         currentState = State.ALIVE;
@@ -101,14 +101,13 @@ public class EnemyOne extends Enemy {
 
     @Override
     public void onHit() {
-        /*crc:
-        Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
-        Esto no se puede hacer aca porque esta siendo llamado desde el WorldContactListener que
-        es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
-        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo, hay que esperar al siguiente
-        ciclo de update, por eso se cambio el estado.
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from the WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore we use a flag (state) in order to point out this behavior.
          */
-
         super.getItemOnHit();
         currentState = State.INJURED;
         Gdx.app.debug(TAG, "Enemy collision");
