@@ -28,34 +28,32 @@ public class EnergyBall extends Weapon {
     public EnergyBall(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
+        // Animation
         energyBallAnimation = Assets.instance.energyBall.energyBallAnimation;
+
+        // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
+        setBounds(getX(), getY(), Constants.ENERGYBALL_WIDTH_METERS, Constants.ENERGYBALL_HEIGHT_METERS);
+
         stateTime = 0;
-
-        TextureRegion energyBall = Assets.instance.energyBall.energyBallStand;
-        // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        // todo constantes
-        setBounds(getX(), getY(), energyBall.getRegionWidth() * 0.8f / Constants.PPM, energyBall.getRegionHeight() * 0.8f / Constants.PPM);
-
         currentState = State.SHOT;
-
-        // todo constantes
-        velocity = new Vector2(0, 6);
+        velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
     }
+
     @Override
     protected void defineWeapon() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
+        bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(20 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.WEAPON_BIT; // Indica que es
+        shape.setRadius(Constants.ENERGYBALL_CIRCLESHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = Constants.WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.ENEMY_BIT; // cON QUE PUEDE COLISIONAR
+                Constants.ENEMY_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -66,58 +64,58 @@ public class EnergyBall extends Weapon {
     public void update(float dt) {
         switch (currentState) {
             case SHOT:
-                stateTime += dt;
-                b2body.setLinearVelocity(velocity);
-                setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-                setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTime, true));
+                stateShot(dt);
                 break;
             case ONTARGET:
-                world.destroyBody(b2body);
-                currentState = State.FINISHED;
+                stateOnTarget();
                 break;
             case FINISHED:
                 break;
             default:
                 break;
         }
+        super.controlBoundaries();
+    }
 
-        /* When a energyBall is on camara, it activates (it moves and can colide).
-        * You have to be very careful because if the energyBall is finished or ontarget, its b2body does not exist and gives
-        * random errors if you try to active it.
-        */
-        if (!isDestroyed()) {
-            if (getY() - getWidth() <= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
-                b2body.setActive(true);
-            }
-            if (getY() + getWidth() <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
-                b2body.setActive(false);
-            }
-        }
+    private void stateShot(float dt) {
+        stateTime += dt;
+        b2body.setLinearVelocity(velocity);
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, EnergyBall may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTime, true));
+    }
+
+    private void stateOnTarget() {
+        world.destroyBody(b2body);
+        currentState = State.FINISHED;
     }
 
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
     }
 
     @Override
     public void onTarget() {
-       /*crc:
-        Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
-        Esto no se puede hacer aca porque esta siendo llamado desde el WorldContactListener que
-        es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
-        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo, hay que esperar al siguiente
-        ciclo de update, por eso se cambio el estado.
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
-
         currentState = State.ONTARGET;
         Gdx.app.debug(TAG, "Enemy collision");
     }
 
     public void draw(Batch batch) {
         if (currentState == State.SHOT) {
-            // ACA SE CAE SEGUN ANDROID
             super.draw(batch);
         }
     }

@@ -224,7 +224,7 @@ public class Hero extends Sprite {
     }
 
     public void openFire() {
-        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET / Constants.PPM);
+        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
         screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 

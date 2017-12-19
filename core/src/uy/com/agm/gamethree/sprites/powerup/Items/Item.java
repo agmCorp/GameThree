@@ -57,6 +57,23 @@ public abstract class Item extends Sprite {
         return currentState == State.TAKEN || currentState == State.FINISHED;
     }
 
+    protected void controlBoundaries() {
+        /* When an Item is on camera, it activates (it moves and can collide).
+        * You have to be very careful because if the item is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
+                b2body.setActive(true);
+            } else {
+                b2body.setActive(false);
+            }
+        }
+    }
+
     protected abstract void defineItem();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);

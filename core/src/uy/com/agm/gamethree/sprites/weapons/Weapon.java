@@ -44,6 +44,23 @@ public abstract class Weapon extends Sprite {
         return currentState == State.ONTARGET || currentState == State.FINISHED;
     }
 
+    protected void controlBoundaries() {
+        /* When a Weapon is on camera, it activates (it moves and can collide).
+        * You have to be very careful because if the weapon is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
+                b2body.setActive(true);
+            } else {
+                b2body.setActive(false);
+            }
+        }
+    }
+
     protected abstract void defineWeapon();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);

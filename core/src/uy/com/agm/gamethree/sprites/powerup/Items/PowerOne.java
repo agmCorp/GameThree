@@ -82,21 +82,7 @@ public class PowerOne extends Item {
             default:
                 break;
         }
-
-        /* When a PowerOne is on camara, it activates (it moves and can collide).
-        * You have to be very careful because if the PowerOne is destroyed, its b2body does not exist and gives
-        * random errors if you try to active it.
-        */
-        if (!isDestroyed()) {
-            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
-
-            if (edgeBottom <= getY() && getY() <= edgeUp) {
-                b2body.setActive(true);
-            } else {
-                b2body.setActive(false);
-            }
-        }
+        super.controlBoundaries();
     }
 
     private void stateWaiting(float dt) {

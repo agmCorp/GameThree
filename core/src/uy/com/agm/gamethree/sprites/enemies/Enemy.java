@@ -57,10 +57,27 @@ public abstract class Enemy extends Sprite {
         return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
+    protected void controlBoundaries() {
+        /* When an Enemy is on camera, it activates (it moves and can collide).
+        * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
+                b2body.setActive(true);
+            } else {
+                b2body.setActive(false);
+            }
+        }
+    }
+
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
         if (object.getProperties().containsKey("powerOne")) {
-            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET / Constants.PPM);
+            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
             screen.creator.createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
         }
     }

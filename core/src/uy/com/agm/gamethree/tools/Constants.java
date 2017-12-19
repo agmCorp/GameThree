@@ -43,39 +43,46 @@ public class Constants {
     public static final short ITEM_BIT = 32;
     public static final short WEAPON_BIT = 64;
 
-    // Hero
-    public static final float WEIGHTING_HERO_SPEED = 0.18f;
+    // Hero (meters = pixels / PPM)
+    public static final float WEIGHTING_HERO_SPEED = 18.0f / PPM;
     public static final float LEN_HERO_SPEED = 5.0f;
     public static final float MAX_LINEAR_VELOCITY = 400f;
     public static final float LINEAR_VELOCITY = 4.0f;
-    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 0.29f;
-    public static final float HERO_WIDTH_METERS = 0.57f;
-    public static final float HERO_HEIGHT_METERS = 0.71f;
+    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float HERO_WIDTH_METERS = 57.0f / PPM;
+    public static final float HERO_HEIGHT_METERS = 71.0f / PPM;
 
-    // PowerBox
-    public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 0.29f;
-    public static final float POWERBOX_WIDTH_METERS = 0.56f;
-    public static final float POWERBOX_HEIGHT_METERS = 0.602f;
+    // PowerBox (meters = pixels / PPM)
+    public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float POWERBOX_WIDTH_METERS = 56.0f / PPM;
+    public static final float POWERBOX_HEIGHT_METERS = 60.2f / PPM;
 
-    // Item
-    public static final float ITEM_OFFSET = 40.0f;
+    // Item (meters = pixels / PPM)
+    public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
-    // PowerOne
-    public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 0.29f;
-    public static final float POWERONE_WIDTH_METERS = 0.52f;
-    public static final float POWERONE_HEIGHT_METERS = 0.52f;
+    // PowerOne (meters = pixels / PPM)
+    public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float POWERONE_WIDTH_METERS = 52.0f / PPM;
+    public static final float POWERONE_HEIGHT_METERS = 52.0f / PPM;
     public static final float POWERONE_VELOCITY_X = 0.7f;
     public static final float POWERONE_VELOCITY_Y = 0.0f;
     public static final float POWERONE_WAITING_SECONDS = 5.0f;
     public static final float POWERONE_FADING_SECONDS = 5.0f;
 
-    // EnemyOne
-    public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 0.29f;
+    // EnemyOne (meters = pixels / PPM)
+    public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float ENEMYONE_VELOCITY_X = 1.0f;
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
-    public static final float ENEMYONE_WIDTH_METERS = 0.66f;
-    public static final float ENEMYONE_HEIGHT_METERS = 0.55f;
+    public static final float ENEMYONE_WIDTH_METERS = 66.0f / PPM;
+    public static final float ENEMYONE_HEIGHT_METERS = 55.0f / PPM;
 
-    // Weapon
-    public static final float WEAPON_OFFSET = 64.0f;
+    // Weapon (meters = pixels / PPM)
+    public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
+
+    // EnergyBall (meters = pixels / PPM)
+    public static final float ENERGYBALL_WIDTH_METERS = 19.2f / PPM;
+    public static final float ENERGYBALL_HEIGHT_METERS = 60.0f / PPM;
+    public static final float ENERGYBALL_VELOCITY_X = 0.0f;
+    public static final float ENERGYBALL_VELOCITY_Y = 6.0f;
+    public static final float ENERGYBALL_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
 }
