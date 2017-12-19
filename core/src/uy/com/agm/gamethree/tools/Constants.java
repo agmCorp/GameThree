@@ -20,6 +20,9 @@ public class Constants {
     public static final int WORLD_VELOCITY_ITERATIONS = 6;
     public static final int WORLD_POSITION_ITERATIONS = 2;
 
+    // Each screen is 800px height, so the whole world (TiledEditor) is 8000px.
+    public static final int WORLD_SCREENS = 10;
+
     // Box2D Scale(Pixels Per Meter)
     public static final float PPM = 100;
 
@@ -28,6 +31,9 @@ public class Constants {
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
+
+    // ---- Level ----
+    public static final int TIMER_LEVEL_ONE = 180;
 
     // ---- Dinamic objects -----
 
@@ -44,10 +50,10 @@ public class Constants {
     public static final short WEAPON_BIT = 64;
 
     // Hero (meters = pixels / PPM)
-    public static final float WEIGHTING_HERO_SPEED = 18.0f / PPM;
-    public static final float LEN_HERO_SPEED = 5.0f;
-    public static final float MAX_LINEAR_VELOCITY = 400f;
-    public static final float LINEAR_VELOCITY = 4.0f;
+    public static final float HERO_WEIGHTING_SPEED = 18.0f / PPM;
+    public static final float HERO_LEN_SPEED = 5.0f;
+    public static final float HERO_MAX_LINEAR_VELOCITY = 400f;
+    public static final float HERO_LINEAR_VELOCITY = 4.0f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float HERO_WIDTH_METERS = 57.0f / PPM;
     public static final float HERO_HEIGHT_METERS = 71.0f / PPM;

@@ -97,20 +97,20 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt) {
         // Control our player using linear velocity
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= Constants.MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, Constants.LINEAR_VELOCITY));
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY));
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -Constants.MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, -Constants.LINEAR_VELOCITY));
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY));
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= Constants.MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(Constants.LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(new Vector2(Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -Constants.MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(-Constants.LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(new Vector2(-Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -154,8 +154,12 @@ public class PlayScreen implements Screen {
         // Head-up display
         hud.update(dt);
 
-        // Cam is moving up
-        gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+        // GameCam must be moved from 4 to 76
+        if (gameCam.position.y < ( Constants.V_HEIGHT * Constants.WORLD_SCREENS  / Constants.PPM ) - gameViewPort.getWorldHeight() / 2) {
+            // Gamecam is moving up
+            gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+            Gdx.app.debug(TAG, "UPDATE CAM " + gameCam.position.y);
+        }
 
         // Update our gamecam with correct coordinates after changes
         gameCam.update();

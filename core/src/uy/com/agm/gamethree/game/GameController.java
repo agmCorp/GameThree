@@ -46,8 +46,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
 
-        if (delta.len() > Constants.LEN_HERO_SPEED / Constants.PPM) {
-            game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.WEIGHTING_HERO_SPEED, -deltaY * Constants.WEIGHTING_HERO_SPEED);
+        if (delta.len() > Constants.HERO_LEN_SPEED / Constants.PPM) {
+            game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.HERO_WEIGHTING_SPEED, -deltaY * Constants.HERO_WEIGHTING_SPEED);
         } else {
             game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }
