@@ -70,78 +70,100 @@ HERRAMIENTAS
 METODOLOGIA
 -----------
 1)
-   Posicon + velocidad da posicion
-   Para ir de A a B, debo restar los vectores B - A.
-   La diferencia entre la posicion actual y la posicion futura es la VELOCIDAD (VECTOR VELOCIDAD).
+    Posicon + velocidad da posicion
+    Para ir de A a B, debo restar los vectores B - A.
+    La diferencia entre la posicion actual y la posicion futura es la VELOCIDAD (VECTOR VELOCIDAD).
 
-   Vector2 position = new Vector2();
-   Vector2 velocity = new Vector2();
-   Vector2 acceleration = new Vector2(0, -10);
-   while(simulationRuns) {
+    Vector2 position = new Vector2();
+    Vector2 velocity = new Vector2();
+    Vector2 acceleration = new Vector2(0, -10);
+    while(simulationRuns) {
         float deltaTime = getDeltaTime();
         velocity.add(acceleration.x * deltaTime, acceleration.y * deltaTime);
         position.add(velocity.x * deltaTime, velocity.y * deltaTime);
-   }
-   This is called numerical Euler integration, and it is the most intuitive of the integration methods
-   used in games. We start off with a position at (0,0), a velocity given as (0,0), and an acceleration
-   of (0,–10), which means that the velocity will increase by 1 m/s on the y axis. There will be no
-   movement on the x axis. Before we enter the integration loop, our object is standing still. Within the
-   loop, we first update the velocity, based on the acceleration multiplied by the delta time, and
-   then update the position, based on the velocity multiplied by the delta time. That’s all there is to
-   the big, scary word integration.
+    }
+    This is called numerical Euler integration, and it is the most intuitive of the integration methods
+    used in games. We start off with a position at (0,0), a velocity given as (0,0), and an acceleration
+    of (0,–10), which means that the velocity will increase by 1 m/s on the y axis. There will be no
+    movement on the x axis. Before we enter the integration loop, our object is standing still. Within the
+    loop, we first update the velocity, based on the acceleration multiplied by the delta time, and
+    then update the position, based on the velocity multiplied by the delta time. That’s all there is to
+    the big, scary word integration.
 
 2)
-Personaje a partir de gif animado:
-- Agarrar un gif animado y separarlo en frames con https://ezgif.com/split.
-- Abrir cada imagen con Paint.net y ponerle fondo transparente.
-- Abrir cada imagen con ShoeBox, y con la funcionalidad "Extract Sprites" extraer el dibujo quitando asi fondo innecesario.
-- Renombrar cada imagen como una secuencia: img_01.png, img_02.png, etc.
-- Usar el TexturePacker para unirlas todas.
+    Personaje a partir de gif animado:
+    - Agarrar un gif animado y separarlo en frames con https://ezgif.com/split.
+    - Abrir cada imagen con Paint.net y ponerle fondo transparente.
+    - Abrir cada imagen con ShoeBox, y con la funcionalidad "Extract Sprites" extraer el dibujo quitando asi fondo innecesario.
+    - Renombrar cada imagen como una secuencia: img_01.png, img_02.png, etc.
+    - Usar el TexturePacker para unirlas todas.
 
-Personaje a partir de un gran archivo en donde estan las imagenes todas juntas:
-- Abrir la imagen con ShoeBox y usar la funcionalidad "Extract Sprites".
-- Usar el TexturePacker para unirlas todas.
+    Personaje a partir de un gran archivo en donde estan las imagenes todas juntas:
+    - Abrir la imagen con ShoeBox y usar la funcionalidad "Extract Sprites".
+    - Usar el TexturePacker para unirlas todas.
 
 3)
-Manejo de memoria: https://github.com/libgdx/libgdx/wiki/Memory-management
+    Manejo de memoria: https://github.com/libgdx/libgdx/wiki/Memory-management
 
 4)
-En las layers (tiled) pongo un rectangulo de cualquier tamano.
-Eso me da las coordenadas x, y en donde va a estar el enemigo, que son las del vertice inferior izquierdo.
-Luego cuando se crea el enemigo, el setbounds usa el tamano de la textura / PPM para definir el tamano.
-Ese tamanio son pixels / (pixels / metro) o sea, metros.
-Entonces no importaria el tamano del rectangulo en las layers.
+    En las layers (tiled) pongo un rectangulo de cualquier tamano.
+    Eso me da las coordenadas x, y en donde va a estar el enemigo, que son las del vertice inferior izquierdo.
+    Luego cuando se crea el enemigo, el setbounds usa el tamano de la textura / PPM para definir el tamano.
+    Ese tamanio son pixels / (pixels / metro) o sea, metros.
+    Entonces no importaria el tamano del rectangulo en las layers.
 
 6)
-PERSONAJE: position(x,y) indica su centro
-MUNDO (10 metros de ancho por 15 metros de largo): su origen está en la esquina inferior izquierda
-TOUCH EVENTOS: su origen está en la esquina superior izquierda
+    SISTEMA DE COORDENADAS
+    ----------------------
+    SPRITE:
+    setPosition(x,y) indica el vertice inferior izquierdo de un rectangulo definido con setBounds.
+    setBounds(x, y, width, hegiht) indica un rectangulo cuyo vertice inferior izquierdo esta en x, y.
+    Siempre debo trabajar con coordenadas del mundo (no pixels).
+    En otras palabras, el origen de coordenadas esta en su vertice inferior izquierdo.
+
+    CAMARA:
+    La camara tiene como origen de coordenadas su centro, es decir, el centro de la pantalla es (cam.x, cam.y).
+
+    BOX2D
+    Los objetos de box2d (b2body) tienen como origen de coordenadas su centro.
+    Es decir su centro es (b2body.getPosition().x, b2body.getPosition().y).
+
+    MUNDO
+    Su origen de coordenadas esta en su esquina inferior izquierda.
+    Identico a SPRITE.
+
+    TOUCH EVENTOS
+    Su origen está en la esquina superior izquierda (lpmqtp)
+    Es decir, el (0, 0) esta arriba a la izquierda.
+
+    TEXTURAS
+    Tienen un u y v. No recuerdo exactamente. Es otro caso distinto.
 
 7)
-Para levantar en el trabajo:
-- instalar java 8 y definir JAVA_HOME
-- instalar android sdk y definir ANDROID_HOME (pues la usa git)
-- instalar git y agregarlo al PATH. Definir su proxy:
-git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
-- instalar maven y agregarlo al PATH
-- instalar android studio y en settings apuntar a la instalación de git. Definir su proxy, puse el del bse.
-- abrir android studio, open new project y seleccionar la carpeta androidStudioProjects.
-- luego checkout (vcs/checkout from version control) desde github: https://github.com/agmCorp/GameThree (https://github.com/BrentAureli/SuperMario)
-- cerrar andoid studio
-/* esto podría no ser necesario
-- ir a dos, dentro de gamethree:
-gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 build
-Si es para supermario, puede ser que me falte alguna cosa de android, ahí tengo que abrir el sdk manager y bajarla.
-*/
-- abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy meter el del bse.
-- en settings deshabilitar configuration on demand
-- luego view/windows tools/gradle
-- luego dalre sincronizar, esperar que finalice  la indexacion
-Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en c\users\amorales\appdata\local\android\sdk.
-Sino el sdk Manager está en el menú tools/Android y ahí las cargo yo a mano hasta resolver todos los problemas.
-Tuve que editar el build.grandle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
-- cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
-- la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
+    Para levantar proyecto github:
+    - instalar java 8 y definir JAVA_HOME
+    - instalar android sdk y definir ANDROID_HOME (pues la usa git)
+    - instalar git y agregarlo al PATH. Definir su proxy:
+    git config --global http.proxy http://amorales:tqspy.7719@proxy.bse.com.uy:8080
+    - instalar maven y agregarlo al PATH
+    - instalar android studio y en settings apuntar a la instalación de git. Definir su proxy, puse el del bse.
+    - abrir android studio, open new project y seleccionar la carpeta androidStudioProjects.
+    - luego checkout (vcs/checkout from version control) desde github: https://github.com/agmCorp/GameThree (https://github.com/BrentAureli/SuperMario)
+    - cerrar andoid studio
+    /* esto podría no ser necesario
+    - ir a dos, dentro de gamethree:
+    gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 build
+    Si es para supermario, puede ser que me falte alguna cosa de android, ahí tengo que abrir el sdk manager y bajarla.
+    */
+    - abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy meter el del bse.
+    - en settings deshabilitar configuration on demand
+    - luego view/windows tools/gradle
+    - luego dalre sincronizar, esperar que finalice  la indexacion
+    Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en c\users\amorales\appdata\local\android\sdk.
+    Sino el sdk Manager está en el menú tools/Android y ahí las cargo yo a mano hasta resolver todos los problemas.
+    Tuve que editar el build.grandle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
+    - cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
+    - la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
 
 8)
    git fetch origin
@@ -152,7 +174,7 @@ Tuve que editar el build.grandle de super mario y poner com.android.tools.build:
    git diff // me muestra los cambios
    git merge // ejecuta cambios
 
-   uar Sourcetree: Reset current branch to this commit
+   usar Sourcetree: Reset current branch to this commit
    Con eso hago un update forzado sobreescribiendo el local con el remoto.
 
 --------------------------- code copy paste ---------------------------------------

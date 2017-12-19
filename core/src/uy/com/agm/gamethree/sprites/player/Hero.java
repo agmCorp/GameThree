@@ -14,11 +14,11 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -47,24 +47,21 @@ public class Hero extends Sprite {
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
-        currentState = State.STANDING;
-        previousState = State.STANDING;
-        stateTimer = 0;
-
-        heroIsDead = false;
 
         heroMovingUp = Assets.instance.hero.heroMovingUp;
         heroMovingDown = Assets.instance.hero.heroMovingDown;
         heroStand = Assets.instance.hero.heroStand;
-        // Es en el centro, por eso el defineHero que hace getx, getY es un circulo centrado en este punto x, y
-        setPosition(x, y);
 
+        // Lo invoca playscreen y ya le pasa coordenadas ficticias del mundo.
+        setPosition(x, y);
         defineHero();
 
-        // setbounds es el que determina el tamano del dibujito del heroe en pantalla width y heght. En proximos update, los setposicion lo ubican
-        // segun la b2body que se mueve segun mis teclas. O sea, puedo poner cualquier cosa en lugar de getx gety.
         setBounds(0, 0, heroStand.getRegionWidth() * Constants.HERO_RESIZE / Constants.PPM, heroStand.getRegionHeight() * Constants.HERO_RESIZE / Constants.PPM);
-        setRegion(heroStand);
+
+        currentState = State.STANDING;
+        previousState = State.STANDING;
+        stateTimer = 0;
+        heroIsDead = false;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -72,29 +69,28 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
-
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         // Intento controlar que no se vaya de los limites (este codigo no deberia ir aca, deberia ir en la clase del heroe)
-        float width = b2body.getFixtureList().get(0).getShape().getRadius();
-        if (b2body.getPosition().y + width >= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+        float camEdgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+        float camEdgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+        float heroEdgeUp = getY() + getHeight();
+        float heroEdgeBottom = getY();
 
-            /*
-            // esto esta bien al parecer. Demora, mejor poner un objeto que vaya avanzando y topee.
-            float posicionEnDondeQuieroEstar = gameCam.position.y + gameViewPort.getWorldHeight() / 2 - width;
-            float posicionActual = player.b2body.getPosition().y;
-            float v = posicionEnDondeQuieroEstar - posicionActual;
-            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, v);
-            */
-            b2body.setTransform(b2body.getPosition().x, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2 - width, b2body.getAngle());
-        }
-        if (b2body.getPosition().y - width <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
-            b2body.setTransform(b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 + width, b2body.getAngle());
+        // Me pase el borde inferior
+        if (camEdgeBottom > heroEdgeBottom) {
+            // El sistema de coordenadas en b2body es en el centro
+            b2body.setTransform(b2body.getPosition().x, camEdgeBottom + getHeight() / 2, b2body.getAngle());
         }
 
+        // Me pase el borde superior
+        if (camEdgeUp < heroEdgeUp) {
+            // El sistema de coordenadas en b2body es en el centro
+            b2body.setTransform(b2body.getPosition().x, camEdgeUp - getHeight() / 2, b2body.getAngle());
+        }
         setRegion(getFrame(dt));
     }
-
+    // ??????????????????????
     public TextureRegion getFrame(float dt) {
         currentState = getState();
         TextureRegion region;
@@ -122,7 +118,7 @@ public class Hero extends Sprite {
         previousState = currentState;
         return region;
     }
-
+    // ??????????????????????
     public State getState() {
         State state;
         if (!heroIsDead) {
@@ -151,7 +147,7 @@ public class Hero extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / Constants.PPM);
+        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS / Constants.PPM);
         fdef.filter.categoryBits = Constants.HERO_BIT; // Que es
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.POWERBOX_BIT |
@@ -163,6 +159,7 @@ public class Hero extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
+    // ??????????????????????
     public void draw(SpriteBatch batch) {
         // estado normal
         // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
@@ -209,10 +206,8 @@ public class Hero extends Sprite {
     }
 
     public void onFire() {
-        // TODO CONSTANTES, HAY QUE RENOMBRAR ESTO...SERIA CREATEOBJETCT Y OBJECTDEF Y TODO ASI
-        float MARGEN = 64 ;// TODO ARREGLAR ESTO
-        screen.creator.createGameThreeActor(new GameThreeActorDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), EnergyBall.class));
-        //energyBalls.add(new EnergyBall(screen, b2body.getPosition().x, b2body.getPosition().y + 50 / Constants.PPM));
+        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET / Constants.PPM);
+        screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 
     public void onDead() {

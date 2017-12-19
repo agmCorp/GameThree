@@ -37,12 +37,12 @@ public abstract class Enemy extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
 
-        // Get the rectangle drawn in TiledEditor
+        // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-        // Set this Sprite's position on the center of that rectangle.
+        // Set this Sprite's position on the lower left vertex.
         // This point will be used by defineEnemy() calling getX(), getY().
-        setPosition((rect.getX() + rect.width / 2) / Constants.PPM, (rect.getY() + rect.height / 2) / Constants.PPM);
+        setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
         defineEnemy();
 
         // By default this Enemy doesn't interact

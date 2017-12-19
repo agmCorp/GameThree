@@ -48,7 +48,7 @@ public class EnemyOne extends Enemy {
     @Override
     protected void defineEnemy() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY()); // Center
+        bdef.position.set(getX(), getY()); // Center of the circle
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -90,10 +90,12 @@ public class EnemyOne extends Enemy {
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            if (getY() - getWidth() <= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
                 b2body.setActive(true);
-            }
-            if (getY() + getWidth() <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
+            } else {
                 b2body.setActive(false);
             }
         }
@@ -115,7 +117,7 @@ public class EnemyOne extends Enemy {
 
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
-            super.draw(batch);
+           // super.draw(batch);
         }
     }
 
