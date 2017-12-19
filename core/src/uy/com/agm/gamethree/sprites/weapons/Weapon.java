@@ -18,16 +18,25 @@ public abstract class Weapon extends Sprite {
     protected PlayScreen screen;
     public Body b2body;
 
-    protected enum State {SHOT, ONTARGET, FINISHED};
-
+    protected enum State {
+        SHOT, ONTARGET, FINISHED
+    }
     protected State currentState;
 
     public Weapon(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
 
+        /* Set this Sprite's position on the lower left vertex of a Rectangle.
+        * At this moment we don't have Weapon.width and Weapon.height because this is an abstract class.
+        * Width and height will be determined in classes that inherit from this one.
+        * This point will be used by defineWeapon() calling getX(), getY() to center its b2body.
+        * SetPosition always receives world coordinates.
+        */
         setPosition(x, y);
         defineWeapon();
+
+        // By default this Weapon doesn't interact in our world
         b2body.setActive(false);
     }
 
@@ -36,10 +45,7 @@ public abstract class Weapon extends Sprite {
     }
 
     protected abstract void defineWeapon();
-
     public abstract void update(float dt);
-
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
-
     public abstract void onTarget();
 }

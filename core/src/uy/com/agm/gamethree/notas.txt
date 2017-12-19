@@ -37,6 +37,8 @@ PENDIENTES
 - termine de comentar playscreen incluido
 - hacer que los bloques se vayan rompiendo de a poco.
 - subir todos mis proyectos a github
+- debería morir cuando quedo aplastado entre el borde inferior y un arbol arriba.
+- Analizar hero.draw(SpriteBatch batch), capaz puedo preguntar en stackoverflow
 
 DUDAS
 -----
@@ -200,3 +202,50 @@ Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo toca
 // Reset color to white
         batch.setColor(1, 1, 1, 1);
 // **************   fin
+
+ public void draw(SpriteBatch batch) {
+        // estado normal
+        // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
+        //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+        boolean clockwise = true;
+        float angulo = 90;
+        float height = this.getWidth(); // si multiplico ambos por 0.8f es el 80% del sprite del archivo .png
+        float width = this.getHeight();
+        float temp;
+
+        // touch
+        float vAngle = this.b2body.getLinearVelocity().angle();
+
+// anda bien
+        if (0 < vAngle && vAngle <= 90) {
+            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            angulo = vAngle;
+            //angulo = 45;
+        }
+
+        if (90 < vAngle && vAngle <= 180) {
+            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            angulo = 270.0f - vAngle;
+            //angulo = 135;
+        }
+
+        if (180 < vAngle && vAngle <= 270) {
+            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            angulo = vAngle;
+            //angulo = 225;
+            clockwise = false;
+        }
+
+        if (270 < vAngle && vAngle <= 360) {
+            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            angulo = vAngle;
+            //angulo = 315;
+            clockwise = false;
+        }
+
+        // Draws a rectangle with the texture coordinates rotated 90 degrees.
+        /*
+        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
+                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
+                */
+    }

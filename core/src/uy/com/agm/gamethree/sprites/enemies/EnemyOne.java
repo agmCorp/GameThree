@@ -37,8 +37,7 @@ public class EnemyOne extends Enemy {
         explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        TextureRegion enemyOneStand = Assets.instance.enemyOne.enemyOneStand;
-        setBounds(getX(), getY(), enemyOneStand.getRegionWidth() * Constants.ENEMYONE_RESIZE / Constants.PPM, enemyOneStand.getRegionHeight() * Constants.ENEMYONE_RESIZE / Constants.PPM);
+        setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
 
         stateTime = 0;
         currentState = State.ALIVE;
@@ -48,13 +47,13 @@ public class EnemyOne extends Enemy {
     @Override
     protected void defineEnemy() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY()); // Center of the circle
+        bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYONE_CIRCLESHAPE_RADIUS / Constants.PPM);
+        shape.setRadius(Constants.ENEMYONE_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -71,13 +70,13 @@ public class EnemyOne extends Enemy {
     public void update(float dt) {
         switch (currentState) {
             case ALIVE:
-                updateEnemyOne(dt);
+                stateAlive(dt);
                 break;
             case INJURED:
-                destroyEnemyOne();
+                stateInjured();
                 break;
             case EXPLODING:
-                explodeEnemyOne(dt);
+                stateExploding(dt);
                 break;
             case DEAD:
                 break;
@@ -105,10 +104,10 @@ public class EnemyOne extends Enemy {
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.
-         * This can't be done here because this method is called from the WorldContactListener that is invoked
+         * This can't be done here because this method is called from WorldContactListener that is invoked
          * from PlayScreen.update.world.step(...).
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore we use a flag (state) in order to point out this behavior.
+         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         super.getItemOnHit();
         currentState = State.INJURED;
@@ -117,7 +116,7 @@ public class EnemyOne extends Enemy {
 
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
-           // super.draw(batch);
+           super.draw(batch);
         }
     }
 
@@ -136,21 +135,28 @@ public class EnemyOne extends Enemy {
         }
     }
 
-    private void destroyEnemyOne() {
+    private void stateInjured() {
         currentState = State.EXPLODING;
         AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
         world.destroyBody(b2body);
         stateTime = 0;
     }
 
-    private void updateEnemyOne(float dt) {
+    private void stateAlive(float dt) {
         stateTime += dt;
         b2body.setLinearVelocity(velocity);
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
     }
 
-    private void explodeEnemyOne(float dt) {
+    private void stateExploding(float dt) {
         if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.DEAD;
         } else {
@@ -159,6 +165,3 @@ public class EnemyOne extends Enemy {
         }
     }
 }
-
-
-

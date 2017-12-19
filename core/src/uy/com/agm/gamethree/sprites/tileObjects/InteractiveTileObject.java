@@ -24,22 +24,25 @@ import uy.com.agm.gamethree.tools.Constants;
 public abstract class InteractiveTileObject {
     private static final String TAG = InteractiveTileObject.class.getName();
 
+    protected PlayScreen screen;
     protected World world;
+    protected MapObject object;
     protected TiledMap map;
-    protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body b2body;
-    protected PlayScreen screen;
     protected Fixture fixture;
-    protected MapObject object;
 
     public InteractiveTileObject(PlayScreen screen, MapObject object) {
-        this.object = object;
         this.screen = screen;
         this.world = screen.getWorld();
+        this.object = object;
         this.map = screen.getMap();
         this.bounds = ((RectangleMapObject) object).getRectangle();
 
+        defineInteractiveTileObject();
+    }
+
+    private void defineInteractiveTileObject() {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
@@ -57,13 +60,7 @@ public abstract class InteractiveTileObject {
 
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
-        filter.categoryBits = filterBit; // indica que es
+        filter.categoryBits = filterBit; // Depicts what this fixture is
         fixture.setFilterData(filter);
-    }
-
-    public TiledMapTileLayer.Cell getCell() {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("graphics");
-        return layer.getCell((int) (b2body.getPosition().x * Constants.PPM / 32),
-                (int) (b2body.getPosition().y * Constants.PPM / 32));
     }
 }

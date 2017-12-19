@@ -23,7 +23,7 @@ public class Constants {
     // Box2D Scale(Pixels Per Meter)
     public static final float PPM = 100;
 
-    // Game cam velocity
+    // Game cam velocity (m/s)
     public static final float GAMECAM_VELOCITY = 0.5f;
 
     // Debug boundaries enabled by default
@@ -48,17 +48,33 @@ public class Constants {
     public static final float LEN_HERO_SPEED = 5.0f;
     public static final float MAX_LINEAR_VELOCITY = 400f;
     public static final float LINEAR_VELOCITY = 4.0f;
-    public static final float HERO_RESIZE = 1.0f;
-    public static final float HERO_CIRCLESHAPE_RADIUS = 29.0f;
+    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 0.29f;
+    public static final float HERO_WIDTH_METERS = 0.57f;
+    public static final float HERO_HEIGHT_METERS = 0.71f;
+
+    // PowerBox
+    public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 0.29f;
+    public static final float POWERBOX_WIDTH_METERS = 0.56f;
+    public static final float POWERBOX_HEIGHT_METERS = 0.602f;
 
     // Item
     public static final float ITEM_OFFSET = 40.0f;
 
+    // PowerOne
+    public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 0.29f;
+    public static final float POWERONE_WIDTH_METERS = 0.52f;
+    public static final float POWERONE_HEIGHT_METERS = 0.52f;
+    public static final float POWERONE_VELOCITY_X = 0.7f;
+    public static final float POWERONE_VELOCITY_Y = 0.0f;
+    public static final float POWERONE_WAITING_SECONDS = 5.0f;
+    public static final float POWERONE_FADING_SECONDS = 5.0f;
+
     // EnemyOne
+    public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 0.29f;
     public static final float ENEMYONE_VELOCITY_X = 1.0f;
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
-    public static final float ENEMYONE_RESIZE = 1.0f;
-    public static final float ENEMYONE_CIRCLESHAPE_RADIUS = 29.0f;
+    public static final float ENEMYONE_WIDTH_METERS = 0.66f;
+    public static final float ENEMYONE_HEIGHT_METERS = 0.55f;
 
     // Weapon
     public static final float WEAPON_OFFSET = 64.0f;

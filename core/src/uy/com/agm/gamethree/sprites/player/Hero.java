@@ -31,11 +31,10 @@ public class Hero extends Sprite {
         STANDING, MOVING_UP, MOVING_DOWN, DEAD
     }
     private State currentState;
-
     private State previousState;
+
     public World world;
     public PlayScreen screen;
-
     public Body b2body;
 
     private TextureRegion heroStand;
@@ -52,11 +51,12 @@ public class Hero extends Sprite {
         heroMovingDown = Assets.instance.hero.heroMovingDown;
         heroStand = Assets.instance.hero.heroStand;
 
-        // Lo invoca playscreen y ya le pasa coordenadas ficticias del mundo.
-        setPosition(x, y);
+        /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
+        * This point will be used by defineHero() calling getX(), getY() to center its b2body.
+        * SetBounds always receives world coordinates.
+        */
+        setBounds(x, y, Constants.HERO_WIDTH_METERS, Constants.HERO_HEIGHT_METERS);
         defineHero();
-
-        setBounds(getX(), getY(), heroStand.getRegionWidth() * Constants.HERO_RESIZE / Constants.PPM, heroStand.getRegionHeight() * Constants.HERO_RESIZE / Constants.PPM);
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -69,31 +69,42 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // Intento controlar que no se vaya de los limites (este codigo no deberia ir aca, deberia ir en la clase del heroe)
-        float camEdgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-        float camEdgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
-        float heroEdgeUp = getY() + getHeight();
-        float heroEdgeBottom = getY();
+        // It prevents Hero from going beyond the limits of the game
+        float camUpperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+        float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+        float heroUpperEdge = getY() + getHeight();
+        float heroBottomEdge = getY();
 
-        // Me pase el borde inferior
-        if (camEdgeBottom > heroEdgeBottom) {
-            // El sistema de coordenadas en b2body es en el centro
-            b2body.setTransform(b2body.getPosition().x, camEdgeBottom + getHeight() / 2, b2body.getAngle());
+        // Beyond bottom edge
+        if (camBottomEdge > heroBottomEdge) {
+            // Be carefull, we broke the simulation because Hero is teleporting.
+            b2body.setTransform(b2body.getPosition().x, camBottomEdge + getHeight() / 2, b2body.getAngle());
         }
 
-        // Me pase el borde superior
-        if (camEdgeUp < heroEdgeUp) {
-            // El sistema de coordenadas en b2body es en el centro
-            b2body.setTransform(b2body.getPosition().x, camEdgeUp - getHeight() / 2, b2body.getAngle());
+        // Beyond upper edge
+        if (camUpperEdge < heroUpperEdge) {
+            // Be carefull, we broke the simulation because Hero is teleporting.
+            b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
         }
+
+        // Update Sprite with the correct frame depending on Hero's current action
         setRegion(getFrame(dt));
     }
-    // ??????????????????????
+
     public TextureRegion getFrame(float dt) {
+        // Get Hero's current state. ie. SANDING, MOVING_DOWN...
         currentState = getState();
         TextureRegion region;
+        // depending on the state, get corresponding animation keyFrame.
         switch (currentState) {
             case STANDING:
                 region = heroStand;
@@ -114,30 +125,37 @@ public class Hero extends Sprite {
                 break;
         }
 
+        // if the current state is the same as the previous state increase the state timer.
+        // otherwise the state has changed and we need to reset timer.
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
+
+        // Update previous state
         previousState = currentState;
+
+        // Return our final adjusted frame
         return region;
     }
-    // ??????????????????????
+
     public State getState() {
         State state;
         if (!heroIsDead) {
-            state = State.STANDING;
-
+            // Test to Box2D for velocity on the y-axis.
+            // If Hero is going positive in y-axis he is moving up.
+            // If Hero is going negative in y-axis he is moving down.
+            // Otherwise he is standing.
             float y = b2body.getLinearVelocity().y;
-            float x = b2body.getLinearVelocity().x;
             if (y > 0) {
                 state = State.MOVING_UP;
             } else if (y < 0) {
                 state = State.MOVING_DOWN;
+            } else {
+                state = State.STANDING;
             }
         } else {
             state = State.DEAD;
         }
-        Gdx.app.log(TAG, "ANGULO " + b2body.getLinearVelocity().angle());
         return state;
     }
-
 
     public void defineHero() {
         BodyDef bdef = new BodyDef();
@@ -147,33 +165,33 @@ public class Hero extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS / Constants.PPM);
-        fdef.filter.categoryBits = Constants.HERO_BIT; // Que es
+        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ITEM_BIT |
-                Constants.ENEMY_BIT; // Con que puede colisionar
+                Constants.ENEMY_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    // ??????????????????????
+    // TODO: ANALIZAR ESTO
     public void draw(SpriteBatch batch) {
         // estado normal
         // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
         //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
         boolean clockwise = true;
         float angulo = 90;
-        float height = this.getWidth(); // si multiplico ambos por 0.8f es el 80% del sprite del archivo .png
+        float height = this.getWidth();
         float width = this.getHeight();
         float temp;
 
         // touch
         float vAngle = this.b2body.getLinearVelocity().angle();
 
-// anda bien
+        // anda bien
         if (0 < vAngle && vAngle <= 90) {
             Gdx.app.debug(TAG, "VANGLE " + vAngle);
             angulo = vAngle;
@@ -205,13 +223,13 @@ public class Hero extends Sprite {
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
     }
 
-    public void onFire() {
+    public void openFire() {
         Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET / Constants.PPM);
         screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 
     public void onDead() {
         heroIsDead = true;
-        Gdx.app.debug(TAG, "mori");
+        Gdx.app.debug(TAG, "Morí T_T");
     }
 }

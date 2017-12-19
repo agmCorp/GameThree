@@ -40,12 +40,16 @@ public abstract class Enemy extends Sprite {
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-        // Set this Sprite's position on the lower left vertex.
-        // This point will be used by defineEnemy() calling getX(), getY().
+        /* Set this Sprite's position on the lower left vertex of a Rectangle determined by TiledEditor.
+        * At this moment we don't have Enemy.width and Enemy.height because this is an abstract class.
+        * Width and height will be determined in classes that inherit from this one.
+        * This point will be used by defineEnemy() calling getX(), getY() to center its b2body.
+        * SetPosition always receives world coordinates.
+        */
         setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
         defineEnemy();
 
-        // By default this Enemy doesn't interact
+        // By default this Enemy doesn't interact in our world
         b2body.setActive(false);
     }
 

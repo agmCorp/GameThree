@@ -37,96 +37,129 @@ public class PowerOne extends Item {
         stateWaiting = 0;
         stateFading = 0;
 
-        // Si quisiera un círculo, debería crear mi propia clase que extienda de Sprite y maneje esa lógica.
-        TextureRegion powerOne = Assets.instance.powerOne.powerOneStand;
-        // setbounds es el que determina el tamano del dibujito del enemigo en pantalla
-        setBounds(getX(), getY(), powerOne.getRegionWidth() / Constants.PPM, powerOne.getRegionHeight() / Constants.PPM);
+        // Setbounds is the one that determines the size of the Item's drawing on the screen
+        setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(0.7f, 0);
+        velocity = new Vector2(Constants.POWERONE_VELOCITY_X, Constants.POWERONE_VELOCITY_Y);
     }
 
     @Override
     protected void defineItem() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
+        bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.ITEM_BIT; // Indica que es
+        shape.setRadius(Constants.POWERONE_CIRCLESHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
-                Constants.HERO_BIT; // Con que puede colisionar
+                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
     public void update(float dt) {
-        float alpha;
-
         switch (currentState) {
             case WAITING:
-                stateTime += dt;
-                //velocity.y = b2body.getLinearVelocity().y; // TODO QUE MIERDA ES ESTO
-                b2body.setLinearVelocity(velocity);
-                setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-                setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
-
-                // Cinco segundos en estado WAITING
-                stateWaiting += dt;
-                if (stateWaiting > 5.0f) {
-                    currentState = State.FADING;
-                }
+                stateWaiting(dt);
                 break;
             case FADING:
-                stateTime += dt;
-                // velocity.y = b2body.getLinearVelocity().y; // TODO QUE MIERDA ES ESTO
-                b2body.setLinearVelocity(velocity);
-                setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-                setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
-
-                stateFading += dt;
-                alpha = 1 - stateFading / 5.0f;
-                if (alpha >= 0) {
-                    Gdx.app.debug(TAG, "SETEO ALFA " + alpha);
-                    // 0 invisible, 1 visible
-                    setAlpha(alpha);
-                }
-                // maximo 5 segundos de fading
-                if (stateFading > 5.0f) {
-                    world.destroyBody(b2body);
-                    currentState = State.FINISHED;
-                }
+                stateFading(dt);
                 break;
             case TAKEN:
-                world.destroyBody(b2body);
-                currentState = State.FINISHED;
-                AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
+                stateTaken();
                 break;
             case FINISHED:
                 break;
             default:
                 break;
         }
+
+        /* When a PowerOne is on camara, it activates (it moves and can collide).
+        * You have to be very careful because if the PowerOne is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        if (!isDestroyed()) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
+                b2body.setActive(true);
+            } else {
+                b2body.setActive(false);
+            }
+        }
+    }
+
+    private void stateWaiting(float dt) {
+        stateTime += dt;
+        b2body.setLinearVelocity(velocity);
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, PowerOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+
+        stateWaiting += dt;
+        if (stateWaiting > Constants.POWERONE_WAITING_SECONDS) {
+            currentState = State.FADING;
+        }
+    }
+
+    private void stateFading(float dt) {
+        stateTime += dt;
+        b2body.setLinearVelocity(velocity);
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, PowerOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+
+        stateFading += dt;
+        float alpha = 1 - stateFading / Constants.POWERONE_FADING_SECONDS;
+        if (alpha >= 0) {
+            // 0 invisible, 1 visible
+            setAlpha(alpha);
+        }
+
+        if (stateFading > Constants.POWERONE_FADING_SECONDS) {
+            world.destroyBody(b2body);
+            currentState = State.FINISHED;
+        }
+    }
+
+    private void stateTaken() {
+        world.destroyBody(b2body);
+        currentState = State.FINISHED;
+        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
     }
 
     @Override
     public void use(Hero hero) {
-        /*crc:
-        Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
-        Esto no se puede hacer aca porque esta siendo llamado desde el WorldContactListener que
-        es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
-        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.TAKEN;
-        Gdx.app.debug(TAG, "TOMO ITEM");
     }
 
     public void draw(Batch batch) {
@@ -138,6 +171,5 @@ public class PowerOne extends Item {
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
     }
 }

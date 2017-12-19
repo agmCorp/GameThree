@@ -41,12 +41,12 @@ public class GameThree extends Game {
 
     private InputProcessor getInputProcessor(GameController gc) {
         /* GameController is an InputAdapter because it extends that class and
-         * It is also a GestureListener because it implements that interface.
+         * It's also a GestureListener because it implements that interface.
          * In GameController then I can recognize gestures (like fling) and I can
-         * recognize events such as touchUp that does not exist within the interface
+         * recognize events such as touchUp that doesn't exist within the interface
          * GestureListener but exists within an InputAdapter.
          * As the InputAdapter methods are too many, I decided to extend that
-         * class (to implement within GameController only the method that I'm interested) and
+         * class (to implement within GameController only the method that I'm interested in) and
          * implemented the GestureListener interface because, after all, there are only few extra methods that I must declare.
          * To work with both InputProcessors at the same time, I must use a InputMultiplexer.
          * The fling and touchUp events, for example, always run at the same time.

@@ -39,10 +39,11 @@ public class PowerBox extends Sprite {
     TextureRegion powerBoxDamagedMedium;
     TextureRegion powerBoxDamagedHard;
 
-    protected enum State {WAITING, OPENED, FINISHED};
+    protected enum State {
+        WAITING, OPENED, FINISHED
+    }
     protected State currentState;
     protected MapObject object;
-
     private int damage;
 
     public PowerBox(PlayScreen screen, MapObject object) {
@@ -50,27 +51,24 @@ public class PowerBox extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
 
-        // Obtengo el rectangulo que dibuje en tilededitor
+        // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-        // Seteo punto (x,y) en la parte inferior izquierda de ese rectangulo. Ese punto lo usa definePowerBox como centro de su circulo
-        setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
+        /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
+        * This point will be used by definePowerBox() calling getX(), getY() to center its b2body.
+        * SetBounds always receives world coordinates.
+        */
+        setBounds(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM, Constants.POWERBOX_WIDTH_METERS, Constants.POWERBOX_HEIGHT_METERS);
         definePowerBox();
+
+        // By default this PowerBox doesn't interact in our world
         b2body.setActive(false);
 
+        // Textures
         powerBoxStand = Assets.instance.powerBox.powerBoxStand;
         powerBoxDamagedLittle = Assets.instance.powerBox.powerBoxDamagedLittle;
         powerBoxDamagedMedium = Assets.instance.powerBox.powerBoxDamagedMedium;
         powerBoxDamagedHard = Assets.instance.powerBox.powerBoxDamagedHard;
-
-        // setbounds es el que determina el tamano del dibujito del enemigo en pantalla.
-        // Es un rectangulo y recibe un punto x, y que es el vertice inferior izquierdo de ese rectangulo
-        float resize = 0.7f; // TODO ARREGLAR ESTO
-        setBounds(getX(), getY(), powerBoxStand.getRegionWidth() * resize / Constants.PPM, powerBoxStand.getRegionHeight() * resize / Constants.PPM);
-
-        // Ahora posicionamos ese rectangulo en el centro del circulo. Esta hecho en dos pasos porque es setBound quien define width y height
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
 
         currentState = State.WAITING;
         damage = 0;
@@ -80,27 +78,28 @@ public class PowerBox extends Sprite {
         return currentState != State.WAITING;
     }
 
+    // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        float MARGEN = 32; // TODO ARREGLAR ESTO
         if (object.getProperties().containsKey("powerOne")) {
-            screen.creator.createGameThreeActor(new GameThreeActorDef(new Vector2(b2body.getPosition().x, b2body.getPosition().y + MARGEN / Constants.PPM), PowerOne.class));
+            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET / Constants.PPM);
+            screen.creator.createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
         }
     }
 
     protected void definePowerBox() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
+        bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(29 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.POWERBOX_BIT; // Indica que es
+        shape.setRadius(Constants.POWERBOX_CIRCLESHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = Constants.POWERBOX_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.ENEMY_BIT |
                 Constants.ITEM_BIT |
                 Constants.WEAPON_BIT |
-                Constants.HERO_BIT; // Con que puede colisionar
+                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -136,31 +135,34 @@ public class PowerBox extends Sprite {
             default:
                 break;
         }
-        /* When a Power Box is on camara, it activates (it can colide).
-        * You have to be very careful because if the power box is destroyed, its b2body does not exist and gives
+
+        /* When a PowerBox is on camara, it activates (it can collide).
+        * You have to be very careful because if the PowerBox is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            if (getY() - getWidth() <= screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2) {
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+
+            if (edgeBottom <= getY() && getY() <= edgeUp) {
                 b2body.setActive(true);
-            }
-            if (getY() + getWidth() <= screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2) {
+            } else {
                 b2body.setActive(false);
             }
         }
     }
 
     public void onHit() {
-        /*crc:
-        Debemos remove sus b2boxbody asi no tiene mas colisiones con nadie.
-        Esto no se puede hacer aca porque esta siendo llamado desde el WorldContactListener que
-        es invocado desde el PlayScreen/update/world.step(1 / 60f, 6, 2);
-        No se puede borrar ningun tipo de b2boxbody cuando la simulacion esta ocurriendo.
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
-
         int strength = object.getProperties().get("strength", 0, Integer.class);
         Gdx.app.debug(TAG, "strength, damage " + strength + " " + damage);
-        if (damage >= strength - 1){
+        if (damage >= strength - 1) {
             getItemOnHit();
             currentState = State.OPENED;
         } else {
@@ -169,14 +171,12 @@ public class PowerBox extends Sprite {
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
-        // TODO IF CONSTANTES.DEBUG
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-        Gdx.app.debug(TAG, "** TAMANO RENDERDEBUG X, Y, WIDTH, EIGHT" + getBoundingRectangle().x + " " + getBoundingRectangle().y + " " + getBoundingRectangle().width + " " + getBoundingRectangle().height);
     }
 
     public void draw(Batch batch) {
         if (currentState == State.WAITING) {
-            super.draw(batch);
+           super.draw(batch);
         }
     }
 }

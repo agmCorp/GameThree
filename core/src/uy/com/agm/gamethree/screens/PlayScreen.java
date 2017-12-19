@@ -114,7 +114,7 @@ public class PlayScreen implements Screen {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            player.onFire();
+            player.openFire();
         }
     }
 
