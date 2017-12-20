@@ -90,12 +90,12 @@ public class Assets implements Disposable, AssetErrorListener {
 
             // Animation
             regions = atlas.findRegions("heroUp");
-            heroMovingUp = new Animation(1.0f / 6.0f, regions);
+            heroMovingUp = new Animation(0.5f / 6.0f, regions);
             regions.clear();
 
             // Animation
             regions = atlas.findRegions("heroDown");
-            heroMovingDown = new Animation(1.0f / 6.0f, regions);
+            heroMovingDown = new Animation(0.5f / 6.0f, regions);
         }
     }
 
@@ -111,12 +111,12 @@ public class Assets implements Disposable, AssetErrorListener {
 
             // Animation
             regions = atlas.findRegions("enemyOne");
-            enemyOneAnimation = new Animation(1.0f / 8.0f, regions);
+            enemyOneAnimation = new Animation(0.5f / 8.0f, regions);
             regions.clear();
 
             // Animation
             regions = atlas.findRegions("explosion");
-            explosionAnimation = new Animation(1.0f / 25.0f, regions);
+            explosionAnimation = new Animation(0.5f / 25.0f, regions);
         }
     }
 
@@ -147,7 +147,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
             // Animation
             regions = atlas.findRegions("energyBall");
-            energyBallAnimation = new Animation(1.0f / 4.0f, regions);
+            energyBallAnimation = new Animation(0.5f / 4.0f, regions);
             regions.clear();
         }
     }
@@ -163,7 +163,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
             // Animation
             regions = atlas.findRegions("enemyBullet");
-            enemyBulletAnimation = new Animation(1.0f / 4.0f, regions);
+            enemyBulletAnimation = new Animation(0.2f / 4.0f, regions);
             regions.clear();
         }
     }

@@ -41,6 +41,13 @@ public class EnemyBullet extends Weapon {
         velocity = new Vector2();
         velocity.x = screen.player.b2body.getPosition().x - b2body.getPosition().x;
         velocity.y = screen.player.b2body.getPosition().y - b2body.getPosition().y;
+
+        // Get the direction of the previous vector (normalization)
+        velocity.nor();
+
+        // Apply constant velocity on that direction
+        velocity.x = velocity.x * Constants.ENEMYBULLET_LINEAR_VELOCITY;
+        velocity.y = velocity.y * Constants.ENEMYBULLET_LINEAR_VELOCITY;
     }
 
     @Override

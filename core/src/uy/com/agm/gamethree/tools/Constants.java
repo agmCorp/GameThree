@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f;
+    public static final float GAMECAM_VELOCITY = 0.0f;//0.5f;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
@@ -79,8 +79,8 @@ public class Constants {
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float ENEMYONE_VELOCITY_X = 1.0f;
-    public static final float ENEMYONE_VELOCITY_Y = -1.0f;
+    public static final float ENEMYONE_VELOCITY_X = 0.0f;//1.0f;
+    public static final float ENEMYONE_VELOCITY_Y = 0.0f;//-1.0f;
     public static final float ENEMYONE_WIDTH_METERS = 66.0f * 1.0f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 55.0f * 1.0f / PPM;
     public static final float ENEMYONE_OPENFIRE_SECONDS = 1.0f;
@@ -100,5 +100,6 @@ public class Constants {
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
     public static final float ENEMYBULLET_WIDTH_METERS = 40.0f * 0.5f / PPM;
     public static final float ENEMYBULLET_HEIGHT_METERS = 39.0f  * 0.5f / PPM;
+    public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
 
 }
