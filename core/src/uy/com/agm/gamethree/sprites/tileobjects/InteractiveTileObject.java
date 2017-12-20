@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.tileObjects;
+package uy.com.agm.gamethree.sprites.tileobjects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;

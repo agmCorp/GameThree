@@ -85,11 +85,14 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void openFire() {
-        Gdx.app.debug(TAG, "ANALIZO SI DEBO DISPARAR");
-        if (object.getProperties().containsKey("enemyBullet")) {
-            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS * 2);
-            screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
-            Gdx.app.debug(TAG, "PUM!");
+        if (!isDestroyed()) {
+            if (b2body.isActive()) {
+                if (object.getProperties().containsKey("enemyBullet")) {
+                    Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS * 2);
+                    screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
+                    Gdx.app.debug(TAG, "PUM!");
+                }
+            }
         }
     }
 

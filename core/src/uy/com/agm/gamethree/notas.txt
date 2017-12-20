@@ -42,6 +42,14 @@ PENDIENTES
 - las properties del tilededitor pueden ser boolean, usarlas.
 - ver como generar un jar.
 
+** yo creo que el activar o desactivar es solo para los enemigos
+que puse con tiled.
+Las balas, en el estado shot una vez que se van de la camara las tengo
+que marcar para destruir y destruirlas y se van de b2box.
+No se activan ni nada...sacar todo eso.
+los items y las powerboxes creo que igual.
+Lo unico que se activa o desactiva son las cosas que pongo en tiled (las power boxes no se)
+
 DUDAS
 -----
 - Que se ejecuta primero el update o el draw?

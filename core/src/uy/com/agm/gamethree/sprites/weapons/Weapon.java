@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -50,12 +51,14 @@ public abstract class Weapon extends Sprite {
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2 - 0.8f;
+            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 + 0.8f;
 
             if (edgeBottom <= getY() && getY() <= edgeUp) {
+                Gdx.app.error(TAG, "ACTIVO");
                 b2body.setActive(true);
             } else {
+                Gdx.app.error(TAG, "DESACTIVO");
                 b2body.setActive(false);
             }
         }
