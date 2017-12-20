@@ -180,6 +180,7 @@ public class Hero extends Sprite {
 
     // TODO: ANALIZAR ESTO
     public void draw(SpriteBatch batch) {
+        /*
         // estado normal
         // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
         //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
@@ -222,6 +223,18 @@ public class Hero extends Sprite {
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
+                */
+
+        // rota 90 anti
+        //setRotation(90);
+
+        // rota 180 anti *de cabeza*
+        // setRotation(180);
+
+        // touch
+        float vAngle = this.b2body.getLinearVelocity().angle();
+        setRotation(vAngle);
+        super.draw(batch);
     }
 
     public void openFire() {
