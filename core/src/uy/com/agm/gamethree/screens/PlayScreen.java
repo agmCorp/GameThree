@@ -158,7 +158,6 @@ public class PlayScreen implements Screen {
         if (gameCam.position.y < ( Constants.V_HEIGHT * Constants.WORLD_SCREENS  / Constants.PPM ) - gameViewPort.getWorldHeight() / 2) {
             // Gamecam is moving up
             gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
-            Gdx.app.debug(TAG, "UPDATE CAM " + gameCam.position.y);
         }
 
         // Update our gamecam with correct coordinates after changes

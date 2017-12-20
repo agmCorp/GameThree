@@ -39,6 +39,8 @@ PENDIENTES
 - subir todos mis proyectos a github
 - debería morir cuando quedo aplastado entre el borde inferior y un arbol arriba.
 - Analizar hero.draw(SpriteBatch batch), capaz puedo preguntar en stackoverflow
+- las properties del tilededitor pueden ser boolean, usarlas.
+- ver como generar un jar.
 
 DUDAS
 -----

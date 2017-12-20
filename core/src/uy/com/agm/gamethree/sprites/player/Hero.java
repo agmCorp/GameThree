@@ -171,7 +171,8 @@ public class Hero extends Sprite {
                 Constants.POWERBOX_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ITEM_BIT |
-                Constants.ENEMY_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.ENEMY_BIT |
+                Constants.ENEMY_WEAPON_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -193,26 +194,26 @@ public class Hero extends Sprite {
 
         // anda bien
         if (0 < vAngle && vAngle <= 90) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
             angulo = vAngle;
             //angulo = 45;
         }
 
         if (90 < vAngle && vAngle <= 180) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
             angulo = 270.0f - vAngle;
             //angulo = 135;
         }
 
         if (180 < vAngle && vAngle <= 270) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
             angulo = vAngle;
             //angulo = 225;
             clockwise = false;
         }
 
         if (270 < vAngle && vAngle <= 360) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
+            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
             angulo = vAngle;
             //angulo = 315;
             clockwise = false;

@@ -3,12 +3,10 @@ package uy.com.agm.gamethree.tools;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
@@ -17,6 +15,7 @@ import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileObjects.Borders;
 import uy.com.agm.gamethree.sprites.tileObjects.Obstacle;
+import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
@@ -98,6 +97,9 @@ public class B2WorldCreator {
             }
             if (gameThreeActorDef.type == EnergyBall.class) {
                 weapons.add(new EnergyBall(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
+            }
+            if (gameThreeActorDef.type == EnemyBullet.class) {
+                weapons.add(new EnemyBullet(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
             }
         }
     }

@@ -47,48 +47,57 @@ public class Constants {
     public static final short POWERBOX_BIT = 8;
     public static final short ENEMY_BIT = 16;
     public static final short ITEM_BIT = 32;
-    public static final short WEAPON_BIT = 64;
+    public static final short HERO_WEAPON_BIT = 64;
+    public static final short ENEMY_WEAPON_BIT = 128;
 
-    // Hero (meters = pixels / PPM)
+    // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_WEIGHTING_SPEED = 18.0f / PPM;
     public static final float HERO_LEN_SPEED = 5.0f;
     public static final float HERO_MAX_LINEAR_VELOCITY = 400f;
     public static final float HERO_LINEAR_VELOCITY = 4.0f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float HERO_WIDTH_METERS = 57.0f / PPM;
-    public static final float HERO_HEIGHT_METERS = 71.0f / PPM;
+    public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / PPM;
+    public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
 
-    // PowerBox (meters = pixels / PPM)
+    // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float POWERBOX_WIDTH_METERS = 56.0f / PPM;
-    public static final float POWERBOX_HEIGHT_METERS = 60.2f / PPM;
+    public static final float POWERBOX_WIDTH_METERS = 80.0f * 0.6f / PPM;
+    public static final float POWERBOX_HEIGHT_METERS = 86.0f * 0.6f / PPM;
 
-    // Item (meters = pixels / PPM)
+    // Item (meters = pixels * resizeFactor / PPM)
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
-    // PowerOne (meters = pixels / PPM)
+    // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float POWERONE_WIDTH_METERS = 52.0f / PPM;
-    public static final float POWERONE_HEIGHT_METERS = 52.0f / PPM;
     public static final float POWERONE_VELOCITY_X = 0.7f;
     public static final float POWERONE_VELOCITY_Y = 0.0f;
     public static final float POWERONE_WAITING_SECONDS = 5.0f;
     public static final float POWERONE_FADING_SECONDS = 5.0f;
+    public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
+    public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
 
-    // EnemyOne (meters = pixels / PPM)
+
+    // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float ENEMYONE_VELOCITY_X = 1.0f;
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
-    public static final float ENEMYONE_WIDTH_METERS = 66.0f / PPM;
-    public static final float ENEMYONE_HEIGHT_METERS = 55.0f / PPM;
+    public static final float ENEMYONE_WIDTH_METERS = 66.0f * 1.0f / PPM;
+    public static final float ENEMYONE_HEIGHT_METERS = 55.0f * 1.0f / PPM;
 
-    // Weapon (meters = pixels / PPM)
+    // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
 
-    // EnergyBall (meters = pixels / PPM)
-    public static final float ENERGYBALL_WIDTH_METERS = 19.2f / PPM;
-    public static final float ENERGYBALL_HEIGHT_METERS = 60.0f / PPM;
+    // EnergyBall (meters = pixels * resizeFactor / PPM)
     public static final float ENERGYBALL_VELOCITY_X = 0.0f;
     public static final float ENERGYBALL_VELOCITY_Y = 6.0f;
     public static final float ENERGYBALL_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
+    public static final float ENERGYBALL_WIDTH_METERS = 24.0f * 0.7f / PPM;
+    public static final float ENERGYBALL_HEIGHT_METERS = 71.0f * 0.7f / PPM;
+
+    // EnemyBullet (meters = pixels * resizeFactor / PPM)
+    public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
+    public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
+    public static final float ENEMYBULLET_WIDTH_METERS = 40.0f * 0.5f / PPM;
+    public static final float ENEMYBULLET_HEIGHT_METERS = 39.0f  * 0.5f / PPM;
+
 }

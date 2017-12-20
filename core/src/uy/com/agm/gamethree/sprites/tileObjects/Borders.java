@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.tileObjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.screens.PlayScreen;

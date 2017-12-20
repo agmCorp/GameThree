@@ -15,28 +15,32 @@ import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
- * Created by AGM on 12/17/2017.
+ * Created by AGM on 12/19/2017.
  */
 
-public class EnergyBall extends Weapon {
-    private static final String TAG = EnergyBall.class.getName();
+public class EnemyBullet extends Weapon {
+    private static final String TAG = EnemyBullet.class.getName();
 
     private float stateTime;
-    private Animation energyBallAnimation;
+    private Animation enemyBulletAnimation;
     private Vector2 velocity;
 
-    public EnergyBall(PlayScreen screen, float x, float y) {
+    public EnemyBullet(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         // Animation
-        energyBallAnimation = Assets.instance.energyBall.energyBallAnimation;
+        enemyBulletAnimation = Assets.instance.enemyBullet.enemyBulletAnimation;
 
         // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENERGYBALL_WIDTH_METERS, Constants.ENERGYBALL_HEIGHT_METERS);
+        setBounds(getX(), getY(), Constants.ENEMYBULLET_WIDTH_METERS, Constants.ENEMYBULLET_HEIGHT_METERS);
 
         stateTime = 0;
         currentState = State.SHOT;
-        velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
+
+        // To go from Enemy to Hero we must subtract their position vectors: Hero - Enemy.
+        velocity = new Vector2();
+        velocity.x = screen.player.b2body.getPosition().x - b2body.getPosition().x;
+        velocity.y = screen.player.b2body.getPosition().y - b2body.getPosition().y;
     }
 
     @Override
@@ -48,12 +52,10 @@ public class EnergyBall extends Weapon {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENERGYBALL_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
+        shape.setRadius(Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ENEMY_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -88,7 +90,7 @@ public class EnergyBall extends Weapon {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTime, true));
     }
 
     private void stateOnTarget() {
@@ -111,7 +113,7 @@ public class EnergyBall extends Weapon {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.ONTARGET;
-        Gdx.app.debug(TAG, "Enemy collision");
+        Gdx.app.debug(TAG, "Hero collision");
     }
 
     public void draw(Batch batch) {

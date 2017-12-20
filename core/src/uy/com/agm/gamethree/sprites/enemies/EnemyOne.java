@@ -25,6 +25,7 @@ public class EnemyOne extends Enemy {
     private static final String TAG = EnemyOne.class.getName();
 
     private float stateTime;
+    private float openFireTime;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
     private Vector2 velocity;
@@ -40,6 +41,7 @@ public class EnemyOne extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
 
         stateTime = 0;
+        openFireTime = 0;
         currentState = State.ALIVE;
         velocity = new Vector2(Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
     }
@@ -59,7 +61,7 @@ public class EnemyOne extends Enemy {
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
-                Constants.WEAPON_BIT |
+                Constants.HERO_WEAPON_BIT |
                 Constants.ENEMY_BIT |
                 Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
         fdef.shape = shape;
@@ -131,6 +133,7 @@ public class EnemyOne extends Enemy {
 
     private void stateAlive(float dt) {
         stateTime += dt;
+        openFireTime += dt;
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -141,6 +144,11 @@ public class EnemyOne extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+
+        if (openFireTime > 1.0f) {
+            super.openFire();
+            openFireTime = 0;
+        }
     }
 
     private void stateExploding(float dt) {
