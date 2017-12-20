@@ -36,9 +36,6 @@ public abstract class Weapon extends Sprite {
         */
         setPosition(x, y);
         defineWeapon();
-
-        // By default this Weapon doesn't interact in our world
-        b2body.setActive(false);
     }
 
     public boolean isDestroyed() {
@@ -46,20 +43,13 @@ public abstract class Weapon extends Sprite {
     }
 
     protected void controlBoundaries() {
-        /* When a Weapon is on camera, it activates (it moves and can collide).
-        * You have to be very careful because if the weapon is destroyed, its b2body does not exist and gives
-        * random errors if you try to active it.
-        */
+        /* A Weapon is ONTARGET when is beyond the camera. */
         if (!isDestroyed()) {
-            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2 - 0.8f;
-            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 + 0.8f;
+            float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (edgeBottom <= getY() && getY() <= edgeUp) {
-                Gdx.app.error(TAG, "ACTIVO");
-                b2body.setActive(true);
-            } else {
-                Gdx.app.error(TAG, "DESACTIVO");
-                b2body.setActive(false);
+            if (!(bottomEdge <= getY() && getY() <= upperEdge)) {
+                currentState = State.ONTARGET;
             }
         }
     }

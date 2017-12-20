@@ -44,10 +44,38 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
+        /*
+        * DeltaX is positive when I move my finger to the left, negative otherwise.
+        * DeltaY is positive when I move my finger down, negative otherwise.
+         */
+
+        // In b2body y-axes sign is the opposite.
+        deltaY = -deltaY;
+
+        // DeltaX and deltaY are in pixels, therefore delta is in metres.
         Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
 
-        if (delta.len() > Constants.HERO_LEN_SPEED / Constants.PPM) {
-            game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.HERO_WEIGHTING_SPEED, -deltaY * Constants.HERO_WEIGHTING_SPEED);
+        // Deltas too small are discarded
+        if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
+            /*
+            * origin.x = game.playScreen.player.b2body.getPosition().x
+            * origin.y = game.playScreen.player.b2body.getPosition().y
+             *
+             * destination.x = origin.x + delta.x
+             * destination.y = origin.y + delta.y
+             *
+             * To go from origin to destination we must subtract their position vectors: destination - origin.
+             * Thus destination - origin is (delta.x, delta.y).
+             */
+            Vector2 velocity = new Vector2(delta.x, delta.y);
+
+            // Get the direction of the previous vector (normalization)
+            velocity.nor();
+
+            // Apply constant velocity on that direction
+            velocity.x = velocity.x * Constants.HERO_LINEAR_VELOCITY;
+            velocity.y = velocity.y * Constants.HERO_LINEAR_VELOCITY;
+            game.playScreen.player.b2body.setLinearVelocity(velocity);
         } else {
             game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }
@@ -117,9 +145,5 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     public void touchToWorld(Vector3 touch) {
         game.playScreen.gameCam.unproject(touch);
-    }
-
-    public boolean insideViewPort(Vector3 touch) {
-        return game.playScreen.gameCam.frustum.pointInFrustum(touch);
     }
 }

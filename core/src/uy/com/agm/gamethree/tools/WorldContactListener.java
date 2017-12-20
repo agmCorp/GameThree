@@ -57,7 +57,7 @@ public class WorldContactListener implements ContactListener {
                 Gdx.app.debug(TAG, "****************** Hero muere!!!");
                 break;
 
-            // Hero - Enemies
+            // Hero - Enemy's weapon
             case Constants.HERO_BIT | Constants.ENEMY_WEAPON_BIT:
                 Gdx.app.debug(TAG, "Hero - EnemyBullet collision");
 
@@ -88,7 +88,6 @@ public class WorldContactListener implements ContactListener {
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
-
             // Item - Enemy
             case Constants.ITEM_BIT | Constants.ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
@@ -107,7 +106,7 @@ public class WorldContactListener implements ContactListener {
                 ((Item) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
-            // Weapon - InteractiveTileObjects & Items
+            // Hero's weapon - InteractiveTileObjects & Items
             case Constants.HERO_WEAPON_BIT | Constants.BORDERS_BIT:
             case Constants.HERO_WEAPON_BIT | Constants.OBSTACLE_BIT:
             case Constants.HERO_WEAPON_BIT | Constants.ITEM_BIT:
@@ -115,7 +114,7 @@ public class WorldContactListener implements ContactListener {
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
-            // Weapon - PowerBox
+            // Hero's weapon - PowerBox
             case Constants.HERO_WEAPON_BIT | Constants.POWERBOX_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
@@ -126,7 +125,7 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Weapon - Enemy
+            // Hero's weapon - Enemy
             case Constants.HERO_WEAPON_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
@@ -135,6 +134,14 @@ public class WorldContactListener implements ContactListener {
                     ((Weapon) fixB.getUserData()).onTarget();
                     ((Enemy) fixA.getUserData()).onHit();
                 }
+                break;
+
+            // Enemy's weapon - InteractiveTileObjects & Items
+            case Constants.ENEMY_WEAPON_BIT | Constants.BORDERS_BIT:
+            case Constants.ENEMY_WEAPON_BIT | Constants.OBSTACLE_BIT:
+            case Constants.ENEMY_WEAPON_BIT | Constants.ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
+                ((Weapon) fixC.getUserData()).onTarget();
                 break;
         }
     }

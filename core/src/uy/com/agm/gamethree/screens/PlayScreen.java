@@ -94,23 +94,23 @@ public class PlayScreen implements Screen {
     public void show() {
 
     }
-
+// TODO ARREGLAR ESTA PORONGA
     public void handleInput(float dt) {
         // Control our player using linear velocity
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY));
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){ //&& player.b2body.getLinearVelocity().y <= Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY));
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){ //&& player.b2body.getLinearVelocity().y >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){ //&& player.b2body.getLinearVelocity().x <= Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(new Vector2(-Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y));
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){ //&& player.b2body.getLinearVelocity().x >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
+            player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

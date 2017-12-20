@@ -65,10 +65,10 @@ public abstract class Enemy extends Sprite {
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+            float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (edgeBottom <= getY() && getY() <= edgeUp) {
+            if (bottomEdge <= getY() && getY() <= upperEdge) {
                 b2body.setActive(true);
             } else {
                 b2body.setActive(false);

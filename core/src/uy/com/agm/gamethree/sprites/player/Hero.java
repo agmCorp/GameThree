@@ -178,63 +178,41 @@ public class Hero extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    // TODO: ANALIZAR ESTO
+    // woow
     public void draw(SpriteBatch batch) {
-        /*
-        // estado normal
-        // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
-        //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+        // Thus by default (no velocity), our Sprite will be drawn rotated 90 degrees counter clockwise.
         boolean clockwise = true;
-        float angulo = 90;
-        float height = this.getWidth();
-        float width = this.getHeight();
-        float temp;
+        float angle = 90;
 
-        // touch
-        float vAngle = this.b2body.getLinearVelocity().angle();
+        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
+        float newHeight = getWidth();
+        float newWidth = getHeight();
 
-        // anda bien
-        if (0 < vAngle && vAngle <= 90) {
-            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 45;
-        }
+        // If Hero is moving, we must calculate his new angle
+        if (b2body.getLinearVelocity().len() > 0.0f) {
+            float velAngle = this.b2body.getLinearVelocity().angle();
 
-        if (90 < vAngle && vAngle <= 180) {
-            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = 270.0f - vAngle;
-            //angulo = 135;
-        }
-
-        if (180 < vAngle && vAngle <= 270) {
-            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 225;
-            clockwise = false;
-        }
-
-        if (270 < vAngle && vAngle <= 360) {
-            //Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 315;
-            clockwise = false;
+            if (0 < velAngle && velAngle <= 90) {
+                angle = velAngle;
+            }
+            if (90 < velAngle && velAngle <= 180) {
+                angle = 270.0f - velAngle;
+            }
+            if (180 < velAngle && velAngle <= 270) {
+                angle = velAngle;
+                clockwise = false;
+            }
+            if (270 < velAngle && velAngle <= 360) {
+                angle = velAngle;
+                clockwise = false;
+            }
         }
 
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
-        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
-                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
-                */
+        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
+                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
 
-        // rota 90 anti
-        //setRotation(90);
-
-        // rota 180 anti *de cabeza*
-        // setRotation(180);
-
-        // touch
-        float vAngle = this.b2body.getLinearVelocity().angle();
-        setRotation(vAngle);
-        super.draw(batch);
     }
 
     public void openFire() {

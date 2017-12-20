@@ -42,14 +42,6 @@ PENDIENTES
 - las properties del tilededitor pueden ser boolean, usarlas.
 - ver como generar un jar.
 
-** yo creo que el activar o desactivar es solo para los enemigos
-que puse con tiled.
-Las balas, en el estado shot una vez que se van de la camara las tengo
-que marcar para destruir y destruirlas y se van de b2box.
-No se activan ni nada...sacar todo eso.
-los items y las powerboxes creo que igual.
-Lo unico que se activa o desactiva son las cosas que pongo en tiled (las power boxes no se)
-
 DUDAS
 -----
 - Que se ejecuta primero el update o el draw?
@@ -259,3 +251,14 @@ Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo toca
                 width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
                 */
     }
+
+
+            /* NO TOCAR
+            Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
+
+            if (delta.len() > Constants.HERO_LEN_SPEED / Constants.PPM) {
+                game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.HERO_WEIGHTING_SPEED, -deltaY * Constants.HERO_WEIGHTING_SPEED);
+            } else {
+                game.playScreen.player.b2body.setLinearVelocity(0, 0);
+            }
+            */

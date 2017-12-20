@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
+import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 
 /**
  * Created by AGM on 12/11/2017.
@@ -58,18 +59,24 @@ public abstract class Item extends Sprite {
     }
 
     protected void controlBoundaries() {
-        /* When an Item is on camera, it activates (it moves and can collide).
+        /* When an Item is on camera, it activates (it can collide).
         * You have to be very careful because if the item is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            float edgeUp = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float edgeBottom = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+            float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+            float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (edgeBottom <= getY() && getY() <= edgeUp) {
+            if (bottomEdge <= getY() && getY() <= upperEdge) {
                 b2body.setActive(true);
             } else {
-                b2body.setActive(false);
+                if (b2body.isActive()) { // Was on camera...
+                    // It's outside bottom edge
+                    if (bottomEdge > getY() + getHeight()) {
+                        world.destroyBody(b2body);
+                        currentState = State.FINISHED;
+                    }
+                }
             }
         }
     }
