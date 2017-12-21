@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -94,28 +93,10 @@ public class PlayScreen implements Screen {
     public void show() {
 
     }
-// TODO ARREGLAR ESTA PORONGA
+
+    // Key control
     public void handleInput(float dt) {
-        // Control our player using linear velocity
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){ //&& player.b2body.getLinearVelocity().y <= Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){ //&& player.b2body.getLinearVelocity().y >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){ //&& player.b2body.getLinearVelocity().x <= Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){ //&& player.b2body.getLinearVelocity().x >= -Constants.HERO_MAX_LINEAR_VELOCITY) {
-            player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            player.openFire();
-        }
+        // We use GameController instead of input.isKeyPressed.
     }
 
     public void update(float dt) {

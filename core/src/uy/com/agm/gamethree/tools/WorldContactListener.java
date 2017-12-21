@@ -136,10 +136,8 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Enemy's weapon - InteractiveTileObjects & Items
+            // Enemy's weapon - Borders
             case Constants.ENEMY_WEAPON_BIT | Constants.BORDERS_BIT:
-            case Constants.ENEMY_WEAPON_BIT | Constants.OBSTACLE_BIT:
-            case Constants.ENEMY_WEAPON_BIT | Constants.ITEM_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;

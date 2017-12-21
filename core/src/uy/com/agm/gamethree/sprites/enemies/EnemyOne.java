@@ -43,7 +43,7 @@ public class EnemyOne extends Enemy {
         stateTime = 0;
         openFireTime = 0;
         currentState = State.ALIVE;
-        velocity = new Vector2(Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
+        velocity = new Vector2(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
     }
 
     @Override

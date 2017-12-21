@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.powerup.Items;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -41,7 +40,7 @@ public class PowerOne extends Item {
         setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(Constants.POWERONE_VELOCITY_X, Constants.POWERONE_VELOCITY_Y);
+        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
     }
 
     @Override
@@ -146,6 +145,7 @@ public class PowerOne extends Item {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.TAKEN;
+        screen.getHud().setPowerLabel(20);
     }
 
     public void draw(Batch batch) {

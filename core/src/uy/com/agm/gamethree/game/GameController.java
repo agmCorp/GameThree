@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
@@ -105,12 +106,36 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        // Control our player using linear velocity
+        if (keycode == Input.Keys.UP){
+            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
+        }
+        if (keycode == Input.Keys.DOWN) {
+            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
+        }
+        if (keycode == Input.Keys.LEFT) {
+            game.playScreen.player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
+        }
+        if (keycode == Input.Keys.RIGHT) {
+            game.playScreen.player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
+        }
+        if (keycode == Input.Keys.SPACE) {
+            game.playScreen.player.openFire();
+        }
+        return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        // Control our player using linear velocity
+        if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN){
+            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, 0);
+        }
+
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
+            game.playScreen.player.b2body.setLinearVelocity(0, game.playScreen.player.b2body.getLinearVelocity().y);
+        }
+        return true;
     }
 
     @Override

@@ -12,7 +12,7 @@ El level tiene puentes
 Hay 2 tipos de bolas:
 	1) bola de poder
 		- nada, escudo, invisibilidad (por tiempo), detener pantalla (por tiempo), te pones rojo y chocas a todos (por tiempo),
-		  invulnerabilidad (te rodea una burbuja) es por tiempo, matar a todos.
+		  invulnerabilidad (te rodea una burbuja) es por tiempo, matar a todos de una vez.
 	2) bola de armas
 		- nada, boomeran, triple bola de fuego, doble fecha, flecha simple (arma por defecto)
 Bloques con sorpresas
@@ -27,20 +27,18 @@ enemigo4: nubes (viajan tranqui como funcion seno y luego se te tiran arriba rap
 
 PENDIENTES
 ----------
-- cuando este estable comentar todo el codigo
-- ver si no tengo metodos overrited de mas
-- resolver el tema de cuando el personaje se va de la pantalla, pero con velocidad. Porque asi como esta estoy
-  seguro que no detecta colisiones porque lo saco del mundo fisico. capaz que se puede pensar en algun objeto
-  invisible que vaya avanzando con la camara y listo. creo es lo mejor.
-  en lugar de tolerancia, capaz que basta con limlitar su velocidad maxima.
-  USAR LA CLASE BASE DE OBJETOS DEL CONEJO.
-- termine de comentar playscreen incluido
-- hacer que los bloques se vayan rompiendo de a poco.
 - subir todos mis proyectos a github
 - debería morir cuando quedo aplastado entre el borde inferior y un arbol arriba.
-- Analizar hero.draw(SpriteBatch batch), capaz puedo preguntar en stackoverflow
 - las properties del tilededitor pueden ser boolean, usarlas.
-- ver como generar un jar.
+- tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
+bordes y objetos
+- el metodo use del powerone recibe al hero al pepe.
+
+TENGO LAS SIGUIENTES CUSTOM PROPERTIES
+--------------------------------------
+powerOne
+enemyBullet
+strength 3
 
 DUDAS
 -----
@@ -181,6 +179,11 @@ METODOLOGIA
    usar Sourcetree: Reset current branch to this commit
    Con eso hago un update forzado sobreescribiendo el local con el remoto.
 
+9)
+    Para generar el jar y correrlo en pc, dentro del proyecto ejecutar:
+    gradlew desktop:dist
+
+    El jar queda en GameThree\desktop\build\libs
 --------------------------- code copy paste ---------------------------------------
 Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo tocan no le hacen nada
 // ************* inicio
