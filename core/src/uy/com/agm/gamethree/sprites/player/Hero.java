@@ -10,10 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sun.org.apache.bcel.internal.classfile.Constant;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -27,11 +30,15 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    private enum State {
+    private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, DEAD
     }
-    private State currentState;
-    private State previousState;
+    private enum PowerState {
+        NORMAL_MODE, GHOST_MODE
+    }
+    private HeroState currentHeroState;
+    private HeroState previousHeroState;
+    private PowerState currentPowerState;
 
     public World world;
     public PlayScreen screen;
@@ -58,8 +65,9 @@ public class Hero extends Sprite {
         setBounds(x, y, Constants.HERO_WIDTH_METERS, Constants.HERO_HEIGHT_METERS);
         defineHero();
 
-        currentState = State.STANDING;
-        previousState = State.STANDING;
+        currentHeroState = HeroState.STANDING;
+        previousHeroState = HeroState.STANDING;
+        currentPowerState = PowerState.NORMAL_MODE;
         stateTimer = 0;
         heroIsDead = false;
     }
@@ -96,16 +104,19 @@ public class Hero extends Sprite {
             b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
         }
 
+        // Check if Hero is using any Power
+        checkSuperPowers();
+
         // Update Sprite with the correct frame depending on Hero's current action
         setRegion(getFrame(dt));
     }
 
     public TextureRegion getFrame(float dt) {
         // Get Hero's current state. ie. SANDING, MOVING_DOWN...
-        currentState = getState();
+        currentHeroState = getHeroState();
         TextureRegion region;
         // depending on the state, get corresponding animation keyFrame.
-        switch (currentState) {
+        switch (currentHeroState) {
             case STANDING:
                 region = heroStand;
                 break;
@@ -127,17 +138,17 @@ public class Hero extends Sprite {
 
         // if the current state is the same as the previous state increase the state timer.
         // otherwise the state has changed and we need to reset timer.
-        stateTimer = currentState == previousState ? stateTimer + dt : 0;
+        stateTimer = currentHeroState == previousHeroState ? stateTimer + dt : 0;
 
         // Update previous state
-        previousState = currentState;
+        previousHeroState = currentHeroState;
 
         // Return our final adjusted frame
         return region;
     }
 
-    public State getState() {
-        State state;
+    public HeroState getHeroState() {
+        HeroState heroState;
         if (!heroIsDead) {
             // Test to Box2D for velocity on the y-axis.
             // If Hero is going positive in y-axis he is moving up.
@@ -145,16 +156,16 @@ public class Hero extends Sprite {
             // Otherwise he is standing.
             float y = b2body.getLinearVelocity().y;
             if (y > 0) {
-                state = State.MOVING_UP;
+                heroState = HeroState.MOVING_UP;
             } else if (y < 0) {
-                state = State.MOVING_DOWN;
+                heroState = HeroState.MOVING_DOWN;
             } else {
-                state = State.STANDING;
+                heroState = HeroState.STANDING;
             }
         } else {
-            state = State.DEAD;
+            heroState = HeroState.DEAD;
         }
-        return state;
+        return heroState;
     }
 
     public void defineHero() {
@@ -166,19 +177,23 @@ public class Hero extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
+        setDefaultFilter();
+    }
+
+    private void setDefaultFilter() {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
+        filter.maskBits = Constants.BORDERS_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
+        b2body.getFixtureList().get(0).setFilterData(filter);
     }
 
-    // woow
     public void draw(SpriteBatch batch) {
         // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
         // Thus by default (no velocity), our Sprite will be drawn rotated 90 degrees counter clockwise.
@@ -209,10 +224,24 @@ public class Hero extends Sprite {
             }
         }
 
+
+
+        // TODO HAY QUE OPTIMIZAR ESTO CUANDO META MÁS PODERES
+        if (currentPowerState != PowerState.NORMAL_MODE) {
+            switch (currentPowerState) {
+                case GHOST_MODE:
+                    batch.setColor(1, 1, 1, Constants.POWERONE_ALPHA);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            batch.setColor(1, 1, 1, 1);
+        }
+
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
                 newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
-
     }
 
     public void openFire() {
@@ -223,5 +252,32 @@ public class Hero extends Sprite {
     public void onDead() {
         heroIsDead = true;
         Gdx.app.debug(TAG, "Morí T_T");
+    }
+
+    public void applyPower(Class<?> type) {
+        if (type == PowerOne.class) {
+            onGhostMode();
+        }
+    }
+
+    private void onGhostMode() {
+        screen.getHud().setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.HERO_BIT;
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.POWERBOX_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.ITEM_BIT;
+        b2body.getFixtureList().get(0).setFilterData(filter);
+
+        currentPowerState = PowerState.GHOST_MODE;
+    }
+
+    private void checkSuperPowers() {
+        if (screen.getHud().isPowerTimeUp()) {
+            setDefaultFilter();
+            currentPowerState = PowerState.NORMAL_MODE;
+        }
     }
 }

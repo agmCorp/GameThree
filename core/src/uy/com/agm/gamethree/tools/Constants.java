@@ -73,6 +73,9 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
+    public static final int TIMER_POWERONE = 20;
+    public static final int POWERONE_SCORE = 15;
+    public static final float POWERONE_ALPHA = 0.4f;
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

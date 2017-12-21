@@ -25,32 +25,40 @@ public class Hud implements Disposable {
     public Viewport viewport;
 
     // Hero score/time Tracking Variables
-    private Integer worldTimer;
-    private boolean timeUp; // True when the world timer reaches 0
-    private float timeCount;
-    private float timeCountPower;
     private Integer score;
+    private Integer level;
+    private Integer levelTimer;
+    private boolean timeUp; // True when the world levelTimer reaches 0
+    private float timeCount;
     private Integer powerTimer;
+    private float timeCountPower;
     private boolean powerTimerVisible;
 
     // Scene2D widgets
-    private Label countdownLabel;
     private Label scoreLabel;
-    private Label timeLabel;
+    private Label scoreValueLabel;
+
     private Label levelLabel;
-    private Label worldLabel;
-    private Label gameThreeLabel;
+    private Label levelValueLabel;
+
+    private Label levelTimerLabel;
+    private Label levelTimerValueLabel;
+
     private Label powerLabel;
-    private Label countdownPowerLabel;
+    private Label powerValueLabel;
+
+
     private Table table;
 
     public Hud(SpriteBatch sb) {
         // Define our tracking variables
-        worldTimer = Constants.TIMER_LEVEL_ONE;
-        timeCount = 0;
-        timeCountPower = 0;
         score = 0;
+        level = 1;
+        levelTimer = Constants.TIMER_LEVEL_ONE;
+        timeUp = false;
+        timeCount = 0;
         powerTimer = 0;
+        timeCountPower = 0;
         powerTimerVisible = false;
 
         // Setup the HUD viewport using a new camera separate from our gamecam
@@ -66,53 +74,58 @@ public class Hud implements Disposable {
 
         // Top-Align table
         table.top();
+
         // Make the table fill the entire stage
         table.setFillParent(true);
 
         // Define our labels using the String, and a Label style consisting of a font and color
-        gameThreeLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        powerLabel = new Label("POWER", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        countdownPowerLabel = new Label(String.format("%03d", powerTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreValueLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        levelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelValueLabel = new Label(String.format("%02d", level), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        levelTimerLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        powerLabel = new Label("POWERNAME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        powerValueLabel = new Label(String.format("%03d", powerTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(gameThreeLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        table.add(scoreLabel).expandX().padTop(10);
+        table.add(levelLabel).expandX().padTop(10);
+        table.add(levelTimerLabel).expandX().padTop(10);
+
         // Add a second row to our table
         table.row();
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
+        table.add(scoreValueLabel).expandX();
+        table.add(levelValueLabel).expandX();
+        table.add(levelTimerValueLabel).expandX();
 
         // Add our table to the stage
         stage.addActor(table);
     }
 
     public void update(float dt){
-        // Update world timer
+        // Update world levelTimer
         timeCount += dt;
         if(timeCount >= 1){
-            if (worldTimer > 0) {
-                worldTimer--;
+            if (levelTimer > 0) {
+                levelTimer--;
             } else {
                 timeUp = true;
             }
-            countdownLabel.setText(String.format("%03d", worldTimer));
+            levelTimerValueLabel.setText(String.format("%03d", levelTimer));
             timeCount = 0;
         }
 
-        // Update power timer
+        // Update power levelTimer
         if (powerTimerVisible) {
             timeCountPower += dt;
             if (timeCountPower >= 1) {
                 if (powerTimer > 0) {
                     powerTimer--;
-                    countdownPowerLabel.setText(String.format("%03d", powerTimer));
+                    powerValueLabel.setText(String.format("%03d", powerTimer));
                 } else {
                     removePowerLabel();
                 }
@@ -123,22 +136,23 @@ public class Hud implements Disposable {
 
     public void addScore(int value) {
         score += value;
-        scoreLabel.setText(String.format("%06d", score));
+        scoreValueLabel.setText(String.format("%06d", score));
     }
 
-    public void setPowerLabel(int maxTime) {
+    public void setPowerLabel(String powerName, int maxTime) {
         powerTimer = maxTime;
-        countdownPowerLabel.setText(String.format("%03d", powerTimer)); // actualizo el texto de la variable
+        powerLabel.setText(powerName);
+        powerValueLabel.setText(String.format("%03d", powerTimer));
 
         if (!powerTimerVisible) {
             // Add a third row to our table
             table.row();
-            table.add().expandX();//
-            table.add(powerLabel).expandX(); // dice power nomas
-            table.add().expandX();//
+            table.add().expandX();
+            table.add(powerLabel).expandX();
+            table.add().expandX();
             table.row();
-            table.add().expandX();//
-            table.add(countdownPowerLabel).expandX(); // tiene el valor de la variable powerTimer
+            table.add().expandX();
+            table.add(powerValueLabel).expandX();
             table.add().expandX();
             powerTimerVisible = true;
         }
@@ -147,7 +161,7 @@ public class Hud implements Disposable {
     private void removePowerLabel() {
         if (powerTimerVisible) {
             table.removeActor(powerLabel);
-            table.removeActor(countdownPowerLabel);
+            table.removeActor(powerValueLabel);
             powerTimerVisible = false;
         }
     }
@@ -159,5 +173,9 @@ public class Hud implements Disposable {
 
     public boolean isTimeUp() {
         return timeUp;
+    }
+
+    public boolean isPowerTimeUp() {
+        return !powerTimerVisible;
     }
 }
