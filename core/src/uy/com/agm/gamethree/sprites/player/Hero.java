@@ -105,7 +105,7 @@ public class Hero extends Sprite {
         }
 
         // Check if Hero is using any Power
-        checkSuperPowers();
+        checkPowerTimeUp();
 
         // Update Sprite with the correct frame depending on Hero's current action
         setRegion(getFrame(dt));
@@ -224,9 +224,7 @@ public class Hero extends Sprite {
             }
         }
 
-
-
-        // TODO HAY QUE OPTIMIZAR ESTO CUANDO META MÁS PODERES
+        // TODO HAY QUE OPTIMIZAR ESTO CUANDO META MÁS PODERES, no lo voy a hacer así, voy a usar imagenes distintas y no usperposicon.
         if (currentPowerState != PowerState.NORMAL_MODE) {
             switch (currentPowerState) {
                 case GHOST_MODE:
@@ -261,8 +259,10 @@ public class Hero extends Sprite {
     }
 
     private void onGhostMode() {
+        // Show the power's name and its countdown
         screen.getHud().setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
 
+        // Hero can't collide with enemies or bullets
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT;
         filter.maskBits = Constants.BORDERS_BIT |
@@ -271,10 +271,11 @@ public class Hero extends Sprite {
                 Constants.ITEM_BIT;
         b2body.getFixtureList().get(0).setFilterData(filter);
 
+        // Flag
         currentPowerState = PowerState.GHOST_MODE;
     }
 
-    private void checkSuperPowers() {
+    private void checkPowerTimeUp() {
         if (screen.getHud().isPowerTimeUp()) {
             setDefaultFilter();
             currentPowerState = PowerState.NORMAL_MODE;
