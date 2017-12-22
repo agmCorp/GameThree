@@ -277,7 +277,7 @@ public class Hero extends Sprite {
 
     public void onDead() {
         heroIsDead = true;
-        Gdx.app.debug(TAG, "Morí T_T");
+        Gdx.app.debug(TAG, "Me morí T_T");
     }
 
     public void applyPower(Class<?> type) {
