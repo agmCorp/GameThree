@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.sprites.powerup.boxes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.tools.Assets;
@@ -38,9 +40,11 @@ public class PowerBox extends Sprite {
     TextureRegion powerBoxDamagedLittle;
     TextureRegion powerBoxDamagedMedium;
     TextureRegion powerBoxDamagedHard;
+    private Animation explosionAnimation;
+    private float stateTime;
 
     protected enum State {
-        WAITING, OPENED, FINISHED
+        WAITING, OPENED, EXPLODING, FINISHED
     }
     protected State currentState;
     protected MapObject object;
@@ -69,13 +73,15 @@ public class PowerBox extends Sprite {
         powerBoxDamagedLittle = Assets.instance.powerBox.powerBoxDamagedLittle;
         powerBoxDamagedMedium = Assets.instance.powerBox.powerBoxDamagedMedium;
         powerBoxDamagedHard = Assets.instance.powerBox.powerBoxDamagedHard;
+        explosionAnimation = Assets.instance.powerBox.explosionAnimation;
 
         currentState = State.WAITING;
         damage = 0;
+        stateTime = 0;
     }
 
     public boolean isDestroyed() {
-        return currentState != State.WAITING;
+        return currentState == State.FINISHED || currentState == State.EXPLODING;
     }
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
@@ -108,27 +114,13 @@ public class PowerBox extends Sprite {
     public void update(float dt) {
         switch (currentState) {
             case WAITING:
-                switch (damage) {
-                    case 0:
-                        setRegion(powerBoxStand);
-                        break;
-                    case 1:
-                        setRegion(powerBoxDamagedLittle);
-                        break;
-                    case 2:
-                        setRegion(powerBoxDamagedMedium);
-                        break;
-                    case 3:
-                        setRegion(powerBoxDamagedHard);
-                        break;
-                    default:
-                        break;
-                }
+                stateWaiting();
                 break;
             case OPENED:
-                world.destroyBody(b2body);
-                currentState = State.FINISHED;
-                AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1, MathUtils.random(1.0f, 1.1f));
+                stateOpened();
+                break;
+            case EXPLODING:
+                stateExploding(dt);
                 break;
             case FINISHED:
                 break;
@@ -136,6 +128,41 @@ public class PowerBox extends Sprite {
                 break;
         }
         controlBoundaries();
+    }
+
+    private void stateWaiting() {
+        switch (damage) {
+            case 0:
+                setRegion(powerBoxStand);
+                break;
+            case 1:
+                setRegion(powerBoxDamagedLittle);
+                break;
+            case 2:
+                setRegion(powerBoxDamagedMedium);
+                break;
+            case 3:
+                setRegion(powerBoxDamagedHard);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void stateOpened() {
+        currentState = State.EXPLODING;
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1, MathUtils.random(1.0f, 1.1f));
+        world.destroyBody(b2body);
+        stateTime = 0;
+    }
+
+    private void stateExploding(float dt) {
+        if (explosionAnimation.isAnimationFinished(stateTime)) {
+            currentState = State.FINISHED;
+        } else {
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
+        }
     }
 
     private void controlBoundaries() {
@@ -184,7 +211,7 @@ public class PowerBox extends Sprite {
     }
 
     public void draw(Batch batch) {
-        if (currentState == State.WAITING) {
+        if (currentState != State.FINISHED) {
            super.draw(batch);
         }
     }

@@ -70,12 +70,19 @@ public class Assets implements Disposable, AssetErrorListener {
         public final TextureRegion powerBoxDamagedLittle;
         public final TextureRegion powerBoxDamagedMedium;
         public final TextureRegion powerBoxDamagedHard;
+        public final Animation explosionAnimation;
 
         public AssetPowerBox(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
             powerBoxStand = atlas.findRegion("powerBox", 1);
             powerBoxDamagedLittle = atlas.findRegion("powerBox", 2);
             powerBoxDamagedMedium = atlas.findRegion("powerBox", 3);
             powerBoxDamagedHard = atlas.findRegion("powerBox", 4);
+
+            // Animation
+            regions = atlas.findRegions("explosion");
+            explosionAnimation = new Animation(0.5f / 25.0f, regions);
         }
     }
 

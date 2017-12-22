@@ -22,9 +22,6 @@ import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
-import static uy.com.agm.gamethree.tools.Constants.POWERONE_FX_HEIGHT_METERS;
-import static uy.com.agm.gamethree.tools.Constants.POWERONE_FX_WIDTH_METERS;
-
 /**
  * Created by AGM on 12/3/2017.
  */
@@ -47,15 +44,15 @@ public class Hero extends Sprite {
     private HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStand;
-    private Animation heroMovingUp;
-    private Animation heroMovingDown;
+    private Animation heroMovingUpAnimation;
+    private Animation heroMovingDownAnimation;
     private float heroStateTimer;
     private boolean heroIsDead;
 
     // Power FX
     private PowerState currentPowerState;
     private PowerState previousPowerState;
-    private Animation powerFX;
+    private Animation powerFXAnimation;
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
 
@@ -74,15 +71,15 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
-        heroMovingUp = Assets.instance.hero.heroMovingUp;
-        heroMovingDown = Assets.instance.hero.heroMovingDown;
+        heroMovingUpAnimation = Assets.instance.hero.heroMovingUp;
+        heroMovingDownAnimation = Assets.instance.hero.heroMovingDown;
         heroStateTimer = 0;
         heroIsDead = false;
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL_MODE;
         previousPowerState = PowerState.NORMAL_MODE;
-        powerFX = null; // we don't know yet
+        powerFXAnimation = null; // we don't know yet
         powerFXStateTimer = 0;
         powerFXSprite = new Sprite();
     }
@@ -141,10 +138,10 @@ public class Hero extends Sprite {
                 region = heroStand;
                 break;
             case MOVING_DOWN:
-                region = (TextureRegion) heroMovingDown.getKeyFrame(heroStateTimer, true);
+                region = (TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true);
                 break;
             case MOVING_UP:
-                region = (TextureRegion) heroMovingUp.getKeyFrame(heroStateTimer, true);
+                region = (TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true);
                 break;
             case DEAD:
                 region = heroStand;
@@ -194,7 +191,7 @@ public class Hero extends Sprite {
         // Depending on the state, get corresponding animation keyFrame.
         switch (currentPowerState) {
             case GHOST_MODE:
-                region = (TextureRegion) powerFX.getKeyFrame(powerFXStateTimer, true);
+                region = (TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true);
                 break;
             default:
                 break;
@@ -316,7 +313,7 @@ public class Hero extends Sprite {
         // Flag
         currentPowerState = PowerState.GHOST_MODE;
 
-        powerFX = Assets.instance.ghostMode.ghostModeAnimation;
+        powerFXAnimation = Assets.instance.ghostMode.ghostModeAnimation;
         Sprite power = new Sprite(Assets.instance.ghostMode.ghostModeStand);
         power.setBounds(0, 0, Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS); // Only to set width and height
         powerFXSprite.set(power);
