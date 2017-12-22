@@ -80,9 +80,11 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
             // In order to determine the difference in both directions (actual and new) we calculate their angle.
             if (Math.abs(game.playScreen.player.b2body.getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
+                // Apply the new velocity
                 game.playScreen.player.b2body.setLinearVelocity(newVelocity);
             }
         } else {
+            // Stop
             game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }
         return true;
@@ -171,9 +173,5 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean scrolled(int amount) {
         return false;
-    }
-
-    public void touchToWorld(Vector3 touch) {
-        game.playScreen.gameCam.unproject(touch);
     }
 }

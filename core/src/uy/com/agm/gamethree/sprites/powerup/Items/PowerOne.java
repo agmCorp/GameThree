@@ -85,7 +85,6 @@ public class PowerOne extends Item {
     }
 
     private void stateWaiting(float dt) {
-        stateTime += dt;
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -96,6 +95,7 @@ public class PowerOne extends Item {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
         stateWaiting += dt;
         if (stateWaiting > Constants.POWERONE_WAITING_SECONDS) {
@@ -104,7 +104,6 @@ public class PowerOne extends Item {
     }
 
     private void stateFading(float dt) {
-        stateTime += dt;
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -115,6 +114,7 @@ public class PowerOne extends Item {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
         stateFading += dt;
         float alpha = 1 - stateFading / Constants.POWERONE_FADING_SECONDS;

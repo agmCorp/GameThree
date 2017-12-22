@@ -78,7 +78,6 @@ public class EnergyBall extends Weapon {
     }
 
     private void stateShot(float dt) {
-        stateTime += dt;
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -89,6 +88,7 @@ public class EnergyBall extends Weapon {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
     }
 
     private void stateOnTarget() {
