@@ -35,6 +35,7 @@ bordes y objetos
 - el metodo use del powerone recibe al hero al pepe.
 - revisar el tema de los statetimers por ejemplo en la explosion de los enemigos. Debe arrancar en cero y yo acumulo al principio.
 Esto surge al ver el metodo getHeroFrame de Hero
+- Agregar un despreciamiento de angulo para que no flashee el macaco. Aumentar la velocidad lineal.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
