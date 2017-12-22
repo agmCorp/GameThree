@@ -71,6 +71,7 @@ HERRAMIENTAS
 - http://www.online-image-editor.com/: editor en linea
 - sourceTree para administrar git
 - https://audio.online-convert.com/es/convertir-a-ogg: conversor de mp3 a ogg
+- https://github.com/BrentAureli/SuperMario / https://www.patreon.com/BrentAureli
 
 METODOLOGIA
 -----------

@@ -134,9 +134,6 @@ public class PowerOne extends Item {
         currentState = State.FINISHED;
         AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
         screen.getHud().addScore(Constants.POWERONE_SCORE);
-
-        // Create power FX
-        screen.player.applyPower(PowerOne.class);
     }
 
     @Override
@@ -149,6 +146,9 @@ public class PowerOne extends Item {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.TAKEN;
+
+        // Create power FX
+        hero.applyPower(PowerOne.class);
     }
 
     public void draw(Batch batch) {

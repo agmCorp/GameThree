@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f;
+    public static final float GAMECAM_VELOCITY = 0.0f;//0.5f;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = false;
@@ -51,11 +51,12 @@ public class Constants {
     public static final short ENEMY_WEAPON_BIT = 128;
 
     // Hero (meters = pixels * resizeFactor / PPM)
-    public static final float HERO_SENSIBILITY_METERS = 4.5f / PPM;
-    public static final float HERO_LINEAR_VELOCITY = 5.0f;
+    public static final float HERO_SENSIBILITY_METERS = 1.0f / PPM; // the lower is the more sensible
+    public static final float HERO_LINEAR_VELOCITY = 7.0f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / PPM;
     public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
+    public static final float HERO_ANGLE_SENSIBILITY_DEGREES = 20.0f;  // the lower is the more sensible
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

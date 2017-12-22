@@ -68,15 +68,20 @@ public class GameController implements GestureDetector.GestureListener, InputPro
              * To go from origin to destination we must subtract their position vectors: destination - origin.
              * Thus destination - origin is (delta.x, delta.y).
              */
-            Vector2 velocity = new Vector2(delta.x, delta.y);
+            Vector2 newVelocity = new Vector2(delta.x, delta.y);
 
             // Get the direction of the previous vector (normalization)
-            velocity.nor();
+            newVelocity.nor();
 
             // Apply constant velocity on that direction
-            velocity.x = velocity.x * Constants.HERO_LINEAR_VELOCITY;
-            velocity.y = velocity.y * Constants.HERO_LINEAR_VELOCITY;
-            game.playScreen.player.b2body.setLinearVelocity(velocity);
+            newVelocity.x = newVelocity.x * Constants.HERO_LINEAR_VELOCITY;
+            newVelocity.y = newVelocity.y * Constants.HERO_LINEAR_VELOCITY;
+
+            // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
+            // In order to determine the difference in both directions (actual and new) we calculate their angle.
+            if (Math.abs(game.playScreen.player.b2body.getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
+                game.playScreen.player.b2body.setLinearVelocity(newVelocity);
+            }
         } else {
             game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }
