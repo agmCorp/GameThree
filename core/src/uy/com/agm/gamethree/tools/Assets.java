@@ -31,6 +31,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetPowerOne powerOne;
     public AssetEnergyBall energyBall;
     public AssetEnemyBullet enemyBullet;
+    public AssetGhostMode ghostMode;
 
     public AssetSounds sounds;
     public AssetMusic music;
@@ -168,6 +169,22 @@ public class Assets implements Disposable, AssetErrorListener {
         }
     }
 
+    public class AssetGhostMode {
+        public final TextureRegion ghostModeStand;
+        public final Animation ghostModeAnimation;
+
+        public AssetGhostMode(TextureAtlas atlas) {
+            Array<TextureAtlas.AtlasRegion> regions;
+
+            ghostModeStand = atlas.findRegion("ghostMode", 1);
+
+            // Animation
+            regions = atlas.findRegions("ghostMode");
+            ghostModeAnimation = new Animation(1.0f / 20.0f, regions);
+            regions.clear();
+        }
+    }
+
     public class AssetSounds {
         public final Sound dead;
         public final Sound hit;
@@ -231,6 +248,7 @@ public class Assets implements Disposable, AssetErrorListener {
         powerOne = new AssetPowerOne(atlas);
         energyBall = new AssetEnergyBall(atlas);
         enemyBullet = new AssetEnemyBullet(atlas);
+        ghostMode = new AssetGhostMode(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
     }

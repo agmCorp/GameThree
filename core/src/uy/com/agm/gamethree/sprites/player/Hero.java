@@ -13,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sun.org.apache.bcel.internal.classfile.Constant;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
@@ -47,8 +46,12 @@ public class Hero extends Sprite {
     private TextureRegion heroStand;
     private Animation heroMovingUp;
     private Animation heroMovingDown;
-    private float stateTimer;
+    private float heroStateTimer;
     private boolean heroIsDead;
+
+    private Animation specialEffect;
+    private float specialEffectStateTimer;
+    private Sprite specialEffectSprite;
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -68,8 +71,12 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         currentPowerState = PowerState.NORMAL_MODE;
-        stateTimer = 0;
+        heroStateTimer = 0;
         heroIsDead = false;
+
+        specialEffect = null;
+        specialEffectStateTimer = 0;
+        specialEffectSprite = new Sprite();
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -104,14 +111,19 @@ public class Hero extends Sprite {
             b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
         }
 
-        // Check if Hero is using any Power
-        checkPowerTimeUp();
+        // Check if the power has run out
+        updatePowerState();
 
-        // Update Sprite with the correct frame depending on Hero's current action
-        setRegion(getFrame(dt));
+        // If he is still using it, update the special effect with the correct frame ****
+        if (currentPowerState != PowerState.NORMAL_MODE) {
+            specialEffectSprite.setRegion(getPowerSpecialEffectFrame(dt));
+        }
+
+        // Update Hero with the correct frame depending on Hero's current action
+        setRegion(getHeroFrame(dt));
     }
 
-    public TextureRegion getFrame(float dt) {
+    public TextureRegion getHeroFrame(float dt) {
         // Get Hero's current state. ie. SANDING, MOVING_DOWN...
         currentHeroState = getHeroState();
         TextureRegion region;
@@ -121,10 +133,10 @@ public class Hero extends Sprite {
                 region = heroStand;
                 break;
             case MOVING_DOWN:
-                region = (TextureRegion) heroMovingDown.getKeyFrame(stateTimer, true);
+                region = (TextureRegion) heroMovingDown.getKeyFrame(heroStateTimer, true);
                 break;
             case MOVING_UP:
-                region = (TextureRegion) heroMovingUp.getKeyFrame(stateTimer, true);
+                region = (TextureRegion) heroMovingUp.getKeyFrame(heroStateTimer, true);
                 break;
             case DEAD:
                 region = heroStand;
@@ -138,7 +150,7 @@ public class Hero extends Sprite {
 
         // if the current state is the same as the previous state increase the state timer.
         // otherwise the state has changed and we need to reset timer.
-        stateTimer = currentHeroState == previousHeroState ? stateTimer + dt : 0;
+        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
 
         // Update previous state
         previousHeroState = currentHeroState;
@@ -166,6 +178,23 @@ public class Hero extends Sprite {
             heroState = HeroState.DEAD;
         }
         return heroState;
+    }
+
+    public TextureRegion getPowerSpecialEffectFrame(float dt) {
+        specialEffectStateTimer += dt;
+        TextureRegion region = null;
+
+        // depending on the state, get corresponding animation keyFrame.
+        switch (currentPowerState) {
+            case GHOST_MODE:
+                region = (TextureRegion) specialEffect.getKeyFrame(specialEffectStateTimer, true);
+                break;
+            default:
+                break;
+        }
+
+        // Return our final adjusted frame
+        return region;
     }
 
     public void defineHero() {
@@ -224,22 +253,21 @@ public class Hero extends Sprite {
             }
         }
 
-        // TODO HAY QUE OPTIMIZAR ESTO CUANDO META MÁS PODERES, no lo voy a hacer así, voy a usar imagenes distintas y no usperposicon.
-        if (currentPowerState != PowerState.NORMAL_MODE) {
-            switch (currentPowerState) {
-                case GHOST_MODE:
-                    batch.setColor(1, 1, 1, Constants.POWERONE_ALPHA);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            batch.setColor(1, 1, 1, 1);
-        }
-
         // Draws a rectangle with the texture coordinates rotated 90 degrees.
         batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
                 newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
+
+        if (currentPowerState != PowerState.NORMAL_MODE) {
+            float w = specialEffectSprite.getHeight();
+            float h = specialEffectSprite.getWidth();
+
+            specialEffectSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+            specialEffectSprite.setAlpha(0.5f);
+            batch.setColor(1, 1, 1, Constants.POWERONE_ALPHA);
+            batch.draw(specialEffectSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
+                    w / 2, h / 2, specialEffectSprite.getHeight(), specialEffectSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
+            batch.setColor(1, 1, 1, 1);
+        }
     }
 
     public void openFire() {
@@ -273,9 +301,15 @@ public class Hero extends Sprite {
 
         // Flag
         currentPowerState = PowerState.GHOST_MODE;
+
+        specialEffect = Assets.instance.ghostMode.ghostModeAnimation;
+        Sprite power = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+        power.setBounds(0, 0, 2, 2);
+        specialEffectSprite.set(power);
+        specialEffectStateTimer = 0;
     }
 
-    private void checkPowerTimeUp() {
+    private void updatePowerState() {
         if (screen.getHud().isPowerTimeUp()) {
             setDefaultFilter();
             currentPowerState = PowerState.NORMAL_MODE;
