@@ -22,6 +22,9 @@ import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
+import static uy.com.agm.gamethree.tools.Constants.POWERONE_FX_HEIGHT_METERS;
+import static uy.com.agm.gamethree.tools.Constants.POWERONE_FX_WIDTH_METERS;
+
 /**
  * Created by AGM on 12/3/2017.
  */
@@ -35,31 +38,30 @@ public class Hero extends Sprite {
     private enum PowerState {
         NORMAL_MODE, GHOST_MODE
     }
-    private HeroState currentHeroState;
-    private HeroState previousHeroState;
-    private PowerState currentPowerState;
 
     public World world;
     public PlayScreen screen;
     public Body b2body;
 
+    // Hero
+    private HeroState currentHeroState;
+    private HeroState previousHeroState;
     private TextureRegion heroStand;
     private Animation heroMovingUp;
     private Animation heroMovingDown;
     private float heroStateTimer;
     private boolean heroIsDead;
 
-    private Animation specialEffect;
-    private float specialEffectStateTimer;
-    private Sprite specialEffectSprite;
+    // Power FX
+    private PowerState currentPowerState;
+    private PowerState previousPowerState;
+    private Animation powerFX;
+    private float powerFXStateTimer;
+    private Sprite powerFXSprite;
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
-
-        heroMovingUp = Assets.instance.hero.heroMovingUp;
-        heroMovingDown = Assets.instance.hero.heroMovingDown;
-        heroStand = Assets.instance.hero.heroStand;
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
         * This point will be used by defineHero() calling getX(), getY() to center its b2body.
@@ -68,15 +70,21 @@ public class Hero extends Sprite {
         setBounds(x, y, Constants.HERO_WIDTH_METERS, Constants.HERO_HEIGHT_METERS);
         defineHero();
 
+        // Hero variables initialization
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
-        currentPowerState = PowerState.NORMAL_MODE;
+        heroStand = Assets.instance.hero.heroStand;
+        heroMovingUp = Assets.instance.hero.heroMovingUp;
+        heroMovingDown = Assets.instance.hero.heroMovingDown;
         heroStateTimer = 0;
         heroIsDead = false;
 
-        specialEffect = null;
-        specialEffectStateTimer = 0;
-        specialEffectSprite = new Sprite();
+        // PowerFX variables initialization
+        currentPowerState = PowerState.NORMAL_MODE;
+        previousPowerState = PowerState.NORMAL_MODE;
+        powerFX = null; // we don't know yet
+        powerFXStateTimer = 0;
+        powerFXSprite = new Sprite();
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -111,23 +119,23 @@ public class Hero extends Sprite {
             b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
         }
 
-        // Check if the power has run out
-        updatePowerState();
-
-        // If he is still using it, update the special effect with the correct frame ****
-        if (currentPowerState != PowerState.NORMAL_MODE) {
-            specialEffectSprite.setRegion(getPowerSpecialEffectFrame(dt));
-        }
-
         // Update Hero with the correct frame depending on Hero's current action
         setRegion(getHeroFrame(dt));
+
+        // Analyze the power state and update it (for instance if the power has run out...)
+        updatePowerState();
+
+        // If he is still using a power, update the special effect with the correct frame
+        if (currentPowerState != PowerState.NORMAL_MODE) {
+            powerFXSprite.setRegion(getPowerFXFrame(dt));
+        }
     }
 
     public TextureRegion getHeroFrame(float dt) {
         // Get Hero's current state. ie. SANDING, MOVING_DOWN...
         currentHeroState = getHeroState();
         TextureRegion region;
-        // depending on the state, get corresponding animation keyFrame.
+        // Depending on the state, get corresponding animation keyFrame.
         switch (currentHeroState) {
             case STANDING:
                 region = heroStand;
@@ -180,18 +188,24 @@ public class Hero extends Sprite {
         return heroState;
     }
 
-    public TextureRegion getPowerSpecialEffectFrame(float dt) {
-        specialEffectStateTimer += dt;
+    public TextureRegion getPowerFXFrame(float dt) {
         TextureRegion region = null;
 
-        // depending on the state, get corresponding animation keyFrame.
+        // Depending on the state, get corresponding animation keyFrame.
         switch (currentPowerState) {
             case GHOST_MODE:
-                region = (TextureRegion) specialEffect.getKeyFrame(specialEffectStateTimer, true);
+                region = (TextureRegion) powerFX.getKeyFrame(powerFXStateTimer, true);
                 break;
             default:
                 break;
         }
+
+        // if the current state is the same as the previous state increase the state timer.
+        // otherwise the state has changed and we need to reset timer.
+        powerFXStateTimer = currentPowerState == previousPowerState ? powerFXStateTimer + dt : 0;
+
+        // Update previous state
+        previousPowerState = currentPowerState;
 
         // Return our final adjusted frame
         return region;
@@ -258,14 +272,14 @@ public class Hero extends Sprite {
                 newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
 
         if (currentPowerState != PowerState.NORMAL_MODE) {
-            float w = specialEffectSprite.getHeight();
-            float h = specialEffectSprite.getWidth();
+            // We do the same with powerFXSprite
+            float w = powerFXSprite.getHeight();
+            float h = powerFXSprite.getWidth();
 
-            specialEffectSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
-            specialEffectSprite.setAlpha(0.5f);
-            batch.setColor(1, 1, 1, Constants.POWERONE_ALPHA);
-            batch.draw(specialEffectSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
-                    w / 2, h / 2, specialEffectSprite.getHeight(), specialEffectSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
+            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+            batch.setColor(1, 1, 1, Constants.POWERONE_FX_ALPHA); // Transparency
+            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
+                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
             batch.setColor(1, 1, 1, 1);
         }
     }
@@ -290,7 +304,7 @@ public class Hero extends Sprite {
         // Show the power's name and its countdown
         screen.getHud().setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
 
-        // Hero can't collide with enemies or bullets
+        // Hero can't collide with enemies nor bullets
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT;
         filter.maskBits = Constants.BORDERS_BIT |
@@ -302,11 +316,10 @@ public class Hero extends Sprite {
         // Flag
         currentPowerState = PowerState.GHOST_MODE;
 
-        specialEffect = Assets.instance.ghostMode.ghostModeAnimation;
+        powerFX = Assets.instance.ghostMode.ghostModeAnimation;
         Sprite power = new Sprite(Assets.instance.ghostMode.ghostModeStand);
-        power.setBounds(0, 0, 2, 2);
-        specialEffectSprite.set(power);
-        specialEffectStateTimer = 0;
+        power.setBounds(0, 0, Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS); // Only to set width and height
+        powerFXSprite.set(power);
     }
 
     private void updatePowerState() {

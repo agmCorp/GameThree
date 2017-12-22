@@ -130,14 +130,13 @@ public class PowerOne extends Item {
     }
 
     private void stateTaken() {
-        /*
-        * aca debería decriel al hero que es poderoso
-         */
         world.destroyBody(b2body);
-        screen.player.applyPower(PowerOne.class); //todo empreolijiar
         currentState = State.FINISHED;
         AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
         screen.getHud().addScore(Constants.POWERONE_SCORE);
+
+        // Create power FX
+        screen.player.applyPower(PowerOne.class);
     }
 
     @Override

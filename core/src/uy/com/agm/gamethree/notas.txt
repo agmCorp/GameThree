@@ -33,6 +33,8 @@ PENDIENTES
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - el metodo use del powerone recibe al hero al pepe.
+- revisar el tema de los statetimers por ejemplo en la explosion de los enemigos. Debe arrancar en cero y yo acumulo al principio.
+Esto surge al ver el metodo getHeroFrame de Hero
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
