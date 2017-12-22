@@ -266,3 +266,17 @@ Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo toca
                 game.playScreen.player.b2body.setLinearVelocity(0, 0);
             }
             */
+para items los cast
+para vidas heal
+
+armas
+https://mrbubblewand.wordpress.com/2010/12/30/animation-light_004/ yo
+https://mrbubblewand.wordpress.com/2010/04/11/animation-light_003/ enemigo
+https://mrbubblewand.wordpress.com/2010/01/29/animation-wind_002/
+https://mrbubblewand.wordpress.com/2010/01/28/animation-magic_005/
+https://mrbubblewand.wordpress.com/2010/01/18/animation-magic_004/
+https://mrbubblewand.wordpress.com/2009/10/05/animation-fire_002/
+https://mrbubblewand.wordpress.com/2009/09/13/animation-magic_003/
+https://mrbubblewand.wordpress.com/2009/06/09/animation-effect_001/
+https://mrbubblewand.wordpress.com/2009/06/07/animation-magic_02/
+https://mrbubblewand.wordpress.com/2009/06/05/animations-thunder_01-heal_01-2/
