@@ -50,6 +50,7 @@ public class Hero extends Sprite {
     private Animation heroDeadAnimation;
     private float heroStateTimer;
     private boolean heroIsDead;
+    private boolean dyingDown;
 
     // Power FX
     private PowerState currentPowerState;
@@ -78,6 +79,7 @@ public class Hero extends Sprite {
         heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
         heroIsDead = false;
+        dyingDown = false;
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL_MODE;
@@ -101,7 +103,39 @@ public class Hero extends Sprite {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // It prevents Hero from going beyond the limits of the game
+        // Update Hero with the correct frame depending on Hero's current action
+        setRegion(getHeroFrame(dt));
+
+        if (!heroIsDead) {
+            // It prevents Hero from going beyond the limits of the game
+            checkBoundaries();
+
+            // Analyze the power state and update it (for instance if the power has run out...)
+            updatePowerState();
+
+            // If he is still using a power, update the special effect with the correct frame
+            if (currentPowerState != PowerState.NORMAL_MODE) {
+                powerFXSprite.setRegion(getPowerFXFrame(dt));
+            }
+        } else {
+            deathMovement();
+        }
+    }
+
+    private void deathMovement() {
+        b2body.setLinearVelocity(0, 0);
+        if (!dyingDown) {
+            b2body.applyLinearImpulse(new Vector2(0.0f, 10.0f), b2body.getWorldCenter(), true);
+            // Center of the screen
+            if (b2body.getPosition().y >= screen.gameCam.position.y) {
+                dyingDown = true;
+            }
+        } else {
+            b2body.applyLinearImpulse(new Vector2(0, -10.0f), b2body.getWorldCenter(), true);
+        }
+    }
+
+    private void checkBoundaries() {
         float camUpperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
         float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
         float heroUpperEdge = getY() + getHeight();
@@ -117,17 +151,6 @@ public class Hero extends Sprite {
         if (camUpperEdge < heroUpperEdge) {
             // Be carefull, we broke the simulation because Hero is teleporting.
             b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
-        }
-
-        // Update Hero with the correct frame depending on Hero's current action
-        setRegion(getHeroFrame(dt));
-
-        // Analyze the power state and update it (for instance if the power has run out...)
-        updatePowerState();
-
-        // If he is still using a power, update the special effect with the correct frame
-        if (currentPowerState != PowerState.NORMAL_MODE) {
-            powerFXSprite.setRegion(getPowerFXFrame(dt));
         }
     }
 
@@ -302,8 +325,6 @@ public class Hero extends Sprite {
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
-
-        b2body.applyLinearImpulse(new Vector2(0, 4.0f), b2body.getWorldCenter(), true); //todo ver esto
     }
 
     public void applyPower(Class<?> type) {
