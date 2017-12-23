@@ -27,10 +27,10 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f;
+    public static final float GAMECAM_VELOCITY = 0.5f * 0;
 
     // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = false;
+    public static final boolean DEBUG_BOUNDARIES = true;
 
     // ---- Level ----
     public static final int TIMER_LEVEL_ONE = 180;
@@ -95,14 +95,14 @@ public class Constants {
     public static final float ENERGYBALL_VELOCITY_X = 0.0f;
     public static final float ENERGYBALL_VELOCITY_Y = 6.0f;
     public static final float ENERGYBALL_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
-    public static final float ENERGYBALL_WIDTH_METERS = 24.0f * 0.7f / PPM;
-    public static final float ENERGYBALL_HEIGHT_METERS = 71.0f * 0.7f / PPM;
+    public static final float ENERGYBALL_WIDTH_METERS = 188.0f * 0.5f / PPM;
+    public static final float ENERGYBALL_HEIGHT_METERS = 175.0f * 0.5f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
-    public static final float ENEMYBULLET_WIDTH_METERS = 40.0f * 0.5f / PPM;
-    public static final float ENEMYBULLET_HEIGHT_METERS = 39.0f  * 0.5f / PPM;
+    public static final float ENEMYBULLET_WIDTH_METERS = 106.0f * 0.5f / PPM;
+    public static final float ENEMYBULLET_HEIGHT_METERS = 105.0f  * 0.5f / PPM;
     public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
 
     // ExplosionA (meters = pixels * resizeFactor / PPM)

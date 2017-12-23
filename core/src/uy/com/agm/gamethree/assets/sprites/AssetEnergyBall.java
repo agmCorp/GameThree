@@ -20,7 +20,7 @@ public class AssetEnergyBall {
 
         // Animation
         regions = atlas.findRegions("energyBall");
-        energyBallAnimation = new Animation(0.5f / 4.0f, regions);
+        energyBallAnimation = new Animation(0.5f / 9.0f, regions);
         regions.clear();
     }
 }

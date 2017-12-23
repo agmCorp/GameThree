@@ -6,6 +6,11 @@ map 32x32 sin margin ni spacing
 Mi mundo ancho 480, alto 800
 mis texturas miden 1024 x 1024
 
+custom properties:
+enemyBullet
+powerOne
+damage (int)
+
 ALCANCE
 -------
 El level tiene puentes

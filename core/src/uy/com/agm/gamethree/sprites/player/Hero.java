@@ -313,9 +313,14 @@ public class Hero extends Sprite {
         // Flag
         currentPowerState = PowerState.GHOST_MODE;
 
+        // Set the power's animation
         powerFXAnimation = Assets.instance.ghostMode.ghostModeAnimation;
         Sprite power = new Sprite(Assets.instance.ghostMode.ghostModeStand);
-        power.setBounds(0, 0, Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS); // Only to set width and height
+
+        // Only to set width and height (in draw(...) we set its position)
+        power.setBounds(getX(), getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+
+        // Set the sprite
         powerFXSprite.set(power);
     }
 

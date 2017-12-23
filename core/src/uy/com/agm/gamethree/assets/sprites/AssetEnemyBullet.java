@@ -20,7 +20,7 @@ public class AssetEnemyBullet {
 
         // Animation
         regions = atlas.findRegions("enemyBullet");
-        enemyBulletAnimation = new Animation(0.2f / 4.0f, regions);
+        enemyBulletAnimation = new Animation(0.5f / 10.0f, regions);
         regions.clear();
     }
 }
