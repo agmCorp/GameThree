@@ -5,8 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -23,8 +23,11 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-        game.playScreen.player.openFire();
-        Gdx.app.debug(TAG, "fuego!!");
+        // If Hero is dead, we don't handle any input
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+            game.playScreen.player.openFire();
+            Gdx.app.debug(TAG, "fuego!!");
+        }
         return true;
     }
 
@@ -45,19 +48,21 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
+        // If Hero is dead, we don't handle any input
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
         /*
         * DeltaX is positive when I move my finger to the left, negative otherwise.
         * DeltaY is positive when I move my finger down, negative otherwise.
          */
 
-        // In b2body y-axes sign is the opposite.
-        deltaY = -deltaY;
+            // In b2body y-axes sign is the opposite.
+            deltaY = -deltaY;
 
-        // DeltaX and deltaY are in pixels, therefore delta is in metres.
-        Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
+            // DeltaX and deltaY are in pixels, therefore delta is in metres.
+            Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
 
-        // Deltas too small are discarded
-        if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
+            // Deltas too small are discarded
+            if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
             /*
             * origin.x = game.playScreen.player.b2body.getPosition().x
             * origin.y = game.playScreen.player.b2body.getPosition().y
@@ -68,31 +73,35 @@ public class GameController implements GestureDetector.GestureListener, InputPro
              * To go from origin to destination we must subtract their position vectors: destination - origin.
              * Thus destination - origin is (delta.x, delta.y).
              */
-            Vector2 newVelocity = new Vector2(delta.x, delta.y);
+                Vector2 newVelocity = new Vector2(delta.x, delta.y);
 
-            // Get the direction of the previous vector (normalization)
-            newVelocity.nor();
+                // Get the direction of the previous vector (normalization)
+                newVelocity.nor();
 
-            // Apply constant velocity on that direction
-            newVelocity.x = newVelocity.x * Constants.HERO_LINEAR_VELOCITY;
-            newVelocity.y = newVelocity.y * Constants.HERO_LINEAR_VELOCITY;
+                // Apply constant velocity on that direction
+                newVelocity.x = newVelocity.x * Constants.HERO_LINEAR_VELOCITY;
+                newVelocity.y = newVelocity.y * Constants.HERO_LINEAR_VELOCITY;
 
-            // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
-            // In order to determine the difference in both directions (actual and new) we calculate their angle.
-            if (Math.abs(game.playScreen.player.b2body.getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
-                // Apply the new velocity
-                game.playScreen.player.b2body.setLinearVelocity(newVelocity);
+                // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
+                // In order to determine the difference in both directions (actual and new) we calculate their angle.
+                if (Math.abs(game.playScreen.player.b2body.getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
+                    // Apply the new velocity
+                    game.playScreen.player.b2body.setLinearVelocity(newVelocity);
+                }
+            } else {
+                // Stop
+                game.playScreen.player.b2body.setLinearVelocity(0, 0);
             }
-        } else {
-            // Stop
-            game.playScreen.player.b2body.setLinearVelocity(0, 0);
         }
         return true;
     }
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        game.playScreen.player.b2body.setLinearVelocity(0, 0);
+        // If Hero is dead, we don't handle any input
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+            game.playScreen.player.b2body.setLinearVelocity(0, 0);
+        }
         return true;
     }
 
@@ -113,34 +122,40 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyDown(int keycode) {
-        // Control our player using linear velocity
-        if (keycode == Input.Keys.UP){
-            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
-        }
-        if (keycode == Input.Keys.DOWN) {
-            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
-        }
-        if (keycode == Input.Keys.LEFT) {
-            game.playScreen.player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
-        }
-        if (keycode == Input.Keys.RIGHT) {
-            game.playScreen.player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
-        }
-        if (keycode == Input.Keys.SPACE) {
-            game.playScreen.player.openFire();
+        // If Hero is dead, we don't handle any input
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+            // Control our player using linear velocity
+            if (keycode == Input.Keys.UP) {
+                game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
+            }
+            if (keycode == Input.Keys.DOWN) {
+                game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
+            }
+            if (keycode == Input.Keys.LEFT) {
+                game.playScreen.player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
+            }
+            if (keycode == Input.Keys.RIGHT) {
+                game.playScreen.player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, game.playScreen.player.b2body.getLinearVelocity().y);
+            }
+            if (keycode == Input.Keys.SPACE) {
+                game.playScreen.player.openFire();
+            }
         }
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        // Control our player using linear velocity
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN){
-            game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, 0);
-        }
+        // If Hero is dead, we don't handle any input
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+            // Control our player using linear velocity
+            if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
+                game.playScreen.player.b2body.setLinearVelocity(game.playScreen.player.b2body.getLinearVelocity().x, 0);
+            }
 
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
-            game.playScreen.player.b2body.setLinearVelocity(0, game.playScreen.player.b2body.getLinearVelocity().y);
+            if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
+                game.playScreen.player.b2body.setLinearVelocity(0, game.playScreen.player.b2body.getLinearVelocity().y);
+            }
         }
         return true;
     }

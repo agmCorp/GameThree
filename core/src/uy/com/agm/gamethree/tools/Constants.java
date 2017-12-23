@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f * 0;
+    public static final float GAMECAM_VELOCITY = 0.5f;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
@@ -41,6 +41,7 @@ public class Constants {
     public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.pack";
 
     // Box2D Collision Bits
+    public static final short NOTHING_BIT = 0;
     public static final short BORDERS_BIT = 1;
     public static final short HERO_BIT = 2;
     public static final short OBSTACLE_BIT = 4;

@@ -135,10 +135,13 @@ public class PlayScreen implements Screen {
         // Head-up display
         hud.update(dt);
 
-        // GameCam must be moved from 4 to 76
-        if (gameCam.position.y < ( Constants.V_HEIGHT * Constants.WORLD_SCREENS  / Constants.PPM ) - gameViewPort.getWorldHeight() / 2) {
-            // Gamecam is moving up
-            gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+        // If Hero is dead, we freeze the camera
+        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+            // GameCam must be moved from 4 to 76
+            if (gameCam.position.y < (Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) - gameViewPort.getWorldHeight() / 2) {
+                // Gamecam is moving up
+                gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+            }
         }
 
         // Update our gamecam with correct coordinates after changes

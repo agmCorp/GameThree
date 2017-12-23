@@ -11,13 +11,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
@@ -29,7 +30,7 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    private enum HeroState {
+    public enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, DEAD
     }
     private enum PowerState {
@@ -41,11 +42,12 @@ public class Hero extends Sprite {
     public Body b2body;
 
     // Hero
-    private HeroState currentHeroState;
+    public HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStand;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
+    private Animation heroDeadAnimation;
     private float heroStateTimer;
     private boolean heroIsDead;
 
@@ -71,8 +73,9 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
-        heroMovingUpAnimation = Assets.instance.hero.heroMovingUp;
-        heroMovingDownAnimation = Assets.instance.hero.heroMovingDown;
+        heroMovingUpAnimation = Assets.instance.hero.heroMovingUpAnimation;
+        heroMovingDownAnimation = Assets.instance.hero.heroMovingDownAnimation;
+        heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
         heroIsDead = false;
 
@@ -128,7 +131,7 @@ public class Hero extends Sprite {
         }
     }
 
-    public TextureRegion getHeroFrame(float dt) {
+    private TextureRegion getHeroFrame(float dt) {
         // Get Hero's current state. ie. SANDING, MOVING_DOWN...
         currentHeroState = getHeroState();
         TextureRegion region;
@@ -144,14 +147,13 @@ public class Hero extends Sprite {
                 region = (TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true);
                 break;
             case DEAD:
-                region = heroStand;
-                AudioManager.instance.play(Assets.instance.sounds.dead, 1);
-                heroIsDead = false;
+                region = (TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true);
                 break;
             default:
                 region = heroStand;
                 break;
         }
+        Gdx.app.debug(TAG, "ESTADO!!! " + currentHeroState);
 
         // if the current state is the same as the previous state increase the state timer.
         // otherwise the state has changed and we need to reset timer.
@@ -164,7 +166,7 @@ public class Hero extends Sprite {
         return region;
     }
 
-    public HeroState getHeroState() {
+    private HeroState getHeroState() {
         HeroState heroState;
         if (!heroIsDead) {
             // Test to Box2D for velocity on the y-axis.
@@ -185,7 +187,7 @@ public class Hero extends Sprite {
         return heroState;
     }
 
-    public TextureRegion getPowerFXFrame(float dt) {
+    private TextureRegion getPowerFXFrame(float dt) {
         TextureRegion region = null;
 
         // Depending on the state, get corresponding animation keyFrame.
@@ -208,7 +210,7 @@ public class Hero extends Sprite {
         return region;
     }
 
-    public void defineHero() {
+    private void defineHero() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX(), getY());
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -231,7 +233,9 @@ public class Hero extends Sprite {
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
-        b2body.getFixtureList().get(0).setFilterData(filter);
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
     }
 
     public void draw(SpriteBatch batch) {
@@ -288,7 +292,18 @@ public class Hero extends Sprite {
 
     public void onDead() {
         heroIsDead = true;
-        Gdx.app.debug(TAG, "Me morí T_T");
+        AudioManager.instance.stopMusic();
+        AudioManager.instance.play(Assets.instance.sounds.dead, 1);
+
+        // Hero can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = Constants.NOTHING_BIT;
+
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        b2body.applyLinearImpulse(new Vector2(0, 4.0f), b2body.getWorldCenter(), true); //todo ver esto
     }
 
     public void applyPower(Class<?> type) {
@@ -308,7 +323,9 @@ public class Hero extends Sprite {
                 Constants.POWERBOX_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ITEM_BIT;
-        b2body.getFixtureList().get(0).setFilterData(filter);
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
 
         // Flag
         currentPowerState = PowerState.GHOST_MODE;

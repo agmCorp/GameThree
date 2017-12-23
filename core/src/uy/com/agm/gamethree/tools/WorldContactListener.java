@@ -54,7 +54,6 @@ public class WorldContactListener implements ContactListener {
 
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
-                Gdx.app.debug(TAG, "****************** Hero muere!!!");
                 break;
 
             // Hero - Enemy's weapon
@@ -63,7 +62,6 @@ public class WorldContactListener implements ContactListener {
 
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
-                Gdx.app.debug(TAG, "****************** Hero muere!!!");
                 break;
 
             // Enemy - InteractiveTileObjects
