@@ -8,6 +8,8 @@ import com.badlogic.gdx.audio.Sound;
  */
 
 public class AssetSounds {
+    private static final String TAG = AssetSounds.class.getName();
+
     public final Sound dead;
     public final Sound hit;
     public final Sound pickUpPowerOne;

@@ -1,10 +1,13 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -14,6 +17,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
@@ -21,6 +26,7 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -87,11 +93,38 @@ public class PlayScreen implements Screen {
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
         world.setContactListener(new WorldContactListener());
+
+        // Load preferences for audio settings and start playing music
+        // GamePreferences.instance.load();
+        AudioManager.instance.play(Assets.instance.music.songLevelOne);
+
+        // User input handler
+        Gdx.input.setInputProcessor(getInputProcessor(new GameController(player)));
+    }
+
+    private InputProcessor getInputProcessor(GameController gc) {
+        /* GameController is an InputAdapter because it extends that class and
+         * It's also a GestureListener because it implements that interface.
+         * In GameController then I can recognize gestures (like fling) and I can
+         * recognize events such as touchUp that doesn't exist within the interface
+         * GestureListener but exists within an InputAdapter.
+         * As the InputAdapter methods are too many, I decided to extend that
+         * class (to implement within GameController only the method that I'm interested in) and
+         * implemented the GestureListener interface because, after all, there are only few extra methods that I must declare.
+         * To work with both InputProcessors at the same time, I must use a InputMultiplexer.
+         * The fling and touchUp events, for example, always run at the same time.
+         * First I registered GestureDetector so that fling is executed before touchUp and as they are related,
+         * when I return true in the fling event the touchUp is canceled. If I return false both are executed.
+         * */
+
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(new GestureDetector(gc));
+        multiplexer.addProcessor(gc);
+        return multiplexer;
     }
 
     @Override
     public void show() {
-
     }
 
     // Key control
@@ -136,7 +169,7 @@ public class PlayScreen implements Screen {
         hud.update(dt);
 
         // If Hero is dead, we freeze the camera
-        if(game.playScreen.player.currentHeroState != Hero.HeroState.DEAD) {
+        if(player.currentHeroState != Hero.HeroState.DEAD) {
             // GameCam must be moved from 4 to 76
             if (gameCam.position.y < (Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) - gameViewPort.getWorldHeight() / 2) {
                 // Gamecam is moving up
@@ -233,6 +266,19 @@ public class PlayScreen implements Screen {
             }
             shapeRenderer.end();
         }
+
+        if (gameOver()) {
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
+
+    public boolean gameOver() {
+        boolean gameOver = false;
+        if (player.currentHeroState == Hero.HeroState.DEAD && player.getStateTimer() > 3.0f) {
+            gameOver = true;
+        }
+        return gameOver;
     }
 
     @Override
@@ -260,7 +306,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resume() {
-
     }
 
     @Override

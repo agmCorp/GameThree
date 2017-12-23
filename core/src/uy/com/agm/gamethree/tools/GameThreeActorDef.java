@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public class GameThreeActorDef {
+    private static final String TAG = GameThreeActorDef.class.getName();
+
     public Vector2 position;
     public Class<?> type;
 

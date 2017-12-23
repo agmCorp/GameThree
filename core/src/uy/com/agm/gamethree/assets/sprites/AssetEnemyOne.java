@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetEnemyOne {
+    private static final String TAG = AssetEnemyOne.class.getName();
+
     public final TextureRegion enemyOneStand;
     public final Animation enemyOneAnimation;
 

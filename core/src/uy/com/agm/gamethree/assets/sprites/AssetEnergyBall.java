@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetEnergyBall {
+    private static final String TAG = AssetEnergyBall.class.getName();
+
     public final TextureRegion energyBallStand;
     public final Animation energyBallAnimation;
 

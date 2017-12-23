@@ -8,6 +8,8 @@ import com.badlogic.gdx.audio.Music;
  */
 
 public class AssetMusic {
+    private static final String TAG = AssetMusic.class.getName();
+
     public final Music songLevelOne;
 
     public AssetMusic(AssetManager am) {

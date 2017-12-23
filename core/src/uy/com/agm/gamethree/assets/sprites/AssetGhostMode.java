@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetGhostMode {
+    private static final String TAG = AssetGhostMode.class.getName();
+
     public final TextureRegion ghostModeStand;
     public final Animation ghostModeAnimation;
 

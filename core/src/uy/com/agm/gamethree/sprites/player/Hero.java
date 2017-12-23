@@ -87,6 +87,8 @@ public class Hero extends Sprite {
         powerFXAnimation = null; // we don't know yet
         powerFXStateTimer = 0;
         powerFXSprite = new Sprite();
+
+        Gdx.app.debug(TAG, "**********el estado en el creador del hero " + currentHeroState);
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -176,7 +178,6 @@ public class Hero extends Sprite {
                 region = heroStand;
                 break;
         }
-        Gdx.app.debug(TAG, "ESTADO!!! " + currentHeroState);
 
         // if the current state is the same as the previous state increase the state timer.
         // otherwise the state has changed and we need to reset timer.
@@ -367,5 +368,9 @@ public class Hero extends Sprite {
             setDefaultFilter();
             currentPowerState = PowerState.NORMAL_MODE;
         }
+    }
+
+    public float getStateTimer() {
+        return heroStateTimer;
     }
 }

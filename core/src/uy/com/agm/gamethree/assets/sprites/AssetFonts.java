@@ -5,6 +5,8 @@ package uy.com.agm.gamethree.assets.sprites;
  */
 
 public class AssetFonts {
+    private static final String TAG = AssetFonts.class.getName();
+
         /*
         public final BitmapFont defaultSmall;
         public final BitmapFont defaultNormal;

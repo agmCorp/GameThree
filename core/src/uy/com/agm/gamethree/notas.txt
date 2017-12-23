@@ -57,12 +57,14 @@ which uses delta to get the right frames for sprite animations, and actually dra
     ver diferencias de mi fuente actual con el del repositorio
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
+- NO SE DONDE TENGO QUE HACER ASSET.DISPOSE, lo puse en gamethree
+
 
 VIDEO
 -----
 HACER REFACTORING Y COMENTAR UN POCO.
 LUEGO:
-Arranco 27, pantalla de gameover.
+REPASAR EL 28.
 
 HERRAMIENTAS
 ------------

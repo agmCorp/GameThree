@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetExplosionB {
+    private static final String TAG = AssetExplosionB.class.getName();
+
     public final TextureRegion explosionBStand;
     public final Animation explosionBAnimation;
 

@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetPowerOne {
+    private static final String TAG = AssetPowerOne.class.getName();
+
     public final TextureRegion powerOneStand;
     public final Animation powerOneAnimation;
 

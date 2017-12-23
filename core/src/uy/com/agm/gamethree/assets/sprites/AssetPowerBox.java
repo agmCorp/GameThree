@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetPowerBox {
+    private static final String TAG = AssetPowerBox.class.getName();
+
     public final TextureRegion powerBoxStand;
     public final TextureRegion powerBoxDamagedLittle;
     public final TextureRegion powerBoxDamagedMedium;

@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class AssetHero {
+    private static final String TAG = AssetHero.class.getName();
+
     public final TextureRegion heroStand;
     public final Animation heroDeadAnimation;
     public final Animation heroMovingUpAnimation;
