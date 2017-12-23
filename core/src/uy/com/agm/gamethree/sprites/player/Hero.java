@@ -17,7 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
-import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;

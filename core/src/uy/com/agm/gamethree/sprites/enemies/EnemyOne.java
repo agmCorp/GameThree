@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -35,7 +35,7 @@ public class EnemyOne extends Enemy {
 
         // Animations
         enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
-        explosionAnimation = Assets.instance.enemyOne.explosionAnimation;
+        explosionAnimation = Assets.instance.explosionA.explosionAAnimation;
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
@@ -124,10 +124,17 @@ public class EnemyOne extends Enemy {
     }
 
     private void stateInjured() {
-        currentState = State.EXPLODING;
-        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+        // Destroy box2D body
         world.destroyBody(b2body);
+
+        // Explosion animation
         stateTime = 0;
+
+        // Audio FX
+        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+
+        // Set the new state
+        currentState = State.EXPLODING;
     }
 
     private void stateAlive(float dt) {
@@ -154,6 +161,10 @@ public class EnemyOne extends Enemy {
         if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.DEAD;
         } else {
+            if (stateTime == 0) { // Explosion starts
+                // Setbounds is the one that determines the size of the explosion on the screen
+                setBounds(getX(), getY(), Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
+            }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
         }

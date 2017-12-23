@@ -105,4 +105,12 @@ public class Constants {
     public static final float ENEMYBULLET_HEIGHT_METERS = 39.0f  * 0.5f / PPM;
     public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
 
+    // ExplosionA (meters = pixels * resizeFactor / PPM)
+    public static final float EXPLOSIONA_WIDTH_METERS = 167.0f * 0.5f / PPM;
+    public static final float EXPLOSIONA_HEIGHT_METERS = 167.0f * 0.5f / PPM;
+
+    // ExplosionB (meters = pixels * resizeFactor / PPM)
+    public static final float EXPLOSIONB_WIDTH_METERS = 98.0f * 0.8f / PPM;
+    public static final float EXPLOSIONB_HEIGHT_METERS = 125.0f * 0.8f / PPM;
+
 }

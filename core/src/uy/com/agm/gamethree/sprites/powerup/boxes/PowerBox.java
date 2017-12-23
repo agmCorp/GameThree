@@ -18,10 +18,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
-import uy.com.agm.gamethree.tools.Assets;
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -73,7 +72,7 @@ public class PowerBox extends Sprite {
         powerBoxDamagedLittle = Assets.instance.powerBox.powerBoxDamagedLittle;
         powerBoxDamagedMedium = Assets.instance.powerBox.powerBoxDamagedMedium;
         powerBoxDamagedHard = Assets.instance.powerBox.powerBoxDamagedHard;
-        explosionAnimation = Assets.instance.powerBox.explosionAnimation;
+        explosionAnimation = Assets.instance.explosionB.explosionBAnimation;
 
         currentState = State.WAITING;
         damage = 0;
@@ -150,16 +149,27 @@ public class PowerBox extends Sprite {
     }
 
     private void stateOpened() {
-        currentState = State.EXPLODING;
-        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1, MathUtils.random(1.0f, 1.1f));
+        // Destroy box2D body
         world.destroyBody(b2body);
+
+        // Explosion animation
         stateTime = 0;
+
+        // Audio FX
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1, MathUtils.random(1.0f, 1.1f));
+
+        // Set the new state
+        currentState = State.EXPLODING;
     }
 
     private void stateExploding(float dt) {
         if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.FINISHED;
         } else {
+            if (stateTime == 0) { // Explosion starts
+                // Setbounds is the one that determines the size of the explosion on the screen
+                setBounds(getX(), getY(), Constants.EXPLOSIONB_WIDTH_METERS, Constants.EXPLOSIONB_HEIGHT_METERS);
+            }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
         }
