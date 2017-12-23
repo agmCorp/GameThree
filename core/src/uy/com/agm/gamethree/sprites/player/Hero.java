@@ -125,13 +125,13 @@ public class Hero extends Sprite {
     private void deathMovement() {
         b2body.setLinearVelocity(0, 0);
         if (!dyingDown) {
-            b2body.applyLinearImpulse(new Vector2(0.0f, 10.0f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(0.0f, Constants.HERO_DEATH_LINEAR_VELOCITY), b2body.getWorldCenter(), true);
             // Center of the screen
             if (b2body.getPosition().y >= screen.gameCam.position.y) {
                 dyingDown = true;
             }
         } else {
-            b2body.applyLinearImpulse(new Vector2(0, -10.0f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(0, -Constants.HERO_DEATH_LINEAR_VELOCITY), b2body.getWorldCenter(), true);
         }
     }
 
