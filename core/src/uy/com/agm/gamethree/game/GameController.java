@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
@@ -24,17 +23,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-        // If Hero is dead, we don't handle any input
-        if(!player.isHeroDead()) {
-            player.openFire();
-            Gdx.app.debug(TAG, "fuego!!");
-        }
-        return true;
+        return false;
     }
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        return false;
+        // If Hero is dead, we don't handle any input
+        if(!player.isHeroDead()) {
+            player.openFire();
+        }
+        return true;
     }
 
     @Override
