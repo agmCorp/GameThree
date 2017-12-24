@@ -23,7 +23,7 @@ public class GameOverScreen implements Screen {
     private static final String TAG = GameOverScreen.class.getName();
 
     // Scene2D.ui Stage and its own Viewport for GameOver
-    public Stage stage;
+    public Stage stage; // todo Stage it's an InputListener, so basically all the input clicks can be redirected to the stage and the stage can handle it
     public Viewport viewport;
 
     private GameThree game;

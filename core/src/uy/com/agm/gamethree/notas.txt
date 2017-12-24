@@ -39,6 +39,16 @@ PENDIENTES
 bordes y objetos
 - No me convence mucho que los personajes que esten por debajo de la camara sean setactive en false. Para mi deberian morir.
 Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pantalla nuevamente con una bala en medio. Con setactive funciona bien.
+- revisar de vuelta todo lo publico y documentar por que dejo cosas publicas.
+- en todos los sprites, cuando mueren (estado DEAD o FINISHED o el que sea). En el case deberia removerlos de las colecciones del b2worldcreator
+para que no jodan. Hoy en dia no joden porque el update tiene ese case y el draw tiene un if.
+Para ello en b2worldcreator crear:
+public void removeEnemy(Enemy enemy) {
+enemies.removeValue(enemy, true);
+}
+(observacion: la eliminacion deberia ser inmediatamente que destruyo su b2body pero creo que
+eso coincide exactamente con el seteo del estado DEAD, asi que queda prolijo hacerlo en la siguiente
+vuelta cuando se evalua el estado dead en el upadte)
 
 IDEAS
 -----
@@ -69,9 +79,8 @@ which uses delta to get the right frames for sprite animations, and actually dra
 
 VIDEO
 -----
-HACER REFACTORING Y COMENTAR UN POCO.
-LUEGO:
-REPASAR EL 28.
+FELICITACIONES
+VER CONTROLADOR
 
 HERRAMIENTAS
 ------------
