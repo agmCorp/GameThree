@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -17,7 +16,7 @@ public abstract class Weapon extends Sprite {
 
     protected World world;
     protected PlayScreen screen;
-    public Body b2body;
+    protected Body b2body;
 
     protected enum State {
         SHOT, ONTARGET, FINISHED

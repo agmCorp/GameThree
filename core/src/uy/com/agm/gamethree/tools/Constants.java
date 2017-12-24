@@ -34,6 +34,7 @@ public class Constants {
 
     // ---- Level ----
     public static final int TIMER_LEVEL_ONE = 180;
+    public static final float DELAY_GAME_OVER_SECONDS = 3.0f;
 
     // ---- Dinamic objects -----
 
@@ -88,7 +89,7 @@ public class Constants {
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
     public static final float ENEMYONE_WIDTH_METERS = 66.0f * 1.0f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 55.0f * 1.0f / PPM;
-    public static final float ENEMYONE_OPENFIRE_SECONDS = 1.0f;
+    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.0f;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;

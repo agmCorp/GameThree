@@ -31,22 +31,22 @@ import uy.com.agm.gamethree.tools.Constants;
 public class PowerBox extends Sprite {
     private static final String TAG = PowerBox.class.getName();
 
-    protected World world;
-    protected PlayScreen screen;
-    public Body b2body;
+    public World world;
+    public PlayScreen screen;
+    private Body b2body;
 
-    TextureRegion powerBoxStand;
-    TextureRegion powerBoxDamagedLittle;
-    TextureRegion powerBoxDamagedMedium;
-    TextureRegion powerBoxDamagedHard;
+    private TextureRegion powerBoxStand;
+    private TextureRegion powerBoxDamagedLittle;
+    private TextureRegion powerBoxDamagedMedium;
+    private TextureRegion powerBoxDamagedHard;
     private Animation explosionAnimation;
     private float stateTime;
 
-    protected enum State {
+    private enum State {
         WAITING, OPENED, EXPLODING, FINISHED
     }
-    protected State currentState;
-    protected MapObject object;
+    private State currentState;
+    private MapObject object;
     private int damage;
 
     public PowerBox(PlayScreen screen, MapObject object) {
@@ -87,7 +87,7 @@ public class PowerBox extends Sprite {
     protected void getItemOnHit() {
         if (object.getProperties().containsKey("powerOne")) {
             Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
-            screen.creator.createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
         }
     }
 
@@ -104,7 +104,7 @@ public class PowerBox extends Sprite {
         fdef.filter.maskBits = Constants.ENEMY_BIT |
                 Constants.ITEM_BIT |
                 Constants.HERO_WEAPON_BIT |
-                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

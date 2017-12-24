@@ -25,7 +25,7 @@ public abstract class Enemy extends Sprite {
 
     protected World world;
     protected PlayScreen screen;
-    public Body b2body;
+    protected Body b2body;
 
     protected enum State {
         ALIVE, INJURED, EXPLODING, DEAD
@@ -80,7 +80,7 @@ public abstract class Enemy extends Sprite {
     protected void getItemOnHit() {
         if (object.getProperties().containsKey("powerOne")) {
             Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
-            screen.creator.createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
         }
     }
 
@@ -89,7 +89,7 @@ public abstract class Enemy extends Sprite {
             if (b2body.isActive()) {
                 if (object.getProperties().containsKey("enemyBullet")) {
                     Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS * 2);
-                    screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
+                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
                     Gdx.app.debug(TAG, "PUM!");
                 }
             }

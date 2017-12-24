@@ -37,7 +37,6 @@ public class GameOverScreen implements Screen {
         stage = new Stage(viewport, game.batch);
 
         // Define our labels using the String, and a Label style consisting of a font and color
-
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         Table table = new Table();
         table.center();

@@ -39,8 +39,8 @@ public class EnemyBullet extends Weapon {
 
         // To go from Enemy to Hero we must subtract their position vectors: Hero - Enemy.
         velocity = new Vector2();
-        velocity.x = screen.player.b2body.getPosition().x - b2body.getPosition().x;
-        velocity.y = screen.player.b2body.getPosition().y - b2body.getPosition().y;
+        velocity.x = screen.getPlayer().getB2body().getPosition().x - b2body.getPosition().x;
+        velocity.y = screen.getPlayer().getB2body().getPosition().y - b2body.getPosition().y;
 
         // Get the direction of the previous vector (normalization)
         velocity.nor();
@@ -62,7 +62,7 @@ public class EnemyBullet extends Weapon {
         shape.setRadius(Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
-                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

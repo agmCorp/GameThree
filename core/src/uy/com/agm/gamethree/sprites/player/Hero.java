@@ -40,10 +40,10 @@ public class Hero extends Sprite {
 
     public World world;
     public PlayScreen screen;
-    public Body b2body;
+    private Body b2body;
 
     // Hero
-    public HeroState currentHeroState;
+    private HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStand;
     private Animation heroMovingUpAnimation;
@@ -356,7 +356,7 @@ public class Hero extends Sprite {
                 Constants.OBSTACLE_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
-                Constants.ENEMY_WEAPON_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
@@ -425,7 +425,7 @@ public class Hero extends Sprite {
 
     public void openFire() {
         Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
-        screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
+        screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 
     public void applyPower(Item item) {
@@ -490,6 +490,14 @@ public class Hero extends Sprite {
     }
 
     public boolean isGameOver() {
-        return currentHeroState == HeroState.DEAD && gameOverTime > 3.0;
+        return currentHeroState == HeroState.DEAD && gameOverTime > Constants.DELAY_GAME_OVER_SECONDS;
+    }
+
+    public Body getB2body() {
+        return b2body;
+    }
+
+    public HeroState getCurrentHeroState() {
+        return currentHeroState;
     }
 }

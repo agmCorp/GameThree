@@ -54,10 +54,10 @@ public class PlayScreen implements Screen {
     // Box2d variables
     private World world;
     private Box2DDebugRenderer b2dr;
-    public B2WorldCreator creator;
+    private B2WorldCreator creator;
 
     // Main character
-    public Hero player;
+    private Hero player;
 
     public PlayScreen(GameThree game) {
         this.game = game;
@@ -169,7 +169,7 @@ public class PlayScreen implements Screen {
         hud.update(dt);
 
         // If Hero is dead, we freeze the camera
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(player.getCurrentHeroState() != Hero.HeroState.DEAD) {
             // GameCam must be moved from 4 to 76
             if (gameCam.position.y < (Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) - gameViewPort.getWorldHeight() / 2) {
                 // Gamecam is moving up
@@ -182,6 +182,14 @@ public class PlayScreen implements Screen {
 
         // Tell our renderer to draw only what our camera can see in our game world.
         renderer.setView(gameCam);
+    }
+
+    public B2WorldCreator getCreator() {
+        return creator;
+    }
+
+    public Hero getPlayer() {
+        return player;
     }
 
     @Override

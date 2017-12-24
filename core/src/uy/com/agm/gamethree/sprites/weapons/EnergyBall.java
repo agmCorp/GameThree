@@ -53,7 +53,7 @@ public class EnergyBall extends Weapon {
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.ENEMY_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.ENEMY_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

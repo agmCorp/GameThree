@@ -92,14 +92,14 @@ public class B2WorldCreator {
     public void handleCreatingGameThreeActors() {
         if (!gameThreeActorsToCreate.isEmpty()) {
             GameThreeActorDef gameThreeActorDef = gameThreeActorsToCreate.poll(); // Similar to pop but for a queue, removes the element
-            if (gameThreeActorDef.type == PowerOne.class) {
-                items.add(new PowerOne(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
+            if (gameThreeActorDef.getType() == PowerOne.class) {
+                items.add(new PowerOne(screen, gameThreeActorDef.getPosition().x, gameThreeActorDef.getPosition().y));
             }
-            if (gameThreeActorDef.type == EnergyBall.class) {
-                weapons.add(new EnergyBall(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
+            if (gameThreeActorDef.getType() == EnergyBall.class) {
+                weapons.add(new EnergyBall(screen, gameThreeActorDef.getPosition().x, gameThreeActorDef.getPosition().y));
             }
-            if (gameThreeActorDef.type == EnemyBullet.class) {
-                weapons.add(new EnemyBullet(screen, gameThreeActorDef.position.x, gameThreeActorDef.position.y));
+            if (gameThreeActorDef.getType() == EnemyBullet.class) {
+                weapons.add(new EnemyBullet(screen, gameThreeActorDef.getPosition().x, gameThreeActorDef.getPosition().y));
             }
         }
     }

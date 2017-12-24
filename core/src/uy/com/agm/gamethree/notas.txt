@@ -43,6 +43,7 @@ Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pan
 IDEAS
 -----
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
+- Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 - Para evitar el disparo sin querer, programar un circulo en donde hacer touch para disparar.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES

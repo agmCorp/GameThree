@@ -65,8 +65,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             // Deltas too small are discarded
             if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
             /*
-            * origin.x = player.b2body.getPosition().x
-            * origin.y = player.b2body.getPosition().y
+            * origin.x = player.getB2body().getPosition().x
+            * origin.y = player.getB2body().getPosition().y
              *
              * destination.x = origin.x + delta.x
              * destination.y = origin.y + delta.y
@@ -85,13 +85,13 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
                 // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
                 // In order to determine the difference in both directions (actual and new) we calculate their angle.
-                if (Math.abs(player.b2body.getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
+                if (Math.abs(player.getB2body().getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
                     // Apply the new velocity
-                    player.b2body.setLinearVelocity(newVelocity);
+                    player.getB2body().setLinearVelocity(newVelocity);
                 }
             } else {
                 // Stop
-                player.b2body.setLinearVelocity(0, 0);
+                player.getB2body().setLinearVelocity(0, 0);
             }
             evaluateMovementDirection();
         }
@@ -102,7 +102,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean panStop(float x, float y, int pointer, int button) {
         // If Hero is dead, we don't handle any input
         if(!player.isHeroDead()) {
-            player.b2body.setLinearVelocity(0, 0);
+            player.getB2body().setLinearVelocity(0, 0);
             evaluateMovementDirection();
         }
         return true;
@@ -129,16 +129,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         if(!player.isHeroDead()) {
             // Control our player using linear velocity
             if (keycode == Input.Keys.UP) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
+                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
             }
             if (keycode == Input.Keys.DOWN) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
+                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
             }
             if (keycode == Input.Keys.LEFT) {
-                player.b2body.setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
+                player.getB2body().setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.RIGHT) {
-                player.b2body.setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.b2body.getLinearVelocity().y);
+                player.getB2body().setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.SPACE) {
                 player.openFire();
@@ -154,10 +154,10 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         if(!player.isHeroDead()) {
             // Control our player using linear velocity
             if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
+                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
             }
             if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
-                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+                player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
             }
             evaluateMovementDirection();
         }
@@ -195,8 +195,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     }
 
     private void evaluateMovementDirection() {
-        float vy = player.b2body.getLinearVelocity().y;
-        float vx = player.b2body.getLinearVelocity().x;
+        float vy = player.getB2body().getLinearVelocity().y;
+        float vx = player.getB2body().getLinearVelocity().x;
 
         // Test to Box2D for velocity on the y-axis.
         // If Hero is going positive in y-axis he is moving up.

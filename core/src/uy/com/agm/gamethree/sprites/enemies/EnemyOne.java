@@ -63,7 +63,7 @@ public class EnemyOne extends Enemy {
                 Constants.ITEM_BIT |
                 Constants.HERO_WEAPON_BIT |
                 Constants.ENEMY_BIT |
-                Constants.HERO_BIT; // Depicts what can this Fixture collide with (see WorldContactListener)
+                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -151,7 +151,7 @@ public class EnemyOne extends Enemy {
         stateTime += dt;
 
         openFireTime += dt;
-        if (openFireTime > Constants.ENEMYONE_OPENFIRE_SECONDS) {
+        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
             super.openFire();
             openFireTime = 0;
         }

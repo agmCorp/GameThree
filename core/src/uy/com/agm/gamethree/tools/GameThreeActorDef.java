@@ -9,12 +9,19 @@ import com.badlogic.gdx.math.Vector2;
 public class GameThreeActorDef {
     private static final String TAG = GameThreeActorDef.class.getName();
 
-    public Vector2 position;
-    public Class<?> type;
+    private Vector2 position;
+    private Class<?> type;
 
     public GameThreeActorDef(Vector2 position, Class<?> type) {
         this.position = position;
         this.type = type;
+    }
 
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Class<?> getType() {
+        return type;
     }
 }
