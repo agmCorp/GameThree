@@ -148,7 +148,7 @@ public class PowerOne extends Item {
         currentState = State.TAKEN;
 
         // Create power FX
-        hero.applyPower(PowerOne.class);
+        hero.applyPower(this);
     }
 
     public void draw(Batch batch) {

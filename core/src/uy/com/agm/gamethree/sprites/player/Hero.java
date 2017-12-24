@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -427,8 +428,8 @@ public class Hero extends Sprite {
         screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 
-    public void applyPower(Class<?> type) {
-        if (type == PowerOne.class) {
+    public void applyPower(Item item) {
+        if (item instanceof PowerOne) {
             onGhostMode();
         }
     }
