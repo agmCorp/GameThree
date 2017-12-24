@@ -267,18 +267,10 @@ public class PlayScreen implements Screen {
             shapeRenderer.end();
         }
 
-        if (gameOver()) {
+        if (player.isGameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
-    }
-
-    public boolean gameOver() {
-        boolean gameOver = false;
-        if (player.currentHeroState == Hero.HeroState.DEAD && player.getStateTimer() > 3.0f) {
-            gameOver = true;
-        }
-        return gameOver;
     }
 
     @Override

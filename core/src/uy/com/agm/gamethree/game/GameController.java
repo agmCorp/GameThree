@@ -25,7 +25,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
         // If Hero is dead, we don't handle any input
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
             player.openFire();
             Gdx.app.debug(TAG, "fuego!!");
         }
@@ -50,7 +50,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         // If Hero is dead, we don't handle any input
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
         /*
         * DeltaX is positive when I move my finger to the left, negative otherwise.
         * DeltaY is positive when I move my finger down, negative otherwise.
@@ -93,6 +93,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 // Stop
                 player.b2body.setLinearVelocity(0, 0);
             }
+            evaluateMovementDirection();
         }
         return true;
     }
@@ -100,8 +101,9 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
         // If Hero is dead, we don't handle any input
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
             player.b2body.setLinearVelocity(0, 0);
+            evaluateMovementDirection();
         }
         return true;
     }
@@ -123,10 +125,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyDown(int keycode) {
-        Gdx.app.debug(TAG, "**********el estado en el handler " + player.currentHeroState);
-
         // If Hero is dead, we don't handle any input
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
             // Control our player using linear velocity
             if (keycode == Input.Keys.UP) {
                 player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
@@ -143,6 +143,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             if (keycode == Input.Keys.SPACE) {
                 player.openFire();
             }
+            evaluateMovementDirection();
         }
         return true;
     }
@@ -150,15 +151,15 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean keyUp(int keycode) {
         // If Hero is dead, we don't handle any input
-        if(player.currentHeroState != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
             // Control our player using linear velocity
             if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
                 player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x, 0);
             }
-
             if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
                 player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
             }
+            evaluateMovementDirection();
         }
         return true;
     }
@@ -191,5 +192,20 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    private void evaluateMovementDirection() {
+        // Test to Box2D for velocity on the y-axis.
+        // If Hero is going positive in y-axis he is moving up.
+        // If Hero is going negative in y-axis he is moving down.
+        // Otherwise he is standing.
+        float vy = player.b2body.getLinearVelocity().y;
+        if (vy > 0) {
+            player.onMovingUp();
+        } else if (vy < 0) {
+            player.onMovingDown();
+        } else {
+            player.onStanding();
+        }
     }
 }

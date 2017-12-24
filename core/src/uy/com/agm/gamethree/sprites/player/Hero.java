@@ -31,7 +31,7 @@ public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
     public enum HeroState {
-        STANDING, MOVING_UP, MOVING_DOWN, DEAD
+        STANDING, MOVING_UP, MOVING_DOWN, DYING_UP, DYING_DOWN, DEAD
     }
     private enum PowerState {
         NORMAL_MODE, GHOST_MODE
@@ -43,18 +43,15 @@ public class Hero extends Sprite {
 
     // Hero
     public HeroState currentHeroState;
-    private HeroState previousHeroState;
     private TextureRegion heroStand;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTimer;
-    private boolean heroIsDead;
-    private boolean dyingDown;
+    private float gameOverTime;
 
     // Power FX
     private PowerState currentPowerState;
-    private PowerState previousPowerState;
     private Animation powerFXAnimation;
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
@@ -72,23 +69,18 @@ public class Hero extends Sprite {
 
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
-        previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
         heroMovingUpAnimation = Assets.instance.hero.heroMovingUpAnimation;
         heroMovingDownAnimation = Assets.instance.hero.heroMovingDownAnimation;
         heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
-        heroIsDead = false;
-        dyingDown = false;
+        gameOverTime = 0;
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL_MODE;
-        previousPowerState = PowerState.NORMAL_MODE;
         powerFXAnimation = null; // we don't know yet
         powerFXStateTimer = 0;
         powerFXSprite = new Sprite();
-
-        Gdx.app.debug(TAG, "**********el estado en el creador del hero " + currentHeroState);
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -96,6 +88,53 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
+        Gdx.app.debug(TAG, "*** ESTADO " + currentHeroState);
+
+        switch (currentHeroState) {
+            case STANDING:
+                stateHeroStanding();
+                break;
+            case MOVING_UP:
+                stateHeroMovingUp(dt);
+                break;
+            case MOVING_DOWN:
+                stateHeroMovingDown(dt);
+                break;
+            case DYING_UP:
+                stateHeroDyingUp(dt);
+                break;
+            case DYING_DOWN:
+                stateHeroDyingDown(dt);
+                break;
+            case DEAD:
+                stateDead(dt);
+                break;
+            default:
+                break;
+        }
+
+        switch (currentPowerState) {
+            case NORMAL_MODE:
+                break;
+            case GHOST_MODE:
+                statePowerGhostMode(dt);
+                break;
+            default:
+                break;
+        }
+   }
+
+   private void statePowerGhostMode(float dt) {
+       powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
+       powerFXStateTimer += dt;
+
+       if (screen.getHud().isPowerTimeUp()) {
+           setDefaultFilter();
+           currentPowerState = PowerState.NORMAL_MODE;
+       }
+   }
+
+   private void stateHeroStanding() {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -104,50 +143,141 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion(heroStand);
 
-        // Update Hero with the correct frame depending on Hero's current action
-        setRegion(getHeroFrame(dt));
+       // If our Hero is standing, he should be dragged when the cam moves
+        checkUpperBound();
+        checkBottomBound();
+    }
 
-        if (!heroIsDead) {
-            // It prevents Hero from going beyond the limits of the game
-            checkBoundaries();
+    private void stateHeroMovingUp(float dt) {
+       /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true));
+        heroStateTimer += dt;
 
-            // Analyze the power state and update it (for instance if the power has run out...)
-            updatePowerState();
+        checkUpperBound();
+    }
 
-            // If he is still using a power, update the special effect with the correct frame
-            if (currentPowerState != PowerState.NORMAL_MODE) {
-                powerFXSprite.setRegion(getPowerFXFrame(dt));
-            }
+    private void stateHeroMovingDown(float dt) {
+       /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true));
+        heroStateTimer += dt;
+
+        checkBottomBound();
+    }
+
+    private void stateHeroDyingUp(float dt) {
+       /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true));
+        heroStateTimer += dt;
+
+        // We reach the center of the screen
+        if (b2body.getPosition().y >= screen.gameCam.position.y) {
+            // Stop
+            b2body.setLinearVelocity(0, 0);
+
+            // Start dying down
+            currentHeroState = HeroState.DYING_DOWN;
         } else {
-            deathMovement();
+            /* We move Hero from the actual position to the middle of the screen.
+             * origin = (b2body.getPosition().x, b2body.getPosition().y)
+             * destination = (b2body.getPosition().x, screen.gameCam.position.y)
+             *
+             * To go from origin to destination we must subtract their position vectors: destination - origin.
+             * Get the direction of the previous vector (normalization) and finally apply constant velocity on that direction
+            */
+            Vector2 newVelocity = new Vector2(0, screen.gameCam.position.y - b2body.getPosition().y);
+            newVelocity.nor();
+            newVelocity.x = newVelocity.x * Constants.HERO_DEATH_LINEAR_VELOCITY;
+            newVelocity.y = newVelocity.y * Constants.HERO_DEATH_LINEAR_VELOCITY;
+            b2body.setLinearVelocity(newVelocity);
         }
     }
 
-    private void deathMovement() {
-        b2body.setLinearVelocity(0, 0);
-        if (!dyingDown) {
-            b2body.applyLinearImpulse(new Vector2(0.0f, Constants.HERO_DEATH_LINEAR_VELOCITY), b2body.getWorldCenter(), true);
-            // Center of the screen
-            if (b2body.getPosition().y >= screen.gameCam.position.y) {
-                dyingDown = true;
-            }
-        } else {
-            b2body.applyLinearImpulse(new Vector2(0, -Constants.HERO_DEATH_LINEAR_VELOCITY), b2body.getWorldCenter(), true);
-        }
-    }
+    private void stateHeroDyingDown(float dt) {
+       /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true));
+        heroStateTimer += dt;
 
-    private void checkBoundaries() {
-        float camUpperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+        /* We move Hero from the actual position to the bottom of the screen.
+        * origin = (b2body.getPosition().x, b2body.getPosition().y)
+        * destination = (b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight())
+        *
+        * To go from origin to destination we must subtract their position vectors: destination - origin.
+        * Get the direction of the previous vector (normalization) and finally apply constant velocity on that direction
+        */
+        Vector2 newVelocity = new Vector2(0, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight() - b2body.getPosition().y);
+        newVelocity.nor();
+        newVelocity.x = newVelocity.x * Constants.HERO_DEATH_LINEAR_VELOCITY;
+        newVelocity.y = newVelocity.y * Constants.HERO_DEATH_LINEAR_VELOCITY;
+        b2body.setLinearVelocity(newVelocity);
+
+        // If we reach the bottom edge of the screen, we set Hero as not active in the simulation.
         float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
         float heroUpperEdge = getY() + getHeight();
-        float heroBottomEdge = getY();
 
         // Beyond bottom edge
-        if (camBottomEdge > heroBottomEdge) {
-            // Be carefull, we broke the simulation because Hero is teleporting.
-            b2body.setTransform(b2body.getPosition().x, camBottomEdge + getHeight() / 2, b2body.getAngle());
+        if (camBottomEdge > heroUpperEdge) {
+            b2body.setActive(false);
+            currentHeroState = Hero.HeroState.DEAD;
         }
+    }
+
+    public void stateDead(float dt) {
+        gameOverTime += dt;
+    }
+
+    public void onDead() {
+        AudioManager.instance.stopMusic();
+        AudioManager.instance.play(Assets.instance.sounds.dead, 1);
+
+        // Hero can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = Constants.NOTHING_BIT;
+
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        // Stop
+        b2body.setLinearVelocity(0, 0);
+
+        // Start dying up
+        currentHeroState = HeroState.DYING_UP;
+    }
+
+    // It prevents Hero from going beyond the upper limit of the game
+    private void checkUpperBound() {
+        float camUpperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+        float heroUpperEdge = getY() + getHeight();
 
         // Beyond upper edge
         if (camUpperEdge < heroUpperEdge) {
@@ -156,96 +286,16 @@ public class Hero extends Sprite {
         }
     }
 
-    private TextureRegion getHeroFrame(float dt) {
-        // Get Hero's current state. ie. SANDING, MOVING_DOWN...
-        currentHeroState = getHeroState();
-        TextureRegion region;
-        // Depending on the state, get corresponding animation keyFrame.
-        switch (currentHeroState) {
-            case STANDING:
-                region = heroStand;
-                break;
-            case MOVING_DOWN:
-                region = (TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true);
-                break;
-            case MOVING_UP:
-                region = (TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true);
-                break;
-            case DEAD:
-                region = (TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true);
-                break;
-            default:
-                region = heroStand;
-                break;
+    // It prevents Hero from going beyond the bottom limit of the game
+    private void checkBottomBound() {
+        float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+        float heroBottomEdge = getY();
+
+        // Beyond bottom edge
+        if (camBottomEdge > heroBottomEdge) {
+            // Be carefull, we broke the simulation because Hero is teleporting.
+            b2body.setTransform(b2body.getPosition().x, camBottomEdge + getHeight() / 2, b2body.getAngle());
         }
-
-        // if the current state is the same as the previous state increase the state timer.
-        // otherwise the state has changed and we need to reset timer.
-        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
-
-        // Update previous state
-        previousHeroState = currentHeroState;
-
-        // Return our final adjusted frame
-        return region;
-    }
-
-    private HeroState getHeroState() {
-        HeroState heroState;
-        if (!heroIsDead) {
-            // Test to Box2D for velocity on the y-axis.
-            // If Hero is going positive in y-axis he is moving up.
-            // If Hero is going negative in y-axis he is moving down.
-            // Otherwise he is standing.
-            float y = b2body.getLinearVelocity().y;
-            if (y > 0) {
-                heroState = HeroState.MOVING_UP;
-            } else if (y < 0) {
-                heroState = HeroState.MOVING_DOWN;
-            } else {
-                heroState = HeroState.STANDING;
-            }
-        } else {
-            heroState = HeroState.DEAD;
-        }
-        return heroState;
-    }
-
-    private TextureRegion getPowerFXFrame(float dt) {
-        TextureRegion region = null;
-
-        // Depending on the state, get corresponding animation keyFrame.
-        switch (currentPowerState) {
-            case GHOST_MODE:
-                region = (TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true);
-                break;
-            default:
-                break;
-        }
-
-        // if the current state is the same as the previous state increase the state timer.
-        // otherwise the state has changed and we need to reset timer.
-        powerFXStateTimer = currentPowerState == previousPowerState ? powerFXStateTimer + dt : 0;
-
-        // Update previous state
-        previousPowerState = currentPowerState;
-
-        // Return our final adjusted frame
-        return region;
-    }
-
-    private void defineHero() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(getX(), getY());
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-        setDefaultFilter();
     }
 
     private void setDefaultFilter() {
@@ -260,6 +310,20 @@ public class Hero extends Sprite {
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
+    }
+
+    private void defineHero() {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(getX(), getY());
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
+
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
+        setDefaultFilter();
     }
 
     public void draw(SpriteBatch batch) {
@@ -314,20 +378,6 @@ public class Hero extends Sprite {
         screen.creator.createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
     }
 
-    public void onDead() {
-        heroIsDead = true;
-        AudioManager.instance.stopMusic();
-        AudioManager.instance.play(Assets.instance.sounds.dead, 1);
-
-        // Hero can't collide with anything
-        Filter filter = new Filter();
-        filter.maskBits = Constants.NOTHING_BIT;
-
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-    }
-
     public void applyPower(Class<?> type) {
         if (type == PowerOne.class) {
             onGhostMode();
@@ -363,14 +413,29 @@ public class Hero extends Sprite {
         powerFXSprite.set(power);
     }
 
-    private void updatePowerState() {
-        if (screen.getHud().isPowerTimeUp()) {
-            setDefaultFilter();
-            currentPowerState = PowerState.NORMAL_MODE;
-        }
+    public void onMovingUp() {
+        currentHeroState = HeroState.MOVING_UP;
+    }
+
+    public void onMovingDown() {
+        currentHeroState = HeroState.MOVING_DOWN;
+    }
+
+    public void onStanding() {
+        currentHeroState = HeroState.STANDING;
     }
 
     public float getStateTimer() {
         return heroStateTimer;
+    }
+
+    public boolean isHeroDead() {
+        return  currentHeroState == HeroState.DEAD ||
+                currentHeroState == HeroState.DYING_UP ||
+                currentHeroState == HeroState.DYING_DOWN;
+    }
+
+    public boolean isGameOver() {
+        return currentHeroState == HeroState.DEAD && gameOverTime > 3.0;
     }
 }

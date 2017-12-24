@@ -67,7 +67,7 @@ public class WorldContactListener implements ContactListener {
             // Enemy - InteractiveTileObjects
             case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
             case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
-                Gdx.app.debug(TAG, "Hero - InteractiveTileObject collision");
+                Gdx.app.debug(TAG, "Enemy - InteractiveTileObject collision");
 
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).reverseVelocity(true, false);

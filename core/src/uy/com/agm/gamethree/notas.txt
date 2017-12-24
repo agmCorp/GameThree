@@ -37,7 +37,13 @@ PENDIENTES
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
+- No me convence mucho que los personajes que esten por debajo de la camara sean setactive en false. Para mi deberian morir.
+Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pantalla nuevamente con una bala en medio. Con setactive funciona bien.
 
+IDEAS
+-----
+- Cuando explota un enemigo puedo hacer aparecer 2 enemigos
+- Para evitar el disparo sin querer, programar un circulo en donde hacer touch para disparar.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
