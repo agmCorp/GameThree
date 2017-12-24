@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,8 +30,9 @@ public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
     public enum HeroState {
-        STANDING, MOVING_UP, MOVING_DOWN, DYING_UP, DYING_DOWN, DEAD
+        STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
     }
+
     private enum PowerState {
         NORMAL_MODE, GHOST_MODE
     }
@@ -43,9 +43,11 @@ public class Hero extends Sprite {
 
     // Hero
     public HeroState currentHeroState;
+    private HeroState previousHeroState;
     private TextureRegion heroStand;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
+    private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTimer;
     private float gameOverTime;
@@ -69,9 +71,11 @@ public class Hero extends Sprite {
 
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
+        previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
         heroMovingUpAnimation = Assets.instance.hero.heroMovingUpAnimation;
         heroMovingDownAnimation = Assets.instance.hero.heroMovingDownAnimation;
+        heroMovingLeftRightAnimation = Assets.instance.hero.heroMovingLeftRightAnimation;
         heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
         gameOverTime = 0;
@@ -88,17 +92,18 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
-        Gdx.app.debug(TAG, "*** ESTADO " + currentHeroState);
-
         switch (currentHeroState) {
             case STANDING:
-                stateHeroStanding();
+                stateHeroStanding(dt);
                 break;
             case MOVING_UP:
                 stateHeroMovingUp(dt);
                 break;
             case MOVING_DOWN:
                 stateHeroMovingDown(dt);
+                break;
+            case MOVING_LEFT_RIGHT:
+                stateHeroMovingLeftRight(dt);
                 break;
             case DYING_UP:
                 stateHeroDyingUp(dt);
@@ -122,19 +127,20 @@ public class Hero extends Sprite {
             default:
                 break;
         }
-   }
+    }
 
-   private void statePowerGhostMode(float dt) {
-       powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
-       powerFXStateTimer += dt;
+    private void statePowerGhostMode(float dt) {
+        powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
+        powerFXStateTimer += dt;
 
-       if (screen.getHud().isPowerTimeUp()) {
-           setDefaultFilter();
-           currentPowerState = PowerState.NORMAL_MODE;
-       }
-   }
+        if (screen.getHud().isPowerTimeUp()) {
+            setDefaultFilter();
+            powerFXStateTimer = 0;
+            currentPowerState = PowerState.NORMAL_MODE;
+        }
+    }
 
-   private void stateHeroStanding() {
+    private void stateHeroStanding(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -145,7 +151,32 @@ public class Hero extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(heroStand);
 
-       // If our Hero is standing, he should be dragged when the cam moves
+        // If our Hero is standing, he should be dragged when the cam moves
+        checkUpperBound();
+        checkBottomBound();
+    }
+
+    private void stateHeroMovingLeftRight(float dt) {
+       /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // if the current state is the same as the previous state increase the state timer.
+        // otherwise the state has changed and we need to reset timer.
+        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+
+        // Update previous state
+        previousHeroState = currentHeroState;
+
+        // Update Hero with the correct frame
+        setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTimer, true));
+
+        // If our Hero is moving to the left or to the right, he should be dragged when the cam moves up
         checkUpperBound();
         checkBottomBound();
     }
@@ -159,8 +190,16 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // if the current state is the same as the previous state increase the state timer.
+        // otherwise the state has changed and we need to reset timer.
+        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+
+        // Update previous state
+        previousHeroState = currentHeroState;
+
+        // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true));
-        heroStateTimer += dt;
 
         checkUpperBound();
     }
@@ -174,8 +213,16 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // if the current state is the same as the previous state increase the state timer.
+        // otherwise the state has changed and we need to reset timer.
+        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+
+        // Update previous state
+        previousHeroState = currentHeroState;
+
+        // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true));
-        heroStateTimer += dt;
 
         checkBottomBound();
     }
@@ -198,6 +245,7 @@ public class Hero extends Sprite {
             b2body.setLinearVelocity(0, 0);
 
             // Start dying down
+            heroStateTimer = 0;
             currentHeroState = HeroState.DYING_DOWN;
         } else {
             /* We move Hero from the actual position to the middle of the screen.
@@ -271,6 +319,7 @@ public class Hero extends Sprite {
         b2body.setLinearVelocity(0, 0);
 
         // Start dying up
+        heroStateTimer = 0;
         currentHeroState = HeroState.DYING_UP;
     }
 
@@ -421,6 +470,10 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.MOVING_DOWN;
     }
 
+    public void onMovingLeftRight() {
+        currentHeroState = HeroState.MOVING_LEFT_RIGHT;
+    }
+
     public void onStanding() {
         currentHeroState = HeroState.STANDING;
     }
@@ -430,7 +483,7 @@ public class Hero extends Sprite {
     }
 
     public boolean isHeroDead() {
-        return  currentHeroState == HeroState.DEAD ||
+        return currentHeroState == HeroState.DEAD ||
                 currentHeroState == HeroState.DYING_UP ||
                 currentHeroState == HeroState.DYING_DOWN;
     }

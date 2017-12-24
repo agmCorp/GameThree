@@ -16,6 +16,7 @@ public class AssetHero {
     public final Animation heroDeadAnimation;
     public final Animation heroMovingUpAnimation;
     public final Animation heroMovingDownAnimation;
+    public final Animation heroMovingLeftRightAnimation;
 
     public AssetHero(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -30,6 +31,11 @@ public class AssetHero {
         // Animation
         regions = atlas.findRegions("heroDown");
         heroMovingDownAnimation = new Animation(0.5f / 6.0f, regions);
+        regions.clear();
+
+        // Animation
+        regions = atlas.findRegions("heroUp");
+        heroMovingLeftRightAnimation = new Animation(0.5f / 6.0f, regions); // We use the same animation as heroMovingUpAnimation
         regions.clear();
 
         // Animation

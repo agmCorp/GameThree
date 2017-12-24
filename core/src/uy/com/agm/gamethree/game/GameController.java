@@ -195,17 +195,23 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     }
 
     private void evaluateMovementDirection() {
+        float vy = player.b2body.getLinearVelocity().y;
+        float vx = player.b2body.getLinearVelocity().x;
+
         // Test to Box2D for velocity on the y-axis.
         // If Hero is going positive in y-axis he is moving up.
         // If Hero is going negative in y-axis he is moving down.
-        // Otherwise he is standing.
-        float vy = player.b2body.getLinearVelocity().y;
-        if (vy > 0) {
+        // Otherwise we check for velocity on the x-axis.
+        if (vy > 0.0f) {
             player.onMovingUp();
-        } else if (vy < 0) {
+        } else if (vy < 0.0f) {
             player.onMovingDown();
         } else {
-            player.onStanding();
+            if (vx != 0.0f) {
+                player.onMovingLeftRight();
+            } else {
+                player.onStanding(); // vx == 0 && vy == 0
+            }
         }
     }
 }
