@@ -31,8 +31,8 @@ import uy.com.agm.gamethree.tools.Constants;
 public class PowerBox extends Sprite {
     private static final String TAG = PowerBox.class.getName();
 
-    public World world;
-    public PlayScreen screen;
+    private World world;
+    private PlayScreen screen;
     private Body b2body;
 
     private TextureRegion powerBoxStand;

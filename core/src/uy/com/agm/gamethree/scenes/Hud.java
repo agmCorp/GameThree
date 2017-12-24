@@ -28,7 +28,7 @@ public class Hud implements Disposable {
     private Integer score;
     private Integer level;
     private Integer levelTimer;
-    private boolean timeUp; // True when the world levelTimer reaches 0
+    private boolean levelTimeUp; // True when the world levelTimer reaches 0
     private float timeCount;
     private Integer powerTimer;
     private float timeCountPower;
@@ -55,7 +55,7 @@ public class Hud implements Disposable {
         score = 0;
         level = 1;
         levelTimer = Constants.TIMER_LEVEL_ONE;
-        timeUp = false;
+        levelTimeUp = false;
         timeCount = 0;
         powerTimer = 0;
         timeCountPower = 0;
@@ -113,7 +113,7 @@ public class Hud implements Disposable {
             if (levelTimer > 0) {
                 levelTimer--;
             } else {
-                timeUp = true;
+                levelTimeUp = true;
             }
             levelTimerValueLabel.setText(String.format("%03d", levelTimer));
             timeCount = 0;
@@ -171,8 +171,8 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
-    public boolean isTimeUp() {
-        return timeUp;
+    public boolean isLevelTimeUp() {
+        return levelTimeUp;
     }
 
     public boolean isPowerTimeUp() {

@@ -7,9 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 
 /**
  * Created by AGM on 12/11/2017.

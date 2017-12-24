@@ -73,16 +73,32 @@ public class B2WorldCreator {
         return enemies;
     }
 
+    public void removeEnemy(Enemy enemy) {
+        enemies.removeValue(enemy, true);
+    }
+
     public Array<PowerBox> getPowerBoxes() {
         return powerBoxes;
+    }
+
+    public void removePowerBox(PowerBox powerBox) {
+        powerBoxes.removeValue(powerBox, true);
     }
 
     public Array<Item> getItems() {
         return items;
     }
 
+    public void removeItem(Item item) {
+        items.removeValue(item, true);
+    }
+
     public Array<Weapon> getWeapons() {
         return weapons;
+    }
+
+    public void removeWeapon(Weapon weapon) {
+        weapons.removeValue(weapon, true);
     }
 
     public void createGameThreeActor(GameThreeActorDef gameThreeActorDef) {

@@ -2,17 +2,21 @@ package uy.com.agm.gamethree.sprites.powerup.Items;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -130,25 +134,52 @@ public class PowerOne extends Item {
     }
 
     private void stateTaken() {
+        // Destroy its b2body
         world.destroyBody(b2body);
-        currentState = State.FINISHED;
+
+        // Audio FX
         AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
-        screen.getHud().addScore(Constants.POWERONE_SCORE);
+
+        // Show the power's name and its countdown
+        Hud hud = screen.getHud();
+        hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+
+        // Set score
+        hud.addScore(Constants.POWERONE_SCORE);
+
+        // Hero can't collide with enemies nor bullets
+        Hero hero = screen.getPlayer();
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.HERO_BIT;
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.POWERBOX_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.ITEM_BIT;
+        for (Fixture fixture : hero.getB2body().getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        // Set the power's texture
+        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+
+        // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
+        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+
+        hero.applyPower(Assets.instance.ghostMode.ghostModeAnimation, spritePower);
+
+        currentState = State.FINISHED;
     }
 
     @Override
     public void use(Hero hero) {
         /*
-         * We must remove its b2body to avoid collisions.
+         * We must remove its b2body to avoid collisions and change the hero's Filter.
          * This can't be done here because this method is called from WorldContactListener that is invoked
          * from PlayScreen.update.world.step(...).
-         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
+         * No b2body can be removed/changed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
-
-        // Create power FX
-        hero.applyPower(this);
     }
 
     public void draw(Batch batch) {

@@ -16,8 +16,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.powerup.Items.Item;
-import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
@@ -35,11 +33,11 @@ public class Hero extends Sprite {
     }
 
     private enum PowerState {
-        NORMAL_MODE, GHOST_MODE
+        NORMAL, POWERFUL
     }
 
-    public World world;
-    public PlayScreen screen;
+    private World world;
+    private PlayScreen screen;
     private Body b2body;
 
     // Hero
@@ -81,9 +79,9 @@ public class Hero extends Sprite {
         heroStateTimer = 0;
         gameOverTime = 0;
 
-        // PowerFX variables initialization
-        currentPowerState = PowerState.NORMAL_MODE;
-        powerFXAnimation = null; // we don't know yet
+        // PowerFX variables initialization (we don't know yet which power will be)
+        currentPowerState = PowerState.NORMAL;
+        powerFXAnimation = null;
         powerFXStateTimer = 0;
         powerFXSprite = new Sprite();
     }
@@ -95,53 +93,53 @@ public class Hero extends Sprite {
     public void update(float dt) {
         switch (currentHeroState) {
             case STANDING:
-                stateHeroStanding(dt);
+                heroStateStanding(dt);
                 break;
             case MOVING_UP:
-                stateHeroMovingUp(dt);
+                heroStateMovingUp(dt);
                 break;
             case MOVING_DOWN:
-                stateHeroMovingDown(dt);
+                heroStateMovingDown(dt);
                 break;
             case MOVING_LEFT_RIGHT:
-                stateHeroMovingLeftRight(dt);
+                heroStateMovingLeftRight(dt);
                 break;
             case DYING_UP:
-                stateHeroDyingUp(dt);
+                heroStateDyingUp(dt);
                 break;
             case DYING_DOWN:
-                stateHeroDyingDown(dt);
+                heroStateDyingDown(dt);
                 break;
             case DEAD:
-                stateDead(dt);
+                heroStateDead(dt);
                 break;
             default:
                 break;
         }
 
         switch (currentPowerState) {
-            case NORMAL_MODE:
+            case NORMAL:
                 break;
-            case GHOST_MODE:
-                statePowerGhostMode(dt);
+            case POWERFUL:
+                powerStatePowerful(dt);
                 break;
             default:
                 break;
         }
     }
 
-    private void statePowerGhostMode(float dt) {
+    private void powerStatePowerful(float dt) {
         powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
         powerFXStateTimer += dt;
 
         if (screen.getHud().isPowerTimeUp()) {
             setDefaultFilter();
             powerFXStateTimer = 0;
-            currentPowerState = PowerState.NORMAL_MODE;
+            currentPowerState = PowerState.NORMAL;
         }
     }
 
-    private void stateHeroStanding(float dt) {
+    private void heroStateStanding(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -157,7 +155,7 @@ public class Hero extends Sprite {
         checkBottomBound();
     }
 
-    private void stateHeroMovingLeftRight(float dt) {
+    private void heroStateMovingLeftRight(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -182,7 +180,7 @@ public class Hero extends Sprite {
         checkBottomBound();
     }
 
-    private void stateHeroMovingUp(float dt) {
+    private void heroStateMovingUp(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -205,7 +203,7 @@ public class Hero extends Sprite {
         checkUpperBound();
     }
 
-    private void stateHeroMovingDown(float dt) {
+    private void heroStateMovingDown(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -228,7 +226,7 @@ public class Hero extends Sprite {
         checkBottomBound();
     }
 
-    private void stateHeroDyingUp(float dt) {
+    private void heroStateDyingUp(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -264,7 +262,7 @@ public class Hero extends Sprite {
         }
     }
 
-    private void stateHeroDyingDown(float dt) {
+    private void heroStateDyingDown(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
@@ -300,7 +298,7 @@ public class Hero extends Sprite {
         }
     }
 
-    public void stateDead(float dt) {
+    private void heroStateDead(float dt) {
         gameOverTime += dt;
     }
 
@@ -410,7 +408,7 @@ public class Hero extends Sprite {
         batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
                 newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
 
-        if (currentPowerState != PowerState.NORMAL_MODE) {
+        if (currentPowerState != PowerState.NORMAL) {
             // We do the same with powerFXSprite
             float w = powerFXSprite.getHeight();
             float h = powerFXSprite.getWidth();
@@ -426,41 +424,6 @@ public class Hero extends Sprite {
     public void openFire() {
         Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
         screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
-    }
-
-    public void applyPower(Item item) {
-        if (item instanceof PowerOne) {
-            onGhostMode();
-        }
-    }
-
-    private void onGhostMode() {
-        // Show the power's name and its countdown
-        screen.getHud().setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
-
-        // Hero can't collide with enemies nor bullets
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT;
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.ITEM_BIT;
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-
-        // Flag
-        currentPowerState = PowerState.GHOST_MODE;
-
-        // Set the power's animation
-        powerFXAnimation = Assets.instance.ghostMode.ghostModeAnimation;
-        Sprite power = new Sprite(Assets.instance.ghostMode.ghostModeStand);
-
-        // Only to set width and height (in draw(...) we set its position)
-        power.setBounds(getX(), getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
-
-        // Set the sprite
-        powerFXSprite.set(power);
     }
 
     public void onMovingUp() {
@@ -497,7 +460,13 @@ public class Hero extends Sprite {
         return b2body;
     }
 
-    public HeroState getCurrentHeroState() {
-        return currentHeroState;
+    public void applyPower(Animation animation, Sprite power) {
+        currentPowerState = PowerState.POWERFUL;
+
+        // Set the animation
+        powerFXAnimation = animation;
+
+        // Set the sprite
+        powerFXSprite.set(power);
     }
 }

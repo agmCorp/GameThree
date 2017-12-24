@@ -49,6 +49,7 @@ enemies.removeValue(enemy, true);
 (observacion: la eliminacion deberia ser inmediatamente que destruyo su b2body pero creo que
 eso coincide exactamente con el seteo del estado DEAD, asi que queda prolijo hacerlo en la siguiente
 vuelta cuando se evalua el estado dead en el upadte)
+- AVERGIUAR COMO DEBUGUEAR
 
 IDEAS
 -----

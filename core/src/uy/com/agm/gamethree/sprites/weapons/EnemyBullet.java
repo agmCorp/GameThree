@@ -124,7 +124,7 @@ public class EnemyBullet extends Weapon {
     }
 
     public void draw(Batch batch) {
-        if (currentState == State.SHOT) {
+        if (currentState == State.SHOT)  {
             super.draw(batch);
         }
     }

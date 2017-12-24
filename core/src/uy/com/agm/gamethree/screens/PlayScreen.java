@@ -92,6 +92,7 @@ public class PlayScreen implements Screen {
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
+        // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
         // Load preferences for audio settings and start playing music
@@ -128,11 +129,11 @@ public class PlayScreen implements Screen {
     }
 
     // Key control
-    public void handleInput(float dt) {
+    private void handleInput(float dt) {
         // We use GameController instead of input.isKeyPressed.
     }
 
-    public void update(float dt) {
+    private void update(float dt) {
         // Handle user input first
         handleInput(dt);
 
@@ -142,34 +143,74 @@ public class PlayScreen implements Screen {
         // Step in the physics simulation
         world.step(Constants.WORLD_TIME_STEP, Constants.WORLD_VELOCITY_ITERATIONS, Constants.WORLD_POSITION_ITERATIONS);
 
-        // Hero
-        player.update(dt);
+        updateHero(dt);
+        updateEnemies(dt);
+        updatePowerBoxes(dt);
+        updateItems(dt);
+        updateWeapons(dt);
+        updateHud(dt);
+        updateCamera(dt);
+    }
 
-        // Enemies
+    private void updateHero(float dt) {
+        player.update(dt);
+    }
+
+    private void updateEnemies(float dt) {
         for (Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
         }
+        // Clean up collection
+        for (Enemy enemy : creator.getEnemies()) {
+            if (enemy.isDestroyed()) {
+                creator.removeEnemy(enemy);
+            }
+        }
+    }
 
-        // PowerBoxes
+    private void updatePowerBoxes(float dt) {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
             powerBox.update(dt);
         }
+        // Clean up collection
+        for (PowerBox powerBox : creator.getPowerBoxes()) {
+            if (powerBox.isDestroyed()) {
+                creator.removePowerBox(powerBox);
+            }
+        }
+    }
 
-        // Items
+    private void updateItems(float dt) {
         for (Item item : creator.getItems()) {
             item.update(dt);
         }
+        // Clean up collection
+        for (Item item : creator.getItems()) {
+            if (item.isDestroyed()) {
+                creator.removeItem(item);
+            }
+        }
+    }
 
-        // Weapons
+    private void updateWeapons(float dt) {
         for (Weapon weapon : creator.getWeapons()) {
             weapon.update(dt);
         }
+        // Clean up collection
+        for (Weapon weapon : creator.getWeapons()) {
+            if (weapon.isDestroyed()) {
+                creator.removeWeapon(weapon);
+            }
+        }
+    }
 
-        // Head-up display
+    private void updateHud(float dt) {
         hud.update(dt);
+    }
 
+    private void updateCamera(float dt) {
         // If Hero is dead, we freeze the camera
-        if(player.getCurrentHeroState() != Hero.HeroState.DEAD) {
+        if(!player.isHeroDead()) {
             // GameCam must be moved from 4 to 76
             if (gameCam.position.y < (Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) - gameViewPort.getWorldHeight() / 2) {
                 // Gamecam is moving up
@@ -213,28 +254,11 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
 
-        // Hero
-        player.draw(game.batch);
-
-        // Enemies
-        for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.batch);
-        }
-
-        // PowerBoxes
-        for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.draw(game.batch);
-        }
-
-        // Items
-        for (Item item : creator.getItems()) {
-            item.draw(game.batch);
-        }
-
-        // Weapons
-        for (Weapon weapon : creator.getWeapons()) {
-            weapon.draw(game.batch);
-        }
+        drawHero();
+        drawEnemies();
+        drawPowerBoxes();
+        drawItems();
+        drawWeapons();
 
         game.batch.end();
 
@@ -250,34 +274,74 @@ public class PlayScreen implements Screen {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(1, 1, 0, 1);
 
-            // Hero
-            player.renderDebug(shapeRenderer);
+            renderDebugHero(shapeRenderer);
+            renderDebugEnemies(shapeRenderer);
+            renderDebugPowerBoxes(shapeRenderer);
+            renderDebugItems(shapeRenderer);
+            renderDebugWeapons(shapeRenderer);
 
-            // Enemies
-            for (Enemy enemy : creator.getEnemies()) {
-                enemy.renderDebug(shapeRenderer);
-            }
-
-            // Power boxes
-            for (PowerBox powerBox : creator.getPowerBoxes()) {
-                powerBox.renderDebug(shapeRenderer);
-            }
-
-            // Items
-            for (Item item : creator.getItems()) {
-                item.renderDebug(shapeRenderer);
-            }
-
-            // Weapons
-            for (Weapon weapon : creator.getWeapons()) {
-                weapon.renderDebug(shapeRenderer);
-            }
             shapeRenderer.end();
         }
 
         if (player.isGameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
+        }
+    }
+
+    private void drawHero() {
+        player.draw(game.batch);
+    }
+
+    private void drawEnemies() {
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.draw(game.batch);
+        }
+    }
+
+    private void drawPowerBoxes() {
+        for (PowerBox powerBox : creator.getPowerBoxes()) {
+            powerBox.draw(game.batch);
+        }
+    }
+
+    private void drawItems() {
+        for (Item item : creator.getItems())  {
+            item.draw(game.batch);
+        }
+    }
+
+    private void drawWeapons() {
+        for (Weapon weapon : creator.getWeapons()) {
+            weapon.draw(game.batch);
+        }
+    }
+
+    private void renderDebugHero(ShapeRenderer shapeRenderer) {
+        player.renderDebug(shapeRenderer);
+    }
+
+    private void renderDebugEnemies(ShapeRenderer shapeRenderer) {
+        for (Enemy enemy : creator.getEnemies()) {
+            enemy.renderDebug(shapeRenderer);
+        }
+    }
+
+    private void renderDebugPowerBoxes(ShapeRenderer shapeRenderer) {
+        for (PowerBox powerBox : creator.getPowerBoxes()) {
+            powerBox.renderDebug(shapeRenderer);
+        }
+    }
+
+    private void renderDebugItems(ShapeRenderer shapeRenderer) {
+        for (Item item : creator.getItems()) {
+            item.renderDebug(shapeRenderer);
+        }
+    }
+
+    private void renderDebugWeapons(ShapeRenderer shapeRenderer) {
+        for (Weapon weapon : creator.getWeapons()) {
+            weapon.renderDebug(shapeRenderer);
         }
     }
 

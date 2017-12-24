@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,8 +9,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -111,7 +110,6 @@ public class EnergyBall extends Weapon {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.ONTARGET;
-        Gdx.app.debug(TAG, "Enemy collision");
     }
 
     public void draw(Batch batch) {
