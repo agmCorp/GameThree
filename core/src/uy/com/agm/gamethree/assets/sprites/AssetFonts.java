@@ -17,12 +17,12 @@ public class AssetFonts {
 
     public AssetFonts() {
             // create three fonts using Libgdx's built-in 15px bitmap font
-            defaultSmall = new BitmapFont(Gdx.files.internal("fonts/Untitled-export.fnt"), false);
-            defaultNormal = new BitmapFont(Gdx.files.internal("fonts/Untitled-export.fnt"), false);
-            defaultBig = new BitmapFont(Gdx.files.internal("fonts/Untitled-export.fnt"), false);
+            defaultSmall = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
+            defaultNormal = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
+            defaultBig = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
             // set font sizes
-            defaultSmall.getData().setScale(0.3f);
-            defaultNormal.getData().setScale(0.5f);
+            defaultSmall.getData().setScale(0.8f);
+            defaultNormal.getData().setScale(1.0f);
             defaultBig.getData().setScale(1.5f);
             // enable linear texture filtering for smooth fonts
             defaultSmall.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

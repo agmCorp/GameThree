@@ -218,6 +218,18 @@ METODOLOGIA
     gradlew desktop:dist
 
     El jar queda en GameThree\desktop\build\libs
+
+10)
+    Para generar un BitmapFont usar SoeBox.
+    Abrirlo y apretar "Bitmap Font". Eso copia al portapapeles un conjunto de letras.
+    Abrir un editor grafico, seleccionar la herramienta para insertar texto y darle pegar.
+    Eso pega todos los caracteres en pantalla, luego los edito como quiera cambiando colores, etc.
+    Finalmente al png resultante, lo tiro nuevamente en la herramienta sobre "Bitmap Font", eso detecta
+    los caracteres.
+    Luego, para evitar tener que editar las settings a mano, debo apretar el boton "Auto fit Settings". Eso setea
+    las propiedades de alto y ancho de cada letra para que se vea bien.
+    Al salvar genera 2 archivos los cuales uso. Capaz que tengo que editarlos para cambiar una ruta absoluta que
+    aparece alli (como en TiledEditor).
 --------------------------- code copy paste ---------------------------------------
 para items los cast
 para vidas heal
