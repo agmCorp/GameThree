@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetEnergyBall;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
@@ -38,6 +39,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetFonts fonts;
     public AssetHero hero;
     public AssetEnemyOne enemyOne;
+    public AssetEnemyTwo enemyTwo;
     public AssetPowerBox powerBox;
     public AssetPowerOne powerOne;
     public AssetExplosionA explosionA;
@@ -97,6 +99,7 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
+        enemyTwo = new AssetEnemyTwo(atlas);
         powerBox = new AssetPowerBox(atlas);
         powerOne = new AssetPowerOne(atlas);
         explosionA = new AssetExplosionA(atlas);

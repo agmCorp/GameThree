@@ -10,6 +10,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
@@ -35,6 +36,19 @@ public class B2WorldCreator {
 
     public B2WorldCreator(PlayScreen screen) {
         this.screen = screen;
+
+        // Enemies
+        enemies = new Array<Enemy>();
+
+        // Items
+        items = new Array<Item>();
+
+        // Weapons
+        weapons = new Array<Weapon>();
+
+        // Queue
+        gameThreeActorsToCreate = new LinkedBlockingQueue<GameThreeActorDef>();
+
         TiledMap map = screen.getMap();
 
         // Layer: borders
@@ -48,9 +62,13 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyOne
-        enemies = new Array<Enemy>();
         for (MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
             enemies.add(new EnemyOne(screen, object));
+        }
+
+        // Layer: enemyTwo
+        for (MapObject object : map.getLayers().get("enemyTwo").getObjects().getByType(RectangleMapObject.class)) {
+            enemies.add(new EnemyTwo(screen, object));
         }
 
         // Layer: powerBoxes
@@ -58,16 +76,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get("powerBox").getObjects().getByType(RectangleMapObject.class)) {
             powerBoxes.add(new PowerBox(screen, object));
         }
-
-        // Items
-        items = new Array<Item>();
-
-        // Weapons
-        weapons = new Array<Weapon>();
-
-        // Queue
-        gameThreeActorsToCreate = new LinkedBlockingQueue<GameThreeActorDef>();
-    }
+  }
 
     public Array<Enemy> getEnemies() {
         return enemies;

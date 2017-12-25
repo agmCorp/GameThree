@@ -92,6 +92,14 @@ public class Constants {
     public static final float ENEMYONE_HEIGHT_METERS = 55.0f * 1.0f / PPM;
     public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.0f;
 
+    // EnemyTwo (meters = pixels * resizeFactor / PPM)
+    public static final float ENEMYTWO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float ENEMYTWO_VELOCITY_X = -5.0f;
+    public static final float ENEMYTWO_VELOCITY_Y = -2.0f;
+    public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
+    public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
+    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+
     // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
 

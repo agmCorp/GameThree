@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="158">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="255">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -14,8 +14,6 @@
  <objectgroup name="borders">
   <object id="5" name="left" x="0" y="0" width="1" height="8000"/>
   <object id="11" name="right" x="479" y="0" width="1" height="8000"/>
-  <object id="12" name="top" x="1" y="0" width="478" height="1"/>
-  <object id="13" name="bottom" x="1" y="7999" width="478" height="1"/>
  </objectgroup>
  <objectgroup name="obstacles">
   <object id="82" x="360" y="76" width="55" height="92"/>
@@ -186,7 +184,7 @@
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="135" x="384" y="6464" width="32" height="32">
+  <object id="135" x="309" y="6367" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
@@ -235,9 +233,70 @@
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="157" x="192" y="7552" width="32" height="32">
+ </objectgroup>
+ <objectgroup name="enemyTwo">
+  <object id="222" x="0" y="3488" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="223" x="0" y="3504" width="32" height="32"/>
+  <object id="224" x="0.666667" y="3520.67" width="32" height="32"/>
+  <object id="225" x="1.33333" y="3536.67" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="226" x="1" y="3552.67" width="32" height="32"/>
+  <object id="227" x="0.666667" y="3569.33" width="32" height="32"/>
+  <object id="228" x="0.666667" y="3584.67" width="32" height="32"/>
+  <object id="229" x="0.666667" y="3601.33" width="32" height="32"/>
+  <object id="231" x="449" y="3569.66" width="32" height="32"/>
+  <object id="232" x="449" y="3521.01" width="32" height="32"/>
+  <object id="233" x="448.333" y="3504.34" width="32" height="32"/>
+  <object id="234" x="449.333" y="3553.01" width="32" height="32"/>
+  <object id="235" x="449.667" y="3537.01" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="236" x="449" y="3585.01" width="32" height="32"/>
+  <object id="237" x="449" y="3601.66" width="32" height="32"/>
+  <object id="238" x="448.333" y="3488.34" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="239" x="5" y="4787.66" width="32" height="32"/>
+  <object id="240" x="5" y="4739.01" width="32" height="32"/>
+  <object id="241" x="4.33333" y="4722.34" width="32" height="32"/>
+  <object id="242" x="5.33333" y="4771.01" width="32" height="32"/>
+  <object id="243" x="5.66666" y="4755.01" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="244" x="5" y="4803.01" width="32" height="32"/>
+  <object id="245" x="5" y="4819.66" width="32" height="32"/>
+  <object id="246" x="4.33333" y="4706.34" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="247" x="444.667" y="6059.01" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="248" x="444" y="6123.66" width="32" height="32"/>
+  <object id="249" x="444" y="6107.01" width="32" height="32"/>
+  <object id="250" x="444" y="6091.66" width="32" height="32"/>
+  <object id="251" x="444" y="6043.01" width="32" height="32"/>
+  <object id="252" x="443.333" y="6026.34" width="32" height="32"/>
+  <object id="253" x="444.333" y="6075.01" width="32" height="32"/>
+  <object id="254" x="443.333" y="6010.34" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
    </properties>
   </object>
  </objectgroup>

@@ -53,64 +53,11 @@ PENDIENTES
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
-- No me convence mucho que los personajes que esten por debajo de la camara sean setactive en false. Para mi deberian morir.
-Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pantalla nuevamente con una bala en medio. Con setactive funciona bien.
 - AVERGIUAR COMO DEBUGUEAR
-- QUITAR EL pitch random de el powerup (cuando agarro la estrella) y de las cosas en donde no tiene sentido
-- LOS ENEMIGOS SE DESACTIVAN NO BIEN TOCAN EL BORDE, DEBERIA SER CUANDO PASAN EL BORDE INFERIOR.
-CAPAZ QUE CONVIENE SACAR LOS OBJETOS BORDE INFERIOR Y SUPERIOR DEL TILED ADEMAS.
-- REVISAR TODAS LAS CONDICIONES DE BORDE, ESTAN MAL, LAS DE WEAPON CREO QUE BIEN, ENEMY MAL.
-ENEMY DEBERIA SER ASI;
-if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge)
-idem powerbox, etc.
-
-  private float getNewX(float x, float y, float dt) {
-        return (float) Math.sin(2.0f * y - dt) * Constants.V_WIDTH / Constants.PPM;
-    }
-
-    private Vector2 getNewVelocity(float yActual, float dt) {
-        /*
-        origen = (b2body.getPosition().x, 2body.getPosition().y)
-        destino = (getNewX(b2body.getPosition().x, b2body.getPosition().y, dt), b2body.getPosition().y - dt)
-        destino - origen = ()
-         */
-        velocity = new Vector2();
-        velocity.x = getNewX(b2body.getPosition().x, b2body.getPosition().y, dt) - b2body.getPosition().x;
-        velocity.y = dt;
-        velocity.nor();
-        velocity.x = velocity.x * 4.0f;
-        velocity.y = -velocity.y * 4.0f;
-        return velocity;
-    }
-
-	luego.....
-
-	 private void stateAlive(float dt) {
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
-
-
-        b2body.setLinearVelocity(getNewVelocity(b2body.getPosition().y, dt));
-
-
-
-
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
-
-
-
-		A VECES LO MAS SENCILLO ES LO MEJOR.
-		HACER QUE EL ENEMIGO SOLO CHOCQUE CONTRA BORDES Y TA
-		velocity = new Vector2(-5, -2); PONER ESO EN EL CONTRUCTOR.
+- CAPAZ QUE CONVIENE SACAR LOS OBJETOS BORDE INFERIOR Y SUPERIOR DEL TILED ADEMAS.
+- Hacer que hero dispare con delay
+- el bump no se escucha por la musica.
+- la calabera no se escucha en android
 
 IDEAS
 -----
@@ -142,7 +89,6 @@ which uses delta to get the right frames for sprite animations, and actually dra
 VIDEO
 -----
 FELICITACIONES
-VER CONTROLADOR
 
 HERRAMIENTAS
 ------------
@@ -154,7 +100,8 @@ HERRAMIENTAS
 - sourceTree para administrar git
 - https://audio.online-convert.com/es/convertir-a-ogg: conversor de mp3 a ogg
 - https://github.com/BrentAureli/SuperMario / https://www.patreon.com/BrentAureli
-- https://freesound.org, user aclaveri. Para sonido.
+- https://freesound.org, user aclaveri/2es...etc. Para sonido.
+- https://www.youtube.com/watch?v=dxPf1M7YORU&feature=youtu.be para crear fonts ver ese video
 
 METODOLOGIA
 -----------
@@ -272,86 +219,6 @@ METODOLOGIA
 
     El jar queda en GameThree\desktop\build\libs
 --------------------------- code copy paste ---------------------------------------
-Se pone en modo fantasta y queda todo igual excepto que los monstruos si lo tocan no le hacen nada
-// ************* inicio
-        // Apply Skin Color
-        float alpha = 0.7f;
-        batch.setColor(1, 1, 1, alpha);
-
-
-        Filter filter = new Filter();
-        filter.categoryBits = GameThree.HERO_BIT;
-        filter.maskBits =  GameThree.DEFAULT_BIT |
-                GameThree.COINBOX_BIT |
-                GameThree.OBSTACLE_BIT |
-                GameThree.ITEM_BIT;
-        b2body.getFixtureList().get(0).setFilterData(filter);
-// ************** fin
-        // Draws a rectangle with the texture coordinates rotated 90 degrees.
-        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
-                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
-// ************** inicio
-// Reset color to white
-        batch.setColor(1, 1, 1, 1);
-// **************   fin
-
- public void draw(SpriteBatch batch) {
-        // estado normal
-        // esto es asi para compensar lo que hace el draw por defecto, que dibuja rotado no se por que.
-        //clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-        boolean clockwise = true;
-        float angulo = 90;
-        float height = this.getWidth(); // si multiplico ambos por 0.8f es el 80% del sprite del archivo .png
-        float width = this.getHeight();
-        float temp;
-
-        // touch
-        float vAngle = this.b2body.getLinearVelocity().angle();
-
-// anda bien
-        if (0 < vAngle && vAngle <= 90) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 45;
-        }
-
-        if (90 < vAngle && vAngle <= 180) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = 270.0f - vAngle;
-            //angulo = 135;
-        }
-
-        if (180 < vAngle && vAngle <= 270) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 225;
-            clockwise = false;
-        }
-
-        if (270 < vAngle && vAngle <= 360) {
-            Gdx.app.debug(TAG, "VANGLE " + vAngle);
-            angulo = vAngle;
-            //angulo = 315;
-            clockwise = false;
-        }
-
-        // Draws a rectangle with the texture coordinates rotated 90 degrees.
-        /*
-        batch.draw(this, this.b2body.getPosition().x - width / 2, this.b2body.getPosition().y - height / 2,
-                width / 2, height / 2, width, height, 1.0f, 1.0f, angulo, clockwise);
-                */
-    }
-
-
-            /* NO TOCAR
-            Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
-
-            if (delta.len() > Constants.HERO_LEN_SPEED / Constants.PPM) {
-                game.playScreen.player.b2body.setLinearVelocity(deltaX * Constants.HERO_WEIGHTING_SPEED, -deltaY * Constants.HERO_WEIGHTING_SPEED);
-            } else {
-                game.playScreen.player.b2body.setLinearVelocity(0, 0);
-            }
-            */
 para items los cast
 para vidas heal
 
@@ -366,3 +233,41 @@ https://mrbubblewand.wordpress.com/2009/09/13/animation-magic_003/
 https://mrbubblewand.wordpress.com/2009/06/09/animation-effect_001/
 https://mrbubblewand.wordpress.com/2009/06/07/animation-magic_02/
 https://mrbubblewand.wordpress.com/2009/06/05/animations-thunder_01-heal_01-2/
+-----------------------------------------------------------------------------------
+FUNCION SENO
+  private float getNewX(float x, float y, float dt) {
+        return (float) Math.sin(2.0f * y - dt) * Constants.V_WIDTH / Constants.PPM;
+    }
+
+    private Vector2 getNewVelocity(float yActual, float dt) {
+        /*
+        origen = (b2body.getPosition().x, 2body.getPosition().y)
+        destino = (getNewX(b2body.getPosition().x, b2body.getPosition().y, dt), b2body.getPosition().y - dt)
+        destino - origen = ()
+         */
+        velocity = new Vector2();
+        velocity.x = getNewX(b2body.getPosition().x, b2body.getPosition().y, dt) - b2body.getPosition().x;
+        velocity.y = dt;
+        velocity.nor();
+        velocity.x = velocity.x * 4.0f;
+        velocity.y = -velocity.y * 4.0f;
+        return velocity;
+    }
+
+	luego.....
+
+	 private void stateAlive(float dt) {
+        b2body.setLinearVelocity(getNewVelocity(b2body.getPosition().y, dt));
+
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
+        openFireTime += dt;
+        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {

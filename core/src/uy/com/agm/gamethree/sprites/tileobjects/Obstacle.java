@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.sprites.tileobjects;
 
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.MathUtils;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -23,6 +22,6 @@ public class Obstacle extends InteractiveTileObject {
 
     @Override
     public void onHit() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 1));
+        AudioManager.instance.play(Assets.instance.sounds.bump, 1);
     }
 }
