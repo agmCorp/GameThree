@@ -88,7 +88,7 @@ public class PowerOne extends Item {
             default:
                 break;
         }
-        super.controlBoundaries();
+        super.checkBoundaries();
     }
 
     private void stateWaiting(float dt) {

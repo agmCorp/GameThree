@@ -78,7 +78,7 @@ public class EnergyBall extends Weapon {
             default:
                 break;
         }
-        super.controlBoundaries();
+        super.checkBoundaries();
     }
 
     private void stateShot(float dt) {

@@ -84,7 +84,7 @@ public class EnemyOne extends Enemy {
             default:
                 break;
         }
-        super.controlBoundaries();
+        super.checkBoundaries();
     }
 
     @Override

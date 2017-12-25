@@ -56,6 +56,61 @@ bordes y objetos
 - No me convence mucho que los personajes que esten por debajo de la camara sean setactive en false. Para mi deberian morir.
 Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pantalla nuevamente con una bala en medio. Con setactive funciona bien.
 - AVERGIUAR COMO DEBUGUEAR
+- QUITAR EL pitch random de el powerup (cuando agarro la estrella) y de las cosas en donde no tiene sentido
+- LOS ENEMIGOS SE DESACTIVAN NO BIEN TOCAN EL BORDE, DEBERIA SER CUANDO PASAN EL BORDE INFERIOR.
+CAPAZ QUE CONVIENE SACAR LOS OBJETOS BORDE INFERIOR Y SUPERIOR DEL TILED ADEMAS.
+- REVISAR TODAS LAS CONDICIONES DE BORDE, ESTAN MAL, LAS DE WEAPON CREO QUE BIEN, ENEMY MAL.
+ENEMY DEBERIA SER ASI;
+if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge)
+idem powerbox, etc.
+
+  private float getNewX(float x, float y, float dt) {
+        return (float) Math.sin(2.0f * y - dt) * Constants.V_WIDTH / Constants.PPM;
+    }
+
+    private Vector2 getNewVelocity(float yActual, float dt) {
+        /*
+        origen = (b2body.getPosition().x, 2body.getPosition().y)
+        destino = (getNewX(b2body.getPosition().x, b2body.getPosition().y, dt), b2body.getPosition().y - dt)
+        destino - origen = ()
+         */
+        velocity = new Vector2();
+        velocity.x = getNewX(b2body.getPosition().x, b2body.getPosition().y, dt) - b2body.getPosition().x;
+        velocity.y = dt;
+        velocity.nor();
+        velocity.x = velocity.x * 4.0f;
+        velocity.y = -velocity.y * 4.0f;
+        return velocity;
+    }
+
+	luego.....
+
+	 private void stateAlive(float dt) {
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
+
+
+        b2body.setLinearVelocity(getNewVelocity(b2body.getPosition().y, dt));
+
+
+
+
+        openFireTime += dt;
+        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+
+
+
+		A VECES LO MAS SENCILLO ES LO MEJOR.
+		HACER QUE EL ENEMIGO SOLO CHOCQUE CONTRA BORDES Y TA
+		velocity = new Vector2(-5, -2); PONER ESO EN EL CONTRUCTOR.
 
 IDEAS
 -----

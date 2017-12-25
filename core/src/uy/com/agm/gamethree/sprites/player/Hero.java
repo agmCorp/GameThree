@@ -153,8 +153,7 @@ public class Hero extends Sprite {
         setRegion(heroStand);
 
         // If our Hero is standing, he should be dragged when the cam moves
-        checkUpperBound();
-        checkBottomBound();
+        checkBoundaries();
     }
 
     private void heroStateMovingLeftRight(float dt) {
@@ -178,8 +177,7 @@ public class Hero extends Sprite {
         setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTimer, true));
 
         // If our Hero is moving to the left or to the right, he should be dragged when the cam moves up
-        checkUpperBound();
-        checkBottomBound();
+        checkBoundaries();
     }
 
     private void heroStateMovingUp(float dt) {
@@ -322,6 +320,12 @@ public class Hero extends Sprite {
         // Start dying up
         heroStateTimer = 0;
         currentHeroState = HeroState.DYING_UP;
+    }
+
+    // It prevents Hero from going beyond the limits of the game
+    private void checkBoundaries() {
+        checkUpperBound();
+        checkBottomBound();
     }
 
     // It prevents Hero from going beyond the upper limit of the game

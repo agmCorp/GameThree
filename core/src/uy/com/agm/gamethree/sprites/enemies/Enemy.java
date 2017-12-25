@@ -54,11 +54,12 @@ public abstract class Enemy extends Sprite {
         b2body.setActive(false);
     }
 
+    // This Enemy doesn't have any b2body
     public boolean isDestroyed() {
         return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
-    protected void controlBoundaries() {
+    protected void checkBoundaries() {
         /* When an Enemy is on camera, it activates (it moves and can collide).
         * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
@@ -67,7 +68,7 @@ public abstract class Enemy extends Sprite {
             float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
             float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (bottomEdge <= getY() && getY() <= upperEdge) {
+            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
             } else {
                 b2body.setActive(false);
@@ -94,6 +95,7 @@ public abstract class Enemy extends Sprite {
         }
     }
 
+    // This Enemy can be removed from our game
     public boolean isDisposable() {
         return currentState == State.DEAD;
     }

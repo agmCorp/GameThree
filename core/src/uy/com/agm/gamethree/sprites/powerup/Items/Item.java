@@ -52,11 +52,12 @@ public abstract class Item extends Sprite {
             velocity.y = -velocity.y;
     }
 
+    // This Item doesn't have any b2body
     public boolean isDestroyed() {
         return currentState == State.TAKEN || currentState == State.FINISHED;
     }
 
-    protected void controlBoundaries() {
+    protected void checkBoundaries() {
         /* When an Item is on camera, it activates (it can collide).
         * You have to be very careful because if the item is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
@@ -65,7 +66,7 @@ public abstract class Item extends Sprite {
             float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
             float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (bottomEdge <= getY() && getY() <= upperEdge) {
+            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
             } else {
                 if (b2body.isActive()) { // Was on camera...
@@ -79,6 +80,7 @@ public abstract class Item extends Sprite {
         }
     }
 
+    // This Item can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }

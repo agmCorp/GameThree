@@ -37,22 +37,24 @@ public abstract class Weapon extends Sprite {
         defineWeapon();
     }
 
+    // This Weapon doesn't have any b2body
     public boolean isDestroyed() {
         return currentState == State.ONTARGET || currentState == State.FINISHED;
     }
 
-    protected void controlBoundaries() {
-        /* A Weapon is ONTARGET when is beyond the camera. */
+    protected void checkBoundaries() {
+        // A Weapon is ONTARGET when is beyond the camera.
         if (!isDestroyed()) {
             float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
             float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
-            if (!(bottomEdge <= getY() && getY() <= upperEdge)) {
+            if (!(bottomEdge <= getY() + getHeight() && getY() <= upperEdge)) {
                 currentState = State.ONTARGET;
             }
         }
     }
 
+    // This Weapon can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }
