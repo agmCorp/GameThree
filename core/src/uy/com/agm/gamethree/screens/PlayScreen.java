@@ -383,7 +383,9 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        b2dr.dispose();
+        if (Constants.DEBUG_BOUNDARIES) {
+            b2dr.dispose();
+        }
         hud.dispose();
     }
 }

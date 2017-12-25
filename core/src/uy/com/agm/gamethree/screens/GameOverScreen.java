@@ -3,16 +3,15 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -37,17 +36,24 @@ public class GameOverScreen implements Screen {
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
+
+        // todo arreglar esto
+        Label.LabelStyle l = new Label.LabelStyle();
+        l.font = Assets.instance.fonts.defaultNormal;
+
+
+
         // Define our labels using the String, and a Label style consisting of a font and color
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(l);
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
         Label playAgainLabel = new Label("Touch to play again", font);
-        table.add(gameOverLabel).expandX();
+        table.add(gameOverLabel);
         table.row();
-        table.add(playAgainLabel).expandX().padTop(10.0f);
+        table.add(playAgainLabel).padTop(10.0f);
 
         stage.addActor(table);
     }

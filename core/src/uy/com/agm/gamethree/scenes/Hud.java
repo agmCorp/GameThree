@@ -1,8 +1,6 @@
 package uy.com.agm.gamethree.scenes;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -80,23 +78,28 @@ public class Hud implements Disposable {
         // Make the table fill the entire stage
         table.setFillParent(true);
 
+        // todo arreglar esto
+        Label.LabelStyle l = new Label.LabelStyle();
+        l.font = Assets.instance.fonts.defaultSmall;
+
+
         // Define our labels using the String, and a Label style consisting of a font and color
-        scoreLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreValueLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label("SCORE", l);
+        scoreValueLabel = new Label(String.format("%06d", score), l);
 
-        levelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelValueLabel = new Label(String.format("%02d", level), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label("LEVEL",l);
+        levelValueLabel = new Label(String.format("%02d", level), l);
 
-        levelTimerLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelTimerLabel = new Label("TIME", l);
+        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), l);
 
-        powerLabel = new Label("POWERNAME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        powerValueLabel = new Label(String.format("%03d", powerTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        powerLabel = new Label("POWERNAME", l);
+        powerValueLabel = new Label(String.format("%03d", powerTimer), l);
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(scoreLabel).expandX().padTop(10);
-        table.add(levelLabel).expandX().padTop(10);
-        table.add(levelTimerLabel).expandX().padTop(10);
+        table.add(scoreLabel).expandX();
+        table.add(levelLabel).expandX();
+        table.add(levelTimerLabel).expandX();
 
         // Add a second row to our table
         table.row();
