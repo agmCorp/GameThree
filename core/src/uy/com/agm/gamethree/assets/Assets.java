@@ -63,10 +63,17 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 
         // Load sounds
+        assetManager.load("audio/sounds/bump.ogg", Sound.class);
+        assetManager.load("audio/sounds/crack.ogg", Sound.class);
         assetManager.load("audio/sounds/dead.ogg", Sound.class);
+        assetManager.load("audio/sounds/enemyShoot.ogg", Sound.class);
+        assetManager.load("audio/sounds/heroShoot.ogg", Sound.class);
         assetManager.load("audio/sounds/hit.ogg", Sound.class);
-        assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
         assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);
+        assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
+        assetManager.load("audio/sounds/powerDown.ogg", Sound.class);
+        assetManager.load("audio/sounds/powerTimer.ogg", Sound.class);
+        assetManager.load("audio/sounds/showUpPowerOne.ogg", Sound.class);
 
         // Load music
         assetManager.load("audio/music/levelOne.ogg", Music.class);

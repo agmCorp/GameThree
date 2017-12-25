@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -136,6 +137,7 @@ public class Hero extends Sprite {
             setDefaultFilter();
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
+            AudioManager.instance.play(Assets.instance.sounds.powerDown, 1, MathUtils.random(1.0f, 1.1f));
         }
     }
 

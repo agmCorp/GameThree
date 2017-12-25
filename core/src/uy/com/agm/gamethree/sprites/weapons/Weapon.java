@@ -53,6 +53,10 @@ public abstract class Weapon extends Sprite {
         }
     }
 
+    public boolean isDisposable() {
+        return currentState == State.FINISHED;
+    }
+
     protected abstract void defineWeapon();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);

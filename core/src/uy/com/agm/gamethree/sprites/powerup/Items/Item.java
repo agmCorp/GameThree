@@ -79,6 +79,10 @@ public abstract class Item extends Sprite {
         }
     }
 
+    public boolean isDisposable() {
+        return currentState == State.FINISHED;
+    }
+
     protected abstract void defineItem();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);

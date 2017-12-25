@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.powerup.boxes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,12 +16,12 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
-import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -198,6 +197,10 @@ public class PowerBox extends Sprite {
         }
     }
 
+    public void onBump() {
+        AudioManager.instance.play(Assets.instance.sounds.bump, 1, MathUtils.random(1.0f, 1.1f));
+    }
+
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.
@@ -207,11 +210,11 @@ public class PowerBox extends Sprite {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         int strength = object.getProperties().get("strength", 0, Integer.class);
-        Gdx.app.debug(TAG, "strength, damage " + strength + " " + damage);
         if (damage >= strength - 1) {
             getItemOnHit();
             currentState = State.OPENED;
         } else {
+            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
             damage++;
         }
     }
@@ -224,5 +227,9 @@ public class PowerBox extends Sprite {
         if (currentState != State.FINISHED) {
            super.draw(batch);
         }
+    }
+
+    public boolean isDisposable() {
+        return currentState == State.FINISHED;
     }
 }

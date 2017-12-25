@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -57,7 +58,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()) {
+        if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new PlayScreen(game));
             dispose();
         }

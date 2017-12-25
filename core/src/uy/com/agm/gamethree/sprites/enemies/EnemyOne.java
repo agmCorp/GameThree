@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,8 +11,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
@@ -99,7 +98,6 @@ public class EnemyOne extends Enemy {
          */
         super.getItemOnHit();
         currentState = State.INJURED;
-        Gdx.app.debug(TAG, "Enemy collision");
     }
 
     public void draw(Batch batch) {

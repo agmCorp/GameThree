@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
@@ -11,10 +10,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -90,10 +89,13 @@ public abstract class Enemy extends Sprite {
                 if (object.getProperties().containsKey("enemyBullet")) {
                     Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
-                    Gdx.app.debug(TAG, "PUM!");
                 }
             }
         }
+    }
+
+    public boolean isDisposable() {
+        return currentState == State.DEAD;
     }
 
     protected abstract void defineEnemy();

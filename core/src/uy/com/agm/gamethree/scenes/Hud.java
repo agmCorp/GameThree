@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -125,6 +127,9 @@ public class Hud implements Disposable {
             if (timeCountPower >= 1) {
                 if (powerTimer > 0) {
                     powerTimer--;
+                    if (powerTimer <= Constants.TIMER_NOTIFICATION) {
+                        AudioManager.instance.play(Assets.instance.sounds.powerTimer, 1);
+                    }
                     powerValueLabel.setText(String.format("%03d", powerTimer));
                 } else {
                     removePowerLabel();

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -36,6 +38,9 @@ public class EnergyBall extends Weapon {
         stateTime = 0;
         currentState = State.SHOT;
         velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
+
+        // Sound FX
+        AudioManager.instance.play(Assets.instance.sounds.heroShoot, 1, MathUtils.random(1.0f, 1.1f));
     }
 
     @Override

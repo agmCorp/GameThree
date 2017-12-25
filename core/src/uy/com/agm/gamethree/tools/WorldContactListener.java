@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -11,6 +10,7 @@ import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.tileobjects.InteractiveTileObject;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
 /**
@@ -31,12 +31,20 @@ public class WorldContactListener implements ContactListener {
             // Hero - InteractiveTileObjects
             case Constants.HERO_BIT | Constants.BORDERS_BIT:
             case Constants.HERO_BIT | Constants.OBSTACLE_BIT:
-                Gdx.app.debug(TAG, "Hero - InteractiveTileObject collision");
+                if (fixA.getFilterData().categoryBits == Constants.HERO_BIT) {
+                    ((InteractiveTileObject) fixB.getUserData()).onHit();
+                } else {
+                    ((InteractiveTileObject) fixA.getUserData()).onHit();
+                }
                 break;
 
             // Hero - PowerBox
             case Constants.HERO_BIT | Constants.POWERBOX_BIT:
-                Gdx.app.debug(TAG, "Hero - PowerBox collision");
+                if (fixA.getFilterData().categoryBits == Constants.HERO_BIT) {
+                    ((PowerBox) fixB.getUserData()).onBump();
+                } else {
+                    ((PowerBox) fixA.getUserData()).onBump();
+                }
                 break;
 
             // Hero - Item
@@ -50,16 +58,12 @@ public class WorldContactListener implements ContactListener {
 
             // Hero - Enemies
             case Constants.HERO_BIT | Constants.ENEMY_BIT:
-                Gdx.app.debug(TAG, "Hero - Enemy collision");
-
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
             // Hero - Enemy's weapon
             case Constants.HERO_BIT | Constants.ENEMY_WEAPON_BIT:
-                Gdx.app.debug(TAG, "Hero - EnemyBullet collision");
-
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
@@ -67,8 +71,12 @@ public class WorldContactListener implements ContactListener {
             // Enemy - InteractiveTileObjects
             case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
             case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
-                Gdx.app.debug(TAG, "Enemy - InteractiveTileObject collision");
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+                ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
+                break;
 
+            // Enemy - PowerBox
+            case Constants.ENEMY_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
                 break;

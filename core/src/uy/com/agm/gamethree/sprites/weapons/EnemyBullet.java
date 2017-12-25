@@ -1,17 +1,18 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 
 /**
@@ -48,6 +49,9 @@ public class EnemyBullet extends Weapon {
         // Apply constant velocity on that direction
         velocity.x = velocity.x * Constants.ENEMYBULLET_LINEAR_VELOCITY;
         velocity.y = velocity.y * Constants.ENEMYBULLET_LINEAR_VELOCITY;
+
+        // Sound FX
+        AudioManager.instance.play(Assets.instance.sounds.heroShoot, 1, MathUtils.random(1.0f, 1.1f));
     }
 
     @Override
@@ -120,7 +124,6 @@ public class EnemyBullet extends Weapon {
          * Therefore we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.ONTARGET;
-        Gdx.app.debug(TAG, "Hero collision");
     }
 
     public void draw(Batch batch) {

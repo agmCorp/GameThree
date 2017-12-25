@@ -45,6 +45,9 @@ public class PowerOne extends Item {
 
         currentState = State.WAITING;
         velocity = new Vector2(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
+
+        // Sound FX
+        AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
     }
 
     @Override
