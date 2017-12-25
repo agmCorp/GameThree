@@ -32,6 +32,11 @@ public class Constants {
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = false;
 
+    // Font sizes
+    public static final float FONT_SMALL = 0.8f;
+    public static final float FONT_NORMAL = 1.0f;
+    public static final float FONT_BIG = 1.5f;
+
     // ---- Level ----
     public static final int TIMER_LEVEL_ONE = 180;
     public static final float DELAY_GAME_OVER_SECONDS = 3.0f;

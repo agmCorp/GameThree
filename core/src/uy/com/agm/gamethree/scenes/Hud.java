@@ -78,23 +78,22 @@ public class Hud implements Disposable {
         // Make the table fill the entire stage
         table.setFillParent(true);
 
-        // todo arreglar esto
-        Label.LabelStyle l = new Label.LabelStyle();
-        l.font = Assets.instance.fonts.defaultSmall;
+        // Personal fonts
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = Assets.instance.fonts.defaultSmall;
 
+        // Define our labels based on labelStyle
+        scoreLabel = new Label("SCORE", labelStyle);
+        scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
 
-        // Define our labels using the String, and a Label style consisting of a font and color
-        scoreLabel = new Label("SCORE", l);
-        scoreValueLabel = new Label(String.format("%06d", score), l);
+        levelLabel = new Label("LEVEL", labelStyle);
+        levelValueLabel = new Label(String.format("%02d", level), labelStyle);
 
-        levelLabel = new Label("LEVEL",l);
-        levelValueLabel = new Label(String.format("%02d", level), l);
+        levelTimerLabel = new Label("TIME", labelStyle);
+        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), labelStyle);
 
-        levelTimerLabel = new Label("TIME", l);
-        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), l);
-
-        powerLabel = new Label("POWERNAME", l);
-        powerValueLabel = new Label(String.format("%03d", powerTimer), l);
+        powerLabel = new Label("POWERNAME", labelStyle);
+        powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(scoreLabel).expandX();

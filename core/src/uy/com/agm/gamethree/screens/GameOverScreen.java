@@ -36,21 +36,17 @@ public class GameOverScreen implements Screen {
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
+        // Personal fonts
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = Assets.instance.fonts.defaultNormal;
 
-        // todo arreglar esto
-        Label.LabelStyle l = new Label.LabelStyle();
-        l.font = Assets.instance.fonts.defaultNormal;
-
-
-
-        // Define our labels using the String, and a Label style consisting of a font and color
-        Label.LabelStyle font = new Label.LabelStyle(l);
+        // Define our labels based on labelStyle
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Touch to play again", font);
+        Label gameOverLabel = new Label("GAME OVER", labelStyle);
+        Label playAgainLabel = new Label("Touch to play again", labelStyle);
         table.add(gameOverLabel);
         table.row();
         table.add(playAgainLabel).padTop(10.0f);
