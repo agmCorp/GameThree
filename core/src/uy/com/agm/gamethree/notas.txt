@@ -11,14 +11,21 @@ enemyBullet
 powerOne
 damage (int)
 
+IDEAS
+-----
+- programar acelerómetro?
+- Cuando explota un enemigo puedo hacer aparecer 2 enemigos
+- Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
+
 ALCANCE
 -------
-El level tiene puentes
-Hay 2 tipos de bolas:
+- El level tiene puentes
+Hay 2 tipos de elementos:
 	1) bola de poder
 		- *nada
 		- escudo (shield_blue.gif esta muy bueno)
-		- invisibilidad (seria algo asi como que puedo caminar por toda la pantalla sin colisionar con anda)
+		- invisibilidad (seria algo así como que puedo caminar por toda la pantalla sin colisionar
+		  con anda)
 		- detener pantalla (por tiempo)
 		- te pones rojo y chocas a todos (por tiempo)
 		- *invulnerabilidad (te rodea una burbuja) es por tiempo
@@ -53,16 +60,7 @@ PENDIENTES
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - AVERGIUAR COMO DEBUGUEAR
-- CAPAZ QUE CONVIENE SACAR LOS OBJETOS BORDE INFERIOR Y SUPERIOR DEL TILED ADEMAS.
 - Hacer que hero dispare con delay
-- el bump no se escucha por la musica.
-- la calabera no se escucha en android
-
-IDEAS
------
-- programar acelerometro?
-- Cuando explota un enemigo puedo hacer aparecer 2 enemigos
-- Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -83,7 +81,6 @@ which uses delta to get the right frames for sprite animations, and actually dra
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
 - NO SE DONDE TENGO QUE HACER ASSET.DISPOSE, lo puse en gamethree
-
 
 VIDEO
 -----
@@ -229,6 +226,7 @@ METODOLOGIA
     las propiedades de alto y ancho de cada letra para que se vea bien.
     Al salvar genera 2 archivos los cuales uso. Capaz que tengo que editarlos para cambiar una ruta absoluta que
     aparece alli (como en TiledEditor).
+
 --------------------------- code copy paste ---------------------------------------
 para items los cast
 para vidas heal
