@@ -127,6 +127,9 @@ public class EnemyTwo extends Enemy {
         // Audio FX
         AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
 
+        // Set score
+        screen.getHud().addScore(Constants.ENEMYONE_SCORE);
+
         // Set the new state
         currentState = State.EXPLODING;
     }

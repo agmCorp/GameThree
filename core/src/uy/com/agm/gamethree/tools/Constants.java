@@ -92,6 +92,7 @@ public class Constants {
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float POWERBOX_WIDTH_METERS = 80.0f * 0.6f / PPM;
     public static final float POWERBOX_HEIGHT_METERS = 86.0f * 0.6f / PPM;
+    public static final int POWERBOX_SCORE = 10;
 
     // Item (meters = pixels * resizeFactor / PPM)
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
@@ -118,6 +119,7 @@ public class Constants {
     public static final float ENEMYONE_WIDTH_METERS = 66.0f * 1.0f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 55.0f * 1.0f / PPM;
     public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final int ENEMYONE_SCORE = 5;
 
     // EnemyTwo (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYTWO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -126,6 +128,7 @@ public class Constants {
     public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+    public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;

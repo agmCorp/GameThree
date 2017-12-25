@@ -157,6 +157,9 @@ public class PowerBox extends Sprite {
         // Audio FX
         AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1);
 
+        // Set score
+        screen.getHud().addScore(Constants.POWERBOX_SCORE);
+
         // Set the new state
         currentState = State.EXPLODING;
     }
