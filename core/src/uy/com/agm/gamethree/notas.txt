@@ -16,10 +16,20 @@ ALCANCE
 El level tiene puentes
 Hay 2 tipos de bolas:
 	1) bola de poder
-		- nada, escudo, invisibilidad (por tiempo), detener pantalla (por tiempo), te pones rojo y chocas a todos (por tiempo),
-		  invulnerabilidad (te rodea una burbuja) es por tiempo, matar a todos de una vez.
+		- *nada
+		- escudo (shield_blue.gif esta muy bueno)
+		- invisibilidad (seria algo asi como que puedo caminar por toda la pantalla sin colisionar con anda)
+		- detener pantalla (por tiempo)
+		- te pones rojo y chocas a todos (por tiempo)
+		- *invulnerabilidad (te rodea una burbuja) es por tiempo
+		- matar a todos de una vez.
 	2) bola de armas
-		- nada, boomeran, triple bola de fuego, doble fecha, flecha simple (arma por defecto)
+		- nada
+		- boomeran
+		- triple bola de fuego
+		- doble fecha
+		- flecha simple (arma por defecto)
+
 Bloques con sorpresas
 
 enemigo1: bolas negras que bajan derecho
@@ -29,6 +39,12 @@ enemigo2: bandada murcielagos
 		  luego vienen desfazados los murcielagos
 enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
 enemigo4: nubes (viajan tranqui como funcion seno y luego se te tiran arriba rapido)
+
+PROXIMOS PASOS
+--------------
+- hacer un nuevo enemigo, murcielagos
+- cambiar las fonts
+
 
 PENDIENTES
 ----------
@@ -43,9 +59,9 @@ Con hero en particular, si lo destruyo pasa algo raro en donde aparece en la pan
 
 IDEAS
 -----
+- programar acelerometro?
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
-- Para evitar el disparo sin querer, programar un circulo en donde hacer touch para disparar.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

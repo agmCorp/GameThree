@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
@@ -25,6 +26,7 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -95,7 +97,7 @@ public class PlayScreen implements Screen {
 
         // Load preferences for audio settings and start playing music
         // GamePreferences.instance.load();
-        //AudioManager.instance.play(Assets.instance.music.songLevelOne);
+        AudioManager.instance.play(Assets.instance.music.songLevelOne);
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(player)));

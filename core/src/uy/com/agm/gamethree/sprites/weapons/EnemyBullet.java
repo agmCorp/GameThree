@@ -51,7 +51,7 @@ public class EnemyBullet extends Weapon {
         velocity.y = velocity.y * Constants.ENEMYBULLET_LINEAR_VELOCITY;
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.heroShoot, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));
     }
 
     @Override

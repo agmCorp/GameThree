@@ -42,7 +42,7 @@ public class AudioManager {
         //if (GamePreferences.instance.music) {
         music.setLooping(true);
         //  music.setVolume(GamePreferences.instance.volMusic);
-        music.setVolume(0.5f);
+        music.setVolume(0.7f);
         music.play();
         //}
     }
