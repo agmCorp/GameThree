@@ -38,13 +38,12 @@ enemigo2: bandada murcielagos
 		  luego disparan
 		  luego vienen desfazados los murcielagos
 enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
-enemigo4: nubes (viajan tranqui como funcion seno y luego se te tiran arriba rapido)
+enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
 
 PROXIMOS PASOS
 --------------
-- hacer un nuevo enemigo, murcielagos
-- cambiar las fonts
-
+- hacer enemigo final
+- hacer nuevo poder
 
 PENDIENTES
 ----------

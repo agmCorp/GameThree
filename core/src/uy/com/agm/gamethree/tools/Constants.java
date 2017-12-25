@@ -32,19 +32,41 @@ public class Constants {
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = false;
 
+    // ---- Assets ----
+
+    // Location of description file for texture atlas
+    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.pack";
+
+    // Location of description file for Bitmap fonts
+    public static final String FONT_FILE = "fonts/fonts.fnt";
+
     // Font sizes
     public static final float FONT_SMALL = 0.8f;
     public static final float FONT_NORMAL = 1.0f;
     public static final float FONT_BIG = 1.5f;
 
+    // Sound FXs
+    public static final String FX_FILE_BUMP = "audio/sounds/bump.ogg";
+    public static final String FX_FILE_CRACK = "audio/sounds/crack.ogg";
+    public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
+    public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
+    public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
+    public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
+    public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
+    public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
+    public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
+    public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
+
+    // Music
+    public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
+
     // ---- Level ----
+
     public static final int TIMER_LEVEL_ONE = 180;
     public static final float DELAY_GAME_OVER_SECONDS = 3.0f;
 
     // ---- Dinamic objects -----
-
-    // Location of description file for texture atlas
-    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.pack";
 
     // Box2D Collision Bits
     public static final short NOTHING_BIT = 0;

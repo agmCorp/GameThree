@@ -19,9 +19,9 @@ public class AssetFonts {
 
     public AssetFonts() {
             // Create three fonts using a personal bitmap font
-            defaultSmall = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
-            defaultNormal = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
-            defaultBig = new BitmapFont(Gdx.files.internal("fonts/fonts.fnt"), false);
+            defaultSmall = new BitmapFont(Gdx.files.internal(Constants.FONT_FILE), false);
+            defaultNormal = new BitmapFont(Gdx.files.internal(Constants.FONT_FILE), false);
+            defaultBig = new BitmapFont(Gdx.files.internal(Constants.FONT_FILE), false);
             // Set font sizes
             defaultSmall.getData().setScale(Constants.FONT_SMALL);
             defaultNormal.getData().setScale(Constants.FONT_NORMAL);

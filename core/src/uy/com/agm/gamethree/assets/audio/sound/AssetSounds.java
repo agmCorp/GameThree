@@ -3,6 +3,8 @@ package uy.com.agm.gamethree.assets.audio.sound;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 
+import uy.com.agm.gamethree.tools.Constants;
+
 /**
  * Created by AGM on 12/22/2017.
  */
@@ -24,16 +26,16 @@ public class AssetSounds {
 
 
     public AssetSounds(AssetManager am) {
-        bump = am.get("audio/sounds/bump.ogg", Sound.class);
-        crack = am.get("audio/sounds/crack.ogg", Sound.class);
-        dead = am.get("audio/sounds/dead.ogg", Sound.class);
-        enemyShoot = am.get("audio/sounds/enemyShoot.ogg", Sound.class);
-        heroShoot = am.get("audio/sounds/heroShoot.ogg", Sound.class);
-        hit = am.get("audio/sounds/hit.ogg", Sound.class);
-        openPowerBox = am.get("audio/sounds/openPowerBox.ogg", Sound.class);
-        pickUpPowerOne = am.get("audio/sounds/pickUpPowerOne.ogg", Sound.class);
-        powerDown = am.get("audio/sounds/powerDown.ogg", Sound.class);
-        powerTimer = am.get("audio/sounds/powerTimer.ogg", Sound.class);
-        showUpPowerOne = am.get("audio/sounds/showUpPowerOne.ogg", Sound.class);
+        bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
+        crack = am.get(Constants.FX_FILE_CRACK, Sound.class);
+        dead = am.get(Constants.FX_FILE_DEAD, Sound.class);
+        enemyShoot = am.get(Constants.FX_FILE_ENEMY_SHOOT, Sound.class);
+        heroShoot = am.get(Constants.FX_FILE_HERO_SHOOT, Sound.class);
+        hit = am.get(Constants.FX_FILE_HIT, Sound.class);
+        openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
+        pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
+        powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
+        powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
+        showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
     }
 }

@@ -65,20 +65,20 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 
         // Load sounds
-        assetManager.load("audio/sounds/bump.ogg", Sound.class);
-        assetManager.load("audio/sounds/crack.ogg", Sound.class);
-        assetManager.load("audio/sounds/dead.ogg", Sound.class);
-        assetManager.load("audio/sounds/enemyShoot.ogg", Sound.class);
-        assetManager.load("audio/sounds/heroShoot.ogg", Sound.class);
-        assetManager.load("audio/sounds/hit.ogg", Sound.class);
-        assetManager.load("audio/sounds/openPowerBox.ogg", Sound.class);
-        assetManager.load("audio/sounds/pickUpPowerOne.ogg", Sound.class);
-        assetManager.load("audio/sounds/powerDown.ogg", Sound.class);
-        assetManager.load("audio/sounds/powerTimer.ogg", Sound.class);
-        assetManager.load("audio/sounds/showUpPowerOne.ogg", Sound.class);
+        assetManager.load(Constants.FX_FILE_BUMP, Sound.class);
+        assetManager.load(Constants.FX_FILE_CRACK, Sound.class);
+        assetManager.load(Constants.FX_FILE_DEAD, Sound.class);
+        assetManager.load(Constants.FX_FILE_ENEMY_SHOOT, Sound.class);
+        assetManager.load(Constants.FX_FILE_HERO_SHOOT, Sound.class);
+        assetManager.load(Constants.FX_FILE_HIT, Sound.class);
+        assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
+        assetManager.load(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
+        assetManager.load(Constants.FX_FILE_POWER_DOWN, Sound.class);
+        assetManager.load(Constants.FX_FILE_POWER_TIMER, Sound.class);
+        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
 
         // Load music
-        assetManager.load("audio/music/levelOne.ogg", Music.class);
+        assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
 
         // Start loading assets and wait until finished
         assetManager.finishLoading();

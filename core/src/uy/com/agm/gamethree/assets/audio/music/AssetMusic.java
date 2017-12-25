@@ -3,6 +3,8 @@ package uy.com.agm.gamethree.assets.audio.music;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 
+import uy.com.agm.gamethree.tools.Constants;
+
 /**
  * Created by AGM on 12/22/2017.
  */
@@ -13,6 +15,6 @@ public class AssetMusic {
     public final Music songLevelOne;
 
     public AssetMusic(AssetManager am) {
-        songLevelOne = am.get("audio/music/levelOne.ogg", Music.class);
+        songLevelOne = am.get(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
     }
 }
