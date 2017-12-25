@@ -198,7 +198,7 @@ public class PowerBox extends Sprite {
     }
 
     public void onBump() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 1);
+        AudioManager.instance.play(Assets.instance.sounds.bump, 0.3f);
     }
 
     public void onHit() {
