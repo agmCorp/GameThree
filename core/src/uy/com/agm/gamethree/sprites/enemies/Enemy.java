@@ -71,7 +71,13 @@ public abstract class Enemy extends Sprite {
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
             } else {
-                b2body.setActive(false);
+                if (b2body.isActive()) { // Was on camera...
+                    // It's outside bottom edge
+                    if (bottomEdge > getY() + getHeight()) {
+                        world.destroyBody(b2body);
+                        currentState = State.DEAD;
+                    }
+                }
             }
         }
     }

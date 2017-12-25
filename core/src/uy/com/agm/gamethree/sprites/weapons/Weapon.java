@@ -43,13 +43,17 @@ public abstract class Weapon extends Sprite {
     }
 
     protected void checkBoundaries() {
-        // A Weapon is ONTARGET when is beyond the camera.
+        /* A Weapon is always shot on camera.
+        * You have to be very careful because if the weapon is destroyed, its b2body does not exist and gives
+        * random errors if you try to access its b2body.
+        */
         if (!isDestroyed()) {
             float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
             float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
 
             if (!(bottomEdge <= getY() + getHeight() && getY() <= upperEdge)) {
-                currentState = State.ONTARGET;
+                world.destroyBody(b2body);
+                currentState = State.FINISHED;
             }
         }
     }
