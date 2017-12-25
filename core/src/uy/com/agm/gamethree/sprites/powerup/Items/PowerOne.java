@@ -47,7 +47,7 @@ public class PowerOne extends Item {
         velocity = new Vector2(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne, 1);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class PowerOne extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1);
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();

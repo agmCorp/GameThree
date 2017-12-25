@@ -23,6 +23,6 @@ public class Obstacle extends InteractiveTileObject {
 
     @Override
     public void onHit() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.bump, 1));
     }
 }

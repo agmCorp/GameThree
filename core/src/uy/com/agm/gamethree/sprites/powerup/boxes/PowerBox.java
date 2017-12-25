@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -156,7 +155,7 @@ public class PowerBox extends Sprite {
         stateTime = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -199,7 +198,7 @@ public class PowerBox extends Sprite {
     }
 
     public void onBump() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.bump, 1);
     }
 
     public void onHit() {
@@ -215,7 +214,7 @@ public class PowerBox extends Sprite {
             getItemOnHit();
             currentState = State.OPENED;
         } else {
-            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
+            AudioManager.instance.play(Assets.instance.sounds.crack, 1);
             damage++;
         }
     }
