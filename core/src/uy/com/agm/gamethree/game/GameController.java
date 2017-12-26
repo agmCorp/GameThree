@@ -49,10 +49,10 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         // If Hero is dead, we don't handle any input
         if(!player.isHeroDead()) {
-        /*
-        * DeltaX is positive when I move my finger to the left, negative otherwise.
-        * DeltaY is positive when I move my finger down, negative otherwise.
-         */
+            /*
+            * DeltaX is positive when I move my finger to the left, negative otherwise.
+            * DeltaY is positive when I move my finger down, negative otherwise.
+            */
 
             // In b2body y-axes sign is the opposite.
             deltaY = -deltaY;
@@ -62,16 +62,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
             // Deltas too small are discarded
             if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
-            /*
-            * origin.x = player.getB2body().getPosition().x
-            * origin.y = player.getB2body().getPosition().y
-             *
-             * destination.x = origin.x + delta.x
-             * destination.y = origin.y + delta.y
-             *
-             * To go from origin to destination we must subtract their position vectors: destination - origin.
-             * Thus destination - origin is (delta.x, delta.y).
-             */
+                /*
+                * origin.x = player.getB2body().getPosition().x
+                * origin.y = player.getB2body().getPosition().y
+                *
+                * destination.x = origin.x + delta.x
+                * destination.y = origin.y + delta.y
+                *
+                * To go from origin to destination we must subtract their position vectors: destination - origin.
+                * Thus destination - origin is (delta.x, delta.y).
+                */
                 Vector2 newVelocity = new Vector2(delta.x, delta.y);
 
                 // Get the direction of the previous vector (normalization)
@@ -86,12 +86,13 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 if (Math.abs(player.getB2body().getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
                     // Apply the new velocity
                     player.getB2body().setLinearVelocity(newVelocity);
+                    evaluateMovementDirection();
                 }
             } else {
                 // Stop
                 player.getB2body().setLinearVelocity(0, 0);
+                evaluateMovementDirection();
             }
-            evaluateMovementDirection();
         }
         return true;
     }
