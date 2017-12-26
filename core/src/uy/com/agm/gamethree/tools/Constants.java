@@ -81,12 +81,12 @@ public class Constants {
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_SENSIBILITY_METERS = 0.8f / PPM; // the lower is the more sensible
-    public static final float HERO_LINEAR_VELOCITY = 5.4f;
+    public static final float HERO_LINEAR_VELOCITY = 3.5f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / PPM;
     public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
     public static final float HERO_ANGLE_SENSIBILITY_DEGREES = 20.0f;  // the lower is the more sensible
-    public static final float HERO_DEATH_LINEAR_VELOCITY = 7.0f;
+    public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
