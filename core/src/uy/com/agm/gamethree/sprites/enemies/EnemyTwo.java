@@ -24,7 +24,7 @@ public class EnemyTwo extends Enemy {
     private static final String TAG = EnemyTwo.class.getName();
 
     private float stateTime;
-    private float openFireTime;
+    private float openFireTimer;
     private Animation enemyTwoAnimation;
     private Animation explosionAnimation;
     private Vector2 velocity;
@@ -40,7 +40,7 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
 
         stateTime = 0;
-        openFireTime = 0;
+        openFireTimer = 0;
         currentState = State.ALIVE;
         velocity = new Vector2(Constants.ENEMYTWO_VELOCITY_X, Constants.ENEMYTWO_VELOCITY_Y);
     }
@@ -128,7 +128,7 @@ public class EnemyTwo extends Enemy {
         AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
 
         // Set score
-        screen.getHud().addScore(Constants.ENEMYONE_SCORE);
+        screen.getHud().addScore(Constants.ENEMYTWO_SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -156,10 +156,10 @@ public class EnemyTwo extends Enemy {
         setRegion(region);
         stateTime += dt;
 
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYTWO_FIRE_DELAY_SECONDS) {
+        openFireTimer += dt;
+        if (openFireTimer > Constants.ENEMYTWO_FIRE_DELAY_SECONDS) {
             super.openFire();
-            openFireTime = 0;
+            openFireTimer = 0;
         }
     }
 

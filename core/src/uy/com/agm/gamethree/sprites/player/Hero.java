@@ -49,7 +49,8 @@ public class Hero extends Sprite {
     private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTimer;
-    private float gameOverTime;
+    private float gameOverTimer;
+    private float openFiretimer;
 
     // Power FX
     private PowerState currentPowerState;
@@ -77,7 +78,8 @@ public class Hero extends Sprite {
         heroMovingLeftRightAnimation = Assets.instance.hero.heroMovingLeftRightAnimation;
         heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
-        gameOverTime = 0;
+        gameOverTimer = 0;
+        openFiretimer = 0;
 
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
@@ -126,6 +128,10 @@ public class Hero extends Sprite {
             default:
                 break;
         }
+
+
+        // Shoot timer
+        openFiretimer += dt;
     }
 
     private void powerStatePowerful(float dt) {
@@ -298,7 +304,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateDead(float dt) {
-        gameOverTime += dt;
+        gameOverTimer += dt;
     }
 
     public void onDead() {
@@ -427,8 +433,11 @@ public class Hero extends Sprite {
     }
 
     public void openFire() {
-        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
-        screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
+        if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
+            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
+            openFiretimer = 0;
+        }
     }
 
     public void onMovingUp() {
@@ -458,7 +467,7 @@ public class Hero extends Sprite {
     }
 
     public boolean isGameOver() {
-        return currentHeroState == HeroState.DEAD && gameOverTime > Constants.DELAY_GAME_OVER_SECONDS;
+        return currentHeroState == HeroState.DEAD && gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
     }
 
     public Body getB2body() {

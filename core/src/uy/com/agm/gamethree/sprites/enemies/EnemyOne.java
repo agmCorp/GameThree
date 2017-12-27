@@ -24,7 +24,7 @@ public class EnemyOne extends Enemy {
     private static final String TAG = EnemyOne.class.getName();
 
     private float stateTime;
-    private float openFireTime;
+    private float openFireTimer;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
     private Vector2 velocity;
@@ -40,7 +40,7 @@ public class EnemyOne extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
 
         stateTime = 0;
-        openFireTime = 0;
+        openFireTimer = 0;
         currentState = State.ALIVE;
         velocity = new Vector2(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
     }
@@ -151,10 +151,10 @@ public class EnemyOne extends Enemy {
         setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+        openFireTimer += dt;
+        if (openFireTimer > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
             super.openFire();
-            openFireTime = 0;
+            openFireTimer = 0;
         }
     }
 

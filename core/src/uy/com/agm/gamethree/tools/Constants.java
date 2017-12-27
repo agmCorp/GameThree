@@ -30,7 +30,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 0.5f;
 
     // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = false;
+    public static final boolean DEBUG_BOUNDARIES = true;
 
     // ---- Assets ----
 
@@ -64,7 +64,7 @@ public class Constants {
     // ---- Level ----
 
     public static final int TIMER_LEVEL_ONE = 180;
-    public static final float DELAY_GAME_OVER_SECONDS = 3.0f;
+    public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
 
     // ---- Dinamic objects -----
 
@@ -86,6 +86,7 @@ public class Constants {
     public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
+    public static final float HERO_FIRE_DELAY_SECONDS = 1.0f;
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -126,7 +127,7 @@ public class Constants {
     public static final float ENEMYTWO_VELOCITY_Y = -2.0f;
     public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
-    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 0.5f;
     public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
