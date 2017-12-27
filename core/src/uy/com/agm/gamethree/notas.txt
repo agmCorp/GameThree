@@ -60,7 +60,6 @@ PENDIENTES
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - AVERGIUAR COMO DEBUGUEAR
-- Hacer que hero dispare con delay
 - investigar uso de new vector y gargage collector
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
