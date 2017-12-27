@@ -30,7 +30,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 0.5f;
 
     // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = true;
+    public static final boolean DEBUG_BOUNDARIES = false;
 
     // ---- Assets ----
 
