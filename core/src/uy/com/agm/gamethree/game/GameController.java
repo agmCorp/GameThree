@@ -15,9 +15,13 @@ import uy.com.agm.gamethree.tools.Constants;
 public class GameController implements GestureDetector.GestureListener, InputProcessor {
     private static final String TAG = GameController.class.getName();
 
+    private Vector2 candidateVelocity; // Temp GC friendly vector
+    private Vector2 heroVelocity;
     private Hero player;
 
     public GameController(Hero player) {
+        candidateVelocity = new Vector2(0.0f, 0.0f);
+        heroVelocity = new Vector2(0.0f, 0.0f);
         this.player = player;
     }
 
@@ -52,47 +56,40 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             /*
             * DeltaX is positive when I move my finger to the left, negative otherwise.
             * DeltaY is positive when I move my finger down, negative otherwise.
+            * Both are in pixels, thus to get meters I must divide by Constants.PPM.
             */
 
             // In b2body y-axes sign is the opposite.
             deltaY = -deltaY;
 
-            // DeltaX and deltaY are in pixels, therefore delta is in metres.
-            Vector2 delta = new Vector2(deltaX / Constants.PPM, deltaY / Constants.PPM);
+            /*
+            * origin.x = player.getB2body().getPosition().x
+            * origin.y = player.getB2body().getPosition().y
+            *
+            * destination.x = origin.x + deltaX / Constants.PPM
+            * destination.y = origin.y + deltaY / Constants.PPM
+            *
+            * To go from origin to destination we must subtract their position vectors: destination - origin.
+            * Thus, destination - origin is (deltaX / Constants.PPM, deltaY / Constants.PPM).
+            */
+            candidateVelocity.x = deltaX / Constants.PPM;
+            candidateVelocity.y = deltaY / Constants.PPM;
 
-            // Deltas too small are discarded
-            if (delta.len() > Constants.HERO_SENSIBILITY_METERS) {
-                /*
-                * origin.x = player.getB2body().getPosition().x
-                * origin.y = player.getB2body().getPosition().y
-                *
-                * destination.x = origin.x + delta.x
-                * destination.y = origin.y + delta.y
-                *
-                * To go from origin to destination we must subtract their position vectors: destination - origin.
-                * Thus destination - origin is (delta.x, delta.y).
-                */
-                Vector2 newVelocity = new Vector2(delta.x, delta.y);
+            // Get the direction of the previous vector (normalization)
+            candidateVelocity.nor();
 
-                // Get the direction of the previous vector (normalization)
-                newVelocity.nor();
+            // Apply constant velocity on that direction
+            candidateVelocity.x = candidateVelocity.x * Constants.HERO_LINEAR_VELOCITY;
+            candidateVelocity.y = candidateVelocity.y * Constants.HERO_LINEAR_VELOCITY;
 
-                // Apply constant velocity on that direction
-                newVelocity.x = newVelocity.x * Constants.HERO_LINEAR_VELOCITY;
-                newVelocity.y = newVelocity.y * Constants.HERO_LINEAR_VELOCITY;
+            // Linear interpolation to avoid character shaking
+            heroVelocity.lerp(candidateVelocity, Constants.HERO_ALPHA_LERP);
 
-                // To avoid shaking, we only consider the newVelocity if its direction is slightly different from the direction of the actual velocity.
-                // In order to determine the difference in both directions (actual and new) we calculate their angle.
-                if (Math.abs(player.getB2body().getLinearVelocity().angle() - newVelocity.angle()) > Constants.HERO_ANGLE_SENSIBILITY_DEGREES) {
-                    // Apply the new velocity
-                    player.getB2body().setLinearVelocity(newVelocity);
-                    evaluateMovementDirection();
-                }
-            } else {
-                // Stop
-                player.getB2body().setLinearVelocity(0, 0);
-                evaluateMovementDirection();
-            }
+            // Apply the result
+            player.getB2body().setLinearVelocity(heroVelocity);
+
+            // Depending on the result, we change the animation if needed
+            evaluateMovementDirection();
         }
         return true;
     }

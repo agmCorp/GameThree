@@ -143,7 +143,7 @@ public class Hero extends Sprite {
     private void heroStateStanding(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -158,7 +158,7 @@ public class Hero extends Sprite {
     private void heroStateMovingLeftRight(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -182,7 +182,7 @@ public class Hero extends Sprite {
     private void heroStateMovingUp(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -205,7 +205,7 @@ public class Hero extends Sprite {
     private void heroStateMovingDown(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -228,7 +228,7 @@ public class Hero extends Sprite {
     private void heroStateDyingUp(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -264,7 +264,7 @@ public class Hero extends Sprite {
     private void heroStateDyingDown(float dt) {
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, Hero may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -381,7 +381,7 @@ public class Hero extends Sprite {
 
     public void draw(SpriteBatch batch) {
         // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-        // Thus by default (no velocity), our Sprite will be drawn rotated 90 degrees counter clockwise.
+        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
         boolean clockwise = true;
         float angle = 90;
 

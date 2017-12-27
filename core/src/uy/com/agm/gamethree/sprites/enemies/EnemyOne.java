@@ -94,7 +94,7 @@ public class EnemyOne extends Enemy {
          * This can't be done here because this method is called from WorldContactListener that is invoked
          * from PlayScreen.update.world.step(...).
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
+         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         super.getItemOnHit();
         currentState = State.INJURED;
@@ -142,7 +142,7 @@ public class EnemyOne extends Enemy {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
+        * At this time, EnemyOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.

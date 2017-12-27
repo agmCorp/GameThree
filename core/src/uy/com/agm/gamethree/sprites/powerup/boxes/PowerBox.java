@@ -210,7 +210,7 @@ public class PowerBox extends Sprite {
          * This can't be done here because this method is called from WorldContactListener that is invoked
          * from PlayScreen.update.world.step(...).
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore we use a flag (state) in order to point out this behavior and remove it later.
+         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         int strength = object.getProperties().get("strength", 0, Integer.class);
         if (damage >= strength - 1) {
