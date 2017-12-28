@@ -81,6 +81,10 @@ which uses delta to get the right frames for sprite animations, and actually dra
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
 - NO SE DONDE TENGO QUE HACER ASSET.DISPOSE, lo puse en gamethree
+- optimizar todos los new de vectores usando variables miembro.
+- Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
+- optimizar todas las cuentas usando scl, set, etc.
+
 
 VIDEO
 -----
