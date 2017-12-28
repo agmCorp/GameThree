@@ -62,6 +62,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             // In b2body y-axes sign is the opposite.
             deltaY = -deltaY;
 
+
+
             /*
             * origin.x = player.getB2body().getPosition().x
             * origin.y = player.getB2body().getPosition().y
