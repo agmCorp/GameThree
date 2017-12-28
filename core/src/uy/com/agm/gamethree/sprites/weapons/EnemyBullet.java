@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
  * Created by AGM on 12/19/2017.
@@ -38,17 +39,9 @@ public class EnemyBullet extends Weapon {
         stateTime = 0;
         currentState = State.SHOT;
 
-        // To go from Enemy to Hero we must subtract their position vectors: Hero - Enemy.
-        velocity = new Vector2();
-        velocity.x = screen.getPlayer().getB2body().getPosition().x - b2body.getPosition().x;
-        velocity.y = screen.getPlayer().getB2body().getPosition().y - b2body.getPosition().y;
-
-        // Get the direction of the previous vector (normalization)
-        velocity.nor();
-
-        // Apply constant velocity on that direction
-        velocity.x = velocity.x * Constants.ENEMYBULLET_LINEAR_VELOCITY;
-        velocity.y = velocity.y * Constants.ENEMYBULLET_LINEAR_VELOCITY;
+        // Move EnemyBullet from Enemy to Hero
+        velocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(velocity,screen.getPlayer().getB2body().getPosition().x,  screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));

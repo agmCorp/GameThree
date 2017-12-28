@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
  * Created by AGM on 12/6/2017.
@@ -56,33 +57,15 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             /*
             * DeltaX is positive when I move my finger to the left, negative otherwise.
             * DeltaY is positive when I move my finger down, negative otherwise.
-            * Both are in pixels, thus to get meters I must divide by Constants.PPM.
+            * Both are in pixels, thus to get meters I must divide them by Constants.PPM.
             */
 
             // In b2body y-axes sign is the opposite.
             deltaY = -deltaY;
 
-
-
-            /*
-            * origin.x = player.getB2body().getPosition().x
-            * origin.y = player.getB2body().getPosition().y
-            *
-            * destination.x = origin.x + deltaX / Constants.PPM
-            * destination.y = origin.y + deltaY / Constants.PPM
-            *
-            * To go from origin to destination we must subtract their position vectors: destination - origin.
-            * Thus, destination - origin is (deltaX / Constants.PPM, deltaY / Constants.PPM).
-            */
-            candidateVelocity.x = deltaX / Constants.PPM;
-            candidateVelocity.y = deltaY / Constants.PPM;
-
-            // Get the direction of the previous vector (normalization)
-            candidateVelocity.nor();
-
-            // Apply constant velocity on that direction
-            candidateVelocity.x = candidateVelocity.x * Constants.HERO_LINEAR_VELOCITY;
-            candidateVelocity.y = candidateVelocity.y * Constants.HERO_LINEAR_VELOCITY;
+            // Go from origin to target at constant speed
+            candidateVelocity.set(player.getB2body().getPosition().x, player.getB2body().getPosition().y);
+            Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / Constants.PPM, player.getB2body().getPosition().y + deltaY / Constants.PPM, Constants.HERO_LINEAR_VELOCITY);
 
             // Linear interpolation to avoid character shaking
             heroVelocity.lerp(candidateVelocity, Constants.HERO_ALPHA_LERP);
