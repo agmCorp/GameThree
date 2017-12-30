@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
+import uy.com.agm.gamethree.sprites.finals.FinalLevelOne;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
@@ -146,6 +147,12 @@ public class WorldContactListener implements ContactListener {
             case Constants.ENEMY_WEAPON_BIT | Constants.BORDERS_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
+                break;
+
+            // Final enemy - Borders
+            case Constants.FINALLEVELONE_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINALLEVELONE_BIT ? fixA : fixB;
+                ((FinalLevelOne) fixC.getUserData()).onWall();
                 break;
         }
     }

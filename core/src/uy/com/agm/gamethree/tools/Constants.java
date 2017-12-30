@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f;
+    public static final float GAMECAM_VELOCITY = 0.5f * 0;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
@@ -78,6 +78,7 @@ public class Constants {
     public static final short ITEM_BIT = 32;
     public static final short HERO_WEAPON_BIT = 64;
     public static final short ENEMY_WEAPON_BIT = 128;
+    public static final short FINALLEVELONE_BIT = 256;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.0f;
@@ -129,6 +130,14 @@ public class Constants {
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
     public static final int ENEMYTWO_SCORE = 7;
+
+    // FinalEnemyOne (meters = pixels * resizeFactor / PPM)
+    public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 70.0f / PPM;
+    public static final float FINALLEVELONE_LINEAR_VELOCITY = 5.0f;
+    public static final float FINALLEVELONE_WIDTH_METERS = 169.0f * 1.0f / PPM;
+    public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
+    //public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+    //public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
