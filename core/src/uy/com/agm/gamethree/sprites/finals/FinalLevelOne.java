@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -32,7 +31,12 @@ public class FinalLevelOne extends Sprite {
         WALKING, IDLE, SHOOTING, EXPLODING, DEAD
     }
 
+    private enum StateWalking {
+        CEILING_LEFT, CEILING_RIGHT, LEFT_UP, LEFT_DOWN, FLOOR_LEFT, FLOOR_RIGHT, RIGHT_UP, RIGHT_DOWN
+    }
+
     private State currentState;
+    private StateWalking currentStateWalking;
     private int damage;
     private float stateTime;
 
@@ -69,7 +73,16 @@ public class FinalLevelOne extends Sprite {
         damage = 0;
         stateTime = 0;
 
-        velocity = new Vector2(MathUtils.randomSign() * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+        // TODO COMENTAR EL PUTO HERO NO FUNCIONA ASI?
+        setOriginCenter();
+
+        int direction = -1;//MathUtils.randomSign();
+        velocity = new Vector2(direction * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+        if (direction < 0) {
+            currentStateWalking = StateWalking.CEILING_LEFT;
+        } else {
+            currentStateWalking = StateWalking.CEILING_RIGHT;
+        }
     }
 
     private void defineFinalLevelOne() {
@@ -115,51 +128,6 @@ public class FinalLevelOne extends Sprite {
 
     private void stateWalking(float dt) {
         b2body.setLinearVelocity(velocity);
-        float vy = b2body.getLinearVelocity().y;
-        float vx = b2body.getLinearVelocity().x;
-        float x = b2body.getPosition().x;
-        float y = b2body.getPosition().y;
-
-        if (vy > 0.0f) {
-            // Se mueve hacia arriba
-            if (x < screen.gameCam.position.x) {
-                // borde izquierdo
-            } else {
-                // borde derecho
-            }
-        } else if (vy < 0.0f) {
-            // Se mueve hacia abajo
-            if (x < screen.gameCam.position.x) {
-                // borde izquierdo
-            } else {
-                // borde derecho
-            }
-        } else {
-            if (vx != 0.0f) {
-                if (vx > 0.0f) {
-                    // Se mueve a la derecha
-                    if (y < screen.gameCam.position.y) {
-                        // borde inferior
-
-                    } else {
-                        // borde superior
-                        flip(true, false);
-                    }
-                } else if (vx < 0.0f) {
-                    // Se mueve a la izquierda
-                    if (y < screen.gameCam.position.y) {
-                        // borde inferior
-                    } else {
-                        // borde superior
-                        flip(true, true);
-                    }
-                }
-            } else {
-                // esta quieto // vx == 0 && vy == 0
-            }
-        }
-
-
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -171,6 +139,41 @@ public class FinalLevelOne extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
+
+        switch (currentStateWalking) {
+            case CEILING_LEFT: //
+                setRotation(0);
+                setFlip(false, true);
+                break;
+            case CEILING_RIGHT: //
+                setRotation(0);
+                setFlip(true, true);
+                break;
+            case LEFT_DOWN:
+                setRotation(90);
+                setFlip(false, true);
+                break;
+            case LEFT_UP:
+                setRotation(90);
+                setFlip(true, true);
+                break;
+            case RIGHT_DOWN:
+                setRotation(90);
+                setFlip(false, false);
+                break;
+            case RIGHT_UP: //
+                setRotation(90);
+                setFlip(true, false);
+                break;
+            case FLOOR_LEFT: //
+                setRotation(0);
+                setFlip(false, false);
+                break;
+            case FLOOR_RIGHT: //
+                setRotation(0);
+                setFlip(true, false);
+                break;
+        }
     }
 
     private void stateIdle() {
@@ -197,12 +200,57 @@ public class FinalLevelOne extends Sprite {
     }
 
     public void onWall() {
-        if (b2body.getPosition().x < screen.gameCam.position.x) {
-            // pared izquerda
-            //currentState = WALKING_LEFT;
+        float vy = b2body.getLinearVelocity().y;
+        float vx = b2body.getLinearVelocity().x;
+        float x = b2body.getPosition().x;
+        float y = b2body.getPosition().y;
+
+        if (vy > 0.0f) {
+            if (x < screen.gameCam.position.x) {
+                // Se movia hacia arriba por el borde izquierdo
+                currentStateWalking =  StateWalking.CEILING_RIGHT;
+                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+            } else {
+                // Se movia hacia arriba por el borde derecho
+                currentStateWalking =  StateWalking.CEILING_LEFT;
+                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+            }
+        } else if (vy < 0.0f) {
+            if (x < screen.gameCam.position.x) {
+                // Se movia hacia abajo por el borde izquierdo
+                currentStateWalking =  StateWalking.FLOOR_RIGHT;
+                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+            } else {
+                // Se movia hacia abajo por el borde derecho
+                currentStateWalking =  StateWalking.FLOOR_LEFT;
+                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+            }
         } else {
-            // pared derecha
-            //currentState = WALKING_RIGHT;
+            if (vx != 0.0f) {
+                if (vx > 0.0f) {
+                    if (y < screen.gameCam.position.y) {
+                        // Se movia a la derecha por el borde inferior
+                        currentStateWalking =  StateWalking.RIGHT_UP;
+                        velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    } else {
+                        // Se movia a la derecha por el borde superior
+                        currentStateWalking =  StateWalking.RIGHT_DOWN;
+                        velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    }
+                } else if (vx < 0.0f) {
+                    if (y < screen.gameCam.position.y) {
+                        // Se movia a la izquierda por el borde inferior
+                        currentStateWalking =  StateWalking.LEFT_UP;
+                        velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    } else {
+                        /// Se movia a la izquierda por el borde superior
+                        currentStateWalking =  StateWalking.LEFT_DOWN;
+                        velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    }
+                }
+            } else {
+                // esta quieto // vx == 0 && vy == 0
+            }
         }
     }
 
