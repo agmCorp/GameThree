@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -40,6 +42,8 @@ public class FinalLevelOne extends Sprite {
     private Animation finalLevelOneShootAnimation;
     private Animation finalLevelOneDeathAnimation;
 
+    private Vector2 velocity;
+
     public FinalLevelOne(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -64,6 +68,8 @@ public class FinalLevelOne extends Sprite {
         currentState = State.WALKING;
         damage = 0;
         stateTime = 0;
+
+        velocity = new Vector2(MathUtils.randomSign() * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
     }
 
     private void defineFinalLevelOne() {
@@ -108,7 +114,53 @@ public class FinalLevelOne extends Sprite {
     }
 
     private void stateWalking(float dt) {
-        b2body.setLinearVelocity(-3, -2);
+        b2body.setLinearVelocity(velocity);
+        float vy = b2body.getLinearVelocity().y;
+        float vx = b2body.getLinearVelocity().x;
+        float x = b2body.getPosition().x;
+        float y = b2body.getPosition().y;
+
+        if (vy > 0.0f) {
+            // Se mueve hacia arriba
+            if (x < screen.gameCam.position.x) {
+                // borde izquierdo
+            } else {
+                // borde derecho
+            }
+        } else if (vy < 0.0f) {
+            // Se mueve hacia abajo
+            if (x < screen.gameCam.position.x) {
+                // borde izquierdo
+            } else {
+                // borde derecho
+            }
+        } else {
+            if (vx != 0.0f) {
+                if (vx > 0.0f) {
+                    // Se mueve a la derecha
+                    if (y < screen.gameCam.position.y) {
+                        // borde inferior
+
+                    } else {
+                        // borde superior
+                        flip(true, false);
+                    }
+                } else if (vx < 0.0f) {
+                    // Se mueve a la izquierda
+                    if (y < screen.gameCam.position.y) {
+                        // borde inferior
+                    } else {
+                        // borde superior
+                        flip(true, true);
+                    }
+                }
+            } else {
+                // esta quieto // vx == 0 && vy == 0
+            }
+        }
+
+
+
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
@@ -118,7 +170,6 @@ public class FinalLevelOne extends Sprite {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTime, true));
-        flip(false, true);
         stateTime += dt;
     }
 
@@ -148,10 +199,10 @@ public class FinalLevelOne extends Sprite {
     public void onWall() {
         if (b2body.getPosition().x < screen.gameCam.position.x) {
             // pared izquerda
-            //rotate(90);
+            //currentState = WALKING_LEFT;
         } else {
             // pared derecha
-            //rotate(270);
+            //currentState = WALKING_RIGHT;
         }
     }
 
