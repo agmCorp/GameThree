@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
+import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -252,17 +253,9 @@ public class Hero extends Sprite {
             heroStateTimer = 0;
             currentHeroState = HeroState.DYING_DOWN;
         } else {
-            /* We move Hero from the actual position to the middle of the screen.
-             * origin = (b2body.getPosition().x, b2body.getPosition().y)
-             * destination = (b2body.getPosition().x, screen.gameCam.position.y)
-             *
-             * To go from origin to destination we must subtract their position vectors: destination - origin.
-             * Get the direction of the previous vector (normalization) and finally apply constant velocity on that direction
-            */
-            Vector2 newVelocity = new Vector2(0, screen.gameCam.position.y - b2body.getPosition().y);
-            newVelocity.nor();
-            newVelocity.x = newVelocity.x * Constants.HERO_DEATH_LINEAR_VELOCITY;
-            newVelocity.y = newVelocity.y * Constants.HERO_DEATH_LINEAR_VELOCITY;
+            // We move Hero from the actual position to the middle of the screen.
+            Vector2 newVelocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
+            Vector2Util.goToTarget(newVelocity, b2body.getPosition().x, screen.gameCam.position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
             b2body.setLinearVelocity(newVelocity);
         }
     }
@@ -279,17 +272,9 @@ public class Hero extends Sprite {
         setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true));
         heroStateTimer += dt;
 
-        /* We move Hero from the actual position to the bottom of the screen.
-        * origin = (b2body.getPosition().x, b2body.getPosition().y)
-        * destination = (b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight())
-        *
-        * To go from origin to destination we must subtract their position vectors: destination - origin.
-        * Get the direction of the previous vector (normalization) and finally apply constant velocity on that direction
-        */
-        Vector2 newVelocity = new Vector2(0, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight() - b2body.getPosition().y);
-        newVelocity.nor();
-        newVelocity.x = newVelocity.x * Constants.HERO_DEATH_LINEAR_VELOCITY;
-        newVelocity.y = newVelocity.y * Constants.HERO_DEATH_LINEAR_VELOCITY;
+        // We move Hero from the actual position to the bottom of the screen.
+        Vector2 newVelocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(newVelocity, b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
         b2body.setLinearVelocity(newVelocity);
 
         // If we reach the bottom edge of the screen, we set Hero as not active in the simulation.

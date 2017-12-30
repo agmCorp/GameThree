@@ -51,6 +51,7 @@ PROXIMOS PASOS
 --------------
 - hacer enemigo final
 - hacer nuevo poder
+- programar los bordes
 
 PENDIENTES
 ----------
@@ -59,8 +60,7 @@ PENDIENTES
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
-- AVERGIUAR COMO DEBUGUEAR
-- investigar uso de new vector y gargage collector
+- averiguar como debuguear
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -80,11 +80,9 @@ which uses delta to get the right frames for sprite animations, and actually dra
     ver diferencias de mi fuente actual con el del repositorio
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
-- NO SE DONDE TENGO QUE HACER ASSET.DISPOSE, lo puse en gamethree
-- optimizar todos los new de vectores usando variables miembro.
+- No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
+- Manejo de memoria y uso de Vector2.
 - Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
-- optimizar todas las cuentas usando scl, set, etc.
-
 
 VIDEO
 -----
