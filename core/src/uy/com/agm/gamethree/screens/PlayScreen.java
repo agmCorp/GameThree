@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalLevelOne;
 import uy.com.agm.gamethree.sprites.player.Hero;
@@ -60,6 +61,10 @@ public class PlayScreen implements Screen {
     // Main character
     private Hero player;
 
+    // Boundaries
+    private Edge upperEdge;
+    private Edge bottomEdge;
+
     // Final Enemy (level one)
     private FinalLevelOne finalEnemy;
 
@@ -96,8 +101,12 @@ public class PlayScreen implements Screen {
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
+        // Create boundaries
+        bottomEdge = new Edge(this, false);
+        upperEdge = new Edge(this, true);
+
         // Create the final enemy in our game world
-        finalEnemy = new FinalLevelOne(this, gameCam.position.x, gameCam.position.y / 2 + 2);
+        finalEnemy = new FinalLevelOne(this, gameCam.position.x, Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM - Constants.FINALLEVELONE_HEIGHT_METERS);
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
@@ -223,11 +232,12 @@ public class PlayScreen implements Screen {
     private void updateCamera(float dt) {
         // If Hero is dead, we freeze the camera
         if(!player.isHeroDead()) {
-            // GameCam must be moved from 4 to 76
-            if (gameCam.position.y < (Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) - gameViewPort.getWorldHeight() / 2) {
-                // Gamecam is moving up
-                gameCam.position.y += Constants.GAMECAM_VELOCITY * dt;
+            if (upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 >= Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) {
+                stopEdges();
             }
+            gameCam.position.y = upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
+        } else {
+            stopEdges();
         }
 
         // Update our gamecam with correct coordinates after changes
@@ -243,6 +253,14 @@ public class PlayScreen implements Screen {
 
     public Hero getPlayer() {
         return player;
+    }
+
+    public Edge getBottomEdge() {
+        return bottomEdge;
+    }
+
+    public Edge getUpperEdge() {
+        return upperEdge;
     }
 
     @Override
@@ -365,6 +383,11 @@ public class PlayScreen implements Screen {
 
     private void renderDebugFinalEnemy(ShapeRenderer shapeRenderer) {
         finalEnemy.renderDebug(shapeRenderer);
+    }
+
+    private void stopEdges() {
+        upperEdge.stop();
+        bottomEdge.stop();
     }
 
     @Override

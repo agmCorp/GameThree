@@ -62,6 +62,7 @@ PENDIENTES
 bordes y objetos
 - averiguar como debuguear
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
+- OJO QUE PUEDO MORIR POR APLASTAMIENTO CON SUPERPODERES!!!!!!
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

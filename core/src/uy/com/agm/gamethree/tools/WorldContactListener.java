@@ -154,6 +154,12 @@ public class WorldContactListener implements ContactListener {
                 fixC = fixA.getFilterData().categoryBits == Constants.FINALLEVELONE_BIT ? fixA : fixB;
                 ((FinalLevelOne) fixC.getUserData()).onWall();
                 break;
+
+            // Final enemy - Edges
+            case Constants.FINALLEVELONE_BIT | Constants.EDGES_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINALLEVELONE_BIT ? fixA : fixB;
+                ((FinalLevelOne) fixC.getUserData()).onWall();
+                break;
         }
     }
 

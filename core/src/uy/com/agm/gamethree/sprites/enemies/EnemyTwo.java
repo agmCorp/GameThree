@@ -135,7 +135,9 @@ public class EnemyTwo extends Enemy {
     }
 
     private void stateAlive(float dt) {
+        // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
+
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, EnemyTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.

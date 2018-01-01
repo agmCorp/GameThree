@@ -155,8 +155,9 @@ public class PowerOne extends Item {
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT;
         filter.maskBits = Constants.BORDERS_BIT |
-                Constants.POWERBOX_BIT |
+                Constants.EDGES_BIT |
                 Constants.OBSTACLE_BIT |
+                Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT;
         for (Fixture fixture : hero.getB2body().getFixtureList()) {
             fixture.setFilterData(filter);

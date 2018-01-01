@@ -101,6 +101,7 @@ public class FinalLevelOne extends Sprite {
         shape.setRadius(Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.FINALLEVELONE_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
+                            Constants.EDGES_BIT |
                             Constants.OBSTACLE_BIT |
                             Constants.HERO_WEAPON_BIT |
                             Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
@@ -145,7 +146,7 @@ public class FinalLevelOne extends Sprite {
         setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
-        switch (currentStateWalking) {
+        switch (currentStateWalking) { // todo los angulos estan mal porque es un rectangulo de 8 por 4.8
             case CEILING_LEFT:
                 setRotation(0);
                 setFlip(false, true);
@@ -232,14 +233,15 @@ public class FinalLevelOne extends Sprite {
             if (x < screen.gameCam.position.x) {
                 // Se movia hacia arriba por el borde izquierdo
                 // Al llegar al muro hay dos opciones: sigue por el techo a la derecha o va a la diagonal.
-                if (rndBoolean && false) {
+                if (rndBoolean) {
                     currentStateWalking = StateWalking.CEILING_RIGHT;
                     velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 } else {
                     currentStateWalking = StateWalking.BACKSLASH_DOWN;
                     // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+//ANDA                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2, screen.getBottomEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
                     //velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
@@ -254,7 +256,8 @@ public class FinalLevelOne extends Sprite {
 
                     // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+ // anda                   Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2, screen.getBottomEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
                     //velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
@@ -271,7 +274,8 @@ public class FinalLevelOne extends Sprite {
 
                     // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+ // anda                   Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2, screen.getUpperEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
 
 
@@ -288,7 +292,8 @@ public class FinalLevelOne extends Sprite {
 
                     // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+// anda                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2, screen.getUpperEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
 
                     //velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, Constants.FINALLEVELONE_LINEAR_VELOCITY);
@@ -349,19 +354,10 @@ public class FinalLevelOne extends Sprite {
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
-            float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+            float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
 
-            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
+            if (upperEdge > getY() + getHeight()) {
                 b2body.setActive(true);
-            } else {
-                if (b2body.isActive()) { // Was on camera...
-                    // It's outside bottom edge
-                    if (bottomEdge > getY() + getHeight()) {
-                        world.destroyBody(b2body);
-                        currentState = State.DEAD;
-                    }
-                }
             }
         }
     }

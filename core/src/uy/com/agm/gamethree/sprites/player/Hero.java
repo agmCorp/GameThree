@@ -158,8 +158,8 @@ public class Hero extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(heroStand);
 
-        // If our Hero is standing, he should be dragged when the cam moves
-        checkBoundaries();
+        // If our Hero is standing, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
+        checkCrashing();
     }
 
     private void heroStateMovingLeftRight(float dt) {
@@ -182,8 +182,9 @@ public class Hero extends Sprite {
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTimer, true));
 
-        // If our Hero is moving to the left or to the right, he should be dragged when the cam moves up
-        checkBoundaries();
+        // If our Hero is moving to the left or to the right, he could be smashed between an object and the bottomEdge
+        // when the camera moves dragging him.
+        checkCrashing();
     }
 
     private void heroStateMovingUp(float dt) {
@@ -206,7 +207,8 @@ public class Hero extends Sprite {
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true));
 
-        checkUpperBound();
+        // If our Hero is moving up, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
+        checkCrashing();
     }
 
     private void heroStateMovingDown(float dt) {
@@ -229,7 +231,8 @@ public class Hero extends Sprite {
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true));
 
-        checkBottomBound();
+        // If our Hero is moving down, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
+        checkCrashing();
     }
 
     private void heroStateDyingUp(float dt) {
@@ -312,33 +315,14 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.DYING_UP;
     }
 
-    // It prevents Hero from going beyond the limits of the game
-    private void checkBoundaries() {
-        checkUpperBound();
-        checkBottomBound();
-    }
-
-    // It prevents Hero from going beyond the upper limit of the game
-    private void checkUpperBound() {
-        float camUpperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
+    // if Hero goes beyond the lower limit, he must have been crushed by an object.
+    private void checkCrashing() {
+        float bottomEdge = screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the bottomEdge :)
         float heroUpperEdge = getY() + getHeight();
 
-        // Beyond upper edge
-        if (camUpperEdge < heroUpperEdge) {
-            // Be carefull, we broke the simulation because Hero is teleporting.
-            b2body.setTransform(b2body.getPosition().x, camUpperEdge - getHeight() / 2, b2body.getAngle());
-        }
-    }
-
-    // It prevents Hero from going beyond the bottom limit of the game
-    private void checkBottomBound() {
-        float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
-        float heroBottomEdge = getY();
-
         // Beyond bottom edge
-        if (camBottomEdge > heroBottomEdge) {
-            // Be carefull, we broke the simulation because Hero is teleporting.
-            b2body.setTransform(b2body.getPosition().x, camBottomEdge + getHeight() / 2, b2body.getAngle());
+        if (bottomEdge > heroUpperEdge) {
+            onDead();
         }
     }
 
@@ -346,8 +330,9 @@ public class Hero extends Sprite {
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
         filter.maskBits = Constants.BORDERS_BIT |
-                Constants.POWERBOX_BIT |
+                Constants.EDGES_BIT |
                 Constants.OBSTACLE_BIT |
+                Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)

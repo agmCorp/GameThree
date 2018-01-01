@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.5f * 0;
+    public static final float GAMECAM_VELOCITY = 7.0f;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
@@ -71,14 +71,15 @@ public class Constants {
     // Box2D Collision Bits
     public static final short NOTHING_BIT = 0;
     public static final short BORDERS_BIT = 1;
-    public static final short HERO_BIT = 2;
+    public static final short EDGES_BIT = 2;
     public static final short OBSTACLE_BIT = 4;
-    public static final short POWERBOX_BIT = 8;
-    public static final short ENEMY_BIT = 16;
-    public static final short ITEM_BIT = 32;
-    public static final short HERO_WEAPON_BIT = 64;
-    public static final short ENEMY_WEAPON_BIT = 128;
-    public static final short FINALLEVELONE_BIT = 256;
+    public static final short HERO_BIT = 8;
+    public static final short POWERBOX_BIT = 16;
+    public static final short ENEMY_BIT = 32;
+    public static final short ITEM_BIT = 64;
+    public static final short HERO_WEAPON_BIT = 128;
+    public static final short ENEMY_WEAPON_BIT = 256;
+    public static final short FINALLEVELONE_BIT = 512;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.0f;
@@ -88,6 +89,10 @@ public class Constants {
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.5f;
+
+    // Edge (meters = pixels * resizeFactor / PPM)
+    public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
+    public static final float EDGE_HEIGHT_METERS = 10.0f * 1.0f / PPM;
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -106,7 +111,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 20;
+    public static final int TIMER_POWERONE = 2000;
     public static final int TIMER_NOTIFICATION = 3;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_ALPHA = 1.0f;
