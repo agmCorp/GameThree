@@ -30,7 +30,7 @@ public class FinalLevelOne extends Sprite {
     private PlayScreen screen;
     private Body b2body;
 
-    private enum State {
+    private enum StateFinal {
         WALKING, IDLE, SHOOTING, EXPLODING, DEAD
     }
 
@@ -38,7 +38,7 @@ public class FinalLevelOne extends Sprite {
         CEILING_LEFT, CEILING_RIGHT, LEFT_UP, LEFT_DOWN, FLOOR_LEFT, FLOOR_RIGHT, RIGHT_UP, RIGHT_DOWN, SLASH_UP, SLASH_DOWN, BACKSLASH_UP, BACKSLASH_DOWN
     }
 
-    private State currentState;
+    private StateFinal currentStateFinal;
     private StateWalking currentStateWalking;
     private int damage;
     private float stateTimer;
@@ -75,13 +75,13 @@ public class FinalLevelOne extends Sprite {
         finalLevelOneShootAnimation = Assets.instance.finalLevelOne.finalLevelOneShootAnimation;
         finalLevelOneDeathAnimation = Assets.instance.finalLevelOne.finalLevelOneDeathAnimation;
 
-        currentState = State.WALKING;
+        currentStateFinal = StateFinal.WALKING;
         damage = 0;
         stateTimer = 0;
         timeToChangeTimer = 0;
-        timeToChange = MathUtils.random(0.0f, 12.0f); // todo
+        timeToChange = getNextTimeToChange();
 
-        // TODO COMENTAR EL PUTO HERO NO FUNCIONA ASI?
+        // Place origin of rotation in the center of the sprite
         setOriginCenter();
 
         int direction = MathUtils.randomSign();
@@ -91,7 +91,8 @@ public class FinalLevelOne extends Sprite {
         } else {
             currentStateWalking = StateWalking.CEILING_RIGHT;
         }
-        // todo ojo
+
+        // Temp GC friendly vector
         tmp = new Vector2();
     }
 
@@ -110,46 +111,59 @@ public class FinalLevelOne extends Sprite {
                             Constants.OBSTACLE_BIT |
                             Constants.HERO_WEAPON_BIT |
                             Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
+    private float getNextTimeToChange() {
+        return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_DELAY_SECONDS);
+    }
+
+    private StateFinal getNewRandomState(StateFinal currentStateFinal) {
+        boolean blnOption = MathUtils.randomBoolean();
+        StateFinal newRandomStat;
+
+        switch (currentStateFinal) {
+            case WALKING:
+                if (blnOption) {
+                    newRandomStat = StateFinal.IDLE;
+                } else {
+                    newRandomStat = StateFinal.SHOOTING;
+                }
+                break;
+            case IDLE:
+                if (blnOption) {
+                    newRandomStat = StateFinal.WALKING;
+                } else {
+                    newRandomStat = StateFinal.SHOOTING;
+                }
+                break;
+            case SHOOTING:
+                if (blnOption) {
+                    newRandomStat = StateFinal.WALKING;
+                } else {
+                    newRandomStat = StateFinal.IDLE;
+                }
+                break;
+            default:
+                newRandomStat = currentStateFinal;
+                break;
+        }
+        return newRandomStat;
+    }
+
     public void update(float dt) {
         if (b2body.isActive()) {
-            boolean blnOption = MathUtils.randomBoolean();
-
             timeToChangeTimer += dt;
             if (timeToChangeTimer >= timeToChange) {
                 timeToChangeTimer = 0;
-                timeToChange = MathUtils.random(0.0f, 12.0f); // todo
+                timeToChange = getNextTimeToChange();
                 stateTimer = 0;
-                switch (currentState) {
-                    case WALKING:
-                        if (blnOption) {
-                            currentState = State.IDLE;
-                        } else {
-                            currentState = State.SHOOTING;
-                        }
-                        break;
-                    case IDLE:
-                        if (blnOption) {
-                            currentState = State.WALKING;
-                        } else {
-                            currentState = State.SHOOTING;
-                        }
-                        break;
-                    case SHOOTING:
-                        if (blnOption) {
-                            currentState = State.WALKING;
-                        } else {
-                            currentState = State.IDLE;
-                        }
-                        break;
-                }
+                currentStateFinal = getNewRandomState(currentStateFinal);
             }
         }
-        switch (currentState) {
+
+        switch (currentStateFinal) {
             case WALKING:
                 Gdx.app.debug(TAG, "camino!!!!!!!!!!!!");
                 stateWalking(dt);
@@ -173,7 +187,6 @@ public class FinalLevelOne extends Sprite {
                 break;
         }
         checkBoundaries();
-
     }
 
     private void stateWalking(float dt) {
@@ -293,6 +306,15 @@ public class FinalLevelOne extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) finalLevelOneShootAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
+
+        // ----------------------
+        // // TODO: 1/1/2018
+        float angulo = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y).sub(b2body.getPosition().x, b2body.getPosition().y).angle();
+        setRotation(angulo);
+        setFlip(true, true);
+        Gdx.app.debug(TAG, "angulo " + angulo);
+        // -----------------------
+
     }
 
     private void stateExploding(float dt) {
@@ -307,7 +329,7 @@ public class FinalLevelOne extends Sprite {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-//        currentState = State.INJURED;
+//        currentStateFinal = StateFinal.INJURED;
     }
 
     public void onWall() {
@@ -445,7 +467,7 @@ public class FinalLevelOne extends Sprite {
     }
 
     public void draw(Batch batch) {
-        if (currentState != State.DEAD) {
+        if (currentStateFinal != StateFinal.DEAD) {
             super.draw(batch);
         }
     }
@@ -456,12 +478,12 @@ public class FinalLevelOne extends Sprite {
 
     // This FinalLevelOne can be removed from our game
     public boolean isDisposable() {
-        return currentState == State.DEAD;
+        return currentStateFinal == StateFinal.DEAD;
     }
 
     // This FinalLevelOne doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == State.DEAD || currentState == State.EXPLODING;
+        return currentStateFinal == StateFinal.DEAD || currentStateFinal == StateFinal.EXPLODING;
     }
 
     private void checkBoundaries() {
