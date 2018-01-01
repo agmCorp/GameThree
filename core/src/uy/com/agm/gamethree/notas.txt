@@ -63,6 +63,8 @@ bordes y objetos
 - averiguar como debuguear
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
 - OJO QUE PUEDO MORIR POR APLASTAMIENTO CON SUPERPODERES!!!!!!
+- buscar en todo el codigo en donde uso V_HEIGHT V_WIDTH
+- yo creo que en el enemigo final, en onwall solo debo setear estados y luego cada estado (en su update) se setea su velocidad.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
