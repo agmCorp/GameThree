@@ -66,6 +66,8 @@ bordes y objetos
 - cuando el enemigo final pasa a idle, la imagen deberia estar girada segun en la parte de la pantalla en donde este.
 o segun el giro de la imagen del estado previo...
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
+- el enemigo final cuando recien lo veo, esta mal parado..no esta sobre el borde. Los calculos estan bien, el
+boundary esta perfecto (cuadrado amarillo), lo que pasa que como agrande las imagenes...el circulo queda muy adentro.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
