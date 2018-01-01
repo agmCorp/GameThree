@@ -16,7 +16,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
@@ -44,6 +46,7 @@ public class FinalLevelOne extends Sprite {
     private float stateTimer;
     private float timeToChangeTimer;
     private float timeToChange;
+    private float openFireTimer;
 
     private TextureRegion finalLevelOneStand;
     private Animation finalLevelOneWalkAnimation;
@@ -80,6 +83,7 @@ public class FinalLevelOne extends Sprite {
         stateTimer = 0;
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
+        openFireTimer = Constants.ENEMYONE_FIRE_DELAY_SECONDS; // todo usar cte adecuada
 
         // Place origin of rotation in the center of the sprite
         setOriginCenter();
@@ -159,6 +163,7 @@ public class FinalLevelOne extends Sprite {
                 timeToChangeTimer = 0;
                 timeToChange = getNextTimeToChange();
                 stateTimer = 0;
+                openFireTimer = Constants.ENEMYONE_FIRE_DELAY_SECONDS; // todo usar cte adecuada
                 currentStateFinal = getNewRandomState(currentStateFinal);
             }
         }
@@ -319,8 +324,21 @@ public class FinalLevelOne extends Sprite {
         setRotation(angulo);
         setFlip(true, true);
         Gdx.app.debug(TAG, "angulo " + angulo);
-        // -----------------------
 
+        // instanciar con tmp, usar cte
+        if (openFireTimer >= Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+            openFire();
+            openFireTimer = 0;
+        } else {
+            openFireTimer += dt;
+        }
+        // -----------------------
+    }
+
+    private void openFire() {
+        // instanciar con tmp, usar cte
+        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
+        screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
     }
 
     private void stateExploding(float dt) {
