@@ -130,7 +130,6 @@ public class Hero extends Sprite {
                 break;
         }
 
-
         // Shoot timer
         openFiretimer += dt;
     }

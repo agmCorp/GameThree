@@ -49,9 +49,10 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- hacer enemigo final
+- optimizar el codigo del enemigofinal poderes.
+- ponerle sonido y assets bien
+- programar damage y muerte y colisiones
 - hacer nuevo poder
-- programar los bordes
 
 PENDIENTES
 ----------

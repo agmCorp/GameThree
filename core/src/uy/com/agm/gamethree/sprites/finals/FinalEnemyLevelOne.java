@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -33,6 +34,10 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private enum StateFinalEnemy {
         WALKING, IDLE, SHOOTING, EXPLODING, DEAD
+    }
+
+    private enum PowerState {
+        NORMAL, POWERFUL
     }
 
     private enum StateWalking {
@@ -60,6 +65,12 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private Vector2 velocity;
     private Vector2 tmp; // Temp GC friendly vector
+
+    // Power FX
+    private PowerState currentPowerState;
+    private Animation powerFXAnimation;
+    private float powerFXStateTimer;
+    private Sprite powerFXSprite;
 
     public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -103,6 +114,27 @@ public class FinalEnemyLevelOne extends Sprite {
 
         // Temp GC friendly vector
         tmp = new Vector2();
+
+
+
+
+//----------- todo
+        // PowerFX variables initialization
+        currentPowerState = PowerState.NORMAL;
+        powerFXAnimation = Assets.instance.ghostMode.ghostModeAnimation;
+        powerFXStateTimer = 0;
+
+        // Set the power's texture
+        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+
+        // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
+        spritePower.setBounds(getX(), getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+
+        powerFXSprite = new Sprite(spritePower);
+
+        // Place origin of rotation in the center of the sprite
+        powerFXSprite.setOriginCenter();
+        //----
     }
 
     private void defineFinalEnemyLevelOne() {
@@ -165,6 +197,7 @@ public class FinalEnemyLevelOne extends Sprite {
     public void update(float dt) {
         if (b2body.isActive()) { // We wait until our FinalEnemy is on camera.
             timeToChangeTimer += dt;
+            // Set a new currentStateFinalEnemy
             if (timeToChangeTimer >= timeToChange) {
                 timeToChangeTimer = 0;
                 timeToChange = getNextTimeToChange();
@@ -192,6 +225,21 @@ public class FinalEnemyLevelOne extends Sprite {
             default:
                 break;
         }
+
+        if (b2body.isActive()) { // We wait until our FinalEnemy is on camera.
+            switch (currentPowerState) {
+                case NORMAL:
+                    powerStateNormal();
+                    break;
+                case POWERFUL:
+                    powerStatePowerful(dt);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // When a FinalEnemy is on camera, it activates
         checkBoundaries();
     }
 
@@ -364,6 +412,36 @@ public class FinalEnemyLevelOne extends Sprite {
 
     }
 
+    private void powerStatePowerful(float dt) {
+// todo emprolijar
+        // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
+        powerFXSprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+
+        powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
+        powerFXStateTimer += dt;
+
+        powerFXSprite.setRotation(getRotation());
+        powerFXSprite.setFlip(isFlipX(), isFlipY());
+
+        // quito poder
+        if (currentStateFinalEnemy != StateFinalEnemy.WALKING) {
+            // setDefaultFilter(); // TODO: 1/1/2018
+            powerFXStateTimer = 0;
+            currentPowerState = PowerState.NORMAL;
+            AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
+        }
+    }
+
+    private void powerStateNormal() {
+        // doy poder
+        if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
+            powerFXStateTimer = 0;
+            currentPowerState = PowerState.POWERFUL;
+            AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1);
+        }
+    }
+
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.
@@ -506,6 +584,10 @@ public class FinalEnemyLevelOne extends Sprite {
     public void draw(Batch batch) {
         if (currentStateFinalEnemy != StateFinalEnemy.DEAD) {
             super.draw(batch);
+
+            if (currentPowerState != PowerState.NORMAL) {
+                powerFXSprite.draw(batch);
+            }
         }
     }
 
