@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -85,8 +84,7 @@ public abstract class Enemy extends Sprite {
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
         if (object.getProperties().containsKey("powerOne")) {
-            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, PowerOne.class));
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerOne.class));
         }
     }
 
@@ -94,8 +92,7 @@ public abstract class Enemy extends Sprite {
         if (!isDestroyed()) {
             if (b2body.isActive()) {
                 if (object.getProperties().containsKey("enemyBullet")) {
-                    Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
-                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
+                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
                 }
             }
         }

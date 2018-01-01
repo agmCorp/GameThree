@@ -64,6 +64,7 @@ bordes y objetos
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
 - OJO QUE PUEDO MORIR POR APLASTAMIENTO CON SUPERPODERES!!!!!!
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
+- optimizar la creacion de vectores, basta con hacer que GameThreeActorDef no tenga un vector adentro sino x, y.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

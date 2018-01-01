@@ -407,8 +407,7 @@ public class Hero extends Sprite {
 
     public void openFire() {
         if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-            Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS);
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnergyBall.class));
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, EnergyBall.class));
             openFiretimer = 0;
         }
     }

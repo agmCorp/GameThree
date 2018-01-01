@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.math.Vector2;
-
 /**
  * Created by AGM on 12/14/2017.
  */
@@ -9,16 +7,22 @@ import com.badlogic.gdx.math.Vector2;
 public class GameThreeActorDef {
     private static final String TAG = GameThreeActorDef.class.getName();
 
-    private Vector2 position;
+    private float x;
+    private float y;
     private Class<?> type;
 
-    public GameThreeActorDef(Vector2 position, Class<?> type) {
-        this.position = position;
+    public GameThreeActorDef(float x, float y, Class<?> type) {
+        this.x = x;
+        this.y = y;
         this.type = type;
     }
 
-    public Vector2 getPosition() {
-        return position;
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 
     public Class<?> getType() {

@@ -136,13 +136,13 @@ public class Constants {
     public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
     public static final int ENEMYTWO_SCORE = 7;
 
-    // FinalEnemyOne (meters = pixels * resizeFactor / PPM)
+    // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELONE_LINEAR_VELOCITY = 5.0f;
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
-    //public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
     //public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)

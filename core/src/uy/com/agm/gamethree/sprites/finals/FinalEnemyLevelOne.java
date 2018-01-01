@@ -25,8 +25,8 @@ import uy.com.agm.gamethree.tools.Vector2Util;
  * Created by AGM on 12/30/2017.
  */
 
-public class FinalLevelOne extends Sprite {
-    private static final String TAG = FinalLevelOne.class.getName();
+public class FinalEnemyLevelOne extends Sprite {
+    private static final String TAG = FinalEnemyLevelOne.class.getName();
 
     private World world;
     private PlayScreen screen;
@@ -57,7 +57,7 @@ public class FinalLevelOne extends Sprite {
     private Vector2 velocity;
     private Vector2 tmp;
 
-    public FinalLevelOne(PlayScreen screen, float x, float y) {
+    public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
 
@@ -68,22 +68,22 @@ public class FinalLevelOne extends Sprite {
         setBounds(x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
         defineFinalLevelOne();
 
-        // By default this FinalLevelOne doesn't interact in our world
+        // By default this FinalEnemyLevelOne doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
-        finalLevelOneStand = Assets.instance.finalLevelOne.finalLevelOneStand;
-        finalLevelOneWalkAnimation = Assets.instance.finalLevelOne.finalLevelOneWalkAnimation;
-        finalLevelOneIdleAnimation = Assets.instance.finalLevelOne.finalLevelOneIdleAnimation;
-        finalLevelOneShootAnimation = Assets.instance.finalLevelOne.finalLevelOneShootAnimation;
-        finalLevelOneDeathAnimation = Assets.instance.finalLevelOne.finalLevelOneDeathAnimation;
+        finalLevelOneStand = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneStand;
+        finalLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
+        finalLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
+        finalLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
+        finalLevelOneDeathAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
 
         currentStateFinal = StateFinal.WALKING;
         damage = 0;
         stateTimer = 0;
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
-        openFireTimer = Constants.ENEMYONE_FIRE_DELAY_SECONDS; // todo usar cte adecuada
+        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
 
         // Place origin of rotation in the center of the sprite
         setOriginCenter();
@@ -163,7 +163,7 @@ public class FinalLevelOne extends Sprite {
                 timeToChangeTimer = 0;
                 timeToChange = getNextTimeToChange();
                 stateTimer = 0;
-                openFireTimer = Constants.ENEMYONE_FIRE_DELAY_SECONDS; // todo usar cte adecuada
+                openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                 currentStateFinal = getNewRandomState(currentStateFinal);
             }
         }
@@ -195,14 +195,14 @@ public class FinalLevelOne extends Sprite {
     }
 
     private void stateWalking(float dt) {
-        float CORRECCION = 0.5f; // todo
+        float CORRECCION = 0.3f; // todo
 
 
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -288,7 +288,7 @@ public class FinalLevelOne extends Sprite {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -309,7 +309,7 @@ public class FinalLevelOne extends Sprite {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -336,9 +336,7 @@ public class FinalLevelOne extends Sprite {
     }
 
     private void openFire() {
-        // instanciar con tmp, usar cte
-        Vector2 position = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
-        screen.getCreator().createGameThreeActor(new GameThreeActorDef(position, EnemyBullet.class));
+        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y, EnemyBullet.class));
     }
 
     private void stateExploding(float dt) {
@@ -500,18 +498,18 @@ public class FinalLevelOne extends Sprite {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
-    // This FinalLevelOne can be removed from our game
+    // This FinalEnemyLevelOne can be removed from our game
     public boolean isDisposable() {
         return currentStateFinal == StateFinal.DEAD;
     }
 
-    // This FinalLevelOne doesn't have any b2body
+    // This FinalEnemyLevelOne doesn't have any b2body
     public boolean isDestroyed() {
         return currentStateFinal == StateFinal.DEAD || currentStateFinal == StateFinal.EXPLODING;
     }
 
     private void checkBoundaries() {
-        /* When a FinalLevelOne is on camera, it activates (it can collide).
+        /* When a FinalEnemyLevelOne is on camera, it activates (it can collide).
         * You have to be very careful because if the final level One enemy is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */

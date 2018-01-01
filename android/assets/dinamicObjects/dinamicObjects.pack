@@ -10,28 +10,28 @@ energyBall
   orig: 175, 185
   offset: 0, 0
   index: 9
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 178, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 1
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 357, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 2
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 536, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 3
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 715, 854
   size: 177, 169
@@ -45,77 +45,77 @@ enemyBullet
   orig: 129, 129
   offset: 0, 0
   index: 2
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 667
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 5
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 496
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 6
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 325
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 7
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 154
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 8
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 180, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 9
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 180, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 10
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 11
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 180, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 12
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 13
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 538, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 14
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 180, 170
   size: 177, 169
@@ -129,21 +129,21 @@ explosionA09
   orig: 167, 167
   offset: 0, 0
   index: -1
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 16
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 538, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 17
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 170
   size: 177, 169
@@ -164,14 +164,14 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 2
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 538, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 19
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 538, 170
   size: 177, 169
@@ -185,28 +185,28 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 3
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 717, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 21
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 717, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 22
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 717, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 23
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 717, 170
   size: 177, 169
@@ -274,133 +274,133 @@ dinamicObjects2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 25
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 26
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 27
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 28
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 29
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 30
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 31
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 32
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 33
-finalLevelOneDeath
+finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 34
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 180, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 1
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 1, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 2
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 180, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 3
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 359, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 4
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 1, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 5
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 180, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 6
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 359, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 7
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 538, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 8
-finalLevelOneIdle
+finalEnemyLevelOneIdle
   rotate: false
   xy: 1, 170
   size: 177, 169
@@ -414,35 +414,35 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 5
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 180, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 1
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 359, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 2
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 538, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 3
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 717, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 4
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 180, 170
   size: 177, 169
@@ -463,28 +463,28 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 7
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 538, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 6
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 717, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 7
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 359, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 8
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 359, 170
   size: 177, 169
@@ -498,21 +498,21 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 8
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 717, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 10
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 538, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 11
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 538, 170
   size: 177, 169
@@ -526,14 +526,14 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 10
-finalLevelOneShoot
+finalEnemyLevelOneShoot
   rotate: false
   xy: 717, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 13
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 717, 170
   size: 177, 169
@@ -601,77 +601,77 @@ dinamicObjects3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 1, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 2
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 1, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 3
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 180, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 4
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 1, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 5
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 180, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 6
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 359, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 7
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 1, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 8
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 180, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 9
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 359, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 10
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 538, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 11
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 1, 170
   size: 177, 169
@@ -685,35 +685,35 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 12
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 180, 341
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 13
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 359, 512
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 14
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 538, 683
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 15
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 717, 854
   size: 177, 169
   orig: 177, 169
   offset: 0, 0
   index: 16
-finalLevelOneWalk
+finalEnemyLevelOneWalk
   rotate: false
   xy: 180, 170
   size: 177, 169
