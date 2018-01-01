@@ -196,8 +196,6 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     private void stateWalking(float dt) {
-        float CORRECCION = 0.3f; // todo
-
         // Set velocity because It could have been changed (see onHitWall)
         b2body.setLinearVelocity(velocity);
 
@@ -260,7 +258,10 @@ public class FinalEnemyLevelOne extends Sprite {
                 setRotation(45);
                 setFlip(false, false);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 +
+                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
+                                screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2,
+                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 velocity.set(tmp);
                 break;
             case SLASH_UP:
@@ -269,7 +270,10 @@ public class FinalEnemyLevelOne extends Sprite {
                 setRotation(45);
                 setFlip(true, true);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 -
+                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
+                                screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2,
+                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 velocity.set(tmp);
                 break;
             case BACKSLASH_DOWN:
@@ -278,7 +282,10 @@ public class FinalEnemyLevelOne extends Sprite {
                 setRotation(135);
                 setFlip(false, false);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 -
+                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
+                                screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2,
+                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 velocity.set(tmp);
                 break;
             case BACKSLASH_UP:
@@ -287,7 +294,10 @@ public class FinalEnemyLevelOne extends Sprite {
                 setRotation(135);
                 setFlip(true, true);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 +
+                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
+                                screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2,
+                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 velocity.set(tmp);
                 break;
         }

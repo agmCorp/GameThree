@@ -143,7 +143,6 @@ public class Constants {
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
-    public static final float FINALLEVELONE_DIAGONAL_CORRECTION_METERS = 300.0f * 1.0f / PPM;
     //public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
