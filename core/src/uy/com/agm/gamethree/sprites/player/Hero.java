@@ -310,6 +310,9 @@ public class Hero extends Sprite {
         // Stop
         b2body.setLinearVelocity(0, 0);
 
+        // We take away his powers
+        currentPowerState = PowerState.NORMAL;
+
         // Start dying up
         heroStateTimer = 0;
         currentHeroState = HeroState.DYING_UP;

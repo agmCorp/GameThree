@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 7.0f;
+    public static final float GAMECAM_VELOCITY = 7.0f;//2.0f;
 
     // Debug boundaries enabled by default
     public static final boolean DEBUG_BOUNDARIES = true;
@@ -92,7 +92,7 @@ public class Constants {
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
-    public static final float EDGE_HEIGHT_METERS = 10.0f * 1.0f / PPM;
+    public static final float EDGE_HEIGHT_METERS = 1.0f * 1.0f / PPM;
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

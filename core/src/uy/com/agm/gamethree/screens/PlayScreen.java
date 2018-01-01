@@ -102,8 +102,8 @@ public class PlayScreen implements Screen {
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
         // Create boundaries
-        bottomEdge = new Edge(this, false);
         upperEdge = new Edge(this, true);
+        bottomEdge = new Edge(this, false);
 
         // Create the final enemy in our game world
         finalEnemy = new FinalLevelOne(this, gameCam.position.x, Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM - Constants.FINALLEVELONE_HEIGHT_METERS);
@@ -111,7 +111,7 @@ public class PlayScreen implements Screen {
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
-        // Load preferences for audio settings and start playing music
+        // todo Load preferences for audio settings and start playing music
         // GamePreferences.instance.load();
         AudioManager.instance.play(Assets.instance.music.songLevelOne);
 
@@ -232,13 +232,15 @@ public class PlayScreen implements Screen {
     private void updateCamera(float dt) {
         // If Hero is dead, we freeze the camera
         if(!player.isHeroDead()) {
-            if (upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 >= Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM) {
+            if (upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 >= gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS) {
                 stopEdges();
             }
-            gameCam.position.y = upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
         } else {
             stopEdges();
         }
+
+        // Our camera is relative to the edges
+        gameCam.position.y = upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
 
         // Update our gamecam with correct coordinates after changes
         gameCam.update();

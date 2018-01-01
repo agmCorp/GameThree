@@ -227,7 +227,7 @@ public class FinalLevelOne extends Sprite {
         float x = b2body.getPosition().x;
         float y = b2body.getPosition().y;
         boolean rndBoolean = MathUtils.randomBoolean();
-
+        float CORRECCION = 0.5f;
 
         if (vy > 0.0f) {
             if (x < screen.gameCam.position.x) {
@@ -238,28 +238,21 @@ public class FinalLevelOne extends Sprite {
                     velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 } else {
                     currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                    // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-//ANDA                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2, screen.getBottomEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
-                    //velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
             } else {
                 // Se movia hacia arriba por el borde derecho
                 // Al llegar al muro hay dos opciones: sigue por el techo a la IZQUIERDA o va a la diagonal.
                 if (rndBoolean) {
-                    currentStateWalking =  StateWalking.CEILING_LEFT;
+                    currentStateWalking = StateWalking.CEILING_LEFT;
                     velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 } else {
                     currentStateWalking = StateWalking.SLASH_DOWN;
-
-                    // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
- // anda                   Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2, screen.getBottomEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
-                    //velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
             }
         } else if (vy < 0.0f) {
@@ -271,15 +264,9 @@ public class FinalLevelOne extends Sprite {
                     velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 } else {
                     currentStateWalking = StateWalking.SLASH_UP;
-
-                    // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
- // anda                   Vector2Util.goToTarget(tmp, screen.gameCam.position.x + screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2, screen.getUpperEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
-
-
-                    //velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
             } else {
                 // Se movia hacia abajo por el borde derecho
@@ -289,14 +276,9 @@ public class FinalLevelOne extends Sprite {
                     velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 } else {
                     currentStateWalking = StateWalking.BACKSLASH_UP;
-
-                    // TODO OJO
                     tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-// anda                    Vector2Util.goToTarget(tmp, screen.gameCam.position.x - screen.gameViewPort.getWorldWidth() / 2, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2, screen.getUpperEdge().getB2body().getPosition().y, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                     velocity.set(tmp);
-
-                    //velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 }
             }
         } else {
