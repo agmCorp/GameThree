@@ -38,7 +38,7 @@ public class PowerBox extends Sprite {
     private TextureRegion powerBoxDamagedMedium;
     private TextureRegion powerBoxDamagedHard;
     private Animation explosionAnimation;
-    private float stateTime;
+    private float stateTimer;
 
     private enum State {
         WAITING, OPENED, EXPLODING, FINISHED
@@ -74,7 +74,7 @@ public class PowerBox extends Sprite {
 
         currentState = State.WAITING;
         damage = 0;
-        stateTime = 0;
+        stateTimer = 0;
     }
 
     // This PowerBox doesn't have any b2body
@@ -152,7 +152,7 @@ public class PowerBox extends Sprite {
         world.destroyBody(b2body);
 
         // Explosion animation
-        stateTime = 0;
+        stateTimer = 0;
 
         // Audio FX
         AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1);
@@ -165,15 +165,15 @@ public class PowerBox extends Sprite {
     }
 
     private void stateExploding(float dt) {
-        if (explosionAnimation.isAnimationFinished(stateTime)) {
+        if (explosionAnimation.isAnimationFinished(stateTimer)) {
             currentState = State.FINISHED;
         } else {
-            if (stateTime == 0) { // Explosion starts
+            if (stateTimer == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX(), getY(), Constants.EXPLOSIONB_WIDTH_METERS, Constants.EXPLOSIONB_HEIGHT_METERS);
             }
-            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
-            stateTime += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
+            stateTimer += dt;
         }
     }
 

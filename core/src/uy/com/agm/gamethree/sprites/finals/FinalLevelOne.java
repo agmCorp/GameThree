@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -40,7 +41,9 @@ public class FinalLevelOne extends Sprite {
     private State currentState;
     private StateWalking currentStateWalking;
     private int damage;
-    private float stateTime;
+    private float stateTimer;
+    private float timeToChangeTimer;
+    private float timeToChange;
 
     private TextureRegion finalLevelOneStand;
     private Animation finalLevelOneWalkAnimation;
@@ -74,7 +77,9 @@ public class FinalLevelOne extends Sprite {
 
         currentState = State.WALKING;
         damage = 0;
-        stateTime = 0;
+        stateTimer = 0;
+        timeToChangeTimer = 0;
+        timeToChange = MathUtils.random(0.0f, 12.0f); // todo
 
         // TODO COMENTAR EL PUTO HERO NO FUNCIONA ASI?
         setOriginCenter();
@@ -111,25 +116,64 @@ public class FinalLevelOne extends Sprite {
     }
 
     public void update(float dt) {
+        if (b2body.isActive()) {
+            boolean blnOption = MathUtils.randomBoolean();
+
+            timeToChangeTimer += dt;
+            if (timeToChangeTimer >= timeToChange) {
+                timeToChangeTimer = 0;
+                timeToChange = MathUtils.random(0.0f, 12.0f); // todo
+                stateTimer = 0;
+                switch (currentState) {
+                    case WALKING:
+                        if (blnOption) {
+                            currentState = State.IDLE;
+                        } else {
+                            currentState = State.SHOOTING;
+                        }
+                        break;
+                    case IDLE:
+                        if (blnOption) {
+                            currentState = State.WALKING;
+                        } else {
+                            currentState = State.SHOOTING;
+                        }
+                        break;
+                    case SHOOTING:
+                        if (blnOption) {
+                            currentState = State.WALKING;
+                        } else {
+                            currentState = State.IDLE;
+                        }
+                        break;
+                }
+            }
+        }
         switch (currentState) {
             case WALKING:
+                Gdx.app.debug(TAG, "camino!!!!!!!!!!!!");
                 stateWalking(dt);
                 break;
             case IDLE:
-                stateIdle();
+                Gdx.app.debug(TAG, "idle!!!!!!!!!!!!");
+                stateIdle(dt);
                 break;
             case SHOOTING:
-                stateShooting();
+                Gdx.app.debug(TAG, "disparo!!!!!!!!!!!!");
+                stateShooting(dt);
                 break;
             case EXPLODING:
+                Gdx.app.debug(TAG, "exploto!!!!!!!!!!!!");
                 stateExploding(dt);
                 break;
             case DEAD:
+                Gdx.app.debug(TAG, "muerto!!!!!!!!!!!!");
                 break;
             default:
                 break;
         }
         checkBoundaries();
+
     }
 
     private void stateWalking(float dt) {
@@ -146,8 +190,8 @@ public class FinalLevelOne extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
 
         switch (currentStateWalking) { // todo los angulos estan mal porque es un rectangulo de 8 por 4.8
             case CEILING_LEFT:
@@ -221,12 +265,34 @@ public class FinalLevelOne extends Sprite {
         }
     }
 
-    private void stateIdle() {
+    private void stateIdle(float dt) {
+        b2body.setLinearVelocity(0.0f, 0.0f);
 
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) finalLevelOneIdleAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
     }
 
-    private void stateShooting() {
+    private void stateShooting(float dt) {
+        b2body.setLinearVelocity(0.0f, 0.0f);
 
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, FinalLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) finalLevelOneShootAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
     }
 
     private void stateExploding(float dt) {

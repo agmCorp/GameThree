@@ -23,7 +23,7 @@ import uy.com.agm.gamethree.tools.Constants;
 public class EnemyTwo extends Enemy {
     private static final String TAG = EnemyTwo.class.getName();
 
-    private float stateTime;
+    private float stateTimer;
     private float openFireTimer;
     private Animation enemyTwoAnimation;
     private Animation explosionAnimation;
@@ -39,7 +39,7 @@ public class EnemyTwo extends Enemy {
         // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
 
-        stateTime = 0;
+        stateTimer = 0;
         openFireTimer = 0;
         currentState = State.ALIVE;
         velocity = new Vector2(Constants.ENEMYTWO_VELOCITY_X, Constants.ENEMYTWO_VELOCITY_Y);
@@ -122,7 +122,7 @@ public class EnemyTwo extends Enemy {
         world.destroyBody(b2body);
 
         // Explosion animation
-        stateTime = 0;
+        stateTimer = 0;
 
         // Audio FX
         AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
@@ -147,7 +147,7 @@ public class EnemyTwo extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyTwoAnimation.getKeyFrame(stateTimer, true);
         if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
@@ -156,7 +156,7 @@ public class EnemyTwo extends Enemy {
         }
 
         setRegion(region);
-        stateTime += dt;
+        stateTimer += dt;
 
         openFireTimer += dt;
         if (openFireTimer > Constants.ENEMYTWO_FIRE_DELAY_SECONDS) {
@@ -166,15 +166,15 @@ public class EnemyTwo extends Enemy {
     }
 
     private void stateExploding(float dt) {
-        if (explosionAnimation.isAnimationFinished(stateTime)) {
+        if (explosionAnimation.isAnimationFinished(stateTimer)) {
             currentState = State.DEAD;
         } else {
-            if (stateTime == 0) { // Explosion starts
+            if (stateTimer == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX(), getY(), Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
             }
-            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
-            stateTime += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
+            stateTimer += dt;
         }
     }
 }

@@ -23,7 +23,7 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 public class EnemyBullet extends Weapon {
     private static final String TAG = EnemyBullet.class.getName();
 
-    private float stateTime;
+    private float stateTimer;
     private Animation enemyBulletAnimation;
     private Vector2 velocity;
 
@@ -36,7 +36,7 @@ public class EnemyBullet extends Weapon {
         // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYBULLET_WIDTH_METERS, Constants.ENEMYBULLET_HEIGHT_METERS);
 
-        stateTime = 0;
+        stateTimer = 0;
         currentState = State.SHOT;
 
         // Move EnemyBullet from Enemy to Hero
@@ -93,8 +93,8 @@ public class EnemyBullet extends Weapon {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
     }
 
     private void stateOnTarget() {

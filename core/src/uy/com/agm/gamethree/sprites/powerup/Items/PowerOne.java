@@ -27,7 +27,7 @@ import uy.com.agm.gamethree.tools.Constants;
 public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
-    private float stateTime;
+    private float stateTimer;
     private float stateWaiting;
     private float stateFading;
     private Animation powerOneAnimation;
@@ -36,7 +36,7 @@ public class PowerOne extends Item {
         super(screen, x, y);
 
         powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
-        stateTime = 0;
+        stateTimer = 0;
         stateWaiting = 0;
         stateFading = 0;
 
@@ -101,8 +101,8 @@ public class PowerOne extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
 
         stateWaiting += dt;
         if (stateWaiting > Constants.POWERONE_WAITING_SECONDS) {
@@ -120,8 +120,8 @@ public class PowerOne extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
 
         stateFading += dt;
         float alpha = 1 - stateFading / Constants.POWERONE_FADING_SECONDS;

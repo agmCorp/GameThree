@@ -22,7 +22,7 @@ import uy.com.agm.gamethree.tools.Constants;
 public class EnergyBall extends Weapon {
     private static final String TAG = EnergyBall.class.getName();
 
-    private float stateTime;
+    private float stateTimer;
     private Animation energyBallAnimation;
     private Vector2 velocity;
 
@@ -35,7 +35,7 @@ public class EnergyBall extends Weapon {
         // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
         setBounds(getX(), getY(), Constants.ENERGYBALL_WIDTH_METERS, Constants.ENERGYBALL_HEIGHT_METERS);
 
-        stateTime = 0;
+        stateTimer = 0;
         currentState = State.SHOT;
         velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
 
@@ -91,8 +91,8 @@ public class EnergyBall extends Weapon {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTimer, true));
+        stateTimer += dt;
     }
 
     private void stateOnTarget() {
