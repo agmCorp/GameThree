@@ -288,9 +288,15 @@ public class FinalLevelOne extends Sprite {
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
+
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) finalLevelOneIdleAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
+
+        setFlip(isFlipX, isFlipY);
     }
 
     private void stateShooting(float dt) {
@@ -494,7 +500,7 @@ public class FinalLevelOne extends Sprite {
         if (!isDestroyed()) {
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
 
-            if (upperEdge > getY() + getHeight()) {
+            if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS) {
                 b2body.setActive(true);
             }
         }
