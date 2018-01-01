@@ -185,13 +185,15 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         // Otherwise we check for velocity on the x-axis.
         if (vy > 0.0f) {
             player.onMovingUp();
-        } else if (vy < 0.0f) {
-            player.onMovingDown();
         } else {
-            if (vx != 0.0f) {
-                player.onMovingLeftRight();
+            if (vy < 0.0f) {
+                player.onMovingDown();
             } else {
-                player.onStanding(); // vx == 0 && vy == 0
+                if (vx != 0.0f) { // vy == 0
+                    player.onMovingLeftRight();
+                } else {
+                    player.onStanding(); // vx == 0 && vy == 0
+                }
             }
         }
     }

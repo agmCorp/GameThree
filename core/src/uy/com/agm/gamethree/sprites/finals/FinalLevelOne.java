@@ -133,6 +133,9 @@ public class FinalLevelOne extends Sprite {
     }
 
     private void stateWalking(float dt) {
+        float CORRECCION = 0.5f; // todo
+
+
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -150,50 +153,70 @@ public class FinalLevelOne extends Sprite {
             case CEILING_LEFT:
                 setRotation(0);
                 setFlip(false, true);
+                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 break;
             case CEILING_RIGHT:
                 setRotation(0);
                 setFlip(true, true);
+                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 break;
             case LEFT_DOWN:
                 setRotation(90);
                 setFlip(false, true);
+                velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 break;
             case LEFT_UP:
                 setRotation(90);
                 setFlip(true, true);
+                velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 break;
             case RIGHT_DOWN:
                 setRotation(90);
                 setFlip(false, false);
+                velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 break;
             case RIGHT_UP:
                 setRotation(90);
                 setFlip(true, false);
+                velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
                 break;
             case FLOOR_LEFT:
                 setRotation(0);
                 setFlip(false, false);
+                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 break;
             case FLOOR_RIGHT:
                 setRotation(0);
                 setFlip(true, false);
+                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 break;
             case SLASH_DOWN:
                 setRotation(45);
                 setFlip(false, false);
+                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                velocity.set(tmp);
                 break;
             case SLASH_UP:
                 setRotation(45);
                 setFlip(true, true);
+                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                velocity.set(tmp);
                 break;
             case BACKSLASH_DOWN:
                 setRotation(135);
                 setFlip(false, false);
+                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                velocity.set(tmp);
                 break;
             case BACKSLASH_UP:
                 setRotation(135);
                 setFlip(true, true);
+                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                velocity.set(tmp);
                 break;
         }
     }
@@ -226,86 +249,131 @@ public class FinalLevelOne extends Sprite {
         float vx = b2body.getLinearVelocity().x;
         float x = b2body.getPosition().x;
         float y = b2body.getPosition().y;
-        boolean rndBoolean = MathUtils.randomBoolean();
-        float CORRECCION = 0.5f;
+        int option = MathUtils.random(1, 3);
 
         if (vy > 0.0f) {
             if (x < screen.gameCam.position.x) {
                 // Se movia hacia arriba por el borde izquierdo
                 // Al llegar al muro hay dos opciones: sigue por el techo a la derecha o va a la diagonal.
-                if (rndBoolean) {
-                    currentStateWalking = StateWalking.CEILING_RIGHT;
-                    velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-                } else {
-                    currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                    tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    velocity.set(tmp);
+                switch (option) {
+                    case 1: // go back
+                        currentStateWalking = StateWalking.LEFT_DOWN;
+                        break;
+                    case 2:
+                        currentStateWalking = StateWalking.CEILING_RIGHT;
+                        break;
+                    case 3:
+                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
+                        break;
                 }
             } else {
                 // Se movia hacia arriba por el borde derecho
                 // Al llegar al muro hay dos opciones: sigue por el techo a la IZQUIERDA o va a la diagonal.
-                if (rndBoolean) {
-                    currentStateWalking = StateWalking.CEILING_LEFT;
-                    velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-                } else {
-                    currentStateWalking = StateWalking.SLASH_DOWN;
-                    tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    velocity.set(tmp);
-                }
-            }
-        } else if (vy < 0.0f) {
-            if (x < screen.gameCam.position.x) {
-                // Se movia hacia abajo por el borde izquierdo
-                // Al llegar al muro hay dos opciones: sigue por el PISO a la DERECHA o va a la diagonal.
-                if (rndBoolean) {
-                    currentStateWalking = StateWalking.FLOOR_RIGHT;
-                    velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-                } else {
-                    currentStateWalking = StateWalking.SLASH_UP;
-                    tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 - CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    velocity.set(tmp);
-                }
-            } else {
-                // Se movia hacia abajo por el borde derecho
-                // Al llegar al muro hay dos opciones: sigue por el PISO a la IZQUEIRDA o va a la diagonal.
-                if (rndBoolean) {
-                    currentStateWalking =  StateWalking.FLOOR_LEFT;
-                    velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-                } else {
-                    currentStateWalking = StateWalking.BACKSLASH_UP;
-                    tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                    Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 + CORRECCION, screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    velocity.set(tmp);
+                switch (option) {
+                    case 1: // go back
+                        currentStateWalking = StateWalking.RIGHT_DOWN;
+                        break;
+                    case 2:
+                        currentStateWalking = StateWalking.CEILING_LEFT;
+                        break;
+                    case 3:
+                        currentStateWalking = StateWalking.SLASH_DOWN;
+                        break;
                 }
             }
         } else {
-            if (vx != 0.0f) {
-                if (vx > 0.0f) {
-                    if (y < screen.gameCam.position.y) {
-                        // Se movia a la derecha por el borde inferior
-                        currentStateWalking =  StateWalking.RIGHT_UP;
-                        velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    } else {
-                        // Se movia a la derecha por el borde superior
-                        currentStateWalking =  StateWalking.RIGHT_DOWN;
-                        velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
+            if (vy < 0.0f) {
+                if (x < screen.gameCam.position.x) {
+                    // Se movia hacia abajo por el borde izquierdo
+                    // Al llegar al muro hay dos opciones: sigue por el PISO a la DERECHA o va a la diagonal.
+                    switch (option) {
+                        case 1: // go back
+                            currentStateWalking = StateWalking.LEFT_UP;
+                            break;
+                        case 2:
+                            currentStateWalking = StateWalking.FLOOR_RIGHT;
+                            break;
+                        case 3:
+                            currentStateWalking = StateWalking.SLASH_UP;
+                            break;
                     }
-                } else if (vx < 0.0f) {
-                    if (y < screen.gameCam.position.y) {
-                        // Se movia a la izquierda por el borde inferior
-                        currentStateWalking =  StateWalking.LEFT_UP;
-                        velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-                    } else {
-                        /// Se movia a la izquierda por el borde superior
-                        currentStateWalking =  StateWalking.LEFT_DOWN;
-                        velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
+                } else {
+                    // Se movia hacia abajo por el borde derecho
+                    // Al llegar al muro hay dos opciones: sigue por el PISO a la IZQUEIRDA o va a la diagonal.
+                    switch (option) {
+                        case 1: // go back
+                            currentStateWalking = StateWalking.RIGHT_UP;
+                            break;
+                        case 2:
+                            currentStateWalking = StateWalking.FLOOR_LEFT;
+                            break;
+                        case 3:
+                            currentStateWalking = StateWalking.BACKSLASH_UP;
+                            break;
                     }
                 }
             } else {
-                // esta quieto // vx == 0 && vy == 0
+                if (vx != 0.0f) { // vy == 0
+                    if (vx > 0.0f) {
+                        if (y < screen.gameCam.position.y) {
+                            // Se movia a la derecha por el borde inferior
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.FLOOR_LEFT;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.RIGHT_UP;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.BACKSLASH_UP;
+                                    break;
+                            }
+                        } else {
+                            // Se movia a la derecha por el borde superior
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.CEILING_LEFT;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.RIGHT_DOWN;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.SLASH_DOWN;
+                                    break;
+                            }
+                        }
+                    } else if (vx < 0.0f) {
+                        if (y < screen.gameCam.position.y) {
+                            // Se movia a la izquierda por el borde inferior
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.FLOOR_RIGHT;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.LEFT_UP;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.SLASH_UP;
+                                    break;
+                            }
+                        } else {
+                            /// Se movia a la izquierda por el borde superior
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.CEILING_RIGHT;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.LEFT_DOWN;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.BACKSLASH_DOWN;
+                                    break;
+                            }
+                        }
+                    }
+                } else { // vx == 0 && vy == 0
+                    // esta quieto // vx == 0 && vy == 0
+                }
             }
         }
     }
