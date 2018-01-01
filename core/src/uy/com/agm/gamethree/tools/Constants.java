@@ -79,7 +79,7 @@ public class Constants {
     public static final short ITEM_BIT = 64;
     public static final short HERO_WEAPON_BIT = 128;
     public static final short ENEMY_WEAPON_BIT = 256;
-    public static final short FINALLEVELONE_BIT = 512;
+    public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 512;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.0f;
@@ -143,6 +143,7 @@ public class Constants {
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float FINALLEVELONE_DIAGONAL_CORRECTION_METERS = 300.0f * 1.0f / PPM;
     //public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)

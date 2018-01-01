@@ -150,15 +150,15 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Borders
-            case Constants.FINALLEVELONE_BIT | Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINALLEVELONE_BIT ? fixA : fixB;
-                ((FinalEnemyLevelOne) fixC.getUserData()).onWall();
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
+                ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Edges
-            case Constants.FINALLEVELONE_BIT | Constants.EDGES_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINALLEVELONE_BIT ? fixA : fixB;
-                ((FinalEnemyLevelOne) fixC.getUserData()).onWall();
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.EDGES_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
+                ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
         }
     }

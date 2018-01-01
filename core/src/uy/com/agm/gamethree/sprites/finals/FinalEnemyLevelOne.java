@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.finals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,55 +31,60 @@ public class FinalEnemyLevelOne extends Sprite {
     private PlayScreen screen;
     private Body b2body;
 
-    private enum StateFinal {
+    private enum StateFinalEnemy {
         WALKING, IDLE, SHOOTING, EXPLODING, DEAD
     }
 
     private enum StateWalking {
-        CEILING_LEFT, CEILING_RIGHT, LEFT_UP, LEFT_DOWN, FLOOR_LEFT, FLOOR_RIGHT, RIGHT_UP, RIGHT_DOWN, SLASH_UP, SLASH_DOWN, BACKSLASH_UP, BACKSLASH_DOWN
+        CEILING_LEFT, CEILING_RIGHT,
+        LEFT_UP, LEFT_DOWN,
+        FLOOR_LEFT, FLOOR_RIGHT,
+        RIGHT_UP, RIGHT_DOWN,
+        SLASH_UP, SLASH_DOWN,
+        BACKSLASH_UP, BACKSLASH_DOWN
     }
 
-    private StateFinal currentStateFinal;
+    private StateFinalEnemy currentStateFinalEnemy;
     private StateWalking currentStateWalking;
     private int damage;
-    private float stateTimer;
+    private float stateFinalEnemyTimer;
     private float timeToChangeTimer;
     private float timeToChange;
     private float openFireTimer;
 
-    private TextureRegion finalLevelOneStand;
-    private Animation finalLevelOneWalkAnimation;
-    private Animation finalLevelOneIdleAnimation;
-    private Animation finalLevelOneShootAnimation;
-    private Animation finalLevelOneDeathAnimation;
+    private TextureRegion finalEnemyLevelOneStand;
+    private Animation finalEnemyLevelOneWalkAnimation;
+    private Animation finalEnemyLevelOneIdleAnimation;
+    private Animation finalEnemyLevelOneShootAnimation;
+    private Animation finalEnemyLevelOneDeathAnimation;
 
     private Vector2 velocity;
-    private Vector2 tmp;
+    private Vector2 tmp; // Temp GC friendly vector
 
     public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
 
-       /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
-        * This point will be used by defineFinalLevelOne() calling getX(), getY() to center its b2body.
+        /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
+        * This point will be used by defineFinalEnemyLevelOne() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
         setBounds(x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
-        defineFinalLevelOne();
+        defineFinalEnemyLevelOne();
 
         // By default this FinalEnemyLevelOne doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
-        finalLevelOneStand = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneStand;
-        finalLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
-        finalLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
-        finalLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
-        finalLevelOneDeathAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
+        finalEnemyLevelOneStand = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneStand;
+        finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
+        finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
+        finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
+        finalEnemyLevelOneDeathAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
 
-        currentStateFinal = StateFinal.WALKING;
+        currentStateFinalEnemy = StateFinalEnemy.WALKING;
         damage = 0;
-        stateTimer = 0;
+        stateFinalEnemyTimer = 0;
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
@@ -88,6 +92,7 @@ public class FinalEnemyLevelOne extends Sprite {
         // Place origin of rotation in the center of the sprite
         setOriginCenter();
 
+        // Initial movement (left or right)
         int direction = MathUtils.randomSign();
         velocity = new Vector2(direction * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
         if (direction < 0) {
@@ -100,7 +105,7 @@ public class FinalEnemyLevelOne extends Sprite {
         tmp = new Vector2();
     }
 
-    private void defineFinalLevelOne() {
+    private void defineFinalEnemyLevelOne() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -109,7 +114,7 @@ public class FinalEnemyLevelOne extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.FINALLEVELONE_BIT; // Depicts what this fixture is
+        fdef.filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                             Constants.EDGES_BIT |
                             Constants.OBSTACLE_BIT |
@@ -123,70 +128,66 @@ public class FinalEnemyLevelOne extends Sprite {
         return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_DELAY_SECONDS);
     }
 
-    private StateFinal getNewRandomState(StateFinal currentStateFinal) {
+    private StateFinalEnemy getNewRandomState(StateFinalEnemy currentStateFinalEnemy) {
         boolean blnOption = MathUtils.randomBoolean();
-        StateFinal newRandomStat;
+        StateFinalEnemy newRandomStateFinalEnemy;
 
-        switch (currentStateFinal) {
+        // Efficient version
+        switch (currentStateFinalEnemy) {
             case WALKING:
                 if (blnOption) {
-                    newRandomStat = StateFinal.IDLE;
+                    newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
                 } else {
-                    newRandomStat = StateFinal.SHOOTING;
+                    newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                 }
                 break;
             case IDLE:
                 if (blnOption) {
-                    newRandomStat = StateFinal.WALKING;
+                    newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
                 } else {
-                    newRandomStat = StateFinal.SHOOTING;
+                    newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                 }
                 break;
             case SHOOTING:
                 if (blnOption) {
-                    newRandomStat = StateFinal.WALKING;
+                    newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
                 } else {
-                    newRandomStat = StateFinal.IDLE;
+                    newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
                 }
                 break;
             default:
-                newRandomStat = currentStateFinal;
+                newRandomStateFinalEnemy = currentStateFinalEnemy;
                 break;
         }
-        return newRandomStat;
+        return newRandomStateFinalEnemy;
     }
 
     public void update(float dt) {
-        if (b2body.isActive()) {
+        if (b2body.isActive()) { // We wait until our FinalEnemy is on camera.
             timeToChangeTimer += dt;
             if (timeToChangeTimer >= timeToChange) {
                 timeToChangeTimer = 0;
                 timeToChange = getNextTimeToChange();
-                stateTimer = 0;
+                stateFinalEnemyTimer = 0;
                 openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                currentStateFinal = getNewRandomState(currentStateFinal);
+                currentStateFinalEnemy = getNewRandomState(currentStateFinalEnemy);
             }
         }
 
-        switch (currentStateFinal) {
+        switch (currentStateFinalEnemy) {
             case WALKING:
-                Gdx.app.debug(TAG, "camino!!!!!!!!!!!!");
                 stateWalking(dt);
                 break;
             case IDLE:
-                Gdx.app.debug(TAG, "idle!!!!!!!!!!!!");
                 stateIdle(dt);
                 break;
             case SHOOTING:
-                Gdx.app.debug(TAG, "disparo!!!!!!!!!!!!");
                 stateShooting(dt);
                 break;
             case EXPLODING:
-                Gdx.app.debug(TAG, "exploto!!!!!!!!!!!!");
                 stateExploding(dt);
                 break;
             case DEAD:
-                Gdx.app.debug(TAG, "muerto!!!!!!!!!!!!");
                 break;
             default:
                 break;
@@ -197,7 +198,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private void stateWalking(float dt) {
         float CORRECCION = 0.3f; // todo
 
-
+        // Set velocity because It could have been changed (see onHitWall)
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -208,10 +209,11 @@ public class FinalEnemyLevelOne extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalLevelOneWalkAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneWalkAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        stateFinalEnemyTimer += dt;
 
-        switch (currentStateWalking) { // todo los angulos estan mal porque es un rectangulo de 8 por 4.8
+        // Depending on the direction, we set the angle and the flip
+        switch (currentStateWalking) {
             case CEILING_LEFT:
                 setRotation(0);
                 setFlip(false, true);
@@ -253,6 +255,8 @@ public class FinalEnemyLevelOne extends Sprite {
                 velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
                 break;
             case SLASH_DOWN:
+                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
+                // But it does the trick
                 setRotation(45);
                 setFlip(false, false);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -260,6 +264,8 @@ public class FinalEnemyLevelOne extends Sprite {
                 velocity.set(tmp);
                 break;
             case SLASH_UP:
+                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
+                // But it does the trick
                 setRotation(45);
                 setFlip(true, true);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -267,6 +273,8 @@ public class FinalEnemyLevelOne extends Sprite {
                 velocity.set(tmp);
                 break;
             case BACKSLASH_DOWN:
+                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
+                // But it does the trick
                 setRotation(135);
                 setFlip(false, false);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -274,6 +282,8 @@ public class FinalEnemyLevelOne extends Sprite {
                 velocity.set(tmp);
                 break;
             case BACKSLASH_UP:
+                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
+                // But it does the trick
                 setRotation(135);
                 setFlip(true, true);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -284,7 +294,12 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     private void stateIdle(float dt) {
+        // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
+
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -293,18 +308,16 @@ public class FinalEnemyLevelOne extends Sprite {
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
-
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
-
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalLevelOneIdleAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        stateFinalEnemyTimer += dt;
 
+        // Apply previous flip state
         setFlip(isFlipX, isFlipY);
     }
 
     private void stateShooting(float dt) {
+        // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -315,24 +328,22 @@ public class FinalEnemyLevelOne extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalLevelOneShootAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        stateFinalEnemyTimer += dt;
 
-        // ----------------------
-        // // TODO: 1/1/2018
-        float angulo = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y).sub(b2body.getPosition().x, b2body.getPosition().y).angle();
-        setRotation(angulo);
+        // Calculate shooting angle
+        float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
+                .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
+        setRotation(angle);
         setFlip(true, true);
-        Gdx.app.debug(TAG, "angulo " + angulo);
 
-        // instanciar con tmp, usar cte
-        if (openFireTimer >= Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+        // If is time to shoot we open fire
+        if (openFireTimer >= Constants.FINALLEVELONE_FIRE_DELAY_SECONDS) {
             openFire();
             openFireTimer = 0;
         } else {
             openFireTimer += dt;
         }
-        // -----------------------
     }
 
     private void openFire() {
@@ -351,20 +362,19 @@ public class FinalEnemyLevelOne extends Sprite {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-//        currentStateFinal = StateFinal.INJURED;
+//        currentStateFinalEnemy = StateFinalEnemy.INJURED;
     }
 
-    public void onWall() {
-        float vy = b2body.getLinearVelocity().y;
-        float vx = b2body.getLinearVelocity().x;
+    public void onHitWall() {
+        float velY = b2body.getLinearVelocity().y;
+        float velX = b2body.getLinearVelocity().x;
         float x = b2body.getPosition().x;
         float y = b2body.getPosition().y;
         int option = MathUtils.random(1, 3);
 
-        if (vy > 0.0f) {
+        if (velY > 0.0f) {
             if (x < screen.gameCam.position.x) {
-                // Se movia hacia arriba por el borde izquierdo
-                // Al llegar al muro hay dos opciones: sigue por el techo a la derecha o va a la diagonal.
+                // We are walking UP along the LEFT EDGE
                 switch (option) {
                     case 1: // go back
                         currentStateWalking = StateWalking.LEFT_DOWN;
@@ -377,8 +387,7 @@ public class FinalEnemyLevelOne extends Sprite {
                         break;
                 }
             } else {
-                // Se movia hacia arriba por el borde derecho
-                // Al llegar al muro hay dos opciones: sigue por el techo a la IZQUIERDA o va a la diagonal.
+                // We are walking UP along the RIGHT EDGE
                 switch (option) {
                     case 1: // go back
                         currentStateWalking = StateWalking.RIGHT_DOWN;
@@ -392,10 +401,9 @@ public class FinalEnemyLevelOne extends Sprite {
                 }
             }
         } else {
-            if (vy < 0.0f) {
+            if (velY < 0.0f) {
                 if (x < screen.gameCam.position.x) {
-                    // Se movia hacia abajo por el borde izquierdo
-                    // Al llegar al muro hay dos opciones: sigue por el PISO a la DERECHA o va a la diagonal.
+                    // We are walking DOWN along the LEFT EDGE
                     switch (option) {
                         case 1: // go back
                             currentStateWalking = StateWalking.LEFT_UP;
@@ -408,8 +416,7 @@ public class FinalEnemyLevelOne extends Sprite {
                             break;
                     }
                 } else {
-                    // Se movia hacia abajo por el borde derecho
-                    // Al llegar al muro hay dos opciones: sigue por el PISO a la IZQUEIRDA o va a la diagonal.
+                    // We are walking DOWN along the RIGHT EDGE
                     switch (option) {
                         case 1: // go back
                             currentStateWalking = StateWalking.RIGHT_UP;
@@ -423,10 +430,10 @@ public class FinalEnemyLevelOne extends Sprite {
                     }
                 }
             } else {
-                if (vx != 0.0f) { // vy == 0
-                    if (vx > 0.0f) {
+                if (velX != 0.0f) { // velY == 0
+                    if (velX > 0.0f) {
                         if (y < screen.gameCam.position.y) {
-                            // Se movia a la derecha por el borde inferior
+                            // We are walking to the RIGHT along the FLOOR EDGE
                             switch (option) {
                                 case 1: // go back
                                     currentStateWalking = StateWalking.FLOOR_LEFT;
@@ -439,7 +446,7 @@ public class FinalEnemyLevelOne extends Sprite {
                                     break;
                             }
                         } else {
-                            // Se movia a la derecha por el borde superior
+                            // We are walking to the RIGHT along the CEILING EDGE
                             switch (option) {
                                 case 1: // go back
                                     currentStateWalking = StateWalking.CEILING_LEFT;
@@ -452,9 +459,9 @@ public class FinalEnemyLevelOne extends Sprite {
                                     break;
                             }
                         }
-                    } else if (vx < 0.0f) {
+                    } else if (velX < 0.0f) {
                         if (y < screen.gameCam.position.y) {
-                            // Se movia a la izquierda por el borde inferior
+                            // We are walking to the LEFT along the FLOOR EDGE
                             switch (option) {
                                 case 1: // go back
                                     currentStateWalking = StateWalking.FLOOR_RIGHT;
@@ -467,7 +474,7 @@ public class FinalEnemyLevelOne extends Sprite {
                                     break;
                             }
                         } else {
-                            /// Se movia a la izquierda por el borde superior
+                            // We are walking to the LEFT along the CEILING EDGE
                             switch (option) {
                                 case 1: // go back
                                     currentStateWalking = StateWalking.CEILING_RIGHT;
@@ -481,15 +488,13 @@ public class FinalEnemyLevelOne extends Sprite {
                             }
                         }
                     }
-                } else { // vx == 0 && vy == 0
-                    // esta quieto // vx == 0 && vy == 0
                 }
             }
         }
     }
 
     public void draw(Batch batch) {
-        if (currentStateFinal != StateFinal.DEAD) {
+        if (currentStateFinalEnemy != StateFinalEnemy.DEAD) {
             super.draw(batch);
         }
     }
@@ -500,12 +505,12 @@ public class FinalEnemyLevelOne extends Sprite {
 
     // This FinalEnemyLevelOne can be removed from our game
     public boolean isDisposable() {
-        return currentStateFinal == StateFinal.DEAD;
+        return currentStateFinalEnemy == StateFinalEnemy.DEAD;
     }
 
     // This FinalEnemyLevelOne doesn't have any b2body
     public boolean isDestroyed() {
-        return currentStateFinal == StateFinal.DEAD || currentStateFinal == StateFinal.EXPLODING;
+        return currentStateFinalEnemy == StateFinalEnemy.DEAD || currentStateFinalEnemy == StateFinalEnemy.EXPLODING;
     }
 
     private void checkBoundaries() {
