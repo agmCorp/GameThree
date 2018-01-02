@@ -420,7 +420,7 @@ public class FinalEnemyLevelOne extends Sprite {
         powerFXSprite.setRotation(getRotation());
         powerFXSprite.setFlip(isFlipX(), isFlipY());
 
-        powerFXSprite.setAlpha(0.3f); // todo definir
+        //powerFXSprite.setAlpha(0.3f); // todo definir
 
         // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
         powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
