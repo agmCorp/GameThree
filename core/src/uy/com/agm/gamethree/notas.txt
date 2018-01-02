@@ -247,6 +247,12 @@ https://mrbubblewand.wordpress.com/2009/09/13/animation-magic_003/
 https://mrbubblewand.wordpress.com/2009/06/09/animation-effect_001/
 https://mrbubblewand.wordpress.com/2009/06/07/animation-magic_02/
 https://mrbubblewand.wordpress.com/2009/06/05/animations-thunder_01-heal_01-2/
+
+candidatos a poderes del malo:
+effect_001
+heal_003
+magic_008
+wind_003
 -----------------------------------------------------------------------------------
 FUNCION SENO
   private float getNewX(float x, float y, float dt) {
