@@ -27,10 +27,10 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 7.0f;//2.0f;
+    public static final float GAMECAM_VELOCITY = 6.0f;//2.0f;
 
     // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = true;
+    public static final boolean DEBUG_BOUNDARIES = false;
 
     // ---- Assets ----
 

@@ -249,10 +249,12 @@ https://mrbubblewand.wordpress.com/2009/06/07/animation-magic_02/
 https://mrbubblewand.wordpress.com/2009/06/05/animations-thunder_01-heal_01-2/
 
 candidatos a poderes del malo:
-effect_001
+effect_001 tiene fondo negro
+wind_003 queda bien
+thunder_003 queda hermoso pero es cuadrado :(
 heal_003
 magic_008
-wind_003
+
 
 -----------------------------------------------------------------------------------
 FUNCION SENO
