@@ -253,6 +253,7 @@ effect_001
 heal_003
 magic_008
 wind_003
+
 -----------------------------------------------------------------------------------
 FUNCION SENO
   private float getNewX(float x, float y, float dt) {
