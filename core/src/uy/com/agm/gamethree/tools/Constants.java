@@ -115,8 +115,8 @@ public class Constants {
     public static final int TIMER_NOTIFICATION = 3;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_ALPHA = 1.0f;
-    public static final float POWERONE_FX_WIDTH_METERS = 2.0f;
-    public static final float POWERONE_FX_HEIGHT_METERS = 2.0f;
+    public static final float POWERONE_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
+    public static final float POWERONE_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -143,6 +143,8 @@ public class Constants {
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
+    public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     //public static final int ENEMYTWO_SCORE = 7;
 
     // Weapon (meters = pixels * resizeFactor / PPM)

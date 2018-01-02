@@ -121,14 +121,14 @@ public class FinalEnemyLevelOne extends Sprite {
 //----------- todo
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = Assets.instance.ghostMode.ghostModeAnimation;
+        powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerAnimation;
         powerFXStateTimer = 0;
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+        Sprite spritePower = new Sprite(Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerStand);
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        spritePower.setBounds(getX(), getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+        spritePower.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
 
         powerFXSprite = new Sprite(spritePower);
 
@@ -414,15 +414,16 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private void powerStatePowerful(float dt) {
 // todo emprolijar
-        // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
-        powerFXSprite.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-
         powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
         powerFXStateTimer += dt;
 
         powerFXSprite.setRotation(getRotation());
         powerFXSprite.setFlip(isFlipX(), isFlipY());
+
+        powerFXSprite.setAlpha(0.3f); // todo definir
+
+        // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
+        powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
 
         // quito poder
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING) {

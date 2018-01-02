@@ -19,6 +19,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnergyBall;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOnePower;
 import uy.com.agm.gamethree.assets.sprites.AssetFonts;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
@@ -49,6 +50,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetEnemyBullet enemyBullet;
     public AssetGhostMode ghostMode;
     public AssetFinalEnemyLevelOne finalEnemyLevelOne;
+    public AssetFinalEnemyLevelOnePower finalEnemyLevelOnePower;
 
     public AssetSounds sounds;
     public AssetMusic music;
@@ -110,6 +112,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyBullet = new AssetEnemyBullet(atlas);
         ghostMode = new AssetGhostMode(atlas);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlas);
+        finalEnemyLevelOnePower = new AssetFinalEnemyLevelOnePower(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
     }
