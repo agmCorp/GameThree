@@ -93,6 +93,7 @@ public class FinalEnemyLevelOne extends Sprite {
         finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
         finalEnemyLevelOneDeathAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
 
+        // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
         damage = 0;
         stateFinalEnemyTimer = 0;
@@ -115,10 +116,6 @@ public class FinalEnemyLevelOne extends Sprite {
         // Temp GC friendly vector
         tmp = new Vector2();
 
-
-
-
-//----------- todo
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerAnimation;
@@ -130,11 +127,11 @@ public class FinalEnemyLevelOne extends Sprite {
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
         spritePower.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
 
+        // Power FX Sprite
         powerFXSprite = new Sprite(spritePower);
 
         // Place origin of rotation in the center of the sprite
         powerFXSprite.setOriginCenter();
-        //----
     }
 
     private void defineFinalEnemyLevelOne() {
@@ -195,7 +192,7 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     public void update(float dt) {
-        if (b2body.isActive()) { // We wait until our FinalEnemy is on camera.
+        if (b2body.isActive()) { // We wait until our final enemy is on camera.
             timeToChangeTimer += dt;
             // Set a new currentStateFinalEnemy
             if (timeToChangeTimer >= timeToChange) {
@@ -226,7 +223,7 @@ public class FinalEnemyLevelOne extends Sprite {
                 break;
         }
 
-        if (b2body.isActive()) { // We wait until our FinalEnemy is on camera.
+        if (b2body.isActive()) { // We wait until our final enemy is on camera.
             switch (currentPowerState) {
                 case NORMAL:
                     powerStateNormal();
@@ -239,7 +236,7 @@ public class FinalEnemyLevelOne extends Sprite {
             }
         }
 
-        // When a FinalEnemy is on camera, it activates
+        // When our final enemy is on camera, it activates
         checkBoundaries();
     }
 
@@ -413,30 +410,30 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     private void powerStatePowerful(float dt) {
-// todo emprolijar
-        powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
-        powerFXStateTimer += dt;
-
-        powerFXSprite.setRotation(getRotation());
-        powerFXSprite.setFlip(isFlipX(), isFlipY());
-
-        //powerFXSprite.setAlpha(0.3f); // todo definir
-
-        // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
-        powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
-
-        // quito poder
+        // If our final enemy is not walking, he becomes weak
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING) {
             // setDefaultFilter(); // TODO: 1/1/2018
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
+        } else {
+            // Animation
+            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
+            powerFXStateTimer += dt;
+
+            // Apply rotation and flip of the main character
+            powerFXSprite.setRotation(getRotation());
+            powerFXSprite.setFlip(isFlipX(), isFlipY());
+
+            // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
+            powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
 
     private void powerStateNormal() {
-        // doy poder
+        // If our final enemy is walking, he becomes powerful
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
+            // setPowerfulFilter(); // // TODO: 2/1/2018
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
             AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1);

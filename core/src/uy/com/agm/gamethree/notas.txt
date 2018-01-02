@@ -56,7 +56,6 @@ PROXIMOS PASOS
 
 PENDIENTES
 ----------
-- subir todos mis proyectos a github
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
@@ -64,7 +63,7 @@ bordes y objetos
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - estaría bueno que las balas reboten y los enemigos también en modo ghost.
-
+- comprar el ninja?
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
