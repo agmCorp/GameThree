@@ -253,7 +253,7 @@ effect_001 tiene fondo negro
 wind_003 queda bien
 thunder_003 queda hermoso pero es cuadrado :(
 heal_003 no queda muy lindo, no se destaca.
-magic_008
+magic_008 no queda muy lindo, no se destaca.
 
 
 -----------------------------------------------------------------------------------
