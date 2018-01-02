@@ -63,6 +63,8 @@ bordes y objetos
 - averiguar como debuguear
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
+- estaría bueno que las balas reboten y los enemigos también en modo ghost.
+
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
