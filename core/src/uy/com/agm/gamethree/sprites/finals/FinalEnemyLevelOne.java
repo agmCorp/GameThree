@@ -57,7 +57,6 @@ public class FinalEnemyLevelOne extends Sprite {
     private float timeToChange;
     private float openFireTimer;
 
-    private TextureRegion finalEnemyLevelOneStand;
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
@@ -87,7 +86,6 @@ public class FinalEnemyLevelOne extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        finalEnemyLevelOneStand = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneStand;
         finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
         finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
         finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
