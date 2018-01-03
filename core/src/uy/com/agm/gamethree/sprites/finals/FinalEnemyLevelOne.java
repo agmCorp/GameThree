@@ -92,7 +92,7 @@ public class FinalEnemyLevelOne extends Sprite {
         finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
         finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
         finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
-        finalEnemylevelOneExplosionAnimation = Assets.instance.explosionB.explosionBAnimation; // todo
+        finalEnemylevelOneExplosionAnimation = Assets.instance.explosionC.explosionCAnimation;
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
@@ -462,11 +462,15 @@ public class FinalEnemyLevelOne extends Sprite {
 
             currentStateFinalEnemy = StateFinalEnemy.DEAD;
         } else {
+            // Preserve the flip state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
+
             setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
             stateFinalEnemyTimer += dt;
 
-            // Remove previous flip state
-            //setFlip(false, false);
+            // Apply previous flip state
+            setFlip(isFlipX, isFlipY);
         }
     }
 
