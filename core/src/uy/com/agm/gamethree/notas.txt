@@ -64,8 +64,8 @@ bordes y objetos
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - estaría bueno que las balas reboten y los enemigos también en modo ghost.
 - comprar el ninja?
-- Agregar conteo de fps
 - hacer que la bala del finalenemy salga con offset (pero para que lado?)
+- renombrar los audios con nomenclatura
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

@@ -413,7 +413,7 @@ public class FinalEnemyLevelOne extends Sprite {
             // setDefaultFilter(); // TODO: 1/1/2018
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
+            AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerDown, 1);
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
@@ -434,7 +434,7 @@ public class FinalEnemyLevelOne extends Sprite {
             // setPowerfulFilter(); // // TODO: 2/1/2018
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1);
+            AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerUp, 1);
         }
     }
 

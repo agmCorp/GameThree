@@ -57,6 +57,8 @@ public class Constants {
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
 
     // Music
     public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";

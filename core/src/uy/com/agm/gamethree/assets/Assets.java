@@ -80,6 +80,8 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_POWER_DOWN, Sound.class);
         assetManager.load(Constants.FX_FILE_POWER_TIMER, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
+        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
+        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
 
         // Load music
         assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);

@@ -23,7 +23,8 @@ public class AssetSounds {
     public final Sound powerDown;
     public final Sound powerTimer;
     public final Sound showUpPowerOne;
-
+    public final Sound finalLevelOnePowerUp;
+    public final Sound finalLevelOnePowerDown;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
@@ -37,5 +38,7 @@ public class AssetSounds {
         powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
         powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
+        finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
+        finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
     }
 }
