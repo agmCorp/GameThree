@@ -144,7 +144,7 @@ public class Constants {
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
-    public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     public static final int FINALLEVELONE_MAX_DAMAGE = 1;
