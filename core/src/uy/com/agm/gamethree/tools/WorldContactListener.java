@@ -160,6 +160,23 @@ public class WorldContactListener implements ContactListener {
                 fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
                 ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
+
+            // Final enemy - Hero's weapon
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_WEAPON_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
+                    ((Weapon) fixA.getUserData()).onTarget();
+                    ((FinalEnemyLevelOne) fixB.getUserData()).onHit();
+                } else {
+                    ((Weapon) fixB.getUserData()).onTarget();
+                    ((FinalEnemyLevelOne) fixA.getUserData()).onHit();
+                }
+                break;
+
+            // Final enemy - Hero
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).onDead();
+                break;
         }
     }
 

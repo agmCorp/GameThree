@@ -27,7 +27,7 @@ Hay 2 tipos de elementos:
 		- invisibilidad (seria algo así como que puedo caminar por toda la pantalla sin colisionar
 		  con anda)
 		- detener pantalla (por tiempo)
-		- te pones rojo y chocas a todos (por tiempo)
+		- te pones rojo y chocas a todos (por tiempo) (puedo hacer que choques a todos y ademas te reboten las balas, rodeado de fuego)
 		- *invulnerabilidad (te rodea una burbuja) es por tiempo
 		- matar a todos de una vez.
 	2) bola de armas

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -33,7 +34,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private Body b2body;
 
     private enum StateFinalEnemy {
-        WALKING, IDLE, SHOOTING, EXPLODING, DEAD
+        WALKING, IDLE, SHOOTING, INJURED, EXPLODING, DEAD
     }
 
     private enum PowerState {
@@ -93,7 +94,7 @@ public class FinalEnemyLevelOne extends Sprite {
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
-        damage = 0;
+        damage = Constants.FINALLEVELONE_MAX_DAMAGE;
         stateFinalEnemyTimer = 0;
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
@@ -211,6 +212,9 @@ public class FinalEnemyLevelOne extends Sprite {
                 break;
             case SHOOTING:
                 stateShooting(dt);
+                break;
+            case INJURED:
+                stateInjured(dt);
                 break;
             case EXPLODING:
                 stateExploding(dt);
@@ -403,7 +407,34 @@ public class FinalEnemyLevelOne extends Sprite {
         screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y, EnemyBullet.class));
     }
 
+    private void stateInjured(float dt) {
+        // Destroy box2D body
+        world.destroyBody(b2body);
+
+        // Explosion animation
+        stateFinalEnemyTimer = 0;
+
+        // Audio FX // // TODO: 3/1/2018  buscar un audio
+        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+
+        // Set score
+        screen.getHud().addScore(Constants.FINALLEVELONE_SCORE);
+
+        // Set the new state
+        currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
+    }
+
     private void stateExploding(float dt) {
+        if (finalEnemyLevelOneDeathAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+            currentStateFinalEnemy = StateFinalEnemy.DEAD;
+        } else {
+            if (stateFinalEnemyTimer == 0) { // Death starts
+                // Setbounds is the one that determines the size of the death animation on the screen
+                setBounds(getX(), getY(), Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
+            }
+            setRegion((TextureRegion) finalEnemyLevelOneDeathAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            stateFinalEnemyTimer += dt;
+        }
 
     }
 
@@ -439,14 +470,11 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     public void onHit() {
-        /*
-         * We must remove its b2body to avoid collisions.
-         * This can't be done here because this method is called from WorldContactListener that is invoked
-         * from PlayScreen.update.world.step(...).
-         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
-         */
-//        currentStateFinalEnemy = StateFinalEnemy.INJURED;
+        damage--;
+        Gdx.app.debug(TAG, "ups!");
+        if (damage <= 0) {
+            currentStateFinalEnemy = StateFinalEnemy.INJURED;
+        }
     }
 
     public void onHitWall() {
