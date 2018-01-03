@@ -258,6 +258,25 @@ thunder_003 queda hermoso pero es cuadrado :(
 heal_003 no queda muy lindo, no se destaca.
 magic_008 no queda muy lindo, no se destaca.
 
+posibles audios ante la perdida de poder
+https://freesound.org/people/Streetpoptunez/sounds/413074/
+https://freesound.org/people/KauaiBoyRK/sounds/59545/
+https://freesound.org/people/OwlStorm/sounds/404767/
+https://freesound.org/people/suntemple/sounds/253173/
+https://freesound.org/people/Callum_Sharp279/sounds/200469/
+https://freesound.org/people/Veiler/sounds/264462/ (bump)
+
+posibles poderes
+https://mrbubblewand.files.wordpress.com/2009/08/special_002.png
+https://mrbubblewand.files.wordpress.com/2010/02/magic_006.png
+https://mrbubblewand.files.wordpress.com/2010/01/magic_005.png
+https://mrbubblewand.files.wordpress.com/2010/01/magic_004.png
+https://mrbubblewand.files.wordpress.com/2009/09/magic_003.png
+https://mrbubblewand.files.wordpress.com/2009/08/magic_002.png (fondo negro)
+https://mrbubblewand.files.wordpress.com/2009/08/heal_001.png
+https://mrbubblewand.files.wordpress.com/2009/08/darkness_001.png
+
+
 
 -----------------------------------------------------------------------------------
 FUNCION SENO
