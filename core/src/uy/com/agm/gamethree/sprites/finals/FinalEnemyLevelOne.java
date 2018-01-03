@@ -34,7 +34,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private Body b2body;
 
     private enum StateFinalEnemy {
-        WALKING, IDLE, SHOOTING, INJURED, EXPLODING, DEAD
+        WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
     }
 
     private enum PowerState {
@@ -61,7 +61,8 @@ public class FinalEnemyLevelOne extends Sprite {
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
-    private Animation finalEnemyLevelOneDeathAnimation;
+    private Animation finalEnemyLevelOneDyingAnimation;
+    private Animation finalEnemylevelOneExplosionAnimation;
 
     private Vector2 velocity;
     private Vector2 tmp; // Temp GC friendly vector
@@ -86,11 +87,12 @@ public class FinalEnemyLevelOne extends Sprite {
         // By default this FinalEnemyLevelOne doesn't interact in our world
         b2body.setActive(false);
 
-        // Textures
+        // Animations
         finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
         finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
         finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
-        finalEnemyLevelOneDeathAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
+        finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
+        finalEnemylevelOneExplosionAnimation = Assets.instance.explosionB.explosionBAnimation; // todo
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
@@ -215,6 +217,9 @@ public class FinalEnemyLevelOne extends Sprite {
                 break;
             case INJURED:
                 stateInjured(dt);
+                break;
+            case DYING:
+                stateDying(dt);
                 break;
             case EXPLODING:
                 stateExploding(dt);
@@ -411,31 +416,58 @@ public class FinalEnemyLevelOne extends Sprite {
         // Destroy box2D body
         world.destroyBody(b2body);
 
-        // Explosion animation
+        // Stop music
+        AudioManager.instance.stopMusic();
+
+        // Death animation
         stateFinalEnemyTimer = 0;
 
-        // Audio FX // // TODO: 3/1/2018  buscar un audio
+        // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a morir
         AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
 
         // Set score
         screen.getHud().addScore(Constants.FINALLEVELONE_SCORE);
 
         // Set the new state
-        currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
+        currentStateFinalEnemy = StateFinalEnemy.DYING;
+    }
+
+    private void stateDying(float dt) {
+        if (finalEnemyLevelOneDyingAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+            // Exploding animation
+            stateFinalEnemyTimer = 0;
+
+            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a explotar
+            AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+
+            // Set the new state
+            currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
+        } else {
+            // Preserve the flip state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
+
+            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            stateFinalEnemyTimer += dt;
+
+            // Apply previous flip state
+            setFlip(isFlipX, isFlipY);
+        }
     }
 
     private void stateExploding(float dt) {
-        if (finalEnemyLevelOneDeathAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+        if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
+            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
+
             currentStateFinalEnemy = StateFinalEnemy.DEAD;
         } else {
-            if (stateFinalEnemyTimer == 0) { // Death starts
-                // Setbounds is the one that determines the size of the death animation on the screen
-                setBounds(getX(), getY(), Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
-            }
-            setRegion((TextureRegion) finalEnemyLevelOneDeathAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
             stateFinalEnemyTimer += dt;
-        }
 
+            // Remove previous flip state
+            //setFlip(false, false);
+        }
     }
 
     private void powerStatePowerful(float dt) {

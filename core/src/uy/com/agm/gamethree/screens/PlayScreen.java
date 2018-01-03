@@ -106,7 +106,8 @@ public class PlayScreen implements Screen {
         bottomEdge = new Edge(this, false);
 
         // Create the final enemy in our game world
-        finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
+        //finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
+        finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());

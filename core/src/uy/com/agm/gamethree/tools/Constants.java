@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 6.0f;//2.0f;
+    public static final float GAMECAM_VELOCITY = 6.0f * 0;//2.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -147,7 +147,7 @@ public class Constants {
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 1.0f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
-    public static final int FINALLEVELONE_MAX_DAMAGE = 3;
+    public static final int FINALLEVELONE_MAX_DAMAGE = 1;
     public static final int FINALLEVELONE_SCORE = 200;
 
     // Weapon (meters = pixels * resizeFactor / PPM)
