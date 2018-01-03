@@ -301,20 +301,20 @@ public class PlayScreen implements Screen {
 
         // Debug
         if (Constants.DEBUG_BOUNDARIES) {
-            ShapeRenderer shapeRenderer = new ShapeRenderer();
             // Set our batch to now draw what the gameCam camera sees.
-            shapeRenderer.setProjectionMatrix(gameCam.combined);
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            shapeRenderer.setColor(1, 1, 0, 1);
+            game.shapeRenderer.setProjectionMatrix(gameCam.combined);
+            game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            game.shapeRenderer.setColor(1, 1, 0, 1);
 
-            renderDebugHero(shapeRenderer);
-            renderDebugEnemies(shapeRenderer);
-            renderDebugPowerBoxes(shapeRenderer);
-            renderDebugItems(shapeRenderer);
-            renderDebugWeapons(shapeRenderer);
-            renderDebugFinalEnemyLevelOne(shapeRenderer);
+            renderDebugHero();
+            renderDebugEnemies();
+            renderDebugPowerBoxes();
+            renderDebugItems();
+            renderDebugWeapons();
+            renderDebugFinalEnemyLevelOne();
+            Gdx.app.debug(TAG, "FPS: " + Gdx.graphics.getFramesPerSecond());
 
-            shapeRenderer.end();
+            game.shapeRenderer.end();
         }
 
         if (player.isGameOver()) {
@@ -355,36 +355,36 @@ public class PlayScreen implements Screen {
         finalEnemyLevelOne.draw(game.batch);
     }
 
-    private void renderDebugHero(ShapeRenderer shapeRenderer) {
-        player.renderDebug(shapeRenderer);
+    private void renderDebugHero() {
+        player.renderDebug(game.shapeRenderer);
     }
 
-    private void renderDebugEnemies(ShapeRenderer shapeRenderer) {
+    private void renderDebugEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.renderDebug(shapeRenderer);
+            enemy.renderDebug(game.shapeRenderer);
         }
     }
 
-    private void renderDebugPowerBoxes(ShapeRenderer shapeRenderer) {
+    private void renderDebugPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.renderDebug(shapeRenderer);
+            powerBox.renderDebug(game.shapeRenderer);
         }
     }
 
-    private void renderDebugItems(ShapeRenderer shapeRenderer) {
+    private void renderDebugItems() {
         for (Item item : creator.getItems()) {
-            item.renderDebug(shapeRenderer);
+            item.renderDebug(game.shapeRenderer);
         }
     }
 
-    private void renderDebugWeapons(ShapeRenderer shapeRenderer) {
+    private void renderDebugWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.renderDebug(shapeRenderer);
+            weapon.renderDebug(game.shapeRenderer);
         }
     }
 
-    private void renderDebugFinalEnemyLevelOne(ShapeRenderer shapeRenderer) {
-        finalEnemyLevelOne.renderDebug(shapeRenderer);
+    private void renderDebugFinalEnemyLevelOne() {
+        finalEnemyLevelOne.renderDebug(game.shapeRenderer);
     }
 
     private void stopEdges() {

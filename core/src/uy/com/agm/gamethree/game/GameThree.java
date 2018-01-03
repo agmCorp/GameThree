@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -13,6 +14,7 @@ public class GameThree extends Game {
     private static final String TAG = GameThree.class.getName();
 
     public SpriteBatch batch;
+    public ShapeRenderer shapeRenderer;
 
     @Override
     public void create() {
@@ -24,6 +26,9 @@ public class GameThree extends Game {
 
         // Constructs a new SpriteBatch
         batch = new SpriteBatch();
+
+        // Constructs a new ShapeRenderer for debugging
+        shapeRenderer = new ShapeRenderer();
 
         // Set the new Screen
         setScreen(new PlayScreen(this));
