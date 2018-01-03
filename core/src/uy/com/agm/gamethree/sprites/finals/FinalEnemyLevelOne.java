@@ -462,6 +462,12 @@ public class FinalEnemyLevelOne extends Sprite {
 
             currentStateFinalEnemy = StateFinalEnemy.DEAD;
         } else {
+            if (stateFinalEnemyTimer == 0) { // Explosion starts
+                // Setbounds is the one that determines the size of the explosion on the screen
+                setBounds(b2body.getPosition().x - Constants.EXPLOSIONC_WIDTH_METERS / 2, b2body.getPosition().y - Constants.EXPLOSIONC_HEIGHT_METERS / 2,
+                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
+            }
+
             // Preserve the flip state
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
