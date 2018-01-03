@@ -92,7 +92,7 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
 
         // Allows for debug lines of our box2d world.
-        if (Constants.DEBUG_BOUNDARIES) {
+        if (Constants.DEBUG_MODE) {
             b2dr = new Box2DDebugRenderer();
         }
 
@@ -278,7 +278,7 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         // Renderer our Box2DDebugLines
-        if (Constants.DEBUG_BOUNDARIES) {
+        if (Constants.DEBUG_MODE) {
             b2dr.render(world, gameCam.combined);
         }
 
@@ -300,7 +300,7 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
 
         // Debug
-        if (Constants.DEBUG_BOUNDARIES) {
+        if (Constants.DEBUG_MODE) {
             // Set our batch to now draw what the gameCam camera sees.
             game.shapeRenderer.setProjectionMatrix(gameCam.combined);
             game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -312,7 +312,6 @@ public class PlayScreen implements Screen {
             renderDebugItems();
             renderDebugWeapons();
             renderDebugFinalEnemyLevelOne();
-            Gdx.app.debug(TAG, "FPS: " + Gdx.graphics.getFramesPerSecond());
 
             game.shapeRenderer.end();
         }
@@ -430,7 +429,7 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        if (Constants.DEBUG_BOUNDARIES) {
+        if (Constants.DEBUG_MODE) {
             b2dr.dispose();
         }
         hud.dispose();

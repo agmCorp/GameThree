@@ -29,8 +29,8 @@ public class Constants {
     // Game cam velocity (m/s)
     public static final float GAMECAM_VELOCITY = 6.0f;//2.0f;
 
-    // Debug boundaries enabled by default
-    public static final boolean DEBUG_BOUNDARIES = true;
+    // Debug mode enabled by default
+    public static final boolean DEBUG_MODE = true;
 
     // ---- Assets ----
 

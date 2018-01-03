@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,6 +34,7 @@ public class Hud implements Disposable {
     private Integer powerTimer;
     private float timeCountPower;
     private boolean powerTimerVisible;
+    private int fps;
 
     // Scene2D widgets
     private Label scoreLabel;
@@ -47,6 +49,8 @@ public class Hud implements Disposable {
     private Label powerLabel;
     private Label powerValueLabel;
 
+    private Label fpsLabel;
+    private Label fpsValueLabel;
 
     private Table table;
 
@@ -60,6 +64,7 @@ public class Hud implements Disposable {
         powerTimer = 0;
         timeCountPower = 0;
         powerTimerVisible = false;
+        fps = 0;
 
         // Setup the HUD viewport using a new camera separate from our gamecam
         // Define our stage using that viewport and our games spritebatch
@@ -69,8 +74,8 @@ public class Hud implements Disposable {
         // Define a table used to organize our hud's labels
         table = new Table();
 
-        // Debug
-        table.setDebug(Constants.DEBUG_BOUNDARIES);
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
 
         // Top-Align table
         table.top();
@@ -95,19 +100,51 @@ public class Hud implements Disposable {
         powerLabel = new Label("POWERNAME", labelStyle);
         powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
 
-        // Add our labels to our table, padding the top, and giving them all equal width with expandX
+        // Add our labels to our table giving them all equal width with expandX
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(levelTimerLabel).expandX();
 
         // Add a second row to our table
         table.row();
+
+        // Values
         table.add(scoreValueLabel).expandX();
         table.add(levelValueLabel).expandX();
         table.add(levelTimerValueLabel).expandX();
 
         // Add our table to the stage
         stage.addActor(table);
+
+        if (Constants.DEBUG_MODE) {
+            // Define a new table used to display our FPS counter
+            Table fpsTable = new Table();
+
+            // Debug lines
+            fpsTable.setDebug(Constants.DEBUG_MODE);
+
+            // Bottom-Align table
+            fpsTable.bottom();
+
+            // Make the table fill the entire stage
+            fpsTable.setFillParent(true);
+
+            // Define our labels based on labelStyle
+            fpsLabel = new Label("FPS", labelStyle);
+            fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
+
+            // Add our label to our table giving it equal width with expandX
+            fpsTable.add(fpsLabel).expandX();
+
+            // Add a second row to our table
+            fpsTable.row();
+
+            // Value
+            fpsTable.add(fpsValueLabel).expandX();
+
+            // Add our table to the stage
+            stage.addActor(fpsTable);
+        }
     }
 
     public void update(float dt){
@@ -138,6 +175,12 @@ public class Hud implements Disposable {
                 }
                 timeCountPower = 0;
             }
+        }
+
+        // Update FPS
+        if (Constants.DEBUG_MODE) {
+            fps = Gdx.graphics.getFramesPerSecond();
+            fpsValueLabel.setText(String.format("%02d", fps));
         }
     }
 
