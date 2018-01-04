@@ -180,10 +180,10 @@ public class FinalEnemyLevelOne extends Sprite {
             switch (currentStateFinalEnemy) {
                 case WALKING:
                     if (blnOption) {
-          //              newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+          // TODO             newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
                     } else {
-            //            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-             //           openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+            //  TODO          newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+             //  TODO         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
                     break;
                 case IDLE:
@@ -468,46 +468,26 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
    private void stateExploding(float dt) {
-//        // Preserve the flip state
-//        boolean isFlipX = false;
-//        boolean isFlipY = false;
-//        float rotation = 0;
-//
-//
-//        if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
-//            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
-//            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
-//            currentStateFinalEnemy = StateFinalEnemy.DEAD;
-//        } else {
-//            isFlipX = isFlipX();
-//            isFlipY = isFlipY();
-//            rotation = getRotation();
-//            if (stateFinalEnemyTimer == 0) { // Explosion starts
-////                setFlip(false, false);
-////                setRotation(0);
-////
-////
-////                // esto si o si es asi
-////                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY(),
-////                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
-////                // fin esto si o si es asi
-////
-////                setOriginCenter();
-//
-//
-//                Sprite putosprite = new Sprite(Assets.instance.explosionC.explosionCStand);
-//                putosprite.setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY(),
-//                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
-//                set(putosprite);
-//                setOriginCenter();
-//            }
-//            setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-//            stateFinalEnemyTimer += dt;
-//
-//            // Apply previous flip state
-//           setFlip(isFlipX, isFlipY);
-//            setRotation(rotation);
-//        }
+       if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+           // Exploding animation
+           stateFinalEnemyTimer = 0;
+
+           // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
+           AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+
+           // Set the new state
+           currentStateFinalEnemy = StateFinalEnemy.DEAD;
+       } else {
+           // Preserve the flip state
+           boolean isFlipX = isFlipX();
+           boolean isFlipY = isFlipY();
+
+           setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+           stateFinalEnemyTimer += dt;
+
+           // Apply previous flip state
+           setFlip(isFlipX, isFlipY);
+       }
     }
 
 
