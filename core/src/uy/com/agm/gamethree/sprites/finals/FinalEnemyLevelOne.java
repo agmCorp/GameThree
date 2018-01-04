@@ -62,7 +62,6 @@ public class FinalEnemyLevelOne extends Sprite {
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
     private Animation finalEnemyLevelOneDyingAnimation;
-    private Animation finalEnemylevelOneExplosionAnimation;
 
     private Vector2 velocity;
     private Vector2 tmp; // Temp GC friendly vector
@@ -72,6 +71,11 @@ public class FinalEnemyLevelOne extends Sprite {
     private Animation powerFXAnimation;
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
+
+    // Explosion FX
+    private Animation explosionFXAnimation;
+    private float explosionFXStateTimer;
+    private Sprite explosionFXSprite;
 
     public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -92,7 +96,6 @@ public class FinalEnemyLevelOne extends Sprite {
         finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
         finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
         finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
-        finalEnemylevelOneExplosionAnimation = Assets.instance.explosionC.explosionCAnimation;
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
@@ -117,6 +120,8 @@ public class FinalEnemyLevelOne extends Sprite {
         // Temp GC friendly vector
         tmp = new Vector2();
 
+        // -------------------- PowerFX --------------------
+
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerAnimation;
@@ -131,8 +136,26 @@ public class FinalEnemyLevelOne extends Sprite {
         // Power FX Sprite
         powerFXSprite = new Sprite(spritePower);
 
-        // Place origin of rotation in the center of the sprite
+        // Place origin of rotation in the center of the Sprite
         powerFXSprite.setOriginCenter();
+
+        // -------------------- ExplosionFX --------------------
+
+        // ExplosionFX variables initialization
+        explosionFXAnimation = Assets.instance.explosionD.explosionDAnimation;
+        explosionFXStateTimer = 0;
+
+        // Set the explosion's texture
+        Sprite spriteExplosion = new Sprite(Assets.instance.explosionD.explosionDStand);
+
+        // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
+        spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIOND_WIDTH_METERS, Constants.EXPLOSIOND_HEIGHT_METERS);
+
+        // Explosion FX Sprite
+        explosionFXSprite = new Sprite(spriteExplosion);
+
+        // Place origin of rotation in the center of the Sprite
+        explosionFXSprite.setOriginCenter();
     }
 
     private void defineFinalEnemyLevelOne() {
@@ -449,7 +472,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private void stateDying(float dt) {
         if (finalEnemyLevelOneDyingAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
             // Exploding animation
-            stateFinalEnemyTimer = 0;
+            explosionFXStateTimer = 0;
 
             // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a explotar
             AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
@@ -472,27 +495,26 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
    private void stateExploding(float dt) {
-       if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
-           // Exploding animation
-           stateFinalEnemyTimer = 0;
-
+       if (explosionFXAnimation.isAnimationFinished(explosionFXStateTimer)) {
            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
            AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
 
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
        } else {
-           // Preserve the flip and rotation state
-           boolean isFlipX = isFlipX();
-           boolean isFlipY = isFlipY();
-           float rotation = getRotation();
+           // Animation
+           explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTimer, true));
+           explosionFXStateTimer += dt;
 
-           setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-           stateFinalEnemyTimer += dt;
+           // Apply rotation and flip of the main character
+           explosionFXSprite.setRotation(getRotation());
+           explosionFXSprite.setFlip(isFlipX(), isFlipY());
 
-           // Apply previous flip and rotation state
-           setFlip(isFlipX, isFlipY);
-           setRotation(rotation);
+           // Get center of main character bounding rectangle
+           getBoundingRectangle().getCenter(tmp);
+
+           // Center the Sprte with respect to the center of FinalEnemyLevelOne
+           explosionFXSprite.setPosition( tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
        }
     }
 
@@ -669,6 +691,10 @@ public class FinalEnemyLevelOne extends Sprite {
 
             if (currentPowerState != PowerState.NORMAL) {
                 powerFXSprite.draw(batch);
+            }
+
+            if (currentStateFinalEnemy == StateFinalEnemy.EXPLODING) {
+                explosionFXSprite.draw(batch);
             }
         }
     }

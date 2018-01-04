@@ -22,7 +22,7 @@ public class AssetExplosionC {
 
         // Animation
         regions = atlas.findRegions("explosionC");
-        explosionCAnimation = new Animation(0.5f / 7.0f, regions);
+        explosionCAnimation = new Animation(1.0f / 24.0f, regions);
         regions.clear();
     }
 }
