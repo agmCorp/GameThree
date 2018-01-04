@@ -44,5 +44,6 @@ public class GameThree extends Game {
         super.dispose();
         Assets.instance.dispose();
         batch.dispose();
+        shapeRenderer.dispose();
     }
 }

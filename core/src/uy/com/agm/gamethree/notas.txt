@@ -66,6 +66,8 @@ bordes y objetos
 - comprar el ninja?
 - hacer que la bala del finalenemy salga con offset (pero para que lado?)
 - renombrar los audios con nomenclatura
+- ver por codigo de poder en modo debug no tener el backround
+- el cuadrado del finalenemy una vez que lo mate sigue ahi
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -88,6 +90,7 @@ which uses delta to get the right frames for sprite animations, and actually dra
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2.
 - Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
+
 
 VIDEO
 -----

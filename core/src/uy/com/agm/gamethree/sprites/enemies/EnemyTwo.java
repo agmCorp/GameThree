@@ -171,7 +171,7 @@ public class EnemyTwo extends Enemy {
         } else {
             if (stateTimer == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(b2body.getPosition().x - Constants.EXPLOSIONA_WIDTH_METERS / 2, b2body.getPosition().y - Constants.EXPLOSIONA_HEIGHT_METERS / 2,
+                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONB_WIDTH_METERS / 2, getY(),
                         Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
