@@ -102,7 +102,7 @@ public class FinalEnemyLevelOne extends Sprite {
         timeToChange = getNextTimeToChange();
         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
 
-        // Place origin of rotation in the center of the sprite
+        // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
         // Initial movement (left or right)
@@ -180,10 +180,10 @@ public class FinalEnemyLevelOne extends Sprite {
             switch (currentStateFinalEnemy) {
                 case WALKING:
                     if (blnOption) {
-          // TODO             newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
                     } else {
-            //  TODO          newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-             //  TODO         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
                     break;
                 case IDLE:
@@ -365,9 +365,10 @@ public class FinalEnemyLevelOne extends Sprite {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
-        // Preserve the flip state
+        // Preserve the flip and rotation state
         boolean isFlipX = isFlipX();
         boolean isFlipY = isFlipY();
+        float rotation = getRotation();
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -380,8 +381,9 @@ public class FinalEnemyLevelOne extends Sprite {
         setRegion((TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTimer, true));
         stateFinalEnemyTimer += dt;
 
-        // Apply previous flip state
+        // Apply previous flip and rotation state
         setFlip(isFlipX, isFlipY);
+        setRotation(rotation);
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
@@ -455,15 +457,17 @@ public class FinalEnemyLevelOne extends Sprite {
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
         } else {
-            // Preserve the flip state
+            // Preserve the flip and rotation state
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
+            float rotation = getRotation();
 
             setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTimer, true));
             stateFinalEnemyTimer += dt;
 
-            // Apply previous flip state
+            // Apply previous flip and rotation state
             setFlip(isFlipX, isFlipY);
+            setRotation(rotation);
         }
     }
 
@@ -478,19 +482,19 @@ public class FinalEnemyLevelOne extends Sprite {
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
        } else {
-           // Preserve the flip state
+           // Preserve the flip and rotation state
            boolean isFlipX = isFlipX();
            boolean isFlipY = isFlipY();
+           float rotation = getRotation();
 
            setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
            stateFinalEnemyTimer += dt;
 
-           // Apply previous flip state
+           // Apply previous flip and rotation state
            setFlip(isFlipX, isFlipY);
+           setRotation(rotation);
        }
     }
-
-
 
     private void powerStatePowerful(float dt) {
         // If our final enemy is not walking, he becomes weak
