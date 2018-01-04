@@ -69,6 +69,7 @@ bordes y objetos
 - ver por codigo de poder en modo debug no tener el backround
 - el cuadrado del finalenemy una vez que lo mate sigue ahi
 - VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
+- VER DE PARAMETRIZAR LOS ASSETS Y LAS EXPLOSIONES QUE SON TODAS IGUALES.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

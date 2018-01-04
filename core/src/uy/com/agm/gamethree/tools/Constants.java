@@ -179,7 +179,12 @@ public class Constants {
     public static final float EXPLOSIONC_WIDTH_METERS = 234.0f * 1.0f / PPM;
     public static final float EXPLOSIONC_HEIGHT_METERS = 189.0f * 1.0f / PPM;
 
-    // ExplosionC (meters = pixels * resizeFactor / PPM)
-    public static final float EXPLOSIOND_WIDTH_METERS = 205.0f * 2.0f / PPM;
-    public static final float EXPLOSIOND_HEIGHT_METERS = 178.0f * 2.0f / PPM;
+    // ExplosionD (meters = pixels * resizeFactor / PPM)
+    public static final float EXPLOSIOND_WIDTH_METERS = 205.0f * 1.0f / PPM;
+    public static final float EXPLOSIOND_HEIGHT_METERS = 178.0f * 1.0f / PPM;
+
+    // ExplosionE (meters = pixels * resizeFactor / PPM)
+    public static final float EXPLOSIONE_WIDTH_METERS = 196.0f * 3.0f / PPM;
+    public static final float EXPLOSIONE_HEIGHT_METERS = 178.0f * 3.0f / PPM;
+
 }

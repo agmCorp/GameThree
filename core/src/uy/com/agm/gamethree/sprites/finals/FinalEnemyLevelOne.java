@@ -142,14 +142,14 @@ public class FinalEnemyLevelOne extends Sprite {
         // -------------------- ExplosionFX --------------------
 
         // ExplosionFX variables initialization
-        explosionFXAnimation = Assets.instance.explosionD.explosionDAnimation;
+        explosionFXAnimation = Assets.instance.explosionE.explosionEAnimation;
         explosionFXStateTimer = 0;
 
         // Set the explosion's texture
-        Sprite spriteExplosion = new Sprite(Assets.instance.explosionD.explosionDStand);
+        Sprite spriteExplosion = new Sprite(Assets.instance.explosionE.explosionEStand);
 
         // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
-        spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIOND_WIDTH_METERS, Constants.EXPLOSIOND_HEIGHT_METERS);
+        spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIONE_WIDTH_METERS, Constants.EXPLOSIONE_HEIGHT_METERS);
 
         // Explosion FX Sprite
         explosionFXSprite = new Sprite(spriteExplosion);
