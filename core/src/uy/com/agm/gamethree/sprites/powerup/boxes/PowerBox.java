@@ -168,7 +168,7 @@ public class PowerBox extends Sprite {
         } else {
             if (stateTimer == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONB_WIDTH_METERS / 2, getY(),
+                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONB_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONB_HEIGHT_METERS / 2,
                         Constants.EXPLOSIONB_WIDTH_METERS, Constants.EXPLOSIONB_HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));

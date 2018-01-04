@@ -755,20 +755,20 @@ finalEnemyLevelOneDeath
   orig: 177, 169
   offset: 0, 0
   index: 5
-explosionA09
+explosionA
   rotate: false
   xy: 389, 156
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: -1
+  index: 1
 explosionA
   rotate: false
   xy: 558, 1
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 1
+  index: 2
 energyBall
   rotate: false
   xy: 389, 1
@@ -782,7 +782,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 2
+  index: 3
 finalEnemyLevelOneDeath
   rotate: false
   xy: 568, 854
@@ -920,7 +920,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 3
+  index: 4
 finalEnemyLevelOneDeath
   rotate: false
   xy: 180, 685
@@ -934,7 +934,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 4
+  index: 5
 finalEnemyLevelOneDeath
   rotate: false
   xy: 1, 683
@@ -997,7 +997,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 5
+  index: 6
 finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 685
@@ -1011,7 +1011,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 6
+  index: 7
 finalEnemyLevelOneDeath
   rotate: false
   xy: 359, 514
@@ -1109,7 +1109,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 7
+  index: 8
 finalEnemyLevelOneIdle
   rotate: false
   xy: 538, 514
@@ -1151,7 +1151,7 @@ explosionA
   size: 167, 167
   orig: 167, 167
   offset: 0, 0
-  index: 8
+  index: 9
 finalEnemyLevelOneIdle
   rotate: false
   xy: 717, 514
