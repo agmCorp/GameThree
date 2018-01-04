@@ -68,6 +68,7 @@ bordes y objetos
 - renombrar los audios con nomenclatura
 - ver por codigo de poder en modo debug no tener el backround
 - el cuadrado del finalenemy una vez que lo mate sigue ahi
+- VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
