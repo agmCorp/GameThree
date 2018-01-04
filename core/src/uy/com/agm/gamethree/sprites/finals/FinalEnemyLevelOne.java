@@ -158,53 +158,56 @@ public class FinalEnemyLevelOne extends Sprite {
         return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_DELAY_SECONDS);
     }
 
-    private StateFinalEnemy getNewRandomState(StateFinalEnemy currentStateFinalEnemy) {
-        boolean blnOption = MathUtils.randomBoolean();
-        StateFinalEnemy newRandomStateFinalEnemy;
+    private StateFinalEnemy getNewRandomState(float dt) {
+        boolean blnOption;
+        StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
 
-        // Efficient version
-        switch (currentStateFinalEnemy) {
-            case WALKING:
-                if (blnOption) {
-                    newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                } else {
-                    newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                }
-                break;
-            case IDLE:
-                if (blnOption) {
-                    newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                } else {
-                    newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                }
-                break;
-            case SHOOTING:
-                if (blnOption) {
-                    newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                } else {
-                    newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                }
-                break;
-            default:
-                newRandomStateFinalEnemy = currentStateFinalEnemy;
-                break;
+        timeToChangeTimer += dt;
+
+        // Set a new currentStateFinalEnemy
+        if (timeToChangeTimer >= timeToChange) {
+            // Reset random state variables
+            timeToChangeTimer = 0;
+            timeToChange = getNextTimeToChange();
+
+            // Reset variable animation
+            stateFinalEnemyTimer = 0;
+
+            // Random option
+            blnOption = MathUtils.randomBoolean();
+
+            // Decide which state must return
+            switch (currentStateFinalEnemy) {
+                case WALKING:
+                    if (blnOption) {
+          //              newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                    } else {
+            //            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+             //           openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                    }
+                    break;
+                case IDLE:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                    }
+                    break;
+                case SHOOTING:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                    }
+                    break;
+            }
         }
+
         return newRandomStateFinalEnemy;
     }
 
     public void update(float dt) {
-        if (b2body.isActive()) { // We wait until our final enemy is on camera.
-            timeToChangeTimer += dt;
-            // Set a new currentStateFinalEnemy
-            if (timeToChangeTimer >= timeToChange) {
-                timeToChangeTimer = 0;
-                timeToChange = getNextTimeToChange();
-                stateFinalEnemyTimer = 0;
-                openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                currentStateFinalEnemy = getNewRandomState(currentStateFinalEnemy);
-            }
-        }
-
         switch (currentStateFinalEnemy) {
             case WALKING:
                 stateWalking(dt);
@@ -353,6 +356,9 @@ public class FinalEnemyLevelOne extends Sprite {
                 velocity.set(tmp);
                 break;
         }
+
+        // New random state
+        currentStateFinalEnemy = getNewRandomState(dt);
     }
 
     private void stateIdle(float dt) {
@@ -376,6 +382,9 @@ public class FinalEnemyLevelOne extends Sprite {
 
         // Apply previous flip state
         setFlip(isFlipX, isFlipY);
+
+        // New random state
+        currentStateFinalEnemy = getNewRandomState(dt);
     }
 
     private void stateShooting(float dt) {
@@ -406,6 +415,9 @@ public class FinalEnemyLevelOne extends Sprite {
         } else {
             openFireTimer += dt;
         }
+
+        // New random state
+        currentStateFinalEnemy = getNewRandomState(dt);
     }
 
     private void openFire() {
@@ -455,30 +467,50 @@ public class FinalEnemyLevelOne extends Sprite {
         }
     }
 
-    private void stateExploding(float dt) {
-        if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
-            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
-            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
-
-            currentStateFinalEnemy = StateFinalEnemy.DEAD;
-        } else {
-            if (stateFinalEnemyTimer == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(b2body.getPosition().x - Constants.EXPLOSIONC_WIDTH_METERS / 2, b2body.getPosition().y - Constants.EXPLOSIONC_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
-            }
-
-            // Preserve the flip state
-            boolean isFlipX = isFlipX();
-            boolean isFlipY = isFlipY();
-
-            setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-            stateFinalEnemyTimer += dt;
-
-            // Apply previous flip state
-            setFlip(isFlipX, isFlipY);
-        }
+   private void stateExploding(float dt) {
+//        // Preserve the flip state
+//        boolean isFlipX = false;
+//        boolean isFlipY = false;
+//        float rotation = 0;
+//
+//
+//        if (finalEnemylevelOneExplosionAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+//            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
+//            AudioManager.instance.play(Assets.instance.sounds.crack, 1, MathUtils.random(1.0f, 1.1f));
+//            currentStateFinalEnemy = StateFinalEnemy.DEAD;
+//        } else {
+//            isFlipX = isFlipX();
+//            isFlipY = isFlipY();
+//            rotation = getRotation();
+//            if (stateFinalEnemyTimer == 0) { // Explosion starts
+////                setFlip(false, false);
+////                setRotation(0);
+////
+////
+////                // esto si o si es asi
+////                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY(),
+////                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
+////                // fin esto si o si es asi
+////
+////                setOriginCenter();
+//
+//
+//                Sprite putosprite = new Sprite(Assets.instance.explosionC.explosionCStand);
+//                putosprite.setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY(),
+//                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
+//                set(putosprite);
+//                setOriginCenter();
+//            }
+//            setRegion((TextureRegion) finalEnemylevelOneExplosionAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+//            stateFinalEnemyTimer += dt;
+//
+//            // Apply previous flip state
+//           setFlip(isFlipX, isFlipY);
+//            setRotation(rotation);
+//        }
     }
+
+
 
     private void powerStatePowerful(float dt) {
         // If our final enemy is not walking, he becomes weak
