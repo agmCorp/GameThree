@@ -30,7 +30,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 6.0f * 0;//2.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // ---- Assets ----
 

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -48,8 +47,7 @@ public class PlayScreen implements Screen {
     public Viewport gameViewPort;
     private Hud hud;
 
-    // TiledEditor map variables
-    private TmxMapLoader maploader;
+    // TiledEditor map variable
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
@@ -80,9 +78,9 @@ public class PlayScreen implements Screen {
         // Create our game HUD for scores/timers/level info
         hud = new Hud(game.batch);
 
-        // Load our map and setup our map renderer
-        maploader = new TmxMapLoader();
-        map = maploader.load("levelOne/levelOne.tmx");
+        // Get our map and setup our map renderer
+        map = Assets.instance.map;
+
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map

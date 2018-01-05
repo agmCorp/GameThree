@@ -6,7 +6,8 @@ map 32x32 sin margin ni spacing
 Mi mundo ancho 480, alto 800
 mis texturas miden 1024 x 1024
 
-custom properties:
+CUSTOM PROPERTIES
+-----------------
 enemyBullet
 powerOne
 damage (int)
@@ -49,9 +50,8 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- optimizar el codigo del enemigofinal poderes.
+- programar de enemigo final el b2body
 - ponerle sonido y assets bien
-- programar damage y muerte y colisiones
 - hacer nuevo poder
 
 PENDIENTES
@@ -64,7 +64,6 @@ bordes y objetos
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - estaría bueno que las balas reboten y los enemigos también en modo ghost.
 - comprar el ninja?
-- hacer que la bala del finalenemy salga con offset (pero para que lado?)
 - renombrar los audios con nomenclatura
 - ver por codigo de poder en modo debug no tener el backround
 - el cuadrado del finalenemy una vez que lo mate sigue ahi
@@ -240,6 +239,18 @@ METODOLOGIA
     Al salvar genera 2 archivos los cuales uso. Capaz que tengo que editarlos para cambiar una ruta absoluta que
     aparece alli (como en TiledEditor).
 
+11)
+    Para definir el tamaño (ancho y altura) de un sprite, debo usar setBoundaries.
+    Luego puedo definir su posición con setPosition.
+    Puedo hacer todo en un paso y definir tamaño y posición con setBoundaries.
+    Si durante el ciclo de vida del personaje (Sprite) quiero cambiar su tramaño, puedo setear nuevamente setBoundaries y lo cambio.
+    Esto lo hice por ejemplo en EnemyOne, EnemyTwo, PowerBox, etc. cuando cambio su animación para que exploten.
+    Lo anterior funciona bien si el sprite no fue rotado, sino es muy complejo setear bien el tamaño nuevamente ya que si está rotado
+    el ancho a veces se convierte en altura y viceversa. De igual manera rota el vértice inferior izquierdo y la verdad resulta muy muy complejo
+    determinar el nuevo sistema de coordenadas.
+    Lo que hice en esos casos fue definir un nuevo sprite (en una variable), seteando su setBoundaries, que la dibujo finalmente sobre el sprite
+    del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite). Esto lo hice así
+    porque es imposible deducir el ancho y altura del sprite FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
 --------------------------- code copy paste ---------------------------------------
 para items los cast
 para vidas heal

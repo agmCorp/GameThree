@@ -4,10 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
 
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
@@ -41,6 +45,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private AssetManager assetManager;
 
+    public TiledMap map;
     public AssetFonts fonts;
     public AssetHero hero;
     public AssetEnemyOne enemyOne;
@@ -70,6 +75,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
         // Set asset manager error handler
         assetManager.setErrorListener(this);
+
+        // Load map
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        assetManager.load("levelOne/levelOne.tmx", TiledMap.class);
 
         // Load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
@@ -108,6 +117,11 @@ public class Assets implements Disposable, AssetErrorListener {
         }
 
         // Create game resource objects
+        map = assetManager.get("levelOne/levelOne.tmx");
+        if (Constants.DEBUG_MODE) {
+            MapLayer floor = map.getLayers().get("floor");
+            map.getLayers().remove(floor);
+        }
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
