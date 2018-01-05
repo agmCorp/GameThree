@@ -398,10 +398,8 @@ public class Hero extends Sprite {
             float h = powerFXSprite.getWidth();
 
             powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
-            batch.setColor(1, 1, 1, Constants.POWERONE_FX_ALPHA); // Transparency
             batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
                     w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
-            batch.setColor(1, 1, 1, 1);
         }
     }
 
