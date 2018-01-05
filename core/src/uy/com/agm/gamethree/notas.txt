@@ -50,7 +50,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- programar de enemigo final el b2body
 - ponerle sonido y assets bien
 - hacer nuevo poder
 
