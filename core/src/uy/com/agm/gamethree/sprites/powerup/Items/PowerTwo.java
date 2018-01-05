@@ -30,24 +30,24 @@ public class PowerTwo extends Item {
     private float stateTimer;
     private float stateWaiting;
     private float stateFading;
-    private Animation powerOneAnimation;
+    private Animation powerTwoAnimation;
 
     public PowerTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
+        powerTwoAnimation = Assets.instance.powerTwo.powerTwoAnimation;
         stateTimer = 0;
         stateWaiting = 0;
         stateFading = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
+        setBounds(getX(), getY(), Constants.POWERTWO_WIDTH_METERS, Constants.POWERTWO_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
+        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne, 1);
+        AudioManager.instance.play(Assets.instance.sounds.showUpPowerTwo, 1);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PowerTwo extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERONE_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(Constants.POWERTWO_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -95,17 +95,17 @@ public class PowerTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateWaiting += dt;
-        if (stateWaiting > Constants.POWERONE_WAITING_SECONDS) {
+        if (stateWaiting > Constants.POWERTWO_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -114,23 +114,23 @@ public class PowerTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateFading += dt;
-        float alpha = 1 - stateFading / Constants.POWERONE_FADING_SECONDS;
+        float alpha = 1 - stateFading / Constants.POWERTWO_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFading > Constants.POWERONE_FADING_SECONDS) {
+        if (stateFading > Constants.POWERTWO_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -141,14 +141,14 @@ public class PowerTwo extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne, 1);
+        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerTwo, 1);
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
-        hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+        hud.setPowerLabel("SHIELD", Constants.TIMER_POWERTWO);
 
         // Set score
-        hud.addScore(Constants.POWERONE_SCORE);
+        hud.addScore(Constants.POWERTWO_SCORE);
 
         // Hero can't collide with enemies nor bullets
         Hero hero = screen.getPlayer();
@@ -163,11 +163,12 @@ public class PowerTwo extends Item {
             fixture.setFilterData(filter);
         }
 
+        // TODO ARREGLAR DE ACA PARA ABAJO
         // Set the power's texture
         Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
 
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
         hero.applyPower(Assets.instance.ghostMode.ghostModeAnimation, spritePower);
 

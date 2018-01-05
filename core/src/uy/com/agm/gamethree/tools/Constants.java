@@ -54,10 +54,11 @@ public class Constants {
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
-    public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
+    public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
 
@@ -106,6 +107,9 @@ public class Constants {
     // Item (meters = pixels * resizeFactor / PPM)
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
+    // Notification (seconds) before power down
+    public static final int TIMER_NOTIFICATION = 3;
+
     // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float POWERONE_VELOCITY_X = 0.7f;
@@ -115,11 +119,24 @@ public class Constants {
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
     public static final int TIMER_POWERONE = 200;
-    public static final int TIMER_NOTIFICATION = 3;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_ALPHA = 1.0f;
     public static final float POWERONE_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
+
+    // PowerTwo (meters = pixels * resizeFactor / PPM)
+    public static final float POWERTWO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float POWERTWO_VELOCITY_X = 0.0f;
+    public static final float POWERTWO_VELOCITY_Y = 0.7f;
+    public static final float POWERTWO_WAITING_SECONDS = 5.0f;
+    public static final float POWERTWO_FADING_SECONDS = 5.0f;
+    public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.5f / PPM;
+    public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.5f / PPM;
+    public static final int TIMER_POWERTWO = 200;
+    public static final int POWERTWO_SCORE = 30;
+    public static final float POWERTWO_FX_ALPHA = 1.0f;
+    public static final float POWERTWO_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
+    public static final float POWERTWO_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
