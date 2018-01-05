@@ -291,7 +291,13 @@ https://mrbubblewand.files.wordpress.com/2009/08/magic_002.png (fondo negro)
 https://mrbubblewand.files.wordpress.com/2009/08/heal_001.png
 https://mrbubblewand.files.wordpress.com/2009/08/darkness_001.png
 
-
+posibles efectos para escudos
+escudo
+https://mrbubblewand.files.wordpress.com/2010/06/fire_003.png si
+https://mrbubblewand.files.wordpress.com/2009/10/water_003.png puede ser
+https://mrbubblewand.files.wordpress.com/2010/05/earth_002.png no
+https://mrbubblewand.files.wordpress.com/2010/01/magic_004.png
+https://mrbubblewand.files.wordpress.com/2010/02/magic_006.png puede ser
 
 -----------------------------------------------------------------------------------
 FUNCION SENO
