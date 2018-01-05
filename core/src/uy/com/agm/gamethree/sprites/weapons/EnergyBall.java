@@ -24,7 +24,6 @@ public class EnergyBall extends Weapon {
 
     private float stateTimer;
     private Animation energyBallAnimation;
-    private Vector2 velocity;
 
     public EnergyBall(PlayScreen screen, float x, float y) {
         super(screen, x, y);
@@ -57,7 +56,8 @@ public class EnergyBall extends Weapon {
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT |
+                Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT |
                 Constants.ENEMY_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;

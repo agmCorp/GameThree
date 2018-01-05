@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.sprites.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -17,6 +18,8 @@ public abstract class Weapon extends Sprite {
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
+
+    protected Vector2 velocity;
 
     protected enum State {
         SHOT, ONTARGET, FINISHED
@@ -56,6 +59,19 @@ public abstract class Weapon extends Sprite {
                 currentState = State.FINISHED;
             }
         }
+    }
+
+    public void reverseVelocity(boolean x, boolean y) {
+        if (x) {
+            velocity.x *= -1;
+        }
+        if (y) {
+            velocity.y *= -1;
+        }
+    }
+
+    public void onBounce() {
+        reverseVelocity(false, true);
     }
 
     // This Weapon can be removed from our game

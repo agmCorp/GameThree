@@ -25,7 +25,6 @@ public class EnemyBullet extends Weapon {
 
     private float stateTimer;
     private Animation enemyBulletAnimation;
-    private Vector2 velocity;
 
     public EnemyBullet(PlayScreen screen, float x, float y) {
         super(screen, x, y);

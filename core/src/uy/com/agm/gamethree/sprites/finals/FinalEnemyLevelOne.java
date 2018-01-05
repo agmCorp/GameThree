@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.finals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -167,14 +168,35 @@ public class FinalEnemyLevelOne extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
-                            Constants.EDGES_BIT |
-                            Constants.OBSTACLE_BIT |
-                            Constants.HERO_WEAPON_BIT |
-                            Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
+        setDefaultFilter();
+    }
+
+    private void setDefaultFilter() {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT; // Depicts what this fixture is
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.EDGES_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.HERO_WEAPON_BIT |
+                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+    }
+
+    private void setPowerfulFilter() {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT; // Depicts what this fixture is
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.EDGES_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.HERO_WEAPON_BIT |
+                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
     }
 
     private float getNextTimeToChange() {
@@ -520,8 +542,8 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private void powerStatePowerful(float dt) {
         // If our final enemy is not walking, he becomes weak
-        if (currentStateFinalEnemy != StateFinalEnemy.WALKING) {
-            // setDefaultFilter(); // TODO: 1/1/2018
+        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
+            setDefaultFilter();
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerDown, 1);
@@ -540,9 +562,9 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     private void powerStateNormal() {
-        // If our final enemy is walking, he becomes powerful
-        if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
-            // setPowerfulFilter(); // // TODO: 2/1/2018
+        // If our final enemy is walking or shooting, he becomes powerful
+        if (currentStateFinalEnemy != StateFinalEnemy.IDLE) {
+            setPowerfulFilter();
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
             AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerUp, 1);
@@ -551,7 +573,7 @@ public class FinalEnemyLevelOne extends Sprite {
 
     public void onHit() {
         damage--;
-        Gdx.app.debug(TAG, "ups!");
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo
         if (damage <= 0) {
             currentStateFinalEnemy = StateFinalEnemy.INJURED;
         }
@@ -686,16 +708,15 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     public void draw(Batch batch) {
-        if (currentStateFinalEnemy != StateFinalEnemy.DEAD) {
+        if (currentStateFinalEnemy != StateFinalEnemy.DEAD && currentStateFinalEnemy != StateFinalEnemy.EXPLODING) {
             super.draw(batch);
 
-            if (currentPowerState != PowerState.NORMAL) {
+            if (currentPowerState == PowerState.POWERFUL) {
                 powerFXSprite.draw(batch);
             }
-
-            if (currentStateFinalEnemy == StateFinalEnemy.EXPLODING) {
-                explosionFXSprite.draw(batch);
-            }
+        }
+        if (currentStateFinalEnemy == StateFinalEnemy.EXPLODING) {
+            explosionFXSprite.draw(batch);
         }
     }
 
