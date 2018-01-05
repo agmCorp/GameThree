@@ -18,6 +18,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
+import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
@@ -175,20 +177,7 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private void setDefaultFilter() {
         Filter filter = new Filter();
-        filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.HERO_WEAPON_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-    }
-
-    private void setPowerfulFilter() {
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT; // Depicts what this fixture is
+        filter.categoryBits = Constants.FINAL_ENEMY_LEVEL_ONE_BIT; // Depicts what this fixture is
         filter.maskBits = Constants.BORDERS_BIT |
                 Constants.EDGES_BIT |
                 Constants.OBSTACLE_BIT |
@@ -541,9 +530,8 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     private void powerStatePowerful(float dt) {
-        // If our final enemy is not walking, he becomes weak
-        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
-            setDefaultFilter();
+        // If our final enemy is not walking nor shooting, he becomes weak
+        if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerDown, 1);
@@ -563,19 +551,23 @@ public class FinalEnemyLevelOne extends Sprite {
 
     private void powerStateNormal() {
         // If our final enemy is walking or shooting, he becomes powerful
-        if (currentStateFinalEnemy != StateFinalEnemy.IDLE) {
-            setPowerfulFilter();
+        if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
             AudioManager.instance.play(Assets.instance.sounds.finalLevelOnePowerUp, 1);
         }
     }
 
-    public void onHit() {
-        damage--;
-        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
-        if (damage <= 0) {
-            currentStateFinalEnemy = StateFinalEnemy.INJURED;
+    public void onHit(Weapon energyBall) {
+        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
+            energyBall.onTarget();
+            damage--;
+            AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
+            if (damage <= 0) {
+                currentStateFinalEnemy = StateFinalEnemy.INJURED;
+            }
+        } else {
+            energyBall.onBounce();
         }
     }
 

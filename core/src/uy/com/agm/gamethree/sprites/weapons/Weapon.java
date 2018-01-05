@@ -64,7 +64,7 @@ public abstract class Weapon extends Sprite {
         }
     }
 
-    public void reverseVelocity(boolean x, boolean y) {
+    protected void reverseVelocity(boolean x, boolean y) {
         if (x) {
             velocity.x *= -1;
         }

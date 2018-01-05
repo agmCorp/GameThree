@@ -30,7 +30,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 6.0f * 0;//2.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // ---- Assets ----
 
@@ -81,8 +81,7 @@ public class Constants {
     public static final short ITEM_BIT = 64;
     public static final short HERO_WEAPON_BIT = 128;
     public static final short ENEMY_WEAPON_BIT = 256;
-    public static final short FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT = 512;
-    public static final short FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT = 1024;
+    public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 512;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.0f;
@@ -114,7 +113,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 20;
+    public static final int TIMER_POWERONE = 200;
     public static final int TIMER_NOTIFICATION = 3;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_ALPHA = 1.0f;

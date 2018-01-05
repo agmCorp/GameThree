@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -151,39 +150,28 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Borders
-            case Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT | Constants.BORDERS_BIT:
-            case Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT | Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT ? fixA : fixB;
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
                 ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Edges
-            case Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT | Constants.EDGES_BIT:
-            case Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT | Constants.EDGES_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT ? fixA : fixB;
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.EDGES_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
                 ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
 
-            // Final enemy (normal) - Hero's weapon
-            case Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT | Constants.HERO_WEAPON_BIT:
+            // Final enemy - Hero's weapon
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
-                    ((Weapon) fixA.getUserData()).onTarget();
-                    ((FinalEnemyLevelOne) fixB.getUserData()).onHit();
+                    ((FinalEnemyLevelOne) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
                 } else {
-                    ((Weapon) fixB.getUserData()).onTarget();
-                    ((FinalEnemyLevelOne) fixA.getUserData()).onHit();
+                    ((FinalEnemyLevelOne) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
                 }
                 break;
 
-            // Final enemy (powerful) - Hero's weapon
-            case Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT | Constants.HERO_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT ? fixA : fixB;
-                ((Weapon) fixC.getUserData()).onBounce();
-                break;
-
             // Final enemy - Hero
-            case Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT | Constants.HERO_BIT:
-            case Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT | Constants.HERO_BIT:
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;

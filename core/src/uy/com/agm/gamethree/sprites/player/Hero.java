@@ -337,8 +337,7 @@ public class Hero extends Sprite {
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT |
+                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);

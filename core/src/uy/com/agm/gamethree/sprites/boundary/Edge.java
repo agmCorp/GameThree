@@ -50,8 +50,7 @@ public class Edge {
         shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
 
         fdef.filter.categoryBits = Constants.EDGES_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.FINAL_ENEMY_LEVEL_ONE_NORMAL_BIT |
-                            Constants.FINAL_ENEMY_LEVEL_ONE_POWERFUL_BIT |
+        fdef.filter.maskBits = Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
                             Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
