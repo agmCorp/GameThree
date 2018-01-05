@@ -54,6 +54,7 @@ public class Constants {
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
+    public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";

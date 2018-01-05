@@ -66,6 +66,8 @@ bordes y objetos
 - renombrar los audios con nomenclatura
 - VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
 - capaz me conviene agrupar las constantes en clases estaticas para cada objeto....no se..como hice assets
+- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
+que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
