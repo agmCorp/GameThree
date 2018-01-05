@@ -573,7 +573,7 @@ public class FinalEnemyLevelOne extends Sprite {
 
     public void onHit() {
         damage--;
-        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
         if (damage <= 0) {
             currentStateFinalEnemy = StateFinalEnemy.INJURED;
         }

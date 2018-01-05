@@ -2,11 +2,14 @@ package uy.com.agm.gamethree.sprites.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -71,6 +74,7 @@ public abstract class Weapon extends Sprite {
     }
 
     public void onBounce() {
+        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));// TODO RUIDO DE REBOTE
         reverseVelocity(false, true);
     }
 
