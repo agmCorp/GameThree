@@ -163,14 +163,13 @@ public class PowerTwo extends Item {
             fixture.setFilterData(filter);
         }
 
-        // TODO ARREGLAR DE ACA PARA ABAJO
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+        Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);
 
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
-        hero.applyPower(Assets.instance.ghostMode.ghostModeAnimation, spritePower);
+        hero.applyPower(Assets.instance.shield.shieldAnimation, spritePower);
 
         currentState = State.FINISHED;
     }
