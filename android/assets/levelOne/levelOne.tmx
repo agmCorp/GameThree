@@ -47,7 +47,7 @@
   </object>
   <object id="265" x="256" y="7360" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerTwo" value=""/>
    </properties>
   </object>
  </objectgroup>
