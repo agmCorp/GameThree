@@ -139,7 +139,7 @@ public class Hero extends Sprite {
         powerFXStateTimer += dt;
 
         if (screen.getHud().isPowerTimeUp()) {
-            setDefaultFilter();
+            setNormal();
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
@@ -350,57 +350,72 @@ public class Hero extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        setDefaultFixture();
+        setDefaultFilter();
+    }
+
+    private void setNormal() {
+        setDefaultFixture();
+        setDefaultFilter();
+    }
+
+    private void setDefaultFixture() {
+        // Remove all fixtures
+        while (b2body.getFixtureList().size > 0) {
+            b2body.destroyFixture(b2body.getFixtureList().first());
+        }
+
+        // Create default fixture
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-        setDefaultFilter();
     }
 
     public void draw(SpriteBatch batch) {
-        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
-        boolean clockwise = true;
-        float angle = 90;
-
-        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
-        float newHeight = getWidth();
-        float newWidth = getHeight();
-
-        // If Hero is moving, we must calculate his new angle
-        if (b2body.getLinearVelocity().len() > 0.0f) {
-            float velAngle = this.b2body.getLinearVelocity().angle();
-
-            if (0 < velAngle && velAngle <= 90) {
-                angle = velAngle;
-            }
-            if (90 < velAngle && velAngle <= 180) {
-                angle = 270.0f - velAngle;
-            }
-            if (180 < velAngle && velAngle <= 270) {
-                angle = velAngle;
-                clockwise = false;
-            }
-            if (270 < velAngle && velAngle <= 360) {
-                angle = velAngle;
-                clockwise = false;
-            }
-        }
-
-        // Draws a rectangle with the texture coordinates rotated 90 degrees.
-        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
-                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
-
-        if (currentPowerState != PowerState.NORMAL) {
-            // We do the same with powerFXSprite
-            float w = powerFXSprite.getHeight();
-            float h = powerFXSprite.getWidth();
-
-            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
-            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
-                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
-        }
+//        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+//        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
+//        boolean clockwise = true;
+//        float angle = 90;
+//
+//        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
+//        float newHeight = getWidth();
+//        float newWidth = getHeight();
+//
+//        // If Hero is moving, we must calculate his new angle
+//        if (b2body.getLinearVelocity().len() > 0.0f) {
+//            float velAngle = this.b2body.getLinearVelocity().angle();
+//
+//            if (0 < velAngle && velAngle <= 90) {
+//                angle = velAngle;
+//            }
+//            if (90 < velAngle && velAngle <= 180) {
+//                angle = 270.0f - velAngle;
+//            }
+//            if (180 < velAngle && velAngle <= 270) {
+//                angle = velAngle;
+//                clockwise = false;
+//            }
+//            if (270 < velAngle && velAngle <= 360) {
+//                angle = velAngle;
+//                clockwise = false;
+//            }
+//        }
+//
+//        // Draws a rectangle with the texture coordinates rotated 90 degrees.
+//        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
+//                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
+//
+//        if (currentPowerState != PowerState.NORMAL) {
+//            // We do the same with powerFXSprite
+//            float w = powerFXSprite.getHeight();
+//            float h = powerFXSprite.getWidth();
+//
+//            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+//            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
+//                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
+//        }
     }
 
     public void openFire() {

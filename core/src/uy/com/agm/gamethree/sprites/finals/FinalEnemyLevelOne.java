@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
-import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
@@ -572,125 +571,127 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     public void onHitWall() {
-        float velY = b2body.getLinearVelocity().y;
-        float velX = b2body.getLinearVelocity().x;
-        float x = b2body.getPosition().x;
-        float y = b2body.getPosition().y;
-        int option = MathUtils.random(1, 3);
+        if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
+            float velY = b2body.getLinearVelocity().y;
+            float velX = b2body.getLinearVelocity().x;
+            float x = b2body.getPosition().x;
+            float y = b2body.getPosition().y;
+            int option = MathUtils.random(1, 3);
 
-        if (velY > 0.0f) {
-            if (x < screen.gameCam.position.x) {
-                // We are walking UP along the LEFT EDGE
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.LEFT_DOWN;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.CEILING_RIGHT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                        break;
-                }
-            } else {
-                // We are walking UP along the RIGHT EDGE
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.RIGHT_DOWN;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.CEILING_LEFT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.SLASH_DOWN;
-                        break;
-                }
-            }
-        } else {
-            if (velY < 0.0f) {
+            if (velY > 0.0f) {
                 if (x < screen.gameCam.position.x) {
-                    // We are walking DOWN along the LEFT EDGE
+                    // We are walking UP along the LEFT EDGE
                     switch (option) {
                         case 1: // go back
-                            currentStateWalking = StateWalking.LEFT_UP;
+                            currentStateWalking = StateWalking.LEFT_DOWN;
                             break;
                         case 2:
-                            currentStateWalking = StateWalking.FLOOR_RIGHT;
+                            currentStateWalking = StateWalking.CEILING_RIGHT;
                             break;
                         case 3:
-                            currentStateWalking = StateWalking.SLASH_UP;
+                            currentStateWalking = StateWalking.BACKSLASH_DOWN;
                             break;
                     }
                 } else {
-                    // We are walking DOWN along the RIGHT EDGE
+                    // We are walking UP along the RIGHT EDGE
                     switch (option) {
                         case 1: // go back
-                            currentStateWalking = StateWalking.RIGHT_UP;
+                            currentStateWalking = StateWalking.RIGHT_DOWN;
                             break;
                         case 2:
-                            currentStateWalking = StateWalking.FLOOR_LEFT;
+                            currentStateWalking = StateWalking.CEILING_LEFT;
                             break;
                         case 3:
-                            currentStateWalking = StateWalking.BACKSLASH_UP;
+                            currentStateWalking = StateWalking.SLASH_DOWN;
                             break;
                     }
                 }
             } else {
-                if (velX != 0.0f) { // velY == 0
-                    if (velX > 0.0f) {
-                        if (y < screen.gameCam.position.y) {
-                            // We are walking to the RIGHT along the FLOOR EDGE
-                            switch (option) {
-                                case 1: // go back
-                                    currentStateWalking = StateWalking.FLOOR_LEFT;
-                                    break;
-                                case 2:
-                                    currentStateWalking = StateWalking.RIGHT_UP;
-                                    break;
-                                case 3:
-                                    currentStateWalking = StateWalking.BACKSLASH_UP;
-                                    break;
-                            }
-                        } else {
-                            // We are walking to the RIGHT along the CEILING EDGE
-                            switch (option) {
-                                case 1: // go back
-                                    currentStateWalking = StateWalking.CEILING_LEFT;
-                                    break;
-                                case 2:
-                                    currentStateWalking = StateWalking.RIGHT_DOWN;
-                                    break;
-                                case 3:
-                                    currentStateWalking = StateWalking.SLASH_DOWN;
-                                    break;
-                            }
+                if (velY < 0.0f) {
+                    if (x < screen.gameCam.position.x) {
+                        // We are walking DOWN along the LEFT EDGE
+                        switch (option) {
+                            case 1: // go back
+                                currentStateWalking = StateWalking.LEFT_UP;
+                                break;
+                            case 2:
+                                currentStateWalking = StateWalking.FLOOR_RIGHT;
+                                break;
+                            case 3:
+                                currentStateWalking = StateWalking.SLASH_UP;
+                                break;
                         }
-                    } else if (velX < 0.0f) {
-                        if (y < screen.gameCam.position.y) {
-                            // We are walking to the LEFT along the FLOOR EDGE
-                            switch (option) {
-                                case 1: // go back
-                                    currentStateWalking = StateWalking.FLOOR_RIGHT;
-                                    break;
-                                case 2:
-                                    currentStateWalking = StateWalking.LEFT_UP;
-                                    break;
-                                case 3:
-                                    currentStateWalking = StateWalking.SLASH_UP;
-                                    break;
+                    } else {
+                        // We are walking DOWN along the RIGHT EDGE
+                        switch (option) {
+                            case 1: // go back
+                                currentStateWalking = StateWalking.RIGHT_UP;
+                                break;
+                            case 2:
+                                currentStateWalking = StateWalking.FLOOR_LEFT;
+                                break;
+                            case 3:
+                                currentStateWalking = StateWalking.BACKSLASH_UP;
+                                break;
+                        }
+                    }
+                } else {
+                    if (velX != 0.0f) { // velY == 0
+                        if (velX > 0.0f) {
+                            if (y < screen.gameCam.position.y) {
+                                // We are walking to the RIGHT along the FLOOR EDGE
+                                switch (option) {
+                                    case 1: // go back
+                                        currentStateWalking = StateWalking.FLOOR_LEFT;
+                                        break;
+                                    case 2:
+                                        currentStateWalking = StateWalking.RIGHT_UP;
+                                        break;
+                                    case 3:
+                                        currentStateWalking = StateWalking.BACKSLASH_UP;
+                                        break;
+                                }
+                            } else {
+                                // We are walking to the RIGHT along the CEILING EDGE
+                                switch (option) {
+                                    case 1: // go back
+                                        currentStateWalking = StateWalking.CEILING_LEFT;
+                                        break;
+                                    case 2:
+                                        currentStateWalking = StateWalking.RIGHT_DOWN;
+                                        break;
+                                    case 3:
+                                        currentStateWalking = StateWalking.SLASH_DOWN;
+                                        break;
+                                }
                             }
-                        } else {
-                            // We are walking to the LEFT along the CEILING EDGE
-                            switch (option) {
-                                case 1: // go back
-                                    currentStateWalking = StateWalking.CEILING_RIGHT;
-                                    break;
-                                case 2:
-                                    currentStateWalking = StateWalking.LEFT_DOWN;
-                                    break;
-                                case 3:
-                                    currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                                    break;
+                        } else if (velX < 0.0f) {
+                            if (y < screen.gameCam.position.y) {
+                                // We are walking to the LEFT along the FLOOR EDGE
+                                switch (option) {
+                                    case 1: // go back
+                                        currentStateWalking = StateWalking.FLOOR_RIGHT;
+                                        break;
+                                    case 2:
+                                        currentStateWalking = StateWalking.LEFT_UP;
+                                        break;
+                                    case 3:
+                                        currentStateWalking = StateWalking.SLASH_UP;
+                                        break;
+                                }
+                            } else {
+                                // We are walking to the LEFT along the CEILING EDGE
+                                switch (option) {
+                                    case 1: // go back
+                                        currentStateWalking = StateWalking.CEILING_RIGHT;
+                                        break;
+                                    case 2:
+                                        currentStateWalking = StateWalking.LEFT_DOWN;
+                                        break;
+                                    case 3:
+                                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
+                                        break;
+                                }
                             }
                         }
                     }

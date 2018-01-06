@@ -9,9 +9,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.scenes.Hud;
@@ -150,18 +149,27 @@ public class PowerTwo extends Item {
         // Set score
         hud.addScore(Constants.POWERTWO_SCORE);
 
-        // Hero can't collide with enemies nor bullets
+        // Create the Shield
         Hero hero = screen.getPlayer();
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT;
-        filter.maskBits = Constants.BORDERS_BIT |
+        PolygonShape shield = new PolygonShape();
+        Vector2[] vertices = new Vector2[4];
+        vertices[0] = new Vector2(-Constants.HERO_CIRCLESHAPE_RADIUS_METERS - 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.1f);
+        vertices[1] = new Vector2(Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.1f);
+        vertices[2] = new Vector2(-Constants.HERO_CIRCLESHAPE_RADIUS_METERS - 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        vertices[3] = new Vector2(Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        shield.set(vertices);
+
+        // Shield collide with enemies' bullets
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = shield;
+        fdef.restitution = 0.5f;
+        fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
+        fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.EDGES_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT;
-        for (Fixture fixture : hero.getB2body().getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
+                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        hero.getB2body().createFixture(fdef).setUserData(this);
 
         // Set the power's texture
         Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);

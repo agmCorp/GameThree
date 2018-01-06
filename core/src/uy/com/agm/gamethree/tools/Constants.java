@@ -84,6 +84,7 @@ public class Constants {
     public static final short HERO_WEAPON_BIT = 128;
     public static final short ENEMY_WEAPON_BIT = 256;
     public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 512;
+    public static final short SHIELD_BIT = 1024;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.0f;
@@ -131,7 +132,7 @@ public class Constants {
     public static final float POWERTWO_FADING_SECONDS = 5.0f;
     public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.5f / PPM;
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.5f / PPM;
-    public static final int TIMER_POWERTWO = 200;
+    public static final int TIMER_POWERTWO = 3;
     public static final int POWERTWO_SCORE = 30;
     public static final float POWERTWO_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERTWO_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
