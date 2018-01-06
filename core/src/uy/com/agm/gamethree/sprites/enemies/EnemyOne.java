@@ -61,6 +61,7 @@ public class EnemyOne extends Enemy {
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.HERO_WEAPON_BIT |
+                Constants.SHIELD_BIT |
                 Constants.ENEMY_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;

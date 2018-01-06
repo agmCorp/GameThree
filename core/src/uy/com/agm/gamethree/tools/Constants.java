@@ -27,10 +27,10 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 6.0f * 0;//2.0f;
+    public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // ---- Assets ----
 
@@ -87,13 +87,13 @@ public class Constants {
     public static final short SHIELD_BIT = 1024;
 
     // Hero (meters = pixels * resizeFactor / PPM)
-    public static final float HERO_LINEAR_VELOCITY = 5.0f;
+    public static final float HERO_LINEAR_VELOCITY = 5.2f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / PPM;
     public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final float HERO_FIRE_DELAY_SECONDS = 0.5f;
+    public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -141,7 +141,6 @@ public class Constants {
     public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
     public static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PPM + Constants.HERO_CIRCLESHAPE_RADIUS_METERS;
     public static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PPM + Constants.HERO_CIRCLESHAPE_RADIUS_METERS;
-    public static final float SHIELD_RESTITUTION = 0.5f;
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

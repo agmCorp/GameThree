@@ -165,10 +165,11 @@ public class PowerTwo extends Item {
         // Shield only collide with enemies' bullets
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shield;
-        fdef.restitution = Constants.SHIELD_RESTITUTION;
         fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        hero.getB2body().createFixture(fdef).setUserData(this);
+        fdef.filter.maskBits = Constants.ENEMY_BIT |
+                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        hero.getB2body().createFixture(fdef).setUserData(hero);
 
         // Set the power's texture
         Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);
