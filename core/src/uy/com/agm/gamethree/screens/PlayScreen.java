@@ -104,7 +104,8 @@ public class PlayScreen implements Screen {
         bottomEdge = new Edge(this, false);
 
         // Create the final enemy in our game world
-        finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
+        //finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
+        finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
@@ -176,9 +177,7 @@ public class PlayScreen implements Screen {
             enemy.update(dt);
         }
         // Clean up collection
-        Enemy enemy;
-        while (creator.getEnemies().size > 0) {
-            enemy = creator.getEnemies().first();
+        for(Enemy enemy : creator.getEnemies()) {
             if (enemy.isDisposable()) {
                 creator.removeEnemy(enemy);
             }
@@ -190,9 +189,7 @@ public class PlayScreen implements Screen {
             powerBox.update(dt);
         }
         // Clean up collection
-        PowerBox powerBox;
-        while (creator.getPowerBoxes().size > 0) {
-            powerBox = creator.getPowerBoxes().first();
+        for(PowerBox powerBox : creator.getPowerBoxes()) {
             if (powerBox.isDisposable()) {
                 creator.removePowerBox(powerBox);
             }
@@ -204,9 +201,7 @@ public class PlayScreen implements Screen {
             item.update(dt);
         }
         // Clean up collection
-        Item item;
-        while (creator.getItems().size > 0) {
-            item = creator.getItems().first();
+        for(Item item : creator.getItems()) {
             if (item.isDisposable()) {
                 creator.removeItem(item);
             }
@@ -218,9 +213,7 @@ public class PlayScreen implements Screen {
             weapon.update(dt);
         }
         // Clean up collection
-        Weapon weapon;
-        while (creator.getWeapons().size > 0) {
-            weapon = creator.getWeapons().first();
+        for(Weapon weapon : creator.getWeapons()) {
             if (weapon.isDisposable()) {
                 creator.removeWeapon(weapon);
             }

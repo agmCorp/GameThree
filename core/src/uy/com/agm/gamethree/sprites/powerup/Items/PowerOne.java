@@ -150,8 +150,11 @@ public class PowerOne extends Item {
         // Set score
         hud.addScore(Constants.POWERONE_SCORE);
 
-        // Hero can't collide with enemies nor bullets
+        // Default behavior
         Hero hero = screen.getPlayer();
+        hero.setDefaultFixtureFilter();
+
+        // Hero can't collide with enemies nor bullets
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT;
         filter.maskBits = Constants.BORDERS_BIT |
@@ -169,7 +172,8 @@ public class PowerOne extends Item {
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
 
-        hero.applyPower(Assets.instance.ghostMode.ghostModeAnimation, spritePower);
+        // Apply effect
+        hero.applyPowerFX(Assets.instance.ghostMode.ghostModeAnimation, spritePower, true);
 
         currentState = State.FINISHED;
     }

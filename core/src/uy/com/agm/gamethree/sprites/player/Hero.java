@@ -58,6 +58,7 @@ public class Hero extends Sprite {
     private Animation powerFXAnimation;
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
+    private boolean powerFXAllowRotation;
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -87,6 +88,7 @@ public class Hero extends Sprite {
         powerFXAnimation = null;
         powerFXStateTimer = 0;
         powerFXSprite = new Sprite();
+        powerFXAllowRotation = false;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -139,7 +141,7 @@ public class Hero extends Sprite {
         powerFXStateTimer += dt;
 
         if (screen.getHud().isPowerTimeUp()) {
-            setNormal();
+            setDefaultFixtureFilter();
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
@@ -350,17 +352,16 @@ public class Hero extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        setDefaultFixture();
-        setDefaultFilter();
+        setDefaultFixtureFilter();
     }
 
-    private void setNormal() {
+    public void setDefaultFixtureFilter() {
         setDefaultFixture();
         setDefaultFilter();
     }
 
     private void setDefaultFixture() {
-        // Remove all fixtures
+        // Remove all fixtures (WA - Iterators doesn't work)
         while (b2body.getFixtureList().size > 0) {
             b2body.destroyFixture(b2body.getFixtureList().first());
         }
@@ -374,48 +375,55 @@ public class Hero extends Sprite {
     }
 
     public void draw(SpriteBatch batch) {
-//        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-//        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
-//        boolean clockwise = true;
-//        float angle = 90;
-//
-//        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
-//        float newHeight = getWidth();
-//        float newWidth = getHeight();
-//
-//        // If Hero is moving, we must calculate his new angle
-//        if (b2body.getLinearVelocity().len() > 0.0f) {
-//            float velAngle = this.b2body.getLinearVelocity().angle();
-//
-//            if (0 < velAngle && velAngle <= 90) {
-//                angle = velAngle;
-//            }
-//            if (90 < velAngle && velAngle <= 180) {
-//                angle = 270.0f - velAngle;
-//            }
-//            if (180 < velAngle && velAngle <= 270) {
-//                angle = velAngle;
-//                clockwise = false;
-//            }
-//            if (270 < velAngle && velAngle <= 360) {
-//                angle = velAngle;
-//                clockwise = false;
-//            }
-//        }
-//
-//        // Draws a rectangle with the texture coordinates rotated 90 degrees.
-//        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
-//                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
-//
-//        if (currentPowerState != PowerState.NORMAL) {
-//            // We do the same with powerFXSprite
-//            float w = powerFXSprite.getHeight();
-//            float h = powerFXSprite.getWidth();
-//
-//            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
-//            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
-//                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, angle, clockwise);
-//        }
+        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
+        boolean clockwise = true;
+        float angle = 90;
+
+        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
+        float newHeight = getWidth();
+        float newWidth = getHeight();
+
+        // If Hero is moving, we must calculate his new angle
+        if (b2body.getLinearVelocity().len() > 0.0f) {
+            float velAngle = this.b2body.getLinearVelocity().angle();
+
+            if (0 < velAngle && velAngle <= 90) {
+                angle = velAngle;
+            }
+            if (90 < velAngle && velAngle <= 180) {
+                angle = 270.0f - velAngle;
+            }
+            if (180 < velAngle && velAngle <= 270) {
+                angle = velAngle;
+                clockwise = false;
+            }
+            if (270 < velAngle && velAngle <= 360) {
+                angle = velAngle;
+                clockwise = false;
+            }
+        }
+
+        // Draws a rectangle with the texture coordinates rotated 90 degrees.
+        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
+                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
+
+        if (currentPowerState != PowerState.NORMAL) {
+            // We do the same with powerFXSprite
+            boolean clwise = true;
+            float ang = 90;
+            float w = powerFXSprite.getHeight();
+            float h = powerFXSprite.getWidth();
+
+            if (powerFXAllowRotation) {
+                clwise = clockwise;
+                ang = angle;
+            }
+
+            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
+                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, ang, clwise);
+        }
     }
 
     public void openFire() {
@@ -459,7 +467,7 @@ public class Hero extends Sprite {
         return b2body;
     }
 
-    public void applyPower(Animation animation, Sprite power) {
+    public void applyPowerFX(Animation animation, Sprite power, boolean allowRotation) {
         currentPowerState = PowerState.POWERFUL;
 
         // Set the animation
@@ -467,5 +475,8 @@ public class Hero extends Sprite {
 
         // Set the sprite
         powerFXSprite.set(power);
+
+        // Indicates if this Sprite must rotate just like our Hero does
+        powerFXAllowRotation = allowRotation;
     }
 }

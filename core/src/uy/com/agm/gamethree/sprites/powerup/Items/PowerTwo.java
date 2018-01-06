@@ -149,26 +149,25 @@ public class PowerTwo extends Item {
         // Set score
         hud.addScore(Constants.POWERTWO_SCORE);
 
-        // Create the Shield
+        // Default behavior
         Hero hero = screen.getPlayer();
+        hero.setDefaultFixtureFilter();
+
+        // Create the Shield
         PolygonShape shield = new PolygonShape();
         Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-Constants.HERO_CIRCLESHAPE_RADIUS_METERS - 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.1f);
-        vertices[1] = new Vector2(Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.1f);
-        vertices[2] = new Vector2(-Constants.HERO_CIRCLESHAPE_RADIUS_METERS - 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
-        vertices[3] = new Vector2(Constants.HERO_CIRCLESHAPE_RADIUS_METERS + 0.3f, Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        vertices[0] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
+        vertices[1] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
+        vertices[2] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
+        vertices[3] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
         shield.set(vertices);
 
-        // Shield collide with enemies' bullets
+        // Shield only collide with enemies' bullets
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shield;
-        fdef.restitution = 0.5f;
+        fdef.restitution = Constants.SHIELD_RESTITUTION;
         fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        fdef.filter.maskBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         hero.getB2body().createFixture(fdef).setUserData(this);
 
         // Set the power's texture
@@ -177,7 +176,8 @@ public class PowerTwo extends Item {
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
-        hero.applyPower(Assets.instance.shield.shieldAnimation, spritePower);
+        // Apply effect
+        hero.applyPowerFX(Assets.instance.shield.shieldAnimation, spritePower, false);
 
         currentState = State.FINISHED;
     }

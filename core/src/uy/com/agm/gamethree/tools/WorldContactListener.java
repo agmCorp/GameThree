@@ -175,6 +175,12 @@ public class WorldContactListener implements ContactListener {
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
+
+            // Shield - Enemy's weapon
+            case Constants.SHIELD_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+                ((Weapon) fixC.getUserData()).onBounce();
+                break;
         }
     }
 

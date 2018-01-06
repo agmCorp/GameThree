@@ -119,7 +119,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 200;
+    public static final int TIMER_POWERONE = 20;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
@@ -132,10 +132,16 @@ public class Constants {
     public static final float POWERTWO_FADING_SECONDS = 5.0f;
     public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.5f / PPM;
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.5f / PPM;
-    public static final int TIMER_POWERTWO = 3;
+    public static final int TIMER_POWERTWO = 20;
     public static final int POWERTWO_SCORE = 30;
     public static final float POWERTWO_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERTWO_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
+
+    // Shield (meters = pixels * resizeFactor / PPM)
+    public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
+    public static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PPM + Constants.HERO_CIRCLESHAPE_RADIUS_METERS;
+    public static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PPM + Constants.HERO_CIRCLESHAPE_RADIUS_METERS;
+    public static final float SHIELD_RESTITUTION = 0.5f;
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

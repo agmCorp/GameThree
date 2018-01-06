@@ -195,48 +195,49 @@ public class FinalEnemyLevelOne extends Sprite {
         boolean blnOption;
         StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
 
-        timeToChangeTimer += dt;
+        if (b2body.isActive()) { // We wait until our final enemy is on camera.
+            timeToChangeTimer += dt;
 
-        // Set a new currentStateFinalEnemy
-        if (timeToChangeTimer >= timeToChange) {
-            // Reset random state variables
-            timeToChangeTimer = 0;
-            timeToChange = getNextTimeToChange();
+            // Set a new currentStateFinalEnemy
+            if (timeToChangeTimer >= timeToChange) {
+                // Reset random state variables
+                timeToChangeTimer = 0;
+                timeToChange = getNextTimeToChange();
 
-            // Reset variable animation
-            stateFinalEnemyTimer = 0;
+                // Reset variable animation
+                stateFinalEnemyTimer = 0;
 
-            // Random option
-            blnOption = MathUtils.randomBoolean();
+                // Random option
+                blnOption = MathUtils.randomBoolean();
 
-            // Decide which state must return
-            switch (currentStateFinalEnemy) {
-                case WALKING:
-                    if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                    } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                    }
-                    break;
-                case IDLE:
-                    if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                    } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                    }
-                    break;
-                case SHOOTING:
-                    if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                    } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                    }
-                    break;
+                // Decide which state must return
+                switch (currentStateFinalEnemy) {
+                    case WALKING:
+                        if (blnOption) {
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                        } else {
+                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        }
+                        break;
+                    case IDLE:
+                        if (blnOption) {
+                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        } else {
+                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        }
+                        break;
+                    case SHOOTING:
+                        if (blnOption) {
+                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        } else {
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                        }
+                        break;
+                }
             }
         }
-
         return newRandomStateFinalEnemy;
     }
 
