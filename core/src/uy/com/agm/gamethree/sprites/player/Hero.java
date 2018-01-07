@@ -323,6 +323,7 @@ public class Hero extends Sprite {
         Filter filter = new Filter();
         filter.maskBits = Constants.NOTHING_BIT;
 
+        // We set the previous filter in every fixture because a power could have added one
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
