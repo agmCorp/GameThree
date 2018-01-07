@@ -9,6 +9,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 
 public class PowerThree extends FirePower {
     public PowerThree(PlayScreen screen, float x, float y) {
-        super(screen, x, y,  Assets.instance.powerOne.powerOneAnimation, Assets.instance.explosionA.explosionAAnimation, 0.2f, 4); // todo
+        super(screen, x, y,  Assets.instance.powerOne.powerOneAnimation, Assets.instance.explosionA.explosionAAnimation, 0.2f, 1); // todo
     }
 }

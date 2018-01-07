@@ -69,7 +69,6 @@ public class EnergyBall extends Weapon {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-
     }
 
     @Override

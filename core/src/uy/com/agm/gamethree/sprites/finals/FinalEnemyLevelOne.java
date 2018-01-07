@@ -210,7 +210,7 @@ public class FinalEnemyLevelOne extends Sprite {
 
                 // Decide which state must return
                 switch (currentStateFinalEnemy) {
-                    case WALKING:
+                    case WALKING: // todo
                     //    if (blnOption) {
                             newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
 //                        } else {
