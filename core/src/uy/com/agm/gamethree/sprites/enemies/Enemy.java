@@ -9,9 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
-import uy.com.agm.gamethree.sprites.powerup.Items.PowerThree;
-import uy.com.agm.gamethree.sprites.powerup.Items.PowerTwo;
+import uy.com.agm.gamethree.sprites.powerup.PowerUpCreator;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
@@ -85,15 +83,7 @@ public abstract class Enemy extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        if (object.getProperties().containsKey("powerOne")) {
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerOne.class));
-        }
-        if (object.getProperties().containsKey("powerTwo")) {
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerTwo.class));
-        }
-        if (object.getProperties().containsKey("powerThree")) {
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerThree.class));
-        }
+        PowerUpCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
     protected void openFire() {
