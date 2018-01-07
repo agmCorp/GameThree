@@ -725,7 +725,9 @@ public class FinalEnemyLevelOne extends Sprite {
 
     // This FinalEnemyLevelOne doesn't have any b2body
     public boolean isDestroyed() {
-        return currentStateFinalEnemy == StateFinalEnemy.DEAD || currentStateFinalEnemy == StateFinalEnemy.EXPLODING;
+        return currentStateFinalEnemy == StateFinalEnemy.DYING ||
+                currentStateFinalEnemy == StateFinalEnemy.EXPLODING ||
+                currentStateFinalEnemy == StateFinalEnemy.DEAD;
     }
 
     private void checkBoundaries() {
