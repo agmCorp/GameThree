@@ -27,8 +27,8 @@ public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
 
     private float stateTimer;
-    private float stateWaiting;
-    private float stateFading;
+    private float stateWaitingTimer;
+    private float stateFadingTimer;
     private Animation powerTwoAnimation;
 
     // Shield
@@ -37,8 +37,8 @@ public class PowerTwo extends Item {
 
         powerTwoAnimation = Assets.instance.powerTwo.powerTwoAnimation;
         stateTimer = 0;
-        stateWaiting = 0;
-        stateFading = 0;
+        stateWaitingTimer = 0;
+        stateFadingTimer = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), Constants.POWERTWO_WIDTH_METERS, Constants.POWERTWO_HEIGHT_METERS);
@@ -104,8 +104,8 @@ public class PowerTwo extends Item {
         setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
-        stateWaiting += dt;
-        if (stateWaiting > Constants.POWERTWO_WAITING_SECONDS) {
+        stateWaitingTimer += dt;
+        if (stateWaitingTimer > Constants.POWERTWO_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -123,14 +123,14 @@ public class PowerTwo extends Item {
         setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
-        stateFading += dt;
-        float alpha = 1 - stateFading / Constants.POWERTWO_FADING_SECONDS;
+        stateFadingTimer += dt;
+        float alpha = 1 - stateFadingTimer / Constants.POWERTWO_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFading > Constants.POWERTWO_FADING_SECONDS) {
+        if (stateFadingTimer > Constants.POWERTWO_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }

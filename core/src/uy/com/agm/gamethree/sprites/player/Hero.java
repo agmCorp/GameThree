@@ -149,7 +149,7 @@ public class Hero extends Sprite {
     }
 
     private void powerStatePowerful(float dt) {
-        if (powerFXSprite != null) { // if powerFXSprite is null, Hero has a fire power (we don't need draw anything)
+        if (powerFXSprite != null) { // if powerFXSprite is null, Hero has a fire power (we don't need to draw anything)
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
             powerFXStateTimer += dt;
         }
@@ -450,18 +450,18 @@ public class Hero extends Sprite {
     public void openFire() {
         if (fireEnhancement) {
             if (openFiretimer > fireDelay) {
-                    float directionDegrees = 180.0f / (fireBullets + 1);
-                    float angle = 0;
-                    for(int i = 1; i <= fireBullets; i++) {
-                        angle = directionDegrees * i;
-                        angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
-                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                                                        b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
-                                                                        angle,
-                                                                        fireAnimation,
-                                                                        HeroBullet.class));
-                    }
-                    openFiretimer = 0;
+                float directionDegrees = 180.0f / (fireBullets + 1);
+                float angle = 0;
+                for(int i = 1; i <= fireBullets; i++) {
+                    angle = directionDegrees * i;
+                    angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
+                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                                                                    b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
+                                                                    angle,
+                                                                    fireAnimation,
+                                                                    HeroBullet.class));
+                }
+                openFiretimer = 0;
             }
         } else {
             if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {

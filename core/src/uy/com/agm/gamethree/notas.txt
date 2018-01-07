@@ -57,11 +57,6 @@ PROXIMOS PASOS
 URGENTES
 --------
 - VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
-- todos los powerAlgo tienen esto:
-    private float stateTimer;
-    private float stateWaiting;
-    private float stateFading;
-  Deberia ser stateWaitingTimer; etc.
 - CUANDO MUERO CON EL ESCUDO NO ME QUITA EL PODER!!!!
 
 PENDIENTES

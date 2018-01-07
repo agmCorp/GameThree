@@ -28,8 +28,8 @@ public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
     private float stateTimer;
-    private float stateWaiting;
-    private float stateFading;
+    private float stateWaitingTimer;
+    private float stateFadingTimer;
     private Animation powerOneAnimation;
 
     // Ghost mode
@@ -38,8 +38,8 @@ public class PowerOne extends Item {
 
         powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
         stateTimer = 0;
-        stateWaiting = 0;
-        stateFading = 0;
+        stateWaitingTimer = 0;
+        stateFadingTimer = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
@@ -105,8 +105,8 @@ public class PowerOne extends Item {
         setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
-        stateWaiting += dt;
-        if (stateWaiting > Constants.POWERONE_WAITING_SECONDS) {
+        stateWaitingTimer += dt;
+        if (stateWaitingTimer > Constants.POWERONE_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -124,14 +124,14 @@ public class PowerOne extends Item {
         setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
-        stateFading += dt;
-        float alpha = 1 - stateFading / Constants.POWERONE_FADING_SECONDS;
+        stateFadingTimer += dt;
+        float alpha = 1 - stateFadingTimer / Constants.POWERONE_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFading > Constants.POWERONE_FADING_SECONDS) {
+        if (stateFadingTimer > Constants.POWERONE_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
