@@ -30,7 +30,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // ---- Assets ----
 
@@ -150,9 +150,9 @@ public class Constants {
     public static final int TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
     public static final float POWERTHREE_FIRE_DELAY = 0.3f;
-    public static final int POWERTHREE_FIRE_BULLETS = 3;
-    public static final float POWERTHREE_FIRE_WIDTH_METERS = 90.0f * 0.5f / PPM;
-    public static final float POWERTHREE_FIRE_HEIGHT_METERS = 120.0f * 0.5f / PPM;
+    public static final int POWERTHREE_FIRE_BULLETS = 4;
+    public static final float POWERTHREE_FIRE_WIDTH_METERS = 90.0f * 0.7f / PPM;
+    public static final float POWERTHREE_FIRE_HEIGHT_METERS = 120.0f * 0.7f / PPM;
 
     // Shield (meters = pixels * resizeFactor / PPM)
     public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
