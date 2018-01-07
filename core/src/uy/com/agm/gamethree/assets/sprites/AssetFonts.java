@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/22/2017.

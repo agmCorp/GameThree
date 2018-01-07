@@ -3,7 +3,7 @@ package uy.com.agm.gamethree.assets.audio.music;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/22/2017.

@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/3/2017.

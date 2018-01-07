@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/31/2017.

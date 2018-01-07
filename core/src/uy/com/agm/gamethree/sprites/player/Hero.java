@@ -18,7 +18,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 

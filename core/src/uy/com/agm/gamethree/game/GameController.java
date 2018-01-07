@@ -6,7 +6,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**

@@ -34,7 +34,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetShield;
-import uy.com.agm.gamethree.tools.Constants;
+import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by amorales on 14/12/2017.
