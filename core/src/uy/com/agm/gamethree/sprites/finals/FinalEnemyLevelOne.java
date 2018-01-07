@@ -265,16 +265,18 @@ public class FinalEnemyLevelOne extends Sprite {
                 break;
         }
 
-        if (b2body.isActive()) { // We wait until our final enemy is on camera.
-            switch (currentPowerState) {
-                case NORMAL:
-                    powerStateNormal();
-                    break;
-                case POWERFUL:
-                    powerStatePowerful(dt);
-                    break;
-                default:
-                    break;
+        if (!isDestroyed()) {
+            if (b2body.isActive()) { // We wait until our final enemy is on camera.
+                switch (currentPowerState) {
+                    case NORMAL:
+                        powerStateNormal();
+                        break;
+                    case POWERFUL:
+                        powerStatePowerful(dt);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

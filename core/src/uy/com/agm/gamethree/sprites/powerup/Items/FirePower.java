@@ -150,7 +150,7 @@ public class FirePower extends Item {
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
-        hud.setPowerLabel("FIRE MODE", Constants.TIMER_POWERONE);
+        hud.setPowerLabel("FIRE MODE", 20); // todo
 
         // Set score
         hud.addScore(Constants.POWERONE_SCORE); // TODO
