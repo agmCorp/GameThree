@@ -140,6 +140,7 @@ bordes y objetos
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 - hacer el juego web y ios
+- Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
