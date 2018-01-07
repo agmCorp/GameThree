@@ -25,11 +25,15 @@ public class EnergyBall extends Weapon {
     private float stateTimer;
     private Animation energyBallAnimation;
 
-    public EnergyBall(PlayScreen screen, float x, float y) {
+    public EnergyBall(PlayScreen screen, float x, float y, float angle, Animation animation) {
         super(screen, x, y);
 
         // Animation
-        energyBallAnimation = Assets.instance.energyBall.energyBallAnimation;
+        if (animation != null) {
+            energyBallAnimation = animation;
+        } else {
+            energyBallAnimation = Assets.instance.energyBall.energyBallAnimation;
+        }
 
         // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
         setBounds(getX(), getY(), Constants.ENERGYBALL_WIDTH_METERS, Constants.ENERGYBALL_HEIGHT_METERS);
@@ -37,6 +41,10 @@ public class EnergyBall extends Weapon {
         stateTimer = 0;
         currentState = State.SHOT;
         velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
+
+        if (angle > 0) {
+            velocity.rotate(angle);
+        }
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));

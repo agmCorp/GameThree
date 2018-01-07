@@ -31,6 +31,7 @@ public class PowerTwo extends Item {
     private float stateFading;
     private Animation powerTwoAnimation;
 
+    // Shield
     public PowerTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
@@ -149,9 +150,9 @@ public class PowerTwo extends Item {
         // Set score
         hud.addScore(Constants.POWERTWO_SCORE);
 
-        // Default behavior
+        // Disable previous power (if any)
         Hero hero = screen.getPlayer();
-        hero.setDefaultFixtureFilter();
+        hero.powerDown();
 
         // Create the Shield
         PolygonShape shield = new PolygonShape();

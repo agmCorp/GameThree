@@ -13,6 +13,7 @@ import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerThree;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerTwo;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileobjects.Borders;
@@ -124,8 +125,11 @@ public class B2WorldCreator {
             if (gameThreeActorDef.getType() == PowerTwo.class) {
                 items.add(new PowerTwo(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
             }
+            if (gameThreeActorDef.getType() == PowerThree.class) {
+                items.add(new PowerThree(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
+            }
             if (gameThreeActorDef.getType() == EnergyBall.class) {
-                weapons.add(new EnergyBall(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
+                weapons.add(new EnergyBall(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY(), gameThreeActorDef.getAngle(), gameThreeActorDef.getAnimation()));
             }
             if (gameThreeActorDef.getType() == EnemyBullet.class) {
                 weapons.add(new EnemyBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));

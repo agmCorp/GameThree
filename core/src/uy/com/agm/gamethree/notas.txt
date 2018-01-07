@@ -8,10 +8,11 @@ mis texturas miden 1024 x 1024
 
 CUSTOM PROPERTIES
 -----------------
-enemyBullet
-powerOne
-strength (int)
-powerTwo
+enemyBullet (string): indica si el enemigo dispara
+strength (int): dureza de la powerbox
+powerOne (string): ghost mode
+powerTwo (string): escudo
+powerThree (string): cambia el poder de disparo
 
 IDEAS
 -----
@@ -68,6 +69,7 @@ bordes y objetos
 - capaz me conviene agrupar las constantes en clases estaticas para cada objeto....no se..como hice assets
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
+- por ejemplo getItemOnHit() repite mucho el getproperties, es ineficiente creo.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

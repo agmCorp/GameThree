@@ -60,6 +60,12 @@ public class Hero extends Sprite {
     private Sprite powerFXSprite;
     private boolean powerFXAllowRotation;
 
+    // Fire power
+    private boolean fireEnhancement;
+    private float fireDelay;
+    private int fireBullets;
+    private Animation fireAnimation;
+
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -87,8 +93,14 @@ public class Hero extends Sprite {
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = null;
         powerFXStateTimer = 0;
-        powerFXSprite = new Sprite();
+        powerFXSprite = null;
         powerFXAllowRotation = false;
+
+        // Fire power variables initialization (we don't know yet which fire power will be)
+        fireEnhancement = false;
+        fireDelay = 0;
+        fireBullets = 0;
+        fireAnimation = null;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -137,15 +149,22 @@ public class Hero extends Sprite {
     }
 
     private void powerStatePowerful(float dt) {
-        powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
-        powerFXStateTimer += dt;
-
+        if (powerFXSprite != null) { // if powerFXSprite is null, Hero has a fire power (we don't need draw anything)
+            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
+            powerFXStateTimer += dt;
+        }
         if (screen.getHud().isPowerTimeUp()) {
-            setDefaultFixtureFilter();
-            powerFXStateTimer = 0;
-            currentPowerState = PowerState.NORMAL;
+            powerDown();
             AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
         }
+    }
+
+    public void powerDown() {
+        setDefaultFixtureFilter();
+        powerFXSprite = null;
+        powerFXStateTimer = 0;
+        fireEnhancement = false;
+        currentPowerState = PowerState.NORMAL;
     }
 
     private void heroStateStanding(float dt) {
@@ -355,7 +374,7 @@ public class Hero extends Sprite {
         setDefaultFixtureFilter();
     }
 
-    public void setDefaultFixtureFilter() {
+    private void setDefaultFixtureFilter() {
         setDefaultFixture();
         setDefaultFilter();
     }
@@ -409,27 +428,46 @@ public class Hero extends Sprite {
                 newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
 
         if (currentPowerState != PowerState.NORMAL) {
-            // We do the same with powerFXSprite
-            boolean clwise = true;
-            float ang = 90;
-            float w = powerFXSprite.getHeight();
-            float h = powerFXSprite.getWidth();
+            if (powerFXSprite != null) {
+                // We do the same with powerFXSprite
+                boolean clwise = true;
+                float ang = 90;
+                float w = powerFXSprite.getHeight();
+                float h = powerFXSprite.getWidth();
 
-            if (powerFXAllowRotation) {
-                clwise = clockwise;
-                ang = angle;
+                if (powerFXAllowRotation) {
+                    clwise = clockwise;
+                    ang = angle;
+                }
+
+                powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+                batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
+                        w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, ang, clwise);
             }
-
-            powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
-            batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
-                    w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, ang, clwise);
         }
     }
 
     public void openFire() {
-        if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, EnergyBall.class));
-            openFiretimer = 0;
+        if (fireEnhancement) {
+            if (openFiretimer > fireDelay) {
+                    float directionDegrees = 180.0f / (fireBullets + 1);
+                    float angle = 0;
+                    for(int i = 1; i <= fireBullets; i++) {
+                        angle = directionDegrees * i;
+                        angle = (angle >= 90) ? angle - 90 : 270 + angle;
+                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                                                                        b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
+                                                                        angle,
+                                                                        fireAnimation,
+                                                                        EnergyBall.class));
+                    }
+                    openFiretimer = 0;
+            }
+        } else {
+            if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
+                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, EnergyBall.class));
+                openFiretimer = 0;
+            }
         }
     }
 
@@ -473,10 +511,19 @@ public class Hero extends Sprite {
         // Set the animation
         powerFXAnimation = animation;
 
-        // Set the sprite
-        powerFXSprite.set(power);
+        // Set the sprite (if null, we don't draw it (see .draw(...))
+        powerFXSprite = power;
 
         // Indicates if this Sprite must rotate just like our Hero does
         powerFXAllowRotation = allowRotation;
+    }
+
+    public void applyFirePower(Animation animation, float delay, int bullets) {
+        currentPowerState = PowerState.POWERFUL;
+
+        fireEnhancement = true;
+        fireAnimation = animation;
+        fireDelay = delay;
+        fireBullets = bullets;
     }
 }

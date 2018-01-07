@@ -130,13 +130,10 @@ public class FinalEnemyLevelOne extends Sprite {
         powerFXStateTimer = 0;
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerStand);
+        powerFXSprite = new Sprite(Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerStand);
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        spritePower.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
-
-        // Power FX Sprite
-        powerFXSprite = new Sprite(spritePower);
+        powerFXSprite.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
 
         // Place origin of rotation in the center of the Sprite
         powerFXSprite.setOriginCenter();

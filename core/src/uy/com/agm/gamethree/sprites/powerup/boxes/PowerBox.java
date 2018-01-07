@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerThree;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerTwo;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
@@ -89,6 +90,9 @@ public class PowerBox extends Sprite {
         }
         if (object.getProperties().containsKey("powerTwo")) {
             screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerTwo.class));
+        }
+        if (object.getProperties().containsKey("powerThree")) {
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS, PowerThree.class));
         }
     }
 
