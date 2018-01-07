@@ -55,10 +55,12 @@ public class Constants {
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
+    public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
+    public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
 

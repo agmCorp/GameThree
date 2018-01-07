@@ -19,7 +19,6 @@ import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
-import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
@@ -30,8 +29,10 @@ import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOnePower;
 import uy.com.agm.gamethree.assets.sprites.AssetFonts;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
+import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetShield;
 import uy.com.agm.gamethree.game.Constants;
@@ -55,6 +56,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetPowerBox powerBox;
     public AssetPowerOne powerOne;
     public AssetPowerTwo powerTwo;
+    public AssetPowerThree powerThree;
     public AssetExplosionA explosionA;
     public AssetExplosionB explosionB;
     public AssetExplosionC explosionC;
@@ -97,10 +99,12 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
+        assetManager.load(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
         assetManager.load(Constants.FX_FILE_POWER_DOWN, Sound.class);
         assetManager.load(Constants.FX_FILE_POWER_TIMER, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
+        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
         assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
 
@@ -135,6 +139,7 @@ public class Assets implements Disposable, AssetErrorListener {
         powerBox = new AssetPowerBox(atlas);
         powerOne = new AssetPowerOne(atlas);
         powerTwo = new AssetPowerTwo(atlas);
+        powerThree = new AssetPowerThree(atlas);
         explosionA = new AssetExplosionA(atlas);
         explosionB = new AssetExplosionB(atlas);
         explosionC = new AssetExplosionC(atlas);

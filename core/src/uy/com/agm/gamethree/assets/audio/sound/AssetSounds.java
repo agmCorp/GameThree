@@ -21,10 +21,12 @@ public class AssetSounds {
     public final Sound openPowerBox;
     public final Sound pickUpPowerOne;
     public final Sound pickUpPowerTwo;
+    public final Sound pickUpPowerThree;
     public final Sound powerDown;
     public final Sound powerTimer;
     public final Sound showUpPowerOne;
     public final Sound showUpPowerTwo;
+    public final Sound showUpPowerThree;
     public final Sound finalLevelOnePowerUp;
     public final Sound finalLevelOnePowerDown;
 
@@ -38,10 +40,12 @@ public class AssetSounds {
         openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         pickUpPowerTwo = am.get(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
+        pickUpPowerThree = am.get(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
         powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
         powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
+        showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
         finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
     }
