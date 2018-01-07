@@ -185,7 +185,7 @@ ghostMode
   orig: 104, 52
   offset: 0, 0
   index: 2
-energyBall
+heroBullet
   rotate: false
   xy: 945, 876
   size: 76, 77
@@ -692,7 +692,7 @@ explosionD
   orig: 205, 178
   offset: 0, 0
   index: 6
-energyBall
+heroBullet
   rotate: false
   xy: 415, 655
   size: 159, 174
@@ -860,7 +860,7 @@ explosionD
   orig: 205, 178
   offset: 0, 0
   index: 15
-energyBall
+heroBullet
   rotate: false
   xy: 803, 1
   size: 108, 112
@@ -881,14 +881,14 @@ ghostMode
   orig: 138, 94
   offset: 0, 0
   index: 5
-energyBall
+heroBullet
   rotate: false
   xy: 536, 7
   size: 93, 92
   orig: 93, 92
   offset: 0, 0
   index: 4
-energyBall
+heroBullet
   rotate: false
   xy: 932, 558
   size: 84, 91
@@ -923,7 +923,7 @@ powerBox
   orig: 80, 86
   offset: 0, 0
   index: 1
-energyBall
+heroBullet
   rotate: false
   xy: 713, 17
   size: 81, 82
@@ -1435,7 +1435,7 @@ explosionE
   orig: 196, 178
   offset: 0, 0
   index: 21
-energyBall
+heroBullet
   rotate: false
   xy: 195, 838
   size: 175, 185
@@ -1930,7 +1930,7 @@ explosionA
   orig: 167, 167
   offset: 0, 0
   index: 10
-energyBall
+heroBullet
   rotate: false
   xy: 896, 891
   size: 123, 132
@@ -2458,7 +2458,7 @@ powerTwo
   orig: 150, 158
   offset: 0, 0
   index: 31
-energyBall
+heroBullet
   rotate: false
   xy: 761, 385
   size: 140, 153

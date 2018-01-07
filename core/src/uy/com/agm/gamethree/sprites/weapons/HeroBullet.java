@@ -19,28 +19,28 @@ import uy.com.agm.gamethree.tools.Constants;
  * Created by AGM on 12/17/2017.
  */
 
-public class EnergyBall extends Weapon {
-    private static final String TAG = EnergyBall.class.getName();
+public class HeroBullet extends Weapon {
+    private static final String TAG = HeroBullet.class.getName();
 
     private float stateTimer;
-    private Animation energyBallAnimation;
+    private Animation heroBulletAnimation;
 
-    public EnergyBall(PlayScreen screen, float x, float y, float angle, Animation animation) {
+    public HeroBullet(PlayScreen screen, float x, float y, float angle, Animation animation) {
         super(screen, x, y);
 
         // Animation
         if (animation != null) {
-            energyBallAnimation = animation;
+            heroBulletAnimation = animation;
         } else {
-            energyBallAnimation = Assets.instance.energyBall.energyBallAnimation;
+            heroBulletAnimation = Assets.instance.heroBullet.heroBulletAnimation;
         }
 
-        // Setbounds is the one that determines the size of the EnergyBall's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENERGYBALL_WIDTH_METERS, Constants.ENERGYBALL_HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
+        setBounds(getX(), getY(), Constants.HEROBULLET_WIDTH_METERS, Constants.HEROBULLET_HEIGHT_METERS);
 
         stateTimer = 0;
         currentState = State.SHOT;
-        velocity = new Vector2(Constants.ENERGYBALL_VELOCITY_X, Constants.ENERGYBALL_VELOCITY_Y);
+        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
 
         if (angle > 0) {
             velocity.rotate(angle);
@@ -59,7 +59,7 @@ public class EnergyBall extends Weapon {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENERGYBALL_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -92,13 +92,13 @@ public class EnergyBall extends Weapon {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnergyBall may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, HeroBullet may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) energyBallAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
     }
 

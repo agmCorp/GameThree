@@ -175,12 +175,12 @@ public class Constants {
     // Weapon (meters = pixels * resizeFactor / PPM)
     public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
 
-    // EnergyBall (meters = pixels * resizeFactor / PPM)
-    public static final float ENERGYBALL_VELOCITY_X = 0.0f;
-    public static final float ENERGYBALL_VELOCITY_Y = 6.0f;
-    public static final float ENERGYBALL_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
-    public static final float ENERGYBALL_WIDTH_METERS = 188.0f * 0.5f / PPM;
-    public static final float ENERGYBALL_HEIGHT_METERS = 175.0f * 0.5f / PPM;
+    // HeroBullet (meters = pixels * resizeFactor / PPM)
+    public static final float HEROBULLET_VELOCITY_X = 0.0f;
+    public static final float HEROBULLET_VELOCITY_Y = 6.0f;
+    public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
+    public static final float HEROBULLET_WIDTH_METERS = 188.0f * 0.5f / PPM;
+    public static final float HEROBULLET_HEIGHT_METERS = 175.0f * 0.5f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;

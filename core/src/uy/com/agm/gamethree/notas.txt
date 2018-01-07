@@ -63,7 +63,6 @@ URGENTES
     private float stateFading;
   Deberia ser stateWaitingTimer; etc.
 - CUANDO MUERO CON EL ESCUDO NO ME QUITA EL PODER!!!!
-- EnergyBall deberia ser renombrado como HeroBullet
 
 PENDIENTES
 ----------

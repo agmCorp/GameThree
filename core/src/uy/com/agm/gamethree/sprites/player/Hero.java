@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.weapons.EnergyBall;
+import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
@@ -459,13 +459,13 @@ public class Hero extends Sprite {
                                                                         b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
                                                                         angle,
                                                                         fireAnimation,
-                                                                        EnergyBall.class));
+                                                                        HeroBullet.class));
                     }
                     openFiretimer = 0;
             }
         } else {
             if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, EnergyBall.class));
+                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, HeroBullet.class));
                 openFiretimer = 0;
             }
         }

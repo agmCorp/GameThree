@@ -19,7 +19,7 @@ import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
-import uy.com.agm.gamethree.assets.sprites.AssetEnergyBall;
+import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
@@ -60,7 +60,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetExplosionC explosionC;
     public AssetExplosionD explosionD;
     public AssetExplosionE explosionE;
-    public AssetEnergyBall energyBall;
+    public AssetHeroBullet heroBullet;
     public AssetEnemyBullet enemyBullet;
     public AssetGhostMode ghostMode;
     public AssetShield shield;
@@ -140,7 +140,7 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionC = new AssetExplosionC(atlas);
         explosionD = new AssetExplosionD(atlas);
         explosionE = new AssetExplosionE(atlas);
-        energyBall = new AssetEnergyBall(atlas);
+        heroBullet = new AssetHeroBullet(atlas);
         enemyBullet = new AssetEnemyBullet(atlas);
         ghostMode = new AssetGhostMode(atlas);
         shield = new AssetShield(atlas);
