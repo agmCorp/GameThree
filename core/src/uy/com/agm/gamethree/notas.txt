@@ -26,7 +26,7 @@ ALCANCE
 Hay 2 tipos de elementos:
 	1) bola de poder
 		- *nada
-		- escudo (shield_blue.gif esta muy bueno)
+		- *escudo (shield_blue.gif esta muy bueno)
 		- invisibilidad (seria algo así como que puedo caminar por toda la pantalla sin colisionar
 		  con anda)
 		- detener pantalla (por tiempo)
@@ -36,15 +36,15 @@ Hay 2 tipos de elementos:
 	2) bola de armas
 		- nada
 		- boomeran
-		- triple bola de fuego
+		- *triple bola de fuego
 		- doble fecha
-		- flecha simple (arma por defecto)
+		- *flecha simple (arma por defecto)
 
 Bloques con sorpresas
 
-enemigo1: bolas negras que bajan derecho
+*enemigo1: bolas negras que bajan derecho
 		  luego disparan
-enemigo2: bandada murcielagos
+*enemigo2: bandada murcielagos
 		  luego disparan
 		  luego vienen desfazados los murcielagos
 enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
@@ -53,19 +53,20 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 PROXIMOS PASOS
 --------------
 - ponerle sonido y assets bien
+- ver el ninja y suriken
+- hacer refactoring de constantes
 
 URGENTES
 --------
 - un poder de disparo puede variar:
-    tamano de la bala *le cambie el sprite pero no el circulo, podria pasar otro parametro,
+    ---> tamano de la bala *le cambie el sprite pero no el circulo, podria pasar otro parametro,
     cantidad*,
     delay*,
     animacion*,
     tipo de movimiento (boomerang)
 
-
-REFACTORING
------------
+REFACTORING URGENTE
+-------------------
 1)
 - Crear paquete Constants
 - dentro, definir una clase:
@@ -99,9 +100,9 @@ bordes y objetos
 - averiguar como debuguear
 - optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
-- comprar el ninja?
 - renombrar los audios con nomenclatura
-- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
+- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
+carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
@@ -125,7 +126,6 @@ which uses delta to get the right frames for sprite animations, and actually dra
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2.
 - Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
-
 
 VIDEO
 -----
