@@ -130,7 +130,9 @@ public class B2WorldCreator {
                 items.add(new PowerThree(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
             }
             if (gameThreeActorDef.getType() == HeroBullet.class) {
-                weapons.add(new HeroBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY(), gameThreeActorDef.getAngle(), gameThreeActorDef.getAnimation()));
+                weapons.add(new HeroBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY(),
+                                gameThreeActorDef.getWidth(), gameThreeActorDef.getHeight(),
+                                gameThreeActorDef.getAngle(), gameThreeActorDef.getAnimation()));
             }
             if (gameThreeActorDef.getType() == EnemyBullet.class) {
                 weapons.add(new EnemyBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));

@@ -20,18 +20,18 @@ public class AssetPowerThree {
     public AssetPowerThree(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        powerThreeStand = atlas.findRegion("powerThree", 1);
+        powerThreeStand = atlas.findRegion("powerThreeFire", 1);
 
         // Animation
-        regions = atlas.findRegions("powerThree");
-        powerThreeAnimation = new Animation(1.0f / 16.0f, regions); // todo
+        regions = atlas.findRegions("powerThreeFire");
+        powerThreeAnimation = new Animation(0.5f / 4.0f, regions);
         regions.clear();
 
         powerThreeFireStand = atlas.findRegion("powerThreeFire", 1);
 
         // Animation
         regions = atlas.findRegions("powerThreeFire");
-        powerThreeFireAnimation = new Animation(1.0f / 16.0f, regions); // todo
+        powerThreeFireAnimation = new Animation(0.5f / 4.0f, regions);
         regions.clear();
     }
 }

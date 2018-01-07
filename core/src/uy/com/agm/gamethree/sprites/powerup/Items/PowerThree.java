@@ -40,7 +40,7 @@ public class PowerThree extends Item {
         powerThreeAnimation = Assets.instance.powerThree.powerThreeAnimation;
         fireAnimation = Assets.instance.powerThree.powerThreeFireAnimation;
         fireDelay = Constants.POWERTHREE_FIRE_DELAY;
-        fireBullets = Constants.POWERTHREE_BULLETS;
+        fireBullets = Constants.POWERTHREE_FIRE_BULLETS;
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -160,8 +160,7 @@ public class PowerThree extends Item {
         hero.powerDown();
 
         // Apply fire power
-        screen.getPlayer().applyFirePower(fireAnimation, fireDelay, fireBullets);
-
+        screen.getPlayer().applyFirePower(Constants.POWERTHREE_FIRE_WIDTH_METERS, Constants.POWERTHREE_FIRE_HEIGHT_METERS, fireDelay, fireBullets, fireAnimation);
         currentState = State.FINISHED;
     }
 

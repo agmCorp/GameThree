@@ -62,6 +62,8 @@ public class Hero extends Sprite {
 
     // Fire power
     private boolean fireEnhancement;
+    private float fireWidth;
+    private float fireHeight;
     private float fireDelay;
     private int fireBullets;
     private Animation fireAnimation;
@@ -98,6 +100,8 @@ public class Hero extends Sprite {
 
         // Fire power variables initialization (we don't know yet which fire power will be)
         fireEnhancement = false;
+        fireWidth = 0;
+        fireHeight = 0;
         fireDelay = 0;
         fireBullets = 0;
         fireAnimation = null;
@@ -458,6 +462,8 @@ public class Hero extends Sprite {
                     angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                                                                     b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
+                                                                    fireWidth,
+                                                                    fireHeight,
                                                                     angle,
                                                                     fireAnimation,
                                                                     HeroBullet.class));
@@ -519,12 +525,14 @@ public class Hero extends Sprite {
         powerFXAllowRotation = allowRotation;
     }
 
-    public void applyFirePower(Animation animation, float delay, int bullets) {
+    public void applyFirePower(float width, float height, float delay, int bullets, Animation animation) {
         currentPowerState = PowerState.POWERFUL;
 
         fireEnhancement = true;
-        fireAnimation = animation;
+        fireWidth = width;
+        fireHeight = height;
         fireDelay = delay;
         fireBullets = bullets;
+        fireAnimation = animation;
     }
 }

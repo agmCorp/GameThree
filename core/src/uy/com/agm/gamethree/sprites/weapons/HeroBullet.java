@@ -25,7 +25,7 @@ public class HeroBullet extends Weapon {
     private float stateTimer;
     private Animation heroBulletAnimation;
 
-    public HeroBullet(PlayScreen screen, float x, float y, float angle, Animation animation) {
+    public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float angle, Animation animation) {
         super(screen, x, y);
 
         // Animation
@@ -33,10 +33,12 @@ public class HeroBullet extends Weapon {
             heroBulletAnimation = animation;
         } else {
             heroBulletAnimation = Assets.instance.heroBullet.heroBulletAnimation;
+            width = Constants.HEROBULLET_WIDTH_METERS;
+            height = Constants.HEROBULLET_HEIGHT_METERS;
         }
 
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
-        setBounds(getX(), getY(), Constants.HEROBULLET_WIDTH_METERS, Constants.HEROBULLET_HEIGHT_METERS);
+        setBounds(getX(), getY(), width, height);
 
         stateTimer = 0;
         currentState = State.SHOT;
@@ -44,6 +46,7 @@ public class HeroBullet extends Weapon {
 
         if (angle > 0) {
             velocity.rotate(angle);
+            setRotation(angle);
         }
 
         // Sound FX
