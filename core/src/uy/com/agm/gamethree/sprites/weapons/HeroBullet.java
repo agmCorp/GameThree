@@ -40,6 +40,9 @@ public class HeroBullet extends Weapon {
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), width, height);
 
+        // Place origin of rotation in the center of the Sprite
+        setOriginCenter();
+
         stateTimer = 0;
         currentState = State.SHOT;
         velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
