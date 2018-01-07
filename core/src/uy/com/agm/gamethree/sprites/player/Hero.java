@@ -397,7 +397,7 @@ public class Hero extends Sprite {
         // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
         // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
         boolean clockwise = true;
-        float angle = 90;
+        float angle = 90.0f;
 
         // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
         float newHeight = getWidth();
@@ -407,17 +407,17 @@ public class Hero extends Sprite {
         if (b2body.getLinearVelocity().len() > 0.0f) {
             float velAngle = this.b2body.getLinearVelocity().angle();
 
-            if (0 < velAngle && velAngle <= 90) {
+            if (0 < velAngle && velAngle <= 90.0f) {
                 angle = velAngle;
             }
-            if (90 < velAngle && velAngle <= 180) {
+            if (90 < velAngle && velAngle <= 180.0f) {
                 angle = 270.0f - velAngle;
             }
-            if (180 < velAngle && velAngle <= 270) {
+            if (180 < velAngle && velAngle <= 270.0f) {
                 angle = velAngle;
                 clockwise = false;
             }
-            if (270 < velAngle && velAngle <= 360) {
+            if (270 < velAngle && velAngle <= 360.0f) {
                 angle = velAngle;
                 clockwise = false;
             }
@@ -431,7 +431,7 @@ public class Hero extends Sprite {
             if (powerFXSprite != null) {
                 // We do the same with powerFXSprite
                 boolean clwise = true;
-                float ang = 90;
+                float ang = 90.0f;
                 float w = powerFXSprite.getHeight();
                 float h = powerFXSprite.getWidth();
 
@@ -454,7 +454,7 @@ public class Hero extends Sprite {
                     float angle = 0;
                     for(int i = 1; i <= fireBullets; i++) {
                         angle = directionDegrees * i;
-                        angle = (angle >= 90) ? angle - 90 : 270 + angle;
+                        angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
                         screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                                                                         b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
                                                                         angle,
