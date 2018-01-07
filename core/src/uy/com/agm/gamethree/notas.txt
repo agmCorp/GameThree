@@ -56,7 +56,6 @@ PROXIMOS PASOS
 
 URGENTES
 --------
-- VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
 - un poder de disparo puede variar: tamano de la bala *puedo pasando un atributo en el actordef, cantidad*, delay*, animacion*, tipo de movimiento (boomerang)
 
 PENDIENTES
