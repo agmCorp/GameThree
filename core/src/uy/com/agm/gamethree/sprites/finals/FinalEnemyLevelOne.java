@@ -36,7 +36,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private Body b2body;
 
     private enum StateFinalEnemy {
-        WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
+        NOTACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
     }
 
     private enum PowerState {
@@ -100,7 +100,7 @@ public class FinalEnemyLevelOne extends Sprite {
         finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
 
         // FinalEnemyLevelOne variables initialization
-        currentStateFinalEnemy = StateFinalEnemy.WALKING;
+        currentStateFinalEnemy = StateFinalEnemy.NOTACTIVE;
         damage = Constants.FINALLEVELONE_MAX_DAMAGE;
         stateFinalEnemyTimer = 0;
         timeToChangeTimer = 0;
@@ -193,55 +193,65 @@ public class FinalEnemyLevelOne extends Sprite {
         boolean blnOption;
         StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
 
-        if (!isDestroyed()) {
-            if (b2body.isActive()) { // We wait until our final enemy is on camera.
-                timeToChangeTimer += dt;
+        // Update timer
+        timeToChangeTimer += dt;
 
-                // Set a new currentStateFinalEnemy
-                if (timeToChangeTimer >= timeToChange) {
-                    // Reset random state variables
-                    timeToChangeTimer = 0;
-                    timeToChange = getNextTimeToChange();
+        // Set a new currentStateFinalEnemy
+        if (timeToChangeTimer >= timeToChange) {
+            // Reset random state variables
+            timeToChangeTimer = 0;
+            timeToChange = getNextTimeToChange();
 
-                    // Reset variable animation
-                    stateFinalEnemyTimer = 0;
+            // Reset variable animation
+            stateFinalEnemyTimer = 0;
 
-                    // Random option
-                    blnOption = MathUtils.randomBoolean();
+            // Random option
+            blnOption = MathUtils.randomBoolean();
 
-                    // Decide which state must return
-                    switch (currentStateFinalEnemy) {
-                        case WALKING:
-                            if (blnOption) {
-                                newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                            } else {
-                                newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                                openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                            }
-                            break;
-                        case IDLE:
-                            if (blnOption) {
-                                newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                            } else {
-                                newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                                openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                            }
-                            break;
-                        case SHOOTING:
-                            if (blnOption) {
-                                newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                            } else {
-                                newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                            }
-                            break;
+            // Decide which state must return
+            switch (currentStateFinalEnemy) {
+                case WALKING:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
-                }
+                    break;
+                case IDLE:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                    }
+                    break;
+                case SHOOTING:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                    }
+                    break;
             }
         }
         return newRandomStateFinalEnemy;
     }
 
     public void update(float dt) {
+        if (currentStateFinalEnemy == StateFinalEnemy.NOTACTIVE) {
+            // When our final enemy is on camera, it activates
+            checkBoundaries();
+            if (b2body.isActive()) {
+                currentStateFinalEnemy = StateFinalEnemy.WALKING;
+                updateLogic(dt);
+            }
+        } else {
+            updateLogic(dt);
+        }
+    }
+
+    public void updateLogic(float dt) {
         switch (currentStateFinalEnemy) {
             case WALKING:
                 stateWalking(dt);
@@ -267,23 +277,23 @@ public class FinalEnemyLevelOne extends Sprite {
                 break;
         }
 
+        // FinalEnemyLevelOne could have been destroyed
         if (!isDestroyed()) {
-            if (b2body.isActive()) { // We wait until our final enemy is on camera.
-                switch (currentPowerState) {
-                    case NORMAL:
-                        powerStateNormal();
-                        break;
-                    case POWERFUL:
-                        powerStatePowerful(dt);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            switchPowerState(dt);
         }
+    }
 
-        // When our final enemy is on camera, it activates
-        checkBoundaries();
+    private void switchPowerState(float dt) {
+        switch (currentPowerState) {
+            case NORMAL:
+                powerStateNormalToPowerful();
+                break;
+            case POWERFUL:
+                powerStatePowerfulToNormal(dt);
+                break;
+            default:
+                break;
+        }
     }
 
     private void stateWalking(float dt) {
@@ -531,7 +541,7 @@ public class FinalEnemyLevelOne extends Sprite {
        }
     }
 
-    private void powerStatePowerful(float dt) {
+    private void powerStatePowerfulToNormal(float dt) {
         // If our final enemy is not walking nor shooting, he becomes weak
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
@@ -551,7 +561,7 @@ public class FinalEnemyLevelOne extends Sprite {
         }
     }
 
-    private void powerStateNormal() {
+    private void powerStateNormalToPowerful() {
         // If our final enemy is walking or shooting, he becomes powerful
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
@@ -703,16 +713,31 @@ public class FinalEnemyLevelOne extends Sprite {
         }
     }
 
-    public void draw(Batch batch) {
-        if (currentStateFinalEnemy != StateFinalEnemy.DEAD && currentStateFinalEnemy != StateFinalEnemy.EXPLODING) {
-            super.draw(batch);
+    private boolean isDrawable() {
+        return currentStateFinalEnemy != StateFinalEnemy.DEAD &&
+                currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
+                currentStateFinalEnemy != StateFinalEnemy.NOTACTIVE;
+    }
 
-            if (currentPowerState == PowerState.POWERFUL) {
-                powerFXSprite.draw(batch);
-            }
+    private void drawPowers(Batch batch) {
+        if (currentPowerState == PowerState.POWERFUL) {
+            powerFXSprite.draw(batch);
         }
+    }
+
+    private void drawExplosion(Batch batch) {
         if (currentStateFinalEnemy == StateFinalEnemy.EXPLODING) {
             explosionFXSprite.draw(batch);
+        }
+    }
+
+    public void draw(Batch batch) {
+        // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
+        if (isDrawable()) {
+            super.draw(batch);
+            drawPowers(batch);
+        } else {
+            drawExplosion(batch);
         }
     }
 
@@ -737,12 +762,10 @@ public class FinalEnemyLevelOne extends Sprite {
         * You have to be very careful because if the final level One enemy is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
-        if (!isDestroyed()) {
-            float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
+        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
 
-            if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS) {
-                b2body.setActive(true);
-            }
+        if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS) {
+            b2body.setActive(true);
         }
     }
 }
