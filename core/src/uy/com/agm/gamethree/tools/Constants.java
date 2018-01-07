@@ -27,7 +27,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f * 0;
+    public static final float GAMECAM_VELOCITY = 7.0f;//1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -119,7 +119,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 20;
+    public static final int TIMER_POWERONE = 200;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;

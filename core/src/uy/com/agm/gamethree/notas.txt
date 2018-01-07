@@ -75,6 +75,7 @@ que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna 
     private float stateWaiting;
     private float stateFading;
   Deberia ser stateWaitingTimer; etc.
+- CUANDO MUERO CON EL ESCUDO NO ME QUITA EL PODER!!!!
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

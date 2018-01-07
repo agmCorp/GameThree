@@ -556,16 +556,16 @@ public class FinalEnemyLevelOne extends Sprite {
         }
     }
 
-    public void onHit(Weapon energyBall) {
+    public void onHit(Weapon weapon) {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
-            energyBall.onTarget();
+            weapon.onTarget();
             damage--;
             AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
             if (damage <= 0) {
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }
         } else {
-            energyBall.onBounce();
+            weapon.onBounce();
         }
     }
 
