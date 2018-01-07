@@ -54,6 +54,17 @@ PROXIMOS PASOS
 --------------
 - ponerle sonido y assets bien
 
+URGENTES
+--------
+- VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
+- todos los powerAlgo tienen esto:
+    private float stateTimer;
+    private float stateWaiting;
+    private float stateFading;
+  Deberia ser stateWaitingTimer; etc.
+- CUANDO MUERO CON EL ESCUDO NO ME QUITA EL PODER!!!!
+- EnergyBall deberia ser renombrado como HeroBullet
+
 PENDIENTES
 ----------
 - las properties del tilededitor pueden ser boolean, usarlas.
@@ -65,17 +76,10 @@ bordes y objetos
 - estaría bueno que las balas reboten y los enemigos también en modo ghost, capaz mejor cuando haga otro poder.
 - comprar el ninja?
 - renombrar los audios con nomenclatura
-- VER QUE HAYAN QUEDADO BIEN CENTRADAS LAS EXPLOSIONES DE LOS ENEMIGOS. LA DE LA POWERBOX QUEDO BIEN.
 - capaz me conviene agrupar las constantes en clases estaticas para cada objeto....no se..como hice assets
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 - por ejemplo getItemOnHit() repite mucho el getproperties, es ineficiente creo.
-- todos los powerAlgo tienen esto:
-    private float stateTimer;
-    private float stateWaiting;
-    private float stateFading;
-  Deberia ser stateWaitingTimer; etc.
-- CUANDO MUERO CON EL ESCUDO NO ME QUITA EL PODER!!!!
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
