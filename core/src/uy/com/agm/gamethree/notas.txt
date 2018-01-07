@@ -139,6 +139,7 @@ bordes y objetos
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
+- hacer el juego web y ios
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -320,6 +321,13 @@ METODOLOGIA
     Lo que hice en esos casos fue definir un nuevo sprite (en una variable), seteando su setBoundaries, que la dibujo finalmente sobre el sprite
     del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite). Esto lo hice así
     porque es imposible deducir el ancho y altura del sprite FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
+
+IOS
+---
+xcode para programar en objectiveC o en swift.
+xcode funciona en mac, se usa un emulador para probar iphone o sino enchufar un iphone.
+La licencia al parecer ahora es gratis.
+Tengo links en bookmarks libgdx en donde habla de las opciones libgdx ios.
 --------------------------- code copy paste ---------------------------------------
 para items los cast
 para vidas heal
