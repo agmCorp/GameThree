@@ -56,7 +56,40 @@ PROXIMOS PASOS
 
 URGENTES
 --------
-- un poder de disparo puede variar: tamano de la bala *puedo pasando un atributo en el actordef, cantidad*, delay*, animacion*, tipo de movimiento (boomerang)
+- un poder de disparo puede variar:
+    tamano de la bala *le cambie el sprite pero no el circulo, podria pasar otro parametro,
+    cantidad*,
+    delay*,
+    animacion*,
+    tipo de movimiento (boomerang)
+
+
+REFACTORING
+-----------
+1)
+- Crear paquete Constants
+- dentro, definir una clase:
+
+public class ConstantsHero {
+    public static final float HERO_LINEAR_VELOCITY = 5.2f;
+    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / Constants.PPM;
+    public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / Constants.PPM;
+    public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / Constants.PPM;
+    public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
+    public static final float HERO_ALPHA_LERP = 0.2f;
+    public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
+}
+
+Ojo ahi con Constants.PPM!!!! hay que cambiar eso. Arrancar por game.
+
+- Luego dentro de la clase Constants:
+public final static ConstantsHero HERO = new ConstantsHero();
+
+- Se usa asi:
+Constants.HERO.HERO_LINEAR_VELOCITY
+
+2)
+- renombrar todos los timer por time (ej: stateTime)
 
 PENDIENTES
 ----------
@@ -68,10 +101,8 @@ bordes y objetos
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - comprar el ninja?
 - renombrar los audios con nomenclatura
-- capaz me conviene agrupar las constantes en clases estaticas para cada objeto....no se..como hice assets
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
-- renombrar todos los timer por time (ej: stateTime)
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -341,3 +372,4 @@ FUNCION SENO
         stateTime += dt;
         openFireTime += dt;
         if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+
