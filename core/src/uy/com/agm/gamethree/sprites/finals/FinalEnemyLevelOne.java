@@ -211,27 +211,27 @@ public class FinalEnemyLevelOne extends Sprite {
                 // Decide which state must return
                 switch (currentStateFinalEnemy) {
                     case WALKING:
-                        if (blnOption) {
+                    //    if (blnOption) {
                             newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        } else {
-                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                        }
+//                        } else {
+//                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+//                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+//                        }
                         break;
                     case IDLE:
-                        if (blnOption) {
-                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                        } else {
-                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-                        }
+//                        if (blnOption) {
+//                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+//                        } else {
+//                            newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+//                            openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+//                        }
                         break;
                     case SHOOTING:
-                        if (blnOption) {
-                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-                        } else {
-                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        }
+//                        if (blnOption) {
+//                            newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+//                        } else {
+//                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+//                        }
                         break;
                 }
             }
