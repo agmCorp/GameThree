@@ -1054,7 +1054,7 @@ finalEnemyLevelOnePower
   orig: 192, 192
   offset: 0, 0
   index: 30
-shield
+imagen_part
   rotate: false
   xy: 195, 81
   size: 192, 192
@@ -1096,7 +1096,7 @@ heroBullet
   orig: 140, 153
   offset: 0, 0
   index: 7
-shield
+imagen_part
   rotate: false
   xy: 389, 109
   size: 192, 192
@@ -1117,7 +1117,7 @@ enemyTwo
   orig: 100, 100
   offset: 0, 0
   index: 2
-shield
+imagen_part
   rotate: false
   xy: 583, 109
   size: 192, 192
@@ -1220,28 +1220,28 @@ explosionE
   orig: 196, 178
   offset: 0, 0
   index: 13
-shield
+imagen_part
   rotate: false
   xy: 1, 648
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 4
-shield
+imagen_part
   rotate: false
   xy: 1, 454
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 5
-shield
+imagen_part
   rotate: false
   xy: 1, 260
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 6
-shield
+imagen_part
   rotate: false
   xy: 1, 66
   size: 192, 192
@@ -1276,21 +1276,21 @@ explosionE
   orig: 196, 178
   offset: 0, 0
   index: 17
-shield
+imagen_part
   rotate: false
   xy: 195, 468
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 8
-shield
+imagen_part
   rotate: false
   xy: 195, 274
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 9
-shield
+imagen_part
   rotate: false
   xy: 195, 80
   size: 192, 192
@@ -1318,14 +1318,14 @@ explosionE
   orig: 196, 178
   offset: 0, 0
   index: 20
-shield
+imagen_part
   rotate: false
   xy: 389, 288
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: 11
-shield
+imagen_part
   rotate: false
   xy: 389, 94
   size: 192, 192
@@ -1411,6 +1411,366 @@ powerThreeFire
   index: 4
 
 dinamicObjects6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+imagen_part
+  rotate: false
+  xy: 1, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 13
+imagen_part
+  rotate: false
+  xy: 1, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 14
+imagen_part
+  rotate: false
+  xy: 195, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 15
+imagen_part
+  rotate: false
+  xy: 1, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 16
+imagen_part
+  rotate: false
+  xy: 195, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 17
+imagen_part
+  rotate: false
+  xy: 389, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 18
+imagen_part
+  rotate: false
+  xy: 1, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 19
+imagen_part
+  rotate: false
+  xy: 195, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 20
+imagen_part
+  rotate: false
+  xy: 389, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 21
+imagen_part
+  rotate: false
+  xy: 583, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 22
+imagen_part
+  rotate: false
+  xy: 1, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 23
+imagen_part
+  rotate: false
+  xy: 195, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 24
+imagen_part
+  rotate: false
+  xy: 389, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 25
+imagen_part
+  rotate: false
+  xy: 583, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 26
+imagen_part
+  rotate: false
+  xy: 777, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 27
+imagen_part
+  rotate: false
+  xy: 195, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 28
+imagen_part
+  rotate: false
+  xy: 389, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 29
+imagen_part
+  rotate: false
+  xy: 583, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 30
+imagen_part
+  rotate: false
+  xy: 777, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 31
+imagen_part
+  rotate: false
+  xy: 389, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 32
+imagen_part
+  rotate: false
+  xy: 583, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 33
+imagen_part
+  rotate: false
+  xy: 777, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 34
+imagen_part
+  rotate: false
+  xy: 583, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 35
+imagen_part
+  rotate: false
+  xy: 777, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 36
+imagen_part
+  rotate: false
+  xy: 777, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 37
+
+dinamicObjects7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+imagen_part
+  rotate: false
+  xy: 1, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 38
+imagen_part
+  rotate: false
+  xy: 1, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 39
+imagen_part
+  rotate: false
+  xy: 195, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 40
+imagen_part
+  rotate: false
+  xy: 1, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 41
+imagen_part
+  rotate: false
+  xy: 195, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 42
+imagen_part
+  rotate: false
+  xy: 389, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 43
+imagen_part
+  rotate: false
+  xy: 1, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 44
+imagen_part
+  rotate: false
+  xy: 195, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 45
+imagen_part
+  rotate: false
+  xy: 389, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 46
+imagen_part
+  rotate: false
+  xy: 583, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 47
+imagen_part
+  rotate: false
+  xy: 1, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 48
+imagen_part
+  rotate: false
+  xy: 195, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 49
+imagen_part
+  rotate: false
+  xy: 389, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 50
+shield
+  rotate: false
+  xy: 583, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 1
+shield
+  rotate: false
+  xy: 777, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 2
+shield
+  rotate: false
+  xy: 195, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 3
+shield
+  rotate: false
+  xy: 389, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 4
+shield
+  rotate: false
+  xy: 583, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 5
+shield
+  rotate: false
+  xy: 777, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 6
+shield
+  rotate: false
+  xy: 389, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 7
+shield
+  rotate: false
+  xy: 583, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 8
+shield
+  rotate: false
+  xy: 777, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 9
+shield
+  rotate: false
+  xy: 583, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 10
+shield
+  rotate: false
+  xy: 777, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 11
+shield
+  rotate: false
+  xy: 777, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 12
+
+dinamicObjects8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -1660,7 +2020,7 @@ heroBullet
   offset: 0, 0
   index: 2
 
-dinamicObjects7.png
+dinamicObjects9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -1987,7 +2347,7 @@ enemyTwo
   offset: 0, 0
   index: 8
 
-dinamicObjects8.png
+dinamicObjects10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -2244,7 +2604,7 @@ enemyBullet
   offset: 0, 0
   index: 1
 
-dinamicObjects9.png
+dinamicObjects11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -2508,7 +2868,7 @@ ghostMode
   offset: 0, 0
   index: 16
 
-dinamicObjects10.png
+dinamicObjects12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
