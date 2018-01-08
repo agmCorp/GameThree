@@ -22,7 +22,7 @@ public class AssetShield {
 
         // Animation
         regions = atlas.findRegions("shield");
-        shieldAnimation = new Animation(1.0f / 20.0f, regions);
+        shieldAnimation = new Animation(0.3f / 20.0f, regions);
         regions.clear();
     }
 }

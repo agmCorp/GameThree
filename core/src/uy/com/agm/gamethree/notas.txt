@@ -89,6 +89,10 @@ carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 - hacer el juego web y ios
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
+- Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
+- Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
+Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
+Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
