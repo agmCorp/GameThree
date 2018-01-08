@@ -62,7 +62,7 @@ public class HeroBullet extends Weapon {
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-        Gdx.app.debug(TAG, "RADIO HEROE: " + circleShapeRadius);
+
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);
