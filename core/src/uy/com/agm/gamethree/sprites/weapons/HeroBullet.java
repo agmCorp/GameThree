@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -25,6 +26,7 @@ public class HeroBullet extends Weapon {
 
     private float stateTimer;
     private Animation heroBulletAnimation;
+    private Vector2 tmp; // Temp GC friendly vector
 
     public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation) {
         super(screen, x, y, circleShapeRadius > 0 ? circleShapeRadius : Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS);
@@ -54,6 +56,9 @@ public class HeroBullet extends Weapon {
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));
+
+        // Temp GC friendly vector
+        tmp = new Vector2();
     }
 
     @Override
@@ -64,7 +69,7 @@ public class HeroBullet extends Weapon {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
+            CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
@@ -96,14 +101,13 @@ public class HeroBullet extends Weapon {
 
     private void stateShot(float dt) {
         b2body.setLinearVelocity(velocity);
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, HeroBullet may have collided with sth., and therefore, it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Get the bounding rectangle that could have been changed after applying setRotation
+        getBoundingRectangle().getCenter(tmp);
+
+        // Update our Sprite to correspond with the position of our Box2D body
+        translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
+
         setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
     }
