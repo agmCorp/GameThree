@@ -160,7 +160,8 @@ public class PowerThree extends Item {
         hero.powerDown();
 
         // Apply fire power
-        screen.getPlayer().applyFirePower(Constants.POWERTHREE_FIRE_WIDTH_METERS, Constants.POWERTHREE_FIRE_HEIGHT_METERS, fireDelay, fireBullets, fireAnimation);
+        screen.getPlayer().applyFirePower(Constants.POWERTHREE_FIRE_WIDTH_METERS, Constants.POWERTHREE_FIRE_HEIGHT_METERS,
+                                Constants.POWERTHREE_FIRE_CIRCLESHAPERADIUS_METERS, fireDelay, fireBullets, fireAnimation);
         currentState = State.FINISHED;
     }
 

@@ -132,6 +132,7 @@ public class B2WorldCreator {
             if (gameThreeActorDef.getType() == HeroBullet.class) {
                 weapons.add(new HeroBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY(),
                                 gameThreeActorDef.getWidth(), gameThreeActorDef.getHeight(),
+                                gameThreeActorDef.getCircleShapeRadius(),
                                 gameThreeActorDef.getAngle(), gameThreeActorDef.getAnimation()));
             }
             if (gameThreeActorDef.getType() == EnemyBullet.class) {

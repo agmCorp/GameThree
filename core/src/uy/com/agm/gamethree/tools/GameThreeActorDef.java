@@ -11,8 +11,9 @@ public class GameThreeActorDef {
 
     private float x;
     private float y;
-    float width;
-    float height;
+    private float width;
+    private float height;
+    private float circleShapeRadius;
     private float angle;
     private Animation animation;
     private Class<?> type;
@@ -22,6 +23,7 @@ public class GameThreeActorDef {
         this.y = y;
         this.width = 0;
         this.height = 0;
+        this.circleShapeRadius = 0;
         this.angle = 0;
         this.animation = null;
         this.type = type;
@@ -32,6 +34,7 @@ public class GameThreeActorDef {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.circleShapeRadius = 0;
         this.angle = 0;
         this.animation = null;
         this.type = type;
@@ -42,6 +45,7 @@ public class GameThreeActorDef {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.circleShapeRadius = 0;
         this.angle = angle;
         this.animation = null;
         this.type = type;
@@ -52,6 +56,18 @@ public class GameThreeActorDef {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.circleShapeRadius = 0;
+        this.angle = angle;
+        this.animation = animation;
+        this.type = type;
+    }
+
+    public GameThreeActorDef(float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation, Class<?> type) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.circleShapeRadius = circleShapeRadius;
         this.angle = angle;
         this.animation = animation;
         this.type = type;
@@ -71,6 +87,10 @@ public class GameThreeActorDef {
 
     public float getHeight() {
         return height;
+    }
+
+    public float getCircleShapeRadius() {
+        return circleShapeRadius;
     }
 
     public float getAngle() {

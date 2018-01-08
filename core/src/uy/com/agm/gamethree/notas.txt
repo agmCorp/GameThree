@@ -52,6 +52,7 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
+- Este poder para escudo tiene muy buena pinta https://mrbubblewand.files.wordpress.com/2009/10/water_003.png
 - ponerle sonido y assets bien
 - ver el ninja y suriken
 - hacer refactoring de constantes
@@ -59,11 +60,13 @@ PROXIMOS PASOS
 URGENTES
 --------
 - un poder de disparo puede variar:
-    ---> tamano de la bala *le cambie el sprite pero no el circulo, podria pasar otro parametro,
+    tamano de la bala* (sprite y b2body)
     cantidad*,
     delay*,
     animacion*,
     tipo de movimiento (boomerang)
+    velocidad
+    sonido
 
 - HACER ESTO PRIMERO: (circleShapeRadius)
 EN ESTE CONSTRUCTOR LO QUE TENGO ES QUE PREGUNTAR *** POR CADA *** VARIABLE, VIENDO SI NO ES VACIA Y AHI SI, SETEANDO EL VALOR...

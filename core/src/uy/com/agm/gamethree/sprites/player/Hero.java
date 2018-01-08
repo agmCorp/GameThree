@@ -64,6 +64,7 @@ public class Hero extends Sprite {
     private boolean fireEnhancement;
     private float fireWidth;
     private float fireHeight;
+    private float fireCircleShapeRadius;
     private float fireDelay;
     private int fireBullets;
     private Animation fireAnimation;
@@ -464,6 +465,7 @@ public class Hero extends Sprite {
                                                                     b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
                                                                     fireWidth,
                                                                     fireHeight,
+                                                                    fireCircleShapeRadius,
                                                                     angle,
                                                                     fireAnimation,
                                                                     HeroBullet.class));
@@ -525,12 +527,13 @@ public class Hero extends Sprite {
         powerFXAllowRotation = allowRotation;
     }
 
-    public void applyFirePower(float width, float height, float delay, int bullets, Animation animation) {
+    public void applyFirePower(float width, float height, float circleShapeRadius, float delay, int bullets, Animation animation) {
         currentPowerState = PowerState.POWERFUL;
 
         fireEnhancement = true;
         fireWidth = width;
         fireHeight = height;
+        fireCircleShapeRadius = circleShapeRadius;
         fireDelay = delay;
         fireBullets = bullets;
         fireAnimation = animation;

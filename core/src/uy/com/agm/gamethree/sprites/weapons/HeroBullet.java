@@ -24,33 +24,34 @@ public class HeroBullet extends Weapon {
 
     private float stateTimer;
     private Animation heroBulletAnimation;
+    private float circleShapeRadius;
 
-    public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float angle, Animation animation) {
+    public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation) {
         super(screen, x, y);
-
-        // Animation
-        if (animation != null) {
-            heroBulletAnimation = animation;
-        } else {
-            heroBulletAnimation = Assets.instance.heroBullet.heroBulletAnimation;
-            width = Constants.HEROBULLET_WIDTH_METERS;
-            height = Constants.HEROBULLET_HEIGHT_METERS;
-        }
-
-        // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
-        setBounds(getX(), getY(), width, height);
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        stateTimer = 0;
-        currentState = State.SHOT;
-        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
+        width = width > 0 ? width : Constants.HEROBULLET_WIDTH_METERS;
+        height = height > 0 ? height : Constants.HEROBULLET_HEIGHT_METERS;
 
+        // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
+        setBounds(getX(), getY(), width, height);
+
+        this.circleShapeRadius = circleShapeRadius > 0 ? circleShapeRadius : Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS;
         if (angle > 0) {
             velocity.rotate(angle);
             setRotation(angle);
         }
+        if (animation != null) {
+            heroBulletAnimation = animation;
+        } else {
+            heroBulletAnimation = Assets.instance.heroBullet.heroBulletAnimation;
+        }
+
+        stateTimer = 0;
+        currentState = State.SHOT;
+        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));
@@ -65,7 +66,7 @@ public class HeroBullet extends Weapon {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |

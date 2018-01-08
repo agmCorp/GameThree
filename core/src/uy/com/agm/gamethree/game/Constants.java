@@ -153,6 +153,7 @@ public class Constants {
     public static final int POWERTHREE_FIRE_BULLETS = 4;
     public static final float POWERTHREE_FIRE_WIDTH_METERS = 90.0f * 0.7f / PPM;
     public static final float POWERTHREE_FIRE_HEIGHT_METERS = 120.0f * 0.7f / PPM;
+    public static final float POWERTHREE_FIRE_CIRCLESHAPERADIUS_METERS = 15.0f / PPM;
 
     // Shield (meters = pixels * resizeFactor / PPM)
     public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
