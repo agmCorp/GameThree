@@ -71,26 +71,7 @@ URGENTES
 REFACTORING URGENTE
 -------------------
 1)
-- Crear paquete Constants
-- dentro, definir una clase:
-
-public class ConstantsHero {
-    public static final float HERO_LINEAR_VELOCITY = 5.2f;
-    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / Constants.PPM;
-    public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / Constants.PPM;
-    public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / Constants.PPM;
-    public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
-    public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
-}
-
-Ojo ahi con Constants.PPM!!!! hay que cambiar eso. Arrancar por game.
-
-- Luego dentro de la clase Constants:
-public final static ConstantsHero HERO = new ConstantsHero();
-
-- Se usa asi:
-Constants.HERO.HERO_LINEAR_VELOCITY
+Pasar las constantes a cada clase
 
 2)
 - renombrar todos los timer por time (ej: stateTime)
