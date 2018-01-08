@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,10 +25,9 @@ public class HeroBullet extends Weapon {
 
     private float stateTimer;
     private Animation heroBulletAnimation;
-    private float circleShapeRadius;
 
     public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation) {
-        super(screen, x, y);
+        super(screen, x, y, circleShapeRadius > 0 ? circleShapeRadius : Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS);
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -38,7 +38,7 @@ public class HeroBullet extends Weapon {
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), width, height);
 
-        this.circleShapeRadius = circleShapeRadius > 0 ? circleShapeRadius : Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS;
+        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
         if (angle > 0) {
             velocity.rotate(angle);
             setRotation(angle);
@@ -51,7 +51,6 @@ public class HeroBullet extends Weapon {
 
         stateTimer = 0;
         currentState = State.SHOT;
-        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.heroShoot, 0.2f, MathUtils.random(1.0f, 1.1f));
@@ -63,7 +62,7 @@ public class HeroBullet extends Weapon {
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-
+        Gdx.app.debug(TAG, "RADIO HEROE: " + circleShapeRadius);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);

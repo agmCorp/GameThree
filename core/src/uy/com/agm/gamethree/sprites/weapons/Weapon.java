@@ -20,6 +20,7 @@ public abstract class Weapon extends Sprite {
 
     protected World world;
     protected PlayScreen screen;
+    protected float circleShapeRadius;
     protected Body b2body;
 
     protected Vector2 velocity;
@@ -29,9 +30,10 @@ public abstract class Weapon extends Sprite {
     }
     protected State currentState;
 
-    public Weapon(PlayScreen screen, float x, float y) {
+    public Weapon(PlayScreen screen, float x, float y, float circleShapeRadius) {
         this.world = screen.getWorld();
         this.screen = screen;
+        this.circleShapeRadius = circleShapeRadius;
 
         /* Set this Sprite's position on the lower left vertex of a Rectangle.
         * At this moment we don't have Weapon.width and Weapon.height because this is an abstract class.

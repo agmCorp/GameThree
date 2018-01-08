@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,7 +28,7 @@ public class EnemyBullet extends Weapon {
     private Animation enemyBulletAnimation;
 
     public EnemyBullet(PlayScreen screen, float x, float y) {
-        super(screen, x, y);
+        super(screen, x, y, Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
 
         // Animation
         enemyBulletAnimation = Assets.instance.enemyBullet.enemyBulletAnimation;
@@ -52,10 +53,10 @@ public class EnemyBullet extends Weapon {
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-
+        Gdx.app.debug(TAG, "RADIO ENEMIGO: " + circleShapeRadius);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.SHIELD_BIT |
