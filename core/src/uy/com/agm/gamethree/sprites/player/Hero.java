@@ -69,6 +69,9 @@ public class Hero extends Sprite {
     private int fireBullets;
     private Animation fireAnimation;
 
+    // Temp GC friendly vector
+    private Vector2 tmp;
+
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -106,6 +109,9 @@ public class Hero extends Sprite {
         fireDelay = 0;
         fireBullets = 0;
         fireAnimation = null;
+
+        // Temp GC friendly vector
+        tmp = new Vector2();
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -282,9 +288,9 @@ public class Hero extends Sprite {
             currentHeroState = HeroState.DYING_DOWN;
         } else {
             // We move Hero from the actual position to the middle of the screen.
-            Vector2 newVelocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(newVelocity, b2body.getPosition().x, screen.gameCam.position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
-            b2body.setLinearVelocity(newVelocity);
+            tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+            Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.gameCam.position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
+            b2body.setLinearVelocity(tmp);
         }
     }
 
@@ -301,9 +307,9 @@ public class Hero extends Sprite {
         heroStateTimer += dt;
 
         // We move Hero from the actual position to the bottom of the screen.
-        Vector2 newVelocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(newVelocity, b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
-        b2body.setLinearVelocity(newVelocity);
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
+        b2body.setLinearVelocity(tmp);
 
         // If we reach the bottom edge of the screen, we set Hero as not active in the simulation.
         float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;

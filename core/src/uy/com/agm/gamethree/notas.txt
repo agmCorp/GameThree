@@ -52,7 +52,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- Este poder para escudo tiene muy buena pinta https://mrbubblewand.files.wordpress.com/2009/10/water_003.png
 - ponerle sonido y assets bien
 - ver el ninja y suriken
 - hacer refactoring de constantes
@@ -82,7 +81,7 @@ PENDIENTES
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - averiguar como debuguear
-- optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor.
+- optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor. Con translate podría, ver heroBullet.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - renombrar los audios con nomenclatura
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
