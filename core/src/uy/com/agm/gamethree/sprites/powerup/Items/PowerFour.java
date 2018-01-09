@@ -172,13 +172,13 @@ public class PowerFour extends Item {
         }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand); // TODO
+        Sprite spritePower = new Sprite(Assets.instance.toughMode.toughModeStand);
 
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.shield.shieldAnimation, spritePower, false); // TODO
+        hero.applyPowerFX(Assets.instance.toughMode.toughModeAnimation, spritePower, false);
 
         currentState = State.FINISHED;
     }
