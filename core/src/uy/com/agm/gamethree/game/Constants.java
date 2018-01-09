@@ -133,8 +133,8 @@ public class Constants {
     public static final float POWERTWO_VELOCITY_Y = 0.7f;
     public static final float POWERTWO_WAITING_SECONDS = 5.0f;
     public static final float POWERTWO_FADING_SECONDS = 5.0f;
-    public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.5f / PPM;
-    public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.5f / PPM;
+    public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.4f / PPM;
+    public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.4f / PPM;
     public static final int TIMER_POWERTWO = 20;
     public static final int POWERTWO_SCORE = 30;
     public static final float POWERTWO_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
@@ -146,8 +146,8 @@ public class Constants {
     public static final float POWERTHREE_VELOCITY_Y = 1.0f;
     public static final float POWERTHREE_WAITING_SECONDS = 5.0f;
     public static final float POWERTHREE_FADING_SECONDS = 5.0f;
-    public static final float POWERTHREE_WIDTH_METERS = 90.0f * 1.0f / PPM;
-    public static final float POWERTHREE_HEIGHT_METERS = 120.0f * 1.0f / PPM;
+    public static final float POWERTHREE_WIDTH_METERS = 63.0f * 0.7f / PPM;
+    public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
     public static final float POWERTHREE_FIRE_DELAY = 0.3f;
@@ -164,7 +164,7 @@ public class Constants {
     public static final float POWERFOUR_FADING_SECONDS = 5.0f;
     public static final float POWERFOUR_WIDTH_METERS = 150.0f * 0.5f / PPM;
     public static final float POWERFOUR_HEIGHT_METERS = 158.0f * 0.5f / PPM;
-    public static final int TIMER_POWERFOUR = 40;
+    public static final int TIMER_POWERFOUR = 400;
     public static final int POWERFOUR_SCORE = 30;
     public static final float POWERFOUR_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERFOUR_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
