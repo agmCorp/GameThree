@@ -83,6 +83,9 @@ public class Hero extends Sprite {
         setBounds(x, y, Constants.HERO_WIDTH_METERS, Constants.HERO_HEIGHT_METERS);
         defineHero();
 
+        // Place origin of rotation in the center of the Sprite
+        setOriginCenter();
+
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
@@ -160,9 +163,12 @@ public class Hero extends Sprite {
     }
 
     private void powerStatePowerful(float dt) {
-        if (powerFXSprite != null) { // if powerFXSprite is null, Hero has a fire power (we don't need to draw anything)
+        if (powerFXSprite != null) { // if powerFXSprite is null (for instance, Hero has a fire power) we don't need to set any TextureRegion
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
             powerFXStateTimer += dt;
+
+            // Update our Sprite to correspond with the position of our Hero's Box2D body
+            powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
@@ -189,6 +195,9 @@ public class Hero extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(heroStand);
 
+        // Reset rotation
+        setRotation(0.0f);
+
         // If our Hero is standing, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
         checkCrashing();
     }
@@ -212,6 +221,9 @@ public class Hero extends Sprite {
 
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTimer, true));
+
+        // Reset rotation
+        setRotation(0.0f);
 
         // If our Hero is moving to the left or to the right, he could be smashed between an object and the bottomEdge
         // when the camera moves dragging him.
@@ -238,6 +250,9 @@ public class Hero extends Sprite {
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true));
 
+        // Calculate rotation
+        setRotationAngle();
+
         // If our Hero is moving up, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
         checkCrashing();
     }
@@ -261,6 +276,9 @@ public class Hero extends Sprite {
 
         // Update Hero with the correct frame
         setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true));
+
+        // Calculate rotation
+        setRotationAngle();
 
         // If our Hero is moving down, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
         checkCrashing();
@@ -405,61 +423,29 @@ public class Hero extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void draw(SpriteBatch batch) {
-        // If clockwise is true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-        // Thus, by default our Sprite will be drawn rotated 90 degrees counter clockwise.
-        // Batch.draw(...) draws a rectangle with the texture coordinates rotated 90 degrees.
-
-        boolean clockwise = true;
-        float angle = 90.0f;
-
-        // If we draw our Texture (heroStand) rotated 90 degrees, the newHeight is the width of the Texture (analogous with newWidth).
-        float newHeight = getWidth();
-        float newWidth = getHeight();
-
-        // If Hero is moving, we must calculate his new angle
+    private void setRotationAngle() {
         if (b2body.getLinearVelocity().len() > 0.0f) {
+            setRotation(90.0f);
             float velAngle = this.b2body.getLinearVelocity().angle();
-
-            if (0 < velAngle && velAngle <= 90.0f) {
-                angle = velAngle;
+            if (0 <= velAngle && velAngle <= 180.0f) {
+                setRotation(270.0f);
             }
-            if (90 < velAngle && velAngle <= 180.0f) {
-                angle = 270.0f - velAngle;
-            }
-            if (180 < velAngle && velAngle <= 270.0f) {
-                angle = velAngle;
-                clockwise = false;
-            }
-            if (270 < velAngle && velAngle <= 360.0f) {
-                angle = velAngle;
-                clockwise = false;
-            }
+            rotate(velAngle);
         }
+    }
 
+    public void draw(SpriteBatch batch) {
         if (currentPowerState != PowerState.NORMAL) {
             if (powerFXSprite != null) {
-                // We do the same with powerFXSprite
-                boolean clwise = true;
-                float ang = 90.0f;
-                float w = powerFXSprite.getHeight();
-                float h = powerFXSprite.getWidth();
-
                 if (powerFXAllowRotation) {
-                    clwise = clockwise;
-                    ang = angle;
+                    powerFXSprite.setRotation(getRotation());
                 }
-
-                // First we draw his power, then we draw our Hero
-                batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
-                        w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, ang, clwise);
+                // Power FX
+                powerFXSprite.draw(batch);
             }
         }
-
-        // At the end, we draw our Hero
-        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
-                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
-
+        // Hero
+        super.draw(batch);
     }
 
     public void openFire() {
@@ -531,6 +517,9 @@ public class Hero extends Sprite {
 
         // Set the sprite (if null, we don't draw it (see .draw(...))
         powerFXSprite = power;
+
+        // Place origin of rotation in the center of the Sprite
+        powerFXSprite.setOriginCenter();
 
         // Indicates if this Sprite must rotate just like our Hero does
         powerFXAllowRotation = allowRotation;

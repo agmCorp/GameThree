@@ -557,7 +557,7 @@ public class FinalEnemyLevelOne extends Sprite {
             powerFXSprite.setRotation(getRotation());
             powerFXSprite.setFlip(isFlipX(), isFlipY());
 
-            // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body:
+            // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
