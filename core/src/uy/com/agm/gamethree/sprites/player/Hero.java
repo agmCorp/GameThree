@@ -452,17 +452,17 @@ public class Hero extends Sprite {
         if (fireEnhancement) {
             if (openFiretimer > fireDelay) {
                 float directionDegrees = 180.0f / (numberBullets + 1);
-                float angle = 0;
+                float angle;
                 for(int i = 1; i <= numberBullets; i++) {
                     angle = directionDegrees * i;
                     angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                                                                     b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
-                            bulletWidth,
-                            bulletHeight,
-                            bulletCircleShapeRadius,
+                                                                    bulletWidth,
+                                                                    bulletHeight,
+                                                                    bulletCircleShapeRadius,
                                                                     angle,
-                            bulletAnimation,
+                                                                    bulletAnimation,
                                                                     HeroBullet.class));
                 }
                 openFiretimer = 0;
