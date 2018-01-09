@@ -179,6 +179,7 @@ public class FinalEnemyLevelOne extends Sprite {
                 Constants.OBSTACLE_BIT |
                 Constants.HERO_WEAPON_BIT |
                 Constants.SHIELD_BIT |
+                Constants.HERO_TOUGH_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
