@@ -26,13 +26,13 @@ ALCANCE
 Hay 2 tipos de elementos:
 	1) bola de poder
 		- *nada
-		- *escudo (shield_blue.gif esta muy bueno)
+		- *escudo
 		- invisibilidad (seria algo así como que puedo caminar por toda la pantalla sin colisionar
 		  con anda)
 		- detener pantalla (por tiempo)
-		- te pones rojo y chocas a todos (por tiempo) (puedo hacer que choques a todos y ademas te reboten las balas, rodeado de fuego)
+		- *te pones rojo y chocas a todos (por tiempo)
 		- *invulnerabilidad (te rodea una burbuja) es por tiempo
-		- matar a todos de una vez.
+		- explotar a todos los enemigos de una vez.
 	2) bola de armas
 		- nada
 		- boomeran
@@ -50,19 +50,14 @@ Bloques con sorpresas
 enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
 enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
 
-PROXIMOS PASOS
+PENDIENTES
 --------------
-- seguir con el powerfour, probar contra el enemigo final: cuando estoy en tough mode, las balas del final me rebotan bien.
-Pero no choco contra el final...es un fantasma. Me gustaria chocar y rebotar sin lastimar al final y sin que me lastime a mi.
-O lo mejor seria que al chocar me saque el tough.
+- seguir con el powerfour
 - reversevelocity de los items y de los enemies esta mal conceptuado, porque los items se mueven en cualquier direccion
 y tambien los enemigos. Hacer algo mas inteligente.
 - ponerle sonido y assets bien
 - ver el ninja y suriken
 - hacer refactoring de constantes
-
-URGENTES
---------
 - un poder de disparo puede variar:
     tamano de la bala* (sprite y b2body)
     cantidad*,
@@ -71,35 +66,32 @@ URGENTES
     tipo de movimiento (boomerang)
     velocidad
     sonido
-
-REFACTORING URGENTE
--------------------
-1)
-Pasar las constantes a cada clase
-
-2)
 - renombrar todos los timer por time (ej: stateTime)
+- Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
+- optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor. Con translate podría, ver heroBullet.
+ADEMAS EL DRAW NO DEBE HACER CALCULOS..EL DRAW SOLO DIBUJA. HACER CALCULOS EN CADA ESTADO.
+Capaz estoy confundido, pero en Hero, yo en los eventos de update debo setear su velocidad y todo lo que quiera y calcular
+su angulo de giro alli mismo. El draw solo debe dibujar, no hacer calculos de angulos y posciones. Para eso esta el update.
+Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
 
-PENDIENTES
-----------
+
+
+PENDIENTES A FUTURO
+-------------------
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - averiguar como debuguear
-- optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor. Con translate podría, ver heroBullet.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - renombrar los audios con nomenclatura
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 - hacer el juego web y ios
-- Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
 Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
-- Capaz estoy confundido, pero en Hero, yo en los eventos de update debo setear su velocidad y todo lo que quiera y calcular
-su angulo de giro alli mismo. El draw solo debe dibujar, no hacer calculos de angulos y posciones. Para eso esta el update.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------
@@ -121,7 +113,6 @@ which uses delta to get the right frames for sprite animations, and actually dra
     No me quedo un acceso directo, sino que ejecuto el exe que baje
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2.
-- Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
 
 VIDEO
 -----
@@ -299,6 +290,8 @@ xcode para programar en objectiveC o en swift.
 xcode funciona en mac, se usa un emulador para probar iphone o sino enchufar un iphone.
 La licencia al parecer ahora es gratis.
 Tengo links en bookmarks libgdx en donde habla de las opciones libgdx ios.
+
+
 --------------------------- code copy paste ---------------------------------------
 para items los cast
 para vidas heal
