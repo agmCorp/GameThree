@@ -96,6 +96,8 @@ que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna 
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
 Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
+- Capaz estoy confundido, pero en Hero, yo en los eventos de update debo setear su velocidad y todo lo que quiera y calcular
+su angulo de giro alli mismo. El draw solo debe dibujar, no hacer calculos de angulos y posciones. Para eso esta el update.
 
 TENGO LAS SIGUIENTES CUSTOM PROPERTIES
 --------------------------------------

@@ -406,8 +406,10 @@ public class Hero extends Sprite {
     }
 
     public void draw(SpriteBatch batch) {
-        // Clockwise - If true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
-        // Thus, by default (no velocity our Sprite will be drawn rotated 90 degrees counter clockwise.
+        // If clockwise is true, the texture coordinates are rotated 90 degrees clockwise. If false, they are rotated 90 degrees counter clockwise.
+        // Thus, by default our Sprite will be drawn rotated 90 degrees counter clockwise.
+        // Batch.draw(...) draws a rectangle with the texture coordinates rotated 90 degrees.
+
         boolean clockwise = true;
         float angle = 90.0f;
 
@@ -435,10 +437,6 @@ public class Hero extends Sprite {
             }
         }
 
-        // Draws a rectangle with the texture coordinates rotated 90 degrees.
-        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
-                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
-
         if (currentPowerState != PowerState.NORMAL) {
             if (powerFXSprite != null) {
                 // We do the same with powerFXSprite
@@ -452,11 +450,16 @@ public class Hero extends Sprite {
                     ang = angle;
                 }
 
-                powerFXSprite.setPosition(this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2);
+                // First we draw his power, then we draw our Hero
                 batch.draw(powerFXSprite, this.b2body.getPosition().x - w / 2, this.b2body.getPosition().y - h / 2,
                         w / 2, h / 2, powerFXSprite.getHeight(), powerFXSprite.getWidth(), 1.0f, 1.0f, ang, clwise);
             }
         }
+
+        // At the end, we draw our Hero
+        batch.draw(this, this.b2body.getPosition().x - newWidth / 2, this.b2body.getPosition().y - newHeight / 2,
+                newWidth / 2, newHeight / 2, newWidth, newHeight, 1.0f, 1.0f, angle, clockwise);
+
     }
 
     public void openFire() {
