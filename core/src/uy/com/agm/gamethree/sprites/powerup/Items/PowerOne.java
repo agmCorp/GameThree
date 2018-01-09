@@ -14,11 +14,11 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -67,6 +67,7 @@ public class PowerOne extends Item {
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
+                Constants.HERO_TOUGH_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

@@ -280,8 +280,8 @@ public class Hero extends Sprite {
 
         // We reach the center of the screen
         if (b2body.getPosition().y >= screen.gameCam.position.y) {
-            // Stop
-            b2body.setLinearVelocity(0, 0);
+            // Stop motion
+            stop();
 
             // Start dying down
             heroStateTimer = 0;
@@ -339,8 +339,8 @@ public class Hero extends Sprite {
             fixture.setFilterData(filter);
         }
 
-        // Stop
-        b2body.setLinearVelocity(0, 0);
+        // Stop motion
+        stop();
 
         // We take away his powers
         currentPowerState = PowerState.NORMAL;
@@ -543,5 +543,9 @@ public class Hero extends Sprite {
         fireDelay = delay;
         fireBullets = bullets;
         fireAnimation = animation;
+    }
+
+    public void stop() {
+        b2body.setLinearVelocity(0.0f, 0.0f);
     }
 }

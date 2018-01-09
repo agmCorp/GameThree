@@ -54,7 +54,7 @@ public abstract class InteractiveTileObject {
         fixture = b2body.createFixture(fdef);
     }
 
-    public abstract void onHit();
+    public abstract void onBump();
 
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();

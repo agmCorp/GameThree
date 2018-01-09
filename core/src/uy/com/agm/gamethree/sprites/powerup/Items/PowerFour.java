@@ -9,45 +9,46 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/14/2017.
  */
 
-public class PowerTwo extends Item {
-    private static final String TAG = PowerTwo.class.getName();
+public class PowerFour extends Item {
+    private static final String TAG = PowerFour.class.getName();
 
     private float stateTimer;
     private float stateWaitingTimer;
     private float stateFadingTimer;
-    private Animation powerTwoAnimation;
+    private Animation powerFourAnimation;
 
-    // Shield
-    public PowerTwo(PlayScreen screen, float x, float y) {
+    // Tough mode
+    public PowerFour(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerTwoAnimation = Assets.instance.powerTwo.powerTwoAnimation;
+        powerFourAnimation = Assets.instance.powerTwo.powerTwoAnimation; // todo
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.POWERTWO_WIDTH_METERS, Constants.POWERTWO_HEIGHT_METERS);
+        setBounds(getX(), getY(), Constants.POWERFOUR_WIDTH_METERS, Constants.POWERFOUR_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
+        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_X, MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.showUpPowerTwo, 1);
+        AudioManager.instance.play(Assets.instance.sounds.showUpPowerTwo, 1); // TODO
     }
 
     @Override
@@ -59,7 +60,7 @@ public class PowerTwo extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERTWO_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(Constants.POWERFOUR_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -96,17 +97,17 @@ public class PowerTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerFour may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) powerFourAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateWaitingTimer += dt;
-        if (stateWaitingTimer > Constants.POWERTWO_WAITING_SECONDS) {
+        if (stateWaitingTimer > Constants.POWERFOUR_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -115,23 +116,23 @@ public class PowerTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerFour may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerTwoAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) powerFourAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateFadingTimer += dt;
-        float alpha = 1 - stateFadingTimer / Constants.POWERTWO_FADING_SECONDS;
+        float alpha = 1 - stateFadingTimer / Constants.POWERFOUR_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTimer > Constants.POWERTWO_FADING_SECONDS) {
+        if (stateFadingTimer > Constants.POWERFOUR_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -142,45 +143,42 @@ public class PowerTwo extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerTwo, 1);
+        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerTwo, 1); // TODO
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
-        hud.setPowerLabel("SHIELD", Constants.TIMER_POWERTWO);
+        hud.setPowerLabel("TOUGH MODE", Constants.TIMER_POWERFOUR);
 
         // Set score
-        hud.addScore(Constants.POWERTWO_SCORE);
+        hud.addScore(Constants.POWERFOUR_SCORE);
 
         // Disable previous power (if any)
         Hero hero = screen.getPlayer();
         hero.powerDown();
 
-        // Create the Shield
-        PolygonShape shield = new PolygonShape();
-        Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-        vertices[1] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-        vertices[2] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
-        vertices[3] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
-        shield.set(vertices);
-
-        // Shield only collide with enemies' bullets
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = shield;
-        fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.ENEMY_BIT |
+        // Create a new Filter
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.HERO_TOUGH_BIT; // Depicts what this fixture is
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.EDGES_BIT |
+                Constants.OBSTACLE_BIT |
+                Constants.POWERBOX_BIT |
+                Constants.ITEM_BIT |
+                Constants.ENEMY_BIT |
                 Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        hero.getB2body().createFixture(fdef).setUserData(hero);
+        for (Fixture fixture : hero.getB2body().getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);
+        Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand); // TODO
 
         // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
+        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.shield.shieldAnimation, spritePower, false);
+        hero.applyPowerFX(Assets.instance.shield.shieldAnimation, spritePower, false); // TODO
 
         currentState = State.FINISHED;
     }

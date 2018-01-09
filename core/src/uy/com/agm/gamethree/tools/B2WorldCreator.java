@@ -12,6 +12,7 @@ import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerFour;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerThree;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerTwo;
@@ -128,6 +129,9 @@ public class B2WorldCreator {
             }
             if (gameThreeActorDef.getType() == PowerThree.class) {
                 items.add(new PowerThree(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
+            }
+            if (gameThreeActorDef.getType() == PowerFour.class) {
+                items.add(new PowerFour(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
             }
             if (gameThreeActorDef.getType() == HeroBullet.class) {
                 weapons.add(new HeroBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY(),

@@ -59,6 +59,7 @@ public class EnemyTwo extends Enemy {
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.HERO_WEAPON_BIT |
                 Constants.SHIELD_BIT |
+                Constants.HERO_TOUGH_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.sprites.powerup;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 
+import uy.com.agm.gamethree.sprites.powerup.Items.PowerFour;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerOne;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerThree;
 import uy.com.agm.gamethree.sprites.powerup.Items.PowerTwo;
@@ -24,6 +25,9 @@ public class PowerUpCreator {
         }
         if (mp.containsKey("powerThree")) {
             creator.createGameThreeActor(new GameThreeActorDef(x, y, PowerThree.class));
+        }
+        if (mp.containsKey("powerFour")) {
+            creator.createGameThreeActor(new GameThreeActorDef(x, y, PowerFour.class));
         }
     }
 }

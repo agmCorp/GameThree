@@ -98,6 +98,7 @@ public class PowerBox extends Sprite {
         fdef.filter.maskBits = Constants.ENEMY_BIT |
                 Constants.ITEM_BIT |
                 Constants.HERO_WEAPON_BIT |
+                Constants.HERO_TOUGH_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;

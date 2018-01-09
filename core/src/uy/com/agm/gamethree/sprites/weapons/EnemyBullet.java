@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,9 +11,9 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
@@ -60,6 +59,7 @@ public class EnemyBullet extends Weapon {
         fdef.filter.categoryBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.SHIELD_BIT |
+                Constants.HERO_TOUGH_BIT |
                 Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;

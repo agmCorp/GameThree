@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.sprites.player.Hero;
@@ -29,28 +30,26 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // Hero - InteractiveTileObjects
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.OBSTACLE_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_BIT) {
-                    ((InteractiveTileObject) fixB.getUserData()).onHit();
-                } else {
-                    ((InteractiveTileObject) fixA.getUserData()).onHit();
-                }
+            // Hero/HeroTough - InteractiveTileObjects
+            case Constants.HERO_BIT | Constants.BORDERS_BIT:
+            case Constants.HERO_BIT | Constants.OBSTACLE_BIT:
+            case Constants.HERO_TOUGH_BIT | Constants.BORDERS_BIT:
+            case Constants.HERO_TOUGH_BIT | Constants.OBSTACLE_BIT:
+                fixC = (fixA.getFilterData().categoryBits == Constants.BORDERS_BIT || fixA.getFilterData().categoryBits == Constants.OBSTACLE_BIT) ? fixA : fixB;
+                ((InteractiveTileObject) fixC.getUserData()).onBump();
                 break;
 
-            // Hero - PowerBox
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.POWERBOX_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_BIT) {
-                    ((PowerBox) fixB.getUserData()).onBump();
-                } else {
-                    ((PowerBox) fixA.getUserData()).onBump();
-                }
+            // Hero/HeroTough - PowerBox
+            case Constants.HERO_BIT | Constants.POWERBOX_BIT:
+            case Constants.HERO_TOUGH_BIT | Constants.POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.POWERBOX_BIT ? fixA : fixB;
+                ((PowerBox) fixC.getUserData()).onBump();
                 break;
 
-            // Hero - Item
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.ITEM_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ITEM_BIT) {
+            // Hero/HeroTough - Item
+            case Constants.HERO_BIT | Constants.ITEM_BIT:
+            case Constants.HERO_TOUGH_BIT | Constants.ITEM_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT) {
                     ((Item) fixA.getUserData()).use((Hero) fixB.getUserData());
                 } else {
                     ((Item) fixB.getUserData()).use((Hero) fixA.getUserData());
@@ -58,72 +57,84 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero - Enemies
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_BIT ? fixA : fixB;
+            case Constants.HERO_BIT | Constants.ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
+                break;
+
+            // HeroTough - Enemies
+            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+                ((Enemy) fixC.getUserData()).onHit();
                 break;
 
             // Hero - Enemy's weapon
-            case uy.com.agm.gamethree.game.Constants.HERO_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_BIT ? fixA : fixB;
+            case Constants.HERO_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
+            // HeroTough - Enemy's weapon
+            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
+                ((Weapon) fixC.getUserData()).onBounce();
+                break;
+
             // Enemy - InteractiveTileObjects
-            case uy.com.agm.gamethree.game.Constants.ENEMY_BIT | uy.com.agm.gamethree.game.Constants.OBSTACLE_BIT:
-            case uy.com.agm.gamethree.game.Constants.ENEMY_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ENEMY_BIT ? fixA : fixB;
+            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
+            case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Enemy - PowerBox
-            case uy.com.agm.gamethree.game.Constants.ENEMY_BIT | uy.com.agm.gamethree.game.Constants.POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ENEMY_BIT ? fixA : fixB;
+            case Constants.ENEMY_BIT | Constants.POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Enemy - Enemy
-            case uy.com.agm.gamethree.game.Constants.ENEMY_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_BIT:
+            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Item - InteractiveTileObjects
-            case uy.com.agm.gamethree.game.Constants.ITEM_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-            case uy.com.agm.gamethree.game.Constants.ITEM_BIT | uy.com.agm.gamethree.game.Constants.OBSTACLE_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ITEM_BIT ? fixA : fixB;
+            case Constants.ITEM_BIT | Constants.BORDERS_BIT:
+            case Constants.ITEM_BIT | Constants.OBSTACLE_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Item - Enemy
-            case uy.com.agm.gamethree.game.Constants.ITEM_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ITEM_BIT ? fixA : fixB;
+            case Constants.ITEM_BIT | Constants.ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Item - PowerBox
-            case uy.com.agm.gamethree.game.Constants.ITEM_BIT | uy.com.agm.gamethree.game.Constants.POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ITEM_BIT ? fixA : fixB;
+            case Constants.ITEM_BIT | Constants.POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Item - Item
-            case uy.com.agm.gamethree.game.Constants.ITEM_BIT | uy.com.agm.gamethree.game.Constants.ITEM_BIT:
+            case Constants.ITEM_BIT | Constants.ITEM_BIT:
                 ((Item) fixA.getUserData()).reverseVelocity(true, false);
                 ((Item) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
             // Hero's weapon - InteractiveTileObjects & Items
-            case uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-            case uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.OBSTACLE_BIT:
-            case uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.ITEM_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT ? fixA : fixB;
+            case Constants.HERO_WEAPON_BIT | Constants.BORDERS_BIT:
+            case Constants.HERO_WEAPON_BIT | Constants.OBSTACLE_BIT:
+            case Constants.HERO_WEAPON_BIT | Constants.ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
             // Hero's weapon - PowerBox
-            case uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.POWERBOX_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT) {
+            case Constants.HERO_WEAPON_BIT | Constants.POWERBOX_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
                     ((PowerBox) fixB.getUserData()).onHit();
                 } else {
@@ -133,8 +144,8 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero's weapon - Enemy
-            case uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT) {
+            case Constants.HERO_WEAPON_BIT | Constants.ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
                     ((Enemy) fixB.getUserData()).onHit();
                 } else {
@@ -144,26 +155,26 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Enemy's weapon - Borders
-            case uy.com.agm.gamethree.game.Constants.ENEMY_WEAPON_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
+            case Constants.ENEMY_WEAPON_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
             // Final enemy - Borders
-            case uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT | uy.com.agm.gamethree.game.Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
                 ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Edges
-            case uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT | uy.com.agm.gamethree.game.Constants.EDGES_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.EDGES_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
                 ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Hero's weapon
-            case uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT | uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT:
-                if (fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_WEAPON_BIT) {
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_WEAPON_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
                     ((FinalEnemyLevelOne) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
                 } else {
                     ((FinalEnemyLevelOne) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
@@ -171,14 +182,14 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Hero
-            case uy.com.agm.gamethree.game.Constants.FINAL_ENEMY_LEVEL_ONE_BIT | uy.com.agm.gamethree.game.Constants.HERO_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.HERO_BIT ? fixA : fixB;
+            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
             // Shield - Enemy's weapon
-            case uy.com.agm.gamethree.game.Constants.SHIELD_BIT | uy.com.agm.gamethree.game.Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == uy.com.agm.gamethree.game.Constants.ENEMY_BIT ? fixA : fixB;
+            case Constants.SHIELD_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
         }
@@ -186,7 +197,27 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+        Fixture fixA = contact.getFixtureA();
+        Fixture fixB = contact.getFixtureB();
+        Fixture fixC;
 
+        int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+        switch (collisionDef) {
+            // HeroTough - Enemy's weapon
+            // Avoid bouncing
+            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.HERO_TOUGH_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).stop();
+                break;
+
+            // Shield - Enemy/Enemy's weapon
+            // Avoid bouncing
+            case Constants.SHIELD_BIT | Constants.ENEMY_BIT:
+            case Constants.SHIELD_BIT | Constants.ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.SHIELD_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).stop();
+                break;
+        }
     }
 
     @Override

@@ -80,13 +80,14 @@ public class Constants {
     public static final short EDGES_BIT = 2;
     public static final short OBSTACLE_BIT = 4;
     public static final short HERO_BIT = 8;
-    public static final short POWERBOX_BIT = 16;
-    public static final short ENEMY_BIT = 32;
-    public static final short ITEM_BIT = 64;
-    public static final short HERO_WEAPON_BIT = 128;
-    public static final short ENEMY_WEAPON_BIT = 256;
-    public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 512;
-    public static final short SHIELD_BIT = 1024;
+    public static final short HERO_TOUGH_BIT = 16;
+    public static final short POWERBOX_BIT = 32;
+    public static final short ENEMY_BIT = 64;
+    public static final short ITEM_BIT = 128;
+    public static final short HERO_WEAPON_BIT = 256;
+    public static final short ENEMY_WEAPON_BIT = 512;
+    public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 1024;
+    public static final short SHIELD_BIT = 2048;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.2f;
@@ -154,6 +155,20 @@ public class Constants {
     public static final float POWERTHREE_FIRE_WIDTH_METERS = 90.0f * 0.7f / PPM;
     public static final float POWERTHREE_FIRE_HEIGHT_METERS = 120.0f * 0.7f / PPM;
     public static final float POWERTHREE_FIRE_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
+
+    // PowerFour (meters = pixels * resizeFactor / PPM)
+    public static final float POWERFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float POWERFOUR_VELOCITY_X = 0.0f;
+    public static final float POWERFOUR_VELOCITY_Y = 0.7f;
+    public static final float POWERFOUR_WAITING_SECONDS = 5.0f;
+    public static final float POWERFOUR_FADING_SECONDS = 5.0f;
+    public static final float POWERFOUR_WIDTH_METERS = 150.0f * 0.5f / PPM;
+    public static final float POWERFOUR_HEIGHT_METERS = 158.0f * 0.5f / PPM;
+    public static final int TIMER_POWERFOUR = 40;
+    public static final int POWERFOUR_SCORE = 30;
+    public static final float POWERFOUR_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
+    public static final float POWERFOUR_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
+
 
     // Shield (meters = pixels * resizeFactor / PPM)
     public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
