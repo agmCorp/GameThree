@@ -162,13 +162,22 @@ public class Hero extends Sprite {
         openFiretimer += dt;
     }
 
+    private boolean visualPowerFX() {
+        return powerFXSprite != null;
+    }
+
     private void powerStatePowerful(float dt) {
-        if (powerFXSprite != null) { // if powerFXSprite is null (for instance, Hero has a fire power) we don't need to set any TextureRegion
+        if (visualPowerFX()) { // if powerFXSprite is null (for instance, Hero has a fire power) we don't need to set any TextureRegion
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
             powerFXStateTimer += dt;
 
             // Update our Sprite to correspond with the position of our Hero's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
+
+            // Apply rotation of the main character
+            if (powerFXAllowRotation) {
+                powerFXSprite.setRotation(getRotation());
+            }
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
@@ -360,6 +369,9 @@ public class Hero extends Sprite {
         // Stop motion
         stop();
 
+        // Reset rotation
+        setRotation(0.0f);
+
         // We take away his powers
         currentPowerState = PowerState.NORMAL;
 
@@ -436,10 +448,7 @@ public class Hero extends Sprite {
 
     public void draw(SpriteBatch batch) {
         if (currentPowerState != PowerState.NORMAL) {
-            if (powerFXSprite != null) {
-                if (powerFXAllowRotation) {
-                    powerFXSprite.setRotation(getRotation());
-                }
+            if (visualPowerFX()) {
                 // Power FX
                 powerFXSprite.draw(batch);
             }
