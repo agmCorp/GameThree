@@ -32,6 +32,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerFour;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
@@ -59,6 +60,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetPowerOne powerOne;
     public AssetPowerTwo powerTwo;
     public AssetPowerThree powerThree;
+    public AssetPowerFour powerFour;
     public AssetExplosionA explosionA;
     public AssetExplosionB explosionB;
     public AssetExplosionC explosionC;
@@ -144,6 +146,7 @@ public class Assets implements Disposable, AssetErrorListener {
         powerOne = new AssetPowerOne(atlas);
         powerTwo = new AssetPowerTwo(atlas);
         powerThree = new AssetPowerThree(atlas);
+        powerFour = new AssetPowerFour(atlas);
         explosionA = new AssetExplosionA(atlas);
         explosionB = new AssetExplosionB(atlas);
         explosionC = new AssetExplosionC(atlas);

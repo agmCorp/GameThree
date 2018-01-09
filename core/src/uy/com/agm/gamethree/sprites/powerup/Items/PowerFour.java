@@ -36,7 +36,7 @@ public class PowerFour extends Item {
     public PowerFour(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerFourAnimation = Assets.instance.powerTwo.powerTwoAnimation; // todo
+        powerFourAnimation = Assets.instance.powerFour.powerFourAnimation;
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
