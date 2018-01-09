@@ -282,6 +282,17 @@ METODOLOGIA
     del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite). Esto lo hice así
     porque es imposible deducir el ancho y altura del sprite FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
 
+12)
+   There are also the following methods that alter the bounding rectangle of a sprite (modifies the sprite's vertices):
+   getBoundingRectangle(): recalculate vertices (see source code)
+   setX(x)
+   setY(y)
+   setBounds(x,y,width,height)
+   setSize(width,height)
+   translate(diffX,diffY)
+   translateX(diffX)
+   translateY(diffY)
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
