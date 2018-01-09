@@ -825,14 +825,14 @@ explosionD
   orig: 205, 178
   offset: 0, 0
   index: 13
-powerThreeFire
+fireA
   rotate: false
   xy: 195, 3
   size: 90, 120
   orig: 90, 120
   offset: 0, 0
   index: 1
-powerThreeFire
+fireA
   rotate: false
   xy: 287, 3
   size: 90, 120
@@ -867,7 +867,7 @@ heroBullet
   orig: 108, 112
   offset: 0, 0
   index: 5
-powerThreeFire
+fireA
   rotate: false
   xy: 932, 529
   size: 90, 120
@@ -1402,7 +1402,7 @@ enemyTwo
   orig: 100, 100
   offset: 0, 0
   index: 5
-powerThreeFire
+fireA
   rotate: false
   xy: 735, 180
   size: 90, 120

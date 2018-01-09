@@ -52,6 +52,9 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
+- seguir con el powerfour, probar contra el enemigo final
+- reversevelocity de los items y de los enemies esta mal conceptuado, porque los items se mueven en cualquier direccion
+y tambien los enemigos. Hacer algo mas inteligente.
 - ponerle sonido y assets bien
 - ver el ninja y suriken
 - hacer refactoring de constantes

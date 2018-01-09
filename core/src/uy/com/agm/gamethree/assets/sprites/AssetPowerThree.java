@@ -14,24 +14,15 @@ public class AssetPowerThree {
 
     public final TextureRegion powerThreeStand;
     public final Animation powerThreeAnimation;
-    public final TextureRegion powerThreeFireStand;
-    public final Animation powerThreeFireAnimation;
 
     public AssetPowerThree(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        powerThreeStand = atlas.findRegion("powerThreeFire", 1);
+        powerThreeStand = atlas.findRegion("fireA", 1);
 
         // Animation
-        regions = atlas.findRegions("powerThreeFire");
+        regions = atlas.findRegions("fireA");
         powerThreeAnimation = new Animation(0.5f / 4.0f, regions);
-        regions.clear();
-
-        powerThreeFireStand = atlas.findRegion("powerThreeFire", 1);
-
-        // Animation
-        regions = atlas.findRegions("powerThreeFire");
-        powerThreeFireAnimation = new Animation(0.5f / 4.0f, regions);
         regions.clear();
     }
 }
