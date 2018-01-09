@@ -52,7 +52,7 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PENDIENTES
 --------------
-- ver si hero funciona bien con teclas, movingleftrigth no se que onda. dyingup y down sin rotacion.
+- ver si hero funciona bien con teclas, movingleftrigth no se que onda creo sirve para keyboard
 - reversevelocity de los items y de los enemies esta mal conceptuado, porque los items se mueven en cualquier direccion
 y tambien los enemigos. Hacer algo mas inteligente.
 
