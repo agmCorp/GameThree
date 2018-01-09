@@ -53,6 +53,7 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 PENDIENTES
 --------------
 - ver si hero funciona bien con teclas, movingleftrigth no se que onda creo sirve para keyboard
+- de alguna manera logre tener tough a la vez que me mataron. Y quedo el fantasmita con tough detenido por el borde de la pantalla inferior. El juego sigue, no tengo touch, la camara esta quieta
 - reversevelocity de los items y de los enemies esta mal conceptuado, porque los items se mueven en cualquier direccion
 y tambien los enemigos. Hacer algo mas inteligente.
 
