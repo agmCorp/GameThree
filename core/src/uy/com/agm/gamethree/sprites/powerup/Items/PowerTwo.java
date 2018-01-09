@@ -176,7 +176,7 @@ public class PowerTwo extends Item {
         // Set the power's texture
         Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);
 
-        // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
+        // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
         // Apply effect

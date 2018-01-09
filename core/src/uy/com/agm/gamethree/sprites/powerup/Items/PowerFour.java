@@ -48,7 +48,7 @@ public class PowerFour extends Item {
         velocity = new Vector2(MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_X, MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.showUpPowerTwo, 1); // TODO
+        AudioManager.instance.play(Assets.instance.sounds.showUpPowerFour, 1);
     }
 
     @Override
@@ -174,7 +174,7 @@ public class PowerFour extends Item {
         // Set the power's texture
         Sprite spritePower = new Sprite(Assets.instance.toughMode.toughModeStand);
 
-        // Only to set width and height of our spritePower (in hero.draw(...) we set its position)
+        // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
 
         // Apply effect

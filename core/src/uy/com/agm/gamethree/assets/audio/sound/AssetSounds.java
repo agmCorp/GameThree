@@ -27,6 +27,7 @@ public class AssetSounds {
     public final Sound showUpPowerOne;
     public final Sound showUpPowerTwo;
     public final Sound showUpPowerThree;
+    public final Sound showUpPowerFour;
     public final Sound finalLevelOnePowerUp;
     public final Sound finalLevelOnePowerDown;
 
@@ -46,6 +47,7 @@ public class AssetSounds {
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
+        showUpPowerFour = am.get(Constants.FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
         finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
     }

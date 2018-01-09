@@ -61,6 +61,7 @@ public class Constants {
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
+    public static final String FX_FILE_SHOW_UP_POWERFOUR = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
 
@@ -162,8 +163,8 @@ public class Constants {
     public static final float POWERFOUR_VELOCITY_Y = 0.7f;
     public static final float POWERFOUR_WAITING_SECONDS = 5.0f;
     public static final float POWERFOUR_FADING_SECONDS = 5.0f;
-    public static final float POWERFOUR_WIDTH_METERS = 150.0f * 0.5f / PPM;
-    public static final float POWERFOUR_HEIGHT_METERS = 158.0f * 0.5f / PPM;
+    public static final float POWERFOUR_WIDTH_METERS = 192.0f * 0.5f / PPM;
+    public static final float POWERFOUR_HEIGHT_METERS = 192.0f * 0.5f / PPM;
     public static final int TIMER_POWERFOUR = 400;
     public static final int POWERFOUR_SCORE = 30;
     public static final float POWERFOUR_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;

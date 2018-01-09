@@ -52,20 +52,13 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PENDIENTES
 --------------
-- seguir con el powerfour
+- ver si hero funciona bien con teclas
 - reversevelocity de los items y de los enemies esta mal conceptuado, porque los items se mueven en cualquier direccion
 y tambien los enemigos. Hacer algo mas inteligente.
+
 - ponerle sonido y assets bien
 - ver el ninja y suriken
 - hacer refactoring de constantes
-- un poder de disparo puede variar:
-    tamano de la bala* (sprite y b2body)
-    cantidad*,
-    delay*,
-    animacion*,
-    tipo de movimiento (boomerang)
-    velocidad
-    sonido
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 
@@ -85,13 +78,14 @@ que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna 
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
 Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
-
-TENGO LAS SIGUIENTES CUSTOM PROPERTIES
---------------------------------------
-powerOne
-enemyBullet
-strength 3
-
+Un poder de disparo puede variar:
+    tamano de la bala* (sprite y b2body)
+    cantidad*,
+    delay*,
+    animacion*,
+    tipo de movimiento (boomerang)
+    velocidad
+    sonido
 
 DUDAS
 -----
