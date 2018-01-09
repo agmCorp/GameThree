@@ -68,13 +68,6 @@ y tambien los enemigos. Hacer algo mas inteligente.
     sonido
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- optimizar el movimiento de hero usando setRotation, setOriginCenter y setFlip. No puedo, todos mis intentos quedan peor. Con translate podría, ver heroBullet.
-ADEMAS EL DRAW NO DEBE HACER CALCULOS..EL DRAW SOLO DIBUJA. HACER CALCULOS EN CADA ESTADO.
-Capaz estoy confundido, pero en Hero, yo en los eventos de update debo setear su velocidad y todo lo que quiera y calcular
-su angulo de giro alli mismo. El draw solo debe dibujar, no hacer calculos de angulos y posciones. Para eso esta el update.
-Me queda el problema de que cuando dejas el dedo apoyado hero se enloquece.
-
-
 
 PENDIENTES A FUTURO
 -------------------
