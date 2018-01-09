@@ -62,12 +62,12 @@ public class Hero extends Sprite {
 
     // Fire power
     private boolean fireEnhancement;
-    private float fireWidth;
-    private float fireHeight;
-    private float fireCircleShapeRadius;
+    private float bulletWidth;
+    private float bulletHeight;
+    private float bulletCircleShapeRadius;
     private float fireDelay;
-    private int fireBullets;
-    private Animation fireAnimation;
+    private int numberBullets;
+    private Animation bulletAnimation;
 
     // Temp GC friendly vector
     private Vector2 tmp;
@@ -104,11 +104,11 @@ public class Hero extends Sprite {
 
         // Fire power variables initialization (we don't know yet which fire power will be)
         fireEnhancement = false;
-        fireWidth = 0;
-        fireHeight = 0;
+        bulletWidth = 0;
+        bulletHeight = 0;
         fireDelay = 0;
-        fireBullets = 0;
-        fireAnimation = null;
+        numberBullets = 0;
+        bulletAnimation = null;
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -465,18 +465,18 @@ public class Hero extends Sprite {
     public void openFire() {
         if (fireEnhancement) {
             if (openFiretimer > fireDelay) {
-                float directionDegrees = 180.0f / (fireBullets + 1);
+                float directionDegrees = 180.0f / (numberBullets + 1);
                 float angle = 0;
-                for(int i = 1; i <= fireBullets; i++) {
+                for(int i = 1; i <= numberBullets; i++) {
                     angle = directionDegrees * i;
                     angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                                                                     b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
-                                                                    fireWidth,
-                                                                    fireHeight,
-                                                                    fireCircleShapeRadius,
+                            bulletWidth,
+                            bulletHeight,
+                            bulletCircleShapeRadius,
                                                                     angle,
-                                                                    fireAnimation,
+                            bulletAnimation,
                                                                     HeroBullet.class));
                 }
                 openFiretimer = 0;
@@ -540,12 +540,12 @@ public class Hero extends Sprite {
         currentPowerState = PowerState.POWERFUL;
 
         fireEnhancement = true;
-        fireWidth = width;
-        fireHeight = height;
-        fireCircleShapeRadius = circleShapeRadius;
+        bulletWidth = width;
+        bulletHeight = height;
+        bulletCircleShapeRadius = circleShapeRadius;
         fireDelay = delay;
-        fireBullets = bullets;
-        fireAnimation = animation;
+        numberBullets = bullets;
+        bulletAnimation = animation;
     }
 
     public void stop() {

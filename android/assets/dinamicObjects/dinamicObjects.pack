@@ -825,14 +825,14 @@ explosionD
   orig: 205, 178
   offset: 0, 0
   index: 13
-fireA
+bulletA
   rotate: false
   xy: 195, 3
   size: 90, 120
   orig: 90, 120
   offset: 0, 0
   index: 1
-fireA
+bulletA
   rotate: false
   xy: 287, 3
   size: 90, 120
@@ -867,7 +867,7 @@ heroBullet
   orig: 108, 112
   offset: 0, 0
   index: 5
-fireA
+bulletA
   rotate: false
   xy: 932, 529
   size: 90, 120
@@ -1395,6 +1395,13 @@ ghostMode
   orig: 139, 135
   offset: 0, 0
   index: 10
+bulletA
+  rotate: false
+  xy: 735, 180
+  size: 90, 120
+  orig: 90, 120
+  offset: 0, 0
+  index: 4
 enemyTwo
   rotate: false
   xy: 917, 38
@@ -1402,13 +1409,6 @@ enemyTwo
   orig: 100, 100
   offset: 0, 0
   index: 5
-fireA
-  rotate: false
-  xy: 735, 180
-  size: 90, 120
-  orig: 90, 120
-  offset: 0, 0
-  index: 4
 
 dinamicObjects6.png
 format: RGBA8888

@@ -151,10 +151,10 @@ public class Constants {
     public static final int TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
     public static final float POWERTHREE_FIRE_DELAY = 0.3f;
-    public static final int POWERTHREE_MAX_FIRE_BULLETS = 6;
-    public static final float POWERTHREE_FIRE_WIDTH_METERS = 90.0f * 0.7f / PPM;
-    public static final float POWERTHREE_FIRE_HEIGHT_METERS = 120.0f * 0.7f / PPM;
-    public static final float POWERTHREE_FIRE_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
+    public static final int POWERTHREE_MAX_BULLETS = 6;
+    public static final float POWERTHREE_BULLET_WIDTH_METERS = 90.0f * 0.7f / PPM;
+    public static final float POWERTHREE_BULLET_HEIGHT_METERS = 120.0f * 0.7f / PPM;
+    public static final float POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
 
     // PowerFour (meters = pixels * resizeFactor / PPM)
     public static final float POWERFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

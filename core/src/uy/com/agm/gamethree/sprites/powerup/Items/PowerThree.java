@@ -28,19 +28,19 @@ public class PowerThree extends Item {
     private float stateWaitingTimer;
     private float stateFadingTimer;
     private Animation powerThreeAnimation;
-    private Animation fireAnimation;
+    private Animation bulletAnimation;
 
     private float fireDelay;
-    private int fireBullets;
+    private int numberBullets;
 
     // Triple mode (fire power)
     public PowerThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         powerThreeAnimation = Assets.instance.powerThree.powerThreeAnimation;
-        fireAnimation = Assets.instance.fireA.fireAAnimation;
+        bulletAnimation = Assets.instance.bulletA.bulletAAnimation;
         fireDelay = Constants.POWERTHREE_FIRE_DELAY;
-        fireBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_FIRE_BULLETS);
+        numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -161,8 +161,8 @@ public class PowerThree extends Item {
         hero.powerDown();
 
         // Apply fire power
-        screen.getPlayer().applyFirePower(Constants.POWERTHREE_FIRE_WIDTH_METERS, Constants.POWERTHREE_FIRE_HEIGHT_METERS,
-                                Constants.POWERTHREE_FIRE_CIRCLESHAPERADIUS_METERS, fireDelay, fireBullets, fireAnimation);
+        screen.getPlayer().applyFirePower(Constants.POWERTHREE_BULLET_WIDTH_METERS, Constants.POWERTHREE_BULLET_HEIGHT_METERS,
+                                Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, fireDelay, numberBullets, bulletAnimation);
         currentState = State.FINISHED;
     }
 
