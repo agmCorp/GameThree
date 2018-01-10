@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="659">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="660">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer name="graphics" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2NsNgkAUhGHoQLQRoRKhErASwEYAG/HSiJcGHBKeyCa7WXyQ9f+SeXCTSZAQcjhRBJPLgu7ja1cBAAAArF+tNEqrnKazjZIoW0u3U3plUM7T2V5JlczSHWf6q3JT7tPZQcmVwtIdZ/qn8lLe0+9SqZSjpQsAAP6D6zxj4jrPmLjOMybMM+FJYj2DsV83VS/z7ObqFZ7dSr2jZ7dRr/Xs9uoNnl0AmDPtOlyZdh2uTLsOV/NdBwAAwIj9BkLDrsQduxLAju//38S73l1o7/rdSv5LueA66wXdbiX3BwAAhOUD9vs/vg==
+   eJzt2G0KgkAUhWHbgdVG0pWUK1FXorURq430sZE+NtAR/FMMzGUMUnsfOD8aODBJyO1GEVxOPbq3r90CAAAAGL9KqZWtsuvOYmWuLDzdRtkrB+XYna2UREk93XamPysX5dqdrZWNknm67Ux/Vx7Ks/ucK4VSeroAAOA/WOcZF+s842KdZ1yYZ6ZnPtNvcBbWTdRLA7sb9bLAbqFeGdit1dsGdvfqHQK7APDJteuwcu06rFy7DqvPXQcAAECL/Qamhl2JHbsSwI///8PEu95uau/65Ui+S97jnlWPbjOS5wMAeBf/+gIB8l9fAIPyAgpZQD4=
   </data>
  </layer>
  <objectgroup name="borders">
@@ -184,11 +184,7 @@
  </objectgroup>
  <objectgroup name="enemyOne">
   <object id="376" x="96" y="7040" width="32" height="32"/>
-  <object id="377" x="352" y="7040" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
+  <object id="377" x="352" y="7040" width="32" height="32"/>
   <object id="380" x="160" y="6624" width="32" height="32"/>
   <object id="381" x="384" y="6624" width="32" height="32"/>
   <object id="383" x="96" y="6304" width="32" height="32"/>
@@ -215,12 +211,12 @@
   <object id="440" x="384" y="352" width="32" height="32"/>
   <object id="621" x="93" y="6762" width="32" height="32"/>
   <object id="622" x="369" y="6343" width="32" height="32"/>
-  <object id="624" x="226" y="5330" width="32" height="32">
+  <object id="624" x="226" y="5330" width="32" height="32"/>
+  <object id="625" x="240" y="4580" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="625" x="240" y="4580" width="32" height="32"/>
   <object id="627" x="427" y="3810" width="32" height="32"/>
   <object id="628" x="248" y="3138" width="32" height="32"/>
   <object id="629" x="334" y="2852" width="32" height="32"/>
