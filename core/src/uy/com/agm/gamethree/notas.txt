@@ -61,6 +61,7 @@ El juego sigue, no tengo touch, la camara esta quieta
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 
 falta: level, vidas
+agregar un item que sea solo para puntos.
 
 PENDIENTES A FUTURO
 -------------------
