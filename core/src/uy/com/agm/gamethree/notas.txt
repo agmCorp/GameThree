@@ -19,6 +19,7 @@ IDEAS
 - programar acelerómetro?
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
+- Que las texturas de la powerbox sean random, tengo muy lindas texturas.
 
 ALCANCE
 -------
