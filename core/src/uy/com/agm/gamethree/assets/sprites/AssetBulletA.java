@@ -22,7 +22,7 @@ public class AssetBulletA {
 
         // Animation
         regions = atlas.findRegions("bulletA");
-        bulletAAnimation = new Animation(0.5f / 4.0f, regions);
+        bulletAAnimation = new Animation(0.5f / 6.0f, regions);
         regions.clear();
     }
 }
