@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="451">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="659">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -161,57 +161,40 @@
   <object id="360" x="363.5" y="268" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="6"/>
+    <property name="strength" type="int" value="2"/>
    </properties>
   </object>
   <object id="361" x="116.5" y="266" width="31" height="29">
    <properties>
     <property name="powerOne" value=""/>
-    <property name="strength" type="int" value="10"/>
    </properties>
   </object>
   <object id="362" x="283.5" y="267" width="32" height="32">
    <properties>
     <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="5"/>
+    <property name="strength" type="int" value="2"/>
    </properties>
   </object>
   <object id="363" x="198.5" y="266" width="32" height="32">
    <properties>
     <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="7"/>
+    <property name="strength" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="enemyOne">
-  <object id="376" x="96" y="7040" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
+  <object id="376" x="96" y="7040" width="32" height="32"/>
   <object id="377" x="352" y="7040" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="378" x="352" y="6464" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="379" x="64" y="6464" width="32" height="32"/>
   <object id="380" x="160" y="6624" width="32" height="32"/>
   <object id="381" x="384" y="6624" width="32" height="32"/>
-  <object id="382" x="192" y="6240" width="32" height="32"/>
   <object id="383" x="96" y="6304" width="32" height="32"/>
-  <object id="384" x="32" y="6176" width="32" height="32"/>
   <object id="385" x="352" y="5568" width="32" height="32"/>
   <object id="386" x="320" y="5696" width="32" height="32">
    <properties>
-    <property name="enemyBullet" value=""/>
     <property name="powerFour" value=""/>
    </properties>
   </object>
@@ -220,164 +203,82 @@
   <object id="389" x="64" y="5504" width="32" height="32"/>
   <object id="390" x="352" y="5056" width="32" height="32"/>
   <object id="392" x="320" y="5216" width="32" height="32"/>
-  <object id="393" x="288" y="5152" width="32" height="32"/>
   <object id="394" x="128" y="5120" width="32" height="32"/>
   <object id="395" x="96" y="4992" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="416" x="224" y="3488" width="32" height="32">
+  <object id="416" x="224" y="3488" width="32" height="32"/>
+  <object id="438" x="128" y="352" width="32" height="32"/>
+  <object id="439" x="256" y="352" width="32" height="32"/>
+  <object id="440" x="384" y="352" width="32" height="32"/>
+  <object id="621" x="93" y="6762" width="32" height="32"/>
+  <object id="622" x="369" y="6343" width="32" height="32"/>
+  <object id="624" x="226" y="5330" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="438" x="128" y="352" width="32" height="32">
+  <object id="625" x="240" y="4580" width="32" height="32"/>
+  <object id="627" x="427" y="3810" width="32" height="32"/>
+  <object id="628" x="248" y="3138" width="32" height="32"/>
+  <object id="629" x="334" y="2852" width="32" height="32"/>
+  <object id="630" x="113" y="1893" width="32" height="32"/>
+  <object id="631" x="232" y="1287" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="439" x="256" y="352" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="440" x="384" y="352" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
+  <object id="632" x="231" y="838" width="32" height="32"/>
+  <object id="633" x="45" y="488" width="32" height="32"/>
+  <object id="636" x="302" y="6094" width="32" height="32"/>
+  <object id="638" x="316" y="3905" width="32" height="32"/>
+  <object id="639" x="34" y="3959" width="32" height="32"/>
+  <object id="640" x="57" y="3842" width="32" height="32"/>
+  <object id="642" x="139" y="3594" width="32" height="32"/>
+  <object id="643" x="126" y="3429" width="32" height="32"/>
+  <object id="644" x="316" y="3402" width="32" height="32"/>
+  <object id="646" x="176" y="2785" width="32" height="32"/>
+  <object id="648" x="360" y="2471" width="32" height="32"/>
+  <object id="649" x="206" y="2576" width="32" height="32"/>
+  <object id="650" x="55" y="2514" width="32" height="32"/>
+  <object id="651" x="370" y="1804" width="32" height="32"/>
+  <object id="654" x="278" y="1106" width="32" height="32"/>
+  <object id="655" x="105" y="1056" width="32" height="32"/>
+  <object id="657" x="69" y="664" width="32" height="32"/>
+  <object id="658" x="158" y="745" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="396" x="441" y="4192" width="32" height="32"/>
   <object id="397" x="441" y="4224" width="32" height="32"/>
   <object id="398" x="441" y="4256" width="32" height="32"/>
-  <object id="399" x="441" y="4288" width="32" height="32"/>
-  <object id="400" x="441" y="4320" width="32" height="32"/>
-  <object id="401" x="441" y="4352" width="32" height="32"/>
-  <object id="402" x="441" y="4384" width="32" height="32"/>
-  <object id="403" x="441" y="4416" width="32" height="32"/>
-  <object id="404" x="441" y="4448" width="32" height="32"/>
-  <object id="405" x="441" y="4480" width="32" height="32"/>
-  <object id="406" x="8" y="3495" width="32" height="32"/>
-  <object id="407" x="8" y="3559" width="32" height="32"/>
-  <object id="408" x="8" y="3591" width="32" height="32"/>
-  <object id="409" x="8" y="3463" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="410" x="8" y="3431" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
   <object id="411" x="8" y="3335" width="32" height="32"/>
-  <object id="412" x="8" y="3399" width="32" height="32"/>
   <object id="413" x="8" y="3303" width="32" height="32"/>
   <object id="414" x="8" y="3367" width="32" height="32"/>
-  <object id="415" x="8" y="3527" width="32" height="32"/>
-  <object id="418" x="442" y="922" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="419" x="442" y="986" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="420" x="442" y="1082" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="421" x="442" y="1050" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="422" x="442" y="1178" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="423" x="442" y="1114" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="424" x="442" y="1018" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="425" x="442" y="890" width="32" height="32">
-   <properties>
-    <property name="PowerOne" value=""/>
-   </properties>
-  </object>
-  <object id="426" x="442" y="954" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="427" x="442" y="1146" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="441" x="5" y="955" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="442" x="5" y="1019" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="443" x="5" y="1115" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="444" x="5" y="891" width="32" height="32">
-   <properties>
-    <property name="PowerOne" value=""/>
-   </properties>
-  </object>
-  <object id="445" x="5" y="1083" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="446" x="5" y="1179" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="447" x="5" y="1147" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="448" x="5" y="1051" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="449" x="5" y="987" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="450" x="5" y="923" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
+  <object id="456" x="291" y="6538" width="32" height="32"/>
+  <object id="458" x="291" y="6506" width="32" height="32"/>
+  <object id="459" x="291" y="6570" width="32" height="32"/>
+  <object id="466" x="7" y="5814" width="32" height="32"/>
+  <object id="468" x="7" y="5782" width="32" height="32"/>
+  <object id="469" x="7" y="5846" width="32" height="32"/>
+  <object id="476" x="442" y="5818" width="32" height="32"/>
+  <object id="478" x="442" y="5786" width="32" height="32"/>
+  <object id="496" x="8" y="5048" width="32" height="32"/>
+  <object id="498" x="8" y="5016" width="32" height="32"/>
+  <object id="499" x="8" y="5080" width="32" height="32"/>
+  <object id="506" x="7" y="4218" width="32" height="32"/>
+  <object id="508" x="7" y="4186" width="32" height="32"/>
+  <object id="509" x="7" y="4250" width="32" height="32"/>
+  <object id="556" x="12" y="2770" width="32" height="32"/>
+  <object id="558" x="12" y="2738" width="32" height="32"/>
+  <object id="559" x="12" y="2802" width="32" height="32"/>
+  <object id="566" x="9" y="2055" width="32" height="32"/>
+  <object id="568" x="9" y="2023" width="32" height="32"/>
+  <object id="576" x="442" y="2056" width="32" height="32"/>
+  <object id="578" x="442" y="2024" width="32" height="32"/>
+  <object id="606" x="441" y="1260" width="32" height="32"/>
+  <object id="608" x="441" y="1228" width="32" height="32"/>
+  <object id="609" x="441" y="1292" width="32" height="32"/>
  </objectgroup>
 </map>
