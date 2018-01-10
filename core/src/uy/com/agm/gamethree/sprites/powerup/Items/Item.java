@@ -31,6 +31,7 @@ public abstract class Item extends Sprite {
     public Item(PlayScreen screen, float x, float y) {
         this.screen = screen;
         this.world = screen.getWorld();
+        this.velocity = new Vector2();
 
         /* Set this Sprite's position on the lower left vertex of a Rectangle.
         * At this moment we don't have Item.width and Item.height because this is an abstract class.
@@ -45,7 +46,7 @@ public abstract class Item extends Sprite {
         b2body.setActive(false);
     }
 
-    public void reverseVelocity(boolean x, boolean y) {
+    protected void reverseVelocity(boolean x, boolean y) {
         if (x)
             velocity.x = -velocity.x;
         if (y)
@@ -89,4 +90,5 @@ public abstract class Item extends Sprite {
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
     public abstract void use(Hero hero);
+    public abstract void onBump();
 }

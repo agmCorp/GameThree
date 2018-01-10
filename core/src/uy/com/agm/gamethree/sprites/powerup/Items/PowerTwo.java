@@ -44,7 +44,7 @@ public class PowerTwo extends Item {
         setBounds(getX(), getY(), Constants.POWERTWO_WIDTH_METERS, Constants.POWERTWO_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.showUpPowerTwo, 1);
@@ -195,6 +195,11 @@ public class PowerTwo extends Item {
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
+    }
+
+    @Override
+    public void onBump() {
+        reverseVelocity(true, true);
     }
 
     public void draw(Batch batch) {

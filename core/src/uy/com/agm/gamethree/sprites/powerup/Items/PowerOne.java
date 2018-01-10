@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -45,7 +44,7 @@ public class PowerOne extends Item {
         setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne, 1);
@@ -190,6 +189,11 @@ public class PowerOne extends Item {
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
+    }
+
+    @Override
+    public void onBump() {
+        reverseVelocity(true, true);
     }
 
     public void draw(Batch batch) {

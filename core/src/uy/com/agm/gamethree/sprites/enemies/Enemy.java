@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.powerup.PowerUpCreator;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 /**
@@ -24,6 +25,7 @@ public abstract class Enemy extends Sprite {
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
+    protected Vector2 velocity;
 
     protected enum State {
         ALIVE, INJURED, EXPLODING, DEAD
@@ -36,6 +38,7 @@ public abstract class Enemy extends Sprite {
         this.object = object;
         this.world = screen.getWorld();
         this.screen = screen;
+        this.velocity = new Vector2();
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -96,6 +99,15 @@ public abstract class Enemy extends Sprite {
         }
     }
 
+    protected void reverseVelocity(boolean x, boolean y) {
+        if (x) {
+            velocity.x *= -1;
+        }
+        if (y) {
+            velocity.y *= -1;
+        }
+    }
+
     // This Enemy can be removed from our game
     public boolean isDisposable() {
         return currentState == State.DEAD;
@@ -105,5 +117,5 @@ public abstract class Enemy extends Sprite {
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
     public abstract void onHit();
-    public abstract void reverseVelocity(boolean x, boolean y);
+    public abstract void onBump();
 }

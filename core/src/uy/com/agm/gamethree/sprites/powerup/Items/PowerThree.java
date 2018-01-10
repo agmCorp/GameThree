@@ -5,17 +5,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -49,7 +48,7 @@ public class PowerThree extends Item {
         setBounds(getX(), getY(), Constants.POWERTHREE_WIDTH_METERS, Constants.POWERTHREE_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_Y);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.showUpPowerThree, 1);
@@ -176,6 +175,11 @@ public class PowerThree extends Item {
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
+    }
+
+    @Override
+    public void onBump() {
+        reverseVelocity(true, true);
     }
 
     public void draw(Batch batch) {

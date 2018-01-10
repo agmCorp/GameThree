@@ -84,44 +84,44 @@ public class WorldContactListener implements ContactListener {
             case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
             case Constants.ENEMY_BIT | Constants.BORDERS_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixC.getUserData()).onBump();
                 break;
 
             // Enemy - PowerBox
             case Constants.ENEMY_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixC.getUserData()).onBump();
                 break;
 
             // Enemy - Enemy
             case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixA.getUserData()).onBump();
+                ((Enemy) fixB.getUserData()).onBump();
                 break;
 
             // Item - InteractiveTileObjects
             case Constants.ITEM_BIT | Constants.BORDERS_BIT:
             case Constants.ITEM_BIT | Constants.OBSTACLE_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
-                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - Enemy
             case Constants.ITEM_BIT | Constants.ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
-                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - PowerBox
             case Constants.ITEM_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
-                ((Item) fixC.getUserData()).reverseVelocity(true, false);
+                ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - Item
             case Constants.ITEM_BIT | Constants.ITEM_BIT:
-                ((Item) fixA.getUserData()).reverseVelocity(true, false);
-                ((Item) fixB.getUserData()).reverseVelocity(true, false);
+                ((Item) fixA.getUserData()).onBump();
+                ((Item) fixB.getUserData()).onBump();
                 break;
 
             // Hero's weapon - InteractiveTileObjects & Items

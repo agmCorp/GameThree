@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -27,7 +26,6 @@ public class EnemyOne extends Enemy {
     private float openFireTimer;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
-    private Vector2 velocity;
 
     public EnemyOne(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -42,7 +40,7 @@ public class EnemyOne extends Enemy {
         stateTimer = 0;
         openFireTimer = 0;
         currentState = State.ALIVE;
-        velocity = new Vector2(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
     }
 
     @Override
@@ -102,6 +100,11 @@ public class EnemyOne extends Enemy {
         currentState = State.INJURED;
     }
 
+    @Override
+    public void onBump() {
+        reverseVelocity(true, false);
+    }
+
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
            super.draw(batch);
@@ -111,16 +114,6 @@ public class EnemyOne extends Enemy {
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-    }
-
-    @Override
-    public void reverseVelocity(boolean x, boolean y) {
-        if (x) {
-            velocity.x *= -1;
-        }
-        if (y) {
-            velocity.y *= -1;
-        }
     }
 
     private void stateInjured() {
