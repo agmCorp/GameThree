@@ -60,6 +60,8 @@ El juego sigue, no tengo touch, la camara esta quieta
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 
+falta: level, vidas
+
 PENDIENTES A FUTURO
 -------------------
 - las properties del tilededitor pueden ser boolean, usarlas.
