@@ -361,7 +361,7 @@ FUNCION SENO
         return velocity;
     }
 
-	luego.....
+	luego......
 
 	 private void stateAlive(float dt) {
         b2body.setLinearVelocity(getNewVelocity(b2body.getPosition().y, dt));
