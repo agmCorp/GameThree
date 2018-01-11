@@ -42,6 +42,7 @@ public class Hero extends Sprite {
     private Body b2body;
 
     // Hero
+    private int lives;
     private HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStand;
@@ -50,8 +51,11 @@ public class Hero extends Sprite {
     private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTimer;
+    private float playAgainTimer;
     private float gameOverTimer;
     private float openFiretimer;
+    private float setDefaultFilterTimer;
+    private boolean isPlayingAgain;
 
     // Power FX
     private PowerState currentPowerState;
@@ -87,6 +91,7 @@ public class Hero extends Sprite {
         setOriginCenter();
 
         // Hero variables initialization
+        lives = Constants.HERO_LIVES_START;
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
@@ -95,8 +100,11 @@ public class Hero extends Sprite {
         heroMovingLeftRightAnimation = Assets.instance.hero.heroMovingLeftRightAnimation;
         heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
         heroStateTimer = 0;
+        playAgainTimer = 0;
         gameOverTimer = 0;
         openFiretimer = 0;
+        setDefaultFilterTimer = 0;
+        isPlayingAgain = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
@@ -122,6 +130,9 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
+        // If Hero is playing again, set his default filter after a few seconds
+        timeToSetDefaultFilter(dt);
+
         switch (currentHeroState) {
             case STANDING:
                 heroStateStanding(dt);
@@ -345,12 +356,57 @@ public class Hero extends Sprite {
         // Beyond bottom edge
         if (camBottomEdge > heroUpperEdge) {
             b2body.setActive(false);
+            lives--;
+            playAgainTimer = 0;
             currentHeroState = Hero.HeroState.DEAD;
         }
     }
 
     private void heroStateDead(float dt) {
-        gameOverTimer += dt;
+        if (lives > 0) {
+            playAgainTimer += dt;
+        } else {
+            gameOverTimer += dt;
+        }
+    }
+
+    public void playAgain() {
+        // Play music again
+        AudioManager.instance.play(Assets.instance.music.songLevelOne);
+
+        setDefaultFixture();
+
+        // Our Hero can collide with borders and edges only
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
+        filter.maskBits = Constants.BORDERS_BIT |
+                Constants.EDGES_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        setDefaultFilterTimer = 0;
+        isPlayingAgain = true;
+
+        // Stop motion
+        stop();
+
+        // Be carefull, we broke the simulation because Hero is teleporting.
+        b2body.setTransform(screen.gameCam.position.x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 4, b2body.getAngle());
+
+        // Set active our Hero with his initial state
+        b2body.setActive(true);
+        currentHeroState = HeroState.STANDING;
+    }
+
+    private void timeToSetDefaultFilter(float dt) {
+        if (isPlayingAgain) {
+            setDefaultFilterTimer += dt;
+            if (setDefaultFilterTimer > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
+                setDefaultFilter();
+                isPlayingAgain = false;
+            }
+        }
     }
 
     public void onDead() {
@@ -500,10 +556,6 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
     }
 
-    public float getStateTimer() {
-        return heroStateTimer;
-    }
-
     public boolean isHeroDead() {
         return currentHeroState == HeroState.DEAD ||
                 currentHeroState == HeroState.DYING_UP ||
@@ -512,6 +564,10 @@ public class Hero extends Sprite {
 
     public boolean isGameOver() {
         return currentHeroState == HeroState.DEAD && gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
+    }
+
+    public boolean isTimeToPlayAgain() {
+        return currentHeroState == HeroState.DEAD && playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
     }
 
     public Body getB2body() {

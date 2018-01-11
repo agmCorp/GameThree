@@ -35,8 +35,7 @@ public class Edge {
             this.bounds = new Rectangle(0, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.EDGE_WIDTH_METERS, Constants.EDGE_HEIGHT_METERS);
         }
         defineEdge();
-
-        b2body.setLinearVelocity(0, Constants.GAMECAM_VELOCITY);
+        start();
     }
 
     private void defineEdge() {
@@ -57,15 +56,15 @@ public class Edge {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void onHit() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 0.3f);
-    }
-
     public Body getB2body() {
         return b2body;
     }
 
     public void stop() {
         b2body.setLinearVelocity(0.0f, 0.0f);
+    }
+
+    public void start() {
+        b2body.setLinearVelocity(0, Constants.GAMECAM_VELOCITY);
     }
 }
