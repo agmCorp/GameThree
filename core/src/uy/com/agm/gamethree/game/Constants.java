@@ -7,6 +7,8 @@ package uy.com.agm.gamethree.game;
 public class Constants {
     // ---- Game -----
 
+    public static final String TITLE = "Game Three";
+
     // GUI Width (pixels)
     // Visible game world is V_WIDTH / PPM meters wide
     public static final int V_WIDTH = 480;
