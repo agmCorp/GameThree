@@ -317,6 +317,7 @@ public class PlayScreen implements Screen {
 
         if (player.isTimeToPlayAgain()) {
             player.playAgain();
+            startEdges();
         }
 
         if (player.isGameOver()) {
@@ -392,6 +393,11 @@ public class PlayScreen implements Screen {
     private void stopEdges() {
         upperEdge.stop();
         bottomEdge.stop();
+    }
+
+    private void startEdges() {
+        upperEdge.start();
+        bottomEdge.start();
     }
 
     @Override
