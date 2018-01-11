@@ -100,6 +100,7 @@ public class Constants {
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
+    public static final int HERO_LIVES_START = 3;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
