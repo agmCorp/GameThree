@@ -374,6 +374,9 @@ public class Hero extends Sprite {
         // Play music again
         AudioManager.instance.play(Assets.instance.music.songLevelOne);
 
+        // todo
+        setAlpha(0.5f);
+
         setDefaultFixture();
 
         // Our Hero can collide with borders and edges only
@@ -404,6 +407,8 @@ public class Hero extends Sprite {
             setDefaultFilterTimer += dt;
             if (setDefaultFilterTimer > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
+                // todo
+                setAlpha(1.0f);
                 isPlayingAgain = false;
             }
         }
