@@ -315,6 +315,10 @@ public class PlayScreen implements Screen {
             game.shapeRenderer.end();
         }
 
+        if (player.isTimeToPlayAgain()) {
+            player.playAgain();
+        }
+
         if (player.isGameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
