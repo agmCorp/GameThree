@@ -358,6 +358,8 @@ public class Hero extends Sprite {
             b2body.setActive(false);
             lives--;
             playAgainTimer = 0;
+            // todo
+            screen.getHud().removePowerLabel();
             currentHeroState = Hero.HeroState.DEAD;
         }
     }

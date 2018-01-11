@@ -208,7 +208,7 @@ public class Hud implements Disposable {
         }
     }
 
-    private void removePowerLabel() {
+    public void removePowerLabel() {
         if (powerTimerVisible) {
             table.removeActor(powerLabel);
             table.removeActor(powerValueLabel);
