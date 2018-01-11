@@ -74,6 +74,7 @@ public class Constants {
 
     public static final int TIMER_LEVEL_ONE = 180;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
+    public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
 
     // ---- Dinamic objects -----
 
@@ -101,6 +102,7 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
     public static final int HERO_LIVES_START = 3;
+    public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 5.0f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
