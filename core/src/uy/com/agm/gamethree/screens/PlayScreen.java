@@ -225,7 +225,9 @@ public class PlayScreen implements Screen {
     }
 
     private void updateHud(float dt) {
-        hud.update(dt);
+        if(!player.isHeroDead()) {
+            hud.update(dt);
+        }
     }
 
     private void updateCamera(float dt) {

@@ -30,6 +30,7 @@ public class Hud implements Disposable {
     private Integer level;
     private Integer levelTimer;
     private boolean levelTimeUp; // True when the world levelTimer reaches 0
+    private int lives;
     private float timeCount;
     private Integer powerTimer;
     private float timeCountPower;
@@ -46,6 +47,9 @@ public class Hud implements Disposable {
     private Label levelTimerLabel;
     private Label levelTimerValueLabel;
 
+    private Label livesLabel;
+    private Label livesValueLabel;
+
     private Label powerLabel;
     private Label powerValueLabel;
 
@@ -60,6 +64,7 @@ public class Hud implements Disposable {
         level = 1;
         levelTimer = Constants.TIMER_LEVEL_ONE;
         levelTimeUp = false;
+        lives = Constants.HERO_LIVES_START;
         timeCount = 0;
         powerTimer = 0;
         timeCountPower = 0;
@@ -97,6 +102,9 @@ public class Hud implements Disposable {
         levelTimerLabel = new Label("TIME", labelStyle);
         levelTimerValueLabel = new Label(String.format("%03d", levelTimer), labelStyle);
 
+        livesLabel = new Label("LIVES", labelStyle);
+        livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
+
         powerLabel = new Label("POWERNAME", labelStyle);
         powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
 
@@ -104,6 +112,7 @@ public class Hud implements Disposable {
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(levelTimerLabel).expandX();
+        table.add(livesLabel).expandX();
 
         // Add a second row to our table
         table.row();
@@ -112,6 +121,7 @@ public class Hud implements Disposable {
         table.add(scoreValueLabel).expandX();
         table.add(levelValueLabel).expandX();
         table.add(levelTimerValueLabel).expandX();
+        table.add(livesValueLabel).expandX();
 
         // Add our table to the stage
         stage.addActor(table);
@@ -147,7 +157,7 @@ public class Hud implements Disposable {
         }
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         // Update world levelTimer
         timeCount += dt;
         if(timeCount >= 1){
@@ -184,8 +194,8 @@ public class Hud implements Disposable {
         }
     }
 
-    public void addScore(int value) {
-        score += value;
+    public void addScore(int score) {
+        this.score += score;
         scoreValueLabel.setText(String.format("%06d", score));
     }
 
@@ -197,18 +207,14 @@ public class Hud implements Disposable {
         if (!powerTimerVisible) {
             // Add a third row to our table
             table.row();
-            table.add().expandX();
-            table.add(powerLabel).expandX();
-            table.add().expandX();
+            table.add(powerLabel).colspan(4).expandX();
             table.row();
-            table.add().expandX();
-            table.add(powerValueLabel).expandX();
-            table.add().expandX();
+            table.add(powerValueLabel).colspan(4).expandX();
             powerTimerVisible = true;
         }
     }
 
-    public void removePowerLabel() {
+    private void removePowerLabel() {
         if (powerTimerVisible) {
             table.removeActor(powerLabel);
             table.removeActor(powerValueLabel);
@@ -227,5 +233,18 @@ public class Hud implements Disposable {
 
     public boolean isPowerTimeUp() {
         return !powerTimerVisible;
+    }
+
+    public void forcePowerTimeUp() {
+        removePowerLabel();
+    }
+
+    public void decreaseLives(int quantity) {
+        lives -= quantity;
+        livesValueLabel.setText(String.format("%02d", lives));
+    }
+
+    public int getLives() {
+        return lives;
     }
 }

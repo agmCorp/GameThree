@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,7 +43,6 @@ public class Hero extends Sprite {
     private Body b2body;
 
     // Hero
-    private int lives;
     private HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStand;
@@ -91,7 +91,6 @@ public class Hero extends Sprite {
         setOriginCenter();
 
         // Hero variables initialization
-        lives = Constants.HERO_LIVES_START;
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         heroStand = Assets.instance.hero.heroStand;
@@ -356,16 +355,14 @@ public class Hero extends Sprite {
         // Beyond bottom edge
         if (camBottomEdge > heroUpperEdge) {
             b2body.setActive(false);
-            lives--;
+            screen.getHud().decreaseLives(1);
             playAgainTimer = 0;
-            // todo
-            screen.getHud().removePowerLabel();
             currentHeroState = Hero.HeroState.DEAD;
         }
     }
 
     private void heroStateDead(float dt) {
-        if (lives > 0) {
+        if (screen.getHud().getLives() > 0) {
             playAgainTimer += dt;
         } else {
             gameOverTimer += dt;
@@ -376,10 +373,9 @@ public class Hero extends Sprite {
         // Play music again
         AudioManager.instance.play(Assets.instance.music.songLevelOne);
 
-        // todo
-        setAlpha(0.5f);
-
-        setDefaultFixture();
+        // We take away his powers and force powerTimeUp
+        powerDown();
+        screen.getHud().forcePowerTimeUp();
 
         // Our Hero can collide with borders and edges only
         Filter filter = new Filter();
@@ -389,6 +385,9 @@ public class Hero extends Sprite {
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
+
+        // Set alpha value for a while to indicate that Hero can't collide with almost anything
+        setAlpha(Constants.HERO_PLAY_AGAIN_ALPHA);
 
         setDefaultFilterTimer = 0;
         isPlayingAgain = true;
@@ -417,6 +416,7 @@ public class Hero extends Sprite {
     }
 
     public void onDead() {
+            // Stop music and play sound effect
         AudioManager.instance.stopMusic();
         AudioManager.instance.play(Assets.instance.sounds.dead, 1);
 
@@ -424,7 +424,7 @@ public class Hero extends Sprite {
         Filter filter = new Filter();
         filter.maskBits = Constants.NOTHING_BIT;
 
-        // We set the previous filter in every fixture because a power could have added one
+        // We set the previous filter in every fixture
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
@@ -435,7 +435,7 @@ public class Hero extends Sprite {
         // Reset rotation
         setRotation(0.0f);
 
-        // We take away his powers
+        // We take away his power effect
         currentPowerState = PowerState.NORMAL;
 
         // Start dying up

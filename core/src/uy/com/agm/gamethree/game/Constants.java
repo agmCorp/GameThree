@@ -43,7 +43,7 @@ public class Constants {
     public static final String FONT_FILE = "fonts/fonts.fnt";
 
     // Font sizes
-    public static final float FONT_SMALL = 0.8f;
+    public static final float FONT_SMALL = 0.6f;
     public static final float FONT_NORMAL = 1.0f;
     public static final float FONT_BIG = 1.5f;
 
@@ -103,6 +103,7 @@ public class Constants {
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
     public static final int HERO_LIVES_START = 4;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 5.0f;
+    public static final float HERO_PLAY_AGAIN_ALPHA = 0.5f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
