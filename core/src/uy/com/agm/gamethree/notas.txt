@@ -72,6 +72,7 @@ cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - si agarro un poder y muero (por aplastamiento) no me resetea el hud.
 - setear alpha
+- si muero con el disparo rojo, me lo conserva al revivir indefinidamente.
 **********
 
 falta: level, vidas
