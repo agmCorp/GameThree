@@ -63,7 +63,7 @@ El juego sigue, no tengo touch, la camara esta quieta
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
-- deberia revisar si debo implementar mas funciones en playscreen para android, ver el conejo o ver su libro (PlayScreen implements Screen)
+- deberia revisar si debo implementar mas metodos sobreescritos en playscreen para android, ver el conejo o ver su libro (PlayScreen implements Screen)
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand".
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
