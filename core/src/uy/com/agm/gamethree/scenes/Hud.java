@@ -194,9 +194,9 @@ public class Hud implements Disposable {
         }
     }
 
-    public void addScore(int score) {
-        this.score += score;
-        scoreValueLabel.setText(String.format("%06d", this.score));
+    public void addScore(int value) {
+        score += value;
+        scoreValueLabel.setText(String.format("%06d", score));
     }
 
     public void setPowerLabel(String powerName, int maxTime) {

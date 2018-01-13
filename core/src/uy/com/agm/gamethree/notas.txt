@@ -70,14 +70,6 @@ Ejemplo: hero y todas las que usan "stand".
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 
-*- si agarro un poder y muero (por aplastamiento) no me resetea el hud.
-*- setear alpha
-*- si muero con el disparo rojo, me lo conserva al revivir indefinidamente.
-
-- debo parar los tiempos al morir (el del power y el general) y reanudar al revivir.
-*- el escudo se ve al morir abajo.
-**********
-
 falta: level, vidas
 agregar un item que sea solo para puntos.
 
