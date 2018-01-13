@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,10 +15,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -408,7 +407,6 @@ public class Hero extends Sprite {
             setDefaultFilterTimer += dt;
             if (setDefaultFilterTimer > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
-                // todo
                 setAlpha(1.0f);
                 isPlayingAgain = false;
             }
@@ -416,7 +414,7 @@ public class Hero extends Sprite {
     }
 
     public void onDead() {
-            // Stop music and play sound effect
+        // Stop music and play sound effect
         AudioManager.instance.stopMusic();
         AudioManager.instance.play(Assets.instance.sounds.dead, 1);
 
@@ -570,11 +568,15 @@ public class Hero extends Sprite {
     }
 
     public boolean isGameOver() {
-        return currentHeroState == HeroState.DEAD && gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
+        return currentHeroState == HeroState.DEAD &&
+                screen.getHud().getLives() <= 0 &&
+                gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
     }
 
     public boolean isTimeToPlayAgain() {
-        return currentHeroState == HeroState.DEAD && playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
+        return currentHeroState == HeroState.DEAD &&
+                screen.getHud().getLives() > 0 &&
+                playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
     }
 
     public Body getB2body() {

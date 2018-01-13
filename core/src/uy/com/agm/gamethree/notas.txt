@@ -21,6 +21,7 @@ IDEAS
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 - Que las texturas de la powerbox sean random, tengo muy lindas texturas.
 - Hacer un tipo toogle que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
+- En las settings poner disparo automatico (siempre dispara) o disparo manual (con touch)
 
 ALCANCE
 -------
@@ -67,9 +68,8 @@ El juego sigue, no tengo touch, la camara esta quieta
 Ejemplo: hero y todas las que usan "stand".
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
 cuando el usuario apreta el homebutton.
-
-**********
 - se corta el audio al morir..el gruñido se escucha cortado.
+
 *- si agarro un poder y muero (por aplastamiento) no me resetea el hud.
 *- setear alpha
 *- si muero con el disparo rojo, me lo conserva al revivir indefinidamente.
