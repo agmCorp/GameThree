@@ -298,6 +298,10 @@ METODOLOGIA
    translateX(diffX)
    translateY(diffY)
 
+13)
+   Para crear un proyecto con libgdx desde cero, seguir este link:
+   http://libgdx.badlogicgames.com/documentation/gettingstarted/Importing%20into%20IDE.html
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
