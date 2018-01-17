@@ -78,6 +78,9 @@ https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
 https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-new-levels
 http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
 http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
+http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
+
+
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
