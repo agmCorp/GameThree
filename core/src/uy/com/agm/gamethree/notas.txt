@@ -77,6 +77,7 @@ levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
 https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-new-levels
 http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
+http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
@@ -128,7 +129,7 @@ HERRAMIENTAS
 - TiledEditor: para crear el nivel
 - TexturePacker: para crear los assets de personajes y empacar las animaciones
 - ShoeBox: para agarrar una imagen grande con muchos sprites y separar cada sprite en un archivo distinto numerado.
-- https://ezgif.com/split: me permite separar un gif animado en frames
+- https://ezgif.com/split: me permite separar un gif animado en frames (también permite convertir video en gif)
 - http://www.online-image-editor.com/: editor en linea
 - sourceTree para administrar git
 - https://audio.online-convert.com/es/convertir-a-ogg: conversor de mp3 a ogg
