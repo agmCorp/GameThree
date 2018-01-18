@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.game.Constants;
  */
 
 public abstract class AbstractScreen extends Stage implements Screen {
+    private static final String TAG = AbstractScreen.class.getName();
 
     protected AbstractScreen() {
         super(new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera()));

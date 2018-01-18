@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  */
 
 public class UIFactory {
+    private static final String TAG = UIFactory.class.getName();
 
     public static ImageButton createButton(Texture texture) {
         return

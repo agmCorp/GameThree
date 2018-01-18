@@ -1,29 +1,19 @@
-package uy.com.agm.gamethree.scenes;
+package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
- * Created by AGM on 12/3/2017.
+ * Created by AGM on 1/18/2018.
  */
 
-public class Hud implements Disposable {
+public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
-
-    // Scene2D.ui Stage and its own Viewport for HUD
-    public Stage stage;
-    public Viewport viewport;
 
     // Hero score/time Tracking Variables
     private Integer score;
@@ -58,11 +48,13 @@ public class Hud implements Disposable {
 
     private Table table;
 
-    public Hud(int level, SpriteBatch sb) {
+    public Hud(Integer level) {
+        super();
+
         // Define our tracking variables
         score = 0;
         this.level = level;
-        levelTimer = Constants.TIMER_LEVEL_ONE; // TODO
+        levelTimer = Constants.TIMER_LEVEL_ONE; // TODO esto deberia ser por nivel...
         levelTimeUp = false;
         lives = Constants.HERO_LIVES_START;
         timeCount = 0;
@@ -70,12 +62,10 @@ public class Hud implements Disposable {
         timeCountPower = 0;
         powerTimerVisible = false;
         fps = 0;
+    }
 
-        // Setup the HUD viewport using a new camera separate from our gamecam
-        // Define our stage using that viewport and our games spritebatch
-        viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, sb);
-
+    @Override
+    public void buildStage() {
         // Define a table used to organize our hud's labels
         table = new Table();
 
@@ -124,7 +114,7 @@ public class Hud implements Disposable {
         table.add(livesValueLabel).expandX();
 
         // Add our table to the stage
-        stage.addActor(table);
+        addActor(table);
 
         if (Constants.DEBUG_MODE) {
             // Define a new table used to display our FPS counter
@@ -153,7 +143,7 @@ public class Hud implements Disposable {
             fpsTable.add(fpsValueLabel).expandX();
 
             // Add our table to the stage
-            stage.addActor(fpsTable);
+            addActor(fpsTable);
         }
     }
 
@@ -224,7 +214,7 @@ public class Hud implements Disposable {
 
     @Override
     public void dispose() {
-        stage.dispose();
+        super.dispose();
     }
 
     public boolean isLevelTimeUp() {

@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
  */
 
 public class LevelSelectScreen extends AbstractScreen {
+    private static final String TAG = LevelSelectScreen.class.getName();
 
     private Texture txtrBg;
     private Texture txtrBack;

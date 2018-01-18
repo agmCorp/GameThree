@@ -10,6 +10,7 @@ import uy.com.agm.gamethree.screens.AbstractScreen;
  */
 
 public class ScreenManager {
+    private static final String TAG = ScreenManager.class.getName();
 
     // Singleton: unique instance
     private static ScreenManager instance;

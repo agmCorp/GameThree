@@ -14,6 +14,12 @@ public enum ScreenEnum {
         }
     },
 
+    PREFERENCES {
+        public AbstractScreen getScreen(Object... params) {
+            return new PreferencesScreen();
+        }
+    },
+
     LEVEL_SELECT {
         public AbstractScreen getScreen(Object... params) {
             return new LevelSelectScreen();

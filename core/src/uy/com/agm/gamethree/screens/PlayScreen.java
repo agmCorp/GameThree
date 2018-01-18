@@ -19,7 +19,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
-import uy.com.agm.gamethree.scenes.Hud;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
@@ -83,7 +82,8 @@ public class PlayScreen extends AbstractScreen {
         gameViewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gameCam);
 
         // Create our game HUD for scores/timers/level info
-        hud = new Hud(level, game.batch);
+        hud = new Hud(level);
+        hud.buildStage();
 
         // Get our map and setup our map renderer
         map = Assets.instance.map;
@@ -323,8 +323,8 @@ public class PlayScreen extends AbstractScreen {
         game.batch.end();
 
         // Set our batch to now draw what the Hud camera sees.
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+        game.batch.setProjectionMatrix(hud.getCamera().combined);
+        hud.draw();
 
         // Debug
         if (Constants.DEBUG_MODE) {

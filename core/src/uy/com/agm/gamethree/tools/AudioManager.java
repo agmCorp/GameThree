@@ -29,22 +29,19 @@ public class AudioManager {
     }
 
     public void play(Sound sound, float volume, float pitch, float pan) {
-        //if (!GamePreferences.instance.sound) return;
-        //sound.play(GamePreferences.instance.volSound * volume, pitch, pan);
-        // TODO definir preferencias de audio
-        sound.play(volume, pitch, pan);
+        if (GamePreferences.instance.sound) {
+            sound.play(GamePreferences.instance.volSound * volume, pitch, pan);
+        }
     }
 
     public void play(Music music) {
         playingMusic = music;
 
-        // TODO definir preferencias de audio
-        //if (GamePreferences.instance.music) {
-        music.setLooping(true);
-        //  music.setVolume(GamePreferences.instance.volMusic);
-        music.setVolume(0.7f);
-        music.play();
-        //}
+        if (GamePreferences.instance.music) {
+            music.setLooping(true);
+            music.setVolume(GamePreferences.instance.volMusic);
+            music.play();
+        }
     }
 
     public void stopMusic() {
@@ -56,15 +53,15 @@ public class AudioManager {
     }
 
     public void onSettingsUpdated() {
-        // TODO definir preferencias de audio
-        /*
-        if (playingMusic == null) return;
-        playingMusic.setVolume(GamePreferences.instance.volMusic);
-        if (GamePreferences.instance.music) {
-            if (!playingMusic.isPlaying()) playingMusic.play();
-        } else {
-            playingMusic.pause();
+        if (playingMusic != null) {
+            playingMusic.setVolume(GamePreferences.instance.volMusic);
+            if (GamePreferences.instance.music) {
+                if (!playingMusic.isPlaying()) {
+                    playingMusic.play();
+                }
+            } else {
+                playingMusic.pause();
+            }
         }
-        */
     }
 }
