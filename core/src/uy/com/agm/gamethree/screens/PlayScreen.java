@@ -53,6 +53,7 @@ public class PlayScreen implements Screen {
 
     // Box2d variables
     private World world;
+    private float accumulator;
     private Box2DDebugRenderer b2dr;
     private B2WorldCreator creator;
 
@@ -88,6 +89,9 @@ public class PlayScreen implements Screen {
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
+
+        // Set accumulator for world.step
+        accumulator = 0;
 
         // Allows for debug lines of our box2d world.
         if (Constants.DEBUG_MODE) {
@@ -156,7 +160,7 @@ public class PlayScreen implements Screen {
         creator.handleCreatingGameThreeActors();
 
         // Step in the physics simulation
-        world.step(Constants.WORLD_TIME_STEP, Constants.WORLD_VELOCITY_ITERATIONS, Constants.WORLD_POSITION_ITERATIONS);
+        doPhysicsStep(dt);
 
         updateHero(dt);
         updateEnemies(dt);
@@ -166,6 +170,17 @@ public class PlayScreen implements Screen {
         updateFinalEnemyLevelOne(dt);
         updateHud(dt);
         updateCamera(dt);
+    }
+
+    private void doPhysicsStep(float dt) {
+        // Fixed time step
+        // Max frame time to avoid spiral of death (on slow devices)
+        float frameTime = Math.min(dt, 0.25f);
+        accumulator += frameTime;
+        while (accumulator >= Constants.WORLD_TIME_STEP) {
+            world.step(Constants.WORLD_TIME_STEP, Constants.WORLD_VELOCITY_ITERATIONS, Constants.WORLD_POSITION_ITERATIONS);
+            accumulator -= Constants.WORLD_TIME_STEP;
+        }
     }
 
     private void updateHero(float dt) {

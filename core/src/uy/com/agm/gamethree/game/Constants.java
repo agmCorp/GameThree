@@ -18,7 +18,7 @@ public class Constants {
     public static final int V_HEIGHT = 800;
 
     // World step parameters
-    public static final float WORLD_TIME_STEP = 1 / 60.0f;
+    public static final float WORLD_TIME_STEP = 1/300.0f;
     public static final int WORLD_VELOCITY_ITERATIONS = 6;
     public static final int WORLD_POSITION_ITERATIONS = 2;
 
@@ -32,7 +32,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // ---- Assets ----
 
