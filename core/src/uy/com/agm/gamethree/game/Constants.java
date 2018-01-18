@@ -42,6 +42,9 @@ public class Constants {
     // Location of description file for Bitmap fonts
     public static final String FONT_FILE = "fonts/fonts.fnt";
 
+    // Location of description file for map
+    public static final String MAP_FILE = "levelOne/levelOne.tmx";
+
     // Font sizes
     public static final float FONT_SMALL = 0.6f;
     public static final float FONT_NORMAL = 1.0f;
