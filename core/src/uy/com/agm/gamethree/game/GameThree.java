@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 
 public class GameThree extends Game {
     private static final String TAG = GameThree.class.getName();
@@ -31,7 +32,8 @@ public class GameThree extends Game {
         shapeRenderer = new ShapeRenderer();
 
         // Set the new Screen
-        setScreen(new PlayScreen(this));
+        ScreenManager.getInstance().initialize(this);
+        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
     }
 
     @Override

@@ -58,11 +58,11 @@ public class Hud implements Disposable {
 
     private Table table;
 
-    public Hud(SpriteBatch sb) {
+    public Hud(int level, SpriteBatch sb) {
         // Define our tracking variables
         score = 0;
-        level = 1;
-        levelTimer = Constants.TIMER_LEVEL_ONE;
+        this.level = level;
+        levelTimer = Constants.TIMER_LEVEL_ONE; // TODO
         levelTimeUp = false;
         lives = Constants.HERO_LIVES_START;
         timeCount = 0;

@@ -3,7 +3,6 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -17,9 +16,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.scenes.Hud;
+import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
@@ -29,18 +31,20 @@ import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/2/2017.
  */
 
-public class PlayScreen implements Screen {
+public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
     // Reference to our Game, used to set Screens
     private GameThree game;
+
+    // Current level
+    private int level;
 
     // Basic playscreen variables
     public OrthographicCamera gameCam;
@@ -67,8 +71,10 @@ public class PlayScreen implements Screen {
     // Final Enemy (level one)
     private FinalEnemyLevelOne finalEnemyLevelOne;
 
-    public PlayScreen(GameThree game) {
-        this.game = game;
+    public PlayScreen(Integer level) {
+        this.level = level;
+
+        this.game = (GameThree) ScreenManager.getInstance().getGame();
 
         // Create a cam used to move up through our world
         gameCam = new OrthographicCamera();
@@ -77,7 +83,7 @@ public class PlayScreen implements Screen {
         gameViewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gameCam);
 
         // Create our game HUD for scores/timers/level info
-        hud = new Hud(game.batch);
+        hud = new Hud(level, game.batch);
 
         // Get our map and setup our map renderer
         map = Assets.instance.map;
@@ -282,6 +288,11 @@ public class PlayScreen implements Screen {
     }
 
     @Override
+    public void buildStage() {
+
+    }
+
+    @Override
     public void render(float delta) {
         // Separate our update logic from render
         update(delta);
@@ -338,8 +349,7 @@ public class PlayScreen implements Screen {
         }
 
         if (player.isGameOver()) {
-            game.setScreen(new GameOverScreen(game));
-            dispose();
+            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
         }
     }
 
@@ -452,6 +462,7 @@ public class PlayScreen implements Screen {
     @Override
     public void dispose() {
         // Dispose of all our opened resources
+        super.dispose();
         map.dispose();
         renderer.dispose();
         world.dispose();
