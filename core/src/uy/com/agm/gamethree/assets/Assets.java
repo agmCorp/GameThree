@@ -90,7 +90,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
         // Load map
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load("levelOne/levelOne.tmx", TiledMap.class);
+        assetManager.load(Constants.MAP_FILE, TiledMap.class);
 
         // Load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
