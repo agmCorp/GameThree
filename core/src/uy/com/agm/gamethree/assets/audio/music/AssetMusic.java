@@ -12,9 +12,11 @@ import uy.com.agm.gamethree.game.Constants;
 public class AssetMusic {
     private static final String TAG = AssetMusic.class.getName();
 
+    public final Music songMainMenu;
     public final Music songLevelOne;
 
     public AssetMusic(AssetManager am) {
+        songMainMenu = am.get(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
         songLevelOne = am.get(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
     }
 }

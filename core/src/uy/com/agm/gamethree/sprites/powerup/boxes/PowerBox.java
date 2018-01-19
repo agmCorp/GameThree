@@ -151,7 +151,7 @@ public class PowerBox extends Sprite {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.openPowerBox, 1);
+        AudioManager.instance.play(Assets.instance.sounds.openPowerBox);
 
         // Set score
         screen.getHud().addScore(Constants.POWERBOX_SCORE);
@@ -198,7 +198,7 @@ public class PowerBox extends Sprite {
     }
 
     public void onBump() {
-        AudioManager.instance.play(Assets.instance.sounds.bump, 0.3f);
+        AudioManager.instance.play(Assets.instance.sounds.bump);
     }
 
     public void onHit() {
@@ -214,7 +214,7 @@ public class PowerBox extends Sprite {
             getItemOnHit();
             currentState = State.OPENED;
         } else {
-            AudioManager.instance.play(Assets.instance.sounds.crack, 1);
+            AudioManager.instance.play(Assets.instance.sounds.crack);
             damage++;
         }
     }

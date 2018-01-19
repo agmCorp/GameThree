@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -92,6 +93,7 @@ public class SettingsScreen extends AbstractScreen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 saveSliderSound();
+                playSampleSound();
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -107,6 +109,25 @@ public class SettingsScreen extends AbstractScreen {
 
         // Load saved values
         loadSettings();
+    }
+
+    private void playSampleSound() {
+        // Audio FX
+        int sample = MathUtils.random(1, 4);
+        switch (sample) {
+            case 1:
+                AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne);
+                break;
+            case 2:
+                AudioManager.instance.play(Assets.instance.sounds.heroShoot, Constants.SHOOT_MAX_VOLUME);
+                break;
+            case 3:
+                AudioManager.instance.play(Assets.instance.sounds.enemyShoot, Constants.SHOOT_MAX_VOLUME);
+                break;
+            case 4:
+                AudioManager.instance.play(Assets.instance.sounds.hit);
+                break;
+        }
     }
 
     private void saveSliderMusic() {

@@ -190,7 +190,7 @@ public class Hero extends Sprite {
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
-            AudioManager.instance.play(Assets.instance.sounds.powerDown, 1);
+            AudioManager.instance.play(Assets.instance.sounds.powerDown);
         }
     }
 
@@ -370,7 +370,7 @@ public class Hero extends Sprite {
 
     public void playAgain() {
         // Play music again
-        AudioManager.instance.play(Assets.instance.music.songLevelOne);
+        AudioManager.instance.play(Assets.instance.music.songLevelOne); // todo depende del nivel
 
         // We take away his powers and force powerTimeUp
         powerDown();
@@ -416,7 +416,7 @@ public class Hero extends Sprite {
     public void onDead() {
         // Stop music and play sound effect
         AudioManager.instance.stopMusic();
-        AudioManager.instance.play(Assets.instance.sounds.dead, 1);
+        AudioManager.instance.play(Assets.instance.sounds.dead);
 
         // Hero can't collide with anything
         Filter filter = new Filter();

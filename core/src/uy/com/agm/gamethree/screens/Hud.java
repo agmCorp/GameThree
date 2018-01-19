@@ -167,7 +167,7 @@ public class Hud extends AbstractScreen {
                 if (powerTimer > 0) {
                     powerTimer--;
                     if (powerTimer <= Constants.TIMER_NOTIFICATION) {
-                        AudioManager.instance.play(Assets.instance.sounds.powerTimer, 1);
+                        AudioManager.instance.play(Assets.instance.sounds.powerTimer);
                     }
                     powerValueLabel.setText(String.format("%03d", powerTimer));
                 } else {

@@ -120,9 +120,9 @@ public class PlayScreen extends AbstractScreen {
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
-        // todo Load preferences for audio settings and start playing music
-        // GamePreferences.instance.load();
-        AudioManager.instance.play(Assets.instance.music.songLevelOne);
+        // Stop menu music and start playing level music
+        AudioManager.instance.stopMusic();
+        AudioManager.instance.play(Assets.instance.music.songLevelOne); // todo depende del nivel
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(player)));

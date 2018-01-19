@@ -10,6 +10,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -20,6 +21,8 @@ public class MainMenuScreen extends AbstractScreen {
 
     public MainMenuScreen() {
         super();
+        //  Start playing music
+        AudioManager.instance.play(Assets.instance.music.songMainMenu);
     }
 
     @Override

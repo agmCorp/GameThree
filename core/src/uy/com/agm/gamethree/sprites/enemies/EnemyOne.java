@@ -124,7 +124,7 @@ public class EnemyOne extends Enemy {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.hit, 1, MathUtils.random(1.0f, 1.1f));
+        AudioManager.instance.play(Assets.instance.sounds.hit);
 
         // Set score
         screen.getHud().addScore(Constants.ENEMYONE_SCORE);

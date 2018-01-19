@@ -38,9 +38,6 @@ public class AudioManager {
         playingMusic = music;
 
         if (GamePreferences.instance.music) {
-            if (music.isPlaying()) {
-                music.stop();
-            }
             music.setLooping(true);
             music.setVolume(GamePreferences.instance.volMusic);
             music.play();

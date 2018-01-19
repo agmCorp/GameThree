@@ -116,6 +116,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
 
         // Load music
+        assetManager.load(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
         assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
 
         // Start loading assets and wait until finished

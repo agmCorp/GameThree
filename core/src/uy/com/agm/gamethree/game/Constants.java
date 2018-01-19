@@ -85,7 +85,11 @@ public class Constants {
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
 
+    // Shoot max volume
+    public static final float SHOOT_MAX_VOLUME = 0.3f;
+
     // Music
+    public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
     public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
 
     // ---- Level ----
