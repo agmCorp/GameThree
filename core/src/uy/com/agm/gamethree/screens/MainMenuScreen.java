@@ -28,8 +28,8 @@ public class MainMenuScreen extends AbstractScreen {
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.instance.fonts.defaultBig;
 
-        Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
-        labelStyleSmall.font = Assets.instance.fonts.defaultSmall;
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.instance.fonts.defaultNormal;
 
         // Define our labels based on labelStyle
         Table table = new Table();
@@ -37,9 +37,9 @@ public class MainMenuScreen extends AbstractScreen {
         table.setFillParent(true);
 
         Label titleLabel = new Label("Menu", labelStyleBig);
-        Label startGameLabel = new Label("Start game", labelStyleSmall);
-        Label settingsLabel = new Label("Settings", labelStyleSmall);
-        Label exitGameLabel = new Label("Exit game", labelStyleSmall);
+        Label startGameLabel = new Label("Start game", labelStyleNormal);
+        Label settingsLabel = new Label("Settings", labelStyleNormal);
+        Label exitGameLabel = new Label("Exit game", labelStyleNormal);
 
         table.add(titleLabel).center();
         table.row();

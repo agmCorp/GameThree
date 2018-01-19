@@ -25,12 +25,12 @@ public class GameOverScreen extends AbstractScreen {
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.instance.fonts.defaultBig;
 
-        Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
-        labelStyleSmall.font = Assets.instance.fonts.defaultSmall;
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.instance.fonts.defaultNormal;
 
         // Define our labels based on labelStyle
         Label titleLabel = new Label("GAME OVER", labelStyleBig);
-        Label backLabel = new Label("Back to menu", labelStyleSmall);
+        Label backLabel = new Label("Back to menu", labelStyleNormal);
 
         // Set table structure
         Table table = new Table();

@@ -42,7 +42,7 @@ public class Constants {
     public static final float MAX_VOLUME = 1.0f;
 
     // ---- Screens ----
-    public static final float PAD_TOP = 20.0f;
+    public static final float PAD_TOP = 40.0f;
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
@@ -62,8 +62,8 @@ public class Constants {
 
     // Font sizes
     public static final float FONT_SMALL = 0.6f;
-    public static final float FONT_NORMAL = 1.0f;
-    public static final float FONT_BIG = 1.5f;
+    public static final float FONT_NORMAL = 0.9f;
+    public static final float FONT_BIG = 1.6f;
 
     // Sound FXs
     public static final String FX_FILE_BUMP = "audio/sounds/bump.ogg";

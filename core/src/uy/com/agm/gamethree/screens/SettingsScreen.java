@@ -43,14 +43,14 @@ public class SettingsScreen extends AbstractScreen {
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.instance.fonts.defaultBig;
 
-        Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
-        labelStyleSmall.font = Assets.instance.fonts.defaultSmall;
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.instance.fonts.defaultNormal;
 
         // Define our labels based on labelStyle
         Label titleLabel = new Label("Preferences", labelStyleBig);
-        Label musicLabel = new Label("Music", labelStyleSmall);
-        Label soundLabel = new Label("sounds FX", labelStyleSmall);
-        Label backLabel = new Label("Back to menu", labelStyleSmall);
+        Label musicLabel = new Label("Music", labelStyleNormal);
+        Label soundLabel = new Label("sounds FX", labelStyleNormal);
+        Label backLabel = new Label("Back to menu", labelStyleNormal);
 
         //Slider
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
