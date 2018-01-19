@@ -36,7 +36,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private Body b2body;
 
     private enum StateFinalEnemy {
-        NOTACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
+        INACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
     }
 
     private enum PowerState {
@@ -100,7 +100,7 @@ public class FinalEnemyLevelOne extends Sprite {
         finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
 
         // FinalEnemyLevelOne variables initialization
-        currentStateFinalEnemy = StateFinalEnemy.NOTACTIVE;
+        currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
         damage = Constants.FINALLEVELONE_MAX_DAMAGE;
         stateFinalEnemyTimer = 0;
         timeToChangeTimer = 0;
@@ -240,7 +240,7 @@ public class FinalEnemyLevelOne extends Sprite {
     }
 
     public void update(float dt) {
-        if (currentStateFinalEnemy == StateFinalEnemy.NOTACTIVE) {
+        if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
             // When our final enemy is on camera, it activates
             checkBoundaries();
             if (b2body.isActive()) {
@@ -717,7 +717,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private boolean isDrawable() {
         return currentStateFinalEnemy != StateFinalEnemy.DEAD &&
                 currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
-                currentStateFinalEnemy != StateFinalEnemy.NOTACTIVE;
+                currentStateFinalEnemy != StateFinalEnemy.INACTIVE;
     }
 
     private void drawPowers(Batch batch) {
