@@ -36,6 +36,19 @@ public class Constants {
 
     public static final String PREFERENCES = "GameThree.prefs";
 
+    // Settings
+    public static final float DEFAULT_VOLUME = 0.5f;
+    public static final float MIN_VOLUME = 0.0f;
+    public static final float MAX_VOLUME = 1.0f;
+
+    // ---- Screens ----
+    public static final float PAD_TOP = 20.0f;
+    public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
+    public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
+    public static final float SLIDER_MIN = 0.0f;
+    public static final float SLIDER_MAX = 1.0f;
+    public static final float SLIDER_STEP = 0.1f;
+
     // ---- Assets ----
 
     // Location of description file for texture atlas

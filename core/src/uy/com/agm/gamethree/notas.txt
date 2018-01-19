@@ -69,6 +69,8 @@ Ejemplo: hero y todas las que usan "stand".
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
+- el menu y todo deberia tener una musica propia y los sliders suben o bajan esa musica. Luego arranca
+el juego con su musica de su nivel.
 
 falta: level, vidas
 agregar un item que sea solo para puntos.

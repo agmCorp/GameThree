@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.screens.util;
 
 import uy.com.agm.gamethree.screens.*;
+import uy.com.agm.gamethree.screens.SettingsScreen;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -16,7 +17,7 @@ public enum ScreenEnum {
 
     PREFERENCES {
         public AbstractScreen getScreen(Object... params) {
-            return new PreferencesScreen();
+            return new SettingsScreen();
         }
     },
 

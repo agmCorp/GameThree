@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -35,25 +36,25 @@ public class MainMenuScreen extends AbstractScreen {
         table.center();
         table.setFillParent(true);
 
-        Label menu = new Label("Menu", labelStyleBig);
-        Label startGame = new Label("Start game", labelStyleSmall);
-        Label options = new Label("Options", labelStyleSmall);
-        Label exitGame = new Label("Exit game", labelStyleSmall);
+        Label titleLabel = new Label("Menu", labelStyleBig);
+        Label startGameLabel = new Label("Start game", labelStyleSmall);
+        Label settingsLabel = new Label("Settings", labelStyleSmall);
+        Label exitGameLabel = new Label("Exit game", labelStyleSmall);
 
-        table.add(menu).center();
+        table.add(titleLabel).center();
         table.row();
-        table.add(startGame).padTop(10.0f).center();
+        table.add(startGameLabel).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(options).padTop(10.0f).center();
+        table.add(settingsLabel).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(exitGame).padTop(10.0f).center();
+        table.add(exitGameLabel).padTop(Constants.PAD_TOP).center();
 
         addActor(table);
 
         // Setting listeners
-        startGame.addListener( UIFactory.createListener(ScreenEnum.LEVEL_SELECT) );
-        options.addListener( UIFactory.createListener(ScreenEnum.PREFERENCES) );
-        exitGame.addListener(
+        startGameLabel.addListener( UIFactory.createListener(ScreenEnum.LEVEL_SELECT) );
+        settingsLabel.addListener( UIFactory.createListener(ScreenEnum.PREFERENCES) );
+        exitGameLabel.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

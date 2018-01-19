@@ -14,7 +14,6 @@ public class GamePreferences {
     public static final String TAG = GamePreferences.class.getName();
 
     public static final GamePreferences instance = new GamePreferences();
-
     public boolean sound;
     public boolean music;
     public float volSound;
@@ -30,8 +29,8 @@ public class GamePreferences {
     public void load () {
         sound = prefs.getBoolean("sound", true);
         music = prefs.getBoolean("music", true);
-        volSound = MathUtils.clamp(prefs.getFloat("volSound", 0.5f), 0.0f, 1.0f); // todo hay que usar constantes?
-        volMusic = MathUtils.clamp(prefs.getFloat("volMusic", 0.5f), 0.0f, 1.0f);
+        volSound = MathUtils.clamp(prefs.getFloat("volSound", Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
+        volMusic = MathUtils.clamp(prefs.getFloat("volMusic", Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
    }
 
     public void save () {

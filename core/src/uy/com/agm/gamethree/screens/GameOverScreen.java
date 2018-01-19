@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -14,8 +14,6 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 
 public class GameOverScreen extends AbstractScreen {
     private static final String TAG = GameOverScreen.class.getName();
-
-    private GameThree game;
 
     public GameOverScreen() {
         super();
@@ -31,18 +29,22 @@ public class GameOverScreen extends AbstractScreen {
         labelStyleSmall.font = Assets.instance.fonts.defaultSmall;
 
         // Define our labels based on labelStyle
+        Label titleLabel = new Label("GAME OVER", labelStyleBig);
+        Label backLabel = new Label("Back to menu", labelStyleSmall);
+
+        // Set table structure
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-
-        Label gameOverLabel = new Label("GAME OVER", labelStyleBig);
-        Label playAgainLabel = new Label("Back to menu", labelStyleSmall);
-        table.add(gameOverLabel).center();
+        table.add(titleLabel).center();
         table.row();
-        table.add(playAgainLabel).padTop(10.0f).center();
-        addActor(table);
+        table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
-        table.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        // Events
+        backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+
+        // Adds created table to stage
+        addActor(table);
     }
 
     @Override
