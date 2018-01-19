@@ -1,19 +1,3 @@
-TILESET
--------
-map 32x32 sin margin ni spacing
-15 tiles de ancho (480/32 = 15)
-250 de alto (10 pantallas, cada una de 25 tiles, 25 x 32 = 800 = viewportheight)
-Mi mundo ancho 480, alto 800
-mis texturas miden 1024 x 1024
-
-CUSTOM PROPERTIES
------------------
-enemyBullet (string): indica si el enemigo dispara
-strength (int): dureza de la powerbox
-powerOne (string): ghost mode
-powerTwo (string): escudo
-powerThree (string): cambia el poder de disparo
-
 IDEAS
 -----
 - programar acelerómetro?
@@ -58,19 +42,23 @@ PENDIENTES
 - de alguna manera logre tener tough a la vez que me mataron. Y quedo el fantasmita con tough detenido por el borde de la pantalla inferior.
 El juego sigue, no tengo touch, la camara esta quieta
 - ponerle sonido y assets bien
-- ver el ninja y suriken
+- ver el ninja y suriken y UI
 - hacer refactoring de constantes
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
 - deberia revisar si debo implementar mas metodos sobreescritos en playscreen para android, ver el conejo o ver su libro (PlayScreen implements Screen)
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
-Ejemplo: hero y todas las que usan "stand".
+Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - el menu y todo deberia tener una musica propia y los sliders suben o bajan esa musica. Luego arranca
 el juego con su musica de su nivel.
+- hacer un atlas para la ui, igualito que para los dinamic objetcts y meterlo en la clase assets y usarlo en las pantallas.
+- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
+carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
+que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 
 falta: level, vidas
 agregar un item que sea solo para puntos.
@@ -81,12 +69,6 @@ https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-
 http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
 http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
 http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
-
-
-- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
-carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
-que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
-
 
 PENDIENTES A FUTURO (no leer aún)
 --------------------------------
@@ -128,6 +110,22 @@ which uses delta to get the right frames for sprite animations, and actually dra
 VIDEO
 -----
 FELICITACIONES
+
+TILESET
+-------
+map 32x32 sin margin ni spacing
+15 tiles de ancho (480/32 = 15)
+250 de alto (10 pantallas, cada una de 25 tiles, 25 x 32 = 800 = viewportheight)
+Mi mundo ancho 480, alto 800
+mis texturas miden 1024 x 1024
+
+CUSTOM PROPERTIES
+-----------------
+enemyBullet (string): indica si el enemigo dispara
+strength (int): dureza de la powerbox
+powerOne (string): ghost mode
+powerTwo (string): escudo
+powerThree (string): cambia el poder de disparo
 
 HERRAMIENTAS
 ------------
