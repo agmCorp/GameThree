@@ -292,11 +292,7 @@ public class PlayScreen extends AbstractScreen {
 
     }
 
-    @Override
-    public void render(float delta) {
-        // Separate our update logic from render
-        update(delta);
-
+    private void render() {
         // Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -313,12 +309,12 @@ public class PlayScreen extends AbstractScreen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
 
-        drawHero();
-        drawEnemies();
-        drawPowerBoxes();
-        drawItems();
-        drawWeapons();
-        drawFinalEnemyLevelOne();
+        renderHero();
+        renderEnemies();
+        renderPowerBoxes();
+        renderItems();
+        renderWeapons();
+        renderFinalEnemyLevelOne();
 
         game.batch.end();
 
@@ -342,7 +338,17 @@ public class PlayScreen extends AbstractScreen {
 
             game.shapeRenderer.end();
         }
+    }
 
+    @Override
+    public void render(float delta) {
+        // Separate our update logic from render
+        update(delta);
+
+        // Render logic
+        render();
+
+        // Analyze game results
         if (player.isTimeToPlayAgain()) {
             player.playAgain();
             startEdges();
@@ -351,37 +357,42 @@ public class PlayScreen extends AbstractScreen {
         if (player.isGameOver()) {
             ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
         }
+
+        if (islevelCompleted()) {
+
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
+        }
     }
 
-    private void drawHero() {
+    private void renderHero() {
         player.draw(game.batch);
     }
 
-    private void drawEnemies() {
+    private void renderEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
             enemy.draw(game.batch);
         }
     }
 
-    private void drawPowerBoxes() {
+    private void renderPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
             powerBox.draw(game.batch);
         }
     }
 
-    private void drawItems() {
+    private void renderItems() {
         for (Item item : creator.getItems())  {
             item.draw(game.batch);
         }
     }
 
-    private void drawWeapons() {
+    private void renderWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
             weapon.draw(game.batch);
         }
     }
 
-    private void drawFinalEnemyLevelOne() {
+    private void renderFinalEnemyLevelOne() {
         finalEnemyLevelOne.draw(game.batch);
     }
 

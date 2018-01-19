@@ -579,6 +579,10 @@ public class Hero extends Sprite {
                 playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
     }
 
+    public boolean isLevelCompleted() {
+        return
+    }
+
     public Body getB2body() {
         return b2body;
     }
