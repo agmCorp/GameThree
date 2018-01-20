@@ -164,7 +164,7 @@ public class PowerFour extends Item {
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.FINAL_ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : hero.getB2body().getFixtureList()) {
             fixture.setFilterData(filter);

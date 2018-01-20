@@ -52,9 +52,10 @@ public class Hero extends Sprite {
     private float heroStateTimer;
     private float playAgainTimer;
     private float gameOverTimer;
-    private float openFiretimer;
+    private float openFireTimer;
     private float setDefaultFilterTimer;
     private boolean isPlayingAgain;
+    private int lives;
 
     // Power FX
     private PowerState currentPowerState;
@@ -100,9 +101,10 @@ public class Hero extends Sprite {
         heroStateTimer = 0;
         playAgainTimer = 0;
         gameOverTimer = 0;
-        openFiretimer = 0;
+        openFireTimer = 0;
         setDefaultFilterTimer = 0;
         isPlayingAgain = false;
+        lives = Constants.HERO_LIVES_START;
 
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
@@ -168,7 +170,7 @@ public class Hero extends Sprite {
         }
 
         // Shoot timer
-        openFiretimer += dt;
+        openFireTimer += dt;
     }
 
     private boolean visualPowerFX() {
@@ -354,6 +356,7 @@ public class Hero extends Sprite {
         // Beyond bottom edge
         if (camBottomEdge > heroUpperEdge) {
             b2body.setActive(false);
+            lives--;
             screen.getHud().decreaseLives(1);
             playAgainTimer = 0;
             currentHeroState = Hero.HeroState.DEAD;
@@ -361,7 +364,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateDead(float dt) {
-        if (screen.getHud().getLives() > 0) {
+        if (lives > 0) {
             playAgainTimer += dt;
         } else {
             gameOverTimer += dt;
@@ -370,7 +373,7 @@ public class Hero extends Sprite {
 
     public void playAgain() {
         // Play music again
-        AudioManager.instance.play(Assets.instance.music.songLevelOne); // todo depende del nivel
+        screen.playLevelMusic();
 
         // We take away his powers and force powerTimeUp
         powerDown();
@@ -461,7 +464,7 @@ public class Hero extends Sprite {
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
                 Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.FINAL_ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
@@ -520,7 +523,7 @@ public class Hero extends Sprite {
 
     public void openFire() {
         if (fireEnhancement) {
-            if (openFiretimer > fireDelay) {
+            if (openFireTimer > fireDelay) {
                 float directionDegrees = 180.0f / (numberBullets + 1);
                 float angle;
                 for(int i = 1; i <= numberBullets; i++) {
@@ -535,12 +538,12 @@ public class Hero extends Sprite {
                                                                     bulletAnimation,
                                                                     HeroBullet.class));
                 }
-                openFiretimer = 0;
+                openFireTimer = 0;
             }
         } else {
-            if (openFiretimer > Constants.HERO_FIRE_DELAY_SECONDS) {
+            if (openFireTimer > Constants.HERO_FIRE_DELAY_SECONDS) {
                 screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, HeroBullet.class));
-                openFiretimer = 0;
+                openFireTimer = 0;
             }
         }
     }
@@ -569,13 +572,13 @@ public class Hero extends Sprite {
 
     public boolean isGameOver() {
         return currentHeroState == HeroState.DEAD &&
-                screen.getHud().getLives() <= 0 &&
+                lives <= 0 &&
                 gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
     }
 
     public boolean isTimeToPlayAgain() {
         return currentHeroState == HeroState.DEAD &&
-                screen.getHud().getLives() > 0 &&
+                lives > 0 &&
                 playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
     }
 
@@ -613,5 +616,9 @@ public class Hero extends Sprite {
 
     public void stop() {
         b2body.setLinearVelocity(0.0f, 0.0f);
+    }
+
+    public int getLives() {
+        return lives;
     }
 }

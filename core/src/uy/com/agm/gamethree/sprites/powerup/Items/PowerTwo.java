@@ -169,7 +169,7 @@ public class PowerTwo extends Item {
         fdef.shape = shield;
         fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
         fdef.filter.maskBits = Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.FINAL_ENEMY_BIT |
                 Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         hero.getB2body().createFixture(fdef).setUserData(hero);
 

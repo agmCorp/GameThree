@@ -24,7 +24,7 @@ import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemyFactory;
+import uy.com.agm.gamethree.sprites.finals.LevelFactory;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
@@ -82,13 +82,8 @@ public class PlayScreen extends AbstractScreen {
         // Create a FitViewport to maintain virtual aspect ratio despite screen size
         gameViewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gameCam);
 
-        // Create our game HUD for scores/timers/level info
-        hud = new Hud(level);
-        hud.buildStage();
-
         // Get our map and setup our map renderer
         map = Assets.instance.map;
-
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
@@ -115,14 +110,18 @@ public class PlayScreen extends AbstractScreen {
         bottomEdge = new Edge(this, false);
 
         // Create the final enemy in our game world
-        finalEnemy = FinalEnemyFactory.getEnemy(this, this.level);
+        finalEnemy = LevelFactory.getFinalEnemy(this, this.level);
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
+        // Create our game HUD for scores/timers/level info
+        hud = new Hud(level, LevelFactory.getLevelTimer(this.level), player.getLives());
+        hud.buildStage();
+
         // Stop menu music and start playing level music
         AudioManager.instance.stopMusic();
-        AudioManager.instance.play(Assets.instance.music.songLevelOne); // todo depende del nivel
+        AudioManager.instance.play(LevelFactory.getLevelMusic(this.level));
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(player)));
@@ -147,10 +146,6 @@ public class PlayScreen extends AbstractScreen {
         multiplexer.addProcessor(new GestureDetector(gc));
         multiplexer.addProcessor(gc);
         return multiplexer;
-    }
-
-    @Override
-    public void show() {
     }
 
     // Key control
@@ -287,11 +282,6 @@ public class PlayScreen extends AbstractScreen {
         return upperEdge;
     }
 
-    @Override
-    public void buildStage() {
-
-    }
-
     private void render() {
         // Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -337,30 +327,6 @@ public class PlayScreen extends AbstractScreen {
             renderDebugFinalEnemy();
 
             game.shapeRenderer.end();
-        }
-    }
-
-    @Override
-    public void render(float delta) {
-        // Separate our update logic from render
-        update(delta);
-
-        // Render logic
-        render();
-
-        // Analyze game results
-        if (player.isTimeToPlayAgain()) {
-            player.playAgain();
-            startEdges();
-        }
-
-        if (player.isGameOver()) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
-        }
-
-        if (islevelCompleted()) {
-            //ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
     }
 
@@ -442,12 +408,6 @@ public class PlayScreen extends AbstractScreen {
         bottomEdge.start();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        // Updated our game viewport
-        gameViewPort.update(width, height);
-    }
-
     public TiledMap getMap() {
         return map;
     }
@@ -458,6 +418,49 @@ public class PlayScreen extends AbstractScreen {
 
     public Hud getHud() {
         return hud;
+    }
+
+    public void playLevelMusic() {
+        AudioManager.instance.play(LevelFactory.getLevelMusic(this.level));
+    }
+
+    @Override
+    public void render(float delta) {
+        // Separate our update logic from render
+        update(delta);
+
+        // Render logic
+        render();
+
+        // Analyze game results
+        if (player.isTimeToPlayAgain()) {
+            player.playAgain();
+            startEdges();
+        }
+
+        if (player.isGameOver()) {
+            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
+        }
+
+        if (islevelCompleted()) {
+            //ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+        }
+    }
+
+    @Override
+    public void buildStage() {
+
+    }
+
+    @Override
+    public void show() {
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        // Updated our game viewport
+        gameViewPort.update(width, height);
     }
 
     @Override

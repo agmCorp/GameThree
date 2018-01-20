@@ -71,5 +71,6 @@ public abstract class FinalEnemy extends Sprite {
     protected abstract void defineFinalEnemy();
     public abstract void update(float dt);
     public abstract void onHit(Weapon weapon);
+    public abstract void onHitWall();
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
 }

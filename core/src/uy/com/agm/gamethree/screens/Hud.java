@@ -16,13 +16,13 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     // Hero score/time Tracking Variables
-    private Integer score;
-    private Integer level;
-    private Integer levelTimer;
+    private int score;
+    private int level;
+    private int levelTimer;
     private boolean levelTimeUp; // True when the world levelTimer reaches 0
     private int lives;
     private float timeCount;
-    private Integer powerTimer;
+    private int powerTimer;
     private float timeCountPower;
     private boolean powerTimerVisible;
     private int fps;
@@ -48,15 +48,15 @@ public class Hud extends AbstractScreen {
 
     private Table table;
 
-    public Hud(Integer level, ) {
+    public Hud(Integer level, Integer levelTimer, Integer lives) {
         super();
 
         // Define our tracking variables
         score = 0;
         this.level = level;
-        levelTimer = Constants.TIMER_LEVEL_ONE; // TODO esto deberia ser por nivel...
+        this.levelTimer = levelTimer;
         levelTimeUp = false;
-        lives = Constants.HERO_LIVES_START;
+        this.lives = lives;
         timeCount = 0;
         powerTimer = 0;
         timeCountPower = 0;
@@ -232,9 +232,5 @@ public class Hud extends AbstractScreen {
     public void decreaseLives(int quantity) {
         lives -= quantity;
         livesValueLabel.setText(String.format("%02d", lives));
-    }
-
-    public int getLives() {
-        return lives;
     }
 }

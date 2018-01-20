@@ -72,7 +72,7 @@ public class HeroBullet extends Weapon {
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
-                Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+                Constants.FINAL_ENEMY_BIT |
                 Constants.ENEMY_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;

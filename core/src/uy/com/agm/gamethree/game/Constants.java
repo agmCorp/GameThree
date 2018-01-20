@@ -112,7 +112,7 @@ public class Constants {
     public static final short ITEM_BIT = 128;
     public static final short HERO_WEAPON_BIT = 256;
     public static final short ENEMY_WEAPON_BIT = 512;
-    public static final short FINAL_ENEMY_LEVEL_ONE_BIT = 1024;
+    public static final short FINAL_ENEMY_BIT = 1024;
     public static final short SHIELD_BIT = 2048;
 
     // Hero (meters = pixels * resizeFactor / PPM)
@@ -123,7 +123,7 @@ public class Constants {
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
-    public static final int HERO_LIVES_START = 1;
+    public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 5.0f;
     public static final float HERO_PLAY_AGAIN_ALPHA = 0.5f;
 

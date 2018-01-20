@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
@@ -161,28 +161,28 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Borders
-            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.BORDERS_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
-                ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
+            case Constants.FINAL_ENEMY_BIT | Constants.BORDERS_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
+                ((FinalEnemy) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Edges
-            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.EDGES_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_LEVEL_ONE_BIT ? fixA : fixB;
-                ((FinalEnemyLevelOne) fixC.getUserData()).onHitWall();
+            case Constants.FINAL_ENEMY_BIT | Constants.EDGES_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
+                ((FinalEnemy) fixC.getUserData()).onHitWall();
                 break;
 
             // Final enemy - Hero's weapon
-            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_WEAPON_BIT:
+            case Constants.FINAL_ENEMY_BIT | Constants.HERO_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
-                    ((FinalEnemyLevelOne) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
+                    ((FinalEnemy) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
                 } else {
-                    ((FinalEnemyLevelOne) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
+                    ((FinalEnemy) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
                 }
                 break;
 
             // Final enemy - Hero
-            case Constants.FINAL_ENEMY_LEVEL_ONE_BIT | Constants.HERO_BIT:
+            case Constants.FINAL_ENEMY_BIT | Constants.HERO_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;

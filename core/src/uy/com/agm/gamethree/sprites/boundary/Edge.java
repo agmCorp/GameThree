@@ -8,9 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.game.Constants;
 
 /**
@@ -49,7 +47,7 @@ public class Edge {
         shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
 
         fdef.filter.categoryBits = Constants.EDGES_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.FINAL_ENEMY_LEVEL_ONE_BIT |
+        fdef.filter.maskBits = Constants.FINAL_ENEMY_BIT |
                             Constants.HERO_TOUGH_BIT |
                             Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
