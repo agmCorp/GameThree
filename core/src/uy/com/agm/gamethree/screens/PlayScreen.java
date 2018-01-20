@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
@@ -24,13 +23,13 @@ import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
+import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -83,7 +82,7 @@ public class PlayScreen extends AbstractScreen {
         gameViewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gameCam);
 
         // Get our map and setup our map renderer
-        map = Assets.instance.map;
+        map = LevelFactory.getLevelMap(this.level);
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map

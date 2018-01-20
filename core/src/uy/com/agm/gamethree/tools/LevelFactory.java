@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -28,7 +29,7 @@ public class LevelFactory {
                 finalEnemy = null;
                 break;
         }
-        return  finalEnemy;
+        return finalEnemy;
     }
 
     public static int getLevelTimer(int level) {
@@ -47,6 +48,20 @@ public class LevelFactory {
                 music = null;
                 break;
         }
-        return  music;
+        return music;
+    }
+
+    public static TiledMap getLevelMap(int level) {
+        TiledMap map;
+
+        switch (level) {
+            case 1:
+                map = Assets.instance.maps.mapLevelOne;
+                break;
+            default:
+                map = null;
+                break;
+        }
+        return map;
     }
 }

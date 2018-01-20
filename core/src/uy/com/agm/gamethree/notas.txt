@@ -47,21 +47,16 @@ El juego sigue, no tengo touch, la camara esta quieta
 - renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
-- deberia revisar si debo implementar mas metodos sobreescritos en playscreen para android, ver el conejo o ver su libro (PlayScreen implements Screen)
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
-- el menu y todo deberia tener una musica propia y los sliders suben o bajan esa musica. Luego arranca
-el juego con su musica de su nivel.
-- hacer un atlas para la ui, igualito que para los dinamic objetcts y meterlo en la clase assets y usarlo en las pantallas.
+- hacer un skin para la ui.
 - cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
 carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
 que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
-
-falta: level, vidas
-agregar un item que sea solo para puntos.
+- agregar un item que sea solo para puntos.
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/

@@ -9,13 +9,13 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
 
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
@@ -26,11 +26,11 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOnePower;
-import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetFonts;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
+import uy.com.agm.gamethree.assets.sprites.AssetMaps;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerFour;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
@@ -51,7 +51,6 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private AssetManager assetManager;
 
-    public TiledMap map;
     public AssetFonts fonts;
     public AssetHero hero;
     public AssetEnemyOne enemyOne;
@@ -75,6 +74,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetFinalEnemyLevelOne finalEnemyLevelOne;
     public AssetFinalEnemyLevelOnePower finalEnemyLevelOnePower;
 
+    public AssetMaps maps;
     public AssetSounds sounds;
     public AssetMusic music;
 
@@ -88,12 +88,12 @@ public class Assets implements Disposable, AssetErrorListener {
         // Set asset manager error handler
         assetManager.setErrorListener(this);
 
-        // Load map
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(Constants.MAP_FILE, TiledMap.class);
-
         // Load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+
+        // Load map for each level
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        assetManager.load(Constants.MAP_FILE_LEVEL_ONE, TiledMap.class);
 
         // Load sounds
         assetManager.load(Constants.FX_FILE_BUMP, Sound.class);
@@ -134,12 +134,6 @@ public class Assets implements Disposable, AssetErrorListener {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
-        // Create game resource objects
-        map = assetManager.get("levelOne/levelOne.tmx");
-        if (Constants.DEBUG_MODE) {
-            MapLayer floor = map.getLayers().get("floor");
-            map.getLayers().remove(floor);
-        }
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);
@@ -162,6 +156,7 @@ public class Assets implements Disposable, AssetErrorListener {
         toughMode = new AssetToughMode(atlas);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlas);
         finalEnemyLevelOnePower = new AssetFinalEnemyLevelOnePower(atlas);
+        maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
     }
