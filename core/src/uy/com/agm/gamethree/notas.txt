@@ -53,9 +53,6 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
-- cuando haga varios niveles, voy a tener que cargar varios maps. Hacer lo mismo que se hizo con AssetsSounds o sea, se
-carga todo en la clase Assets y luego se hace otra clase (AssetsSounds)
-que devuelve cada sonido. En mi caso sería otra clase AssetsLevels que retorna map1 map2 map3 etc.
 - agregar un item que sea solo para puntos.
 
 levels
