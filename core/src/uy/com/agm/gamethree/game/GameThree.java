@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
-import uy.com.agm.gamethree.tools.GamePreferences;
 
 public class GameThree extends Game {
     private static final String TAG = GameThree.class.getName();
@@ -26,8 +25,8 @@ public class GameThree extends Game {
         // Load assets
         Assets.instance.init(new AssetManager());
 
-        // Load preferences for audio settings
-        GamePreferences.instance.load();
+        // Load preferences and settings
+        GameSettings.instance.load();
 
         // Constructs a new SpriteBatch
         batch = new SpriteBatch();

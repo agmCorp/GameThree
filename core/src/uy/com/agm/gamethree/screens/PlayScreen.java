@@ -90,7 +90,8 @@ public class PlayScreen extends AbstractScreen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
+        //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0); todo
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 75, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -244,7 +245,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void updateHud(float dt) {
-        if(!player.isHeroDead()) {
+        if(!player.isHeroDead() && !finalEnemy.isDestroyed()) {
             hud.update(dt);
         }
     }
@@ -452,8 +453,7 @@ public class PlayScreen extends AbstractScreen {
         }
 
         if (isLevelCompleted(delta)) {
-            //ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU); // todo hacer una screen
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level);
         }
     }
 

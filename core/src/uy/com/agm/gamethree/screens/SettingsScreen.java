@@ -16,7 +16,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.GamePreferences;
+import uy.com.agm.gamethree.game.GameSettings;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -29,11 +29,11 @@ public class SettingsScreen extends AbstractScreen {
     private Texture sliderKnobTex;
     private Slider sliderMusic;
     private Slider sliderSound;
-    private GamePreferences prefs;
+    private GameSettings prefs;
 
     public SettingsScreen() {
         super();
-        prefs = GamePreferences.instance;
+        prefs = GameSettings.instance;
         sliderBackgroundTex = new Texture(Gdx.files.internal(Constants.SLIDER_BACKGROUND));
         sliderKnobTex = new Texture(Gdx.files.internal(Constants.SLIDER_KNOB));
     }
@@ -145,7 +145,7 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void loadSettings () {
-        GamePreferences prefs = GamePreferences.instance;
+        GameSettings prefs = GameSettings.instance;
         prefs.load();
         sliderSound.setValue(prefs.volSound);
         sliderMusic.setValue(prefs.volMusic);

@@ -34,7 +34,7 @@ public class Constants {
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
 
-    public static final String PREFERENCES = "GameThree.prefs";
+    public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
     // Settings
     public static final float DEFAULT_VOLUME = 0.5f;
@@ -95,7 +95,7 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 18;
+    public static final int TIMER_LEVEL_ONE = 180;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     public static final float LEVEL_COMPLETED_DELAY_SECONDS = 5.0f;

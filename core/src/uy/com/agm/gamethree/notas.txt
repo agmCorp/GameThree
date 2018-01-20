@@ -37,6 +37,11 @@ Bloques con sorpresas
 enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
 enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
 
+PROXIMOS PASOS
+--------------
+Revisar toda la parte de gamesettings, viendo el acceso publico a los campos. Que se lea y grabe bien.
+hacer la pagina de seleccion de nivel.
+
 PENDIENTES
 --------------
 - de alguna manera logre tener tough a la vez que me mataron. Y quedo el fantasmita con tough detenido por el borde de la pantalla inferior.
@@ -55,7 +60,10 @@ cuando el usuario apreta el homebutton.
 - hacer un skin para la ui.
 - agregar un item que sea solo para puntos.
 - si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
-- En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox).
+- En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox). Tambien se puede
+agregar acelerometro.
+- la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
+- En GameSettings usar constantes para las key!!!!, no quiero que las settings sean public!!!! usar gets
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
@@ -387,4 +395,9 @@ FUNCION SENO
         stateTime += dt;
         openFireTime += dt;
         if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+
+Para ir a pelear directo con el enemigo final poner en playscreen:
+        // Initially set our gamcam to be centered correctly at the start (bottom) of the map
+        //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 75, 0);
 

@@ -3,6 +3,8 @@ package uy.com.agm.gamethree.tools;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
+import uy.com.agm.gamethree.game.GameSettings;
+
 /**
  * Created by amorales on 14/12/2017.
  */
@@ -29,17 +31,17 @@ public class AudioManager {
     }
 
     public void play(Sound sound, float volume, float pitch, float pan) {
-        if (GamePreferences.instance.sound) {
-            sound.play(GamePreferences.instance.volSound * volume, pitch, pan);
+        if (GameSettings.instance.sound) {
+            sound.play(GameSettings.instance.volSound * volume, pitch, pan);
         }
     }
 
     public void play(Music music) {
         playingMusic = music;
 
-        if (GamePreferences.instance.music) {
+        if (GameSettings.instance.music) {
             music.setLooping(true);
-            music.setVolume(GamePreferences.instance.volMusic);
+            music.setVolume(GameSettings.instance.volMusic);
             music.play();
         }
     }
@@ -54,8 +56,8 @@ public class AudioManager {
 
     public void onSettingsUpdated() {
         if (playingMusic != null) {
-            playingMusic.setVolume(GamePreferences.instance.volMusic);
-            if (GamePreferences.instance.music) {
+            playingMusic.setVolume(GameSettings.instance.volMusic);
+            if (GameSettings.instance.music) {
                 if (!playingMusic.isPlaying()) {
                     playingMusic.play();
                 }

@@ -33,6 +33,12 @@ public enum ScreenEnum {
         }
     },
 
+    LEVEL_COMPLETED {
+        public AbstractScreen getScreen(Object... params) {
+            return new LevelCompletedScreen((Integer) params[0]);
+        }
+    },
+
     GAME_OVER {
         public AbstractScreen getScreen(Object... params) {
             return new GameOverScreen();
