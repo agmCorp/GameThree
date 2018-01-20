@@ -73,6 +73,7 @@ public class Constants {
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
+    public static final String FX_FILE_LEVEL_TIMER = "audio/sounds/powerTimer.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
@@ -94,9 +95,11 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 180;
+    public static final int TIMER_LEVEL_ONE = 18;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
+    public static final float LEVEL_COMPLETED_DELAY_SECONDS = 5.0f;
+    public static final int LEVEL_TIMER_NOTIFICATION = 10;
 
     // ---- Dinamic objects -----
 
@@ -141,7 +144,7 @@ public class Constants {
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
     // Notification (seconds) before power down
-    public static final int TIMER_NOTIFICATION = 3;
+    public static final int POWER_TIMER_NOTIFICATION = 3;
 
     // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

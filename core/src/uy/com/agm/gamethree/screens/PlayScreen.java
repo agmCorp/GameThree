@@ -45,6 +45,9 @@ public class PlayScreen extends AbstractScreen {
     // Current level
     private int level;
 
+    // Time to wait after the level is completed
+    private float levelCompletedTimer;
+
     // Basic playscreen variables
     public OrthographicCamera gameCam;
     public Viewport gameViewPort;
@@ -72,6 +75,7 @@ public class PlayScreen extends AbstractScreen {
 
     public PlayScreen(Integer level) {
         this.level = level;
+        levelCompletedTimer = 0;
 
         this.game = (GameThree) ScreenManager.getInstance().getGame();
 
@@ -329,8 +333,14 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private boolean islevelCompleted() {
-        return finalEnemy.isDisposable();
+    private boolean isLevelCompleted(float delta) {
+        boolean isLevelCompleted = false;
+
+        if (finalEnemy.isDisposable()) {
+            levelCompletedTimer += delta;
+            isLevelCompleted = levelCompletedTimer > Constants.LEVEL_COMPLETED_DELAY_SECONDS;
+        }
+        return isLevelCompleted;
     }
 
     private void renderHero() {
@@ -441,9 +451,9 @@ public class PlayScreen extends AbstractScreen {
             ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
         }
 
-        if (islevelCompleted()) {
+        if (isLevelCompleted(delta)) {
             //ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU); // todo hacer una screen
         }
     }
 

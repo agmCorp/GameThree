@@ -54,6 +54,7 @@ cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
 - agregar un item que sea solo para puntos.
+- si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/

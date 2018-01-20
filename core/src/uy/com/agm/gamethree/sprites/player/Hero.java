@@ -130,6 +130,9 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
+        // Time is up : too late our Hero dies T_T
+        checkLevelTimeUp();
+
         // If Hero is playing again, set his default filter after a few seconds
         timeToSetDefaultFilter(dt);
 
@@ -397,12 +400,19 @@ public class Hero extends Sprite {
         // Stop motion
         stop();
 
-        // Be carefull, we broke the simulation because Hero is teleporting.
+        // Be careful, we broke the simulation because Hero is teleported.
         b2body.setTransform(screen.gameCam.position.x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 4, b2body.getAngle());
 
-        // Set active our Hero with his initial state
+        // Set Hero active with his initial state
         b2body.setActive(true);
         currentHeroState = HeroState.STANDING;
+    }
+
+    private void checkLevelTimeUp() {
+        if (screen.getHud().isLevelTimeUp() && !isHeroDead()) {
+            lives = 1;
+            onDead();
+        }
     }
 
     private void timeToSetDefaultFilter(float dt) {
