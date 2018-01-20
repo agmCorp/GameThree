@@ -1,6 +1,6 @@
 IDEAS
 -----
-- programar acelerómetro?
+- programar acelerómetro? En la pagina de settings se puede agregar un titulo que cuando lo tocas cambia: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 - Que las texturas de la powerbox sean random, tengo muy lindas texturas.
@@ -55,6 +55,7 @@ cuando el usuario apreta el homebutton.
 - hacer un skin para la ui.
 - agregar un item que sea solo para puntos.
 - si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
+- En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox).
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
@@ -63,8 +64,8 @@ http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
 http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
 http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
 
-PENDIENTES A FUTURO (no leer aún)
---------------------------------
+PENDIENTES A FUTURO
+-------------------
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos

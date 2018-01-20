@@ -410,7 +410,7 @@ public class Hero extends Sprite {
 
     private void checkLevelTimeUp() {
         if (screen.getHud().isLevelTimeUp() && !isHeroDead()) {
-            lives = 1;
+            lives = 1; // Force game over
             onDead();
         }
     }
