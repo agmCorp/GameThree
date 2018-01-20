@@ -24,7 +24,7 @@ import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.finals.LevelFactory;
+import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;

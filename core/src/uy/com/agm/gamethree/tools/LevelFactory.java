@@ -1,10 +1,12 @@
-package uy.com.agm.gamethree.sprites.finals;
+package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.audio.Music;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
 
 /**
  * Created by AGM on 1/20/2018.
