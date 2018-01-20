@@ -100,6 +100,7 @@ public class EnemyTwo extends Enemy {
         reverseVelocity(true, false);
     }
 
+    @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
            super.draw(batch);

@@ -37,7 +37,7 @@ public class HeroBullet extends Weapon {
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), width, height);
 
-        velocity = new Vector2(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
+        velocity.set(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
         if (angle > 0) {
             velocity.rotate(angle);
             setRotation(angle);
@@ -131,6 +131,7 @@ public class HeroBullet extends Weapon {
         currentState = State.ONTARGET;
     }
 
+    @Override
     public void draw(Batch batch) {
         if (currentState == State.SHOT) {
             super.draw(batch);

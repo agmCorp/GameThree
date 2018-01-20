@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +34,7 @@ public abstract class Weapon extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
         this.circleShapeRadius = circleShapeRadius;
+        this.velocity = new Vector2();
 
         /* Set this Sprite's position on the lower left vertex of a Rectangle.
         * At this moment we don't have Weapon.width and Weapon.height because this is an abstract class.
@@ -82,6 +84,11 @@ public abstract class Weapon extends Sprite {
     // This Weapon can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        super.draw(batch);
     }
 
     protected abstract void defineWeapon();

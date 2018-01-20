@@ -48,7 +48,7 @@ public class Hud extends AbstractScreen {
 
     private Table table;
 
-    public Hud(Integer level) {
+    public Hud(Integer level, ) {
         super();
 
         // Define our tracking variables

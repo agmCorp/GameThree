@@ -6,21 +6,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -28,20 +25,8 @@ import uy.com.agm.gamethree.tools.Vector2Util;
  * Created by AGM on 12/30/2017.
  */
 
-public class FinalEnemyLevelOne extends Sprite {
+public class FinalEnemyLevelOne extends FinalEnemy {
     private static final String TAG = FinalEnemyLevelOne.class.getName();
-
-    private World world;
-    private PlayScreen screen;
-    private Body b2body;
-
-    private enum StateFinalEnemy {
-        INACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
-    }
-
-    private enum PowerState {
-        NORMAL, POWERFUL
-    }
 
     private enum StateWalking {
         CEILING_LEFT, CEILING_RIGHT,
@@ -52,7 +37,6 @@ public class FinalEnemyLevelOne extends Sprite {
         BACKSLASH_UP, BACKSLASH_DOWN
     }
 
-    private StateFinalEnemy currentStateFinalEnemy;
     private StateWalking currentStateWalking;
     private int damage;
     private float stateFinalEnemyTimer;
@@ -64,9 +48,6 @@ public class FinalEnemyLevelOne extends Sprite {
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
     private Animation finalEnemyLevelOneDyingAnimation;
-
-    private Vector2 velocity;
-    private Vector2 tmp; // Temp GC friendly vector
 
     // Power FX
     private PowerState currentPowerState;
@@ -80,18 +61,7 @@ public class FinalEnemyLevelOne extends Sprite {
     private Sprite explosionFXSprite;
 
     public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
-        this.world = screen.getWorld();
-        this.screen = screen;
-
-        /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
-        * This point will be used by defineFinalEnemyLevelOne() calling getX(), getY() to center its b2body.
-        * SetBounds always receives world coordinates.
-        */
-        setBounds(x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
-        defineFinalEnemyLevelOne();
-
-        // By default this FinalEnemyLevelOne doesn't interact in our world
-        b2body.setActive(false);
+        super(screen, x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
 
         // Animations
         finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
@@ -112,15 +82,12 @@ public class FinalEnemyLevelOne extends Sprite {
 
         // Initial movement (left or right)
         int direction = MathUtils.randomSign();
-        velocity = new Vector2(direction * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
+        velocity.set(direction * Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
         if (direction < 0) {
             currentStateWalking = StateWalking.CEILING_LEFT;
         } else {
             currentStateWalking = StateWalking.CEILING_RIGHT;
         }
-
-        // Temp GC friendly vector
-        tmp = new Vector2();
 
         // -------------------- PowerFX --------------------
 
@@ -157,7 +124,7 @@ public class FinalEnemyLevelOne extends Sprite {
         explosionFXSprite.setOriginCenter();
     }
 
-    private void defineFinalEnemyLevelOne() {
+    protected void defineFinalEnemy() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -732,6 +699,7 @@ public class FinalEnemyLevelOne extends Sprite {
         }
     }
 
+    @Override
     public void draw(Batch batch) {
         // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
@@ -744,18 +712,6 @@ public class FinalEnemyLevelOne extends Sprite {
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-    }
-
-    // This FinalEnemyLevelOne can be removed from our game
-    public boolean isDisposable() {
-        return currentStateFinalEnemy == StateFinalEnemy.DEAD;
-    }
-
-    // This FinalEnemyLevelOne doesn't have any b2body
-    public boolean isDestroyed() {
-        return currentStateFinalEnemy == StateFinalEnemy.DYING ||
-                currentStateFinalEnemy == StateFinalEnemy.EXPLODING ||
-                currentStateFinalEnemy == StateFinalEnemy.DEAD;
     }
 
     private void checkBoundaries() {

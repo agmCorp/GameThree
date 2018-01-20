@@ -23,7 +23,8 @@ import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemyFactory;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.powerup.Items.Item;
 import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
@@ -67,8 +68,8 @@ public class PlayScreen extends AbstractScreen {
     private Edge upperEdge;
     private Edge bottomEdge;
 
-    // Final Enemy (level one)
-    private FinalEnemyLevelOne finalEnemyLevelOne;
+    // Final Enemy
+    private FinalEnemy finalEnemy;
 
     public PlayScreen(Integer level) {
         this.level = level;
@@ -114,8 +115,7 @@ public class PlayScreen extends AbstractScreen {
         bottomEdge = new Edge(this, false);
 
         // Create the final enemy in our game world
-        finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
-        //finalEnemyLevelOne = new FinalEnemyLevelOne(this, gameCam.position.x, gameViewPort.getWorldHeight() - Constants.FINALLEVELONE_HEIGHT_METERS + 0.2f); // TODO CONSTANTE DE AJUSTE PORQUE
+        finalEnemy = FinalEnemyFactory.getEnemy(this, this.level);
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
@@ -173,7 +173,7 @@ public class PlayScreen extends AbstractScreen {
         updatePowerBoxes(dt);
         updateItems(dt);
         updateWeapons(dt);
-        updateFinalEnemyLevelOne(dt);
+        updateFinalEnemy(dt);
         updateHud(dt);
         updateCamera(dt);
     }
@@ -241,8 +241,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void updateFinalEnemyLevelOne(float dt) {
-        finalEnemyLevelOne.update(dt);
+    private void updateFinalEnemy(float dt) {
+        finalEnemy.update(dt);
     }
 
     private void updateHud(float dt) {
@@ -314,7 +314,7 @@ public class PlayScreen extends AbstractScreen {
         renderPowerBoxes();
         renderItems();
         renderWeapons();
-        renderFinalEnemyLevelOne();
+        renderFinalEnemy();
 
         game.batch.end();
 
@@ -334,7 +334,7 @@ public class PlayScreen extends AbstractScreen {
             renderDebugPowerBoxes();
             renderDebugItems();
             renderDebugWeapons();
-            renderDebugFinalEnemyLevelOne();
+            renderDebugFinalEnemy();
 
             game.shapeRenderer.end();
         }
@@ -359,9 +359,13 @@ public class PlayScreen extends AbstractScreen {
         }
 
         if (islevelCompleted()) {
-
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
+            //ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
+    }
+
+    private boolean islevelCompleted() {
+        return finalEnemy.isDisposable();
     }
 
     private void renderHero() {
@@ -392,8 +396,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void renderFinalEnemyLevelOne() {
-        finalEnemyLevelOne.draw(game.batch);
+    private void renderFinalEnemy() {
+        finalEnemy.draw(game.batch);
     }
 
     private void renderDebugHero() {
@@ -424,8 +428,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void renderDebugFinalEnemyLevelOne() {
-        finalEnemyLevelOne.renderDebug(game.shapeRenderer);
+    private void renderDebugFinalEnemy() {
+        finalEnemy.renderDebug(game.shapeRenderer);
     }
 
     private void stopEdges() {

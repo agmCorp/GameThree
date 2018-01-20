@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -38,8 +37,8 @@ public class EnemyBullet extends Weapon {
         currentState = State.SHOT;
 
         // Move EnemyBullet from Enemy to Hero
-        velocity = new Vector2(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(velocity,screen.getPlayer().getB2body().getPosition().x,  screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
+        velocity.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(velocity, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
 
         // Sound FX
         AudioManager.instance.play(Assets.instance.sounds.enemyShoot, Constants.SHOOT_MAX_VOLUME);
@@ -119,6 +118,7 @@ public class EnemyBullet extends Weapon {
         currentState = State.ONTARGET;
     }
 
+    @Override
     public void draw(Batch batch) {
         if (currentState == State.SHOT)  {
             super.draw(batch);

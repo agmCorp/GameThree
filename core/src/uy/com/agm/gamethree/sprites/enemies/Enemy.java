@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
@@ -111,6 +112,11 @@ public abstract class Enemy extends Sprite {
     // This Enemy can be removed from our game
     public boolean isDisposable() {
         return currentState == State.DEAD;
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        super.draw(batch);
     }
 
     protected abstract void defineEnemy();
