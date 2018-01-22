@@ -20,7 +20,6 @@ public class ScreenManager {
 
     // Singleton: private constructor
     private ScreenManager() {
-        super();
     }
 
     // Singleton: retrieve instance

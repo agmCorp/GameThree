@@ -53,12 +53,18 @@ public class SettingsScreen extends AbstractScreen {
         Label soundLabel = new Label("sounds FX", labelStyleNormal);
         Label backLabel = new Label("Back to menu", labelStyleNormal);
 
-        //Slider
+        //Slider style
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(sliderBackgroundTex));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(sliderKnobTex));
+
+        // Music
         sliderMusic = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
+        sliderMusic.setValue(prefs.getVolMusic());
+
+        // Sound
         sliderSound = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
+        sliderSound.setValue(prefs.getVolSound());
 
         // Set table structure
         Table table = new Table();
@@ -106,9 +112,6 @@ public class SettingsScreen extends AbstractScreen {
 
         // Adds created table to stage
         addActor(table);
-
-        // Load saved values
-        loadSettings();
     }
 
     private void playSampleSound() {
@@ -142,13 +145,6 @@ public class SettingsScreen extends AbstractScreen {
         prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
         prefs.save();
         AudioManager.instance.onSettingsUpdated();
-    }
-
-    private void loadSettings () {
-        GameSettings prefs = GameSettings.getInstance();
-        prefs.load();
-        sliderSound.setValue(prefs.getVolSound());
-        sliderMusic.setValue(prefs.getVolMusic());
     }
 
     @Override

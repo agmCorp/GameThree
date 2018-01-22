@@ -18,7 +18,6 @@ public class LevelSelectScreen extends AbstractScreen {
 
     public LevelSelectScreen() {
         super();
-        GameSettings.getInstance().load();
     }
 
     @Override
