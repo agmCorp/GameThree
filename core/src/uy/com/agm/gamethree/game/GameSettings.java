@@ -10,12 +10,12 @@ import com.badlogic.gdx.utils.ObjectSet;
  */
 
 public class GameSettings {
-    public static final String TAG = GameSettings.class.getName();
-    public static final String SOUND = "sound";
-    public static final String MUSIC = "music";
-    public static final String VOLUME_SOUND = "volSound";
-    public static final String VOLUME_MUSIC = "volMusic";
-    public static final String AVAILABLE_LEVEL = "availableLevel_";
+    private static final String TAG = GameSettings.class.getName();
+    private static final String SOUND = "sound";
+    private static final String MUSIC = "music";
+    private static final String VOLUME_SOUND = "volSound";
+    private static final String VOLUME_MUSIC = "volMusic";
+    private static final String AVAILABLE_LEVEL = "availableLevel_";
 
     public static final GameSettings instance = new GameSettings();
     public boolean sound;

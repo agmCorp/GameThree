@@ -29,7 +29,7 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
-    public enum HeroState {
+    private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
     }
 
