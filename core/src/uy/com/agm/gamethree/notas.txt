@@ -40,7 +40,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 PROXIMOS PASOS
 --------------
 Revisar toda la parte de gamesettings, viendo el acceso publico a los campos. Que se lea y grabe bien.
-hacer la pagina de seleccion de nivel.
 
 PENDIENTES
 --------------
@@ -63,10 +62,8 @@ cuando el usuario apreta el homebutton.
 - En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox). Tambien se puede
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
-- En GameSettings usar constantes para las key!!!!, no quiero que las settings sean public!!!! usar gets
 - agregar transitions
 - ver de usar campos public o metodos get
-
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
