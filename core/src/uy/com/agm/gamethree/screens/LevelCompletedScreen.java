@@ -22,8 +22,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         super();
         this.currentLevel = currentLevel;
         this.nextLevel = currentLevel + 1;
-        GameSettings.instance.availableLevels.add(nextLevel);
-        GameSettings.instance.save();
+        GameSettings.getInstance().addAvailableLevel(nextLevel);
+        GameSettings.getInstance().save();
     }
 
     @Override

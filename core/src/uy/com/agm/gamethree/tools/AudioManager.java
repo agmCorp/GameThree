@@ -31,17 +31,17 @@ public class AudioManager {
     }
 
     public void play(Sound sound, float volume, float pitch, float pan) {
-        if (GameSettings.instance.sound) {
-            sound.play(GameSettings.instance.volSound * volume, pitch, pan);
+        if (GameSettings.getInstance().getSound()) {
+            sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }
     }
 
     public void play(Music music) {
         playingMusic = music;
 
-        if (GameSettings.instance.music) {
+        if (GameSettings.getInstance().getMusic()) {
             music.setLooping(true);
-            music.setVolume(GameSettings.instance.volMusic);
+            music.setVolume(GameSettings.getInstance().getVolMusic());
             music.play();
         }
     }
@@ -56,8 +56,8 @@ public class AudioManager {
 
     public void onSettingsUpdated() {
         if (playingMusic != null) {
-            playingMusic.setVolume(GameSettings.instance.volMusic);
-            if (GameSettings.instance.music) {
+            playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
+            if (GameSettings.getInstance().getMusic()) {
                 if (!playingMusic.isPlaying()) {
                     playingMusic.play();
                 }

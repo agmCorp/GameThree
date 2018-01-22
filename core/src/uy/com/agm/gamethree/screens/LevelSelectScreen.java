@@ -18,7 +18,7 @@ public class LevelSelectScreen extends AbstractScreen {
 
     public LevelSelectScreen() {
         super();
-        GameSettings.instance.load();
+        GameSettings.getInstance().load();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LevelSelectScreen extends AbstractScreen {
         table.add(titleLabel).center();
 
         Label levelLabel;
-        for (int level : GameSettings.instance.availableLevels) {
+        for (int level : GameSettings.getInstance().getAvailableLevels()) {
             // Define our labels based on labelStyle
             table.row();
             levelLabel = new Label("Play level " + level, labelStyleNormal);

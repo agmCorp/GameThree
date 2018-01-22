@@ -26,7 +26,7 @@ public class GameThree extends Game {
         Assets.instance.init(new AssetManager());
 
         // Load preferences and settings
-        GameSettings.instance.load();
+        GameSettings.getInstance().load();
 
         // Constructs a new SpriteBatch
         batch = new SpriteBatch();

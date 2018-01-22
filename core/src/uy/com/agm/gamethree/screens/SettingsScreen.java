@@ -33,7 +33,7 @@ public class SettingsScreen extends AbstractScreen {
 
     public SettingsScreen() {
         super();
-        prefs = GameSettings.instance;
+        prefs = GameSettings.getInstance();
         sliderBackgroundTex = new Texture(Gdx.files.internal(Constants.SLIDER_BACKGROUND));
         sliderKnobTex = new Texture(Gdx.files.internal(Constants.SLIDER_KNOB));
     }
@@ -131,24 +131,24 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void saveSliderMusic() {
-        prefs.volMusic = sliderMusic.getValue();
-        prefs.music = (sliderMusic.getValue() <= 0.0f)? false : true;
+        prefs.setVolMusic(sliderMusic.getValue());
+        prefs.setMusic((sliderMusic.getValue() <= 0.0f)? false : true);
         prefs.save();
         AudioManager.instance.onSettingsUpdated();
     }
 
     private void saveSliderSound() {
-        prefs.volSound = sliderSound.getValue();
-        prefs.sound = (sliderSound.getValue() <= 0.0f)? false : true;
+        prefs.setVolSound(sliderSound.getValue());
+        prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
         prefs.save();
         AudioManager.instance.onSettingsUpdated();
     }
 
     private void loadSettings () {
-        GameSettings prefs = GameSettings.instance;
+        GameSettings prefs = GameSettings.getInstance();
         prefs.load();
-        sliderSound.setValue(prefs.volSound);
-        sliderMusic.setValue(prefs.volMusic);
+        sliderSound.setValue(prefs.getVolSound());
+        sliderMusic.setValue(prefs.getVolMusic());
     }
 
     @Override
