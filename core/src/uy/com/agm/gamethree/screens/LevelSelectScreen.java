@@ -1,64 +1,68 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
 /**
- * Created by AGM on 1/18/2018.
+ * Created by AGM on 12/23/2017.
  */
 
 public class LevelSelectScreen extends AbstractScreen {
     private static final String TAG = LevelSelectScreen.class.getName();
 
-    private Texture txtrBg;
-    private Texture txtrBack;
-    private Texture txtrLevel1;
-    private Texture txtrLevel2;
-
     public LevelSelectScreen() {
         super();
-        txtrBg   = new Texture( Gdx.files.internal("scene2d/level_select_bg.png") );
-        txtrBack = new Texture( Gdx.files.internal("scene2d/btn_back.png") );
-        txtrLevel1 = new Texture( Gdx.files.internal("scene2d/btn_level_1.png") );
-        txtrLevel2 = new Texture( Gdx.files.internal("scene2d/btn_level_2.png") );
+        GameSettings.instance.load();
     }
 
     @Override
     public void buildStage() {
+        // Personal fonts
+        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig.font = Assets.instance.fonts.defaultBig;
 
-        // Adding actors
-        Image bg = new Image(txtrBg);
-        addActor(bg);
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.instance.fonts.defaultNormal;
 
-        ImageButton btnBack = UIFactory.createButton(txtrBack);
-        btnBack.setPosition(260.f, 40.f, Align.center);
-        addActor(btnBack);
+        // Define our labels based on labelStyle
+        Label titleLabel = new Label("Select level", labelStyleBig);
+        Label backLabel = new Label("Back to menu", labelStyleNormal);
 
-        ImageButton btnLevel1 = UIFactory.createButton(txtrLevel1);
-        btnLevel1.setPosition(100.f, 100.f, Align.center);
-        addActor(btnLevel1);
+        // Set table structure
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
+        table.add(titleLabel).center();
 
-        ImageButton btnLevel2 = UIFactory.createButton(txtrLevel2);
-        btnLevel2.setPosition(220.f, 100.f, Align.center);
-        addActor(btnLevel2);
+        Label levelLabel;
+        for (int level : GameSettings.instance.availableLevels) {
+            // Define our labels based on labelStyle
+            table.row();
+            levelLabel = new Label("Play level " + level, labelStyleNormal);
+            table.add(levelLabel).padTop(Constants.PAD_TOP).center();
 
-        btnBack.addListener( UIFactory.createListener( ScreenEnum.MAIN_MENU ) );
-        btnLevel1.addListener( UIFactory.createListener(ScreenEnum.GAME, 1) );
-        btnLevel2.addListener( UIFactory.createListener(ScreenEnum.GAME, 2) );
+            // Events
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level));
+        }
+
+        table.row();
+        table.add(backLabel).padTop(Constants.PAD_TOP).center();
+
+        // Events
+        backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+
+        // Adds created table to stage
+        addActor(table);
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        txtrBg.dispose();
-        txtrBack.dispose();
-        txtrLevel1.dispose();
-        txtrLevel2.dispose();
     }
 }

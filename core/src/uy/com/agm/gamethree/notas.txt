@@ -64,6 +64,9 @@ cuando el usuario apreta el homebutton.
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - En GameSettings usar constantes para las key!!!!, no quiero que las settings sean public!!!! usar gets
+- agregar transitions
+- ver de usar campos public o metodos get
+
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/

@@ -11,6 +11,11 @@ import com.badlogic.gdx.utils.ObjectSet;
 
 public class GameSettings {
     public static final String TAG = GameSettings.class.getName();
+    public static final String SOUND = "sound";
+    public static final String MUSIC = "music";
+    public static final String VOLUME_SOUND = "volSound";
+    public static final String VOLUME_MUSIC = "volMusic";
+    public static final String AVAILABLE_LEVEL = "availableLevel_";
 
     public static final GameSettings instance = new GameSettings();
     public boolean sound;
@@ -27,10 +32,10 @@ public class GameSettings {
     }
 
     public void load () {
-        sound = prefs.getBoolean("sound", true);
-        music = prefs.getBoolean("music", true);
-        volSound = MathUtils.clamp(prefs.getFloat("volSound", Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
-        volMusic = MathUtils.clamp(prefs.getFloat("volMusic", Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
+        sound = prefs.getBoolean(SOUND, true);
+        music = prefs.getBoolean(MUSIC, true);
+        volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
+        volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
 
         availableLevels = new ObjectSet<Integer>();
         availableLevels.add(1); // Default level
@@ -39,27 +44,27 @@ public class GameSettings {
         int level = 2;
         boolean availableLevel;
         do {
-            availableLevel = prefs.getBoolean("availableLevel_" + level, false);
+            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false);
             if (availableLevel) {
                 availableLevels.add(level);
                 level++;
             }
         } while (availableLevel);
 
-        Gdx.app.debug(TAG, "sound " + sound);
-        Gdx.app.debug(TAG, "music " + music);
-        Gdx.app.debug(TAG, "volSound " + volSound);
-        Gdx.app.debug(TAG, "volMusic " + volMusic);
-        Gdx.app.debug(TAG, "availableLevels " + availableLevels.toString("|"));
+        Gdx.app.debug(TAG, SOUND + " " + sound);
+        Gdx.app.debug(TAG, MUSIC + " " + music);
+        Gdx.app.debug(TAG, VOLUME_SOUND + " " + volSound);
+        Gdx.app.debug(TAG, VOLUME_MUSIC + " " + volMusic);
+        Gdx.app.debug(TAG, AVAILABLE_LEVEL + " " + availableLevels.toString(", "));
    }
 
     public void save () {
-        prefs.putBoolean("sound", sound);
-        prefs.putBoolean("music", music);
-        prefs.putFloat("volSound", volSound);
-        prefs.putFloat("volMusic", volMusic);
+        prefs.putBoolean(SOUND, sound);
+        prefs.putBoolean(MUSIC, music);
+        prefs.putFloat(VOLUME_SOUND, volSound);
+        prefs.putFloat(VOLUME_MUSIC, volMusic);
         for(Integer level : availableLevels) {
-            prefs.putBoolean("availableLevel_" + level, true);
+            prefs.putBoolean(AVAILABLE_LEVEL + level, true);
         }
         prefs.flush();
     }
