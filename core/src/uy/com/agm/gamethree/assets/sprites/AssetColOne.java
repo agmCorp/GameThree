@@ -22,7 +22,7 @@ public class AssetColOne {
 
         // Animation
         regions = atlas.findRegions("colOne");
-        colOneAnimation = new Animation(1.0f / 16.0f, regions);
+        colOneAnimation = new Animation(0.3f / 4.0f, regions);
         regions.clear();
     }
 
