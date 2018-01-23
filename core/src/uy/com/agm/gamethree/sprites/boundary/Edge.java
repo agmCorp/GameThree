@@ -28,9 +28,9 @@ public class Edge {
         this.screen = screen;
         this.world = screen.getWorld();
         if (isUpper) {
-            this.bounds = new Rectangle(0, screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2 - Constants.EDGE_HEIGHT_METERS, Constants.EDGE_WIDTH_METERS, Constants.EDGE_HEIGHT_METERS);
+            this.bounds = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - Constants.EDGE_HEIGHT_METERS, Constants.EDGE_WIDTH_METERS, Constants.EDGE_HEIGHT_METERS);
         } else {
-            this.bounds = new Rectangle(0, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2, Constants.EDGE_WIDTH_METERS, Constants.EDGE_HEIGHT_METERS);
+            this.bounds = new Rectangle(0, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2, Constants.EDGE_WIDTH_METERS, Constants.EDGE_HEIGHT_METERS);
         }
         defineEdge();
         start();

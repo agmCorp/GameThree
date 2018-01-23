@@ -21,8 +21,8 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                finalEnemy = new FinalEnemyLevelOne(screen, screen.gameCam.position.x,
-                        screen.gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS -
+                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
+                        screen.getGameViewPort().getWorldHeight() * Constants.WORLD_SCREENS -
                                 Constants.FINALLEVELONE_HEIGHT_METERS + Constants.FINALLEVELONE_OFFSET_METERS);
                 break;
             default:

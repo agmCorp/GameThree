@@ -320,7 +320,7 @@ public class Hero extends Sprite {
         heroStateTimer += dt;
 
         // We reach the center of the screen
-        if (b2body.getPosition().y >= screen.gameCam.position.y) {
+        if (b2body.getPosition().y >= screen.getGameCam().position.y) {
             // Stop motion
             stop();
 
@@ -330,7 +330,7 @@ public class Hero extends Sprite {
         } else {
             // We move Hero from the actual position to the middle of the screen.
             tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.gameCam.position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
+            Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
             b2body.setLinearVelocity(tmp);
         }
     }
@@ -349,11 +349,11 @@ public class Hero extends Sprite {
 
         // We move Hero from the actual position to the bottom of the screen.
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
         b2body.setLinearVelocity(tmp);
 
         // If we reach the bottom edge of the screen, we set Hero as not active in the simulation.
-        float camBottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+        float camBottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
         float heroUpperEdge = getY() + getHeight();
 
         // Beyond bottom edge
@@ -401,7 +401,7 @@ public class Hero extends Sprite {
         stop();
 
         // Be careful, we broke the simulation because Hero is teleported.
-        b2body.setTransform(screen.gameCam.position.x, screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 4, b2body.getAngle());
+        b2body.setTransform(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4, b2body.getAngle());
 
         // Set Hero active with his initial state
         b2body.setActive(true);

@@ -560,7 +560,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             int option = MathUtils.random(1, 3);
 
             if (velY > 0.0f) {
-                if (x < screen.gameCam.position.x) {
+                if (x < screen.getGameCam().position.x) {
                     // We are walking UP along the LEFT EDGE
                     switch (option) {
                         case 1: // go back
@@ -589,7 +589,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 }
             } else {
                 if (velY < 0.0f) {
-                    if (x < screen.gameCam.position.x) {
+                    if (x < screen.getGameCam().position.x) {
                         // We are walking DOWN along the LEFT EDGE
                         switch (option) {
                             case 1: // go back
@@ -619,7 +619,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 } else {
                     if (velX != 0.0f) { // velY == 0
                         if (velX > 0.0f) {
-                            if (y < screen.gameCam.position.y) {
+                            if (y < screen.getGameCam().position.y) {
                                 // We are walking to the RIGHT along the FLOOR EDGE
                                 switch (option) {
                                     case 1: // go back
@@ -647,7 +647,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                                 }
                             }
                         } else if (velX < 0.0f) {
-                            if (y < screen.gameCam.position.y) {
+                            if (y < screen.getGameCam().position.y) {
                                 // We are walking to the LEFT along the FLOOR EDGE
                                 switch (option) {
                                     case 1: // go back

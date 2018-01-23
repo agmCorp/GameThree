@@ -49,8 +49,8 @@ public class PlayScreen extends AbstractScreen {
     private float levelCompletedTimer;
 
     // Basic playscreen variables
-    public OrthographicCamera gameCam;
-    public Viewport gameViewPort;
+    private OrthographicCamera gameCam;
+    private Viewport gameViewPort;
     private Hud hud;
 
     // TiledEditor map variable
@@ -423,6 +423,14 @@ public class PlayScreen extends AbstractScreen {
 
     public World getWorld() {
         return world;
+    }
+
+    public OrthographicCamera getGameCam() {
+        return gameCam;
+    }
+
+    public Viewport getGameViewPort() {
+        return gameViewPort;
     }
 
     public Hud getHud() {

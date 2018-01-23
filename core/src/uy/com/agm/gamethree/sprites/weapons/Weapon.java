@@ -57,8 +57,8 @@ public abstract class Weapon extends Sprite {
         * random errors if you try to access its b2body.
         */
         if (!isDestroyed()) {
-            float upperEdge = screen.gameCam.position.y + screen.gameViewPort.getWorldHeight() / 2;
-            float bottomEdge = screen.gameCam.position.y - screen.gameViewPort.getWorldHeight() / 2;
+            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (!(bottomEdge <= getY() + getHeight() && getY() <= upperEdge)) {
                 world.destroyBody(b2body);
