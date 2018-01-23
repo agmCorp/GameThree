@@ -22,7 +22,7 @@ public class MainMenuScreen extends AbstractScreen {
     public MainMenuScreen() {
         super();
         //  Start playing music
-        AudioManager.instance.play(Assets.instance.music.songMainMenu);
+        AudioManager.instance.play(Assets.instance.music.getSongMainMenu());
     }
 
     @Override
