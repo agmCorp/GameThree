@@ -450,8 +450,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // Death animation
         stateFinalEnemyTimer = 0;
 
-        // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a morir
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOneExplosion());
 
         // Set score
         screen.getHud().addScore(Constants.FINALLEVELONE_SCORE);
@@ -465,8 +465,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             // Exploding animation
             explosionFXStateTimer = 0;
 
-            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a explotar
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOneExplosion());
 
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;

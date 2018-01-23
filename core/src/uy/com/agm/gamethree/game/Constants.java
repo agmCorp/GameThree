@@ -91,6 +91,7 @@ public class Constants {
     public static final String FX_FILE_SHOW_UP_POWERFOUR = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_EXPLOSION = "audio/sounds/finalEnemyLevelOneExplosion.ogg";
     public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
     public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
 
