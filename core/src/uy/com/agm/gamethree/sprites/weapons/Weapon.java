@@ -77,7 +77,7 @@ public abstract class Weapon extends Sprite {
     }
 
     public void onBounce() {
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());// TODO RUIDO DE REBOTE
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBoing());
         reverseVelocity(false, true);
     }
 

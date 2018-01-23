@@ -35,6 +35,7 @@ public class AssetSounds {
     private Sound finalLevelOnePowerUp;
     private Sound finalLevelOnePowerDown;
     private Sound levelCompleted;
+    private Sound boing;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
@@ -60,6 +61,7 @@ public class AssetSounds {
         finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
         levelCompleted = am.get(Constants.FX_FILE_LEVEL_COMPLETED, Sound.class);
+        boing = am.get(Constants.FX_FILE_BOUNCE, Sound.class);
     }
 
     public Sound getBump() {
@@ -152,5 +154,9 @@ public class AssetSounds {
 
     public Sound getLevelCompleted() {
         return levelCompleted;
+    }
+
+    public Sound getBoing() {
+        return  boing;
     }
 }
