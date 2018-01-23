@@ -20,11 +20,13 @@ public class AssetSounds {
     private Sound hit;
     private Sound openPowerBox;
     private Sound levelTimer;
+    private Sound pickUpColOne;
     private Sound pickUpPowerOne;
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
     private Sound powerDown;
     private Sound powerTimer;
+    private Sound showUpColOne;
     private Sound showUpPowerOne;
     private Sound showUpPowerTwo;
     private Sound showUpPowerThree;
@@ -41,11 +43,13 @@ public class AssetSounds {
         hit = am.get(Constants.FX_FILE_HIT, Sound.class);
         openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         levelTimer = am.get(Constants.FX_FILE_LEVEL_TIMER, Sound.class);
+        pickUpColOne = am.get(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
         pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         pickUpPowerTwo = am.get(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         pickUpPowerThree = am.get(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
         powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
         powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
+        showUpColOne = am.get(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
@@ -86,6 +90,10 @@ public class AssetSounds {
         return levelTimer;
     }
 
+    public Sound getPickUpColOne() {
+        return pickUpColOne;
+    }
+
     public Sound getPickUpPowerOne() {
         return pickUpPowerOne;
     }
@@ -104,6 +112,10 @@ public class AssetSounds {
 
     public Sound getPowerTimer() {
         return powerTimer;
+    }
+
+    public Sound getShowUpColOne() {
+        return showUpColOne;
     }
 
     public Sound getShowUpPowerOne() {

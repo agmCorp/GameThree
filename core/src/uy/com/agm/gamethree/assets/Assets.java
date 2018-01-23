@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Disposable;
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
+import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
@@ -56,6 +57,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetEnemyOne enemyOne;
     private AssetEnemyTwo enemyTwo;
     private AssetPowerBox powerBox;
+    private AssetColOne colOne;
     private AssetPowerOne powerOne;
     private AssetPowerTwo powerTwo;
     private AssetPowerThree powerThree;
@@ -112,11 +114,13 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_HIT, Sound.class);
         assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         assetManager.load(Constants.FX_FILE_LEVEL_TIMER, Sound.class);
+        assetManager.load(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
         assetManager.load(Constants.FX_FILE_POWER_DOWN, Sound.class);
         assetManager.load(Constants.FX_FILE_POWER_TIMER, Sound.class);
+        assetManager.load(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
@@ -148,6 +152,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyOne = new AssetEnemyOne(atlas);
         enemyTwo = new AssetEnemyTwo(atlas);
         powerBox = new AssetPowerBox(atlas);
+        colOne = new AssetColOne(atlas);
         powerOne = new AssetPowerOne(atlas);
         powerTwo = new AssetPowerTwo(atlas);
         powerThree = new AssetPowerThree(atlas);
@@ -201,6 +206,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetPowerBox getPowerBox() {
         return powerBox;
+    }
+
+    public AssetColOne getColOne() {
+        return colOne;
     }
 
     public AssetPowerOne getPowerOne() {

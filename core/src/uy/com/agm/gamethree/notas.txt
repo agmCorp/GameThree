@@ -65,7 +65,6 @@ cuando el usuario apreta el homebutton.
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
-- pasar a get assetssounds y assets con derivados.
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
