@@ -17,7 +17,7 @@ public class AssetMaps {
 
     public AssetMaps(AssetManager am) {
         mapLevelOne = am.get(Constants.MAP_FILE_LEVEL_ONE);
-        if (Constants.DEBUG_MODE) {
+        if (Constants.HIDE_BACKGROUND) {
             MapLayer floor = mapLevelOne.getLayers().get("floor");
             mapLevelOne.getLayers().remove(floor);
         }
