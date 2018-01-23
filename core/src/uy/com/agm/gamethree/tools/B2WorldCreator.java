@@ -12,6 +12,7 @@ import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.items.collectibles.ColOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
@@ -121,6 +122,9 @@ public class B2WorldCreator {
         if (!gameThreeActorsToCreate.isEmpty()) {
             GameThreeActorDef gameThreeActorDef = gameThreeActorsToCreate.poll(); // Similar to pop but for a queue, removes the element
 
+            if (gameThreeActorDef.getType() == ColOne.class) {
+                items.add(new ColOne(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
+            }
             if (gameThreeActorDef.getType() == PowerOne.class) {
                 items.add(new PowerOne(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
             }

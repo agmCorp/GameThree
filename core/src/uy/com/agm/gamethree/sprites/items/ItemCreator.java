@@ -17,6 +17,9 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public class ItemCreator {
     public static void getItemOnHit(MapObject object, B2WorldCreator creator, float x, float y) {
         MapProperties mp = object.getProperties();
+        if (mp.containsKey("colOne")) {
+            creator.createGameThreeActor(new GameThreeActorDef(x, y, PowerOne.class));
+        }
         if (mp.containsKey("powerOne")) {
             creator.createGameThreeActor(new GameThreeActorDef(x, y, PowerOne.class));
         }
