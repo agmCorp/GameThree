@@ -32,7 +32,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -74,11 +74,13 @@ public class Constants {
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_LEVEL_TIMER = "audio/sounds/powerTimer.ogg"; // TODO BUSCAR UN AUDIO
+    public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpPowerOne.ogg"; // TODO
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
+    public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpPowerOne.ogg"; // TODO
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO
@@ -145,6 +147,16 @@ public class Constants {
 
     // Notification (seconds) before power down
     public static final int POWER_TIMER_NOTIFICATION = 3;
+
+    // ColOne (meters = pixels * resizeFactor / PPM)
+    public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float COLONE_VELOCITY_X = 0.7f;
+    public static final float COLONE_VELOCITY_Y = 0.0f;
+    public static final float COLONE_WAITING_SECONDS = 5.0f;
+    public static final float COLONE_FADING_SECONDS = 5.0f;
+    public static final float COLONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
+    public static final float COLONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
+    public static final int COLONE_SCORE = 25;
 
     // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

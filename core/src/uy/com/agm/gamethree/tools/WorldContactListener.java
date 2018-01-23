@@ -10,8 +10,8 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.powerup.Items.Item;
-import uy.com.agm.gamethree.sprites.powerup.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.items.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileobjects.InteractiveTileObject;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 

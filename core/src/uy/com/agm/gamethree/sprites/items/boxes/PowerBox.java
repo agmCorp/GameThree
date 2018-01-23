@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.powerup.boxes;
+package uy.com.agm.gamethree.sprites.items.boxes;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.powerup.PowerUpCreator;
+import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.game.Constants;
 
@@ -82,7 +82,7 @@ public class PowerBox extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        PowerUpCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+        ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
     protected void definePowerBox() {

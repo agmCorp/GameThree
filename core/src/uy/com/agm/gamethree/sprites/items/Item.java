@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.powerup.Items;
+package uy.com.agm.gamethree.sprites.items;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;

@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.powerup.Items;
+package uy.com.agm.gamethree.sprites.items.collectibles;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,38 +16,38 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
- * Created by AGM on 12/14/2017.
+ * Created by amorales on 23/1/2018.
  */
 
-public class PowerOne extends Item {
-    private static final String TAG = PowerOne.class.getName();
+public class ColOne extends Item {
+    private static final String TAG = ColOne.class.getName();
 
     private float stateTimer;
     private float stateWaitingTimer;
     private float stateFadingTimer;
-    private Animation powerOneAnimation;
+    private Animation colOneAnimation;
 
-    // Ghost mode
-    public PowerOne(PlayScreen screen, float x, float y) {
+    public ColOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
+       // colOneAnimation = Assets.instance.colOne.colOneAnimation; todo
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
+        setBounds(getX(), getY(), Constants.COLONE_WIDTH_METERS, Constants.COLONE_HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity.set(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * Constants.COLONE_VELOCITY_X, MathUtils.randomSign() * Constants.COLONE_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.showUpPowerOne);
+        //AudioManager.getInstance().play(Assets.instance.sounds.getShowUpColOne()); todo
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PowerOne extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERONE_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(Constants.COLONE_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -96,17 +96,17 @@ public class PowerOne extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, ColOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) colOneAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateWaitingTimer += dt;
-        if (stateWaitingTimer > Constants.POWERONE_WAITING_SECONDS) {
+        if (stateWaitingTimer > Constants.COLONE_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -115,23 +115,23 @@ public class PowerOne extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, ColOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
+        setRegion((TextureRegion) colOneAnimation.getKeyFrame(stateTimer, true));
         stateTimer += dt;
 
         stateFadingTimer += dt;
-        float alpha = 1 - stateFadingTimer / Constants.POWERONE_FADING_SECONDS;
+        float alpha = 1 - stateFadingTimer / Constants.COLONE_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTimer > Constants.POWERONE_FADING_SECONDS) {
+        if (stateFadingTimer > Constants.COLONE_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -142,39 +142,10 @@ public class PowerOne extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne);
-
-        // Show the power's name and its countdown
-        Hud hud = screen.getHud();
-        hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+       // AudioManager.getInstance().play(Assets.instance.sounds.getPickUpColOne()); todo
 
         // Set score
-        hud.addScore(Constants.POWERONE_SCORE);
-
-        // Disable previous power (if any)
-        Hero hero = screen.getPlayer();
-        hero.powerDown();
-
-        // Hero can't collide with enemies nor bullets
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT;
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT;
-        for (Fixture fixture : hero.getB2body().getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-
-        // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
-
-        // Only to set width and height of our spritePower
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
-
-        // Apply effect
-        hero.applyPowerFX(Assets.instance.ghostMode.ghostModeAnimation, spritePower, true);
+        screen.getHud().addScore(Constants.COLONE_SCORE);
 
         currentState = State.FINISHED;
     }
