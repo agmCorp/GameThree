@@ -37,8 +37,8 @@ public class PowerThree extends Item {
     public PowerThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerThreeAnimation = Assets.instance.powerThree.getPowerThreeAnimation();
-        bulletAnimation = Assets.instance.bulletA.getBulletAAnimation();
+        powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
+        bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
         fireDelay = Constants.POWERTHREE_FIRE_DELAY;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTimer = 0;
@@ -52,7 +52,7 @@ public class PowerThree extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getShowUpPowerThree());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerThree());
     }
 
     @Override
@@ -147,7 +147,7 @@ public class PowerThree extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerThree());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerThree());
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();

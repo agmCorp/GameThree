@@ -93,11 +93,11 @@ public class Hero extends Sprite {
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
-        heroStand = Assets.instance.hero.getHeroStand();
-        heroMovingUpAnimation = Assets.instance.hero.getHeroMovingUpAnimation();
-        heroMovingDownAnimation = Assets.instance.hero.getHeroMovingDownAnimation();
-        heroMovingLeftRightAnimation = Assets.instance.hero.getHeroMovingLeftRightAnimation();
-        heroDeadAnimation = Assets.instance.hero.getHeroDeadAnimation();
+        heroStand = Assets.getInstance().getHero().getHeroStand();
+        heroMovingUpAnimation = Assets.getInstance().getHero().getHeroMovingUpAnimation();
+        heroMovingDownAnimation = Assets.getInstance().getHero().getHeroMovingDownAnimation();
+        heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
+        heroDeadAnimation = Assets.getInstance().getHero().getHeroDeadAnimation();
         heroStateTimer = 0;
         playAgainTimer = 0;
         gameOverTimer = 0;
@@ -195,7 +195,7 @@ public class Hero extends Sprite {
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
-            AudioManager.instance.play(Assets.instance.sounds.getPowerDown());
+            AudioManager.instance.play(Assets.getInstance().getSounds().getPowerDown());
         }
     }
 
@@ -429,7 +429,7 @@ public class Hero extends Sprite {
     public void onDead() {
         // Stop music and play sound effect
         AudioManager.instance.stopMusic();
-        AudioManager.instance.play(Assets.instance.sounds.getDead());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getDead());
 
         // Hero can't collide with anything
         Filter filter = new Filter();

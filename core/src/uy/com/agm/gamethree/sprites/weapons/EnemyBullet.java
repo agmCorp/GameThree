@@ -28,7 +28,7 @@ public class EnemyBullet extends Weapon {
         super(screen, x, y, Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
 
         // Animation
-        enemyBulletAnimation = Assets.instance.enemyBullet.getEnemyBulletAnimation();
+        enemyBulletAnimation = Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation();
 
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYBULLET_WIDTH_METERS, Constants.ENEMYBULLET_HEIGHT_METERS);
@@ -41,7 +41,7 @@ public class EnemyBullet extends Weapon {
         Vector2Util.goToTarget(velocity, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
+        AudioManager.instance.play(Assets.getInstance().getSounds().getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
     }
 
     @Override

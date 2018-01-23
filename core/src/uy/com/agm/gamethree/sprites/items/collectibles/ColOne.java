@@ -35,7 +35,7 @@ public class ColOne extends Item {
     public ColOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-       // colOneAnimation = Assets.instance.colOne.colOneAnimation; todo
+       // colOneAnimation = Assets.getInstance().colOne.colOneAnimation; todo
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -47,7 +47,7 @@ public class ColOne extends Item {
         velocity.set(MathUtils.randomSign() * Constants.COLONE_VELOCITY_X, MathUtils.randomSign() * Constants.COLONE_VELOCITY_Y);
 
         // Sound FX
-        //AudioManager.getInstance().play(Assets.instance.sounds.getShowUpColOne()); todo
+        //AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpColOne()); todo
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ColOne extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-       // AudioManager.getInstance().play(Assets.instance.sounds.getPickUpColOne()); todo
+       // AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne()); todo
 
         // Set score
         screen.getHud().addScore(Constants.COLONE_SCORE);

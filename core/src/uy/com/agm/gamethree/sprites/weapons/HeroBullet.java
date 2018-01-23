@@ -45,14 +45,14 @@ public class HeroBullet extends Weapon {
         if (animation != null) {
             heroBulletAnimation = animation;
         } else {
-            heroBulletAnimation = Assets.instance.heroBullet.getHeroBulletAnimation();
+            heroBulletAnimation = Assets.getInstance().getHeroBullet().getHeroBulletAnimation();
         }
 
         stateTimer = 0;
         currentState = State.SHOT;
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+        AudioManager.instance.play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
 
         // Temp GC friendly vector
         tmp = new Vector2();

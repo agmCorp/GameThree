@@ -64,11 +64,11 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        powerBoxStand = Assets.instance.powerBox.getPowerBoxStand();
-        powerBoxDamagedLittle = Assets.instance.powerBox.getPowerBoxDamagedLittle();
-        powerBoxDamagedMedium = Assets.instance.powerBox.getPowerBoxDamagedMedium();
-        powerBoxDamagedHard = Assets.instance.powerBox.getPowerBoxDamagedHard();
-        explosionAnimation = Assets.instance.explosionB.getExplosionBAnimation();
+        powerBoxStand = Assets.getInstance().getPowerBox().getPowerBoxStand();
+        powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getPowerBoxDamagedLittle();
+        powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getPowerBoxDamagedMedium();
+        powerBoxDamagedHard = Assets.getInstance().getPowerBox().getPowerBoxDamagedHard();
+        explosionAnimation = Assets.getInstance().getExplosionB().getExplosionBAnimation();
 
         currentState = State.WAITING;
         damage = 0;
@@ -151,7 +151,7 @@ public class PowerBox extends Sprite {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getOpenPowerBox());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getOpenPowerBox());
 
         // Set score
         screen.getHud().addScore(Constants.POWERBOX_SCORE);
@@ -198,7 +198,7 @@ public class PowerBox extends Sprite {
     }
 
     public void onBump() {
-        AudioManager.instance.play(Assets.instance.sounds.getBump());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getBump());
     }
 
     public void onHit() {
@@ -214,7 +214,7 @@ public class PowerBox extends Sprite {
             getItemOnHit();
             currentState = State.OPENED;
         } else {
-            AudioManager.instance.play(Assets.instance.sounds.getCrack());
+            AudioManager.instance.play(Assets.getInstance().getSounds().getCrack());
             damage++;
         }
     }

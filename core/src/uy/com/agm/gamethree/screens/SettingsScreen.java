@@ -42,10 +42,10 @@ public class SettingsScreen extends AbstractScreen {
     public void buildStage() {
         // Personal fonts
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.instance.fonts.getDefaultBig();
+        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.instance.fonts.getDefaultNormal();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
         Label titleLabel = new Label("Preferences", labelStyleBig);
@@ -119,16 +119,16 @@ public class SettingsScreen extends AbstractScreen {
         int sample = MathUtils.random(1, 4);
         switch (sample) {
             case 1:
-                AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerOne());
+                AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerOne());
                 break;
             case 2:
-                AudioManager.instance.play(Assets.instance.sounds.getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.instance.play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 3:
-                AudioManager.instance.play(Assets.instance.sounds.getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.instance.play(Assets.getInstance().getSounds().getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 4:
-                AudioManager.instance.play(Assets.instance.sounds.getHit());
+                AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
                 break;
         }
     }

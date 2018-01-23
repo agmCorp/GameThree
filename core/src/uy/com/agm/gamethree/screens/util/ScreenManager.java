@@ -18,7 +18,7 @@ public class ScreenManager {
     // Reference to game
     private Game game;
 
-    // Singleton: private constructor
+    // Singleton: prevent instantiation from other classes
     private ScreenManager() {
     }
 

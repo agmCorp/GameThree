@@ -36,7 +36,7 @@ public class PowerOne extends Item {
     public PowerOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerOneAnimation = Assets.instance.powerOne.getPowerOneAnimation();
+        powerOneAnimation = Assets.getInstance().getPowerOne().getPowerOneAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -48,7 +48,7 @@ public class PowerOne extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERONE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERONE_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getShowUpPowerOne());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerOne());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PowerOne extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerOne());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerOne());
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
@@ -169,13 +169,13 @@ public class PowerOne extends Item {
         }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.ghostMode.getGhostModeStand());
+        Sprite spritePower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.ghostMode.getGhostModeAnimation(), spritePower, true);
+        hero.applyPowerFX(Assets.getInstance().getGhostMode().getGhostModeAnimation(), spritePower, true);
 
         currentState = State.FINISHED;
     }

@@ -30,8 +30,8 @@ public class EnemyTwo extends Enemy {
         super(screen, object);
 
         // Animations
-        enemyTwoAnimation = Assets.instance.enemyTwo.getEnemyTwoAnimation();
-        explosionAnimation = Assets.instance.explosionA.getExplosionAAnimation();
+        enemyTwoAnimation = Assets.getInstance().getEnemyTwo().getEnemyTwoAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
@@ -120,7 +120,7 @@ public class EnemyTwo extends Enemy {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getHit());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
 
         // Set score
         screen.getHud().addScore(Constants.ENEMYTWO_SCORE);

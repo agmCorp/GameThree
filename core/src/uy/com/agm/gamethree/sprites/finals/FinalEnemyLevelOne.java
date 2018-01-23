@@ -64,10 +64,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         super(screen, x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
 
         // Animations
-        finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneWalkAnimation();
-        finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneIdleAnimation();
-        finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneShootAnimation();
-        finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneDeathAnimation();
+        finalEnemyLevelOneWalkAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneWalkAnimation();
+        finalEnemyLevelOneIdleAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneIdleAnimation();
+        finalEnemyLevelOneShootAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneShootAnimation();
+        finalEnemyLevelOneDyingAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneDeathAnimation();
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
@@ -93,11 +93,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.getFinalEnemyLevelOnePowerAnimation();
+        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOnePower().getFinalEnemyLevelOnePowerAnimation();
         powerFXStateTimer = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.instance.finalEnemyLevelOnePower.getFinalEnemyLevelOnePowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOnePower().getFinalEnemyLevelOnePowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
         powerFXSprite.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
@@ -108,11 +108,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // -------------------- ExplosionFX --------------------
 
         // ExplosionFX variables initialization
-        explosionFXAnimation = Assets.instance.explosionE.getExplosionEAnimation();
+        explosionFXAnimation = Assets.getInstance().getExplosionE().getExplosionEAnimation();
         explosionFXStateTimer = 0;
 
         // Set the explosion's texture
-        Sprite spriteExplosion = new Sprite(Assets.instance.explosionE.getExplosionEStand());
+        Sprite spriteExplosion = new Sprite(Assets.getInstance().getExplosionE().getExplosionEStand());
 
         // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
         spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIONE_WIDTH_METERS, Constants.EXPLOSIONE_HEIGHT_METERS);
@@ -451,7 +451,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         stateFinalEnemyTimer = 0;
 
         // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a morir
-        AudioManager.instance.play(Assets.instance.sounds.getHit());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
 
         // Set score
         screen.getHud().addScore(Constants.FINALLEVELONE_SCORE);
@@ -466,7 +466,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             explosionFXStateTimer = 0;
 
             // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando comienza a explotar
-            AudioManager.instance.play(Assets.instance.sounds.getHit());
+            AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
 
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
@@ -488,7 +488,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
    private void stateExploding(float dt) {
        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTimer)) {
            // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
-           AudioManager.instance.play(Assets.instance.sounds.getHit());
+           AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
 
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
@@ -514,7 +514,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.instance.play(Assets.instance.sounds.getFinalLevelOnePowerDown());
+            AudioManager.instance.play(Assets.getInstance().getSounds().getFinalLevelOnePowerDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
@@ -534,7 +534,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.instance.play(Assets.instance.sounds.getFinalLevelOnePowerUp());
+            AudioManager.instance.play(Assets.getInstance().getSounds().getFinalLevelOnePowerUp());
         }
     }
 
@@ -542,7 +542,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
             weapon.onTarget();
             damage--;
-            AudioManager.instance.play(Assets.instance.sounds.getOpenPowerBox()); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
+            AudioManager.instance.play(Assets.getInstance().getSounds().getOpenPowerBox()); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
             if (damage <= 0) {
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }

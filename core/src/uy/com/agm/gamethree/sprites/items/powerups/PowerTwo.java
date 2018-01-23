@@ -36,7 +36,7 @@ public class PowerTwo extends Item {
     public PowerTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerTwoAnimation = Assets.instance.powerTwo.getPowerTwoAnimation();
+        powerTwoAnimation = Assets.getInstance().getPowerTwo().getPowerTwoAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -48,7 +48,7 @@ public class PowerTwo extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getShowUpPowerTwo());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerTwo());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PowerTwo extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerTwo());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerTwo());
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
@@ -175,13 +175,13 @@ public class PowerTwo extends Item {
         hero.getB2body().createFixture(fdef).setUserData(hero);
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.shield.getShieldStand());
+        Sprite spritePower = new Sprite(Assets.getInstance().getShield().getShieldStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.shield.getShieldAnimation(), spritePower, false);
+        hero.applyPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spritePower, false);
 
         currentState = State.FINISHED;
     }

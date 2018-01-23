@@ -24,10 +24,10 @@ public class LevelSelectScreen extends AbstractScreen {
     public void buildStage() {
         // Personal fonts
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.instance.fonts.getDefaultBig();
+        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.instance.fonts.getDefaultNormal();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
         Label titleLabel = new Label("Select level", labelStyleBig);

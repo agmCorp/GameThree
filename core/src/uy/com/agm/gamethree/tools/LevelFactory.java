@@ -42,7 +42,7 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                music = Assets.instance.music.getSongLevelOne();
+                music = Assets.getInstance().getMusic().getSongLevelOne();
                 break;
             default:
                 music = null;
@@ -56,7 +56,7 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                map = Assets.instance.maps.getMapLevelOne();
+                map = Assets.getInstance().getMaps().getMapLevelOne();
                 break;
             default:
                 map = null;

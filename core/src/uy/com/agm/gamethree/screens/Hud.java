@@ -80,7 +80,7 @@ public class Hud extends AbstractScreen {
 
         // Personal fonts
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = Assets.instance.fonts.getDefaultSmall();
+        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
         scoreLabel = new Label("SCORE", labelStyle);
@@ -154,7 +154,7 @@ public class Hud extends AbstractScreen {
             if (levelTimer > 0) {
                 levelTimer--;
                 if (levelTimer <= Constants.LEVEL_TIMER_NOTIFICATION) {
-                    AudioManager.instance.play(Assets.instance.sounds.getLevelTimer());
+                    AudioManager.instance.play(Assets.getInstance().getSounds().getLevelTimer());
                 }
             } else {
                 levelTimeUp = true;
@@ -170,7 +170,7 @@ public class Hud extends AbstractScreen {
                 if (powerTimer > 0) {
                     powerTimer--;
                     if (powerTimer <= Constants.POWER_TIMER_NOTIFICATION) {
-                        AudioManager.instance.play(Assets.instance.sounds.getPowerTimer());
+                        AudioManager.instance.play(Assets.getInstance().getSounds().getPowerTimer());
                     }
                     powerValueLabel.setText(String.format("%03d", powerTimer));
                 } else {

@@ -31,8 +31,8 @@ public class EnemyOne extends Enemy {
         super(screen, object);
 
         // Animations
-        enemyOneAnimation = Assets.instance.enemyOne.getEnemyOneAnimation();
-        explosionAnimation = Assets.instance.explosionA.getExplosionAAnimation();
+        enemyOneAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
@@ -125,7 +125,7 @@ public class EnemyOne extends Enemy {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getHit());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
 
         // Set score
         screen.getHud().addScore(Constants.ENEMYONE_SCORE);

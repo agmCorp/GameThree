@@ -23,7 +23,7 @@ public class GameThree extends Game {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         // Load assets
-        Assets.instance.init(new AssetManager());
+        Assets.getInstance().init(new AssetManager());
 
         // Load preferences and settings
         GameSettings.getInstance().load();
@@ -47,7 +47,7 @@ public class GameThree extends Game {
     @Override
     public void dispose() {
         super.dispose();
-        Assets.instance.dispose();
+        Assets.getInstance().dispose();
         batch.dispose();
         shapeRenderer.dispose();
     }

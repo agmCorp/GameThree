@@ -36,7 +36,7 @@ public class PowerFour extends Item {
     public PowerFour(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerFourAnimation = Assets.instance.powerFour.getPowerFourAnimation();
+        powerFourAnimation = Assets.getInstance().getPowerFour().getPowerFourAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -48,7 +48,7 @@ public class PowerFour extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_X, MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.getShowUpPowerFour());
+        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerFour());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PowerFour extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerTwo()); // TODO
+        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerTwo()); // TODO
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
@@ -172,13 +172,13 @@ public class PowerFour extends Item {
         }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.toughMode.getToughModeStand());
+        Sprite spritePower = new Sprite(Assets.getInstance().getToughMode().getToughModeStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.toughMode.getToughModeAnimation(), spritePower, false);
+        hero.applyPowerFX(Assets.getInstance().getToughMode().getToughModeAnimation(), spritePower, false);
 
         currentState = State.FINISHED;
     }

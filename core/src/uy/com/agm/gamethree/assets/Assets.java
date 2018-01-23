@@ -47,39 +47,47 @@ import uy.com.agm.gamethree.game.Constants;
 public class Assets implements Disposable, AssetErrorListener {
     private static final String TAG = Assets.class.getName();
 
-    public static final Assets instance = new Assets();
+    private static Assets instance;
 
     private AssetManager assetManager;
 
-    public AssetFonts fonts;
-    public AssetHero hero;
-    public AssetEnemyOne enemyOne;
-    public AssetEnemyTwo enemyTwo;
-    public AssetPowerBox powerBox;
-    public AssetPowerOne powerOne;
-    public AssetPowerTwo powerTwo;
-    public AssetPowerThree powerThree;
-    public AssetPowerFour powerFour;
-    public AssetExplosionA explosionA;
-    public AssetExplosionB explosionB;
-    public AssetExplosionC explosionC;
-    public AssetExplosionD explosionD;
-    public AssetExplosionE explosionE;
-    public AssetHeroBullet heroBullet;
-    public AssetEnemyBullet enemyBullet;
-    public AssetGhostMode ghostMode;
-    public AssetShield shield;
-    public AssetBulletA bulletA;
-    public AssetToughMode toughMode;
-    public AssetFinalEnemyLevelOne finalEnemyLevelOne;
-    public AssetFinalEnemyLevelOnePower finalEnemyLevelOnePower;
+    private AssetFonts fonts;
+    private AssetHero hero;
+    private AssetEnemyOne enemyOne;
+    private AssetEnemyTwo enemyTwo;
+    private AssetPowerBox powerBox;
+    private AssetPowerOne powerOne;
+    private AssetPowerTwo powerTwo;
+    private AssetPowerThree powerThree;
+    private AssetPowerFour powerFour;
+    private AssetExplosionA explosionA;
+    private AssetExplosionB explosionB;
+    private AssetExplosionC explosionC;
+    private AssetExplosionD explosionD;
+    private AssetExplosionE explosionE;
+    private AssetHeroBullet heroBullet;
+    private AssetEnemyBullet enemyBullet;
+    private AssetGhostMode ghostMode;
+    private AssetShield shield;
+    private AssetBulletA bulletA;
+    private AssetToughMode toughMode;
+    private AssetFinalEnemyLevelOne finalEnemyLevelOne;
+    private AssetFinalEnemyLevelOnePower finalEnemyLevelOnePower;
 
-    public AssetMaps maps;
-    public AssetSounds sounds;
-    public AssetMusic music;
+    private AssetMaps maps;
+    private AssetSounds sounds;
+    private AssetMusic music;
 
     // Singleton: prevent instantiation from other classes
     private Assets() {
+    }
+
+    // Singleton: retrieve instance
+    public static Assets getInstance() {
+        if (instance == null) {
+            instance = new Assets();
+        }
+        return instance;
     }
 
     public void init(AssetManager assetManager) {
@@ -173,5 +181,105 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts.getDefaultSmall().dispose();
         fonts.getDefaultNormal().dispose();
         fonts.getDefaultBig().dispose();
+    }
+
+    public AssetFonts getFonts() {
+        return fonts;
+    }
+
+    public AssetHero getHero() {
+        return hero;
+    }
+
+    public AssetEnemyOne getEnemyOne() {
+        return enemyOne;
+    }
+
+    public AssetEnemyTwo getEnemyTwo() {
+        return enemyTwo;
+    }
+
+    public AssetPowerBox getPowerBox() {
+        return powerBox;
+    }
+
+    public AssetPowerOne getPowerOne() {
+        return powerOne;
+    }
+
+    public AssetPowerTwo getPowerTwo() {
+        return powerTwo;
+    }
+
+    public AssetPowerThree getPowerThree() {
+        return powerThree;
+    }
+
+    public AssetPowerFour getPowerFour() {
+        return powerFour;
+    }
+
+    public AssetExplosionA getExplosionA() {
+        return explosionA;
+    }
+
+    public AssetExplosionB getExplosionB() {
+        return explosionB;
+    }
+
+    public AssetExplosionC getExplosionC() {
+        return explosionC;
+    }
+
+    public AssetExplosionD getExplosionD() {
+        return explosionD;
+    }
+
+    public AssetExplosionE getExplosionE() {
+        return explosionE;
+    }
+
+    public AssetHeroBullet getHeroBullet() {
+        return heroBullet;
+    }
+
+    public AssetEnemyBullet getEnemyBullet() {
+        return enemyBullet;
+    }
+
+    public AssetGhostMode getGhostMode() {
+        return ghostMode;
+    }
+
+    public AssetShield getShield() {
+        return shield;
+    }
+
+    public AssetBulletA getBulletA() {
+        return bulletA;
+    }
+
+    public AssetToughMode getToughMode() {
+        return toughMode;
+    }
+
+    public AssetFinalEnemyLevelOne getFinalEnemyLevelOne() {
+        return finalEnemyLevelOne;
+    }
+
+    public AssetFinalEnemyLevelOnePower getFinalEnemyLevelOnePower() {
+        return finalEnemyLevelOnePower;
+    }
+
+    public AssetMaps getMaps() {
+        return maps;
+    }
+
+    public AssetSounds getSounds() {
+        return sounds;
+    }
+
+    public AssetMusic getMusic() {
+        return music;
     }
 }
