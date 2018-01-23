@@ -41,7 +41,7 @@ public class EnemyBullet extends Weapon {
         Vector2Util.goToTarget(velocity, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.enemyShoot, Constants.SHOOT_MAX_VOLUME);
+        AudioManager.instance.play(Assets.instance.sounds.getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
     }
 
     @Override

@@ -120,7 +120,7 @@ public class EnemyTwo extends Enemy {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.instance.play(Assets.instance.sounds.hit);
+        AudioManager.instance.play(Assets.instance.sounds.getHit());
 
         // Set score
         screen.getHud().addScore(Constants.ENEMYTWO_SCORE);

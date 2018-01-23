@@ -195,7 +195,7 @@ public class Hero extends Sprite {
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
-            AudioManager.instance.play(Assets.instance.sounds.powerDown);
+            AudioManager.instance.play(Assets.instance.sounds.getPowerDown());
         }
     }
 
@@ -429,7 +429,7 @@ public class Hero extends Sprite {
     public void onDead() {
         // Stop music and play sound effect
         AudioManager.instance.stopMusic();
-        AudioManager.instance.play(Assets.instance.sounds.dead);
+        AudioManager.instance.play(Assets.instance.sounds.getDead());
 
         // Hero can't collide with anything
         Filter filter = new Filter();

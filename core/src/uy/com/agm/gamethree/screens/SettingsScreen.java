@@ -119,16 +119,16 @@ public class SettingsScreen extends AbstractScreen {
         int sample = MathUtils.random(1, 4);
         switch (sample) {
             case 1:
-                AudioManager.instance.play(Assets.instance.sounds.pickUpPowerOne);
+                AudioManager.instance.play(Assets.instance.sounds.getPickUpPowerOne());
                 break;
             case 2:
-                AudioManager.instance.play(Assets.instance.sounds.heroShoot, Constants.SHOOT_MAX_VOLUME);
+                AudioManager.instance.play(Assets.instance.sounds.getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 3:
-                AudioManager.instance.play(Assets.instance.sounds.enemyShoot, Constants.SHOOT_MAX_VOLUME);
+                AudioManager.instance.play(Assets.instance.sounds.getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 4:
-                AudioManager.instance.play(Assets.instance.sounds.hit);
+                AudioManager.instance.play(Assets.instance.sounds.getHit());
                 break;
         }
     }

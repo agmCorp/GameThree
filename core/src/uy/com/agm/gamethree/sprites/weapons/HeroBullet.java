@@ -52,7 +52,7 @@ public class HeroBullet extends Weapon {
         currentState = State.SHOT;
 
         // Sound FX
-        AudioManager.instance.play(Assets.instance.sounds.heroShoot, Constants.SHOOT_MAX_VOLUME);
+        AudioManager.instance.play(Assets.instance.sounds.getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
 
         // Temp GC friendly vector
         tmp = new Vector2();

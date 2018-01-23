@@ -12,25 +12,25 @@ import uy.com.agm.gamethree.game.Constants;
 public class AssetSounds {
     private static final String TAG = AssetSounds.class.getName();
 
-    public final Sound bump;
-    public final Sound crack;
-    public final Sound dead;
-    public final Sound enemyShoot;
-    public final Sound heroShoot;
-    public final Sound hit;
-    public final Sound openPowerBox;
-    public final Sound levelTimer;
-    public final Sound pickUpPowerOne;
-    public final Sound pickUpPowerTwo;
-    public final Sound pickUpPowerThree;
-    public final Sound powerDown;
-    public final Sound powerTimer;
-    public final Sound showUpPowerOne;
-    public final Sound showUpPowerTwo;
-    public final Sound showUpPowerThree;
-    public final Sound showUpPowerFour;
-    public final Sound finalLevelOnePowerUp;
-    public final Sound finalLevelOnePowerDown;
+    private Sound bump;
+    private Sound crack;
+    private Sound dead;
+    private Sound enemyShoot;
+    private Sound heroShoot;
+    private Sound hit;
+    private Sound openPowerBox;
+    private Sound levelTimer;
+    private Sound pickUpPowerOne;
+    private Sound pickUpPowerTwo;
+    private Sound pickUpPowerThree;
+    private Sound powerDown;
+    private Sound powerTimer;
+    private Sound showUpPowerOne;
+    private Sound showUpPowerTwo;
+    private Sound showUpPowerThree;
+    private Sound showUpPowerFour;
+    private Sound finalLevelOnePowerUp;
+    private Sound finalLevelOnePowerDown;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
@@ -52,5 +52,81 @@ public class AssetSounds {
         showUpPowerFour = am.get(Constants.FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
         finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
+    }
+
+    public Sound getBump() {
+        return bump;
+    }
+
+    public Sound getCrack() {
+        return crack;
+    }
+
+    public Sound getDead() {
+        return dead;
+    }
+
+    public Sound getEnemyShoot() {
+        return enemyShoot;
+    }
+
+    public Sound getHeroShoot() {
+        return heroShoot;
+    }
+
+    public Sound getHit() {
+        return hit;
+    }
+
+    public Sound getOpenPowerBox() {
+        return openPowerBox;
+    }
+
+    public Sound getLevelTimer() {
+        return levelTimer;
+    }
+
+    public Sound getPickUpPowerOne() {
+        return pickUpPowerOne;
+    }
+
+    public Sound getPickUpPowerTwo() {
+        return pickUpPowerTwo;
+    }
+
+    public Sound getPickUpPowerThree() {
+        return pickUpPowerThree;
+    }
+
+    public Sound getPowerDown() {
+        return powerDown;
+    }
+
+    public Sound getPowerTimer() {
+        return powerTimer;
+    }
+
+    public Sound getShowUpPowerOne() {
+        return showUpPowerOne;
+    }
+
+    public Sound getShowUpPowerTwo() {
+        return showUpPowerTwo;
+    }
+
+    public Sound getShowUpPowerThree() {
+        return showUpPowerThree;
+    }
+
+    public Sound getShowUpPowerFour() {
+        return showUpPowerFour;
+    }
+
+    public Sound getFinalLevelOnePowerUp() {
+        return finalLevelOnePowerUp;
+    }
+
+    public Sound getFinalLevelOnePowerDown() {
+        return finalLevelOnePowerDown;
     }
 }

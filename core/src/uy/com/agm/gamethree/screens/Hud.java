@@ -154,7 +154,7 @@ public class Hud extends AbstractScreen {
             if (levelTimer > 0) {
                 levelTimer--;
                 if (levelTimer <= Constants.LEVEL_TIMER_NOTIFICATION) {
-                    AudioManager.instance.play(Assets.instance.sounds.levelTimer);
+                    AudioManager.instance.play(Assets.instance.sounds.getLevelTimer());
                 }
             } else {
                 levelTimeUp = true;
@@ -170,7 +170,7 @@ public class Hud extends AbstractScreen {
                 if (powerTimer > 0) {
                     powerTimer--;
                     if (powerTimer <= Constants.POWER_TIMER_NOTIFICATION) {
-                        AudioManager.instance.play(Assets.instance.sounds.powerTimer);
+                        AudioManager.instance.play(Assets.instance.sounds.getPowerTimer());
                     }
                     powerValueLabel.setText(String.format("%03d", powerTimer));
                 } else {
