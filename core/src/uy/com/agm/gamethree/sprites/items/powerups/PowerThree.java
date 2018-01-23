@@ -52,7 +52,7 @@ public class PowerThree extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerThree());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerThree());
     }
 
     @Override
@@ -147,7 +147,7 @@ public class PowerThree extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerThree());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerThree());
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();

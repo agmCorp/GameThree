@@ -48,7 +48,7 @@ public class PowerFour extends Item {
         velocity.set(MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_X, MathUtils.randomSign() * Constants.POWERFOUR_VELOCITY_Y);
 
         // Sound FX
-        AudioManager.instance.play(Assets.getInstance().getSounds().getShowUpPowerFour());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerFour());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PowerFour extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerTwo()); // TODO
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo()); // TODO
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();

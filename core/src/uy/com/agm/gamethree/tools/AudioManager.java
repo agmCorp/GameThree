@@ -10,12 +10,21 @@ import uy.com.agm.gamethree.game.GameSettings;
  */
 
 public class AudioManager {
-    public static final AudioManager instance = new AudioManager();
+    private static final String TAG = AudioManager.class.getName();
 
+    private static  AudioManager instance;
     private Music playingMusic;
 
     // Singleton: prevent instantiation from other classes
     private AudioManager() {
+    }
+
+    // Singleton: retrieve instance
+    public static AudioManager getInstance() {
+        if (instance == null) {
+            instance = new AudioManager();
+        }
+        return instance;
     }
 
     public void play(Sound sound) {

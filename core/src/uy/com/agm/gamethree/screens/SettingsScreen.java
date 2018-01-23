@@ -119,16 +119,16 @@ public class SettingsScreen extends AbstractScreen {
         int sample = MathUtils.random(1, 4);
         switch (sample) {
             case 1:
-                AudioManager.instance.play(Assets.getInstance().getSounds().getPickUpPowerOne());
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
                 break;
             case 2:
-                AudioManager.instance.play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 3:
-                AudioManager.instance.play(Assets.getInstance().getSounds().getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
                 break;
             case 4:
-                AudioManager.instance.play(Assets.getInstance().getSounds().getHit());
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
                 break;
         }
     }
@@ -137,14 +137,14 @@ public class SettingsScreen extends AbstractScreen {
         prefs.setVolMusic(sliderMusic.getValue());
         prefs.setMusic((sliderMusic.getValue() <= 0.0f)? false : true);
         prefs.save();
-        AudioManager.instance.onSettingsUpdated();
+        AudioManager.getInstance().onSettingsUpdated();
     }
 
     private void saveSliderSound() {
         prefs.setVolSound(sliderSound.getValue());
         prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
         prefs.save();
-        AudioManager.instance.onSettingsUpdated();
+        AudioManager.getInstance().onSettingsUpdated();
     }
 
     @Override

@@ -22,6 +22,6 @@ public class Obstacle extends InteractiveTileObject {
 
     @Override
     public void onBump() {
-        AudioManager.instance.play(Assets.getInstance().getSounds().getBump());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
     }
 }
