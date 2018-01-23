@@ -65,7 +65,7 @@ cuando el usuario apreta el homebutton.
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
-- ver de usar campos public o metodos get, googlear. Por ahora solo deje acceso a campos publicos en assets, Gamethree, playscreen y audiomanager porque se llaman desde el render para ganar en performance.
+- ver de usar campos public o metodos get, googlear. Por ahora solo deje acceso a campos publicos en assets, playscreen y audiomanager porque se llaman desde el render para ganar en performance.
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/

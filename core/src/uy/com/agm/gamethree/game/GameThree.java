@@ -14,8 +14,8 @@ import uy.com.agm.gamethree.screens.util.ScreenManager;
 public class GameThree extends Game {
     private static final String TAG = GameThree.class.getName();
 
-    public SpriteBatch batch;
-    public ShapeRenderer shapeRenderer;
+    private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
 
     @Override
     public void create() {
@@ -50,5 +50,13 @@ public class GameThree extends Game {
         Assets.instance.dispose();
         batch.dispose();
         shapeRenderer.dispose();
+    }
+
+    public SpriteBatch getBatch() {
+        return batch;
+    }
+
+    public ShapeRenderer getShapeRenderer() {
+        return shapeRenderer;
     }
 }

@@ -299,8 +299,8 @@ public class PlayScreen extends AbstractScreen {
         }
 
         // Set our batch to now draw what the gameCam camera sees.
-        game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
+        game.getBatch().setProjectionMatrix(gameCam.combined);
+        game.getBatch().begin();
 
         renderHero();
         renderEnemies();
@@ -309,18 +309,18 @@ public class PlayScreen extends AbstractScreen {
         renderWeapons();
         renderFinalEnemy();
 
-        game.batch.end();
+        game.getBatch().end();
 
         // Set our batch to now draw what the Hud camera sees.
-        game.batch.setProjectionMatrix(hud.getCamera().combined);
+        game.getBatch().setProjectionMatrix(hud.getCamera().combined);
         hud.draw();
 
         // Debug
         if (Constants.DEBUG_MODE) {
             // Set our batch to now draw what the gameCam camera sees.
-            game.shapeRenderer.setProjectionMatrix(gameCam.combined);
-            game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            game.shapeRenderer.setColor(1, 1, 0, 1);
+            game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
+            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
+            game.getShapeRenderer().setColor(1, 1, 0, 1);
 
             renderDebugHero();
             renderDebugEnemies();
@@ -329,7 +329,7 @@ public class PlayScreen extends AbstractScreen {
             renderDebugWeapons();
             renderDebugFinalEnemy();
 
-            game.shapeRenderer.end();
+            game.getShapeRenderer().end();
         }
     }
 
@@ -344,67 +344,67 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderHero() {
-        player.draw(game.batch);
+        player.draw(game.getBatch());
     }
 
     private void renderEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.batch);
+            enemy.draw(game.getBatch());
         }
     }
 
     private void renderPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.draw(game.batch);
+            powerBox.draw(game.getBatch());
         }
     }
 
     private void renderItems() {
         for (Item item : creator.getItems())  {
-            item.draw(game.batch);
+            item.draw(game.getBatch());
         }
     }
 
     private void renderWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.draw(game.batch);
+            weapon.draw(game.getBatch());
         }
     }
 
     private void renderFinalEnemy() {
-        finalEnemy.draw(game.batch);
+        finalEnemy.draw(game.getBatch());
     }
 
     private void renderDebugHero() {
-        player.renderDebug(game.shapeRenderer);
+        player.renderDebug(game.getShapeRenderer());
     }
 
     private void renderDebugEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.renderDebug(game.shapeRenderer);
+            enemy.renderDebug(game.getShapeRenderer());
         }
     }
 
     private void renderDebugPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.renderDebug(game.shapeRenderer);
+            powerBox.renderDebug(game.getShapeRenderer());
         }
     }
 
     private void renderDebugItems() {
         for (Item item : creator.getItems()) {
-            item.renderDebug(game.shapeRenderer);
+            item.renderDebug(game.getShapeRenderer());
         }
     }
 
     private void renderDebugWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.renderDebug(game.shapeRenderer);
+            weapon.renderDebug(game.getShapeRenderer());
         }
     }
 
     private void renderDebugFinalEnemy() {
-        finalEnemy.renderDebug(game.shapeRenderer);
+        finalEnemy.renderDebug(game.getShapeRenderer());
     }
 
     private void stopEdges() {
