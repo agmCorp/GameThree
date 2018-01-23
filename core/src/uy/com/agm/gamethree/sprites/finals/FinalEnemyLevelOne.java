@@ -487,8 +487,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
    private void stateExploding(float dt) {
        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTimer)) {
-           // Audio FX // // TODO: 3/1/2018  buscar un audio para cuando termina de explotar, tipo música exitosa.
-           AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+           // Audio FX
+           AudioManager.getInstance().play(Assets.getInstance().getSounds().getLevelCompleted());
 
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
