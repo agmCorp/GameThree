@@ -30,10 +30,10 @@ public class LevelCompletedScreen extends AbstractScreen {
     public void buildStage() {
         // Personal fonts
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.instance.fonts.defaultBig;
+        labelStyleBig.font = Assets.instance.fonts.getDefaultBig();
 
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.instance.fonts.defaultNormal;
+        labelStyleNormal.font = Assets.instance.fonts.getDefaultNormal();
 
         // Define our labels based on labelStyle
         Label titleLabel1 = new Label("Level " + this.currentLevel, labelStyleBig);

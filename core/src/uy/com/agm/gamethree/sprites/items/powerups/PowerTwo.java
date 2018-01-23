@@ -36,7 +36,7 @@ public class PowerTwo extends Item {
     public PowerTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerTwoAnimation = Assets.instance.powerTwo.powerTwoAnimation;
+        powerTwoAnimation = Assets.instance.powerTwo.getPowerTwoAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -175,13 +175,13 @@ public class PowerTwo extends Item {
         hero.getB2body().createFixture(fdef).setUserData(hero);
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.shield.shieldStand);
+        Sprite spritePower = new Sprite(Assets.instance.shield.getShieldStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.shield.shieldAnimation, spritePower, false);
+        hero.applyPowerFX(Assets.instance.shield.getShieldAnimation(), spritePower, false);
 
         currentState = State.FINISHED;
     }

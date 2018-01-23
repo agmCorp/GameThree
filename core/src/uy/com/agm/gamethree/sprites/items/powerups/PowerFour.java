@@ -36,7 +36,7 @@ public class PowerFour extends Item {
     public PowerFour(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerFourAnimation = Assets.instance.powerFour.powerFourAnimation;
+        powerFourAnimation = Assets.instance.powerFour.getPowerFourAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -172,13 +172,13 @@ public class PowerFour extends Item {
         }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.toughMode.toughModeStand);
+        Sprite spritePower = new Sprite(Assets.instance.toughMode.getToughModeStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.toughMode.toughModeAnimation, spritePower, false);
+        hero.applyPowerFX(Assets.instance.toughMode.getToughModeAnimation(), spritePower, false);
 
         currentState = State.FINISHED;
     }

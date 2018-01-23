@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetEnemyOne {
     private static final String TAG = AssetEnemyOne.class.getName();
 
-    public final TextureRegion enemyOneStand;
-    public final Animation enemyOneAnimation;
+    private TextureRegion enemyOneStand;
+    private Animation enemyOneAnimation;
 
     public AssetEnemyOne(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetEnemyOne {
         regions = atlas.findRegions("enemyOne");
         enemyOneAnimation = new Animation(0.5f / 8.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getEnemyOneStand() {
+        return enemyOneStand;
+    }
+
+    public Animation getEnemyOneAnimation() {
+        return enemyOneAnimation;
     }
 }

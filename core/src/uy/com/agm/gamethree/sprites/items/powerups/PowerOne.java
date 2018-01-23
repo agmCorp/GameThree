@@ -36,7 +36,7 @@ public class PowerOne extends Item {
     public PowerOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerOneAnimation = Assets.instance.powerOne.powerOneAnimation;
+        powerOneAnimation = Assets.instance.powerOne.getPowerOneAnimation();
         stateTimer = 0;
         stateWaitingTimer = 0;
         stateFadingTimer = 0;
@@ -169,13 +169,13 @@ public class PowerOne extends Item {
         }
 
         // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.instance.ghostMode.ghostModeStand);
+        Sprite spritePower = new Sprite(Assets.instance.ghostMode.getGhostModeStand());
 
         // Only to set width and height of our spritePower
         spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
 
         // Apply effect
-        hero.applyPowerFX(Assets.instance.ghostMode.ghostModeAnimation, spritePower, true);
+        hero.applyPowerFX(Assets.instance.ghostMode.getGhostModeAnimation(), spritePower, true);
 
         currentState = State.FINISHED;
     }

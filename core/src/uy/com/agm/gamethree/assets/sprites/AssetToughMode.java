@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetToughMode {
     private static final String TAG = AssetToughMode.class.getName();
 
-    public final TextureRegion toughModeStand;
-    public final Animation toughModeAnimation;
+    private TextureRegion toughModeStand;
+    private Animation toughModeAnimation;
 
     public AssetToughMode(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetToughMode {
         regions = atlas.findRegions("toughMode");
         toughModeAnimation = new Animation(1.0f / 20.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getToughModeStand() {
+        return toughModeStand;
+    }
+
+    public Animation getToughModeAnimation() {
+        return toughModeAnimation;
     }
 }

@@ -12,11 +12,11 @@ import com.badlogic.gdx.utils.Array;
 public class AssetFinalEnemyLevelOne {
     private static final String TAG = AssetFinalEnemyLevelOne.class.getName();
 
-    public final TextureRegion finalEnemyLevelOneStand;
-    public final Animation finalEnemyLevelOneIdleAnimation;
-    public final Animation finalEnemyLevelOneWalkAnimation;
-    public final Animation finalEnemyLevelOneShootAnimation;
-    public final Animation finalEnemyLevelOneDeathAnimation;
+    private TextureRegion finalEnemyLevelOneStand;
+    private Animation finalEnemyLevelOneIdleAnimation;
+    private Animation finalEnemyLevelOneWalkAnimation;
+    private Animation finalEnemyLevelOneShootAnimation;
+    private Animation finalEnemyLevelOneDeathAnimation;
 
     public AssetFinalEnemyLevelOne(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -42,5 +42,25 @@ public class AssetFinalEnemyLevelOne {
         regions = atlas.findRegions("finalEnemyLevelOneDeath");
         finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getFinalEnemyLevelOneStand() {
+        return finalEnemyLevelOneStand;
+    }
+
+    public Animation getFinalEnemyLevelOneIdleAnimation() {
+        return finalEnemyLevelOneIdleAnimation;
+    }
+
+    public Animation getFinalEnemyLevelOneWalkAnimation() {
+        return finalEnemyLevelOneWalkAnimation;
+    }
+
+    public Animation getFinalEnemyLevelOneShootAnimation() {
+        return finalEnemyLevelOneShootAnimation;
+    }
+
+    public Animation getFinalEnemyLevelOneDeathAnimation() {
+        return finalEnemyLevelOneDeathAnimation;
     }
 }

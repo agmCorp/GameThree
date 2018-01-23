@@ -28,7 +28,7 @@ public class EnemyBullet extends Weapon {
         super(screen, x, y, Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
 
         // Animation
-        enemyBulletAnimation = Assets.instance.enemyBullet.enemyBulletAnimation;
+        enemyBulletAnimation = Assets.instance.enemyBullet.getEnemyBulletAnimation();
 
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYBULLET_WIDTH_METERS, Constants.ENEMYBULLET_HEIGHT_METERS);

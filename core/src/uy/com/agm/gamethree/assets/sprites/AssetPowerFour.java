@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetPowerFour {
     private static final String TAG = AssetPowerFour.class.getName();
 
-    public final TextureRegion powerFourStand;
-    public final Animation powerFourAnimation;
+    private TextureRegion powerFourStand;
+    private Animation powerFourAnimation;
 
     public AssetPowerFour(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetPowerFour {
         regions = atlas.findRegions("powerFour");
         powerFourAnimation = new Animation(0.5f / 20.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getPowerFourStand() {
+        return powerFourStand;
+    }
+
+    public Animation getPowerFourAnimation() {
+        return powerFourAnimation;
     }
 }

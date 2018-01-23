@@ -37,8 +37,8 @@ public class PowerThree extends Item {
     public PowerThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        powerThreeAnimation = Assets.instance.powerThree.powerThreeAnimation;
-        bulletAnimation = Assets.instance.bulletA.bulletAAnimation;
+        powerThreeAnimation = Assets.instance.powerThree.getPowerThreeAnimation();
+        bulletAnimation = Assets.instance.bulletA.getBulletAAnimation();
         fireDelay = Constants.POWERTHREE_FIRE_DELAY;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTimer = 0;

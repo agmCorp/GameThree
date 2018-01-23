@@ -80,7 +80,7 @@ public class Hud extends AbstractScreen {
 
         // Personal fonts
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = Assets.instance.fonts.defaultSmall;
+        labelStyle.font = Assets.instance.fonts.getDefaultSmall();
 
         // Define our labels based on labelStyle
         scoreLabel = new Label("SCORE", labelStyle);

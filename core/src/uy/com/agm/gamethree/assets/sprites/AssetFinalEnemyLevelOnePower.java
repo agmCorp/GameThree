@@ -12,17 +12,25 @@ import com.badlogic.gdx.utils.Array;
 public class AssetFinalEnemyLevelOnePower {
     private static final String TAG = AssetFinalEnemyLevelOnePower.class.getName();
 
-    public final TextureRegion AssetFinalEnemyLevelOnePowerStand;
-    public final Animation AssetFinalEnemyLevelOnePowerAnimation;
+    private TextureRegion finalEnemyLevelOnePowerStand;
+    private Animation finalEnemyLevelOnePowerAnimation;
 
     public AssetFinalEnemyLevelOnePower(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        AssetFinalEnemyLevelOnePowerStand = atlas.findRegion("finalEnemyLevelOnePower", 1);
+        finalEnemyLevelOnePowerStand = atlas.findRegion("finalEnemyLevelOnePower", 1);
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOnePower");
-        AssetFinalEnemyLevelOnePowerAnimation = new Animation(1.0f / 30.0f, regions);
+        finalEnemyLevelOnePowerAnimation = new Animation(1.0f / 30.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getFinalEnemyLevelOnePowerStand() {
+        return finalEnemyLevelOnePowerStand;
+    }
+
+    public Animation getFinalEnemyLevelOnePowerAnimation() {
+        return finalEnemyLevelOnePowerAnimation;
     }
 }

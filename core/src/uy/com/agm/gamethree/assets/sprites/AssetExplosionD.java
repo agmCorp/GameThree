@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetExplosionD {
     private static final String TAG = AssetExplosionD.class.getName();
 
-    public final TextureRegion explosionDStand;
-    public final Animation explosionDAnimation;
+    private TextureRegion explosionDStand;
+    private Animation explosionDAnimation;
 
     public AssetExplosionD(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetExplosionD {
         regions = atlas.findRegions("explosionD");
         explosionDAnimation = new Animation(0.5f / 21.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getExplosionDStand() {
+        return explosionDStand;
+    }
+
+    public Animation getExplosionDAnimation() {
+        return explosionDAnimation;
     }
 }

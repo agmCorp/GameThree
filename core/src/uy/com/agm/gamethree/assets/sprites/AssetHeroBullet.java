@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetHeroBullet {
     private static final String TAG = AssetHeroBullet.class.getName();
 
-    public final TextureRegion heroBulletStand;
-    public final Animation heroBulletAnimation;
+    private TextureRegion heroBulletStand;
+    private Animation heroBulletAnimation;
 
     public AssetHeroBullet(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetHeroBullet {
         regions = atlas.findRegions("heroBullet");
         heroBulletAnimation = new Animation(0.5f / 9.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getHeroBulletStand() {
+        return heroBulletStand;
+    }
+
+    public Animation getHeroBulletAnimation() {
+        return heroBulletAnimation;
     }
 }

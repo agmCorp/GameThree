@@ -170,8 +170,8 @@ public class Assets implements Disposable, AssetErrorListener {
     @Override
     public void dispose() {
         assetManager.dispose();
-        fonts.defaultSmall.dispose();
-        fonts.defaultNormal.dispose();
-        fonts.defaultBig.dispose();
+        fonts.getDefaultSmall().dispose();
+        fonts.getDefaultNormal().dispose();
+        fonts.getDefaultBig().dispose();
     }
 }

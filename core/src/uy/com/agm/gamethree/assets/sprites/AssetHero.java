@@ -12,11 +12,11 @@ import com.badlogic.gdx.utils.Array;
 public class AssetHero {
     private static final String TAG = AssetHero.class.getName();
 
-    public final TextureRegion heroStand;
-    public final Animation heroDeadAnimation;
-    public final Animation heroMovingUpAnimation;
-    public final Animation heroMovingDownAnimation;
-    public final Animation heroMovingLeftRightAnimation;
+    private TextureRegion heroStand;
+    private Animation heroDeadAnimation;
+    private Animation heroMovingUpAnimation;
+    private Animation heroMovingDownAnimation;
+    private Animation heroMovingLeftRightAnimation;
 
     public AssetHero(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -42,5 +42,25 @@ public class AssetHero {
         regions = atlas.findRegions("heroDead");
         heroDeadAnimation = new Animation(0.5f / 10.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getHeroStand() {
+        return heroStand;
+    }
+
+    public Animation getHeroDeadAnimation() {
+        return heroDeadAnimation;
+    }
+
+    public Animation getHeroMovingUpAnimation() {
+        return heroMovingUpAnimation;
+    }
+
+    public Animation getHeroMovingDownAnimation() {
+        return heroMovingDownAnimation;
+    }
+
+    public Animation getHeroMovingLeftRightAnimation() {
+        return heroMovingLeftRightAnimation;
     }
 }

@@ -13,7 +13,7 @@ import uy.com.agm.gamethree.game.Constants;
 public class AssetMaps {
     private static final String TAG = AssetMaps.class.getName();
 
-    public final TiledMap mapLevelOne;
+    private TiledMap mapLevelOne;
 
     public AssetMaps(AssetManager am) {
         mapLevelOne = am.get(Constants.MAP_FILE_LEVEL_ONE);
@@ -21,5 +21,9 @@ public class AssetMaps {
             MapLayer floor = mapLevelOne.getLayers().get("floor");
             mapLevelOne.getLayers().remove(floor);
         }
+    }
+
+    public TiledMap getMapLevelOne() {
+        return mapLevelOne;
     }
 }

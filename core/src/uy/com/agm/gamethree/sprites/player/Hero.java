@@ -93,11 +93,11 @@ public class Hero extends Sprite {
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
-        heroStand = Assets.instance.hero.heroStand;
-        heroMovingUpAnimation = Assets.instance.hero.heroMovingUpAnimation;
-        heroMovingDownAnimation = Assets.instance.hero.heroMovingDownAnimation;
-        heroMovingLeftRightAnimation = Assets.instance.hero.heroMovingLeftRightAnimation;
-        heroDeadAnimation = Assets.instance.hero.heroDeadAnimation;
+        heroStand = Assets.instance.hero.getHeroStand();
+        heroMovingUpAnimation = Assets.instance.hero.getHeroMovingUpAnimation();
+        heroMovingDownAnimation = Assets.instance.hero.getHeroMovingDownAnimation();
+        heroMovingLeftRightAnimation = Assets.instance.hero.getHeroMovingLeftRightAnimation();
+        heroDeadAnimation = Assets.instance.hero.getHeroDeadAnimation();
         heroStateTimer = 0;
         playAgainTimer = 0;
         gameOverTimer = 0;

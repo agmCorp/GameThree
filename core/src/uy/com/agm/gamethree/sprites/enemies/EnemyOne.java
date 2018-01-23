@@ -31,8 +31,8 @@ public class EnemyOne extends Enemy {
         super(screen, object);
 
         // Animations
-        enemyOneAnimation = Assets.instance.enemyOne.enemyOneAnimation;
-        explosionAnimation = Assets.instance.explosionA.explosionAAnimation;
+        enemyOneAnimation = Assets.instance.enemyOne.getEnemyOneAnimation();
+        explosionAnimation = Assets.instance.explosionA.getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);

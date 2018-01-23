@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetShield {
     private static final String TAG = AssetShield.class.getName();
 
-    public final TextureRegion shieldStand;
-    public final Animation shieldAnimation;
+    private TextureRegion shieldStand;
+    private Animation shieldAnimation;
 
     public AssetShield(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetShield {
         regions = atlas.findRegions("shield");
         shieldAnimation = new Animation(0.3f / 20.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getShieldStand() {
+        return shieldStand;
+    }
+
+    public Animation getShieldAnimation() {
+        return shieldAnimation;
     }
 }

@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetGhostMode {
     private static final String TAG = AssetGhostMode.class.getName();
 
-    public final TextureRegion ghostModeStand;
-    public final Animation ghostModeAnimation;
+    private TextureRegion ghostModeStand;
+    private Animation ghostModeAnimation;
 
     public AssetGhostMode(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetGhostMode {
         regions = atlas.findRegions("ghostMode");
         ghostModeAnimation = new Animation(1.0f / 20.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getGhostModeStand() {
+        return ghostModeStand;
+    }
+
+    public Animation getGhostModeAnimation() {
+        return ghostModeAnimation;
     }
 }

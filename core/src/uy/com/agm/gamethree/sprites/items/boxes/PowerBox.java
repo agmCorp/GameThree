@@ -64,11 +64,11 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        powerBoxStand = Assets.instance.powerBox.powerBoxStand;
-        powerBoxDamagedLittle = Assets.instance.powerBox.powerBoxDamagedLittle;
-        powerBoxDamagedMedium = Assets.instance.powerBox.powerBoxDamagedMedium;
-        powerBoxDamagedHard = Assets.instance.powerBox.powerBoxDamagedHard;
-        explosionAnimation = Assets.instance.explosionB.explosionBAnimation;
+        powerBoxStand = Assets.instance.powerBox.getPowerBoxStand();
+        powerBoxDamagedLittle = Assets.instance.powerBox.getPowerBoxDamagedLittle();
+        powerBoxDamagedMedium = Assets.instance.powerBox.getPowerBoxDamagedMedium();
+        powerBoxDamagedHard = Assets.instance.powerBox.getPowerBoxDamagedHard();
+        explosionAnimation = Assets.instance.explosionB.getExplosionBAnimation();
 
         currentState = State.WAITING;
         damage = 0;

@@ -45,7 +45,7 @@ public class HeroBullet extends Weapon {
         if (animation != null) {
             heroBulletAnimation = animation;
         } else {
-            heroBulletAnimation = Assets.instance.heroBullet.heroBulletAnimation;
+            heroBulletAnimation = Assets.instance.heroBullet.getHeroBulletAnimation();
         }
 
         stateTimer = 0;

@@ -64,10 +64,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         super(screen, x, y, Constants.FINALLEVELONE_WIDTH_METERS, Constants.FINALLEVELONE_HEIGHT_METERS);
 
         // Animations
-        finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneWalkAnimation;
-        finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneIdleAnimation;
-        finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneShootAnimation;
-        finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.finalEnemyLevelOneDeathAnimation;
+        finalEnemyLevelOneWalkAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneWalkAnimation();
+        finalEnemyLevelOneIdleAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneIdleAnimation();
+        finalEnemyLevelOneShootAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneShootAnimation();
+        finalEnemyLevelOneDyingAnimation = Assets.instance.finalEnemyLevelOne.getFinalEnemyLevelOneDeathAnimation();
 
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
@@ -93,11 +93,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerAnimation;
+        powerFXAnimation = Assets.instance.finalEnemyLevelOnePower.getFinalEnemyLevelOnePowerAnimation();
         powerFXStateTimer = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.instance.finalEnemyLevelOnePower.AssetFinalEnemyLevelOnePowerStand);
+        powerFXSprite = new Sprite(Assets.instance.finalEnemyLevelOnePower.getFinalEnemyLevelOnePowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
         powerFXSprite.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
@@ -108,11 +108,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // -------------------- ExplosionFX --------------------
 
         // ExplosionFX variables initialization
-        explosionFXAnimation = Assets.instance.explosionE.explosionEAnimation;
+        explosionFXAnimation = Assets.instance.explosionE.getExplosionEAnimation();
         explosionFXStateTimer = 0;
 
         // Set the explosion's texture
-        Sprite spriteExplosion = new Sprite(Assets.instance.explosionE.explosionEStand);
+        Sprite spriteExplosion = new Sprite(Assets.instance.explosionE.getExplosionEStand());
 
         // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
         spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIONE_WIDTH_METERS, Constants.EXPLOSIONE_HEIGHT_METERS);

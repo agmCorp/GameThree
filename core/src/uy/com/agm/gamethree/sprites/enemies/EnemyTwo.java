@@ -30,8 +30,8 @@ public class EnemyTwo extends Enemy {
         super(screen, object);
 
         // Animations
-        enemyTwoAnimation = Assets.instance.enemyTwo.enemyTwoAnimation;
-        explosionAnimation = Assets.instance.explosionA.explosionAAnimation;
+        enemyTwoAnimation = Assets.instance.enemyTwo.getEnemyTwoAnimation();
+        explosionAnimation = Assets.instance.explosionA.getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);

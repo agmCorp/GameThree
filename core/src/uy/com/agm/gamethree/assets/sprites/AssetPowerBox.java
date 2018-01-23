@@ -11,10 +11,10 @@ import com.badlogic.gdx.utils.Array;
 public class AssetPowerBox {
     private static final String TAG = AssetPowerBox.class.getName();
 
-    public final TextureRegion powerBoxStand;
-    public final TextureRegion powerBoxDamagedLittle;
-    public final TextureRegion powerBoxDamagedMedium;
-    public final TextureRegion powerBoxDamagedHard;
+    private TextureRegion powerBoxStand;
+    private TextureRegion powerBoxDamagedLittle;
+    private TextureRegion powerBoxDamagedMedium;
+    private TextureRegion powerBoxDamagedHard;
 
     public AssetPowerBox(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -23,5 +23,21 @@ public class AssetPowerBox {
         powerBoxDamagedLittle = atlas.findRegion("powerBox", 2);
         powerBoxDamagedMedium = atlas.findRegion("powerBox", 3);
         powerBoxDamagedHard = atlas.findRegion("powerBox", 4);
+    }
+
+    public TextureRegion getPowerBoxStand() {
+        return powerBoxStand;
+    }
+
+    public TextureRegion getPowerBoxDamagedLittle() {
+        return powerBoxDamagedLittle;
+    }
+
+    public TextureRegion getPowerBoxDamagedMedium() {
+        return powerBoxDamagedMedium;
+    }
+
+    public TextureRegion getPowerBoxDamagedHard() {
+        return powerBoxDamagedHard;
     }
 }

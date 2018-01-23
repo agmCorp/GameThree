@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetPowerOne {
     private static final String TAG = AssetPowerOne.class.getName();
 
-    public final TextureRegion powerOneStand;
-    public final Animation powerOneAnimation;
+    private TextureRegion powerOneStand;
+    private Animation powerOneAnimation;
 
     public AssetPowerOne(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetPowerOne {
         regions = atlas.findRegions("powerOne");
         powerOneAnimation = new Animation(1.0f / 16.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getPowerOneStand() {
+        return powerOneStand;
+    }
+
+    public Animation getPowerOneAnimation() {
+        return powerOneAnimation;
     }
 }

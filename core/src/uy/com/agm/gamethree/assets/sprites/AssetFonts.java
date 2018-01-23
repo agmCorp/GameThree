@@ -13,9 +13,9 @@ import uy.com.agm.gamethree.game.Constants;
 public class AssetFonts {
     private static final String TAG = AssetFonts.class.getName();
 
-    public final BitmapFont defaultSmall;
-    public final BitmapFont defaultNormal;
-    public final BitmapFont defaultBig;
+    private BitmapFont defaultSmall;
+    private BitmapFont defaultNormal;
+    private BitmapFont defaultBig;
 
     public AssetFonts() {
             // Create three fonts using a personal bitmap font
@@ -30,6 +30,18 @@ public class AssetFonts {
             defaultSmall.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             defaultNormal.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             defaultBig.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
+
+    public BitmapFont getDefaultSmall() {
+        return defaultSmall;
+    }
+
+    public BitmapFont getDefaultNormal() {
+        return defaultNormal;
+    }
+
+    public BitmapFont getDefaultBig() {
+        return defaultBig;
     }
 }
 

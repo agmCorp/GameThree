@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetBulletA {
     private static final String TAG = AssetBulletA.class.getName();
 
-    public final TextureRegion bulletAStand;
-    public final Animation bulletAAnimation;
+    private TextureRegion bulletAStand;
+    private Animation bulletAAnimation;
 
     public AssetBulletA(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetBulletA {
         regions = atlas.findRegions("bulletA");
         bulletAAnimation = new Animation(0.5f / 6.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getBulletAStand() {
+        return bulletAStand;
+    }
+
+    public Animation getBulletAAnimation() {
+        return bulletAAnimation;
     }
 }

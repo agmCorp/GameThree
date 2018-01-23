@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetPowerThree {
     private static final String TAG = AssetPowerThree.class.getName();
 
-    public final TextureRegion powerThreeStand;
-    public final Animation powerThreeAnimation;
+    private TextureRegion powerThreeStand;
+    private Animation powerThreeAnimation;
 
     public AssetPowerThree(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -24,5 +24,13 @@ public class AssetPowerThree {
         regions = atlas.findRegions("powerThree");
         powerThreeAnimation = new Animation(0.5f / 17.0f, regions);
         regions.clear();
+    }
+
+    public TextureRegion getPowerThreeStand() {
+        return powerThreeStand;
+    }
+
+    public Animation getPowerThreeAnimation() {
+        return powerThreeAnimation;
     }
 }

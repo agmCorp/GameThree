@@ -56,7 +56,7 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                map = Assets.instance.maps.mapLevelOne;
+                map = Assets.instance.maps.getMapLevelOne();
                 break;
             default:
                 map = null;
