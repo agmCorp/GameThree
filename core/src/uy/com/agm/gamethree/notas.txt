@@ -39,7 +39,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- hacer item solo por puntos
 - hacer otro enemigo
 - ponerle sonido y assets bien
 

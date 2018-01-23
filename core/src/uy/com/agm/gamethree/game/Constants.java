@@ -81,6 +81,7 @@ public class Constants {
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerOne.ogg"; // TODO BUSCAR UN AUDIO? capaz que no es necesario
+    public static final String FX_FILE_PICK_UP_POWERFOUR = "audio/sounds/pickUpPowerFour.ogg";
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
     public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
     public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpPowerOne.ogg"; // TODO

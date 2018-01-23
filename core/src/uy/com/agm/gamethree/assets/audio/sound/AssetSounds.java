@@ -24,6 +24,7 @@ public class AssetSounds {
     private Sound pickUpPowerOne;
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
+    private Sound pickUpPowerFour;
     private Sound powerDown;
     private Sound powerTimer;
     private Sound showUpColOne;
@@ -47,6 +48,7 @@ public class AssetSounds {
         pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         pickUpPowerTwo = am.get(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         pickUpPowerThree = am.get(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
+        pickUpPowerFour = am.get(Constants.FX_FILE_PICK_UP_POWERFOUR, Sound.class);
         powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
         powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
         showUpColOne = am.get(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
@@ -104,6 +106,10 @@ public class AssetSounds {
 
     public Sound getPickUpPowerThree() {
         return pickUpPowerThree;
+    }
+
+    public Sound getPickUpPowerFour() {
+        return pickUpPowerFour;
     }
 
     public Sound getPowerDown() {

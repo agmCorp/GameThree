@@ -143,7 +143,7 @@ public class PowerFour extends Item {
         world.destroyBody(b2body);
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo()); // TODO
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
 
         // Show the power's name and its countdown
         Hud hud = screen.getHud();
