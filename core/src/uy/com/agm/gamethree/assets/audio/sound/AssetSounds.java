@@ -19,19 +19,21 @@ public class AssetSounds {
     private Sound heroShoot;
     private Sound hit;
     private Sound openPowerBox;
-    private Sound levelTimer;
+    private Sound clock;
     private Sound pickUpColOne;
     private Sound pickUpPowerOne;
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
     private Sound pickUpPowerFour;
     private Sound powerDown;
-    private Sound powerTimer;
+    private Sound beepA;
+    private Sound beepB;
     private Sound showUpColOne;
     private Sound showUpPowerOne;
     private Sound showUpPowerTwo;
     private Sound showUpPowerThree;
     private Sound showUpPowerFour;
+    private Sound timeIsUp;
     private Sound finalEnemyLevelOnePowerUp;
     private Sound finalEnemyLevelOnePowerDown;
     private Sound finalEnemyLevelOneExplosion;
@@ -49,19 +51,21 @@ public class AssetSounds {
         heroShoot = am.get(Constants.FX_FILE_HERO_SHOOT, Sound.class);
         hit = am.get(Constants.FX_FILE_HIT, Sound.class);
         openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
-        levelTimer = am.get(Constants.FX_FILE_LEVEL_TIMER, Sound.class);
+        clock = am.get(Constants.FX_FILE_CLOCK, Sound.class);
         pickUpColOne = am.get(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
         pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         pickUpPowerTwo = am.get(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         pickUpPowerThree = am.get(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
         pickUpPowerFour = am.get(Constants.FX_FILE_PICK_UP_POWERFOUR, Sound.class);
         powerDown = am.get(Constants.FX_FILE_POWER_DOWN, Sound.class);
-        powerTimer = am.get(Constants.FX_FILE_POWER_TIMER, Sound.class);
+        beepA = am.get(Constants.FX_FILE_BEEP_A, Sound.class);
+        beepB = am.get(Constants.FX_FILE_BEEP_B, Sound.class);
         showUpColOne = am.get(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
         showUpPowerFour = am.get(Constants.FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
+        timeIsUp = am.get(Constants.FX_FILE_TIME_IS_UP, Sound.class);
         finalEnemyLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
         finalEnemyLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
         finalEnemyLevelOneExplosion = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
@@ -100,8 +104,8 @@ public class AssetSounds {
         return openPowerBox;
     }
 
-    public Sound getLevelTimer() {
-        return levelTimer;
+    public Sound getClock() {
+        return clock;
     }
 
     public Sound getPickUpColOne() {
@@ -128,8 +132,12 @@ public class AssetSounds {
         return powerDown;
     }
 
-    public Sound getPowerTimer() {
-        return powerTimer;
+    public Sound getBeepA() {
+        return beepA;
+    }
+
+    public Sound getBeepB() {
+        return beepB;
     }
 
     public Sound getShowUpColOne() {
@@ -150,6 +158,10 @@ public class AssetSounds {
 
     public Sound getShowUpPowerFour() {
         return showUpPowerFour;
+    }
+
+    public Sound getTimeIsUp() {
+        return timeIsUp;
     }
 
     public Sound getFinalEnemyLevelOnePowerUp() {

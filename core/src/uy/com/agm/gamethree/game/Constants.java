@@ -76,19 +76,21 @@ public class Constants {
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
-    public static final String FX_FILE_LEVEL_TIMER = "audio/sounds/levelTimer.ogg";
+    public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
     public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpColOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerThree.ogg";
     public static final String FX_FILE_PICK_UP_POWERFOUR = "audio/sounds/pickUpPowerFour.ogg";
     public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
-    public static final String FX_FILE_POWER_TIMER = "audio/sounds/powerTimer.ogg";
+    public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
+    public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
     public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpColOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerTwo.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerThree.ogg";
     public static final String FX_FILE_SHOW_UP_POWERFOUR = "audio/sounds/showUpPowerFour.ogg";
+    public static final String FX_FILE_TIME_IS_UP = "audio/sounds/timeIsUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_EXPLOSION = "audio/sounds/finalEnemyLevelOneExplosion.ogg";
@@ -108,7 +110,7 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 18;
+    public static final int TIMER_LEVEL_ONE = 180;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     public static final float LEVEL_COMPLETED_DELAY_SECONDS = 5.0f;
