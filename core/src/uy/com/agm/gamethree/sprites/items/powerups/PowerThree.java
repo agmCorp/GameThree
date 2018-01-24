@@ -33,7 +33,7 @@ public class PowerThree extends Item {
     private float fireDelay;
     private int numberBullets;
 
-    // Triple mode (fire power)
+    // Fire power
     public PowerThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
