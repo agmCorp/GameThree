@@ -13,8 +13,8 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -145,25 +145,31 @@ public class PowerThree extends Item {
     private void stateTaken() {
         // Destroy its b2body
         world.destroyBody(b2body);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerThree());
-
-        // Show the power's name and its countdown
-        Hud hud = screen.getHud();
-        hud.setPowerLabel("FIRE MODE", Constants.TIMER_POWERTHREE);
-
-        // Set score
-        hud.addScore(Constants.POWERTHREE_SCORE);
-
-        // Disable previous power (if any)
-        Hero hero = screen.getPlayer();
-        hero.powerDown();
-
-        // Apply fire power
-        screen.getPlayer().applyFirePower(Constants.POWERTHREE_BULLET_WIDTH_METERS, Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                                Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, fireDelay, numberBullets, bulletAnimation);
+        applyPowerThree();
         currentState = State.FINISHED;
+    }
+
+    private void applyPowerThree() {
+        // WA: Hero could have died between use method and applyPowerThree method
+        if (!screen.getPlayer().isHeroDead()) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerThree());
+
+            // Show the power's name and its countdown
+            Hud hud = screen.getHud();
+            hud.setPowerLabel("FIRE MODE", Constants.TIMER_POWERTHREE);
+
+            // Set score
+            hud.addScore(Constants.POWERTHREE_SCORE);
+
+            // Disable previous power (if any)
+            Hero hero = screen.getPlayer();
+            hero.powerDown();
+
+            // Apply fire power
+            screen.getPlayer().applyFirePower(Constants.POWERTHREE_BULLET_WIDTH_METERS, Constants.POWERTHREE_BULLET_HEIGHT_METERS,
+                    Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, fireDelay, numberBullets, bulletAnimation);
+        }
     }
 
     @Override

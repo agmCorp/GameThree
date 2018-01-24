@@ -2,19 +2,15 @@ package uy.com.agm.gamethree.sprites.items.collectibles;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
-import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
@@ -140,26 +136,25 @@ public class ColOne extends Item {
     private void stateTaken() {
         // Destroy its b2body
         world.destroyBody(b2body);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne());
-
-        // Set score
-        screen.getHud().addScore(Constants.COLONE_SCORE);
-
         currentState = State.FINISHED;
     }
 
     @Override
     public void use(Hero hero) {
         /*
-         * We must remove its b2body to avoid collisions and change the hero's Filter.
+         * We must remove its b2body to avoid collisions.
          * This can't be done here because this method is called from WorldContactListener that is invoked
          * from PlayScreen.update.world.step(...).
          * No b2body can be removed/changed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne());
+
+        // Set score
+        screen.getHud().addScore(Constants.COLONE_SCORE);
     }
 
     @Override

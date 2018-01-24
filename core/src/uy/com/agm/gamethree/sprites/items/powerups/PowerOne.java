@@ -16,8 +16,8 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -141,43 +141,48 @@ public class PowerOne extends Item {
     private void stateTaken() {
         // Destroy its b2body
         world.destroyBody(b2body);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
-
-        // Show the power's name and its countdown
-        Hud hud = screen.getHud();
-        hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
-
-        // Set score
-        hud.addScore(Constants.POWERONE_SCORE);
-
-        // Disable previous power (if any)
-        Hero hero = screen.getPlayer();
-        hero.powerDown();
-
-        // Hero can't collide with enemies nor bullets
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT;
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT;
-        for (Fixture fixture : hero.getB2body().getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-
-        // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
-
-        // Only to set width and height of our spritePower
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
-
-        // Apply effect
-        hero.applyPowerFX(Assets.getInstance().getGhostMode().getGhostModeAnimation(), spritePower, true);
-
+        applyPowerOne();
         currentState = State.FINISHED;
+    }
+
+    private void applyPowerOne() {
+        // WA: Hero could have died between use method and applyPowerOne method
+        if (!screen.getPlayer().isHeroDead()) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
+
+            // Show the power's name and its countdown
+            Hud hud = screen.getHud();
+            hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+
+            // Set score
+            hud.addScore(Constants.POWERONE_SCORE);
+
+            // Disable previous power (if any)
+            Hero hero = screen.getPlayer();
+            hero.powerDown();
+
+            // Hero can't collide with enemies nor bullets
+            Filter filter = new Filter();
+            filter.categoryBits = Constants.HERO_BIT;
+            filter.maskBits = Constants.BORDERS_BIT |
+                    Constants.EDGES_BIT |
+                    Constants.OBSTACLE_BIT |
+                    Constants.POWERBOX_BIT |
+                    Constants.ITEM_BIT;
+            for (Fixture fixture : hero.getB2body().getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+
+            // Set the power's texture
+            Sprite spritePower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
+
+            // Only to set width and height of our spritePower
+            spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERONE_FX_WIDTH_METERS, Constants.POWERONE_FX_HEIGHT_METERS);
+
+            // Apply effect
+            hero.applyPowerFX(Assets.getInstance().getGhostMode().getGhostModeAnimation(), spritePower, true);
+        }
     }
 
     @Override

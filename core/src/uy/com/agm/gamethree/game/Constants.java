@@ -93,11 +93,13 @@ public class Constants {
     public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_EXPLOSION = "audio/sounds/finalEnemyLevelOneExplosion.ogg";
     public static final String FX_FILE_FINAL_LEVEL_ONE_HIT = "audio/sounds/finalEnemyLevelOneHit.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_INTRO = "audio/sounds/fear.ogg";
     public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
     public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
 
-    // Shoot max volume
+    // Max volume
     public static final float SHOOT_MAX_VOLUME = 0.3f;
+    public static final float HIT_MAX_VOLUME = 0.3f;
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -253,6 +255,7 @@ public class Constants {
     public static final float FINALLEVELONE_OFFSET_METERS = 20.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_DELAY_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
+    public static final float FINALLEVELONE_INTRO_DELAY_SECONDS = 5.0f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     public static final int FINALLEVELONE_MAX_DAMAGE = 3;

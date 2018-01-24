@@ -13,12 +13,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -141,49 +141,54 @@ public class PowerTwo extends Item {
     private void stateTaken() {
         // Destroy its b2body
         world.destroyBody(b2body);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo());
-
-        // Show the power's name and its countdown
-        Hud hud = screen.getHud();
-        hud.setPowerLabel("SHIELD", Constants.TIMER_POWERTWO);
-
-        // Set score
-        hud.addScore(Constants.POWERTWO_SCORE);
-
-        // Disable previous power (if any)
-        Hero hero = screen.getPlayer();
-        hero.powerDown();
-
-        // Create the Shield
-        PolygonShape shield = new PolygonShape();
-        Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-        vertices[1] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-        vertices[2] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
-        vertices[3] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
-        shield.set(vertices);
-
-        // Shield only collide with enemies' bullets
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = shield;
-        fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_BIT |
-                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        hero.getB2body().createFixture(fdef).setUserData(hero);
-
-        // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.getInstance().getShield().getShieldStand());
-
-        // Only to set width and height of our spritePower
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
-
-        // Apply effect
-        hero.applyPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spritePower, false);
-
+        applyPowerTwo();
         currentState = State.FINISHED;
+    }
+
+    private void applyPowerTwo() {
+        // WA: Hero could have died between use method and applyPowerTwo method
+        if (!screen.getPlayer().isHeroDead()) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo());
+
+            // Show the power's name and its countdown
+            Hud hud = screen.getHud();
+            hud.setPowerLabel("SHIELD", Constants.TIMER_POWERTWO);
+
+            // Set score
+            hud.addScore(Constants.POWERTWO_SCORE);
+
+            // Disable previous power (if any)
+            Hero hero = screen.getPlayer();
+            hero.powerDown();
+
+            // Create the Shield
+            PolygonShape shield = new PolygonShape();
+            Vector2[] vertices = new Vector2[4];
+            vertices[0] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
+            vertices[1] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
+            vertices[2] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
+            vertices[3] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
+            shield.set(vertices);
+
+            // Shield only collide with enemies' bullets
+            FixtureDef fdef = new FixtureDef();
+            fdef.shape = shield;
+            fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
+            fdef.filter.maskBits = Constants.ENEMY_BIT |
+                    Constants.FINAL_ENEMY_BIT |
+                    Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+            hero.getB2body().createFixture(fdef).setUserData(hero);
+
+            // Set the power's texture
+            Sprite spritePower = new Sprite(Assets.getInstance().getShield().getShieldStand());
+
+            // Only to set width and height of our spritePower
+            spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
+
+            // Apply effect
+            hero.applyPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spritePower, false);
+        }
     }
 
     @Override

@@ -43,6 +43,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private float timeToChangeTimer;
     private float timeToChange;
     private float openFireTimer;
+    private float introTimer;
+    private boolean playingIntro;
 
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
@@ -76,6 +78,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+        introTimer = 0;
+        playingIntro = false;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -211,10 +215,27 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             // When our final enemy is on camera, it activates
             checkBoundaries();
             if (b2body.isActive()) {
+                // Pause music for a few seconds
+                AudioManager.getInstance().getPlayingMusic().pause();
+                introTimer = 0;
+                playingIntro = true;
+
+                // Audio FX
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneIntro());
+
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
                 updateLogic(dt);
             }
         } else {
+            if (playingIntro) {
+                introTimer += dt;
+                if (introTimer > Constants.FINALLEVELONE_INTRO_DELAY_SECONDS) {
+                    if (!screen.getPlayer().isHeroDead() || !isDestroyed()) {
+                        AudioManager.getInstance().getPlayingMusic().play();
+                    }
+                    playingIntro = false;
+                }
+            }
             updateLogic(dt);
         }
     }
@@ -542,7 +563,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
             weapon.onTarget();
             damage--;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME);
             if (damage <= 0) {
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }

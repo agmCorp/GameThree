@@ -16,8 +16,8 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -141,46 +141,51 @@ public class PowerFour extends Item {
     private void stateTaken() {
         // Destroy its b2body
         world.destroyBody(b2body);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
-
-        // Show the power's name and its countdown
-        Hud hud = screen.getHud();
-        hud.setPowerLabel("TOUGH MODE", Constants.TIMER_POWERFOUR);
-
-        // Set score
-        hud.addScore(Constants.POWERFOUR_SCORE);
-
-        // Disable previous power (if any)
-        Hero hero = screen.getPlayer();
-        hero.powerDown();
-
-        // Create a new Filter
-        Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_TOUGH_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_BIT |
-                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        for (Fixture fixture : hero.getB2body().getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-
-        // Set the power's texture
-        Sprite spritePower = new Sprite(Assets.getInstance().getToughMode().getToughModeStand());
-
-        // Only to set width and height of our spritePower
-        spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
-
-        // Apply effect
-        hero.applyPowerFX(Assets.getInstance().getToughMode().getToughModeAnimation(), spritePower, false);
-
+        applyPowerFour();
         currentState = State.FINISHED;
+    }
+
+    private void applyPowerFour() {
+        // WA: Hero could have died between use method and applyPowerFour method
+        if (!screen.getPlayer().isHeroDead()) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
+
+            // Show the power's name and its countdown
+            Hud hud = screen.getHud();
+            hud.setPowerLabel("TOUGH MODE", Constants.TIMER_POWERFOUR);
+
+            // Set score
+            hud.addScore(Constants.POWERFOUR_SCORE);
+
+            // Disable previous power (if any)
+            Hero hero = screen.getPlayer();
+            hero.powerDown();
+
+            // Create a new Filter
+            Filter filter = new Filter();
+            filter.categoryBits = Constants.HERO_TOUGH_BIT; // Depicts what this fixture is
+            filter.maskBits = Constants.BORDERS_BIT |
+                    Constants.EDGES_BIT |
+                    Constants.OBSTACLE_BIT |
+                    Constants.POWERBOX_BIT |
+                    Constants.ITEM_BIT |
+                    Constants.ENEMY_BIT |
+                    Constants.FINAL_ENEMY_BIT |
+                    Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+            for (Fixture fixture : hero.getB2body().getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+
+            // Set the power's texture
+            Sprite spritePower = new Sprite(Assets.getInstance().getToughMode().getToughModeStand());
+
+            // Only to set width and height of our spritePower
+            spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERFOUR_FX_WIDTH_METERS, Constants.POWERFOUR_FX_HEIGHT_METERS);
+
+            // Apply effect
+            hero.applyPowerFX(Assets.getInstance().getToughMode().getToughModeAnimation(), spritePower, false);
+        }
     }
 
     @Override
