@@ -39,13 +39,19 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
+- seguir con los sonidos, agergar sonido de timeup
 - hacer otro enemigo
-- ponerle sonido y assets bien
+
 
 PENDIENTES
 --------------
 - de alguna manera logre tener tough a la vez que me mataron. Y quedo el fantasmita con tough detenido por el borde de la pantalla inferior.
-El juego sigue, no tengo touch, la camara esta quieta
+El juego sigue, no tengo touch, la camara esta quieta. Tambien me paso con ghostmode y el enemigo final. Agarre un item a la vez que me
+mataron y quede con la burbuja azul, fantasma, el hud completo y detenido por el edge inferior.
+Deduzco que es un apply del power cuando estoy en estado dyingup.
+La unica manera de morir es con ondead. El ondead setea nothing_bit entonces no hay forma de quedar atrapado por el borde inferior.
+Lo que puede pasar es que haga un use de un power y en la siguiente vuelta muero (me llaman un ondead). Se ejecuta el ondead y luego el statetaken
+del power que cambio los filtros. Ver que no vuelva a pasar.
 - ponerle sonido y assets bien
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
@@ -58,7 +64,6 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
-- agregar un item que sea solo para puntos.
 - si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
 - En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox). Tambien se puede
 agregar acelerometro.
@@ -79,7 +84,6 @@ PENDIENTES A FUTURO
 bordes y objetos
 - averiguar como debuguear
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
-- renombrar los audios con nomenclatura
 - hacer el juego web y ios
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
@@ -128,6 +132,7 @@ strength (int): dureza de la powerbox
 powerOne (string): ghost mode
 powerTwo (string): escudo
 powerThree (string): cambia el poder de disparo
+colOne (string): moneda
 
 HERRAMIENTAS
 ------------
