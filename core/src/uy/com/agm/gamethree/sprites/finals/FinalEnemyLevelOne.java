@@ -230,7 +230,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             if (playingIntro) {
                 introTimer += dt;
                 if (introTimer > Constants.FINALLEVELONE_INTRO_DELAY_SECONDS) {
-                    if (!screen.getPlayer().isHeroDead() || !isDestroyed()) {
+                    if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
                         AudioManager.getInstance().getPlayingMusic().play();
                     }
                     playingIntro = false;
