@@ -52,7 +52,6 @@ Deduzco que es un apply del power cuando estoy en estado dyingup.
 La unica manera de morir es con ondead. El ondead setea nothing_bit entonces no hay forma de quedar atrapado por el borde inferior.
 Lo que puede pasar es que haga un use de un power y en la siguiente vuelta muero (me llaman un ondead). Se ejecuta el ondead y luego el statetaken
 del power que cambio los filtros. Ver que no vuelva a pasar.
-- ponerle sonido y assets bien
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
 - renombrar todos los timer por time (ej: stateTime)
