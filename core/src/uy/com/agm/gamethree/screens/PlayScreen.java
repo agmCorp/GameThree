@@ -91,7 +91,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 70, 0); todo
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 70, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
