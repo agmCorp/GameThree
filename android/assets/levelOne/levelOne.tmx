@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="662">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="665">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -181,12 +181,27 @@
     <property name="strength" type="int" value="2"/>
    </properties>
   </object>
-  <object id="660" x="224" y="7200" width="32" height="32">
+  <object id="660" x="212" y="7483" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
   <object id="661" x="288" y="6656" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="662" x="159" y="6146" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="663" x="206" y="5729" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="664" x="233" y="5582" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>

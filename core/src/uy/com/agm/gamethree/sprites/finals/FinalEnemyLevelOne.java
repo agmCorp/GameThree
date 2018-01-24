@@ -451,7 +451,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         stateFinalEnemyTimer = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOneExplosion());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
 
         // Set score
         screen.getHud().addScore(Constants.FINALLEVELONE_SCORE);
@@ -466,7 +466,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             explosionFXStateTimer = 0;
 
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOneExplosion());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
 
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
@@ -514,7 +514,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOnePowerDown());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
@@ -534,7 +534,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTimer = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalLevelOnePowerUp());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp());
         }
     }
 
@@ -542,7 +542,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
             weapon.onTarget();
             damage--;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getOpenPowerBox()); // todo BUSCAR AUDIO PARA CUANDO SE MORFA UN BALAZO
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit());
             if (damage <= 0) {
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }

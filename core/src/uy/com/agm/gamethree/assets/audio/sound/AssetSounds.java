@@ -32,9 +32,10 @@ public class AssetSounds {
     private Sound showUpPowerTwo;
     private Sound showUpPowerThree;
     private Sound showUpPowerFour;
-    private Sound finalLevelOnePowerUp;
-    private Sound finalLevelOnePowerDown;
-    private Sound finalLevelOneExplosion;
+    private Sound finalEnemyLevelOnePowerUp;
+    private Sound finalEnemyLevelOnePowerDown;
+    private Sound finalEnemyLevelOneExplosion;
+    private Sound finalEnemyLevelOneHit;
     private Sound levelCompleted;
     private Sound boing;
 
@@ -59,9 +60,10 @@ public class AssetSounds {
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
         showUpPowerFour = am.get(Constants.FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
-        finalLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
-        finalLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
-        finalLevelOneExplosion = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
+        finalEnemyLevelOnePowerUp = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
+        finalEnemyLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
+        finalEnemyLevelOneExplosion = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
+        finalEnemyLevelOneHit = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
         levelCompleted = am.get(Constants.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Constants.FX_FILE_BOUNCE, Sound.class);
     }
@@ -146,16 +148,20 @@ public class AssetSounds {
         return showUpPowerFour;
     }
 
-    public Sound getFinalLevelOnePowerUp() {
-        return finalLevelOnePowerUp;
+    public Sound getFinalEnemyLevelOnePowerUp() {
+        return finalEnemyLevelOnePowerUp;
     }
 
-    public Sound getFinalLevelOnePowerDown() {
-        return finalLevelOnePowerDown;
+    public Sound getFinalEnemyLevelOnePowerDown() {
+        return finalEnemyLevelOnePowerDown;
     }
 
-    public Sound getFinalLevelOneExplosion() {
-        return finalLevelOneExplosion;
+    public Sound getFinalEnemyLevelOneExplosion() {
+        return finalEnemyLevelOneExplosion;
+    }
+
+    public Sound getFinalEnemyLevelOneHit() {
+        return finalEnemyLevelOneHit;
     }
 
     public Sound getLevelCompleted() {
