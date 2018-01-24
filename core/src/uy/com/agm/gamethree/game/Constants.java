@@ -96,6 +96,7 @@ public class Constants {
     public static final String FX_FILE_FINAL_LEVEL_ONE_INTRO = "audio/sounds/fear.ogg";
     public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
     public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
+    public static final String FX_FILE_CLICK = "audio/sounds/click.ogg";
 
     // Max volume
     public static final float SHOOT_MAX_VOLUME = 0.3f;

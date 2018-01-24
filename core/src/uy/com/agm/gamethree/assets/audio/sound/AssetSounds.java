@@ -39,6 +39,7 @@ public class AssetSounds {
     private Sound finalEnemyLevelOneIntro;
     private Sound levelCompleted;
     private Sound boing;
+    private Sound click;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
@@ -68,6 +69,7 @@ public class AssetSounds {
         finalEnemyLevelOneIntro = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
         levelCompleted = am.get(Constants.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Constants.FX_FILE_BOUNCE, Sound.class);
+        click = am.get(Constants.FX_FILE_CLICK, Sound.class);
     }
 
     public Sound getBump() {
@@ -176,5 +178,9 @@ public class AssetSounds {
 
     public Sound getBoing() {
         return  boing;
+    }
+
+    public Sound getClick() {
+        return click;
     }
 }
