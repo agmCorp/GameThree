@@ -32,10 +32,10 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -60,8 +60,9 @@ public class Constants {
     // Location of description file for Bitmap fonts
     public static final String FONT_FILE = "fonts/fonts.fnt";
 
-    // Location of the map file for level one
+    // Location of the map file for each level
     public static final String MAP_FILE_LEVEL_ONE = "levelOne/levelOne.tmx";
+    public static final String MAP_FILE_LEVEL_TWO = "levelTwo/levelTwo.tmx";
 
     // Font sizes
     public static final float FONT_SMALL = 0.6f;
@@ -107,10 +108,12 @@ public class Constants {
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
     public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
+    public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
 
     // ---- Level ----
 
     public static final int TIMER_LEVEL_ONE = 180;
+    public static final int TIMER_LEVEL_TWO = 30;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     public static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;

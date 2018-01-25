@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="665">
+ <tileset firstgid="1" source="background.tsx"/>
+ <layer name="floor" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzt1OVZFgwYhmFf6Z4BaVCYgZKGGWhQhBmQ7hloJWegG2eQslBW+M4lvn/Pj3OC+7ivxKtXr16TRDIppJJGOhlkkkU2OeSSRz5vKKCQIoopoZQyyqngLe+opIpqaqiljnre00AjTTTTQitttNNBJ11000MvffQzwCAf+MgQnxhmhFE+M8Y4E0wyxTQzzDLHPAssssQyK6yyxjobbPKFr2yxzQ677LHPAYccccwJp5xxzgWXXHHNDbd84zt33PPAI0/84Ce/+M0fnvnLP15IJOxLEsmkkEoa6WSQSRbZ5JBLHvm8oYBCiiimhFLKKKeCt7yjkiqqqaGWOup5TwONNNFMC6200U4HnXTRTQ+99NHPAIN84CNDfGKYEUb5zBjjTDDJFNPMMMsc8yywyBLLrLDKGutssMkXvrLFNjvsssc+BxxyxDEnnHLGORdccsU1N9zyje/ccc8Djzzxg5/84jd/eOYv/3gh4byvSSKZFFJJI50MMskimxxyySOfNxRQSBHFlFBKGeVU8JZ3VFJFNTXUUkc972mgkSaaaaGVNtrpoJMuuumhlz76GWCQD3xkiE8MM8IonxljnAkmmWKaGWaZY54FFllimRVWWWOdDTb5wle22GaHXfbY54BDjjjmhFPOOOeCS6645oZbvvGdO+554JEnfvCTX/zmD8/85R8vJIT5NUkkk0IqaaSTQSZZZJNDLnkkou3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tD3aHm2Ptkfbo+3R9mh7tP1/aPt/4i2sXQ==
+  </data>
+ </layer>
+ <layer name="graphics" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzt2G0KgkAUhWHbgdVG0pWUK1FXorURq430sZE+NtAR/FMMzGUMUnsfOD8aODBJyO1GEVxOPbq3r90CAAAAGL9KqZWtsuvOYmWuLDzdRtkrB+XYna2UREk93XamPysX5dqdrZWNknm67Ux/Vx7Ks/ucK4VSeroAAOA/WOcZF+s842KdZ1yYZ6ZnPtNvcBbWTdRLA7sb9bLAbqFeGdit1dsGdvfqHQK7APDJteuwcu06rFy7DqvPXQcAAECL/Qamhl2JHbsSwI///8PEu95uau/65Ui+S97jnlWPbjOS5wMAeBf/+gIB8l9fAIPyAgpZQD4=
+  </data>
+ </layer>
+ <objectgroup name="borders">
+  <object id="5" name="left" x="0" y="0" width="1" height="8000"/>
+  <object id="11" name="right" x="479" y="0" width="1" height="8000"/>
+ </objectgroup>
+ <objectgroup name="obstacles">
+  <object id="84" x="257" y="1708" width="37" height="98"/>
+  <object id="86" x="117" y="1704" width="42" height="95"/>
+  <object id="87" x="72" y="2928" width="29" height="91"/>
+  <object id="88" x="438" y="3261" width="23" height="154"/>
+  <object id="90" x="221" y="4029" width="33" height="75"/>
+  <object id="91" x="73" y="5234" width="24" height="93"/>
+  <object id="92" x="92" y="5629" width="16" height="154"/>
+  <object id="93" x="339" y="6199" width="37" height="76"/>
+  <object id="94" x="215" y="6425" width="23" height="156"/>
+ </objectgroup>
+ <objectgroup name="powerBox">
+  <object id="265" x="177" y="7358" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="270" x="95" y="7358" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="328" x="262" y="7359" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+   </properties>
+  </object>
+  <object id="331" x="342" y="7360" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+    <property name="strength" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="340" x="348.5" y="6012" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
+  <object id="341" x="101.5" y="6010" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="342" x="268.5" y="6011" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+   </properties>
+  </object>
+  <object id="343" x="183.5" y="6010" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+    <property name="strength" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="344" x="339.5" y="4819" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+    <property name="strength" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="345" x="92.5" y="4817" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="346" x="259.5" y="4818" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+   </properties>
+  </object>
+  <object id="347" x="174.5" y="4817" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="348" x="350.5" y="3746" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
+  <object id="349" x="103.5" y="3744" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+    <property name="strength" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="350" x="270.5" y="3745" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+   </properties>
+  </object>
+  <object id="351" x="185.5" y="3744" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="352" x="350.5" y="2687" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
+  <object id="353" x="103.5" y="2685" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="354" x="270.5" y="2686" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="355" x="185.5" y="2685" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="356" x="353.5" y="1487" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+    <property name="strength" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="357" x="106.5" y="1485" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+    <property name="strength" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="358" x="273.5" y="1486" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="359" x="188.5" y="1485" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="360" x="363.5" y="268" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="361" x="116.5" y="266" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="362" x="283.5" y="267" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="363" x="198.5" y="266" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="660" x="212" y="7483" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="661" x="288" y="6656" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="662" x="159" y="6146" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="663" x="206" y="5729" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="664" x="233" y="5582" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="enemyOne"/>
+ <objectgroup name="enemyTwo">
+  <object id="396" x="441" y="4192" width="32" height="32"/>
+  <object id="397" x="441" y="4224" width="32" height="32"/>
+  <object id="398" x="441" y="4256" width="32" height="32"/>
+  <object id="411" x="8" y="3335" width="32" height="32"/>
+  <object id="413" x="8" y="3303" width="32" height="32"/>
+  <object id="414" x="8" y="3367" width="32" height="32"/>
+  <object id="456" x="291" y="6538" width="32" height="32"/>
+  <object id="458" x="291" y="6506" width="32" height="32"/>
+  <object id="459" x="291" y="6570" width="32" height="32"/>
+  <object id="466" x="7" y="5814" width="32" height="32"/>
+  <object id="468" x="7" y="5782" width="32" height="32"/>
+  <object id="469" x="7" y="5846" width="32" height="32"/>
+  <object id="476" x="442" y="5818" width="32" height="32"/>
+  <object id="478" x="442" y="5786" width="32" height="32"/>
+  <object id="496" x="8" y="5048" width="32" height="32"/>
+  <object id="498" x="8" y="5016" width="32" height="32"/>
+  <object id="499" x="8" y="5080" width="32" height="32"/>
+  <object id="506" x="7" y="4218" width="32" height="32"/>
+  <object id="508" x="7" y="4186" width="32" height="32"/>
+  <object id="509" x="7" y="4250" width="32" height="32"/>
+  <object id="556" x="12" y="2770" width="32" height="32"/>
+  <object id="558" x="12" y="2738" width="32" height="32"/>
+  <object id="559" x="12" y="2802" width="32" height="32"/>
+  <object id="566" x="9" y="2055" width="32" height="32"/>
+  <object id="568" x="9" y="2023" width="32" height="32"/>
+  <object id="576" x="442" y="2056" width="32" height="32"/>
+  <object id="578" x="442" y="2024" width="32" height="32"/>
+  <object id="606" x="441" y="1260" width="32" height="32"/>
+  <object id="608" x="441" y="1228" width="32" height="32"/>
+  <object id="609" x="441" y="1292" width="32" height="32"/>
+ </objectgroup>
+</map>

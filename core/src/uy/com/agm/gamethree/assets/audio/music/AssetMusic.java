@@ -14,10 +14,12 @@ public class AssetMusic {
 
     private Music songMainMenu;
     private Music songLevelOne;
+    private Music songLevelTwo;
 
     public AssetMusic(AssetManager am) {
         songMainMenu = am.get(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
         songLevelOne = am.get(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
+        songLevelTwo = am.get(Constants.MUSIC_FILE_LEVEL_TWO, Music.class);
     }
 
     public Music getSongMainMenu() {
@@ -26,5 +28,9 @@ public class AssetMusic {
 
     public Music getSongLevelOne() {
         return songLevelOne;
+    }
+
+    public Music getSongLevelTwo() {
+        return songLevelTwo;
     }
 }

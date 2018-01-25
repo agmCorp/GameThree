@@ -104,6 +104,7 @@ public class Assets implements Disposable, AssetErrorListener {
         // Load map for each level
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(Constants.MAP_FILE_LEVEL_ONE, TiledMap.class);
+        assetManager.load(Constants.MAP_FILE_LEVEL_TWO, TiledMap.class);
 
         // Load sounds
         assetManager.load(Constants.FX_FILE_BUMP, Sound.class);
@@ -140,6 +141,7 @@ public class Assets implements Disposable, AssetErrorListener {
         // Load music
         assetManager.load(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
         assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
+        assetManager.load(Constants.MUSIC_FILE_LEVEL_TWO, Music.class);
 
         // Start loading assets and wait until finished
         assetManager.finishLoading();

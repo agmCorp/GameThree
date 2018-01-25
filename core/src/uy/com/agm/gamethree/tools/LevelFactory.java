@@ -21,6 +21,7 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
+            case 2:
                 finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
                         screen.getGameViewPort().getWorldHeight() * Constants.WORLD_SCREENS -
                                 Constants.FINALLEVELONE_HEIGHT_METERS + Constants.FINALLEVELONE_OFFSET_METERS);
@@ -33,7 +34,7 @@ public class LevelFactory {
     }
 
     public static int getLevelTimer(int level) {
-        int[] levelTimers = {Constants.TIMER_LEVEL_ONE};
+        int[] levelTimers = {Constants.TIMER_LEVEL_ONE, Constants.TIMER_LEVEL_TWO};
         return  levelTimers[level - 1];
     }
 
@@ -43,6 +44,9 @@ public class LevelFactory {
         switch (level) {
             case 1:
                 music = Assets.getInstance().getMusic().getSongLevelOne();
+                break;
+            case 2:
+                music = Assets.getInstance().getMusic().getSongLevelTwo();
                 break;
             default:
                 music = null;
@@ -57,6 +61,9 @@ public class LevelFactory {
         switch (level) {
             case 1:
                 map = Assets.getInstance().getMaps().getMapLevelOne();
+                break;
+            case 2:
+                map = Assets.getInstance().getMaps().getMapLevelTwo();
                 break;
             default:
                 map = null;

@@ -40,7 +40,10 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 PROXIMOS PASOS
 --------------
 - hacer otro enemigo
-
+- capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
+hurry up cuando empieza a sonar el tiempo
+time is up cuando moriste por eso (y luego pantalla de gameover)
+pausa y eso.
 
 PENDIENTES
 --------------

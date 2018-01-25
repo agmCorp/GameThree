@@ -14,16 +14,27 @@ public class AssetMaps {
     private static final String TAG = AssetMaps.class.getName();
 
     private TiledMap mapLevelOne;
+    private TiledMap mapLevelTwo;
 
     public AssetMaps(AssetManager am) {
-        mapLevelOne = am.get(Constants.MAP_FILE_LEVEL_ONE);
+        mapLevelOne = getMap(am, Constants.MAP_FILE_LEVEL_ONE);
+        mapLevelTwo = getMap(am, Constants.MAP_FILE_LEVEL_TWO);
+    }
+
+    private TiledMap getMap(AssetManager am, String mapFile) {
+        TiledMap map = am.get(mapFile);
         if (Constants.HIDE_BACKGROUND) {
-            MapLayer floor = mapLevelOne.getLayers().get("floor");
-            mapLevelOne.getLayers().remove(floor);
+            MapLayer floor = map.getLayers().get("floor");
+            map.getLayers().remove(floor);
         }
+        return map;
     }
 
     public TiledMap getMapLevelOne() {
         return mapLevelOne;
+    }
+
+    public TiledMap getMapLevelTwo() {
+        return mapLevelTwo;
     }
 }
