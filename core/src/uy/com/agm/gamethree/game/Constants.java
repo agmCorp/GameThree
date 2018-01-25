@@ -139,14 +139,14 @@ public class Constants {
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.2f;
     public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float HERO_WIDTH_METERS = 57.0f * 1.0f / PPM;
-    public static final float HERO_HEIGHT_METERS = 71.0f * 1.0f / PPM;
+    public static final float HERO_WIDTH_METERS = 128.0f * 0.7f / PPM;
+    public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
     public static final int HERO_LIVES_START = 3;
-    public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 5.0f;
-    public static final float HERO_PLAY_AGAIN_ALPHA = 0.5f;
+    public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 4.0f;
+    public static final float HERO_PLAY_AGAIN_ALPHA = 0.7f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
