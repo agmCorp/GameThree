@@ -151,8 +151,8 @@ public class Constants {
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float POWERBOX_WIDTH_METERS = 80.0f * 0.6f / PPM;
-    public static final float POWERBOX_HEIGHT_METERS = 86.0f * 0.6f / PPM;
+    public static final float POWERBOX_WIDTH_METERS = 80.0f * 0.5f / PPM;
+    public static final float POWERBOX_HEIGHT_METERS = 86.0f * 0.5f / PPM;
     public static final int POWERBOX_SCORE = 10;
 
     // Item (meters = pixels * resizeFactor / PPM)
@@ -167,8 +167,8 @@ public class Constants {
     public static final float COLONE_VELOCITY_Y = 0.0f;
     public static final float COLONE_WAITING_SECONDS = 1.0f;
     public static final float COLONE_FADING_SECONDS = 1.0f;
-    public static final float COLONE_WIDTH_METERS = 77.0f * 0.7f / PPM;
-    public static final float COLONE_HEIGHT_METERS = 77.0f * 0.7f / PPM;
+    public static final float COLONE_WIDTH_METERS = 77.0f * 0.5f / PPM;
+    public static final float COLONE_HEIGHT_METERS = 77.0f * 0.5f / PPM;
     public static final int COLONE_SCORE = 25;
 
     // PowerOne (meters = pixels * resizeFactor / PPM)

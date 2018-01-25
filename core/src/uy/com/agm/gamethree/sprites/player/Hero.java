@@ -382,10 +382,11 @@ public class Hero extends Sprite {
         powerDown();
         screen.getHud().forcePowerTimeUp();
 
-        // Our Hero can collide with borders and edges only
+        // Our Hero can collide with borders, edges and items only
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
         filter.maskBits = Constants.BORDERS_BIT |
+                Constants.ITEM_BIT |
                 Constants.EDGES_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
