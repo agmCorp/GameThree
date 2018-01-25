@@ -39,7 +39,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- seguir con los sonidos, agergar sonido de timeup
 - hacer otro enemigo
 
 
