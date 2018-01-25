@@ -25,22 +25,22 @@ public class AssetHero {
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingUpAnimation = new Animation(0.5f / 6.0f, regions);
+        heroMovingUpAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDown");
-        heroMovingDownAnimation = new Animation(0.5f / 6.0f, regions);
+        heroMovingDownAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingLeftRightAnimation = new Animation(0.5f / 6.0f, regions); // We use the same animation as heroMovingUpAnimation
+        heroMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions); // We use the same animation as heroMovingUpAnimation
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDead");
-        heroDeadAnimation = new Animation(0.5f / 10.0f, regions);
+        heroDeadAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
     }
 
