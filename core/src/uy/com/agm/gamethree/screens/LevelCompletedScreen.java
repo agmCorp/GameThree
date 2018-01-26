@@ -8,6 +8,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -63,6 +64,9 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Adds created table to stage
         addActor(table);
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getAplause());
     }
 
     @Override

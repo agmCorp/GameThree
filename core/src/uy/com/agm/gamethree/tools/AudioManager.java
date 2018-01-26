@@ -13,6 +13,7 @@ public class AudioManager {
     private static final String TAG = AudioManager.class.getName();
 
     private static  AudioManager instance;
+    private Sound playingSound;
     private Music playingMusic;
 
     // Singleton: prevent instantiation from other classes
@@ -27,7 +28,18 @@ public class AudioManager {
         return instance;
     }
 
+    public void stopSound() {
+        if (playingSound != null) {
+            playingSound.stop();
+        }
+    }
+
+    public Sound getPlayingSound() {
+        return playingSound;
+    }
+
     public void play(Sound sound) {
+        playingSound = sound;
         play(sound, 1);
     }
 
@@ -47,7 +59,6 @@ public class AudioManager {
 
     public void play(Music music) {
         playingMusic = music;
-
         if (GameSettings.getInstance().getMusic()) {
             music.setLooping(true);
             music.setVolume(GameSettings.getInstance().getVolMusic());
@@ -56,7 +67,9 @@ public class AudioManager {
     }
 
     public void stopMusic() {
-        if (playingMusic != null) playingMusic.stop();
+        if (playingMusic != null) {
+            playingMusic.stop();
+        }
     }
 
     public Music getPlayingMusic() {

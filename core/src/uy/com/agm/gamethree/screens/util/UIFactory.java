@@ -31,6 +31,7 @@ public class UIFactory {
                     public boolean touchDown(InputEvent event, float x,
                                              float y, int pointer, int button) {
                         // Audio FX
+                        AudioManager.getInstance().stopSound();
                         AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
 
                         // Display screen

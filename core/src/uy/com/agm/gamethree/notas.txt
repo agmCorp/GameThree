@@ -70,7 +70,8 @@ cuando el usuario apreta el homebutton.
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
-- a veces me genera dos items en lugar de 1 (por ejemplo dos ghost)
+- a veces me genera dos items en lugar de 1 (por ejemplo dos ghost). No deberia volver a pasar, movi la generacion
+de items de onhit a stateopened.
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
@@ -306,6 +307,8 @@ METODOLOGIA
 13)
    Para crear un proyecto con libgdx desde cero, seguir este link:
    http://libgdx.badlogicgames.com/documentation/gettingstarted/Importing%20into%20IDE.html
+
+14) On Android, a Sound instance can not be over 1mb in size. If you have a bigger file, use Music
 
 IOS
 ---
