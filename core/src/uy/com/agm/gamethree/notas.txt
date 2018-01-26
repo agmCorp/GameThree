@@ -72,6 +72,7 @@ agregar acelerometro.
 - agregar transitions
 - a veces me genera dos items en lugar de 1 (por ejemplo dos ghost). No deberia volver a pasar, movi la generacion
 de items de onhit a stateopened.
+- agregar credits
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
