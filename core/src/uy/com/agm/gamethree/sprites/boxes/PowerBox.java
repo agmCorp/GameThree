@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.items.boxes;
+package uy.com.agm.gamethree.sprites.boxes;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -80,12 +80,12 @@ public class PowerBox extends Sprite {
         return currentState == State.FINISHED || currentState == State.EXPLODING;
     }
 
-    // Determine whether or not a power should be released reading a property set in TiledEditor.
-    protected void getItemOnHit() {
+    // Determine whether or not an item should be released reading a property set in TiledEditor.
+    private void getItemOnHit() {
         ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
-    protected void definePowerBox() {
+    private void definePowerBox() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -146,6 +146,9 @@ public class PowerBox extends Sprite {
     private void stateOpened() {
         // Destroy box2D body
         world.destroyBody(b2body);
+
+        // Release an item
+        getItemOnHit();
 
         // Explosion animation
         stateTimer = 0;
@@ -211,7 +214,6 @@ public class PowerBox extends Sprite {
          */
         int strength = object.getProperties().get("strength", 0, Integer.class);
         if (damage >= strength - 1) {
-            getItemOnHit();
             currentState = State.OPENED;
         } else {
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getCrack());

@@ -70,6 +70,7 @@ cuando el usuario apreta el homebutton.
 agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
+- a veces me genera dos items en lugar de 1 (por ejemplo dos ghost)
 
 levels
 https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/

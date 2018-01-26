@@ -17,7 +17,7 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
-import uy.com.agm.gamethree.sprites.items.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileobjects.Borders;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
