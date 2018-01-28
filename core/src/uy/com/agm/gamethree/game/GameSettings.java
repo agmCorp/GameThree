@@ -5,8 +5,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectSet;
 
-import uy.com.agm.gamethree.screens.util.ScreenManager;
-
 /**
  * Created by AGM on 1/18/2018.
  */
@@ -19,6 +17,7 @@ public class GameSettings {
     private static final String MUSIC = "music";
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
+    private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String AVAILABLE_LEVEL = "availableLevel_";
 
     // Singleton: unique instance
@@ -28,6 +27,7 @@ public class GameSettings {
     private boolean music;
     private float volSound;
     private float volMusic;
+    private boolean manualShooting;
     private ObjectSet<Integer> availableLevels;
     private Preferences prefs;
 
@@ -49,6 +49,7 @@ public class GameSettings {
         music = prefs.getBoolean(MUSIC, true);
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
+        manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
 
         availableLevels = new ObjectSet<Integer>();
         availableLevels.add(1); // Default level
@@ -68,6 +69,7 @@ public class GameSettings {
         Gdx.app.debug(TAG, MUSIC + " " + music);
         Gdx.app.debug(TAG, VOLUME_SOUND + " " + volSound);
         Gdx.app.debug(TAG, VOLUME_MUSIC + " " + volMusic);
+        Gdx.app.debug(TAG, MANUAL_SHOOTING + " " + manualShooting);
         Gdx.app.debug(TAG, AVAILABLE_LEVEL + " " + availableLevels.toString(", "));
    }
 
@@ -76,13 +78,14 @@ public class GameSettings {
         prefs.putBoolean(MUSIC, music);
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
+        prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
         for(Integer level : availableLevels) {
             prefs.putBoolean(AVAILABLE_LEVEL + level, true);
         }
         prefs.flush();
     }
 
-    public boolean getSound() {
+    public boolean isSound() {
         return sound;
     }
 
@@ -90,7 +93,7 @@ public class GameSettings {
         this.sound = sound;
     }
 
-    public boolean getMusic() {
+    public boolean isMusic() {
         return music;
     }
 
@@ -112,6 +115,14 @@ public class GameSettings {
 
     public void setVolMusic(float volMusic) {
         this.volMusic = volMusic;
+    }
+
+    public boolean isManualShooting() {
+        return manualShooting;
+    }
+
+    public void setManualShooting(boolean manualShooting) {
+        this.manualShooting = manualShooting;
     }
 
     public ObjectSet<Integer> getAvailableLevels() {

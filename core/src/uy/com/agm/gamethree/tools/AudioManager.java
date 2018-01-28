@@ -52,14 +52,14 @@ public class AudioManager {
     }
 
     public void play(Sound sound, float volume, float pitch, float pan) {
-        if (GameSettings.getInstance().getSound()) {
+        if (GameSettings.getInstance().isSound()) {
             sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }
     }
 
     public void play(Music music) {
         playingMusic = music;
-        if (GameSettings.getInstance().getMusic()) {
+        if (GameSettings.getInstance().isMusic()) {
             music.setLooping(true);
             music.setVolume(GameSettings.getInstance().getVolMusic());
             music.play();
@@ -79,7 +79,7 @@ public class AudioManager {
     public void onSettingsUpdated() {
         if (playingMusic != null) {
             playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
-            if (GameSettings.getInstance().getMusic()) {
+            if (GameSettings.getInstance().isMusic()) {
                 if (!playingMusic.isPlaying()) {
                     playingMusic.play();
                 }

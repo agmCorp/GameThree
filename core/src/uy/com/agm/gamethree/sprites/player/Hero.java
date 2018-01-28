@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -176,6 +177,11 @@ public class Hero extends Sprite {
 
         // Shoot timer
         openFireTimer += dt;
+        if (!GameSettings.getInstance().isManualShooting()) {
+            if (!isHeroDead()) {
+                openFire();
+            }
+        }
     }
 
     private boolean visualPowerFX() {

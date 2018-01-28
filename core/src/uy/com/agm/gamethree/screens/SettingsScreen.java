@@ -13,10 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.GameSettings;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
 
+    private Label shootingLabel;
     private Texture sliderBackgroundTex;
     private Texture sliderKnobTex;
     private Slider sliderMusic;
@@ -66,6 +67,10 @@ public class SettingsScreen extends AbstractScreen {
         sliderSound = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
         sliderSound.setValue(prefs.getVolSound());
 
+        // Shooting
+        shootingLabel = new Label("Manual shooting", labelStyleNormal);
+        setTextLabelShooting();
+
         // Set table structure
         Table table = new Table();
         table.center();
@@ -79,6 +84,8 @@ public class SettingsScreen extends AbstractScreen {
         table.add(soundLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderSound).padTop(Constants.PAD_TOP).center();
+        table.row();
+        table.add(shootingLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
@@ -104,7 +111,18 @@ public class SettingsScreen extends AbstractScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
-            };
+            }
+        });
+
+        // Events
+        shootingLabel.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                // Audio FX
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                saveShooting();
+                return true;
+            }
         });
 
         // Events
@@ -144,6 +162,20 @@ public class SettingsScreen extends AbstractScreen {
         prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
         prefs.save();
         AudioManager.getInstance().onSettingsUpdated();
+    }
+
+    private void saveShooting() {
+        prefs.setManualShooting(!prefs.isManualShooting());
+        setTextLabelShooting();
+        prefs.save();
+    }
+
+    private void setTextLabelShooting() {
+        if (prefs.isManualShooting()) {
+            shootingLabel.setText("Manual shooting");
+        } else {
+            shootingLabel.setText("Automatic shooting");
+        }
     }
 
     @Override
