@@ -73,16 +73,9 @@ agregar acelerometro.
 - a veces me genera dos items en lugar de 1 (por ejemplo dos ghost). No deberia volver a pasar, movi la generacion
 de items de onhit a stateopened.
 - agregar credits
-
-levels
-https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
-https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-new-levels
-http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
-http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
-http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
-
-PENDIENTES A FUTURO
--------------------
+- Inventar una etiqueta random en las powerbox para generar poder random
+- Ponele barra de vida al enemigo final
+- Marcar el terreno con banderas para saber dónde estoy
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
@@ -101,6 +94,13 @@ Un poder de disparo puede variar:
     tipo de movimiento (boomerang)
     velocidad
     sonido
+
+levels
+https://www.reddit.com/r/libgdx/comments/32cprp/loading_levels/
+https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-new-levels
+http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
+http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
+http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
 
 DUDAS
 -----
