@@ -67,8 +67,9 @@ public class PowerTwo extends Item {
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
-                Constants.HERO_TOUGH_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                Constants.HERO_BIT |
+                Constants.HERO_GHOST_BIT |
+                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -192,7 +193,7 @@ public class PowerTwo extends Item {
     }
 
     @Override
-    public void onUse(Hero hero) {
+    public void onUse() {
         /*
          * We must remove its b2body to avoid collisions and change the hero's Filter.
          * This can't be done here because this method is called from WorldContactListener that is invoked

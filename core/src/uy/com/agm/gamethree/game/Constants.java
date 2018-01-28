@@ -128,14 +128,15 @@ public class Constants {
     public static final short EDGES_BIT = 2;
     public static final short OBSTACLE_BIT = 4;
     public static final short HERO_BIT = 8;
-    public static final short HERO_TOUGH_BIT = 16;
-    public static final short POWERBOX_BIT = 32;
-    public static final short ENEMY_BIT = 64;
-    public static final short ITEM_BIT = 128;
-    public static final short HERO_WEAPON_BIT = 256;
-    public static final short ENEMY_WEAPON_BIT = 512;
-    public static final short FINAL_ENEMY_BIT = 1024;
-    public static final short SHIELD_BIT = 2048;
+    public static final short HERO_GHOST_BIT = 16;
+    public static final short HERO_TOUGH_BIT = 32;
+    public static final short POWERBOX_BIT = 64;
+    public static final short ENEMY_BIT = 128;
+    public static final short ITEM_BIT = 256;
+    public static final short HERO_WEAPON_BIT = 512;
+    public static final short ENEMY_WEAPON_BIT = 1024;
+    public static final short FINAL_ENEMY_BIT = 2048;
+    public static final short SHIELD_BIT = 4096;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.2f;
@@ -146,7 +147,7 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
     public static final int HERO_LIVES_START = 3;
-    public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 4.0f;
+    public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     public static final float HERO_PLAY_AGAIN_ALPHA = 0.7f;
 
     // Edge (meters = pixels * resizeFactor / PPM)

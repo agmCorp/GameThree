@@ -400,7 +400,6 @@ public class Hero extends Sprite {
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
         filter.maskBits = Constants.BORDERS_BIT |
-                Constants.ITEM_BIT |
                 Constants.EDGES_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);

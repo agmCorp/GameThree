@@ -13,7 +13,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -62,8 +61,9 @@ public class ColOne extends Item {
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
-                Constants.HERO_TOUGH_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                Constants.HERO_BIT |
+                Constants.HERO_GHOST_BIT |
+                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -140,7 +140,7 @@ public class ColOne extends Item {
     }
 
     @Override
-    public void onUse(Hero hero) {
+    public void onUse() {
         /*
          * We must remove its b2body to avoid collisions.
          * This can't be done here because this method is called from WorldContactListener that is invoked

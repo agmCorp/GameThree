@@ -38,11 +38,12 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- hacer otro enemigo
+- hacer el ultimo enenmigo que se congela
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
+- disparo automatico
 
 PENDIENTES
 --------------
@@ -308,7 +309,16 @@ METODOLOGIA
    Para crear un proyecto con libgdx desde cero, seguir este link:
    http://libgdx.badlogicgames.com/documentation/gettingstarted/Importing%20into%20IDE.html
 
-14) On Android, a Sound instance can not be over 1mb in size. If you have a bigger file, use Music
+14)
+    On Android, a Sound instance can not be over 1mb in size. If you have a bigger file, use Music
+
+15)
+    Cuando estoy invulnerable durante unos segundos por haber perdido una vida, no programar el
+    poder agarrar items, porque eso cambia los filtros y me dejan vulnerable dependiendo del poder.
+
+16)
+    Debo hacer dispose de las cosas a las que les hice new. Si yo no les hice new (por ejemplo las texturas), no
+    es mi responsabilidad (es la responsabilidad del assetManager).
 
 IOS
 ---

@@ -67,8 +67,9 @@ public class PowerOne extends Item {
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
-                Constants.HERO_TOUGH_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                Constants.HERO_BIT |
+                Constants.HERO_GHOST_BIT |
+                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -164,12 +165,13 @@ public class PowerOne extends Item {
 
             // Hero can't collide with enemies nor bullets
             Filter filter = new Filter();
-            filter.categoryBits = Constants.HERO_BIT;  // Depicts what this fixture is
+            filter.categoryBits = Constants.HERO_GHOST_BIT;  // Depicts what this fixture is
             filter.maskBits = Constants.BORDERS_BIT |
                     Constants.EDGES_BIT |
                     Constants.OBSTACLE_BIT |
                     Constants.POWERBOX_BIT |
-                    Constants.ITEM_BIT;  // Depicts what this Fixture can collide with (see WorldContactListener)
+                    Constants.ITEM_BIT |
+                    Constants.ENEMY_BIT;  // Depicts what this Fixture can collide with (see WorldContactListener)
             for (Fixture fixture : hero.getB2body().getFixtureList()) {
                 fixture.setFilterData(filter);
             }
@@ -186,7 +188,7 @@ public class PowerOne extends Item {
     }
 
     @Override
-    public void onUse(Hero hero) {
+    public void onUse() {
         /*
          * We must remove its b2body to avoid collisions and change the hero's Filter.
          * This can't be done here because this method is called from WorldContactListener that is invoked

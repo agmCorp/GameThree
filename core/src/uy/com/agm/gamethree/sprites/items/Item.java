@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.player.Hero;
 
 /**
  * Created by AGM on 12/11/2017.
@@ -89,6 +88,6 @@ public abstract class Item extends Sprite {
     protected abstract void defineItem();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
-    public abstract void onUse(Hero hero);
+    public abstract void onUse();
     public abstract void onBump();
 }

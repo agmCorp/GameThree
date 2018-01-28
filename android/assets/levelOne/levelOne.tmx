@@ -207,67 +207,67 @@
   </object>
  </objectgroup>
  <objectgroup name="enemyOne">
-  <object id="376" x="96" y="7040" width="32" height="32"/>
-  <object id="377" x="352" y="7040" width="32" height="32"/>
-  <object id="380" x="160" y="6624" width="32" height="32"/>
-  <object id="381" x="384" y="6624" width="32" height="32"/>
-  <object id="383" x="96" y="6304" width="32" height="32"/>
-  <object id="385" x="352" y="5568" width="32" height="32"/>
-  <object id="386" x="320" y="5696" width="32" height="32">
+  <object id="376" x="96" y="7040" width="32" height="32" visible="0"/>
+  <object id="377" x="352" y="7040" width="32" height="32" visible="0"/>
+  <object id="380" x="160" y="6624" width="32" height="32" visible="0"/>
+  <object id="381" x="384" y="6624" width="32" height="32" visible="0"/>
+  <object id="383" x="96" y="6304" width="32" height="32" visible="0"/>
+  <object id="385" x="352" y="5568" width="32" height="32" visible="0"/>
+  <object id="386" x="320" y="5696" width="32" height="32" visible="0">
    <properties>
     <property name="powerFour" value=""/>
    </properties>
   </object>
-  <object id="387" x="256" y="5824" width="32" height="32"/>
-  <object id="388" x="96" y="5888" width="32" height="32"/>
-  <object id="389" x="64" y="5504" width="32" height="32"/>
-  <object id="390" x="352" y="5056" width="32" height="32"/>
-  <object id="392" x="320" y="5216" width="32" height="32"/>
-  <object id="394" x="128" y="5120" width="32" height="32"/>
-  <object id="395" x="96" y="4992" width="32" height="32">
+  <object id="387" x="256" y="5824" width="32" height="32" visible="0"/>
+  <object id="388" x="96" y="5888" width="32" height="32" visible="0"/>
+  <object id="389" x="64" y="5504" width="32" height="32" visible="0"/>
+  <object id="390" x="352" y="5056" width="32" height="32" visible="0"/>
+  <object id="392" x="320" y="5216" width="32" height="32" visible="0"/>
+  <object id="394" x="128" y="5120" width="32" height="32" visible="0"/>
+  <object id="395" x="96" y="4992" width="32" height="32" visible="0">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="416" x="224" y="3488" width="32" height="32"/>
-  <object id="438" x="128" y="352" width="32" height="32"/>
-  <object id="439" x="256" y="352" width="32" height="32"/>
-  <object id="440" x="384" y="352" width="32" height="32"/>
-  <object id="621" x="93" y="6762" width="32" height="32"/>
-  <object id="622" x="369" y="6343" width="32" height="32"/>
-  <object id="624" x="226" y="5330" width="32" height="32"/>
-  <object id="625" x="240" y="4580" width="32" height="32">
+  <object id="416" x="224" y="3488" width="32" height="32" visible="0"/>
+  <object id="438" x="128" y="352" width="32" height="32" visible="0"/>
+  <object id="439" x="256" y="352" width="32" height="32" visible="0"/>
+  <object id="440" x="384" y="352" width="32" height="32" visible="0"/>
+  <object id="621" x="93" y="6762" width="32" height="32" visible="0"/>
+  <object id="622" x="369" y="6343" width="32" height="32" visible="0"/>
+  <object id="624" x="226" y="5330" width="32" height="32" visible="0"/>
+  <object id="625" x="240" y="4580" width="32" height="32" visible="0">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="627" x="427" y="3810" width="32" height="32"/>
-  <object id="628" x="248" y="3138" width="32" height="32"/>
-  <object id="629" x="334" y="2852" width="32" height="32"/>
-  <object id="630" x="113" y="1893" width="32" height="32"/>
-  <object id="631" x="232" y="1287" width="32" height="32">
+  <object id="627" x="427" y="3810" width="32" height="32" visible="0"/>
+  <object id="628" x="248" y="3138" width="32" height="32" visible="0"/>
+  <object id="629" x="334" y="2852" width="32" height="32" visible="0"/>
+  <object id="630" x="113" y="1893" width="32" height="32" visible="0"/>
+  <object id="631" x="232" y="1287" width="32" height="32" visible="0">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="632" x="231" y="838" width="32" height="32"/>
-  <object id="633" x="45" y="488" width="32" height="32"/>
-  <object id="636" x="302" y="6094" width="32" height="32"/>
-  <object id="638" x="316" y="3905" width="32" height="32"/>
-  <object id="639" x="34" y="3959" width="32" height="32"/>
-  <object id="640" x="57" y="3842" width="32" height="32"/>
-  <object id="642" x="139" y="3594" width="32" height="32"/>
-  <object id="643" x="126" y="3429" width="32" height="32"/>
-  <object id="644" x="316" y="3402" width="32" height="32"/>
-  <object id="646" x="176" y="2785" width="32" height="32"/>
-  <object id="648" x="360" y="2471" width="32" height="32"/>
-  <object id="649" x="206" y="2576" width="32" height="32"/>
-  <object id="650" x="55" y="2514" width="32" height="32"/>
-  <object id="651" x="370" y="1804" width="32" height="32"/>
-  <object id="654" x="278" y="1106" width="32" height="32"/>
-  <object id="655" x="105" y="1056" width="32" height="32"/>
-  <object id="657" x="69" y="664" width="32" height="32"/>
-  <object id="658" x="158" y="745" width="32" height="32"/>
+  <object id="632" x="231" y="838" width="32" height="32" visible="0"/>
+  <object id="633" x="45" y="488" width="32" height="32" visible="0"/>
+  <object id="636" x="302" y="6094" width="32" height="32" visible="0"/>
+  <object id="638" x="316" y="3905" width="32" height="32" visible="0"/>
+  <object id="639" x="34" y="3959" width="32" height="32" visible="0"/>
+  <object id="640" x="57" y="3842" width="32" height="32" visible="0"/>
+  <object id="642" x="139" y="3594" width="32" height="32" visible="0"/>
+  <object id="643" x="126" y="3429" width="32" height="32" visible="0"/>
+  <object id="644" x="316" y="3402" width="32" height="32" visible="0"/>
+  <object id="646" x="176" y="2785" width="32" height="32" visible="0"/>
+  <object id="648" x="360" y="2471" width="32" height="32" visible="0"/>
+  <object id="649" x="206" y="2576" width="32" height="32" visible="0"/>
+  <object id="650" x="55" y="2514" width="32" height="32" visible="0"/>
+  <object id="651" x="370" y="1804" width="32" height="32" visible="0"/>
+  <object id="654" x="278" y="1106" width="32" height="32" visible="0"/>
+  <object id="655" x="105" y="1056" width="32" height="32" visible="0"/>
+  <object id="657" x="69" y="664" width="32" height="32" visible="0"/>
+  <object id="658" x="158" y="745" width="32" height="32" visible="0"/>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="396" x="441" y="4192" width="32" height="32"/>

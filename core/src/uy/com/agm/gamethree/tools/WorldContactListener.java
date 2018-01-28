@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
+import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
@@ -30,30 +31,31 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // Hero/HeroTough - InteractiveTileObjects
+            // Hero/HeroGhost/HeroTough - InteractiveTileObjects
             case Constants.HERO_BIT | Constants.BORDERS_BIT:
             case Constants.HERO_BIT | Constants.OBSTACLE_BIT:
+            case Constants.HERO_GHOST_BIT | Constants.BORDERS_BIT:
+            case Constants.HERO_GHOST_BIT | Constants.OBSTACLE_BIT:
             case Constants.HERO_TOUGH_BIT | Constants.BORDERS_BIT:
             case Constants.HERO_TOUGH_BIT | Constants.OBSTACLE_BIT:
                 fixC = (fixA.getFilterData().categoryBits == Constants.BORDERS_BIT || fixA.getFilterData().categoryBits == Constants.OBSTACLE_BIT) ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onBump();
                 break;
 
-            // Hero/HeroTough - PowerBox
+            // Hero/HeroGhost/HeroTough - PowerBox
             case Constants.HERO_BIT | Constants.POWERBOX_BIT:
+            case Constants.HERO_GHOST_BIT | Constants.POWERBOX_BIT:
             case Constants.HERO_TOUGH_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.POWERBOX_BIT ? fixA : fixB;
                 ((PowerBox) fixC.getUserData()).onBump();
                 break;
 
-            // Hero/HeroTough - Item
+            // Hero/HeroGhost/HeroTough - Item
             case Constants.HERO_BIT | Constants.ITEM_BIT:
+            case Constants.HERO_GHOST_BIT | Constants.ITEM_BIT:
             case Constants.HERO_TOUGH_BIT | Constants.ITEM_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT) {
-                    ((Item) fixA.getUserData()).onUse((Hero) fixB.getUserData());
-                } else {
-                    ((Item) fixB.getUserData()).onUse((Hero) fixA.getUserData());
-                }
+                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
+                ((Item) fixC.getUserData()).onUse();
                 break;
 
             // Hero - Enemies
@@ -62,10 +64,38 @@ public class WorldContactListener implements ContactListener {
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
+            // HeroGhost - Enemies
+            case Constants.HERO_GHOST_BIT | Constants.ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BIT) {
+                    Enemy enemy = ((Enemy) fixA.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixB.getUserData()).onDead();
+                    }
+                } else {
+                    Enemy enemy = ((Enemy) fixB.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixA.getUserData()).onDead();
+                    }
+                }
+                break;
+
             // HeroTough - Enemies
             case Constants.HERO_TOUGH_BIT | Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).onHit();
+                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BIT) {
+                    Enemy enemy = ((Enemy) fixA.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixB.getUserData()).onDead();
+                    } else {
+                        enemy.onHit();
+                    }
+                } else {
+                    Enemy enemy = ((Enemy) fixB.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixA.getUserData()).onDead();
+                    } else {
+                        enemy.onHit();
+                    }
+                }
                 break;
 
             // Hero - Enemy's weapon
