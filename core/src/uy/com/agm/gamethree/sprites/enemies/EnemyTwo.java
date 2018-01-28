@@ -91,7 +91,6 @@ public class EnemyTwo extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        super.getItemOnHit();
         currentState = State.INJURED;
     }
 
@@ -113,6 +112,9 @@ public class EnemyTwo extends Enemy {
     }
 
     private void stateInjured() {
+        // Release an item
+        getItemOnHit();
+
         // Destroy box2D body
         world.destroyBody(b2body);
 

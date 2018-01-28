@@ -50,6 +50,7 @@ public class Hero extends Sprite {
     private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTimer;
+    private boolean applyNewFilters;
     private float playAgainTimer;
     private float gameOverTimer;
     private float openFireTimer;
@@ -99,6 +100,7 @@ public class Hero extends Sprite {
         heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
         heroDeadAnimation = Assets.getInstance().getHero().getHeroDeadAnimation();
         heroStateTimer = 0;
+        applyNewFilters = false;
         playAgainTimer = 0;
         gameOverTimer = 0;
         openFireTimer = 0;
@@ -308,6 +310,18 @@ public class Hero extends Sprite {
     }
 
     private void heroStateDyingUp(float dt) {
+        if (applyNewFilters) {
+            // Hero can't collide with anything
+            Filter filter = new Filter();
+            filter.maskBits = Constants.NOTHING_BIT;
+
+            // We set the previous filter in every fixture
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            applyNewFilters = false;
+        }
+
        /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
@@ -434,14 +448,14 @@ public class Hero extends Sprite {
         AudioManager.getInstance().stopMusic();
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
 
-        // Hero can't collide with anything
-        Filter filter = new Filter();
-        filter.maskBits = Constants.NOTHING_BIT;
-
-        // We set the previous filter in every fixture
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
+        /*
+         * We must change his b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be changed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore, we use a flag in order to point out this behavior and change it later.
+         */
+        applyNewFilters = true;
 
         // Stop motion
         stop();

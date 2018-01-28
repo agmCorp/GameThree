@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="673">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="682">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -300,5 +300,43 @@
   <object id="606" x="441" y="1260" width="32" height="32"/>
   <object id="608" x="441" y="1228" width="32" height="32"/>
   <object id="609" x="441" y="1292" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="enemyThree">
+  <object id="673" x="384" y="6176" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="679" x="54" y="5374" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="680" x="311" y="5376" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="681" x="196" y="5470" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

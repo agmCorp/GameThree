@@ -189,7 +189,7 @@ public class PowerFour extends Item {
     }
 
     @Override
-    public void use(Hero hero) {
+    public void onUse(Hero hero) {
         /*
          * We must remove its b2body to avoid collisions and change the hero's Filter.
          * This can't be done here because this method is called from WorldContactListener that is invoked

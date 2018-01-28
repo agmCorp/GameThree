@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -19,28 +18,28 @@ import uy.com.agm.gamethree.tools.AudioManager;
  * Created by AGM on 12/9/2017.
  */
 
-public class EnemyOne extends Enemy {
-    private static final String TAG = EnemyOne.class.getName();
+public class EnemyThree extends Enemy {
+    private static final String TAG = EnemyThree.class.getName();
 
     private float stateTimer;
     private float openFireTimer;
-    private Animation enemyOneAnimation;
+    private Animation enemyThreeAnimation;
     private Animation explosionAnimation;
 
-    public EnemyOne(PlayScreen screen, MapObject object) {
+    public EnemyThree(PlayScreen screen, MapObject object) {
         super(screen, object);
 
         // Animations
-        enemyOneAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
+        enemyThreeAnimation = Assets.getInstance().getEnemyThree().getEnemyThreeAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionC().getExplosionCAnimation();
 
-        // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the EnemyThree's drawing on the screen
+        setBounds(getX(), getY(), Constants.ENEMYTHREE_WIDTH_METERS, Constants.ENEMYTHREE_HEIGHT_METERS);
 
         stateTimer = 0;
         openFireTimer = 0;
         currentState = State.ALIVE;
-        velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
+        velocity.set(Constants.ENEMYTHREE_VELOCITY_X, Constants.ENEMYTHREE_VELOCITY_Y);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class EnemyOne extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYONE_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(Constants.ENEMYTHREE_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
                 Constants.OBSTACLE_BIT |
@@ -101,7 +100,7 @@ public class EnemyOne extends Enemy {
 
     @Override
     public void onBump() {
-        reverseVelocity(true, false);
+        // Nothing to do here
     }
 
     @Override
@@ -130,7 +129,7 @@ public class EnemyOne extends Enemy {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
 
         // Set score
-        screen.getHud().addScore(Constants.ENEMYONE_SCORE);
+        screen.getHud().addScore(Constants.ENEMYTHREE_SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -142,17 +141,26 @@ public class EnemyOne extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyThree may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTimer, true));
+
+        TextureRegion region = (TextureRegion) enemyThreeAnimation.getKeyFrame(stateTimer, true);
+        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
+            region.flip(true, false);
+        }
+        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
+            region.flip(true, false);
+        }
+
+        setRegion(region);
         stateTimer += dt;
 
         openFireTimer += dt;
-        if (openFireTimer > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+        if (openFireTimer > Constants.ENEMYTHREE_FIRE_DELAY_SECONDS) {
             super.openFire();
             openFireTimer = 0;
         }
@@ -164,8 +172,8 @@ public class EnemyOne extends Enemy {
         } else {
             if (stateTimer == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONA_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONA_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONC_HEIGHT_METERS / 2,
+                        Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
             stateTimer += dt;

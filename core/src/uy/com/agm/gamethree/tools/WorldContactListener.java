@@ -50,9 +50,9 @@ public class WorldContactListener implements ContactListener {
             case Constants.HERO_BIT | Constants.ITEM_BIT:
             case Constants.HERO_TOUGH_BIT | Constants.ITEM_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT) {
-                    ((Item) fixA.getUserData()).use((Hero) fixB.getUserData());
+                    ((Item) fixA.getUserData()).onUse((Hero) fixB.getUserData());
                 } else {
-                    ((Item) fixB.getUserData()).use((Hero) fixA.getUserData());
+                    ((Item) fixB.getUserData()).onUse((Hero) fixA.getUserData());
                 }
                 break;
 

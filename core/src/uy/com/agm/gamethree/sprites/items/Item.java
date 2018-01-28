@@ -89,6 +89,6 @@ public abstract class Item extends Sprite {
     protected abstract void defineItem();
     public abstract void update(float dt);
     public abstract void renderDebug(ShapeRenderer shapeRenderer);
-    public abstract void use(Hero hero);
+    public abstract void onUse(Hero hero);
     public abstract void onBump();
 }

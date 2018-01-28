@@ -8,8 +8,10 @@ import com.badlogic.gdx.utils.Array;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.items.collectibles.ColOne;
@@ -17,7 +19,6 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileobjects.Borders;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
@@ -73,6 +74,11 @@ public class B2WorldCreator {
         // Layer: enemyTwo
         for (MapObject object : map.getLayers().get("enemyTwo").getObjects().getByType(RectangleMapObject.class)) {
             enemies.add(new EnemyTwo(screen, object));
+        }
+
+        // Layer: enemyThree
+        for (MapObject object : map.getLayers().get("enemyThree").getObjects().getByType(RectangleMapObject.class)) {
+            enemies.add(new EnemyThree(screen, object));
         }
 
         // Layer: powerBoxes

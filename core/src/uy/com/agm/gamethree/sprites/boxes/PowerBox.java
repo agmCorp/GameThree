@@ -228,11 +228,11 @@ public class PowerBox extends Sprite {
     }
 
     private void stateOpened() {
-        // Destroy box2D body
-        world.destroyBody(b2body);
-
         // Release an item
         getItemOnHit();
+
+        // Destroy box2D body
+        world.destroyBody(b2body);
 
         // Explosion animation
         stateTimer = 0;
