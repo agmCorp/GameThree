@@ -3,7 +3,6 @@ IDEAS
 - programar acelerómetro? En la pagina de settings se puede agregar un titulo que cuando lo tocas cambia: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
-- Que las texturas de la powerbox sean random, tengo muy lindas texturas.
 - Hacer un tipo toogle que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
 - En las settings poner disparo automatico (siempre dispara) o disparo manual (con touch)
 

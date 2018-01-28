@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -64,10 +65,94 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        powerBoxStand = Assets.getInstance().getPowerBox().getPowerBoxStand();
-        powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getPowerBoxDamagedLittle();
-        powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getPowerBoxDamagedMedium();
-        powerBoxDamagedHard = Assets.getInstance().getPowerBox().getPowerBoxDamagedHard();
+        int i = MathUtils.random(1, 14); // // TODO: 1/28/2018
+        switch (i) {
+            case 1:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickAStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickADamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickADamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickADamagedHard();
+                break;
+            case 2:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickBStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickBDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickBDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickBDamagedHard();
+                break;
+            case 3:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickCStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickCDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickCDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickCDamagedHard();
+                break;
+            case 4:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickDStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickDDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickDDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickDDamagedHard();
+                break;
+            case 5:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickEStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickEDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickEDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickEDamagedHard();
+                break;
+            case 6:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickFStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickFDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickFDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickFDamagedHard();
+                break;
+            case 7:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickGStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickGDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickGDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickGDamagedHard();
+                break;
+            case 8:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickHStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickHDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickHDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickHDamagedHard();
+                break;
+            case 9:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickIStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickIDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickIDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickIDamagedHard();
+                break;
+            case 10:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickJStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickJDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickJDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickJDamagedHard();
+                break;
+            case 11:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickKStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickKDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickKDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickKDamagedHard();
+                break;
+            case 12:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickLStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickLDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickLDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickLDamagedHard();
+                break;
+            case 13:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickMStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickMDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickMDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickMDamagedHard();
+                break;
+            case 14:
+                powerBoxStand = Assets.getInstance().getPowerBox().getBrickNStand();
+                powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickNDamagedLittle();
+                powerBoxDamagedMedium = Assets.getInstance().getPowerBox().getBrickNDamagedMedium();
+                powerBoxDamagedHard = Assets.getInstance().getPowerBox().getBrickNDamagedHard();
+                break;
+        }
+
         explosionAnimation = Assets.getInstance().getExplosionB().getExplosionBAnimation();
 
         currentState = State.WAITING;
