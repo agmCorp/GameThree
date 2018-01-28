@@ -16,10 +16,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -65,8 +65,7 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        int i = MathUtils.random(1, 14); // // TODO: 1/28/2018
-        switch (i) {
+        switch (MathUtils.random(1, Constants.POWERBOX_MAX_TEXTURES)) {
             case 1:
                 powerBoxStand = Assets.getInstance().getPowerBox().getBrickAStand();
                 powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickADamagedLittle();

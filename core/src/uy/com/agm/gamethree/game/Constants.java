@@ -158,6 +158,7 @@ public class Constants {
     public static final float POWERBOX_WIDTH_METERS = 80.0f * 0.5f / PPM;
     public static final float POWERBOX_HEIGHT_METERS = 86.0f * 0.5f / PPM;
     public static final int POWERBOX_SCORE = 10;
+    public static final int POWERBOX_MAX_TEXTURES = 14;
 
     // Item (meters = pixels * resizeFactor / PPM)
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;

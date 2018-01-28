@@ -116,8 +116,7 @@ public class SettingsScreen extends AbstractScreen {
 
     private void playSampleSound() {
         // Audio FX
-        int sample = MathUtils.random(1, 4);
-        switch (sample) {
+        switch (MathUtils.random(1, 4)) {
             case 1:
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
                 break;
