@@ -5,6 +5,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -17,12 +19,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     private Vector2 candidateVelocity; // Temp GC friendly vector
     private Vector2 heroVelocity;
+    private PlayScreen screen;
     private Hero player;
+    private FinalEnemy finalEnemy;
 
-    public GameController(Hero player) {
+    public GameController(PlayScreen screen) {
         candidateVelocity = new Vector2(0.0f, 0.0f);
         heroVelocity = new Vector2(0.0f, 0.0f);
-        this.player = player;
+        this.screen = screen;
+        this.player = screen.getPlayer();
+        this.finalEnemy = screen.getFinalEnemy();
     }
 
     @Override
@@ -34,7 +40,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean tap(float x, float y, int count, int button) {
         // If Hero is dead, we don't handle any input
         if (GameSettings.getInstance().isManualShooting()) {
-            if (!player.isHeroDead()) {
+            if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
                 player.openFire();
             }
         }
@@ -123,7 +129,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 player.getB2body().setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.SPACE) {
-                if (GameSettings.getInstance().isManualShooting()) {
+                if (GameSettings.getInstance().isManualShooting() && !finalEnemy.isDestroyed()) {
                     player.openFire();
                 }
             }

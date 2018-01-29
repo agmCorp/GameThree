@@ -128,7 +128,7 @@ public class PlayScreen extends AbstractScreen {
         AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
 
         // User input handler
-        Gdx.input.setInputProcessor(getInputProcessor(new GameController(player)));
+        Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
     }
 
     private InputProcessor getInputProcessor(GameController gc) {
@@ -276,6 +276,10 @@ public class PlayScreen extends AbstractScreen {
 
     public Hero getPlayer() {
         return player;
+    }
+
+    public FinalEnemy getFinalEnemy() {
+        return finalEnemy;
     }
 
     public Edge getBottomEdge() {

@@ -177,8 +177,12 @@ public class Hero extends Sprite {
 
         // Shoot timer
         openFireTimer += dt;
+        automaticShooting();
+    }
+
+    private void automaticShooting() {
         if (!GameSettings.getInstance().isManualShooting()) {
-            if (!isHeroDead()) {
+            if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
                 openFire();
             }
         }

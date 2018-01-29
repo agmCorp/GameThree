@@ -79,6 +79,7 @@ bordes y objetos
 - averiguar como debuguear
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - hacer el juego web y ios
+- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
