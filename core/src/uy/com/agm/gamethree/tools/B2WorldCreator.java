@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -40,6 +41,7 @@ public class B2WorldCreator {
     private LinkedBlockingQueue<GameThreeActorDef> gameThreeActorsToCreate;
 
     public B2WorldCreator(PlayScreen screen) {
+        MapLayer layer;
         this.screen = screen;
 
         // Enemies
@@ -57,36 +59,54 @@ public class B2WorldCreator {
         TiledMap map = screen.getMap();
 
         // Layer: borders
-        for (MapObject object : map.getLayers().get("borders").getObjects().getByType(RectangleMapObject.class)) {
-            new Borders(screen, object);
+        layer = map.getLayers().get("borders");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                new Borders(screen, object);
+            }
         }
 
         // Layer: obstacles
-        for (MapObject object : map.getLayers().get("obstacles").getObjects().getByType(RectangleMapObject.class)) {
-            new Obstacle(screen, object);
+        layer = map.getLayers().get("obstacles");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                new Obstacle(screen, object);
+            }
         }
 
         // Layer: enemyOne
-        for (MapObject object : map.getLayers().get("enemyOne").getObjects().getByType(RectangleMapObject.class)) {
-            enemies.add(new EnemyOne(screen, object));
+        layer = map.getLayers().get("enemyOne");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyOne(screen, object));
+            }
         }
 
         // Layer: enemyTwo
-        for (MapObject object : map.getLayers().get("enemyTwo").getObjects().getByType(RectangleMapObject.class)) {
-            enemies.add(new EnemyTwo(screen, object));
+        layer = map.getLayers().get("enemyTwo");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyTwo(screen, object));
+            }
         }
 
         // Layer: enemyThree
-        for (MapObject object : map.getLayers().get("enemyThree").getObjects().getByType(RectangleMapObject.class)) {
-            enemies.add(new EnemyThree(screen, object));
+        layer = map.getLayers().get("enemyThree");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyThree(screen, object));
+            }
         }
 
         // Layer: powerBoxes
-        powerBoxes = new Array<PowerBox>();
-        for (MapObject object : map.getLayers().get("powerBox").getObjects().getByType(RectangleMapObject.class)) {
-            powerBoxes.add(new PowerBox(screen, object));
+        layer = map.getLayers().get("powerBox");
+        if (layer != null) {
+            powerBoxes = new Array<PowerBox>();
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                powerBoxes.add(new PowerBox(screen, object));
+            }
         }
-  }
+    }
 
     public Array<Enemy> getEnemies() {
         return enemies;
