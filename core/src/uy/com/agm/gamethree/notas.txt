@@ -63,6 +63,7 @@ cuando el usuario apreta el homebutton.
 - hacer un skin para la ui.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
+- Hacer que el poder flashee muy importante.
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
 - Ponele barra de vida al enemigo final
