@@ -21,11 +21,11 @@ import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
@@ -167,12 +167,12 @@ public class PlayScreen extends AbstractScreen {
         // Step in the physics simulation
         doPhysicsStep(dt);
 
-        updateHero(dt);
-        updateEnemies(dt);
         updatePowerBoxes(dt);
         updateItems(dt);
         updateWeapons(dt);
         updateFinalEnemy(dt);
+        updateEnemies(dt);
+        updateHero(dt);
         updateHud(dt);
         updateCamera(dt);
     }
@@ -307,12 +307,12 @@ public class PlayScreen extends AbstractScreen {
         game.getBatch().setProjectionMatrix(gameCam.combined);
         game.getBatch().begin();
 
-        renderHero();
-        renderEnemies();
         renderPowerBoxes();
         renderItems();
         renderWeapons();
         renderFinalEnemy();
+        renderEnemies();
+        renderHero();
 
         game.getBatch().end();
 
@@ -327,12 +327,12 @@ public class PlayScreen extends AbstractScreen {
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
             game.getShapeRenderer().setColor(1, 1, 0, 1);
 
-            renderDebugHero();
-            renderDebugEnemies();
             renderDebugPowerBoxes();
             renderDebugItems();
             renderDebugWeapons();
             renderDebugFinalEnemy();
+            renderDebugEnemies();
+            renderDebugHero();
 
             game.getShapeRenderer().end();
         }

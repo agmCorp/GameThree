@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f;
+    public static final float GAMECAM_VELOCITY = 1.0f * 0;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -264,6 +264,15 @@ public class Constants {
     public static final float ENEMYTHREE_HEIGHT_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.0f;
     public static final int ENEMYTHREE_SCORE = 17;
+
+    // EnemyFour (meters = pixels * resizeFactor / PPM)
+    public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float ENEMYFOUR_VELOCITY_X = 1.0f;
+    public static final float ENEMYFOUR_VELOCITY_Y = 0.0f;
+    public static final float ENEMYFOUR_WIDTH_METERS = 125.0f * 1.0f / PPM;
+    public static final float ENEMYFOUR_HEIGHT_METERS = 106.0f * 1.0f / PPM;
+    public static final float ENEMYFOUR_FIRE_DELAY_SECONDS = 1.0f;
+    public static final int ENEMYFOUR_SCORE = 35;
 
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;

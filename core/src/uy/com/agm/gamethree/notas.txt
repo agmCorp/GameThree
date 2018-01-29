@@ -36,7 +36,6 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-- ver lo que hice en el hud.
 PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
 evitar que la arana quede atrapada por balas.
 - pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
@@ -419,3 +418,16 @@ Para ir a pelear directo con el enemigo final poner en playscreen:
 
 PAUSA
 https://stackoverflow.com/questions/21576181/pause-resume-a-simple-libgdx-game-for-android
+
+
+antes de dibujar el hud:
+/**/
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
+        game.getShapeRenderer().setColor(new Color(0, 0, 0, 0.5f));
+        game.getShapeRenderer().rect(0, 0, gameViewPort.getWorldWidth(), gameViewPort.getWorldHeight() * 10);
+        game.getShapeRenderer().end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
+/**/
