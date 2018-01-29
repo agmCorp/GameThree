@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f;
+    public static final float GAMECAM_VELOCITY = 1.0f * 0;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -166,7 +166,7 @@ public class Constants {
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
     // Notification (seconds) before power down
-    public static final int POWER_TIMER_NOTIFICATION = 3;
+    public static final int POWER_TIMER_NOTIFICATION = 5;
 
     // ColOne (meters = pixels * resizeFactor / PPM)
     public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

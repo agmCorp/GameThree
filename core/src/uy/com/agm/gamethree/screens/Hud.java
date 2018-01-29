@@ -229,6 +229,10 @@ public class Hud extends AbstractScreen {
         return !powerTimerVisible;
     }
 
+    public boolean isPowerRunningOut() {
+        return powerTimer <= Constants.POWER_TIMER_NOTIFICATION;
+    }
+
     public void forcePowerTimeUp() {
         removePowerLabel();
     }

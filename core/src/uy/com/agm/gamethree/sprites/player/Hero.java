@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -41,6 +42,7 @@ public class Hero extends Sprite {
     private World world;
     private PlayScreen screen;
     private Body b2body;
+boolean alpha = true; // todo
 
     // Hero
     private HeroState currentHeroState;
@@ -65,6 +67,7 @@ public class Hero extends Sprite {
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
     private boolean powerFXAllowRotation;
+    private float blinkingTimer;
 
     // Fire power
     private boolean fireEnhancement;
@@ -115,6 +118,7 @@ public class Hero extends Sprite {
         powerFXStateTimer = 0;
         powerFXSprite = null;
         powerFXAllowRotation = false;
+        blinkingTimer = 0;
 
         // Fire power variables initialization (we don't know yet which fire power will be)
         fireEnhancement = false;
@@ -204,6 +208,19 @@ public class Hero extends Sprite {
             if (powerFXAllowRotation) {
                 powerFXSprite.setRotation(getRotation());
             }
+
+            if (screen.getHud().isPowerRunningOut()) { // todo
+                blinkingTimer += dt;
+                if (blinkingTimer >= 0.5f) {
+                    if (alpha) {
+                        powerFXSprite.setAlpha(0.2f);
+                    } else {
+                        powerFXSprite.setAlpha(1);
+                    }
+                    alpha = !alpha;
+                    blinkingTimer = 0;
+                }
+            }
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
@@ -215,6 +232,7 @@ public class Hero extends Sprite {
         setDefaultFixtureFilter();
         powerFXSprite = null;
         powerFXStateTimer = 0;
+        blinkingTimer = 0;
         fireEnhancement = false;
         currentPowerState = PowerState.NORMAL;
     }
@@ -565,14 +583,20 @@ public class Hero extends Sprite {
                 for(int i = 1; i <= numberBullets; i++) {
                     angle = directionDegrees * i;
                     angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
-                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                                                    b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
-                                                                    bulletWidth,
-                                                                    bulletHeight,
-                                                                    bulletCircleShapeRadius,
-                                                                    angle,
-                                                                    bulletAnimation,
-                                                                    HeroBullet.class));
+
+                    if (screen.getHud().isPowerRunningOut()) {
+                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                                b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, angle, HeroBullet.class));
+                    } else {
+                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                                b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
+                                bulletWidth,
+                                bulletHeight,
+                                bulletCircleShapeRadius,
+                                angle,
+                                bulletAnimation,
+                                HeroBullet.class));
+                    }
                 }
                 openFireTimer = 0;
             }

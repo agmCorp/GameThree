@@ -29,6 +29,17 @@ public class GameThreeActorDef {
         this.type = type;
     }
 
+    public GameThreeActorDef(float x, float y, float angle, Class<?> type) {
+        this.x = x;
+        this.y = y;
+        this.width = 0;
+        this.height = 0;
+        this.circleShapeRadius = 0;
+        this.angle = angle;
+        this.animation = null;
+        this.type = type;
+    }
+
     public GameThreeActorDef(float x, float y, float width, float height, Class<?> type) {
         this.x = x;
         this.y = y;
