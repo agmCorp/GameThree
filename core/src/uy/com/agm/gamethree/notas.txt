@@ -61,6 +61,8 @@ cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
+- incluir highscores
+- mostrar score en la pantalla de level completed
 - agregar transitions
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
