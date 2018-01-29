@@ -3,7 +3,6 @@ IDEAS
 - programar acelerómetro? toggle: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
-- Hacer que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
 
 ALCANCE
 -------
@@ -39,7 +38,7 @@ PROXIMOS PASOS
 --------------
 PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
 evitar que la arana quede atrapada por balas.
-- pensar un objetivo del juego.
+- pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
 - el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
 - hacer el ultimo enenmigo que se congela
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
@@ -63,7 +62,6 @@ cuando el usuario apreta el homebutton.
 - hacer un skin para la ui.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
-- Hacer que el poder flashee muy importante.
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
 - Ponele barra de vida al enemigo final
