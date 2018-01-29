@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f * 0;
+    public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -149,7 +149,6 @@ public class Constants {
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
     public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float HERO_PLAY_AGAIN_ALPHA = 0.7f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -167,7 +166,7 @@ public class Constants {
 
     // Notification (seconds) before power down
     public static final int POWER_TIMER_NOTIFICATION = 5;
-    public static final float POWER_BLINKING_INTERVAL_SECONDS = 0.1f;
+    public static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
 
     // ColOne (meters = pixels * resizeFactor / PPM)
     public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

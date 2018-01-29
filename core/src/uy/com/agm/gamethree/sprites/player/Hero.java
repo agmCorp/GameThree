@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -66,7 +65,6 @@ public class Hero extends Sprite {
     private float powerFXStateTimer;
     private Sprite powerFXSprite;
     private boolean powerFXAllowRotation;
-    private float blinkingTimer;
 
     // Fire power
     private boolean fireEnhancement;
@@ -76,6 +74,10 @@ public class Hero extends Sprite {
     private float fireDelay;
     private int numberBullets;
     private Animation bulletAnimation;
+
+    // Blink
+    private float blinkingTimer;
+    private boolean alpha;
 
     // Temp GC friendly vector
     private Vector2 tmp;
@@ -117,7 +119,6 @@ public class Hero extends Sprite {
         powerFXStateTimer = 0;
         powerFXSprite = null;
         powerFXAllowRotation = false;
-        blinkingTimer = 0;
 
         // Fire power variables initialization (we don't know yet which fire power will be)
         fireEnhancement = false;
@@ -129,6 +130,10 @@ public class Hero extends Sprite {
 
         // Temp GC friendly vector
         tmp = new Vector2();
+
+        // Blink
+        blinkingTimer = 0;
+        alpha = false;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -210,13 +215,7 @@ public class Hero extends Sprite {
 
             // When Hero's power is running out, power FX blinks
             if (screen.getHud().isPowerRunningOut()) {
-                blinkingTimer += dt;
-                if (blinkingTimer >= Constants.POWER_BLINKING_INTERVAL_SECONDS) {
-                    powerFXSprite.setAlpha(0);
-                    blinkingTimer = 0;
-                } else {
-                    powerFXSprite.setAlpha(1);
-                }
+                blink(dt, powerFXSprite);
             }
         }
         if (screen.getHud().isPowerTimeUp()) {
@@ -230,6 +229,7 @@ public class Hero extends Sprite {
         powerFXSprite = null;
         powerFXStateTimer = 0;
         blinkingTimer = 0;
+        alpha = false;
         fireEnhancement = false;
         currentPowerState = PowerState.NORMAL;
     }
@@ -430,9 +430,6 @@ public class Hero extends Sprite {
             fixture.setFilterData(filter);
         }
 
-        // Set alpha value for a while to indicate that Hero can't collide with almost anything
-        setAlpha(Constants.HERO_PLAY_AGAIN_ALPHA);
-
         setDefaultFilterTimer = 0;
         isPlayingAgain = true;
 
@@ -456,13 +453,31 @@ public class Hero extends Sprite {
         }
     }
 
+    private void blink(float dt, Sprite sprite) {
+        blinkingTimer += dt;
+        if (blinkingTimer >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
+            alpha = !alpha;
+            blinkingTimer = 0;
+        }
+        if (alpha) {
+            sprite.setAlpha(1.0f);
+        } else {
+            sprite.setAlpha(0.0f);
+        }
+    }
+
     private void timeToSetDefaultFilter(float dt) {
         if (isPlayingAgain) {
+            blink(dt, this);
+
             setDefaultFilterTimer += dt;
             if (setDefaultFilterTimer > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
                 setAlpha(1.0f);
+
                 isPlayingAgain = false;
+                blinkingTimer = 0;
+                alpha = false;
             }
         }
     }
