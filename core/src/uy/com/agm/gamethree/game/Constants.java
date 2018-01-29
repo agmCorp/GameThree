@@ -114,7 +114,7 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 180;
+    public static final int TIMER_LEVEL_ONE = 10;//180;
     public static final int TIMER_LEVEL_TWO = 30;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
