@@ -42,7 +42,6 @@ public class Hero extends Sprite {
     private World world;
     private PlayScreen screen;
     private Body b2body;
-boolean alpha = true; // todo
 
     // Hero
     private HeroState currentHeroState;
@@ -209,16 +208,14 @@ boolean alpha = true; // todo
                 powerFXSprite.setRotation(getRotation());
             }
 
-            if (screen.getHud().isPowerRunningOut()) { // todo
+            // When Hero's power is running out, power FX blinks
+            if (screen.getHud().isPowerRunningOut()) {
                 blinkingTimer += dt;
-                if (blinkingTimer >= 0.5f) {
-                    if (alpha) {
-                        powerFXSprite.setAlpha(0.2f);
-                    } else {
-                        powerFXSprite.setAlpha(1);
-                    }
-                    alpha = !alpha;
+                if (blinkingTimer >= Constants.POWER_BLINKING_INTERVAL_SECONDS) {
+                    powerFXSprite.setAlpha(0);
                     blinkingTimer = 0;
+                } else {
+                    powerFXSprite.setAlpha(1);
                 }
             }
         }

@@ -39,7 +39,7 @@ public class PowerThree extends Item {
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
         bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
-        fireDelay = Constants.POWERTHREE_FIRE_DELAY;
+        fireDelay = Constants.POWERTHREE_FIRE_DELAY_SECONDS;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTimer = 0;
         stateWaitingTimer = 0;

@@ -167,6 +167,7 @@ public class Constants {
 
     // Notification (seconds) before power down
     public static final int POWER_TIMER_NOTIFICATION = 5;
+    public static final float POWER_BLINKING_INTERVAL_SECONDS = 0.2f;
 
     // ColOne (meters = pixels * resizeFactor / PPM)
     public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -214,7 +215,7 @@ public class Constants {
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
-    public static final float POWERTHREE_FIRE_DELAY = 0.3f;
+    public static final float POWERTHREE_FIRE_DELAY_SECONDS = 0.3f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_HEIGHT_METERS = 102.0f * 1.0f / PPM;
@@ -232,7 +233,6 @@ public class Constants {
     public static final int POWERFOUR_SCORE = 30;
     public static final float POWERFOUR_FX_WIDTH_METERS = 139.0f * 1.4f / PPM;
     public static final float POWERFOUR_FX_HEIGHT_METERS = 137.0f * 1.4f / PPM;
-
 
     // Shield (meters = pixels * resizeFactor / PPM)
     public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PPM;
