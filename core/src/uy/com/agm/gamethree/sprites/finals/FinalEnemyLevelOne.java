@@ -216,7 +216,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             checkBoundaries();
             if (b2body.isActive()) {
                 // Pause music for a few seconds
-                AudioManager.getInstance().getPlayingMusic().pause();
+                AudioManager.getInstance().pauseMusic();
                 introTimer = 0;
                 playingIntro = true;
 
@@ -231,7 +231,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 introTimer += dt;
                 if (introTimer > Constants.FINALLEVELONE_INTRO_DELAY_SECONDS) {
                     if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
-                        AudioManager.getInstance().getPlayingMusic().play();
+                        AudioManager.getInstance().resumeMusic();
                     }
                     playingIntro = false;
                 }

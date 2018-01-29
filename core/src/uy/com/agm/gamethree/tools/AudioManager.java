@@ -34,10 +34,6 @@ public class AudioManager {
         }
     }
 
-    public Sound getPlayingSound() {
-        return playingSound;
-    }
-
     public void play(Sound sound) {
         playingSound = sound;
         play(sound, 1);
@@ -66,14 +62,22 @@ public class AudioManager {
         }
     }
 
+    public void resumeMusic() {
+        if (GameSettings.getInstance().isMusic()) {
+            playingMusic.play();
+        }
+    }
+
     public void stopMusic() {
         if (playingMusic != null) {
             playingMusic.stop();
         }
     }
 
-    public Music getPlayingMusic() {
-        return playingMusic;
+    public void pauseMusic() {
+        if (playingMusic != null) {
+            playingMusic.pause();
+        }
     }
 
     public void onSettingsUpdated() {
