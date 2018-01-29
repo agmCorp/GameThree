@@ -19,7 +19,7 @@ public class Hud extends AbstractScreen {
     private int score;
     private int level;
     private int levelTimer;
-    private boolean levelTimeUp; // True when the world levelTimer reaches 0
+    private boolean levelTimeIsUp; // True when the world levelTimer reaches 0
     private int lives;
     private float timeCount;
     private int powerTimer;
@@ -42,11 +42,11 @@ public class Hud extends AbstractScreen {
     public Hud(Integer level, Integer levelTimer, Integer lives) {
         super();
 
-        // Define our tracking variables
+        // Define tracking variables
         score = 0;
         this.level = level;
         this.levelTimer = levelTimer;
-        levelTimeUp = false;
+        levelTimeIsUp = false;
         this.lives = lives;
         timeCount = 0;
         powerTimer = 0;
@@ -73,7 +73,7 @@ public class Hud extends AbstractScreen {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
-        // Define our labels based on labelStyle
+        // Define labels based on labelStyle
         Label scoreLabel = new Label("SCORE", labelStyle);
         scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
 
@@ -89,7 +89,7 @@ public class Hud extends AbstractScreen {
         powerLabel = new Label("POWERNAME", labelStyle);
         powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
 
-        // Add our labels to our table giving them all equal width with expandX
+        // Add labels to the table giving them all equal width with expandX
         hudTable.add(scoreLabel).expandX();
         hudTable.add(levelLabel).expandX();
         hudTable.add(levelTimerLabel).expandX();
@@ -104,7 +104,7 @@ public class Hud extends AbstractScreen {
         hudTable.add(levelTimerValueLabel).expandX();
         hudTable.add(livesValueLabel).expandX();
 
-        // Add our table to the stage
+        // Add table to the stage
         addActor(hudTable);
 
         if (Constants.DEBUG_MODE) {
@@ -120,11 +120,11 @@ public class Hud extends AbstractScreen {
             // Make the table fill the entire stage
             fpsTable.setFillParent(true);
 
-            // Define our labels based on labelStyle
+            // Define a label based on labelStyle
             Label fpsLabel = new Label("FPS", labelStyle);
             fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
 
-            // Add our label to our table giving it equal width with expandX
+            // Add previous label to the table giving it equal width with expandX
             fpsTable.add(fpsLabel).expandX();
 
             // Add a second row to our table
@@ -133,7 +133,7 @@ public class Hud extends AbstractScreen {
             // Value
             fpsTable.add(fpsValueLabel).expandX();
 
-            // Add our table to the stage
+            // Add table to the stage
             addActor(fpsTable);
         }
 
@@ -149,10 +149,10 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         timeIsUpTable.setFillParent(true);
 
-        // Define our labels based on labelStyle
+        // Define a label based on labelStyle
         Label.LabelStyle labelStyleMessage = new Label.LabelStyle();
         labelStyleMessage.font = Assets.getInstance().getFonts().getDefaultBig();
-        timeIsUpLabel = new Label("MESSAGE", labelStyleMessage);
+        timeIsUpLabel = new Label("TIME IS UP!!", labelStyleMessage);
 
         // Add our table to the stage
         addActor(timeIsUpTable);
@@ -169,7 +169,7 @@ public class Hud extends AbstractScreen {
                     AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeepB());
                 }
             } else {
-                levelTimeUp = true;
+                levelTimeIsUp = true;
             }
             levelTimerValueLabel.setText(String.format("%03d", levelTimer));
             timeCount = 0;
@@ -220,7 +220,6 @@ public class Hud extends AbstractScreen {
     }
 
     public void setTimeIsUpLabel() {
-        timeIsUpLabel.setText("TIME IS UP!!");
         timeIsUpTable.add(timeIsUpLabel).expandX();
     }
 
@@ -241,8 +240,8 @@ public class Hud extends AbstractScreen {
         super.dispose();
     }
 
-    public boolean isLevelTimeUp() {
-        return levelTimeUp;
+    public boolean isLevelTimeIsUp() {
+        return levelTimeIsUp;
     }
 
     public boolean isPowerTimeUp() {
