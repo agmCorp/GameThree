@@ -47,7 +47,7 @@ time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
 
 PENDIENTES
---------------
+----------
 
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
