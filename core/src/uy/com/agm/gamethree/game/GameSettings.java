@@ -58,7 +58,7 @@ public class GameSettings {
         int level = 2;
         boolean availableLevel;
         do {
-            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false);
+            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false) && level <= Constants.MAX_AVAILABLE_LEVEL;
             if (availableLevel) {
                 availableLevels.add(level);
                 level++;

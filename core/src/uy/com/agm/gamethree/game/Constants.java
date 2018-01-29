@@ -43,6 +43,7 @@ public class Constants {
     public static final float DEFAULT_VOLUME = 0.5f;
     public static final float MIN_VOLUME = 0.0f;
     public static final float MAX_VOLUME = 1.0f;
+    public static final int MAX_AVAILABLE_LEVEL = 2;
 
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
