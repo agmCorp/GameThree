@@ -167,7 +167,7 @@ public class Constants {
 
     // Notification (seconds) before power down
     public static final int POWER_TIMER_NOTIFICATION = 5;
-    public static final float POWER_BLINKING_INTERVAL_SECONDS = 0.2f;
+    public static final float POWER_BLINKING_INTERVAL_SECONDS = 0.1f;
 
     // ColOne (meters = pixels * resizeFactor / PPM)
     public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
