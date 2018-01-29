@@ -63,8 +63,10 @@ public class AudioManager {
     }
 
     public void resumeMusic() {
-        if (GameSettings.getInstance().isMusic()) {
-            playingMusic.play();
+        if (playingMusic != null) {
+            if (GameSettings.getInstance().isMusic()) {
+                playingMusic.play();
+            }
         }
     }
 
