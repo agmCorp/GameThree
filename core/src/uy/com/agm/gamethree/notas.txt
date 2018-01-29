@@ -37,7 +37,8 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 
 PROXIMOS PASOS
 --------------
-PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON.
+PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
+evitar que la ara;a quede atrapada por balas.
 
 - hacer el ultimo enenmigo que se congela
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
