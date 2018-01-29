@@ -77,6 +77,8 @@ de items de onhit a stateopened.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - averiguar como debuguear
+- los slides no se arrastran bien, verificar si los eventos que uso estan bien. Nunca probe hacerlo como me parece.
+para mi habria que usar el pan o touchdown.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - hacer el juego web y ios
 - el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.

@@ -78,7 +78,7 @@ public abstract class Weapon extends Sprite {
 
     public void onBounce() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBoing());
-        reverseVelocity(false, true);
+        reverseVelocity(true, true);
     }
 
     // This Weapon can be removed from our game
