@@ -4,7 +4,6 @@ IDEAS
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 - Hacer un tipo toogle que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
-- En las settings poner disparo automatico (siempre dispara) o disparo manual (con touch)
 
 ALCANCE
 -------
@@ -66,8 +65,6 @@ cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
 - si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
-- En setting agregar Disparo automatico, Disparo manual (un texto que cuando lo tocas cambia, no necesito checkbox). Tambien se puede
-agregar acelerometro.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
 - a veces me genera dos items en lugar de 1 (por ejemplo dos ghost). No deberia volver a pasar, movi la generacion
