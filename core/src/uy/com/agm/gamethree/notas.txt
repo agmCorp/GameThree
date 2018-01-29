@@ -1,9 +1,9 @@
 IDEAS
 -----
-- programar acelerómetro? En la pagina de settings se puede agregar un titulo que cuando lo tocas cambia: acelerometro, manual
+- programar acelerómetro? toggle: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
 - Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
-- Hacer un tipo toogle que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
+- Hacer que flashee el poder que tenés cuando empieza a sonar la chicharra del timeout -3.
 
 ALCANCE
 -------
@@ -25,7 +25,7 @@ Hay 2 tipos de elementos:
 		- doble fecha
 		- *flecha simple (arma por defecto)
 
-Bloques con sorpresas
+*Bloques con sorpresas
 
 *enemigo1: bolas negras que bajan derecho
 		  luego disparan
@@ -38,24 +38,17 @@ enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te ti
 PROXIMOS PASOS
 --------------
 PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
-evitar que la ara;a quede atrapada por balas.
-
+evitar que la arana quede atrapada por balas.
+- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
 - hacer el ultimo enenmigo que se congela
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
-- disparo automatico
 
 PENDIENTES
 --------------
-- de alguna manera logre tener tough a la vez que me mataron. Y quedo el fantasmita con tough detenido por el borde de la pantalla inferior.
-El juego sigue, no tengo touch, la camara esta quieta. Tambien me paso con ghostmode y el enemigo final. Agarre un item a la vez que me
-mataron y quede con la burbuja azul, fantasma, el hud completo y detenido por el edge inferior.
-Deduzco que es un apply del power cuando estoy en estado dyingup.
-La unica manera de morir es con ondead. El ondead setea nothing_bit entonces no hay forma de quedar atrapado por el borde inferior.
-Lo que puede pasar es que haga un use de un power y en la siguiente vuelta muero (me llaman un ondead). Se ejecuta el ondead y luego el statetaken
-del power que cambio los filtros. Ver que no vuelva a pasar.
+
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
 - renombrar todos los timer por time (ej: stateTime)
@@ -67,11 +60,8 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui.
-- si muere por timeup, no ir a la pantalla de game over, sino a una de timeup o poner en la pantalla timeup.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
-- a veces me genera dos items en lugar de 1 (por ejemplo dos ghost). No deberia volver a pasar, movi la generacion
-de items de onhit a stateopened.
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
 - Ponele barra de vida al enemigo final
@@ -83,8 +73,6 @@ bordes y objetos
 - los slides no se arrastran bien, verificar si los eventos que uso estan bien. Nunca probe hacerlo como me parece.
 para mi habria que usar el pan o touchdown.
 - sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
-- hacer el juego web y ios
-- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
@@ -107,11 +95,6 @@ http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-scree
 
 DUDAS
 -----
-- Que se ejecuta primero el update o el draw?
-For instance, within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled by the distance
-traveled in time "delta" (it doesn't render them, just moves their position variables).
-Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
-which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
 - git:
     traer un solo fuente (con sourcetree)
     ver diferencias de mi fuente actual con el del repositorio
@@ -155,8 +138,8 @@ HERRAMIENTAS
 - https://www.youtube.com/watch?v=dxPf1M7YORU&feature=youtu.be para crear fonts ver ese video
 - https://www.imgonline.com.ua/eng/cut-photo-into-pieces.php para cortar una imagen en pedazos iguales
 
-METODOLOGIA
------------
+LECCIONES APRENDIDAS
+--------------------
 1)
     Posicon + velocidad da posicion
     Para ir de A a B, debo restar los vectores B - A.
@@ -322,6 +305,12 @@ METODOLOGIA
 16)
     Debo hacer dispose de las cosas a las que les hice new. Si yo no les hice new (por ejemplo las texturas), no
     es mi responsabilidad (es la responsabilidad del assetManager).
+
+17)
+    Within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled by the distance
+    traveled in time "delta" (it doesn't render them, just moves their position variables).
+    Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
+    which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
 
 IOS
 ---
