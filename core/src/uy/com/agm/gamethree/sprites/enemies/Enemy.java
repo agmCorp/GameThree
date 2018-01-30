@@ -27,6 +27,7 @@ public abstract class Enemy extends Sprite {
     protected PlayScreen screen;
     protected Body b2body;
     protected Vector2 velocity;
+    protected Vector2 tmp; // Temp GC friendly vector
 
     protected enum State {
         ALIVE, INJURED, EXPLODING, DEAD
@@ -40,6 +41,9 @@ public abstract class Enemy extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
+
+        // Temp GC friendly vector
+        tmp = new Vector2();
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();

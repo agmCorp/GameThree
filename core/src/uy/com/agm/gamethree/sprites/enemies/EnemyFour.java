@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,6 +15,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -26,6 +28,9 @@ public class EnemyFour extends Enemy {
     private float openFireTimer;
     private Animation enemyFourAnimation;
     private Animation explosionAnimation;
+
+    private float b2bodyTargetX;
+    private float b2bodyTargetY;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -40,7 +45,13 @@ public class EnemyFour extends Enemy {
         stateTimer = 0;
         openFireTimer = 0;
         currentState = State.ALIVE;
-        velocity.set(MathUtils.randomSign() * Constants.ENEMYFOUR_VELOCITY_X, Constants.ENEMYFOUR_VELOCITY_Y);
+
+        b2bodyTargetX = getX() + 0.5f * MathUtils.randomSign();
+        b2bodyTargetY = getY() + 2.0f * MathUtils.randomSign();
+
+        tmp.set(getX(), getY());
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
+        velocity.set(tmp);
     }
 
     @Override
@@ -161,6 +172,8 @@ public class EnemyFour extends Enemy {
             super.openFire();
             openFireTimer = 0;
         }
+
+        checkPath();
     }
 
     private void stateExploding(float dt) {
@@ -175,5 +188,33 @@ public class EnemyFour extends Enemy {
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
             stateTimer += dt;
         }
+    }
+
+    private void checkPath() {
+        if (b2body.getLinearVelocity().y > 0) { // VA PARA ARRIBA
+            if (b2body.getPosition().y >= b2bodyTargetY) { // ME PASE DEL TARGET
+                b2bodyTargetY = b2bodyTargetY - 2.0f;; // EL NUEVO TARGET ESTA ABAJO
+            }
+        } else { // VA PARA ABAJO
+            if (b2body.getPosition().y <= b2bodyTargetY) { // ME PASE DEL TARGET
+                b2bodyTargetY = b2bodyTargetY + 2.0f;; // EL NUEVO TARGET ESTA ARRIBA
+            }
+        }
+
+        if (b2body.getLinearVelocity().x > 0) { // VA PARA LA DERECHA
+            if (b2body.getPosition().x >= b2bodyTargetX) { // ME PASE DEL TARGET
+                b2bodyTargetX = b2bodyTargetX + 0.5f; // EL NUEVO TARGET ESTA A LA derecha
+                Gdx.app.debug(TAG, "UNO*");
+            }
+        } else { // VA PARA LA IZQUIERDA
+            if (b2body.getPosition().x <= b2bodyTargetX) { // ME PASE DEL TARGET
+                b2bodyTargetX = b2bodyTargetX - 0.5f; // EL NUEVO TARGET ESTA A LA izq
+                Gdx.app.debug(TAG, "DOS*");
+            }
+        }
+
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
+        velocity.set(tmp);
     }
 }
