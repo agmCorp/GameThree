@@ -193,23 +193,21 @@ public class EnemyFour extends Enemy {
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // VA PARA ARRIBA
             if (b2body.getPosition().y >= b2bodyTargetY) { // ME PASE DEL TARGET
-                b2bodyTargetY = b2bodyTargetY - 2.0f;; // EL NUEVO TARGET ESTA ABAJO
+                b2bodyTargetY = b2bodyTargetY - 2.0f * 2; // EL NUEVO TARGET ESTA ABAJO
             }
         } else { // VA PARA ABAJO
             if (b2body.getPosition().y <= b2bodyTargetY) { // ME PASE DEL TARGET
-                b2bodyTargetY = b2bodyTargetY + 2.0f;; // EL NUEVO TARGET ESTA ARRIBA
+                b2bodyTargetY = b2bodyTargetY + 2.0f * 2; // EL NUEVO TARGET ESTA ARRIBA
             }
         }
 
         if (b2body.getLinearVelocity().x > 0) { // VA PARA LA DERECHA
             if (b2body.getPosition().x >= b2bodyTargetX) { // ME PASE DEL TARGET
                 b2bodyTargetX = b2bodyTargetX + 0.5f; // EL NUEVO TARGET ESTA A LA derecha
-                Gdx.app.debug(TAG, "UNO*");
             }
         } else { // VA PARA LA IZQUIERDA
             if (b2body.getPosition().x <= b2bodyTargetX) { // ME PASE DEL TARGET
                 b2bodyTargetX = b2bodyTargetX - 0.5f; // EL NUEVO TARGET ESTA A LA izq
-                Gdx.app.debug(TAG, "DOS*");
             }
         }
 
