@@ -2,7 +2,6 @@ IDEAS
 -----
 - programar acelerómetro? toggle: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
-- Cuando le disparo a un enemigo, no explota sino que se queda quieto (o se congela con efecto) y luego revive.
 
 ALCANCE
 -------
@@ -31,21 +30,21 @@ Hay 2 tipos de elementos:
 *enemigo2: bandada murcielagos
 		  luego disparan
 		  luego vienen desfazados los murcielagos
-enemigo3: caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
-enemigo4: nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
+*enemigo3 (hice otro): caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
+*enemigo4 (hice otro): nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
 
 PROXIMOS PASOS
 --------------
-- movimiento del enemigo4.
 PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
 evitar que la arana quede atrapada por balas.
 - pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
 - el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
-- hacer el ultimo enenmigo que se congela
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
+- mostrar score en la pantalla de level completed
+- revisar los tamanos de todas las imagenes y hacerlos iguales por personaje. Son pocas, ej: enemyOne.
 
 PENDIENTES
 ----------
@@ -72,7 +71,6 @@ cuando el usuario apreta el homebutton.
 - las properties del tilededitor pueden ser boolean, usarlas.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
-- revisar los tamanos de todas las imagenes y hacerlos iguales por personaje. Son pocas, ej: enemyOne.
 - averiguar como debuguear
 - los slides no se arrastran bien, verificar si los eventos que uso estan bien. Nunca probe hacerlo como me parece.
 para mi habria que usar el pan o touchdown.
