@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -46,8 +45,8 @@ public class EnemyFour extends Enemy {
         openFireTimer = 0;
         currentState = State.ALIVE;
 
-        b2bodyTargetX = getX() + Constants.ENEMYFOUR_STEP_WIDTH_METERS * MathUtils.randomSign();
-        b2bodyTargetY = getY() + (Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS / 2 ) * MathUtils.randomSign();
+        b2bodyTargetX = getX() + (Constants.ENEMYFOUR_WAVELENGTH_METERS / 2) * MathUtils.randomSign();
+        b2bodyTargetY = getY() + (Constants.ENEMYFOUR_AMPLITUDE_METERS / 2) * MathUtils.randomSign();
 
         tmp.set(getX(), getY());
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
@@ -193,24 +192,25 @@ public class EnemyFour extends Enemy {
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
             if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY - Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS; // New targetY (down)
+                b2bodyTargetY = b2bodyTargetY - Constants.ENEMYFOUR_AMPLITUDE_METERS; // New targetY (down)
             }
         } else { // EnemyFour goes down
             if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY + Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS; // New targetY (up)
+                b2bodyTargetY = b2bodyTargetY + Constants.ENEMYFOUR_AMPLITUDE_METERS; // New targetY (up)
             }
         }
 
         if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
             if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX + Constants.ENEMYFOUR_STEP_WIDTH_METERS; // New targetX (right)
+                b2bodyTargetX = b2bodyTargetX + Constants.ENEMYFOUR_WAVELENGTH_METERS / 2; // New targetX (right)
             }
         } else { // // EnemyFour goes to the left
             if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX - Constants.ENEMYFOUR_STEP_WIDTH_METERS; // New targetX (left)
+                b2bodyTargetX = b2bodyTargetX - Constants.ENEMYFOUR_WAVELENGTH_METERS / 2; // New targetX (left)
             }
         }
 
+        // Go to target with constant velocity
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
         velocity.set(tmp);
