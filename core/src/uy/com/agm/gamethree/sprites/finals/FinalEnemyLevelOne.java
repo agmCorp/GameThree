@@ -158,7 +158,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private float getNextTimeToChange() {
-        return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_DELAY_SECONDS);
+        return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_TIME_SECONDS);
     }
 
     private StateFinalEnemy getNewRandomState(float dt) {
@@ -229,7 +229,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         } else {
             if (playingIntro) {
                 introTimer += dt;
-                if (introTimer > Constants.FINALLEVELONE_INTRO_DELAY_SECONDS) {
+                if (introTimer > Constants.FINALLEVELONE_INTRO_TIME_SECONDS) {
                     if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
                         AudioManager.getInstance().resumeMusic();
                     }

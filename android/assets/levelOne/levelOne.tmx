@@ -340,6 +340,10 @@
   </object>
  </objectgroup>
  <objectgroup name="enemyFour">
-  <object id="682" x="324" y="7583" width="32" height="32"/>
+  <object id="682" x="324" y="7583" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

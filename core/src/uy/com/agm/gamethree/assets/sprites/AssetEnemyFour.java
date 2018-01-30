@@ -39,4 +39,8 @@ public class AssetEnemyFour {
     public Animation getEnemyFourAnimation() {
         return enemyFourAnimation;
     }
+
+    public Animation getEnemyFourFrozenAnimation() {
+        return enemyFourFrozenAnimation;
+    }
 }
