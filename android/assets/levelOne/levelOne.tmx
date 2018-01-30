@@ -8,7 +8,7 @@
  </layer>
  <layer name="graphics" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2kdOw0AYhuGxDYSyCYRyDTrXoHONXIHeNlyB3jZcgU7IJhwh9LIJEmXLu2GDZsFgSx7ge6VnY80vjSzbcqwYo2yVYsxWEtuFUkqpr2VDYxrRhFzoNtvO+g50ostxtp/1AxjEkOOsUkr5lJ6jSimllFLJlE17A8rrxnnnncAkpjCNGcxiDvNYwKLl3XiZYytYxRrWsYFNbGEbO9i1zO5z7ACHOMIxTnCKMxRwjqJltsyxS1zhGje4xR3u8YBHPFlmg8iYEBGqUI0aZFCLOtSjIYp/bpVSSimVTi+BMa94w3vgNtvM+0MLWtHm+G2wm/U96EWf4+ww60cwijF9k1RKKaWUUkr90fR7Tf2Xco7Xd1rlY+xzKcbs3i85P0r5Uol75uKH902FuWfdcyqhvvvfEx+u2c895FPcg/KvD+eeQGk=
+   eJzt2jdOA0EYhuHZXcCExmAD1yBzDTLX8BXIqeEK5NRwBXJqzBHIqTESoeVtaFZTMF5Ls8D3Sk+zml8erUbWemVjlK1igtlSxXahlFIqXjY0phFNyIVus22sb0cHOh1n+1jfjwEMOs4qpVSa0veoUkoppVRlyvregEp1YzzzjmMCk5jCNGYwiznMY8HybLzEtWWsYBVrWMcGNrGFbexYZve4to8DHOIIxzjBKc5wjgvL7BXXrnGDW9zhHg94xBOe8WKZDSJjQkSoQjVqkEEt6lCPhij5vVVKKaWUn94CY97xgc/AbTbP80MzWtDq+G6wi/Xd6EGv4+wQ64cxglG9k1RKKaWUUkr90fR7Tf2Xco7n21eFBPtcTDC7+0vuj1LxipzdyzLPb4m51zJnfX2uUvF++t+TNJzZ7z0UPO5Bpa8vzzJD7w==
   </data>
  </layer>
  <objectgroup name="borders">
@@ -340,6 +340,6 @@
   </object>
  </objectgroup>
  <objectgroup name="enemyFour">
-  <object id="682" x="416" y="7520" width="32" height="32"/>
+  <object id="682" x="324" y="7583" width="32" height="32"/>
  </objectgroup>
 </map>

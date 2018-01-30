@@ -46,8 +46,8 @@ public class EnemyFour extends Enemy {
         openFireTimer = 0;
         currentState = State.ALIVE;
 
-        b2bodyTargetX = getX() + 0.5f * MathUtils.randomSign();
-        b2bodyTargetY = getY() + 2.0f * MathUtils.randomSign();
+        b2bodyTargetX = getX() + Constants.ENEMYFOUR_STEP_WIDTH_METERS * MathUtils.randomSign();
+        b2bodyTargetY = getY() + (Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS / 2 ) * MathUtils.randomSign();
 
         tmp.set(getX(), getY());
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
@@ -191,23 +191,23 @@ public class EnemyFour extends Enemy {
     }
 
     private void checkPath() {
-        if (b2body.getLinearVelocity().y > 0) { // VA PARA ARRIBA
-            if (b2body.getPosition().y >= b2bodyTargetY) { // ME PASE DEL TARGET
-                b2bodyTargetY = b2bodyTargetY - 2.0f * 2; // EL NUEVO TARGET ESTA ABAJO
+        if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
+            if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
+                b2bodyTargetY = b2bodyTargetY - Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS; // New targetY (down)
             }
-        } else { // VA PARA ABAJO
-            if (b2body.getPosition().y <= b2bodyTargetY) { // ME PASE DEL TARGET
-                b2bodyTargetY = b2bodyTargetY + 2.0f * 2; // EL NUEVO TARGET ESTA ARRIBA
+        } else { // EnemyFour goes down
+            if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
+                b2bodyTargetY = b2bodyTargetY + Constants.ENEMYFOUR_TUNNEL_HEIGHT_METERS; // New targetY (up)
             }
         }
 
-        if (b2body.getLinearVelocity().x > 0) { // VA PARA LA DERECHA
-            if (b2body.getPosition().x >= b2bodyTargetX) { // ME PASE DEL TARGET
-                b2bodyTargetX = b2bodyTargetX + 0.5f; // EL NUEVO TARGET ESTA A LA derecha
+        if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
+            if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
+                b2bodyTargetX = b2bodyTargetX + Constants.ENEMYFOUR_STEP_WIDTH_METERS; // New targetX (right)
             }
-        } else { // VA PARA LA IZQUIERDA
-            if (b2body.getPosition().x <= b2bodyTargetX) { // ME PASE DEL TARGET
-                b2bodyTargetX = b2bodyTargetX - 0.5f; // EL NUEVO TARGET ESTA A LA izq
+        } else { // // EnemyFour goes to the left
+            if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
+                b2bodyTargetX = b2bodyTargetX - Constants.ENEMYFOUR_STEP_WIDTH_METERS; // New targetX (left)
             }
         }
 
