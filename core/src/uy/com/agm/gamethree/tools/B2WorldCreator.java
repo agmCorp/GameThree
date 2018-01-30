@@ -48,6 +48,9 @@ public class B2WorldCreator {
         // Enemies
         enemies = new Array<Enemy>();
 
+        // PowerBoxes
+        powerBoxes = new Array<PowerBox>();
+
         // Items
         items = new Array<Item>();
 
@@ -99,7 +102,7 @@ public class B2WorldCreator {
             }
         }
 
-        // Layer: enemyThree
+        // Layer: enemyFour
         layer = map.getLayers().get("enemyFour");
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
@@ -110,7 +113,6 @@ public class B2WorldCreator {
         // Layer: powerBoxes
         layer = map.getLayers().get("powerBox");
         if (layer != null) {
-            powerBoxes = new Array<PowerBox>();
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 powerBoxes.add(new PowerBox(screen, object));
             }
