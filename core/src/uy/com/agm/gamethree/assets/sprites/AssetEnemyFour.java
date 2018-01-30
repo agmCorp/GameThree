@@ -23,12 +23,12 @@ public class AssetEnemyFour {
 
         // Animation
         regions = atlas.findRegions("enemyFour");
-        enemyFourAnimation = new Animation(0.8f / 17.0f, regions);
+        enemyFourAnimation = new Animation(0.4f / 17.0f, regions);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("enemyFourFrozen");
-        enemyFourFrozenAnimation = new Animation(0.8f / 17.0f, regions);
+        enemyFourFrozenAnimation = new Animation(0.4f / 17.0f, regions);
         regions.clear();
     }
 

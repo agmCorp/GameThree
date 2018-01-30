@@ -267,10 +267,9 @@ public class Constants {
 
     // EnemyFour (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float ENEMYFOUR_LINEAR_VELOCITY = 1.0f;
-    //TODO public static final float ENEMYFOUR_VELOCITY_Y = 1.0f;
-    public static final float ENEMYFOUR_WIDTH_METERS = 125.0f * 1.0f / PPM;
-    public static final float ENEMYFOUR_HEIGHT_METERS = 106.0f * 1.0f / PPM;
+    public static final float ENEMYFOUR_LINEAR_VELOCITY = 3.0f;
+    public static final float ENEMYFOUR_WIDTH_METERS = 125.0f * 0.8f / PPM;
+    public static final float ENEMYFOUR_HEIGHT_METERS = 106.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_FIRE_DELAY_SECONDS = 1.0f;
     public static final int ENEMYFOUR_SCORE = 35;
 
