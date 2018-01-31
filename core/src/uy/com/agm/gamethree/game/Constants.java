@@ -305,8 +305,8 @@ public class Constants {
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
-    public static final float ENEMYBULLET_WIDTH_METERS = 106.0f * 0.5f / PPM;
-    public static final float ENEMYBULLET_HEIGHT_METERS = 105.0f  * 0.5f / PPM;
+    public static final float ENEMYBULLET_WIDTH_METERS = 192.0f * 0.3f / PPM;
+    public static final float ENEMYBULLET_HEIGHT_METERS = 192.0f  * 0.3f / PPM;
     public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
 
     // ExplosionA (meters = pixels * resizeFactor / PPM)

@@ -268,7 +268,11 @@
   <object id="655" x="105" y="1056" width="32" height="32"/>
   <object id="657" x="69" y="664" width="32" height="32"/>
   <object id="658" x="158" y="745" width="32" height="32"/>
-  <object id="686" x="225" y="7395" width="32" height="32"/>
+  <object id="686" x="225" y="7395" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="396" x="441" y="4192" width="32" height="32"/>
