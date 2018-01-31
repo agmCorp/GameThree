@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="690">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="692">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -370,9 +370,23 @@
     <property name="powerTwo" value=""/>
    </properties>
   </object>
+  <object id="690" x="67" y="7525" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyFour">
   <object id="682" x="359" y="4473" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
+  <object id="691" x="424" y="7455" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
    </properties>
