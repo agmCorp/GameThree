@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="687">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="690">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer name="graphics" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2jdOA0EYhuHZXcCExmAD1yBzDTLX8BXIqeEK5NRwBXJqzBHIqTESoeVtaFZTMF5Ls8D3Sk+zml8erUbWemVjlK1igtlSxXahlFIqXjY0phFNyIVus22sb0cHOh1n+1jfjwEMOs4qpVSa0veoUkoppVRlyvregEp1YzzzjmMCk5jCNGYwiznMY8HybLzEtWWsYBVrWMcGNrGFbexYZve4to8DHOIIxzjBKc5wjgvL7BXXrnGDW9zhHg94xBOe8WKZDSJjQkSoQjVqkEEt6lCPhij5vVVKKaWUn94CY97xgc/AbTbP80MzWtDq+G6wi/Xd6EGv4+wQ64cxglG9k1RKKaWUUkr90fR7Tf2Xco7n21eFBPtcTDC7+0vuj1LxipzdyzLPb4m51zJnfX2uUvF++t+TNJzZ7z0UPO5Bpa8vzzJD7w==
+   eJzt2kdOw0AYhuGxDYSyCYRyDTrXoHONXIHeNlyB3jZcgU7IJhwh9LIJEmXLu2GDZsFgSx7ge6VnY80vjSzbcqwYo2yVYsxWEtuFUkqpr2VDYxrRhFzoNtvO+g50ostxtp/1AxjEkOOsUkr5lJ6jSimllFLJlE17A8rrxnnnncAkpjCNGcxiDvNYwKLl3XiZYytYxRrWsYFNbGEbO9i1zO5z7ACHOMIxTnCKMxRwjqJltsyxS1zhGje4xR3u8YBHPFlmg8iYEBGqUI0aZFCLOtSjIYp/bpVSSimVTi+BMa94w3vgNtvM+0MLWtHm+G2wm/U96EWf4+ww60cwijF9k1RKKaWUUkr90fR7Tf2Xco7Xd1rlY+xzKcbs3i85P0r5Uol75uKH902FuWfdcyqhvvvfEx+u2c895FPcg/KvD+eeQGk=
   </data>
  </layer>
  <objectgroup name="borders">
@@ -343,24 +343,36 @@
     <property name="powerTwo" value=""/>
    </properties>
   </object>
+  <object id="687" x="366" y="1717" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="688" x="290" y="650" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
+  <object id="689" x="203" y="90" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+    <property name="powerFour" value=""/>
+    <property name="powerOne" value=""/>
+    <property name="powerThree" value=""/>
+    <property name="powerTwo" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyFour">
-  <object id="682" x="324" y="7583" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="683" x="359" y="7625" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="684" x="103" y="7646" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="685" x="48" y="7588" width="32" height="32">
+  <object id="682" x="359" y="4473" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
    </properties>

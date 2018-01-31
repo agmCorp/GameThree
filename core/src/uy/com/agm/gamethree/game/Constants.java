@@ -29,13 +29,13 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f * 0;
+    public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -272,7 +272,7 @@ public class Constants {
     public static final float ENEMYFOUR_HEIGHT_METERS = 106.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_FROZEN_WIDTH_METERS = 123.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_FROZEN_HEIGHT_METERS = 99.0f * 0.8f / PPM;
-    public static final float ENEMYFOUR_AMPLITUDE_METERS = 800.0f / PPM;
+    public static final float ENEMYFOUR_AMPLITUDE_METERS = 200.0f / PPM;
     public static final float ENEMYFOUR_WAVELENGTH_METERS = 100.0f / PPM;
     public static final float ENEMYFOUR_FIRE_DELAY_SECONDS = 1.0f;
     public static final float ENEMYFOUR_FROZEN_TIME_SECONDS = 4.0f;
