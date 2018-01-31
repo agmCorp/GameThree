@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="692">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="693">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -268,11 +268,6 @@
   <object id="655" x="105" y="1056" width="32" height="32"/>
   <object id="657" x="69" y="664" width="32" height="32"/>
   <object id="658" x="158" y="745" width="32" height="32"/>
-  <object id="686" x="225" y="7395" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="396" x="441" y="4192" width="32" height="32"/>
@@ -370,15 +365,6 @@
     <property name="powerTwo" value=""/>
    </properties>
   </object>
-  <object id="690" x="67" y="7525" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="enemyFour">
   <object id="682" x="359" y="4473" width="32" height="32">
@@ -387,6 +373,12 @@
    </properties>
   </object>
   <object id="691" x="424" y="7455" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+    <property name="timesItFreeze" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="692" x="38" y="7519" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
    </properties>

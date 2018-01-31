@@ -39,6 +39,7 @@ public class EnemyFour extends Enemy {
     private FrozenState currentFrozenState;
     private float b2bodyLinearVelX;
     private float stateFrozenTimer;
+    private int timesItFreeze;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -68,6 +69,9 @@ public class EnemyFour extends Enemy {
         currentFrozenState = FrozenState.INITIAL;
         b2bodyLinearVelX = 0;
         stateFrozenTimer = 0;
+
+        // Indicates how many times this enemy can be frozen.
+        timesItFreeze = object.getProperties().get("timesItFreeze", 1, Integer.class);
     }
 
     @Override
@@ -238,15 +242,21 @@ public class EnemyFour extends Enemy {
             // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
             setBounds(b2body.getPosition().x, b2body.getPosition().y, Constants.ENEMYFOUR_WIDTH_METERS, Constants.ENEMYFOUR_HEIGHT_METERS);
 
+            timesItFreeze--;
+            if (timesItFreeze > 0) {
+                currentFrozenState = FrozenState.INITIAL;
+            } else {
+                currentFrozenState = FrozenState.DEFROSTED;
+            }
             currentState = State.ALIVE;
-            currentFrozenState = FrozenState.DEFROSTED;
 
             // Return movement
-            tmp.set(getX(), getY());
+            tmp.set(b2body.getPosition().x, b2body.getPosition().y);
             Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
             velocity.set(tmp);
 
             stateTimer = 0;
+            stateFrozenTimer = 0;
         }
     }
 

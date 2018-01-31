@@ -124,6 +124,7 @@ powerOne (string): ghost mode
 powerTwo (string): escudo
 powerThree (string): cambia el poder de disparo
 colOne (string): moneda
+timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
 
 HERRAMIENTAS
 ------------
