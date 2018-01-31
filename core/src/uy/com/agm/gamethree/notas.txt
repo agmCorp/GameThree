@@ -35,10 +35,9 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-PROBLEMAS GRANDES: VER EL BOUNCE DE LAS BALAS, VUELVEN POR LA MISMA RUTA EN QUE ENTRARON. en realidad es para
-evitar que la arana quede atrapada por balas.
 - pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
-- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc.
+- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc. Si estoy en tough no debería moverlo.
+
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)

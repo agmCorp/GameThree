@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f * 0;
+    public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;

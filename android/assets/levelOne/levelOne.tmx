@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="693">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="696">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -205,6 +205,24 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
+  <object id="693" x="270" y="365" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="694" x="154" y="362" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="695" x="399" y="368" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+    <property name="strength" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyOne">
   <object id="376" x="96" y="7040" width="32" height="32"/>
@@ -230,9 +248,6 @@
    </properties>
   </object>
   <object id="416" x="224" y="3488" width="32" height="32"/>
-  <object id="438" x="128" y="352" width="32" height="32"/>
-  <object id="439" x="256" y="352" width="32" height="32"/>
-  <object id="440" x="384" y="352" width="32" height="32"/>
   <object id="621" x="93" y="6762" width="32" height="32"/>
   <object id="622" x="369" y="6343" width="32" height="32"/>
   <object id="624" x="226" y="5330" width="32" height="32"/>
@@ -245,13 +260,6 @@
   <object id="628" x="248" y="3138" width="32" height="32"/>
   <object id="629" x="334" y="2852" width="32" height="32"/>
   <object id="630" x="113" y="1893" width="32" height="32"/>
-  <object id="631" x="232" y="1287" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="632" x="231" y="838" width="32" height="32"/>
-  <object id="633" x="45" y="488" width="32" height="32"/>
   <object id="636" x="302" y="6094" width="32" height="32"/>
   <object id="638" x="316" y="3905" width="32" height="32"/>
   <object id="639" x="34" y="3959" width="32" height="32"/>
@@ -264,10 +272,6 @@
   <object id="649" x="206" y="2576" width="32" height="32"/>
   <object id="650" x="55" y="2514" width="32" height="32"/>
   <object id="651" x="370" y="1804" width="32" height="32"/>
-  <object id="654" x="278" y="1106" width="32" height="32"/>
-  <object id="655" x="105" y="1056" width="32" height="32"/>
-  <object id="657" x="69" y="664" width="32" height="32"/>
-  <object id="658" x="158" y="745" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="396" x="441" y="4192" width="32" height="32"/>
@@ -339,24 +343,6 @@
    </properties>
   </object>
   <object id="687" x="366" y="1717" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="688" x="290" y="650" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="689" x="203" y="90" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
     <property name="powerFour" value=""/>
