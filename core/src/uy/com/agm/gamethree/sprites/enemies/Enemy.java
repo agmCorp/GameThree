@@ -23,6 +23,8 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
+    private boolean hasEnemyBulletProp;
+
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
@@ -44,6 +46,9 @@ public abstract class Enemy extends Sprite {
 
         // Temp GC friendly vector
         tmp = new Vector2();
+
+        // Fire property
+        hasEnemyBulletProp = object.getProperties().containsKey("enemyBullet");
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -95,9 +100,9 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void openFire() {
-        if (!isDestroyed()) {
-            if (b2body.isActive()) {
-                if (object.getProperties().containsKey("enemyBullet")) {
+        if (hasEnemyBulletProp) {
+            if (!isDestroyed()) {
+                if (b2body.isActive()) {
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
                 }
             }
