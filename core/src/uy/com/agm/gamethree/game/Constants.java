@@ -260,8 +260,8 @@ public class Constants {
     public static final float ENEMYTHREE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float ENEMYTHREE_VELOCITY_X = 0.0f;
     public static final float ENEMYTHREE_VELOCITY_Y = 0.0f;
-    public static final float ENEMYTHREE_WIDTH_METERS = 100.0f * 0.8f / PPM;
-    public static final float ENEMYTHREE_HEIGHT_METERS = 100.0f * 0.8f / PPM;
+    public static final float ENEMYTHREE_WIDTH_METERS = 130.0f * 0.6f / PPM;
+    public static final float ENEMYTHREE_HEIGHT_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.0f;
     public static final int ENEMYTHREE_SCORE = 17;
 
