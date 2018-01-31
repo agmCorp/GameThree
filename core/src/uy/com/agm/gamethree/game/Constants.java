@@ -156,8 +156,8 @@ public class Constants {
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float POWERBOX_WIDTH_METERS = 140.0f * 0.4f / PPM;
-    public static final float POWERBOX_HEIGHT_METERS = 175.0f * 0.4f / PPM;
+    public static final float POWERBOX_WIDTH_METERS = 140.0f * 0.3f / PPM;
+    public static final float POWERBOX_HEIGHT_METERS = 175.0f * 0.3f / PPM;
     public static final int POWERBOX_SCORE = 10;
     public static final int POWERBOX_MAX_TEXTURES = 14;
 
@@ -299,8 +299,8 @@ public class Constants {
     public static final float HEROBULLET_VELOCITY_X = 0.0f;
     public static final float HEROBULLET_VELOCITY_Y = 6.0f;
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
-    public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.5f / PPM;
-    public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.5f / PPM;
+    public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
