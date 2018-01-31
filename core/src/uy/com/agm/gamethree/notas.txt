@@ -44,7 +44,6 @@ hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
 - mostrar score en la pantalla de level completed
-- revisar los tamanos de todas las imagenes y hacerlos iguales por personaje. Son pocas, ej: enemyOne.
 
 PENDIENTES
 ----------
