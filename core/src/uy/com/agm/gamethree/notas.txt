@@ -35,6 +35,8 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
+http://www.coding-daddy.xyz/node/20
+
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
