@@ -168,9 +168,9 @@ public class Hud extends AbstractScreen {
         timeIsUpTable.setFillParent(true);
 
         // Define a label based on labelStyle
-        labelStyleMessage.font = Assets.getInstance().getFonts().getDefaultBig();
+        labelStyle.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        timeIsUpLabel = new Label("TIME IS UP!!", labelStyleMessage);
+        timeIsUpLabel = new Label("TIME IS UP!!", labelStyle);
 
         // Add our table to the stage
         addActor(timeIsUpTable);
