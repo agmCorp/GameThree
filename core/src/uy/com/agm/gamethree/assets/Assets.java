@@ -96,21 +96,17 @@ public class Assets implements Disposable, AssetErrorListener {
         return instance;
     }
 
-    public void init(AssetManager assetManager) {
-        this.assetManager = assetManager;
-
-        // Set asset manager error handler
-        assetManager.setErrorListener(this);
-
-        // Load texture atlas
+    private void loadTextureAtlas() {
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+    }
 
-        // Load map for each level
+    private void loadMaps() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(Constants.MAP_FILE_LEVEL_ONE, TiledMap.class);
         assetManager.load(Constants.MAP_FILE_LEVEL_TWO, TiledMap.class);
+    }
 
-        // Load sounds
+    private void loadSounds() {
         assetManager.load(Constants.FX_FILE_BUMP, Sound.class);
         assetManager.load(Constants.FX_FILE_CRACK, Sound.class);
         assetManager.load(Constants.FX_FILE_DEAD, Sound.class);
@@ -142,11 +138,31 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_BOUNCE, Sound.class);
         assetManager.load(Constants.FX_FILE_CLICK, Sound.class);
         assetManager.load(Constants.FX_FILE_APLAUSE, Sound.class);
+    }
 
-        // Load music
+    private void loadMusic() {
         assetManager.load(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
         assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
         assetManager.load(Constants.MUSIC_FILE_LEVEL_TWO, Music.class);
+    }
+
+    public void init(AssetManager assetManager) {
+        this.assetManager = assetManager;
+
+        // Set asset manager error handler
+        assetManager.setErrorListener(this);
+
+        // Load texture atlas
+        loadTextureAtlas();
+
+        // Load map for each level
+        loadMaps();
+
+        // Load all sounds
+        loadSounds();
+
+        // Load all music
+        loadMusic();
 
         // Start loading assets and wait until finished
         assetManager.finishLoading();
@@ -156,13 +172,11 @@ public class Assets implements Disposable, AssetErrorListener {
             Gdx.app.debug(TAG, "Asset: " + assetName);
         }
 
-        TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-
         // Enable texture filtering for pixel smoothing
+        TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
         for (Texture texture : atlas.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
-
         fonts = new AssetFonts();
         hero = new AssetHero(atlas);
         enemyOne = new AssetEnemyOne(atlas);

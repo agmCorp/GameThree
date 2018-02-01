@@ -61,7 +61,7 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
 cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
-- hacer un skin para la ui.
+- hacer un skin para la ui, intente usar las clases "asset" pero mejor no, ver de usar un skin.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
