@@ -17,11 +17,13 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
     private int currentLevel;
+    private int finalScore;
     private int nextLevel;
 
-    public LevelCompletedScreen(Integer currentLevel) {
+    public LevelCompletedScreen(Integer currentLevel, Integer finalScore) {
         super();
         this.currentLevel = currentLevel;
+        this.finalScore = finalScore;
         this.nextLevel = currentLevel + 1;
         GameSettings.getInstance().addAvailableLevel(nextLevel);
         GameSettings.getInstance().save();
@@ -39,6 +41,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Define our labels based on labelStyle
         Label titleLabel1 = new Label("Level " + this.currentLevel, labelStyleBig);
         Label titleLabel2 = new Label("Completed!!", labelStyleBig);
+        Label scoreLabel = new Label("Score: " + finalScore, labelStyleNormal);
         Label playAgainLabel = new Label("Touch to play again", labelStyleNormal);
         Label nextLevelLabel = new Label("Next level", labelStyleNormal);
         Label backLabel = new Label("Back to menu", labelStyleNormal);
@@ -50,6 +53,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(titleLabel1).center();
         table.row();
         table.add(titleLabel2).padTop(Constants.PAD_TOP).center();
+        table.row();
+        table.add(scoreLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(playAgainLabel).padTop(Constants.PAD_TOP).center();
         table.row();

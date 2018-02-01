@@ -36,17 +36,15 @@ Hay 2 tipos de elementos:
 PROXIMOS PASOS
 --------------
 - pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
-- el enemigo final no deberia retroceder/moverse por el peso de las balas o empujones etc. Si estoy en tough no debería moverlo.
-
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
 - mostrar score en la pantalla de level completed
+- Ponele barra de vida a todos los enemigos finales (abajo supongo)
 
 PENDIENTES
 ----------
-
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
 - renombrar todos los timer por time (ej: stateTime)
@@ -64,7 +62,6 @@ cuando el usuario apreta el homebutton.
 - agregar transitions
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
-- Ponele barra de vida al enemigo final
 - Marcar el terreno con banderas para saber dónde estoy
 - las properties del tilededitor pueden ser boolean, usarlas.
 - highscores
@@ -414,6 +411,11 @@ Para ir a pelear directo con el enemigo final poner en playscreen:
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, 75, 0);
+
+        // Create the hero in our game world
+        player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
+
 
 PAUSA
 https://stackoverflow.com/questions/21576181/pause-resume-a-simple-libgdx-game-for-android

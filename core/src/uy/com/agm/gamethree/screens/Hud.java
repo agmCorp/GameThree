@@ -260,4 +260,8 @@ public class Hud extends AbstractScreen {
         lives -= quantity;
         livesValueLabel.setText(String.format("%02d", lives));
     }
+
+    public int getScore() {
+        return score;
+    }
 }

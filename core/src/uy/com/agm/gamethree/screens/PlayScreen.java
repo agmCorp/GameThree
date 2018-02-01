@@ -466,7 +466,7 @@ public class PlayScreen extends AbstractScreen {
         }
 
         if (isLevelCompleted(delta)) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level);
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
     }
 

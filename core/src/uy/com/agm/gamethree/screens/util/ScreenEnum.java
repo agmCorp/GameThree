@@ -35,7 +35,7 @@ public enum ScreenEnum {
 
     LEVEL_COMPLETED {
         public AbstractScreen getScreen(Object... params) {
-            return new LevelCompletedScreen((Integer) params[0]);
+            return new LevelCompletedScreen((Integer) params[0], (Integer) params[1]);
         }
     },
 
