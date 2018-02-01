@@ -141,13 +141,13 @@ public class Constants {
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.2f;
-    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float HERO_CIRCLESHAPE_RADIUS_METERS = 32.0f / PPM;
     public static final float HERO_WIDTH_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
-    public static final int HERO_LIVES_START = 3;
+    public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
@@ -281,6 +281,7 @@ public class Constants {
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELONE_LINEAR_VELOCITY = 5.0f;
+    public static final float FINALLEVELONE_DENSITY = 1000.0f;
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_OFFSET_METERS = 20.0f / PPM;
@@ -292,10 +293,8 @@ public class Constants {
     public static final int FINALLEVELONE_MAX_DAMAGE = 3;
     public static final int FINALLEVELONE_SCORE = 200;
 
-    // Weapon (meters = pixels * resizeFactor / PPM)
-    public static final float WEAPON_OFFSET_METERS = 64.0f / PPM;
-
     // HeroBullet (meters = pixels * resizeFactor / PPM)
+    public static final float HEROBULLET_OFFSET_METERS = HERO_CIRCLESHAPE_RADIUS_METERS;
     public static final float HEROBULLET_VELOCITY_X = 0.0f;
     public static final float HEROBULLET_VELOCITY_Y = 6.0f;
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;

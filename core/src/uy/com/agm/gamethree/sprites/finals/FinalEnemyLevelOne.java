@@ -138,6 +138,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
         fdef.shape = shape;
+        fdef.density = Constants.FINALLEVELONE_DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
         setDefaultFilter();
     }

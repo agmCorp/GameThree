@@ -599,10 +599,10 @@ public class Hero extends Sprite {
 
                     if (screen.getHud().isPowerRunningOut()) {
                         screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, angle, HeroBullet.class));
+                                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
                     } else {
                         screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS,
+                                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
                                 bulletWidth,
                                 bulletHeight,
                                 bulletCircleShapeRadius,
@@ -615,7 +615,7 @@ public class Hero extends Sprite {
             }
         } else {
             if (openFireTimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.WEAPON_OFFSET_METERS, HeroBullet.class));
+                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
                 openFireTimer = 0;
             }
         }

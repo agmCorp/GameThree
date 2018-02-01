@@ -108,6 +108,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
 
         // Create boundaries
         upperEdge = new Edge(this, true);
