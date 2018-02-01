@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.ui.HealthBar;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -34,10 +35,15 @@ public class Hud extends AbstractScreen {
     private Label livesValueLabel;
     private Label powerLabel;
     private Label powerValueLabel;
+    private Label enemyNameLabel;
     private Label fpsValueLabel;
     private Label timeIsUpLabel;
-    private Table hudTable;
+    private Table upperTable;
     private Table timeIsUpTable;
+    private Table bottomTable;
+
+    // Health progressBar
+    private HealthBar helthBar;
 
     public Hud(Integer level, Integer levelTimer, Integer lives) {
         super();
@@ -53,21 +59,21 @@ public class Hud extends AbstractScreen {
         timeCountPower = 0;
         powerTimerVisible = false;
         fps = 0;
+        helthBar = new HealthBar();
     }
 
-    @Override
-    public void buildStage() {
+    private void defineUpperTable() {
         // Define a table used to organize our hud's labels
-        hudTable = new Table();
+        upperTable = new Table();
 
         // Debug lines
-        hudTable.setDebug(Constants.DEBUG_MODE);
+        upperTable.setDebug(Constants.DEBUG_MODE);
 
         // Top-Align table
-        hudTable.top();
+        upperTable.top();
 
         // Make the table fill the entire stage
-        hudTable.setFillParent(true);
+        upperTable.setFillParent(true);
 
         // Personal fonts
         Label.LabelStyle labelStyle = new Label.LabelStyle();
@@ -90,53 +96,62 @@ public class Hud extends AbstractScreen {
         powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
 
         // Add labels to the table giving them all equal width with expandX
-        hudTable.add(scoreLabel).expandX();
-        hudTable.add(levelLabel).expandX();
-        hudTable.add(levelTimerLabel).expandX();
-        hudTable.add(livesLabel).expandX();
+        upperTable.add(scoreLabel).expandX();
+        upperTable.add(levelLabel).expandX();
+        upperTable.add(levelTimerLabel).expandX();
+        upperTable.add(livesLabel).expandX();
 
         // Add a second row to our table
-        hudTable.row();
+        upperTable.row();
 
         // Values
-        hudTable.add(scoreValueLabel).expandX();
-        hudTable.add(levelValueLabel).expandX();
-        hudTable.add(levelTimerValueLabel).expandX();
-        hudTable.add(livesValueLabel).expandX();
+        upperTable.add(scoreValueLabel).expandX();
+        upperTable.add(levelValueLabel).expandX();
+        upperTable.add(levelTimerValueLabel).expandX();
+        upperTable.add(livesValueLabel).expandX();
 
         // Add table to the stage
-        addActor(hudTable);
+        addActor(upperTable);
+    }
+
+    private void defineBottomTable() {
+        // Define a new table used to display an Enemy's health bar and a FPS counter
+        bottomTable = new Table();
+
+        // Debug lines
+        bottomTable.setDebug(Constants.DEBUG_MODE);
+
+        // Bottom-Align table
+        bottomTable.bottom();
+
+        // Make the table fill the entire stage
+        bottomTable.setFillParent(true);
+
+        // Personal fonts
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
+
+        // Define a label based on labelStyle
+        enemyNameLabel = new Label("ENEMY_NAME", labelStyle);
+        Label fpsLabel = new Label("FPS", labelStyle);
+        fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
 
         if (Constants.DEBUG_MODE) {
-            // Define a new table used to display our FPS counter
-            Table fpsTable = new Table();
-
-            // Debug lines
-            fpsTable.setDebug(Constants.DEBUG_MODE);
-
-            // Bottom-Align table
-            fpsTable.bottom();
-
-            // Make the table fill the entire stage
-            fpsTable.setFillParent(true);
-
-            // Define a label based on labelStyle
-            Label fpsLabel = new Label("FPS", labelStyle);
-            fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
-
             // Add previous label to the table giving it equal width with expandX
-            fpsTable.add(fpsLabel).expandX();
+            bottomTable.add(fpsLabel).expandX();
 
             // Add a second row to our table
-            fpsTable.row();
+            bottomTable.row();
 
             // Value
-            fpsTable.add(fpsValueLabel).expandX();
-
-            // Add table to the stage
-            addActor(fpsTable);
+            bottomTable.add(fpsValueLabel).expandX();
         }
 
+        // Add table to the stage
+        addActor(bottomTable);
+    }
+
+    private void defineTimeIsUpTable() {
         // Define a new table used to display "Iime is up" message
         timeIsUpTable = new Table();
 
@@ -152,10 +167,18 @@ public class Hud extends AbstractScreen {
         // Define a label based on labelStyle
         Label.LabelStyle labelStyleMessage = new Label.LabelStyle();
         labelStyleMessage.font = Assets.getInstance().getFonts().getDefaultBig();
+
         timeIsUpLabel = new Label("TIME IS UP!!", labelStyleMessage);
 
         // Add our table to the stage
         addActor(timeIsUpTable);
+    }
+
+    @Override
+    public void buildStage() {
+        defineUpperTable();
+        defineBottomTable();
+        defineTimeIsUpTable();
     }
 
     public void update(float dt) {
@@ -211,12 +234,29 @@ public class Hud extends AbstractScreen {
 
         if (!powerTimerVisible) {
             // Add a third row to our table
-            hudTable.row();
-            hudTable.add(powerLabel).colspan(4).expandX();
-            hudTable.row();
-            hudTable.add(powerValueLabel).colspan(4).expandX();
+            upperTable.row();
+            upperTable.add(powerLabel).colspan(4).expandX();
+            upperTable.row();
+            upperTable.add(powerValueLabel).colspan(4).expandX();
             powerTimerVisible = true;
         }
+    }
+
+    public void setHealthBar(String enemyName, int energy) {
+        enemyNameLabel.setText(enemyName);
+        helthBar.setInitialEnergy(energy);
+        helthBar.setFull();
+        bottomTable.row();
+        bottomTable.add(helthBar).padTop(Constants.PAD_TOP).center();
+    }
+
+    public void removeHealthBar() {
+        bottomTable.removeActor(enemyNameLabel);
+        bottomTable.removeActor(helthBar);
+    }
+
+    public void decreaseHealth() {
+        helthBar.decrease();
     }
 
     public void setTimeIsUpLabel() {
@@ -225,8 +265,8 @@ public class Hud extends AbstractScreen {
 
     private void removePowerLabel() {
         if (powerTimerVisible) {
-            hudTable.removeActor(powerLabel);
-            hudTable.removeActor(powerValueLabel);
+            upperTable.removeActor(powerLabel);
+            upperTable.removeActor(powerValueLabel);
             powerTimerVisible = false;
         }
     }
@@ -265,27 +305,3 @@ public class Hud extends AbstractScreen {
         return score;
     }
 }
-
-
-//  private HealthBar helthBar; // todo
-
-/*
-
-
-        table.row();
-                helthBar = new HealthBar(27);
-                table.add(helthBar).padTop(Constants.PAD_TOP).center().expandX();
-
-                table.row();
-                Label decLabel = new Label("disminuir", labelStyleNormal);
-                table.add(decLabel).padTop(Constants.PAD_TOP).center();
-
-                decLabel.addListener(
-                new InputListener() {
-@Override
-public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        helthBar.decrease();
-        return true;
-        }
-        });
-*/

@@ -20,7 +20,7 @@ public class HealthBar extends ProgressBar {
     private int currentEnergy;
     private int fullEnergy;
 
-    public HealthBar(int energy) {
+    public HealthBar() {
         super(Constants.HEALTHBAR_MIN, Constants.HEALTHBAR_MAX, Constants.HEALTHBAR_STEP, false, new ProgressBarStyle());
 
         getStyle().background = getColoredDrawable(Constants.HEALTHBAR_WIDTH, Constants.HEALTHBAR_HEIGHT, Color.RED);
@@ -28,9 +28,10 @@ public class HealthBar extends ProgressBar {
         getStyle().knobBefore = getColoredDrawable(Constants.HEALTHBAR_WIDTH, Constants.HEALTHBAR_HEIGHT, Color.GREEN);
 
         setHeight(Constants.HEALTHBAR_HEIGHT);
-        setValue(Constants.HEALTHBAR_MAX);
         setAnimateDuration(Constants.HEALTHBAR_ANIMATION_DURATION);
+    }
 
+    public void setInitialEnergy(int energy) {
         currentEnergy = energy;
         fullEnergy = energy;
     }
@@ -60,5 +61,9 @@ public class HealthBar extends ProgressBar {
     public float getPrefWidth() {
         // WA: Impossible to set 'width' on an horizontal ProgressBar using size, resize or setWidth
         return (float) Constants.HEALTHBAR_WIDTH;
+    }
+
+    public void setFull() {
+        setValue(Constants.HEALTHBAR_MAX);
     }
 }
