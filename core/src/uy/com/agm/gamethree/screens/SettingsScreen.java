@@ -89,6 +89,9 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
         // Slider listener
         sliderMusic.addListener(new InputListener() {
             @Override

@@ -62,16 +62,19 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
         // Events
         playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel));
         nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel));
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created table to stage
-        addActor(table);
-
         // Audio FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getAplause());
+
+        // Adds created table to stage
+        addActor(table);
     }
 
     @Override

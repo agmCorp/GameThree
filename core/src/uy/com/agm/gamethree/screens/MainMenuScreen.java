@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.ui.HealthBar;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -27,10 +28,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class MainMenuScreen extends AbstractScreen {
     private static final String TAG = MainMenuScreen.class.getName();
-
-    private ProgressBar progressBar; // todo
-    private final static int CANTDISPAROS = 25; // TODO
-    private int contador = CANTDISPAROS; // TODO
+    private HealthBar helthBar; // todo
 
     public MainMenuScreen() {
         super();
@@ -64,13 +62,18 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(settingsLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(exitGameLabel).padTop(Constants.PAD_TOP).center();
+
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
 /* */
 
 
 table.row();
-        progressBar = createProgressBar();
-        init();
-        table.add(progressBar).padTop(Constants.PAD_TOP).center();
+        helthBar = new HealthBar(40, 40, 7);
+
+        table.add(helthBar).padTop(Constants.PAD_TOP).center().expandX();;
+
         table.row();
         Label decLabel = new Label("disminuir", labelStyleNormal);
         table.add(decLabel).padTop(Constants.PAD_TOP).center();
@@ -79,12 +82,11 @@ table.row();
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        decrease();
+                        helthBar.decrease();
                         return true;
                     }
                 });
 /* */
-        addActor(table);
 
         // Setting listeners
         startGameLabel.addListener( UIFactory.createListener(ScreenEnum.LEVEL_SELECT) );
@@ -97,53 +99,13 @@ table.row();
                         return false;
                     }
                 });
+
+        // Adds created table to stage
+        addActor(table);
     }
 
     @Override
     public void dispose() {
         super.dispose();
-    }
-
-    private ProgressBar createProgressBar(){
-        Drawable knob = createKnob();
-        Drawable background = createLoadingBar();
-        ProgressBar.ProgressBarStyle style= new ProgressBar.ProgressBarStyle(background, knob);
-        style.knobBefore = knob;
-        //return new ProgressBar(LOADING_MIN,LOADING_MAX,STEP_SIZE,false,style);
-        return new ProgressBar(0, 100, 1, false, style);
-    }
-
-    private Drawable createLoadingBar() {
-        // CONFIRMADO DEBO HACER DISPOSE DE LAS TEXTURES a las que hice new!
-        Pixmap pixmap = new Pixmap(100, 5, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
-        pixmap.fill();
-        Drawable background = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
-        return background;
-    }
-
-    private Drawable createKnob() {
-        //TiledDrawable knob = new TiledDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.SLIDER_BACKGROUND))));
-        Pixmap pixmap = new Pixmap(1, 5, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
-        pixmap.fill();
-        TiledDrawable knob = new TiledDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
-        return knob;
-    }
-
-    private void init() {
-        progressBar.setValue(100);
-    }
-
-    private void decrease() {
-        contador--;
-        if (contador > 0) {
-            progressBar.setValue(progressBar.getValue() - MathUtils.round(100.0f / CANTDISPAROS));
-        } else {
-            progressBar.setValue(0);
-        }
-
     }
 }

@@ -40,6 +40,9 @@ public class GameOverScreen extends AbstractScreen {
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
