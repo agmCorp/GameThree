@@ -40,7 +40,6 @@ PROXIMOS PASOS
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
-- mostrar score en la pantalla de level completed
 - Ponele barra de vida a todos los enemigos finales (abajo supongo)
 
 PENDIENTES
