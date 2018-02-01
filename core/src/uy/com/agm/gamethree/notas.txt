@@ -35,12 +35,17 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-- pensar un objetivo del juego: agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos. Cada llave es una estrella. O pueden ser estrellas.
+- pensar un objetivo del juego:
+agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
+Cada llave es una estrella del level completed.
+Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el nivel y si no tengo ninguna sale una pantalla diciendo
+que no complete el nivel (play again, back to main menu). Sencillo.
 - capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
 hurry up cuando empieza a sonar el tiempo
 time is up cuando moriste por eso (y luego pantalla de gameover)
 pausa y eso.
 - Ponele barra de vida a todos los enemigos finales (abajo supongo)
+- highscores, en la pantalla de level completed si hubo highscore se indica.
 
 PENDIENTES
 ----------
@@ -57,7 +62,6 @@ cuando el usuario apreta el homebutton.
 - hacer un skin para la ui.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
-- mostrar score en la pantalla de level completed
 - agregar transitions
 - agregar credits
 - Inventar una etiqueta random en las powerbox para generar poder random
