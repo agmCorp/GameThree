@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -29,6 +30,7 @@ public class Hud extends AbstractScreen {
     private int fps;
 
     // Scene2D widgets
+    private Label.LabelStyle labelStyle;
     private Label scoreValueLabel;
     private Label levelValueLabel;
     private Label levelTimerValueLabel;
@@ -60,6 +62,9 @@ public class Hud extends AbstractScreen {
         powerTimerVisible = false;
         fps = 0;
         helthBar = new HealthBar();
+
+        // Style
+        labelStyle = new Label.LabelStyle();
     }
 
     private void defineUpperTable() {
@@ -76,7 +81,6 @@ public class Hud extends AbstractScreen {
         upperTable.setFillParent(true);
 
         // Personal fonts
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define labels based on labelStyle
@@ -128,7 +132,6 @@ public class Hud extends AbstractScreen {
         bottomTable.setFillParent(true);
 
         // Personal fonts
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define a label based on labelStyle
@@ -165,7 +168,6 @@ public class Hud extends AbstractScreen {
         timeIsUpTable.setFillParent(true);
 
         // Define a label based on labelStyle
-        Label.LabelStyle labelStyleMessage = new Label.LabelStyle();
         labelStyleMessage.font = Assets.getInstance().getFonts().getDefaultBig();
 
         timeIsUpLabel = new Label("TIME IS UP!!", labelStyleMessage);
