@@ -36,7 +36,10 @@ Hay 2 tipos de elementos:
 PROXIMOS PASOS
 --------------
 http://www.coding-daddy.xyz/node/20
+https://stackoverflow.com/questions/37503499/scene2d-progress-bar-not-resizing
+https://stackoverflow.com/questions/23833251/how-to-change-the-size-of-a-progessbar-slider
 
+- expandX????
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.

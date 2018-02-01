@@ -265,3 +265,27 @@ public class Hud extends AbstractScreen {
         return score;
     }
 }
+
+
+//  private HealthBar helthBar; // todo
+
+/*
+
+
+        table.row();
+                helthBar = new HealthBar(27);
+                table.add(helthBar).padTop(Constants.PAD_TOP).center().expandX();
+
+                table.row();
+                Label decLabel = new Label("disminuir", labelStyleNormal);
+                table.add(decLabel).padTop(Constants.PAD_TOP).center();
+
+                decLabel.addListener(
+                new InputListener() {
+@Override
+public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        helthBar.decrease();
+        return true;
+        }
+        });
+*/
