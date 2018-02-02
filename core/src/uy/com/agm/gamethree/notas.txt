@@ -35,28 +35,18 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-http://www.coding-daddy.xyz/node/20
-https://stackoverflow.com/questions/37503499/scene2d-progress-bar-not-resizing
-https://stackoverflow.com/questions/23833251/how-to-change-the-size-of-a-progessbar-slider
-
-- expandX????
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
 Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el nivel y si no tengo ninguna sale una pantalla diciendo
 que no complete el nivel (play again, back to main menu). Sencillo.
-- capaz que lo proximo que puedo hacer es escribir cosas superpuesas en la pantalla:
-hurry up cuando empieza a sonar el tiempo
-time is up cuando moriste por eso (y luego pantalla de gameover)
-pausa y eso.
-- Ponele barra de vida a todos los enemigos finales (abajo supongo)
+- pantalla superpuesta para pausa con opciones.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 
 PENDIENTES
 ----------
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
-- renombrar todos los timer por time (ej: stateTime)
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
@@ -72,13 +62,11 @@ cuando el usuario apreta el homebutton.
 - Inventar una etiqueta random en las powerbox para generar poder random
 - Marcar el terreno con banderas para saber dónde estoy
 - las properties del tilededitor pueden ser boolean, usarlas.
-- highscores
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - averiguar como debuguear
 - los slides no se arrastran bien, verificar si los eventos que uso estan bien. Nunca probe hacerlo como me parece.
 para mi habria que usar el pan o touchdown.
-- sigo sin entender mucho por que la camara no dibuja el ultimo cachito.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
@@ -98,6 +86,11 @@ https://gamedev.stackexchange.com/questions/128715/libgdx-managing-and-starting-
 http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/
 http://www.pixnbgames.com/blog/libgdx/como-gestionar-varias-pantallas-en-libgdx/
 http://nexsoftware.net/wp/2013/05/09/libgdx-making-a-paged-level-selection-screen/
+
+width progressbar
+http://www.coding-daddy.xyz/node/20
+https://stackoverflow.com/questions/37503499/scene2d-progress-bar-not-resizing
+https://stackoverflow.com/questions/23833251/how-to-change-the-size-of-a-progessbar-slider
 
 DUDAS
 -----
