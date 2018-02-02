@@ -47,6 +47,7 @@ public class Constants {
 
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
+    public static final float HUD_CELL_HEIGHT = 20.0f;
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
@@ -290,7 +291,6 @@ public class Constants {
     public static final float FINALLEVELONE_DENSITY = 1000.0f;
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
-    public static final float FINALLEVELONE_OFFSET_METERS = 20.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_TIME_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final float FINALLEVELONE_INTRO_TIME_SECONDS = 5.0f;

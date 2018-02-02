@@ -88,6 +88,9 @@ public class Hud extends AbstractScreen {
         // Define a table used to organize our hud's labels
         upperTable = new Table();
 
+        // Cell height
+        upperTable.defaults().height(Constants.HUD_CELL_HEIGHT);
+
         // Debug lines
         upperTable.setDebug(Constants.DEBUG_MODE);
 

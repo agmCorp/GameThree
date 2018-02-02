@@ -24,7 +24,7 @@ public class LevelFactory {
             case 2:
                 finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
                         screen.getGameViewPort().getWorldHeight() * Constants.WORLD_SCREENS -
-                                Constants.FINALLEVELONE_HEIGHT_METERS + Constants.FINALLEVELONE_OFFSET_METERS);
+                                Constants.FINALLEVELONE_HEIGHT_METERS + Constants.FINALLEVELONE_HEIGHT_METERS / 2 - Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
                 break;
             default:
                 finalEnemy = null;

@@ -440,3 +440,6 @@ antes de dibujar el hud:
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
 /**/
+
+
+02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6
