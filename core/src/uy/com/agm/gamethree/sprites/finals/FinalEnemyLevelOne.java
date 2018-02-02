@@ -225,7 +225,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneIntro());
 
                 // HealthBar
-                screen.getHud().setHealthBar("SPIDER", damage);
+                screen.getHud().setHealthBarHud("SPIDER", damage);
 
                 // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
@@ -571,7 +571,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             screen.getHud().decreaseHealth();
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME);
             if (damage <= 0) {
-                screen.getHud().removeHealthBar();
+                screen.getHud().removeHealthBarHud();
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }
         } else {

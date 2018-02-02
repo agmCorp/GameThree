@@ -154,7 +154,7 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.setPowerLabel("GHOST MODE", Constants.TIMER_POWERONE);
+            hud.setPowerHud("GHOST MODE", Constants.TIMER_POWERONE);
 
             // Set score
             hud.addScore(Constants.POWERONE_SCORE);
