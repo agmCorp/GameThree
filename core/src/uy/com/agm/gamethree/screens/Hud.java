@@ -263,6 +263,7 @@ public class Hud extends AbstractScreen {
             removeFpsHud();
         }
     }
+
     public void update(float dt) {
         // Update world levelTimer
         timeCount += dt;
