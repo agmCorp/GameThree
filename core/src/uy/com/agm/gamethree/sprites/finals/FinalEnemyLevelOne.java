@@ -579,7 +579,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
     }
 
-    public void onHitWall() {
+    public void onHitWall(boolean isBorder) {
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
             float velY = b2body.getLinearVelocity().y;
             float velX = b2body.getLinearVelocity().x;
@@ -589,59 +589,67 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
             if (velY > 0.0f) {
                 if (x < screen.getGameCam().position.x) {
-                    // We are walking UP along the LEFT EDGE
-                    switch (option) {
-                        case 1: // go back
-                            currentStateWalking = StateWalking.LEFT_DOWN;
-                            break;
-                        case 2:
-                            currentStateWalking = StateWalking.CEILING_RIGHT;
-                            break;
-                        case 3:
-                            currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                            break;
+                    // We are walking UP along the LEFT BORDER
+                    if (!isBorder) { // We must collide only with an edge
+                        switch (option) {
+                            case 1: // go back
+                                currentStateWalking = StateWalking.LEFT_DOWN;
+                                break;
+                            case 2:
+                                currentStateWalking = StateWalking.CEILING_RIGHT;
+                                break;
+                            case 3:
+                                currentStateWalking = StateWalking.BACKSLASH_DOWN;
+                                break;
+                        }
                     }
                 } else {
-                    // We are walking UP along the RIGHT EDGE
-                    switch (option) {
-                        case 1: // go back
-                            currentStateWalking = StateWalking.RIGHT_DOWN;
-                            break;
-                        case 2:
-                            currentStateWalking = StateWalking.CEILING_LEFT;
-                            break;
-                        case 3:
-                            currentStateWalking = StateWalking.SLASH_DOWN;
-                            break;
+                    // We are walking UP along the RIGHT BORDER
+                    if (!isBorder) { // We must collide only with an edge
+                        switch (option) {
+                            case 1: // go back
+                                currentStateWalking = StateWalking.RIGHT_DOWN;
+                                break;
+                            case 2:
+                                currentStateWalking = StateWalking.CEILING_LEFT;
+                                break;
+                            case 3:
+                                currentStateWalking = StateWalking.SLASH_DOWN;
+                                break;
+                        }
                     }
                 }
             } else {
                 if (velY < 0.0f) {
                     if (x < screen.getGameCam().position.x) {
-                        // We are walking DOWN along the LEFT EDGE
-                        switch (option) {
-                            case 1: // go back
-                                currentStateWalking = StateWalking.LEFT_UP;
-                                break;
-                            case 2:
-                                currentStateWalking = StateWalking.FLOOR_RIGHT;
-                                break;
-                            case 3:
-                                currentStateWalking = StateWalking.SLASH_UP;
-                                break;
+                        // We are walking DOWN along the LEFT BORDER
+                        if (!isBorder) { // We must collide only with an edge
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.LEFT_UP;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.FLOOR_RIGHT;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.SLASH_UP;
+                                    break;
+                            }
                         }
                     } else {
-                        // We are walking DOWN along the RIGHT EDGE
-                        switch (option) {
-                            case 1: // go back
-                                currentStateWalking = StateWalking.RIGHT_UP;
-                                break;
-                            case 2:
-                                currentStateWalking = StateWalking.FLOOR_LEFT;
-                                break;
-                            case 3:
-                                currentStateWalking = StateWalking.BACKSLASH_UP;
-                                break;
+                        // We are walking DOWN along the RIGHT BORDER
+                        if (!isBorder) { // We must collide only with an edge
+                            switch (option) {
+                                case 1: // go back
+                                    currentStateWalking = StateWalking.RIGHT_UP;
+                                    break;
+                                case 2:
+                                    currentStateWalking = StateWalking.FLOOR_LEFT;
+                                    break;
+                                case 3:
+                                    currentStateWalking = StateWalking.BACKSLASH_UP;
+                                    break;
+                            }
                         }
                     }
                 } else {
@@ -649,57 +657,65 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         if (velX > 0.0f) {
                             if (y < screen.getGameCam().position.y) {
                                 // We are walking to the RIGHT along the FLOOR EDGE
-                                switch (option) {
-                                    case 1: // go back
-                                        currentStateWalking = StateWalking.FLOOR_LEFT;
-                                        break;
-                                    case 2:
-                                        currentStateWalking = StateWalking.RIGHT_UP;
-                                        break;
-                                    case 3:
-                                        currentStateWalking = StateWalking.BACKSLASH_UP;
-                                        break;
+                                if (isBorder) { // We must collide only with a border
+                                    switch (option) {
+                                        case 1: // go back
+                                            currentStateWalking = StateWalking.FLOOR_LEFT;
+                                            break;
+                                        case 2:
+                                            currentStateWalking = StateWalking.RIGHT_UP;
+                                            break;
+                                        case 3:
+                                            currentStateWalking = StateWalking.BACKSLASH_UP;
+                                            break;
+                                    }
                                 }
                             } else {
                                 // We are walking to the RIGHT along the CEILING EDGE
-                                switch (option) {
-                                    case 1: // go back
-                                        currentStateWalking = StateWalking.CEILING_LEFT;
-                                        break;
-                                    case 2:
-                                        currentStateWalking = StateWalking.RIGHT_DOWN;
-                                        break;
-                                    case 3:
-                                        currentStateWalking = StateWalking.SLASH_DOWN;
-                                        break;
+                                if (isBorder) { // We must collide only with a border
+                                    switch (option) {
+                                        case 1: // go back
+                                            currentStateWalking = StateWalking.CEILING_LEFT;
+                                            break;
+                                        case 2:
+                                            currentStateWalking = StateWalking.RIGHT_DOWN;
+                                            break;
+                                        case 3:
+                                            currentStateWalking = StateWalking.SLASH_DOWN;
+                                            break;
+                                    }
                                 }
                             }
                         } else if (velX < 0.0f) {
                             if (y < screen.getGameCam().position.y) {
                                 // We are walking to the LEFT along the FLOOR EDGE
-                                switch (option) {
-                                    case 1: // go back
-                                        currentStateWalking = StateWalking.FLOOR_RIGHT;
-                                        break;
-                                    case 2:
-                                        currentStateWalking = StateWalking.LEFT_UP;
-                                        break;
-                                    case 3:
-                                        currentStateWalking = StateWalking.SLASH_UP;
-                                        break;
+                                if (isBorder) { // We must collide only with a border
+                                    switch (option) {
+                                        case 1: // go back
+                                            currentStateWalking = StateWalking.FLOOR_RIGHT;
+                                            break;
+                                        case 2:
+                                            currentStateWalking = StateWalking.LEFT_UP;
+                                            break;
+                                        case 3:
+                                            currentStateWalking = StateWalking.SLASH_UP;
+                                            break;
+                                    }
                                 }
                             } else {
                                 // We are walking to the LEFT along the CEILING EDGE
-                                switch (option) {
-                                    case 1: // go back
-                                        currentStateWalking = StateWalking.CEILING_RIGHT;
-                                        break;
-                                    case 2:
-                                        currentStateWalking = StateWalking.LEFT_DOWN;
-                                        break;
-                                    case 3:
-                                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                                        break;
+                                if (isBorder) { // We must collide only with a border
+                                    switch (option) {
+                                        case 1: // go back
+                                            currentStateWalking = StateWalking.CEILING_RIGHT;
+                                            break;
+                                        case 2:
+                                            currentStateWalking = StateWalking.LEFT_DOWN;
+                                            break;
+                                        case 3:
+                                            currentStateWalking = StateWalking.BACKSLASH_DOWN;
+                                            break;
+                                    }
                                 }
                             }
                         }

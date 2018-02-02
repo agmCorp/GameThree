@@ -193,13 +193,13 @@ public class WorldContactListener implements ContactListener {
             // Final enemy - Borders
             case Constants.FINAL_ENEMY_BIT | Constants.BORDERS_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
-                ((FinalEnemy) fixC.getUserData()).onHitWall();
+                ((FinalEnemy) fixC.getUserData()).onHitWall(true);
                 break;
 
             // Final enemy - Edges
             case Constants.FINAL_ENEMY_BIT | Constants.EDGES_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
-                ((FinalEnemy) fixC.getUserData()).onHitWall();
+                ((FinalEnemy) fixC.getUserData()).onHitWall(false);
                 break;
 
             // Final enemy - Hero's weapon
