@@ -25,7 +25,11 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
 
+    private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleNormal;
+    Slider.SliderStyle sliderStyle;
     private Label shootingLabel;
+    private Label backLabel;
     private Texture sliderBackgroundTex;
     private Texture sliderKnobTex;
     private Slider sliderMusic;
@@ -42,20 +46,17 @@ public class SettingsScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         // Personal fonts
-        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label titleLabel = new Label("Preferences", labelStyleBig);
-        Label musicLabel = new Label("Music", labelStyleNormal);
-        Label soundLabel = new Label("sounds FX", labelStyleNormal);
-        Label backLabel = new Label("Back to menu", labelStyleNormal);
+        backLabel = new Label("Back to menu", labelStyleNormal);
 
         //Slider style
-        Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
+        sliderStyle = new Slider.SliderStyle();
         sliderStyle.background = new TextureRegionDrawable(new TextureRegion(sliderBackgroundTex));
         sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(sliderKnobTex));
 
@@ -75,13 +76,13 @@ public class SettingsScreen extends AbstractScreen {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-        table.add(titleLabel).center();
+        table.add(new Label("Preferences", labelStyleBig)).center();
         table.row();
-        table.add(musicLabel).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("Music", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderMusic).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(soundLabel).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("sounds FX", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderSound).padTop(Constants.PAD_TOP).center();
         table.row();

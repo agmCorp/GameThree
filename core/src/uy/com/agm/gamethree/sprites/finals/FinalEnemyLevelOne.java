@@ -224,6 +224,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 // Audio FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneIntro());
 
+                // HealthBar
+                screen.getHud().setHealthBar("SPIDER", damage);
+
+                // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
                 updateLogic(dt);
             }
@@ -564,8 +568,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
             weapon.onTarget();
             damage--;
+            screen.getHud().decreaseHealth();
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME);
             if (damage <= 0) {
+                screen.getHud().removeHealthBar();
                 currentStateFinalEnemy = StateFinalEnemy.INJURED;
             }
         } else {

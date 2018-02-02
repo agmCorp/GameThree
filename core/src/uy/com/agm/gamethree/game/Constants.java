@@ -52,8 +52,8 @@ public class Constants {
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
     public static final float SLIDER_STEP = 0.1f;
-    public static final int HEALTHBAR_WIDTH = 400;
-    public static final int HEALTHBAR_HEIGHT = 5;
+    public static final int HEALTHBAR_WIDTH = 200;
+    public static final int HEALTHBAR_HEIGHT = 10;
     public static final float HEALTHBAR_MIN = 0.0f;
     public static final float HEALTHBAR_MAX = 100.0f;
     public static final float HEALTHBAR_STEP = 0.01f;
@@ -153,7 +153,7 @@ public class Constants {
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
-    public static final int HERO_LIVES_START = 30;
+    public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
 
     // Edge (meters = pixels * resizeFactor / PPM)

@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -38,14 +37,13 @@ public class Hud extends AbstractScreen {
     private Label powerLabel;
     private Label powerValueLabel;
     private Label enemyNameLabel;
+    private Label marginBottom;
     private Label fpsValueLabel;
     private Label timeIsUpLabel;
     private Table upperTable;
     private Table timeIsUpTable;
     private Table bottomTable;
-
-    // Health progressBar
-    private HealthBar helthBar;
+    private HealthBar healthBar;
 
     public Hud(Integer level, Integer levelTimer, Integer lives) {
         super();
@@ -61,10 +59,8 @@ public class Hud extends AbstractScreen {
         timeCountPower = 0;
         powerTimerVisible = false;
         fps = 0;
-        helthBar = new HealthBar();
-
-        // Style
         labelStyle = new Label.LabelStyle();
+        healthBar = new HealthBar();
     }
 
     private void defineUpperTable() {
@@ -83,32 +79,24 @@ public class Hud extends AbstractScreen {
         // Personal fonts
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
-        // Define labels based on labelStyle
-        Label scoreLabel = new Label("SCORE", labelStyle);
-        scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
-
-        Label levelLabel = new Label("LEVEL", labelStyle);
-        levelValueLabel = new Label(String.format("%02d", level), labelStyle);
-
-        Label levelTimerLabel = new Label("TIME", labelStyle);
-        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), labelStyle);
-
-        Label livesLabel = new Label("LIVES", labelStyle);
-        livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
-
-        powerLabel = new Label("POWERNAME", labelStyle);
-        powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
-
         // Add labels to the table giving them all equal width with expandX
-        upperTable.add(scoreLabel).expandX();
-        upperTable.add(levelLabel).expandX();
-        upperTable.add(levelTimerLabel).expandX();
-        upperTable.add(livesLabel).expandX();
+        upperTable.add(new Label("SCORE", labelStyle)).expandX();
+        upperTable.add(new Label("LEVEL", labelStyle)).expandX();
+        upperTable.add(new Label("TIME", labelStyle)).expandX();
+        upperTable.add(new Label("LIVES", labelStyle)).expandX();
 
         // Add a second row to our table
         upperTable.row();
 
-        // Values
+        // Define label values based on labelStyle
+        scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
+        levelValueLabel = new Label(String.format("%02d", level), labelStyle);
+        levelTimerValueLabel = new Label(String.format("%03d", levelTimer), labelStyle);
+        livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
+        powerLabel = new Label("POWERNAME", labelStyle);
+        powerValueLabel = new Label(String.format("%03d", powerTimer), labelStyle);
+
+        // Add values
         upperTable.add(scoreValueLabel).expandX();
         upperTable.add(levelValueLabel).expandX();
         upperTable.add(levelTimerValueLabel).expandX();
@@ -134,20 +122,26 @@ public class Hud extends AbstractScreen {
         // Personal fonts
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
-        // Define a label based on labelStyle
+        // Define labels based on labelStyle
         enemyNameLabel = new Label("ENEMY_NAME", labelStyle);
-        Label fpsLabel = new Label("FPS", labelStyle);
-        fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
+        marginBottom = new Label("", labelStyle);
 
+        // Debug
         if (Constants.DEBUG_MODE) {
-            // Add previous label to the table giving it equal width with expandX
-            bottomTable.add(fpsLabel).expandX();
+            // Add a label to the table giving it equal width with expandX
+            bottomTable.add(new Label("FPS", labelStyle)).expandX();
 
             // Add a second row to our table
             bottomTable.row();
 
-            // Value
+            // Define label value based on labelStyle
+            fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
+
+            // Add value
             bottomTable.add(fpsValueLabel).expandX();
+
+            // Add new row to insert more cells
+            bottomTable.row();
         }
 
         // Add table to the stage
@@ -167,7 +161,7 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         timeIsUpTable.setFillParent(true);
 
-        // Define a label based on labelStyle
+        // Personal fonts
         labelStyle.font = Assets.getInstance().getFonts().getDefaultBig();
 
         timeIsUpLabel = new Label("TIME IS UP!!", labelStyle);
@@ -246,19 +240,23 @@ public class Hud extends AbstractScreen {
 
     public void setHealthBar(String enemyName, int energy) {
         enemyNameLabel.setText(enemyName);
-        helthBar.setInitialEnergy(energy);
-        helthBar.setFull();
+        healthBar.setInitialEnergy(energy);
+
+        bottomTable.add(enemyNameLabel).expandX();
         bottomTable.row();
-        bottomTable.add(helthBar).padTop(Constants.PAD_TOP).center();
+        bottomTable.add(healthBar).expandX();
+        bottomTable.row();
+        bottomTable.add(marginBottom).expandX(); // WA: bottomTable.add(healthBar).padBottom(..) doesn't disappear after removing healthBar
     }
 
     public void removeHealthBar() {
         bottomTable.removeActor(enemyNameLabel);
-        bottomTable.removeActor(helthBar);
+        bottomTable.removeActor(healthBar);
+        bottomTable.removeActor(marginBottom);
     }
 
     public void decreaseHealth() {
-        helthBar.decrease();
+        healthBar.decrease();
     }
 
     public void setTimeIsUpLabel() {
@@ -271,10 +269,6 @@ public class Hud extends AbstractScreen {
             upperTable.removeActor(powerValueLabel);
             powerTimerVisible = false;
         }
-    }
-
-    public void removeMessageLabel() {
-        timeIsUpTable.removeActor(timeIsUpLabel);
     }
 
     @Override
@@ -305,5 +299,11 @@ public class Hud extends AbstractScreen {
 
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public void draw () {
+        act();
+        super.draw();
     }
 }

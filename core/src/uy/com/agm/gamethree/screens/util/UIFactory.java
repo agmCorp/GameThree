@@ -1,11 +1,7 @@
 package uy.com.agm.gamethree.screens.util;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -16,13 +12,6 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class UIFactory {
     private static final String TAG = UIFactory.class.getName();
-
-    public static ImageButton createButton(Texture texture) {
-        return
-                new ImageButton(
-                        new TextureRegionDrawable(
-                                new TextureRegion(texture) ) );
-    }
 
     public static InputListener createListener(final ScreenEnum dstScreen, final Object... params) {
         return

@@ -15,6 +15,9 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 public class GameOverScreen extends AbstractScreen {
     private static final String TAG = GameOverScreen.class.getName();
 
+    private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleNormal;
+
     public GameOverScreen() {
         super();
     }
@@ -22,21 +25,20 @@ public class GameOverScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         // Personal fonts
-        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label titleLabel = new Label("GAME OVER", labelStyleBig);
         Label backLabel = new Label("Back to menu", labelStyleNormal);
 
         // Set table structure
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-        table.add(titleLabel).center();
+        table.add(new Label("GAME OVER", labelStyleBig)).center();
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 

@@ -16,6 +16,12 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
+
+    private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleNormal;
+    private Label playAgainLabel;
+    private Label nextLevelLabel;
+    private Label backLabel;
     private int currentLevel;
     private int finalScore;
     private int nextLevel;
@@ -32,29 +38,26 @@ public class LevelCompletedScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         // Personal fonts
-        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label titleLabel1 = new Label("Level " + this.currentLevel, labelStyleBig);
-        Label titleLabel2 = new Label("Completed!!", labelStyleBig);
-        Label scoreLabel = new Label("Score: " + finalScore, labelStyleNormal);
-        Label playAgainLabel = new Label("Touch to play again", labelStyleNormal);
-        Label nextLevelLabel = new Label("Next level", labelStyleNormal);
-        Label backLabel = new Label("Back to menu", labelStyleNormal);
+        playAgainLabel = new Label("Touch to play again", labelStyleNormal);
+        nextLevelLabel = new Label("Next level", labelStyleNormal);
+        backLabel = new Label("Back to menu", labelStyleNormal);
 
         // Set table structure
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-        table.add(titleLabel1).center();
+        table.add(new Label("Level " + this.currentLevel, labelStyleBig)).center();
         table.row();
-        table.add(titleLabel2).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("Completed!!", labelStyleBig)).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(scoreLabel).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("Score: " + finalScore, labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(playAgainLabel).padTop(Constants.PAD_TOP).center();
         table.row();

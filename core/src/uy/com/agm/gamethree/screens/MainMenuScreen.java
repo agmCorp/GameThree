@@ -11,7 +11,6 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.ui.HealthBar;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -19,6 +18,9 @@ import uy.com.agm.gamethree.ui.HealthBar;
 
 public class MainMenuScreen extends AbstractScreen {
     private static final String TAG = MainMenuScreen.class.getName();
+
+    private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleNormal;
 
     public MainMenuScreen() {
         super();
@@ -29,23 +31,22 @@ public class MainMenuScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         // Personal fonts
-        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
-        Label titleLabel = new Label("Menu", labelStyleBig);
         Label startGameLabel = new Label("Start game", labelStyleNormal);
         Label settingsLabel = new Label("Settings", labelStyleNormal);
         Label exitGameLabel = new Label("Exit game", labelStyleNormal);
 
-        table.add(titleLabel).center();
+        // Set table structure
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
+        table.add(new Label("Menu", labelStyleBig)).center();
         table.row();
         table.add(startGameLabel).padTop(Constants.PAD_TOP).center();
         table.row();

@@ -1,12 +1,11 @@
 package uy.com.agm.gamethree.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -17,6 +16,8 @@ import uy.com.agm.gamethree.game.Constants;
  */
 
 public class HealthBar extends ProgressBar {
+    private static final String TAG = HealthBar.class.getName();
+
     private int currentEnergy;
     private int fullEnergy;
 
@@ -28,7 +29,7 @@ public class HealthBar extends ProgressBar {
         getStyle().knobBefore = getColoredDrawable(Constants.HEALTHBAR_WIDTH, Constants.HEALTHBAR_HEIGHT, Color.GREEN);
 
         setHeight(Constants.HEALTHBAR_HEIGHT);
-        setAnimateDuration(Constants.HEALTHBAR_ANIMATION_DURATION);
+        setFull();
     }
 
     public void setInitialEnergy(int energy) {
@@ -46,12 +47,17 @@ public class HealthBar extends ProgressBar {
         return drawable;
     }
 
-    // todo DISPOSE DE LAS TEXTURAS!!! y definir constantes
+    private void setFull() {
+        setValue(Constants.HEALTHBAR_MAX);
+        setAnimateDuration(Constants.HEALTHBAR_ANIMATION_DURATION);
+    }
 
     public void decrease() {
         currentEnergy--;
+        Gdx.app.debug(TAG, "CURRENTENERGY " + currentEnergy);
         if (currentEnergy > 0) {
             setValue(getValue() - Constants.HEALTHBAR_MAX / fullEnergy);
+            Gdx.app.debug(TAG, "set " + (getValue() - Constants.HEALTHBAR_MAX / fullEnergy));
         } else {
             setValue(0);
         }
@@ -61,9 +67,5 @@ public class HealthBar extends ProgressBar {
     public float getPrefWidth() {
         // WA: Impossible to set 'width' on an horizontal ProgressBar using size, resize or setWidth
         return (float) Constants.HEALTHBAR_WIDTH;
-    }
-
-    public void setFull() {
-        setValue(Constants.HEALTHBAR_MAX);
     }
 }
