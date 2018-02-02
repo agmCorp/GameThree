@@ -264,6 +264,18 @@ public class Hud extends AbstractScreen {
     }
 
     private void removePowerLabel() {
+        /*
+        * todo
+        * hud:
+Para setear las alturas hago upperTable.setDefaults().width(30);
+Para ocultar y mostrar:
+
+para remover:
+ell c = upperTable.getCell(powerLabel);
+upperTable.removeActor(powerLabel);
+
+y luego con c.setActor(powerLabel) lo vuelvo a meter.
+        * */
         if (powerTimerVisible) {
             upperTable.removeActor(powerLabel);
             upperTable.removeActor(powerValueLabel);
