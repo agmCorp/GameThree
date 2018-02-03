@@ -2,6 +2,15 @@ IDEAS
 -----
 - programar acelerómetro? toggle: acelerometro, manual
 - Cuando explota un enemigo puedo hacer aparecer 2 enemigos
+- nuevo item vidas
+- enemigo que hay que dispararle mucho para matarlo.
+- se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos
+- el enemigo final puede estar acompanado de otros simples.
+- enemigo final que dispare como un abanico de balas, asi como mi poder fire.
+- enemigo final que se mueve en forma de 8 horizontal y dispara abanico de balas, queda dificil de matar y es sencillo.
+- enemigo minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
+centro de la pantalla y se van por arriba.
+- minuto 33.43 puentes
 
 ALCANCE
 -------
@@ -35,6 +44,8 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
+- el poder fuego no deberia disparar, ver que hago con las powerboxes y tengo los enemigos negros que no los puedo matar.
+Capaz que no es buena idea.
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
