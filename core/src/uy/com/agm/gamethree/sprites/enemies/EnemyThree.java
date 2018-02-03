@@ -127,7 +127,7 @@ public class EnemyThree extends Enemy {
         stateTimer = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getSquish());
 
         // Set score
         screen.getHud().addScore(Constants.ENEMYTHREE_SCORE);

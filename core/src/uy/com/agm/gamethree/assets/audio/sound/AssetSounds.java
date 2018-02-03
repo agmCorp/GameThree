@@ -43,6 +43,7 @@ public class AssetSounds {
     private Sound boing;
     private Sound click;
     private Sound aplause;
+    private Sound squish;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Constants.FX_FILE_BUMP, Sound.class);
@@ -76,6 +77,7 @@ public class AssetSounds {
         boing = am.get(Constants.FX_FILE_BOUNCE, Sound.class);
         click = am.get(Constants.FX_FILE_CLICK, Sound.class);
         aplause = am.get(Constants.FX_FILE_APLAUSE, Sound.class);
+        squish = am.get(Constants.FX_FILE_SQUISH, Sound.class);
     }
 
     public Sound getBump() {
@@ -200,5 +202,9 @@ public class AssetSounds {
 
     public Sound getAplause() {
         return aplause;
+    }
+
+    public Sound getSquish() {
+        return squish;
     }
 }
