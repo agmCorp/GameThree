@@ -435,14 +435,20 @@ https://stackoverflow.com/questions/21576181/pause-resume-a-simple-libgdx-game-f
 
 antes de dibujar el hud:
 /**/
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
-        game.getShapeRenderer().setColor(new Color(0, 0, 0, 0.5f));
-        game.getShapeRenderer().rect(0, 0, gameViewPort.getWorldWidth(), gameViewPort.getWorldHeight() * 10);
-        game.getShapeRenderer().end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
+        // Set our batch to now draw what the Hud camera sees.
+        game.getBatch().setProjectionMatrix(hud.getCamera().combined);
 
+        if (hud.isMessageVisible()) {
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined); ***** optimizar para no hacerlo 2 veces si hay debug
+            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
+            game.getShapeRenderer().setColor(0, 0, 0, 0.5f);
+            game.getShapeRenderer().rect(0, 0, hud.getCamera().viewportWidth, hud.getCamera().viewportHeight);
+            game.getShapeRenderer().end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
+        hud.draw();
 /**/
 
 
