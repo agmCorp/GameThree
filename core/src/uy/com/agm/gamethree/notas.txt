@@ -44,6 +44,8 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
+https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
+https://rskupnik.github.io/libgdx-ui-overview
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
