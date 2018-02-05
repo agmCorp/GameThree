@@ -44,14 +44,12 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-- el poder fuego no deberia disparar, ver que hago con las powerboxes y tengo los enemigos negros que no los puedo matar.
-Capaz que no es buena idea.
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
 Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el nivel y si no tengo ninguna sale una pantalla diciendo
 que no complete el nivel (play again, back to main menu). Sencillo.
-- pantalla superpuesta para pausa con opciones y para help inicial de cada nivel.
+- pantalla superpuesta para pausa con opciones y para help dinamico de cada momento que quiera.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 
 PENDIENTES
