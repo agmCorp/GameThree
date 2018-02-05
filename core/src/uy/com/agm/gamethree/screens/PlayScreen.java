@@ -127,7 +127,7 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create our game HUD for scores/timers/level info
-        hud = new Hud(level, LevelFactory.getLevelTimer(this.level), player.getLives());
+        hud = new Hud(this, level, LevelFactory.getLevelTimer(this.level), player.getLives());
         hud.buildStage();
 
         // Stop menu music and start playing level music
@@ -157,6 +157,7 @@ public class PlayScreen extends AbstractScreen {
          * */
 
         InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(hud); // Hud also implements InputProcessor and receives events
         multiplexer.addProcessor(new GestureDetector(gc));
         multiplexer.addProcessor(gc);
         return multiplexer;
