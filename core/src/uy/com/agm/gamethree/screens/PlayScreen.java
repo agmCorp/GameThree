@@ -317,8 +317,7 @@ public class PlayScreen extends AbstractScreen {
 
         game.getBatch().end();
 
-        // Set our batch to now draw what the Hud camera sees.
-        game.getBatch().setProjectionMatrix(hud.getCamera().combined);
+        // Draw hud
         hud.draw();
 
         // Debug
