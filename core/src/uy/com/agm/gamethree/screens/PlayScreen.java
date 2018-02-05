@@ -39,6 +39,12 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
+    public enum PlayScreenState
+    {
+        PAUSED, RUNNING
+    }
+    private PlayScreenState playScreenState;
+
     // Reference to our Game, used to set Screens
     private GameThree game;
 
@@ -130,6 +136,9 @@ public class PlayScreen extends AbstractScreen {
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
+
+        // Game running
+        playScreenState = PlayScreenState.RUNNING;
     }
 
     private InputProcessor getInputProcessor(GameController gc) {
@@ -446,15 +455,7 @@ public class PlayScreen extends AbstractScreen {
         AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
     }
 
-    @Override
-    public void render(float delta) {
-        // Separate our update logic from render
-        update(delta);
-
-        // Render logic
-        render();
-
-        // Analyze game results
+    private void gameResults(float delta) {
         if (player.isTimeToPlayAgain()) {
             player.playAgain();
             startEdges();
@@ -467,6 +468,28 @@ public class PlayScreen extends AbstractScreen {
         if (isLevelCompleted(delta)) {
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
+    }
+
+    public PlayScreenState getGameState(){
+        return playScreenState;
+    }
+
+    public void setGameState(PlayScreenState playScreenState){
+        this.playScreenState = playScreenState;
+    }
+
+    @Override
+    public void render(float delta) {
+        // Separate our update logic from render
+        if (playScreenState == PlayScreenState.RUNNING) {
+            update(delta);
+        }
+
+        // Render logic
+        render();
+
+        // Analyze game results
+        gameResults(delta);
     }
 
     @Override
@@ -486,11 +509,12 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-
+        playScreenState = PlayScreenState.PAUSED;
     }
 
     @Override
     public void resume() {
+        playScreenState = PlayScreenState.RUNNING;
     }
 
     @Override
