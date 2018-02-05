@@ -46,6 +46,8 @@ PROXIMOS PASOS
 --------------
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 https://rskupnik.github.io/libgdx-ui-overview
+http://pimentoso.blogspot.com.uy/2013/05/libgdx-scene2d-complex-ui-elements.html
+
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
