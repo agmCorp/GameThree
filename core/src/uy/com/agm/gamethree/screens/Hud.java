@@ -1,12 +1,16 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.ui.HealthBar;
 
@@ -16,6 +20,8 @@ import uy.com.agm.gamethree.ui.HealthBar;
 
 public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
+
+    private PlayScreen screen;
 
     // Hero score/time Tracking Variables
     private int score;
@@ -67,8 +73,9 @@ public class Hud extends AbstractScreen {
     private Table centerTable;
     private Table bottomTable;
 
-    public Hud(Integer level, Integer levelTimer, Integer lives) {
+    public Hud(PlayScreen screen, Integer level, Integer levelTimer, Integer lives) {
         super();
+        this.screen = screen;
 
         // Define tracking variables
         score = 0;
