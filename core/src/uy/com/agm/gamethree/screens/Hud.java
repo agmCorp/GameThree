@@ -289,13 +289,15 @@ public class Hud extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (screen.getGameState() == PlayScreen.GameState.PAUSED) {
+                            pauseContainer.width(Constants.HUD_PAUSE_CONTAINER_WIDTH);
                             pauseLabel.setText("||");
                             removeMessage();
-                            screen.setGameState(PlayScreen.GameState.RUNNING);
+                            screen.setGameStateRunning();
                         } else {
-                            screen.setGameState(PlayScreen.GameState.PAUSED);
+                            pauseContainer.width(Constants.HUD_RESUME_CONTAINER_WIDTH);
                             pauseLabel.setText("RESUME");
                             setMessage("PAUSED");
+                            screen.setGameStatePaused();
                         }
                         return true;
                     }

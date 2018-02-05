@@ -28,6 +28,21 @@ public class AudioManager {
         return instance;
     }
 
+
+    public void pauseSound() {
+        if (playingSound != null) {
+            playingSound.pause();
+        }
+    }
+
+    public void resumeSound() {
+        if (playingSound != null) {
+            if (GameSettings.getInstance().isSound()) {
+                playingSound.resume();
+            }
+        }
+    }
+
     public void stopSound() {
         if (playingSound != null) {
             playingSound.stop();

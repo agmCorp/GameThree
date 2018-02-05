@@ -486,8 +486,16 @@ public class PlayScreen extends AbstractScreen {
         return gameState;
     }
 
-    public void setGameState(GameState gameState){
-        this.gameState = gameState;
+    public void setGameStatePaused(){
+        this.gameState = GameState.PAUSED;
+        AudioManager.getInstance().pauseMusic();
+        AudioManager.getInstance().pauseSound();
+    }
+
+    public void setGameStateRunning(){
+        this.gameState = GameState.RUNNING;
+        AudioManager.getInstance().resumeMusic();
+        AudioManager.getInstance().resumeSound();
     }
 
     @Override
