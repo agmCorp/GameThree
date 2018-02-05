@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -69,9 +70,12 @@ public class Hud extends AbstractScreen {
     private Label messageLabel;
     private Cell cellMessageLabel;
 
+    private Label pauseLabel;
+
     private Table upperTable;
     private Table centerTable;
     private Table bottomTable;
+    private Container pauseContainer;
 
     public Hud(PlayScreen screen, Integer level, Integer levelTimer, Integer lives) {
         super();
@@ -257,11 +261,56 @@ public class Hud extends AbstractScreen {
         cellMessageLabel = centerTable.getCell(messageLabel);
     }
 
+    private void definePauseTable() {
+        // Define a new container used to display a pause button
+        pauseContainer = new Container();
+
+        // Debug lines
+        pauseContainer.setDebug(Constants.DEBUG_MODE);
+
+        // Bottom-Left-Align container
+        pauseContainer.bottom().left().width(Constants.HUD_PAUSE_CONTAINER_WIDTH).padLeft(Constants.HUD_PAUSE_CONTAINER_PADLEFT);
+
+        // Make the container fill the entire stage
+        pauseContainer.setFillParent(true);
+
+        // Personal fonts
+        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
+
+        // Define a label based on labelStyle
+        pauseLabel = new Label("||", labelStyle);
+
+        // Add values
+        pauseContainer.setActor(pauseLabel);
+
+        // Events
+        pauseContainer.addListener(
+                new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        if (screen.getGameState() == PlayScreen.GameState.PAUSED) {
+                            pauseLabel.setText("||");
+                            removeMessage();
+                            screen.setGameState(PlayScreen.GameState.RUNNING);
+                        } else {
+                            screen.setGameState(PlayScreen.GameState.PAUSED);
+                            pauseLabel.setText("RESUME");
+                            setMessage("PAUSED");
+                        }
+                        return true;
+                    }
+                });
+
+        // Add our container to the stage
+        addActor(pauseContainer);
+    }
+
     @Override
     public void buildStage() {
         defineUpperTable();
         defineBottomTable();
         defineCenterTable();
+        definePauseTable();
         initTables();
     }
 

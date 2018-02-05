@@ -76,13 +76,13 @@ public class SettingsScreen extends AbstractScreen {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-        table.add(new Label("Preferences", labelStyleBig)).center();
+        table.add(new Label("Settings", labelStyleBig)).center();
         table.row();
         table.add(new Label("Music", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderMusic).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(new Label("sounds FX", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("Sound effects", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderSound).padTop(Constants.PAD_TOP).center();
         table.row();

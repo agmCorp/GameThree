@@ -426,28 +426,4 @@ Para ir a pelear directo con el enemigo final poner en playscreen:
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
         player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
 
-
-PAUSA
-https://stackoverflow.com/questions/21576181/pause-resume-a-simple-libgdx-game-for-android
-
-
-antes de dibujar el hud:
-/**/
-        // Set our batch to now draw what the Hud camera sees.
-        game.getBatch().setProjectionMatrix(hud.getCamera().combined);
-
-        if (hud.isMessageVisible()) {
-            Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined); ***** optimizar para no hacerlo 2 veces si hay debug
-            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
-            game.getShapeRenderer().setColor(0, 0, 0, 0.5f);
-            game.getShapeRenderer().rect(0, 0, hud.getCamera().viewportWidth, hud.getCamera().viewportHeight);
-            game.getShapeRenderer().end();
-            Gdx.gl.glDisable(GL20.GL_BLEND);
-        }
-        hud.draw();
-/**/
-
-
 02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6

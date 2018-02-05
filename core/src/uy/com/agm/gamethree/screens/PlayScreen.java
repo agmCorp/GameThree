@@ -327,6 +327,17 @@ public class PlayScreen extends AbstractScreen {
 
         game.getBatch().end();
 
+        if (gameState == GameState.PAUSED) {
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined);
+            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
+            game.getShapeRenderer().setColor(0, 0, 0, 0.5f);
+            game.getShapeRenderer().rect(0, 0, hud.getCamera().viewportWidth, hud.getCamera().viewportHeight);
+            game.getShapeRenderer().end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
+
         // Draw hud
         hud.draw();
 

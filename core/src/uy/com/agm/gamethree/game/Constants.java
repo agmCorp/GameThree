@@ -48,6 +48,8 @@ public class Constants {
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
     public static final float HUD_CELL_HEIGHT = 20.0f;
+    public static final float HUD_PAUSE_CONTAINER_PADLEFT = 20.0f;
+    public static final float HUD_PAUSE_CONTAINER_WIDTH = 130.0f;
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
