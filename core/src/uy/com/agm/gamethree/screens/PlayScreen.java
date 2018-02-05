@@ -39,11 +39,11 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
-    public enum PlayScreenState
+    public enum GameState
     {
         PAUSED, RUNNING
     }
-    private PlayScreenState playScreenState;
+    private GameState gameState;
 
     // Reference to our Game, used to set Screens
     private GameThree game;
@@ -138,7 +138,7 @@ public class PlayScreen extends AbstractScreen {
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
 
         // Game running
-        playScreenState = PlayScreenState.RUNNING;
+        gameState = GameState.RUNNING;
     }
 
     private InputProcessor getInputProcessor(GameController gc) {
@@ -470,18 +470,18 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    public PlayScreenState getGameState(){
-        return playScreenState;
+    public GameState getGameState(){
+        return gameState;
     }
 
-    public void setGameState(PlayScreenState playScreenState){
-        this.playScreenState = playScreenState;
+    public void setGameState(GameState gameState){
+        this.gameState = gameState;
     }
 
     @Override
     public void render(float delta) {
         // Separate our update logic from render
-        if (playScreenState == PlayScreenState.RUNNING) {
+        if (gameState == GameState.RUNNING) {
             update(delta);
         }
 
@@ -509,12 +509,12 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        playScreenState = PlayScreenState.PAUSED;
+        gameState = GameState.PAUSED;
     }
 
     @Override
     public void resume() {
-        playScreenState = PlayScreenState.RUNNING;
+        gameState = GameState.RUNNING;
     }
 
     @Override
