@@ -51,6 +51,7 @@ Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el
 que no complete el nivel (play again, back to main menu). Sencillo.
 - pantalla superpuesta para pausa con opciones (RESUME, QUIT) y para help dinamico de cada momento que quiera.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
+- HACER UNA SKIN
 
 PENDIENTES
 ----------
