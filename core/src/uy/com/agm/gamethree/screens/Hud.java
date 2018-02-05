@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
-import uy.com.agm.gamethree.game.GameThree;
-import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.ui.HealthBar;
 

@@ -529,12 +529,12 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        gameState = GameState.PAUSED;
+        setGameStatePaused();
     }
 
     @Override
     public void resume() {
-        gameState = GameState.RUNNING;
+
     }
 
     @Override
