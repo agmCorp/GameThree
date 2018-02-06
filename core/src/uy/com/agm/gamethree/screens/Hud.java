@@ -268,7 +268,7 @@ public class Hud extends AbstractScreen {
         healthBarTable.row();
 
         // Add health bar
-        healthBarTable.add(healthBar).expandX();
+        healthBarTable.add(healthBar).expandX().padBottom(Constants.HUD_HEALTHBAR_PADBOTTOM);
 
         // Initially hidden
         healthBarTable.setVisible(false);
