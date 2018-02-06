@@ -154,7 +154,7 @@ public class PowerFour extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.setPowerHud("TOUGH MODE", Constants.TIMER_POWERFOUR);
+            hud.showPowerInfo("TOUGH MODE", Constants.TIMER_POWERFOUR);
 
             // Set score
             hud.addScore(Constants.POWERFOUR_SCORE);

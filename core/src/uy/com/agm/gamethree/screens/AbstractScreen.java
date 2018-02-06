@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -38,6 +40,9 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
         // Back button Android
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            // Audio FX
+            AudioManager.getInstance().stopSound();
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
     }

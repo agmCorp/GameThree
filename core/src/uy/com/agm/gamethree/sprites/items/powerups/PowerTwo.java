@@ -154,7 +154,7 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.setPowerHud("SHIELD", Constants.TIMER_POWERTWO);
+            hud.showPowerInfo("SHIELD", Constants.TIMER_POWERTWO);
 
             // Set score
             hud.addScore(Constants.POWERTWO_SCORE);

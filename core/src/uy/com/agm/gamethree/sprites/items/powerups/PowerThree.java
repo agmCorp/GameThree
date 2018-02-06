@@ -158,7 +158,7 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.setPowerHud("FIRE MODE", Constants.TIMER_POWERTHREE);
+            hud.showPowerInfo("FIRE MODE", Constants.TIMER_POWERTHREE);
 
             // Set score
             hud.addScore(Constants.POWERTHREE_SCORE);

@@ -445,10 +445,10 @@ public class Hero extends Sprite {
     }
 
     private void checkLevelTimeUp() {
-        if (screen.getHud().isLevelTimeIsUp() && !isHeroDead()) {
+        if (screen.getHud().isTimeIsUp() && !isHeroDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getTimeIsUp());
-            screen.getHud().setTimeIsUpMessage();
+            screen.getHud().showTimeIsUpMessage();
             lives = 1; // Force game over
             onDead();
         }
