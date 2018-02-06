@@ -39,11 +39,11 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
-    public enum GameState
+    public enum PlayScreenState
     {
         PAUSED, RUNNING
     }
-    private GameState gameState;
+    private PlayScreenState playScreenState;
 
     // Reference to our Game, used to set Screens
     private GameThree game;
@@ -137,8 +137,8 @@ public class PlayScreen extends AbstractScreen {
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
 
-        // Game running
-        gameState = GameState.RUNNING;
+        // PlayScreen running
+        playScreenState = PlayScreenState.RUNNING;
     }
 
     private InputProcessor getInputProcessor(GameController gc) {
@@ -327,7 +327,7 @@ public class PlayScreen extends AbstractScreen {
 
         game.getBatch().end();
 
-        if (gameState == GameState.PAUSED) {
+        if (playScreenState == PlayScreenState.PAUSED) {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined);
@@ -482,26 +482,28 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    public GameState getGameState(){
-        return gameState;
+    public PlayScreenState getPlayScreenState(){
+        return playScreenState;
     }
 
-    public void setGameStatePaused(){
-        this.gameState = GameState.PAUSED;
+    public void setPlayScreenStatePaused(){
+        this.playScreenState = PlayScreenState.PAUSED;
         AudioManager.getInstance().pauseMusic();
         AudioManager.getInstance().pauseSound();
     }
 
-    public void setGameStateRunning(){
-        this.gameState = GameState.RUNNING;
-        AudioManager.getInstance().resumeMusic();
+    public void setPlayScreenStateRunning(){
+        this.playScreenState = PlayScreenState.RUNNING;
+        if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
+            AudioManager.getInstance().resumeMusic();
+        }
         AudioManager.getInstance().resumeSound();
     }
 
     @Override
     public void render(float delta) {
         // Separate our update logic from render
-        if (gameState == GameState.RUNNING) {
+        if (playScreenState == PlayScreenState.RUNNING) {
             update(delta);
         }
 
@@ -514,7 +516,6 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-
     }
 
     @Override
@@ -529,17 +530,15 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        setGameStatePaused();
+        hud.setGameStatePaused();
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

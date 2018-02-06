@@ -286,23 +286,35 @@ public class Hud extends AbstractScreen {
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        if (screen.getGameState() == PlayScreen.GameState.PAUSED) {
-                            pauseContainer.width(Constants.HUD_PAUSE_CONTAINER_WIDTH);
-                            pauseLabel.setText("||");
-                            removeMessage();
-                            screen.setGameStateRunning();
-                        } else {
-                            pauseContainer.width(Constants.HUD_RESUME_CONTAINER_WIDTH);
-                            pauseLabel.setText("RESUME");
-                            setMessage("PAUSED");
-                            screen.setGameStatePaused();
-                        }
+                        toggleGameState();
                         return true;
                     }
                 });
 
         // Add our container to the stage
         addActor(pauseContainer);
+    }
+
+    public void toggleGameState() {
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.PAUSED) {
+            setGameStateRunning();
+        } else {
+            setGameStatePaused();
+        }
+    }
+
+    public void setGameStatePaused() {
+        pauseContainer.width(Constants.HUD_RESUME_CONTAINER_WIDTH);
+        pauseLabel.setText("RESUME");
+        setMessage("PAUSED");
+        screen.setPlayScreenStatePaused();
+    }
+
+    public void setGameStateRunning() {
+        pauseContainer.width(Constants.HUD_PAUSE_CONTAINER_WIDTH);
+        pauseLabel.setText("||");
+        removeMessage();
+        screen.setPlayScreenStateRunning();
     }
 
     @Override
