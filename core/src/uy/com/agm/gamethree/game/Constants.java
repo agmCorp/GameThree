@@ -47,7 +47,7 @@ public class Constants {
 
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
-    public static final float HUD_BUTTONS_PAD = 30.0f;
+    public static final float HUD_BUTTONS_PAD = 20.0f;
     public static final float HUD_CELL_HEIGHT = 20.0f;
     public static final float HUD_PAUSE_WIDTH = 100.0f;
     public static final float HUD_HEALTHBAR_PADBOTTOM = 30.0f;
