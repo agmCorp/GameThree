@@ -115,6 +115,8 @@ DUDAS
     No me quedo un acceso directo, sino que ejecuto el exe que baje
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2.
+- Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
+el resto del sonido. No lo supe arreglar...
 
 VIDEO
 -----
