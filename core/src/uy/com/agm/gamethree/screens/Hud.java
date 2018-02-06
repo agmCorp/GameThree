@@ -204,16 +204,19 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         bottomTable.setFillParent(true);
 
-        // Add FPS info
-        defineFpsTable();
-        bottomTable.add(fpsTable).expandX();
-
-        // Add a second row to the table
-        bottomTable.row();
-
         // Add health bar info
         defineHealthBarTable();
         bottomTable.add(healthBarTable).expandX();
+
+        // FPS info
+        defineFpsTable();
+
+        if (Constants.DEBUG_MODE) {
+            // Add a second row to the table
+            bottomTable.row();
+            // Add FPS info
+            bottomTable.add(fpsTable).expandX();
+        }
 
         // Add the table to the stage
         addActor(bottomTable);

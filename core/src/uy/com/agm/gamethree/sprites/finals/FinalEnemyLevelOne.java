@@ -225,7 +225,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneIntro());
 
                 // HealthBar
-                screen.getHud().showHealthBarInfo("ASTROBITSY", damage);
+                screen.getHud().showHealthBarInfo("Astrobitsy", damage);
 
                 // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
