@@ -66,7 +66,7 @@ public class Constants {
     // ---- Assets ----
 
     // Location of description file for texture atlas
-    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.pack";
+    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.atlas";
 
     // Location of description file for Bitmap fonts
     public static final String FONT_FILE = "fonts/fonts.fnt";
