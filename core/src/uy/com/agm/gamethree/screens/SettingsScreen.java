@@ -29,7 +29,7 @@ public class SettingsScreen extends AbstractScreen {
 
     private Label.LabelStyle labelStyleBig;
     private Label.LabelStyle labelStyleNormal;
-    Slider.SliderStyle sliderStyle;
+    private Slider.SliderStyle sliderStyle;
     private Label shootingLabel;
     private Label backLabel;
     private Texture sliderBackgroundTex;
@@ -99,7 +99,18 @@ public class SettingsScreen extends AbstractScreen {
         sliderMusic.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                saveSliderMusic();
+                changeSliderMusic();
+            }
+        });
+
+        sliderMusic.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                save();
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
             }
         });
 
@@ -107,8 +118,19 @@ public class SettingsScreen extends AbstractScreen {
         sliderSound.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                saveSliderSound();
+                changeSliderSound();
                 playSampleSound();
+            }
+        });
+
+        sliderSound.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                save();
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
             }
         });
 
@@ -118,7 +140,8 @@ public class SettingsScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 // Audio FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
-                saveShooting();
+                changeShooting();
+                save();
                 return true;
             }
         });
@@ -148,24 +171,21 @@ public class SettingsScreen extends AbstractScreen {
         }
     }
 
-    private void saveSliderMusic() {
+    private void changeSliderMusic() {
         prefs.setVolMusic(sliderMusic.getValue());
         prefs.setMusic((sliderMusic.getValue() <= 0.0f)? false : true);
-        prefs.save();
         AudioManager.getInstance().onSettingsUpdated();
     }
 
-    private void saveSliderSound() {
+    private void changeSliderSound() {
         prefs.setVolSound(sliderSound.getValue());
         prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
-        prefs.save();
         AudioManager.getInstance().onSettingsUpdated();
     }
 
-    private void saveShooting() {
+    private void changeShooting() {
         prefs.setManualShooting(!prefs.isManualShooting());
         setTextLabelShooting();
-        prefs.save();
     }
 
     private void setTextLabelShooting() {
@@ -174,6 +194,10 @@ public class SettingsScreen extends AbstractScreen {
         } else {
             shootingLabel.setText("Automatic shooting");
         }
+    }
+
+    private void save() {
+        prefs.save();
     }
 
     @Override

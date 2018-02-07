@@ -44,19 +44,9 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-- el change de los sliders atomiza grabando
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview
 lo guarde, no aporto mucho, http://pimentoso.blogspot.com.uy/2013/05/libgdx-scene2d-complex-ui-elements.html
-- OBS: PARA MI EN EL
-   // Add heathbar
-        bottomTable.add(healthBar).expandX();
-        DEBERIA HABERLE PUESTO .SETWIDTH EN LUGAR DE
-            @Override
-            public float getPrefWidth() {
-                // WA: Impossible to set 'width' on an horizontal ProgressBar using size, resize or setWidth
-                return (float) Constants.HEALTHBAR_WIDTH;
-            }
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
@@ -64,7 +54,7 @@ Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el
 que no complete el nivel (play again, back to main menu). Sencillo.
 - pantalla superpuesta para pausa con opciones (RESUME, QUIT) y para help dinamico de cada momento que quiera.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
-- HACER UNA SKIN CUANTO ANTES
+- HACER UNA SKIN?
 
 PENDIENTES
 ----------
@@ -74,8 +64,6 @@ PENDIENTES
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
-- Podria usar el evento onpause de screen, para pausar el juego y pedir que el usuario toque la pantalla para continuarlo. Se llama al evento pause() de andorid
-cuando el usuario apreta el homebutton.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - hacer un skin para la ui, intente usar las clases "asset" pero mejor no, ver de usar un skin.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
@@ -88,8 +76,6 @@ cuando el usuario apreta el homebutton.
 - tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
 bordes y objetos
 - averiguar como debuguear
-- los slides no se arrastran bien, verificar si los eventos que uso estan bien. Nunca probe hacerlo como me parece.
-para mi habria que usar el pan o touchdown.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
 Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
