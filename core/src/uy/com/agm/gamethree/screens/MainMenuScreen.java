@@ -64,6 +64,8 @@ public class MainMenuScreen extends AbstractScreen {
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
                         Gdx.app.exit();
                         return false;
                     }

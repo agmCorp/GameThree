@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -299,17 +300,20 @@ public class Hud extends AbstractScreen {
         // Define labels based on labelStyle
         pauseLabel = new Label("||", labelStyle);
         quitLabel = new Label("QUIT", labelStyle);
+        quitLabel.setAlignment(Align.right);
         resumeLabel = new Label("RESUME", labelStyle);
 
         // Add values
-        buttonsTable.add(pauseLabel).width(Constants.HUD_PAUSE_WIDTH).left().expandX();
-        buttonsTable.add(quitLabel).right().expandX();
+        buttonsTable.add(pauseLabel).width(Constants.HUD_BUTTON_WIDTH).left().expandX();
+        buttonsTable.add(quitLabel).width(Constants.HUD_BUTTON_WIDTH).right().expandX();
 
         // Events
         pauseLabel.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
                         setGameStatePaused();
                         return true;
                     }
@@ -319,6 +323,8 @@ public class Hud extends AbstractScreen {
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
                         setGameStateRunning();
                         return true;
                     }
@@ -328,6 +334,8 @@ public class Hud extends AbstractScreen {
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
                         quit();
                         return true;
                     }
