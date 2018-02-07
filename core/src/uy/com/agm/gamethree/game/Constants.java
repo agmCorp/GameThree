@@ -55,7 +55,8 @@ public class Constants {
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
-    public static final float SLIDER_STEP = 0.1f;
+    public static final float SLIDER_STEP = 0.01f;
+    public static final float SLIDER_WIDTH = 250.0f;
     public static final int HEALTHBAR_WIDTH = 200;
     public static final int HEALTHBAR_HEIGHT = 10;
     public static final float HEALTHBAR_MIN = 0.0f;

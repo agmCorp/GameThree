@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -80,11 +82,11 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(new Label("Music", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(sliderMusic).padTop(Constants.PAD_TOP).center();
+        table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(new Label("Sound effects", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(sliderSound).padTop(Constants.PAD_TOP).center();
+        table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(shootingLabel).padTop(Constants.PAD_TOP).center();
         table.row();
@@ -94,27 +96,19 @@ public class SettingsScreen extends AbstractScreen {
         table.setDebug(Constants.DEBUG_MODE);
 
         // Slider listener
-        sliderMusic.addListener(new InputListener() {
+        sliderMusic.addListener(new ChangeListener() {
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            public void changed(ChangeEvent event, Actor actor) {
                 saveSliderMusic();
             }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            };
         });
 
         // Slider listener
-        sliderSound.addListener(new InputListener() {
+        sliderSound.addListener(new ChangeListener() {
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            public void changed(ChangeEvent event, Actor actor) {
                 saveSliderSound();
                 playSampleSound();
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
             }
         });
 
