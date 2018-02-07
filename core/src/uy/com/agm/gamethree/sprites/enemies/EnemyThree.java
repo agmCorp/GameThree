@@ -64,6 +64,7 @@ public class EnemyThree extends Enemy {
                 Constants.HERO_GHOST_BIT |
                 Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
+        fdef.density = Constants.ENEMYTHREE_DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
     }
 

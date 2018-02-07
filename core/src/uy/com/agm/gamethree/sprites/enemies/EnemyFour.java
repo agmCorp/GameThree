@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -91,6 +90,7 @@ public class EnemyFour extends Enemy {
                 Constants.HERO_BIT |
                 Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
+        fdef.density = Constants.ENEMYFOUR_DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
     }
 

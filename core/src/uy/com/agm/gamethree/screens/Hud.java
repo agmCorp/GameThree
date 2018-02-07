@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
-import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.ui.HealthBar;
 
@@ -88,7 +87,7 @@ public class Hud extends AbstractScreen {
         upperTable = new Table();
 
         // Cell height
-        //upperTable.defaults().height(Constants.HUD_CELL_HEIGHT); todo
+        upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Debug lines
         upperTable.setDebug(Constants.DEBUG_MODE);
@@ -109,7 +108,7 @@ public class Hud extends AbstractScreen {
         upperTable.add(new Label("LIVES", labelStyle)).expandX();
 
         // Add a second row to our table
-        upperTable.row();
+        upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
@@ -139,7 +138,7 @@ public class Hud extends AbstractScreen {
         powerTable = new Table();
 
         // Cell height
-        //powerTable.defaults().height(Constants.HUD_CELL_HEIGHT); todo
+        powerTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Debug lines
         powerTable.setDebug(Constants.DEBUG_MODE);
@@ -154,7 +153,7 @@ public class Hud extends AbstractScreen {
         powerTable.add(powerNameLabel).expandX();
 
         // Add a second row to the table
-        powerTable.row();
+        powerTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define a label based on labelStyle
         powerTimeValueLabel = new Label(String.format("%03d", powerTime), labelStyle);
@@ -316,7 +315,6 @@ public class Hud extends AbstractScreen {
                     }
                 });
 
-        // Events
         resumeLabel.addListener(
                 new InputListener() {
                     @Override
@@ -326,8 +324,14 @@ public class Hud extends AbstractScreen {
                     }
                 });
 
-        // Events
-        quitLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        quitLabel.addListener(
+                new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        quit();
+                        return true;
+                    }
+                });
 
         // Add the table to the stage
         addActor(buttonsTable);
@@ -354,6 +358,16 @@ public class Hud extends AbstractScreen {
         screen.setPlayScreenStateRunning();
     }
 
+    private void quit() {
+        final String MESSAGE = "REALLY?";
+
+        if (getMessage().equals(MESSAGE)) {
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+        } else {
+            showMessage(MESSAGE);
+        }
+    }
+
     @Override
     public void buildStage() {
         defineUpperTable();
@@ -377,10 +391,17 @@ public class Hud extends AbstractScreen {
         return powerTable.isVisible();
     }
 
-
     public void showMessage(String message) {
         messageLabel.setText(message);
         centerTable.setVisible(true);
+    }
+
+    public String getMessage() {
+        String message = "";
+        if (centerTable.isVisible()) {
+            message = messageLabel.getText().toString();
+        }
+        return message;
     }
 
     public void showHurryUpMessage() {

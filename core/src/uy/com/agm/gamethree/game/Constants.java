@@ -48,10 +48,9 @@ public class Constants {
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
     public static final float HUD_BUTTONS_PAD = 20.0f;
-    public static final float HUD_CELL_HEIGHT = 20.0f;
+    public static final float HUD_UPPERTABLE_CELL_HEIGHT = 20.0f;
     public static final float HUD_PAUSE_WIDTH = 100.0f;
     public static final float HUD_HEALTHBAR_PADBOTTOM = 30.0f;
-
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
@@ -272,6 +271,7 @@ public class Constants {
     public static final float ENEMYTHREE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float ENEMYTHREE_VELOCITY_X = 0.0f;
     public static final float ENEMYTHREE_VELOCITY_Y = 0.0f;
+    public static final float ENEMYTHREE_DENSITY = 1000.0f;
     public static final float ENEMYTHREE_WIDTH_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_HEIGHT_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.0f;
@@ -280,6 +280,7 @@ public class Constants {
     // EnemyFour (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 40.0f / PPM;
     public static final float ENEMYFOUR_LINEAR_VELOCITY = 3.0f;
+    public static final float ENEMYFOUR_DENSITY = 1000.0f;
     public static final float ENEMYFOUR_WIDTH_METERS = 125.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_HEIGHT_METERS = 106.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_FROZEN_WIDTH_METERS = 123.0f * 0.8f / PPM;
