@@ -32,10 +32,10 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -279,7 +279,7 @@ public class Constants {
     public static final int ENEMYTHREE_SCORE = 17;
 
     // EnemyFour (meters = pixels * resizeFactor / PPM)
-    public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 40.0f / PPM;
+    public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 20.0f / PPM;
     public static final float ENEMYFOUR_LINEAR_VELOCITY = 3.0f;
     public static final float ENEMYFOUR_DENSITY = 1000.0f;
     public static final float ENEMYFOUR_WIDTH_METERS = 125.0f * 0.8f / PPM;
