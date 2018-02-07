@@ -3,8 +3,8 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
@@ -63,7 +63,7 @@ public class Hud extends AbstractScreen {
 
     private boolean timeIsUp; // True when the level time reaches 0
 
-    private Cell cell;
+    private Stack stack;
 
     public Hud(PlayScreen screen, Integer level, Integer time, Integer lives) {
         super();
@@ -81,6 +81,7 @@ public class Hud extends AbstractScreen {
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
+        stack = new Stack();
     }
 
     private void defineUpperTable() {
@@ -304,7 +305,9 @@ public class Hud extends AbstractScreen {
         resumeLabel = new Label("RESUME", labelStyle);
 
         // Add values
-        buttonsTable.add(pauseLabel).width(Constants.HUD_BUTTON_WIDTH).left().expandX();
+        stack.add(pauseLabel);
+        stack.add(resumeLabel);
+        buttonsTable.add(stack).width(Constants.HUD_BUTTON_WIDTH).left().expandX(); // Pause and Resume texts overlapped
         buttonsTable.add(quitLabel).width(Constants.HUD_BUTTON_WIDTH).right().expandX();
 
         // Events
@@ -345,22 +348,21 @@ public class Hud extends AbstractScreen {
         addActor(buttonsTable);
 
         // Initially hidden
+        resumeLabel.setVisible(false);
         quitLabel.setVisible(false);
     }
 
     public void setGameStatePaused() {
-        cell = buttonsTable.getCell(pauseLabel);
-        buttonsTable.removeActor(pauseLabel);
-        cell.setActor(resumeLabel);
+        pauseLabel.setVisible(false);
+        resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
         showMessage("PAUSED");
         screen.setPlayScreenStatePaused();
     }
 
     public void setGameStateRunning() {
-        cell = buttonsTable.getCell(resumeLabel);
-        buttonsTable.removeActor(resumeLabel);
-        cell.setActor(pauseLabel);
+        pauseLabel.setVisible(true);
+        resumeLabel.setVisible(false);
         quitLabel.setVisible(false);
         hideMessage();
         screen.setPlayScreenStateRunning();
