@@ -49,6 +49,10 @@ public class Hud extends AbstractScreen {
     private Table centerTable;
     private Label messageLabel;
     private Image image;
+    private float overlayTimer;
+    private float overlaySeconds;
+    private boolean overlayTemporaryScreen;
+
 
     private Table bottomTable;
 
@@ -86,6 +90,9 @@ public class Hud extends AbstractScreen {
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
+        overlayTimer = 0;
+        overlaySeconds = 0;
+        overlayTemporaryScreen = false;
     }
 
     private void defineUpperTable() {
@@ -452,6 +459,13 @@ public class Hud extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
+    public void showImage(TextureRegion textureRegion, float seconds) {
+        overlayTimer = 0;
+        overlaySeconds = seconds;
+        overlayTemporaryScreen = true;
+        showImage(textureRegion);
+    }
+
     public void showModalImage(TextureRegion textureRegion) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
@@ -546,6 +560,16 @@ public class Hud extends AbstractScreen {
         if (isFpsInfoVisible()) {
             fps = Gdx.graphics.getFramesPerSecond();
             fpsValueLabel.setText(String.format("%02d", fps));
+        }
+
+        // Overlay temporary screen
+        if (overlayTemporaryScreen) {
+            overlayTimer += dt;
+            if (overlayTimer >= overlaySeconds) {
+                overlayTemporaryScreen = false;
+                overlayTimer = 0;
+                hideImage();
+            }
         }
     }
 

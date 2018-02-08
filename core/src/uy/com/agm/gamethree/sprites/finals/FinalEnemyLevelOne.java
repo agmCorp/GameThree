@@ -230,6 +230,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 // // TODO: 2/7/2018
                 //screen.getHud().showModalImage(Assets.getInstance().getPowerBox().getBrickADamagedHard());
                 //screen.getHud().showImage(Assets.getInstance().getPowerBox().getBrickADamagedHard());
+                //screen.getHud().showImage(Assets.getInstance().getPowerBox().getBrickADamagedHard(), 4.0f);
 
                 // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
