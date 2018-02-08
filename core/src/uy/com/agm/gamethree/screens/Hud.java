@@ -419,7 +419,7 @@ public class Hud extends AbstractScreen {
     }
 
     public void showTimeIsUpMessage() {
-        showMessage("TIME IS UP!!");
+        showMessage("TIME'S UP!!");
     }
 
     public void hideMessage() {
