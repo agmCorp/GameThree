@@ -40,6 +40,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetShield;
+import uy.com.agm.gamethree.assets.sprites.AssetShuriken;
 import uy.com.agm.gamethree.assets.sprites.AssetToughMode;
 import uy.com.agm.gamethree.game.Constants;
 
@@ -73,6 +74,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionE explosionE;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
+    private AssetShuriken shuriken;
     private AssetGhostMode ghostMode;
     private AssetShield shield;
     private AssetBulletA bulletA;
@@ -197,6 +199,7 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionE = new AssetExplosionE(atlas);
         heroBullet = new AssetHeroBullet(atlas);
         enemyBullet = new AssetEnemyBullet(atlas);
+        shuriken = new AssetShuriken(atlas);
         ghostMode = new AssetGhostMode(atlas);
         shield = new AssetShield(atlas);
         bulletA = new AssetBulletA(atlas);
@@ -295,6 +298,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetEnemyBullet getEnemyBullet() {
         return enemyBullet;
+    }
+
+    public AssetShuriken getShuriken() {
+        return shuriken;
     }
 
     public AssetGhostMode getGhostMode() {

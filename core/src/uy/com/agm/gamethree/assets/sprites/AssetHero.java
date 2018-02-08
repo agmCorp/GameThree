@@ -12,7 +12,8 @@ import com.badlogic.gdx.utils.Array;
 public class AssetHero {
     private static final String TAG = AssetHero.class.getName();
 
-    private TextureRegion heroStand;
+    private TextureRegion heroStandUp;
+    private TextureRegion heroStandDown;
     private Animation heroDeadAnimation;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
@@ -21,7 +22,8 @@ public class AssetHero {
     public AssetHero(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        heroStand = atlas.findRegion("heroUp", 1);
+        heroStandUp = atlas.findRegion("heroUp", 1);
+        heroStandDown = atlas.findRegion("heroDown", 1);
 
         // Animation
         regions = atlas.findRegions("heroUp");
@@ -44,8 +46,12 @@ public class AssetHero {
         regions.clear();
     }
 
-    public TextureRegion getHeroStand() {
-        return heroStand;
+    public TextureRegion getHeroStandUp() {
+        return heroStandUp;
+    }
+
+    public TextureRegion getHeroStandDown() {
+        return heroStandDown;
     }
 
     public Animation getHeroDeadAnimation() {
