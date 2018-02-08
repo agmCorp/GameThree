@@ -55,7 +55,6 @@ que no complete el nivel (play again, back to main menu). Sencillo.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
 
-
 PENDIENTES
 ----------
 - ver de configurar que no incluya el raw cuando arma el apk.
