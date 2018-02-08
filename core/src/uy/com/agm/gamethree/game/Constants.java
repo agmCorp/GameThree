@@ -35,7 +35,7 @@ public class Constants {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -48,7 +48,7 @@ public class Constants {
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
     public static final float HUD_BUTTONS_PAD = 20.0f;
-    public static final float HUD_UPPERTABLE_CELL_HEIGHT = 30.0f;
+    public static final float HUD_UPPERTABLE_CELL_HEIGHT = 40.0f;
     public static final float HUD_BUTTON_WIDTH = 100.0f;
     public static final float HUD_HEALTHBAR_PADBOTTOM = 30.0f;
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";

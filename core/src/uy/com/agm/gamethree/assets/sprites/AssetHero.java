@@ -14,6 +14,7 @@ public class AssetHero {
 
     private TextureRegion heroStandUp;
     private TextureRegion heroStandDown;
+    private TextureRegion heroHead;
     private Animation heroDeadAnimation;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
@@ -24,6 +25,7 @@ public class AssetHero {
 
         heroStandUp = atlas.findRegion("heroUp", 1);
         heroStandDown = atlas.findRegion("heroDown", 1);
+        heroHead = atlas.findRegion("heroHead");
 
         // Animation
         regions = atlas.findRegions("heroUp");
@@ -52,6 +54,10 @@ public class AssetHero {
 
     public TextureRegion getHeroStandDown() {
         return heroStandDown;
+    }
+
+    public TextureRegion getHeroHead() {
+        return heroHead;
     }
 
     public Animation getHeroDeadAnimation() {

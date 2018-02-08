@@ -121,7 +121,7 @@ public class Hud extends AbstractScreen {
         upperTable.add(new Label("SCORE", labelStyle)).expandX();
         upperTable.add(new Label("LEVEL", labelStyle)).expandX();
         upperTable.add(new Label("TIME", labelStyle)).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroStandDown()), Scaling.fit)).expandX();
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getShuriken().getShurikenStand()), Scaling.fit)).expandX();
 
         // Add a second row to our table
@@ -146,7 +146,7 @@ public class Hud extends AbstractScreen {
 
         // Add power info
         definePowerTable();
-        upperTable.add(powerTable).colspan(4);
+        upperTable.add(powerTable).colspan(upperTable.getColumns());
 
         // Add table to the stage
         addActor(upperTable);
