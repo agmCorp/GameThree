@@ -32,8 +32,6 @@ public class Hud extends AbstractScreen {
     private Table upperTable;
     private int score;
     private Label scoreValueLabel;
-    private int level;
-    private Label levelValueLabel;
     private int time;
     private float timeCount;
     private Label timeValueLabel;
@@ -76,14 +74,13 @@ public class Hud extends AbstractScreen {
 
     private Stack stack;
 
-    public Hud(PlayScreen screen, Integer level, Integer time, Integer lives) {
+    public Hud(PlayScreen screen, Integer time, Integer lives) {
         super();
 
         // Define tracking variables
         this.screen = screen;
         labelStyle = new Label.LabelStyle();
         score = 0;
-        this.level = level;
         this.time = time;
         timeCount = 0;
         this.lives = lives;
@@ -119,7 +116,6 @@ public class Hud extends AbstractScreen {
 
         // Add labels to the table giving them all equal width with expandX
         upperTable.add(new Label("SCORE", labelStyle)).expandX();
-        upperTable.add(new Label("LEVEL", labelStyle)).expandX();
         upperTable.add(new Label("TIME", labelStyle)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getShuriken().getShurikenStand()), Scaling.fit)).expandX();
@@ -128,15 +124,13 @@ public class Hud extends AbstractScreen {
         upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define label values based on labelStyle
-        scoreValueLabel = new Label(String.format("%06d", score), labelStyle);
-        levelValueLabel = new Label(String.format("%02d", level), labelStyle);
+        scoreValueLabel = new Label(String.format("%6d", score), labelStyle);
         timeValueLabel = new Label(String.format("%03d", time), labelStyle);
         livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
         shurikenValueLabel = new Label(String.format("%02d", shurikens), labelStyle);
 
         // Add values
         upperTable.add(scoreValueLabel).expandX();
-        upperTable.add(levelValueLabel).expandX();
         upperTable.add(timeValueLabel).expandX();
         upperTable.add(livesValueLabel).expandX();
         upperTable.add(shurikenValueLabel).expandX();
@@ -581,7 +575,7 @@ public class Hud extends AbstractScreen {
 
     public void addScore(int value) {
         score += value;
-        scoreValueLabel.setText(String.format("%06d", score));
+        scoreValueLabel.setText(String.format("%6d", score));
     }
 
     public int getScore() {

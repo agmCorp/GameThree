@@ -48,7 +48,7 @@ public class Constants {
     // ---- Screens ----
     public static final float PAD_TOP = 40.0f;
     public static final float HUD_BUTTONS_PAD = 20.0f;
-    public static final float HUD_UPPERTABLE_CELL_HEIGHT = 40.0f;
+    public static final float HUD_UPPERTABLE_CELL_HEIGHT = 30.0f;
     public static final float HUD_BUTTON_WIDTH = 100.0f;
     public static final float HUD_HEALTHBAR_PADBOTTOM = 30.0f;
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
@@ -293,6 +293,7 @@ public class Constants {
     public static final int ENEMYFOUR_SCORE = 35;
 
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
+    public static final String FINALLEVELONE_NAME = "Astrobitsy";
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELONE_LINEAR_VELOCITY = 5.0f;
     public static final float FINALLEVELONE_DENSITY = 1000.0f;

@@ -47,6 +47,7 @@ PROXIMOS PASOS
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview
 lo guarde, no aporto mucho, http://pimentoso.blogspot.com.uy/2013/05/libgdx-scene2d-complex-ui-elements.html
+- HACER EN CASA EL TEXTUREPAKCER
 - pensar un objetivo del juego:
 agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
 Cada llave es una estrella del level completed.
@@ -54,6 +55,19 @@ Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el
 que no complete el nivel (play again, back to main menu). Sencillo.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
+
+- TOKENS DEL HUD QUE CAPAZ DEBERIA PONER EN CONSTANES
+SCORE
+TIME
+FPS
+||
+QUIT
+RESUME
+PAUSED
+REALLY?
+HURRY UP!
+TIME'S UP!!
+
 
 PENDIENTES
 ----------
