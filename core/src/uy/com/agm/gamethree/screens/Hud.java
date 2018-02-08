@@ -1,12 +1,16 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -44,6 +48,7 @@ public class Hud extends AbstractScreen {
 
     private Table centerTable;
     private Label messageLabel;
+    private Image image;
 
     private Table bottomTable;
 
@@ -81,7 +86,6 @@ public class Hud extends AbstractScreen {
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
-        stack = new Stack();
     }
 
     private void defineUpperTable() {
@@ -185,15 +189,21 @@ public class Hud extends AbstractScreen {
 
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyle);
+        image = new Image();
 
         // Add values
-        centerTable.add(messageLabel).expandX();
-
-        // Initially hidden
-        centerTable.setVisible(false);
+        stack = new Stack();
+        stack.add(messageLabel);
+        stack.add(image);
+        centerTable.add(stack);
 
         // Add our table to the stage
         addActor(centerTable);
+
+        // Initially hidden
+        messageLabel.setVisible(false);
+        image.setVisible(false);
+        centerTable.setVisible(false);
     }
 
     private void defineBottomTable() {
@@ -305,6 +315,7 @@ public class Hud extends AbstractScreen {
         resumeLabel = new Label("RESUME", labelStyle);
 
         // Add values
+        stack = new Stack();
         stack.add(pauseLabel);
         stack.add(resumeLabel);
         buttonsTable.add(stack).width(Constants.HUD_BUTTON_WIDTH).left().expandX(); // Pause and Resume texts overlapped
@@ -403,12 +414,14 @@ public class Hud extends AbstractScreen {
 
     public void showMessage(String message) {
         messageLabel.setText(message);
+        messageLabel.setVisible(true);
+        image.setVisible(false);
         centerTable.setVisible(true);
     }
 
     public String getMessage() {
         String message = "";
-        if (centerTable.isVisible()) {
+        if (messageLabel.isVisible()) {
             message = messageLabel.getText().toString();
         }
         return message;
@@ -423,11 +436,45 @@ public class Hud extends AbstractScreen {
     }
 
     public void hideMessage() {
+        messageLabel.setVisible(false);
         centerTable.setVisible(false);
     }
 
     public boolean isMessageVisible() {
-        return centerTable.isVisible();
+        return messageLabel.isVisible();
+    }
+
+    public void showImage(TextureRegion textureRegion) {
+        image.setDrawable(new TextureRegionDrawable(textureRegion));
+        image.setScaling(Scaling.fit); // Default is Scaling.stretch.
+        image.setVisible(true);
+        messageLabel.setVisible(false);
+        centerTable.setVisible(true);
+    }
+
+    public void showModalImage(TextureRegion textureRegion) {
+        pauseLabel.setVisible(false);
+        resumeLabel.setVisible(true);
+        quitLabel.setVisible(false);
+        showImage(textureRegion);
+        screen.setPlayScreenStatePaused();
+    }
+
+    public void hideModalImage() {
+        pauseLabel.setVisible(true);
+        resumeLabel.setVisible(false);
+        quitLabel.setVisible(false);
+        hideImage();
+        screen.setPlayScreenStateRunning();
+    }
+
+    public void hideImage() {
+        image.setVisible(false);
+        centerTable.setVisible(false);
+    }
+
+    public boolean isImageVisible() {
+        return image.isVisible();
     }
 
     public void showFpsInfo() {

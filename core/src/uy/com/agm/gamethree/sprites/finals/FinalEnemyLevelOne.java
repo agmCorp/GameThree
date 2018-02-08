@@ -227,6 +227,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 // HealthBar
                 screen.getHud().showHealthBarInfo("Astrobitsy", damage);
 
+                // // TODO: 2/7/2018
+                //screen.getHud().showModalImage(Assets.getInstance().getPowerBox().getBrickADamagedHard());
+                //screen.getHud().showImage(Assets.getInstance().getPowerBox().getBrickADamagedHard());
+
                 // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
                 updateLogic(dt);
