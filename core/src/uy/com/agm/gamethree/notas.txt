@@ -58,6 +58,9 @@ que no complete el nivel (play again, back to main menu). Sencillo.
 
 PENDIENTES
 ----------
+- ver de configurar que no incluya el raw cuando arma el apk.
+Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
+Con estas 2 cosas disminuyo mucho el tamano total y ya no se puede optimizar mucho mas.
 - ver el ninja y suriken y UI
 - hacer refactoring de constantes
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
