@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.widget;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -54,10 +53,8 @@ public class HealthBar extends ProgressBar {
 
     public void decrease() {
         currentEnergy--;
-        Gdx.app.debug(TAG, "CURRENTENERGY " + currentEnergy);
         if (currentEnergy > 0) {
             setValue(getValue() - Constants.HEALTHBAR_MAX / fullEnergy);
-            Gdx.app.debug(TAG, "set " + (getValue() - Constants.HEALTHBAR_MAX / fullEnergy));
         } else {
             setValue(0);
         }
