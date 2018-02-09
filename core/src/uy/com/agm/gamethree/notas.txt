@@ -44,6 +44,7 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
+- ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - llamarle silverBullet al shuriken? llamarle colSilverBullet al col?
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview
