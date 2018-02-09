@@ -17,6 +17,7 @@ import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.items.collectibles.ColOne;
+import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
@@ -161,6 +162,9 @@ public class B2WorldCreator {
 
             if (gameThreeActorDef.getType() == ColOne.class) {
                 items.add(new ColOne(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
+            }
+            if (gameThreeActorDef.getType() == ColOne.class) {
+                items.add(new ColSilverBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY())); // todo aca deberia ser otra coleccion creo
             }
             if (gameThreeActorDef.getType() == PowerOne.class) {
                 items.add(new PowerOne(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
