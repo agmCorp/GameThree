@@ -37,8 +37,8 @@ public class Hud extends AbstractScreen {
     private Label timeValueLabel;
     private int lives;
     private Label livesValueLabel;
-    private int shurikens;
-    private Label shurikenValueLabel;
+    private int silverBullets;
+    private Label silverBulletValueLablel;
 
     private Table powerTable;
     private Label powerNameLabel;
@@ -84,7 +84,7 @@ public class Hud extends AbstractScreen {
         this.time = time;
         timeCount = 0;
         this.lives = lives;
-        shurikens = 0;
+        silverBullets = 0;
         powerTime = 0;
         powerTimeCount = 0;
         fps = 0;
@@ -118,7 +118,7 @@ public class Hud extends AbstractScreen {
         upperTable.add(new Label(Constants.HUD_LABEL_SCORE, labelStyle)).expandX();
         upperTable.add(new Label(Constants.HUD_LABEL_TIME, labelStyle)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getShuriken().getShurikenStand()), Scaling.fit)).expandX();
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getSilverBullet().getSilverBulletStand()), Scaling.fit)).expandX();
 
         // Add a second row to our table
         upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
@@ -127,13 +127,13 @@ public class Hud extends AbstractScreen {
         scoreValueLabel = new Label(String.format("%6d", score), labelStyle);
         timeValueLabel = new Label(String.format("%03d", time), labelStyle);
         livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
-        shurikenValueLabel = new Label(String.format("%02d", shurikens), labelStyle);
+        silverBulletValueLablel = new Label(String.format("%02d", silverBullets), labelStyle);
 
         // Add values
         upperTable.add(scoreValueLabel).expandX();
         upperTable.add(timeValueLabel).expandX();
         upperTable.add(livesValueLabel).expandX();
-        upperTable.add(shurikenValueLabel).expandX();
+        upperTable.add(silverBulletValueLablel).expandX();
 
         // Add a third row to our table
         upperTable.row();
