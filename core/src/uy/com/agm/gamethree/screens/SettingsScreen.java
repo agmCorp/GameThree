@@ -82,7 +82,7 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(new Label("Sound effects", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
+        table.add(new Label("Sound FXs", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();

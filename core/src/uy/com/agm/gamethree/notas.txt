@@ -44,6 +44,7 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
+- llamarle silverBullet al shuriken? llamarle colSilverBullet al col?
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview
 lo guarde, no aporto mucho, http://pimentoso.blogspot.com.uy/2013/05/libgdx-scene2d-complex-ui-elements.html
