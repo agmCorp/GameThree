@@ -58,6 +58,7 @@ public class Hero extends Sprite {
     private float setDefaultFilterTimer;
     private boolean isPlayingAgain;
     private int lives;
+    private int silverBullets;
 
     // Power FX
     private PowerState currentPowerState;
@@ -112,6 +113,7 @@ public class Hero extends Sprite {
         setDefaultFilterTimer = 0;
         isPlayingAgain = false;
         lives = Constants.HERO_LIVES_START;
+        silverBullets = 0;
 
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
@@ -693,5 +695,10 @@ public class Hero extends Sprite {
 
     public int getLives() {
         return lives;
+    }
+
+    public void addSilverBullet() {
+        silverBullets++;
+        screen.getHud().increaseSilverBullets(1);
     }
 }

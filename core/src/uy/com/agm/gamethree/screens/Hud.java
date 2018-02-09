@@ -606,6 +606,16 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format("%02d", lives));
     }
 
+    public void increaseSilverBullets(int quantity) {
+        silverBullets += quantity;
+        silverBulletValueLablel.setText(String.format("%02d", silverBullets));
+    }
+
+    public void decreaseSilverBullets(int quantity) {
+        silverBullets -= quantity;
+        silverBulletValueLablel.setText(String.format("%02d", silverBullets));
+    }
+
     @Override
     public void dispose() {
         super.dispose();

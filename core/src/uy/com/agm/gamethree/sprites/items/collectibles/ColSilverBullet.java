@@ -155,6 +155,9 @@ public class ColSilverBullet extends Item {
 
         // Set score
         screen.getHud().addScore(Constants.COLSILVERBULLET_SCORE);
+
+        // Increment the number of silver bullets
+        screen.getPlayer().addSilverBullet();
     }
 
     @Override
