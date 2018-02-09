@@ -32,10 +32,10 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -323,8 +323,8 @@ public class Constants {
     public static final float HEROBULLET_VELOCITY_X = 0.0f;
     public static final float HEROBULLET_VELOCITY_Y = 6.0f;
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
-    public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
-    public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;//192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;//192.0f * 0.6f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
