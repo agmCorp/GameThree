@@ -115,8 +115,8 @@ public class Hud extends AbstractScreen {
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Add labels to the table giving them all equal width with expandX
-        upperTable.add(new Label("SCORE", labelStyle)).expandX();
-        upperTable.add(new Label("TIME", labelStyle)).expandX();
+        upperTable.add(new Label(Constants.HUD_LABEL_SCORE, labelStyle)).expandX();
+        upperTable.add(new Label(Constants.HUD_LABEL_TIME, labelStyle)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getShuriken().getShurikenStand()), Scaling.fit)).expandX();
 
@@ -255,7 +255,7 @@ public class Hud extends AbstractScreen {
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define a label based on labelStyle
-        fpsLabel = new Label("FPS", labelStyle);
+        fpsLabel = new Label(Constants.HUD_LABEL_FPS, labelStyle);
 
         // Add a label to the table giving it equal width with expandX
         fpsTable.add(fpsLabel).expandX();
@@ -316,10 +316,10 @@ public class Hud extends AbstractScreen {
         labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define labels based on labelStyle
-        pauseLabel = new Label("||", labelStyle);
-        quitLabel = new Label("QUIT", labelStyle);
+        pauseLabel = new Label(Constants.HUD_LABEL_PAUSE, labelStyle);
+        quitLabel = new Label(Constants.HUD_LABEL_QUIT, labelStyle);
         quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label("RESUME", labelStyle);
+        resumeLabel = new Label(Constants.HUD_LABEL_RESUME, labelStyle);
 
         // Add values
         stack = new Stack();
@@ -374,7 +374,7 @@ public class Hud extends AbstractScreen {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
-        showMessage("PAUSED");
+        showMessage(Constants.HUD_TEXT_PAUSED);
         screen.setPlayScreenStatePaused();
     }
 
@@ -387,12 +387,10 @@ public class Hud extends AbstractScreen {
     }
 
     private void quit() {
-        final String MESSAGE = "REALLY?";
-
-        if (getMessage().equals(MESSAGE)) {
+        if (getMessage().equals(Constants.HUD_TEXT_CONFIRM)) {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
-            showMessage(MESSAGE);
+            showMessage(Constants.HUD_TEXT_CONFIRM);
         }
     }
 
@@ -435,11 +433,11 @@ public class Hud extends AbstractScreen {
     }
 
     public void showHurryUpMessage() {
-        showMessage("HURRY UP!");
+        showMessage(Constants.HUD_TEXT_HURRYUP);
     }
 
     public void showTimeIsUpMessage() {
-        showMessage("TIME'S UP!!");
+        showMessage(Constants.HUD_TEXT_TIMESUP);
     }
 
     public void hideMessage() {

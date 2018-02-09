@@ -51,6 +51,16 @@ public class Constants {
     public static final float HUD_UPPERTABLE_CELL_HEIGHT = 30.0f;
     public static final float HUD_BUTTON_WIDTH = 100.0f;
     public static final float HUD_HEALTHBAR_PADBOTTOM = 30.0f;
+    public static final String HUD_LABEL_SCORE = "SCORE";
+    public static final String HUD_LABEL_TIME = "TIME";
+    public static final String HUD_LABEL_FPS = "FPS";
+    public static final String HUD_LABEL_PAUSE = "||";
+    public static final String HUD_LABEL_QUIT = "QUIT";
+    public static final String HUD_LABEL_RESUME = "RESUME";
+    public static final String HUD_TEXT_PAUSED = "PAUSED";
+    public static final String HUD_TEXT_CONFIRM = "REALLY?";
+    public static final String HUD_TEXT_HURRYUP = "HURRY UP!";
+    public static final String HUD_TEXT_TIMESUP = "TIME'S UP!!";
     public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
     public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
@@ -168,8 +178,8 @@ public class Constants {
 
     // PowerBox (meters = pixels * resizeFactor / PPM)
     public static final float POWERBOX_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float POWERBOX_WIDTH_METERS = 140.0f * 0.3f / PPM;
-    public static final float POWERBOX_HEIGHT_METERS = 175.0f * 0.3f / PPM;
+    public static final float POWERBOX_WIDTH_METERS = 102.0f * 0.4f / PPM;
+    public static final float POWERBOX_HEIGHT_METERS = 128.0f * 0.4f / PPM;
     public static final int POWERBOX_SCORE = 10;
     public static final int POWERBOX_MAX_TEXTURES = 14;
 
