@@ -66,7 +66,7 @@ public class SilverBullet extends Weapon {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-            CircleShape shape = new CircleShape();
+        CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.BORDERS_BIT |
