@@ -102,6 +102,7 @@ public class Constants {
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
     public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpColOne.ogg";
+    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColOne.ogg"; // TODO
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerThree.ogg";
@@ -110,6 +111,7 @@ public class Constants {
     public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
     public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
     public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpColOne.ogg";
+    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColOne.ogg"; // TODO
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerTwo.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerThree.ogg";
@@ -200,6 +202,16 @@ public class Constants {
     public static final float COLONE_WIDTH_METERS = 77.0f * 0.5f / PPM;
     public static final float COLONE_HEIGHT_METERS = 77.0f * 0.5f / PPM;
     public static final int COLONE_SCORE = 25;
+
+    // ColSilverBullet (meters = pixels * resizeFactor / PPM)
+    public static final float COLSILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
+    public static final float COLSILVERBULLET_VELOCITY_X = 0.7f;
+    public static final float COLSILVERBULLET_VELOCITY_Y = 0.0f;
+    public static final float COLSILVERBULLET_WAITING_SECONDS = 1.0f;
+    public static final float COLSILVERBULLET_FADING_SECONDS = 1.0f;
+    public static final float COLSILVERBULLET_WIDTH_METERS = 126.0f * 0.4f / PPM;
+    public static final float COLSILVERBULLET_HEIGHT_METERS = 116.0f * 0.4f / PPM;
+    public static final int COLSILVERBULLET_SCORE = 50;
 
     // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

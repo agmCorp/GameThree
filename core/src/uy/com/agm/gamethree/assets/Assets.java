@@ -124,6 +124,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         assetManager.load(Constants.FX_FILE_CLOCK, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
+        assetManager.load(Constants.FX_FILE_PICK_UP_COLSILVERBULLET, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         assetManager.load(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
@@ -132,6 +133,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_BEEP_A, Sound.class);
         assetManager.load(Constants.FX_FILE_BEEP_B, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
+        assetManager.load(Constants.FX_FILE_SHOW_UP_COLSILVERBULLET, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);

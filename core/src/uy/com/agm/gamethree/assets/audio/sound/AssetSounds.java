@@ -21,6 +21,7 @@ public class AssetSounds {
     private Sound openPowerBox;
     private Sound clock;
     private Sound pickUpColOne;
+    private Sound pickUpColSilverBullet;
     private Sound pickUpPowerOne;
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
@@ -29,6 +30,7 @@ public class AssetSounds {
     private Sound beepA;
     private Sound beepB;
     private Sound showUpColOne;
+    private Sound showUpColSilverBullet;
     private Sound showUpPowerOne;
     private Sound showUpPowerTwo;
     private Sound showUpPowerThree;
@@ -55,6 +57,7 @@ public class AssetSounds {
         openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         clock = am.get(Constants.FX_FILE_CLOCK, Sound.class);
         pickUpColOne = am.get(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
+        pickUpColSilverBullet = am.get(Constants.FX_FILE_PICK_UP_COLSILVERBULLET, Sound.class);
         pickUpPowerOne = am.get(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
         pickUpPowerTwo = am.get(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
         pickUpPowerThree = am.get(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
@@ -63,6 +66,7 @@ public class AssetSounds {
         beepA = am.get(Constants.FX_FILE_BEEP_A, Sound.class);
         beepB = am.get(Constants.FX_FILE_BEEP_B, Sound.class);
         showUpColOne = am.get(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
+        showUpColSilverBullet = am.get(Constants.FX_FILE_SHOW_UP_COLSILVERBULLET, Sound.class);
         showUpPowerOne = am.get(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
         showUpPowerTwo = am.get(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
         showUpPowerThree = am.get(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
@@ -116,6 +120,10 @@ public class AssetSounds {
         return pickUpColOne;
     }
 
+    public Sound getPickUpColSilverBullet() {
+        return pickUpColSilverBullet;
+    }
+
     public Sound getPickUpPowerOne() {
         return pickUpPowerOne;
     }
@@ -146,6 +154,10 @@ public class AssetSounds {
 
     public Sound getShowUpColOne() {
         return showUpColOne;
+    }
+
+    public Sound getShowUpColSilverBullet() {
+        return showUpColSilverBullet;
     }
 
     public Sound getShowUpPowerOne() {

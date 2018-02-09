@@ -15,14 +15,23 @@ public class AssetSilverBullet {
     private TextureRegion silverBulletStand;
     private Animation silverBulletAnimation;
 
+    private TextureRegion colSilverBulletStand;
+    private Animation colSilverBulletAnimation;
+
     public AssetSilverBullet(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
         silverBulletStand = atlas.findRegion("shuriken", 1);
+        colSilverBulletStand = atlas.findRegion("colTwo", 1);
 
         // Animation
         regions = atlas.findRegions("shuriken");
         silverBulletAnimation = new Animation(0.5f / 13.0f, regions);
+        regions.clear();
+
+        // Animation
+        regions = atlas.findRegions("colTwo");
+        colSilverBulletAnimation = new Animation(0.5f / 25.0f, regions);
         regions.clear();
     }
 
@@ -30,7 +39,11 @@ public class AssetSilverBullet {
         return silverBulletStand;
     }
 
-    public Animation getSilverBulletAnimation() {
-        return silverBulletAnimation;
+    public TextureRegion getColSilverBulletStand() {
+        return colSilverBulletStand;
+    }
+
+    public Animation getColSilverBulletAnimation() {
+        return colSilverBulletAnimation;
     }
 }
