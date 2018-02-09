@@ -60,8 +60,10 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(new Label("Score: " + finalScore, labelStyleNormal)).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(playAgainLabel).padTop(Constants.PAD_TOP).center();
-        table.row();
-        table.add(nextLevelLabel).padTop(Constants.PAD_TOP).center();
+        if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
+            table.row();
+            table.add(nextLevelLabel).padTop(Constants.PAD_TOP).center();
+        }
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
@@ -70,7 +72,9 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Events
         playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel));
-        nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel));
+        if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
+            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel));
+        }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
         // Audio FX
