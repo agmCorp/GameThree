@@ -102,7 +102,7 @@ public class Constants {
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
     public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpColOne.ogg";
-    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColOne.ogg"; // TODO
+    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColOne.ogg"; // TODO poner audio de "cool", "yea"
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerThree.ogg";
@@ -111,7 +111,7 @@ public class Constants {
     public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
     public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
     public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpColOne.ogg";
-    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColOne.ogg"; // TODO
+    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColOne.ogg"; // TODO poner audio de arma poderosa
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerTwo.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerThree.ogg";
@@ -351,6 +351,7 @@ public class Constants {
     public static final float SILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float SILVERBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;
     public static final float SILVERBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;
+    public static final float SILVERBULLET__FIRE_DELAY_SECONDS = 1.5f;
 
     // ExplosionA (meters = pixels * resizeFactor / PPM)
     public static final float EXPLOSIONA_WIDTH_METERS = 167.0f * 0.5f / PPM;

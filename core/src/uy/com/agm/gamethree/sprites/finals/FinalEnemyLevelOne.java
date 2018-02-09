@@ -227,6 +227,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 // HealthBar
                 screen.getHud().showHealthBarInfo(Constants.FINALLEVELONE_NAME, damage);
 
+                // todo
+                screen.getPlayer().applySilverBullet(Constants.SILVERBULLET_WIDTH_METERS, Constants.SILVERBULLET_HEIGHT_METERS, Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS, Constants.SILVERBULLET__FIRE_DELAY_SECONDS, Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
+
                 // Initial state
                 currentStateFinalEnemy = StateFinalEnemy.WALKING;
                 updateLogic(dt);

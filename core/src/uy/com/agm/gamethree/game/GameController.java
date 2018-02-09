@@ -39,7 +39,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     @Override
     public boolean tap(float x, float y, int count, int button) {
         // If Hero is dead, we don't handle any input
-        if (GameSettings.getInstance().isManualShooting()) {
+        if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
             if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
                 player.openFire();
             }
@@ -129,7 +129,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 player.getB2body().setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.SPACE) {
-                if (GameSettings.getInstance().isManualShooting() && !finalEnemy.isDestroyed()) {
+                if ((GameSettings.getInstance().isManualShooting()  || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
                     player.openFire();
                 }
             }

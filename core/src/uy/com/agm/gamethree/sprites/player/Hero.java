@@ -58,7 +58,10 @@ public class Hero extends Sprite {
     private float setDefaultFilterTimer;
     private boolean isPlayingAgain;
     private int lives;
+
+    // Silver bullets
     private int silverBullets;
+    private boolean silverBulletEnabled;
 
     // Power FX
     private PowerState currentPowerState;
@@ -113,7 +116,10 @@ public class Hero extends Sprite {
         setDefaultFilterTimer = 0;
         isPlayingAgain = false;
         lives = Constants.HERO_LIVES_START;
+
+        // SilverBullets variables initialization
         silverBullets = 0;
+        silverBulletEnabled = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
@@ -191,7 +197,7 @@ public class Hero extends Sprite {
     }
 
     private void automaticShooting() {
-        if (!GameSettings.getInstance().isManualShooting()) {
+        if (!GameSettings.getInstance().isManualShooting() && !silverBulletEnabled) {
             if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
                 openFire();
             }
@@ -591,35 +597,72 @@ public class Hero extends Sprite {
     }
 
     public void openFire() {
-        if (fireEnhancement) {
-            if (openFireTimer > fireDelay) {
-                float directionDegrees = 180.0f / (numberBullets + 1);
-                float angle;
-                for(int i = 1; i <= numberBullets; i++) {
-                    angle = directionDegrees * i;
-                    angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
-
-                    if (screen.getHud().isPowerRunningOut()) {
-                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
-                    } else {
-                        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
-                                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
-                                bulletWidth,
-                                bulletHeight,
-                                bulletCircleShapeRadius,
-                                angle,
-                                bulletAnimation,
-                                HeroBullet.class));
-                    }
-                }
-                openFireTimer = 0;
-            }
+        if (silverBulletEnabled) {
+            openFireSilverBullet();
         } else {
-            if (openFireTimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
-                openFireTimer = 0;
+            if (fireEnhancement) {
+                openFireEnhanced();
+            } else {
+                openFireDefault();
             }
+        }
+    }
+
+    private void openFireSilverBullet() {
+        if (openFireTimer > fireDelay) {
+            if (silverBullets > 0) {
+                silverBullets--;
+                screen.getHud().decreaseSilverBullets(1);
+                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                        b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
+                        bulletWidth,
+                        bulletHeight,
+                        bulletCircleShapeRadius,
+                        0,
+                        bulletAnimation,
+                        HeroBullet.class));
+                openFireTimer = 0;
+            } else {
+                // Sound FX
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick()); // todo poner ruido de vacio
+            }
+        }
+    }
+
+    private void openFireEnhanced(float bulletWidth, float bulletHeight, float bulletCircleShapeRadius, Animation bulletAnimation) {
+        if (openFireTimer > fireDelay) {
+            float directionDegrees = 180.0f / (numberBullets + 1);
+            float angle;
+            for (int i = 1; i <= numberBullets; i++) {
+                angle = directionDegrees * i;
+                angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
+
+                if (screen.getHud().isPowerRunningOut()) {
+                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                            b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
+                } else {
+                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                            b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
+                            bulletWidth,
+                            bulletHeight,
+                            bulletCircleShapeRadius,
+                            angle,
+                            bulletAnimation,
+                            HeroBullet.class));
+                }
+            }
+            openFireTimer = 0;
+        }
+    }
+
+    private void openFireEnhanced() {
+        openFireEnhanced(bulletWidth, bulletHeight, bulletCircleShapeRadius, bulletAnimation);
+    }
+
+    private void openFireDefault() {
+        if (openFireTimer > Constants.HERO_FIRE_DELAY_SECONDS) {
+            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
+            openFireTimer = 0;
         }
     }
 
@@ -689,6 +732,15 @@ public class Hero extends Sprite {
         bulletAnimation = animation;
     }
 
+    public void applySilverBullet(float width, float height, float circleShapeRadius, float delay, Animation animation) {
+        silverBulletEnabled = true;
+        bulletWidth = width;
+        bulletHeight = height;
+        bulletCircleShapeRadius = circleShapeRadius;
+        fireDelay = delay;
+        bulletAnimation = animation;
+    }
+
     public void stop() {
         b2body.setLinearVelocity(0.0f, 0.0f);
     }
@@ -700,5 +752,9 @@ public class Hero extends Sprite {
     public void addSilverBullet() {
         silverBullets++;
         screen.getHud().increaseSilverBullets(1);
+    }
+
+    public boolean isSilverBulletEnabled() {
+        return silverBulletEnabled;
     }
 }
