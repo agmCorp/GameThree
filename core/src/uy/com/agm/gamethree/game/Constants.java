@@ -61,8 +61,6 @@ public class Constants {
     public static final String HUD_TEXT_CONFIRM = "REALLY?";
     public static final String HUD_TEXT_HURRYUP = "HURRY UP!";
     public static final String HUD_TEXT_TIMESUP = "TIME'S UP!!";
-    public static final String SLIDER_BACKGROUND = "scene2d/slider_background.png";
-    public static final String SLIDER_KNOB = "scene2d/slider_knob.png";
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
     public static final float SLIDER_STEP = 0.01f;
@@ -76,8 +74,11 @@ public class Constants {
 
     // ---- Assets ----
 
-    // Location of description file for texture atlas
+    // Location of description file for texture atlas (dinamic game objects)
     public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.atlas";
+
+    // Location of description file for texture atlas (GUI)
+    public static final String TEXTURE_ATLAS_UI = "scene2d/scene2d.atlas";
 
     // Location of description file for Bitmap fonts
     public static final String FONT_FILE = "fonts/fonts.fnt";

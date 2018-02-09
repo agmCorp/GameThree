@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
@@ -55,6 +56,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private AssetManager assetManager;
 
+    private AssetScene2d scene2d;
     private AssetFonts fonts;
     private AssetHero hero;
     private AssetEnemyOne enemyOne;
@@ -98,8 +100,12 @@ public class Assets implements Disposable, AssetErrorListener {
         return instance;
     }
 
-    private void loadTextureAtlas() {
+    private void loadTextureAtlasObjects() {
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+    }
+
+    private void loadTextureAtlasUI() {
+        assetManager.load(Constants.TEXTURE_ATLAS_UI, TextureAtlas.class);
     }
 
     private void loadMaps() {
@@ -155,8 +161,11 @@ public class Assets implements Disposable, AssetErrorListener {
         // Set asset manager error handler
         assetManager.setErrorListener(this);
 
-        // Load texture atlas
-        loadTextureAtlas();
+        // Load texture atlas (dinamic game objects)
+        loadTextureAtlasObjects();
+
+        // Load texture atlas (UI)
+        loadTextureAtlasUI();
 
         // Load map for each level
         loadMaps();
@@ -175,37 +184,44 @@ public class Assets implements Disposable, AssetErrorListener {
             Gdx.app.debug(TAG, "Asset: " + assetName);
         }
 
-        // Enable texture filtering for pixel smoothing
-        TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-        for (Texture texture : atlas.getTextures()) {
+        // Enable texture filtering for pixel smoothing (UI)
+        TextureAtlas atlasUI = assetManager.get(Constants.TEXTURE_ATLAS_UI);
+        for (Texture texture : atlasUI.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
+
+        // Enable texture filtering for pixel smoothing (dinamic game objects)
+        TextureAtlas atlasDinamicObjects = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+        for (Texture texture : atlasDinamicObjects.getTextures()) {
+            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
+        scene2d = new AssetScene2d(atlasUI);
         fonts = new AssetFonts();
-        hero = new AssetHero(atlas);
-        enemyOne = new AssetEnemyOne(atlas);
-        enemyTwo = new AssetEnemyTwo(atlas);
-        enemyThree = new AssetEnemyThree(atlas);
-        enemyFour = new AssetEnemyFour(atlas);
-        powerBox = new AssetPowerBox(atlas);
-        colOne = new AssetColOne(atlas);
-        powerOne = new AssetPowerOne(atlas);
-        powerTwo = new AssetPowerTwo(atlas);
-        powerThree = new AssetPowerThree(atlas);
-        powerFour = new AssetPowerFour(atlas);
-        explosionA = new AssetExplosionA(atlas);
-        explosionB = new AssetExplosionB(atlas);
-        explosionC = new AssetExplosionC(atlas);
-        explosionD = new AssetExplosionD(atlas);
-        explosionE = new AssetExplosionE(atlas);
-        heroBullet = new AssetHeroBullet(atlas);
-        enemyBullet = new AssetEnemyBullet(atlas);
-        shuriken = new AssetShuriken(atlas);
-        ghostMode = new AssetGhostMode(atlas);
-        shield = new AssetShield(atlas);
-        bulletA = new AssetBulletA(atlas);
-        toughMode = new AssetToughMode(atlas);
-        finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlas);
-        finalEnemyLevelOnePower = new AssetFinalEnemyLevelOnePower(atlas);
+        hero = new AssetHero(atlasDinamicObjects);
+        enemyOne = new AssetEnemyOne(atlasDinamicObjects);
+        enemyTwo = new AssetEnemyTwo(atlasDinamicObjects);
+        enemyThree = new AssetEnemyThree(atlasDinamicObjects);
+        enemyFour = new AssetEnemyFour(atlasDinamicObjects);
+        powerBox = new AssetPowerBox(atlasDinamicObjects);
+        colOne = new AssetColOne(atlasDinamicObjects);
+        powerOne = new AssetPowerOne(atlasDinamicObjects);
+        powerTwo = new AssetPowerTwo(atlasDinamicObjects);
+        powerThree = new AssetPowerThree(atlasDinamicObjects);
+        powerFour = new AssetPowerFour(atlasDinamicObjects);
+        explosionA = new AssetExplosionA(atlasDinamicObjects);
+        explosionB = new AssetExplosionB(atlasDinamicObjects);
+        explosionC = new AssetExplosionC(atlasDinamicObjects);
+        explosionD = new AssetExplosionD(atlasDinamicObjects);
+        explosionE = new AssetExplosionE(atlasDinamicObjects);
+        heroBullet = new AssetHeroBullet(atlasDinamicObjects);
+        enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
+        shuriken = new AssetShuriken(atlasDinamicObjects);
+        ghostMode = new AssetGhostMode(atlasDinamicObjects);
+        shield = new AssetShield(atlasDinamicObjects);
+        bulletA = new AssetBulletA(atlasDinamicObjects);
+        toughMode = new AssetToughMode(atlasDinamicObjects);
+        finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDinamicObjects);
+        finalEnemyLevelOnePower = new AssetFinalEnemyLevelOnePower(atlasDinamicObjects);
         maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
@@ -222,6 +238,10 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts.getDefaultSmall().dispose();
         fonts.getDefaultNormal().dispose();
         fonts.getDefaultBig().dispose();
+    }
+
+    public AssetScene2d getScene2d() {
+        return scene2d;
     }
 
     public AssetFonts getFonts() {

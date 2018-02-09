@@ -56,9 +56,11 @@ que no complete el nivel (play again, back to main menu). Sencillo.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
 - VOLVER TODAS LAS SCREEN A VARIABLES LOCALES.
+- PONER LAS LABELS DE LAS PANTALLAS EN CONSTANTES, SON POCAS.
 
 PENDIENTES
 ----------
+-i18n
 - ver de configurar que no incluya el raw cuando arma el apk.
 Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 Con estas 2 cosas disminuyo mucho el tamano total y ya no se puede optimizar mucho mas.

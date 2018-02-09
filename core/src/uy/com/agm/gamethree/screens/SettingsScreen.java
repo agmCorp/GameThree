@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,8 +30,8 @@ public class SettingsScreen extends AbstractScreen {
     private Slider.SliderStyle sliderStyle;
     private Label shootingLabel;
     private Label backLabel;
-    private Texture sliderBackgroundTex;
-    private Texture sliderKnobTex;
+    private TextureRegion sliderBackground;
+    private TextureRegion sliderKnob;
     private Slider sliderMusic;
     private Slider sliderSound;
     private GameSettings prefs;
@@ -41,8 +39,8 @@ public class SettingsScreen extends AbstractScreen {
     public SettingsScreen() {
         super();
         prefs = GameSettings.getInstance();
-        sliderBackgroundTex = new Texture(Gdx.files.internal(Constants.SLIDER_BACKGROUND));
-        sliderKnobTex = new Texture(Gdx.files.internal(Constants.SLIDER_KNOB));
+        sliderBackground = Assets.getInstance().getScene2d().getSliderBackground();
+        sliderKnob = Assets.getInstance().getScene2d().getSliderKnob();
     }
 
     @Override
@@ -59,8 +57,8 @@ public class SettingsScreen extends AbstractScreen {
 
         //Slider style
         sliderStyle = new Slider.SliderStyle();
-        sliderStyle.background = new TextureRegionDrawable(new TextureRegion(sliderBackgroundTex));
-        sliderStyle.knob = new TextureRegionDrawable(new TextureRegion(sliderKnobTex));
+        sliderStyle.background = new TextureRegionDrawable(sliderBackground);
+        sliderStyle.knob = new TextureRegionDrawable(sliderKnob);
 
         // Music
         sliderMusic = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
@@ -203,8 +201,5 @@ public class SettingsScreen extends AbstractScreen {
     @Override
     public void dispose() {
         super.dispose();
-
-        sliderBackgroundTex.dispose();
-        sliderKnobTex.dispose();
     }
 }

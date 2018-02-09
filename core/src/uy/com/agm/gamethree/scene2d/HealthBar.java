@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.ui;
+package uy.com.agm.gamethree.scene2d;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

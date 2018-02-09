@@ -17,7 +17,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.ui.HealthBar;
+import uy.com.agm.gamethree.scene2d.HealthBar;
 
 /**
  * Created by AGM on 1/18/2018.
