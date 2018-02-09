@@ -43,6 +43,10 @@ public class AssetSilverBullet {
         return colSilverBulletStand;
     }
 
+    public Animation getSilverBulletAnimation() {
+        return silverBulletAnimation;
+    }
+
     public Animation getColSilverBulletAnimation() {
         return colSilverBulletAnimation;
     }

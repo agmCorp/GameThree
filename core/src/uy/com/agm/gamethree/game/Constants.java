@@ -335,8 +335,8 @@ public class Constants {
     public static final float HEROBULLET_VELOCITY_X = 0.0f;
     public static final float HEROBULLET_VELOCITY_Y = 6.0f;
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
-    public static final float HEROBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;//192.0f * 0.6f / PPM;
-    public static final float HEROBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;//192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
@@ -344,6 +344,13 @@ public class Constants {
     public static final float ENEMYBULLET_WIDTH_METERS = 192.0f * 0.3f / PPM;
     public static final float ENEMYBULLET_HEIGHT_METERS = 192.0f  * 0.3f / PPM;
     public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
+
+    // SilverBullet (meters = pixels * resizeFactor / PPM)
+    public static final float SILVERBULLET_VELOCITY_X = 0.0f;
+    public static final float SILVERBULLET_VELOCITY_Y = 3.0f;
+    public static final float SILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
+    public static final float SILVERBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;
+    public static final float SILVERBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;
 
     // ExplosionA (meters = pixels * resizeFactor / PPM)
     public static final float EXPLOSIONA_WIDTH_METERS = 167.0f * 0.5f / PPM;
