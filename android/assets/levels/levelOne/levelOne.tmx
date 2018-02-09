@@ -225,7 +225,7 @@
   </object>
   <object id="696" x="194" y="7105" width="32" height="32">
    <properties>
-    <property name="ColSilverBullet" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
  </objectgroup>

@@ -163,7 +163,7 @@ public class B2WorldCreator {
             if (gameThreeActorDef.getType() == ColOne.class) {
                 items.add(new ColOne(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY()));
             }
-            if (gameThreeActorDef.getType() == ColOne.class) {
+            if (gameThreeActorDef.getType() == ColSilverBullet.class) {
                 items.add(new ColSilverBullet(screen, gameThreeActorDef.getX(), gameThreeActorDef.getY())); // todo aca deberia ser otra coleccion creo
             }
             if (gameThreeActorDef.getType() == PowerOne.class) {
