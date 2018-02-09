@@ -47,15 +47,10 @@ PROXIMOS PASOS
 https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview
 lo guarde, no aporto mucho, http://pimentoso.blogspot.com.uy/2013/05/libgdx-scene2d-complex-ui-elements.html
-- HACER EN CASA EL TEXTUREPAKCER
-- pensar un objetivo del juego:
-agarrar entre 1 o 3 llaves escondidas en las powerbox o en los enemigos.
-Cada llave es una estrella del level completed.
-Yo juego alegremente y mato al enemigo final. Si tengo alguna llave, complete el nivel y si no tengo ninguna sale una pantalla diciendo
-que no complete el nivel (play again, back to main menu). Sencillo.
+- programar el objetivo del juego.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
-- VOLVER TODAS LAS SCREEN A VARIABLES LOCALES.
+- VOLVER TODAS LAS SCREEN A VARIABLES LOCALES?
 - PONER LAS LABELS DE LAS PANTALLAS EN CONSTANTES, SON POCAS.
 
 PENDIENTES
@@ -71,7 +66,7 @@ Con estas 2 cosas disminuyo mucho el tamano total y ya no se puede optimizar muc
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - se corta el audio al morir..el gruñido se escucha cortado.
-- hacer un skin para la ui, intente usar las clases "asset" pero mejor no, ver de usar un skin.
+- hacer un skin para la ui?
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
@@ -115,7 +110,8 @@ DUDAS
     abrir un git local (un proyecto) sin tener que hacer clone
     No me quedo un acceso directo, sino que ejecuto el exe que baje
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
-- Manejo de memoria y uso de Vector2.
+- Manejo de memoria y uso de Vector2 y uso de Lables en las pantallas.
+El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
 

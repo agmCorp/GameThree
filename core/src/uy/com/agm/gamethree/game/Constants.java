@@ -75,17 +75,17 @@ public class Constants {
     // ---- Assets ----
 
     // Location of description file for texture atlas (dinamic game objects)
-    public static final String TEXTURE_ATLAS_OBJECTS = "dinamicObjects/dinamicObjects.atlas";
+    public static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
 
     // Location of description file for texture atlas (GUI)
-    public static final String TEXTURE_ATLAS_UI = "scene2d/scene2d.atlas";
+    public static final String TEXTURE_ATLAS_UI = "atlas/scene2d/scene2d.atlas";
 
     // Location of description file for Bitmap fonts
     public static final String FONT_FILE = "fonts/fonts.fnt";
 
     // Location of the map file for each level
-    public static final String MAP_FILE_LEVEL_ONE = "levelOne/levelOne.tmx";
-    public static final String MAP_FILE_LEVEL_TWO = "levelTwo/levelTwo.tmx";
+    public static final String MAP_FILE_LEVEL_ONE = "levels/levelOne/levelOne.tmx";
+    public static final String MAP_FILE_LEVEL_TWO = "levels/levelTwo/levelTwo.tmx";
 
     // Font sizes
     public static final float FONT_SMALL = 0.6f;
