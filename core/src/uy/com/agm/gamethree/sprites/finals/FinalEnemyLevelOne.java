@@ -244,6 +244,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                     playingIntro = false;
                 }
             }
+
+            // todo me parece que aca deberia evaluar si el hero no tiene shurikens y liberar uno cada cierto tiempo.
+            // tendria que generalizar toda esta parte y llevarla a la clase base
+            // lo puedo generalizar si paso todo esto a la clase base y luego invoco a metodos abstractos que obligo a que esten
+            // en la clase hija *(como hice con defineFinalEnemy).
             updateLogic(dt);
         }
     }

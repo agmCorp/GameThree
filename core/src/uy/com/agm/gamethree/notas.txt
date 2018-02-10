@@ -48,7 +48,8 @@ disparo manual, agarro las silver, agarro power fire, muero y luego disparo como
 Creo que lo que hay que hacer es si estoy en modo silver y agarro un poder de disparo, la animacion es el shuriken y por cada disparo (doble o triple, etc.) se me toma como 1 disparo.
 
 deje la implementacion de eso por la mitad.
-
+- pasar todos los update de todos los enemy a la clase base (son todos identicos)
+pasar el update de finalenemyone a la clase base.
 - renombrar las imágenes colTwo y shuriken por colSilverBullet o colShuriken...no se...
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
