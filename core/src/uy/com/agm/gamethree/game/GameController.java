@@ -129,7 +129,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 player.getB2body().setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.SPACE) {
-                if ((GameSettings.getInstance().isManualShooting()  || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
+                if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
                     player.openFire();
                 }
             }
