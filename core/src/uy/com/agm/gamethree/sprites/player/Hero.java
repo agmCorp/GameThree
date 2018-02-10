@@ -118,7 +118,7 @@ public class Hero extends Sprite {
         lives = Constants.HERO_LIVES_START;
 
         // SilverBullets variables initialization
-        silverBullets = 0;
+        silverBullets = 2;
         silverBulletEnabled = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)
@@ -596,11 +596,19 @@ public class Hero extends Sprite {
         super.draw(batch);
     }
 
+    public void playSoundHeroShoot() {
+        if (isSilverBulletEnabled()) {
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
+        } else {
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+        }
+    }
+
     public void openFire() {
         if (isFireEnhanced()) {
             openFireEnhanced();
         } else {
-            openFireDefault();
+            openFireNormal();
         }
     }
 
@@ -622,7 +630,7 @@ public class Hero extends Sprite {
             shootEnhanced();
         } else {
             // Sound FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick()); // todo poner ruido de vacio
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
         }
     }
 
@@ -633,7 +641,7 @@ public class Hero extends Sprite {
             angle = directionDegrees * i;
             angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
-            if (screen.getHud().isPowerRunningOut()) {
+            if (screen.getHud().isPowerRunningOut() && !isSilverBulletEnabled()) {
                 screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                         b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
             } else {
@@ -649,7 +657,7 @@ public class Hero extends Sprite {
         }
     }
 
-    private void openFireDefault() {
+    private void openFireNormal() {
         if (isSilverBulletEnabled()) {
             if (openFireTimer > fireDelay) {
                 shootSilverBulletNormal();
@@ -677,7 +685,7 @@ public class Hero extends Sprite {
                     HeroBullet.class));
         } else {
             // Sound FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick()); // todo poner ruido de vacio
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
         }
     }
 

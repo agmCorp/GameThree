@@ -17,6 +17,8 @@ public class AssetSounds {
     private Sound dead;
     private Sound enemyShoot;
     private Sound heroShoot;
+    private Sound heroShootEmpty;
+    private Sound heroShootSwish;
     private Sound hit;
     private Sound openPowerBox;
     private Sound clock;
@@ -53,6 +55,8 @@ public class AssetSounds {
         dead = am.get(Constants.FX_FILE_DEAD, Sound.class);
         enemyShoot = am.get(Constants.FX_FILE_ENEMY_SHOOT, Sound.class);
         heroShoot = am.get(Constants.FX_FILE_HERO_SHOOT, Sound.class);
+        heroShootEmpty = am.get(Constants.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
+        heroShootSwish = am.get(Constants.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         hit = am.get(Constants.FX_FILE_HIT, Sound.class);
         openPowerBox = am.get(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         clock = am.get(Constants.FX_FILE_CLOCK, Sound.class);
@@ -102,6 +106,14 @@ public class AssetSounds {
 
     public Sound getHeroShoot() {
         return heroShoot;
+    }
+
+    public Sound getHeroShootEmpty() {
+        return heroShootEmpty;
+    }
+
+    public Sound getHeroShootSwish() {
+        return heroShootSwish;
     }
 
     public Sound getHit() {

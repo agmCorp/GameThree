@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -52,7 +51,7 @@ public class HeroBullet extends Weapon {
         currentState = State.SHOT;
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+        screen.getPlayer().playSoundHeroShoot();
 
         // Temp GC friendly vector
         tmp = new Vector2();

@@ -141,6 +141,7 @@ public class PlayScreen extends AbstractScreen {
         playScreenState = PlayScreenState.RUNNING;
     }
 
+
     private InputProcessor getInputProcessor(GameController gc) {
         /* GameController is an InputAdapter because it extends that class and
          * It's also a GestureListener because it implements that interface.

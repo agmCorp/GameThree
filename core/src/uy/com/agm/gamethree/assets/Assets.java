@@ -120,6 +120,8 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_DEAD, Sound.class);
         assetManager.load(Constants.FX_FILE_ENEMY_SHOOT, Sound.class);
         assetManager.load(Constants.FX_FILE_HERO_SHOOT, Sound.class);
+        assetManager.load(Constants.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
+        assetManager.load(Constants.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         assetManager.load(Constants.FX_FILE_HIT, Sound.class);
         assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
         assetManager.load(Constants.FX_FILE_CLOCK, Sound.class);

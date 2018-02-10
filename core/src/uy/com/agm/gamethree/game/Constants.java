@@ -32,10 +32,10 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -98,11 +98,13 @@ public class Constants {
     public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
     public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
+    public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/gunReload.ogg";
+    public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
     public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpColOne.ogg";
-    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColOne.ogg"; // TODO poner audio de "cool", "yea"
+    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColSilverBullet.ogg";
     public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerThree.ogg";
@@ -111,7 +113,7 @@ public class Constants {
     public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
     public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
     public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpColOne.ogg";
-    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColOne.ogg"; // TODO poner audio de arma poderosa
+    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColSilverBullet.ogg";
     public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerTwo.ogg";
     public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerThree.ogg";
@@ -171,7 +173,7 @@ public class Constants {
     public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final float HERO_FIRE_DELAY_SECONDS = 0.3f;
+    public static final float HERO_FIRE_DELAY_SECONDS = 0.5f;
     public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
 
@@ -339,19 +341,17 @@ public class Constants {
     public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
-    public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
+    public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
+    public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
     public static final float ENEMYBULLET_WIDTH_METERS = 192.0f * 0.3f / PPM;
     public static final float ENEMYBULLET_HEIGHT_METERS = 192.0f  * 0.3f / PPM;
-    public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
 
     // SilverBullet (meters = pixels * resizeFactor / PPM)
-    public static final float SILVERBULLET_VELOCITY_X = 0.0f;
-    public static final float SILVERBULLET_VELOCITY_Y = 3.0f;
     public static final float SILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float SILVERBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;
     public static final float SILVERBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;
-    public static final float SILVERBULLET__FIRE_DELAY_SECONDS = 1.5f;
+    public static final float SILVERBULLET_FIRE_DELAY_SECONDS = 1.0f;
 
     // ExplosionA (meters = pixels * resizeFactor / PPM)
     public static final float EXPLOSIONA_WIDTH_METERS = 167.0f * 0.5f / PPM;
