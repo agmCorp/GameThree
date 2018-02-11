@@ -44,7 +44,7 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-- renombrar las imágenes colTwo y shuriken por colSilverBullet o colShuriken...no se...
+- los helps que saltan, deberia tirarlos el hud segun el time general capaz.
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
