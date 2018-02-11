@@ -38,11 +38,11 @@ public class AssetSounds {
     private Sound showUpPowerThree;
     private Sound showUpPowerFour;
     private Sound timeIsUp;
+    private Sound finalEnemyIntro;
     private Sound finalEnemyLevelOnePowerUp;
     private Sound finalEnemyLevelOnePowerDown;
     private Sound finalEnemyLevelOneExplosion;
     private Sound finalEnemyLevelOneHit;
-    private Sound finalEnemyLevelOneIntro;
     private Sound levelCompleted;
     private Sound boing;
     private Sound click;
@@ -80,7 +80,7 @@ public class AssetSounds {
         finalEnemyLevelOnePowerDown = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
         finalEnemyLevelOneExplosion = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
         finalEnemyLevelOneHit = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
-        finalEnemyLevelOneIntro = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
+        finalEnemyIntro = am.get(Constants.FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
         levelCompleted = am.get(Constants.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Constants.FX_FILE_BOUNCE, Sound.class);
         click = am.get(Constants.FX_FILE_CLICK, Sound.class);
@@ -208,8 +208,8 @@ public class AssetSounds {
         return finalEnemyLevelOneHit;
     }
 
-    public Sound getFinalEnemyLevelOneIntro() {
-        return finalEnemyLevelOneIntro;
+    public Sound getFinalEnemyIntro() {
+        return finalEnemyIntro;
     }
 
     public Sound getLevelCompleted() {

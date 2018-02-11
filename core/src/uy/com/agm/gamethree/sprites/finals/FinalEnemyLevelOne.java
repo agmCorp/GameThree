@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -43,8 +42,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private float timeToChangeTimer;
     private float timeToChange;
     private float openFireTimer;
-    private float introTimer;
-    private boolean playingIntro;
 
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
@@ -78,8 +75,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         timeToChangeTimer = 0;
         timeToChange = getNextTimeToChange();
         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
-        introTimer = 0;
-        playingIntro = false;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -128,6 +123,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         explosionFXSprite.setOriginCenter();
     }
 
+    @Override
     protected void defineFinalEnemy() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
@@ -211,48 +207,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         return newRandomStateFinalEnemy;
     }
 
-    public void update(float dt) {
-        if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
-            // When our final enemy is on camera, it activates
-            checkBoundaries();
-            if (b2body.isActive()) {
-                // Pause music for a few seconds
-                AudioManager.getInstance().pauseMusic();
-                introTimer = 0;
-                playingIntro = true;
-
-                // Audio FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneIntro());
-
-                // HealthBar
-                screen.getHud().showHealthBarInfo(Constants.FINALLEVELONE_NAME, damage);
-
-                // todo
-                screen.getPlayer().applySilverBullet(Constants.SILVERBULLET_WIDTH_METERS, Constants.SILVERBULLET_HEIGHT_METERS, Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS, Constants.SILVERBULLET_FIRE_DELAY_SECONDS, Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
-
-                // Initial state
-                currentStateFinalEnemy = StateFinalEnemy.WALKING;
-                updateLogic(dt);
-            }
-        } else {
-            if (playingIntro) {
-                introTimer += dt;
-                if (introTimer > Constants.FINALLEVELONE_INTRO_TIME_SECONDS) {
-                    if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
-                        AudioManager.getInstance().resumeMusic();
-                    }
-                    playingIntro = false;
-                }
-            }
-
-            // todo me parece que aca deberia evaluar si el hero no tiene shurikens y liberar uno cada cierto tiempo.
-            // tendria que generalizar toda esta parte y llevarla a la clase base
-            // lo puedo generalizar si paso todo esto a la clase base y luego invoco a metodos abstractos que obligo a que esten
-            // en la clase hija *(como hice con defineFinalEnemy).
-            updateLogic(dt);
-        }
-    }
-
+    @Override
     public void updateLogic(float dt) {
         switch (currentStateFinalEnemy) {
             case WALKING:
@@ -572,6 +527,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
     }
 
+    @Override
     public void onHit(Weapon weapon) {
         if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
             weapon.onTarget();
@@ -587,6 +543,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
     }
 
+    @Override
     public void onHitWall(boolean isBorder) {
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING) {
             float velY = b2body.getLinearVelocity().y;
@@ -733,6 +690,39 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
     }
 
+    @Override
+    protected boolean finalEnemyStarts() {
+        checkBoundaries();
+        return b2body.isActive();
+    }
+
+    @Override
+    protected String getFinalEnemyName() {
+        return Constants.FINALLEVELONE_NAME;
+    }
+
+    @Override
+    protected int getFinalEnemyDamage() {
+        return damage;
+    }
+
+    @Override
+    protected void setInitialState() {
+        currentStateFinalEnemy = StateFinalEnemy.WALKING;
+    }
+
+    private void checkBoundaries() {
+        /* When a FinalEnemyLevelOne is on camera, it activates (it can collide).
+        * You have to be very careful because if the final level One enemy is destroyed, its b2body does not exist and gives
+        * random errors if you try to active it.
+        */
+        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
+
+        if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS) {
+            b2body.setActive(true);
+        }
+    }
+
     private boolean isDrawable() {
         return currentStateFinalEnemy != StateFinalEnemy.DEAD &&
                 currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
@@ -759,22 +749,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             drawPowers(batch);
         } else {
             drawExplosion(batch);
-        }
-    }
-
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-    }
-
-    private void checkBoundaries() {
-        /* When a FinalEnemyLevelOne is on camera, it activates (it can collide).
-        * You have to be very careful because if the final level One enemy is destroyed, its b2body does not exist and gives
-        * random errors if you try to active it.
-        */
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
-
-        if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS) {
-            b2body.setActive(true);
         }
     }
 }

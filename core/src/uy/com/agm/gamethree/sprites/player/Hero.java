@@ -118,7 +118,7 @@ public class Hero extends Sprite {
         lives = Constants.HERO_LIVES_START;
 
         // SilverBullets variables initialization
-        silverBullets = 2;
+        silverBullets = 0;
         silverBulletEnabled = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)
@@ -761,13 +761,13 @@ public class Hero extends Sprite {
         }
     }
 
-    public void applySilverBullet(float width, float height, float circleShapeRadius, float delay, Animation animation) {
+    public void applySilverBullet() {
         silverBulletEnabled = true;
-        bulletWidth = width;
-        bulletHeight = height;
-        bulletCircleShapeRadius = circleShapeRadius;
-        fireDelay = delay;
-        bulletAnimation = animation;
+        bulletWidth = Constants.SILVERBULLET_WIDTH_METERS;
+        bulletHeight = Constants.SILVERBULLET_HEIGHT_METERS;
+        bulletCircleShapeRadius = Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS;
+        fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
+        bulletAnimation = Assets.getInstance().getSilverBullet().getSilverBulletAnimation();
     }
 
     public void stop() {
@@ -781,6 +781,10 @@ public class Hero extends Sprite {
     public void addSilverBullet() {
         silverBullets++;
         screen.getHud().increaseSilverBullets(1);
+    }
+
+    public int getSilverBullets() {
+        return silverBullets;
     }
 
     public boolean isSilverBulletEnabled() {

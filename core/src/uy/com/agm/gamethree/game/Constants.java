@@ -317,6 +317,11 @@ public class Constants {
     public static final float ENEMYFOUR_FROZEN_TIME_SECONDS = 4.0f;
     public static final int ENEMYFOUR_SCORE = 35;
 
+    // FinalEnemy
+    public static final float FINALENEMY_INTRO_TIME_SECONDS = 5.0f;
+    public static final int FINALENEMY_MAX_SILVERBULLET_HELP = 5;
+    public static final float FINALENEMY_SILVERBULLET_HELP_TIME_SECONDS = 5.0f;
+
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
     public static final String FINALLEVELONE_NAME = "Astrobitsy";
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
@@ -326,7 +331,6 @@ public class Constants {
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_STATE_MAX_TIME_SECONDS = 10.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
-    public static final float FINALLEVELONE_INTRO_TIME_SECONDS = 5.0f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     public static final int FINALLEVELONE_MAX_DAMAGE = 3;
