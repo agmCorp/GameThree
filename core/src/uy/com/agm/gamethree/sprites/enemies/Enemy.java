@@ -123,14 +123,40 @@ public abstract class Enemy extends Sprite {
         return currentState == State.DEAD;
     }
 
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
+    }
+
+    public void update(float dt) {
+        switch (currentState) {
+            case ALIVE:
+                stateAlive(dt);
+                break;
+            case INJURED:
+                stateInjured(dt);
+                break;
+            case EXPLODING:
+                stateExploding(dt);
+                break;
+            case DEAD:
+                break;
+            default:
+                break;
+        }
+        checkBoundaries();
+    }
+
     @Override
     public void draw(Batch batch) {
-        super.draw(batch);
+        if (currentState != State.DEAD) {
+            super.draw(batch);
+        }
     }
 
     protected abstract void defineEnemy();
-    public abstract void update(float dt);
-    public abstract void renderDebug(ShapeRenderer shapeRenderer);
+    protected abstract void stateAlive(float dt);
+    protected abstract void stateInjured(float dt);
+    protected abstract void stateExploding(float dt);
     public abstract void onHit();
     public abstract void onBump();
 }

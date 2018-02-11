@@ -51,6 +51,8 @@ deje la implementacion de eso por la mitad.
 - pasar todos los update de todos los enemy a la clase base (son todos identicos)
 pasar el update de finalenemyone a la clase base.
 - renombrar las imágenes colTwo y shuriken por colSilverBullet o colShuriken...no se...
+
+
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - https://gamedev.stackexchange.com/questions/121666/a-single-libgdx-gamescreen-with-pop-up-menu-getting-ready-hud-and-game-over
 lo guarde, no aporto mucho, https://rskupnik.github.io/libgdx-ui-overview

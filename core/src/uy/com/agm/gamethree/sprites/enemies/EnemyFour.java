@@ -1,9 +1,7 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -95,55 +93,7 @@ public class EnemyFour extends Enemy {
     }
 
     @Override
-    public void update(float dt) {
-        switch (currentState) {
-            case ALIVE:
-                stateAlive(dt);
-                break;
-            case INJURED:
-                stateInjured(dt);
-                break;
-            case EXPLODING:
-                stateExploding(dt);
-                break;
-            case DEAD:
-                break;
-            default:
-                break;
-        }
-        super.checkBoundaries();
-    }
-
-    @Override
-    public void onHit() {
-        /*
-         * We must remove its b2body to avoid collisions.
-         * This can't be done here because this method is called from WorldContactListener that is invoked
-         * from PlayScreen.update.world.step(...).
-         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
-         */
-        currentState = State.INJURED;
-    }
-
-    @Override
-    public void onBump() {
-        reverseVelocity(true, false);
-    }
-
-    @Override
-    public void draw(Batch batch) {
-        if (currentState != State.DEAD) {
-           super.draw(batch);
-        }
-    }
-
-    @Override
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-    }
-
-    private void stateAlive(float dt) {
+    protected void stateAlive(float dt) {
         // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
 
@@ -176,7 +126,8 @@ public class EnemyFour extends Enemy {
         checkPath();
     }
 
-    private void stateInjured(float dt) {
+    @Override
+    protected void stateInjured(float dt) {
         switch (currentFrozenState) {
             case INITIAL:
                 stateTimer = 0;
@@ -280,7 +231,8 @@ public class EnemyFour extends Enemy {
         currentState = State.EXPLODING;
     }
 
-    private void stateExploding(float dt) {
+    @Override
+    protected void stateExploding(float dt) {
         if (explosionAnimation.isAnimationFinished(stateTimer)) {
             currentState = State.DEAD;
         } else {
@@ -323,5 +275,22 @@ public class EnemyFour extends Enemy {
 
     private void stop() {
         velocity.set(0.0f, 0.0f);
+    }
+
+    @Override
+    public void onHit() {
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
+         */
+        currentState = State.INJURED;
+    }
+
+    @Override
+    public void onBump() {
+        reverseVelocity(true, false);
     }
 }
