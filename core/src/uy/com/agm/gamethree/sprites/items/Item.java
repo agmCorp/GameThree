@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.items;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -85,9 +86,40 @@ public abstract class Item extends Sprite {
         return currentState == State.FINISHED;
     }
 
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
+    }
+
+    public void update(float dt) {
+        switch (currentState) {
+            case WAITING:
+                stateWaiting(dt);
+                break;
+            case FADING:
+                stateFading(dt);
+                break;
+            case TAKEN:
+                stateTaken(dt);
+                break;
+            case FINISHED:
+                break;
+            default:
+                break;
+        }
+        checkBoundaries();
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        if (currentState == State.WAITING || currentState == State.FADING) {
+            super.draw(batch);
+        }
+    }
+
     protected abstract void defineItem();
-    public abstract void update(float dt);
-    public abstract void renderDebug(ShapeRenderer shapeRenderer);
+    protected abstract void stateWaiting(float dt);
+    protected abstract void stateFading(float dt);
+    protected abstract void stateTaken(float dt);
     public abstract void onUse();
     public abstract void onBump();
 }

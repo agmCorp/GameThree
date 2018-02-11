@@ -86,13 +86,35 @@ public abstract class Weapon extends Sprite {
         return currentState == State.FINISHED;
     }
 
+    public void update(float dt) {
+        switch (currentState) {
+            case SHOT:
+                stateShot(dt);
+                break;
+            case ONTARGET:
+                stateOnTarget(dt);
+                break;
+            case FINISHED:
+                break;
+            default:
+                break;
+        }
+        checkBoundaries();
+    }
+
     @Override
     public void draw(Batch batch) {
-        super.draw(batch);
+        if (currentState == State.SHOT) {
+            super.draw(batch);
+        }
+    }
+
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
     protected abstract void defineWeapon();
-    public abstract void update(float dt);
-    public abstract void renderDebug(ShapeRenderer shapeRenderer);
+    protected abstract void stateShot(float dt);
+    protected abstract void stateOnTarget(float dt);
     public abstract void onTarget();
 }

@@ -1,9 +1,7 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -66,23 +64,7 @@ public class EnemyBullet extends Weapon {
     }
 
     @Override
-    public void update(float dt) {
-        switch (currentState) {
-            case SHOT:
-                stateShot(dt);
-                break;
-            case ONTARGET:
-                stateOnTarget();
-                break;
-            case FINISHED:
-                break;
-            default:
-                break;
-        }
-        super.checkBoundaries();
-    }
-
-    private void stateShot(float dt) {
+    protected void stateShot(float dt) {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -96,14 +78,10 @@ public class EnemyBullet extends Weapon {
         stateTimer += dt;
     }
 
-    private void stateOnTarget() {
+    @Override
+    protected void stateOnTarget(float dt) {
         world.destroyBody(b2body);
         currentState = State.FINISHED;
-    }
-
-    @Override
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
     @Override
@@ -116,12 +94,5 @@ public class EnemyBullet extends Weapon {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.ONTARGET;
-    }
-
-    @Override
-    public void draw(Batch batch) {
-        if (currentState == State.SHOT)  {
-            super.draw(batch);
-        }
     }
 }

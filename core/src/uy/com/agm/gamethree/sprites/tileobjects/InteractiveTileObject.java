@@ -54,11 +54,11 @@ public abstract class InteractiveTileObject {
         fixture = b2body.createFixture(fdef);
     }
 
-    public abstract void onBump();
-
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit; // Depicts what this fixture is
         fixture.setFilterData(filter);
     }
+
+    public abstract void onBump();
 }

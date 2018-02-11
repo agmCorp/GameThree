@@ -3,13 +3,12 @@ package uy.com.agm.gamethree.sprites.boundary;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
  * Created by AGM on 12/31/2017.
@@ -22,7 +21,6 @@ public class Edge {
     private Rectangle bounds;
 
     private Body b2body;
-    private Fixture fixture;
 
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;

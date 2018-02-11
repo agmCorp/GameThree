@@ -1,10 +1,8 @@
 package uy.com.agm.gamethree.sprites.items.powerups;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -75,26 +73,7 @@ public class PowerTwo extends Item {
     }
 
     @Override
-    public void update(float dt) {
-        switch (currentState) {
-            case WAITING:
-                stateWaiting(dt);
-                break;
-            case FADING:
-                stateFading(dt);
-                break;
-            case TAKEN:
-                stateTaken();
-                break;
-            case FINISHED:
-                break;
-            default:
-                break;
-        }
-        super.checkBoundaries();
-    }
-
-    private void stateWaiting(float dt) {
+    protected void stateWaiting(float dt) {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -113,7 +92,8 @@ public class PowerTwo extends Item {
         }
     }
 
-    private void stateFading(float dt) {
+    @Override
+    protected void stateFading(float dt) {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -139,7 +119,8 @@ public class PowerTwo extends Item {
         }
     }
 
-    private void stateTaken() {
+    @Override
+    protected void stateTaken(float dt) {
         // Destroy its b2body
         world.destroyBody(b2body);
         applyPowerTwo();
@@ -207,16 +188,5 @@ public class PowerTwo extends Item {
     @Override
     public void onBump() {
         reverseVelocity(true, true);
-    }
-
-    public void draw(Batch batch) {
-        if (currentState == State.WAITING || currentState == State.FADING) {
-            super.draw(batch);
-        }
-    }
-
-    @Override
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 }

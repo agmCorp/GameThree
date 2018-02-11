@@ -1,9 +1,7 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -79,23 +77,7 @@ public class HeroBullet extends Weapon {
     }
 
     @Override
-    public void update(float dt) {
-        switch (currentState) {
-            case SHOT:
-                stateShot(dt);
-                break;
-            case ONTARGET:
-                stateOnTarget();
-                break;
-            case FINISHED:
-                break;
-            default:
-                break;
-        }
-        super.checkBoundaries();
-    }
-
-    private void stateShot(float dt) {
+    protected void stateShot(float dt) {
         b2body.setLinearVelocity(velocity);
 
         // Get the bounding rectangle that could have been changed after applying setRotation
@@ -108,14 +90,10 @@ public class HeroBullet extends Weapon {
         stateTimer += dt;
     }
 
-    private void stateOnTarget() {
+    @Override
+    protected void stateOnTarget(float dt) {
         world.destroyBody(b2body);
         currentState = State.FINISHED;
-    }
-
-    @Override
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
     @Override
@@ -128,12 +106,5 @@ public class HeroBullet extends Weapon {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.ONTARGET;
-    }
-
-    @Override
-    public void draw(Batch batch) {
-        if (currentState == State.SHOT) {
-            super.draw(batch);
-        }
     }
 }
