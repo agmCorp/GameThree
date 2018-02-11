@@ -488,6 +488,9 @@ public class Hero extends Sprite {
                 blinkingTimer = 0;
                 alpha = false;
             }
+
+            //todo
+            screen.getHud().showImage(Assets.getInstance().getScene2d().getDrag(), 5);
         }
     }
 

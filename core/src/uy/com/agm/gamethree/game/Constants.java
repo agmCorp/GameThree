@@ -35,7 +35,7 @@ public class Constants {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 

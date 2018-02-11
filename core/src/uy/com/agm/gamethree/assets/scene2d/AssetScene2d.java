@@ -12,10 +12,12 @@ public class AssetScene2d {
 
     private TextureRegion sliderBackground;
     private TextureRegion sliderKnob;
+    private TextureRegion drag;
 
     public AssetScene2d(TextureAtlas atlas) {
         sliderBackground = atlas.findRegion("sliderBackground");
         sliderKnob = atlas.findRegion("sliderKnob");
+        drag = atlas.findRegion("drag");
     }
 
     public TextureRegion getSliderBackground() {
@@ -24,5 +26,9 @@ public class AssetScene2d {
 
     public TextureRegion getSliderKnob() {
         return sliderKnob;
+    }
+
+    public TextureRegion getDrag() {
+        return drag;
     }
 }
