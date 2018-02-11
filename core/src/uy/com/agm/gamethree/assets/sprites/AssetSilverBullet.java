@@ -22,7 +22,7 @@ public class AssetSilverBullet {
         Array<TextureAtlas.AtlasRegion> regions;
 
         silverBulletStand = atlas.findRegion("shuriken", 1);
-        colSilverBulletStand = atlas.findRegion("colTwo", 1);
+        colSilverBulletStand = atlas.findRegion("colSilverBullet", 1);
 
         // Animation
         regions = atlas.findRegions("shuriken");
@@ -30,7 +30,7 @@ public class AssetSilverBullet {
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("colTwo");
+        regions = atlas.findRegions("colSilverBullet");
         colSilverBulletAnimation = new Animation(0.5f / 25.0f, regions);
         regions.clear();
     }
