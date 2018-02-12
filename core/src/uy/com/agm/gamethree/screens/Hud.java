@@ -8,9 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -28,7 +28,10 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     private PlayScreen screen;
-    private Label.LabelStyle labelStyle;
+
+    private I18NBundle i18NGameThreeBundle;
+    private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleSmall;
 
     private Table upperTable;
     private int score;
@@ -54,11 +57,9 @@ public class Hud extends AbstractScreen {
     private float overlaySeconds;
     private boolean overlayTemporaryScreen;
 
-
     private Table bottomTable;
 
     private Table fpsTable;
-    private Label fpsLabel;
     private int fps;
     private Label fpsValueLabel;
 
@@ -80,7 +81,6 @@ public class Hud extends AbstractScreen {
 
         // Define tracking variables
         this.screen = screen;
-        labelStyle = new Label.LabelStyle();
         score = 0;
         this.time = time;
         timeCount = 0;
@@ -94,6 +94,16 @@ public class Hud extends AbstractScreen {
         overlayTimer = 0;
         overlaySeconds = 0;
         overlayTemporaryScreen = false;
+
+        // I18n
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
+        // Personal fonts
+        labelStyleBig = new Label.LabelStyle();
+        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
+
+        labelStyleSmall = new Label.LabelStyle();
+        labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
     }
 
     private void defineUpperTable() {
@@ -112,12 +122,13 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         upperTable.setFillParent(true);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
+        // Define our labels based on labelStyle
+        Label scoreLabel = new Label(i18NGameThreeBundle.format("hud.score"), labelStyleSmall);
+        Label timeLabel = new Label(i18NGameThreeBundle.format("hud.time"), labelStyleSmall);
 
         // Add labels to the table giving them all equal width with expandX
-        upperTable.add(new Label(Constants.HUD_LABEL_SCORE, labelStyle)).expandX();
-        upperTable.add(new Label(Constants.HUD_LABEL_TIME, labelStyle)).expandX();
+        upperTable.add(scoreLabel).expandX();
+        upperTable.add(timeLabel).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getSilverBullet().getSilverBulletStand()), Scaling.fit)).expandX();
 
@@ -125,10 +136,10 @@ public class Hud extends AbstractScreen {
         upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define label values based on labelStyle
-        scoreValueLabel = new Label(String.format("%6d", score), labelStyle);
-        timeValueLabel = new Label(String.format("%03d", time), labelStyle);
-        livesValueLabel = new Label(String.format("%02d", lives), labelStyle);
-        silverBulletValueLablel = new Label(String.format("%02d", silverBullets), labelStyle);
+        scoreValueLabel = new Label(String.format(Constants.HUD_FORMAT_SCORE, score), labelStyleSmall);
+        timeValueLabel = new Label(String.format(Constants.HUD_FORMAT_TIME, time), labelStyleSmall);
+        livesValueLabel = new Label(String.format(Constants.HUD_FORMAT_LIVES, lives), labelStyleSmall);
+        silverBulletValueLablel = new Label(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
 
         // Add values
         upperTable.add(scoreValueLabel).expandX();
@@ -157,23 +168,20 @@ public class Hud extends AbstractScreen {
         // Debug lines
         powerTable.setDebug(Constants.DEBUG_MODE);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
-
         // Define a label based on labelStyle
-        powerNameLabel = new Label("POWERNAME", labelStyle);
+        powerNameLabel = new Label("POWERNAME", labelStyleSmall);
 
         // Add values
-        powerTable.add(powerNameLabel).expandX();
+        powerTable.add(powerNameLabel);
 
         // Add a second row to the table
         powerTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define a label based on labelStyle
-        powerTimeValueLabel = new Label(String.format("%03d", powerTime), labelStyle);
+        powerTimeValueLabel = new Label(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime), labelStyleSmall);
 
         // Add values
-        powerTable.add(powerTimeValueLabel).expandX();
+        powerTable.add(powerTimeValueLabel);
 
         // Initially hidden
         powerTable.setVisible(false);
@@ -192,11 +200,8 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         centerTable.setFillParent(true);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultBig();
-
         // Define a label based on labelStyle
-        messageLabel = new Label("MESSAGE", labelStyle);
+        messageLabel = new Label("MESSAGE", labelStyleBig);
         image = new Image();
 
         // Add values
@@ -229,7 +234,7 @@ public class Hud extends AbstractScreen {
 
         // Add health bar info
         defineHealthBarTable();
-        bottomTable.add(healthBarTable).expandX();
+        bottomTable.add(healthBarTable);
 
         // FPS info
         defineFpsTable();
@@ -238,7 +243,7 @@ public class Hud extends AbstractScreen {
             // Add a second row to the table
             bottomTable.row();
             // Add FPS info
-            bottomTable.add(fpsTable).expandX();
+            bottomTable.add(fpsTable);
         }
 
         // Add the table to the stage
@@ -252,23 +257,20 @@ public class Hud extends AbstractScreen {
         // Debug lines
         fpsTable.setDebug(Constants.DEBUG_MODE);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
-
         // Define a label based on labelStyle
-        fpsLabel = new Label(Constants.HUD_LABEL_FPS, labelStyle);
+        Label fpsLabel = new Label(i18NGameThreeBundle.format("hud.FPS"), labelStyleSmall);
 
-        // Add a label to the table giving it equal width with expandX
-        fpsTable.add(fpsLabel).expandX();
+        // Add a label to the table
+        fpsTable.add(fpsLabel);
 
         // Add a second row to our table
         fpsTable.row();
 
         // Define a label value based on labelStyle
-        fpsValueLabel = new Label(String.format("%02d", fps), labelStyle);
+        fpsValueLabel = new Label(String.format(Constants.HUD_FORMAT_POWER_TIME, fps), labelStyleSmall);
 
         // Add value
-        fpsTable.add(fpsValueLabel).expandX();
+        fpsTable.add(fpsValueLabel);
 
         // Hidden if not in debug mode
         fpsTable.setVisible(Constants.DEBUG_MODE);
@@ -281,20 +283,17 @@ public class Hud extends AbstractScreen {
         // Debug lines
         healthBarTable.setDebug(Constants.DEBUG_MODE);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
-
         // Define a label based on labelStyle
-        enemyNameLabel = new Label("ENEMY_NAME", labelStyle);
+        enemyNameLabel = new Label("ENEMY_NAME", labelStyleSmall);
 
         // Add value
-        healthBarTable.add(enemyNameLabel).expandX();
+        healthBarTable.add(enemyNameLabel);
 
         // Add a second row to our table
         healthBarTable.row();
 
         // Add health bar
-        healthBarTable.add(healthBar).expandX().padBottom(Constants.HUD_HEALTHBAR_PADBOTTOM);
+        healthBarTable.add(healthBar).padBottom(Constants.HUD_HEALTHBAR_PADBOTTOM);
 
         // Initially hidden
         healthBarTable.setVisible(false);
@@ -313,14 +312,11 @@ public class Hud extends AbstractScreen {
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);
 
-        // Personal fonts
-        labelStyle.font = Assets.getInstance().getFonts().getDefaultSmall();
-
         // Define labels based on labelStyle
-        pauseLabel = new Label(Constants.HUD_LABEL_PAUSE, labelStyle);
-        quitLabel = new Label(Constants.HUD_LABEL_QUIT, labelStyle);
+        pauseLabel = new Label(i18NGameThreeBundle.format("hud.pause"), labelStyleSmall);
+        quitLabel = new Label(i18NGameThreeBundle.format("hud.quit"), labelStyleSmall);
         quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(Constants.HUD_LABEL_RESUME, labelStyle);
+        resumeLabel = new Label(i18NGameThreeBundle.format("hud.resume"), labelStyleSmall);
 
         // Add values
         stack = new Stack();
@@ -375,7 +371,7 @@ public class Hud extends AbstractScreen {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
-        showMessage(Constants.HUD_TEXT_PAUSED);
+        showMessage(i18NGameThreeBundle.format("hud.pauseMessage"));
         screen.setPlayScreenStatePaused();
     }
 
@@ -388,10 +384,10 @@ public class Hud extends AbstractScreen {
     }
 
     private void quit() {
-        if (getMessage().equals(Constants.HUD_TEXT_CONFIRM)) {
+        if (getMessage().equals(i18NGameThreeBundle.format("hud.confirm"))) {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
-            showMessage(Constants.HUD_TEXT_CONFIRM);
+            showMessage(i18NGameThreeBundle.format("hud.confirm"));
         }
     }
 
@@ -406,7 +402,7 @@ public class Hud extends AbstractScreen {
     public void showPowerInfo(String powerName, int maxTime) {
         powerNameLabel.setText(powerName);
         powerTime = maxTime;
-        powerTimeValueLabel.setText(String.format("%03d", powerTime));
+        powerTimeValueLabel.setText(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime));
         powerTable.setVisible(true);
     }
 
@@ -434,11 +430,11 @@ public class Hud extends AbstractScreen {
     }
 
     public void showHurryUpMessage() {
-        showMessage(Constants.HUD_TEXT_HURRYUP);
+        showMessage(i18NGameThreeBundle.format("hud.hurryUp"));
     }
 
     public void showTimeIsUpMessage() {
-        showMessage(Constants.HUD_TEXT_TIMESUP);
+        showMessage(i18NGameThreeBundle.format("hud.timeIsUp"));
     }
 
     public void hideMessage() {
@@ -519,7 +515,7 @@ public class Hud extends AbstractScreen {
     public void update(float dt) {
         // Update world time
         timeCount += dt;
-        if(timeCount >= 1){
+        if (timeCount >= 1) {
             if (time > 0) {
                 time--;
                 if (time <= Constants.LEVEL_TIMER_NOTIFICATION) {
@@ -534,7 +530,7 @@ public class Hud extends AbstractScreen {
             } else {
                 timeIsUp = true;
             }
-            timeValueLabel.setText(String.format("%03d", time));
+            timeValueLabel.setText(String.format(Constants.HUD_FORMAT_TIME, time));
             timeCount = 0;
         }
 
@@ -547,7 +543,7 @@ public class Hud extends AbstractScreen {
                     if (powerTime <= Constants.POWER_TIMER_NOTIFICATION) {
                         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeepA());
                     }
-                    powerTimeValueLabel.setText(String.format("%03d", powerTime));
+                    powerTimeValueLabel.setText(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime));
                 } else {
                     hidePowerInfo();
                 }
@@ -558,7 +554,7 @@ public class Hud extends AbstractScreen {
         // Update FPS
         if (isFpsInfoVisible()) {
             fps = Gdx.graphics.getFramesPerSecond();
-            fpsValueLabel.setText(String.format("%02d", fps));
+            fpsValueLabel.setText(String.format(Constants.HUD_FORMAT_FPS, fps));
         }
 
         // Overlay temporary screen
@@ -574,7 +570,7 @@ public class Hud extends AbstractScreen {
 
     public void addScore(int value) {
         score += value;
-        scoreValueLabel.setText(String.format("%6d", score));
+        scoreValueLabel.setText(String.format(Constants.HUD_FORMAT_SCORE, score));
     }
 
     public int getScore() {
@@ -603,17 +599,17 @@ public class Hud extends AbstractScreen {
 
     public void decreaseLives(int quantity) {
         lives -= quantity;
-        livesValueLabel.setText(String.format("%02d", lives));
+        livesValueLabel.setText(String.format(Constants.HUD_FORMAT_LIVES, lives));
     }
 
     public void increaseSilverBullets(int quantity) {
         silverBullets += quantity;
-        silverBulletValueLablel.setText(String.format("%02d", silverBullets));
+        silverBulletValueLablel.setText(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
     }
 
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
-        silverBulletValueLablel.setText(String.format("%02d", silverBullets));
+        silverBulletValueLablel.setText(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
     }
 
     @Override
@@ -622,7 +618,7 @@ public class Hud extends AbstractScreen {
     }
 
     @Override
-    public void draw () {
+    public void draw() {
         act();
         // Set our batch to now draw what the Hud camera sees.
         super.draw();

@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -17,11 +18,6 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
 
-    private Label.LabelStyle labelStyleBig;
-    private Label.LabelStyle labelStyleNormal;
-    private Label playAgainLabel;
-    private Label nextLevelLabel;
-    private Label backLabel;
     private int currentLevel;
     private int finalScore;
     private int nextLevel;
@@ -37,27 +33,42 @@ public class LevelCompletedScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        // Personal fonts
-        labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
-
-        labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
-
-        // Define our labels based on labelStyle
-        playAgainLabel = new Label("Touch to play again", labelStyleNormal);
-        nextLevelLabel = new Label("Next level", labelStyleNormal);
-        backLabel = new Label("Back to menu", labelStyleNormal);
+        // I18n
+        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         // Set table structure
         Table table = new Table();
+
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
+        // Center-Align table
         table.center();
+
+        // Make the table fill the entire stage
         table.setFillParent(true);
-        table.add(new Label("Level " + this.currentLevel, labelStyleBig)).center();
+
+        // Personal fonts
+        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
+        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
+
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
+
+        // Define our labels based on labelStyle
+        Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
+        Label levelCompletedLabel = new Label(i18NGameThreeBundle.format("levelCompleted.completed"), labelStyleBig);
+        Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
+        Label playAgainLabel = new Label(i18NGameThreeBundle.format("levelCompleted.playAgain"), labelStyleNormal);
+        Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
+        Label backLabel = new Label(i18NGameThreeBundle.format("levelCompleted.backToMenu"), labelStyleNormal);
+
+        // Add values
+        table.add(currentLevelLabel).center();
         table.row();
-        table.add(new Label("Completed!!", labelStyleBig)).padTop(Constants.PAD_TOP).center();
+        table.add(levelCompletedLabel).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(new Label("Score: " + finalScore, labelStyleNormal)).padTop(Constants.PAD_TOP).center();
+        table.add(finalScoreLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(playAgainLabel).padTop(Constants.PAD_TOP).center();
         if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
@@ -66,9 +77,6 @@ public class LevelCompletedScreen extends AbstractScreen {
         }
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
-
-        // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
 
         // Events
         playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel));

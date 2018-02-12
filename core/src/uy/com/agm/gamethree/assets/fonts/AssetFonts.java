@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.assets.sprites;
+package uy.com.agm.gamethree.assets.fonts;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

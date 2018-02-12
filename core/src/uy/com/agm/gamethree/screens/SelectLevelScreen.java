@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -13,10 +14,10 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
  * Created by AGM on 12/23/2017.
  */
 
-public class GameOverScreen extends AbstractScreen {
-    private static final String TAG = GameOverScreen.class.getName();
+public class SelectLevelScreen extends AbstractScreen {
+    private static final String TAG = SelectLevelScreen.class.getName();
 
-    public GameOverScreen() {
+    public SelectLevelScreen() {
         super();
     }
 
@@ -45,11 +46,21 @@ public class GameOverScreen extends AbstractScreen {
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label gameOverLabel = new Label(i18NGameThreeBundle.format("gameOver.title"), labelStyleBig);
-        Label backLabel = new Label(i18NGameThreeBundle.format("gameOver.backToMenu"), labelStyleNormal);
+        Label selectLevelLabel = new Label(i18NGameThreeBundle.format("selectLevel.title"), labelStyleBig);
+        Label backLabel = new Label(i18NGameThreeBundle.format("selectLevel.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(gameOverLabel).center();
+        table.add(selectLevelLabel).center();
+        table.row();
+        Label levelLabel;
+        for (int level : GameSettings.getInstance().getAvailableLevels()) {
+            table.row();
+            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
+            table.add(levelLabel).padTop(Constants.PAD_TOP).center();
+
+            // Events
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level));
+        }
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 

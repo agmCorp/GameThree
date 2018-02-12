@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -25,6 +26,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
+    private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
     private float stateFadingTimer;
@@ -33,6 +35,9 @@ public class PowerOne extends Item {
     // Ghost mode
     public PowerOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        // I18n
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerOneAnimation = Assets.getInstance().getPowerOne().getPowerOneAnimation();
         stateTimer = 0;
@@ -135,7 +140,7 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo("GHOST MODE", Constants.TIMER_POWERONE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), Constants.TIMER_POWERONE);
 
             // Set score
             hud.addScore(Constants.POWERONE_SCORE);

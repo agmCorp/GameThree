@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -25,6 +26,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
 
+    private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
     private float stateFadingTimer;
@@ -33,6 +35,9 @@ public class PowerTwo extends Item {
     // Shield
     public PowerTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        // I18n
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerTwoAnimation = Assets.getInstance().getPowerTwo().getPowerTwoAnimation();
         stateTimer = 0;
@@ -135,7 +140,7 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo("SHIELD", Constants.TIMER_POWERTWO);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), Constants.TIMER_POWERTWO);
 
             // Set score
             hud.addScore(Constants.POWERTWO_SCORE);

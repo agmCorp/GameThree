@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -25,40 +25,53 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
 
-    private Label.LabelStyle labelStyleBig;
-    private Label.LabelStyle labelStyleNormal;
-    private Slider.SliderStyle sliderStyle;
     private Label shootingLabel;
-    private Label backLabel;
-    private TextureRegion sliderBackground;
-    private TextureRegion sliderKnob;
     private Slider sliderMusic;
     private Slider sliderSound;
     private GameSettings prefs;
+    private I18NBundle i18NGameThreeBundle;
 
     public SettingsScreen() {
         super();
         prefs = GameSettings.getInstance();
-        sliderBackground = Assets.getInstance().getScene2d().getSliderBackground();
-        sliderKnob = Assets.getInstance().getScene2d().getSliderKnob();
+
+        // I18n
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
     }
 
     @Override
     public void buildStage() {
+        // Set table structure
+        Table table = new Table();
+
+        // Debug lines
+        table.setDebug(Constants.DEBUG_MODE);
+
+        // Center-Align table
+        table.center();
+
+        // Make the table fill the entire stage
+        table.setFillParent(true);
+
         // Personal fonts
-        labelStyleBig = new Label.LabelStyle();
+        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        labelStyleNormal = new Label.LabelStyle();
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        backLabel = new Label("Back to menu", labelStyleNormal);
+        Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleNormal);
+        Label musicLabel = new Label(i18NGameThreeBundle.format("settings.music"), labelStyleNormal);
+        Label soundEffectsLabel = new Label(i18NGameThreeBundle.format("settings.soundEffects"), labelStyleNormal);
+        shootingLabel = new Label("SHOOTING", labelStyleNormal);
+        setTextLabelShooting();
+        Label backLabel = new Label(i18NGameThreeBundle.format("settings.backToMenu"), labelStyleNormal);
 
         //Slider style
-        sliderStyle = new Slider.SliderStyle();
-        sliderStyle.background = new TextureRegionDrawable(sliderBackground);
-        sliderStyle.knob = new TextureRegionDrawable(sliderKnob);
+        Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
+        sliderStyle.background = new TextureRegionDrawable(Assets.getInstance().getScene2d().getSliderBackground());
+        sliderStyle.knob = new TextureRegionDrawable(Assets.getInstance().getScene2d().getSliderKnob());
 
         // Music
         sliderMusic = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
@@ -68,21 +81,14 @@ public class SettingsScreen extends AbstractScreen {
         sliderSound = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
         sliderSound.setValue(prefs.getVolSound());
 
-        // Shooting
-        shootingLabel = new Label("Manual shooting", labelStyleNormal);
-        setTextLabelShooting();
-
-        // Set table structure
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-        table.add(new Label("Settings", labelStyleBig)).center();
+        // Add values
+        table.add(settingsLabel).center();
         table.row();
-        table.add(new Label("Music", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
+        table.add(musicLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(new Label("Sound FXs", labelStyleNormal)).padTop(Constants.PAD_TOP).center();
+        table.add(soundEffectsLabel).padTop(Constants.PAD_TOP).center();
         table.row();
         table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
         table.row();
@@ -90,10 +96,7 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP).center();
 
-        // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
-
-        // Slider listener
+        // Events
         sliderMusic.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -112,7 +115,6 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
-        // Slider listener
         sliderSound.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -132,7 +134,6 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
-        // Events
         shootingLabel.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -144,7 +145,6 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
-        // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
         // Adds created table to stage
@@ -188,9 +188,9 @@ public class SettingsScreen extends AbstractScreen {
 
     private void setTextLabelShooting() {
         if (prefs.isManualShooting()) {
-            shootingLabel.setText("Manual shooting");
+            shootingLabel.setText(i18NGameThreeBundle.format("settings.manualShooting"));
         } else {
-            shootingLabel.setText("Automatic shooting");
+            shootingLabel.setText(i18NGameThreeBundle.format("settings.automaticShooting"));
         }
     }
 

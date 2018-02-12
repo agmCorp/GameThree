@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
@@ -22,6 +23,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerThree extends Item {
     private static final String TAG = PowerThree.class.getName();
 
+    private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
     private float stateFadingTimer;
@@ -34,6 +36,9 @@ public class PowerThree extends Item {
     // Fire power
     public PowerThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        // I18n
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
         bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
@@ -139,7 +144,7 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo("FIRE MODE", Constants.TIMER_POWERTHREE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), Constants.TIMER_POWERTHREE);
 
             // Set score
             hud.addScore(Constants.POWERTHREE_SCORE);

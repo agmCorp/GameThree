@@ -12,9 +12,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
+import uy.com.agm.gamethree.assets.i18n.AssetI18NGameThree;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
@@ -30,7 +32,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOnePower;
-import uy.com.agm.gamethree.assets.sprites.AssetFonts;
+import uy.com.agm.gamethree.assets.fonts.AssetFonts;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
@@ -56,6 +58,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private AssetManager assetManager;
 
+    private AssetI18NGameThree i18NGameThree;
     private AssetScene2d scene2d;
     private AssetFonts fonts;
     private AssetHero hero;
@@ -98,6 +101,10 @@ public class Assets implements Disposable, AssetErrorListener {
             instance = new Assets();
         }
         return instance;
+    }
+
+    private void loadI18NGameThree() {
+        assetManager.load("i18n/I18NGameThreeBundle", I18NBundle.class);
     }
 
     private void loadTextureAtlasObjects() {
@@ -165,6 +172,9 @@ public class Assets implements Disposable, AssetErrorListener {
         // Set asset manager error handler
         assetManager.setErrorListener(this);
 
+        // Load i18n
+        loadI18NGameThree();
+
         // Load texture atlas (dinamic game objects)
         loadTextureAtlasObjects();
 
@@ -199,6 +209,8 @@ public class Assets implements Disposable, AssetErrorListener {
         for (Texture texture : atlasDinamicObjects.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
+
+        i18NGameThree = new AssetI18NGameThree(assetManager);
         scene2d = new AssetScene2d(atlasUI);
         fonts = new AssetFonts();
         hero = new AssetHero(atlasDinamicObjects);
@@ -242,6 +254,10 @@ public class Assets implements Disposable, AssetErrorListener {
         fonts.getDefaultSmall().dispose();
         fonts.getDefaultNormal().dispose();
         fonts.getDefaultBig().dispose();
+    }
+
+    public AssetI18NGameThree getI18NGameThree() {
+        return i18NGameThree;
     }
 
     public AssetScene2d getScene2d() {
