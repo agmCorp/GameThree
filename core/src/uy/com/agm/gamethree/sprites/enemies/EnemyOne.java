@@ -126,6 +126,11 @@ public class EnemyOne extends Enemy {
     }
 
     @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
     protected TextureRegion getHelpImage() {
         return Assets.getInstance().getScene2d().getHelpEnemyOne();
     }

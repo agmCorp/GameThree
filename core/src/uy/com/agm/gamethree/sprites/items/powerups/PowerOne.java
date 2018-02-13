@@ -133,6 +133,16 @@ public class PowerOne extends Item {
         currentState = State.FINISHED;
     }
 
+    @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpPowerOne();
+    }
+
     private void applyPowerOne() {
         // WA: Hero could have died between use method and applyPowerOne method
         if (!screen.getPlayer().isHeroDead()) {

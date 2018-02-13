@@ -44,6 +44,22 @@ Hay 2 tipos de elementos:
 *enemigo3 (hice otro): caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
 *enemigo4 (hice otro): nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
 
+Estimacion:
+En youtube el knight se desplaza 10 pixels por segundo aprox.
+El primer nivel dura 5 minutos (300 segundos).
+En youtube el knight tiene 260 pixels de alto.
+Entonces el nivel total mide 260 (primer pantalla) + 10 pixels * 300s = 3260.
+
+O sea, son en total: 3260 / 260 = 12.5 pantallas, redondeo a 13.
+
+Velocidad:
+Se mueve a un 3.8% de pantalla por segundo.
+En mi juego seria 3.8 de 800 por segundo, o sea, 30.4 pixels por segundo.
+
+RESUMEN
+En mi juego seria 0.304 la velocidad.
+En mi juego serian 13 pantallas
+
 PROXIMOS PASOS
 --------------
 
@@ -145,7 +161,6 @@ powerTwo (string): escudo
 powerThree (string): cambia el poder de disparo
 colOne (string): moneda
 timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
-help (string): muestra help modal
 
 HERRAMIENTAS
 ------------

@@ -133,6 +133,16 @@ public class PowerTwo extends Item {
         currentState = State.FINISHED;
     }
 
+    @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpPowerTwo();
+    }
+
     private void applyPowerTwo() {
         // WA: Hero could have died between use method and applyPowerTwo method
         if (!screen.getPlayer().isHeroDead()) {

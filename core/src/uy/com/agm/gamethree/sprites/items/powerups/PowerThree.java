@@ -137,6 +137,16 @@ public class PowerThree extends Item {
         currentState = State.FINISHED;
     }
 
+    @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpPowerThree();
+    }
+
     private void applyPowerThree() {
         // WA: Hero could have died between use method and applyPowerThree method
         if (!screen.getPlayer().isHeroDead()) {

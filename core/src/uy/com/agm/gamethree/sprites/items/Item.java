@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.sprites.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -99,6 +100,7 @@ public abstract class Item extends Sprite {
                 stateFading(dt);
                 break;
             case TAKEN:
+                showFirstHelp();
                 stateTaken(dt);
                 break;
             case FINISHED:
@@ -107,6 +109,14 @@ public abstract class Item extends Sprite {
                 break;
         }
         checkBoundaries();
+    }
+
+    private void showFirstHelp() {
+        String className = getClassName();
+        if (!screen.getCreator().getHelpScreens().contains(className)){
+            screen.getHud().showModalImage(getHelpImage());
+            screen.getCreator().getHelpScreens().add(className);
+        }
     }
 
     @Override
@@ -120,6 +130,8 @@ public abstract class Item extends Sprite {
     protected abstract void stateWaiting(float dt);
     protected abstract void stateFading(float dt);
     protected abstract void stateTaken(float dt);
+    protected abstract String getClassName();
+    protected abstract TextureRegion getHelpImage();
     public abstract void onUse();
     public abstract void onBump();
 }

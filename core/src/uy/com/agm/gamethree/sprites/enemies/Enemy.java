@@ -24,12 +24,10 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
-    private boolean openFire;
-    private boolean showHelp;
-
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
+    private boolean openFire;
     protected Vector2 velocity;
     protected Vector2 tmp; // Temp GC friendly vector
 
@@ -51,9 +49,6 @@ public abstract class Enemy extends Sprite {
 
         // Fire property
         openFire = object.getProperties().containsKey("enemyBullet");
-
-        // Help property
-        showHelp = object.getProperties().containsKey("help");
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -87,7 +82,7 @@ public abstract class Enemy extends Sprite {
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
-                showHelp();
+                showFirstHelp();
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -100,10 +95,11 @@ public abstract class Enemy extends Sprite {
         }
     }
 
-    private void showHelp() {
-        if (showHelp) {
+    private void showFirstHelp() {
+        String className = getClassName();
+        if (!screen.getCreator().getHelpScreens().contains(className)){
             screen.getHud().showModalImage(getHelpImage());
-            showHelp = false;
+            screen.getCreator().getHelpScreens().add(className);
         }
     }
 
@@ -170,6 +166,7 @@ public abstract class Enemy extends Sprite {
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);
+    protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
     public abstract void onHit();
     public abstract void onBump();

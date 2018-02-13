@@ -121,6 +121,16 @@ public class ColSilverBullet extends Item {
     }
 
     @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpColSilverBullet();
+    }
+
+    @Override
     public void onUse() {
         /*
          * We must remove its b2body to avoid collisions.

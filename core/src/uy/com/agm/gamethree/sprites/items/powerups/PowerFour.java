@@ -133,6 +133,16 @@ public class PowerFour extends Item {
         currentState = State.FINISHED;
     }
 
+    @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpPowerFour();
+    }
+
     private void applyPowerFour() {
         // WA: Hero could have died between use method and applyPowerFour method
         if (!screen.getPlayer().isHeroDead()) {
