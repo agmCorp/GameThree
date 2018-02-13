@@ -126,9 +126,12 @@ public class PlayScreen extends AbstractScreen {
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
-        // Create our game HUD for scores/timers/level info
+        // Create our game HUD for scores/timers/level and info
         hud = new Hud(this, level, LevelFactory.getLevelTimer(this.level), player.getLives());
         hud.buildStage();
+
+        // Show how to play with the main character
+        hud.showInitialHelp();
 
         // Stop menu music and start playing level music
         AudioManager.getInstance().stopMusic();

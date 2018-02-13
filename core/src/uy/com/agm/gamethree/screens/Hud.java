@@ -42,6 +42,7 @@ public class Hud extends AbstractScreen {
     private Table upperTable;
     private int score;
     private Label scoreValueLabel;
+    private int level;
     private int time;
     private float timeCount;
     private Label timeValueLabel;
@@ -88,6 +89,7 @@ public class Hud extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         score = 0;
+        this.level = level;
         this.time = time;
         timeCount = 0;
         this.lives = lives;
@@ -397,6 +399,12 @@ public class Hud extends AbstractScreen {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
             showMessage(i18NGameThreeBundle.format("hud.confirm"));
+        }
+    }
+
+    public void showInitialHelp() {
+        if (level == 1) {
+            showImage(Assets.getInstance().getScene2d().getHelpInitial(), Constants.HUD_DEFAULT_HELP_SECONDS);
         }
     }
 

@@ -88,19 +88,18 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                dynamic.put(PowerOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(PowerOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
                 dynamic.put(PowerTwo.class.getName(), new DynamicHelpDef(true));
                 dynamic.put(PowerThree.class.getName(), new DynamicHelpDef(true));
                 dynamic.put(PowerFour.class.getName(), new DynamicHelpDef(true));
-                dynamic.put(ColOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
-                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
-                dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(ColOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
+                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
                 break;
             case 2:
-                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
                 dynamic.put(EnemyTwo.class.getName(), new DynamicHelpDef(true));
-                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
-                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
+                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_HELP_SECONDS));
                 break;
             default:
                 break;
