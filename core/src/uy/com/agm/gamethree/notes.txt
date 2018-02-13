@@ -64,8 +64,6 @@ PROXIMOS PASOS
 --------------
 - Si agarro items (o shurikens) reboto un poco.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
-- HELPS:
-    - el primero que indica como disparar y moverse, condicionado al time, no es modal.
 - Con eso ya puedo disenar al menos 2 niveles, tengo:
     - paths
     - 4 enemigos
