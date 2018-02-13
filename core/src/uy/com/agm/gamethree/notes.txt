@@ -64,6 +64,7 @@ PROXIMOS PASOS
 --------------
 - Si agarro items (o shurikens) reboto un poco.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
+Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Con eso ya puedo disenar al menos 2 niveles, tengo:
     - paths
     - 4 enemigos
