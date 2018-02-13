@@ -64,13 +64,6 @@ public class GameSettings {
                 level++;
             }
         } while (availableLevel);
-
-        Gdx.app.debug(TAG, SOUND + " " + sound);
-        Gdx.app.debug(TAG, MUSIC + " " + music);
-        Gdx.app.debug(TAG, VOLUME_SOUND + " " + volSound);
-        Gdx.app.debug(TAG, VOLUME_MUSIC + " " + volMusic);
-        Gdx.app.debug(TAG, MANUAL_SHOOTING + " " + manualShooting);
-        Gdx.app.debug(TAG, AVAILABLE_LEVEL + " " + availableLevels.toString(", "));
    }
 
     public void save () {

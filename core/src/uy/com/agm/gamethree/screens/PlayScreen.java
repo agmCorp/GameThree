@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -29,6 +30,7 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
+import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -78,6 +80,9 @@ public class PlayScreen extends AbstractScreen {
 
     // Final Enemy
     private FinalEnemy finalEnemy;
+
+    // Track help screens depending on the object's class name
+    private ObjectMap<String, DynamicHelpDef> dynamicHelp;
 
     public PlayScreen(Integer level) {
         this.level = level;
@@ -136,6 +141,9 @@ public class PlayScreen extends AbstractScreen {
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
+
+        // Track help screens
+        dynamicHelp = LevelFactory.getDynamicHelp(level);
 
         // PlayScreen running
         playScreenState = PlayScreenState.RUNNING;
@@ -505,6 +513,10 @@ public class PlayScreen extends AbstractScreen {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();
+    }
+
+    public ObjectMap<String, DynamicHelpDef> getDynamicHelp() {
+        return dynamicHelp;
     }
 
     @Override

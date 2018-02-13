@@ -57,6 +57,7 @@ public class Constants {
     public static final String HUD_FORMAT_SILVER_BULLETS = "%02d";
     public static final String HUD_FORMAT_POWER_TIME = "%03d";
     public static final String HUD_FORMAT_FPS = "%02d";
+    public static final float HUD_DEFAULT_DINAMIC_HELP_SECONDS = 3.0f;
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
     public static final float SLIDER_STEP = 0.01f;

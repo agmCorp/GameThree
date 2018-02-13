@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.DynamicHelpDef;
 
 /**
  * Created by AGM on 12/11/2017.
@@ -113,9 +115,15 @@ public abstract class Item extends Sprite {
 
     private void showFirstHelp() {
         String className = getClassName();
-        if (!screen.getCreator().getHelpScreens().contains(className)){
-            screen.getHud().showModalImage(getHelpImage());
-            screen.getCreator().getHelpScreens().add(className);
+        ObjectMap<String, DynamicHelpDef> dynamicHelp = screen.getDynamicHelp();
+        if (dynamicHelp.containsKey(className)){
+            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
+            if (dynamicHelpDef.isModal()) {
+                screen.getHud().showModalImage(getHelpImage());
+            } else {
+                screen.getHud().showImage(getHelpImage(), dynamicHelpDef.getSeconds());
+            }
+            screen.getDynamicHelp().remove(className);
         }
     }
 

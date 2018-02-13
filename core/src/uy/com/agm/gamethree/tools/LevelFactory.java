@@ -2,12 +2,23 @@ package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.enemies.EnemyFour;
+import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
+import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
+import uy.com.agm.gamethree.sprites.items.collectibles.ColOne;
+import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -70,5 +81,29 @@ public class LevelFactory {
                 break;
         }
         return map;
+    }
+
+    public static ObjectMap<String, DynamicHelpDef> getDynamicHelp(int level) {
+        ObjectMap<String, DynamicHelpDef> dynamic = new ObjectMap<String, DynamicHelpDef>();
+
+        switch (level) {
+            case 1:
+                dynamic.put(PowerOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(PowerTwo.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(PowerThree.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(PowerFour.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(ColOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                break;
+            case 2:
+                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(EnemyTwo.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                break;
+            default:
+                break;
+        }
+        return dynamic;
     }
 }

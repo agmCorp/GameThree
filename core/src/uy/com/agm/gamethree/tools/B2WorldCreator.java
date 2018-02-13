@@ -5,7 +5,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectSet;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -44,9 +43,6 @@ public class B2WorldCreator {
     private Array<Weapon> weapons;
     private LinkedBlockingQueue<GameThreeActorDef> gameThreeActorsToCreate;
 
-    // Track help screens depending on the object's class name
-    private ObjectSet<String> helpScreens;
-
     public B2WorldCreator(PlayScreen screen) {
         MapLayer layer;
         this.screen = screen;
@@ -65,9 +61,6 @@ public class B2WorldCreator {
 
         // Queue
         gameThreeActorsToCreate = new LinkedBlockingQueue<GameThreeActorDef>();
-
-        // Track help screens
-        helpScreens = new ObjectSet<String>();
 
         TiledMap map = screen.getMap();
 
@@ -166,10 +159,6 @@ public class B2WorldCreator {
 
     public void removeWeapon(Weapon weapon) {
         weapons.removeValue(weapon, true);
-    }
-
-    public ObjectSet<String> getHelpScreens() {
-        return helpScreens;
     }
 
     public void createGameThreeActor(GameThreeActorDef gameThreeActorDef) {
