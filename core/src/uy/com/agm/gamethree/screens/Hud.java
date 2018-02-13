@@ -77,6 +77,7 @@ public class Hud extends AbstractScreen {
     private Table buttonsTable;
     private Label pauseLabel;
     private Label resumeLabel;
+    private Label gotItLabel;
     private Label quitLabel;
 
     private boolean timeIsUp; // True when the level time reaches 0
@@ -328,12 +329,14 @@ public class Hud extends AbstractScreen {
         quitLabel = new Label(i18NGameThreeBundle.format("hud.quit"), labelStyleSmall);
         quitLabel.setAlignment(Align.right);
         resumeLabel = new Label(i18NGameThreeBundle.format("hud.resume"), labelStyleSmall);
+        gotItLabel = new Label(i18NGameThreeBundle.format("hud.gotIt"), labelStyleSmall);
 
         // Add values
         stack = new Stack();
         stack.add(pauseLabel);
         stack.add(resumeLabel);
-        buttonsTable.add(stack).width(Constants.HUD_BUTTON_WIDTH).left().expandX(); // Pause and Resume texts overlapped
+        stack.add(gotItLabel);
+        buttonsTable.add(stack).width(Constants.HUD_BUTTON_WIDTH).left().expandX(); // Pause, Resume and Got it texts overlapped
         buttonsTable.add(quitLabel).width(Constants.HUD_BUTTON_WIDTH).right().expandX();
 
         // Events
@@ -349,6 +352,17 @@ public class Hud extends AbstractScreen {
                 });
 
         resumeLabel.addListener(
+                new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        setGameStateRunning();
+                        return true;
+                    }
+                });
+
+        gotItLabel.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -375,12 +389,14 @@ public class Hud extends AbstractScreen {
 
         // Initially hidden
         resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
     }
 
     public void setGameStatePaused() {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
+        gotItLabel.setVisible(false);
         quitLabel.setVisible(true);
         showMessage(i18NGameThreeBundle.format("hud.pauseMessage"));
         screen.setPlayScreenStatePaused();
@@ -389,6 +405,7 @@ public class Hud extends AbstractScreen {
     public void setGameStateRunning() {
         pauseLabel.setVisible(true);
         resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
         hideMessage();
         screen.setPlayScreenStateRunning();
@@ -480,7 +497,8 @@ public class Hud extends AbstractScreen {
 
     public void showModalImage(TextureRegion textureRegion) {
         pauseLabel.setVisible(false);
-        resumeLabel.setVisible(true);
+        resumeLabel.setVisible(false);
+        gotItLabel.setVisible(true);
         quitLabel.setVisible(false);
         showImage(textureRegion);
         screen.setPlayScreenStatePaused();
@@ -489,6 +507,7 @@ public class Hud extends AbstractScreen {
     public void hideModalImage() {
         pauseLabel.setVisible(true);
         resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
         hideImage();
         screen.setPlayScreenStateRunning();

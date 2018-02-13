@@ -32,7 +32,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -57,7 +57,7 @@ public class Constants {
     public static final String HUD_FORMAT_SILVER_BULLETS = "%02d";
     public static final String HUD_FORMAT_POWER_TIME = "%03d";
     public static final String HUD_FORMAT_FPS = "%02d";
-    public static final float HUD_DEFAULT_HELP_SECONDS = 3.0f;
+    public static final float HUD_DEFAULT_HELP_SECONDS = 2.0f;
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
     public static final float SLIDER_STEP = 0.01f;
