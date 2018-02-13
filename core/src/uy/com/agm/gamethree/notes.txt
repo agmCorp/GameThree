@@ -46,7 +46,20 @@ Hay 2 tipos de elementos:
 
 PROXIMOS PASOS
 --------------
-- los helps que saltan, deberia tirarlos el hud segun el time general capaz.
+
+- HELPS:
+    - el primero que indica como disparar y moverse, condicionado al time, no es modal.
+    - el del enemigo final que indica que es inmune en la nube verde y que lo debo matar con shurikens. Debe aparecer
+    antes de la intro y debe ser modal.
+    - lo ideal seria un help la primera vez EN TODO EL JUEGO (INDEPENDIENTE DEL NIVEL) que aparece un enemigo nuevo o agarras
+    un poder nuevo. Modal. No se como condicionar eso.
+- Con eso ya puedo disenar al menos 2 niveles, tengo:
+    - paths
+    - 4 enemigos
+    - un final
+    - 4 poderes
+    - 1 moneda
+    - 1 shuriken
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
@@ -132,6 +145,7 @@ powerTwo (string): escudo
 powerThree (string): cambia el poder de disparo
 colOne (string): moneda
 timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
+help (string): muestra help modal
 
 HERRAMIENTAS
 ------------

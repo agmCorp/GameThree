@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.sprites.enemies;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -23,7 +24,8 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
-    private boolean hasEnemyBulletProp;
+    private boolean openFire;
+    private boolean showHelp;
 
     protected World world;
     protected PlayScreen screen;
@@ -48,7 +50,10 @@ public abstract class Enemy extends Sprite {
         tmp = new Vector2();
 
         // Fire property
-        hasEnemyBulletProp = object.getProperties().containsKey("enemyBullet");
+        openFire = object.getProperties().containsKey("enemyBullet");
+
+        // Help property
+        showHelp = object.getProperties().containsKey("help");
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -82,6 +87,7 @@ public abstract class Enemy extends Sprite {
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
+                showHelp();
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -94,13 +100,20 @@ public abstract class Enemy extends Sprite {
         }
     }
 
+    private void showHelp() {
+        if (showHelp) {
+            screen.getHud().showModalImage(getHelpImage());
+            showHelp = false;
+        }
+    }
+
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
         ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
     protected void openFire() {
-        if (hasEnemyBulletProp) {
+        if (openFire) {
             if (!isDestroyed()) {
                 if (b2body.isActive()) {
                     screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
@@ -157,6 +170,7 @@ public abstract class Enemy extends Sprite {
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);
+    protected abstract TextureRegion getHelpImage();
     public abstract void onHit();
     public abstract void onBump();
 }

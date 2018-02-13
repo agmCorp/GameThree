@@ -129,6 +129,11 @@ public class EnemyTwo extends Enemy {
     }
 
     @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpEnemyTwo();
+    }
+
+    @Override
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.

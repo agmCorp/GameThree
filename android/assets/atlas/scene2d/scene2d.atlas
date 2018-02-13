@@ -1,26 +1,103 @@
 
 scene2d.png
-size: 512,256
+size: 2048,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-drag
+helpColOne
   rotate: false
-  xy: 2, 33
-  size: 150, 150
-  orig: 150, 150
+  xy: 2, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpColSilverBullet
+  rotate: false
+  xy: 406, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpEnemyFour
+  rotate: false
+  xy: 204, 12
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpEnemyOne
+  rotate: false
+  xy: 1012, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpEnemyThree
+  rotate: false
+  xy: 810, 12
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpEnemyTwo
+  rotate: false
+  xy: 810, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpFinalEnemyLevelOne
+  rotate: false
+  xy: 406, 12
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpInitial
+  rotate: false
+  xy: 1012, 12
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpPowerFour
+  rotate: false
+  xy: 204, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpPowerOne
+  rotate: false
+  xy: 608, 12
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpPowerThree
+  rotate: false
+  xy: 608, 214
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+helpPowerTwo
+  rotate: false
+  xy: 2, 12
+  size: 200, 200
+  orig: 200, 200
   offset: 0, 0
   index: -1
 sliderBackground
   rotate: false
-  xy: 2, 185
+  xy: 2, 2
   size: 316, 8
   orig: 316, 8
   offset: 0, 0
   index: -1
 sliderKnob
   rotate: false
-  xy: 2, 2
+  xy: 1214, 385
   size: 14, 29
   orig: 14, 29
   offset: 0, 0

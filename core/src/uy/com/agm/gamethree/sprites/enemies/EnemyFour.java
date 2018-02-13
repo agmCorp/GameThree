@@ -246,6 +246,11 @@ public class EnemyFour extends Enemy {
         }
     }
 
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpEnemyFour();
+    }
+
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
             if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
