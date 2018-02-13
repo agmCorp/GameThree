@@ -12,7 +12,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -30,7 +29,6 @@ import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
-import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -81,9 +79,6 @@ public class PlayScreen extends AbstractScreen {
     // Final Enemy
     private FinalEnemy finalEnemy;
 
-    // Track help screens depending on the object's class name
-    private ObjectMap<String, DynamicHelpDef> dynamicHelp;
-
     public PlayScreen(Integer level) {
         this.level = level;
         levelCompletedTimer = 0;
@@ -101,8 +96,8 @@ public class PlayScreen extends AbstractScreen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
-        // todo gameCam.position.set(gameViewPort.getWorldWidth() / 2, 70, 0);
+        // todo gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 65, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -119,7 +114,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
-        //player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
 
         // Create boundaries
         upperEdge = new Edge(this, true);
@@ -132,7 +127,7 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create our game HUD for scores/timers/level info
-        hud = new Hud(this, LevelFactory.getLevelTimer(this.level), player.getLives());
+        hud = new Hud(this, level, LevelFactory.getLevelTimer(this.level), player.getLives());
         hud.buildStage();
 
         // Stop menu music and start playing level music
@@ -141,9 +136,6 @@ public class PlayScreen extends AbstractScreen {
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
-
-        // Track help screens
-        dynamicHelp = LevelFactory.getDynamicHelp(level);
 
         // PlayScreen running
         playScreenState = PlayScreenState.RUNNING;
@@ -382,6 +374,10 @@ public class PlayScreen extends AbstractScreen {
         return isLevelCompleted;
     }
 
+    private boolean isChallengeBegin() {
+        return gameCam.position.y >= Constants.LEVEL_CHALLENGE_BEGIN;
+    }
+
     private void renderHero() {
         player.draw(game.getBatch());
     }
@@ -495,6 +491,14 @@ public class PlayScreen extends AbstractScreen {
         if (isLevelCompleted(delta)) {
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
+
+        if (isChallengeBegin()) {
+            // Show help
+            finalEnemy.showChallengeBeginHelp();
+
+            // Change Hero's weapon
+            player.applySilverBullet();
+        }
     }
 
     public PlayScreenState getPlayScreenState(){
@@ -513,10 +517,6 @@ public class PlayScreen extends AbstractScreen {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();
-    }
-
-    public ObjectMap<String, DynamicHelpDef> getDynamicHelp() {
-        return dynamicHelp;
     }
 
     @Override

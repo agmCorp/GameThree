@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.304f;//1.0f;
+    public static final float GAMECAM_VELOCITY = 1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = true;
@@ -144,6 +144,9 @@ public class Constants {
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     public static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
     public static final int LEVEL_TIMER_NOTIFICATION = 10;
+
+    // Position (y-axis) where the epic fight against the final enemy begins
+    public static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1.3f) / PPM;
 
     // ---- Dinamic objects -----
 

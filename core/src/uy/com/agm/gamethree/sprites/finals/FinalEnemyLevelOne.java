@@ -529,14 +529,18 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     public void onHit(Weapon weapon) {
-        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
-            weapon.onTarget();
-            damage--;
-            screen.getHud().decreaseHealth();
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME);
-            if (damage <= 0) {
-                screen.getHud().hideHealthBarInfo();
-                currentStateFinalEnemy = StateFinalEnemy.INJURED;
+        if (screen.getPlayer().isSilverBulletEnabled()) {
+            if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
+                weapon.onTarget();
+                damage--;
+                screen.getHud().decreaseHealth();
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME);
+                if (damage <= 0) {
+                    screen.getHud().hideHealthBarInfo();
+                    currentStateFinalEnemy = StateFinalEnemy.INJURED;
+                }
+            } else {
+                weapon.onBounce();
             }
         } else {
             weapon.onBounce();
@@ -709,6 +713,16 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     @Override
     protected void setInitialState() {
         currentStateFinalEnemy = StateFinalEnemy.WALKING;
+    }
+
+    @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
+    protected TextureRegion getHelpImage() {
+        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelOne();
     }
 
     private void checkBoundaries() {

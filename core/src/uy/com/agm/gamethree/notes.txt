@@ -62,13 +62,10 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
+- Si agarro items (o shurikens) reboto un poco.
 
 - HELPS:
     - el primero que indica como disparar y moverse, condicionado al time, no es modal.
-    - el del enemigo final que indica que es inmune en la nube verde y que lo debo matar con shurikens. Debe aparecer
-    antes de la intro y debe ser modal.
-    - lo ideal seria un help la primera vez EN TODO EL JUEGO (INDEPENDIENTE DEL NIVEL) que aparece un enemigo nuevo o agarras
-    un poder nuevo. Modal. No se como condicionar eso.
 - Con eso ya puedo disenar al menos 2 niveles, tengo:
     - paths
     - 4 enemigos

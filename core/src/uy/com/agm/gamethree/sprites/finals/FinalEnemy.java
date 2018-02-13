@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.sprites.finals;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
@@ -95,9 +96,6 @@ public abstract class FinalEnemy extends Sprite {
                 // HealthBar
                 screen.getHud().showHealthBarInfo(getFinalEnemyName(), getFinalEnemyDamage());
 
-                // Change Hero's weapon
-                screen.getPlayer().applySilverBullet();
-
                 // Initial state
                 setInitialState();
 
@@ -139,6 +137,10 @@ public abstract class FinalEnemy extends Sprite {
         }
     }
 
+    public void showChallengeBeginHelp() {
+        screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+    }
+
     @Override
     public void draw(Batch batch) {
         super.draw(batch);
@@ -152,4 +154,6 @@ public abstract class FinalEnemy extends Sprite {
     protected abstract String getFinalEnemyName();
     protected abstract int getFinalEnemyDamage();
     protected abstract void setInitialState();
+    protected abstract String getClassName();
+    protected abstract TextureRegion getHelpImage();
 }

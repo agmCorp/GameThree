@@ -10,13 +10,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
-import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 /**
@@ -84,7 +82,7 @@ public abstract class Enemy extends Sprite {
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
-                showFirstHelp();
+                screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -94,20 +92,6 @@ public abstract class Enemy extends Sprite {
                     }
                 }
             }
-        }
-    }
-
-    private void showFirstHelp() {
-        String className = getClassName();
-        ObjectMap<String, DynamicHelpDef> dynamicHelp = screen.getDynamicHelp();
-        if (dynamicHelp.containsKey(className)){
-            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
-            if (dynamicHelpDef.isModal()) {
-                screen.getHud().showModalImage(getHelpImage());
-            } else {
-                screen.getHud().showImage(getHelpImage(), dynamicHelpDef.getSeconds());
-            }
-            screen.getDynamicHelp().remove(className);
         }
     }
 

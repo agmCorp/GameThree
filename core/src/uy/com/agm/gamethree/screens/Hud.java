@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -18,6 +19,8 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.DynamicHelpDef;
+import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.HealthBar;
 
 /**
@@ -28,6 +31,9 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     private PlayScreen screen;
+
+    // Track help screens depending on the object's class name
+    private ObjectMap<String, DynamicHelpDef> dynamicHelp;
 
     private I18NBundle i18NGameThreeBundle;
     private Label.LabelStyle labelStyleBig;
@@ -76,7 +82,7 @@ public class Hud extends AbstractScreen {
 
     private Stack stack;
 
-    public Hud(PlayScreen screen, Integer time, Integer lives) {
+    public Hud(PlayScreen screen, Integer level, Integer time, Integer lives) {
         super();
 
         // Define tracking variables
@@ -97,6 +103,9 @@ public class Hud extends AbstractScreen {
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
+        // Track help screens
+        dynamicHelp = LevelFactory.getDynamicHelp(level);
 
         // Personal fonts
         labelStyleBig = new Label.LabelStyle();
@@ -610,6 +619,19 @@ public class Hud extends AbstractScreen {
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
         silverBulletValueLablel.setText(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
+    }
+
+    // Show help screens depending on the object's class name
+    public void showDynamicHelp(String className, TextureRegion helpImage) {
+        if (dynamicHelp.containsKey(className)){
+            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
+            if (dynamicHelpDef.isModal()) {
+                screen.getHud().showModalImage(helpImage);
+            } else {
+                screen.getHud().showImage(helpImage, dynamicHelpDef.getSeconds());
+            }
+            dynamicHelp.remove(className);
+        }
     }
 
     @Override

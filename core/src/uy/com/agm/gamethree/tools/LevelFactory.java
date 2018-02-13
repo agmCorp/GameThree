@@ -94,6 +94,7 @@ public class LevelFactory {
                 dynamic.put(PowerFour.class.getName(), new DynamicHelpDef(true));
                 dynamic.put(ColOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
+                dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
                 break;
             case 2:
                 dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef(Constants.HUD_DEFAULT_DINAMIC_HELP_SECONDS));
