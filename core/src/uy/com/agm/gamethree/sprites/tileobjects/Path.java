@@ -3,21 +3,21 @@ package uy.com.agm.gamethree.sprites.tileobjects;
 import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by AGM on 12/4/2017.
  */
 
-public class Borders extends InteractiveTileObject {
-    private static final String TAG = Borders.class.getName();
+public class Path extends InteractiveTileObject {
+    private static final String TAG = Path.class.getName();
 
-    public Borders(PlayScreen screen, MapObject object) {
+    public Path(PlayScreen screen, MapObject object) {
         super(screen, object);
         fixture.setUserData(this);
-        setCategoryFilter(Constants.BORDER_BIT);
+        setCategoryFilter(Constants.PATH_BIT);
     }
 
     @Override

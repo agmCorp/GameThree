@@ -142,8 +142,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private void setDefaultFilter() {
         Filter filter = new Filter();
         filter.categoryBits = Constants.FINAL_ENEMY_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDERS_BIT |
-                Constants.EDGES_BIT |
+        filter.maskBits = Constants.BORDER_BIT |
+                Constants.EDGE_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.HERO_WEAPON_BIT |
                 Constants.SHIELD_BIT |

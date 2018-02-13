@@ -54,7 +54,7 @@ public class ColSilverBullet extends Item {
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.COLSILVERBULLET_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
+        fdef.filter.maskBits = Constants.BORDER_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |

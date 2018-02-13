@@ -65,8 +65,9 @@ public class PowerFour extends Item {
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.POWERFOUR_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
+        fdef.filter.maskBits = Constants.BORDER_BIT |
                 Constants.OBSTACLE_BIT |
+                Constants.PATH_BIT |
                 Constants.ENEMY_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.ITEM_BIT |
@@ -152,9 +153,10 @@ public class PowerFour extends Item {
             // Create a new Filter
             Filter filter = new Filter();
             filter.categoryBits = Constants.HERO_TOUGH_BIT; // Depicts what this fixture is
-            filter.maskBits = Constants.BORDERS_BIT |
-                    Constants.EDGES_BIT |
+            filter.maskBits = Constants.BORDER_BIT |
+                    Constants.EDGE_BIT |
                     Constants.OBSTACLE_BIT |
+                    Constants.PATH_BIT |
                     Constants.POWERBOX_BIT |
                     Constants.ITEM_BIT |
                     Constants.ENEMY_BIT |

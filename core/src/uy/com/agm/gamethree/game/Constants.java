@@ -148,19 +148,20 @@ public class Constants {
 
     // Box2D Collision Bits
     public static final short NOTHING_BIT = 0;
-    public static final short BORDERS_BIT = 1;
-    public static final short EDGES_BIT = 2;
+    public static final short BORDER_BIT = 1;
+    public static final short EDGE_BIT = 2;
     public static final short OBSTACLE_BIT = 4;
-    public static final short HERO_BIT = 8;
-    public static final short HERO_GHOST_BIT = 16;
-    public static final short HERO_TOUGH_BIT = 32;
-    public static final short POWERBOX_BIT = 64;
-    public static final short ENEMY_BIT = 128;
-    public static final short ITEM_BIT = 256;
-    public static final short HERO_WEAPON_BIT = 512;
-    public static final short ENEMY_WEAPON_BIT = 1024;
-    public static final short FINAL_ENEMY_BIT = 2048;
-    public static final short SHIELD_BIT = 4096;
+    public static final short PATH_BIT = 8;
+    public static final short HERO_BIT = 16;
+    public static final short HERO_GHOST_BIT = 32;
+    public static final short HERO_TOUGH_BIT = 64;
+    public static final short POWERBOX_BIT = 128;
+    public static final short ENEMY_BIT = 256;
+    public static final short ITEM_BIT = 512;
+    public static final short HERO_WEAPON_BIT = 1024;
+    public static final short ENEMY_WEAPON_BIT = 2048;
+    public static final short FINAL_ENEMY_BIT = 4096;
+    public static final short SHIELD_BIT = 8192;
 
     // Hero (meters = pixels * resizeFactor / PPM)
     public static final float HERO_LINEAR_VELOCITY = 5.2f;

@@ -51,7 +51,7 @@ public class EnemyTwo extends Enemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(Constants.ENEMYTWO_CIRCLESHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
+        fdef.filter.maskBits = Constants.BORDER_BIT |
                 Constants.HERO_WEAPON_BIT |
                 Constants.SHIELD_BIT |
                 Constants.HERO_BIT |

@@ -44,7 +44,7 @@ public class Edge {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
 
-        fdef.filter.categoryBits = Constants.EDGES_BIT; // Depicts what this fixture is
+        fdef.filter.categoryBits = Constants.EDGE_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = Constants.FINAL_ENEMY_BIT |
                             Constants.HERO_BIT |
                             Constants.HERO_GHOST_BIT |

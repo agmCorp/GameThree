@@ -24,6 +24,7 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 import uy.com.agm.gamethree.sprites.tileobjects.Borders;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
+import uy.com.agm.gamethree.sprites.tileobjects.Path;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
@@ -63,19 +64,27 @@ public class B2WorldCreator {
 
         TiledMap map = screen.getMap();
 
-        // Layer: borders
-        layer = map.getLayers().get("borders");
+        // Layer: border
+        layer = map.getLayers().get("border");
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 new Borders(screen, object);
             }
         }
 
-        // Layer: obstacles
-        layer = map.getLayers().get("obstacles");
+        // Layer: obstacle
+        layer = map.getLayers().get("obstacle");
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 new Obstacle(screen, object);
+            }
+        }
+
+        // Layer: path
+        layer = map.getLayers().get("path");
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                new Path(screen, object);
             }
         }
 

@@ -66,7 +66,7 @@ public class HeroBullet extends Weapon {
         CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = Constants.HERO_WEAPON_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDERS_BIT |
+        fdef.filter.maskBits = Constants.BORDER_BIT |
                 Constants.OBSTACLE_BIT |
                 Constants.POWERBOX_BIT |
                 Constants.FINAL_ENEMY_BIT |

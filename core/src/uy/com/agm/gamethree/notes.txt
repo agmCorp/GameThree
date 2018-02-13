@@ -1,5 +1,7 @@
 IDEAS
 -----
+- estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
+hacer highscores
 - programar acelerómetro? toggle: acelerometro, manual
 - nuevo item vidas
 - enemigo que hay que dispararle mucho para matarlo.
