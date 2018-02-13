@@ -138,7 +138,7 @@ public abstract class FinalEnemy extends Sprite {
     }
 
     public void showChallengeBeginHelp() {
-        screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+        screen.getHud().showModalImage(getHelpImage());
     }
 
     @Override
@@ -154,6 +154,5 @@ public abstract class FinalEnemy extends Sprite {
     protected abstract String getFinalEnemyName();
     protected abstract int getFinalEnemyDamage();
     protected abstract void setInitialState();
-    protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
 }

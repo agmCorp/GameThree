@@ -495,7 +495,7 @@ public class PlayScreen extends AbstractScreen {
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
 
-        if (isChallengeBegin()) {
+        if (isChallengeBegin() && !player.isSilverBulletEnabled()) {
             // Show help
             finalEnemy.showChallengeBeginHelp();
 
