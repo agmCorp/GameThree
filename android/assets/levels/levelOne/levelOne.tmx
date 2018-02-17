@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1025">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1049">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -186,16 +186,22 @@
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="1023" x="160" y="4544" width="32" height="32">
+  <object id="1023" x="128" y="5280" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
     <property name="strength" type="int" value="3"/>
    </properties>
   </object>
-  <object id="1024" x="320" y="4576" width="32" height="32">
+  <object id="1024" x="288" y="5312" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="2"/>
+    <property name="strength" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1041" x="224" y="5152" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+    <property name="strength" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>
@@ -280,20 +286,20 @@
   <object id="971" x="364" y="6132" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyTwo">
-  <object id="997" x="416" y="5760" width="32" height="32">
+  <object id="997" x="416" y="5856" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
   </object>
-  <object id="1001" x="32" y="4800" width="32" height="32"/>
-  <object id="1002" x="32" y="4864" width="32" height="32"/>
-  <object id="1003" x="32" y="4736" width="32" height="32"/>
-  <object id="1004" x="416" y="4736" width="32" height="32"/>
-  <object id="1005" x="416" y="4800" width="32" height="32"/>
-  <object id="1006" x="416" y="4864" width="32" height="32"/>
-  <object id="1008" x="416" y="5792" width="32" height="32"/>
-  <object id="1009" x="32" y="5792" width="32" height="32"/>
-  <object id="1010" x="32" y="5760" width="32" height="32">
+  <object id="1001" x="32" y="4896" width="32" height="32"/>
+  <object id="1002" x="32" y="4960" width="32" height="32"/>
+  <object id="1003" x="32" y="4832" width="32" height="32"/>
+  <object id="1004" x="416" y="4832" width="32" height="32"/>
+  <object id="1005" x="416" y="4896" width="32" height="32"/>
+  <object id="1006" x="416" y="4960" width="32" height="32"/>
+  <object id="1008" x="416" y="5888" width="32" height="32"/>
+  <object id="1009" x="32" y="5888" width="32" height="32"/>
+  <object id="1010" x="32" y="5856" width="32" height="32">
    <properties>
     <property name="powerOne" value=""/>
    </properties>
@@ -316,8 +322,55 @@
   <object id="1018" x="32" y="5088" width="32" height="32"/>
   <object id="1019" x="32" y="5120" width="32" height="32"/>
   <object id="1020" x="32" y="5152" width="32" height="32"/>
-  <object id="1021" x="192" y="4800" width="32" height="32"/>
-  <object id="1022" x="320" y="4800" width="32" height="32"/>
+  <object id="1025" x="32" y="5728" width="32" height="32"/>
+  <object id="1026" x="32" y="5696" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1027" x="416" y="5728" width="32" height="32"/>
+  <object id="1028" x="416" y="5696" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1029" x="416" y="5248" width="32" height="32"/>
+  <object id="1030" x="416" y="5312" width="32" height="32"/>
+  <object id="1031" x="32" y="5312" width="32" height="32"/>
+  <object id="1032" x="32" y="5280" width="32" height="32"/>
+  <object id="1033" x="32" y="5248" width="32" height="32"/>
+  <object id="1034" x="416" y="5280" width="32" height="32"/>
+  <object id="1035" x="32" y="4864" width="32" height="32"/>
+  <object id="1036" x="32" y="4928" width="32" height="32"/>
+  <object id="1037" x="416" y="4864" width="32" height="32"/>
+  <object id="1038" x="416" y="4928" width="32" height="32"/>
+  <object id="1042" x="32" y="4768" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1043" x="32" y="4800" width="32" height="32"/>
+  <object id="1044" x="416" y="4768" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1045" x="416" y="4800" width="32" height="32"/>
+  <object id="1046" x="192" y="5376" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1047" x="288" y="5376" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
+  <object id="1048" x="224" y="5920" width="32" height="32">
+   <properties>
+    <property name="powerOne" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyThree"/>
  <objectgroup name="enemyFour"/>

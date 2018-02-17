@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.304f; //1.0f;
+    public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = false;
@@ -175,7 +175,7 @@ public class Constants {
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final float HERO_FIRE_DELAY_SECONDS = 0.5f;
-    public static final int HERO_LIVES_START = 3;
+    public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
 
     // Edge (meters = pixels * resizeFactor / PPM)
@@ -224,7 +224,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 6;
+    public static final int TIMER_POWERONE = 10;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
@@ -266,7 +266,7 @@ public class Constants {
     public static final float POWERFOUR_FADING_SECONDS = 5.0f;
     public static final float POWERFOUR_WIDTH_METERS = 192.0f * 0.5f / PPM;
     public static final float POWERFOUR_HEIGHT_METERS = 192.0f * 0.5f / PPM;
-    public static final int TIMER_POWERFOUR = 20;
+    public static final int TIMER_POWERFOUR = 10;
     public static final int POWERFOUR_SCORE = 30;
     public static final float POWERFOUR_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERFOUR_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
