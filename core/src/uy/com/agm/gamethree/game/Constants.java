@@ -146,7 +146,7 @@ public class Constants {
     public static final int LEVEL_TIMER_NOTIFICATION = 10;
 
     // Position (y-axis) where the epic fight against the final enemy begins
-    public static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1.3f) / PPM;
+    public static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // ---- Dinamic objects -----
 
@@ -224,7 +224,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 20;
+    public static final int TIMER_POWERONE = 200;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;

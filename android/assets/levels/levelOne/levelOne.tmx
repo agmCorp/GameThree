@@ -1,397 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="715">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="831">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   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
+   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
+  </data>
+ </layer>
+ <layer name="green" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzty7cRwkAARNGLpHowjck0JtOYDMSsSjgCAua9mZ/tlgLAr3RNKX0a0tjUfafs57SktfK7Zb+nI52V31tbyj090rOt+3bZ92lIY+V3yn5OS1orv1v2ezrSWfm9XJ9Xen/xBQAAAAAAAAAAAAAAgH/2AaiAFTM=
   </data>
  </layer>
  <layer name="graphic" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2ldKA1EYhuGTxC5qNJZt2N2G3W1kC/Z24xbsDQvqBuwNNZYN2Btq1Ki3vhcKQ5iLjAlk1O+Fhxkm54dBJsMk0RhlVyiO2XDCzkIppVR0fq8x+ShAwOtstpT1ZShHhcPZWtbXoR4NDmeVUspN6T6qlFJKKZWY/Mk+AeXqWnnmbUM7OtCJLnSjB73oQ7/Ns/Egx4YwjBGMYgzjmMAkpjBtM7vMsRWsYg3r2MAmtrCNHezazJ5y7AznuMAlrnCNG9ziDvc2sx6fMV74kIJUpCEdGchEFrJ98f9tlVJKKZWcIh5j3vCOD4+z2UKeH4pQjBKH3w1Wsr4K1ahxONvI+iY0o0XfSSqllFJKKaX+aPq8pv5LAYfXd7IKxnieM1z7s5jD/Nf7YMBmdoHXFrFk2UbPWtdY949wjBPLdg/7OEAoao11/wWviFi2D3jEE8JRa6z7duX4jMlFHvz6vUi5oBDvt8Mf3lfCzD3/knuScn+x/u+JG67Z73MIJvEclPv6BMx3Z/4=
+   eJzt2EVullEUgOEP+4u72xrYQt3ddQVIt1D3FndYAdIt1L3FHVaALYFn2PwJE8qAhPMmz+Dk5Azu9CZJFEVR9C92PpUkF7jIJdpTv9+lz494zBOeMr7uNn2XPn/lG9/5wc91t+m79Dm9cxl//v72DdyOb+A2iqIoiqIoiqIoiqK/V2YqSbLIJodc8singEKKKKaEUsoop4NOuuimh1766GeAQYYYZoRRxphgkimmmWGWOeZZYJEllllhlTU2ZSTJZrawlW2kyGA7O9jJLnazh73sI5MssskhlzzyKaCQIoopoZQyyumgky666aGXPvoZYJAhhhlhlDEmmGSKaWaYZY55FlhkiWVWWGUt/lCiKIqiKIqiKIqiKEqrIpUklVRRTQ211FFPA4000UwLrbRxmStc5RrXucFNbnGbO9zlHvd5wEOe8ZwXvOQVr3nDW97xng985BOf+cL+jCQ5wEEOcZgjHOUYxznBSU5xmjOcpYJKqqimhlrqqKeBRppopoVW2uJfJYqiKIqiKIqiKIqi/7xfEOFynQ==
+  </data>
+ </layer>
+ <layer name="bridge" width="15" height="250">
+  <data encoding="base64" compression="zlib">
+   eJzt2Ld1AkAUBdGNgC7kQMIUhfdF4X1RGAnfhKaEnyjSzDk3+y/YdFMyMzMzMzMzMzMzs/9QNZNSDXU00EQrE9uOuBtjgilmmAe3e+4OOOKEb/wEty/ZlF7xhnd8IJ+Nbavc1VBHA020gtsRd2NMMMUM8+B2z90BR5zwjZ/g9iXHe/GGd3wgn4ttq9zVUEcDTbSC2xF3Y0wwxQzz4NbMzMzMzMzMYrUzKXXQRQ99DDAM/JMsuFlihTU22GIX2J65ueCKG+544BnYFrIpfeILRZRQRiXw19HmpoMueuhjgGFgu+BmiRXW2GCLXWB75uaCK26444FnYFvI8V58oYgSyqgE/kna3HTQRQ99DDAMbBfcLLHCGhtssQtsz9xccMUNdzzw9G/HzMzMzMzMzP6wX4hqTak=
   </data>
  </layer>
  <objectgroup name="border">
   <object id="5" name="left" x="0" y="0" width="1" height="8000"/>
   <object id="11" name="right" x="479" y="0" width="1" height="8000"/>
  </objectgroup>
- <objectgroup name="obstacle">
-  <object id="665" x="325" y="897" width="110" height="78"/>
-  <object id="666" x="101" y="1633" width="110" height="78"/>
-  <object id="667" x="90" y="3245" width="304" height="79"/>
-  <object id="668" x="13" y="4451" width="91" height="75"/>
-  <object id="669" x="195" y="6308" width="102" height="76"/>
-  <object id="670" x="426" y="7630" width="47" height="34"/>
-  <object id="671" x="43" y="7730" width="46" height="30"/>
-  <object id="672" x="167" y="7280" width="52" height="32"/>
- </objectgroup>
+ <objectgroup name="obstacle"/>
  <objectgroup name="path">
-  <object id="698" x="2.5" y="6911.5" width="157" height="3.5"/>
-  <object id="699" x="156.5" y="6916" width="2.5" height="28"/>
-  <object id="700" x="288.5" y="6912.5" width="189.5" height="3"/>
-  <object id="702" x="288" y="6916" width="3" height="26.5"/>
-  <object id="703" x="2.5" y="6812.5" width="156.5" height="3.5"/>
-  <object id="704" x="156.5" y="6783.5" width="2.5" height="29"/>
-  <object id="709" x="288.5" y="6784.5" width="2.5" height="31.5"/>
-  <object id="712" x="292" y="6812.5" width="186" height="3.5"/>
-  <object id="713" x="288.5" y="6817" width="2" height="94.5"/>
-  <object id="714" x="155.5" y="6817" width="3.5" height="93"/>
+  <object id="721" x="178.5" y="5539" width="15" height="14"/>
+  <object id="722" x="171.5" y="5555" width="18" height="13.5"/>
+  <object id="723" x="167.5" y="5571" width="15" height="15"/>
+  <object id="724" x="162.5" y="5591" width="16" height="13.5"/>
+  <object id="725" x="159.5" y="5611" width="11.5" height="12.5"/>
+  <object id="726" x="153.5" y="5629" width="11" height="11.5"/>
+  <object id="727" x="151.5" y="5646.5" width="8.5" height="11"/>
+  <object id="728" x="315.5" y="5529.5" width="11" height="9.5"/>
+  <object id="729" x="311.5" y="5542" width="12" height="11"/>
+  <object id="730" x="304" y="5557" width="11.5" height="10.5"/>
+  <object id="731" x="299.5" y="5571" width="10" height="10.5"/>
+  <object id="732" x="296" y="5586.5" width="10" height="10"/>
+  <object id="733" x="290.5" y="5601" width="10" height="11"/>
+  <object id="734" x="284.5" y="5614.5" width="10.5" height="9.5"/>
+  <object id="735" x="280.5" y="5629" width="9" height="9.5"/>
+  <object id="736" x="278" y="5643.5" width="7.5" height="7.5"/>
+  <object id="737" x="161.5" y="5540.5" width="12" height="9.5"/>
+  <object id="738" x="145.5" y="5541" width="12" height="9"/>
+  <object id="739" x="130.5" y="5540" width="11.5" height="9"/>
+  <object id="740" x="118.5" y="5545" width="9" height="8"/>
+  <object id="741" x="105" y="5549.5" width="11.5" height="8"/>
+  <object id="742" x="91.5" y="5552" width="11" height="7.5"/>
+  <object id="743" x="79.5" y="5554" width="7.5" height="8"/>
+  <object id="744" x="90.5" y="5564" width="13.5" height="7.5"/>
+  <object id="745" x="107" y="5574.5" width="6.5" height="7"/>
+  <object id="746" x="99" y="5584" width="10" height="7"/>
+  <object id="747" x="80.5" y="5587.5" width="16" height="7.5"/>
+  <object id="748" x="36.5" y="5588" width="41" height="9.5"/>
+  <object id="749" x="12.5" y="5589" width="21" height="8"/>
+  <object id="750" x="4.5" y="5598" width="9" height="9.5"/>
+  <object id="751" x="6" y="5613" width="11.5" height="10.5"/>
+  <object id="752" x="18.5" y="5628" width="15" height="7"/>
+  <object id="753" x="40" y="5635" width="17" height="6.5"/>
+  <object id="754" x="63" y="5642" width="13.5" height="5.5"/>
+  <object id="755" x="82.5" y="5650" width="11.5" height="5.5"/>
+  <object id="756" x="97" y="5656.5" width="61.5" height="6"/>
+  <object id="757" x="288.5" y="5645" width="10" height="5"/>
+  <object id="758" x="299.5" y="5640.5" width="16" height="6"/>
+  <object id="759" x="321.5" y="5635" width="19" height="5.5"/>
+  <object id="760" x="347" y="5630.5" width="29.5" height="4.5"/>
+  <object id="761" x="384" y="5626.5" width="22" height="5"/>
+  <object id="762" x="402" y="5611" width="18" height="12.5"/>
+  <object id="763" x="418" y="5599" width="11.5" height="8.5"/>
+  <object id="764" x="434" y="5598" width="31.5" height="7"/>
+  <object id="765" x="466.5" y="5587" width="10" height="9"/>
+  <object id="766" x="461.5" y="5550" width="12.5" height="15.5"/>
+  <object id="767" x="446.5" y="5539" width="13.5" height="11.5"/>
+  <object id="768" x="435" y="5526" width="13" height="11"/>
+  <object id="769" x="412" y="5520.5" width="19.5" height="8.5"/>
+  <object id="770" x="391" y="5513.5" width="21.5" height="8.5"/>
+  <object id="771" x="374" y="5508.5" width="13.5" height="9"/>
+  <object id="772" x="349.5" y="5509" width="21.5" height="5.5"/>
+  <object id="773" x="329.5" y="5508.5" width="18" height="7.5"/>
+  <object id="775" x="322" y="5518" width="9.5" height="8"/>
+  <object id="776" x="239" y="3085" width="8.5" height="9"/>
+  <object id="777" x="235" y="3097" width="8" height="11.5"/>
+  <object id="778" x="229.5" y="3115.5" width="8" height="14"/>
+  <object id="779" x="227" y="3132" width="5.5" height="14"/>
+  <object id="780" x="219.5" y="3149.5" width="9" height="14"/>
+  <object id="781" x="215" y="3168.5" width="7" height="13.5"/>
+  <object id="782" x="209.5" y="3186" width="9.5" height="12"/>
+  <object id="783" x="205.5" y="3202" width="7.5" height="12"/>
+  <object id="784" x="202.5" y="3219" width="6.5" height="10"/>
+  <object id="785" x="197" y="3234" width="9.5" height="14.5"/>
+  <object id="786" x="193.5" y="3253.5" width="8" height="10"/>
+  <object id="787" x="190" y="3268.5" width="7" height="12.5"/>
+  <object id="788" x="184.5" y="3284.5" width="71.5" height="10"/>
+  <object id="789" x="263" y="3287" width="16" height="6.5"/>
+  <object id="790" x="286.5" y="3282" width="18" height="7"/>
+  <object id="791" x="307" y="3271.5" width="21" height="9"/>
+  <object id="792" x="330.5" y="3260.5" width="11" height="9"/>
+  <object id="793" x="344" y="3248.5" width="10" height="9"/>
+  <object id="794" x="357.5" y="3238.5" width="10.5" height="11"/>
+  <object id="795" x="373" y="3232.5" width="12" height="8.5"/>
+  <object id="796" x="391" y="3228.5" width="10" height="6.5"/>
+  <object id="797" x="406.5" y="3220.5" width="10.5" height="6.5"/>
+  <object id="798" x="421" y="3209.5" width="12.5" height="10.5"/>
+  <object id="799" x="440" y="3207.5" width="10" height="6.5"/>
+  <object id="800" x="454" y="3200" width="13" height="7"/>
+  <object id="801" x="466" y="3188" width="11" height="9.5"/>
+  <object id="802" x="251" y="3074.5" width="51.5" height="10.5"/>
+  <object id="803" x="309" y="3085" width="17.5" height="17"/>
+  <object id="804" x="329" y="3105" width="20.5" height="14"/>
+  <object id="806" x="349.5" y="3125" width="10" height="11"/>
+  <object id="807" x="362" y="3136.5" width="17" height="9"/>
+  <object id="808" x="382.5" y="3144.5" width="19" height="7.5"/>
+  <object id="809" x="407.5" y="3151" width="18" height="8.5"/>
+  <object id="810" x="433" y="3157.5" width="10" height="10"/>
+  <object id="811" x="448.5" y="3168" width="13" height="8.5"/>
+  <object id="812" x="465.5" y="3177" width="10" height="6.5"/>
+  <object id="813" x="75" y="3143.5" width="29" height="4.5"/>
+  <object id="814" x="51.5" y="3151" width="21.5" height="4.5"/>
+  <object id="815" x="36" y="3157" width="14.5" height="5.5"/>
+  <object id="816" x="18.5" y="3165.5" width="17" height="6.5"/>
+  <object id="817" x="9" y="3178" width="12.5" height="8"/>
+  <object id="818" x="8" y="3189" width="14.5" height="13.5"/>
+  <object id="819" x="25.5" y="3204" width="22" height="7"/>
+  <object id="820" x="53.5" y="3212.5" width="23.5" height="8"/>
+  <object id="821" x="79.5" y="3222.5" width="6.5" height="6"/>
+  <object id="822" x="93.5" y="3150.5" width="8" height="12"/>
+  <object id="823" x="90" y="3168" width="8" height="12"/>
+  <object id="824" x="86" y="3185.5" width="8" height="12.5"/>
+  <object id="825" x="82.5" y="3204" width="6.5" height="14.5"/>
+  <object id="826" x="225.5" y="831" width="253" height="10.5"/>
+  <object id="827" x="2.5" y="831.25" width="124.5" height="10.5"/>
+  <object id="829" x="131.5" y="788" width="25" height="149.5"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="265" x="177" y="7358" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="270" x="95" y="7358" width="31" height="29">
+  <object id="830" x="225.5" y="544.5" width="30.5" height="30.5">
    <properties>
     <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="328" x="262" y="7359" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="331" x="342" y="7360" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="5"/>
-   </properties>
-  </object>
-  <object id="340" x="348.5" y="6012" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="341" x="101.5" y="6010" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="342" x="268.5" y="6011" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="343" x="183.5" y="6010" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="344" x="339.5" y="4819" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="10"/>
-   </properties>
-  </object>
-  <object id="345" x="92.5" y="4817" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="346" x="259.5" y="4818" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="347" x="174.5" y="4817" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="348" x="350.5" y="3746" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="349" x="103.5" y="3744" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="350" x="270.5" y="3745" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="351" x="185.5" y="3744" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="352" x="350.5" y="2687" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="353" x="103.5" y="2685" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="354" x="270.5" y="2686" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="355" x="185.5" y="2685" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="356" x="353.5" y="1487" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="357" x="106.5" y="1485" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="358" x="273.5" y="1486" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="359" x="188.5" y="1485" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="360" x="363.5" y="268" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="361" x="116.5" y="266" width="31" height="29">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="362" x="283.5" y="267" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="363" x="198.5" y="266" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="660" x="212" y="7483" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="661" x="288" y="6656" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="662" x="159" y="6146" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="663" x="206" y="5729" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="664" x="233" y="5582" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="693" x="270" y="365" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="694" x="154" y="362" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="695" x="399" y="368" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="696" x="194" y="7105" width="32" height="32">
-   <properties>
-    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne">
-  <object id="376" x="96" y="7040" width="32" height="32"/>
-  <object id="377" x="352" y="7040" width="32" height="32"/>
-  <object id="380" x="160" y="6624" width="32" height="32"/>
-  <object id="381" x="384" y="6624" width="32" height="32"/>
-  <object id="383" x="96" y="6304" width="32" height="32"/>
-  <object id="385" x="352" y="5568" width="32" height="32"/>
-  <object id="386" x="320" y="5696" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="387" x="256" y="5824" width="32" height="32"/>
-  <object id="388" x="96" y="5888" width="32" height="32"/>
-  <object id="389" x="64" y="5504" width="32" height="32"/>
-  <object id="390" x="352" y="5056" width="32" height="32"/>
-  <object id="392" x="320" y="5216" width="32" height="32"/>
-  <object id="394" x="128" y="5120" width="32" height="32"/>
-  <object id="395" x="96" y="4992" width="32" height="32">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="416" x="224" y="3488" width="32" height="32"/>
-  <object id="621" x="93" y="6762" width="32" height="32"/>
-  <object id="622" x="369" y="6343" width="32" height="32"/>
-  <object id="624" x="226" y="5330" width="32" height="32"/>
-  <object id="625" x="240" y="4580" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="627" x="427" y="3810" width="32" height="32"/>
-  <object id="628" x="248" y="3138" width="32" height="32"/>
-  <object id="629" x="334" y="2852" width="32" height="32"/>
-  <object id="630" x="113" y="1893" width="32" height="32"/>
-  <object id="636" x="302" y="6094" width="32" height="32"/>
-  <object id="638" x="316" y="3905" width="32" height="32"/>
-  <object id="639" x="34" y="3959" width="32" height="32"/>
-  <object id="640" x="57" y="3842" width="32" height="32"/>
-  <object id="642" x="139" y="3594" width="32" height="32"/>
-  <object id="643" x="126" y="3429" width="32" height="32"/>
-  <object id="644" x="316" y="3402" width="32" height="32"/>
-  <object id="646" x="176" y="2785" width="32" height="32"/>
-  <object id="648" x="360" y="2471" width="32" height="32"/>
-  <object id="649" x="206" y="2576" width="32" height="32"/>
-  <object id="650" x="55" y="2514" width="32" height="32"/>
-  <object id="651" x="370" y="1804" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="enemyTwo">
-  <object id="396" x="441" y="4192" width="32" height="32"/>
-  <object id="397" x="441" y="4224" width="32" height="32"/>
-  <object id="398" x="441" y="4256" width="32" height="32"/>
-  <object id="411" x="8" y="3335" width="32" height="32"/>
-  <object id="413" x="8" y="3303" width="32" height="32"/>
-  <object id="414" x="8" y="3367" width="32" height="32"/>
-  <object id="456" x="439" y="6486" width="32" height="32"/>
-  <object id="458" x="439" y="6454" width="32" height="32"/>
-  <object id="459" x="439" y="6518" width="32" height="32"/>
-  <object id="466" x="7" y="5814" width="32" height="32"/>
-  <object id="468" x="7" y="5782" width="32" height="32"/>
-  <object id="469" x="7" y="5846" width="32" height="32"/>
-  <object id="476" x="442" y="5818" width="32" height="32"/>
-  <object id="478" x="442" y="5786" width="32" height="32"/>
-  <object id="496" x="8" y="5048" width="32" height="32"/>
-  <object id="498" x="8" y="5016" width="32" height="32"/>
-  <object id="499" x="8" y="5080" width="32" height="32"/>
-  <object id="506" x="7" y="4218" width="32" height="32"/>
-  <object id="508" x="7" y="4186" width="32" height="32"/>
-  <object id="509" x="7" y="4250" width="32" height="32"/>
-  <object id="556" x="12" y="2770" width="32" height="32"/>
-  <object id="558" x="12" y="2738" width="32" height="32"/>
-  <object id="559" x="12" y="2802" width="32" height="32"/>
-  <object id="566" x="9" y="2055" width="32" height="32"/>
-  <object id="568" x="9" y="2023" width="32" height="32"/>
-  <object id="576" x="442" y="2056" width="32" height="32"/>
-  <object id="578" x="442" y="2024" width="32" height="32"/>
-  <object id="606" x="441" y="1260" width="32" height="32"/>
-  <object id="608" x="441" y="1228" width="32" height="32"/>
-  <object id="609" x="441" y="1292" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="enemyThree">
-  <object id="673" x="384" y="6176" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="679" x="54" y="5374" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="680" x="311" y="5376" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="681" x="196" y="5470" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
-  <object id="687" x="366" y="1717" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerFour" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="powerThree" value=""/>
-    <property name="powerTwo" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="enemyFour">
-  <object id="682" x="359" y="4473" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
-  <object id="691" x="424" y="7455" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="timesItFreeze" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="692" x="38" y="7519" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="enemyOne"/>
+ <objectgroup name="enemyTwo"/>
+ <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyFour"/>
 </map>

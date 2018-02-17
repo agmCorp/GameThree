@@ -378,7 +378,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private boolean isChallengeBegin() {
-        return gameCam.position.y >= Constants.LEVEL_CHALLENGE_BEGIN;
+        return player.getB2body().getPosition().y >= Constants.LEVEL_CHALLENGE_BEGIN;
     }
 
     private void renderHero() {
