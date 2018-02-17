@@ -29,7 +29,7 @@ public class Constants {
     public static final float PPM = 100;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 1.0f;
+    public static final float GAMECAM_VELOCITY = 0.304f; //1.0f;
 
     // Debug mode enabled by default
     public static final boolean DEBUG_MODE = false;
@@ -138,7 +138,7 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 180;
+    public static final int TIMER_LEVEL_ONE = 327;
     public static final int TIMER_LEVEL_TWO = 30;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
@@ -193,7 +193,7 @@ public class Constants {
     public static final float ITEM_OFFSET_METERS = 40.0f / PPM;
 
     // Notification (seconds) before power down
-    public static final int POWER_TIMER_NOTIFICATION = 5;
+    public static final int POWER_TIMER_NOTIFICATION = 3;
     public static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
 
     // ColOne (meters = pixels * resizeFactor / PPM)
@@ -224,7 +224,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 200;
+    public static final int TIMER_POWERONE = 6;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
@@ -334,7 +334,7 @@ public class Constants {
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
-    public static final int FINALLEVELONE_MAX_DAMAGE = 3;
+    public static final int FINALLEVELONE_MAX_DAMAGE = 10;
     public static final int FINALLEVELONE_SCORE = 200;
 
     // HeroBullet (meters = pixels * resizeFactor / PPM)
