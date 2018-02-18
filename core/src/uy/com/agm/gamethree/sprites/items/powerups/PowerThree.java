@@ -157,7 +157,7 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer > 0 ? timer : Constants.TIMER_POWERTHREE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTHREE);
 
             // Set score
             hud.addScore(Constants.POWERTHREE_SCORE);

@@ -224,7 +224,7 @@ public class Constants {
     public static final float POWERONE_FADING_SECONDS = 5.0f;
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
-    public static final int TIMER_POWERONE = 10;
+    public static final int DEFAULT_TIMER_POWERONE = 10;
     public static final int POWERONE_SCORE = 15;
     public static final float POWERONE_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
@@ -237,7 +237,7 @@ public class Constants {
     public static final float POWERTWO_FADING_SECONDS = 5.0f;
     public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.4f / PPM;
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.4f / PPM;
-    public static final int TIMER_POWERTWO = 20;
+    public static final int DEFAULT_TIMER_POWERTWO = 20;
     public static final int POWERTWO_SCORE = 30;
     public static final float POWERTWO_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERTWO_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
@@ -250,7 +250,7 @@ public class Constants {
     public static final float POWERTHREE_FADING_SECONDS = 5.0f;
     public static final float POWERTHREE_WIDTH_METERS = 63.0f * 0.7f / PPM;
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
-    public static final int TIMER_POWERTHREE = 20;
+    public static final int DEFAULT_TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
     public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
@@ -266,7 +266,7 @@ public class Constants {
     public static final float POWERFOUR_FADING_SECONDS = 5.0f;
     public static final float POWERFOUR_WIDTH_METERS = 192.0f * 0.5f / PPM;
     public static final float POWERFOUR_HEIGHT_METERS = 192.0f * 0.5f / PPM;
-    public static final int TIMER_POWERFOUR = 10;
+    public static final int DEFAULT_TIMER_POWERFOUR = 10;
     public static final int POWERFOUR_SCORE = 30;
     public static final float POWERFOUR_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERFOUR_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;

@@ -153,7 +153,7 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer > 0 ? timer : Constants.TIMER_POWERONE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERONE);
 
             // Set score
             hud.addScore(Constants.POWERONE_SCORE);

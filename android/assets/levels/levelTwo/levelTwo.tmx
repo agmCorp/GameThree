@@ -201,7 +201,7 @@
   <object id="678" x="98.5" y="7375" width="31" height="29">
    <properties>
     <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="0"/>
+    <property name="timer" type="int" value="40"/>
    </properties>
   </object>
   <object id="679" x="265.5" y="7376" width="32" height="32">

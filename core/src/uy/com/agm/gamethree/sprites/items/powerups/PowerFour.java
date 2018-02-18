@@ -153,7 +153,7 @@ public class PowerFour extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer > 0 ? timer : Constants.TIMER_POWERFOUR);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERFOUR);
 
             // Set score
             hud.addScore(Constants.POWERFOUR_SCORE);

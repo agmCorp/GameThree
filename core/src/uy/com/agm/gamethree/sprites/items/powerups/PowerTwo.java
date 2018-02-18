@@ -153,7 +153,7 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer > 0 ? timer : Constants.TIMER_POWERTWO);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTWO);
 
             // Set score
             hud.addScore(Constants.POWERTWO_SCORE);
