@@ -50,19 +50,19 @@ public class SelectLevelScreen extends AbstractScreen {
         Label backLabel = new Label(i18NGameThreeBundle.format("selectLevel.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(selectLevelLabel).center();
+        table.add(selectLevelLabel);
         table.row();
         Label levelLabel;
         for (int level : GameSettings.getInstance().getAvailableLevels()) {
             table.row();
             levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
-            table.add(levelLabel).padTop(Constants.PAD_TOP).center();
+            table.add(levelLabel).padTop(Constants.PAD_TOP);
 
             // Events
             levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level));
         }
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP).center();
+        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

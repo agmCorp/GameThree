@@ -49,9 +49,9 @@ public class GameOverScreen extends AbstractScreen {
         Label backLabel = new Label(i18NGameThreeBundle.format("gameOver.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(gameOverLabel).center();
+        table.add(gameOverLabel);
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP).center();
+        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

@@ -665,10 +665,7 @@ public class Hero extends Sprite {
                 openFireTimer = 0;
             }
         } else {
-            if (openFireTimer > Constants.HERO_FIRE_DELAY_SECONDS) {
-                shootBulletNormal();
-                openFireTimer = 0;
-            }
+            defaultShooting();
         }
     }
 
@@ -693,6 +690,14 @@ public class Hero extends Sprite {
     private void shootBulletNormal() {
         screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
                 b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
+    }
+
+    private void defaultShooting() {
+        float fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HERO_AUTOMATIC_FIRE_DELAY_SECONDS;
+        if (openFireTimer > fireDelay) {
+            shootBulletNormal();
+            openFireTimer = 0;
+        }
     }
 
     public void onMovingUp() {
@@ -749,7 +754,7 @@ public class Hero extends Sprite {
         powerFXAllowRotation = allowRotation;
     }
 
-    public void applyFirePower(float width, float height, float circleShapeRadius, float delay, int bullets, Animation animation) {
+    public void applyFirePower(float width, float height, float circleShapeRadius, float manualDelay, int bullets, Animation animation) {
         currentPowerState = PowerState.POWERFUL;
         fireEnhancement = true;
         numberBullets = bullets;
@@ -757,7 +762,7 @@ public class Hero extends Sprite {
             bulletWidth = width;
             bulletHeight = height;
             bulletCircleShapeRadius = circleShapeRadius;
-            fireDelay = delay;
+            fireDelay = GameSettings.getInstance().isManualShooting() ?  manualDelay : Constants.HERO_AUTOMATIC_FIRE_DELAY_SECONDS;
             bulletAnimation = animation;
         }
     }
@@ -767,6 +772,7 @@ public class Hero extends Sprite {
         bulletWidth = Constants.SILVERBULLET_WIDTH_METERS;
         bulletHeight = Constants.SILVERBULLET_HEIGHT_METERS;
         bulletCircleShapeRadius = Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS;
+        // Same delay regardless of automatic/manual setting because we can only shoot silver bullets manually
         fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
         bulletAnimation = Assets.getInstance().getSilverBullet().getSilverBulletAnimation();
     }

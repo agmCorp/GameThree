@@ -57,13 +57,13 @@ public class MainMenuScreen extends AbstractScreen {
         Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        table.add(menuLabel).center();
+        table.add(menuLabel);
         table.row();
-        table.add(startGameLabel).padTop(Constants.PAD_TOP).center();
+        table.add(startGameLabel).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(settingsLabel).padTop(Constants.PAD_TOP).center();
+        table.add(settingsLabel).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(exitGameLabel).padTop(Constants.PAD_TOP).center();
+        table.add(exitGameLabel).padTop(Constants.PAD_TOP * 2);
 
         // Events
         startGameLabel.addListener( UIFactory.createListener(ScreenEnum.SELECT_LEVEL) );

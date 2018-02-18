@@ -25,7 +25,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
 
-    private Label shootingLabel;
+    private Label shootingSettingLabel;
     private Slider sliderMusic;
     private Slider sliderSound;
     private GameSettings prefs;
@@ -64,7 +64,8 @@ public class SettingsScreen extends AbstractScreen {
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleNormal);
         Label musicLabel = new Label(i18NGameThreeBundle.format("settings.music"), labelStyleNormal);
         Label soundEffectsLabel = new Label(i18NGameThreeBundle.format("settings.soundEffects"), labelStyleNormal);
-        shootingLabel = new Label("SHOOTING", labelStyleNormal);
+        Label shootingLabel = new Label(i18NGameThreeBundle.format("settings.shooting"), labelStyleNormal);
+        shootingSettingLabel = new Label("SHOOTING", labelStyleNormal);
         setTextLabelShooting();
         Label backLabel = new Label(i18NGameThreeBundle.format("settings.backToMenu"), labelStyleNormal);
 
@@ -82,19 +83,21 @@ public class SettingsScreen extends AbstractScreen {
         sliderSound.setValue(prefs.getVolSound());
 
         // Add values
-        table.add(settingsLabel).center();
+        table.add(settingsLabel);
         table.row();
-        table.add(musicLabel).padTop(Constants.PAD_TOP).center();
+        table.add(musicLabel).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
+        table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(soundEffectsLabel).padTop(Constants.PAD_TOP).center();
+        table.add(soundEffectsLabel).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP).center();
+        table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(shootingLabel).padTop(Constants.PAD_TOP).center();
+        table.add(shootingLabel).padTop(Constants.PAD_TOP);
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP).center();
+        table.add(shootingSettingLabel).padTop(Constants.PAD_TOP);
+        table.row();
+        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
 
         // Events
         sliderMusic.addListener(new ChangeListener() {
@@ -134,7 +137,7 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
-        shootingLabel.addListener(new InputListener() {
+        shootingSettingLabel.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 // Audio FX
@@ -188,9 +191,9 @@ public class SettingsScreen extends AbstractScreen {
 
     private void setTextLabelShooting() {
         if (prefs.isManualShooting()) {
-            shootingLabel.setText(i18NGameThreeBundle.format("settings.manualShooting"));
+            shootingSettingLabel.setText(i18NGameThreeBundle.format("settings.manualShooting"));
         } else {
-            shootingLabel.setText(i18NGameThreeBundle.format("settings.automaticShooting"));
+            shootingSettingLabel.setText(i18NGameThreeBundle.format("settings.automaticShooting"));
         }
     }
 

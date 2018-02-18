@@ -32,7 +32,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -174,9 +174,9 @@ public class Constants {
     public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final float HERO_FIRE_DELAY_SECONDS = 0.5f;
     public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
+    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.6f; // For all kind of bullets
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -252,7 +252,7 @@ public class Constants {
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int TIMER_POWERTHREE = 20;
     public static final int POWERTHREE_SCORE = 30;
-    public static final float POWERTHREE_FIRE_DELAY_SECONDS = 0.3f;
+    public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_HEIGHT_METERS = 102.0f * 1.0f / PPM;
@@ -344,6 +344,7 @@ public class Constants {
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
     public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.3f;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;

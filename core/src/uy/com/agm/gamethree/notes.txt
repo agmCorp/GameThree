@@ -62,6 +62,15 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
+- si doy quit a mitad de level uno, luego en el menu elijo jugar de vuelta el level 1, la cancion esta empezada.
+
+	- creo que deberia renombar las constantes y firedelay poniendo la palabra automatic.
+	Luego en cada rutina, discriminar si es automatico o manual para usar la variable o cero. y ta.
+
+	- pensar si puedo ponerle tiempo al powerOne personalizable.
+
+	- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
+
 - Si agarro items (o shurikens) reboto un poco.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
@@ -95,8 +104,6 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - Inventar una etiqueta random en las powerbox para generar poder random
 - Marcar el terreno con banderas para saber dónde estoy
 - las properties del tilededitor pueden ser boolean, usarlas.
-- tendria que agregar otra layer para los puentes porque por ej. las balas desaparecen al chocar con
-bordes y objetos
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
