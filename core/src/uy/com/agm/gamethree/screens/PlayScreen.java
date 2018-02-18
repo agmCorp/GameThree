@@ -133,9 +133,9 @@ public class PlayScreen extends AbstractScreen {
         // Show how to play with the main character
         hud.showInitialHelp();
 
-        // Stop menu music and start playing level music
+        // Stop menu music and start playing level music from the beginning
         AudioManager.getInstance().stopMusic();
-        AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
+        playLevelMusic();
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));

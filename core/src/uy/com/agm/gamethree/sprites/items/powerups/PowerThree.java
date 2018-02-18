@@ -30,7 +30,7 @@ public class PowerThree extends Item {
     private Animation powerThreeAnimation;
     private Animation bulletAnimation;
 
-    private float automaticFireDelay;
+    private float manualFireDelay;
     private int numberBullets;
 
     // Fire power
@@ -42,7 +42,7 @@ public class PowerThree extends Item {
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
         bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
-        automaticFireDelay = Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS;
+        manualFireDelay = Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTimer = 0;
         stateWaitingTimer = 0;
@@ -166,7 +166,7 @@ public class PowerThree extends Item {
 
             // Apply fire power
             screen.getPlayer().applyFirePower(Constants.POWERTHREE_BULLET_WIDTH_METERS, Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                    Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, automaticFireDelay, numberBullets, bulletAnimation);
+                    Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, manualFireDelay, numberBullets, bulletAnimation);
         }
     }
 
