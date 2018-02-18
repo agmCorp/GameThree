@@ -23,6 +23,9 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public abstract class FinalEnemy extends Sprite {
     private static final String TAG = FinalEnemy.class.getName();
 
+    // Constants
+    private static final String KEY_COLSILVERBULLET = "colSilverBullet";
+
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
@@ -31,7 +34,7 @@ public abstract class FinalEnemy extends Sprite {
     protected StateFinalEnemy currentStateFinalEnemy;
     private float introTimer;
     private boolean playingIntro;
-    private float helpSilverBulletTimer;
+    private float aidSilverBulletTimer;
 
     protected enum StateFinalEnemy {
         INACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
@@ -58,7 +61,7 @@ public abstract class FinalEnemy extends Sprite {
 
         introTimer = 0;
         playingIntro = false;
-        helpSilverBulletTimer = 0;
+        aidSilverBulletTimer = 0;
 
         // By default this FinalEnemy doesn't interact in our world
         b2body.setActive(false);
@@ -114,10 +117,10 @@ public abstract class FinalEnemy extends Sprite {
 
             // Release silver bullets if needed
             if (screen.getPlayer().getSilverBullets() <= 0 && !isDestroyed()) {
-                helpSilverBulletTimer += dt;
-                if (helpSilverBulletTimer > Constants.FINALENEMY_SILVERBULLET_HELP_TIME_SECONDS) {
+                aidSilverBulletTimer += dt;
+                if (aidSilverBulletTimer > Constants.FINALENEMY_AID_SILVERBULLET_TIME_SECONDS) {
                     releaseSilverBullet();
-                    helpSilverBulletTimer = 0;
+                    aidSilverBulletTimer = 0;
                 }
             }
 
@@ -127,11 +130,11 @@ public abstract class FinalEnemy extends Sprite {
 
     private void releaseSilverBullet() {
         MapObject object;
-        int max = MathUtils.random(1, Constants.FINALENEMY_MAX_SILVERBULLET_HELP);
+        int max = MathUtils.random(1, Constants.FINALENEMY_MAX_AID_SILVERBULLET);
 
         for(int i = 0; i < max; i++) {
             object = new MapObject();
-            object.getProperties().put("colSilverBullet", "");
+            object.getProperties().put(KEY_COLSILVERBULLET, "");
             screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
         }
     }

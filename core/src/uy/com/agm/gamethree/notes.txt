@@ -62,6 +62,13 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
+- juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
+- el enemyfour no tiene ruido al congelarse.
+PENDIENTES
+----------
+- EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
+y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
+esas constantes globales como con los _BIT. Pensarlo cuando unifique constantes.
 - Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
 O sera que son muy rapidos y se van.
 - Si agarro items (o shurikens) reboto un poco.
@@ -77,11 +84,8 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
-
-PENDIENTES
-----------
 - ver de configurar que no incluya el raw cuando arma el apk.
-Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
+-Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 Con estas 2 cosas disminuyo mucho el tamano total y ya no se puede optimizar mucho mas.
 - hacer refactoring de constantes
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.

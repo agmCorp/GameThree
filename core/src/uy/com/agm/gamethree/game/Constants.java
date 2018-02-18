@@ -32,7 +32,7 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -57,7 +57,7 @@ public class Constants {
     public static final String HUD_FORMAT_SILVER_BULLETS = "%02d";
     public static final String HUD_FORMAT_POWER_TIME = "%03d";
     public static final String HUD_FORMAT_FPS = "%02d";
-    public static final float HUD_DEFAULT_HELP_SECONDS = 2.0f;
+    public static final float HUD_DEFAULT_HELP_SECONDS = 3.0f;
     public static final float SLIDER_MIN = 0.0f;
     public static final float SLIDER_MAX = 1.0f;
     public static final float SLIDER_STEP = 0.01f;
@@ -176,7 +176,7 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.6f; // For all kind of bullets
+    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.5f; // For all kind of bullets
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -237,7 +237,7 @@ public class Constants {
     public static final float POWERTWO_FADING_SECONDS = 5.0f;
     public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.4f / PPM;
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.4f / PPM;
-    public static final int DEFAULT_TIMER_POWERTWO = 20;
+    public static final int DEFAULT_TIMER_POWERTWO = 10;
     public static final int POWERTWO_SCORE = 30;
     public static final float POWERTWO_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERTWO_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
@@ -250,7 +250,7 @@ public class Constants {
     public static final float POWERTHREE_FADING_SECONDS = 5.0f;
     public static final float POWERTHREE_WIDTH_METERS = 63.0f * 0.7f / PPM;
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
-    public static final int DEFAULT_TIMER_POWERTHREE = 20;
+    public static final int DEFAULT_TIMER_POWERTHREE = 10;
     public static final int POWERTHREE_SCORE = 30;
     public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
@@ -320,8 +320,8 @@ public class Constants {
 
     // FinalEnemy
     public static final float FINALENEMY_INTRO_TIME_SECONDS = 5.0f;
-    public static final int FINALENEMY_MAX_SILVERBULLET_HELP = 5;
-    public static final float FINALENEMY_SILVERBULLET_HELP_TIME_SECONDS = 5.0f;
+    public static final int FINALENEMY_MAX_AID_SILVERBULLET = 3;
+    public static final float FINALENEMY_AID_SILVERBULLET_TIME_SECONDS = 5.0f;
 
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
     public static final String FINALLEVELONE_NAME = "Astrobitsy";
