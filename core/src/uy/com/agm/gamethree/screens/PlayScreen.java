@@ -177,7 +177,7 @@ public class PlayScreen extends AbstractScreen {
         handleInput(dt);
 
         // Handle creation of game actors first
-        creator.handleCreatingGameThreeActors();
+        creator.handleCreatingActors();
 
         // Step in the physics simulation
         doPhysicsStep(dt);

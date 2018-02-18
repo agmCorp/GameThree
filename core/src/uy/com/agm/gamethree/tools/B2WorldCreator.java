@@ -62,7 +62,7 @@ public class B2WorldCreator {
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
     private Array<Weapon> weapons;
-    private LinkedBlockingQueue<ActorDef> gameThreeActorsToCreate;
+    private LinkedBlockingQueue<ActorDef> actorsToCreate;
 
     public B2WorldCreator(PlayScreen screen) {
         MapLayer layer;
@@ -81,7 +81,7 @@ public class B2WorldCreator {
         weapons = new Array<Weapon>();
 
         // Queue
-        gameThreeActorsToCreate = new LinkedBlockingQueue<ActorDef>();
+        actorsToCreate = new LinkedBlockingQueue<ActorDef>();
 
         TiledMap map = screen.getMap();
 
@@ -183,12 +183,12 @@ public class B2WorldCreator {
     }
 
     public void createGameThreeActor(ActorDef actorDef) {
-        gameThreeActorsToCreate.add(actorDef);
+        actorsToCreate.add(actorDef);
     }
 
-    public void handleCreatingGameThreeActors() {
-        if (!gameThreeActorsToCreate.isEmpty()) {
-            ActorDef actorDef = gameThreeActorsToCreate.poll(); // Similar to pop but for a queue, removes the element
+    public void handleCreatingActors() {
+        if (!actorsToCreate.isEmpty()) {
+            ActorDef actorDef = actorsToCreate.poll(); // Similar to pop but for a queue, removes the element
 
             if (actorDef.getType() == ColOne.class) {
                 items.add(new ColOne(screen, actorDef.getX(), actorDef.getY()));
@@ -198,23 +198,19 @@ public class B2WorldCreator {
             }
             if (actorDef.getType() == PowerOne.class) {
                 items.add(new PowerOne(screen, actorDef.getX(),
-                        actorDef.getY(),
-                        ((ActorDefPower) actorDef).getTimer()));
+                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
             }
             if (actorDef.getType() == PowerTwo.class) {
                 items.add(new PowerTwo(screen, actorDef.getX(),
-                        actorDef.getY(),
-                        ((ActorDefPower) actorDef).getTimer()));
+                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
             }
             if (actorDef.getType() == PowerThree.class) {
                 items.add(new PowerThree(screen, actorDef.getX(),
-                        actorDef.getY(),
-                        ((ActorDefPower) actorDef).getTimer()));
+                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
             }
             if (actorDef.getType() == PowerFour.class) {
                 items.add(new PowerFour(screen, actorDef.getX(),
-                        actorDef.getY(),
-                        ((ActorDefPower) actorDef).getTimer()));
+                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
             }
             if (actorDef.getType() == HeroBullet.class) {
                 weapons.add(new HeroBullet(screen, actorDef.getX(), actorDef.getY(),
