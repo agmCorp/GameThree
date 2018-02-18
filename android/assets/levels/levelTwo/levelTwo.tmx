@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="678">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="682">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -37,28 +37,6 @@
   <object id="677" x="420" y="5245" width="54" height="136"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="265" x="177" y="7358" width="32" height="32">
-   <properties>
-    <property name="powerTwo" value=""/>
-    <property name="strength" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="270" x="95" y="7358" width="31" height="29">
-   <properties>
-    <property name="powerOne" value=""/>
-   </properties>
-  </object>
-  <object id="328" x="262" y="7359" width="32" height="32">
-   <properties>
-    <property name="powerThree" value=""/>
-   </properties>
-  </object>
-  <object id="331" x="342" y="7360" width="32" height="32">
-   <properties>
-    <property name="powerFour" value=""/>
-    <property name="strength" type="int" value="5"/>
-   </properties>
-  </object>
   <object id="340" x="348.5" y="6012" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
@@ -105,22 +83,25 @@
   <object id="348" x="350.5" y="3746" width="32" height="32">
    <properties>
     <property name="powerFour" value=""/>
+    <property name="timer" type="int" value="5"/>
    </properties>
   </object>
   <object id="349" x="103.5" y="3744" width="31" height="29">
    <properties>
     <property name="powerOne" value=""/>
-    <property name="strength" type="int" value="3"/>
+    <property name="timer" type="int" value="17"/>
    </properties>
   </object>
   <object id="350" x="270.5" y="3745" width="32" height="32">
    <properties>
     <property name="powerThree" value=""/>
+    <property name="timer" type="int" value="35"/>
    </properties>
   </object>
   <object id="351" x="185.5" y="3744" width="32" height="32">
    <properties>
     <property name="powerTwo" value=""/>
+    <property name="timer" type="int" value="7"/>
    </properties>
   </object>
   <object id="352" x="350.5" y="2687" width="32" height="32">
@@ -194,6 +175,7 @@
   <object id="660" x="212" y="7483" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="timer" type="int" value="66"/>
    </properties>
   </object>
   <object id="661" x="288" y="6656" width="32" height="32">
@@ -214,6 +196,27 @@
   <object id="664" x="233" y="5582" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="678" x="98.5" y="7375" width="31" height="29">
+   <properties>
+    <property name="powerOne" value=""/>
+    <property name="timer" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="679" x="265.5" y="7376" width="32" height="32">
+   <properties>
+    <property name="powerThree" value=""/>
+   </properties>
+  </object>
+  <object id="680" x="345.5" y="7377" width="32" height="32">
+   <properties>
+    <property name="powerFour" value=""/>
+   </properties>
+  </object>
+  <object id="681" x="180.5" y="7375" width="32" height="32">
+   <properties>
+    <property name="powerTwo" value=""/>
    </properties>
   </object>
  </objectgroup>

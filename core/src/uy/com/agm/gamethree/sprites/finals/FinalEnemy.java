@@ -13,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -133,7 +132,7 @@ public abstract class FinalEnemy extends Sprite {
         for(int i = 0; i < max; i++) {
             object = new MapObject();
             object.getProperties().put("colSilverBullet", "");
-            ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+            screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
         }
     }
 

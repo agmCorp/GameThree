@@ -17,7 +17,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
+import uy.com.agm.gamethree.tools.actordef.ActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
@@ -426,7 +426,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private void openFire() {
-        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y, EnemyBullet.class));
+        screen.getCreator().createGameThreeActor(new ActorDef(b2body.getPosition().x, b2body.getPosition().y, EnemyBullet.class));
     }
 
     private void stateInjured(float dt) {

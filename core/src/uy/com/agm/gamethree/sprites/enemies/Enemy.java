@@ -13,9 +13,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
+import uy.com.agm.gamethree.tools.actordef.ActorDef;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -23,6 +22,9 @@ import uy.com.agm.gamethree.tools.GameThreeActorDef;
 
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
+
+    // Constants
+    private static final String KEY_ENEMYBULLET = "enemyBullet";
 
     protected World world;
     protected PlayScreen screen;
@@ -48,7 +50,7 @@ public abstract class Enemy extends Sprite {
         tmp = new Vector2();
 
         // Fire property
-        openFire = object.getProperties().containsKey("enemyBullet");
+        openFire = object.getProperties().containsKey(KEY_ENEMYBULLET);
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -97,14 +99,14 @@ public abstract class Enemy extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
     protected void openFire() {
         if (openFire) {
             if (!isDestroyed()) {
                 if (b2body.isActive()) {
-                    screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
+                    screen.getCreator().createGameThreeActor(new ActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
                 }
             }
         }

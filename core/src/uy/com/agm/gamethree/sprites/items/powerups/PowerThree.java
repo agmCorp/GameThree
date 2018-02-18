@@ -23,6 +23,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerThree extends Item {
     private static final String TAG = PowerThree.class.getName();
 
+    private int timer;
     private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
@@ -34,8 +35,9 @@ public class PowerThree extends Item {
     private int numberBullets;
 
     // Fire power
-    public PowerThree(PlayScreen screen, float x, float y) {
+    public PowerThree(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
+        this.timer = timer;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -155,7 +157,7 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), Constants.TIMER_POWERTHREE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer > 0 ? timer : Constants.TIMER_POWERTHREE);
 
             // Set score
             hud.addScore(Constants.POWERTHREE_SCORE);

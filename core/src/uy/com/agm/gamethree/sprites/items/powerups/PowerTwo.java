@@ -26,6 +26,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
 
+    private int timer;
     private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
@@ -33,8 +34,9 @@ public class PowerTwo extends Item {
     private Animation powerTwoAnimation;
 
     // Shield
-    public PowerTwo(PlayScreen screen, float x, float y) {
+    public PowerTwo(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
+        this.timer = timer;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -151,7 +153,7 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), Constants.TIMER_POWERTWO);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer > 0 ? timer : Constants.TIMER_POWERTWO);
 
             // Set score
             hud.addScore(Constants.POWERTWO_SCORE);

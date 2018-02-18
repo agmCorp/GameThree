@@ -26,6 +26,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
+    private int timer;
     private I18NBundle i18NGameThreeBundle;
     private float stateTimer;
     private float stateWaitingTimer;
@@ -33,8 +34,9 @@ public class PowerOne extends Item {
     private Animation powerOneAnimation;
 
     // Ghost mode
-    public PowerOne(PlayScreen screen, float x, float y) {
+    public PowerOne(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
+        this.timer = timer;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -151,7 +153,7 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), Constants.TIMER_POWERONE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer > 0 ? timer : Constants.TIMER_POWERONE);
 
             // Set score
             hud.addScore(Constants.POWERONE_SCORE);

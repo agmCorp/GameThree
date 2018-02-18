@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.items.ItemCreator;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -27,6 +26,9 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class PowerBox extends Sprite {
     private static final String TAG = PowerBox.class.getName();
+
+    // Constants
+    private static final String KEY_STRENGTH = "strength";
 
     private World world;
     private PlayScreen screen;
@@ -166,7 +168,7 @@ public class PowerBox extends Sprite {
 
     // Determine whether or not an item should be released reading a property set in TiledEditor.
     private void getItemOnHit() {
-        ItemCreator.getItemOnHit(object, screen.getCreator(), b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
     private void definePowerBox() {
@@ -297,7 +299,7 @@ public class PowerBox extends Sprite {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        int strength = object.getProperties().get("strength", 0, Integer.class);
+        int strength = object.getProperties().get(KEY_STRENGTH, 0, Integer.class);
         if (damage >= strength - 1) {
             currentState = State.OPENED;
         } else {

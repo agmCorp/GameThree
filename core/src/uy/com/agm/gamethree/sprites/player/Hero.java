@@ -19,8 +19,8 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
+import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.GameThreeActorDef;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
@@ -643,10 +643,10 @@ public class Hero extends Sprite {
             angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
             if (screen.getHud().isPowerRunningOut() && !isSilverBulletEnabled()) {
-                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
                         b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
             } else {
-                screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+                screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
                         b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
                         bulletWidth,
                         bulletHeight,
@@ -673,7 +673,7 @@ public class Hero extends Sprite {
         if (silverBullets > 0) {
             silverBullets--;
             screen.getHud().decreaseSilverBullets(1);
-            screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+            screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
                     b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
                     bulletWidth,
                     bulletHeight,
@@ -688,7 +688,7 @@ public class Hero extends Sprite {
     }
 
     private void shootBulletNormal() {
-        screen.getCreator().createGameThreeActor(new GameThreeActorDef(b2body.getPosition().x,
+        screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
                 b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
     }
 

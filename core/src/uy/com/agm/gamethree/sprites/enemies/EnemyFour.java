@@ -21,6 +21,9 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 public class EnemyFour extends Enemy {
     private static final String TAG = EnemyFour.class.getName();
 
+    // Constants
+    private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
+
     private float stateTimer;
     private float openFireTimer;
     private Animation enemyFourAnimation;
@@ -68,7 +71,7 @@ public class EnemyFour extends Enemy {
         stateFrozenTimer = 0;
 
         // Indicates how many times this enemy can be frozen.
-        timesItFreeze = object.getProperties().get("timesItFreeze", 1, Integer.class);
+        timesItFreeze = object.getProperties().get(KEY_TIMES_IT_FREEZE, 1, Integer.class);
     }
 
     @Override

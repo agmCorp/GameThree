@@ -62,11 +62,6 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
-- pensar si puedo ponerle tiempo al powerOne personalizable.
-Tendria que pasarlo en el GameThreeActorDef y recogerlo en el handleCreatingGameThreeActors del B2WorldCreator.
-En gamethreeactordef podria haber puesto una clase madre, con poca cosa, y clases especializadas para cada mierda.
-ej: poder, bala, etc.
-
 - Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
 O sera que son muy rapidos y se van.
 - Si agarro items (o shurikens) reboto un poco.
@@ -104,8 +99,8 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - las properties del tilededitor pueden ser boolean, usarlas.
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
-- Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el gameThreeActorDef.
-Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via gameThreeActorDef.
+- Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el actorDef.
+Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via actorDef.
 Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
 Un poder de disparo puede variar:
     tamano de la bala* (sprite y b2body)
@@ -161,6 +156,7 @@ powerOne (string): ghost mode
 powerTwo (string): escudo
 powerThree (string): cambia el poder de disparo
 powerFour (string): thogh mode
+timer (int): para los poderes indica el tiempo de uso
 colOne (string): moneda
 timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
 
