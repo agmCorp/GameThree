@@ -62,13 +62,13 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
-	- creo que deberia renombar las constantes y firedelay poniendo la palabra automatic.
-	Luego en cada rutina, discriminar si es automatico o manual para usar la variable o cero. y ta.
+- pensar si puedo ponerle tiempo al powerOne personalizable.
+Tendria que pasarlo en el GameThreeActorDef y recogerlo en el handleCreatingGameThreeActors del B2WorldCreator.
+En gamethreeactordef podria haber puesto una clase madre, con poca cosa, y clases especializadas para cada mierda.
+ej: poder, bala, etc.
 
-	- pensar si puedo ponerle tiempo al powerOne personalizable.
-
-	- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
-
+- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
+O sera que son muy rapidos y se van.
 - Si agarro items (o shurikens) reboto un poco.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
