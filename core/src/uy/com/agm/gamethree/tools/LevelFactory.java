@@ -16,7 +16,6 @@ import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
-import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -87,7 +86,6 @@ public class LevelFactory {
         switch (level) {
             case 1:
                 dynamic.put(PowerOne.class.getName(), new DynamicHelpDef());
-                dynamic.put(PowerTwo.class.getName(), new DynamicHelpDef());
                 dynamic.put(PowerThree.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(true));
