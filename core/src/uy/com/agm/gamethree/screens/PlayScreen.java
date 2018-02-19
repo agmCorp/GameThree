@@ -495,12 +495,12 @@ public class PlayScreen extends AbstractScreen {
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
 
-        if (isChallengeBegin() && !player.isSilverBulletEnabled()) {
+        if (isChallengeBegin() && !player.isSilverBulletEnabled() && !player.isHeroDead()) {
             // Show help
             finalEnemy.showChallengeBeginHelp();
 
-            // Disable fire todo
-            // seter algun booleano de hero
+            // Disable shooting
+            player.disableShooting();
 
             // Change Hero's weapon
             player.applySilverBullet();

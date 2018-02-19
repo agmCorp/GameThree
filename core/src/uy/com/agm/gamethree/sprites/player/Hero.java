@@ -57,6 +57,7 @@ public class Hero extends Sprite {
     private float openFireTimer;
     private float setDefaultFilterTimer;
     private boolean isPlayingAgain;
+    private boolean shootingEnabled;
     private int lives;
 
     // Silver bullets
@@ -115,10 +116,11 @@ public class Hero extends Sprite {
         openFireTimer = 0;
         setDefaultFilterTimer = 0;
         isPlayingAgain = false;
+        shootingEnabled = true;
         lives = Constants.HERO_LIVES_START;
 
         // SilverBullets variables initialization
-        silverBullets = 0;
+        silverBullets = 100;
         silverBulletEnabled = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)
@@ -605,11 +607,25 @@ public class Hero extends Sprite {
         }
     }
 
+    public void disableShooting() {
+        shootingEnabled = false;
+    }
+
+    public void enableShooting() {
+        shootingEnabled = true;
+    }
+
+    public boolean isShootingEnabled() {
+        return shootingEnabled;
+    }
+
     public void openFire() {
-        if (isFireEnhanced()) {
-            openFireEnhanced();
-        } else {
-            openFireNormal();
+        if (isShootingEnabled()) {
+            if (isFireEnhanced()) {
+                openFireEnhanced();
+            } else {
+                openFireNormal();
+            }
         }
     }
 

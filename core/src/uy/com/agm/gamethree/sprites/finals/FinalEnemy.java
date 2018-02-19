@@ -98,8 +98,8 @@ public abstract class FinalEnemy extends Sprite {
                 // Fight message
                 screen.getHud().showFightMessage();
 
-                // Enable fire // TODO: 2/19/2018
-                // habilitar el fuego.
+                // Enable shooting
+                screen.getPlayer().enableShooting();
 
                 // HealthBar
                 screen.getHud().showHealthBarInfo(getFinalEnemyName(), getFinalEnemyDamage());
