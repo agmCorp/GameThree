@@ -62,8 +62,16 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
+- hacer pantallas de help
+- esto hacerlo asi: cuando el hero pasa el porton, aparece el cartel de help. Ahí hablar sobre
+que va a comenzar la batalla y que debe usar sus shurikens tocando la pantalla.
+Luego, entre ese cartel y que el enemigo se activa, DESHABILITAR EL DISPARO...YO NO PUEDO DISPARAR CON NADA.
+Luego cuando el enemigo se activa, poner en la pantalla FIGHT! y ahí si puedo disparar.
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse.
+- deberia hacer creo como hice con las imagenes, un mensaje que dure x segundos.
+no lo hice porque no lo necesitaba. Ahora lo necesitaría en fight capaz.
+
 PENDIENTES
 ----------
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.

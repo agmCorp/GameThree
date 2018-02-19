@@ -95,6 +95,12 @@ public abstract class FinalEnemy extends Sprite {
                 // Audio FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyIntro());
 
+                // Fight message
+                screen.getHud().showFightMessage();
+
+                // Enable fire // TODO: 2/19/2018
+                // habilitar el fuego.
+
                 // HealthBar
                 screen.getHud().showHealthBarInfo(getFinalEnemyName(), getFinalEnemyDamage());
 
@@ -111,6 +117,7 @@ public abstract class FinalEnemy extends Sprite {
                     if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
                         AudioManager.getInstance().resumeMusic();
                     }
+                    screen.getHud().hideMessage();
                     playingIntro = false;
                 }
             }

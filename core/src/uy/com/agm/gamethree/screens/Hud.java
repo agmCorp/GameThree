@@ -472,6 +472,10 @@ public class Hud extends AbstractScreen {
         showMessage(i18NGameThreeBundle.format("hud.timeIsUp"));
     }
 
+    public void showFightMessage() {
+        showMessage(i18NGameThreeBundle.format("hud.fight"));
+    }
+
     public void hideMessage() {
         messageLabel.setVisible(false);
         centerTable.setVisible(false);
