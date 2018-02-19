@@ -64,7 +64,7 @@ PROXIMOS PASOS
 --------------
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
-- el enemyfour no tiene ruido al congelarse.
+- el enemyfour no tiene ruido al congelarse
 
 PENDIENTES
 ----------
