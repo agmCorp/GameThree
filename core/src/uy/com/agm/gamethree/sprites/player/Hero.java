@@ -120,7 +120,7 @@ public class Hero extends Sprite {
         lives = Constants.HERO_LIVES_START;
 
         // SilverBullets variables initialization
-        silverBullets = 100;
+        silverBullets = 0;
         silverBulletEnabled = false;
 
         // PowerFX variables initialization (we don't know yet which power will be)

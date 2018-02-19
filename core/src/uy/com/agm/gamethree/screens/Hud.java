@@ -63,6 +63,7 @@ public class Hud extends AbstractScreen {
     private float overlayTimer;
     private float overlaySeconds;
     private boolean overlayTemporaryScreen;
+    private boolean overlayTemporaryMessage;
 
     private Table bottomTable;
 
@@ -103,6 +104,7 @@ public class Hud extends AbstractScreen {
         overlayTimer = 0;
         overlaySeconds = 0;
         overlayTemporaryScreen = false;
+        overlayTemporaryMessage = false;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -456,6 +458,13 @@ public class Hud extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
+    public void showMessage(String message, float seconds) {
+        overlayTimer = 0;
+        overlaySeconds = seconds;
+        overlayTemporaryMessage = true;
+        showMessage(message);
+    }
+
     public String getMessage() {
         String message = "";
         if (messageLabel.isVisible()) {
@@ -554,7 +563,14 @@ public class Hud extends AbstractScreen {
     }
 
     public void update(float dt) {
-        // Update world time
+        updateWorldTime(dt);
+        updatePowerTime(dt);
+        updateFPS();
+        overlayTemporaryScreen(dt);
+        overlayTemporaryMessage(dt);
+    }
+
+    private void updateWorldTime(float dt) {
         timeCount += dt;
         if (timeCount >= 1) {
             if (time > 0) {
@@ -574,8 +590,9 @@ public class Hud extends AbstractScreen {
             timeValueLabel.setText(String.format(Constants.HUD_FORMAT_TIME, time));
             timeCount = 0;
         }
+    }
 
-        // Update power time
+    private void updatePowerTime(float dt) {
         if (isPowerInfoVisible()) {
             powerTimeCount += dt;
             if (powerTimeCount >= 1) {
@@ -591,20 +608,33 @@ public class Hud extends AbstractScreen {
                 powerTimeCount = 0;
             }
         }
+    }
 
-        // Update FPS
+    private void updateFPS() {
         if (isFpsInfoVisible()) {
             fps = Gdx.graphics.getFramesPerSecond();
             fpsValueLabel.setText(String.format(Constants.HUD_FORMAT_FPS, fps));
         }
+    }
 
-        // Overlay temporary screen
+    private void overlayTemporaryScreen(float dt) {
         if (overlayTemporaryScreen) {
             overlayTimer += dt;
             if (overlayTimer >= overlaySeconds) {
                 overlayTemporaryScreen = false;
                 overlayTimer = 0;
                 hideImage();
+            }
+        }
+    }
+
+    private void overlayTemporaryMessage(float dt) {
+        if (overlayTemporaryMessage) {
+            overlayTimer += dt;
+            if (overlayTimer >= overlaySeconds) {
+                overlayTemporaryMessage = false;
+                overlayTimer = 0;
+                hideMessage();
             }
         }
     }
