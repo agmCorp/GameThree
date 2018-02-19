@@ -65,8 +65,6 @@ PROXIMOS PASOS
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse.
-- deberia hacer creo como hice con las imagenes, un mensaje que dure x segundos.
-no lo hice porque no lo necesitaba. Ahora lo necesitaría en fight capaz.
 
 PENDIENTES
 ----------
