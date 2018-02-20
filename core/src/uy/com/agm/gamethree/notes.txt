@@ -13,6 +13,7 @@ hacer highscores
 centro de la pantalla y se van por arriba.
 - minuto 33.43 puentes
 - Posible nuevo enemigo: cuando explota puedo hacer aparecer n enemigos más simples
+- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones.
 
 ALCANCE
 -------
@@ -64,6 +65,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
+- ver que consecuencias tiene de que los enemyone se vayan para arriba y desaparezcan
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -24,6 +25,8 @@ public class EnemyOne extends Enemy {
     private float openFireTimer;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
+    private boolean changeDirection;
+    private float changeDirectionTimer;
 
     public EnemyOne(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -38,7 +41,10 @@ public class EnemyOne extends Enemy {
         stateTimer = 0;
         openFireTimer = 0;
         currentState = State.ALIVE;
+
         velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
+        changeDirection = false;
+        changeDirectionTimer = 0;
     }
 
     @Override
@@ -86,6 +92,16 @@ public class EnemyOne extends Enemy {
         if (openFireTimer > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
             super.openFire();
             openFireTimer = 0;
+        }
+
+        if (changeDirection) {
+            changeDirectionTimer += dt;
+            if (changeDirectionTimer > Constants.ENEMYONE_CHANGE_DIRECTION_SECONDS) {
+                velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X;
+                velocity.y *= -1;
+                changeDirection = false;
+                changeDirectionTimer = 0;
+            }
         }
     }
 
@@ -145,6 +161,14 @@ public class EnemyOne extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
+    }
+
+    @Override
+    public void onBumpWithFeint() {
+        velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X * 2.0f;
+        velocity.y *= -1;
+        changeDirection = true;
+        changeDirectionTimer = 0;
     }
 
     @Override

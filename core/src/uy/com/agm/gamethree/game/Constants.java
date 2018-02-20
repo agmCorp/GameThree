@@ -176,7 +176,7 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.5f; // For all kind of bullets
+    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.3f; // For all kind of bullets
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -283,6 +283,7 @@ public class Constants {
     public static final float ENEMYONE_WIDTH_METERS = 120.0f * 0.6f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 90.0f * 0.6f / PPM;
     public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float ENEMYONE_CHANGE_DIRECTION_SECONDS = 1.0f;
     public static final int ENEMYONE_SCORE = 5;
 
     // EnemyTwo (meters = pixels * resizeFactor / PPM)
@@ -344,7 +345,7 @@ public class Constants {
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
     public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
-    public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.3f;
+    public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;

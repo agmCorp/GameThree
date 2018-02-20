@@ -115,18 +115,23 @@ public class WorldContactListener implements ContactListener {
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
 
-            // Enemy - InteractiveTileObjects
-            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
+            // Enemy - Borders
             case Constants.ENEMY_BIT | Constants.BORDER_BIT:
-            case Constants.ENEMY_BIT | Constants.PATH_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBump();
+                break;
+
+            // Enemy - InteractiveTileObjects
+            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
+            case Constants.ENEMY_BIT | Constants.PATH_BIT:
+                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+                ((Enemy) fixC.getUserData()).onBumpWithFeint();
                 break;
 
             // Enemy - PowerBox
             case Constants.ENEMY_BIT | Constants.POWERBOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).onBump();
+                ((Enemy) fixC.getUserData()).onBumpWithFeint();
                 break;
 
             // Enemy - Enemy

@@ -83,8 +83,10 @@ public abstract class Enemy extends Sprite {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                b2body.setActive(true);
-                screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+                if (!b2body.isActive()) { // Wasn't on camera...
+                    b2body.setActive(true);
+                    screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+                }
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -147,6 +149,10 @@ public abstract class Enemy extends Sprite {
                 break;
         }
         checkBoundaries();
+    }
+
+    public void onBumpWithFeint() {
+        onBump();
     }
 
     @Override
