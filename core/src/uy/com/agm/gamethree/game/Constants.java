@@ -200,8 +200,8 @@ public class Constants {
     public static final float COLONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float COLONE_VELOCITY_X = 0.7f;
     public static final float COLONE_VELOCITY_Y = 0.0f;
-    public static final float COLONE_WAITING_SECONDS = 2.0f;
-    public static final float COLONE_FADING_SECONDS = 1.0f;
+    public static final float COLONE_WAITING_SECONDS = 3.0f;
+    public static final float COLONE_FADING_SECONDS = 2.0f;
     public static final float COLONE_WIDTH_METERS = 77.0f * 0.5f / PPM;
     public static final float COLONE_HEIGHT_METERS = 77.0f * 0.5f / PPM;
     public static final int COLONE_SCORE = 25;
@@ -210,8 +210,8 @@ public class Constants {
     public static final float COLSILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
     public static final float COLSILVERBULLET_VELOCITY_X = 0.7f;
     public static final float COLSILVERBULLET_VELOCITY_Y = 0.0f;
-    public static final float COLSILVERBULLET_WAITING_SECONDS = 2.0f;
-    public static final float COLSILVERBULLET_FADING_SECONDS = 1.0f;
+    public static final float COLSILVERBULLET_WAITING_SECONDS = 3.0f;
+    public static final float COLSILVERBULLET_FADING_SECONDS = 2.0f;
     public static final float COLSILVERBULLET_WIDTH_METERS = 126.0f * 0.4f / PPM;
     public static final float COLSILVERBULLET_HEIGHT_METERS = 116.0f * 0.4f / PPM;
     public static final int COLSILVERBULLET_SCORE = 50;
