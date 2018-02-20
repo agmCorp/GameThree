@@ -60,9 +60,10 @@ RESUMEN
 En mi juego seria 0.304 la velocidad.
 En mi juego serian 13 pantallas
 
+Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de enemigos.
+
 PROXIMOS PASOS
 --------------
-- ver lo de grandle
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
@@ -75,7 +76,7 @@ y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O 
 esas constantes globales como con los _BIT. Pensarlo cuando unifique constantes.
 - Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
 O sera que son muy rapidos y se van.
-- Si agarro items (o shurikens) reboto un poco.
+- Si agarro items (o shurikens) reboto un poco en versión escritorio.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Con eso ya puedo disenar al menos 2 niveles, tengo:
@@ -88,13 +89,12 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
 - HACER UNA SKIN?
-- ver de configurar que no incluya el raw cuando arma el apk.
--Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
-Con estas 2 cosas disminuyo mucho el tamano total y ya no se puede optimizar mucho mas.
-Investigar como se usa ProGuard para reducir el tamaño del apk y ver otras alternativas.
+- Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - hacer refactoring de constantes
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
+Solo se me ocurre que ante choque con OBJETOS, vayan unos segundos hacia arriba derecho (vel.x = 0) y luego de esos segundos, comiencen
+nuevamente a bajar con su velocidad x vieja también.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - se corta el audio al morir..el gruñido se escucha cortado.
@@ -103,15 +103,12 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - incluir highscores
 - agregar transitions
 - agregar credits
-- Inventar una etiqueta random en las powerbox para generar poder random
-- Marcar el terreno con banderas para saber dónde estoy
+- Inventar una etiqueta random en las powerbox para generar poder random (por ejemplo, para la box del enemigo final).
+Debe ser un random configurable (para el set de poderes que quiera).
 - las properties del tilededitor pueden ser boolean, usarlas.
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
-- Los items (powers) y las balas (de hero y de enemy) son los objetos que creo dinamicamente via el actorDef.
-Si quisiera que los items leyeran properties del tiledEditor, deberia hacerselas llegar al constructor (de item o de weapon) via actorDef.
-Podria o pasar el objeto del tiled editor o pasar la lista de properties. Mucha cosa para tan poco, ademas no se como afecta la memoria.
-Un poder de disparo puede variar:
+- Un poder de disparo puede variar:
     tamano de la bala* (sprite y b2body)
     cantidad*,
     delay*,
@@ -182,6 +179,8 @@ HERRAMIENTAS
 - https://freesound.org, user aclaveri/2es...etc. Para sonido.
 - https://www.youtube.com/watch?v=dxPf1M7YORU&feature=youtu.be para crear fonts ver ese video
 - https://www.imgonline.com.ua/eng/cut-photo-into-pieces.php para cortar una imagen en pedazos iguales
+- pngcrush para reducir el tamano de los .png (https://pmt.sourceforge.io/pngcrush/)
+https://developer.android.com/topic/performance/reduce-apk-size.html
 
 LECCIONES APRENDIDAS
 --------------------
