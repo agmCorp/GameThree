@@ -65,6 +65,7 @@ PROXIMOS PASOS
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
+- ver las sugerencias de Juan
 
 PENDIENTES
 ----------
@@ -369,11 +370,14 @@ LECCIONES APRENDIDAS
     Information:Gradle tasks [:android:assembleRelease, :core:assemble, :desktop:assemble]
 
     Para quitar el folder raw de los apk (tanto en debug como release), agregue en android/build.grandle:
+    android {
         aaptOptions {
             ignoreAssetsPattern '!raw'
         }
     Para quitar el folder raw del jar (desktop) agregue en desktop/build.grandle:
-    exclude '**/raw/**'
+    task dist(type: Jar) {
+        ...
+        exclude '**/raw/**'
 
 IOS
 ---
