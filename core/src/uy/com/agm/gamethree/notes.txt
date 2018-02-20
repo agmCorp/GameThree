@@ -58,7 +58,7 @@ En mi juego seria 3.8 de 800 por segundo, o sea, 30.4 pixels por segundo.
 
 RESUMEN
 En mi juego seria 0.304 la velocidad.
-En mi juego serian 13 pantalla
+En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
