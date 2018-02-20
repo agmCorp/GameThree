@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 
+import java.util.Locale;
+
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -150,10 +152,10 @@ public class Hud extends AbstractScreen {
         upperTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define label values based on labelStyle
-        scoreValueLabel = new Label(String.format(Constants.HUD_FORMAT_SCORE, score), labelStyleSmall);
-        timeValueLabel = new Label(String.format(Constants.HUD_FORMAT_TIME, time), labelStyleSmall);
-        livesValueLabel = new Label(String.format(Constants.HUD_FORMAT_LIVES, lives), labelStyleSmall);
-        silverBulletValueLablel = new Label(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
+        scoreValueLabel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_SCORE, score), labelStyleSmall);
+        timeValueLabel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_TIME, time), labelStyleSmall);
+        livesValueLabel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_LIVES, lives), labelStyleSmall);
+        silverBulletValueLablel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
 
         // Add values
         upperTable.add(scoreValueLabel).expandX();
@@ -192,7 +194,7 @@ public class Hud extends AbstractScreen {
         powerTable.row().height(Constants.HUD_UPPERTABLE_CELL_HEIGHT);
 
         // Define a label based on labelStyle
-        powerTimeValueLabel = new Label(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime), labelStyleSmall);
+        powerTimeValueLabel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_POWER_TIME, powerTime), labelStyleSmall);
 
         // Add values
         powerTable.add(powerTimeValueLabel);
@@ -281,7 +283,7 @@ public class Hud extends AbstractScreen {
         fpsTable.row();
 
         // Define a label value based on labelStyle
-        fpsValueLabel = new Label(String.format(Constants.HUD_FORMAT_POWER_TIME, fps), labelStyleSmall);
+        fpsValueLabel = new Label(String.format(Locale.getDefault(), Constants.HUD_FORMAT_POWER_TIME, fps), labelStyleSmall);
 
         // Add value
         fpsTable.add(fpsValueLabel);
@@ -439,7 +441,7 @@ public class Hud extends AbstractScreen {
     public void showPowerInfo(String powerName, int maxTime) {
         powerNameLabel.setText(powerName);
         powerTime = maxTime;
-        powerTimeValueLabel.setText(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime));
+        powerTimeValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_POWER_TIME, powerTime));
         powerTable.setVisible(true);
     }
 
@@ -587,7 +589,7 @@ public class Hud extends AbstractScreen {
             } else {
                 timeIsUp = true;
             }
-            timeValueLabel.setText(String.format(Constants.HUD_FORMAT_TIME, time));
+            timeValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_TIME, time));
             timeCount = 0;
         }
     }
@@ -601,7 +603,7 @@ public class Hud extends AbstractScreen {
                     if (powerTime <= Constants.POWER_TIMER_NOTIFICATION) {
                         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeepA());
                     }
-                    powerTimeValueLabel.setText(String.format(Constants.HUD_FORMAT_POWER_TIME, powerTime));
+                    powerTimeValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_POWER_TIME, powerTime));
                 } else {
                     hidePowerInfo();
                 }
@@ -613,7 +615,7 @@ public class Hud extends AbstractScreen {
     private void updateFPS() {
         if (isFpsInfoVisible()) {
             fps = Gdx.graphics.getFramesPerSecond();
-            fpsValueLabel.setText(String.format(Constants.HUD_FORMAT_FPS, fps));
+            fpsValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_FPS, fps));
         }
     }
 
@@ -641,7 +643,7 @@ public class Hud extends AbstractScreen {
 
     public void addScore(int value) {
         score += value;
-        scoreValueLabel.setText(String.format(Constants.HUD_FORMAT_SCORE, score));
+        scoreValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_SCORE, score));
     }
 
     public int getScore() {
@@ -670,17 +672,17 @@ public class Hud extends AbstractScreen {
 
     public void decreaseLives(int quantity) {
         lives -= quantity;
-        livesValueLabel.setText(String.format(Constants.HUD_FORMAT_LIVES, lives));
+        livesValueLabel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_LIVES, lives));
     }
 
     public void increaseSilverBullets(int quantity) {
         silverBullets += quantity;
-        silverBulletValueLablel.setText(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
+        silverBulletValueLablel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
     }
 
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
-        silverBulletValueLablel.setText(String.format(Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
+        silverBulletValueLablel.setText(String.format(Locale.getDefault(), Constants.HUD_FORMAT_SILVER_BULLETS, silverBullets));
     }
 
     // Show help screens depending on the object's class name
