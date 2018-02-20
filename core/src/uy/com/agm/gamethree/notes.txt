@@ -65,7 +65,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
-- ver que consecuencias tiene de que los enemyone se vayan para arriba y desaparezcan
+- ARREGLAR EL TEMITA DE LA SILVER QUE SE VA DE LA PANTALLA CUANDO EL BICHO ESTA ARRIBA.
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
