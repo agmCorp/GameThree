@@ -62,6 +62,7 @@ En mi juego serian 13 pantallas
 
 PROXIMOS PASOS
 --------------
+- ver lo de grandle
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
