@@ -380,6 +380,32 @@ LECCIONES APRENDIDAS
         ...
         exclude '**/raw/**'
 
+    También seguí la información de esta guia (sección Tweaking) para generar jars (desktop) renombrados con fecha y hora:
+    https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline
+
+    Finalmente, para optimizar el tamaño del apk leí la info de esta guía:
+    https://developer.android.com/topic/performance/reduce-apk-size.html
+
+    Agregué en android/build.grandle:
+        buildTypes {
+            debug {
+                minifyEnabled true
+                shrinkResources true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+            release {
+                minifyEnabled true
+                shrinkResources true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+
+    Lo interesante además es el uso de la herramienta pngcrush.exe, que reduce el tamaño de los pngs.
+    Si reduzco los dinamicObjects.png, gano algo así como medio mega en total.
+    Pero la reducción más drástica se da con background.png (de cada nivel) en donde gano más de 2 megas.
+    Para usar esa herramienta hice:
+    >pngcrush.exe background.png salidaBackground.png
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
