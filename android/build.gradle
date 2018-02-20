@@ -11,7 +11,6 @@ android {
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
-
         instrumentTest.setRoot('tests')
     }
     packagingOptions {
@@ -29,9 +28,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    aaptOptions {
-        ignoreAssetsPattern '!raw'
     }
 }
 
@@ -138,3 +134,4 @@ idea {
         }
     }
 }
+

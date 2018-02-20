@@ -298,6 +298,9 @@ LECCIONES APRENDIDAS
 
     El jar queda en GameThree\desktop\build\libs
 
+    Aca explican como generar cada cosa:
+    https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline
+
 10)
     Para generar un BitmapFont usar SoeBox.
     Abrirlo y apretar "Bitmap Font". Eso copia al portapapeles un conjunto de letras.
@@ -354,6 +357,23 @@ LECCIONES APRENDIDAS
     traveled in time "delta" (it doesn't render them, just moves their position variables).
     Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
     which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
+
+18)
+    No estoy seguro, pero para generar un apk release no firmado:
+    Abrir el archivo android/build.grandle y clickear adentro.
+    Se me habilita en el menu build la opcion Select Build Variant...
+    Alli elijo Release, luego en el menu Build selecciono Build APK.
+
+    Si hago cambios en los archivos .grandle, debo luego hacer un Rebuild project para que sean tomados en cuenta.
+    Esto es para usar el ide, sino seria ejecutar las tareas gradle:
+    Information:Gradle tasks [:android:assembleRelease, :core:assemble, :desktop:assemble]
+
+    Para quitar el folder raw de los apk (tanto en debug como release), agregue en android/build.grandle:
+        aaptOptions {
+            ignoreAssetsPattern '!raw'
+        }
+    Para quitar el folder raw del jar (desktop) agregue en desktop/build.grandle:
+    exclude '**/raw/**'
 
 IOS
 ---
