@@ -326,7 +326,7 @@ public class Constants {
     public static final float FINALENEMY_AID_SILVERBULLET_OFFSET_METERS = 100.0f / PPM;
 
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)
-    public static final String FINALLEVELONE_NAME = "Astrobitsy";
+    public static final String FINALLEVELONE_NAME = "ASTROBITSY";
     public static final float FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELONE_LINEAR_VELOCITY = 5.0f;
     public static final float FINALLEVELONE_DENSITY = 1000.0f;
