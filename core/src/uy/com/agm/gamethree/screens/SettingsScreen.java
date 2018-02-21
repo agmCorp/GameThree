@@ -61,7 +61,7 @@ public class SettingsScreen extends AbstractScreen {
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleNormal);
+        Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
         Label musicLabel = new Label(i18NGameThreeBundle.format("settings.music"), labelStyleNormal);
         Label soundEffectsLabel = new Label(i18NGameThreeBundle.format("settings.soundEffects"), labelStyleNormal);
         Label shootingLabel = new Label(i18NGameThreeBundle.format("settings.shooting"), labelStyleNormal);

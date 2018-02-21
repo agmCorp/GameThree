@@ -4,6 +4,7 @@ IDEAS
 hacer highscores
 - programar acelerómetro? toggle: acelerometro, manual
 - nuevo item vidas
+- hacer splashscreen
 - enemigo que hay que dispararle mucho para matarlo.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos
 - el enemigo final puede estar acompanado de otros simples.
@@ -11,9 +12,9 @@ hacer highscores
 - enemigo final que se mueve en forma de 8 horizontal y dispara abanico de balas, queda dificil de matar y es sencillo.
 - enemigo minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
 centro de la pantalla y se van por arriba.
-- minuto 33.43 puentes
+- minuto 33.43 puentes dinámicos
 - Posible nuevo enemigo: cuando explota puedo hacer aparecer n enemigos más simples
-- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones.
+- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
 
 ALCANCE
 -------
@@ -70,6 +71,7 @@ PROXIMOS PASOS
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
 - ver las sugerencias de Juan
+- nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
 
 PENDIENTES
 ----------
@@ -77,7 +79,7 @@ PENDIENTES
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
 esas constantes globales como con los _BIT. Pensarlo cuando unifique constantes.
 - Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
-O sera que son muy rapidos y se van.
+Para mi que son muy rapidos y se van...revisar.
 - Si agarro items (o shurikens) reboto un poco en versión escritorio.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
@@ -90,13 +92,9 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
     - 1 shuriken
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
 - highscores, en la pantalla de level completed si hubo highscore se indica.
-- HACER UNA SKIN?
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - hacer refactoring de constantes
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- los enemigos y a veces los items se quedan trancados...se me ocurre porque la velocidad es baja y quedan en contacto continuo.
-Solo se me ocurre que ante choque con OBJETOS, vayan unos segundos hacia arriba derecho (vel.x = 0) y luego de esos segundos, comiencen
-nuevamente a bajar con su velocidad x vieja también.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - se corta el audio al morir..el gruñido se escucha cortado.
@@ -104,7 +102,7 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
-- agregar credits
+- agregar credits con cuenta bancaria para donación
 - Inventar una etiqueta random en las powerbox para generar poder random (por ejemplo, para la box del enemigo final).
 Debe ser un random configurable (para el set de poderes que quiera).
 - las properties del tilededitor pueden ser boolean, usarlas.
