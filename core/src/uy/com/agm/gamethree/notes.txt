@@ -383,6 +383,25 @@ LECCIONES APRENDIDAS
 
     También seguí la información de esta guia (sección Tweaking) para generar jars (desktop) renombrados con fecha y hora:
     https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline
+    salida ejemplo: gameThree-1.0-build-20180220_223045.jar
+
+    Para generar los apks renombrados con informacion de version agregue en android/build.grandle:
+    android {
+    ...
+        // Rename all output artifacts to include version information
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def apkName = "gameThree_" + android.defaultConfig.versionName;
+                if (variant.buildType.name.equals("release")) {
+                    apkName += "_" + variant.buildType.name;
+                }
+                apkName += ".apk";
+                output.outputFile = file("$project.buildDir/apk/" + apkName)
+            }
+        }
+    }
+
+    salida ejemplo: gameThree_1.0-build-20180220_221710.apk
 
     Finalmente, para optimizar el tamaño del apk leí la info de esta guía:
     https://developer.android.com/topic/performance/reduce-apk-size.html

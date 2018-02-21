@@ -25,7 +25,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-build-" + getDate()
     }
     buildTypes {
         debug {
@@ -37,6 +37,18 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Rename all output artifacts to include version information
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def apkName = "gameThree_" + android.defaultConfig.versionName;
+            if (variant.buildType.name.equals("release")) {
+                apkName += "_" + variant.buildType.name;
+            }
+            apkName += ".apk";
+            output.outputFile = file("$project.buildDir/apk/" + apkName)
         }
     }
 }
