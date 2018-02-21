@@ -143,10 +143,13 @@ public abstract class FinalEnemy extends Sprite {
             object = new MapObject();
             object.getProperties().put(KEY_COLSILVERBULLET, "");
 
-            // todo
-            // ACA YO TENGO QEU CONTROLAR SI EL Y  QUE ESTOY PASANDO b2body.getPosition().y + Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS ES
-            // MAYOR QUE EL LIMITE DE LA PANTALLA Y PASAR UNO QUE SEA ACORDE.
-            screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS);
+            float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
+            float silverBulletCandidatePosition = b2body.getPosition().y + Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;
+
+            if (silverBulletCandidatePosition >= upperEdge) {
+                silverBulletCandidatePosition = b2body.getPosition().y - Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;;
+            }
+            screen.getCreator().getItemOnHit(object, b2body.getPosition().x, silverBulletCandidatePosition);
         }
     }
 
