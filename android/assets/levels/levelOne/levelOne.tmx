@@ -327,8 +327,6 @@
   <object id="1194" x="224" y="7264" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="500"/>
    </properties>
   </object>
   <object id="1197" x="270" y="2936" width="32" height="32">

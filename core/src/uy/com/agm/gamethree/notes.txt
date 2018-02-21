@@ -68,7 +68,6 @@ PROXIMOS PASOS
 --------------
 - ARREGLAR EL TEMITA DE LA SILVER QUE SE VA DE LA PANTALLA CUANDO EL BICHO ESTA ARRIBA.
 - El score no debería resetearse por nivel?????
-- La inmunidad al volver de la muerte no debe ser total sino que debe chocar contra objetos path edges etc
 - Shoot' em up. Cambiar el nombre y los iconos en android.
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
