@@ -67,7 +67,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 PROXIMOS PASOS
 --------------
 - El score no debería resetearse por nivel?????
-- Shoot' em up. Cambiar el nombre y los iconos en android.
+- Shoot' em up. Cambiar el nombre y los iconos en android. Mátalos a tiros.
 - hacer pantallas de help
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
