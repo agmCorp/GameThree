@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -155,7 +156,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private float getNextTimeToChange() {
-        return MathUtils.random(0.0f, Constants.FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS);
+        return MathUtils.random(Constants.FINALLEVELONE_CHANGE_STATE_MIN_TIME_SECONDS, Constants.FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS);
     }
 
     private StateFinalEnemy getNewRandomState(float dt) {
@@ -164,6 +165,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // Update timer
         timeToChangeTimer += dt;
+
+        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
+            timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
+        }
 
         // Set a new currentStateFinalEnemy
         if (timeToChangeTimer >= timeToChange) {

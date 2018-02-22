@@ -332,12 +332,13 @@ public class Constants {
     public static final float FINALLEVELONE_DENSITY = 1000.0f;
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
-    public static final float FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS = 5.0f;
-    public static final float FINALLEVELONE_IDLE_STATE_TIME_SECONDS = 6.0f;
-    public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     public static final int FINALLEVELONE_MAX_DAMAGE = 10;
+    public static final float FINALLEVELONE_CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
+    public static final float FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
+    public static final float FINALLEVELONE_IDLE_STATE_TIME_SECONDS = 5.0f;
+    public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final int FINALLEVELONE_SCORE = 200;
 
     // HeroBullet (meters = pixels * resizeFactor / PPM)
