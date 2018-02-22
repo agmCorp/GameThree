@@ -166,15 +166,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // Update timer
         timeToChangeTimer += dt;
 
-        if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
-            timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
-        }
-
         // Set a new currentStateFinalEnemy
         if (timeToChangeTimer >= timeToChange) {
             // Reset random state variables
             timeToChangeTimer = 0;
-            timeToChange = getNextTimeToChange();
 
             // Reset variable animation
             stateFinalEnemyTimer = 0;
@@ -187,9 +182,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 case WALKING:
                     if (blnOption) {
                         newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                        timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        timeToChange = getNextTimeToChange();
                     }
                     break;
                 case IDLE:
@@ -199,12 +196,15 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                         openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
+                    timeToChange = getNextTimeToChange();
                     break;
                 case SHOOTING:
                     if (blnOption) {
                         newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        timeToChange = getNextTimeToChange();
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                        timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
                     }
                     break;
             }
