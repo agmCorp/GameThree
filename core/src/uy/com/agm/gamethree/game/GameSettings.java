@@ -49,7 +49,7 @@ public class GameSettings {
         music = prefs.getBoolean(MUSIC, true);
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, Constants.DEFAULT_VOLUME), Constants.MIN_VOLUME, Constants.MAX_VOLUME);
-        manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
+        manualShooting = prefs.getBoolean(MANUAL_SHOOTING, false);
 
         availableLevels = new ObjectSet<Integer>();
         availableLevels.add(1); // Default level

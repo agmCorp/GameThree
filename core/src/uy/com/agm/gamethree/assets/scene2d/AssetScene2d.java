@@ -12,7 +12,8 @@ public class AssetScene2d {
 
     private TextureRegion sliderBackground;
     private TextureRegion sliderKnob;
-    private TextureRegion helpInitial;
+    private TextureRegion helpInitialManual;
+    private TextureRegion helpInitialAutomatic;
     private TextureRegion helpEnemyOne;
     private TextureRegion helpEnemyTwo;
     private TextureRegion helpEnemyThree;
@@ -29,7 +30,8 @@ public class AssetScene2d {
         sliderBackground = atlas.findRegion("sliderBackground");
         sliderKnob = atlas.findRegion("sliderKnob");
 
-        helpInitial = atlas.findRegion("helpInitial");
+        helpInitialManual = atlas.findRegion("helpInitialManual");
+        helpInitialAutomatic = atlas.findRegion("helpInitialAutomatic");
         helpEnemyOne = atlas.findRegion("helpEnemyOne");
         helpEnemyTwo = atlas.findRegion("helpEnemyTwo");
         helpEnemyThree = atlas.findRegion("helpEnemyThree");
@@ -51,8 +53,12 @@ public class AssetScene2d {
         return sliderKnob;
     }
 
-    public TextureRegion getHelpInitial() {
-        return helpInitial;
+    public TextureRegion getHelpInitialManual() {
+        return helpInitialManual;
+    }
+
+    public TextureRegion getHelpInitialAutomatic() {
+        return helpInitialAutomatic;
     }
 
     public TextureRegion getHelpEnemyOne() {

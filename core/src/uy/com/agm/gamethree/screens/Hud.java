@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -426,7 +427,11 @@ public class Hud extends AbstractScreen {
 
     public void showInitialHelp() {
         if (level == 1) {
-            showImage(Assets.getInstance().getScene2d().getHelpInitial(), Constants.HUD_DEFAULT_HELP_SECONDS);
+            if (GameSettings.getInstance().isManualShooting()) {
+                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), Constants.HUD_DEFAULT_HELP_SECONDS);
+            } else {
+                showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), Constants.HUD_DEFAULT_HELP_SECONDS);
+            }
         }
     }
 

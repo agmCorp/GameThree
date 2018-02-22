@@ -138,7 +138,7 @@ public class Constants {
 
     // ---- Level ----
 
-    public static final int TIMER_LEVEL_ONE = 327;
+    public static final int TIMER_LEVEL_ONE = 400;
     public static final int TIMER_LEVEL_TWO = 30;
     public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
@@ -282,7 +282,7 @@ public class Constants {
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
     public static final float ENEMYONE_WIDTH_METERS = 120.0f * 0.6f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 90.0f * 0.6f / PPM;
-    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.3f;
     public static final float ENEMYONE_CHANGE_DIRECTION_SECONDS = 1.0f;
     public static final int ENEMYONE_SCORE = 5;
 
@@ -292,7 +292,7 @@ public class Constants {
     public static final float ENEMYTWO_VELOCITY_Y = -2.0f;
     public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
-    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.3f;
     public static final int ENEMYTWO_SCORE = 7;
 
     // EnemyThree (meters = pixels * resizeFactor / PPM)
@@ -302,7 +302,7 @@ public class Constants {
     public static final float ENEMYTHREE_DENSITY = 1000.0f;
     public static final float ENEMYTHREE_WIDTH_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_HEIGHT_METERS = 130.0f * 0.6f / PPM;
-    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.0f;
+    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.3f;
     public static final int ENEMYTHREE_SCORE = 17;
 
     // EnemyFour (meters = pixels * resizeFactor / PPM)
@@ -332,7 +332,8 @@ public class Constants {
     public static final float FINALLEVELONE_DENSITY = 1000.0f;
     public static final float FINALLEVELONE_WIDTH_METERS = 177.0f * 1.0f / PPM;
     public static final float FINALLEVELONE_HEIGHT_METERS = 169.0f * 1.0f / PPM;
-    public static final float FINALLEVELONE_STATE_MAX_TIME_SECONDS = 10.0f;
+    public static final float FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS = 5.0f;
+    public static final float FINALLEVELONE_IDLE_STATE_TIME_SECONDS = 6.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
     public static final float FINALLEVELONE_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELONE_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;

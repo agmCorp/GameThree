@@ -155,7 +155,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private float getNextTimeToChange() {
-        return MathUtils.random(0.0f, Constants.FINALLEVELONE_STATE_MAX_TIME_SECONDS);
+        return MathUtils.random(0.0f, Constants.FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS);
     }
 
     private StateFinalEnemy getNewRandomState(float dt) {
