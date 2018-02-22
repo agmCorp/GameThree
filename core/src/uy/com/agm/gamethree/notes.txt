@@ -66,6 +66,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
+- revisar todos los scores
 - El enemigo final se quedó trabado, subiendo por la derecha y jamás salió del vértice superior derecho yendo hacia arriba.
 - El score no debería resetearse por nivel?????
 - hacer pantallas de help
