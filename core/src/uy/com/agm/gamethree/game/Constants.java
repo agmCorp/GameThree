@@ -214,7 +214,7 @@ public class Constants {
     public static final float COLSILVERBULLET_FADING_SECONDS = 2.0f;
     public static final float COLSILVERBULLET_WIDTH_METERS = 126.0f * 0.4f / PPM;
     public static final float COLSILVERBULLET_HEIGHT_METERS = 116.0f * 0.4f / PPM;
-    public static final int COLSILVERBULLET_SCORE = 50;
+    public static final int COLSILVERBULLET_SCORE = 100;
 
     // PowerOne (meters = pixels * resizeFactor / PPM)
     public static final float POWERONE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -225,7 +225,7 @@ public class Constants {
     public static final float POWERONE_WIDTH_METERS = 52.0f * 1.0f / PPM;
     public static final float POWERONE_HEIGHT_METERS = 52.0f * 1.0f / PPM;
     public static final int DEFAULT_TIMER_POWERONE = 10;
-    public static final int POWERONE_SCORE = 15;
+    public static final int POWERONE_SCORE = 20;
     public static final float POWERONE_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERONE_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
 
@@ -238,7 +238,7 @@ public class Constants {
     public static final float POWERTWO_WIDTH_METERS = 150.0f * 0.4f / PPM;
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.4f / PPM;
     public static final int DEFAULT_TIMER_POWERTWO = 10;
-    public static final int POWERTWO_SCORE = 30;
+    public static final int POWERTWO_SCORE = 60;
     public static final float POWERTWO_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERTWO_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
 
@@ -251,7 +251,7 @@ public class Constants {
     public static final float POWERTHREE_WIDTH_METERS = 63.0f * 0.7f / PPM;
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int DEFAULT_TIMER_POWERTHREE = 10;
-    public static final int POWERTHREE_SCORE = 30;
+    public static final int POWERTHREE_SCORE = 20;
     public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
@@ -267,7 +267,7 @@ public class Constants {
     public static final float POWERFOUR_WIDTH_METERS = 192.0f * 0.5f / PPM;
     public static final float POWERFOUR_HEIGHT_METERS = 192.0f * 0.5f / PPM;
     public static final int DEFAULT_TIMER_POWERFOUR = 10;
-    public static final int POWERFOUR_SCORE = 30;
+    public static final int POWERFOUR_SCORE = 20;
     public static final float POWERFOUR_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
     public static final float POWERFOUR_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
 
@@ -282,7 +282,7 @@ public class Constants {
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
     public static final float ENEMYONE_WIDTH_METERS = 120.0f * 0.6f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 90.0f * 0.6f / PPM;
-    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 1.3f;
+    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 2.0f;
     public static final float ENEMYONE_CHANGE_DIRECTION_SECONDS = 1.0f;
     public static final int ENEMYONE_SCORE = 5;
 
@@ -292,8 +292,8 @@ public class Constants {
     public static final float ENEMYTWO_VELOCITY_Y = -2.0f;
     public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
-    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 1.3f;
-    public static final int ENEMYTWO_SCORE = 7;
+    public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 3.0f;
+    public static final int ENEMYTWO_SCORE = 10;
 
     // EnemyThree (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYTHREE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -302,8 +302,8 @@ public class Constants {
     public static final float ENEMYTHREE_DENSITY = 1000.0f;
     public static final float ENEMYTHREE_WIDTH_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_HEIGHT_METERS = 130.0f * 0.6f / PPM;
-    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 2.3f;
-    public static final int ENEMYTHREE_SCORE = 17;
+    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 3f;
+    public static final int ENEMYTHREE_SCORE = 20;
 
     // EnemyFour (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS = 20.0f / PPM;
@@ -315,7 +315,7 @@ public class Constants {
     public static final float ENEMYFOUR_FROZEN_HEIGHT_METERS = 99.0f * 0.8f / PPM;
     public static final float ENEMYFOUR_AMPLITUDE_METERS = 200.0f / PPM;
     public static final float ENEMYFOUR_WAVELENGTH_METERS = 100.0f / PPM;
-    public static final float ENEMYFOUR_FIRE_DELAY_SECONDS = 1.0f;
+    public static final float ENEMYFOUR_FIRE_DELAY_SECONDS = 3.0f;
     public static final float ENEMYFOUR_FROZEN_TIME_SECONDS = 4.0f;
     public static final int ENEMYFOUR_SCORE = 35;
 
@@ -339,7 +339,7 @@ public class Constants {
     public static final float FINALLEVELONE_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     public static final float FINALLEVELONE_IDLE_STATE_TIME_SECONDS = 5.0f;
     public static final float FINALLEVELONE_FIRE_DELAY_SECONDS = 0.7f;
-    public static final int FINALLEVELONE_SCORE = 200;
+    public static final int FINALLEVELONE_SCORE = 500;
 
     // HeroBullet (meters = pixels * resizeFactor / PPM)
     public static final float HEROBULLET_OFFSET_METERS = HERO_CIRCLESHAPE_RADIUS_METERS;
