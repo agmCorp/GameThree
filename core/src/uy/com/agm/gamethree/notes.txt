@@ -67,7 +67,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 PROXIMOS PASOS
 --------------
 - El enemigo final se quedó trabado, subiendo por la derecha y jamás salió del vértice superior derecho yendo hacia arriba.
-- El enemigo final tira aids muy rapido (creo que en estado shoot).
+- El enemigo final tira aids muy rapido (creo que en estado shoot). Confirmado!
 - Quedo atrapado en el puente quimico al morir, no puedo salir ni con blink.
 - un item quedo atrapado en el pozo, no podia salir.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor

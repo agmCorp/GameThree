@@ -219,7 +219,9 @@ public class Hud extends AbstractScreen {
 
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyleBig);
+        messageLabel.setAlignment(Align.center);
         image = new Image();
+        image.setAlign(Align.center);
 
         // Add values
         stack = new Stack();
