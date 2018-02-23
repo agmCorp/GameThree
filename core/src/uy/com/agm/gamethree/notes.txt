@@ -1,7 +1,7 @@
 IDEAS
 -----
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
-hacer highscores
+- hacer highscores
 - programar acelerómetro? toggle: acelerometro, manual
 - nuevo item vidas
 - hacer splashscreen
@@ -68,12 +68,12 @@ PROXIMOS PASOS
 --------------
 - El enemigo final se quedó trabado, subiendo por la derecha y jamás salió del vértice superior derecho yendo hacia arriba.
 - El enemigo final tira aids muy rapido (creo que en estado shoot). Confirmado!
-- Quedo atrapado en el puente quimico al morir, no puedo salir ni con blink.
-- un item quedo atrapado en el pozo, no podia salir.
+- Quedo atrapado en el puente quimico al morir, no puedo salir ni con blink, capaz que la solución es que en blink no choque con path, al menos el usuario tiene una oportunidad
+y si queda atrapado es por idiota. Así como está ahora, queda atrapado por culpa del juego y no puede salir.
+Además un item quedo atrapado en el pozo, no podia salir.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
-
-- El score no debería resetearse por nivel?????
-- hacer pantallas de help, falta la del fuego nomas.
+- El score no debería resetearse por nivel????? averiguar
+- capaz conviene dedicarle tiempo a las pantallas
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
 - nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
@@ -104,7 +104,6 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
 - se corta el audio al morir..el gruñido se escucha cortado.
-- hacer un skin para la ui?
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
@@ -135,8 +134,8 @@ http://www.coding-daddy.xyz/node/20
 https://stackoverflow.com/questions/37503499/scene2d-progress-bar-not-resizing
 https://stackoverflow.com/questions/23833251/how-to-change-the-size-of-a-progessbar-slider
 
-DUDAS
------
+DUDAS Y BUGS
+------------
 - git:
     traer un solo fuente (con sourcetree)
     ver diferencias de mi fuente actual con el del repositorio
