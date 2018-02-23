@@ -35,7 +35,7 @@ public class Constants {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -282,14 +282,14 @@ public class Constants {
     public static final float ENEMYONE_VELOCITY_Y = -1.0f;
     public static final float ENEMYONE_WIDTH_METERS = 120.0f * 0.6f / PPM;
     public static final float ENEMYONE_HEIGHT_METERS = 90.0f * 0.6f / PPM;
-    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 2.0f;
+    public static final float ENEMYONE_FIRE_DELAY_SECONDS = 3.0f;
     public static final float ENEMYONE_CHANGE_DIRECTION_SECONDS = 1.0f;
     public static final int ENEMYONE_SCORE = 5;
 
     // EnemyTwo (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYTWO_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
-    public static final float ENEMYTWO_VELOCITY_X = -5.0f;
-    public static final float ENEMYTWO_VELOCITY_Y = -2.0f;
+    public static final float ENEMYTWO_VELOCITY_X = -2.0f;
+    public static final float ENEMYTWO_VELOCITY_Y = -1.0f;
     public static final float ENEMYTWO_WIDTH_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_HEIGHT_METERS = 100.0f * 0.8f / PPM;
     public static final float ENEMYTWO_FIRE_DELAY_SECONDS = 3.0f;
@@ -302,7 +302,7 @@ public class Constants {
     public static final float ENEMYTHREE_DENSITY = 1000.0f;
     public static final float ENEMYTHREE_WIDTH_METERS = 130.0f * 0.6f / PPM;
     public static final float ENEMYTHREE_HEIGHT_METERS = 130.0f * 0.6f / PPM;
-    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 3f;
+    public static final float ENEMYTHREE_FIRE_DELAY_SECONDS = 4.0f;
     public static final int ENEMYTHREE_SCORE = 20;
 
     // EnemyFour (meters = pixels * resizeFactor / PPM)
@@ -348,11 +348,11 @@ public class Constants {
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
     public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
-    public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
+    public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
     public static final float ENEMYBULLET_OFFSET_METERS = 40.0f / PPM;
-    public static final float ENEMYBULLET_LINEAR_VELOCITY = 4.0f;
+    public static final float ENEMYBULLET_LINEAR_VELOCITY = 2.0f;
     public static final float ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS = 10.0f / PPM;
     public static final float ENEMYBULLET_WIDTH_METERS = 192.0f * 0.3f / PPM;
     public static final float ENEMYBULLET_HEIGHT_METERS = 192.0f  * 0.3f / PPM;
