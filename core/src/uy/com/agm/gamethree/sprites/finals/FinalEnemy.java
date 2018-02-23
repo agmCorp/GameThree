@@ -146,7 +146,7 @@ public abstract class FinalEnemy extends Sprite {
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
             float silverBulletCandidatePosition = b2body.getPosition().y + Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;
 
-            if (silverBulletCandidatePosition >= upperEdge) {
+            if (silverBulletCandidatePosition + Constants.COLSILVERBULLET_HEIGHT_METERS / 2 >= upperEdge) {
                 silverBulletCandidatePosition = b2body.getPosition().y - Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;;
             }
             screen.getCreator().getItemOnHit(object, b2body.getPosition().x, silverBulletCandidatePosition);
