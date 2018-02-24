@@ -68,7 +68,6 @@ PROXIMOS PASOS
 --------------
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
 - capaz conviene dedicarle tiempo a las pantallas
-- juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
 - nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
