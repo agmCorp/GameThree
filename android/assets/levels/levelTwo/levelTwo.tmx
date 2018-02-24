@@ -179,11 +179,6 @@
   <object id="826" x="225.5" y="831" width="253" height="10.5"/>
   <object id="827" x="2.5" y="831.25" width="124.5" height="10.5"/>
   <object id="829" x="131.5" y="788" width="25" height="149.5"/>
-  <object id="1282" x="254.667" y="3106.67" width="64" height="42.6667"/>
-  <object id="1283" x="236" y="3154.67" width="141.333" height="62.6667"/>
-  <object id="1284" x="214.667" y="3221.33" width="76" height="54.6667"/>
-  <object id="1285" x="304" y="3225.33" width="32" height="30.6667"/>
-  <object id="1286" x="390.667" y="3173.33" width="34.6667" height="34.6667"/>
  </objectgroup>
  <objectgroup name="powerBox">
   <object id="830" x="225.5" y="544.5" width="30.5" height="30.5">
