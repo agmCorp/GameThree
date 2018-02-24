@@ -605,7 +605,7 @@ public class Hero extends Sprite {
         if (isSilverBulletEnabled()) {
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
         }
     }
 

@@ -126,9 +126,9 @@ public class Constants {
     public static final String FX_FILE_CLICK = "audio/sounds/click.ogg";
     public static final String FX_FILE_APLAUSE = "audio/sounds/aplause.ogg";
     public static final String FX_FILE_SQUISH = "audio/sounds/squish.ogg";
+    public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
 
     // Max volume
-    public static final float SHOOT_MAX_VOLUME = 0.3f;
     public static final float HIT_MAX_VOLUME = 0.3f;
 
     // Music

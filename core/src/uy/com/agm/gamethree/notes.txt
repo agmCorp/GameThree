@@ -66,6 +66,9 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
+- Las cosas en los demas niveles deberian ser mas rapidas.
+Todos los enemigos reciben el tileObject, entonces una manera seria usar properties al dibujar el nivel con
+sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
 - capaz conviene dedicarle tiempo a las pantallas
 - el enemyfour no tiene ruido al congelarse

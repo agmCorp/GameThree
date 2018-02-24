@@ -158,6 +158,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(Constants.FX_FILE_CLICK, Sound.class);
         assetManager.load(Constants.FX_FILE_APLAUSE, Sound.class);
         assetManager.load(Constants.FX_FILE_SQUISH, Sound.class);
+        assetManager.load(Constants.FX_FILE_FROZEN, Sound.class);
     }
 
     private void loadMusic() {

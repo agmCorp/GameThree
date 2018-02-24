@@ -164,10 +164,10 @@ public class SettingsScreen extends AbstractScreen {
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
                 break;
             case 2:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
                 break;
             case 3:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot(), Constants.SHOOT_MAX_VOLUME);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
                 break;
             case 4:
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());

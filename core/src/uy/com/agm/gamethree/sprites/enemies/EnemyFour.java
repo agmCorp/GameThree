@@ -160,6 +160,9 @@ public class EnemyFour extends Enemy {
             // We get the linear velocity that it had before being frozen
             b2bodyLinearVelX = b2body.getLinearVelocity().x;
 
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
+
             // Stop motion
             stop();
         }
