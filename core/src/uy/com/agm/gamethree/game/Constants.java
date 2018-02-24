@@ -32,10 +32,10 @@ public class Constants {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -176,7 +176,7 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final int HERO_LIVES_START = 30;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.3f; // For all kind of bullets
+    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f; // For all kind of bullets
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;

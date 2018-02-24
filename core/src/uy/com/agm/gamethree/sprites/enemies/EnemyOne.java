@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -39,7 +38,7 @@ public class EnemyOne extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
 
         stateTimer = 0;
-        openFireTimer = 0;
+        openFireTimer = MathUtils.random(0, Constants.ENEMYONE_FIRE_DELAY_SECONDS);;
         currentState = State.ALIVE;
 
         velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);

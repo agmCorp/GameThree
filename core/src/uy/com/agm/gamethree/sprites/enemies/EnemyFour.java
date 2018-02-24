@@ -54,7 +54,7 @@ public class EnemyFour extends Enemy {
 
         // State variables initialization
         stateTimer = 0;
-        openFireTimer = 0;
+        openFireTimer = MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);;
         currentState = State.ALIVE;
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed

@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.sprites.enemies;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -35,7 +36,7 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
 
         stateTimer = 0;
-        openFireTimer = 0;
+        openFireTimer = MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS);;
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTWO_VELOCITY_X, Constants.ENEMYTWO_VELOCITY_Y);
     }

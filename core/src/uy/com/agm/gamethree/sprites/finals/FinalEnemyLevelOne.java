@@ -767,8 +767,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     public void draw(Batch batch) {
         // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
-            super.draw(batch);
             drawPowers(batch);
+            super.draw(batch);
         } else {
             drawExplosion(batch);
         }

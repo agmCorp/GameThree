@@ -6,42 +6,42 @@ filter: Nearest,Nearest
 repeat: none
 helpColOne
   rotate: false
-  xy: 1212, 2
+  xy: 404, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpColSilverBullet
   rotate: false
-  xy: 842, 204
+  xy: 1280, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpEnemyFour
   rotate: false
-  xy: 808, 2
+  xy: 1212, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpEnemyOne
   rotate: false
-  xy: 1010, 2
+  xy: 1718, 229
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpEnemyThree
   rotate: false
-  xy: 1061, 204
+  xy: 1499, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpEnemyTwo
   rotate: false
-  xy: 1718, 229
+  xy: 808, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
@@ -55,42 +55,42 @@ helpFinalEnemyLevelOne
   index: -1
 helpInitialAutomatic
   rotate: false
-  xy: 1280, 204
+  xy: 404, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 1499, 204
+  xy: 623, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerFour
   rotate: false
-  xy: 606, 2
+  xy: 1010, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 623, 204
+  xy: 1061, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerThree
   rotate: false
-  xy: 404, 204
+  xy: 842, 204
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 404, 2
+  xy: 606, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
