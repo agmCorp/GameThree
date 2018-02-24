@@ -25,6 +25,7 @@ public class AssetScene2d {
     private TextureRegion helpColOne;
     private TextureRegion helpColSilverBullet;
     private TextureRegion helpFinalEnemyLevelOne;
+    private TextureRegion table;
 
     public AssetScene2d(TextureAtlas atlas) {
         sliderBackground = atlas.findRegion("sliderBackground");
@@ -43,6 +44,7 @@ public class AssetScene2d {
         helpColOne = atlas.findRegion("helpColOne");
         helpColSilverBullet = atlas.findRegion("helpColSilverBullet");
         helpFinalEnemyLevelOne = atlas.findRegion("helpFinalEnemyLevelOne");
+        table = atlas.findRegion("table");
     }
 
     public TextureRegion getSliderBackground() {
@@ -103,5 +105,9 @@ public class AssetScene2d {
 
     public TextureRegion getHelpFinalEnemyLevelOne() {
         return helpFinalEnemyLevelOne;
+    }
+
+    public TextureRegion getTable() {
+        return table;
     }
 }

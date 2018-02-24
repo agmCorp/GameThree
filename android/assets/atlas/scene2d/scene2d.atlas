@@ -1,111 +1,118 @@
 
 scene2d.png
-size: 2048,512
+size: 2048,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 helpColOne
   rotate: false
-  xy: 404, 2
+  xy: 204, 12
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpColSilverBullet
   rotate: false
-  xy: 1280, 204
+  xy: 1543, 789
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpEnemyFour
   rotate: false
-  xy: 1212, 2
+  xy: 1107, 587
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpEnemyOne
   rotate: false
-  xy: 1718, 229
+  xy: 2, 12
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpEnemyThree
   rotate: false
-  xy: 1499, 204
+  xy: 1762, 789
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpEnemyTwo
   rotate: false
-  xy: 808, 2
+  xy: 484, 185
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelOne
   rotate: false
-  xy: 2, 29
+  xy: 484, 614
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpInitialAutomatic
   rotate: false
-  xy: 404, 204
+  xy: 484, 387
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 623, 204
+  xy: 886, 789
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerFour
   rotate: false
-  xy: 1010, 2
+  xy: 905, 587
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 1061, 204
+  xy: 1324, 789
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerThree
   rotate: false
-  xy: 842, 204
+  xy: 1105, 789
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 606, 2
+  xy: 703, 412
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 sliderBackground
   rotate: false
-  xy: 2, 19
+  xy: 2, 2
   size: 316, 8
   orig: 316, 8
   offset: 0, 0
   index: -1
 sliderKnob
   rotate: false
-  xy: 1920, 400
+  xy: 1981, 985
   size: 14, 29
   orig: 14, 29
+  offset: 0, 0
+  index: -1
+table
+  rotate: false
+  xy: 2, 214
+  size: 480, 800
+  orig: 480, 800
   offset: 0, 0
   index: -1

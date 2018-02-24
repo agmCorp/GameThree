@@ -87,7 +87,7 @@ public class Constants {
     // Font sizes
     public static final float FONT_SMALL = 0.6f;
     public static final float FONT_NORMAL = 0.9f;
-    public static final float FONT_BIG = 1.6f;
+    public static final float FONT_BIG = 1.4f;
 
     // Sound FXs
     public static final String FX_FILE_BUMP = "audio/sounds/bump.ogg";

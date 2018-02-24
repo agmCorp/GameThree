@@ -44,6 +44,9 @@ public class SettingsScreen extends AbstractScreen {
         // Set table structure
         Table table = new Table();
 
+        // Design
+        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
+
         // Debug lines
         table.setDebug(Constants.DEBUG_MODE);
 

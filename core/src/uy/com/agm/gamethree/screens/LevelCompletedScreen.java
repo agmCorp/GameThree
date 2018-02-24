@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -38,6 +39,9 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Set table structure
         Table table = new Table();
+
+        // Design
+        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
         table.setDebug(Constants.DEBUG_MODE);
