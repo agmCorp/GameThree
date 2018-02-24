@@ -431,13 +431,13 @@ public class Hero extends Sprite {
         powerDown();
         screen.getHud().forcePowerTimeUp();
 
-        // Our Hero can collide with borders, edges, obstacles and paths only
+        // Our Hero can collide with powerBoxes, borders, edges and obstacles only (not with paths)
         Filter filter = new Filter();
         filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDER_BIT |
+        filter.maskBits = Constants.POWERBOX_BIT |
+                Constants.BORDER_BIT |
                 Constants.EDGE_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.PATH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                Constants.OBSTACLE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
