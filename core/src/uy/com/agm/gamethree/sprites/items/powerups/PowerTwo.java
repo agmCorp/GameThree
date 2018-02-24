@@ -36,7 +36,7 @@ public class PowerTwo extends Item {
     // Shield
     public PowerTwo(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer;
+        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTWO;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -153,7 +153,7 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTWO);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer);
 
             // Set score
             hud.addScore(Constants.POWERTWO_SCORE);

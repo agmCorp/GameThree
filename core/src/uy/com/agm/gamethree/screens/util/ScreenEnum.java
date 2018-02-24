@@ -29,7 +29,7 @@ public enum ScreenEnum {
 
     GAME {
         public AbstractScreen getScreen(Object... params) {
-            return new PlayScreen((Integer) params[0]);
+            return new PlayScreen((Integer) params[0], (Integer) params[1]);
         }
     },
 

@@ -88,12 +88,12 @@ public class Hud extends AbstractScreen {
 
     private Stack stack;
 
-    public Hud(PlayScreen screen, Integer level, Integer time, Integer lives) {
+    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives) {
         super();
 
         // Define tracking variables
         this.screen = screen;
-        score = 0;
+        this.score = score;
         this.level = level;
         this.time = time;
         timeCount = 0;

@@ -79,9 +79,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(backLabel).padTop(Constants.PAD_TOP * 2).center();
 
         // Events
-        playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel));
+        playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel, 0));
         if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel));
+            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.finalScore));
         }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 

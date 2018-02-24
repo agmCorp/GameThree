@@ -59,7 +59,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelLabel).padTop(Constants.PAD_TOP);
 
             // Events
-            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level));
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, 0));
         }
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP * 2);

@@ -322,7 +322,7 @@ public class Constants {
     // FinalEnemy
     public static final float FINALENEMY_INTRO_TIME_SECONDS = 5.0f;
     public static final int FINALENEMY_MAX_AID_SILVERBULLET = 3;
-    public static final float FINALENEMY_AID_SILVERBULLET_TIME_SECONDS = 10.0f;
+    public static final float FINALENEMY_AID_SILVERBULLET_TIME_SECONDS = 5.0f;
     public static final float FINALENEMY_AID_SILVERBULLET_OFFSET_METERS = 100.0f / PPM;
 
     // FinalEnemyLevelOne (meters = pixels * resizeFactor / PPM)

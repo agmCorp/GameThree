@@ -53,7 +53,6 @@ public class B2WorldCreator {
     private static final String KEY_POWERTWO = "powerTwo";
     private static final String KEY_POWERTHREE = "powerThree";
     private static final String KEY_POWERFOUR = "powerFour";
-    private static final String KEY_TIMER = "timer";
     private static final String KEY_COLONE = "colOne";
     private static final String KEY_COLSILVERBULLET = "colSilverBullet";
 
@@ -228,8 +227,8 @@ public class B2WorldCreator {
 
     public void getItemOnHit(MapObject object, float x, float y) {
         MapProperties mp = object.getProperties();
+        int timer;
 
-        int timer = object.getProperties().get(KEY_TIMER, 0, Integer.class);
         if (mp.containsKey(KEY_COLONE)) {
             createGameThreeActor(new ActorDef(x, y, ColOne.class));
         }
@@ -237,15 +236,19 @@ public class B2WorldCreator {
             createGameThreeActor(new ActorDef(x, y, ColSilverBullet.class));
         }
         if (mp.containsKey(KEY_POWERONE)) {
+            timer = object.getProperties().get(KEY_POWERONE, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerOne.class));
         }
         if (mp.containsKey(KEY_POWERTWO)) {
+            timer = object.getProperties().get(KEY_POWERTWO, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerTwo.class));
         }
         if (mp.containsKey(KEY_POWERTHREE)) {
+            timer = object.getProperties().get(KEY_POWERTHREE, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerThree.class));
         }
         if (mp.containsKey(KEY_POWERFOUR)) {
+            timer = object.getProperties().get(KEY_POWERFOUR, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerFour.class));
         }
     }

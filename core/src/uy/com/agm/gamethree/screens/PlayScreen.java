@@ -79,7 +79,7 @@ public class PlayScreen extends AbstractScreen {
     // Final Enemy
     private FinalEnemy finalEnemy;
 
-    public PlayScreen(Integer level) {
+    public PlayScreen(Integer level, Integer score) {
         this.level = level;
         levelCompletedTimer = 0;
 
@@ -127,7 +127,7 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create our game HUD for scores/timers/level and info
-        hud = new Hud(this, level, LevelFactory.getLevelTimer(this.level), player.getLives());
+        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level), player.getLives());
         hud.buildStage();
 
         // Show how to play with the main character

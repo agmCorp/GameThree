@@ -36,7 +36,7 @@ public class PowerFour extends Item {
     // Tough mode
     public PowerFour(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer;
+        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERFOUR;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -153,7 +153,7 @@ public class PowerFour extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERFOUR);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer);
 
             // Set score
             hud.addScore(Constants.POWERFOUR_SCORE);

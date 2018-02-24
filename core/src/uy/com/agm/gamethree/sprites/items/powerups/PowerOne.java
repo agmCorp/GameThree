@@ -36,7 +36,7 @@ public class PowerOne extends Item {
     // Ghost mode
     public PowerOne(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer;
+        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERONE;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -153,7 +153,7 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERONE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer);
 
             // Set score
             hud.addScore(Constants.POWERONE_SCORE);

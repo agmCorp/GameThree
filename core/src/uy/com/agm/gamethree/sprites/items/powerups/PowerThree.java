@@ -37,7 +37,7 @@ public class PowerThree extends Item {
     // Fire power
     public PowerThree(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer;
+        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTHREE;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -157,7 +157,7 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTHREE);
+            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer);
 
             // Set score
             hud.addScore(Constants.POWERTHREE_SCORE);

@@ -66,12 +66,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
-- El enemigo final tira aids muy rapido (creo que en estado shoot). Confirmado!
-- Quedo atrapado en el puente quimico al morir, no puedo salir ni con blink, capaz que la solución es que en blink no choque con path, al menos el usuario tiene una oportunidad
-y si queda atrapado es por idiota. Así como está ahora, queda atrapado por culpa del juego y no puede salir.
-Además un item quedo atrapado en el pozo, no podia salir.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
-- El score no debería resetearse por nivel????? averiguar
 - capaz conviene dedicarle tiempo a las pantallas
 - juntar la key powerALGO con timer...para que sea integer como strength...asi no tengo 2.
 - el enemyfour no tiene ruido al congelarse
@@ -83,9 +78,6 @@ PENDIENTES
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
 esas constantes globales como con los _BIT. Pensarlo cuando unifique constantes.
-- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
-Para mi que son muy rapidos y se van...revisar.
-- Si agarro items (o shurikens) reboto un poco en versión escritorio.
 - mostrar imagen animada en el hud? no se como se muestra una animacion en scene2d...no quiero hacerlo, seria para el help inicial nomas.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Con eso ya puedo disenar al menos 2 niveles, tengo:
@@ -102,14 +94,12 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - creo que todas las clases que usan textureRegions deberían tener un dispose: miTextureRegion.getTexture().dispose();
 Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las cosas...preguntar en stack overflow.
-- se corta el audio al morir..el gruñido se escucha cortado.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
 - agregar credits con cuenta bancaria para donación
 - Inventar una etiqueta random en las powerbox para generar poder random (por ejemplo, para la box del enemigo final).
 Debe ser un random configurable (para el set de poderes que quiera).
-- las properties del tilededitor pueden ser boolean, usarlas.
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
@@ -135,16 +125,19 @@ https://stackoverflow.com/questions/23833251/how-to-change-the-size-of-a-progess
 
 DUDAS Y BUGS
 ------------
-- git:
-    traer un solo fuente (con sourcetree)
-    ver diferencias de mi fuente actual con el del repositorio
-    abrir un git local (un proyecto) sin tener que hacer clone
-    No me quedo un acceso directo, sino que ejecuto el exe que baje
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2 y uso de Lables en las pantallas.
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
+- El enemigo final tira aids muy rapido (creo que en estado shoot). Confirmado!
+- Quedo atrapado en el puente quimico al morir, no puedo salir ni con blink, capaz que la solución es que en blink no choque con path, al menos el usuario tiene una oportunidad
+y si queda atrapado es por idiota. Así como está ahora, queda atrapado por culpa del juego y no puede salir.
+Además un item quedo atrapado en el pozo, no podia salir.
+- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
+Para mi que son muy rapidos y se van...revisar.
+- Si agarro items (o shurikens) reboto un poco en versión escritorio. En la version android no se nota porque sigo moviendo el dedo.
+- se corta el audio al morir..el gruñido se escucha cortado.
 
 VIDEO
 -----
@@ -160,15 +153,15 @@ mis texturas miden 1024 x 1024
 
 CUSTOM PROPERTIES
 -----------------
-enemyBullet (string): indica si el enemigo dispara
 strength (int): dureza de la powerbox
-powerOne (string): ghost mode
-powerTwo (string): escudo
-powerThree (string): cambia el poder de disparo
-powerFour (string): thogh mode
-timer (int): para los poderes indica el tiempo de uso
-colOne (string): moneda
+powerOne (int): ghost mode, indica el tiempo de uso
+powerTwo (int): escudo, indica el tiempo de uso
+powerThree (int): cambia el poder de disparo, indica el tiempo de uso
+powerFour (int): thogh mode, indica el tiempo de uso
 timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
+
+enemyBullet (string): indica si el enemigo dispara
+colOne (string): moneda
 
 HERRAMIENTAS
 ------------
@@ -427,6 +420,12 @@ LECCIONES APRENDIDAS
     Pero la reducción más drástica se da con background.png (de cada nivel) en donde gano más de 2 megas.
     Para usar esa herramienta hice:
     >pngcrush.exe background.png salidaBackground.png
+
+19)
+    A dynamic body is a body which is affected by world forces and react to collisions. And you already met a million of them.
+    A static body is a body which isn’t affected by world forces it does not react to collisions. It can’t be moved. Fullstop.
+    A kinematic body is an hybrid body which is not affected by forces and collisions like a static body but can moved
+    with a linear velocity like a dynamic body.
 
 IOS
 ---

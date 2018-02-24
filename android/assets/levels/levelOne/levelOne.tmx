@@ -183,36 +183,32 @@
  <objectgroup name="powerBox">
   <object id="830" x="225.5" y="544.5" width="30.5" height="30.5">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerThree" type="int" value="15"/>
    </properties>
   </object>
   <object id="1024" x="288" y="5312" width="32" height="32">
    <properties>
-    <property name="powerThree" value=""/>
+    <property name="powerThree" type="int" value="10"/>
     <property name="strength" type="int" value="2"/>
-    <property name="timer" type="int" value="10"/>
    </properties>
   </object>
   <object id="1041" x="224" y="5152" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="8"/>
     <property name="strength" type="int" value="3"/>
-    <property name="timer" type="int" value="8"/>
    </properties>
   </object>
   <object id="1049" x="224" y="4896" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="10"/>
     <property name="strength" type="int" value="3"/>
-    <property name="timer" type="int" value="10"/>
    </properties>
   </object>
   <object id="1090" x="224" y="6208" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="10"/>
     <property name="strength" type="int" value="3"/>
-    <property name="timer" type="int" value="12"/>
    </properties>
   </object>
   <object id="1099" x="64" y="3936" width="32" height="32">
@@ -229,16 +225,14 @@
   <object id="1101" x="192" y="3936" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="3"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1102" x="256" y="3936" width="32" height="32">
    <properties>
-    <property name="powerThree" value=""/>
+    <property name="powerThree" type="int" value="15"/>
     <property name="strength" type="int" value="2"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1103" x="320" y="3936" width="32" height="32">
@@ -265,9 +259,8 @@
   </object>
   <object id="1127" x="281.333" y="2851" width="32" height="32">
    <properties>
-    <property name="powerThree" value=""/>
+    <property name="powerThree" type="int" value="15"/>
     <property name="strength" type="int" value="2"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1128" x="89.3333" y="2851" width="32" height="32">
@@ -277,9 +270,8 @@
   </object>
   <object id="1129" x="154.667" y="2907.67" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="3"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1130" x="214" y="2932.33" width="32" height="32">
@@ -312,16 +304,14 @@
   </object>
   <object id="1155" x="195.333" y="2430" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="2"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1156" x="268.667" y="2431.33" width="32" height="32">
    <properties>
-    <property name="powerThree" value=""/>
+    <property name="powerThree" type="int" value="15"/>
     <property name="strength" type="int" value="2"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1194" x="224" y="7264" width="32" height="32">
@@ -331,37 +321,32 @@
   </object>
   <object id="1197" x="270" y="2936" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1198" x="219.5" y="2814.5" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1252" x="334.5" y="2901.5" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1253" x="165.5" y="2852.5" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
   <object id="1254" x="174.5" y="2783.5" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
+    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
-    <property name="timer" type="int" value="15"/>
    </properties>
   </object>
  </objectgroup>
@@ -489,8 +474,7 @@
   <object id="940" x="136.833" y="6177.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="10"/>
+    <property name="powerOne" type="int" value="10"/>
    </properties>
   </object>
   <object id="941" x="48.5" y="6344" width="32" height="32"/>
@@ -852,28 +836,24 @@
   <object id="1044" x="441" y="4768" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1045" x="441" y="4800" width="32" height="32"/>
   <object id="1046" x="192" y="5376" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="6"/>
+    <property name="powerOne" type="int" value="6"/>
    </properties>
   </object>
   <object id="1047" x="288" y="5376" width="32" height="32">
    <properties>
-    <property name="powerThree" value=""/>
-    <property name="timer" type="int" value="15"/>
+    <property name="powerThree" type="int" value="15"/>
    </properties>
   </object>
   <object id="1048" x="224" y="5920" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="10"/>
+    <property name="powerOne" type="int" value="10"/>
    </properties>
   </object>
   <object id="1050" x="384" y="4576" width="32" height="32"/>
@@ -1009,8 +989,7 @@
   <object id="1183" x="441.333" y="2017.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1184" x="441.333" y="2113.33" width="32" height="32"/>
@@ -1033,8 +1012,7 @@
   <object id="1189" x="7.33333" y="2020" width="32" height="32"/>
   <object id="1190" x="7.33333" y="1956" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1191" x="7.33333" y="2052" width="32" height="32">
@@ -1044,8 +1022,7 @@
   </object>
   <object id="1199" x="221" y="2086" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="15"/>
+    <property name="powerOne" type="int" value="15"/>
    </properties>
   </object>
   <object id="1201" x="11" y="1891.5" width="32" height="32"/>
@@ -1059,8 +1036,7 @@
   <object id="1205" x="11" y="1763.5" width="32" height="32"/>
   <object id="1206" x="11" y="1699.5" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1207" x="11" y="1795.5" width="32" height="32"/>
@@ -1075,8 +1051,7 @@
   <object id="1212" x="439" y="1764" width="32" height="32"/>
   <object id="1213" x="439" y="1700" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1214" x="439" y="1796" width="32" height="32">
@@ -1104,8 +1079,7 @@
   </object>
   <object id="1220" x="194.5" y="1531" width="32" height="32">
    <properties>
-    <property name="powerOne" value=""/>
-    <property name="timer" type="int" value="8"/>
+    <property name="powerOne" type="int" value="8"/>
    </properties>
   </object>
   <object id="1221" x="194.5" y="1627" width="32" height="32">
