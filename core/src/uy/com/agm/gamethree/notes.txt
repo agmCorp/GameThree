@@ -71,7 +71,6 @@ Todos los enemigos reciben el tileObject, entonces una manera seria usar propert
 sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
 - capaz conviene dedicarle tiempo a las pantallas
-- el enemyfour no tiene ruido al congelarse
 - nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
 
