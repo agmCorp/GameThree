@@ -7,10 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.enemies.EnemyFour;
-import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
-import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
@@ -92,10 +89,10 @@ public class LevelFactory {
                 dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
                 break;
             case 2:
-                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef());
-                dynamic.put(EnemyTwo.class.getName(), new DynamicHelpDef(true));
-                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef());
-                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef());
+//                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef());
+//                dynamic.put(EnemyTwo.class.getName(), new DynamicHelpDef(true));
+//                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef());
+//                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef());
                 break;
             default:
                 break;
