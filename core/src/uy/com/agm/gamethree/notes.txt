@@ -75,6 +75,7 @@ HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 - capaz conviene dedicarle tiempo a las pantallas
 - nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
+- ir viendo los bugs
 
 PENDIENTES
 ----------
