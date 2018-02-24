@@ -808,8 +808,8 @@ public class Hero extends Sprite {
         screen.getHud().increaseSilverBullets(1);
     }
 
-    public int getSilverBullets() {
-        return silverBullets;
+    public boolean hasSilverBullets() {
+        return silverBullets > 0;
     }
 
     public boolean isSilverBulletEnabled() {
