@@ -196,6 +196,9 @@ public class EnemyFour extends Enemy {
     private void checkDefrost(float dt) {
         stateFrozenTimer += dt;
         if (stateFrozenTimer >= Constants.ENEMYFOUR_FROZEN_TIME_SECONDS) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
+
             // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
             setBounds(b2body.getPosition().x, b2body.getPosition().y, Constants.ENEMYFOUR_WIDTH_METERS, Constants.ENEMYFOUR_HEIGHT_METERS);
 
