@@ -244,8 +244,8 @@ public class Constants {
     public static final float POWERTWO_HEIGHT_METERS = 158.0f * 0.4f / PPM;
     public static final int DEFAULT_TIMER_POWERTWO = 10;
     public static final int POWERTWO_SCORE = 60;
-    public static final float POWERTWO_FX_WIDTH_METERS = 192.0f * 1.2f / PPM;
-    public static final float POWERTWO_FX_HEIGHT_METERS = 192.0f * 1.2f / PPM;
+    public static final float POWERTWO_FX_WIDTH_METERS = 181.0f * 1.3f / PPM;
+    public static final float POWERTWO_FX_HEIGHT_METERS = 181.0f * 1.3f / PPM;
 
     // PowerThree (meters = pixels * resizeFactor / PPM)
     public static final float POWERTHREE_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
