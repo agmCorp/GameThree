@@ -151,10 +151,12 @@ public class Constants {
     // ---- Dinamic objects -----
 
     /* Box2D Collision Bits
-    * I can have up to 16 different categories for collision. If I need even finer control over what
+    * I can have up to 16 different categories for collision. If I require even finer control over what
     * should collide with what, I can set a contact filter callback in the world so that when Box2D
-    * needs to check if two fixtures should collide, instead of using the following rules it will give me the
-    * two fixtures and let me decide. See world.setContactFilter(...) and ContactFilter interface (shouldCollide(...))
+    * needs to check if two fixtures should collide, instead of using the following rules (that is filters -categoryBits, maskBits and groupIndex-)
+    * it will give me the two fixtures and let me decide. See world.setContactFilter(...) and ContactFilter interface (shouldCollide(...))
+    * I could then have a enum every entity holds showing its type and based on that, sort out whether the collision
+    * should be handled or not in shouldCollide(...) method.
     */
     public static final short NOTHING_BIT = 0;
     public static final short BORDER_BIT = 1;
