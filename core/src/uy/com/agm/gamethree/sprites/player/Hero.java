@@ -496,8 +496,8 @@ public class Hero extends Sprite {
     }
 
     public void onDead() {
-        // Stop music and play sound effect
-        AudioManager.getInstance().stopMusic();
+        // Pause music and play sound effect
+        AudioManager.getInstance().pauseMusic();
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
 
         /*
