@@ -190,6 +190,7 @@ HERRAMIENTAS
 - https://www.imgonline.com.ua/eng/cut-photo-into-pieces.php para cortar una imagen en pedazos iguales
 - pngcrush para reducir el tamano de los .png (https://pmt.sourceforge.io/pngcrush/)
 https://developer.android.com/topic/performance/reduce-apk-size.html
+- https://cloudconvert.com/svg-to-png: svg to png converter
 
 LECCIONES APRENDIDAS
 --------------------
