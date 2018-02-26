@@ -65,6 +65,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
         Label playAgainLabel = new Label(i18NGameThreeBundle.format("levelCompleted.playAgain"), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
+        Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
         Label backLabel = new Label(i18NGameThreeBundle.format("levelCompleted.backToMenu"), labelStyleNormal);
 
         // Add values
@@ -78,6 +79,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
             table.row();
             table.add(nextLevelLabel).padTop(Constants.PAD_TOP).center();
+        } else {
+            table.row();
+            table.add(newLevelsLabel).padTop(Constants.PAD_TOP).center();
         }
         table.row();
         table.add(backLabel).padTop(Constants.PAD_TOP * 2).center();
