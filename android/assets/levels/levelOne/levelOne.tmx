@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1301">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1302">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -74,8 +74,8 @@
   <object id="1289" x="424" y="3239.33" width="52" height="117.333"/>
  </objectgroup>
  <objectgroup name="path">
-  <object id="826" x="225.5" y="831" width="253" height="10.5"/>
-  <object id="827" x="2.5" y="831.25" width="124.5" height="10.5"/>
+  <object id="826" x="225.5" y="794" width="253" height="47.5"/>
+  <object id="827" x="2.5" y="789.25" width="124.5" height="52.5"/>
   <object id="829" x="131.5" y="788" width="25" height="149.5"/>
   <object id="1282" x="233.333" y="3103.33" width="117.333" height="32.6667"/>
   <object id="1284" x="223.333" y="3143.33" width="254.667" height="46.6667"/>
@@ -92,6 +92,7 @@
   <object id="1298" x="138.667" y="5543.33" width="49.3333" height="33.3333"/>
   <object id="1299" x="138.667" y="5588" width="38.6667" height="27.3333"/>
   <object id="1300" x="139.333" y="5630" width="25.3333" height="26.6667"/>
+  <object id="1301" x="246" y="3075" width="66" height="23"/>
  </objectgroup>
  <objectgroup name="powerBox">
   <object id="830" x="225.5" y="544.5" width="30.5" height="30.5">

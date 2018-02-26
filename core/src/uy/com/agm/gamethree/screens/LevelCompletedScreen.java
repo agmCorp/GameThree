@@ -74,7 +74,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(Constants.PAD_TOP).center();
         table.row();
-        table.add(playAgainLabel).padTop(Constants.PAD_TOP).center();
+        table.add(playAgainLabel).padTop(Constants.PAD_TOP * 2).center();
         if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
             table.row();
             table.add(nextLevelLabel).padTop(Constants.PAD_TOP).center();
