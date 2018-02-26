@@ -29,8 +29,8 @@
  <objectgroup name="path">
   <object id="1301" x="7" y="3123" width="169" height="106"/>
   <object id="1302" x="304" y="3123" width="171.5" height="106"/>
-  <object id="1303" x="300" y="5580.67" width="176.667" height="19.3333"/>
-  <object id="1305" x="3.6665" y="5580.33" width="176.667" height="19.3333"/>
+  <object id="1303" x="300" y="5505.34" width="176.667" height="94.6666"/>
+  <object id="1305" x="3.6665" y="5505.66" width="176.667" height="94"/>
   <object id="1309" x="3" y="801.5" width="187" height="28.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="28.5"/>
  </objectgroup>
