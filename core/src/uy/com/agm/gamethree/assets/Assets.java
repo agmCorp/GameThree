@@ -32,6 +32,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.fonts.AssetFonts;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
@@ -84,6 +85,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetBulletA bulletA;
     private AssetToughMode toughMode;
     private AssetFinalEnemyLevelOne finalEnemyLevelOne;
+    private AssetFinalEnemyLevelTwo finalEnemyLevelTwo;
 
     private AssetMaps maps;
     private AssetSounds sounds;
@@ -236,6 +238,7 @@ public class Assets implements Disposable, AssetErrorListener {
         bulletA = new AssetBulletA(atlasDinamicObjects);
         toughMode = new AssetToughMode(atlasDinamicObjects);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDinamicObjects);
+        finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDinamicObjects);
         maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
@@ -360,6 +363,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetFinalEnemyLevelOne getFinalEnemyLevelOne() {
         return finalEnemyLevelOne;
+    }
+
+    public AssetFinalEnemyLevelTwo getFinalEnemyLevelTwo() {
+        return finalEnemyLevelTwo;
     }
 
     public AssetMaps getMaps() {
