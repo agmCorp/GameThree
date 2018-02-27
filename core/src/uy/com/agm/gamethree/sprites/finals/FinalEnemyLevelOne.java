@@ -37,6 +37,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
     // This is a slash: /
     // This is a backslash: \
+    // This is a happy guy \(^-^)/
 
     private StateWalking currentStateWalking;
     private int damage;
