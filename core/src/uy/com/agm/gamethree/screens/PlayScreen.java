@@ -326,10 +326,10 @@ public class PlayScreen extends AbstractScreen {
         game.getBatch().setProjectionMatrix(gameCam.combined);
         game.getBatch().begin();
 
+        renderFinalEnemy();
         renderPowerBoxes();
         renderItems();
         renderWeapons();
-        renderFinalEnemy();
         renderEnemies();
         renderHero();
 
