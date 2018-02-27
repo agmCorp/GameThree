@@ -13,15 +13,20 @@ public class AssetFinalEnemyLevelOne {
     private static final String TAG = AssetFinalEnemyLevelOne.class.getName();
 
     private TextureRegion finalEnemyLevelOneStand;
+    private TextureRegion finalEnemyLevelOnePowerStand;
+    private TextureRegion finalEnemyLevelOneBackground;
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
     private Animation finalEnemyLevelOneDeathAnimation;
+    private Animation finalEnemyLevelOnePowerAnimation;
 
     public AssetFinalEnemyLevelOne(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
         finalEnemyLevelOneStand = atlas.findRegion("finalEnemyLevelOneIdle", 1);
+        finalEnemyLevelOnePowerStand = atlas.findRegion("finalEnemyLevelOnePower", 1);
+        finalEnemyLevelOneBackground = atlas.findRegion("spiderWeb");
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneIdle");
@@ -42,10 +47,23 @@ public class AssetFinalEnemyLevelOne {
         regions = atlas.findRegions("finalEnemyLevelOneDeath");
         finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions);
         regions.clear();
+
+        // Animation
+        regions = atlas.findRegions("finalEnemyLevelOnePower");
+        finalEnemyLevelOnePowerAnimation = new Animation(1.0f / 30.0f, regions);
+        regions.clear();
     }
 
     public TextureRegion getFinalEnemyLevelOneStand() {
         return finalEnemyLevelOneStand;
+    }
+
+    public TextureRegion getFinalEnemyLevelOnePowerStand() {
+        return finalEnemyLevelOnePowerStand;
+    }
+
+    public TextureRegion getFinalEnemyLevelOneBackground() {
+        return finalEnemyLevelOneBackground;
     }
 
     public Animation getFinalEnemyLevelOneIdleAnimation() {
@@ -62,5 +80,9 @@ public class AssetFinalEnemyLevelOne {
 
     public Animation getFinalEnemyLevelOneDeathAnimation() {
         return finalEnemyLevelOneDeathAnimation;
+    }
+
+    public Animation getFinalEnemyLevelOnePowerAnimation() {
+        return finalEnemyLevelOnePowerAnimation;
     }
 }

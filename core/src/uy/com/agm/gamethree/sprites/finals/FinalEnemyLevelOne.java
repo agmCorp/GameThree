@@ -50,6 +50,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private Animation finalEnemyLevelOneShootAnimation;
     private Animation finalEnemyLevelOneDyingAnimation;
 
+    // Background
+    private Sprite backgroundSprite;
+
     // Power FX
     private PowerState currentPowerState;
     private Animation powerFXAnimation;
@@ -90,15 +93,19 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             currentStateWalking = StateWalking.CEILING_RIGHT;
         }
 
+        // Spider web
+        backgroundSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneBackground());
+        backgroundSprite.setBounds(0, Constants.V_HEIGHT * (Constants.WORLD_SCREENS - 1) / Constants.PPM, Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM);
+
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOnePower().getFinalEnemyLevelOnePowerAnimation();
+        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerAnimation();
         powerFXStateTimer = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOnePower().getFinalEnemyLevelOnePowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
         powerFXSprite.setBounds(getX(), getY(), Constants.FINALLEVELONE_POWER_WIDTH_METERS, Constants.FINALLEVELONE_POWER_HEIGHT_METERS);
@@ -765,6 +772,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     public void draw(Batch batch) {
+        // Draw background
+        backgroundSprite.draw(batch);
+
         // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
