@@ -66,14 +66,22 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
-- tengo un escudo nuevo en gif ahi...
-- agergar la tela de araña como parte del enemigo final 1: definir un sprite y en el draw de
-finalenemylevelone dibujarla al comienzo del todo. La web la meto en dinamicobjects como un dibujo mas.
-Se dibuja en screen.getgamecam().position.x - ancho / 2, idem y con height.
+- Que la pantalla en pausa no detenga la música? en PlayScreen.setPlayScreenStatePaused() pasar un booleano que indique si se detiene o no la musica al pausar.
+- Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
+y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
+----- final
+- Para el final: usar el amigo de la araña, misma idea sale y entra por los costados. Ver como hizo jumper para reaparecer.
 - como enemigo final para el nivel 2 puedo hacer algo que aparezca magicamente por un borde y camine
 derecho (paralelo al edge) a lo ancho y dispare rotando como la araña y se va al cruzar el borde opuesto.
 Luego entra random por otro borde y así. También lo hace desde arriba y desde abajo, o sea, se mueve
 sobre las lineas de un ta te ti.
+- Comprar el esqueleto y como enemigo final puedo hacer que se mueva a puntos random del futrum
+--------
+- Ver si es fácil hacer una animación en scen2d para poner las letras que encontré.
+- Tengo un escudo nuevo en gif ahi...
+- Agergar la tela de araña como parte del enemigo final 1: definir un sprite y en el draw de
+finalenemylevelone dibujarla al comienzo del todo. La web la meto en dinamicobjects como un dibujo mas.
+Se dibuja en screen.getgamecam().position.x - ancho / 2, idem y con height.
 - Las cosas en los demas niveles deberian ser mas rapidas.
 Todos los enemigos reciben el tileObject, entonces una manera seria usar properties al dibujar el nivel con
 sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
@@ -444,6 +452,10 @@ LECCIONES APRENDIDAS
     A static body is a body which isn’t affected by world forces it does not react to collisions. It can’t be moved. Fullstop.
     A kinematic body is an hybrid body which is not affected by forces and collisions like a static body but can moved
     with a linear velocity like a dynamic body.
+
+20)
+   Mi criterio es el siguiente: En los eventos invocados por WorldContactListener solo seteo estados. No toco velocidades ni nada, ni mucho menos toco el box2d.
+   En los update, según el estado es que cambio velocidades, posiciones, box2d, etc. Ese es mi criterio.
 
 IOS
 ---

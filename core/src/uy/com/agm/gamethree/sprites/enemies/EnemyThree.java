@@ -35,7 +35,7 @@ public class EnemyThree extends Enemy {
         // Setbounds is the one that determines the size of the EnemyThree's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYTHREE_WIDTH_METERS, Constants.ENEMYTHREE_HEIGHT_METERS);
 
-        stateTimer = 0;
+        stateTimer = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
         openFireTimer = MathUtils.random(0, Constants.ENEMYTHREE_FIRE_DELAY_SECONDS);
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTHREE_VELOCITY_X, Constants.ENEMYTHREE_VELOCITY_Y);
