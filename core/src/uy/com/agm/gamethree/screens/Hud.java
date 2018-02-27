@@ -406,7 +406,7 @@ public class Hud extends AbstractScreen {
         gotItLabel.setVisible(false);
         quitLabel.setVisible(true);
         showMessage(i18NGameThreeBundle.format("hud.pauseMessage"));
-        screen.setPlayScreenStatePaused();
+        screen.setPlayScreenStatePaused(true);
     }
 
     public void setGameStateRunning() {
@@ -524,7 +524,7 @@ public class Hud extends AbstractScreen {
         gotItLabel.setVisible(true);
         quitLabel.setVisible(false);
         showImage(textureRegion);
-        screen.setPlayScreenStatePaused();
+        screen.setPlayScreenStatePaused(false);
     }
 
     public void hideModalImage() {
