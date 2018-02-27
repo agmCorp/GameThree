@@ -457,6 +457,10 @@ LECCIONES APRENDIDAS
    Mi criterio es el siguiente: En los eventos invocados por WorldContactListener solo seteo estados. No toco velocidades ni nada, ni mucho menos toco el box2d.
    En los update, según el estado es que cambio velocidades, posiciones, box2d, etc. Ese es mi criterio.
 
+21)
+   Con setBound defino su tamaño y luego, si quiero, son setPosition su posición. Esta ultima tiene sentido llamarla si deseo cambiar la posición del sprite, por ejemplo,
+   para alinearla con su box2d después de la simulación física.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
