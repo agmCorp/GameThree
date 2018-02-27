@@ -66,9 +66,14 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
+- tengo un escudo nuevo en gif ahi...
+- agergar la tela de araña como parte del enemigo final 1: definir un sprite y en el draw de
+finalenemylevelone dibujarla al comienzo del todo. La web la meto en dinamicobjects como un dibujo mas.
+Se dibuja en screen.getgamecam().position.x - ancho / 2, idem y con height.
 - como enemigo final para el nivel 2 puedo hacer algo que aparezca magicamente por un borde y camine
 derecho (paralelo al edge) a lo ancho y dispare rotando como la araña y se va al cruzar el borde opuesto.
-Luego entra por otro borde y así.
+Luego entra random por otro borde y así. También lo hace desde arriba y desde abajo, o sea, se mueve
+sobre las lineas de un ta te ti.
 - Las cosas en los demas niveles deberian ser mas rapidas.
 Todos los enemigos reciben el tileObject, entonces una manera seria usar properties al dibujar el nivel con
 sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
