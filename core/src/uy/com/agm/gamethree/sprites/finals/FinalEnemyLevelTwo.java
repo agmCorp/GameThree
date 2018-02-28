@@ -323,6 +323,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         tmp.set(getX(), getY());
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
         velocity.set(tmp);
+
+        // creo que aca iria el evaluateMovementDirection o en tal caso, la rotacion magica para llegar al punto.
     }
 
     private boolean reachX() {
