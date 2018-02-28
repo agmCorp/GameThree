@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -45,6 +46,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private Animation finalEnemyLevelTwoShootAnimation;
     private Animation finalEnemyLevelTwoDyingAnimation;
 
+    private float b2bodyTargetX;
+    private float b2bodyTargetY;
+
     // Power FX
     private PowerState currentPowerState;
     private Animation powerFXAnimation;
@@ -78,10 +82,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Initial movement (left or right)
-        int direction = MathUtils.randomSign();
-        velocity.set(direction * Constants.FINALLEVELTWO_LINEAR_VELOCITY, 0);
-        currentStateWalking = StateWalking.MOVING_LEFT_RIGHT;
+        // Move to a point on the screen at constant speed
+        moveToNewTarget();
+        currentStateWalking = evaluateMovementDirection();
 
         // -------------------- PowerFX --------------------
 
@@ -208,6 +211,11 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
     @Override
     public void updateLogic(float dt) {
+        Gdx.app.debug(TAG, "***** currentStateFinalEnemy " + currentStateFinalEnemy);
+        Gdx.app.debug(TAG, "***** currentStateWalking " + currentStateWalking);
+        Gdx.app.debug(TAG, "***** b2bodyTargetX " + b2bodyTargetX);
+        Gdx.app.debug(TAG, "***** b2bodyTargetY " + b2bodyTargetY);
+
         switch (currentStateFinalEnemy) {
             case WALKING:
                 stateWalking(dt);
@@ -252,9 +260,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         }
     }
 
-    // TODO, ACA VA LA BOSTA
     private void stateWalking(float dt) {
-        // Set velocity because It could have been changed (see onHitWall)
+        // Set velocity because It could have been changed
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -265,105 +272,71 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelTwoMovingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        stateFinalEnemyTimer += dt;
-//
-//        // Depending on the direction, we set the angle and the flip
-//        switch (currentStateWalking) {
-//            case CEILING_LEFT:
-//                setRotation(0);
-//                setFlip(false, true);
-//                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-//                break;
-//            case CEILING_RIGHT:
-//                setRotation(0);
-//                setFlip(true, true);
-//                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-//                break;
-//            case LEFT_DOWN:
-//                setRotation(90);
-//                setFlip(false, true);
-//                velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                break;
-//            case LEFT_UP:
-//                setRotation(90);
-//                setFlip(true, true);
-//                velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                break;
-//            case RIGHT_DOWN:
-//                setRotation(90);
-//                setFlip(false, false);
-//                velocity.set(0, -Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                break;
-//            case RIGHT_UP:
-//                setRotation(90);
-//                setFlip(true, false);
-//                velocity.set(0, Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                break;
-//            case FLOOR_LEFT:
-//                setRotation(0);
-//                setFlip(false, false);
-//                velocity.set(-Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-//                break;
-//            case FLOOR_RIGHT:
-//                setRotation(0);
-//                setFlip(true, false);
-//                velocity.set(Constants.FINALLEVELONE_LINEAR_VELOCITY, 0);
-//                break;
-//            case SLASH_DOWN:
-//                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
-//                // But it does the trick
-//                setRotation(45);
-//                setFlip(false, false);
-//                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-//                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 +
-//                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
-//                                screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2,
-//                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                velocity.set(tmp);
-//                break;
-//            case SLASH_UP:
-//                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
-//                // But it does the trick
-//                setRotation(45);
-//                setFlip(true, true);
-//                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-//                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 -
-//                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
-//                                screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2,
-//                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                velocity.set(tmp);
-//                break;
-//            case BACKSLASH_DOWN:
-//                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
-//                // But it does the trick
-//                setRotation(135);
-//                setFlip(false, false);
-//                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-//                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Constants.EDGE_WIDTH_METERS / 2 -
-//                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
-//                                screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2,
-//                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                velocity.set(tmp);
-//                break;
-//            case BACKSLASH_UP:
-//                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
-//                // But it does the trick
-//                setRotation(135);
-//                setFlip(true, true);
-//                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-//                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Constants.EDGE_WIDTH_METERS / 2 +
-//                                Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS / 2,
-//                                screen.getUpperEdge().getB2body().getPosition().y - Constants.EDGE_HEIGHT_METERS / 2,
-//                                Constants.FINALLEVELONE_LINEAR_VELOCITY);
-//                velocity.set(tmp);
-//                break;
-//        }
-//
 
+        // todo poner un comentario. Aca los estados previos como disparar rotaron la cuestion, yo la desroto mierda carajo.
+        setRotation(0);
+        setFlip(false, false);
+        switch (currentStateWalking) {
+            case MOVING_UP:
+                setRegion((TextureRegion) finalEnemyLevelTwoMovingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+                break;
+            case MOVING_DOWN:
+                setRegion((TextureRegion) finalEnemyLevelTwoMovingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+                break;
+            case MOVING_LEFT_RIGHT:
+                setRegion((TextureRegion) finalEnemyLevelTwoMovingLeftRightAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+                break;
+            default:
+                break;
+        }
+        stateFinalEnemyTimer += dt;
+
+        if (reachTarget()) {
+            moveToNewTarget();
+        }
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
+    }
+
+    private StateWalking evaluateMovementDirection() {
+        StateWalking currentStateWalking;
+        float vy = b2body.getLinearVelocity().y;
+
+        if (vy > 0.0f) {
+            currentStateWalking = StateWalking.MOVING_UP;
+        } else {
+            if (vy < 0.0f) {
+                currentStateWalking = StateWalking.MOVING_DOWN;
+            } else { // vy == 0
+                currentStateWalking = StateWalking.MOVING_LEFT_RIGHT;
+            }
+        }
+        return currentStateWalking;
+    }
+
+    // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
+    private void moveToNewTarget() {
+        b2bodyTargetX = MathUtils.random(1.0f, 3.8f); //todo
+        b2bodyTargetY = MathUtils.random(73.0f, 79.0f); //todo
+
+        tmp.set(getX(), getY());
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
+        velocity.set(tmp);
+    }
+
+    private boolean reachX() {
+        return (b2body.getLinearVelocity().x > 0 && b2body.getPosition().x >= b2bodyTargetX) ||
+                (b2body.getLinearVelocity().x <= 0) && (b2body.getPosition().x <= b2bodyTargetX);
+    }
+
+    private boolean reachY() {
+        return (b2body.getLinearVelocity().y > 0 && b2body.getPosition().y >= b2bodyTargetY) ||
+                (b2body.getLinearVelocity().y <= 0) && (b2body.getPosition().y <= b2bodyTargetY);
+    }
+
+    private boolean reachTarget() {
+        return reachX() && reachY();
     }
 
     private void stateIdle(float dt) {
