@@ -113,7 +113,11 @@ Ejemplo: hero y todas las que usan "stand". El asset manager es para cargar las 
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - incluir highscores
 - agregar transitions
-- agregar credits con cuenta bancaria para donación
+- agregar credits con cuenta bancaria para donación, algo asi:
+support this game:
+(icono corazón) Support the developer by paying above the minimum price
++$1.00 +$2.00 +$5.00 +$10.00
+Pay with paypal, pay with card bitcoin
 - Inventar una etiqueta random en las powerbox para generar poder random (por ejemplo, para la box del enemigo final).
 Debe ser un random configurable (para el set de poderes que quiera).
 - averiguar como debuguear
