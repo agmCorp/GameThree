@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -28,11 +30,6 @@ import uy.com.agm.gamethree.tools.actordef.ActorDef;
 public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final String TAG = FinalEnemyLevelTwo.class.getName();
 
-    private enum StateWalking {
-        MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT
-    }
-
-    private StateWalking currentStateWalking;
     private int damage;
     private float stateFinalEnemyTimer;
     private float timeToChangeTimer;
@@ -46,8 +43,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private Animation finalEnemyLevelTwoShootAnimation;
     private Animation finalEnemyLevelTwoDyingAnimation;
 
-    private float b2bodyTargetX;
-    private float b2bodyTargetY;
+    // Circle on the screen where FinalEnemyLevelTwo must go
+    private Circle target;
 
     // Power FX
     private PowerState currentPowerState;
@@ -82,9 +79,11 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Move to a point on the screen at constant speed
+        // Initialize target
+        target = new Circle(0, 0, Constants.FINALLEVELTWO_TARGET_RADIUS_METERS);
+
+        // Move to a new target at constant speed
         moveToNewTarget();
-        //currentStateWalking = evaluateMovementDirection(); todo
 
         // -------------------- PowerFX --------------------
 
@@ -211,16 +210,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
     @Override
     public void updateLogic(float dt) {
-        Gdx.app.debug(TAG, "***** currentStateFinalEnemy " + currentStateFinalEnemy);
-        Gdx.app.debug(TAG, "***** currentStateWalking " + currentStateWalking);
-        Gdx.app.debug(TAG, "***** b2bodyTargetX " + b2bodyTargetX);
-        Gdx.app.debug(TAG, "***** b2bodyTargetY " + b2bodyTargetY);
-        Gdx.app.debug(TAG, "***** positionX " + b2body.getPosition().x);
-        Gdx.app.debug(TAG, "***** positionY " + b2body.getPosition().y);
-        Gdx.app.debug(TAG, "*** calculo dist " + b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY));
-        Gdx.app.debug(TAG, "*** velocityX " + b2body.getLinearVelocity().x);
-        Gdx.app.debug(TAG, "*** velocityY " + b2body.getLinearVelocity().y);
-
         switch (currentStateFinalEnemy) {
             case WALKING:
                 stateWalking(dt);
@@ -266,39 +255,22 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     private void stateWalking(float dt) {
-        // Set velocity because It could have been changed
+        // Set velocity calculated to reach the target circle
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // todo poner un comentario. Aca los estados previos como disparar rotaron la cuestion, yo la desroto mierda carajo.
-        // setRotation(targetAngle); // todo
-        //setFlip(false, false);
-
+        // Depending on the velocity, set the sprite's rotation angle
         setRotationAngle();
-        currentStateWalking = evaluateMovementDirection();
 
-        switch (currentStateWalking) {
-            case MOVING_UP:
-                setRegion((TextureRegion) finalEnemyLevelTwoMovingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-                break;
-            case MOVING_DOWN:
-                setRegion((TextureRegion) finalEnemyLevelTwoMovingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-                break;
-            case MOVING_LEFT_RIGHT:
-                setRegion((TextureRegion) finalEnemyLevelTwoMovingLeftRightAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-                break;
-            default:
-                break;
-        }
-        stateFinalEnemyTimer += dt;
+        // Depending on the velocity, set the appropriate sprite animation
+        setAnimation(dt);
 
         if (reachTarget()) {
             moveToNewTarget();
@@ -308,31 +280,13 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         currentStateFinalEnemy = getNewRandomState(dt);
     }
 
-    private StateWalking evaluateMovementDirection() {
-        StateWalking currentStateWalking;
-        float vy = b2body.getLinearVelocity().y;
-
-        if (vy > 0.0f) {
-            currentStateWalking = StateWalking.MOVING_UP;
-        } else {
-            if (vy < 0.0f) {
-                currentStateWalking = StateWalking.MOVING_DOWN;
-            } else { // vy == 0
-                currentStateWalking = StateWalking.MOVING_LEFT_RIGHT;
-            }
-        }
-        return currentStateWalking;
-    }
-
-    // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
+    // Move to target
     private void moveToNewTarget() {
-        b2bodyTargetX = MathUtils.random(1.0f, 3.8f); //todo
-        b2bodyTargetY = MathUtils.random(73.0f, 79.0f); //todo
+        target.setPosition(MathUtils.random(1.0f, 3.8f), MathUtils.random(73.0f, 79.0f)); // todo
 
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, target.x, target.y, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
         velocity.set(tmp);
-        // creo que aca iria el evaluateMovementDirection o en tal caso, la rotacion magica para llegar al punto.
     }
 
     private void setRotationAngle() {
@@ -346,20 +300,22 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         }
     }
 
-    private boolean reachX() {
-        return (b2body.getLinearVelocity().x > 0 && b2body.getPosition().x >= b2bodyTargetX) ||
-                (b2body.getLinearVelocity().x <= 0) && (b2body.getPosition().x <= b2bodyTargetX);
-    }
-
-    private boolean reachY() {
-        return (b2body.getLinearVelocity().y > 0 && b2body.getPosition().y >= b2bodyTargetY) ||
-                (b2body.getLinearVelocity().y <= 0) && (b2body.getPosition().y <= b2bodyTargetY);
+    private void setAnimation(float dt) {
+        float vy = b2body.getLinearVelocity().y;
+        if (vy > 0.0f) {
+            setRegion((TextureRegion) finalEnemyLevelTwoMovingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        } else {
+            if (vy < 0.0f) {
+                setRegion((TextureRegion) finalEnemyLevelTwoMovingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            } else { // vy == 0
+                setRegion((TextureRegion) finalEnemyLevelTwoMovingLeftRightAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            }
+        }
+        stateFinalEnemyTimer += dt;
     }
 
     private boolean reachTarget() {
-//        Gdx.app.debug(TAG, "*** DISTANCIA " + b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY));
-        return b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY) <= 0.6f; // radius?
-       // return reachX() && reachY();
+        return target.contains(b2body.getPosition().x, b2body.getPosition().y);
     }
 
     private void stateIdle(float dt) {
@@ -616,5 +572,11 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         } else {
             drawExplosion(batch);
         }
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(target.x, target.y, target.radius);
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 }
