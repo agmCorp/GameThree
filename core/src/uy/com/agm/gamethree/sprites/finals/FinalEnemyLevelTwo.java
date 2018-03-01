@@ -358,7 +358,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
     private boolean reachTarget() {
 //        Gdx.app.debug(TAG, "*** DISTANCIA " + b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY));
-        return b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY) <= 0.1f;
+        return b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY) <= 0.6f; // radius?
        // return reachX() && reachY();
     }
 

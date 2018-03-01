@@ -360,7 +360,7 @@ public class Constants {
     public static final int FINALLEVELTWO_MAX_DAMAGE = 10;
     public static final float FINALLEVELTWO_CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     public static final float FINALLEVELTWO_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
-    public static final float FINALLEVELTWO_IDLE_STATE_TIME_SECONDS = 5.0f;
+    public static final float FINALLEVELTWO_IDLE_STATE_TIME_SECONDS = 1.0f;
     public static final float FINALLEVELTWO_FIRE_DELAY_SECONDS = 0.7f;
     public static final int FINALLEVELTWO_SCORE = 500;
 
