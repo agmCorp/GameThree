@@ -375,28 +375,32 @@ b2body.setFixedRotation(true); // todo
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         //setRegion((TextureRegion) finalEnemyLevelTwoShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-
-        // // TODO: 1/3/2018
-        float vy = b2body.getLinearVelocity().y;
-        if (vy > 0.0f) {
-            setRegion((TextureRegion) finalEnemyLevelTwoShootingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        } else {
-            if (vy < 0.0f) {
-                setRegion((TextureRegion) finalEnemyLevelTwoShootingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-            } else { // vy == 0
-                setRegion((TextureRegion) finalEnemyLevelTwoShootingLeftRightAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-            }
-        }
-        stateFinalEnemyTimer += dt;
-        // fin
-
-        stateFinalEnemyTimer += dt;
+        //stateFinalEnemyTimer += dt;
 
         // Calculate shooting angle
         float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
                 .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
-        setRotation(angle);
-        setFlip(true, true);
+
+        Gdx.app.debug(TAG, "*** ANGLE " + angle);
+
+
+        // // TODO: 1/3/2018
+        setRotation(90.0f);
+        if (0 <= angle && angle <= 180.0f) {
+            setRegion((TextureRegion) finalEnemyLevelTwoShootingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            setRotation(270.0f);
+        } else {
+            setRegion((TextureRegion) finalEnemyLevelTwoShootingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        }
+        rotate(angle);
+        stateFinalEnemyTimer += dt;
+        // fin
+
+
+
+        //setRotation(angle + 90);
+        //setFlip(true, true);
+
 
         // If is time to shoot we open fire
         if (openFireTimer >= Constants.FINALLEVELTWO_FIRE_DELAY_SECONDS) {

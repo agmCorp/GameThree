@@ -51,17 +51,17 @@ public class AssetFinalEnemyLevelTwo {
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("ShootingUp");
+        regions = atlas.findRegions("SlashingUp");
         finalEnemyLevelTwoShootingUpAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("ShootingDown");
+        regions = atlas.findRegions("SlashingDown");
         finalEnemyLevelTwoShootingDownAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("ShootingDown");
+        regions = atlas.findRegions("SlashingDown");
         finalEnemyLevelTwoShootingLeftRightAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
