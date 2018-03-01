@@ -40,11 +40,14 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private Animation finalEnemyLevelTwoMovingDownAnimation;
     private Animation finalEnemyLevelTwoMovingLeftRightAnimation;
     private Animation finalEnemyLevelTwoIdleAnimation;
-    private Animation finalEnemyLevelTwoShootAnimation;
+    private Animation finalEnemyLevelTwoShootingUpAnimation;
+    private Animation finalEnemyLevelTwoShootingDownAnimation;
+    private Animation finalEnemyLevelTwoShootingLeftRightAnimation;
     private Animation finalEnemyLevelTwoDyingAnimation;
 
     // Circle on the screen where FinalEnemyLevelTwo must go
     private Circle target;
+    private Circle tmpCircle; // Temp GC friendly circle
 
     // Power FX
     private PowerState currentPowerState;
@@ -65,7 +68,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         finalEnemyLevelTwoMovingDownAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingDownAnimation();
         finalEnemyLevelTwoMovingLeftRightAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingLeftRightAnimation();
         finalEnemyLevelTwoIdleAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoIdleAnimation();
-        finalEnemyLevelTwoShootAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootAnimation();
+        finalEnemyLevelTwoShootingUpAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootingUpAnimation();
+        finalEnemyLevelTwoShootingDownAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootingDownAnimation();
+        finalEnemyLevelTwoShootingLeftRightAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootingLeftRightAnimation();
         finalEnemyLevelTwoDyingAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoDeathAnimation();
 
         // FinalEnemyLevelTwo variables initialization
@@ -81,6 +86,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
         // Initialize target
         target = new Circle(0, 0, Constants.FINALLEVELTWO_TARGET_RADIUS_METERS);
+
+        // Temp GC friendly circle
+        tmpCircle = new Circle();
 
         // Move to a new target at constant speed
         moveToNewTarget();
@@ -126,6 +134,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+b2body.setFixedRotation(true); // todo
+
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -282,7 +292,12 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
     // Move to target
     private void moveToNewTarget() {
-        target.setPosition(MathUtils.random(1.0f, 3.8f), MathUtils.random(73.0f, 79.0f)); // todo
+        float xMin = 0;
+        float xMax = Constants.V_WIDTH / Constants.PPM;
+        float yMin = Constants.V_HEIGHT * (Constants.WORLD_SCREENS - 1) / Constants.PPM;
+        float yMax = Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM;
+        target.setPosition(MathUtils.random(xMin + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS, xMax - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS),
+                MathUtils.random(yMin + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS, yMax - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS));
 
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, target.x, target.y, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
@@ -315,7 +330,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     private boolean reachTarget() {
-        return target.contains(b2body.getPosition().x, b2body.getPosition().y);
+        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
+        return target.overlaps(tmpCircle);
     }
 
     private void stateIdle(float dt) {
@@ -358,7 +374,22 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelTwoShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        //setRegion((TextureRegion) finalEnemyLevelTwoShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+
+        // // TODO: 1/3/2018
+        float vy = b2body.getLinearVelocity().y;
+        if (vy > 0.0f) {
+            setRegion((TextureRegion) finalEnemyLevelTwoShootingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+        } else {
+            if (vy < 0.0f) {
+                setRegion((TextureRegion) finalEnemyLevelTwoShootingDownAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            } else { // vy == 0
+                setRegion((TextureRegion) finalEnemyLevelTwoShootingLeftRightAnimation.getKeyFrame(stateFinalEnemyTimer, true));
+            }
+        }
+        stateFinalEnemyTimer += dt;
+        // fin
+
         stateFinalEnemyTimer += dt;
 
         // Calculate shooting angle
