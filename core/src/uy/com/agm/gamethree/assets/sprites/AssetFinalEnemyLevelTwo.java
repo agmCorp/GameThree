@@ -20,7 +20,7 @@ public class AssetFinalEnemyLevelTwo {
     private Animation finalEnemyLevelTwoMovingUpAnimation;
     private Animation finalEnemyLevelTwoMovingDownAnimation;
     private Animation finalEnemyLevelTwoMovingLeftRightAnimation;
-    private Animation finalEnemyLevelTwoShootAnimation;
+    private Animation finalEnemyLevelTwoShootAnimation; // todo deberia ser shootup y down y left y right
     private Animation finalEnemyLevelTwoDeathAnimation;
     private Animation finalEnemyLevelTwoPowerAnimation;
 

@@ -84,7 +84,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
         // Move to a point on the screen at constant speed
         moveToNewTarget();
-        currentStateWalking = evaluateMovementDirection();
+        //currentStateWalking = evaluateMovementDirection(); todo
 
         // -------------------- PowerFX --------------------
 
@@ -215,6 +215,11 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         Gdx.app.debug(TAG, "***** currentStateWalking " + currentStateWalking);
         Gdx.app.debug(TAG, "***** b2bodyTargetX " + b2bodyTargetX);
         Gdx.app.debug(TAG, "***** b2bodyTargetY " + b2bodyTargetY);
+        Gdx.app.debug(TAG, "***** positionX " + b2body.getPosition().x);
+        Gdx.app.debug(TAG, "***** positionY " + b2body.getPosition().y);
+        Gdx.app.debug(TAG, "*** calculo dist " + b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY));
+        Gdx.app.debug(TAG, "*** velocityX " + b2body.getLinearVelocity().x);
+        Gdx.app.debug(TAG, "*** velocityY " + b2body.getLinearVelocity().y);
 
         switch (currentStateFinalEnemy) {
             case WALKING:
@@ -274,8 +279,12 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         // todo poner un comentario. Aca los estados previos como disparar rotaron la cuestion, yo la desroto mierda carajo.
-        setRotation(0);
-        setFlip(false, false);
+        // setRotation(targetAngle); // todo
+        //setFlip(false, false);
+
+        setRotationAngle();
+        currentStateWalking = evaluateMovementDirection();
+
         switch (currentStateWalking) {
             case MOVING_UP:
                 setRegion((TextureRegion) finalEnemyLevelTwoMovingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
@@ -320,11 +329,21 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         b2bodyTargetX = MathUtils.random(1.0f, 3.8f); //todo
         b2bodyTargetY = MathUtils.random(73.0f, 79.0f); //todo
 
-        tmp.set(getX(), getY());
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
         velocity.set(tmp);
-
         // creo que aca iria el evaluateMovementDirection o en tal caso, la rotacion magica para llegar al punto.
+    }
+
+    private void setRotationAngle() {
+        if (b2body.getLinearVelocity().len() > 0.0f) {
+            setRotation(90.0f);
+            float velAngle = this.b2body.getLinearVelocity().angle();
+            if (0 <= velAngle && velAngle <= 180.0f) {
+                setRotation(270.0f);
+            }
+            rotate(velAngle);
+        }
     }
 
     private boolean reachX() {
@@ -338,7 +357,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     private boolean reachTarget() {
-        return reachX() && reachY();
+//        Gdx.app.debug(TAG, "*** DISTANCIA " + b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY));
+        return b2body.getPosition().dst(b2bodyTargetX, b2bodyTargetY) <= 0.1f;
+       // return reachX() && reachY();
     }
 
     private void stateIdle(float dt) {
