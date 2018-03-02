@@ -27,51 +27,51 @@ public class AssetFinalEnemyLevelTwo {
     public AssetFinalEnemyLevelTwo(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        finalEnemyLevelTwoStand = atlas.findRegion("finalEnemyLevelOneIdle", 1);
+        finalEnemyLevelTwoStand = atlas.findRegion("finalEnemyLevelTwoIdle", 1);
         finalEnemyLevelTwoPowerStand = atlas.findRegion("finalEnemyLevelOnePower", 1);
 
         // Animation
-        regions = atlas.findRegions("finalEnemyLevelOneIdle");
-        finalEnemyLevelTwoIdleAnimation = new Animation(0.4f / 9.0f, regions);
+        regions = atlas.findRegions("finalEnemyLevelTwoIdle");
+        finalEnemyLevelTwoIdleAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("heroUp");
+        regions = atlas.findRegions("finalEnemyLevelTwoUp");
         finalEnemyLevelTwoMovingUpAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("heroDown");
+        regions = atlas.findRegions("finalEnemyLevelTwoDown");
         finalEnemyLevelTwoMovingDownAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("heroUp");
+        regions = atlas.findRegions("finalEnemyLevelTwoUp");
         finalEnemyLevelTwoMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("SlashingUp");
+        regions = atlas.findRegions("finalEnemyLevelTwoSlashingUp");
         finalEnemyLevelTwoShootingUpAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("SlashingDown");
+        regions = atlas.findRegions("finalEnemyLevelTwoSlashingDown");
         finalEnemyLevelTwoShootingDownAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("SlashingDown");
-        finalEnemyLevelTwoShootingLeftRightAnimation = new Animation(0.5f / 18.0f, regions);
+        regions = atlas.findRegions("finalEnemyLevelTwoSlashingDown");
+        finalEnemyLevelTwoShootingLeftRightAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("heroDead");
+        regions = atlas.findRegions("finalEnemyLevelTwoDead");
         finalEnemyLevelTwoDeathAnimation = new Animation(0.5f / 12.0f, regions);
         regions.clear();
 
         // Animation
-        regions = atlas.findRegions("finalEnemyLevelOnePower");
+        regions = atlas.findRegions("finalEnemyLevelTwoPower");
         finalEnemyLevelTwoPowerAnimation = new Animation(1.0f / 30.0f, regions);
         regions.clear();
     }

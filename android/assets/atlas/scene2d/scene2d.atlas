@@ -6,7 +6,7 @@ filter: Nearest,Nearest
 repeat: none
 helpColOne
   rotate: false
-  xy: 204, 12
+  xy: 703, 412
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
@@ -90,7 +90,7 @@ helpPowerThree
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 703, 412
+  xy: 204, 12
   size: 200, 200
   orig: 200, 200
   offset: 0, 0

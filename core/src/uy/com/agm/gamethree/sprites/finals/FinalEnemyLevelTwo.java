@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.finals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -338,14 +337,11 @@ b2body.setFixedRotation(true); // todo
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
-        // Preserve the flip and rotation state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
+        // Preserve the rotation state
         float rotation = getRotation();
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -354,8 +350,7 @@ b2body.setFixedRotation(true); // todo
         setRegion((TextureRegion) finalEnemyLevelTwoIdleAnimation.getKeyFrame(stateFinalEnemyTimer, true));
         stateFinalEnemyTimer += dt;
 
-        // Apply previous flip and rotation state
-        setFlip(isFlipX, isFlipY);
+        // Apply previous rotation state
         setRotation(rotation);
 
         // New random state
@@ -368,23 +363,17 @@ b2body.setFixedRotation(true); // todo
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        //setRegion((TextureRegion) finalEnemyLevelTwoShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        //stateFinalEnemyTimer += dt;
 
         // Calculate shooting angle
         float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
                 .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
 
-        Gdx.app.debug(TAG, "*** ANGLE " + angle);
-
-
-        // // TODO: 1/3/2018
+        // Depending on the angle, set the sprite's rotation angle and animation
         setRotation(90.0f);
         if (0 <= angle && angle <= 180.0f) {
             setRegion((TextureRegion) finalEnemyLevelTwoShootingUpAnimation.getKeyFrame(stateFinalEnemyTimer, true));
@@ -394,13 +383,6 @@ b2body.setFixedRotation(true); // todo
         }
         rotate(angle);
         stateFinalEnemyTimer += dt;
-        // fin
-
-
-
-        //setRotation(angle + 90);
-        //setFlip(true, true);
-
 
         // If is time to shoot we open fire
         if (openFireTimer >= Constants.FINALLEVELTWO_FIRE_DELAY_SECONDS) {
@@ -449,16 +431,13 @@ b2body.setFixedRotation(true); // todo
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
         } else {
-            // Preserve the flip and rotation state
-            boolean isFlipX = isFlipX();
-            boolean isFlipY = isFlipY();
+            // Preserve the rotation state
             float rotation = getRotation();
 
             setRegion((TextureRegion) finalEnemyLevelTwoDyingAnimation.getKeyFrame(stateFinalEnemyTimer, true));
             stateFinalEnemyTimer += dt;
 
-            // Apply previous flip and rotation state
-            setFlip(isFlipX, isFlipY);
+            // Apply previous rotation state
             setRotation(rotation);
         }
     }
@@ -475,9 +454,8 @@ b2body.setFixedRotation(true); // todo
            explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTimer, true));
            explosionFXStateTimer += dt;
 
-           // Apply rotation and flip of the main character
+           // Apply rotation of the main character
            explosionFXSprite.setRotation(getRotation());
-           explosionFXSprite.setFlip(isFlipX(), isFlipY());
 
            // Get center of main character bounding rectangle
            getBoundingRectangle().getCenter(tmp);
@@ -498,9 +476,8 @@ b2body.setFixedRotation(true); // todo
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
             powerFXStateTimer += dt;
 
-            // Apply rotation and flip of the main character
+            // Apply rotation of the main character
             powerFXSprite.setRotation(getRotation());
-            powerFXSprite.setFlip(isFlipX(), isFlipY());
 
             // Update our Sprite to correspond with the position of our finalEnemyLevelTwo's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);

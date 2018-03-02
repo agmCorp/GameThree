@@ -22,7 +22,7 @@ public class AssetGhostMode {
 
         // Animation
         regions = atlas.findRegions("ghostMode");
-        ghostModeAnimation = new Animation(1.0f / 20.0f, regions);
+        ghostModeAnimation = new Animation(1.0f / 25.0f, regions);
         regions.clear();
     }
 
