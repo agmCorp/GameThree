@@ -34,6 +34,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private float changeTime;
     private float timeToChange;
     private float openFireTime;
+    private float agonyTime;
 
     private Animation finalEnemyLevelTwoMovingUpAnimation;
     private Animation finalEnemyLevelTwoMovingDownAnimation;
@@ -79,6 +80,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         openFireTime = Constants.FINALLEVELTWO_FIRE_DELAY_SECONDS;
+        agonyTime = 0;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -419,7 +421,8 @@ b2body.setFixedRotation(true); // todo
     }
 
     private void stateDying(float dt) {
-        if (finalEnemyLevelTwoDyingAnimation.isAnimationFinished(stateFinalEnemyTime)) {
+        agonyTime += dt;
+        if (agonyTime >= Constants.FINALLEVELTWO_DYING_STATE_TIME_SECONDS) {
             // Exploding animation
             explosionFXStateTime = 0;
 
