@@ -349,7 +349,7 @@ public class Constants {
     public static final int FINALLEVELONE_SCORE = 500;
 
     // FinalEnemyLevelTwo (meters = pixels * resizeFactor / PPM)
-    public static final String FINALLEVELTWO_NAME = "SKULLY";
+    public static final String FINALLEVELTWO_NAME = "SKULLYHOOD";
     public static final float FINALLEVELTWO_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELTWO_TARGET_RADIUS_METERS = 30.0f / PPM;
     public static final float FINALLEVELTWO_LINEAR_VELOCITY = 5.0f;
