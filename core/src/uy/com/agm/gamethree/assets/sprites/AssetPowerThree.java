@@ -22,7 +22,7 @@ public class AssetPowerThree {
 
         // Animation
         regions = atlas.findRegions("powerThree");
-        powerThreeAnimation = new Animation(0.5f / 17.0f, regions);
+        powerThreeAnimation = new Animation(0.5f / 17.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

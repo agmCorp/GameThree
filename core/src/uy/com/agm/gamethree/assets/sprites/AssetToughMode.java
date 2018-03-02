@@ -22,7 +22,7 @@ public class AssetToughMode {
 
         // Animation
         regions = atlas.findRegions("toughMode");
-        toughModeAnimation = new Animation(0.5f / 20.0f, regions);
+        toughModeAnimation = new Animation(0.5f / 20.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

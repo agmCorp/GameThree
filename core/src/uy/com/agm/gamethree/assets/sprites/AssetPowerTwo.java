@@ -22,7 +22,7 @@ public class AssetPowerTwo {
 
         // Animation
         regions = atlas.findRegions("powerTwo");
-        powerTwoAnimation = new Animation(1.5f / 31.0f, regions);
+        powerTwoAnimation = new Animation(1.5f / 31.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

@@ -22,7 +22,7 @@ public class AssetPowerFour {
 
         // Animation
         regions = atlas.findRegions("powerFour");
-        powerFourAnimation = new Animation(0.5f / 20.0f, regions);
+        powerFourAnimation = new Animation(0.5f / 20.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

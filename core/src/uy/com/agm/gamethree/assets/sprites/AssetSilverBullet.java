@@ -26,12 +26,12 @@ public class AssetSilverBullet {
 
         // Animation
         regions = atlas.findRegions("shuriken");
-        silverBulletAnimation = new Animation(0.5f / 13.0f, regions);
+        silverBulletAnimation = new Animation(0.5f / 13.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("colSilverBullet");
-        colSilverBulletAnimation = new Animation(0.5f / 25.0f, regions);
+        colSilverBulletAnimation = new Animation(0.5f / 25.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

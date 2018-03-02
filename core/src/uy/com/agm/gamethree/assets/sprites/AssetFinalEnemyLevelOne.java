@@ -30,27 +30,27 @@ public class AssetFinalEnemyLevelOne {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneIdle");
-        finalEnemyLevelOneIdleAnimation = new Animation(0.4f / 9.0f, regions);
+        finalEnemyLevelOneIdleAnimation = new Animation(0.4f / 9.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneWalk");
-        finalEnemyLevelOneWalkAnimation = new Animation(0.7f / 17.0f, regions);
+        finalEnemyLevelOneWalkAnimation = new Animation(0.7f / 17.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneShoot");
-        finalEnemyLevelOneShootAnimation = new Animation(0.5f / 13.0f, regions);
+        finalEnemyLevelOneShootAnimation = new Animation(0.5f / 13.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneDeath");
-        finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions);
+        finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOnePower");
-        finalEnemyLevelOnePowerAnimation = new Animation(1.0f / 30.0f, regions);
+        finalEnemyLevelOnePowerAnimation = new Animation(1.0f / 30.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

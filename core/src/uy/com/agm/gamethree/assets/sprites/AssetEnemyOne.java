@@ -22,7 +22,7 @@ public class AssetEnemyOne {
 
         // Animation
         regions = atlas.findRegions("enemyOne");
-        enemyOneAnimation = new Animation(0.5f / 8.0f, regions);
+        enemyOneAnimation = new Animation(0.5f / 8.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

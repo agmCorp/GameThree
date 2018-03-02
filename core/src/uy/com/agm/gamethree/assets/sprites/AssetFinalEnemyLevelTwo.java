@@ -32,47 +32,47 @@ public class AssetFinalEnemyLevelTwo {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoIdle");
-        finalEnemyLevelTwoIdleAnimation = new Animation(0.5f / 12.0f, regions);
+        finalEnemyLevelTwoIdleAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoUp");
-        finalEnemyLevelTwoMovingUpAnimation = new Animation(0.5f / 18.0f, regions);
+        finalEnemyLevelTwoMovingUpAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoDown");
-        finalEnemyLevelTwoMovingDownAnimation = new Animation(0.5f / 18.0f, regions);
+        finalEnemyLevelTwoMovingDownAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoUp");
-        finalEnemyLevelTwoMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions);
+        finalEnemyLevelTwoMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoSlashingUp");
-        finalEnemyLevelTwoShootingUpAnimation = new Animation(0.5f / 12.0f, regions);
+        finalEnemyLevelTwoShootingUpAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoSlashingDown");
-        finalEnemyLevelTwoShootingDownAnimation = new Animation(0.5f / 12.0f, regions);
+        finalEnemyLevelTwoShootingDownAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoSlashingDown");
-        finalEnemyLevelTwoShootingLeftRightAnimation = new Animation(0.5f / 12.0f, regions);
+        finalEnemyLevelTwoShootingLeftRightAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoDead");
-        finalEnemyLevelTwoDeathAnimation = new Animation(0.5f / 12.0f, regions);
+        finalEnemyLevelTwoDeathAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoPower");
-        finalEnemyLevelTwoPowerAnimation = new Animation(0.5f / 24.0f, regions);
+        finalEnemyLevelTwoPowerAnimation = new Animation(0.5f / 24.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

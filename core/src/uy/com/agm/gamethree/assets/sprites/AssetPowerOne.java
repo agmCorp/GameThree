@@ -22,7 +22,7 @@ public class AssetPowerOne {
 
         // Animation
         regions = atlas.findRegions("powerOne");
-        powerOneAnimation = new Animation(1.0f / 16.0f, regions);
+        powerOneAnimation = new Animation(1.0f / 16.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
