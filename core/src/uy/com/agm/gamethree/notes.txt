@@ -67,6 +67,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 PROXIMOS PASOS
 --------------
+- reiniciar para ver unity, ver los assets que trae y transformar los poderes que baje.
 - el finaltwo es muy grande! habria que reducir todas las imagenes!
 - Implementar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.

@@ -354,10 +354,10 @@ public class Constants {
     public static final float FINALLEVELTWO_TARGET_RADIUS_METERS = 30.0f / PPM;
     public static final float FINALLEVELTWO_LINEAR_VELOCITY = 5.0f;
     public static final float FINALLEVELTWO_DENSITY = 1000.0f;
-    public static final float FINALLEVELTWO_WIDTH_METERS = 192.0f * 1.0f / PPM;
-    public static final float FINALLEVELTWO_HEIGHT_METERS = 192.0f * 1.0f / PPM;
-    public static final float FINALLEVELTWO_POWER_WIDTH_METERS = 192.0f * 2.0f / PPM;
-    public static final float FINALLEVELTWO_POWER_HEIGHT_METERS = 192.0f * 2.0f / PPM;
+    public static final float FINALLEVELTWO_WIDTH_METERS = 192.0f * 0.9f / PPM;
+    public static final float FINALLEVELTWO_HEIGHT_METERS = 192.0f * 0.9f / PPM;
+    public static final float FINALLEVELTWO_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
+    public static final float FINALLEVELTWO_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
     public static final int FINALLEVELTWO_MAX_DAMAGE = 10;
     public static final float FINALLEVELTWO_CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     public static final float FINALLEVELTWO_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
