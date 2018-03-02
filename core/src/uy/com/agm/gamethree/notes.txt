@@ -68,8 +68,6 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 PROXIMOS PASOS
 --------------
 - reiniciar para ver unity, ver los assets que trae y transformar los poderes que baje.
-- el finaltwo es muy grande! habria que reducir todas las imagenes!
-- Implementar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
@@ -96,6 +94,8 @@ HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 
 PENDIENTES
 ----------
+- evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Modificaciones importantes pero que no creo que haga son: hacer
+que el juego se juegue landscape. Hacer que el hero dispare en la dirección en la que se mueve (torcido, hacia abajo, etc.). Eso capaz no queda bueno...
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
 esas constantes globales como con los _BIT. Pensarlo cuando unifique constantes.
