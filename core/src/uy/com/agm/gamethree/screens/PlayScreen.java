@@ -482,20 +482,20 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void gameResults(float delta) {
-        if (player.isTimeToPlayAgain()) {
+        boolean finish = false;
+
+        /* We evaluate mutual exclusion conditions.
+         * A boolean value is used to avoid nested if/else sentences.
+         */
+
+        finish = !finish && player.isTimeToPlayAgain();
+        if (finish) {
             player.playAgain();
             startEdges();
         }
 
-        if (player.isGameOver()) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
-        }
-
-        if (isLevelCompleted(delta)) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
-        }
-
-        if (isChallengeBegin() && !player.isSilverBulletEnabled() && !player.isHeroDead()) {
+        finish = !finish && !player.isSilverBulletEnabled() && !player.isHeroDead() && isChallengeBegin();
+        if (finish) {
             // Show help
             finalEnemy.showChallengeBeginHelp();
 
@@ -504,6 +504,18 @@ public class PlayScreen extends AbstractScreen {
 
             // Change Hero's weapon
             player.applySilverBullet();
+        }
+
+        // New Screens are evaluated at the end, because they call playScreen.dispose.
+        // Dispose method destroys the world among other objects, so b2bodies (like player.getB2body()) are no longer available
+        finish = !finish && player.isGameOver();
+        if (finish) {
+            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
+        }
+
+        finish = !finish && isLevelCompleted(delta);
+        if (finish) {
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, hud.getScore());
         }
     }
 

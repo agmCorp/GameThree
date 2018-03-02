@@ -181,7 +181,7 @@ public class Constants {
     public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final int HERO_LIVES_START = 30;
+    public static final int HERO_LIVES_START = 2;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f; // For all kind of bullets
 
@@ -358,7 +358,7 @@ public class Constants {
     public static final float FINALLEVELTWO_HEIGHT_METERS = 192.0f * 0.9f / PPM;
     public static final float FINALLEVELTWO_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELTWO_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
-    public static final int FINALLEVELTWO_MAX_DAMAGE = 10;
+    public static final int FINALLEVELTWO_MAX_DAMAGE = 1;
     public static final float FINALLEVELTWO_CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     public static final float FINALLEVELTWO_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     public static final float FINALLEVELTWO_IDLE_STATE_TIME_SECONDS = 5.0f;
