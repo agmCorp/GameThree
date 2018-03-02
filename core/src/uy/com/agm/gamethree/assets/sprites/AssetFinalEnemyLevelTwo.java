@@ -72,7 +72,7 @@ public class AssetFinalEnemyLevelTwo {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelTwoPower");
-        finalEnemyLevelTwoPowerAnimation = new Animation(1.0f / 30.0f, regions);
+        finalEnemyLevelTwoPowerAnimation = new Animation(0.5f / 24.0f, regions);
         regions.clear();
     }
 

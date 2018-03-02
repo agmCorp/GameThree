@@ -208,6 +208,7 @@ HERRAMIENTAS
 - pngcrush para reducir el tamano de los .png (https://pmt.sourceforge.io/pngcrush/)
 https://developer.android.com/topic/performance/reduce-apk-size.html
 - https://cloudconvert.com/svg-to-png: svg to png converter
+- https://bulkresizephotos.com: para redimensionar imagenes batch
 
 LECCIONES APRENDIDAS
 --------------------
