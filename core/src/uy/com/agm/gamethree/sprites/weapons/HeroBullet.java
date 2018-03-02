@@ -18,7 +18,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class HeroBullet extends Weapon {
     private static final String TAG = HeroBullet.class.getName();
 
-    private float stateTimer;
+    private float stateTime;
     private Animation heroBulletAnimation;
     private Vector2 tmp; // Temp GC friendly vector
 
@@ -45,7 +45,7 @@ public class HeroBullet extends Weapon {
             heroBulletAnimation = Assets.getInstance().getHeroBullet().getHeroBulletAnimation();
         }
 
-        stateTimer = 0;
+        stateTime = 0;
         currentState = State.SHOT;
 
         // Sound FX
@@ -86,8 +86,8 @@ public class HeroBullet extends Weapon {
         // Update our Sprite to correspond with the position of our Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
-        setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
     }
 
     @Override

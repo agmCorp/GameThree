@@ -41,10 +41,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     private StateWalking currentStateWalking;
     private int damage;
-    private float stateFinalEnemyTimer;
-    private float timeToChangeTimer;
+    private float stateFinalEnemyTime;
+    private float changeTime;
     private float timeToChange;
-    private float openFireTimer;
+    private float openFireTime;
 
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
@@ -57,12 +57,12 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     // Power FX
     private PowerState currentPowerState;
     private Animation powerFXAnimation;
-    private float powerFXStateTimer;
+    private float powerFXStateTime;
     private Sprite powerFXSprite;
 
     // Explosion FX
     private Animation explosionFXAnimation;
-    private float explosionFXStateTimer;
+    private float explosionFXStateTime;
     private Sprite explosionFXSprite;
 
     public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
@@ -77,10 +77,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // FinalEnemyLevelOne variables initialization
         currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
         damage = Constants.FINALLEVELONE_MAX_DAMAGE;
-        stateFinalEnemyTimer = 0;
-        timeToChangeTimer = 0;
+        stateFinalEnemyTime = 0;
+        changeTime = 0;
         timeToChange = getNextTimeToChange();
-        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -103,7 +103,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerAnimation();
-        powerFXStateTimer = 0;
+        powerFXStateTime = 0;
 
         // Set the power's texture
         powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerStand());
@@ -118,7 +118,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // ExplosionFX variables initialization
         explosionFXAnimation = Assets.getInstance().getExplosionE().getExplosionEAnimation();
-        explosionFXStateTimer = 0;
+        explosionFXStateTime = 0;
 
         // Set the explosion's texture
         Sprite spriteExplosion = new Sprite(Assets.getInstance().getExplosionE().getExplosionEStand());
@@ -172,16 +172,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         boolean blnOption;
         StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
 
-        // Update timer
-        timeToChangeTimer += dt;
-
         // Set a new currentStateFinalEnemy
-        if (timeToChangeTimer >= timeToChange) {
+        changeTime += dt;
+        if (changeTime >= timeToChange) {
             // Reset random state variables
-            timeToChangeTimer = 0;
+            changeTime = 0;
 
             // Reset variable animation
-            stateFinalEnemyTimer = 0;
+            stateFinalEnemyTime = 0;
 
             // Random option
             blnOption = MathUtils.randomBoolean();
@@ -194,7 +192,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                         timeToChange = getNextTimeToChange();
                     }
                     break;
@@ -203,7 +201,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTimer = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
+                        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
                     timeToChange = getNextTimeToChange();
                     break;
@@ -279,8 +277,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneWalkAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        stateFinalEnemyTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneWalkAnimation.getKeyFrame(stateFinalEnemyTime, true));
+        stateFinalEnemyTime += dt;
 
         // Depending on the direction, we set the angle and the flip
         switch (currentStateWalking) {
@@ -395,8 +393,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        stateFinalEnemyTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
+        stateFinalEnemyTime += dt;
 
         // Apply previous flip and rotation state
         setFlip(isFlipX, isFlipY);
@@ -418,8 +416,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneShootAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-        stateFinalEnemyTimer += dt;
+        setRegion((TextureRegion) finalEnemyLevelOneShootAnimation.getKeyFrame(stateFinalEnemyTime, true));
+        stateFinalEnemyTime += dt;
 
         // Calculate shooting angle
         float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
@@ -428,11 +426,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         setFlip(true, true);
 
         // If is time to shoot we open fire
-        if (openFireTimer >= Constants.FINALLEVELONE_FIRE_DELAY_SECONDS) {
+        if (openFireTime >= Constants.FINALLEVELONE_FIRE_DELAY_SECONDS) {
             openFire();
-            openFireTimer = 0;
+            openFireTime = 0;
         } else {
-            openFireTimer += dt;
+            openFireTime += dt;
         }
 
         // New random state
@@ -451,7 +449,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         AudioManager.getInstance().stopMusic();
 
         // Death animation
-        stateFinalEnemyTimer = 0;
+        stateFinalEnemyTime = 0;
 
         // Audio FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
@@ -464,9 +462,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private void stateDying(float dt) {
-        if (finalEnemyLevelOneDyingAnimation.isAnimationFinished(stateFinalEnemyTimer)) {
+        if (finalEnemyLevelOneDyingAnimation.isAnimationFinished(stateFinalEnemyTime)) {
             // Exploding animation
-            explosionFXStateTimer = 0;
+            explosionFXStateTime = 0;
 
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
@@ -479,8 +477,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             boolean isFlipY = isFlipY();
             float rotation = getRotation();
 
-            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTimer, true));
-            stateFinalEnemyTimer += dt;
+            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTime, true));
+            stateFinalEnemyTime += dt;
 
             // Apply previous flip and rotation state
             setFlip(isFlipX, isFlipY);
@@ -489,7 +487,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
    private void stateExploding(float dt) {
-       if (explosionFXAnimation.isAnimationFinished(explosionFXStateTimer)) {
+       if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
            // Audio FX
            AudioManager.getInstance().play(Assets.getInstance().getSounds().getLevelCompleted());
 
@@ -497,8 +495,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
        } else {
            // Animation
-           explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTimer, true));
-           explosionFXStateTimer += dt;
+           explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTime, true));
+           explosionFXStateTime += dt;
 
            // Apply rotation and flip of the main character
            explosionFXSprite.setRotation(getRotation());
@@ -515,13 +513,13 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private void powerStatePowerfulToNormal(float dt) {
         // If our final enemy is not walking nor shooting, he becomes weak
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
-            powerFXStateTimer = 0;
+            powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerDown());
         } else {
             // Animation
-            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
-            powerFXStateTimer += dt;
+            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
+            powerFXStateTime += dt;
 
             // Apply rotation and flip of the main character
             powerFXSprite.setRotation(getRotation());
@@ -535,7 +533,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private void powerStateNormalToPowerful() {
         // If our final enemy is walking or shooting, he becomes powerful
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
-            powerFXStateTimer = 0;
+            powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp());
         }

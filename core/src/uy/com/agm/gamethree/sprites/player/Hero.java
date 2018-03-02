@@ -50,12 +50,12 @@ public class Hero extends Sprite {
     private Animation heroMovingDownAnimation;
     private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
-    private float heroStateTimer;
+    private float heroStateTime;
     private boolean applyNewFilters;
-    private float playAgainTimer;
-    private float gameOverTimer;
-    private float openFireTimer;
-    private float setDefaultFilterTimer;
+    private float playAgainTime;
+    private float gameOverTime;
+    private float openFireTime;
+    private float setDefaultFilterTime;
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
@@ -67,7 +67,7 @@ public class Hero extends Sprite {
     // Power FX
     private PowerState currentPowerState;
     private Animation powerFXAnimation;
-    private float powerFXStateTimer;
+    private float powerFXStateTime;
     private Sprite powerFXSprite;
     private boolean powerFXAllowRotation;
 
@@ -81,7 +81,7 @@ public class Hero extends Sprite {
     private Animation bulletAnimation;
 
     // Blink
-    private float blinkingTimer;
+    private float blinkingTime;
     private boolean alpha;
 
     // Temp GC friendly vector
@@ -109,12 +109,12 @@ public class Hero extends Sprite {
         heroMovingDownAnimation = Assets.getInstance().getHero().getHeroMovingDownAnimation();
         heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
         heroDeadAnimation = Assets.getInstance().getHero().getHeroDeadAnimation();
-        heroStateTimer = 0;
+        heroStateTime = 0;
         applyNewFilters = false;
-        playAgainTimer = 0;
-        gameOverTimer = 0;
-        openFireTimer = 0;
-        setDefaultFilterTimer = 0;
+        playAgainTime = 0;
+        gameOverTime = 0;
+        openFireTime = 0;
+        setDefaultFilterTime = 0;
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = Constants.HERO_LIVES_START;
@@ -126,7 +126,7 @@ public class Hero extends Sprite {
         // PowerFX variables initialization (we don't know yet which power will be)
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = null;
-        powerFXStateTimer = 0;
+        powerFXStateTime = 0;
         powerFXSprite = null;
         powerFXAllowRotation = false;
 
@@ -142,7 +142,7 @@ public class Hero extends Sprite {
         tmp = new Vector2();
 
         // Blink
-        blinkingTimer = 0;
+        blinkingTime = 0;
         alpha = false;
     }
 
@@ -193,8 +193,8 @@ public class Hero extends Sprite {
                 break;
         }
 
-        // Shoot timer
-        openFireTimer += dt;
+        // Shoot time
+        openFireTime += dt;
         automaticShooting();
     }
 
@@ -212,8 +212,8 @@ public class Hero extends Sprite {
 
     private void powerStatePowerful(float dt) {
         if (visualPowerFX()) { // if powerFXSprite is null (for instance, Hero has a fire power) we don't need to set any TextureRegion
-            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTimer, true));
-            powerFXStateTimer += dt;
+            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
+            powerFXStateTime += dt;
 
             // Update our Sprite to correspond with the position of our Hero's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
@@ -237,8 +237,8 @@ public class Hero extends Sprite {
     public void powerDown() {
         setDefaultFixtureFilter();
         powerFXSprite = null;
-        powerFXStateTimer = 0;
-        blinkingTimer = 0;
+        powerFXStateTime = 0;
+        blinkingTime = 0;
         alpha = false;
         fireEnhancement = false;
         currentPowerState = PowerState.NORMAL;
@@ -272,15 +272,15 @@ public class Hero extends Sprite {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // if the current state is the same as the previous state increase the state timer.
-        // otherwise the state has changed and we need to reset timer.
-        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+        // if the current state is the same as the previous state increase the state time.
+        // otherwise the state has changed and we need to reset time.
+        heroStateTime = currentHeroState == previousHeroState ? heroStateTime + dt : 0;
 
         // Update previous state
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTimer, true));
+        setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTime, true));
 
         // Reset rotation
         setRotation(0.0f);
@@ -300,15 +300,15 @@ public class Hero extends Sprite {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // if the current state is the same as the previous state increase the state timer.
-        // otherwise the state has changed and we need to reset timer.
-        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+        // if the current state is the same as the previous state increase the state time.
+        // otherwise the state has changed and we need to reset time.
+        heroStateTime = currentHeroState == previousHeroState ? heroStateTime + dt : 0;
 
         // Update previous state
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTimer, true));
+        setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTime, true));
 
         // Calculate rotation
         setRotationAngle();
@@ -327,15 +327,15 @@ public class Hero extends Sprite {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // if the current state is the same as the previous state increase the state timer.
-        // otherwise the state has changed and we need to reset timer.
-        heroStateTimer = currentHeroState == previousHeroState ? heroStateTimer + dt : 0;
+        // if the current state is the same as the previous state increase the state time.
+        // otherwise the state has changed and we need to reset time.
+        heroStateTime = currentHeroState == previousHeroState ? heroStateTime + dt : 0;
 
         // Update previous state
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTimer, true));
+        setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTime, true));
 
         // Calculate rotation
         setRotationAngle();
@@ -365,8 +365,8 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true));
-        heroStateTimer += dt;
+        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTime, true));
+        heroStateTime += dt;
 
         // We reach the center of the screen
         if (b2body.getPosition().y >= screen.getGameCam().position.y) {
@@ -374,7 +374,7 @@ public class Hero extends Sprite {
             stop();
 
             // Start dying down
-            heroStateTimer = 0;
+            heroStateTime = 0;
             currentHeroState = HeroState.DYING_DOWN;
         } else {
             // We move Hero from the actual position to the middle of the screen.
@@ -393,8 +393,8 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTimer, true));
-        heroStateTimer += dt;
+        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTime, true));
+        heroStateTime += dt;
 
         // We move Hero from the actual position to the bottom of the screen.
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -410,16 +410,16 @@ public class Hero extends Sprite {
             b2body.setActive(false);
             lives--;
             screen.getHud().decreaseLives(1);
-            playAgainTimer = 0;
+            playAgainTime = 0;
             currentHeroState = Hero.HeroState.DEAD;
         }
     }
 
     private void heroStateDead(float dt) {
         if (lives > 0) {
-            playAgainTimer += dt;
+            playAgainTime += dt;
         } else {
-            gameOverTimer += dt;
+            gameOverTime += dt;
         }
     }
 
@@ -442,7 +442,7 @@ public class Hero extends Sprite {
             fixture.setFilterData(filter);
         }
 
-        setDefaultFilterTimer = 0;
+        setDefaultFilterTime = 0;
         isPlayingAgain = true;
 
         // Stop motion
@@ -467,10 +467,10 @@ public class Hero extends Sprite {
     }
 
     private void blink(float dt, Sprite sprite) {
-        blinkingTimer += dt;
-        if (blinkingTimer >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
+        blinkingTime += dt;
+        if (blinkingTime >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
             alpha = !alpha;
-            blinkingTimer = 0;
+            blinkingTime = 0;
         }
         if (alpha) {
             sprite.setAlpha(1.0f);
@@ -483,13 +483,13 @@ public class Hero extends Sprite {
         if (isPlayingAgain) {
             blink(dt, this);
 
-            setDefaultFilterTimer += dt;
-            if (setDefaultFilterTimer > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
+            setDefaultFilterTime += dt;
+            if (setDefaultFilterTime > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
                 setAlpha(1.0f);
 
                 isPlayingAgain = false;
-                blinkingTimer = 0;
+                blinkingTime = 0;
                 alpha = false;
             }
         }
@@ -519,7 +519,7 @@ public class Hero extends Sprite {
         currentPowerState = PowerState.NORMAL;
 
         // Start dying up
-        heroStateTimer = 0;
+        heroStateTime = 0;
         currentHeroState = HeroState.DYING_UP;
     }
 
@@ -632,13 +632,13 @@ public class Hero extends Sprite {
     }
 
     private void openFireEnhanced() {
-        if (openFireTimer > fireDelay) {
+        if (openFireTime > fireDelay) {
             if (isSilverBulletEnabled()) {
                 shootSilverBulletEnhanced();
             } else {
                 shootEnhanced();
             }
-            openFireTimer = 0;
+            openFireTime = 0;
         }
     }
 
@@ -678,9 +678,9 @@ public class Hero extends Sprite {
 
     private void openFireNormal() {
         if (isSilverBulletEnabled()) {
-            if (openFireTimer > fireDelay) {
+            if (openFireTime > fireDelay) {
                 shootSilverBulletNormal();
-                openFireTimer = 0;
+                openFireTime = 0;
             }
         } else {
             defaultShooting();
@@ -712,9 +712,9 @@ public class Hero extends Sprite {
 
     private void defaultShooting() {
         float fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HERO_AUTOMATIC_FIRE_DELAY_SECONDS;
-        if (openFireTimer > fireDelay) {
+        if (openFireTime > fireDelay) {
             shootBulletNormal();
-            openFireTimer = 0;
+            openFireTime = 0;
         }
     }
 
@@ -743,13 +743,13 @@ public class Hero extends Sprite {
     public boolean isGameOver() {
         return currentHeroState == HeroState.DEAD &&
                 lives <= 0 &&
-                gameOverTimer > Constants.GAME_OVER_DELAY_SECONDS;
+                gameOverTime > Constants.GAME_OVER_DELAY_SECONDS;
     }
 
     public boolean isTimeToPlayAgain() {
         return currentHeroState == HeroState.DEAD &&
                 lives > 0 &&
-                playAgainTimer > Constants.PLAY_AGAIN_DELAY_SECONDS;
+                playAgainTime > Constants.PLAY_AGAIN_DELAY_SECONDS;
     }
 
     public Body getB2body() {

@@ -24,8 +24,8 @@ public class EnemyFour extends Enemy {
     // Constants
     private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
 
-    private float stateTimer;
-    private float openFireTimer;
+    private float stateTime;
+    private float openFireTime;
     private Animation enemyFourAnimation;
     private Animation enemyFourFrozenAnimation;
     private Animation explosionAnimation;
@@ -38,7 +38,7 @@ public class EnemyFour extends Enemy {
     }
     private FrozenState currentFrozenState;
     private float b2bodyLinearVelX;
-    private float stateFrozenTimer;
+    private float stateFrozenTime;
     private int timesItFreeze;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
@@ -53,8 +53,8 @@ public class EnemyFour extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYFOUR_WIDTH_METERS, Constants.ENEMYFOUR_HEIGHT_METERS);
 
         // State variables initialization
-        stateTimer = 0;
-        openFireTimer = MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);;
+        stateTime = 0;
+        openFireTime = MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);;
         currentState = State.ALIVE;
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
@@ -68,7 +68,7 @@ public class EnemyFour extends Enemy {
         // Frozen state variables initialization
         currentFrozenState = FrozenState.INITIAL;
         b2bodyLinearVelX = 0;
-        stateFrozenTimer = 0;
+        stateFrozenTime = 0;
 
         // Indicates how many times this enemy can be frozen.
         timesItFreeze = object.getProperties().get(KEY_TIMES_IT_FREEZE, 1, Integer.class);
@@ -109,7 +109,7 @@ public class EnemyFour extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyFourAnimation.getKeyFrame(stateTimer, true);
+        TextureRegion region = (TextureRegion) enemyFourAnimation.getKeyFrame(stateTime, true);
         if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
@@ -118,12 +118,12 @@ public class EnemyFour extends Enemy {
         }
 
         setRegion(region);
-        stateTimer += dt;
+        stateTime += dt;
 
-        openFireTimer += dt;
-        if (openFireTimer > Constants.ENEMYFOUR_FIRE_DELAY_SECONDS) {
+        openFireTime += dt;
+        if (openFireTime > Constants.ENEMYFOUR_FIRE_DELAY_SECONDS) {
             super.openFire();
-            openFireTimer = 0;
+            openFireTime = 0;
         }
 
         checkPath();
@@ -133,7 +133,7 @@ public class EnemyFour extends Enemy {
     protected void stateInjured(float dt) {
         switch (currentFrozenState) {
             case INITIAL:
-                stateTimer = 0;
+                stateTime = 0;
                 currentFrozenState = FrozenState.FROZEN;
                 frozenStateFrozen(dt);
                 break;
@@ -152,7 +152,7 @@ public class EnemyFour extends Enemy {
         // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
 
-        if (stateTimer == 0) { // Frozen state starts
+        if (stateTime == 0) { // Frozen state starts
             // Setbounds is the one that determines the size of the frozen sprite on the screen
             setBounds(getX() + getWidth() / 2 - Constants.ENEMYFOUR_FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.ENEMYFOUR_FROZEN_HEIGHT_METERS / 2,
                     Constants.ENEMYFOUR_FROZEN_WIDTH_METERS, Constants.ENEMYFOUR_FROZEN_HEIGHT_METERS);
@@ -177,7 +177,7 @@ public class EnemyFour extends Enemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         // We set its frozen animation
-        TextureRegion region = (TextureRegion) enemyFourFrozenAnimation.getKeyFrame(stateTimer, true);
+        TextureRegion region = (TextureRegion) enemyFourFrozenAnimation.getKeyFrame(stateTime, true);
         if (b2bodyLinearVelX > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
@@ -186,7 +186,7 @@ public class EnemyFour extends Enemy {
         }
 
         setRegion(region);
-        stateTimer += dt;
+        stateTime += dt;
 
         // Check if it's time to defrost it
         checkDefrost(dt);
@@ -194,8 +194,8 @@ public class EnemyFour extends Enemy {
     }
 
     private void checkDefrost(float dt) {
-        stateFrozenTimer += dt;
-        if (stateFrozenTimer >= Constants.ENEMYFOUR_FROZEN_TIME_SECONDS) {
+        stateFrozenTime += dt;
+        if (stateFrozenTime >= Constants.ENEMYFOUR_FROZEN_TIME_SECONDS) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
 
@@ -215,8 +215,8 @@ public class EnemyFour extends Enemy {
             Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
             velocity.set(tmp);
 
-            stateTimer = 0;
-            stateFrozenTimer = 0;
+            stateTime = 0;
+            stateFrozenTime = 0;
         }
     }
 
@@ -228,7 +228,7 @@ public class EnemyFour extends Enemy {
         world.destroyBody(b2body);
 
         // Explosion animation
-        stateTimer = 0;
+        stateTime = 0;
 
         // Audio FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
@@ -242,16 +242,16 @@ public class EnemyFour extends Enemy {
 
     @Override
     protected void stateExploding(float dt) {
-        if (explosionAnimation.isAnimationFinished(stateTimer)) {
+        if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.DEAD;
         } else {
-            if (stateTimer == 0) { // Explosion starts
+            if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIOND_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIOND_HEIGHT_METERS / 2,
                         Constants.EXPLOSIOND_WIDTH_METERS, Constants.EXPLOSIOND_HEIGHT_METERS);
             }
-            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
-            stateTimer += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
         }
     }
 

@@ -32,9 +32,9 @@ public abstract class FinalEnemy extends Sprite {
     protected Vector2 velocity;
     protected Vector2 tmp; // Temp GC friendly vector
     protected StateFinalEnemy currentStateFinalEnemy;
-    private float introTimer;
+    private float introTime;
     private boolean playingIntro;
-    private float aidSilverBulletTimer;
+    private float aidSilverBulletTime;
 
     protected enum StateFinalEnemy {
         INACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
@@ -59,9 +59,9 @@ public abstract class FinalEnemy extends Sprite {
         setBounds(x, y, width, height);
         defineFinalEnemy();
 
-        introTimer = 0;
+        introTime = 0;
         playingIntro = false;
-        aidSilverBulletTimer = 0;
+        aidSilverBulletTime = 0;
 
         // By default this FinalEnemy doesn't interact in our world
         b2body.setActive(false);
@@ -89,7 +89,7 @@ public abstract class FinalEnemy extends Sprite {
             if (finalEnemyStarts()) {
                 // Pause music for a few seconds
                 AudioManager.getInstance().pauseMusic();
-                introTimer = 0;
+                introTime = 0;
                 playingIntro = true;
 
                 // Audio FX
@@ -112,8 +112,8 @@ public abstract class FinalEnemy extends Sprite {
             }
         } else {
             if (playingIntro) {
-                introTimer += dt;
-                if (introTimer > Constants.FINALENEMY_INTRO_TIME_SECONDS) {
+                introTime += dt;
+                if (introTime > Constants.FINALENEMY_INTRO_TIME_SECONDS) {
                     if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
                         AudioManager.getInstance().resumeMusic();
                     }
@@ -124,10 +124,10 @@ public abstract class FinalEnemy extends Sprite {
 
             // Release silver bullets if needed
             if (!screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
-                aidSilverBulletTimer += dt;
-                if (aidSilverBulletTimer > Constants.FINALENEMY_AID_SILVERBULLET_TIME_SECONDS) {
+                aidSilverBulletTime += dt;
+                if (aidSilverBulletTime > Constants.FINALENEMY_AID_SILVERBULLET_TIME_SECONDS) {
                     releaseSilverBullet();
-                    aidSilverBulletTimer = 0;
+                    aidSilverBulletTime = 0;
                 }
             }
 

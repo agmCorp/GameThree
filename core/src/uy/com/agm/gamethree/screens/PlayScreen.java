@@ -52,7 +52,7 @@ public class PlayScreen extends AbstractScreen {
     private int level;
 
     // Time to wait after the level is completed
-    private float levelCompletedTimer;
+    private float levelCompletedTime;
 
     // Basic playscreen variables
     private OrthographicCamera gameCam;
@@ -81,7 +81,7 @@ public class PlayScreen extends AbstractScreen {
 
     public PlayScreen(Integer level, Integer score) {
         this.level = level;
-        levelCompletedTimer = 0;
+        levelCompletedTime = 0;
 
         this.game = (GameThree) ScreenManager.getInstance().getGame();
 
@@ -371,8 +371,8 @@ public class PlayScreen extends AbstractScreen {
         boolean isLevelCompleted = false;
 
         if (finalEnemy.isDisposable()) {
-            levelCompletedTimer += delta;
-            isLevelCompleted = levelCompletedTimer > Constants.LEVEL_COMPLETED_DELAY_SECONDS;
+            levelCompletedTime += delta;
+            isLevelCompleted = levelCompletedTime > Constants.LEVEL_COMPLETED_DELAY_SECONDS;
         }
         return isLevelCompleted;
     }

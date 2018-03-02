@@ -20,12 +20,12 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class EnemyOne extends Enemy {
     private static final String TAG = EnemyOne.class.getName();
 
-    private float stateTimer;
-    private float openFireTimer;
+    private float stateTime;
+    private float openFireTime;
     private Animation enemyOneAnimation;
     private Animation explosionAnimation;
     private boolean changeDirection;
-    private float changeDirectionTimer;
+    private float changeDirectionTime;
 
     public EnemyOne(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -37,13 +37,13 @@ public class EnemyOne extends Enemy {
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
 
-        stateTimer = 0;
-        openFireTimer = MathUtils.random(0, Constants.ENEMYONE_FIRE_DELAY_SECONDS);;
+        stateTime = 0;
+        openFireTime = MathUtils.random(0, Constants.ENEMYONE_FIRE_DELAY_SECONDS);;
         currentState = State.ALIVE;
 
         velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
         changeDirection = false;
-        changeDirectionTimer = 0;
+        changeDirectionTime = 0;
     }
 
     @Override
@@ -84,22 +84,22 @@ public class EnemyOne extends Enemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        openFireTimer += dt;
-        if (openFireTimer > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
+        openFireTime += dt;
+        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
             super.openFire();
-            openFireTimer = 0;
+            openFireTime = 0;
         }
 
         if (changeDirection) {
-            changeDirectionTimer += dt;
-            if (changeDirectionTimer > Constants.ENEMYONE_CHANGE_DIRECTION_SECONDS) {
+            changeDirectionTime += dt;
+            if (changeDirectionTime > Constants.ENEMYONE_CHANGE_DIRECTION_SECONDS) {
                 velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X;
                 velocity.y *= -1;
                 changeDirection = false;
-                changeDirectionTimer = 0;
+                changeDirectionTime = 0;
             }
         }
     }
@@ -113,7 +113,7 @@ public class EnemyOne extends Enemy {
         world.destroyBody(b2body);
 
         // Explosion animation
-        stateTimer = 0;
+        stateTime = 0;
 
         // Audio FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
@@ -127,16 +127,16 @@ public class EnemyOne extends Enemy {
 
     @Override
     protected void stateExploding(float dt) {
-        if (explosionAnimation.isAnimationFinished(stateTimer)) {
+        if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.DEAD;
         } else {
-            if (stateTimer == 0) { // Explosion starts
+            if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONA_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONA_HEIGHT_METERS / 2,
                         Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
             }
-            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
-            stateTimer += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
         }
     }
 
@@ -167,7 +167,7 @@ public class EnemyOne extends Enemy {
         velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X * 2.0f;
         velocity.y *= -1;
         changeDirection = true;
-        changeDirectionTimer = 0;
+        changeDirectionTime = 0;
     }
 
     @Override

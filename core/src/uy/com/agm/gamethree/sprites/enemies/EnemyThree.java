@@ -20,8 +20,8 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class EnemyThree extends Enemy {
     private static final String TAG = EnemyThree.class.getName();
 
-    private float stateTimer;
-    private float openFireTimer;
+    private float stateTime;
+    private float openFireTime;
     private Animation enemyThreeAnimation;
     private Animation explosionAnimation;
 
@@ -35,8 +35,8 @@ public class EnemyThree extends Enemy {
         // Setbounds is the one that determines the size of the EnemyThree's drawing on the screen
         setBounds(getX(), getY(), Constants.ENEMYTHREE_WIDTH_METERS, Constants.ENEMYTHREE_HEIGHT_METERS);
 
-        stateTimer = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-        openFireTimer = MathUtils.random(0, Constants.ENEMYTHREE_FIRE_DELAY_SECONDS);
+        stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
+        openFireTime = MathUtils.random(0, Constants.ENEMYTHREE_FIRE_DELAY_SECONDS);
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTHREE_VELOCITY_X, Constants.ENEMYTHREE_VELOCITY_Y);
     }
@@ -81,7 +81,7 @@ public class EnemyThree extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyThreeAnimation.getKeyFrame(stateTimer, true);
+        TextureRegion region = (TextureRegion) enemyThreeAnimation.getKeyFrame(stateTime, true);
         if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
@@ -90,12 +90,12 @@ public class EnemyThree extends Enemy {
         }
 
         setRegion(region);
-        stateTimer += dt;
+        stateTime += dt;
 
-        openFireTimer += dt;
-        if (openFireTimer > Constants.ENEMYTHREE_FIRE_DELAY_SECONDS) {
+        openFireTime += dt;
+        if (openFireTime > Constants.ENEMYTHREE_FIRE_DELAY_SECONDS) {
             super.openFire();
-            openFireTimer = 0;
+            openFireTime = 0;
         }
     }
 
@@ -108,7 +108,7 @@ public class EnemyThree extends Enemy {
         world.destroyBody(b2body);
 
         // Explosion animation
-        stateTimer = 0;
+        stateTime = 0;
 
         // Audio FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getSquish());
@@ -122,16 +122,16 @@ public class EnemyThree extends Enemy {
 
     @Override
     protected void stateExploding(float dt) {
-        if (explosionAnimation.isAnimationFinished(stateTimer)) {
+        if (explosionAnimation.isAnimationFinished(stateTime)) {
             currentState = State.DEAD;
         } else {
-            if (stateTimer == 0) { // Explosion starts
+            if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONC_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONC_HEIGHT_METERS / 2,
                         Constants.EXPLOSIONC_WIDTH_METERS, Constants.EXPLOSIONC_HEIGHT_METERS);
             }
-            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTimer, true));
-            stateTimer += dt;
+            setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
         }
     }
 

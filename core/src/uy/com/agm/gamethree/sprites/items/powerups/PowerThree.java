@@ -25,9 +25,9 @@ public class PowerThree extends Item {
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
-    private float stateTimer;
-    private float stateWaitingTimer;
-    private float stateFadingTimer;
+    private float stateTime;
+    private float stateWaitingTime;
+    private float stateFadingTime;
     private Animation powerThreeAnimation;
     private Animation bulletAnimation;
 
@@ -46,9 +46,9 @@ public class PowerThree extends Item {
         bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
         manualFireDelay = Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
-        stateTimer = 0;
-        stateWaitingTimer = 0;
-        stateFadingTimer = 0;
+        stateTime = 0;
+        stateWaitingTime = 0;
+        stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), Constants.POWERTHREE_WIDTH_METERS, Constants.POWERTHREE_HEIGHT_METERS);
@@ -95,11 +95,11 @@ public class PowerThree extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateWaitingTimer += dt;
-        if (stateWaitingTimer > Constants.POWERTHREE_WAITING_SECONDS) {
+        stateWaitingTime += dt;
+        if (stateWaitingTime > Constants.POWERTHREE_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -115,17 +115,17 @@ public class PowerThree extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateFadingTimer += dt;
-        float alpha = 1 - stateFadingTimer / Constants.POWERTHREE_FADING_SECONDS;
+        stateFadingTime += dt;
+        float alpha = 1 - stateFadingTime / Constants.POWERTHREE_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTimer > Constants.POWERTHREE_FADING_SECONDS) {
+        if (stateFadingTime > Constants.POWERTHREE_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }

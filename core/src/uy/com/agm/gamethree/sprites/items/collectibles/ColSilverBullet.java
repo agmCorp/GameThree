@@ -20,18 +20,18 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class ColSilverBullet extends Item {
     private static final String TAG = ColSilverBullet.class.getName();
 
-    private float stateTimer;
-    private float stateWaitingTimer;
-    private float stateFadingTimer;
+    private float stateTime;
+    private float stateWaitingTime;
+    private float stateFadingTime;
     private Animation colSilverBulletAnimation;
 
     public ColSilverBullet(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         colSilverBulletAnimation = Assets.getInstance().getSilverBullet().getColSilverBulletAnimation();
-        stateTimer = 0;
-        stateWaitingTimer = 0;
-        stateFadingTimer = 0;
+        stateTime = 0;
+        stateWaitingTime = 0;
+        stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), Constants.COLSILVERBULLET_WIDTH_METERS, Constants.COLSILVERBULLET_HEIGHT_METERS);
@@ -77,11 +77,11 @@ public class ColSilverBullet extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) colSilverBulletAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) colSilverBulletAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateWaitingTimer += dt;
-        if (stateWaitingTimer > Constants.COLSILVERBULLET_WAITING_SECONDS) {
+        stateWaitingTime += dt;
+        if (stateWaitingTime > Constants.COLSILVERBULLET_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -97,17 +97,17 @@ public class ColSilverBullet extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) colSilverBulletAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) colSilverBulletAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateFadingTimer += dt;
-        float alpha = 1 - stateFadingTimer / Constants.COLSILVERBULLET_FADING_SECONDS;
+        stateFadingTime += dt;
+        float alpha = 1 - stateFadingTime / Constants.COLSILVERBULLET_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTimer > Constants.COLSILVERBULLET_FADING_SECONDS) {
+        if (stateFadingTime > Constants.COLSILVERBULLET_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }

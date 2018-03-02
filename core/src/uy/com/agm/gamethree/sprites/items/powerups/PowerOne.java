@@ -28,9 +28,9 @@ public class PowerOne extends Item {
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
-    private float stateTimer;
-    private float stateWaitingTimer;
-    private float stateFadingTimer;
+    private float stateTime;
+    private float stateWaitingTime;
+    private float stateFadingTime;
     private Animation powerOneAnimation;
 
     // Ghost mode
@@ -42,9 +42,9 @@ public class PowerOne extends Item {
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerOneAnimation = Assets.getInstance().getPowerOne().getPowerOneAnimation();
-        stateTimer = 0;
-        stateWaitingTimer = 0;
-        stateFadingTimer = 0;
+        stateTime = 0;
+        stateWaitingTime = 0;
+        stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), Constants.POWERONE_WIDTH_METERS, Constants.POWERONE_HEIGHT_METERS);
@@ -91,11 +91,11 @@ public class PowerOne extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateWaitingTimer += dt;
-        if (stateWaitingTimer > Constants.POWERONE_WAITING_SECONDS) {
+        stateWaitingTime += dt;
+        if (stateWaitingTime > Constants.POWERONE_WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -111,17 +111,17 @@ public class PowerOne extends Item {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTimer, true));
-        stateTimer += dt;
+        setRegion((TextureRegion) powerOneAnimation.getKeyFrame(stateTime, true));
+        stateTime += dt;
 
-        stateFadingTimer += dt;
-        float alpha = 1 - stateFadingTimer / Constants.POWERONE_FADING_SECONDS;
+        stateFadingTime += dt;
+        float alpha = 1 - stateFadingTime / Constants.POWERONE_FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTimer > Constants.POWERONE_FADING_SECONDS) {
+        if (stateFadingTime > Constants.POWERONE_FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }

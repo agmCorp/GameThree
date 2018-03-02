@@ -63,7 +63,7 @@ public class Hud extends AbstractScreen {
     private Table centerTable;
     private Label messageLabel;
     private Image image;
-    private float overlayTimer;
+    private float overlayTime;
     private float overlaySeconds;
     private boolean overlayTemporaryScreen;
     private boolean overlayTemporaryMessage;
@@ -104,7 +104,7 @@ public class Hud extends AbstractScreen {
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
-        overlayTimer = 0;
+        overlayTime = 0;
         overlaySeconds = 0;
         overlayTemporaryScreen = false;
         overlayTemporaryMessage = false;
@@ -468,7 +468,7 @@ public class Hud extends AbstractScreen {
     }
 
     public void showMessage(String message, float seconds) {
-        overlayTimer = 0;
+        overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
         showMessage(message);
@@ -512,7 +512,7 @@ public class Hud extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion, float seconds) {
-        overlayTimer = 0;
+        overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryScreen = true;
         showImage(textureRegion);
@@ -628,10 +628,10 @@ public class Hud extends AbstractScreen {
 
     private void overlayTemporaryScreen(float dt) {
         if (overlayTemporaryScreen) {
-            overlayTimer += dt;
-            if (overlayTimer >= overlaySeconds) {
+            overlayTime += dt;
+            if (overlayTime >= overlaySeconds) {
                 overlayTemporaryScreen = false;
-                overlayTimer = 0;
+                overlayTime = 0;
                 hideImage();
             }
         }
@@ -639,10 +639,10 @@ public class Hud extends AbstractScreen {
 
     private void overlayTemporaryMessage(float dt) {
         if (overlayTemporaryMessage) {
-            overlayTimer += dt;
-            if (overlayTimer >= overlaySeconds) {
+            overlayTime += dt;
+            if (overlayTime >= overlaySeconds) {
                 overlayTemporaryMessage = false;
-                overlayTimer = 0;
+                overlayTime = 0;
                 hideMessage();
             }
         }
