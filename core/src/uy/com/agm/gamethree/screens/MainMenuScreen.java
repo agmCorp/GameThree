@@ -23,7 +23,8 @@ public class MainMenuScreen extends AbstractScreen {
 
     public MainMenuScreen() {
         super();
-        //  Start playing music
+        // Stop game music and start playing menu music from the beginning
+        AudioManager.getInstance().stopMusic();
         AudioManager.getInstance().play(Assets.getInstance().getMusic().getSongMainMenu());
     }
 
