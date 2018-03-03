@@ -13,7 +13,7 @@
  </layer>
  <layer name="graphic" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2MdNQ1EQQNG3clg6imSgFSiA4CTAAVoiilgMBQByFMEGBI1w2eHPAn28g3ulo6eRZhp4IZiZ2V/rLRXCe+r7G3fHzMzMzMzMzGyaVhIhrCbi3ayxv47TZAhnOMcFLnGVnNzdZz7AIY5wjBPc4wGPeMII48hth7mLHvoYYIiZVAizmMM8FlCK/JlkmLPIIY8CitjCNnbQQBOtyO0mcxkVVFFDfco/mevkzztfu2H/Fncx78zMzMzMzMzs7/eUCmGEMZ7xgtfI30WHuYse+hhg+PmXkg5hASUsYgnL6cnbDHMWOeRRQBENNNFCG7vYi9xuMpdRQRU11CM7cdv45f9I238VMzMzMzMzM/vnfQDdqDic
+   eJzt2MlNQmEUQOF/BY8lY1TAXrQAZ41zT4xRBnuxADWMUQYX2ojHnSKJQXZ4TvLl5X+5t4EbgpmZrVpvUQjv0c/vojNmZmZmZmZmZsu0FQthO7bYzg7zu7iJh3CLBppooR3/PlviXUYFVdRQxzNeMMIYE0xndju8u+ihjwGGWItCWMcG8iigOHMzSfJOIY0MssjhFGc4xwUucTWzu8/7AIc4wjFOlrzJ3Md/n/naA/OPeFpwz8zMzMzMzMxWv0YUQhMttHE3525R4l8ZFVRRQx0jjDHBFK9zdjv866KHPgYYft5iEiHkUUARm4mfu0n+pZBGBlnk5swt0t4f7yPX3lXMzMzMzMzM7J/3AbeQOcg=
   </data>
  </layer>
  <layer name="bridge" width="15" height="250">
@@ -34,8 +34,8 @@
   <object id="1320" x="307.333" y="3203.33" width="14" height="22.6667"/>
  </objectgroup>
  <objectgroup name="path">
-  <object id="1303" x="300" y="5505.34" width="176.667" height="94.6666"/>
-  <object id="1305" x="3.6665" y="5505.66" width="176.667" height="94"/>
+  <object id="1303" x="292" y="5516.67" width="184.667" height="83.3333"/>
+  <object id="1305" x="3.6665" y="5517.66" width="156.667" height="82"/>
   <object id="1309" x="3" y="801.5" width="187" height="28.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="28.5"/>
  </objectgroup>
