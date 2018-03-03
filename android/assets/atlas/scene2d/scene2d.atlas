@@ -4,9 +4,16 @@ size: 2048,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-helpColSilverBullet
+helpColSilverBulletLevelOne
   rotate: false
-  xy: 484, 377
+  xy: 1726, 779
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpColSilverBulletLevelTwo
+  rotate: false
+  xy: 703, 377
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
@@ -34,42 +41,42 @@ helpFinalEnemyLevelTwo
   index: -1
 helpInitialAutomatic
   rotate: false
-  xy: 703, 377
+  xy: 1507, 779
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 1507, 779
+  xy: 922, 377
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerFour
   rotate: false
-  xy: 2, 2
+  xy: 204, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 1726, 779
+  xy: 484, 377
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerThree
   rotate: false
-  xy: 922, 377
+  xy: 1288, 552
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 204, 2
+  xy: 2, 2
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
@@ -83,7 +90,7 @@ sliderBackground
   index: -1
 sliderKnob
   rotate: false
-  xy: 1288, 748
+  xy: 1945, 975
   size: 14, 29
   orig: 14, 29
   offset: 0, 0

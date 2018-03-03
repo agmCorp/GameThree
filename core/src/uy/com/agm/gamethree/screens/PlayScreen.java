@@ -309,6 +309,10 @@ public class PlayScreen extends AbstractScreen {
         return upperEdge;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     private void render() {
         // Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);

@@ -18,6 +18,7 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
+- silver bullet deberia tener ayuda en el nivel 2 como la tiene en el 1?
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
@@ -34,6 +35,8 @@ HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 
 PENDIENTES
 ----------
+- No me gusta como quedo en el nivel 1, el corral sobre la red..por ahi habria que bajar un poquito el corral. Tampoco
+me gustan los alambres de puas en el nivel 2 que son muy grandes.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U.
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas

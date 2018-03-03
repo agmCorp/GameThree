@@ -542,8 +542,7 @@ b2body.setFixedRotation(true); // todo
 
     @Override
     protected TextureRegion getHelpImage() {
-        // TODO
-        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelOne();
+        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelTwo();
     }
 
     private void checkBoundaries() {

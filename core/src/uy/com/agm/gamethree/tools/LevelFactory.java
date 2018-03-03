@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -12,8 +13,10 @@ import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelTwo;
 import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
+import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -94,14 +97,30 @@ public class LevelFactory {
                 dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
                 break;
             case 2:
-//                dynamic.put(EnemyOne.class.getName(), new DynamicHelpDef());
-//                dynamic.put(EnemyTwo.class.getName(), new DynamicHelpDef(true));
-//                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef());
-//                dynamic.put(EnemyFour.class.getName(), new DynamicHelpDef());
+                dynamic.put(PowerTwo.class.getName(), new DynamicHelpDef());
+                dynamic.put(PowerFour.class.getName(), new DynamicHelpDef());
+                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
+                dynamic.put(FinalEnemyLevelTwo.class.getName(), new DynamicHelpDef(true));
                 break;
             default:
                 break;
         }
         return dynamic;
+    }
+
+    public static TextureRegion getHelpColSilverBullet(int level) {
+        TextureRegion helpColSilverBullet;
+        switch (level) {
+            case 1:
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
+                break;
+            case 2:
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelTwo();
+                break;
+            default:
+                helpColSilverBullet = null;
+                break;
+        }
+        return helpColSilverBullet;
     }
 }

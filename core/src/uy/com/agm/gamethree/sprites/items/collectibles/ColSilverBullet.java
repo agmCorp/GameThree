@@ -12,6 +12,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.LevelFactory;
 
 /**
  * Created by amorales on 23/1/2018.
@@ -127,7 +128,7 @@ public class ColSilverBullet extends Item {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpColSilverBullet();
+        return LevelFactory.getHelpColSilverBullet(screen.getLevel());
     }
 
     @Override
