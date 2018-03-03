@@ -420,7 +420,6 @@ public class Hud extends AbstractScreen {
 
     private void quit() {
         if (getMessage().equals(i18NGameThreeBundle.format("hud.confirm"))) {
-            AudioManager.getInstance().stopMusic();
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
             showMessage(i18NGameThreeBundle.format("hud.confirm"));
