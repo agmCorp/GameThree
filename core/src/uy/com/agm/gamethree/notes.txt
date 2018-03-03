@@ -18,7 +18,6 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
-- reiniciar para ver unity, ver los assets que trae y transformar los poderes que baje.
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
@@ -66,13 +65,13 @@ Debe ser un random configurable (para el set de poderes que quiera).
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
-    tamano de la bala* (sprite y b2body)
-    cantidad*,
-    delay*,
-    animacion*,
-    tipo de movimiento (boomerang)
-    velocidad
-    sonido
+    tamano de la bala* (sprite y b2body) --- contemplado
+    cantidad*, --- contemplado al crear las balas
+    delay*, --- contemplado en cada personaje
+    animacion*, --- contemplado
+    tipo de movimiento (boomerang) (se me ocurre modelarlo solo con un enumerado recibido en el constructor y luego en el stateShot)
+    velocidad AGREGAR
+    sonido AGREGAR
 
 ALCANCE
 -------
