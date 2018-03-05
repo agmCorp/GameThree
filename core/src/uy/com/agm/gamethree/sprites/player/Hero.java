@@ -18,7 +18,8 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.weapons.HeroBullet;
+import uy.com.agm.gamethree.sprites.weapons.ShootContext;
+import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
 import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -72,6 +73,7 @@ public class Hero extends Sprite {
     private boolean powerFXAllowRotation;
 
     // Fire power
+    private ShootContext shootContext;
     private boolean fireEnhancement;
     private float bulletWidth;
     private float bulletHeight;
@@ -131,6 +133,7 @@ public class Hero extends Sprite {
         powerFXAllowRotation = false;
 
         // Fire power variables initialization (we don't know yet which fire power will be)
+        shootContext = new ShootContext();
         fireEnhancement = false;
         bulletWidth = 0;
         bulletHeight = 0;
@@ -621,6 +624,10 @@ public class Hero extends Sprite {
         return shootingEnabled;
     }
 
+    public ShootContext getShootContext() {
+        return shootContext;
+    }
+
     public void openFire() {
         if (isShootingEnabled()) {
             if (isFireEnhanced()) {
@@ -654,26 +661,13 @@ public class Hero extends Sprite {
     }
 
     private void shootEnhanced() {
-        float directionDegrees = 180.0f / (numberBullets + 1);
-        float angle;
-        for (int i = 1; i <= numberBullets; i++) {
-            angle = directionDegrees * i;
-            angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
-
-            if (screen.getHud().isPowerRunningOut() && !isSilverBulletEnabled()) {
-                screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
-                        b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
-            } else {
-                screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
-                        b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
-                        bulletWidth,
-                        bulletHeight,
-                        bulletCircleShapeRadius,
-                        angle,
-                        bulletAnimation,
-                        HeroBullet.class));
-            }
-        }
+        shootContext.shootEnhanced(b2body.getPosition().x,
+                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
+                bulletWidth,
+                bulletHeight,
+                bulletCircleShapeRadius,
+                bulletAnimation,
+                numberBullets);
     }
 
     private void openFireNormal() {

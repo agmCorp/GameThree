@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.weapons.EnemyBullet;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.tools.actordef.ActorDef;
 
 /**

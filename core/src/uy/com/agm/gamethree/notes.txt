@@ -31,11 +31,12 @@ NO. SI LUEGO LAS QUIERO CAMBIAR TENGO QUE RECORRER 1 POR 1 LOS OBJETOS DEL TILED
 HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 - Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
+- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
+Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
+
 
 PENDIENTES
 ----------
-- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
-Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U.
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
@@ -279,7 +280,7 @@ LECCIONES APRENDIDAS
     - en settings deshabilitar configuration on demand
     - luego view/windows tools/gradle
     - luego dalre sincronizar, esperar que finalice  la indexacion
-    Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en c\users\amorales\appdata\local\android\sdk.
+    Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en shootStrategy\users\amorales\appdata\local\android\sdk.
     Sino el sdk Manager está en el menú tools/Android y ahí las cargo yo a mano hasta resolver todos los problemas.
     Tuve que editar el build.grandle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
     - cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.

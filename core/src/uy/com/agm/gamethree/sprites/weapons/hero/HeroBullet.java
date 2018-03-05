@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.weapons;
+package uy.com.agm.gamethree.sprites.weapons.hero;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
 /**
  * Created by AGM on 12/17/2017.
