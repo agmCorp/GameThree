@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1302">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1305">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -72,11 +72,14 @@
   <object id="902" x="5.5" y="1625" width="29" height="78"/>
   <object id="903" x="8.5" y="848" width="29" height="78"/>
   <object id="1289" x="424" y="3239.33" width="52" height="117.333"/>
+  <object id="1302" x="224" y="826" width="253.333" height="13.3333"/>
+  <object id="1303" x="3" y="823.667" width="122.333" height="17"/>
+  <object id="1304" x="132" y="823.333" width="24" height="113"/>
  </objectgroup>
  <objectgroup name="path">
-  <object id="826" x="225.5" y="794" width="253" height="47.5"/>
-  <object id="827" x="2.5" y="789.25" width="124.5" height="52.5"/>
-  <object id="829" x="131.5" y="788" width="25" height="149.5"/>
+  <object id="826" x="225.5" y="794" width="253" height="28.8333"/>
+  <object id="827" x="2.5" y="789.25" width="124.5" height="32.5"/>
+  <object id="829" x="131.5" y="788" width="25" height="33.5"/>
   <object id="1282" x="233.333" y="3103.33" width="117.333" height="32.6667"/>
   <object id="1284" x="223.333" y="3143.33" width="254.667" height="46.6667"/>
   <object id="1285" x="211.333" y="3196.67" width="239.333" height="26"/>
