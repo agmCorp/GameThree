@@ -35,7 +35,7 @@ public class Constants {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     public static final String SETTINGS = "uy.com.agm.gameThree.settings";
 
@@ -183,7 +183,6 @@ public class Constants {
     public static final float HERO_ALPHA_LERP = 0.2f;
     public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f; // For all kind of bullets
 
     // Edge (meters = pixels * resizeFactor / PPM)
     public static final float EDGE_WIDTH_METERS = Constants.V_WIDTH / PPM;
@@ -259,11 +258,14 @@ public class Constants {
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int DEFAULT_TIMER_POWERTHREE = 10;
     public static final int POWERTHREE_SCORE = 20;
+    public static final float POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f;
     public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_HEIGHT_METERS = 102.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
+    public static final float POWERTHREE_BULLET_VELOCITY_X = 0.0f;
+    public static final float POWERTHREE_BULLET_VELOCITY_Y = 6.0f;
 
     // PowerFour (meters = pixels * resizeFactor / PPM)
     public static final float POWERFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;
@@ -373,6 +375,7 @@ public class Constants {
     public static final float HEROBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float HEROBULLET_WIDTH_METERS = 192.0f * 0.6f / PPM;
     public static final float HEROBULLET_HEIGHT_METERS = 192.0f * 0.6f / PPM;
+    public static final float HEROBULLET_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f;
     public static final float HEROBULLET_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
 
     // EnemyBullet (meters = pixels * resizeFactor / PPM)
@@ -383,6 +386,8 @@ public class Constants {
     public static final float ENEMYBULLET_HEIGHT_METERS = 192.0f  * 0.3f / PPM;
 
     // SilverBullet (meters = pixels * resizeFactor / PPM)
+    public static final float SILVERBULLET_VELOCITY_X = 0.0f;
+    public static final float SILVERBULLET_VELOCITY_Y = 6.0f;
     public static final float SILVERBULLET_CIRCLESHAPE_RADIUS_METERS = 15.0f / PPM;
     public static final float SILVERBULLET_WIDTH_METERS = 72.0f * 0.7f / PPM;
     public static final float SILVERBULLET_HEIGHT_METERS = 65.0f * 0.7f / PPM;

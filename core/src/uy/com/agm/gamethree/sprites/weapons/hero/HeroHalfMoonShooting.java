@@ -2,9 +2,13 @@ package uy.com.agm.gamethree.sprites.weapons.hero;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 /**
@@ -13,31 +17,94 @@ import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 public class HeroHalfMoonShooting implements IShootStrategy {
     private PlayScreen screen;
+    private int numberBullets;
+    private float openFireTime;
 
     public HeroHalfMoonShooting(PlayScreen screen) {
         this.screen = screen;
+        this.numberBullets = 0;
+        this.openFireTime = 0;
+    }
+
+    public HeroHalfMoonShooting(PlayScreen screen, int numberBullets) {
+        this.screen = screen;
+        this.numberBullets = numberBullets;
+        this.openFireTime = 0;
+    }
+
+    public void setNumberBullets(int numberBullets) {
+        this.numberBullets = numberBullets;
     }
 
     @Override
-    public void shootEnhanced(float x, float y, float bulletWidth, float bulletHeight, float bulletCircleShapeRadius, Animation bulletAnimation, int numberBullets) {
+    public void shoot(float dt) {
+        float fireDelay;
+
+        openFireTime += dt;
+        if (screen.getPlayer().isSilverBulletEnabled()) {
+            fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
+        } else {
+            fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
+        }
+        if (openFireTime > fireDelay) {
+            shootImp(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y);
+        }
+    }
+
+    private void shootImp(float x, float y) {
         float directionDegrees = 180.0f / (numberBullets + 1);
         float angle;
+        Hero hero = screen.getPlayer();
+
         for (int i = 1; i <= numberBullets; i++) {
             angle = directionDegrees * i;
             angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
-            if (screen.getHud().isPowerRunningOut() && !screen.getPlayer().isSilverBulletEnabled()) {
-                screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                        y + Constants.HEROBULLET_OFFSET_METERS, angle, HeroBullet.class));
+            if (hero.isSilverBulletEnabled()) {
+                if (hero.hasSilverBullets()) {
+                    hero.decreaseSilverBullets();
+                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
+                            y + Constants.HEROBULLET_OFFSET_METERS,
+                            Constants.SILVERBULLET_WIDTH_METERS,
+                            Constants.SILVERBULLET_HEIGHT_METERS,
+                            Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS,
+                            angle,
+                            Constants.SILVERBULLET_VELOCITY_X,
+                            Constants.SILVERBULLET_VELOCITY_Y,
+                            Assets.getInstance().getSilverBullet().getSilverBulletAnimation(),
+                            HeroBullet.class));
+                    // Sound FX
+                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
+                } else {
+                    // Sound FX
+                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
+                }
             } else {
-                screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                        y + Constants.HEROBULLET_OFFSET_METERS,
-                        bulletWidth,
-                        bulletHeight,
-                        bulletCircleShapeRadius,
-                        angle,
-                        bulletAnimation,
-                        HeroBullet.class));
+                if (screen.getHud().isPowerRunningOut()) {
+                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
+                            y + Constants.HEROBULLET_OFFSET_METERS,
+                            Constants.HEROBULLET_WIDTH_METERS,
+                            Constants.HEROBULLET_HEIGHT_METERS,
+                            Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS,
+                            angle,
+                            Constants.POWERTHREE_BULLET_VELOCITY_X,
+                            Constants.POWERTHREE_BULLET_VELOCITY_Y,
+                            Assets.getInstance().getHeroBullet().getHeroBulletAnimation(),
+                            HeroBullet.class));
+                } else {
+                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
+                            y + Constants.HEROBULLET_OFFSET_METERS,
+                            Constants.POWERTHREE_BULLET_WIDTH_METERS,
+                            Constants.POWERTHREE_BULLET_HEIGHT_METERS,
+                            Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS,
+                            angle,
+                            Constants.POWERTHREE_BULLET_VELOCITY_X,
+                            Constants.POWERTHREE_BULLET_VELOCITY_Y,
+                            Assets.getInstance().getBulletA().getBulletAAnimation(),
+                            HeroBullet.class));
+                }
+                // Sound FX
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
             }
         }
     }

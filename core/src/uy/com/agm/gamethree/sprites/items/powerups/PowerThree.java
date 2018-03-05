@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -30,9 +31,6 @@ public class PowerThree extends Item {
     private float stateWaitingTime;
     private float stateFadingTime;
     private Animation powerThreeAnimation;
-    private Animation bulletAnimation;
-
-    private float manualFireDelay;
     private int numberBullets;
 
     // Fire power
@@ -44,8 +42,6 @@ public class PowerThree extends Item {
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
-        bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
-        manualFireDelay = Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS;
         numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
         stateTime = 0;
         stateWaitingTime = 0;
@@ -168,9 +164,10 @@ public class PowerThree extends Item {
             hero.powerDown();
 
             // Apply fire power
-            screen.getPlayer().getShootContext().setStrategy(new HeroHalfMoonShooting(screen));
-            screen.getPlayer().applyFirePower(Constants.POWERTHREE_BULLET_WIDTH_METERS, Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                    Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS, manualFireDelay, numberBullets, bulletAnimation);
+            HeroHalfMoonShooting heroHalfMoonShooting = ((HeroHalfMoonShooting) hero.getHeroHalfMoonShooting());
+            heroHalfMoonShooting.setNumberBullets(numberBullets); // Performance, to avoid GC
+            hero.getShootContext().setStrategy(heroHalfMoonShooting);
+            screen.getPlayer().applyFirePower();
         }
     }
 

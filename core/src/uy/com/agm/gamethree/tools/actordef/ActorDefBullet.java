@@ -14,32 +14,18 @@ public class ActorDefBullet extends ActorDef {
     private float height;
     private float circleShapeRadius;
     private float angle;
+    float velocityX;
+    float velocityY;
     private Animation animation;
 
-    public ActorDefBullet(float x, float y, Class<?> type) {
-        super(x, y, type);
-        this.width = 0;
-        this.height = 0;
-        this.circleShapeRadius = 0;
-        this.angle = 0;
-        this.animation = null;
-    }
-
-    public ActorDefBullet(float x, float y, float angle, Class<?> type) {
-        super(x, y, type);
-        this.width = 0;
-        this.height = 0;
-        this.circleShapeRadius = 0;
-        this.angle = angle;
-        this.animation = null;
-    }
-
-    public ActorDefBullet(float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation, Class<?> type) {
+    public ActorDefBullet(float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation, Class<?> type) {
         super(x, y, type);
         this.width = width;
         this.height = height;
         this.circleShapeRadius = circleShapeRadius;
         this.angle = angle;
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
         this.animation = animation;
     }
 
@@ -57,6 +43,14 @@ public class ActorDefBullet extends ActorDef {
 
     public float getAngle() {
         return angle;
+    }
+
+    public float getVelocityX() {
+        return velocityX;
+    }
+
+    public float getVelocityY() {
+        return velocityY;
     }
 
     public Animation getAnimation() {

@@ -217,6 +217,8 @@ public class B2WorldCreator {
                         ((ActorDefBullet) actorDef).getHeight(),
                         ((ActorDefBullet) actorDef).getCircleShapeRadius(),
                         ((ActorDefBullet) actorDef).getAngle(),
+                        ((ActorDefBullet) actorDef).getVelocityX(),
+                        ((ActorDefBullet) actorDef).getVelocityY(),
                         ((ActorDefBullet) actorDef).getAnimation()));
             }
             if (actorDef.getType() == EnemyBullet.class) {

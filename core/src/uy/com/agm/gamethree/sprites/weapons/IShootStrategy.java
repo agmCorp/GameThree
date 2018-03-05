@@ -7,5 +7,5 @@ import com.badlogic.gdx.graphics.g2d.Animation;
  */
 
 public interface IShootStrategy {
-    public void shootEnhanced(float x, float y, float bulletWidth, float bulletHeight, float bulletCircleShapeRadius, Animation bulletAnimation, int numberBullets);
+    public void shoot(float dt);
 }

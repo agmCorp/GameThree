@@ -9,11 +9,15 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class ShootContext {
     IShootStrategy shootStrategy;
 
+    public ShootContext(IShootStrategy shootStrategy) {
+        this.shootStrategy = shootStrategy;
+    }
+
     public void setStrategy(IShootStrategy shootStrategy) {
         this.shootStrategy = shootStrategy;
     }
 
-    public void shootEnhanced(float x, float y, float bulletWidth, float bulletHeight, float bulletCircleShapeRadius, Animation bulletAnimation, int numberBullets) {
-        shootStrategy.shootEnhanced(x, y, bulletWidth, bulletHeight, bulletCircleShapeRadius, bulletAnimation, numberBullets);
+    public void shoot(float dt) {
+        shootStrategy.shoot(dt);
     }
 }

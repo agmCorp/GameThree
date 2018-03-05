@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,8 +19,11 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
+import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
+import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
 import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -55,7 +59,6 @@ public class Hero extends Sprite {
     private boolean applyNewFilters;
     private float playAgainTime;
     private float gameOverTime;
-    private float openFireTime;
     private float setDefaultFilterTime;
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
@@ -74,13 +77,8 @@ public class Hero extends Sprite {
 
     // Fire power
     private ShootContext shootContext;
-    private boolean fireEnhancement;
-    private float bulletWidth;
-    private float bulletHeight;
-    private float bulletCircleShapeRadius;
-    private float fireDelay;
-    private int numberBullets;
-    private Animation bulletAnimation;
+    private IShootStrategy heroDefaultShooting; // performance (GC friendly)
+    private IShootStrategy heroHalfMoonShooting; // performance (GC friendly)
 
     // Blink
     private float blinkingTime;
@@ -115,7 +113,6 @@ public class Hero extends Sprite {
         applyNewFilters = false;
         playAgainTime = 0;
         gameOverTime = 0;
-        openFireTime = 0;
         setDefaultFilterTime = 0;
         isPlayingAgain = false;
         shootingEnabled = true;
@@ -132,14 +129,10 @@ public class Hero extends Sprite {
         powerFXSprite = null;
         powerFXAllowRotation = false;
 
-        // Fire power variables initialization (we don't know yet which fire power will be)
-        shootContext = new ShootContext();
-        fireEnhancement = false;
-        bulletWidth = 0;
-        bulletHeight = 0;
-        fireDelay = 0;
-        numberBullets = 0;
-        bulletAnimation = null;
+        // Fire power variables initialization
+        heroDefaultShooting = new HeroDefaultShooting(screen);
+        heroHalfMoonShooting = new HeroHalfMoonShooting(screen);
+        shootContext = new ShootContext(heroDefaultShooting);
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -197,14 +190,13 @@ public class Hero extends Sprite {
         }
 
         // Shoot time
-        openFireTime += dt;
-        automaticShooting();
+        automaticShooting(dt);
     }
 
-    private void automaticShooting() {
+    private void automaticShooting(float dt) {
         if (!GameSettings.getInstance().isManualShooting() && !isSilverBulletEnabled()) {
             if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
-                openFire();
+                openFire(dt);
             }
         }
     }
@@ -243,7 +235,7 @@ public class Hero extends Sprite {
         powerFXStateTime = 0;
         blinkingTime = 0;
         alpha = false;
-        fireEnhancement = false;
+        shootContext.setStrategy(heroDefaultShooting);
         currentPowerState = PowerState.NORMAL;
     }
 
@@ -604,14 +596,6 @@ public class Hero extends Sprite {
         super.draw(batch);
     }
 
-    public void playSoundHeroShoot() {
-        if (isSilverBulletEnabled()) {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
-        } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
-        }
-    }
-
     public void disableShooting() {
         shootingEnabled = false;
     }
@@ -628,87 +612,17 @@ public class Hero extends Sprite {
         return shootContext;
     }
 
+    public IShootStrategy getHeroHalfMoonShooting() {
+        return heroHalfMoonShooting;
+    }
+
     public void openFire() {
+        openFire(Gdx.graphics.getDeltaTime());
+    }
+
+    public void openFire(float dt) {
         if (isShootingEnabled()) {
-            if (isFireEnhanced()) {
-                openFireEnhanced();
-            } else {
-                openFireNormal();
-            }
-        }
-    }
-
-    private void openFireEnhanced() {
-        if (openFireTime > fireDelay) {
-            if (isSilverBulletEnabled()) {
-                shootSilverBulletEnhanced();
-            } else {
-                shootEnhanced();
-            }
-            openFireTime = 0;
-        }
-    }
-
-    private void shootSilverBulletEnhanced() {
-        if (silverBullets > 0) {
-            silverBullets--;
-            screen.getHud().decreaseSilverBullets(1);
-            shootEnhanced();
-        } else {
-            // Sound FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
-        }
-    }
-
-    private void shootEnhanced() {
-        shootContext.shootEnhanced(b2body.getPosition().x,
-                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
-                bulletWidth,
-                bulletHeight,
-                bulletCircleShapeRadius,
-                bulletAnimation,
-                numberBullets);
-    }
-
-    private void openFireNormal() {
-        if (isSilverBulletEnabled()) {
-            if (openFireTime > fireDelay) {
-                shootSilverBulletNormal();
-                openFireTime = 0;
-            }
-        } else {
-            defaultShooting();
-        }
-    }
-
-    private void shootSilverBulletNormal() {
-        if (silverBullets > 0) {
-            silverBullets--;
-            screen.getHud().decreaseSilverBullets(1);
-            screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
-                    b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS,
-                    bulletWidth,
-                    bulletHeight,
-                    bulletCircleShapeRadius,
-                    0,
-                    bulletAnimation,
-                    HeroBullet.class));
-        } else {
-            // Sound FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
-        }
-    }
-
-    private void shootBulletNormal() {
-        screen.getCreator().createGameThreeActor(new ActorDefBullet(b2body.getPosition().x,
-                b2body.getPosition().y + Constants.HEROBULLET_OFFSET_METERS, HeroBullet.class));
-    }
-
-    private void defaultShooting() {
-        float fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HERO_AUTOMATIC_FIRE_DELAY_SECONDS;
-        if (openFireTime > fireDelay) {
-            shootBulletNormal();
-            openFireTime = 0;
+            shootContext.shoot(dt);
         }
     }
 
@@ -766,27 +680,12 @@ public class Hero extends Sprite {
         powerFXAllowRotation = allowRotation;
     }
 
-    public void applyFirePower(float width, float height, float circleShapeRadius, float manualDelay, int bullets, Animation animation) {
+    public void applyFirePower() {
         currentPowerState = PowerState.POWERFUL;
-        fireEnhancement = true;
-        numberBullets = bullets;
-        if (!isSilverBulletEnabled()) {
-            bulletWidth = width;
-            bulletHeight = height;
-            bulletCircleShapeRadius = circleShapeRadius;
-            fireDelay = GameSettings.getInstance().isManualShooting() ?  manualDelay : Constants.HERO_AUTOMATIC_FIRE_DELAY_SECONDS;
-            bulletAnimation = animation;
-        }
     }
 
     public void applySilverBullet() {
         silverBulletEnabled = true;
-        bulletWidth = Constants.SILVERBULLET_WIDTH_METERS;
-        bulletHeight = Constants.SILVERBULLET_HEIGHT_METERS;
-        bulletCircleShapeRadius = Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS;
-        // Same delay regardless of automatic/manual setting because we can only shoot silver bullets manually
-        fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
-        bulletAnimation = Assets.getInstance().getSilverBullet().getSilverBulletAnimation();
     }
 
     public void stop() {
@@ -802,15 +701,16 @@ public class Hero extends Sprite {
         screen.getHud().increaseSilverBullets(1);
     }
 
+    public void decreaseSilverBullets() {
+        silverBullets--;
+        screen.getHud().decreaseSilverBullets(1);
+    }
+
     public boolean hasSilverBullets() {
         return silverBullets > 0;
     }
 
     public boolean isSilverBulletEnabled() {
         return silverBulletEnabled;
-    }
-
-    public boolean isFireEnhanced() {
-        return fireEnhancement;
     }
 }

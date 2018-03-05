@@ -23,34 +23,24 @@ public class HeroBullet extends Weapon {
     private Animation heroBulletAnimation;
     private Vector2 tmp; // Temp GC friendly vector
 
-    public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, Animation animation) {
-        super(screen, x, y, circleShapeRadius > 0 ? circleShapeRadius : Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS);
+    public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
+        super(screen, x, y, circleShapeRadius);
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        width = width > 0 ? width : Constants.HEROBULLET_WIDTH_METERS;
-        height = height > 0 ? height : Constants.HEROBULLET_HEIGHT_METERS;
-
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), width, height);
 
-        velocity.set(Constants.HEROBULLET_VELOCITY_X, Constants.HEROBULLET_VELOCITY_Y);
-        if (angle > 0) {
+        velocity.set(velocityX, velocityY);
+        if (angle > 0) { // todo sacar if?
             velocity.rotate(angle);
             setRotation(angle);
         }
-        if (animation != null) {
-            heroBulletAnimation = animation;
-        } else {
-            heroBulletAnimation = Assets.getInstance().getHeroBullet().getHeroBulletAnimation();
-        }
+        heroBulletAnimation = animation;
 
         stateTime = 0;
         currentState = State.SHOT;
-
-        // Sound FX
-        screen.getPlayer().playSoundHeroShoot();
 
         // Temp GC friendly vector
         tmp = new Vector2();
