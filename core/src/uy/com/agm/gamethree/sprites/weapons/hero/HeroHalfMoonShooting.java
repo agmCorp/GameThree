@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
@@ -16,6 +14,8 @@ import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
  */
 
 public class HeroHalfMoonShooting implements IShootStrategy {
+    private static final String TAG = HeroHalfMoonShooting.class.getName();
+
     private PlayScreen screen;
     private int numberBullets;
     private float openFireTime;
@@ -48,6 +48,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         }
         if (openFireTime > fireDelay) {
             shootImp(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y);
+            openFireTime = 0;
         }
     }
 
