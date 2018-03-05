@@ -133,8 +133,7 @@ public class PlayScreen extends AbstractScreen {
         // Show how to play with the main character
         hud.showInitialHelp();
 
-        // Stop menu music and start playing level music from the beginning
-        AudioManager.getInstance().stopMusic();
+        // Start playing level music
         playLevelMusic();
 
         // User input handler

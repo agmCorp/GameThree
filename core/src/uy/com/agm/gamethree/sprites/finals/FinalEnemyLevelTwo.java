@@ -404,7 +404,7 @@ b2body.setFixedRotation(true); // todo
         // Destroy box2D body
         world.destroyBody(b2body);
 
-        // Stop music
+        // Stop level music
         AudioManager.getInstance().stopMusic();
 
         // Death animation

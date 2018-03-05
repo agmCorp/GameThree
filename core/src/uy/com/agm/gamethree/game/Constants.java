@@ -181,7 +181,7 @@ public class Constants {
     public static final float HERO_HEIGHT_METERS = 128.0f * 0.7f / PPM;
     public static final float HERO_DEATH_LINEAR_VELOCITY = 5.0f;
     public static final float HERO_ALPHA_LERP = 0.2f;
-    public static final int HERO_LIVES_START = 30;
+    public static final int HERO_LIVES_START = 3;
     public static final float HERO_PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     public static final float HERO_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f; // For all kind of bullets
 

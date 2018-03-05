@@ -69,6 +69,14 @@ public class AudioManager {
     }
 
     public void play(Music music) {
+        // Stop previous music
+        if (playingMusic != null) {
+            if (playingMusic != music) {
+                playingMusic.stop();
+            }
+        }
+
+        // Play new music
         playingMusic = music;
         if (GameSettings.getInstance().isMusic()) {
             music.setLooping(true);
