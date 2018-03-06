@@ -14,7 +14,6 @@ import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -166,8 +165,7 @@ public class PowerThree extends Item {
             // Apply fire power
             HeroHalfMoonShooting heroHalfMoonShooting = ((HeroHalfMoonShooting) hero.getHeroHalfMoonShooting());
             heroHalfMoonShooting.setNumberBullets(numberBullets); // Performance, to avoid GC
-            hero.getShootContext().setStrategy(heroHalfMoonShooting);
-            screen.getPlayer().applyFirePower();
+            screen.getPlayer().applyFirePower(heroHalfMoonShooting);
         }
     }
 

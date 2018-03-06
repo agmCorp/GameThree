@@ -119,7 +119,7 @@ public class Hero extends Sprite {
         silverBullets = 0;
         silverBulletEnabled = false;
 
-        // PowerFX variables initialization (we don't know yet which power will be)
+        // PowerFX variables initialization (we don't know which power will be yet)
         currentPowerState = PowerState.NORMAL;
         powerFXAnimation = null;
         powerFXStateTime = 0;
@@ -188,6 +188,10 @@ public class Hero extends Sprite {
 
         // Shoot time
         shootContext.update(dt);
+        openFireAutomatic();
+    }
+
+    private void openFireAutomatic() {
         if (!GameSettings.getInstance().isManualShooting() && !isSilverBulletEnabled()) {
             if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
                 openFire();
@@ -214,7 +218,7 @@ public class Hero extends Sprite {
 
             // When Hero's power is running out, power FX blinks
             if (screen.getHud().isPowerRunningOut()) {
-                blink(dt, powerFXSprite);
+                activateBlink(dt, powerFXSprite);
             }
         }
         if (screen.getHud().isPowerTimeUp()) {
@@ -225,10 +229,9 @@ public class Hero extends Sprite {
 
     public void powerDown() {
         setDefaultFixtureFilter();
+        deactivateBlink(powerFXSprite);
         powerFXSprite = null;
         powerFXStateTime = 0;
-        blinkingTime = 0;
-        alpha = false;
         shootContext.setStrategy(heroDefaultShooting);
         currentPowerState = PowerState.NORMAL;
     }
@@ -455,7 +458,7 @@ public class Hero extends Sprite {
         }
     }
 
-    private void blink(float dt, Sprite sprite) {
+    private void activateBlink(float dt, Sprite sprite) {
         blinkingTime += dt;
         if (blinkingTime >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
             alpha = !alpha;
@@ -468,18 +471,21 @@ public class Hero extends Sprite {
         }
     }
 
+    private void deactivateBlink(Sprite sprite) {
+        sprite.setAlpha(1.0f);
+        blinkingTime = 0;
+        alpha = false;
+    }
+
     private void timeToSetDefaultFilter(float dt) {
         if (isPlayingAgain) {
-            blink(dt, this);
+            activateBlink(dt, this);
 
             setDefaultFilterTime += dt;
             if (setDefaultFilterTime > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
-                setAlpha(1.0f);
-
+                deactivateBlink(this);
                 isPlayingAgain = false;
-                blinkingTime = 0;
-                alpha = false;
             }
         }
     }
@@ -602,10 +608,6 @@ public class Hero extends Sprite {
         return shootingEnabled;
     }
 
-    public ShootContext getShootContext() {
-        return shootContext;
-    }
-
     public IShootStrategy getHeroHalfMoonShooting() {
         return heroHalfMoonShooting;
     }
@@ -670,8 +672,9 @@ public class Hero extends Sprite {
         powerFXAllowRotation = allowRotation;
     }
 
-    public void applyFirePower() {
+    public void applyFirePower(IShootStrategy shootStrategy) {
         currentPowerState = PowerState.POWERFUL;
+        shootContext.setStrategy(shootStrategy);
     }
 
     public void applySilverBullet() {
