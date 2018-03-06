@@ -258,14 +258,14 @@ public class Constants {
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int DEFAULT_TIMER_POWERTHREE = 10;
     public static final int POWERTHREE_SCORE = 20;
-    public static final float POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f;
-    public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.2f;
+    public static final float POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS = 0.15f;
+    public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_HEIGHT_METERS = 102.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
     public static final float POWERTHREE_BULLET_VELOCITY_X = 0.0f;
-    public static final float POWERTHREE_BULLET_VELOCITY_Y = 6.0f;
+    public static final float POWERTHREE_BULLET_VELOCITY_Y = 7.0f;
 
     // PowerFour (meters = pixels * resizeFactor / PPM)
     public static final float POWERFOUR_CIRCLESHAPE_RADIUS_METERS = 29.0f / PPM;

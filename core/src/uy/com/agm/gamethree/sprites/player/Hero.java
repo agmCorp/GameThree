@@ -459,22 +459,26 @@ public class Hero extends Sprite {
     }
 
     private void activateBlink(float dt, Sprite sprite) {
-        blinkingTime += dt;
-        if (blinkingTime >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
-            alpha = !alpha;
-            blinkingTime = 0;
-        }
-        if (alpha) {
-            sprite.setAlpha(1.0f);
-        } else {
-            sprite.setAlpha(0.0f);
+        if (sprite != null) {
+            blinkingTime += dt;
+            if (blinkingTime >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
+                alpha = !alpha;
+                blinkingTime = 0;
+            }
+            if (alpha) {
+                sprite.setAlpha(1.0f);
+            } else {
+                sprite.setAlpha(0.0f);
+            }
         }
     }
 
     private void deactivateBlink(Sprite sprite) {
-        sprite.setAlpha(1.0f);
-        blinkingTime = 0;
-        alpha = false;
+        if (sprite != null) {
+            sprite.setAlpha(1.0f);
+            blinkingTime = 0;
+            alpha = false;
+        }
     }
 
     private void timeToSetDefaultFilter(float dt) {

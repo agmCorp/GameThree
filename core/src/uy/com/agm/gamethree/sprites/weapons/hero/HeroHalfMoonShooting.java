@@ -62,7 +62,6 @@ public class HeroHalfMoonShooting implements IShootStrategy {
 
             if (hero.isSilverBulletEnabled()) {
                 if (hero.hasSilverBullets()) {
-                    hero.decreaseSilverBullets();
                     screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
                             y + Constants.HEROBULLET_OFFSET_METERS,
                             Constants.SILVERBULLET_WIDTH_METERS,
@@ -75,6 +74,9 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             HeroBullet.class));
                     // Sound FX
                     AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
+                    if (i == numberBullets) {
+                        hero.decreaseSilverBullets();
+                    }
                 } else {
                     // Sound FX
                     AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
