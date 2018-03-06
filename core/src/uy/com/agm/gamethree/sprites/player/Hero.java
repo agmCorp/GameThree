@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,10 +20,8 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
-import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -190,13 +187,10 @@ public class Hero extends Sprite {
         }
 
         // Shoot time
-        automaticShooting(dt);
-    }
-
-    private void automaticShooting(float dt) {
+        shootContext.update(dt);
         if (!GameSettings.getInstance().isManualShooting() && !isSilverBulletEnabled()) {
             if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
-                openFire(dt);
+                openFire();
             }
         }
     }
@@ -617,12 +611,8 @@ public class Hero extends Sprite {
     }
 
     public void openFire() {
-        openFire(Gdx.graphics.getDeltaTime());
-    }
-
-    public void openFire(float dt) {
         if (isShootingEnabled()) {
-            shootContext.shoot(dt);
+            shootContext.shoot();
         }
     }
 

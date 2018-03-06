@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
-import com.badlogic.gdx.Gdx;
-
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
@@ -20,24 +18,26 @@ public class HeroDefaultShooting implements IShootStrategy {
 
     private PlayScreen screen;
     private float openFireTime;
+    private float fireDelay;
 
     public HeroDefaultShooting(PlayScreen screen) {
         this.screen = screen;
         this.openFireTime = 0;
+        this.fireDelay = 0;
     }
 
     @Override
-    public void shoot(float dt) {
-        float fireDelay;
-
+    public void updateShoot(float dt) {
         openFireTime += dt;
         if (screen.getPlayer().isSilverBulletEnabled()) {
             fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
         } else {
             fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HEROBULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
         }
-        Gdx.app.debug(TAG, "**** openFireTimer y fireDelay " + openFireTime + " " + fireDelay);
+    }
 
+    @Override
+    public void shoot() {
         if (openFireTime > fireDelay) {
             shootImp(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y);
             openFireTime = 0;

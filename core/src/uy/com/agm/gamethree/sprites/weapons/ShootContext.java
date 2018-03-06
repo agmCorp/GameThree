@@ -19,7 +19,11 @@ public class ShootContext {
         this.shootStrategy = shootStrategy;
     }
 
-    public void shoot(float dt) {
-        shootStrategy.shoot(dt);
+    public void update(float dt) {
+        shootStrategy.updateShoot(dt);
+    }
+
+    public void shoot() {
+        shootStrategy.shoot();
     }
 }
