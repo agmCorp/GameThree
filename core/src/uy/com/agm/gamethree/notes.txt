@@ -72,7 +72,7 @@ Debe ser un random configurable (para el set de poderes que quiera).
     cantidad*, --- contemplado en la estrategia
     delay*, --- contemplado en la estrategia
     animacion*, --- contemplado en la estrategia
-    tipo de movimiento (boomerang) (no se...habria que hacer otra clase que no sea ni heroBullet ni EnemyBullet)
+    tipo de movimiento (boomerang) (se me ocurre modelarlo solo con un enumerado recibido en el constructor y luego en el stateShot de heroBullet o enemyBullet)
     velocidad --- contemplado en la estrategia
     sonido --- contemplado en la estrategia
 
