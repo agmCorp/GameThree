@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
@@ -33,10 +32,9 @@ public class HeroBullet extends Weapon {
         setBounds(getX(), getY(), width, height);
 
         velocity.set(velocityX, velocityY);
-        if (angle > 0) { // todo sacar if?
-            velocity.rotate(angle);
-            setRotation(angle);
-        }
+        velocity.rotate(angle);
+        setRotation(angle);
+
         heroBulletAnimation = animation;
 
         stateTime = 0;

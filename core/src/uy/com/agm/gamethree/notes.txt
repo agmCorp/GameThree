@@ -68,13 +68,13 @@ Debe ser un random configurable (para el set de poderes que quiera).
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
-    tamano de la bala* (sprite y b2body) --- contemplado
-    cantidad*, --- contemplado al crear las balas
-    delay*, --- contemplado en cada personaje
-    animacion*, --- contemplado
-    tipo de movimiento (boomerang) (se me ocurre modelarlo solo con un enumerado recibido en el constructor y luego en el stateShot)
-    velocidad AGREGAR
-    sonido AGREGAR
+    tamano de la bala* (sprite y b2body) --- contemplado en la estrategia
+    cantidad*, --- contemplado en la estrategia
+    delay*, --- contemplado en la estrategia
+    animacion*, --- contemplado en la estrategia
+    tipo de movimiento (boomerang) (no se...habria que hacer otra clase que no sea ni heroBullet ni EnemyBullet)
+    velocidad --- contemplado en la estrategia
+    sonido --- contemplado en la estrategia
 
 ALCANCE
 -------
