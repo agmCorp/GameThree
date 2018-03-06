@@ -23,7 +23,7 @@ public class HeroDefaultShooting implements IShootStrategy {
     public HeroDefaultShooting(PlayScreen screen) {
         this.screen = screen;
         this.openFireTime = 0;
-        this.fireDelay = 0;
+        this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HEROBULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
     }
 
     @Override
@@ -31,15 +31,13 @@ public class HeroDefaultShooting implements IShootStrategy {
         openFireTime += dt;
         if (screen.getPlayer().isSilverBulletEnabled()) {
             fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
-        } else {
-            fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HEROBULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
         }
     }
 
     @Override
-    public void shoot() {
+    public void shoot(float x, float y) {
         if (openFireTime > fireDelay) {
-            shootImp(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y);
+            shootImp(x, y);
             openFireTime = 0;
         }
     }

@@ -127,7 +127,7 @@ public class AssetPowerBox {
         brickFDamagedHard = atlas.findRegion("brickF", 4);
         brickGDamagedHard = atlas.findRegion("brickG", 4);
         brickHDamagedHard = atlas.findRegion("brickH", 4);
-        brickIDamagedHard = atlas.findRegion("brickI", 4);;
+        brickIDamagedHard = atlas.findRegion("brickI", 4);
         brickJDamagedHard = atlas.findRegion("brickJ", 4);
         brickKDamagedHard = atlas.findRegion("brickK", 4);
         brickLDamagedHard = atlas.findRegion("brickL", 4);

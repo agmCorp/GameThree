@@ -1,13 +1,11 @@
 package uy.com.agm.gamethree.sprites.weapons;
 
-import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
-
 /**
  * Created by amorales on 5/3/2018.
  */
 
 public class ShootContext {
-    private static final String TAG = HeroHalfMoonShooting.class.getName();
+    private static final String TAG = ShootContext.class.getName();
 
     private IShootStrategy shootStrategy;
 
@@ -23,7 +21,7 @@ public class ShootContext {
         shootStrategy.updateShoot(dt);
     }
 
-    public void shoot() {
-        shootStrategy.shoot();
+    public void shoot(float x, float y) {
+        shootStrategy.shoot(x, y);
     }
 }

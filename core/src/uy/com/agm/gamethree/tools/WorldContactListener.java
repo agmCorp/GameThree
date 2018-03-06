@@ -7,12 +7,12 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.items.Item;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.tileobjects.InteractiveTileObject;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 

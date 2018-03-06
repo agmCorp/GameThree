@@ -6,5 +6,5 @@ package uy.com.agm.gamethree.sprites.weapons;
 
 public interface IShootStrategy {
     public void updateShoot(float dt);
-    public void shoot();
+    public void shoot(float x, float y);
 }

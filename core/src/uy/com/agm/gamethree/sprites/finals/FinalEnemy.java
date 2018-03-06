@@ -147,7 +147,7 @@ public abstract class FinalEnemy extends Sprite {
             float silverBulletCandidatePosition = b2body.getPosition().y + Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;
 
             if (silverBulletCandidatePosition + Constants.COLSILVERBULLET_HEIGHT_METERS / 2 >= upperEdge) {
-                silverBulletCandidatePosition = b2body.getPosition().y - Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;;
+                silverBulletCandidatePosition = b2body.getPosition().y - Constants.FINALENEMY_AID_SILVERBULLET_OFFSET_METERS;
             }
             screen.getCreator().getItemOnHit(object, b2body.getPosition().x, silverBulletCandidatePosition);
         }

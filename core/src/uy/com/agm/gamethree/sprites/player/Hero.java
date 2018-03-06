@@ -186,7 +186,7 @@ public class Hero extends Sprite {
                 break;
         }
 
-        // Shoot time
+        // Shoot time!
         shootContext.update(dt);
         openFireAutomatic();
     }
@@ -612,13 +612,13 @@ public class Hero extends Sprite {
         return shootingEnabled;
     }
 
-    public IShootStrategy getHeroHalfMoonShooting() {
-        return heroHalfMoonShooting;
+    public HeroHalfMoonShooting getHeroHalfMoonShooting() {
+        return (HeroHalfMoonShooting) heroHalfMoonShooting;
     }
 
     public void openFire() {
         if (isShootingEnabled()) {
-            shootContext.shoot();
+            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y);
         }
     }
 

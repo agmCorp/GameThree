@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.audio.music.AssetMusic;
 import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
+import uy.com.agm.gamethree.assets.fonts.AssetFonts;
 import uy.com.agm.gamethree.assets.i18n.AssetI18NGameThree;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
@@ -31,7 +32,6 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
-import uy.com.agm.gamethree.assets.fonts.AssetFonts;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;

@@ -1,6 +1,11 @@
 package uy.com.agm.gamethree.screens.util;
 
-import uy.com.agm.gamethree.screens.*;
+import uy.com.agm.gamethree.screens.AbstractScreen;
+import uy.com.agm.gamethree.screens.GameOverScreen;
+import uy.com.agm.gamethree.screens.LevelCompletedScreen;
+import uy.com.agm.gamethree.screens.MainMenuScreen;
+import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.screens.SelectLevelScreen;
 import uy.com.agm.gamethree.screens.SettingsScreen;
 
 /**

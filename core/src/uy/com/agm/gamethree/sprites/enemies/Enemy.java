@@ -13,8 +13,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
-import uy.com.agm.gamethree.tools.actordef.ActorDef;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.ShootContext;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -29,7 +30,11 @@ public abstract class Enemy extends Sprite {
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
+
+    protected ShootContext shootContext;
+    private IShootStrategy enemyDefaultShooting; // performance (GC friendly)
     private boolean openFire;
+
     protected Vector2 velocity;
     protected Vector2 tmp; // Temp GC friendly vector
 
@@ -45,6 +50,10 @@ public abstract class Enemy extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
+
+        // Shooting variables initialization
+        enemyDefaultShooting = new EnemyDefaultShooting(screen);
+        shootContext = new ShootContext(enemyDefaultShooting);
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -108,7 +117,7 @@ public abstract class Enemy extends Sprite {
         if (openFire) {
             if (!isDestroyed()) {
                 if (b2body.isActive()) {
-                    screen.getCreator().createGameThreeActor(new ActorDef(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS, EnemyBullet.class));
+                    shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
                 }
             }
         }
@@ -132,6 +141,10 @@ public abstract class Enemy extends Sprite {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
+    protected EnemyDefaultShooting getEnemyDefaultShooting() {
+        return (EnemyDefaultShooting) enemyDefaultShooting;
+    }
+
     public void update(float dt) {
         switch (currentState) {
             case ALIVE:
@@ -147,6 +160,9 @@ public abstract class Enemy extends Sprite {
                 break;
             default:
                 break;
+        }
+        if (openFire) {
+            shootContext.update(dt);
         }
         checkBoundaries();
     }

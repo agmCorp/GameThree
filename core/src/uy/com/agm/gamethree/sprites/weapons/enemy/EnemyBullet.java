@@ -2,16 +2,14 @@ package uy.com.agm.gamethree.sprites.weapons.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
-import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
  * Created by AGM on 12/19/2017.
@@ -22,25 +20,28 @@ public class EnemyBullet extends Weapon {
 
     private float stateTime;
     private Animation enemyBulletAnimation;
+    private Vector2 tmp; // Temp GC friendly vector
 
-    public EnemyBullet(PlayScreen screen, float x, float y) {
-        super(screen, x, y, Constants.ENEMYBULLET_CIRCLESHAPE_RADIUS_METERS);
+    public EnemyBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
+        super(screen, x, y, circleShapeRadius);
 
-        // Animation
-        enemyBulletAnimation = Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation();
+        // Place origin of rotation in the center of the Sprite
+        setOriginCenter();
 
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENEMYBULLET_WIDTH_METERS, Constants.ENEMYBULLET_HEIGHT_METERS);
+        setBounds(getX(), getY(), width, height);
+
+        velocity.set(velocityX, velocityY);
+        velocity.rotate(angle);
+        setRotation(angle);
+
+        enemyBulletAnimation = animation;
 
         stateTime = 0;
         currentState = State.SHOT;
 
-        // Move EnemyBullet from Enemy to Hero
-        velocity.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(velocity, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
-
-        // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
+        // Temp GC friendly vector
+        tmp = new Vector2();
     }
 
     @Override
@@ -67,14 +68,13 @@ public class EnemyBullet extends Weapon {
     @Override
     protected void stateShot(float dt) {
         b2body.setLinearVelocity(velocity);
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, HeroBullet may have collided with sth., and therefore, it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Get the bounding rectangle that could have been changed after applying setRotation
+        getBoundingRectangle().getCenter(tmp);
+
+        // Update our Sprite to correspond with the position of our Box2D body
+        translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
+
         setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
     }

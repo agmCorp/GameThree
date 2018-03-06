@@ -25,7 +25,6 @@ public class EnemyFour extends Enemy {
     private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
 
     private float stateTime;
-    private float openFireTime;
     private Animation enemyFourAnimation;
     private Animation enemyFourFrozenAnimation;
     private Animation explosionAnimation;
@@ -54,7 +53,11 @@ public class EnemyFour extends Enemy {
 
         // State variables initialization
         stateTime = 0;
-        openFireTime = MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);;
+
+        // Default shooting (we don't create a new instance for performance reasons)
+        getEnemyDefaultShooting().setInitialOpenFireTime(MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS));
+        getEnemyDefaultShooting().setFireDelay(Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);
+
         currentState = State.ALIVE;
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
@@ -120,11 +123,8 @@ public class EnemyFour extends Enemy {
         setRegion(region);
         stateTime += dt;
 
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYFOUR_FIRE_DELAY_SECONDS) {
-            super.openFire();
-            openFireTime = 0;
-        }
+        // Shoot time!
+        super.openFire();
 
         checkPath();
     }

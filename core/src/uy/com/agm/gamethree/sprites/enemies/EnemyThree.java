@@ -21,7 +21,6 @@ public class EnemyThree extends Enemy {
     private static final String TAG = EnemyThree.class.getName();
 
     private float stateTime;
-    private float openFireTime;
     private Animation enemyThreeAnimation;
     private Animation explosionAnimation;
 
@@ -36,7 +35,11 @@ public class EnemyThree extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYTHREE_WIDTH_METERS, Constants.ENEMYTHREE_HEIGHT_METERS);
 
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-        openFireTime = MathUtils.random(0, Constants.ENEMYTHREE_FIRE_DELAY_SECONDS);
+
+        // Default shooting (we don't create a new instance for performance reasons)
+        getEnemyDefaultShooting().setInitialOpenFireTime(MathUtils.random(0, Constants.ENEMYTHREE_FIRE_DELAY_SECONDS));
+        getEnemyDefaultShooting().setFireDelay(Constants.ENEMYTHREE_FIRE_DELAY_SECONDS);
+
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTHREE_VELOCITY_X, Constants.ENEMYTHREE_VELOCITY_Y);
     }
@@ -92,11 +95,8 @@ public class EnemyThree extends Enemy {
         setRegion(region);
         stateTime += dt;
 
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYTHREE_FIRE_DELAY_SECONDS) {
-            super.openFire();
-            openFireTime = 0;
-        }
+        // Shoot time!
+        super.openFire();
     }
 
     @Override

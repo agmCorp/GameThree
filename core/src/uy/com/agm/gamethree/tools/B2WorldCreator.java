@@ -26,9 +26,9 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 import uy.com.agm.gamethree.sprites.tileobjects.Borders;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.tileobjects.Path;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
-import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.actordef.ActorDef;
 import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 import uy.com.agm.gamethree.tools.actordef.ActorDefPower;
@@ -212,17 +212,26 @@ public class B2WorldCreator {
                         actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
             }
             if (actorDef.getType() == HeroBullet.class) {
-                weapons.add(new HeroBullet(screen, actorDef.getX(), actorDef.getY(),
-                        ((ActorDefBullet) actorDef).getWidth(),
-                        ((ActorDefBullet) actorDef).getHeight(),
-                        ((ActorDefBullet) actorDef).getCircleShapeRadius(),
-                        ((ActorDefBullet) actorDef).getAngle(),
-                        ((ActorDefBullet) actorDef).getVelocityX(),
-                        ((ActorDefBullet) actorDef).getVelocityY(),
-                        ((ActorDefBullet) actorDef).getAnimation()));
+                ActorDefBullet actorDefBullet = (ActorDefBullet) actorDef;
+                weapons.add(new HeroBullet(screen, actorDefBullet.getX(), actorDefBullet.getY(),
+                        actorDefBullet.getWidth(),
+                        actorDefBullet.getHeight(),
+                        actorDefBullet.getCircleShapeRadius(),
+                        actorDefBullet.getAngle(),
+                        actorDefBullet.getVelocityX(),
+                        actorDefBullet.getVelocityY(),
+                        actorDefBullet.getAnimation()));
             }
             if (actorDef.getType() == EnemyBullet.class) {
-                weapons.add(new EnemyBullet(screen, actorDef.getX(), actorDef.getY()));
+                ActorDefBullet actorDefBullet = (ActorDefBullet) actorDef;
+                weapons.add(new EnemyBullet(screen, actorDefBullet.getX(), actorDefBullet.getY(),
+                        actorDefBullet.getWidth(),
+                        actorDefBullet.getHeight(),
+                        actorDefBullet.getCircleShapeRadius(),
+                        actorDefBullet.getAngle(),
+                        actorDefBullet.getVelocityX(),
+                        actorDefBullet.getVelocityY(),
+                        actorDefBullet.getAnimation()));
             }
         }
     }

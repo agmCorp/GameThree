@@ -25,7 +25,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         this.screen = screen;
         this.numberBullets = 0;
         this.openFireTime = 0;
-        this.fireDelay = 0;
+        this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
     }
 
     // We don't define it in the constructor for performance reasons
@@ -38,15 +38,13 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         openFireTime += dt;
         if (screen.getPlayer().isSilverBulletEnabled()) {
             fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
-        } else {
-            fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
         }
     }
 
     @Override
-    public void shoot() {
+    public void shoot(float x, float y) {
         if (openFireTime > fireDelay) {
-            shootImp(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y);
+            shootImp(x, y);
             openFireTime = 0;
         }
     }

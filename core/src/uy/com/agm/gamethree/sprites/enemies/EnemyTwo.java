@@ -21,7 +21,6 @@ public class EnemyTwo extends Enemy {
     private static final String TAG = EnemyTwo.class.getName();
 
     private float stateTime;
-    private float openFireTime;
     private Animation enemyTwoAnimation;
     private Animation explosionAnimation;
 
@@ -36,7 +35,11 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
 
         stateTime = 0;
-        openFireTime = MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS);;
+
+        // Default shooting (we don't create a new instance for performance reasons)
+        getEnemyDefaultShooting().setInitialOpenFireTime(MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS));
+        getEnemyDefaultShooting().setFireDelay(Constants.ENEMYTWO_FIRE_DELAY_SECONDS);
+
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTWO_VELOCITY_X, Constants.ENEMYTWO_VELOCITY_Y);
     }
@@ -86,11 +89,8 @@ public class EnemyTwo extends Enemy {
         setRegion(region);
         stateTime += dt;
 
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYTWO_FIRE_DELAY_SECONDS) {
-            super.openFire();
-            openFireTime = 0;
-        }
+        // Shoot time!
+        super.openFire();
     }
 
     @Override
