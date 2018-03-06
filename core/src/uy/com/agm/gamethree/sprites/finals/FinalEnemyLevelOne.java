@@ -425,6 +425,13 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         setRotation(angle);
         setFlip(true, true);
 
+        /*
+        yo deberia hacer lo que hace la clase enemy +  lo que hace enemyone por ejemplo. Todo aca. Eso para usar la estrategia default.
+        Otro va a usar otra cosa, por ejemplo el que dispara en abanico.
+        Para el final 2, capaz puedo usar el angulo para girar el chuchillo.
+         */
+
+
         // If is time to shoot we open fire
         if (openFireTime >= Constants.FINALLEVELONE_FIRE_DELAY_SECONDS) {
             openFire();
