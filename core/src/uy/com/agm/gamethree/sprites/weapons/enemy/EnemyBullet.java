@@ -28,15 +28,12 @@ public class EnemyBullet extends Weapon {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
+        // Setbounds is the one that determines the size of the EnemyBullet's drawing on the screen
         setBounds(getX(), getY(), width, height);
 
         velocity.set(velocityX, velocityY);
-        velocity.rotate(angle);
         setRotation(angle);
-
         enemyBulletAnimation = animation;
-
         stateTime = 0;
         currentState = State.SHOT;
 

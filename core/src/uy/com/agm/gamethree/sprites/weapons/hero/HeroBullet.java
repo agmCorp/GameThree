@@ -32,11 +32,8 @@ public class HeroBullet extends Weapon {
         setBounds(getX(), getY(), width, height);
 
         velocity.set(velocityX, velocityY);
-        velocity.rotate(angle);
         setRotation(angle);
-
         heroBulletAnimation = animation;
-
         stateTime = 0;
         currentState = State.SHOT;
 

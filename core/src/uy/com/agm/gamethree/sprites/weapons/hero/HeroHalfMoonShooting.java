@@ -1,5 +1,8 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
+
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
@@ -20,12 +23,16 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private int numberBullets;
     private float openFireTime;
     private float fireDelay;
+    private Vector2 tmp; // Temp GC friendly vector
 
     public HeroHalfMoonShooting(PlayScreen screen, int numberBullets) {
         this.screen = screen;
         this.numberBullets = numberBullets;
         this.openFireTime = 0;
         this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
+
+        // Temp GC friendly vector
+        tmp = new Vector2();
     }
 
     @Override
@@ -55,16 +62,14 @@ public class HeroHalfMoonShooting implements IShootStrategy {
 
             if (hero.isSilverBulletEnabled()) {
                 if (hero.hasSilverBullets()) {
-                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                            y + Constants.HEROBULLET_OFFSET_METERS,
+                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
                             Constants.SILVERBULLET_WIDTH_METERS,
                             Constants.SILVERBULLET_HEIGHT_METERS,
                             Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS,
                             angle,
                             Constants.SILVERBULLET_VELOCITY_X,
                             Constants.SILVERBULLET_VELOCITY_Y,
-                            Assets.getInstance().getSilverBullet().getSilverBulletAnimation(),
-                            HeroBullet.class));
+                            Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
                     // Sound FX
                     AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
                     if (i == numberBullets) {
@@ -76,31 +81,35 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                 }
             } else {
                 if (screen.getHud().isPowerRunningOut()) {
-                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                            y + Constants.HEROBULLET_OFFSET_METERS,
+                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
                             Constants.HEROBULLET_WIDTH_METERS,
                             Constants.HEROBULLET_HEIGHT_METERS,
                             Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS,
                             angle,
                             Constants.POWERTHREE_BULLET_VELOCITY_X,
                             Constants.POWERTHREE_BULLET_VELOCITY_Y,
-                            Assets.getInstance().getHeroBullet().getHeroBulletAnimation(),
-                            HeroBullet.class));
+                            Assets.getInstance().getHeroBullet().getHeroBulletAnimation());
                 } else {
-                    screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                            y + Constants.HEROBULLET_OFFSET_METERS,
+                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
                             Constants.POWERTHREE_BULLET_WIDTH_METERS,
                             Constants.POWERTHREE_BULLET_HEIGHT_METERS,
                             Constants.POWERTHREE_BULLET_CIRCLESHAPE_RADIUS_METERS,
                             angle,
                             Constants.POWERTHREE_BULLET_VELOCITY_X,
                             Constants.POWERTHREE_BULLET_VELOCITY_Y,
-                            Assets.getInstance().getBulletA().getBulletAAnimation(),
-                            HeroBullet.class));
+                            Assets.getInstance().getBulletA().getBulletAAnimation());
                 }
                 // Sound FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
             }
         }
+    }
+
+    private void createBullet(float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
+        tmp.set(velocityX, velocityY).rotate(angle); // The Lord works in mysterious ways
+        screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
+                width, height, circleShapeRadius, angle, tmp.x, tmp.y,
+                animation, HeroBullet.class));
+
     }
 }
