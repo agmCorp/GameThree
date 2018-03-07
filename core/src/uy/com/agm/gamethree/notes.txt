@@ -19,6 +19,7 @@ centro de la pantalla y se van por arriba.
 PROXIMOS PASOS
 --------------
 URGENTE: Ver que las weapons hagan target al irse hacia abajo...ahora se dispara para cualquier lado. Supongo que si por los enemigos que siempre dispararon hacia abajo.
+- el disparo rojo esta muy rapido
 - refactoring weapon, ver poder para disparar hacia atras
 - factor handycap por nivel
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
