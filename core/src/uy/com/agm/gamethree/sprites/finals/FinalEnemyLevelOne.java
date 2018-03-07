@@ -14,11 +14,11 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
-import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
-import uy.com.agm.gamethree.tools.actordef.ActorDef;
 
 /**
  * Created by AGM on 12/30/2017.
@@ -44,7 +44,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private float stateFinalEnemyTime;
     private float changeTime;
     private float timeToChange;
-    private float openFireTime;
 
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneIdleAnimation;
@@ -80,7 +79,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         stateFinalEnemyTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
-        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -192,7 +190,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         timeToChange = Constants.FINALLEVELONE_IDLE_STATE_TIME_SECONDS;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                         timeToChange = getNextTimeToChange();
                     }
                     break;
@@ -201,7 +198,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-                        openFireTime = Constants.FINALLEVELONE_FIRE_DELAY_SECONDS;
                     }
                     timeToChange = getNextTimeToChange();
                     break;
@@ -217,6 +213,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             }
         }
         return newRandomStateFinalEnemy;
+    }
+
+    @Override
+    protected IShootStrategy getShootStrategy() {
+        return new EnemyDefaultShooting(screen, 0, Constants.FINALLEVELONE_FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -425,27 +426,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         setRotation(angle);
         setFlip(true, true);
 
-        /*
-        yo deberia hacer lo que hace la clase enemy +  lo que hace enemyone por ejemplo. Todo aca. Eso para usar la estrategia default.
-        Otro va a usar otra cosa, por ejemplo el que dispara en abanico.
-        Para el final 2, capaz puedo usar el angulo para girar el chuchillo.
-         */
-
-
-        // If is time to shoot we open fire
-        if (openFireTime >= Constants.FINALLEVELONE_FIRE_DELAY_SECONDS) {
-            openFire();
-            openFireTime = 0;
-        } else {
-            openFireTime += dt;
-        }
+        // Shoot time!
+        openFire(dt);
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
-    }
-
-    private void openFire() {
-        screen.getCreator().createGameThreeActor(new ActorDef(b2body.getPosition().x, b2body.getPosition().y, EnemyBullet.class));
     }
 
     private void stateInjured(float dt) {

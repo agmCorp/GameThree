@@ -30,7 +30,7 @@ public abstract class Enemy extends Sprite {
     protected PlayScreen screen;
     protected Body b2body;
 
-    protected ShootContext shootContext;
+    private ShootContext shootContext;
     private boolean openFire;
 
     protected Vector2 velocity;

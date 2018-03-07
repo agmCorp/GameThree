@@ -13,6 +13,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -35,6 +37,7 @@ public abstract class FinalEnemy extends Sprite {
     private float introTime;
     private boolean playingIntro;
     private float aidSilverBulletTime;
+    private ShootContext shootContext;
 
     protected enum StateFinalEnemy {
         INACTIVE, WALKING, IDLE, SHOOTING, INJURED, DYING, EXPLODING, DEAD
@@ -62,6 +65,9 @@ public abstract class FinalEnemy extends Sprite {
         introTime = 0;
         playingIntro = false;
         aidSilverBulletTime = 0;
+
+        // Shooting strategy initialization
+        shootContext = new ShootContext(getShootStrategy());
 
         // By default this FinalEnemy doesn't interact in our world
         b2body.setActive(false);
@@ -157,12 +163,18 @@ public abstract class FinalEnemy extends Sprite {
         screen.getHud().showModalImage(getHelpImage());
     }
 
+    protected void openFire(float dt) {
+        shootContext.update(dt);
+        shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y);
+    }
+
     @Override
     public void draw(Batch batch) {
         super.draw(batch);
     }
 
     protected abstract void defineFinalEnemy();
+    protected abstract IShootStrategy getShootStrategy();
     protected abstract void updateLogic(float dt);
     public abstract void onHit(Weapon weapon);
     public abstract void onHitWall(boolean isBorder);
