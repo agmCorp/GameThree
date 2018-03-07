@@ -21,16 +21,11 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private float openFireTime;
     private float fireDelay;
 
-    public HeroHalfMoonShooting(PlayScreen screen) {
+    public HeroHalfMoonShooting(PlayScreen screen, int numberBullets) {
         this.screen = screen;
-        this.numberBullets = 0;
+        this.numberBullets = numberBullets;
         this.openFireTime = 0;
         this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
-    }
-
-    // We don't define it in the constructor for performance reasons
-    public void setNumberBullets(int numberBullets) {
-        this.numberBullets = numberBullets;
     }
 
     @Override

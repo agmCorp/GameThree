@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -36,10 +38,6 @@ public class EnemyTwo extends Enemy {
 
         stateTime = 0;
 
-        // Default shooting (we don't create a new instance for performance reasons)
-        getEnemyDefaultShooting().setInitialOpenFireTime(MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS));
-        getEnemyDefaultShooting().setFireDelay(Constants.ENEMYTWO_FIRE_DELAY_SECONDS);
-
         currentState = State.ALIVE;
         velocity.set(Constants.ENEMYTWO_VELOCITY_X, Constants.ENEMYTWO_VELOCITY_Y);
     }
@@ -62,6 +60,11 @@ public class EnemyTwo extends Enemy {
                 Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
+    }
+
+    @Override
+    protected IShootStrategy getShootStrategy() {
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS), Constants.ENEMYTWO_FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -90,6 +93,7 @@ public class EnemyTwo extends Enemy {
         stateTime += dt;
 
         // Shoot time!
+        shootContext.update(dt);
         super.openFire();
     }
 

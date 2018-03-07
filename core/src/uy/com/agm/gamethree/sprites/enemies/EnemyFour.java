@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -54,10 +56,6 @@ public class EnemyFour extends Enemy {
         // State variables initialization
         stateTime = 0;
 
-        // Default shooting (we don't create a new instance for performance reasons)
-        getEnemyDefaultShooting().setInitialOpenFireTime(MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS));
-        getEnemyDefaultShooting().setFireDelay(Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);
-
         currentState = State.ALIVE;
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
@@ -99,6 +97,11 @@ public class EnemyFour extends Enemy {
     }
 
     @Override
+    protected IShootStrategy getShootStrategy() {
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS), Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);
+    }
+
+    @Override
     protected void stateAlive(float dt) {
         // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
@@ -124,6 +127,7 @@ public class EnemyFour extends Enemy {
         stateTime += dt;
 
         // Shoot time!
+        shootContext.update(dt);
         super.openFire();
 
         checkPath();

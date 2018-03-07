@@ -21,7 +21,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
-import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -74,8 +73,7 @@ public class Hero extends Sprite {
 
     // Fire power
     private ShootContext shootContext;
-    private IShootStrategy heroDefaultShooting; // performance (GC friendly)
-    private IShootStrategy heroHalfMoonShooting; // performance (GC friendly)
+    private IShootStrategy heroDefaultShooting;
 
     // Blink
     private float blinkingTime;
@@ -128,7 +126,6 @@ public class Hero extends Sprite {
 
         // Fire power variables initialization
         heroDefaultShooting = new HeroDefaultShooting(screen);
-        heroHalfMoonShooting = new HeroHalfMoonShooting(screen);
         shootContext = new ShootContext(heroDefaultShooting);
 
         // Temp GC friendly vector
@@ -610,10 +607,6 @@ public class Hero extends Sprite {
 
     public boolean isShootingEnabled() {
         return shootingEnabled;
-    }
-
-    public HeroHalfMoonShooting getHeroHalfMoonShooting() {
-        return (HeroHalfMoonShooting) heroHalfMoonShooting;
     }
 
     public void openFire() {

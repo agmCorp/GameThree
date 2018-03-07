@@ -163,9 +163,7 @@ public class PowerThree extends Item {
             hero.powerDown();
 
             // Apply fire power
-            HeroHalfMoonShooting heroHalfMoonShooting = hero.getHeroHalfMoonShooting();
-            heroHalfMoonShooting.setNumberBullets(numberBullets); // Performance, to avoid GC
-            screen.getPlayer().applyFirePower(heroHalfMoonShooting);
+            screen.getPlayer().applyFirePower(new HeroHalfMoonShooting(screen, numberBullets));
         }
     }
 

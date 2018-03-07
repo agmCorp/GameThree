@@ -15,7 +15,6 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
-import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -32,7 +31,6 @@ public abstract class Enemy extends Sprite {
     protected Body b2body;
 
     protected ShootContext shootContext;
-    private IShootStrategy enemyDefaultShooting; // performance (GC friendly)
     private boolean openFire;
 
     protected Vector2 velocity;
@@ -51,9 +49,8 @@ public abstract class Enemy extends Sprite {
         this.screen = screen;
         this.velocity = new Vector2();
 
-        // Shooting variables initialization
-        enemyDefaultShooting = new EnemyDefaultShooting(screen);
-        shootContext = new ShootContext(enemyDefaultShooting);
+        // Shooting strategy initialization
+        shootContext = new ShootContext(getShootStrategy());
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -141,10 +138,6 @@ public abstract class Enemy extends Sprite {
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
-    protected EnemyDefaultShooting getEnemyDefaultShooting() {
-        return (EnemyDefaultShooting) enemyDefaultShooting;
-    }
-
     public void update(float dt) {
         switch (currentState) {
             case ALIVE:
@@ -161,9 +154,6 @@ public abstract class Enemy extends Sprite {
             default:
                 break;
         }
-        if (openFire) {
-            shootContext.update(dt);
-        }
         checkBoundaries();
     }
 
@@ -179,6 +169,7 @@ public abstract class Enemy extends Sprite {
     }
 
     protected abstract void defineEnemy();
+    protected abstract IShootStrategy getShootStrategy();
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);
