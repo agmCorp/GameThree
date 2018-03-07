@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.weapons.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -63,19 +62,30 @@ public class EnemySwordShooting implements IShootStrategy { // todo hacer esto
 //        }
 //        angle = angle + velAngle;
 
-        float angle; //90no 0no 180no
-        float velAngle = tmp.angle();
-        Gdx.app.debug(TAG, "ANGULO " + tmp.angle());
+//        float angle; //90no 0no 180no
+//        float velAngle = tmp.angle();
+//        Gdx.app.debug(TAG, "ANGULO " + tmp.angle());
+//
+//
+//        if (0 <= velAngle && velAngle <= 180.0f) {
+//            angle = 270 + velAngle; // estoy anda bien
+//        } else {
+//
+//        // if (180 <= velAngle && velAngle <= 360.0f) {
+//            angle = 0 - velAngle; // velAngle no, +90 manda bien pero imagen a 180, +180 no, angle 0 no ** velangle - 180no, -90no, -270no, -360no
+//            //270 - vel no, 180 - vel no, 90 - vel no, 360 - vel no, 0 - vel no
+//        }// mod 360 no, mod 180no, mod 90no, mod 270no
 
 
-        if (0 <= velAngle && velAngle <= 180.0f) {
-            angle = 270 + velAngle; // estoy anda bien
-        } else {
 
-        // if (180 <= velAngle && velAngle <= 360.0f) {
-            angle = 0 - velAngle; // velAngle no, +90 manda bien pero imagen a 180, +180 no, angle 0 no ** velangle - 180no, -90no, -270no, -360no
-            //270 - vel no, 180 - vel no, 90 - vel no, 360 - vel no, 0 - vel no
-        }// mod 360 no, mod 180no, mod 90no, mod 270no
+        // Calculate shooting angle
+//        float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
+//                .sub(x, y).angle();
+        float angle = tmp.set(x,y )
+                .sub(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y).angle() + 270; // +90 no, +180n, +270no
+        //setRotation(angle);
+        //setFlip(true, true);
+
 
             screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
                     Constants.POWERTHREE_BULLET_WIDTH_METERS,
