@@ -18,6 +18,11 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
+URGENTE: Ver que las weapons hagan target al irse hacia abajo...ahora se dispara para cualquier lado. Supongo que si por los enemigos que siempre dispararon hacia abajo.
+- refactoring weapon, ver poder para disparar hacia atras
+- factor handycap por nivel
+- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
+Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
