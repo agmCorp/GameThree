@@ -106,7 +106,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     }
 
     private void createBullet(float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
-        tmp.set(velocityX, velocityY).rotate(angle); // The Lord works in mysterious ways
+        tmp.set(velocityX, velocityY).rotate(angle); // I must rotate the velocity to move in that direction, otherwise I'll move in a straight line to the front.
         screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
                 width, height, circleShapeRadius, angle, tmp.x, tmp.y,
                 animation, HeroBullet.class));

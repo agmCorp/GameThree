@@ -446,6 +446,40 @@ LECCIONES APRENDIDAS
    Con setBound defino su tamaño y luego, si quiero, son setPosition su posición. Esta ultima tiene sentido llamarla si deseo cambiar la posición del sprite, por ejemplo,
    para alinearla con su box2d después de la simulación física.
 
+22) setRotation, angle() y lpmqtrmpc:
+    Si tengo un vector y hago vector.angle() eso me devuelve el ángulo que forma el vector puesto en el punto (0, 0) con respecto al eje x, medido en sentido antihorario. Punto, se acabó.
+    Este es el sistema de coordenadas:
+                    90
+                    |
+                    |
+     cuadrante II   |  cuadrante I
+                    |
+      180 ----------|---------- 0/360
+                    |
+                    |
+     cuadrante III  |  cuadrante IV            |
+                    |
+                   270
+
+    Cuando dibujo una textura con el método draw(Batch batch) de la clase Sprite, se dibuja paradita tal cual la veo en mis archivos de imágenes.
+    Si utilizo el método draw de la clase Batch, ahí la dibuja acostada sobre el eje x y mirando hacia la derecha.
+    Se puede decir entonces que Sprite.draw() es equivalente a Batch.draw() + setRotation(90).
+    En lo posible debo usar siempre Sprite.draw() que como comenté antes, dibuja la textura tal cual la veo en mis archivos (paradita).
+    Si hago Sprite.setRotation(), eso la rota en sentido antihorario, si hago Sprite.rotation() la rota también en sentido antihorario pero permite acumular rotaciones.
+    Entonces Sprite.rotation(20) + Sprite.rotation(30) = Sprite.setRotation(50).
+
+    Lo divertido de esto, es que si tengo un vector velocidad vel que está en el cuadrante I apuntando hacia afuera, y quiero hacer que mi textura (supongamos un hombrecito)
+    mire hacia ese lugar, como los angulos se rotan antihorario y se miden antihorario y la textura de Sprite.draw() está "rotada 90 con respecto a la matemática" debo hacer:
+    anguloAGirarTextura = 90 (cuadrante II) + 90 (cuadrante III) + 90 (cuadrante IV) + vel.angle();
+    sprite.setRotation(anguloAGirarTextura)
+
+    Si el vector velocidad está en los cuadrantes II, III y IV:
+    anguloAGirarTextura = vel.angle() - 90 (cuadrante I);
+    sprite.setRotation(anguloAGirarTextura)
+
+    Libgdx no trabaja con ángulos negativos aunque al parecer es robusto y los giros de ángulos negativos lo hace en sentido horario. No usar ángulos negativos porque es impredecible para mi.
+    No se si alguna vez vector.angle() retorna exactamente cero o exactamente 360. Creo que puede llegar a retornar cero pero no 360. Es decir, no conozco ese valor borde.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
