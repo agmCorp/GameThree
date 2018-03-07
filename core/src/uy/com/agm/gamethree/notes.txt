@@ -19,7 +19,8 @@ centro de la pantalla y se van por arriba.
 PROXIMOS PASOS
 --------------
 - URGENTE: HACER CON ENEMY LO MISMO QUE HICE CON HERO Y HACER CON ENEMYBULLET LO MISMO QUE HICE CON HEROBULLET. ES DIFICIL.
-
+			‎está mal el if
+- ‎estudiar la memoria en android por el new
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
