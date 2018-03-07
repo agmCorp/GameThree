@@ -127,8 +127,7 @@ public class EnemyFour extends Enemy {
         stateTime += dt;
 
         // Shoot time!
-        shootContext.update(dt);
-        super.openFire();
+        super.openFire(dt);
 
         checkPath();
     }

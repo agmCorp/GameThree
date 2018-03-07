@@ -110,12 +110,11 @@ public abstract class Enemy extends Sprite {
         screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
     }
 
-    protected void openFire() {
-        if (openFire) {
-            if (!isDestroyed()) {
-                if (b2body.isActive()) {
-                    shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
-                }
+    protected void openFire(float dt) {
+        if (openFire && !isDestroyed()) {
+            if (b2body.isActive()) {
+                shootContext.update(dt);
+                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
             }
         }
     }

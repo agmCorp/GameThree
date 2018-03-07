@@ -94,8 +94,7 @@ public class EnemyOne extends Enemy {
         stateTime += dt;
 
         // Shoot time!
-        shootContext.update(dt);
-        super.openFire();
+        super.openFire(dt);
 
         if (changeDirection) {
             changeDirectionTime += dt;

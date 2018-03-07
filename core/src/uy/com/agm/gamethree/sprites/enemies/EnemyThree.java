@@ -99,8 +99,7 @@ public class EnemyThree extends Enemy {
         stateTime += dt;
 
         // Shoot time!
-        shootContext.update(dt);
-        super.openFire();
+        super.openFire(dt);
     }
 
     @Override
