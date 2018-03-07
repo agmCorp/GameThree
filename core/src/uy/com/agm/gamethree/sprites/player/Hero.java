@@ -71,7 +71,7 @@ public class Hero extends Sprite {
     private Sprite powerFXSprite;
     private boolean powerFXAllowRotation;
 
-    // Fire power
+    // Shooting strategy
     private ShootContext shootContext;
     private IShootStrategy heroDefaultShooting;
 
@@ -124,7 +124,7 @@ public class Hero extends Sprite {
         powerFXSprite = null;
         powerFXAllowRotation = false;
 
-        // Fire power variables initialization
+        // Shooting strategy initialization
         heroDefaultShooting = new HeroDefaultShooting(screen);
         shootContext = new ShootContext(heroDefaultShooting);
 
