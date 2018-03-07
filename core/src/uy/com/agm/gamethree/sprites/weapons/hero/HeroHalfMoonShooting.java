@@ -91,7 +91,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             y + Constants.HEROBULLET_OFFSET_METERS,
                             Constants.POWERTHREE_BULLET_WIDTH_METERS,
                             Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                            Constants.POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS,
+                            Constants.POWERTHREE_BULLET_CIRCLESHAPE_RADIUS_METERS,
                             angle,
                             Constants.POWERTHREE_BULLET_VELOCITY_X,
                             Constants.POWERTHREE_BULLET_VELOCITY_Y,

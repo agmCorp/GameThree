@@ -263,7 +263,7 @@ public class Constants {
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
     public static final float POWERTHREE_BULLET_HEIGHT_METERS = 102.0f * 1.0f / PPM;
-    public static final float POWERTHREE_BULLET_CIRCLESHAPERADIUS_METERS = 30.0f / PPM;
+    public static final float POWERTHREE_BULLET_CIRCLESHAPE_RADIUS_METERS = 30.0f / PPM;
     public static final float POWERTHREE_BULLET_VELOCITY_X = 0.0f;
     public static final float POWERTHREE_BULLET_VELOCITY_Y = 7.0f;
 
