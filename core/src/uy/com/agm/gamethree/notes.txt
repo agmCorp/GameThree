@@ -18,9 +18,6 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
-- URGENTE: HACER CON ENEMY LO MISMO QUE HICE CON HERO Y HACER CON ENEMYBULLET LO MISMO QUE HICE CON HEROBULLET. ES DIFICIL.
-			‎está mal el if
-- ‎estudiar la memoria en android por el new
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la pantalla (o en el centro del héroe)
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
@@ -32,7 +29,6 @@ Todos los enemigos reciben el tileObject, entonces una manera seria usar propert
 sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
 NO. SI LUEGO LAS QUIERO CAMBIAR TENGO QUE RECORRER 1 POR 1 LOS OBJETOS DEL TILED. CREO QUE LO MEJOR SERIA
 HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
-- Ahora el arma del enemigo final quedo muy lenta. Creo conviene hacer con enemybullet lo mismo que hice con herobullet, pasando info en el constructor
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
@@ -71,11 +67,15 @@ Debe ser un random configurable (para el set de poderes que quiera).
 - averiguar como debuguear
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
-    tamano de la bala* (sprite y b2body) --- contemplado en la estrategia
-    cantidad*, --- contemplado en la estrategia
-    delay*, --- contemplado en la estrategia
-    animacion*, --- contemplado en la estrategia
-    tipo de movimiento (boomerang) (se me ocurre modelarlo solo con un enumerado recibido en el constructor y luego en el stateShot de heroBullet o enemyBullet)
+    dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
+    cantidad, --- contemplado en la estrategia
+    delay, --- contemplado en la estrategia
+    animacion, --- contemplado en la estrategia
+    tipo de movimiento (boomerang):
+        se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
+        y luego en el stateShot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
+        definir una clase nueva FancyBullet que herede de Weapon y tenga toda su lógica loca adentro (como la tiene HeroBullet o EnemyBullet).
+        Luego el B2WorldCreator la contemplaría.
     velocidad --- contemplado en la estrategia
     sonido --- contemplado en la estrategia
 
