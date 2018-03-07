@@ -16,6 +16,7 @@ import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -220,8 +221,7 @@ b2body.setFixedRotation(true); // todo
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        //return new EnemyDefaultShooting(screen, 0, Constants.FINALLEVELONE_FIRE_DELAY_SECONDS);
-        return new EnemySwordShooting(screen, 0, Constants.FINALLEVELONE_FIRE_DELAY_SECONDS);
+        return new EnemyDefaultShooting(screen, 0, Constants.FINALLEVELONE_FIRE_DELAY_SECONDS);
     }
 
     @Override
