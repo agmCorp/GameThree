@@ -53,13 +53,13 @@ public class EnemySwordShooting implements IShootStrategy { // todo hacer esto
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
         screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
-                Constants.POWERTHREE_BULLET_WIDTH_METERS,
-                Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                Constants.POWERTHREE_BULLET_CIRCLESHAPE_RADIUS_METERS,
+                Constants.BULLETC_WIDTH_METERS,
+                Constants.BULLETC_HEIGHT_METERS,
+                Constants.BULLETC_CIRCLESHAPE_RADIUS_METERS,
                 angle,
                 tmp.x,
                 tmp.y,
-                Assets.getInstance().getBulletA().getBulletAAnimation(),
+                Assets.getInstance().getBulletC().getBulletCAnimation(),
                 EnemyBullet.class));
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());

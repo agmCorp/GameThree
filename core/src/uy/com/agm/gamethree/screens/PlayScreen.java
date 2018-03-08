@@ -96,8 +96,8 @@ public class PlayScreen extends AbstractScreen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
-        // todo gameCam.position.set(gameViewPort.getWorldWidth() / 2, 74, 0);
+        // todo gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 74, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -114,7 +114,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
-        //player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
 
         // Create boundaries
         upperEdge = new Edge(this, true);
@@ -184,8 +184,8 @@ public class PlayScreen extends AbstractScreen {
         updatePowerBoxes(dt);
         updateItems(dt);
         updateWeapons(dt);
-        updateFinalEnemy(dt);
         updateEnemies(dt);
+        updateFinalEnemy(dt);
         updateHero(dt);
         updateHud(dt);
         updateCamera(dt);
@@ -329,11 +329,12 @@ public class PlayScreen extends AbstractScreen {
         game.getBatch().setProjectionMatrix(gameCam.combined);
         game.getBatch().begin();
 
-        renderFinalEnemy();
+        // This order is important
         renderPowerBoxes();
         renderItems();
         renderWeapons();
         renderEnemies();
+        renderFinalEnemy();
         renderHero();
 
         game.getBatch().end();

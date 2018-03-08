@@ -7,7 +7,7 @@ package uy.com.agm.gamethree.game;
 public class Constants {
     // ---- Game -----
 
-    public static final String TITLE = "Wipe them out";
+    public static final String TITLE = "Wipe them out!";
 
     // GUI Width (pixels)
     // Visible game world is V_WIDTH / PPM meters wide
@@ -258,7 +258,7 @@ public class Constants {
     public static final float POWERTHREE_HEIGHT_METERS = 64.0f * 0.7f / PPM;
     public static final int DEFAULT_TIMER_POWERTHREE = 10;
     public static final int POWERTHREE_SCORE = 20;
-    public static final float POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS = 0.15f;
+    public static final float POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
     public static final float POWERTHREE_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
     public static final int POWERTHREE_MAX_BULLETS = 6;
     public static final float POWERTHREE_BULLET_WIDTH_METERS = 39.0f * 1.0f / PPM;
@@ -413,4 +413,13 @@ public class Constants {
     public static final float EXPLOSIONE_WIDTH_METERS = 196.0f * 3.0f / PPM;
     public static final float EXPLOSIONE_HEIGHT_METERS = 178.0f * 3.0f / PPM;
 
+    // BulletB (meters = pixels * resizeFactor / PPM)
+    public static final float BULLETB_WIDTH_METERS = 40.0f * 1.0f / PPM;
+    public static final float BULLETB_HEIGHT_METERS = 100.0f * 1.0f / PPM;
+    public static final float BULLETB_CIRCLESHAPE_RADIUS_METERS = 30.0f / PPM;
+
+    // BulletC (meters = pixels * resizeFactor / PPM)
+    public static final float BULLETC_WIDTH_METERS = 40.0f * 0.8f / PPM;
+    public static final float BULLETC_HEIGHT_METERS = 100.0f * 0.8f / PPM;
+    public static final float BULLETC_CIRCLESHAPE_RADIUS_METERS = 30.0f / PPM;
 }

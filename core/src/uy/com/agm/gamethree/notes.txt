@@ -18,9 +18,12 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
-URGENTE: Ver que las weapons hagan target al irse hacia abajo...ahora se dispara para cualquier lado. Supongo que si por los enemigos que siempre dispararon hacia abajo.
-- el disparo rojo esta muy rapido
-- refactoring weapon, ver poder para disparar hacia atras
+- ir pasando las constantes?
+- capaz conviene dibujar la red mismo en el background y no dinamicamente. El probelma es que
+tuve que poner el enemigo final como la capa mas baja al dibujar, para que todo lo demas quede sobre la red.
+Lo que pasa es que el final del level 2 pasa por abajo de las boxes y queda feo.
+Puedo hacer que choque contra ellas definiendo un nuevo target, pero el final 1 deberia chocar tambien y ahi no sirve.
+conclusion: dibujarla como graphic y mover los draw como antes.
 - factor handycap por nivel
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
@@ -36,9 +39,6 @@ sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
 NO. SI LUEGO LAS QUIERO CAMBIAR TENGO QUE RECORRER 1 POR 1 LOS OBJETOS DEL TILED. CREO QUE LO MEJOR SERIA
 HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
-- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
-Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
-
 
 PENDIENTES
 ----------

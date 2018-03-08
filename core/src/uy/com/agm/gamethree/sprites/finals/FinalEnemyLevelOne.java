@@ -17,7 +17,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
-import uy.com.agm.gamethree.sprites.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
@@ -50,9 +49,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
     private Animation finalEnemyLevelOneDyingAnimation;
-
-    // Background
-    private Sprite backgroundSprite;
 
     // Power FX
     private PowerState currentPowerState;
@@ -92,10 +88,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         } else {
             currentStateWalking = StateWalking.CEILING_RIGHT;
         }
-
-        // Spider web
-        backgroundSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneBackground());
-        backgroundSprite.setBounds(0, Constants.V_HEIGHT * (Constants.WORLD_SCREENS - 1) / Constants.PPM, Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM);
 
         // -------------------- PowerFX --------------------
 
@@ -767,9 +759,6 @@ b2body.setFixedRotation(true); // todo
 
     @Override
     public void draw(Batch batch) {
-        // Draw background
-        backgroundSprite.draw(batch);
-
         // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);

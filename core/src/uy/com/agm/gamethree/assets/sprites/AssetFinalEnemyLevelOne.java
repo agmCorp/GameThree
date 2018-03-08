@@ -14,7 +14,6 @@ public class AssetFinalEnemyLevelOne {
 
     private TextureRegion finalEnemyLevelOneStand;
     private TextureRegion finalEnemyLevelOnePowerStand;
-    private TextureRegion finalEnemyLevelOneBackground;
     private Animation finalEnemyLevelOneIdleAnimation;
     private Animation finalEnemyLevelOneWalkAnimation;
     private Animation finalEnemyLevelOneShootAnimation;
@@ -26,7 +25,6 @@ public class AssetFinalEnemyLevelOne {
 
         finalEnemyLevelOneStand = atlas.findRegion("finalEnemyLevelOneIdle", 1);
         finalEnemyLevelOnePowerStand = atlas.findRegion("finalEnemyLevelOnePower", 1);
-        finalEnemyLevelOneBackground = atlas.findRegion("spiderWeb");
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneIdle");
@@ -60,10 +58,6 @@ public class AssetFinalEnemyLevelOne {
 
     public TextureRegion getFinalEnemyLevelOnePowerStand() {
         return finalEnemyLevelOnePowerStand;
-    }
-
-    public TextureRegion getFinalEnemyLevelOneBackground() {
-        return finalEnemyLevelOneBackground;
     }
 
     public Animation getFinalEnemyLevelOneIdleAnimation() {
