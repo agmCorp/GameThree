@@ -19,11 +19,6 @@ centro de la pantalla y se van por arriba.
 PROXIMOS PASOS
 --------------
 - ir pasando las constantes?
-- capaz conviene dibujar la red mismo en el background y no dinamicamente. El probelma es que
-tuve que poner el enemigo final como la capa mas baja al dibujar, para que todo lo demas quede sobre la red.
-Lo que pasa es que el final del level 2 pasa por abajo de las boxes y queda feo.
-Puedo hacer que choque contra ellas definiendo un nuevo target, pero el final 1 deberia chocar tambien y ahi no sirve.
-conclusion: dibujarla como graphic y mover los draw como antes.
 - factor handycap por nivel
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
@@ -32,7 +27,6 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
 - nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan. Cuando llegan al edge suben y hacen lo mismo.
 - programar la secuencia de movimientos del enemigo final 2.
-- Tengo un escudo nuevo en gif ahi...
 - Las cosas en los demas niveles deberian ser mas rapidas.
 Todos los enemigos reciben el tileObject, entonces una manera seria usar properties al dibujar el nivel con
 sus velocidades, frecuencias de disparo, etc. Si no estan, toma las constantes.
@@ -42,6 +36,7 @@ HACER UN FACTOR DE DIFICULTAD POR NIVEL QUE MULTIPLIQUE LAS COSAS.
 
 PENDIENTES
 ----------
+- Tengo un escudo nuevo en gif ahi...
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U.
 - EL B2WORLDcreator es el que deberia tener todas las constantes publicas de por ejemplo KEY_COLSILVERBULLET, etc.
 y los demas usan sus constantes (ver finalEnemy cuando crea un silverbullet). O capaz me conviene poner todas
@@ -56,12 +51,11 @@ Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
     - 1 moneda
     - 1 shuriken
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
-- highscores, en la pantalla de level completed si hubo highscore se indica.
+- incluir highscores, en la pantalla de level completed si hubo highscore se indica.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - hacer refactoring de constantes
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
-- incluir highscores
 - agregar transitions
 - agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
