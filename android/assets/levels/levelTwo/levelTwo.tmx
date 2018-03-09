@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1342">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1343">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -47,27 +47,27 @@
     <property name="powerOne" type="int" value="500"/>
    </properties>
   </object>
-  <object id="1324" x="192" y="7520" width="32" height="32">
+  <object id="1324" x="184" y="6038" width="32" height="32">
    <properties>
     <property name="powerThree" type="int" value="10"/>
    </properties>
   </object>
-  <object id="1325" x="288" y="7392" width="32" height="32">
+  <object id="1325" x="280" y="5910" width="32" height="32">
    <properties>
     <property name="powerOne" type="int" value="10"/>
    </properties>
   </object>
-  <object id="1326" x="160" y="7136" width="32" height="32">
+  <object id="1326" x="152" y="5654" width="32" height="32">
    <properties>
     <property name="powerOne" type="int" value="5"/>
    </properties>
   </object>
-  <object id="1327" x="224" y="7232" width="32" height="32">
+  <object id="1327" x="216" y="5750" width="32" height="32">
    <properties>
     <property name="powerThree" type="int" value="12"/>
    </properties>
   </object>
-  <object id="1328" x="160" y="7328" width="32" height="32">
+  <object id="1328" x="152" y="5846" width="32" height="32">
    <properties>
     <property name="powerThree" type="int" value="11"/>
    </properties>
@@ -119,5 +119,8 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="enemyFive">
+  <object id="1342" x="224" y="7552" width="32" height="32"/>
  </objectgroup>
 </map>

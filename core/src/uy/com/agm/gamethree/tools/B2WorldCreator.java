@@ -12,6 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
+import uy.com.agm.gamethree.sprites.enemies.EnemyFive;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFour;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
@@ -48,6 +49,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMYTWO = "enemyTwo";
     private static final String LAYER_ENEMYTHREE = "enemyThree";
     private static final String LAYER_ENEMYFOUR = "enemyFour";
+    private static final String LAYER_ENEMYFIVE = "enemyFive";
     private static final String LAYER_POWERBOX = "powerBox";
     private static final String KEY_POWERONE = "powerOne";
     private static final String KEY_POWERTWO = "powerTwo";
@@ -137,6 +139,14 @@ public class B2WorldCreator {
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyFour(screen, object));
+            }
+        }
+
+        // Layer: enemyFive
+        layer = map.getLayers().get(LAYER_ENEMYFIVE);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyFive(screen, object));
             }
         }
 

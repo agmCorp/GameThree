@@ -19,6 +19,8 @@ centro de la pantalla y se van por arriba.
 
 PROXIMOS PASOS
 --------------
+- Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
+        tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
 - ir pasando las constantes?
 - factor handycap por nivel
 - help de escudo y help de tough

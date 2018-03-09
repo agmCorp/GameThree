@@ -1224,4 +1224,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="enemyFive"/>
 </map>
