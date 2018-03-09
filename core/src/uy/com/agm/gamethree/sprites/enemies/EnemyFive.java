@@ -44,8 +44,8 @@ public class EnemyFive extends Enemy {
 
         stateTime = 0;
         // // TODO: 9/3/2018
-        period = 5;
-        radius = 1.0f;
+        period = 2;
+        radius = 1.5f;
         counterclockwise = true;
         elapsedTime = 0;
         // fin todo
