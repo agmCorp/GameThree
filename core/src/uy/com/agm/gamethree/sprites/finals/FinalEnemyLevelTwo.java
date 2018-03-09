@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -288,15 +289,39 @@ b2body.setFixedRotation(true); // todo
         currentStateFinalEnemy = getNewRandomState(dt);
     }
 
-    // Move to target
     private void moveToNewTarget() {
-        float xMin = 0;
-        float xMax = Constants.V_WIDTH / Constants.PPM;
-        float yMin = Constants.V_HEIGHT * (Constants.WORLD_SCREENS - 1) / Constants.PPM;
-        float yMax = Constants.V_HEIGHT * Constants.WORLD_SCREENS / Constants.PPM;
-        target.setPosition(MathUtils.random(xMin + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS, xMax - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS),
-                MathUtils.random(yMin + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS, yMax - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS));
+        // We cannot use screen.getGameCam().position.x because our finalEnemy is created at the end
+        // of the level when the camera is still moving.
+        float worldWidth = screen.getGameViewPort().getWorldWidth();
+        float worldHeight = screen.getGameViewPort().getWorldHeight();
+        float xMin = Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
+        float xMax = worldWidth - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
+        float xHalf = worldWidth / 2;
+        float yMin = worldHeight * (Constants.WORLD_SCREENS - 1) + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
+        float yMax = worldHeight * Constants.WORLD_SCREENS - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
+        float yHalf = worldHeight * Constants.WORLD_SCREENS - worldHeight / 2;
 
+        int randomPoint = MathUtils.random(1, 5);
+        switch (randomPoint) {
+            case 1:
+                target.setPosition(xMin, yHalf);
+                break;
+            case 2:
+                target.setPosition(xHalf, yMax);
+                break;
+            case 3:
+                target.setPosition(xMax, yHalf);
+                break;
+            case 4:
+                target.setPosition(xHalf, yMin);
+                break;
+            case 5:
+                target.setPosition(xHalf, yHalf);
+                break;
+        }
+        Gdx.app.debug(TAG, "***** target(" + target.x + ", " + target.y + ") --> " + randomPoint);
+
+        // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, target.x, target.y, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
         velocity.set(tmp);

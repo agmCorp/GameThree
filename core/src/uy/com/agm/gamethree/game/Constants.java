@@ -354,13 +354,13 @@ public class Constants {
     public static final String FINALLEVELTWO_NAME = "SKULLYHOOD";
     public static final float FINALLEVELTWO_CIRCLESHAPE_RADIUS_METERS = 60.0f / PPM;
     public static final float FINALLEVELTWO_TARGET_RADIUS_METERS = 30.0f / PPM;
-    public static final float FINALLEVELTWO_LINEAR_VELOCITY = 5.0f;
+    public static final float FINALLEVELTWO_LINEAR_VELOCITY = 4.0f;
     public static final float FINALLEVELTWO_DENSITY = 1000.0f;
     public static final float FINALLEVELTWO_WIDTH_METERS = 192.0f * 0.9f / PPM;
     public static final float FINALLEVELTWO_HEIGHT_METERS = 192.0f * 0.9f / PPM;
     public static final float FINALLEVELTWO_POWER_WIDTH_METERS = 192.0f * 1.6f / PPM;
     public static final float FINALLEVELTWO_POWER_HEIGHT_METERS = 192.0f * 1.6f / PPM;
-    public static final int FINALLEVELTWO_MAX_DAMAGE = 1;
+    public static final int FINALLEVELTWO_MAX_DAMAGE = 15;
     public static final float FINALLEVELTWO_CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     public static final float FINALLEVELTWO_CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     public static final float FINALLEVELTWO_IDLE_STATE_TIME_SECONDS = 5.0f;
