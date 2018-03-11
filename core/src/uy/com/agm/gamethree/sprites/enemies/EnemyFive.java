@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -23,6 +24,11 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 
 public class EnemyFive extends Enemy {
     private static final String TAG = EnemyFive.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final int SCORE = 10;
 
     private float stateTime;
     private float period; // Measured in seconds
@@ -75,8 +81,7 @@ public class EnemyFive extends Enemy {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-  // todo      return new EnemyDefaultShooting(screen, MathUtils.random(0, EnemyTwo.FIRE_DELAY_SECONDS), EnemyTwo.FIRE_DELAY_SECONDS);
-        return null;
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, FIRE_DELAY_SECONDS), FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -125,7 +130,7 @@ public class EnemyFive extends Enemy {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
 
         // Set score
-        // todo screen.getHud().addScore(EnemyTwo.SCORE);
+        screen.getHud().addScore(SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
