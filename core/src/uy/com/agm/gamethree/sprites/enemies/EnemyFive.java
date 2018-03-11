@@ -10,8 +10,8 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
@@ -27,34 +27,30 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float PERIOD_SECONDS = 2.0f;
+    private static final float RADIUS_METERS = 1.5f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final int SCORE = 10;
+    private static final int SCORE = 15;
 
     private float stateTime;
-    private float period; // Measured in seconds
-    private float radius; // Measured in meters
     private boolean counterclockwise;
     private float elapsedTime;
-    private Animation enemyTwoAnimation;
+    private Animation enemyFiveAnimation;
     private Animation explosionAnimation;
 
     public EnemyFive(PlayScreen screen, MapObject object) {
         super(screen, object);
 
         // Animations
-        enemyTwoAnimation = Assets.getInstance().getEnemyTwo().getEnemyTwoAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
+        enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
-        // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
         stateTime = 0;
-        // // TODO: 9/3/2018
-        period = 2;
-        radius = 1.5f;
-        counterclockwise = true;
+        counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
-        // fin todo
 
         currentState = State.ALIVE;
         velocity.set(0.0f, 0.0f); // Initially at rest
@@ -69,7 +65,7 @@ public class EnemyFive extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(EnemyTwo.CIRCLE_SHAPE_RADIUS_METERS);
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.SHIELD_BIT |
@@ -91,18 +87,18 @@ public class EnemyFive extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyFive may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
+        TextureRegion region = (TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true);
+        if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
-        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
+        if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
 
@@ -143,8 +139,8 @@ public class EnemyFive extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionA.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionA.HEIGHT_METERS / 2,
-                        AssetExplosionA.WIDTH_METERS, AssetExplosionA.HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionF.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionF.HEIGHT_METERS / 2,
+                        AssetExplosionF.WIDTH_METERS, AssetExplosionF.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
@@ -153,8 +149,8 @@ public class EnemyFive extends Enemy {
 
     private Vector2 getNewTangentialSpeed(float dt) {
         elapsedTime += dt;
-        float w = 2 * MathUtils.PI / period;
-        tmp.set((counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), radius * w * MathUtils.cos(w * elapsedTime));
+        float w = 2 * MathUtils.PI / PERIOD_SECONDS;
+        tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         return tmp;
     }
 
@@ -165,7 +161,7 @@ public class EnemyFive extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyTwo();
+        return Assets.getInstance().getScene2d().getHelpEnemyFive();
     }
 
     @Override

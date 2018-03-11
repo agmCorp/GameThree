@@ -17,6 +17,7 @@ centro de la pantalla y se van por arriba.
 - Para el próximo enemigofinal puedo hacer que me siga
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
 
+
 PROXIMOS PASOS
 --------------
 - Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
@@ -43,7 +44,9 @@ TENGO
 PENDIENTES
 ----------
 - Tengo un escudo nuevo en gif ahi...no parece muy lindo
-- evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U.
+- evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
+pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
+la pantalla
 - Ver si es fácil hacer una animación en scen2d para poner las letras que encontré y capaz el help inicial.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - ver si en modo pausa me conviene sacar el hud, seguro la healthbar.

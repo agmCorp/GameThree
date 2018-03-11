@@ -24,6 +24,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetBulletB;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFour;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyThree;
@@ -33,6 +34,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
@@ -121,6 +123,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetEnemyTwo enemyTwo;
     private AssetEnemyThree enemyThree;
     private AssetEnemyFour enemyFour;
+    private AssetEnemyFive enemyFive;
     private AssetPowerBox powerBox;
     private AssetColOne colOne;
     private AssetPowerOne powerOne;
@@ -132,6 +135,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionC explosionC;
     private AssetExplosionD explosionD;
     private AssetExplosionE explosionE;
+    private AssetExplosionF explosionF;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
     private AssetSilverBullet silverBullet;
@@ -276,6 +280,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyTwo = new AssetEnemyTwo(atlasDinamicObjects);
         enemyThree = new AssetEnemyThree(atlasDinamicObjects);
         enemyFour = new AssetEnemyFour(atlasDinamicObjects);
+        enemyFive = new AssetEnemyFive(atlasDinamicObjects);
         powerBox = new AssetPowerBox(atlasDinamicObjects);
         colOne = new AssetColOne(atlasDinamicObjects);
         powerOne = new AssetPowerOne(atlasDinamicObjects);
@@ -287,6 +292,7 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionC = new AssetExplosionC(atlasDinamicObjects);
         explosionD = new AssetExplosionD(atlasDinamicObjects);
         explosionE = new AssetExplosionE(atlasDinamicObjects);
+        explosionF = new AssetExplosionF(atlasDinamicObjects);
         heroBullet = new AssetHeroBullet(atlasDinamicObjects);
         enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
         silverBullet = new AssetSilverBullet(atlasDinamicObjects);
@@ -348,6 +354,10 @@ public class Assets implements Disposable, AssetErrorListener {
         return enemyFour;
     }
 
+    public AssetEnemyFive getEnemyFive() {
+        return enemyFive;
+    }
+
     public AssetPowerBox getPowerBox() {
         return powerBox;
     }
@@ -390,6 +400,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetExplosionE getExplosionE() {
         return explosionE;
+    }
+
+    public AssetExplosionF getExplosionF() {
+        return explosionF;
     }
 
     public AssetHeroBullet getHeroBullet() {
