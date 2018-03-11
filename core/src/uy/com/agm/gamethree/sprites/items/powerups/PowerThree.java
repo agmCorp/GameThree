@@ -31,7 +31,7 @@ public class PowerThree extends Item {
     private static final float VELOCITY_Y = 1.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 5.0f;
-    private static final int TIMER_POWERTHREE = 10;
+    private static final int DEFAULT_TIMER = 10;
     private static final int SCORE = 20;
     private static final int MAX_BULLETS = 6;
 
@@ -46,7 +46,7 @@ public class PowerThree extends Item {
     // Fire power
     public PowerThree(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer > 0 ? timer : TIMER_POWERTHREE;
+        this.timer = timer > 0 ? timer : DEFAULT_TIMER;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -82,7 +82,7 @@ public class PowerThree extends Item {
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.PATH_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |

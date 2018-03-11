@@ -67,7 +67,7 @@ public class ColSilverBullet extends Item {
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |

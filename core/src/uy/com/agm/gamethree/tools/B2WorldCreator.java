@@ -45,18 +45,22 @@ public class B2WorldCreator {
     private static final String LAYER_BORDER = "border";
     private static final String LAYER_OBSTACLE = "obstacle";
     private static final String LAYER_PATH = "path";
-    private static final String LAYER_ENEMYONE = "enemyOne";
-    private static final String LAYER_ENEMYTWO = "enemyTwo";
-    private static final String LAYER_ENEMYTHREE = "enemyThree";
-    private static final String LAYER_ENEMYFOUR = "enemyFour";
-    private static final String LAYER_ENEMYFIVE = "enemyFive";
-    private static final String LAYER_POWERBOX = "powerBox";
-    private static final String KEY_POWERONE = "powerOne";
-    private static final String KEY_POWERTWO = "powerTwo";
-    private static final String KEY_POWERTHREE = "powerThree";
-    private static final String KEY_POWERFOUR = "powerFour";
-    private static final String KEY_COLONE = "colOne";
-    private static final String KEY_COLSILVERBULLET = "colSilverBullet";
+    private static final String LAYER_ENEMY_ONE = "enemyOne";
+    private static final String LAYER_ENEMY_TWO = "enemyTwo";
+    private static final String LAYER_ENEMY_THREE = "enemyThree";
+    private static final String LAYER_ENEMY_FOUR = "enemyFour";
+    private static final String LAYER_ENEMY_FIVE = "enemyFive";
+    private static final String LAYER_POWER_BOX = "powerBox";
+
+    public static final String KEY_POWER_ONE = "powerOne";
+    public static final String KEY_POWER_TWO = "powerTwo";
+    public static final String KEY_POWER_THREE = "powerThree";
+    public static final String KEY_POWER_FOUR = "powerFour";
+    public static final String KEY_COL_ONE = "colOne";
+    public static final String KEY_COL_SILVER_BULLET = "colSilverBullet";
+    public static final String KEY_STRENGTH = "strength";
+    public static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
+    public static final String KEY_ENEMY_BULLET = "enemyBullet";
 
     private PlayScreen screen;
     private Array<Enemy> enemies;
@@ -111,7 +115,7 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyOne
-        layer = map.getLayers().get(LAYER_ENEMYONE);
+        layer = map.getLayers().get(LAYER_ENEMY_ONE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyOne(screen, object));
@@ -119,7 +123,7 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyTwo
-        layer = map.getLayers().get(LAYER_ENEMYTWO);
+        layer = map.getLayers().get(LAYER_ENEMY_TWO);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyTwo(screen, object));
@@ -127,7 +131,7 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyThree
-        layer = map.getLayers().get(LAYER_ENEMYTHREE);
+        layer = map.getLayers().get(LAYER_ENEMY_THREE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyThree(screen, object));
@@ -135,7 +139,7 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyFour
-        layer = map.getLayers().get(LAYER_ENEMYFOUR);
+        layer = map.getLayers().get(LAYER_ENEMY_FOUR);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyFour(screen, object));
@@ -143,7 +147,7 @@ public class B2WorldCreator {
         }
 
         // Layer: enemyFive
-        layer = map.getLayers().get(LAYER_ENEMYFIVE);
+        layer = map.getLayers().get(LAYER_ENEMY_FIVE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyFive(screen, object));
@@ -151,7 +155,7 @@ public class B2WorldCreator {
         }
 
         // Layer: powerBoxes
-        layer = map.getLayers().get(LAYER_POWERBOX);
+        layer = map.getLayers().get(LAYER_POWER_BOX);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 powerBoxes.add(new PowerBox(screen, object));
@@ -250,26 +254,26 @@ public class B2WorldCreator {
         MapProperties mp = object.getProperties();
         int timer;
 
-        if (mp.containsKey(KEY_COLONE)) {
+        if (mp.containsKey(KEY_COL_ONE)) {
             createGameThreeActor(new ActorDef(x, y, ColOne.class));
         }
-        if (mp.containsKey(KEY_COLSILVERBULLET)) {
+        if (mp.containsKey(KEY_COL_SILVER_BULLET)) {
             createGameThreeActor(new ActorDef(x, y, ColSilverBullet.class));
         }
-        if (mp.containsKey(KEY_POWERONE)) {
-            timer = object.getProperties().get(KEY_POWERONE, 0, Integer.class);
+        if (mp.containsKey(KEY_POWER_ONE)) {
+            timer = object.getProperties().get(KEY_POWER_ONE, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerOne.class));
         }
-        if (mp.containsKey(KEY_POWERTWO)) {
-            timer = object.getProperties().get(KEY_POWERTWO, 0, Integer.class);
+        if (mp.containsKey(KEY_POWER_TWO)) {
+            timer = object.getProperties().get(KEY_POWER_TWO, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerTwo.class));
         }
-        if (mp.containsKey(KEY_POWERTHREE)) {
-            timer = object.getProperties().get(KEY_POWERTHREE, 0, Integer.class);
+        if (mp.containsKey(KEY_POWER_THREE)) {
+            timer = object.getProperties().get(KEY_POWER_THREE, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerThree.class));
         }
-        if (mp.containsKey(KEY_POWERFOUR)) {
-            timer = object.getProperties().get(KEY_POWERFOUR, 0, Integer.class);
+        if (mp.containsKey(KEY_POWER_FOUR)) {
+            timer = object.getProperties().get(KEY_POWER_FOUR, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerFour.class));
         }
     }

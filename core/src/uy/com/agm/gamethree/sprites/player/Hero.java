@@ -435,7 +435,7 @@ public class Hero extends Sprite {
         // Our Hero can collide with powerBoxes, borders, edges and obstacles only (not with paths)
         Filter filter = new Filter();
         filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
-        filter.maskBits = WorldContactListener.POWERBOX_BIT |
+        filter.maskBits = WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.BORDER_BIT |
                 WorldContactListener.EDGE_BIT |
                 WorldContactListener.OBSTACLE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
@@ -549,7 +549,7 @@ public class Hero extends Sprite {
                 WorldContactListener.EDGE_BIT |
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.PATH_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.ENEMY_BIT |
                 WorldContactListener.FINAL_ENEMY_BIT |

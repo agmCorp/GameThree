@@ -16,6 +16,7 @@ import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -23,9 +24,6 @@ import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
-
-    // Constants
-    private static final String KEY_ENEMYBULLET = "enemyBullet";
 
     protected World world;
     protected PlayScreen screen;
@@ -57,7 +55,7 @@ public abstract class Enemy extends Sprite {
         tmp = new Vector2();
 
         // Fire property
-        openFire = object.getProperties().containsKey(KEY_ENEMYBULLET);
+        openFire = object.getProperties().containsKey(B2WorldCreator.KEY_ENEMY_BULLET);
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();

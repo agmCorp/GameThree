@@ -65,7 +65,7 @@ public class EnemyThree extends Enemy {
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.OBSTACLE_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.SHIELD_BIT |

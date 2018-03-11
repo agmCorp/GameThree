@@ -54,7 +54,7 @@ public class HeroBullet extends Weapon {
         fdef.filter.categoryBits = WorldContactListener.HERO_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.OBSTACLE_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.FINAL_ENEMY_BIT |
                 WorldContactListener.ENEMY_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 

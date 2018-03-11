@@ -35,7 +35,7 @@ public class PowerFour extends Item {
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 5.0f;
     private static final int DEFAULT_TIMER = 10;
-    private static final int POWERFOUR = 20;
+    private static final int SCORE = 20;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
@@ -82,7 +82,7 @@ public class PowerFour extends Item {
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.PATH_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |
@@ -167,7 +167,7 @@ public class PowerFour extends Item {
             hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer);
 
             // Set score
-            hud.addScore(POWERFOUR);
+            hud.addScore(SCORE);
 
             // Disable previous power (if any)
             Hero hero = screen.getPlayer();
@@ -180,7 +180,7 @@ public class PowerFour extends Item {
                     WorldContactListener.EDGE_BIT |
                     WorldContactListener.OBSTACLE_BIT |
                     WorldContactListener.PATH_BIT |
-                    WorldContactListener.POWERBOX_BIT |
+                    WorldContactListener.POWER_BOX_BIT |
                     WorldContactListener.ITEM_BIT |
                     WorldContactListener.ENEMY_BIT |
                     WorldContactListener.FINAL_ENEMY_BIT |

@@ -18,6 +18,7 @@ import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -28,10 +29,9 @@ public abstract class FinalEnemy extends Sprite {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float INTRO_TIME_SECONDS = 5.0f;
-    private static final int MAX_AID_SILVERBULLET = 3;
-    private static final float AID_SILVERBULLET_TIME_SECONDS = 5.0f;
-    private static final float AID_SILVERBULLET_OFFSET_METERS = 100.0f / PlayScreen.PPM;
-    private static final String KEY_COLSILVERBULLET = "colSilverBullet";
+    private static final int MAX_AID_SILVER_BULLET = 3;
+    private static final float AID_SILVER_BULLET_TIME_SECONDS = 5.0f;
+    private static final float AID_SILVER_BULLET_OFFSET_METERS = 100.0f / PlayScreen.PPM;
     protected static final float HIT_MAX_VOLUME = 0.3f;
 
     protected World world;
@@ -137,7 +137,7 @@ public abstract class FinalEnemy extends Sprite {
             // Release silver bullets if needed
             if (!screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
                 aidSilverBulletTime += dt;
-                if (aidSilverBulletTime > AID_SILVERBULLET_TIME_SECONDS) {
+                if (aidSilverBulletTime > AID_SILVER_BULLET_TIME_SECONDS) {
                     releaseSilverBullet();
                     aidSilverBulletTime = 0;
                 }
@@ -149,17 +149,17 @@ public abstract class FinalEnemy extends Sprite {
 
     private void releaseSilverBullet() {
         MapObject object;
-        int max = MathUtils.random(1, MAX_AID_SILVERBULLET);
+        int max = MathUtils.random(1, MAX_AID_SILVER_BULLET);
 
         for(int i = 0; i < max; i++) {
             object = new MapObject();
-            object.getProperties().put(KEY_COLSILVERBULLET, "");
+            object.getProperties().put(B2WorldCreator.KEY_COL_SILVER_BULLET, "");
 
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
-            float silverBulletCandidatePosition = b2body.getPosition().y + AID_SILVERBULLET_OFFSET_METERS;
+            float silverBulletCandidatePosition = b2body.getPosition().y + AID_SILVER_BULLET_OFFSET_METERS;
 
             if (silverBulletCandidatePosition + AssetSilverBullet.COLLECTIBLE_HEIGHT_METERS / 2 >= upperEdge) {
-                silverBulletCandidatePosition = b2body.getPosition().y - AID_SILVERBULLET_OFFSET_METERS;
+                silverBulletCandidatePosition = b2body.getPosition().y - AID_SILVER_BULLET_OFFSET_METERS;
             }
             screen.getCreator().getItemOnHit(object, b2body.getPosition().x, silverBulletCandidatePosition);
         }

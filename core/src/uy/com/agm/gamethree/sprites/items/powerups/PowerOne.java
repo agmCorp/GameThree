@@ -29,13 +29,13 @@ public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float POWERONE_CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float POWERONE_VELOCITY_X = 0.7f;
-    private static final float POWERONE_VELOCITY_Y = 0.0f;
-    private static final float POWERONE_WAITING_SECONDS = 5.0f;
-    private static final float POWERONE_FADING_SECONDS = 5.0f;
-    private static final int DEFAULT_TIMER_POWERONE = 10;
-    private static final int POWERONE_SCORE = 20;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 0.7f;
+    private static final float VELOCITY_Y = 0.0f;
+    private static final float WAITING_SECONDS = 5.0f;
+    private static final float FADING_SECONDS = 5.0f;
+    private static final int DEFAULT_TIMER = 10;
+    private static final int SCORE = 20;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
@@ -47,7 +47,7 @@ public class PowerOne extends Item {
     // Ghost mode
     public PowerOne(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer > 0 ? timer : DEFAULT_TIMER_POWERONE;
+        this.timer = timer > 0 ? timer : DEFAULT_TIMER;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -61,7 +61,7 @@ public class PowerOne extends Item {
         setBounds(getX(), getY(), AssetPowerOne.WIDTH_METERS, AssetPowerOne.HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity.set(MathUtils.randomSign() * POWERONE_VELOCITY_X, MathUtils.randomSign() * POWERONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerOne());
@@ -76,13 +76,13 @@ public class PowerOne extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(POWERONE_CIRCLE_SHAPE_RADIUS_METERS);
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = WorldContactListener.ITEM_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.PATH_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |
@@ -106,7 +106,7 @@ public class PowerOne extends Item {
         stateTime += dt;
 
         stateWaitingTime += dt;
-        if (stateWaitingTime > POWERONE_WAITING_SECONDS) {
+        if (stateWaitingTime > WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -126,13 +126,13 @@ public class PowerOne extends Item {
         stateTime += dt;
 
         stateFadingTime += dt;
-        float alpha = 1 - stateFadingTime / POWERONE_FADING_SECONDS;
+        float alpha = 1 - stateFadingTime / FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTime > POWERONE_FADING_SECONDS) {
+        if (stateFadingTime > FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -167,7 +167,7 @@ public class PowerOne extends Item {
             hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer);
 
             // Set score
-            hud.addScore(POWERONE_SCORE);
+            hud.addScore(SCORE);
 
             // Disable previous power (if any)
             Hero hero = screen.getPlayer();
@@ -180,7 +180,7 @@ public class PowerOne extends Item {
                     WorldContactListener.EDGE_BIT |
                     WorldContactListener.OBSTACLE_BIT |
                     WorldContactListener.PATH_BIT |
-                    WorldContactListener.POWERBOX_BIT |
+                    WorldContactListener.POWER_BOX_BIT |
                     WorldContactListener.ITEM_BIT |
                     WorldContactListener.ENEMY_BIT;  // Depicts what this Fixture can collide with (see WorldContactListener)
             for (Fixture fixture : hero.getB2body().getFixtureList()) {

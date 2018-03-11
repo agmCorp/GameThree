@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -34,7 +35,6 @@ public class EnemyFour extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final int SCORE = 35;
-    private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
 
     private float stateTime;
     private Animation enemyFourAnimation;
@@ -82,7 +82,7 @@ public class EnemyFour extends Enemy {
         stateFrozenTime = 0;
 
         // Indicates how many times this enemy can be frozen.
-        timesItFreeze = object.getProperties().get(KEY_TIMES_IT_FREEZE, 1, Integer.class);
+        timesItFreeze = object.getProperties().get(B2WorldCreator.KEY_TIMES_IT_FREEZE, 1, Integer.class);
     }
 
     @Override

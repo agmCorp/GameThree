@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -33,7 +34,6 @@ public class PowerBox extends Sprite {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final int SCORE = 10;
-    private static final String KEY_STRENGTH = "strength";
 
     private World world;
     private PlayScreen screen;
@@ -185,7 +185,7 @@ public class PowerBox extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = WorldContactListener.POWERBOX_BIT; // Depicts what this fixture is
+        fdef.filter.categoryBits = WorldContactListener.POWER_BOX_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
@@ -304,7 +304,7 @@ public class PowerBox extends Sprite {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        int strength = object.getProperties().get(KEY_STRENGTH, 0, Integer.class);
+        int strength = object.getProperties().get(B2WorldCreator.KEY_STRENGTH, 0, Integer.class);
         if (damage >= strength - 1) {
             currentState = State.OPENED;
         } else {

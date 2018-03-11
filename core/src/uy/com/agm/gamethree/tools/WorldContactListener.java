@@ -36,7 +36,7 @@ public class WorldContactListener implements ContactListener {
     public static final short HERO_BIT = 16;
     public static final short HERO_GHOST_BIT = 32;
     public static final short HERO_TOUGH_BIT = 64;
-    public static final short POWERBOX_BIT = 128;
+    public static final short POWER_BOX_BIT = 128;
     public static final short ENEMY_BIT = 256;
     public static final short ITEM_BIT = 512;
     public static final short HERO_WEAPON_BIT = 1024;
@@ -70,10 +70,10 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero/HeroGhost/HeroTough - PowerBox
-            case HERO_BIT | POWERBOX_BIT:
-            case HERO_GHOST_BIT | POWERBOX_BIT:
-            case HERO_TOUGH_BIT | POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == POWERBOX_BIT ? fixA : fixB;
+            case HERO_BIT | POWER_BOX_BIT:
+            case HERO_GHOST_BIT | POWER_BOX_BIT:
+            case HERO_TOUGH_BIT | POWER_BOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == POWER_BOX_BIT ? fixA : fixB;
                 ((PowerBox) fixC.getUserData()).onBump();
                 break;
 
@@ -151,7 +151,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Enemy - PowerBox
-            case ENEMY_BIT | POWERBOX_BIT:
+            case ENEMY_BIT | POWER_BOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBumpWithFeint();
                 break;
@@ -177,7 +177,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Item - PowerBox
-            case ITEM_BIT | POWERBOX_BIT:
+            case ITEM_BIT | POWER_BOX_BIT:
                 fixC = fixA.getFilterData().categoryBits == ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).onBump();
                 break;
@@ -197,7 +197,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero's weapon - PowerBox
-            case HERO_WEAPON_BIT | POWERBOX_BIT:
+            case HERO_WEAPON_BIT | POWER_BOX_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
                     ((PowerBox) fixB.getUserData()).onHit();
