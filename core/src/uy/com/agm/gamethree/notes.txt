@@ -35,9 +35,9 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 TENGO
 -----
 - paths
-- enemigos comunes: 4
+- enemigos comunes: 5 (uso 3 enemigos por nivel)
 - enemigos finales: 2
-- poderes 4
+- poderes 4 (2 poderes por nivel)
 - 1 moneda
 - 1 shuriken
 
@@ -583,3 +583,21 @@ Para ir a pelear directo con el enemigo final poner en playscreen:
         player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
 
 02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6
+
+----------------
+
+    private Vector2 getNewTangentialSpeed(float dt) {
+        elapsedTime += dt;
+
+        if (elapsedTime >= period) {
+            elapsedTime = 0;
+            counterclockwise = !counterclockwise;
+        }
+
+
+        float w = 2 * MathUtils.PI / period;
+        tmp.set((!counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), (!counterclockwise ? -1 : 1)*radius * w * MathUtils.cos(w * elapsedTime));
+        //tmp.set((counterclockwise ? -1 : 1)*radius * w * MathUtils.cos(w * elapsedTime),(counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime));
+        Gdx.app.debug(TAG, "****" + tmp.x + " " + tmp.y + " ELAPSED_TIME " + elapsedTime);
+        return tmp;
+    }
