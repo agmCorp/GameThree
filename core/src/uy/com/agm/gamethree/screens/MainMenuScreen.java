@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -39,7 +38,7 @@ public class MainMenuScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -63,11 +62,11 @@ public class MainMenuScreen extends AbstractScreen {
         // Add values
         table.add(menuLabel);
         table.row();
-        table.add(startGameLabel).padTop(Constants.PAD_TOP);
+        table.add(startGameLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(settingsLabel).padTop(Constants.PAD_TOP);
+        table.add(settingsLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(exitGameLabel).padTop(Constants.PAD_TOP * 2);
+        table.add(exitGameLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
         startGameLabel.addListener( UIFactory.createListener(ScreenEnum.SELECT_LEVEL) );

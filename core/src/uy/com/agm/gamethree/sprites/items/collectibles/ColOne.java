@@ -8,10 +8,11 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by amorales on 23/1/2018.
@@ -19,6 +20,14 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class ColOne extends Item {
     private static final String TAG = ColOne.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    public static final float VELOCITY_X = 0.7f;
+    public static final float VELOCITY_Y = 0.0f;
+    public static final float WAITING_SECONDS = 3.0f;
+    public static final float FADING_SECONDS = 2.0f;
+    public static final int SCORE = 25;
 
     private float stateTime;
     private float stateWaitingTime;
@@ -34,10 +43,10 @@ public class ColOne extends Item {
         stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.COLONE_WIDTH_METERS, Constants.COLONE_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetColOne.WIDTH_METERS, AssetColOne.HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity.set(MathUtils.randomSign() * Constants.COLONE_VELOCITY_X, MathUtils.randomSign() * Constants.COLONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpColOne());
@@ -52,16 +61,16 @@ public class ColOne extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.COLONE_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.ENEMY_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_GHOST_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ITEM_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_GHOST_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -81,7 +90,7 @@ public class ColOne extends Item {
         stateTime += dt;
 
         stateWaitingTime += dt;
-        if (stateWaitingTime > Constants.COLONE_WAITING_SECONDS) {
+        if (stateWaitingTime > WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -101,13 +110,13 @@ public class ColOne extends Item {
         stateTime += dt;
 
         stateFadingTime += dt;
-        float alpha = 1 - stateFadingTime / Constants.COLONE_FADING_SECONDS;
+        float alpha = 1 - stateFadingTime / FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTime > Constants.COLONE_FADING_SECONDS) {
+        if (stateFadingTime > FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -145,7 +154,7 @@ public class ColOne extends Item {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne());
 
         // Set score
-        screen.getHud().addScore(Constants.COLONE_SCORE);
+        screen.getHud().addScore(SCORE);
     }
 
     @Override

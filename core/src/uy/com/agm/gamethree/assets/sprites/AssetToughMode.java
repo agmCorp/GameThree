@@ -5,12 +5,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/22/2017.
  */
 
 public class AssetToughMode {
     private static final String TAG = AssetToughMode.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float WIDTH_METERS = 192.0f * 1.2f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 192.0f * 1.2f / PlayScreen.PPM;
 
     private TextureRegion toughModeStand;
     private Animation toughModeAnimation;

@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
@@ -21,6 +20,29 @@ import uy.com.agm.gamethree.sprites.weapons.Weapon;
  */
 
 public class WorldContactListener implements ContactListener {
+    /* Box2D Collision Bits
+    * I can have up to 16 different categories for collision. If I require even finer control over what
+    * should collide with what, I can set a contact filter callback in the world so that when Box2D
+    * needs to check if two fixtures should collide, instead of using the following rules (that is filters -categoryBits, maskBits and groupIndex-)
+    * it will give me the two fixtures and let me decide. See world.setContactFilter(...) and ContactFilter interface (shouldCollide(...))
+    * I could then have a enum every entity holds showing its type and based on that, sort out whether the collision
+    * should be handled or not in shouldCollide(...) method.
+    */
+    public static final short NOTHING_BIT = 0;
+    public static final short BORDER_BIT = 1;
+    public static final short EDGE_BIT = 2;
+    public static final short OBSTACLE_BIT = 4;
+    public static final short PATH_BIT = 8;
+    public static final short HERO_BIT = 16;
+    public static final short HERO_GHOST_BIT = 32;
+    public static final short HERO_TOUGH_BIT = 64;
+    public static final short POWERBOX_BIT = 128;
+    public static final short ENEMY_BIT = 256;
+    public static final short ITEM_BIT = 512;
+    public static final short HERO_WEAPON_BIT = 1024;
+    public static final short ENEMY_WEAPON_BIT = 2048;
+    public static final short FINAL_ENEMY_BIT = 4096;
+    public static final short SHIELD_BIT = 8192;
     private static final String TAG = WorldContactListener.class.getName();
 
     @Override
@@ -32,46 +54,46 @@ public class WorldContactListener implements ContactListener {
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
             // Hero/HeroGhost/HeroTough - InteractiveTileObjects
-            case Constants.HERO_BIT | Constants.BORDER_BIT:
-            case Constants.HERO_BIT | Constants.OBSTACLE_BIT:
-            case Constants.HERO_BIT | Constants.PATH_BIT:
-            case Constants.HERO_GHOST_BIT | Constants.BORDER_BIT:
-            case Constants.HERO_GHOST_BIT | Constants.OBSTACLE_BIT:
-            case Constants.HERO_GHOST_BIT | Constants.PATH_BIT:
-            case Constants.HERO_TOUGH_BIT | Constants.BORDER_BIT:
-            case Constants.HERO_TOUGH_BIT | Constants.OBSTACLE_BIT:
-            case Constants.HERO_TOUGH_BIT | Constants.PATH_BIT:
-                fixC = (fixA.getFilterData().categoryBits == Constants.BORDER_BIT ||
-                        fixA.getFilterData().categoryBits == Constants.OBSTACLE_BIT ||
-                        fixA.getFilterData().categoryBits == Constants.PATH_BIT) ? fixA : fixB;
+            case HERO_BIT | BORDER_BIT:
+            case HERO_BIT | OBSTACLE_BIT:
+            case HERO_BIT | PATH_BIT:
+            case HERO_GHOST_BIT | BORDER_BIT:
+            case HERO_GHOST_BIT | OBSTACLE_BIT:
+            case HERO_GHOST_BIT | PATH_BIT:
+            case HERO_TOUGH_BIT | BORDER_BIT:
+            case HERO_TOUGH_BIT | OBSTACLE_BIT:
+            case HERO_TOUGH_BIT | PATH_BIT:
+                fixC = (fixA.getFilterData().categoryBits == BORDER_BIT ||
+                        fixA.getFilterData().categoryBits == OBSTACLE_BIT ||
+                        fixA.getFilterData().categoryBits == PATH_BIT) ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onBump();
                 break;
 
             // Hero/HeroGhost/HeroTough - PowerBox
-            case Constants.HERO_BIT | Constants.POWERBOX_BIT:
-            case Constants.HERO_GHOST_BIT | Constants.POWERBOX_BIT:
-            case Constants.HERO_TOUGH_BIT | Constants.POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.POWERBOX_BIT ? fixA : fixB;
+            case HERO_BIT | POWERBOX_BIT:
+            case HERO_GHOST_BIT | POWERBOX_BIT:
+            case HERO_TOUGH_BIT | POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == POWERBOX_BIT ? fixA : fixB;
                 ((PowerBox) fixC.getUserData()).onBump();
                 break;
 
             // Hero/HeroGhost/HeroTough - Item
-            case Constants.HERO_BIT | Constants.ITEM_BIT:
-            case Constants.HERO_GHOST_BIT | Constants.ITEM_BIT:
-            case Constants.HERO_TOUGH_BIT | Constants.ITEM_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
+            case HERO_BIT | ITEM_BIT:
+            case HERO_GHOST_BIT | ITEM_BIT:
+            case HERO_TOUGH_BIT | ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).onUse();
                 break;
 
             // Hero - Enemies
-            case Constants.HERO_BIT | Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+            case HERO_BIT | ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
             // HeroGhost - Enemies
-            case Constants.HERO_GHOST_BIT | Constants.ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BIT) {
+            case HERO_GHOST_BIT | ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
                     Enemy enemy = ((Enemy) fixA.getUserData());
                     if (enemy instanceof EnemyThree) {
                         ((Hero) fixB.getUserData()).onDead();
@@ -85,8 +107,8 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // HeroTough - Enemies
-            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BIT) {
+            case HERO_TOUGH_BIT | ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
                     Enemy enemy = ((Enemy) fixA.getUserData());
                     if (enemy instanceof EnemyThree) {
                         ((Hero) fixB.getUserData()).onDead();
@@ -104,79 +126,79 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero - Enemy's weapon
-            case Constants.HERO_BIT | Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+            case HERO_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
             // HeroTough - Enemy's weapon
-            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
+            case HERO_TOUGH_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
 
             // Enemy - Borders
-            case Constants.ENEMY_BIT | Constants.BORDER_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+            case ENEMY_BIT | BORDER_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBump();
                 break;
 
             // Enemy - InteractiveTileObjects
-            case Constants.ENEMY_BIT | Constants.OBSTACLE_BIT:
-            case Constants.ENEMY_BIT | Constants.PATH_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+            case ENEMY_BIT | OBSTACLE_BIT:
+            case ENEMY_BIT | PATH_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBumpWithFeint();
                 break;
 
             // Enemy - PowerBox
-            case Constants.ENEMY_BIT | Constants.POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+            case ENEMY_BIT | POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBumpWithFeint();
                 break;
 
             // Enemy - Enemy
-            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
+            case ENEMY_BIT | ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).onBump();
                 ((Enemy) fixB.getUserData()).onBump();
                 break;
 
             // Item - InteractiveTileObjects
-            case Constants.ITEM_BIT | Constants.BORDER_BIT:
-            case Constants.ITEM_BIT | Constants.OBSTACLE_BIT:
-            case Constants.ITEM_BIT | Constants.PATH_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
+            case ITEM_BIT | BORDER_BIT:
+            case ITEM_BIT | OBSTACLE_BIT:
+            case ITEM_BIT | PATH_BIT:
+                fixC = fixA.getFilterData().categoryBits == ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - Enemy
-            case Constants.ITEM_BIT | Constants.ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
+            case ITEM_BIT | ENEMY_BIT:
+                fixC = fixA.getFilterData().categoryBits == ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - PowerBox
-            case Constants.ITEM_BIT | Constants.POWERBOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ITEM_BIT ? fixA : fixB;
+            case ITEM_BIT | POWERBOX_BIT:
+                fixC = fixA.getFilterData().categoryBits == ITEM_BIT ? fixA : fixB;
                 ((Item) fixC.getUserData()).onBump();
                 break;
 
             // Item - Item
-            case Constants.ITEM_BIT | Constants.ITEM_BIT:
+            case ITEM_BIT | ITEM_BIT:
                 ((Item) fixA.getUserData()).onBump();
                 ((Item) fixB.getUserData()).onBump();
                 break;
 
             // Hero's weapon - InteractiveTileObjects & Items
-            case Constants.HERO_WEAPON_BIT | Constants.BORDER_BIT:
-            case Constants.HERO_WEAPON_BIT | Constants.OBSTACLE_BIT:
-            case Constants.HERO_WEAPON_BIT | Constants.ITEM_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT ? fixA : fixB;
+            case HERO_WEAPON_BIT | BORDER_BIT:
+            case HERO_WEAPON_BIT | OBSTACLE_BIT:
+            case HERO_WEAPON_BIT | ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
             // Hero's weapon - PowerBox
-            case Constants.HERO_WEAPON_BIT | Constants.POWERBOX_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
+            case HERO_WEAPON_BIT | POWERBOX_BIT:
+                if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
                     ((PowerBox) fixB.getUserData()).onHit();
                 } else {
@@ -186,8 +208,8 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Hero's weapon - Enemy
-            case Constants.HERO_WEAPON_BIT | Constants.ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
+            case HERO_WEAPON_BIT | ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
                     ((Weapon) fixA.getUserData()).onTarget();
                     ((Enemy) fixB.getUserData()).onHit();
                 } else {
@@ -197,26 +219,26 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Enemy's weapon - Borders
-            case Constants.ENEMY_WEAPON_BIT | Constants.BORDER_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_WEAPON_BIT ? fixA : fixB;
+            case ENEMY_WEAPON_BIT | BORDER_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
             // Final enemy - Borders
-            case Constants.FINAL_ENEMY_BIT | Constants.BORDER_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
+            case FINAL_ENEMY_BIT | BORDER_BIT:
+                fixC = fixA.getFilterData().categoryBits == FINAL_ENEMY_BIT ? fixA : fixB;
                 ((FinalEnemy) fixC.getUserData()).onHitWall(true);
                 break;
 
             // Final enemy - Edges
-            case Constants.FINAL_ENEMY_BIT | Constants.EDGE_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.FINAL_ENEMY_BIT ? fixA : fixB;
+            case FINAL_ENEMY_BIT | EDGE_BIT:
+                fixC = fixA.getFilterData().categoryBits == FINAL_ENEMY_BIT ? fixA : fixB;
                 ((FinalEnemy) fixC.getUserData()).onHitWall(false);
                 break;
 
             // Final enemy - Hero's weapon
-            case Constants.FINAL_ENEMY_BIT | Constants.HERO_WEAPON_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.HERO_WEAPON_BIT) {
+            case FINAL_ENEMY_BIT | HERO_WEAPON_BIT:
+                if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
                     ((FinalEnemy) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
                 } else {
                     ((FinalEnemy) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
@@ -224,14 +246,14 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Hero
-            case Constants.FINAL_ENEMY_BIT | Constants.HERO_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_BIT ? fixA : fixB;
+            case FINAL_ENEMY_BIT | HERO_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onDead();
                 break;
 
             // Shield - Enemy's weapon
-            case Constants.SHIELD_BIT | Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.ENEMY_BIT ? fixA : fixB;
+            case SHIELD_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
         }
@@ -247,16 +269,16 @@ public class WorldContactListener implements ContactListener {
         switch (collisionDef) {
             // HeroTough - Enemy's weapon
             // Avoid bouncing
-            case Constants.HERO_TOUGH_BIT | Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.HERO_TOUGH_BIT ? fixA : fixB;
+            case HERO_TOUGH_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_TOUGH_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;
 
             // Shield - Enemy/Enemy's weapon
             // Avoid bouncing
-            case Constants.SHIELD_BIT | Constants.ENEMY_BIT:
-            case Constants.SHIELD_BIT | Constants.ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == Constants.SHIELD_BIT ? fixA : fixB;
+            case SHIELD_BIT | ENEMY_BIT:
+            case SHIELD_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == SHIELD_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;
         }

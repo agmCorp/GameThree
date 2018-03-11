@@ -5,12 +5,20 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/30/2017.
  */
 
 public class AssetFinalEnemyLevelOne {
     private static final String TAG = AssetFinalEnemyLevelOne.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float WIDTH_METERS = 177.0f * 1.0f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 169.0f * 1.0f / PlayScreen.PPM;
+    public static final float POWER_WIDTH_METERS = 192.0f * 1.6f / PlayScreen.PPM;
+    public static final float POWER_HEIGHT_METERS = 192.0f * 1.6f / PlayScreen.PPM;
 
     private TextureRegion finalEnemyLevelOneStand;
     private TextureRegion finalEnemyLevelOnePowerStand;

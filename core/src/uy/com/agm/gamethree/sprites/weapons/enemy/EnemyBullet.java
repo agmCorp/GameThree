@@ -7,9 +7,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/19/2017.
@@ -51,11 +51,11 @@ public class EnemyBullet extends Weapon {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(circleShapeRadius);
-        fdef.filter.categoryBits = Constants.ENEMY_WEAPON_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.SHIELD_BIT |
-                Constants.HERO_TOUGH_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        fdef.filter.categoryBits = WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_TOUGH_BIT |
+                WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

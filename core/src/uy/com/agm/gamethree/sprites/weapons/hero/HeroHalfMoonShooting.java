@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
+import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
+import uy.com.agm.gamethree.assets.sprites.AssetSilverBullet;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
@@ -19,6 +21,13 @@ import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 public class HeroHalfMoonShooting implements IShootStrategy {
     private static final String TAG = HeroHalfMoonShooting.class.getName();
 
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
+    public static final float MANUAL_FIRE_DELAY_SECONDS = 0.1f;
+    public static final float BULLET_CIRCLESHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    public static final float BULLET_VELOCITY_X = 0.0f;
+    public static final float BULLET_VELOCITY_Y = 7.0f;
+
     private PlayScreen screen;
     private int numberBullets;
     private float openFireTime;
@@ -29,7 +38,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         this.screen = screen;
         this.numberBullets = numberBullets;
         this.openFireTime = 0;
-        this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.POWERTHREE_MANUAL_FIRE_DELAY_SECONDS : Constants.POWERTHREE_AUTOMATIC_FIRE_DELAY_SECONDS;
+        this.fireDelay = GameSettings.getInstance().isManualShooting() ? MANUAL_FIRE_DELAY_SECONDS : AUTOMATIC_FIRE_DELAY_SECONDS;
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -39,7 +48,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     public void updateShoot(float dt) {
         openFireTime += dt;
         if (screen.getPlayer().isSilverBulletEnabled()) {
-            fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
+            fireDelay = HeroDefaultShooting.SILVER_BULLET_FIRE_DELAY_SECONDS;
         }
     }
 
@@ -62,13 +71,13 @@ public class HeroHalfMoonShooting implements IShootStrategy {
 
             if (hero.isSilverBulletEnabled()) {
                 if (hero.hasSilverBullets()) {
-                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
-                            Constants.SILVERBULLET_WIDTH_METERS,
-                            Constants.SILVERBULLET_HEIGHT_METERS,
-                            Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS,
+                    createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
+                            AssetSilverBullet.WIDTH_METERS,
+                            AssetSilverBullet.HEIGHT_METERS,
+                            HeroDefaultShooting.SILVER_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
-                            Constants.SILVERBULLET_VELOCITY_X,
-                            Constants.SILVERBULLET_VELOCITY_Y,
+                            HeroDefaultShooting.SILVER_BULLET_VELOCITY_X,
+                            HeroDefaultShooting.SILVER_BULLET_VELOCITY_Y,
                             Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
                     // Sound FX
                     AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
@@ -81,22 +90,22 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                 }
             } else {
                 if (screen.getHud().isPowerRunningOut()) {
-                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
-                            Constants.HEROBULLET_WIDTH_METERS,
-                            Constants.HEROBULLET_HEIGHT_METERS,
-                            Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS,
+                    createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
+                            AssetHeroBullet.WIDTH_METERS,
+                            AssetHeroBullet.HEIGHT_METERS,
+                            HeroDefaultShooting.DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
-                            Constants.POWERTHREE_BULLET_VELOCITY_X,
-                            Constants.POWERTHREE_BULLET_VELOCITY_Y,
+                            BULLET_VELOCITY_X,
+                            BULLET_VELOCITY_Y,
                             Assets.getInstance().getHeroBullet().getHeroBulletAnimation());
                 } else {
-                    createBullet(x, y + Constants.HEROBULLET_OFFSET_METERS,
-                            Constants.POWERTHREE_BULLET_WIDTH_METERS,
-                            Constants.POWERTHREE_BULLET_HEIGHT_METERS,
-                            Constants.POWERTHREE_BULLET_CIRCLESHAPE_RADIUS_METERS,
+                    createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
+                            AssetBulletA.BULLET_WIDTH_METERS,
+                            AssetBulletA.BULLET_HEIGHT_METERS,
+                            BULLET_CIRCLESHAPE_RADIUS_METERS,
                             angle,
-                            Constants.POWERTHREE_BULLET_VELOCITY_X,
-                            Constants.POWERTHREE_BULLET_VELOCITY_Y,
+                            BULLET_VELOCITY_X,
+                            BULLET_VELOCITY_Y,
                             Assets.getInstance().getBulletA().getBulletAAnimation());
                 }
                 // Sound FX

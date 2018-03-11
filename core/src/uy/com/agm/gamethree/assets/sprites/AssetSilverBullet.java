@@ -5,12 +5,20 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/22/2017.
  */
 
 public class AssetSilverBullet {
     private static final String TAG = AssetSilverBullet.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float WIDTH_METERS = 72.0f * 0.7f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 65.0f * 0.7f / PlayScreen.PPM;
+    public static final float COLLECTIBLE_WIDTH_METERS = 126.0f * 0.4f / PlayScreen.PPM;
+    public static final float COLLECTIBLE_HEIGHT_METERS = 116.0f * 0.4f / PlayScreen.PPM;
 
     private TextureRegion silverBulletStand;
     private Animation silverBulletAnimation;

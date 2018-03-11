@@ -47,7 +47,6 @@ import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetShield;
 import uy.com.agm.gamethree.assets.sprites.AssetSilverBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetToughMode;
-import uy.com.agm.gamethree.game.Constants;
 
 /**
  * Created by amorales on 14/12/2017.
@@ -56,10 +55,64 @@ import uy.com.agm.gamethree.game.Constants;
 public class Assets implements Disposable, AssetErrorListener {
     private static final String TAG = Assets.class.getName();
 
+    // Constants
+
+    // Sound FXs
+    public static final String FX_FILE_BUMP = "audio/sounds/bump.ogg";
+    public static final String FX_FILE_CRACK = "audio/sounds/crack.ogg";
+    public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
+    public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
+    public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
+    public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/gunReload.ogg";
+    public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
+    public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
+    public static final String FX_FILE_OPEN_POWERBOX = "audio/sounds/openPowerBox.ogg";
+    public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
+    public static final String FX_FILE_PICK_UP_COLONE = "audio/sounds/pickUpColOne.ogg";
+    public static final String FX_FILE_PICK_UP_COLSILVERBULLET = "audio/sounds/pickUpColSilverBullet.ogg";
+    public static final String FX_FILE_PICK_UP_POWERONE = "audio/sounds/pickUpPowerOne.ogg";
+    public static final String FX_FILE_PICK_UP_POWERTWO = "audio/sounds/pickUpPowerTwo.ogg";
+    public static final String FX_FILE_PICK_UP_POWERTHREE = "audio/sounds/pickUpPowerThree.ogg";
+    public static final String FX_FILE_PICK_UP_POWERFOUR = "audio/sounds/pickUpPowerFour.ogg";
+    public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
+    public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
+    public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
+    public static final String FX_FILE_SHOW_UP_COLONE = "audio/sounds/showUpColOne.ogg";
+    public static final String FX_FILE_SHOW_UP_COLSILVERBULLET = "audio/sounds/showUpColSilverBullet.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERONE = "audio/sounds/showUpPowerOne.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERTWO = "audio/sounds/showUpPowerTwo.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERTHREE = "audio/sounds/showUpPowerThree.ogg";
+    public static final String FX_FILE_SHOW_UP_POWERFOUR = "audio/sounds/showUpPowerFour.ogg";
+    public static final String FX_FILE_TIME_IS_UP = "audio/sounds/timeIsUp.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_EXPLOSION = "audio/sounds/finalEnemyLevelOneExplosion.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_HIT = "audio/sounds/finalEnemyLevelOneHit.ogg";
+    public static final String FX_FILE_FINAL_LEVEL_ONE_INTRO = "audio/sounds/fear.ogg";
+    public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
+    public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
+    public static final String FX_FILE_CLICK = "audio/sounds/click.ogg";
+    public static final String FX_FILE_APLAUSE = "audio/sounds/aplause.ogg";
+    public static final String FX_FILE_SQUISH = "audio/sounds/squish.ogg";
+    public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
+
+    // Music
+    public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
+    public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
+    public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
+
+    // Location of description file for texture atlas (dinamic game objects)
+    public static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
+
+    // Location of description file for texture atlas (GUI)
+    public static final String TEXTURE_ATLAS_UI = "atlas/scene2d/scene2d.atlas";
+
+    // Location of the map file for each level
+    public static final String MAP_FILE_LEVEL_ONE = "levels/levelOne/levelOne.tmx";
+    public static final String MAP_FILE_LEVEL_TWO = "levels/levelTwo/levelTwo.tmx";
+
     private static Assets instance;
-
     private AssetManager assetManager;
-
     private AssetI18NGameThree i18NGameThree;
     private AssetScene2d scene2d;
     private AssetFonts fonts;
@@ -112,63 +165,63 @@ public class Assets implements Disposable, AssetErrorListener {
     }
 
     private void loadTextureAtlasObjects() {
-        assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+        assetManager.load(TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
     }
 
     private void loadTextureAtlasUI() {
-        assetManager.load(Constants.TEXTURE_ATLAS_UI, TextureAtlas.class);
+        assetManager.load(TEXTURE_ATLAS_UI, TextureAtlas.class);
     }
 
     private void loadMaps() {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(Constants.MAP_FILE_LEVEL_ONE, TiledMap.class);
-        assetManager.load(Constants.MAP_FILE_LEVEL_TWO, TiledMap.class);
+        assetManager.load(MAP_FILE_LEVEL_ONE, TiledMap.class);
+        assetManager.load(MAP_FILE_LEVEL_TWO, TiledMap.class);
     }
 
     private void loadSounds() {
-        assetManager.load(Constants.FX_FILE_BUMP, Sound.class);
-        assetManager.load(Constants.FX_FILE_CRACK, Sound.class);
-        assetManager.load(Constants.FX_FILE_DEAD, Sound.class);
-        assetManager.load(Constants.FX_FILE_ENEMY_SHOOT, Sound.class);
-        assetManager.load(Constants.FX_FILE_HERO_SHOOT, Sound.class);
-        assetManager.load(Constants.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
-        assetManager.load(Constants.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
-        assetManager.load(Constants.FX_FILE_HIT, Sound.class);
-        assetManager.load(Constants.FX_FILE_OPEN_POWERBOX, Sound.class);
-        assetManager.load(Constants.FX_FILE_CLOCK, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_COLONE, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_COLSILVERBULLET, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_POWERONE, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_POWERTWO, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_POWERTHREE, Sound.class);
-        assetManager.load(Constants.FX_FILE_PICK_UP_POWERFOUR, Sound.class);
-        assetManager.load(Constants.FX_FILE_POWER_DOWN, Sound.class);
-        assetManager.load(Constants.FX_FILE_BEEP_A, Sound.class);
-        assetManager.load(Constants.FX_FILE_BEEP_B, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_COLONE, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_COLSILVERBULLET, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERONE, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTWO, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
-        assetManager.load(Constants.FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
-        assetManager.load(Constants.FX_FILE_TIME_IS_UP, Sound.class);
-        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
-        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
-        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
-        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
-        assetManager.load(Constants.FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
-        assetManager.load(Constants.FX_FILE_LEVEL_COMPLETED, Sound.class);
-        assetManager.load(Constants.FX_FILE_BOUNCE, Sound.class);
-        assetManager.load(Constants.FX_FILE_CLICK, Sound.class);
-        assetManager.load(Constants.FX_FILE_APLAUSE, Sound.class);
-        assetManager.load(Constants.FX_FILE_SQUISH, Sound.class);
-        assetManager.load(Constants.FX_FILE_FROZEN, Sound.class);
+        assetManager.load(FX_FILE_BUMP, Sound.class);
+        assetManager.load(FX_FILE_CRACK, Sound.class);
+        assetManager.load(FX_FILE_DEAD, Sound.class);
+        assetManager.load(FX_FILE_ENEMY_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_HERO_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
+        assetManager.load(FX_FILE_HERO_SHOOT_SWISH, Sound.class);
+        assetManager.load(FX_FILE_HIT, Sound.class);
+        assetManager.load(FX_FILE_OPEN_POWERBOX, Sound.class);
+        assetManager.load(FX_FILE_CLOCK, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_COLONE, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_COLSILVERBULLET, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_POWERONE, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_POWERTWO, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_POWERTHREE, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_POWERFOUR, Sound.class);
+        assetManager.load(FX_FILE_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_BEEP_A, Sound.class);
+        assetManager.load(FX_FILE_BEEP_B, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_COLONE, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_COLSILVERBULLET, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_POWERONE, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_POWERTWO, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_POWERTHREE, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_POWERFOUR, Sound.class);
+        assetManager.load(FX_FILE_TIME_IS_UP, Sound.class);
+        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
+        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
+        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
+        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
+        assetManager.load(FX_FILE_LEVEL_COMPLETED, Sound.class);
+        assetManager.load(FX_FILE_BOUNCE, Sound.class);
+        assetManager.load(FX_FILE_CLICK, Sound.class);
+        assetManager.load(FX_FILE_APLAUSE, Sound.class);
+        assetManager.load(FX_FILE_SQUISH, Sound.class);
+        assetManager.load(FX_FILE_FROZEN, Sound.class);
     }
 
     private void loadMusic() {
-        assetManager.load(Constants.MUSIC_FILE_MAIN_MENU, Music.class);
-        assetManager.load(Constants.MUSIC_FILE_LEVEL_ONE, Music.class);
-        assetManager.load(Constants.MUSIC_FILE_LEVEL_TWO, Music.class);
+        assetManager.load(MUSIC_FILE_MAIN_MENU, Music.class);
+        assetManager.load(MUSIC_FILE_LEVEL_ONE, Music.class);
+        assetManager.load(MUSIC_FILE_LEVEL_TWO, Music.class);
     }
 
     public void init(AssetManager assetManager) {
@@ -204,13 +257,13 @@ public class Assets implements Disposable, AssetErrorListener {
         }
 
         // Enable texture filtering for pixel smoothing (UI)
-        TextureAtlas atlasUI = assetManager.get(Constants.TEXTURE_ATLAS_UI);
+        TextureAtlas atlasUI = assetManager.get(TEXTURE_ATLAS_UI);
         for (Texture texture : atlasUI.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
         // Enable texture filtering for pixel smoothing (dinamic game objects)
-        TextureAtlas atlasDinamicObjects = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+        TextureAtlas atlasDinamicObjects = assetManager.get(TEXTURE_ATLAS_OBJECTS);
         for (Texture texture : atlasDinamicObjects.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }

@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -38,6 +37,32 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
+
+    // Constants
+    public static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
+
+    // World physics simulation parameters
+    public static final float WORLD_TIME_STEP = 1/300.0f;
+    public static final int WORLD_VELOCITY_ITERATIONS = 6;
+    public static final int WORLD_POSITION_ITERATIONS = 2;
+
+    // Each screen is 800px height, so the whole world (see TiledEditor) is 8000px.
+    public static final int WORLD_SCREENS = 10;
+
+    // Box2D Scale(Pixels Per Meter)
+    public static final float PPM = 100;
+
+    // Position (y-axis) where the epic fight against the final enemy begins
+    public static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
+
+    // Game cam velocity (m/s)
+    public static final float GAMECAM_VELOCITY = 0.304f;
+
+    // Debug mode enabled by default
+    public static final boolean DEBUG_MODE = true;
+
+    // Show/hide background image
+    public static final boolean HIDE_BACKGROUND = false;
 
     public enum PlayScreenState
     {
@@ -89,11 +114,11 @@ public class PlayScreen extends AbstractScreen {
         gameCam = new OrthographicCamera();
 
         // Create a FitViewport to maintain virtual aspect ratio despite screen size
-        gameViewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gameCam);
+        gameViewPort = new FitViewport(AbstractScreen.V_WIDTH / PPM, AbstractScreen.V_HEIGHT / PPM, gameCam);
 
         // Get our map and setup our map renderer
         map = LevelFactory.getLevelMap(this.level);
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
@@ -106,7 +131,7 @@ public class PlayScreen extends AbstractScreen {
         accumulator = 0;
 
         // Allows for debug lines of our box2d world.
-        if (Constants.DEBUG_MODE) {
+        if (DEBUG_MODE) {
             b2dr = new Box2DDebugRenderer();
         }
 
@@ -196,9 +221,9 @@ public class PlayScreen extends AbstractScreen {
         // Max frame time to avoid spiral of death (on slow devices)
         float frameTime = Math.min(dt, 0.25f);
         accumulator += frameTime;
-        while (accumulator >= Constants.WORLD_TIME_STEP) {
-            world.step(Constants.WORLD_TIME_STEP, Constants.WORLD_VELOCITY_ITERATIONS, Constants.WORLD_POSITION_ITERATIONS);
-            accumulator -= Constants.WORLD_TIME_STEP;
+        while (accumulator >= WORLD_TIME_STEP) {
+            world.step(WORLD_TIME_STEP, WORLD_VELOCITY_ITERATIONS, WORLD_POSITION_ITERATIONS);
+            accumulator -= WORLD_TIME_STEP;
         }
     }
 
@@ -265,7 +290,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private boolean isTheEndOfTheWorld() {
-        return upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 >= gameViewPort.getWorldHeight() * Constants.WORLD_SCREENS;
+        return upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 >= gameViewPort.getWorldHeight() * WORLD_SCREENS;
     }
 
     private void updateCamera(float dt) {
@@ -279,7 +304,7 @@ public class PlayScreen extends AbstractScreen {
         }
 
         // Our camera is relative to the edges
-        gameCam.position.y = upperEdge.getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
+        gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
 
         // Update our gamecam with correct coordinates after changes
         gameCam.update();
@@ -321,7 +346,7 @@ public class PlayScreen extends AbstractScreen {
         renderer.render();
 
         // Renderer our Box2DDebugLines
-        if (Constants.DEBUG_MODE) {
+        if (DEBUG_MODE) {
             b2dr.render(world, gameCam.combined);
         }
 
@@ -354,7 +379,7 @@ public class PlayScreen extends AbstractScreen {
         hud.draw();
 
         // Debug
-        if (Constants.DEBUG_MODE) {
+        if (DEBUG_MODE) {
             // Set our batch to now draw what the gameCam camera sees.
             game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
@@ -376,13 +401,13 @@ public class PlayScreen extends AbstractScreen {
 
         if (finalEnemy.isDisposable()) {
             levelCompletedTime += delta;
-            isLevelCompleted = levelCompletedTime > Constants.LEVEL_COMPLETED_DELAY_SECONDS;
+            isLevelCompleted = levelCompletedTime > LEVEL_COMPLETED_DELAY_SECONDS;
         }
         return isLevelCompleted;
     }
 
     private boolean isChallengeBegin() {
-        return player.getB2body().getPosition().y >= Constants.LEVEL_CHALLENGE_BEGIN;
+        return player.getB2body().getPosition().y >= LEVEL_CHALLENGE_BEGIN;
     }
 
     private void renderHero() {
@@ -593,7 +618,7 @@ public class PlayScreen extends AbstractScreen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        if (Constants.DEBUG_MODE) {
+        if (DEBUG_MODE) {
             b2dr.dispose();
         }
         hud.dispose();

@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -34,7 +33,7 @@ public class SelectLevelScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -60,13 +59,13 @@ public class SelectLevelScreen extends AbstractScreen {
         for (int level : GameSettings.getInstance().getAvailableLevels()) {
             table.row();
             levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
-            table.add(levelLabel).padTop(Constants.PAD_TOP);
+            table.add(levelLabel).padTop(AbstractScreen.PAD_TOP);
 
             // Events
             levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, 0));
         }
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

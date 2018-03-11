@@ -5,12 +5,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/23/2017.
  */
 
 public class AssetBulletA {
     private static final String TAG = AssetBulletA.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float BULLET_WIDTH_METERS = 39.0f * 1.0f / PlayScreen.PPM;
+    public static final float BULLET_HEIGHT_METERS = 102.0f * 1.0f / PlayScreen.PPM;
 
     private TextureRegion bulletAStand;
     private Animation bulletAAnimation;

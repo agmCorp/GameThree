@@ -8,6 +8,8 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import uy.com.agm.gamethree.game.GameThree;
 
 public class AndroidLauncher extends AndroidApplication {
+    private static final String TAG = AndroidApplication.class.getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

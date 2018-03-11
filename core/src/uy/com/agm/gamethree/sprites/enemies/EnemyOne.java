@@ -9,11 +9,13 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -21,6 +23,14 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class EnemyOne extends Enemy {
     private static final String TAG = EnemyOne.class.getName();
+
+    // EnemyOne (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    public static final float VELOCITY_X = 1.0f;
+    public static final float VELOCITY_Y = -1.0f;
+    public static final float FIRE_DELAY_SECONDS = 3.0f;
+    public static final float CHANGE_DIRECTION_SECONDS = 1.0f;
+    public static final int SCORE = 5;
 
     private float stateTime;
     private Animation enemyOneAnimation;
@@ -36,13 +46,13 @@ public class EnemyOne extends Enemy {
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENEMYONE_WIDTH_METERS, Constants.ENEMYONE_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
 
         stateTime = 0;
 
         currentState = State.ALIVE;
 
-        velocity.set(MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X, Constants.ENEMYONE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
         changeDirection = false;
         changeDirectionTime = 0;
     }
@@ -56,25 +66,25 @@ public class EnemyOne extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYONE_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.PATH_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.HERO_WEAPON_BIT |
-                Constants.SHIELD_BIT |
-                Constants.ENEMY_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.PATH_BIT |
+                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyDefaultShooting(screen, MathUtils.random(0, Constants.ENEMYONE_FIRE_DELAY_SECONDS), Constants.ENEMYONE_FIRE_DELAY_SECONDS);
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, FIRE_DELAY_SECONDS), FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -98,8 +108,8 @@ public class EnemyOne extends Enemy {
 
         if (changeDirection) {
             changeDirectionTime += dt;
-            if (changeDirectionTime > Constants.ENEMYONE_CHANGE_DIRECTION_SECONDS) {
-                velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X;
+            if (changeDirectionTime > CHANGE_DIRECTION_SECONDS) {
+                velocity.x = MathUtils.randomSign() * VELOCITY_X;
                 velocity.y *= -1;
                 changeDirection = false;
                 changeDirectionTime = 0;
@@ -122,7 +132,7 @@ public class EnemyOne extends Enemy {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
 
         // Set score
-        screen.getHud().addScore(Constants.ENEMYONE_SCORE);
+        screen.getHud().addScore(SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -135,8 +145,8 @@ public class EnemyOne extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONA_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONA_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionA.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionA.HEIGHT_METERS / 2,
+                        AssetExplosionA.WIDTH_METERS, AssetExplosionA.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
@@ -167,7 +177,7 @@ public class EnemyOne extends Enemy {
 
     @Override
     public void onBumpWithFeint() {
-        velocity.x = MathUtils.randomSign() * Constants.ENEMYONE_VELOCITY_X * 2.0f;
+        velocity.x = MathUtils.randomSign() * VELOCITY_X * 2.0f;
         velocity.y *= -1;
         changeDirection = true;
         changeDirectionTime = 0;

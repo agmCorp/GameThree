@@ -3,9 +3,9 @@ package uy.com.agm.gamethree.sprites.tileobjects;
 import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -17,7 +17,7 @@ public class Obstacle extends InteractiveTileObject {
     public Obstacle(PlayScreen screen, MapObject object) {
         super(screen, object);
         fixture.setUserData(this);
-        setCategoryFilter(Constants.OBSTACLE_BIT);
+        setCategoryFilter(WorldContactListener.OBSTACLE_BIT);
     }
 
     @Override

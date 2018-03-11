@@ -1,6 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.screens.Hud;
 
 /**
  * Created by AGM on 2/13/2018.
@@ -12,7 +12,7 @@ public class DynamicHelpDef {
 
     public DynamicHelpDef() {
         this.modal = false;
-        this.seconds = Constants.HUD_DEFAULT_HELP_SECONDS;
+        this.seconds = Hud.DEFAULT_HELP_SECONDS;
     }
 
     public DynamicHelpDef(float seconds) {

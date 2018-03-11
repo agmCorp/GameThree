@@ -15,14 +15,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/3/2017.
@@ -30,6 +32,16 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 
 public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float LINEAR_VELOCITY = 5.2f;
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
+    public static final float DEATH_LINEAR_VELOCITY = 5.0f;
+    public static final int LIVES_START = 3;
+    public static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
+    public static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
+    public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
+    public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -90,7 +102,7 @@ public class Hero extends Sprite {
         * This point will be used by defineHero() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(x, y, Constants.HERO_WIDTH_METERS, Constants.HERO_HEIGHT_METERS);
+        setBounds(x, y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
         defineHero();
 
         // Place origin of rotation in the center of the Sprite
@@ -111,7 +123,7 @@ public class Hero extends Sprite {
         setDefaultFilterTime = 0;
         isPlayingAgain = false;
         shootingEnabled = true;
-        lives = Constants.HERO_LIVES_START;
+        lives = LIVES_START;
 
         // SilverBullets variables initialization
         silverBullets = 0;
@@ -337,7 +349,7 @@ public class Hero extends Sprite {
         if (applyNewFilters) {
             // Hero can't collide with anything
             Filter filter = new Filter();
-            filter.maskBits = Constants.NOTHING_BIT;
+            filter.maskBits = WorldContactListener.NOTHING_BIT;
 
             // We set the previous filter in every fixture
             for (Fixture fixture : b2body.getFixtureList()) {
@@ -368,7 +380,7 @@ public class Hero extends Sprite {
         } else {
             // We move Hero from the actual position to the middle of the screen.
             tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y, Constants.HERO_DEATH_LINEAR_VELOCITY);
+            Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y, DEATH_LINEAR_VELOCITY);
             b2body.setLinearVelocity(tmp);
         }
     }
@@ -387,7 +399,7 @@ public class Hero extends Sprite {
 
         // We move Hero from the actual position to the bottom of the screen.
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2 - getHeight(), Constants.HERO_DEATH_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, b2body.getPosition().x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2 - getHeight(), DEATH_LINEAR_VELOCITY);
         b2body.setLinearVelocity(tmp);
 
         // If we reach the bottom edge of the screen, we set Hero as not active in the simulation.
@@ -422,11 +434,11 @@ public class Hero extends Sprite {
 
         // Our Hero can collide with powerBoxes, borders, edges and obstacles only (not with paths)
         Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.POWERBOX_BIT |
-                Constants.BORDER_BIT |
-                Constants.EDGE_BIT |
-                Constants.OBSTACLE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.BORDER_BIT |
+                WorldContactListener.EDGE_BIT |
+                WorldContactListener.OBSTACLE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
@@ -458,7 +470,7 @@ public class Hero extends Sprite {
     private void activateBlink(float dt, Sprite sprite) {
         if (sprite != null) {
             blinkingTime += dt;
-            if (blinkingTime >= Constants.SPRITE_BLINKING_INTERVAL_SECONDS) {
+            if (blinkingTime >= SPRITE_BLINKING_INTERVAL_SECONDS) {
                 alpha = !alpha;
                 blinkingTime = 0;
             }
@@ -483,7 +495,7 @@ public class Hero extends Sprite {
             activateBlink(dt, this);
 
             setDefaultFilterTime += dt;
-            if (setDefaultFilterTime > Constants.HERO_PLAY_AGAIN_WARM_UP_TIME) {
+            if (setDefaultFilterTime > PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
                 deactivateBlink(this);
                 isPlayingAgain = false;
@@ -521,7 +533,7 @@ public class Hero extends Sprite {
 
     // if Hero goes beyond the lower limit, he must have been crushed by an object.
     private void checkCrashing() {
-        float bottomEdge = screen.getBottomEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the bottomEdge :)
+        float bottomEdge = screen.getBottomEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; //  Upper edge of the bottomEdge :)
         float heroUpperEdge = getY() + getHeight();
 
         // Beyond bottom edge
@@ -532,16 +544,16 @@ public class Hero extends Sprite {
 
     private void setDefaultFilter() {
         Filter filter = new Filter();
-        filter.categoryBits = Constants.HERO_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDER_BIT |
-                Constants.EDGE_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.PATH_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.ENEMY_BIT |
-                Constants.FINAL_ENEMY_BIT |
-                Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.EDGE_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.PATH_BIT |
+                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.FINAL_ENEMY_BIT |
+                WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
@@ -570,7 +582,7 @@ public class Hero extends Sprite {
         // Create default fixture
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.HERO_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -640,13 +652,13 @@ public class Hero extends Sprite {
     public boolean isGameOver() {
         return currentHeroState == HeroState.DEAD &&
                 lives <= 0 &&
-                gameOverTime > Constants.GAME_OVER_DELAY_SECONDS;
+                gameOverTime > GAME_OVER_DELAY_SECONDS;
     }
 
     public boolean isTimeToPlayAgain() {
         return currentHeroState == HeroState.DEAD &&
                 lives > 0 &&
-                playAgainTime > Constants.PLAY_AGAIN_DELAY_SECONDS;
+                playAgainTime > PLAY_AGAIN_DELAY_SECONDS;
     }
 
     public Body getB2body() {

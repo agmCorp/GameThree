@@ -6,8 +6,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
@@ -31,13 +33,13 @@ public class LevelFactory {
         switch (level) {
             case 1:
                 finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
-                        screen.getGameViewPort().getWorldHeight() * Constants.WORLD_SCREENS -
-                                Constants.FINALLEVELONE_HEIGHT_METERS + Constants.FINALLEVELONE_HEIGHT_METERS / 2 - Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                AssetFinalEnemyLevelOne.HEIGHT_METERS + AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             case 2:
                 finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x,
-                        screen.getGameViewPort().getWorldHeight() * Constants.WORLD_SCREENS -
-                                Constants.FINALLEVELTWO_HEIGHT_METERS + Constants.FINALLEVELTWO_HEIGHT_METERS / 2 - Constants.FINALLEVELTWO_CIRCLESHAPE_RADIUS_METERS);
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                AssetFinalEnemyLevelTwo.HEIGHT_METERS + AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             default:
                 finalEnemy = null;
@@ -47,7 +49,7 @@ public class LevelFactory {
     }
 
     public static int getLevelTimer(int level) {
-        int[] levelTimers = {Constants.TIMER_LEVEL_ONE, Constants.TIMER_LEVEL_TWO};
+        int[] levelTimers = {UIFactory.TIMER_LEVEL_ONE, UIFactory.TIMER_LEVEL_TWO};
         return  levelTimers[level - 1];
     }
 

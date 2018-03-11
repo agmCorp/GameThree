@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
@@ -46,10 +45,10 @@ public abstract class InteractiveTileObject {
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM, (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
+        bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / PlayScreen.PPM, (bounds.getY() + bounds.getHeight() / 2) / PlayScreen.PPM);
 
         b2body = world.createBody(bdef);
-        shape.setAsBox(bounds.getWidth() / 2 / Constants.PPM, bounds.getHeight() / 2 / Constants.PPM);
+        shape.setAsBox(bounds.getWidth() / 2 / PlayScreen.PPM, bounds.getHeight() / 2 / PlayScreen.PPM);
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
     }

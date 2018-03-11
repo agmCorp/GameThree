@@ -3,7 +3,7 @@ package uy.com.agm.gamethree.sprites.weapons.enemy;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -14,8 +14,11 @@ import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
  * Created by amorales on 5/3/2018.
  */
 
-public class EnemySwordShooting implements IShootStrategy { // todo hacer esto
+public class EnemySwordShooting implements IShootStrategy {
     private static final String TAG = EnemySwordShooting.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM; // todo hacer esto
 
     private PlayScreen screen;
     private float openFireTime;
@@ -47,15 +50,15 @@ public class EnemySwordShooting implements IShootStrategy { // todo hacer esto
     private void shootImp(float x, float y) {
         // Move EnemyBullet from Enemy to Hero
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, Constants.ENEMYBULLET_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, EnemyDefaultShooting.DEFAULT_BULLET_LINEAR_VELOCITY);
 
         float angle = tmp.angle();
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
         screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
-                Constants.BULLETC_WIDTH_METERS,
-                Constants.BULLETC_HEIGHT_METERS,
-                Constants.BULLETC_CIRCLESHAPE_RADIUS_METERS,
+                AssetBulletC.WIDTH_METERS,
+                AssetBulletC.HEIGHT_METERS,
+                CIRCLE_SHAPE_RADIUS_METERS,
                 angle,
                 tmp.x,
                 tmp.y,

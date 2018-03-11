@@ -5,12 +5,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/23/2017.
  */
 
 public class AssetExplosionA {
     private static final String TAG = AssetExplosionA.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float WIDTH_METERS = 167.0f * 0.5f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 167.0f * 0.5f / PlayScreen.PPM;
 
     private TextureRegion explosionAStand;
     private Animation explosionAAnimation;

@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import uy.com.agm.gamethree.game.Constants;
-
 /**
  * Created by amorales on 1/2/2018.
  */
@@ -17,17 +15,25 @@ import uy.com.agm.gamethree.game.Constants;
 public class HealthBar extends ProgressBar {
     private static final String TAG = HealthBar.class.getName();
 
+    // Constants
+    public static final int WIDTH = 200;
+    public static final int HEIGHT = 10;
+    public static final float MIN = 0.0f;
+    public static final float MAX = 100.0f;
+    public static final float STEP = 0.01f;
+    public static final float ANIMATION_DURATION = 0.25f;
+
     private int currentEnergy;
     private int fullEnergy;
 
     public HealthBar() {
-        super(Constants.HEALTHBAR_MIN, Constants.HEALTHBAR_MAX, Constants.HEALTHBAR_STEP, false, new ProgressBarStyle());
+        super(MIN, MAX, STEP, false, new ProgressBarStyle());
 
-        getStyle().background = getColoredDrawable(Constants.HEALTHBAR_WIDTH, Constants.HEALTHBAR_HEIGHT, Color.RED);
-        getStyle().knob = getColoredDrawable(0, Constants.HEALTHBAR_HEIGHT, Color.GREEN);
-        getStyle().knobBefore = getColoredDrawable(Constants.HEALTHBAR_WIDTH, Constants.HEALTHBAR_HEIGHT, Color.GREEN);
+        getStyle().background = getColoredDrawable(WIDTH, HEIGHT, Color.RED);
+        getStyle().knob = getColoredDrawable(0, HEIGHT, Color.GREEN);
+        getStyle().knobBefore = getColoredDrawable(WIDTH, HEIGHT, Color.GREEN);
 
-        setHeight(Constants.HEALTHBAR_HEIGHT);
+        setHeight(HEIGHT);
         setFull();
     }
 
@@ -47,14 +53,14 @@ public class HealthBar extends ProgressBar {
     }
 
     private void setFull() {
-        setValue(Constants.HEALTHBAR_MAX);
-        setAnimateDuration(Constants.HEALTHBAR_ANIMATION_DURATION);
+        setValue(MAX);
+        setAnimateDuration(ANIMATION_DURATION);
     }
 
     public void decrease() {
         currentEnergy--;
         if (currentEnergy > 0) {
-            setValue(getValue() - Constants.HEALTHBAR_MAX / fullEnergy);
+            setValue(getValue() - MAX / fullEnergy);
         } else {
             setValue(0);
         }
@@ -63,6 +69,6 @@ public class HealthBar extends ProgressBar {
     @Override
     public float getPrefWidth() {
         // WA: Impossible to set 'width' on an horizontal ProgressBar using size, resize or setWidth
-        return (float) Constants.HEALTHBAR_WIDTH;
+        return (float) WIDTH;
     }
 }

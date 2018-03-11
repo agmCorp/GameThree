@@ -16,9 +16,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/17/2017.
@@ -26,6 +29,10 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class PowerBox extends Sprite {
     private static final String TAG = PowerBox.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    public static final int SCORE = 10;
 
     // Constants
     private static final String KEY_STRENGTH = "strength";
@@ -60,14 +67,14 @@ public class PowerBox extends Sprite {
         * This point will be used by definePowerBox() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM, Constants.POWERBOX_WIDTH_METERS, Constants.POWERBOX_HEIGHT_METERS);
+        setBounds(rect.getX() / PlayScreen.PPM, rect.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
         definePowerBox();
 
         // By default this PowerBox doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
-        switch (MathUtils.random(1, Constants.POWERBOX_MAX_TEXTURES)) {
+        switch (MathUtils.random(1, AssetPowerBox.POWERBOX_MAX_TEXTURES)) {
             case 1:
                 powerBoxStand = Assets.getInstance().getPowerBox().getBrickAStand();
                 powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickADamagedLittle();
@@ -168,7 +175,7 @@ public class PowerBox extends Sprite {
 
     // Determine whether or not an item should be released reading a property set in TiledEditor.
     private void getItemOnHit() {
-        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
     }
 
     private void definePowerBox() {
@@ -179,14 +186,14 @@ public class PowerBox extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERBOX_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.POWERBOX_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.ENEMY_BIT |
-                Constants.ITEM_BIT |
-                Constants.HERO_WEAPON_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_GHOST_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.POWERBOX_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_GHOST_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -244,7 +251,7 @@ public class PowerBox extends Sprite {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getOpenPowerBox());
 
         // Set score
-        screen.getHud().addScore(Constants.POWERBOX_SCORE);
+        screen.getHud().addScore(SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -256,8 +263,8 @@ public class PowerBox extends Sprite {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONB_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONB_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIONB_WIDTH_METERS, Constants.EXPLOSIONB_HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionB.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionB.HEIGHT_METERS / 2,
+                        AssetExplosionB.WIDTH_METERS, AssetExplosionB.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

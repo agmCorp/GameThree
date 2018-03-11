@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -21,8 +20,20 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public abstract class AbstractScreen extends Stage implements Screen {
     private static final String TAG = AbstractScreen.class.getName();
 
+    // Constants
+
+    // GUI Width (pixels)
+    // Visible game world is V_WIDTH / PPM meters wide
+    public static final int V_WIDTH = 480;
+
+    // GUI Height (pixels)
+    // Visible game world is V_WIDTH / PPM meters tall
+    public static final int V_HEIGHT = 800;
+
+    public static final float PAD_TOP = 40.0f;
+
     protected AbstractScreen() {
-        super(new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera()));
+        super(new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera()));
     }
 
     // Subclasses must load actors in this method

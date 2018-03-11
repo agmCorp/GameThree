@@ -4,12 +4,19 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 12/22/2017.
  */
 
 public class AssetPowerBox {
     private static final String TAG = AssetPowerBox.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float WIDTH_METERS = 102.0f * 0.4f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 128.0f * 0.4f / PlayScreen.PPM;
+    public static final int POWERBOX_MAX_TEXTURES = 14;
 
     private TextureRegion brickAStand;
     private TextureRegion brickBStand;

@@ -12,12 +12,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetShield;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -25,6 +27,18 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PlayScreen.PPM;
+    public static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    public static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    public static final float VELOCITY_X = 0.0f;
+    public static final float VELOCITY_Y = 0.7f;
+    public static final float WAITING_SECONDS = 5.0f;
+    public static final float FADING_SECONDS = 5.0f;
+    public static final int DEFAULT_TIMER = 10;
+    public static final int SCORE = 60;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
@@ -36,7 +50,7 @@ public class PowerTwo extends Item {
     // Shield
     public PowerTwo(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTWO;
+        this.timer = timer > 0 ? timer : DEFAULT_TIMER;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
@@ -47,10 +61,10 @@ public class PowerTwo extends Item {
         stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.POWERTWO_WIDTH_METERS, Constants.POWERTWO_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetPowerTwo.WIDTH_METERS, AssetPowerTwo.HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity.set(MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTWO_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerTwo());
@@ -65,17 +79,17 @@ public class PowerTwo extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERTWO_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.PATH_BIT |
-                Constants.ENEMY_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_GHOST_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ITEM_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.PATH_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_GHOST_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -95,7 +109,7 @@ public class PowerTwo extends Item {
         stateTime += dt;
 
         stateWaitingTime += dt;
-        if (stateWaitingTime > Constants.POWERTWO_WAITING_SECONDS) {
+        if (stateWaitingTime > WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -115,13 +129,13 @@ public class PowerTwo extends Item {
         stateTime += dt;
 
         stateFadingTime += dt;
-        float alpha = 1 - stateFadingTime / Constants.POWERTWO_FADING_SECONDS;
+        float alpha = 1 - stateFadingTime / FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTime > Constants.POWERTWO_FADING_SECONDS) {
+        if (stateFadingTime > FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -156,7 +170,7 @@ public class PowerTwo extends Item {
             hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer);
 
             // Set score
-            hud.addScore(Constants.POWERTWO_SCORE);
+            hud.addScore(SCORE);
 
             // Disable previous power (if any)
             Hero hero = screen.getPlayer();
@@ -165,26 +179,26 @@ public class PowerTwo extends Item {
             // Create the Shield
             PolygonShape shield = new PolygonShape();
             Vector2[] vertices = new Vector2[4];
-            vertices[0] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-            vertices[1] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS + Constants.SHIELD_HEIGHT_METERS);
-            vertices[2] = new Vector2(-Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
-            vertices[3] = new Vector2(Constants.SHIELD_OFFSETX_METERS, Constants.SHIELD_OFFSETY_METERS);
+            vertices[0] = new Vector2(-SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS + SHIELD_HEIGHT_METERS);
+            vertices[1] = new Vector2(SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS + SHIELD_HEIGHT_METERS);
+            vertices[2] = new Vector2(-SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS);
+            vertices[3] = new Vector2(SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS);
             shield.set(vertices);
 
             // Shield only collide with enemies' bullets
             FixtureDef fdef = new FixtureDef();
             fdef.shape = shield;
-            fdef.filter.categoryBits = Constants.SHIELD_BIT;  // Depicts what this fixture is
-            fdef.filter.maskBits = Constants.ENEMY_BIT |
-                    Constants.FINAL_ENEMY_BIT |
-                    Constants.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+            fdef.filter.categoryBits = WorldContactListener.SHIELD_BIT;  // Depicts what this fixture is
+            fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
+                    WorldContactListener.FINAL_ENEMY_BIT |
+                    WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
             hero.getB2body().createFixture(fdef).setUserData(hero);
 
             // Set the power's texture
             Sprite spritePower = new Sprite(Assets.getInstance().getShield().getShieldStand());
 
             // Only to set width and height of our spritePower
-            spritePower.setBounds(hero.getX(), hero.getY(), Constants.POWERTWO_FX_WIDTH_METERS, Constants.POWERTWO_FX_HEIGHT_METERS);
+            spritePower.setBounds(hero.getX(), hero.getY(), AssetShield.WIDTH_METERS, AssetShield.HEIGHT_METERS);
 
             // Apply effect
             hero.applyPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spritePower, false);

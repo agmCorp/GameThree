@@ -17,6 +17,9 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 public class GameController implements GestureDetector.GestureListener, InputProcessor {
     private static final String TAG = GameController.class.getName();
 
+    // Constants
+    public static final float ALPHA_LERP = 0.2f;
+
     private Vector2 candidateVelocity; // Temp GC friendly vector
     private Vector2 heroVelocity;
     private PlayScreen screen;
@@ -72,10 +75,10 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
             // Go from origin to target at constant speed
             candidateVelocity.set(player.getB2body().getPosition().x, player.getB2body().getPosition().y);
-            Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / Constants.PPM, player.getB2body().getPosition().y + deltaY / Constants.PPM, Constants.HERO_LINEAR_VELOCITY);
+            Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / PlayScreen.PPM, player.getB2body().getPosition().y + deltaY / PlayScreen.PPM, Hero.LINEAR_VELOCITY);
 
             // Linear interpolation to avoid character shaking
-            heroVelocity.lerp(candidateVelocity, Constants.HERO_ALPHA_LERP);
+            heroVelocity.lerp(candidateVelocity, ALPHA_LERP);
 
             // Apply the result
             player.getB2body().setLinearVelocity(heroVelocity);
@@ -117,16 +120,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         if(!player.isHeroDead()) {
             // Control our player using linear velocity
             if (keycode == Input.Keys.UP) {
-                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Constants.HERO_LINEAR_VELOCITY);
+                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
             }
             if (keycode == Input.Keys.DOWN) {
-                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Constants.HERO_LINEAR_VELOCITY);
+                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Hero.LINEAR_VELOCITY);
             }
             if (keycode == Input.Keys.LEFT) {
-                player.getB2body().setLinearVelocity(-Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                player.getB2body().setLinearVelocity(-Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.RIGHT) {
-                player.getB2body().setLinearVelocity(Constants.HERO_LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
             }
             if (keycode == Input.Keys.SPACE) {
                 if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {

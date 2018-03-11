@@ -9,12 +9,14 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyFour;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -23,7 +25,15 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 public class EnemyFour extends Enemy {
     private static final String TAG = EnemyFour.class.getName();
 
-    // Constants
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
+    public static final float LINEAR_VELOCITY = 3.0f;
+    public static final float DENSITY = 1000.0f;
+    public static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
+    public static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
+    public static final float FIRE_DELAY_SECONDS = 3.0f;
+    public static final float FROZEN_TIME_SECONDS = 4.0f;
+    public static final int SCORE = 35;
     private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
 
     private float stateTime;
@@ -51,7 +61,7 @@ public class EnemyFour extends Enemy {
         explosionAnimation = Assets.getInstance().getExplosionD().getExplosionDAnimation();
 
         // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENEMYFOUR_WIDTH_METERS, Constants.ENEMYFOUR_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
         // State variables initialization
         stateTime = 0;
@@ -59,11 +69,11 @@ public class EnemyFour extends Enemy {
         currentState = State.ALIVE;
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
-        b2bodyTargetX = getX() + (Constants.ENEMYFOUR_WAVELENGTH_METERS / 2) * MathUtils.randomSign();
-        b2bodyTargetY = getY() + (Constants.ENEMYFOUR_AMPLITUDE_METERS / 2) * MathUtils.randomSign();
+        b2bodyTargetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
+        b2bodyTargetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();
 
         tmp.set(getX(), getY());
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
         velocity.set(tmp);
 
         // Frozen state variables initialization
@@ -84,21 +94,21 @@ public class EnemyFour extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYFOUR_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.HERO_WEAPON_BIT |
-                Constants.SHIELD_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
-        fdef.density = Constants.ENEMYFOUR_DENSITY; // Hard to push
+        fdef.density = DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyDefaultShooting(screen, MathUtils.random(0, Constants.ENEMYFOUR_FIRE_DELAY_SECONDS), Constants.ENEMYFOUR_FIRE_DELAY_SECONDS);
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, FIRE_DELAY_SECONDS), FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -157,8 +167,8 @@ public class EnemyFour extends Enemy {
 
         if (stateTime == 0) { // Frozen state starts
             // Setbounds is the one that determines the size of the frozen sprite on the screen
-            setBounds(getX() + getWidth() / 2 - Constants.ENEMYFOUR_FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.ENEMYFOUR_FROZEN_HEIGHT_METERS / 2,
-                    Constants.ENEMYFOUR_FROZEN_WIDTH_METERS, Constants.ENEMYFOUR_FROZEN_HEIGHT_METERS);
+            setBounds(getX() + getWidth() / 2 - AssetEnemyFour.FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemyFour.FROZEN_HEIGHT_METERS / 2,
+                    AssetEnemyFour.FROZEN_WIDTH_METERS, AssetEnemyFour.FROZEN_HEIGHT_METERS);
 
             // We get the linear velocity that it had before being frozen
             b2bodyLinearVelX = b2body.getLinearVelocity().x;
@@ -198,12 +208,12 @@ public class EnemyFour extends Enemy {
 
     private void checkDefrost(float dt) {
         stateFrozenTime += dt;
-        if (stateFrozenTime >= Constants.ENEMYFOUR_FROZEN_TIME_SECONDS) {
+        if (stateFrozenTime >= FROZEN_TIME_SECONDS) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
 
             // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
-            setBounds(b2body.getPosition().x, b2body.getPosition().y, Constants.ENEMYFOUR_WIDTH_METERS, Constants.ENEMYFOUR_HEIGHT_METERS);
+            setBounds(b2body.getPosition().x, b2body.getPosition().y, AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
             timesItFreeze--;
             if (timesItFreeze > 0) {
@@ -215,7 +225,7 @@ public class EnemyFour extends Enemy {
 
             // Return movement
             tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
+            Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
             velocity.set(tmp);
 
             stateTime = 0;
@@ -237,7 +247,7 @@ public class EnemyFour extends Enemy {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
 
         // Set score
-        screen.getHud().addScore(Constants.ENEMYFOUR_SCORE);
+        screen.getHud().addScore(SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -250,8 +260,8 @@ public class EnemyFour extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIOND_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIOND_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIOND_WIDTH_METERS, Constants.EXPLOSIOND_HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionD.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionD.HEIGHT_METERS / 2,
+                        AssetExplosionD.WIDTH_METERS, AssetExplosionD.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
@@ -271,27 +281,27 @@ public class EnemyFour extends Enemy {
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
             if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY - Constants.ENEMYFOUR_AMPLITUDE_METERS; // New targetY (down)
+                b2bodyTargetY = b2bodyTargetY - AMPLITUDE_METERS; // New targetY (down)
             }
         } else { // EnemyFour goes down
             if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY + Constants.ENEMYFOUR_AMPLITUDE_METERS; // New targetY (up)
+                b2bodyTargetY = b2bodyTargetY + AMPLITUDE_METERS; // New targetY (up)
             }
         }
 
         if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
             if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX + Constants.ENEMYFOUR_WAVELENGTH_METERS / 2; // New targetX (right)
+                b2bodyTargetX = b2bodyTargetX + WAVELENGTH_METERS / 2; // New targetX (right)
             }
         } else { // // EnemyFour goes to the left
             if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX - Constants.ENEMYFOUR_WAVELENGTH_METERS / 2; // New targetX (left)
+                b2bodyTargetX = b2bodyTargetX - WAVELENGTH_METERS / 2; // New targetX (left)
             }
         }
 
         // Go to target with constant velocity
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, Constants.ENEMYFOUR_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
         velocity.set(tmp);
     }
 

@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -24,6 +23,16 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
+
+    // Constants
+    public static final float DEFAULT_VOLUME = 0.5f;
+    public static final float MIN_VOLUME = 0.0f;
+    public static final float MAX_VOLUME = 1.0f;
+    public static final int MAX_AVAILABLE_LEVEL = 2;
+    public static final float SLIDER_MIN = 0.0f;
+    public static final float SLIDER_MAX = 1.0f;
+    public static final float SLIDER_STEP = 0.01f;
+    public static final float SLIDER_WIDTH = 250.0f;
 
     private Label shootingSettingLabel;
     private Slider sliderMusic;
@@ -48,7 +57,7 @@ public class SettingsScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -78,29 +87,29 @@ public class SettingsScreen extends AbstractScreen {
         sliderStyle.knob = new TextureRegionDrawable(Assets.getInstance().getScene2d().getSliderKnob());
 
         // Music
-        sliderMusic = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
+        sliderMusic = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
         sliderMusic.setValue(prefs.getVolMusic());
 
         // Sound
-        sliderSound = new Slider(Constants.SLIDER_MIN, Constants.SLIDER_MAX, Constants.SLIDER_STEP, false, sliderStyle);
+        sliderSound = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
         sliderSound.setValue(prefs.getVolSound());
 
         // Add values
         table.add(settingsLabel);
         table.row();
-        table.add(musicLabel).padTop(Constants.PAD_TOP);
+        table.add(musicLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(sliderMusic).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP);
+        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(soundEffectsLabel).padTop(Constants.PAD_TOP);
+        table.add(soundEffectsLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(sliderSound).width(Constants.SLIDER_WIDTH).padTop(Constants.PAD_TOP);
+        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(shootingLabel).padTop(Constants.PAD_TOP);
+        table.add(shootingLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(shootingSettingLabel).padTop(Constants.PAD_TOP);
+        table.add(shootingSettingLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
         sliderMusic.addListener(new ChangeListener() {

@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -28,7 +27,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.currentLevel = currentLevel;
         this.finalScore = finalScore;
         this.nextLevel = currentLevel + 1;
-        if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
             GameSettings.getInstance().addAvailableLevel(nextLevel);
             GameSettings.getInstance().save();
         }
@@ -46,7 +45,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -73,24 +72,24 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(currentLevelLabel).center();
         table.row();
-        table.add(levelCompletedLabel).padTop(Constants.PAD_TOP).center();
+        table.add(levelCompletedLabel).padTop(AbstractScreen.PAD_TOP).center();
         table.row();
-        table.add(finalScoreLabel).padTop(Constants.PAD_TOP).center();
+        table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP).center();
         table.row();
-        table.add(playAgainLabel).padTop(Constants.PAD_TOP * 2).center();
-        if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
+        table.add(playAgainLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
+        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
             table.row();
-            table.add(nextLevelLabel).padTop(Constants.PAD_TOP).center();
+            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP).center();
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(Constants.PAD_TOP).center();
+            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP).center();
         }
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP * 2).center();
+        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
 
         // Events
         playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel, 0));
-        if (this.nextLevel <= Constants.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.finalScore));
         }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

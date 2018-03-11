@@ -11,10 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
+import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -67,7 +68,7 @@ public abstract class Enemy extends Sprite {
         * This point will be used by defineEnemy() calling getX(), getY() to center its b2body.
         * SetPosition always receives world coordinates.
         */
-        setPosition(rect.getX() / Constants.PPM, rect.getY() / Constants.PPM);
+        setPosition(rect.getX() / PlayScreen.PPM, rect.getY() / PlayScreen.PPM);
         defineEnemy();
 
         // By default this Enemy doesn't interact in our world
@@ -107,14 +108,14 @@ public abstract class Enemy extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Constants.ITEM_OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
     }
 
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
             if (b2body.isActive()) {
                 shootContext.update(dt);
-                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - Constants.ENEMYBULLET_OFFSET_METERS);
+                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
             }
         }
     }

@@ -9,13 +9,14 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroHalfMoonShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/14/2017.
@@ -23,6 +24,16 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class PowerThree extends Item {
     private static final String TAG = PowerThree.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    public static final float VELOCITY_X = 1.0f;
+    public static final float VELOCITY_Y = 1.0f;
+    public static final float WAITING_SECONDS = 5.0f;
+    public static final float FADING_SECONDS = 5.0f;
+    public static final int TIMER_POWERTHREE = 10;
+    public static final int SCORE = 20;
+    public static final int MAX_BULLETS = 6;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
@@ -35,22 +46,22 @@ public class PowerThree extends Item {
     // Fire power
     public PowerThree(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
-        this.timer = timer > 0 ? timer : Constants.DEFAULT_TIMER_POWERTHREE;
+        this.timer = timer > 0 ? timer : TIMER_POWERTHREE;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
-        numberBullets = MathUtils.random(2, Constants.POWERTHREE_MAX_BULLETS);
+        numberBullets = MathUtils.random(2, MAX_BULLETS);
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Setbounds is the one that determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), Constants.POWERTHREE_WIDTH_METERS, Constants.POWERTHREE_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetPowerThree.WIDTH_METERS, AssetPowerThree.HEIGHT_METERS);
 
         currentState = State.WAITING;
-        velocity.set(MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_X, MathUtils.randomSign() * Constants.POWERTHREE_VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerThree());
@@ -65,17 +76,17 @@ public class PowerThree extends Item {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.POWERTHREE_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ITEM_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.BORDER_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.PATH_BIT |
-                Constants.ENEMY_BIT |
-                Constants.POWERBOX_BIT |
-                Constants.ITEM_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_GHOST_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ITEM_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.PATH_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.POWERBOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_GHOST_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
@@ -95,7 +106,7 @@ public class PowerThree extends Item {
         stateTime += dt;
 
         stateWaitingTime += dt;
-        if (stateWaitingTime > Constants.POWERTHREE_WAITING_SECONDS) {
+        if (stateWaitingTime > WAITING_SECONDS) {
             currentState = State.FADING;
         }
     }
@@ -115,13 +126,13 @@ public class PowerThree extends Item {
         stateTime += dt;
 
         stateFadingTime += dt;
-        float alpha = 1 - stateFadingTime / Constants.POWERTHREE_FADING_SECONDS;
+        float alpha = 1 - stateFadingTime / FADING_SECONDS;
         if (alpha >= 0) {
             // 0 invisible, 1 visible
             setAlpha(alpha);
         }
 
-        if (stateFadingTime > Constants.POWERTHREE_FADING_SECONDS) {
+        if (stateFadingTime > FADING_SECONDS) {
             world.destroyBody(b2body);
             currentState = State.FINISHED;
         }
@@ -156,7 +167,7 @@ public class PowerThree extends Item {
             hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer);
 
             // Set score
-            hud.addScore(Constants.POWERTHREE_SCORE);
+            hud.addScore(SCORE);
 
             // Disable previous power (if any)
             Hero hero = screen.getPlayer();

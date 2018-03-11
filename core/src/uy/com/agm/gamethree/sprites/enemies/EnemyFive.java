@@ -10,12 +10,13 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.Vector2Util;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -40,7 +41,7 @@ public class EnemyFive extends Enemy {
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
-        setBounds(getX(), getY(), Constants.ENEMYTWO_WIDTH_METERS, Constants.ENEMYTWO_HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
 
         stateTime = 0;
         // // TODO: 9/3/2018
@@ -63,19 +64,19 @@ public class EnemyFive extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.ENEMYTWO_CIRCLESHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = Constants.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = Constants.HERO_WEAPON_BIT |
-                Constants.SHIELD_BIT |
-                Constants.HERO_BIT |
-                Constants.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        shape.setRadius(EnemyTwo.CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyDefaultShooting(screen, MathUtils.random(0, Constants.ENEMYTWO_FIRE_DELAY_SECONDS), Constants.ENEMYTWO_FIRE_DELAY_SECONDS);
+        return new EnemyDefaultShooting(screen, MathUtils.random(0, EnemyTwo.FIRE_DELAY_SECONDS), EnemyTwo.FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -124,7 +125,7 @@ public class EnemyFive extends Enemy {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
 
         // Set score
-        screen.getHud().addScore(Constants.ENEMYTWO_SCORE);
+        screen.getHud().addScore(EnemyTwo.SCORE);
 
         // Set the new state
         currentState = State.EXPLODING;
@@ -137,8 +138,8 @@ public class EnemyFive extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - Constants.EXPLOSIONA_WIDTH_METERS / 2, getY() + getHeight() / 2 - Constants.EXPLOSIONA_HEIGHT_METERS / 2,
-                        Constants.EXPLOSIONA_WIDTH_METERS, Constants.EXPLOSIONA_HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionA.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionA.HEIGHT_METERS / 2,
+                        AssetExplosionA.WIDTH_METERS, AssetExplosionA.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

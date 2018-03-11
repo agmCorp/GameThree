@@ -1,7 +1,8 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
+import uy.com.agm.gamethree.assets.sprites.AssetSilverBullet;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
@@ -16,6 +17,20 @@ import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 public class HeroDefaultShooting implements IShootStrategy {
     private static final String TAG = HeroDefaultShooting.class.getName();
 
+    // HeroBullet (meters = pixels * resizeFactor / PPM)
+    public static final float DEFAULT_BULLET_OFFSET_METERS = Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    public static final float DEFAULT_BULLET_VELOCITY_X = 0.0f;
+    public static final float DEFAULT_BULLET_VELOCITY_Y = 6.0f;
+    public static final float DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 15.0f / PlayScreen.PPM;
+    public static final float DEFAULT_BULLET_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f;
+    public static final float DEFAULT_BULLET_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
+
+    // SilverBullet (meters = pixels * resizeFactor / PPM)
+    public static final float SILVER_BULLET_VELOCITY_X = 0.0f;
+    public static final float SILVER_BULLET_VELOCITY_Y = 6.0f;
+    public static final float SILVER_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 15.0f / PlayScreen.PPM;
+    public static final float SILVER_BULLET_FIRE_DELAY_SECONDS = 1.0f;
+
     private PlayScreen screen;
     private float openFireTime;
     private float fireDelay;
@@ -23,14 +38,14 @@ public class HeroDefaultShooting implements IShootStrategy {
     public HeroDefaultShooting(PlayScreen screen) {
         this.screen = screen;
         this.openFireTime = 0;
-        this.fireDelay = GameSettings.getInstance().isManualShooting() ? Constants.HEROBULLET_MANUAL_FIRE_DELAY_SECONDS : Constants.HEROBULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
+        this.fireDelay = GameSettings.getInstance().isManualShooting() ? DEFAULT_BULLET_MANUAL_FIRE_DELAY_SECONDS : DEFAULT_BULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
     }
 
     @Override
     public void updateShoot(float dt) {
         openFireTime += dt;
         if (screen.getPlayer().isSilverBulletEnabled()) {
-            fireDelay = Constants.SILVERBULLET_FIRE_DELAY_SECONDS;
+            fireDelay = SILVER_BULLET_FIRE_DELAY_SECONDS;
         }
     }
 
@@ -49,13 +64,13 @@ public class HeroDefaultShooting implements IShootStrategy {
             if (hero.hasSilverBullets()) {
                 hero.decreaseSilverBullets();
                 screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                        y + Constants.HEROBULLET_OFFSET_METERS,
-                        Constants.SILVERBULLET_WIDTH_METERS,
-                        Constants.SILVERBULLET_HEIGHT_METERS,
-                        Constants.SILVERBULLET_CIRCLESHAPE_RADIUS_METERS,
+                        y + DEFAULT_BULLET_OFFSET_METERS,
+                        AssetSilverBullet.WIDTH_METERS,
+                        AssetSilverBullet.HEIGHT_METERS,
+                        SILVER_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                         0,
-                        Constants.SILVERBULLET_VELOCITY_X,
-                        Constants.SILVERBULLET_VELOCITY_Y,
+                        SILVER_BULLET_VELOCITY_X,
+                        SILVER_BULLET_VELOCITY_Y,
                         Assets.getInstance().getSilverBullet().getSilverBulletAnimation(),
                         HeroBullet.class));
                 // Sound FX
@@ -66,13 +81,13 @@ public class HeroDefaultShooting implements IShootStrategy {
             }
         } else {
             screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
-                    y + Constants.HEROBULLET_OFFSET_METERS,
-                    Constants.HEROBULLET_WIDTH_METERS,
-                    Constants.HEROBULLET_HEIGHT_METERS,
-                    Constants.HEROBULLET_CIRCLESHAPE_RADIUS_METERS,
+                    y + DEFAULT_BULLET_OFFSET_METERS,
+                    AssetHeroBullet.WIDTH_METERS,
+                    AssetHeroBullet.HEIGHT_METERS,
+                    DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                     0,
-                    Constants.HEROBULLET_VELOCITY_X,
-                    Constants.HEROBULLET_VELOCITY_Y,
+                    DEFAULT_BULLET_VELOCITY_X,
+                    DEFAULT_BULLET_VELOCITY_Y,
                     Assets.getInstance().getHeroBullet().getHeroBulletAnimation(),
                     HeroBullet.class));
             // Sound FX

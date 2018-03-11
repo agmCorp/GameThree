@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -33,7 +32,7 @@ public class GameOverScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(Constants.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -55,7 +54,7 @@ public class GameOverScreen extends AbstractScreen {
         // Add values
         table.add(gameOverLabel);
         table.row();
-        table.add(backLabel).padTop(Constants.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

@@ -15,13 +15,16 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.Constants;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/30/2017.
@@ -29,6 +32,20 @@ import uy.com.agm.gamethree.tools.Vector2Util;
 
 public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final String TAG = FinalEnemyLevelTwo.class.getName();
+
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final String NAME = "SKULLYHOOD";
+    public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
+    public static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    public static final float LINEAR_VELOCITY = 4.0f;
+    public static final float DENSITY = 1000.0f;
+    public static final int MAX_DAMAGE = 15;
+    public static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
+    public static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
+    public static final float IDLE_STATE_TIME_SECONDS = 5.0f;
+    public static final float DYING_STATE_TIME_SECONDS = 2.0f;
+    public static final float FIRE_DELAY_SECONDS = 0.7f;
+    public static final int SCORE = 500;
 
     private int damage;
     private float stateFinalEnemyTime;
@@ -60,7 +77,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private Sprite explosionFXSprite;
 
     public FinalEnemyLevelTwo(PlayScreen screen, float x, float y) {
-        super(screen, x, y, Constants.FINALLEVELTWO_WIDTH_METERS, Constants.FINALLEVELTWO_HEIGHT_METERS);
+        super(screen, x, y, AssetFinalEnemyLevelTwo.WIDTH_METERS, AssetFinalEnemyLevelTwo.HEIGHT_METERS);
 
         // Animations
         finalEnemyLevelTwoMovingUpAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingUpAnimation();
@@ -73,7 +90,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
         // FinalEnemyLevelTwo variables initialization
         currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
-        damage = Constants.FINALLEVELTWO_MAX_DAMAGE;
+        damage = MAX_DAMAGE;
         stateFinalEnemyTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
@@ -83,7 +100,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         setOriginCenter();
 
         // Initialize target
-        target = new Circle(0, 0, Constants.FINALLEVELTWO_TARGET_RADIUS_METERS);
+        target = new Circle(0, 0, TARGET_RADIUS_METERS);
 
         // Temp GC friendly circle
         tmpCircle = new Circle();
@@ -102,7 +119,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoPowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        powerFXSprite.setBounds(getX(), getY(), Constants.FINALLEVELTWO_POWER_WIDTH_METERS, Constants.FINALLEVELTWO_POWER_HEIGHT_METERS);
+        powerFXSprite.setBounds(getX(), getY(), AssetFinalEnemyLevelTwo.POWER_WIDTH_METERS, AssetFinalEnemyLevelTwo.POWER_HEIGHT_METERS);
 
         // Place origin of rotation in the center of the Sprite
         powerFXSprite.setOriginCenter();
@@ -117,7 +134,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         Sprite spriteExplosion = new Sprite(Assets.getInstance().getExplosionE().getExplosionEStand());
 
         // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
-        spriteExplosion.setBounds(getX(), getY(), Constants.EXPLOSIONE_WIDTH_METERS, Constants.EXPLOSIONE_HEIGHT_METERS);
+        spriteExplosion.setBounds(getX(), getY(), AssetExplosionE.WIDTH_METERS, AssetExplosionE.HEIGHT_METERS);
 
         // Explosion FX Sprite
         explosionFXSprite = new Sprite(spriteExplosion);
@@ -137,30 +154,30 @@ b2body.setFixedRotation(true); // todo
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(Constants.FINALLEVELTWO_CIRCLESHAPE_RADIUS_METERS);
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.shape = shape;
-        fdef.density = Constants.FINALLEVELTWO_DENSITY; // Hard to push
+        fdef.density = DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
         setDefaultFilter();
     }
 
     private void setDefaultFilter() {
         Filter filter = new Filter();
-        filter.categoryBits = Constants.FINAL_ENEMY_BIT; // Depicts what this fixture is
-        filter.maskBits = Constants.BORDER_BIT |
-                Constants.EDGE_BIT |
-                Constants.OBSTACLE_BIT |
-                Constants.HERO_WEAPON_BIT |
-                Constants.SHIELD_BIT |
-                Constants.HERO_TOUGH_BIT |
-                Constants.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        filter.categoryBits = WorldContactListener.FINAL_ENEMY_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.EDGE_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_TOUGH_BIT |
+                WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
     }
 
     private float getNextTimeToChange() {
-        return MathUtils.random(Constants.FINALLEVELTWO_CHANGE_STATE_MIN_TIME_SECONDS, Constants.FINALLEVELTWO_CHANGE_STATE_MAX_TIME_SECONDS);
+        return MathUtils.random(CHANGE_STATE_MIN_TIME_SECONDS, CHANGE_STATE_MAX_TIME_SECONDS);
     }
 
     private StateFinalEnemy getNewRandomState(float dt) {
@@ -184,7 +201,7 @@ b2body.setFixedRotation(true); // todo
                 case WALKING:
                     if (blnOption) {
                         newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        timeToChange = Constants.FINALLEVELTWO_IDLE_STATE_TIME_SECONDS;
+                        timeToChange = IDLE_STATE_TIME_SECONDS;
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                         timeToChange = getNextTimeToChange();
@@ -204,7 +221,7 @@ b2body.setFixedRotation(true); // todo
                         timeToChange = getNextTimeToChange();
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        timeToChange = Constants.FINALLEVELTWO_IDLE_STATE_TIME_SECONDS;
+                        timeToChange = IDLE_STATE_TIME_SECONDS;
                     }
                     break;
             }
@@ -214,7 +231,7 @@ b2body.setFixedRotation(true); // todo
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemySwordShooting(screen, 0, Constants.FINALLEVELTWO_FIRE_DELAY_SECONDS);
+        return new EnemySwordShooting(screen, 0, FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -294,12 +311,12 @@ b2body.setFixedRotation(true); // todo
         // of the level when the camera is still moving.
         float worldWidth = screen.getGameViewPort().getWorldWidth();
         float worldHeight = screen.getGameViewPort().getWorldHeight();
-        float xMin = Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
-        float xMax = worldWidth - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
+        float xMin = TARGET_RADIUS_METERS;
+        float xMax = worldWidth - TARGET_RADIUS_METERS;
         float xHalf = worldWidth / 2;
-        float yMin = worldHeight * (Constants.WORLD_SCREENS - 1) + Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
-        float yMax = worldHeight * Constants.WORLD_SCREENS - Constants.FINALLEVELTWO_TARGET_RADIUS_METERS;
-        float yHalf = worldHeight * Constants.WORLD_SCREENS - worldHeight / 2;
+        float yMin = worldHeight * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
+        float yMax = worldHeight * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+        float yHalf = worldHeight * PlayScreen.WORLD_SCREENS - worldHeight / 2;
 
         int randomPoint = MathUtils.random(1, 5);
         switch (randomPoint) {
@@ -323,7 +340,7 @@ b2body.setFixedRotation(true); // todo
 
         // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, target.x, target.y, Constants.FINALLEVELTWO_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
         velocity.set(tmp);
     }
 
@@ -353,7 +370,7 @@ b2body.setFixedRotation(true); // todo
     }
 
     private boolean reachTarget() {
-        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, Constants.FINALLEVELONE_CIRCLESHAPE_RADIUS_METERS);
+        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
         return target.overlaps(tmpCircle);
     }
 
@@ -429,7 +446,7 @@ b2body.setFixedRotation(true); // todo
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion()); // todo
 
         // Set score
-        screen.getHud().addScore(Constants.FINALLEVELTWO_SCORE);
+        screen.getHud().addScore(SCORE);
 
         // Set the new state
         currentStateFinalEnemy = StateFinalEnemy.DYING;
@@ -437,7 +454,7 @@ b2body.setFixedRotation(true); // todo
 
     private void stateDying(float dt) {
         agonyTime += dt;
-        if (agonyTime >= Constants.FINALLEVELTWO_DYING_STATE_TIME_SECONDS) {
+        if (agonyTime >= DYING_STATE_TIME_SECONDS) {
             // Exploding animation
             explosionFXStateTime = 0;
 
@@ -516,7 +533,7 @@ b2body.setFixedRotation(true); // todo
                 weapon.onTarget();
                 damage--;
                 screen.getHud().decreaseHealth();
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), Constants.HIT_MAX_VOLUME); // todo
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), FinalEnemy.HIT_MAX_VOLUME); // todo
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();
                     currentStateFinalEnemy = StateFinalEnemy.INJURED;
@@ -542,7 +559,7 @@ b2body.setFixedRotation(true); // todo
 
     @Override
     protected String getFinalEnemyName() {
-        return Constants.FINALLEVELTWO_NAME;
+        return NAME;
     }
 
     @Override
@@ -565,9 +582,9 @@ b2body.setFixedRotation(true); // todo
         * You have to be very careful because if the final level Two enemy is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Constants.EDGE_HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
+        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
 
-        if (upperEdge > b2body.getPosition().y + Constants.FINALLEVELTWO_CIRCLESHAPE_RADIUS_METERS) {
+        if (upperEdge > b2body.getPosition().y + CIRCLE_SHAPE_RADIUS_METERS) {
             b2body.setActive(true);
         }
     }

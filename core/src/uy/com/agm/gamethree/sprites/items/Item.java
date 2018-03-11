@@ -17,6 +17,9 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public abstract class Item extends Sprite {
     private static final String TAG = Item.class.getName();
 
+    // Constants (meters = pixels * resizeFactor / PPM)
+    public static final float OFFSET_METERS = 40.0f / PlayScreen.PPM;
+
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
