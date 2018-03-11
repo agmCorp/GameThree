@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1343">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1345">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -87,40 +87,17 @@
     <property name="powerThree" type="int" value="30"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="enemyOne">
-  <object id="1336" x="128" y="6720" width="32" height="32">
+  <object id="1343" x="224" y="7712" width="32" height="32">
    <properties>
-    <property name="enemyBullet" value=""/>
+    <property name="powerTwo" type="int" value="500"/>
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
- <objectgroup name="enemyThree">
-  <object id="1340" x="160" y="6496" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1341" x="256" y="6496" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="enemyFour">
-  <object id="1338" x="256" y="6336" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1339" x="352" y="6336" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyFour"/>
  <objectgroup name="enemyFive">
-  <object id="1342" x="224" y="7552" width="32" height="32"/>
+  <object id="1342" x="211.333" y="6728.67" width="32" height="32"/>
  </objectgroup>
 </map>
