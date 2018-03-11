@@ -39,12 +39,12 @@ public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
     // Constants
-    public static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
+    private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
 
     // World physics simulation parameters
-    public static final float WORLD_TIME_STEP = 1/300.0f;
-    public static final int WORLD_VELOCITY_ITERATIONS = 6;
-    public static final int WORLD_POSITION_ITERATIONS = 2;
+    private static final float WORLD_TIME_STEP = 1/300.0f;
+    private static final int WORLD_VELOCITY_ITERATIONS = 6;
+    private static final int WORLD_POSITION_ITERATIONS = 2;
 
     // Each screen is 800px height, so the whole world (see TiledEditor) is 8000px.
     public static final int WORLD_SCREENS = 10;
@@ -53,7 +53,7 @@ public class PlayScreen extends AbstractScreen {
     public static final float PPM = 100;
 
     // Position (y-axis) where the epic fight against the final enemy begins
-    public static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
+    private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
     public static final float GAMECAM_VELOCITY = 0.304f;

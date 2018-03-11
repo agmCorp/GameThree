@@ -27,12 +27,12 @@ public abstract class FinalEnemy extends Sprite {
     private static final String TAG = FinalEnemy.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float INTRO_TIME_SECONDS = 5.0f;
-    public static final int MAX_AID_SILVERBULLET = 3;
-    public static final float AID_SILVERBULLET_TIME_SECONDS = 5.0f;
-    public static final float AID_SILVERBULLET_OFFSET_METERS = 100.0f / PlayScreen.PPM;
+    private static final float INTRO_TIME_SECONDS = 5.0f;
+    private static final int MAX_AID_SILVERBULLET = 3;
+    private static final float AID_SILVERBULLET_TIME_SECONDS = 5.0f;
+    private static final float AID_SILVERBULLET_OFFSET_METERS = 100.0f / PlayScreen.PPM;
     private static final String KEY_COLSILVERBULLET = "colSilverBullet";
-    public static final float HIT_MAX_VOLUME = 0.3f;
+    protected static final float HIT_MAX_VOLUME = 0.3f;
 
     protected World world;
     protected PlayScreen screen;

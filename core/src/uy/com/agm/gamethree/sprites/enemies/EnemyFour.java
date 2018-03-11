@@ -26,14 +26,14 @@ public class EnemyFour extends Enemy {
     private static final String TAG = EnemyFour.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
-    public static final float LINEAR_VELOCITY = 3.0f;
-    public static final float DENSITY = 1000.0f;
-    public static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
-    public static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
-    public static final float FIRE_DELAY_SECONDS = 3.0f;
-    public static final float FROZEN_TIME_SECONDS = 4.0f;
-    public static final int SCORE = 35;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
+    private static final float LINEAR_VELOCITY = 3.0f;
+    private static final float DENSITY = 1000.0f;
+    private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
+    private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final float FROZEN_TIME_SECONDS = 4.0f;
+    private static final int SCORE = 35;
     private static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
 
     private float stateTime;

@@ -5,8 +5,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectSet;
 
-import uy.com.agm.gamethree.screens.SettingsScreen;
-
 /**
  * Created by AGM on 1/18/2018.
  */
@@ -21,7 +19,11 @@ public class GameSettings {
     private static final String VOLUME_MUSIC = "volMusic";
     private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String AVAILABLE_LEVEL = "availableLevel_";
-    public static final String SETTINGS = "uy.com.agm.gameThree.settings";
+    private static final String SETTINGS = "uy.com.agm.gameThree.settings";
+    private static final float DEFAULT_VOLUME = 0.5f;
+    private static final float MIN_VOLUME = 0.0f;
+    private static final float MAX_VOLUME = 1.0f;
+    public static final int MAX_AVAILABLE_LEVEL = 2;
 
     // Singleton: unique instance
     private static GameSettings instance;
@@ -50,8 +52,8 @@ public class GameSettings {
     public void load () {
         sound = prefs.getBoolean(SOUND, true);
         music = prefs.getBoolean(MUSIC, true);
-        volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, SettingsScreen.DEFAULT_VOLUME), SettingsScreen.MIN_VOLUME, SettingsScreen.MAX_VOLUME);
-        volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, SettingsScreen.DEFAULT_VOLUME), SettingsScreen.MIN_VOLUME, SettingsScreen.MAX_VOLUME);
+        volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
+        volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, false);
 
         availableLevels = new ObjectSet<Integer>();
@@ -61,7 +63,7 @@ public class GameSettings {
         int level = 2;
         boolean availableLevel;
         do {
-            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false) && level <= SettingsScreen.MAX_AVAILABLE_LEVEL;
+            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false) && level <= MAX_AVAILABLE_LEVEL;
             if (availableLevel) {
                 availableLevels.add(level);
                 level++;

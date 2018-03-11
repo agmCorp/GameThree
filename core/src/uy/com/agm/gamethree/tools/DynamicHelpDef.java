@@ -1,18 +1,21 @@
 package uy.com.agm.gamethree.tools;
 
-import uy.com.agm.gamethree.screens.Hud;
-
 /**
  * Created by AGM on 2/13/2018.
  */
 
 public class DynamicHelpDef {
+    private static final String TAG = DynamicHelpDef.class.getName();
+
+    // Constants
+    public static final float DEFAULT_HELP_SECONDS = 3.0f;
+
     private boolean modal;
     private float seconds;
 
     public DynamicHelpDef() {
         this.modal = false;
-        this.seconds = Hud.DEFAULT_HELP_SECONDS;
+        this.seconds = DEFAULT_HELP_SECONDS;
     }
 
     public DynamicHelpDef(float seconds) {

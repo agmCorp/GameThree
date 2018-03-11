@@ -33,19 +33,18 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     // Constants
-    public static final float BUTTONS_PAD = 20.0f;
-    public static final float UPPERTABLE_CELL_HEIGHT = 30.0f;
-    public static final float BUTTON_WIDTH = 100.0f;
-    public static final float HEALTHBAR_PADBOTTOM = 30.0f;
-    public static final String FORMAT_SCORE = "%6d";
-    public static final String FORMAT_TIME = "%03d";
-    public static final String FORMAT_LIVES = "%02d";
-    public static final String FORMAT_SILVER_BULLETS = "%02d";
-    public static final String FORMAT_POWER_TIME = "%03d";
-    public static final String FORMAT_FPS = "%02d";
-    public static final float DEFAULT_HELP_SECONDS = 3.0f;
-    public static final int POWER_TIMER_NOTIFICATION = 3;
-    public static final int LEVEL_TIMER_NOTIFICATION = 10;
+    private static final float BUTTONS_PAD = 20.0f;
+    private static final float UPPERTABLE_CELL_HEIGHT = 30.0f;
+    private static final float BUTTON_WIDTH = 100.0f;
+    private static final float HEALTHBAR_PADBOTTOM = 30.0f;
+    private static final String FORMAT_SCORE = "%6d";
+    private static final String FORMAT_TIME = "%03d";
+    private static final String FORMAT_LIVES = "%02d";
+    private static final String FORMAT_SILVER_BULLETS = "%02d";
+    private static final String FORMAT_POWER_TIME = "%03d";
+    private static final String FORMAT_FPS = "%02d";
+    private static final int POWER_TIMER_NOTIFICATION = 3;
+    private static final int LEVEL_TIMER_NOTIFICATION = 10;
 
     private PlayScreen screen;
 
@@ -443,9 +442,9 @@ public class Hud extends AbstractScreen {
     public void showInitialHelp() {
         if (level == 1) {
             if (GameSettings.getInstance().isManualShooting()) {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DEFAULT_HELP_SECONDS);
+                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             } else {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DEFAULT_HELP_SECONDS);
+                showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             }
         }
     }

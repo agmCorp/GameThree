@@ -25,12 +25,12 @@ public class EnemyThree extends Enemy {
     private static final String TAG = EnemyThree.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = 0.0f;
-    public static final float VELOCITY_Y = 0.0f;
-    public static final float DENSITY = 1000.0f;
-    public static final float FIRE_DELAY_SECONDS = 4.0f;
-    public static final int SCORE = 20;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 0.0f;
+    private static final float VELOCITY_Y = 0.0f;
+    private static final float DENSITY = 1000.0f;
+    private static final float FIRE_DELAY_SECONDS = 4.0f;
+    private static final int SCORE = 20;
 
     private float stateTime;
     private Animation enemyThreeAnimation;

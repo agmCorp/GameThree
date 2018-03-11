@@ -23,12 +23,12 @@ public class ColSilverBullet extends Item {
     private static final String TAG = ColSilverBullet.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = 0.7f;
-    public static final float VELOCITY_Y = 0.0f;
-    public static final float WAITING_SECONDS = 3.0f;
-    public static final float FADING_SECONDS = 2.0f;
-    public static final int SCORE = 100;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 0.7f;
+    private static final float VELOCITY_Y = 0.0f;
+    private static final float WAITING_SECONDS = 3.0f;
+    private static final float FADING_SECONDS = 2.0f;
+    private static final int SCORE = 100;
 
     private float stateTime;
     private float stateWaitingTime;

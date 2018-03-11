@@ -31,10 +31,8 @@ public class PowerBox extends Sprite {
     private static final String TAG = PowerBox.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final int SCORE = 10;
-
-    // Constants
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final int SCORE = 10;
     private static final String KEY_STRENGTH = "strength";
 
     private World world;
@@ -74,7 +72,7 @@ public class PowerBox extends Sprite {
         b2body.setActive(false);
 
         // Textures
-        switch (MathUtils.random(1, AssetPowerBox.POWERBOX_MAX_TEXTURES)) {
+        switch (MathUtils.random(1, AssetPowerBox.MAX_TEXTURES)) {
             case 1:
                 powerBoxStand = Assets.getInstance().getPowerBox().getBrickAStand();
                 powerBoxDamagedLittle = Assets.getInstance().getPowerBox().getBrickADamagedLittle();

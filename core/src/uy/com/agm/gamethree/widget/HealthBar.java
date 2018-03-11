@@ -16,12 +16,12 @@ public class HealthBar extends ProgressBar {
     private static final String TAG = HealthBar.class.getName();
 
     // Constants
-    public static final int WIDTH = 200;
-    public static final int HEIGHT = 10;
-    public static final float MIN = 0.0f;
-    public static final float MAX = 100.0f;
-    public static final float STEP = 0.01f;
-    public static final float ANIMATION_DURATION = 0.25f;
+    private static final int WIDTH = 200;
+    private static final int HEIGHT = 10;
+    private static final float MIN = 0.0f;
+    private static final float MAX = 100.0f;
+    private static final float STEP = 0.01f;
+    private static final float ANIMATION_DURATION = 0.25f;
 
     private int currentEnergy;
     private int fullEnergy;

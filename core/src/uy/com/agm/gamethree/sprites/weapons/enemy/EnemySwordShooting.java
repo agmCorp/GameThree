@@ -18,7 +18,8 @@ public class EnemySwordShooting implements IShootStrategy {
     private static final String TAG = EnemySwordShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM; // todo hacer esto
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float SWORD_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
     private float openFireTime;
@@ -50,7 +51,7 @@ public class EnemySwordShooting implements IShootStrategy {
     private void shootImp(float x, float y) {
         // Move EnemyBullet from Enemy to Hero
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, EnemyDefaultShooting.DEFAULT_BULLET_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, SWORD_LINEAR_VELOCITY);
 
         float angle = tmp.angle();
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;

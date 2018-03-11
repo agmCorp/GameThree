@@ -27,7 +27,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.currentLevel = currentLevel;
         this.finalScore = finalScore;
         this.nextLevel = currentLevel + 1;
-        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             GameSettings.getInstance().addAvailableLevel(nextLevel);
             GameSettings.getInstance().save();
         }
@@ -77,7 +77,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP).center();
         table.row();
         table.add(playAgainLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
-        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             table.row();
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP).center();
         } else {
@@ -89,7 +89,7 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Events
         playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel, 0));
-        if (this.nextLevel <= SettingsScreen.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.finalScore));
         }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

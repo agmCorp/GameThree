@@ -26,10 +26,10 @@ public class EnemyTwo extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = -2.0f;
-    public static final float VELOCITY_Y = -1.0f;
-    public static final float FIRE_DELAY_SECONDS = 3.0f;
-    public static final int SCORE = 10;
+    private static final float VELOCITY_X = -2.0f;
+    private static final float VELOCITY_Y = -1.0f;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final int SCORE = 10;
 
     private float stateTime;
     private Animation enemyTwoAnimation;

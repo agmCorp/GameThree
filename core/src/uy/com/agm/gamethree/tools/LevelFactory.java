@@ -9,7 +9,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
@@ -26,6 +25,10 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
 
 public class LevelFactory {
     private static final String TAG = LevelFactory.class.getName();
+
+    // Constants
+    private static final int TIMER_LEVEL_ONE = 400;
+    private static final int TIMER_LEVEL_TWO = 350;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -49,7 +52,7 @@ public class LevelFactory {
     }
 
     public static int getLevelTimer(int level) {
-        int[] levelTimers = {UIFactory.TIMER_LEVEL_ONE, UIFactory.TIMER_LEVEL_TWO};
+        int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO};
         return  levelTimers[level - 1];
     }
 

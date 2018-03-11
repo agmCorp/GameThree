@@ -29,13 +29,13 @@ public class PowerOne extends Item {
     private static final String TAG = PowerOne.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float POWERONE_CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float POWERONE_VELOCITY_X = 0.7f;
-    public static final float POWERONE_VELOCITY_Y = 0.0f;
-    public static final float POWERONE_WAITING_SECONDS = 5.0f;
-    public static final float POWERONE_FADING_SECONDS = 5.0f;
-    public static final int DEFAULT_TIMER_POWERONE = 10;
-    public static final int POWERONE_SCORE = 20;
+    private static final float POWERONE_CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float POWERONE_VELOCITY_X = 0.7f;
+    private static final float POWERONE_VELOCITY_Y = 0.0f;
+    private static final float POWERONE_WAITING_SECONDS = 5.0f;
+    private static final float POWERONE_FADING_SECONDS = 5.0f;
+    private static final int DEFAULT_TIMER_POWERONE = 10;
+    private static final int POWERONE_SCORE = 20;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;

@@ -13,10 +13,6 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class UIFactory {
     private static final String TAG = UIFactory.class.getName();
 
-    // Constants
-    public static final int TIMER_LEVEL_ONE = 400;
-    public static final int TIMER_LEVEL_TWO = 350;
-
     public static InputListener createListener(final ScreenEnum dstScreen, final Object... params) {
         return
                 new InputListener() {

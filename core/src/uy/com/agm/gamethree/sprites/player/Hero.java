@@ -36,12 +36,12 @@ public class Hero extends Sprite {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float LINEAR_VELOCITY = 5.2f;
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
-    public static final float DEATH_LINEAR_VELOCITY = 5.0f;
-    public static final int LIVES_START = 3;
-    public static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
-    public static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
-    public static final float GAME_OVER_DELAY_SECONDS = 3.0f;
-    public static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
+    private static final float DEATH_LINEAR_VELOCITY = 5.0f;
+    private static final int LIVES_START = 3;
+    private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
+    private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
+    private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
+    private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD

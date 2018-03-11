@@ -102,10 +102,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
 
     // Location of description file for texture atlas (dinamic game objects)
-    public static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
+    private static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
 
     // Location of description file for texture atlas (GUI)
-    public static final String TEXTURE_ATLAS_UI = "atlas/scene2d/scene2d.atlas";
+    private static final String TEXTURE_ATLAS_UI = "atlas/scene2d/scene2d.atlas";
 
     // Location of the map file for each level
     public static final String MAP_FILE_LEVEL_ONE = "levels/levelOne/levelOne.tmx";

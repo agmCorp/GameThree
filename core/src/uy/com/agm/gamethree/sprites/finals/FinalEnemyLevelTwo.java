@@ -34,18 +34,18 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final String TAG = FinalEnemyLevelTwo.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final String NAME = "SKULLYHOOD";
+    private static final String NAME = "SKULLYHOOD";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
-    public static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
-    public static final float LINEAR_VELOCITY = 4.0f;
-    public static final float DENSITY = 1000.0f;
-    public static final int MAX_DAMAGE = 15;
-    public static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
-    public static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
-    public static final float IDLE_STATE_TIME_SECONDS = 5.0f;
-    public static final float DYING_STATE_TIME_SECONDS = 2.0f;
-    public static final float FIRE_DELAY_SECONDS = 0.7f;
-    public static final int SCORE = 500;
+    private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float LINEAR_VELOCITY = 4.0f;
+    private static final float DENSITY = 1000.0f;
+    private static final int MAX_DAMAGE = 15;
+    private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
+    private static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
+    private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
+    private static final float DYING_STATE_TIME_SECONDS = 2.0f;
+    private static final float FIRE_DELAY_SECONDS = 0.7f;
+    private static final int SCORE = 500;
 
     private int damage;
     private float stateFinalEnemyTime;
@@ -370,7 +370,7 @@ b2body.setFixedRotation(true); // todo
     }
 
     private boolean reachTarget() {
-        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
         return target.overlaps(tmpCircle);
     }
 

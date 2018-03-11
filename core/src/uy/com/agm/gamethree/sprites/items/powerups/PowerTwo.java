@@ -29,16 +29,16 @@ public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PlayScreen.PPM;
-    public static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-    public static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = 0.0f;
-    public static final float VELOCITY_Y = 0.7f;
-    public static final float WAITING_SECONDS = 5.0f;
-    public static final float FADING_SECONDS = 5.0f;
-    public static final int DEFAULT_TIMER = 10;
-    public static final int SCORE = 60;
+    private static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PlayScreen.PPM;
+    private static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    private static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 0.0f;
+    private static final float VELOCITY_Y = 0.7f;
+    private static final float WAITING_SECONDS = 5.0f;
+    private static final float FADING_SECONDS = 5.0f;
+    private static final int DEFAULT_TIMER = 10;
+    private static final int SCORE = 60;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;

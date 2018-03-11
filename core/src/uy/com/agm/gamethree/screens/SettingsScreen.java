@@ -25,14 +25,10 @@ public class SettingsScreen extends AbstractScreen {
     private static final String TAG = SettingsScreen.class.getName();
 
     // Constants
-    public static final float DEFAULT_VOLUME = 0.5f;
-    public static final float MIN_VOLUME = 0.0f;
-    public static final float MAX_VOLUME = 1.0f;
-    public static final int MAX_AVAILABLE_LEVEL = 2;
-    public static final float SLIDER_MIN = 0.0f;
-    public static final float SLIDER_MAX = 1.0f;
-    public static final float SLIDER_STEP = 0.01f;
-    public static final float SLIDER_WIDTH = 250.0f;
+    private static final float SLIDER_MIN = 0.0f;
+    private static final float SLIDER_MAX = 1.0f;
+    private static final float SLIDER_STEP = 0.01f;
+    private static final float SLIDER_WIDTH = 250.0f;
 
     private Label shootingSettingLabel;
     private Slider sliderMusic;

@@ -29,13 +29,13 @@ public class PowerFour extends Item {
     private static final String TAG = PowerFour.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = 0.0f;
-    public static final float VELOCITY_Y = 0.7f;
-    public static final float WAITING_SECONDS = 5.0f;
-    public static final float FADING_SECONDS = 5.0f;
-    public static final int DEFAULT_TIMER = 10;
-    public static final int POWERFOUR = 20;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 0.0f;
+    private static final float VELOCITY_Y = 0.7f;
+    private static final float WAITING_SECONDS = 5.0f;
+    private static final float FADING_SECONDS = 5.0f;
+    private static final int DEFAULT_TIMER = 10;
+    private static final int POWERFOUR = 20;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;

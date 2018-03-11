@@ -10,7 +10,7 @@ public class DesktopLauncher {
 	private static final String TAG = DesktopLauncher.class.getName();
 
 	// Constants
-    public static final String TITLE = "Wipe them out!";
+	private static final String TITLE = "Wipe them out!";
 
     public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

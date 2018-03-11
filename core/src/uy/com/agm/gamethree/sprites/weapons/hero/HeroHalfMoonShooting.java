@@ -22,11 +22,11 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private static final String TAG = HeroHalfMoonShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
-    public static final float MANUAL_FIRE_DELAY_SECONDS = 0.1f;
-    public static final float BULLET_CIRCLESHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
-    public static final float BULLET_VELOCITY_X = 0.0f;
-    public static final float BULLET_VELOCITY_Y = 7.0f;
+    private static final float AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
+    private static final float MANUAL_FIRE_DELAY_SECONDS = 0.1f;
+    private static final float BULLET_CIRCLESHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float BULLET_VELOCITY_X = 0.0f;
+    private static final float BULLET_VELOCITY_Y = 7.0f;
 
     private PlayScreen screen;
     private int numberBullets;

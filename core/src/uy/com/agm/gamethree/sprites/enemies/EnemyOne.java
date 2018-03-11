@@ -25,12 +25,12 @@ public class EnemyOne extends Enemy {
     private static final String TAG = EnemyOne.class.getName();
 
     // EnemyOne (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    public static final float VELOCITY_X = 1.0f;
-    public static final float VELOCITY_Y = -1.0f;
-    public static final float FIRE_DELAY_SECONDS = 3.0f;
-    public static final float CHANGE_DIRECTION_SECONDS = 1.0f;
-    public static final int SCORE = 5;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float VELOCITY_X = 1.0f;
+    private static final float VELOCITY_Y = -1.0f;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
+    private static final int SCORE = 5;
 
     private float stateTime;
     private Animation enemyOneAnimation;

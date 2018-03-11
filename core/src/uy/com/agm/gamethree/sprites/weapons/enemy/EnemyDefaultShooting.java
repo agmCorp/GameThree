@@ -19,8 +19,8 @@ public class EnemyDefaultShooting implements IShootStrategy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float DEFAULT_BULLET_OFFSET_METERS = 40.0f / PlayScreen.PPM;
-    public static final float DEFAULT_BULLET_LINEAR_VELOCITY = 2.0f;
-    public static final float DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
+    private static final float DEFAULT_BULLET_LINEAR_VELOCITY = 2.0f;
+    private static final float DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
 
     private PlayScreen screen;
     private float openFireTime;

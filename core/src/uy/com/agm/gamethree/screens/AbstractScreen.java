@@ -30,7 +30,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     // Visible game world is V_WIDTH / PPM meters tall
     public static final int V_HEIGHT = 800;
 
-    public static final float PAD_TOP = 40.0f;
+    protected static final float PAD_TOP = 40.0f;
 
     protected AbstractScreen() {
         super(new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera()));

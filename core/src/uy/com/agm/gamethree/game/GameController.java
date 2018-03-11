@@ -18,7 +18,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     private static final String TAG = GameController.class.getName();
 
     // Constants
-    public static final float ALPHA_LERP = 0.2f;
+    private static final float ALPHA_LERP = 0.2f;
 
     private Vector2 candidateVelocity; // Temp GC friendly vector
     private Vector2 heroVelocity;

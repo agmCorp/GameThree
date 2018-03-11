@@ -17,7 +17,6 @@ public class AssetBulletB {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = 40.0f * 1.0f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 100.0f * 1.0f / PlayScreen.PPM;
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
 
     private TextureRegion bulletBStand;
     private Animation bulletBAnimation;
