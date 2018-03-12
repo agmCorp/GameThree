@@ -178,6 +178,6 @@ public class EnemyFive extends Enemy {
 
     @Override
     public void onBump() {
-        reverseVelocity(true, false);
+        // Nothing to do here
     }
 }

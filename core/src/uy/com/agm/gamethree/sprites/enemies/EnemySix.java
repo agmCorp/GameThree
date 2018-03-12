@@ -4,9 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
@@ -26,35 +30,34 @@ public class EnemySix extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float VELOCITY_X = 1.0f;
-    private static final float VELOCITY_Y = -1.0f;
+    private static final float VELOCITY_X = 0.0f;
+    private static final float VELOCITY_Y = 0.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
+    private static final float BEAM_INTERVAL_SECONDS = 4.0f;
     private static final int SCORE = 5;
+    private static final float BEAM_HEIGHT_METERS = 50.0f * 1.0f / PlayScreen.PPM;
 
     private float stateTime;
-    private Animation enemyOneAnimation;
+    private Animation enemySixAnimation;
     private Animation explosionAnimation;
-    private boolean changeDirection;
-    private float changeDirectionTime;
+    private boolean beaming;
+    private float beamIntervalTime;
 
     public EnemySix(PlayScreen screen, MapObject object) {
         super(screen, object);
 
         // Animations
-        enemyOneAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
+        enemySixAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
 
         stateTime = 0;
-
         currentState = State.ALIVE;
-
-        velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
-        changeDirection = false;
-        changeDirectionTime = 0;
+        velocity.set(VELOCITY_X, VELOCITY_Y);
+        beaming = false;
+        beamIntervalTime = 0;
     }
 
     @Override
@@ -64,22 +67,7 @@ public class EnemySix extends Enemy {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
-                WorldContactListener.OBSTACLE_BIT |
-                WorldContactListener.PATH_BIT |
-                WorldContactListener.POWER_BOX_BIT |
-                WorldContactListener.ITEM_BIT |
-                WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.SHIELD_BIT |
-                WorldContactListener.ENEMY_BIT |
-                WorldContactListener.HERO_BIT |
-                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
+        setDefaultFixtureFilter();
     }
 
     @Override
@@ -89,31 +77,107 @@ public class EnemySix extends Enemy {
 
     @Override
     protected void stateAlive(float dt) {
-        // Set velocity because It could have been changed (see reverseVelocity)
+        // Set velocity because It could have been changed a little due to a collision
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemySix may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) enemySixAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         // Shoot time!
         super.openFire(dt);
 
-        if (changeDirection) {
-            changeDirectionTime += dt;
-            if (changeDirectionTime > CHANGE_DIRECTION_SECONDS) {
-                velocity.x = MathUtils.randomSign() * VELOCITY_X;
-                velocity.y *= -1;
-                changeDirection = false;
-                changeDirectionTime = 0;
-            }
+        if (beaming) {
+            beamToNormal(dt);
+        } else {
+            normalToBeam(dt);
+        }
+    }
+
+    private void normalToBeam(float dt) {
+        beamIntervalTime += dt;
+        if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
+            beamIntervalTime = 0;
+            beaming = true;
+            createBeam();
+        }
+    }
+
+    private void createBeam() {
+        // Distance between the left border and EnemySix
+        float distLeft = tmp.set(0, b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
+        // Distance between the right border and EnemySix
+        float distRight = tmp.set(screen.getGameViewPort().getWorldWidth(), b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
+        // Max distance
+        float offsetXMeters = distRight > distLeft ? distRight : -distLeft;
+
+        PolygonShape beam = new PolygonShape();
+        Vector2[] vertices = new Vector2[4];
+        vertices[0] = new Vector2(offsetXMeters, BEAM_HEIGHT_METERS / 2);
+        vertices[1] = new Vector2(0, BEAM_HEIGHT_METERS / 2);
+        vertices[2] = new Vector2(offsetXMeters, -BEAM_HEIGHT_METERS / 2);
+        vertices[3] = new Vector2(0, -BEAM_HEIGHT_METERS / 2);
+        beam.set(vertices);
+
+        // The beam is like another Enemy
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = beam;
+        fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT;  // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        b2body.createFixture(fdef).setUserData(this);
+    }
+
+    private void beamToNormal(float dt) {
+        beamIntervalTime += dt;
+        if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
+            beamIntervalTime = 0;
+            beaming = false;
+            setDefaultFixtureFilter();
+        }
+    }
+
+    private void setDefaultFixtureFilter() {
+        setDefaultFixture();
+        setDefaultFilter();
+    }
+
+    private void setDefaultFixture() {
+        // Remove all fixtures (WA - Iterators doesn't work)
+        while (b2body.getFixtureList().size > 0) {
+            b2body.destroyFixture(b2body.getFixtureList().first());
+        }
+
+        // Create default fixture
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
+    }
+
+    private void setDefaultFilter() {
+        Filter filter = new Filter();
+        filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
         }
     }
 
@@ -176,15 +240,7 @@ public class EnemySix extends Enemy {
     }
 
     @Override
-    public void onBumpWithFeint() {
-        velocity.x = MathUtils.randomSign() * VELOCITY_X * 2.0f;
-        velocity.y *= -1;
-        changeDirection = true;
-        changeDirectionTime = 0;
-    }
-
-    @Override
     public void onBump() {
-        reverseVelocity(true, false);
+        // Nothing to do here
     }
 }

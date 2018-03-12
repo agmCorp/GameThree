@@ -85,7 +85,7 @@ public class EnemyThree extends Enemy {
 
     @Override
     protected void stateAlive(float dt) {
-        // Set velocity because It could have been changed (see reverseVelocity)
+        // Set velocity because It could have been changed a little due to a collision
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:

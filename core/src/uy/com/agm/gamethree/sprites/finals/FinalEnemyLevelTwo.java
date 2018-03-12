@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.finals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -336,7 +335,6 @@ b2body.setFixedRotation(true); // todo
                 target.setPosition(xHalf, yHalf);
                 break;
         }
-        Gdx.app.debug(TAG, "***** target(" + target.x + ", " + target.y + ") --> " + randomPoint);
 
         // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
