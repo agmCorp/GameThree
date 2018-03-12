@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1346">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" nextobjectid="1354">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -87,9 +87,14 @@
     <property name="powerThree" type="int" value="30"/>
    </properties>
   </object>
-  <object id="1343" x="224" y="7712" width="32" height="32">
+  <object id="1350" x="160" y="7680" width="32" height="32">
    <properties>
     <property name="powerTwo" type="int" value="500"/>
+   </properties>
+  </object>
+  <object id="1353" x="311" y="7686" width="32" height="32">
+   <properties>
+    <property name="powerFour" type="int" value="500"/>
    </properties>
   </object>
  </objectgroup>
@@ -101,6 +106,9 @@
   <object id="1342" x="211.333" y="6728.67" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemySix">
-  <object id="1345" x="386" y="7488.67" width="32" height="32"/>
+  <object id="1345" x="384" y="7390.67" width="32" height="32"/>
+  <object id="1347" x="63" y="7296" width="32" height="32"/>
+  <object id="1348" x="230" y="7168" width="32" height="32"/>
+  <object id="1349" x="397" y="7073" width="32" height="32"/>
  </objectgroup>
 </map>

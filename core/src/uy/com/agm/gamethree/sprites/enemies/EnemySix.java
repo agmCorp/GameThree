@@ -1,6 +1,9 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
@@ -40,24 +43,46 @@ public class EnemySix extends Enemy {
     private float stateTime;
     private Animation enemySixAnimation;
     private Animation explosionAnimation;
+
+    // Power beam
     private boolean beaming;
     private float beamIntervalTime;
+    private Animation beamAnimation;
+    private Sprite beamSprite;
+    private float offsetXMeters;
 
     public EnemySix(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Animations
+        // Main character variables initialization
         enemySixAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
-
-        // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
-
         stateTime = 0;
-        currentState = State.ALIVE;
-        velocity.set(VELOCITY_X, VELOCITY_Y);
+
+        // Power beam variables initialization
         beaming = false;
         beamIntervalTime = 0;
+        beamAnimation = Assets.getInstance().getGhostMode().getGhostModeAnimation();
+        beamSprite = new Sprite(new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand()));
+
+        // Setbounds is the one that determines the size of the EnemySix's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the power beam's drawing on the screen
+        offsetXMeters = getOffsetXMeters();
+        Gdx.app.debug(TAG, "***** OFFSETX " + offsetXMeters);
+        beamSprite.setBounds(getX(), getY(), Math.abs(offsetXMeters), BEAM_HEIGHT_METERS);
+
+        currentState = State.ALIVE;
+        velocity.set(VELOCITY_X, VELOCITY_Y);
+    }
+
+    private float getOffsetXMeters() {
+        // Distance between the left border and EnemySix
+        float distLeft = tmp.set(0, b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
+        // Distance between the right border and EnemySix
+        float distRight = tmp.set(screen.getGameViewPort().getWorldWidth(), b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
+        // Max distance
+        return distRight > distLeft ? distRight : -distLeft;
     }
 
     @Override
@@ -89,7 +114,6 @@ public class EnemySix extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemySixAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
 
         // Shoot time!
         super.openFire(dt);
@@ -99,6 +123,8 @@ public class EnemySix extends Enemy {
         } else {
             normalToBeam(dt);
         }
+
+        stateTime += dt;
     }
 
     private void normalToBeam(float dt) {
@@ -111,13 +137,6 @@ public class EnemySix extends Enemy {
     }
 
     private void createBeam() {
-        // Distance between the left border and EnemySix
-        float distLeft = tmp.set(0, b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
-        // Distance between the right border and EnemySix
-        float distRight = tmp.set(screen.getGameViewPort().getWorldWidth(), b2body.getPosition().y).dst(b2body.getPosition().x, b2body.getPosition().y);
-        // Max distance
-        float offsetXMeters = distRight > distLeft ? distRight : -distLeft;
-
         PolygonShape beam = new PolygonShape();
         Vector2[] vertices = new Vector2[4];
         vertices[0] = new Vector2(offsetXMeters, BEAM_HEIGHT_METERS / 2);
@@ -140,6 +159,11 @@ public class EnemySix extends Enemy {
     }
 
     private void beamToNormal(float dt) {
+        beamSprite.setRegion((TextureRegion) beamAnimation.getKeyFrame(stateTime, true));
+        // Update our Sprite to correspond with the position of our Box2D body
+        float offset = offsetXMeters >= 0 ? 0 : offsetXMeters;
+        beamSprite.setPosition(b2body.getPosition().x + offset, b2body.getPosition().y - beamSprite.getHeight() / 2);
+
         beamIntervalTime += dt;
         if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
             beamIntervalTime = 0;
@@ -242,5 +266,15 @@ public class EnemySix extends Enemy {
     @Override
     public void onBump() {
         // Nothing to do here
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        if (currentState != State.DEAD) {
+            if (beaming) {
+                beamSprite.draw(batch);
+            }
+            super.draw(batch);
+        }
     }
 }
