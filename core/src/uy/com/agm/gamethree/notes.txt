@@ -36,7 +36,7 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 TENGO
 -----
 - paths
-- enemigos comunes: 5 (uso 3 enemigos por nivel)
+- enemigos comunes: 6 (uso 3 o 4 enemigos por nivel)
 - enemigos finales: 2
 - poderes 4 (2 poderes por nivel)
 - 1 moneda
