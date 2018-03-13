@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionG;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
@@ -37,7 +37,7 @@ public class EnemySix extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float BEAM_INTERVAL_SECONDS = 4.0f;
     private static final int SCORE = 5;
-    private static final float POLYGON_SHAPE_HEIGHT_METERS = 15.0f * 1.0f / PlayScreen.PPM;
+    private static final float POLYGON_SHAPE_HEIGHT_METERS = 20.0f * 1.0f / PlayScreen.PPM;
 
     private float stateTime;
     private Animation enemySixIdleAnimation;
@@ -58,7 +58,7 @@ public class EnemySix extends Enemy {
         // Main character variables initialization
         enemySixIdleAnimation = Assets.getInstance().getEnemySix().getEnemySixIdleAnimation();
         enemySixBeamAnimation = Assets.getInstance().getEnemySix().getEnemySixBeamAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionG().getExplosionGAnimation();
         stateTime = 0;
 
         // Power beam variables initialization
@@ -240,8 +240,8 @@ public class EnemySix extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionA.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionA.HEIGHT_METERS / 2,
-                        AssetExplosionA.WIDTH_METERS, AssetExplosionA.HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionG.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionG.HEIGHT_METERS / 2,
+                        AssetExplosionG.WIDTH_METERS, AssetExplosionG.HEIGHT_METERS);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

@@ -15,10 +15,10 @@ public class AssetEnemySix {
     private static final String TAG = AssetEnemySix.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)|
-    public static final float WIDTH_METERS = 118.0f * 0.6f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 182.0f * 0.6f / PlayScreen.PPM;
-    public static final float BEAM_WIDTH_METERS = 50.0f * 0.6f / PlayScreen.PPM;
-    public static final float BEAM_HEIGHT_METERS = 182.0f * 0.6f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 118.0f * 0.9f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 182.0f * 0.9f / PlayScreen.PPM;
+    public static final float BEAM_WIDTH_METERS = 50.0f * 0.9f / PlayScreen.PPM;
+    public static final float BEAM_HEIGHT_METERS = 182.0f * 0.9f / PlayScreen.PPM;
 
     private TextureRegion enemySixIdleStand;
     private TextureRegion enemySixBeamStand;

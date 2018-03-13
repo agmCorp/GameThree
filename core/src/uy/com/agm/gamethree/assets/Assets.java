@@ -36,6 +36,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionG;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
@@ -138,6 +139,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionD explosionD;
     private AssetExplosionE explosionE;
     private AssetExplosionF explosionF;
+    private AssetExplosionG explosionG;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
     private AssetSilverBullet silverBullet;
@@ -296,6 +298,7 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionD = new AssetExplosionD(atlasDinamicObjects);
         explosionE = new AssetExplosionE(atlasDinamicObjects);
         explosionF = new AssetExplosionF(atlasDinamicObjects);
+        explosionG = new AssetExplosionG(atlasDinamicObjects);
         heroBullet = new AssetHeroBullet(atlasDinamicObjects);
         enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
         silverBullet = new AssetSilverBullet(atlasDinamicObjects);
@@ -411,6 +414,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetExplosionF getExplosionF() {
         return explosionF;
+    }
+
+    public AssetExplosionG getExplosionG() {
+        return explosionG;
     }
 
     public AssetHeroBullet getHeroBullet() {
