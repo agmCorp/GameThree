@@ -126,7 +126,7 @@ Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de ene
 
 DUDAS Y BUGS
 ------------
-- El back si lo dejo apretado hace ruido
+- El back si lo dejo apretado hace ruido.
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2 y uso de Lables en las pantallas.
 El vector2 no tiene dispose, las labels tampoco...
