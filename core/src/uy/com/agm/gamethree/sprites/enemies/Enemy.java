@@ -88,12 +88,12 @@ public abstract class Enemy extends Sprite {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                if (!b2body.isActive()) { // Wasn't on camera...
+                if (!isActive()) { // Wasn't on camera...
                     b2body.setActive(true);
                     screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
                 }
             } else {
-                if (b2body.isActive()) { // Was on camera...
+                if (isActive()) { // Was on camera...
                     // It's outside bottom edge
                     if (bottomEdge > getY() + getHeight()) {
                         world.destroyBody(b2body);
@@ -111,7 +111,7 @@ public abstract class Enemy extends Sprite {
 
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
-            if (b2body.isActive()) {
+            if (isActive()) {
                 shootContext.update(dt);
                 shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
             }
@@ -157,6 +157,10 @@ public abstract class Enemy extends Sprite {
 
     public void onBumpWithFeint() {
         onBump();
+    }
+
+    protected boolean isActive() {
+        return b2body.isActive();
     }
 
     @Override
