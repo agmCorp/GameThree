@@ -27,6 +27,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFour;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyThree;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
@@ -124,6 +125,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetEnemyThree enemyThree;
     private AssetEnemyFour enemyFour;
     private AssetEnemyFive enemyFive;
+    private AssetEnemySix enemySix;
     private AssetPowerBox powerBox;
     private AssetColOne colOne;
     private AssetPowerOne powerOne;
@@ -281,6 +283,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyThree = new AssetEnemyThree(atlasDinamicObjects);
         enemyFour = new AssetEnemyFour(atlasDinamicObjects);
         enemyFive = new AssetEnemyFive(atlasDinamicObjects);
+        enemySix = new AssetEnemySix(atlasDinamicObjects);
         powerBox = new AssetPowerBox(atlasDinamicObjects);
         colOne = new AssetColOne(atlasDinamicObjects);
         powerOne = new AssetPowerOne(atlasDinamicObjects);
@@ -356,6 +359,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetEnemyFive getEnemyFive() {
         return enemyFive;
+    }
+
+    public AssetEnemySix getEnemySix() {
+        return enemySix;
     }
 
     public AssetPowerBox getPowerBox() {
