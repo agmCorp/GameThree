@@ -109,7 +109,7 @@ public class EnemySix extends Enemy {
     protected void stateAlive(float dt) {
         // Set velocity (at rest) because It could have been changed a little due to a collision
         b2body.setLinearVelocity(velocity);
-
+// todo esto lo deberia hacer si esta activo.
         // Update EnemySix to correspond with the position of its Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         if (beaming) {
