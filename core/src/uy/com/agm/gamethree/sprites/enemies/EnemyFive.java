@@ -96,10 +96,10 @@ public class EnemyFive extends Enemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         TextureRegion region = (TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
+        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
-        if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
+        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
             region.flip(true, false);
         }
 

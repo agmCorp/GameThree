@@ -15,8 +15,8 @@ public class AssetEnemyFive {
     private static final String TAG = AssetEnemyFive.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)|
-    public static final float WIDTH_METERS = 122.0f * 0.9f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 81.0f * 0.9f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 122.0f * 1.0f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 81.0f * 1.0f / PlayScreen.PPM;
 
     private TextureRegion enemyFiveStand;
     private Animation enemyFiveAnimation;
@@ -28,7 +28,7 @@ public class AssetEnemyFive {
 
         // Animation
         regions = atlas.findRegions("enemyFive");
-        enemyFiveAnimation = new Animation(0.8f / 8.0f, regions, Animation.PlayMode.LOOP);
+        enemyFiveAnimation = new Animation(0.5f / 6.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
