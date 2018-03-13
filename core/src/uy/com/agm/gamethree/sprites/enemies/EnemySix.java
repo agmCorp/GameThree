@@ -113,9 +113,6 @@ public class EnemySix extends Enemy {
         // Update EnemySix to correspond with the position of its Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         if (beaming) {
-            // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit()); // todo
-
             setRegion((TextureRegion) enemySixBeamAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
             beamToNormal(dt);
@@ -134,6 +131,9 @@ public class EnemySix extends Enemy {
     private void normalToBeam(float dt) {
         beamIntervalTime += dt;
         if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp()); // todo
+
             stateTime = 0;
             beamStateTime = 0;
             beamIntervalTime = 0;
