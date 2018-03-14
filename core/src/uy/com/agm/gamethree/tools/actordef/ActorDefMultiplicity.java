@@ -8,13 +8,19 @@ public class ActorDefMultiplicity extends ActorDef {
     private static final String TAG = ActorDefMultiplicity.class.getName();
 
     private int repeat;
+    private boolean shoot;
 
-    public ActorDefMultiplicity(float x, float y, int repeat, Class<?> type) {
+    public ActorDefMultiplicity(float x, float y, int repeat, boolean shoot, Class<?> type) {
         super(x, y, type);
         this.repeat = repeat;
+        this.shoot = shoot;
     }
 
     public int getRepeat() {
         return repeat;
+    }
+
+    public boolean getShoot() {
+        return shoot;
     }
 }
