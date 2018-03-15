@@ -1,10 +1,12 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -15,6 +17,7 @@ import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFive;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFour;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
+import uy.com.agm.gamethree.sprites.enemies.EnemySeven;
 import uy.com.agm.gamethree.sprites.enemies.EnemySix;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.enemies.EnemyTwo;
@@ -52,6 +55,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_FOUR = "enemyFour";
     private static final String LAYER_ENEMY_FIVE = "enemyFive";
     private static final String LAYER_ENEMY_SIX = "enemySix";
+    private static final String LAYER_ENEMY_SEVEN = "enemySeven";
     private static final String LAYER_POWER_BOX = "powerBox";
 
     public static final String KEY_POWER_ONE = "powerOne";
@@ -63,6 +67,7 @@ public class B2WorldCreator {
     public static final String KEY_STRENGTH = "strength";
     public static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
     public static final String KEY_ENEMY_BULLET = "enemyBullet";
+    public static final String KEY_ENEMY_SEVEN = "enemySeven";
 
     private PlayScreen screen;
     private Array<Enemy> enemies;
@@ -164,6 +169,15 @@ public class B2WorldCreator {
             }
         }
 
+        // Layer: enemySeven
+        layer = map.getLayers().get(LAYER_ENEMY_SEVEN);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                Gdx.app.debug(TAG, "**** inicio TENGO TAG? " + object.getProperties().containsKey(B2WorldCreator.KEY_ENEMY_SEVEN));
+                enemies.add(new EnemySeven(screen, object));
+            }
+        }
+
         // Layer: powerBoxes
         layer = map.getLayers().get(LAYER_POWER_BOX);
         if (layer != null) {
@@ -212,6 +226,13 @@ public class B2WorldCreator {
     public void handleCreatingActors() {
         if (!actorsToCreate.isEmpty()) {
             ActorDef actorDef = actorsToCreate.poll(); // Similar to pop but for a queue, removes the element
+
+            if (actorDef.getType() == EnemySeven.class) {
+                RectangleMapObject object;
+                object = new RectangleMapObject(actorDef.getX() * PlayScreen.PPM, actorDef.getY() * PlayScreen.PPM, 1, 1); // todo 1- 1
+                object.getProperties().put(KEY_ENEMY_SEVEN, "");
+                enemies.add(new EnemySeven(screen, object));
+            }
 
             if (actorDef.getType() == ColOne.class) {
                 items.add(new ColOne(screen, actorDef.getX(), actorDef.getY()));
@@ -263,6 +284,14 @@ public class B2WorldCreator {
     public void getItemOnHit(MapObject object, float x, float y) {
         MapProperties mp = object.getProperties();
         int timer;
+
+        if (mp.containsKey(KEY_ENEMY_SEVEN)) {
+            int rnd = MathUtils.random(EnemySeven.MIN_CLONE, EnemySeven.MAX_CLONE);
+            Gdx.app.debug(TAG, "**** random " + rnd);
+            for (int i = 0; i < rnd; i++) {
+                createGameThreeActor(new ActorDef(x, y, EnemySeven.class));
+            }
+        }
 
         if (mp.containsKey(KEY_COL_ONE)) {
             createGameThreeActor(new ActorDef(x, y, ColOne.class));

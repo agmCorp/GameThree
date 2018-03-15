@@ -109,6 +109,10 @@ public abstract class Enemy extends Sprite {
         screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
     }
 
+    protected void getItemOnHit(float x, float y) {
+        screen.getCreator().getItemOnHit(object, x, y);
+    }
+
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
             if (isActive()) {

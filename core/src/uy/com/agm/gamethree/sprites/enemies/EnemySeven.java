@@ -1,8 +1,10 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,51 +12,63 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
  */
 
-public class EnemyOne extends Enemy {
-    private static final String TAG = EnemyOne.class.getName();
+public class EnemySeven extends Enemy {
+    private static final String TAG = EnemySeven.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float VELOCITY_X = 1.0f;
-    private static final float VELOCITY_Y = -1.0f;
-    private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
+    private static final float VELOCITY_X = 3.0f;
+    private static final float VELOCITY_Y = -2.0f;
+    private static final float FIRE_DELAY_SECONDS = 2.0f;
+    public static final int MIN_CLONE = 2;
+    public static final int MAX_CLONE = 5;
+    private static final float CHANGE_HORIZONTAL_SECONDS = 2.0f;
+    private static final float CHANGE_VERTICAL_SECONDS = 0.2f;
     private static final int SCORE = 5;
 
     private float stateTime;
-    private Animation enemyOneAnimation;
+    private Animation enemySevenAnimation;
     private Animation explosionAnimation;
-    private boolean changeDirection;
-    private float changeDirectionTime;
+    private float changeHorizontalTime;
+    private float changeVerticalTime;
 
-    public EnemyOne(PlayScreen screen, MapObject object) {
+    public EnemySeven(PlayScreen screen, MapObject object) {
         super(screen, object);
 
         // Animations
-        enemyOneAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
+        enemySevenAnimation = Assets.getInstance().getEnemySeven().getEnemySevenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
+
+        // Tag
+        MapProperties mp = object.getProperties();
+        Gdx.app.debug(TAG, "**** TENGO TAG? " + mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN));
+        if (mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
+            mp.remove(B2WorldCreator.KEY_ENEMY_SEVEN);
+        } else {
+            mp.put(B2WorldCreator.KEY_ENEMY_SEVEN, "");
+        }
 
         stateTime = 0;
-
         currentState = State.ALIVE;
-
-        velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
-        changeDirection = false;
-        changeDirectionTime = 0;
+        velocity.set(0, VELOCITY_Y);
+        changeHorizontalTime = 0;
+        changeVerticalTime = 0;
     }
 
     @Override
@@ -69,13 +83,10 @@ public class EnemyOne extends Enemy {
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
-                WorldContactListener.OBSTACLE_BIT |
-                WorldContactListener.PATH_BIT |
-                WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
+                WorldContactListener.ENEMY_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.SHIELD_BIT |
-                WorldContactListener.ENEMY_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
@@ -100,19 +111,25 @@ public class EnemyOne extends Enemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) enemySevenAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         // Shoot time!
         super.openFire(dt);
 
-        if (changeDirection) {
-            changeDirectionTime += dt;
-            if (changeDirectionTime > CHANGE_DIRECTION_SECONDS) {
-                velocity.x = MathUtils.randomSign() * VELOCITY_X;
-                velocity.y *= -1;
-                changeDirection = false;
-                changeDirectionTime = 0;
+        if (velocity.x != 0) {
+            changeHorizontalTime += dt;
+            if (changeHorizontalTime > CHANGE_HORIZONTAL_SECONDS) {
+                velocity.set(0.0f, VELOCITY_Y);
+                changeHorizontalTime = 0;
+
+            }
+        }
+        if (velocity.y != 0) {
+            changeVerticalTime += dt;
+            if (changeVerticalTime > CHANGE_VERTICAL_SECONDS) {
+                velocity.set(MathUtils.randomSign() * VELOCITY_X, 0.0f);
+                changeVerticalTime = 0;
             }
         }
     }
@@ -160,7 +177,7 @@ public class EnemyOne extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyOne();
+        return Assets.getInstance().getScene2d().getHelpEnemySeven();
     }
 
     @Override
@@ -173,14 +190,6 @@ public class EnemyOne extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
-    }
-
-    @Override
-    public void onBumpWithFeint() {
-        velocity.x = MathUtils.randomSign() * VELOCITY_X * 2.0f;
-        velocity.y *= -1;
-        changeDirection = true;
-        changeDirectionTime = 0;
     }
 
     @Override
