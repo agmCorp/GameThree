@@ -15,8 +15,8 @@ public class AssetEnemySeven {
     private static final String TAG = AssetEnemySeven.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)|
-    public static final float WIDTH_METERS = 120.0f * 0.6f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 90.0f * 0.6f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 120.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 115.0f * 0.8f / PlayScreen.PPM;
 
     private TextureRegion enemySevenStand;
     private Animation enemySevenAnimation;
@@ -24,11 +24,11 @@ public class AssetEnemySeven {
     public AssetEnemySeven(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
-        enemySevenStand = atlas.findRegion("enemyOne", 1);
+        enemySevenStand = atlas.findRegion("enemySeven", 1);
 
         // Animation
-        regions = atlas.findRegions("enemyOne");
-        enemySevenAnimation = new Animation(0.5f / 8.0f, regions, Animation.PlayMode.LOOP);
+        regions = atlas.findRegions("enemySeven");
+        enemySevenAnimation = new Animation(0.3f / 4.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
