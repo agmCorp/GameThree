@@ -41,7 +41,15 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 TENGO
 -----
 - paths
-- enemigos comunes: 6 (uso 3 o 4 enemigos por nivel)
+- enemigos comunes 7 (uso 3 o 4 enemigos por nivel):
+one - amarillo
+two - murcielago
+three - bola negra
+four - congelados
+five - dragon en circulos
+six - rayo
+seven - se multiplica
+
 - enemigos finales: 2
 - poderes 4 (2 poderes por nivel)
 - 1 moneda
