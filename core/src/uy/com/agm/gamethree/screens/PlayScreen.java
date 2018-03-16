@@ -114,6 +114,7 @@ public class PlayScreen extends AbstractScreen {
         gameCam = new OrthographicCamera();
 
         // Create a FitViewport to maintain virtual aspect ratio despite screen size
+        // We use the convention 100 pixels = 1 meter to work with meters and therefore meters per seconds in velocity and so on.
         gameViewPort = new FitViewport(AbstractScreen.V_WIDTH / PPM, AbstractScreen.V_HEIGHT / PPM, gameCam);
 
         // Get our map and setup our map renderer

@@ -33,6 +33,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     protected static final float PAD_TOP = 40.0f;
 
     protected AbstractScreen() {
+        // We don't scale our viewPort (see PlayScreen constructor), so we work with pixels
         super(new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera()));
     }
 
