@@ -149,6 +149,26 @@ public class EnemyFive extends Enemy {
     }
 
     private Vector2 getNewTangentialSpeed(float dt) {
+        /* Parametric equation of a Circle:
+         * x = center_x + radius * cos(angle)
+         * y = center_y + radius * sin(angle)
+         *
+         * Here 'angle' is the fraction of angular velocity (w) traveled in deltaTime (t).
+         * Therefore:
+         * w = 2 * PI / PERIOD
+         *
+         * Thus:
+         * x = center_x + radius * cos(w * t)
+         * y = center_y + radius * sin(w * t)
+         *
+         * Velocity (derivative d/dt)
+         * x = -r * w * sin(w * t)
+         * y = r * w * cos(w * t)
+         *
+         * Here, the negative sign indicates counterclockwise movement
+         *
+         */
+
         elapsedTime += dt;
         float w = 2 * MathUtils.PI / PERIOD_SECONDS;
         tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
