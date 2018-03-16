@@ -24,14 +24,6 @@ tira una rafaga de balas y se vuelve a ir como nube asi como vino.
 
 PROXIMOS PASOS
 --------------
-Para mi sería así:
-en el b2world, al crear la layer marco a todos los bichos.
-En el getItemonhit del b2world:
-if (mp.containsKey(KEY_ENEMY_SEVEN)) lo desmarco y hago lo de siempre.
-
-Probar esto ademas agregando un enemySeven y poniendo la property "PowerOne" en el tiled.
-Probar ademas poniendo los demas enemigos en escena como el que tira el rayo a ver que hace.
-
 - Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
         tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
 - factor handycap por nivel
