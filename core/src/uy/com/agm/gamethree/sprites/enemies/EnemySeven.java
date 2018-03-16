@@ -1,24 +1,20 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -54,15 +50,6 @@ public class EnemySeven extends Enemy {
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
-
-        // Tag
-        MapProperties mp = object.getProperties();
-        Gdx.app.debug(TAG, "**** TENGO TAG? " + mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN));
-        if (mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
-            mp.remove(B2WorldCreator.KEY_ENEMY_SEVEN);
-        } else {
-            mp.put(B2WorldCreator.KEY_ENEMY_SEVEN, "");
-        }
 
         stateTime = 0;
         currentState = State.ALIVE;

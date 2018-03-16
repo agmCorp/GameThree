@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
@@ -172,8 +172,12 @@ public class B2WorldCreator {
         // Layer: enemySeven
         layer = map.getLayers().get(LAYER_ENEMY_SEVEN);
         if (layer != null) {
+            MapProperties mp;
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                Gdx.app.debug(TAG, "**** inicio TENGO TAG? " + object.getProperties().containsKey(B2WorldCreator.KEY_ENEMY_SEVEN));
+                mp = object.getProperties();
+                if (!mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
+                    mp.put(B2WorldCreator.KEY_ENEMY_SEVEN, "");
+                }
                 enemies.add(new EnemySeven(screen, object));
             }
         }
@@ -229,8 +233,10 @@ public class B2WorldCreator {
 
             if (actorDef.getType() == EnemySeven.class) {
                 RectangleMapObject object;
-                object = new RectangleMapObject(actorDef.getX() * PlayScreen.PPM, actorDef.getY() * PlayScreen.PPM, 1, 1); // todo 1- 1
-                object.getProperties().put(KEY_ENEMY_SEVEN, "");
+                object = new RectangleMapObject(actorDef.getX() * PlayScreen.PPM,
+                        actorDef.getY() * PlayScreen.PPM,
+                        AssetEnemySeven.WIDTH_METERS * PlayScreen.PPM,
+                        AssetEnemySeven.HEIGHT_METERS * PlayScreen.PPM); // Width and height are irrelevant
                 enemies.add(new EnemySeven(screen, object));
             }
 
@@ -287,7 +293,6 @@ public class B2WorldCreator {
 
         if (mp.containsKey(KEY_ENEMY_SEVEN)) {
             int rnd = MathUtils.random(EnemySeven.MIN_CLONE, EnemySeven.MAX_CLONE);
-            Gdx.app.debug(TAG, "**** random " + rnd);
             for (int i = 0; i < rnd; i++) {
                 createGameThreeActor(new ActorDef(x, y, EnemySeven.class));
             }
