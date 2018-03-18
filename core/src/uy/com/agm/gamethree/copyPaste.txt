@@ -170,7 +170,7 @@ elapsedTime += dt;
 		en el metodo de velocidad:
 
         // parametrica: t**3-3.2t+2, 2t**2
-        elapsedTime += dt / 3; <----- aca le puse /3 para reducir la velocidad, pero capaz me conviene probar w * dt, siendo w la angular.
+        elapsedTime += dt / 3; <----- aca le puse /3 para reducir la velocidad, NO LOGRE HACERLO DE OTRA MANERA (NI USANDO W).
         float max = 2.497f;
         float min = -2.497f;
         float t = (max - min) * elapsedTime + min;
