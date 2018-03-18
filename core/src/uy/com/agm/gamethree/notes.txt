@@ -492,6 +492,11 @@ LECCIONES APRENDIDAS
     Libgdx no trabaja con ángulos negativos aunque al parecer es robusto y los giros de ángulos negativos lo hace en sentido horario. No usar ángulos negativos porque es impredecible para mi.
     No se si alguna vez vector.angle() retorna exactamente cero o exactamente 360. Creo que puede llegar a retornar cero pero no 360. Es decir, no conozco ese valor borde.
 
+23)
+    Given a range between Max and Min, the following is the general formula for generating random numbers between a given minimum and maximum number:
+
+    (Max - Min) * random(0 to 1) + Min = random(Min to Max)
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
