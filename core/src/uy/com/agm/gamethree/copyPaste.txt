@@ -179,7 +179,21 @@ elapsedTime += dt;
         tmp.set(x, y);
         return tmp;
 
-		en el stateAlive:
-		if (b2body.isActive()) {
-            velocity.set(getNewTangentialSpeed(dt));
+---- lo mejorcito ----
+        // parametrica: t**3-3.2t+2, 2t**2
+        elapsedTime += dt/5;
+        float max = 2.497f;
+        float min = -2.497f;
+        float t = (max - min) * elapsedTime + min;
+        float x = (3*t*t - 3.0f) * (counterclockwise ? -1:1);
+        float y = 4 * t;
+        tmp.set(x, y);
+
+        Gdx.app.debug(TAG, "LEN " + tmp.len());
+        if (tmp.len() > 5) {
+            tmp.nor().scl(5);
         }
+
+        return tmp;
+
+        pero me niego...no lo voy a hacer asi...lo voy a hacer componiendo y listo porque no tengo control.
