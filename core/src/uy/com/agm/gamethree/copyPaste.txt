@@ -183,8 +183,3 @@ elapsedTime += dt;
 		if (b2body.isActive()) {
             velocity.set(getNewTangentialSpeed(dt));
         }
-
-		el problema con esto es que:
-		- el enemigo sigue vivo cuando se va hacia arriba, si en enemy controlo eso (de destruirlos), el enemyOne cuando suba se destruye.
-		- tengo que considerar el isActive, habria que arreglar las cosas para que el update no haga nada si no esta activo. Se colgaba
-		porque faltaba el setregion...capaz que lo puedo solucionar.
