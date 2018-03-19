@@ -86,7 +86,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         finalEnemyLevelOneDyingAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneDeathAnimation();
 
         // FinalEnemyLevelOne variables initialization
-        currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
         damage = MAX_DAMAGE;
         stateFinalEnemyTime = 0;
         changeTime = 0;

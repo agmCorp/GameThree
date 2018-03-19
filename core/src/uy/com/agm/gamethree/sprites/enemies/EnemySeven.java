@@ -52,7 +52,6 @@ public class EnemySeven extends Enemy {
         setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
 
         stateTime = 0;
-        currentState = State.ALIVE;
         velocity.set(0, VELOCITY_Y);
         changeHorizontalTime = 0;
         changeVerticalTime = 0;

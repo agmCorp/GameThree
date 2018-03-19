@@ -47,8 +47,6 @@ public class EnemyThree extends Enemy {
         setBounds(getX(), getY(), AssetEnemyThree.WIDTH_METERS, AssetEnemyThree.HEIGHT_METERS);
 
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-
-        currentState = State.ALIVE;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 

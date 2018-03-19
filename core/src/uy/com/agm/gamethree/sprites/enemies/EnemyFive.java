@@ -51,8 +51,6 @@ public class EnemyFive extends Enemy {
         stateTime = 0;
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
-
-        currentState = State.ALIVE;
         velocity.set(0.0f, 0.0f); // Initially at rest
     }
 

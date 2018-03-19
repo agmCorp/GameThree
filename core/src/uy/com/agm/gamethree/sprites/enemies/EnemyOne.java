@@ -49,9 +49,6 @@ public class EnemyOne extends Enemy {
         setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
 
         stateTime = 0;
-
-        currentState = State.ALIVE;
-
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
         changeDirection = false;
         changeDirectionTime = 0;

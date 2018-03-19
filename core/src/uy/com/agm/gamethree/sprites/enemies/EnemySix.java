@@ -75,7 +75,6 @@ public class EnemySix extends Enemy {
         offsetXMeters = getOffsetXMeters();
         beamSprite.setBounds(getX(), getY(), Math.abs(offsetXMeters), AssetEnemySix.BEAM_HEIGHT_METERS);
 
-        currentState = State.ALIVE;
         velocity.set(VELOCITY_X, VELOCITY_Y); // At rest
     }
 
@@ -129,18 +128,16 @@ public class EnemySix extends Enemy {
     }
 
     private void normalToBeam(float dt) {
-        if (isActive()) {
-            beamIntervalTime += dt;
-            if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
-                // Audio FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp()); // todo
+        beamIntervalTime += dt;
+        if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp()); // todo
 
-                stateTime = 0;
-                beamStateTime = 0;
-                beamIntervalTime = 0;
-                beaming = true;
-                createBeam();
-            }
+            stateTime = 0;
+            beamStateTime = 0;
+            beamIntervalTime = 0;
+            beaming = true;
+            createBeam();
         }
     }
 

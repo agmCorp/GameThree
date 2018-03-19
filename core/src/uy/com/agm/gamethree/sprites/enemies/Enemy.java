@@ -12,11 +12,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
+
+import static uy.com.agm.gamethree.sprites.items.Item.OFFSET_METERS;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -24,6 +25,9 @@ import uy.com.agm.gamethree.tools.B2WorldCreator;
 
 public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
+
+    // Constants
+    private static final float MARGIN_METERS = 1.0f;
 
     protected World world;
     protected PlayScreen screen;
@@ -36,7 +40,7 @@ public abstract class Enemy extends Sprite {
     protected Vector2 tmp; // Temp GC friendly vector
 
     protected enum State {
-        ALIVE, INJURED, EXPLODING, DEAD
+        INACTIVE, ALIVE, INJURED, EXPLODING, DEAD
     }
 
     protected State currentState;
@@ -71,6 +75,7 @@ public abstract class Enemy extends Sprite {
 
         // By default this Enemy doesn't interact in our world
         b2body.setActive(false);
+        currentState = State.INACTIVE;
     }
 
     // This Enemy doesn't have any b2body
@@ -88,14 +93,15 @@ public abstract class Enemy extends Sprite {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                if (!isActive()) { // Wasn't on camera...
+                if (currentState == State.INACTIVE) { // Wasn't on camera...
                     b2body.setActive(true);
+                    currentState = State.ALIVE;
                     screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
                 }
             } else {
-                if (isActive()) { // Was on camera...
-                    // It's outside bottom edge
-                    if (bottomEdge > getY() + getHeight()) {
+                if (currentState != State.INACTIVE) { // Was on camera...
+                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
+                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
                         world.destroyBody(b2body);
                         currentState = State.DEAD;
                     }
@@ -106,7 +112,7 @@ public abstract class Enemy extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + OFFSET_METERS);
     }
 
     protected void getItemOnHit(float x, float y) {
@@ -115,10 +121,8 @@ public abstract class Enemy extends Sprite {
 
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
-            if (isActive()) {
-                shootContext.update(dt);
-                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
-            }
+            shootContext.update(dt);
+            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
         }
     }
 
@@ -141,35 +145,34 @@ public abstract class Enemy extends Sprite {
     }
 
     public void update(float dt) {
-        switch (currentState) {
-            case ALIVE:
-                stateAlive(dt);
-                break;
-            case INJURED:
-                stateInjured(dt);
-                break;
-            case EXPLODING:
-                stateExploding(dt);
-                break;
-            case DEAD:
-                break;
-            default:
-                break;
-        }
         checkBoundaries();
+
+        if (currentState != State.INACTIVE) {
+            switch (currentState) {
+                case ALIVE:
+                    stateAlive(dt);
+                    break;
+                case INJURED:
+                    stateInjured(dt);
+                    break;
+                case EXPLODING:
+                    stateExploding(dt);
+                    break;
+                case DEAD:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void onBumpWithFeint() {
         onBump();
     }
 
-    protected boolean isActive() {
-        return b2body.isActive();
-    }
-
     @Override
     public void draw(Batch batch) {
-        if (currentState != State.DEAD) {
+        if (currentState != State.DEAD && currentState != State.INACTIVE) {
             super.draw(batch);
         }
     }

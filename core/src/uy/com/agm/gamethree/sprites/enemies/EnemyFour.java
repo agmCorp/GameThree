@@ -66,8 +66,6 @@ public class EnemyFour extends Enemy {
         // State variables initialization
         stateTime = 0;
 
-        currentState = State.ALIVE;
-
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
         b2bodyTargetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
         b2bodyTargetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();

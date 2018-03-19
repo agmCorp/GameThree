@@ -46,8 +46,6 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
 
         stateTime = 0;
-
-        currentState = State.ALIVE;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 

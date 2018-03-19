@@ -77,6 +77,7 @@ public abstract class FinalEnemy extends Sprite {
 
         // By default this FinalEnemy doesn't interact in our world
         b2body.setActive(false);
+        currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
     }
 
     // This FinalEnemy can be removed from our game
