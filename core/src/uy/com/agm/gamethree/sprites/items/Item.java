@@ -19,6 +19,7 @@ public abstract class Item extends Sprite {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float OFFSET_METERS = 40.0f / PlayScreen.PPM;
+    private static final float MARGIN_METERS = 1.0f;
 
     protected World world;
     protected PlayScreen screen;
@@ -27,7 +28,7 @@ public abstract class Item extends Sprite {
     protected Vector2 velocity;
 
     protected enum State {
-        WAITING, FADING, TAKEN, FINISHED
+        INACTIVE, WAITING, FADING, TAKEN, FINISHED
     }
 
     protected State currentState;
@@ -48,6 +49,7 @@ public abstract class Item extends Sprite {
 
         // By default this Item doesn't interact in our world
         b2body.setActive(false);
+        currentState = State.INACTIVE;
     }
 
     protected void reverseVelocity(boolean x, boolean y) {
@@ -72,11 +74,14 @@ public abstract class Item extends Sprite {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                b2body.setActive(true);
+                if (currentState == State.INACTIVE) { // Wasn't on camera...
+                    b2body.setActive(true);
+                    currentState = State.WAITING;
+                }
             } else {
-                if (b2body.isActive()) { // Was on camera...
-                    // It's outside bottom edge
-                    if (bottomEdge > getY() + getHeight()) {
+                if (currentState != State.INACTIVE) { // Was on camera...
+                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
+                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
                         world.destroyBody(b2body);
                         currentState = State.FINISHED;
                     }
@@ -95,23 +100,26 @@ public abstract class Item extends Sprite {
     }
 
     public void update(float dt) {
-        switch (currentState) {
-            case WAITING:
-                stateWaiting(dt);
-                break;
-            case FADING:
-                stateFading(dt);
-                break;
-            case TAKEN:
-                screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
-                stateTaken(dt);
-                break;
-            case FINISHED:
-                break;
-            default:
-                break;
-        }
         checkBoundaries();
+
+        if (currentState != State.INACTIVE) {
+            switch (currentState) {
+                case WAITING:
+                    stateWaiting(dt);
+                    break;
+                case FADING:
+                    stateFading(dt);
+                    break;
+                case TAKEN:
+                    screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+                    stateTaken(dt);
+                    break;
+                case FINISHED:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     @Override

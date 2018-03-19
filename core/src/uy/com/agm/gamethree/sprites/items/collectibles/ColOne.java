@@ -45,7 +45,6 @@ public class ColOne extends Item {
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), AssetColOne.WIDTH_METERS, AssetColOne.HEIGHT_METERS);
 
-        currentState = State.WAITING;
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX

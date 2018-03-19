@@ -24,12 +24,6 @@ tira una rafaga de balas y se vuelve a ir como nube asi como vino.
 
 PROXIMOS PASOS
 --------------
-
-LO QUE TENDRIA QUE RESOLVER SI O SI, ES QUE NO SE EJECUTE EL UPDATE SI EL ENEMIGO NO ESTA ACTIVO Y PUNTO. CLASE ENEMY.
-ESO ME FACILITARIA COSAS, INCLUSO EL DISPARO...ESTUDIARLO....
-LO OTRO QUE ESTARIA BUENO ES MATAR AL ENEMIGO SI SE VA MUCHO POR ARRIBA.
-
-
 - Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
         tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
 - factor handycap por nivel
