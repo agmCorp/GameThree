@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
+import uy.com.agm.gamethree.sprites.enemies.EnemyEight;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFive;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFour;
 import uy.com.agm.gamethree.sprites.enemies.EnemyOne;
@@ -56,6 +57,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_FIVE = "enemyFive";
     private static final String LAYER_ENEMY_SIX = "enemySix";
     private static final String LAYER_ENEMY_SEVEN = "enemySeven";
+    private static final String LAYER_ENEMY_EIGHT = "enemyEight";
     private static final String LAYER_POWER_BOX = "powerBox";
 
     public static final String KEY_POWER_ONE = "powerOne";
@@ -179,6 +181,14 @@ public class B2WorldCreator {
                     mp.put(B2WorldCreator.KEY_ENEMY_SEVEN, "");
                 }
                 enemies.add(new EnemySeven(screen, object));
+            }
+        }
+
+        // Layer: enemyEight
+        layer = map.getLayers().get(LAYER_ENEMY_EIGHT);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyEight(screen, object));
             }
         }
 

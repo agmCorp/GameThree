@@ -1226,5 +1226,6 @@
  </objectgroup>
  <objectgroup name="enemyFive"/>
  <objectgroup name="enemySix"/>
- <objectgroup name="Capa de Objetos 11"/>
+ <objectgroup name="enemySeven"/>
+ <objectgroup name="enemyEight"/>
 </map>
