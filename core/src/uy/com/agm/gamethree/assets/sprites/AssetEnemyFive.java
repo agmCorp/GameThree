@@ -16,7 +16,7 @@ public class AssetEnemyFive {
 
     // Constants (meters = pixels * resizeFactor / PPM)|
     public static final float WIDTH_METERS = 122.0f * 1.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 81.0f * 1.0f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 116.0f * 1.0f / PlayScreen.PPM;
 
     private TextureRegion enemyFiveStand;
     private Animation enemyFiveAnimation;

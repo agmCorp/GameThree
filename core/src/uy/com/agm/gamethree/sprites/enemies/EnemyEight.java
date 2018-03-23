@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -10,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
@@ -35,7 +34,7 @@ public class EnemyEight extends Enemy {
     private static final int SCORE = 15;
 
     private float stateTime;
-    private Animation enemyFiveAnimation;
+    private Animation enemyEightAnimation;
     private Animation explosionAnimation;
 
     // The whole path is divided into three sections, we need only two boolean variables
@@ -47,13 +46,13 @@ public class EnemyEight extends Enemy {
     public EnemyEight(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the EnemyEight's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyEight.WIDTH_METERS, AssetEnemyEight.HEIGHT_METERS);
 
         stateTime = 0;
 
         // Animations
-        enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
+        enemyEightAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
         path1 = true;
@@ -94,18 +93,18 @@ public class EnemyEight extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyFive may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyEight may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
+        TextureRegion region = (TextureRegion) enemyEightAnimation.getKeyFrame(stateTime, true);
+        if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
-        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
+        if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
 
@@ -210,7 +209,7 @@ public class EnemyEight extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyFive();
+        return Assets.getInstance().getScene2d().getHelpEnemyEight();
     }
 
     @Override
