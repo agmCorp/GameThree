@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.sprites.enemies;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -16,6 +17,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -27,31 +29,45 @@ public class EnemyEight extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float LINEAR_VELOCITY = 3.0f;
     private static final float PERIOD_SECONDS = 2.0f;
-    private static final float RADIUS_METERS = 1.5f;
+    private static final float RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final int SCORE = 15;
 
     private float stateTime;
-    private boolean counterclockwise;
     private float elapsedTime;
     private Animation enemyFiveAnimation;
     private Animation explosionAnimation;
 
+    private boolean path1;
+    private boolean path2;
+    private boolean path3;
+
     public EnemyEight(PlayScreen screen, MapObject object) {
         super(screen, object);
-
-        // Animations
-        enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
         // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
         stateTime = 0;
-        counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
-        velocity.set(0.0f, 0.0f); // Initially at rest
+
+        // Animations
+        enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
+
+        path1 = true;
+        path2 = false;
+        path3 = false;
+
+        // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
+        float b2bodyTargetX = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2 - CIRCLE_SHAPE_RADIUS_METERS;
+        float b2bodyTargetY = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4;
+
+        tmp.set(getX(), getY());
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
+        velocity.set(tmp);
     }
 
     @Override
@@ -106,7 +122,7 @@ public class EnemyEight extends Enemy {
         // Shoot time!
         super.openFire(dt);
 
-        velocity.set(getNewTangentialSpeed(dt));
+        checkPath(dt);
     }
 
     @Override
@@ -145,31 +161,50 @@ public class EnemyEight extends Enemy {
         }
     }
 
-    private Vector2 getNewTangentialSpeed(float dt) {
-        /* Parametric equation of a Circle:
-         * x = center_x + radius * cos(angle)
-         * y = center_y + radius * sin(angle)
-         *
-         * Here 'angle' is the fraction of angular velocity (w) traveled in deltaTime (t).
-         * Therefore:
-         * w = 2 * PI / PERIOD
-         *
-         * Thus:
-         * x = center_x + radius * cos(w * t)
-         * y = center_y + radius * sin(w * t)
-         *
-         * Velocity (derivative d/dt)
-         * x = -r * w * sin(w * t)
-         * y = r * w * cos(w * t)
-         *
-         * Here, the negative sign indicates counterclockwise movement
-         *
-         */
+    private void checkPath(float dt) {
+        if (path1) {
+            checkPath1();
+        } else {
+            if (path2) {
+                checkPath2(dt);
+            } else {
+                if (path3) {
+                    checkPath3();
+                }
+            }
+        }
+    }
 
-        elapsedTime += dt;
-        float w = 2 * MathUtils.PI / PERIOD_SECONDS;
-        tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
-        return tmp;
+    private void checkPath1() {
+        // We don't use a variable because the cam is always moving
+        if (b2body.getPosition().y <= screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+            path1 = false;
+            path2 = true;
+        }
+    }
+
+    private void checkPath2(float dt) {
+        // We don't use a variable because the cam is always moving
+        if (b2body.getPosition().y >= screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+            path2 = false;
+            path3 = true;
+        } else {
+            elapsedTime += dt;
+            float w = 2 * MathUtils.PI / PERIOD_SECONDS;
+            velocity.set(-RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), -RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
+        }
+    }
+
+    private void checkPath3() {
+        // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
+        float b2bodyTargetX = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2 - CIRCLE_SHAPE_RADIUS_METERS;
+        float b2bodyTargetY = screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4;
+
+        tmp.set(getX(), getY());
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
+        velocity.set(tmp);
+
+//        path3 = false;
     }
 
     @Override
