@@ -6,33 +6,30 @@ IDEAS
 - hacer splashscreen
 - enemigo que hay que dispararle mucho para matarlo.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
-EnemyBullet (BoomerangBullet) que contemple el movimiento y una
-estrategia nueva que cree el objeto pasando BoomerangBullet para que el b2worldcreator lo cree.
+EnemyBullet (BoomerangBullet) que contemple el movimiento y una estrategia nueva que cree el objeto pasando BoomerangBullet para que el b2worldcreator lo cree.
 - el enemigo final puede estar acompanado de otros simples.
-- enemigo final que se mueva en 8 horizaontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
+- enemigo final que se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
 - enemigo minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
-centro de la pantalla y se van por arriba.
+centro de la pantalla y se van por arriba (copiarlo de enemyEight).
 - minuto 33.43 puentes dinámicos
-- Posible nuevo enemigo: cuando explota puedo hacer aparecer n enemigos más simples
 - Para el próximo enemigofinal puedo hacer que me siga
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
 - enemigo: nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
 - enemigo: nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas
-tira una rafaga de balas y se vuelve a ir como nube asi como vino.
-- enemigo: viene por el vertice izquierdo en movimiento de parabola, da una vuelta por el centro y se va por el otro vertice.
+- Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la
+pantalla (o en el centro del héroe) y se va por abajo (izquieda o derecha).
+- nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan.
+Cuando llegan al edge suben y hacen lo mismo. usar esto: https://graphicriver.net/item/tower-defense-desert-pack/20449683?s_rank=11
+- Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
+        tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
+        Tengo más formular en copyPaste.txt
+tira una rafaga (como flor) de balas y se vuelve a ir como nube asi como vino.
 - enemigo que luego de un rato hace blink y desaparece..y vuelve a aparecer. disparando siempre.
 
 PROXIMOS PASOS
 --------------
-- Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
-        tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
-- factor handycap por nivel
+- factor handycap por nivel (solo para los enemigos que reuse?)
 - help de escudo y help de tough
-- Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la
-pantalla (o en el centro del héroe)
-y se va por abajo (izquieda o derecha). Con eso, los rojos y los demas tengo.
-- nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan.
-Cuando llegan al edge suben y hacen lo mismo. usar esto: https://graphicriver.net/item/tower-defense-desert-pack/20449683?s_rank=11
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
@@ -41,7 +38,7 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 TENGO
 -----
 - paths
-- enemigos comunes 7 (uso 3 o 4 enemigos por nivel):
+- enemigos comunes 8 (uso 3 o 4 enemigos por nivel):
 one - amarillo
 two - murcielago
 three - bola negra
@@ -49,6 +46,7 @@ four - congelados
 five - dragon en circulos
 six - rayo
 seven - se multiplica
+eight - bicho verde cometa
 
 - enemigos finales: 2
 - poderes 4 (2 poderes por nivel)
@@ -153,8 +151,6 @@ De igual manera si te moviste al espacio que queda entre el limite del path (en 
 camara avanza y te aplasta pero se traba todo porque no tenes hacia donde escapar. Todo funciona lento por un tiempo, se escucha
 un pitido y despues se destraba a duras penas, pero esta mal eso.
 No se como solucionar eso. Pasa lo mismo cuando moris aplastado por un path y el edge...
-- Los items no se destruyen al ir hacia arriba. El power four (y seguramente todos) se estan destruyendo al subir.
-Para mi que son muy rapidos y se van...revisar.
 - Si agarro items (o shurikens) reboto un poco en versión escritorio. En la version android no se nota porque sigo moviendo el dedo.
 - se corta el audio al morir..el gruñido se escucha cortado.
 - Cuando se me acaben las category_bits que hago? ver mi comentario sobre eso en el codigo (world.setContactFilter(...))
