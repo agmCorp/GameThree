@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1418">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1421">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -62,6 +62,11 @@
     <property name="powerThree" type="int" value="30"/>
    </properties>
   </object>
+  <object id="1419" x="252" y="7561.33" width="30.6667" height="38.6667">
+   <properties>
+    <property name="powerTwo" type="int" value="300"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
@@ -73,13 +78,10 @@
   <object id="1417" x="352" y="4832" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyFive">
-  <object id="1393" x="224" y="7232" width="32" height="32"/>
   <object id="1411" x="128" y="3840" width="32" height="32"/>
   <object id="1412" x="320" y="3968" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemySix">
-  <object id="1406" x="352" y="7104" width="32" height="32"/>
-  <object id="1407" x="128" y="7680" width="32" height="32"/>
   <object id="1409" x="256" y="4704" width="32" height="32"/>
   <object id="1410" x="96" y="4896" width="32" height="32"/>
  </objectgroup>
@@ -91,9 +93,7 @@
   <object id="1405" x="160" y="6656" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyEight">
-  <object id="1390" x="444" y="7336" width="32" height="32"/>
   <object id="1391" x="351" y="6905" width="32" height="32"/>
-  <object id="1392" x="13" y="7115" width="32" height="32"/>
   <object id="1394" x="156" y="6055" width="32" height="32"/>
   <object id="1395" x="431" y="4877" width="32" height="32"/>
  </objectgroup>

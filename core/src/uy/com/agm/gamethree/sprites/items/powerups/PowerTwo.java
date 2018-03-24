@@ -29,9 +29,7 @@ public class PowerTwo extends Item {
     private static final String TAG = PowerTwo.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float SHIELD_HEIGHT_METERS = 10.0f * 1.0f / PlayScreen.PPM;
-    private static final float SHIELD_OFFSETX_METERS = 50.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-    private static final float SHIELD_OFFSETY_METERS = 40.0f * 1.0f / PlayScreen.PPM + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+    private static final float SHIELD_RADIUS_METERS = 80.0f * 1.0f / PlayScreen.PPM;
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 0.0f;
     private static final float VELOCITY_Y = 0.7f;
@@ -175,13 +173,22 @@ public class PowerTwo extends Item {
             Hero hero = screen.getPlayer();
             hero.powerDown();
 
-            // Create the Shield
+            // Create the Shield (regular octagon)
             PolygonShape shield = new PolygonShape();
-            Vector2[] vertices = new Vector2[4];
-            vertices[0] = new Vector2(-SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS + SHIELD_HEIGHT_METERS);
-            vertices[1] = new Vector2(SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS + SHIELD_HEIGHT_METERS);
-            vertices[2] = new Vector2(-SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS);
-            vertices[3] = new Vector2(SHIELD_OFFSETX_METERS, SHIELD_OFFSETY_METERS);
+            Vector2[] vertices = new Vector2[8];
+
+            // Just for clarity since both are the same
+            float cos45 = MathUtils.cosDeg(45);
+            float sin45 = MathUtils.sinDeg(45);
+
+            vertices[0] = new Vector2(-SHIELD_RADIUS_METERS, 0);
+            vertices[1] = new Vector2(-cos45 * SHIELD_RADIUS_METERS, sin45 * SHIELD_RADIUS_METERS) ;
+            vertices[2] = new Vector2(0, SHIELD_RADIUS_METERS);
+            vertices[3] = new Vector2(cos45 * SHIELD_RADIUS_METERS, sin45 * SHIELD_RADIUS_METERS) ;
+            vertices[4] = new Vector2(SHIELD_RADIUS_METERS, 0);
+            vertices[5] = new Vector2(cos45 * SHIELD_RADIUS_METERS, -sin45 * SHIELD_RADIUS_METERS);
+            vertices[6] = new Vector2(0, -SHIELD_RADIUS_METERS);
+            vertices[7] = new Vector2(-cos45 * SHIELD_RADIUS_METERS, -sin45 * SHIELD_RADIUS_METERS);
             shield.set(vertices);
 
             // Shield only collide with enemies' bullets

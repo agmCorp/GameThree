@@ -28,7 +28,7 @@ public class AssetShield {
 
         // Animation
         regions = atlas.findRegions("shield");
-        shieldAnimation = new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP);
+        shieldAnimation = new Animation(0.3f / 21.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
