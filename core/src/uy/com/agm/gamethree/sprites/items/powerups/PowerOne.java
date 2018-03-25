@@ -180,8 +180,7 @@ public class PowerOne extends Item {
                     WorldContactListener.OBSTACLE_BIT |
                     WorldContactListener.PATH_BIT |
                     WorldContactListener.POWER_BOX_BIT |
-                    WorldContactListener.ITEM_BIT |
-                    WorldContactListener.ENEMY_BIT;  // Depicts what this Fixture can collide with (see WorldContactListener)
+                    WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
             for (Fixture fixture : hero.getB2body().getFixtureList()) {
                 fixture.setFilterData(filter);
             }

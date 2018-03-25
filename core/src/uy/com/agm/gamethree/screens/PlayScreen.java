@@ -59,7 +59,7 @@ public class PlayScreen extends AbstractScreen {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;

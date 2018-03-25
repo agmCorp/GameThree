@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -190,6 +192,21 @@ public class PowerTwo extends Item {
             vertices[6] = new Vector2(0, -SHIELD_RADIUS_METERS);
             vertices[7] = new Vector2(-cos45 * SHIELD_RADIUS_METERS, -sin45 * SHIELD_RADIUS_METERS);
             shield.set(vertices);
+
+            // Hero can't collide with enemies nor bullets.
+            // This is a work around: although the shield surrounds Hero, if he is in the path of EnemySix's beam (when its beam begins) he dies.
+            // To avoid this behavior, we also give him invulnerability.
+            Filter filter = new Filter();
+            filter.categoryBits = WorldContactListener.HERO_GHOST_BIT;  // Depicts what this fixture is
+            filter.maskBits = WorldContactListener.BORDER_BIT |
+                    WorldContactListener.EDGE_BIT |
+                    WorldContactListener.OBSTACLE_BIT |
+                    WorldContactListener.PATH_BIT |
+                    WorldContactListener.POWER_BOX_BIT |
+                    WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+            for (Fixture fixture : hero.getB2body().getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
 
             // Shield only collide with enemies' bullets
             FixtureDef fdef = new FixtureDef();
