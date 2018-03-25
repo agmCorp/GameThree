@@ -27,8 +27,8 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float PERIOD_SECONDS = 2.0f;
-    private static final float RADIUS_METERS = 1.5f;
+    private static final float PERIOD_SECONDS = 1.3f;
+    private static final float RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final int SCORE = 15;
 
@@ -167,6 +167,12 @@ public class EnemyFive extends Enemy {
          */
 
         elapsedTime += dt;
+
+        if (elapsedTime >= PERIOD_SECONDS) {
+            elapsedTime = 0;
+            counterclockwise = !counterclockwise;
+        }
+
         float w = 2 * MathUtils.PI / PERIOD_SECONDS;
         tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         return tmp;

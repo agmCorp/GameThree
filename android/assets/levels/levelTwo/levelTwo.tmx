@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1422">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1633">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -13,7 +13,7 @@
  </layer>
  <layer name="graphic" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2MlNQmEUQOF/BY8lY1TAXrQAZ41zT4xRBnuxADWMUQYX2ojHnSKJQXZ4TvLl5X+5t4EbgpmZrVpvUQjv0c/vojNmZmZmZmZmZsu0FQthO7bYzg7zu7iJh3CLBppooR3/PlviXUYFVdRQxzNeMMIYE0xndju8u+ihjwGGWItCWMcG8iigOHMzSfJOIY0MssjhFGc4xwUucTWzu8/7AIc4wjFOlrzJ3Md/n/naA/OPeFpwz8zMzMzMzMxWv0YUQhMttHE3525R4l8ZFVRRQx0jjDHBFK9zdjv866KHPgYYft5iEiHkUUARm4mfu0n+pZBGBlnk5swt0t4f7yPX3lXMzMzMzMzM7J/3AbeQOcg=
+   eJzt2ElKA0EYhuF/le4sM6Im8S56AGfF+U4Z0QzexQOoZCTpTlzoRXxFRO00aJtFtPleeAhVVEFWP02ZKaWUiltPrtmzO/8b9YxSSql4N06YTeDBTyz73yillFo0zXWl1F9sg3m0GXEmbXF+G1eO2TWaaKGNjvP1bJl1BVXUUEcDY0zgwccUs8DdLuse+hhgiBFWXLNVrKGAIkqBN5MU6zQyyCKHPI5xglOc4RwXgbu7rPewjwMc4mjBN5lb5/szn7vj/D0eIt5TSin1kb6/lVIqfmm2K6XUW03XrIU2OrgJebcos1dBFTXU0YAHH1PM8Bhyt8teD30MMMTo9S0maVZAESWsJ+fvpthLI4MscsiHnHvvJ7N955fvI5d6V1FKqaWlb3ellIpfmu1KKfU/ewEoJlI6
   </data>
  </layer>
  <layer name="bridge" width="15" height="250">
@@ -36,35 +36,38 @@
   <object id="1323" x="3.33333" y="820" width="186.667" height="10.6667"/>
   <object id="1356" x="291.333" y="5520" width="185.333" height="77.3333"/>
   <object id="1357" x="3.00017" y="5520" width="156.666" height="77.3333"/>
+  <object id="1423" x="10.6667" y="7409.33" width="92" height="81.3333"/>
+  <object id="1427" x="8.66667" y="6610" width="92" height="81.3333"/>
+  <object id="1428" x="8.66667" y="5807.33" width="92" height="81.3333"/>
+  <object id="1435" x="418.667" y="5273.33" width="54.6667" height="86.6667"/>
+  <object id="1437" x="418" y="4465.33" width="54.6667" height="86.6667"/>
+  <object id="1439" x="418" y="3664" width="54.6667" height="86.6667"/>
+  <object id="1443" x="6.66667" y="3397.33" width="46.6667" height="150.667"/>
+  <object id="1444" x="7.33332" y="4194" width="46.6667" height="150.667"/>
+  <object id="1445" x="8.66665" y="4996.67" width="46.6667" height="150.667"/>
+  <object id="1446" x="6.66667" y="1349.33" width="76" height="226.667"/>
+  <object id="1447" x="6" y="2148" width="76" height="226.667"/>
+  <object id="1448" x="6" y="2938.67" width="76" height="181.334"/>
+  <object id="1449" x="417.333" y="2612" width="53.3333" height="238.667"/>
+  <object id="1450" x="420" y="1812.67" width="53.3333" height="238.667"/>
+  <object id="1451" x="418.667" y="1012.67" width="53.3333" height="238.667"/>
+  <object id="1599" x="432" y="5973.33" width="41.3333" height="76"/>
+  <object id="1600" x="432.667" y="6774" width="41.3333" height="76"/>
+  <object id="1602" x="434" y="7579.33" width="41.3333" height="76"/>
  </objectgroup>
  <objectgroup name="path">
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
  <objectgroup name="powerBox">
-  <object id="1321" x="224" y="512" width="32" height="32">
+  <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="500"/>
+    <property name="powerThree" type="int" value="15"/>
    </properties>
   </object>
-  <object id="1329" x="96" y="576" width="32" height="32">
+  <object id="1598" x="224" y="7648" width="32" height="32">
    <properties>
-    <property name="powerThree" type="int" value="10"/>
-   </properties>
-  </object>
-  <object id="1330" x="352" y="576" width="32" height="32">
-   <properties>
-    <property name="powerThree" type="int" value="8"/>
-   </properties>
-  </object>
-  <object id="1331" x="224" y="864" width="32" height="32">
-   <properties>
-    <property name="powerThree" type="int" value="30"/>
-   </properties>
-  </object>
-  <object id="1419" x="252" y="7561.33" width="30.6667" height="38.6667">
-   <properties>
-    <property name="powerTwo" type="int" value="10"/>
+    <property name="powerFour" type="int" value="500"/>
    </properties>
   </object>
  </objectgroup>
@@ -72,30 +75,159 @@
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
  <objectgroup name="enemyFour">
-  <object id="1413" x="128" y="4384" width="32" height="32"/>
-  <object id="1415" x="256" y="4512" width="32" height="32"/>
-  <object id="1416" x="128" y="4640" width="32" height="32"/>
-  <object id="1417" x="352" y="4832" width="32" height="32"/>
+  <object id="1508" x="384" y="5632" width="32" height="32">
+   <properties>
+    <property name="timesItFreeze" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="1509" x="320" y="5696" width="32" height="32">
+   <properties>
+    <property name="timesItFreeze" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="1510" x="224" y="5760" width="32" height="32">
+   <properties>
+    <property name="timesItFreeze" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="1511" x="160" y="5824" width="32" height="32"/>
+  <object id="1512" x="256" y="5888" width="32" height="32"/>
+  <object id="1513" x="128" y="5952" width="32" height="32"/>
+  <object id="1514" x="320" y="5952" width="32" height="32"/>
+  <object id="1515" x="72" y="6089.33" width="32" height="32"/>
+  <object id="1516" x="236" y="6038.67" width="32" height="32">
+   <properties>
+    <property name="timesItFreeze" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="1517" x="240" y="6174.67" width="32" height="32"/>
+  <object id="1518" x="120" y="6260" width="32" height="32"/>
+  <object id="1521" x="364" y="6254.67" width="32" height="32"/>
+  <object id="1522" x="128" y="6368" width="32" height="32">
+   <properties>
+    <property name="timesItFreeze" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="1523" x="352" y="6368" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyFive">
-  <object id="1411" x="128" y="3840" width="32" height="32"/>
-  <object id="1412" x="320" y="3968" width="32" height="32"/>
+  <object id="1566" x="224" y="5376" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1567" x="224" y="5248" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1586" x="224" y="5120" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1587" x="224" y="4992" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1590" x="224" y="4864" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1591" x="224" y="4736" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1594" x="224" y="4608" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1595" x="224" y="4480" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1596" x="224" y="4352" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1616" x="226" y="4238" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="enemySix">
-  <object id="1409" x="256" y="4704" width="32" height="32"/>
-  <object id="1410" x="96" y="4896" width="32" height="32"/>
-  <object id="1421" x="56" y="6742.67" width="32" height="32"/>
- </objectgroup>
+ <objectgroup name="enemySix"/>
  <objectgroup name="enemySeven">
-  <object id="1398" x="64" y="5120" width="32" height="32"/>
-  <object id="1399" x="352" y="5792" width="32" height="32"/>
-  <object id="1400" x="96" y="5792" width="32" height="32"/>
-  <object id="1401" x="64" y="5920" width="32" height="32"/>
-  <object id="1405" x="160" y="6656" width="32" height="32"/>
+  <object id="1461" x="30.6667" y="7098.33" width="32" height="32"/>
+  <object id="1462" x="98.6667" y="7017" width="32" height="32"/>
+  <object id="1463" x="144" y="7089" width="32" height="32"/>
+  <object id="1464" x="222.667" y="7149" width="32" height="32"/>
+  <object id="1465" x="308" y="7090.33" width="32" height="32"/>
+  <object id="1467" x="368" y="7149" width="32" height="32"/>
+  <object id="1468" x="309.333" y="6841" width="32" height="32"/>
+  <object id="1471" x="312" y="6949" width="32" height="32"/>
+  <object id="1475" x="212" y="7025" width="32" height="32"/>
+  <object id="1479" x="121.333" y="6918.33" width="32" height="32"/>
+  <object id="1480" x="21.3333" y="6953" width="32" height="32"/>
+  <object id="1481" x="433.333" y="7058.33" width="32" height="32"/>
+  <object id="1484" x="205.333" y="6862.33" width="32" height="32"/>
+  <object id="1486" x="210.667" y="6941" width="32" height="32"/>
+  <object id="1487" x="342.667" y="7018.33" width="32" height="32"/>
+  <object id="1488" x="78.6667" y="6831.67" width="32" height="32"/>
+  <object id="1491" x="54.0002" y="6750.66" width="32" height="32"/>
+  <object id="1492" x="124.667" y="6612" width="32" height="32"/>
+  <object id="1493" x="150" y="6701.34" width="32" height="32"/>
+  <object id="1494" x="214.001" y="6766.67" width="32" height="32"/>
+  <object id="1495" x="314" y="6702.66" width="32" height="32"/>
+  <object id="1496" x="374" y="6761.34" width="32" height="32"/>
+  <object id="1497" x="314" y="6477.33" width="32" height="32"/>
+  <object id="1498" x="344.667" y="6569.34" width="32" height="32"/>
+  <object id="1499" x="247.334" y="6636" width="32" height="32"/>
+  <object id="1500" x="127.333" y="6530.66" width="32" height="32"/>
+  <object id="1501" x="24.6668" y="6554.67" width="32" height="32"/>
+  <object id="1502" x="404.667" y="6642.66" width="32" height="32"/>
+  <object id="1503" x="192.667" y="6450.67" width="32" height="32"/>
+  <object id="1504" x="238.001" y="6556" width="32" height="32"/>
+  <object id="1505" x="60.6669" y="6462.66" width="32" height="32"/>
+  <object id="1507" x="421.333" y="6512" width="32" height="32"/>
+  <object id="1617" x="95.3335" y="4180" width="32" height="32"/>
+  <object id="1618" x="282" y="3772" width="32" height="32"/>
+  <object id="1619" x="328.667" y="3857.33" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1620" x="98.0001" y="3769.33" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1621" x="220.667" y="3930.67" width="32" height="32"/>
+  <object id="1622" x="176.667" y="3829.33" width="32" height="32"/>
+  <object id="1623" x="87.3335" y="3884" width="32" height="32"/>
+  <object id="1624" x="118" y="3978.67" width="32" height="32"/>
+  <object id="1625" x="250" y="4038.67" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1626" x="323.333" y="3937.33" width="32" height="32"/>
+  <object id="1627" x="374" y="4142.67" width="32" height="32"/>
+  <object id="1628" x="239.333" y="4133.33" width="32" height="32"/>
+  <object id="1629" x="143.333" y="4080" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyEight">
-  <object id="1391" x="351" y="6905" width="32" height="32"/>
-  <object id="1394" x="156" y="6055" width="32" height="32"/>
-  <object id="1395" x="431" y="4877" width="32" height="32"/>
+  <object id="1574" x="6.66667" y="3360" width="32" height="32"/>
+  <object id="1575" x="436" y="3236" width="32" height="32"/>
+  <object id="1581" x="438.667" y="3778.67" width="32" height="32"/>
+  <object id="1582" x="440" y="4105.33" width="32" height="32"/>
+  <object id="1583" x="9.33333" y="3686.67" width="32" height="32"/>
+  <object id="1584" x="9.33333" y="4149.33" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -27,8 +27,8 @@ public class EnemySeven extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 3.0f;
-    private static final float VELOCITY_Y = -2.0f;
-    private static final float FIRE_DELAY_SECONDS = 2.0f;
+    private static final float VELOCITY_Y = -3.0f;
+    private static final float FIRE_DELAY_SECONDS = 1.0f;
     public static final int MIN_CLONE = 2;
     public static final int MAX_CLONE = 5;
     private static final float CHANGE_HORIZONTAL_SECONDS = 2.0f;
