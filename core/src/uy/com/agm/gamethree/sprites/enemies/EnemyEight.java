@@ -28,8 +28,8 @@ public class EnemyEight extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float LINEAR_VELOCITY = 6.0f;
-    private static final float PATH_PERIOD_SECONDS = 1.0f;
+    private static final float LINEAR_VELOCITY = 5.0f;
+    private static final float PATH_PERIOD_SECONDS = 1.3f;
     private static final float PATH_RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final int SCORE = 15;

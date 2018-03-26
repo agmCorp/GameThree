@@ -254,7 +254,7 @@
   <object id="1784" x="128" y="1728" width="32" height="32"/>
   <object id="1785" x="224" y="1472" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySix">
+ <objectgroup name="enemySix" visible="0">
   <object id="1808" x="96" y="1088" width="32" height="32"/>
   <object id="1811" x="416" y="864" width="32" height="32"/>
   <object id="1818" x="416" y="1312" width="32" height="32"/>
@@ -270,9 +270,13 @@
   <object id="1827" x="352" y="2720" width="32" height="32"/>
   <object id="1828" x="416" y="3040" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySeven" visible="0">
+ <objectgroup name="enemySeven">
   <object id="1461" x="30.6667" y="7098.33" width="32" height="32"/>
-  <object id="1462" x="98.6667" y="7017" width="32" height="32"/>
+  <object id="1462" x="98.6667" y="7017" width="32" height="32">
+   <properties>
+    <property name="powerThree" type="int" value="10"/>
+   </properties>
+  </object>
   <object id="1463" x="144" y="7089" width="32" height="32"/>
   <object id="1464" x="222.667" y="7149" width="32" height="32"/>
   <object id="1465" x="308" y="7090.33" width="32" height="32"/>
@@ -283,7 +287,11 @@
     <property name="powerTwo" type="int" value="15"/>
    </properties>
   </object>
-  <object id="1479" x="121.333" y="6918.33" width="32" height="32"/>
+  <object id="1479" x="121.333" y="6918.33" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="10"/>
+   </properties>
+  </object>
   <object id="1480" x="21.3333" y="6953" width="32" height="32"/>
   <object id="1481" x="433.333" y="7058.33" width="32" height="32"/>
   <object id="1484" x="205.333" y="6862.33" width="32" height="32"/>
@@ -293,7 +301,11 @@
     <property name="powerThree" type="int" value="20"/>
    </properties>
   </object>
-  <object id="1494" x="214.001" y="6766.67" width="32" height="32"/>
+  <object id="1494" x="214.001" y="6766.67" width="32" height="32">
+   <properties>
+    <property name="powerThree" type="int" value="15"/>
+   </properties>
+  </object>
   <object id="1495" x="314" y="6702.66" width="32" height="32"/>
   <object id="1496" x="374" y="6761.34" width="32" height="32">
    <properties>
