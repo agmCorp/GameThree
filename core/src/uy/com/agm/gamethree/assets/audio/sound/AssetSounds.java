@@ -39,16 +39,17 @@ public class AssetSounds {
     private Sound showUpPowerFour;
     private Sound timeIsUp;
     private Sound finalEnemyIntro;
-    private Sound finalEnemyLevelOnePowerUp;
-    private Sound finalEnemyLevelOnePowerDown;
-    private Sound finalEnemyLevelOneExplosion;
-    private Sound finalEnemyLevelOneHit;
+    private Sound finalEnemyPowerUp;
+    private Sound finalEnemyDown;
+    private Sound finalEnemyExplosion;
+    private Sound finalEnemyHit;
     private Sound levelCompleted;
     private Sound boing;
     private Sound click;
     private Sound aplause;
     private Sound squish;
     private Sound frozen;
+    private Sound beam;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Assets.FX_FILE_BUMP, Sound.class);
@@ -77,17 +78,18 @@ public class AssetSounds {
         showUpPowerThree = am.get(Assets.FX_FILE_SHOW_UP_POWER_THREE, Sound.class);
         showUpPowerFour = am.get(Assets.FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
         timeIsUp = am.get(Assets.FX_FILE_TIME_IS_UP, Sound.class);
-        finalEnemyLevelOnePowerUp = am.get(Assets.FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
-        finalEnemyLevelOnePowerDown = am.get(Assets.FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
-        finalEnemyLevelOneExplosion = am.get(Assets.FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
-        finalEnemyLevelOneHit = am.get(Assets.FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
-        finalEnemyIntro = am.get(Assets.FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
+        finalEnemyPowerUp = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
+        finalEnemyDown = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
+        finalEnemyExplosion = am.get(Assets.FX_FILE_FINAL_ENEMY_EXPLOSION, Sound.class);
+        finalEnemyHit = am.get(Assets.FX_FILE_FINAL_ENEMY_HIT, Sound.class);
+        finalEnemyIntro = am.get(Assets.FX_FILE_FINAL_ENEMY_INTRO, Sound.class);
         levelCompleted = am.get(Assets.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Assets.FX_FILE_BOUNCE, Sound.class);
         click = am.get(Assets.FX_FILE_CLICK, Sound.class);
         aplause = am.get(Assets.FX_FILE_APPLAUSE, Sound.class);
         squish = am.get(Assets.FX_FILE_SQUISH, Sound.class);
         frozen = am.get(Assets.FX_FILE_FROZEN, Sound.class);
+        beam = am.get(Assets.FX_FILE_BEAM, Sound.class);
     }
 
     public Sound getBump() {
@@ -194,20 +196,20 @@ public class AssetSounds {
         return timeIsUp;
     }
 
-    public Sound getFinalEnemyLevelOnePowerUp() {
-        return finalEnemyLevelOnePowerUp;
+    public Sound getFinalEnemyPowerUp() {
+        return finalEnemyPowerUp;
     }
 
-    public Sound getFinalEnemyLevelOnePowerDown() {
-        return finalEnemyLevelOnePowerDown;
+    public Sound getFinalEnemyDown() {
+        return finalEnemyDown;
     }
 
-    public Sound getFinalEnemyLevelOneExplosion() {
-        return finalEnemyLevelOneExplosion;
+    public Sound getFinalEnemyExplosion() {
+        return finalEnemyExplosion;
     }
 
-    public Sound getFinalEnemyLevelOneHit() {
-        return finalEnemyLevelOneHit;
+    public Sound getFinalEnemyHit() {
+        return finalEnemyHit;
     }
 
     public Sound getFinalEnemyIntro() {
@@ -236,5 +238,9 @@ public class AssetSounds {
 
     public Sound getFrozen() {
         return frozen;
+    }
+
+    public Sound getBeam() {
+        return beam;
     }
 }

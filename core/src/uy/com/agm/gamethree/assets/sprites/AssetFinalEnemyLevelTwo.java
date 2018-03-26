@@ -10,7 +10,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 /**
  * Created by AGM on 12/30/2017.
  */
-// todo revisar todos los assets y sus tiempos
 public class AssetFinalEnemyLevelTwo {
     private static final String TAG = AssetFinalEnemyLevelTwo.class.getName();
 

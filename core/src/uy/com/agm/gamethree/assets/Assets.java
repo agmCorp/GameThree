@@ -90,17 +90,18 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_SHOW_UP_POWER_THREE = "audio/sounds/showUpPowerThree.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_FOUR = "audio/sounds/showUpPowerFour.ogg";
     public static final String FX_FILE_TIME_IS_UP = "audio/sounds/timeIsUp.ogg";
-    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_UP = "audio/sounds/finalEnemyLevelOnePowerUp.ogg";
-    public static final String FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN = "audio/sounds/finalEnemyLevelOnePowerDown.ogg";
-    public static final String FX_FILE_FINAL_LEVEL_ONE_EXPLOSION = "audio/sounds/finalEnemyLevelOneExplosion.ogg";
-    public static final String FX_FILE_FINAL_LEVEL_ONE_HIT = "audio/sounds/finalEnemyLevelOneHit.ogg";
-    public static final String FX_FILE_FINAL_LEVEL_ONE_INTRO = "audio/sounds/fear.ogg";
+    public static final String FX_FILE_FINAL_ENEMY_POWER_UP = "audio/sounds/finalEnemyPowerUp.ogg";
+    public static final String FX_FILE_FINAL_ENEMY_POWER_DOWN = "audio/sounds/finalEnemyPowerDown.ogg";
+    public static final String FX_FILE_FINAL_ENEMY_EXPLOSION = "audio/sounds/finalEnemyExplosion.ogg";
+    public static final String FX_FILE_FINAL_ENEMY_HIT = "audio/sounds/finalEnemyHit.ogg";
+    public static final String FX_FILE_FINAL_ENEMY_INTRO = "audio/sounds/fear.ogg";
     public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
     public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
     public static final String FX_FILE_CLICK = "audio/sounds/click.ogg";
     public static final String FX_FILE_APPLAUSE = "audio/sounds/applause.ogg";
     public static final String FX_FILE_SQUISH = "audio/sounds/squish.ogg";
     public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
+    public static final String FX_FILE_BEAM = "audio/sounds/finalEnemyPowerUp.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -217,11 +218,11 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_SHOW_UP_POWER_THREE, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
         assetManager.load(FX_FILE_TIME_IS_UP, Sound.class);
-        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_POWER_UP, Sound.class);
-        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_POWER_DOWN, Sound.class);
-        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_EXPLOSION, Sound.class);
-        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_HIT, Sound.class);
-        assetManager.load(FX_FILE_FINAL_LEVEL_ONE_INTRO, Sound.class);
+        assetManager.load(FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
+        assetManager.load(FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_FINAL_ENEMY_EXPLOSION, Sound.class);
+        assetManager.load(FX_FILE_FINAL_ENEMY_HIT, Sound.class);
+        assetManager.load(FX_FILE_FINAL_ENEMY_INTRO, Sound.class);
         assetManager.load(FX_FILE_LEVEL_COMPLETED, Sound.class);
         assetManager.load(FX_FILE_BOUNCE, Sound.class);
         assetManager.load(FX_FILE_CLICK, Sound.class);

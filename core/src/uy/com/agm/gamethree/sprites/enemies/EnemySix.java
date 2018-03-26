@@ -131,7 +131,7 @@ public class EnemySix extends Enemy {
         beamIntervalTime += dt;
         if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp()); // todo
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeam());
 
             stateTime = 0;
             beamStateTime = 0;

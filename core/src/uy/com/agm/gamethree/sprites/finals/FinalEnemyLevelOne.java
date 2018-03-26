@@ -454,7 +454,7 @@ b2body.setFixedRotation(true); // todo
         stateFinalEnemyTime = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -469,7 +469,7 @@ b2body.setFixedRotation(true); // todo
             explosionFXStateTime = 0;
 
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneExplosion());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
 
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
@@ -517,7 +517,7 @@ b2body.setFixedRotation(true); // todo
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerDown());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
@@ -537,7 +537,7 @@ b2body.setFixedRotation(true); // todo
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOnePowerUp());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyPowerUp());
         }
     }
 
@@ -548,7 +548,7 @@ b2body.setFixedRotation(true); // todo
                 weapon.onTarget();
                 damage--;
                 screen.getHud().decreaseHealth();
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyLevelOneHit(), FinalEnemy.HIT_MAX_VOLUME);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyHit(), FinalEnemy.HIT_MAX_VOLUME);
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();
                     currentStateFinalEnemy = StateFinalEnemy.INJURED;
