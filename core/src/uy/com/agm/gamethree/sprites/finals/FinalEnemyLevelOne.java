@@ -144,9 +144,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-b2body.setFixedRotation(true); // todo
-
-
+        b2body.setFixedRotation(true);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -517,7 +515,7 @@ b2body.setFixedRotation(true); // todo
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyDown());
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyPowerDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));

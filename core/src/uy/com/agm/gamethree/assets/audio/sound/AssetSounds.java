@@ -40,7 +40,7 @@ public class AssetSounds {
     private Sound timeIsUp;
     private Sound finalEnemyIntro;
     private Sound finalEnemyPowerUp;
-    private Sound finalEnemyDown;
+    private Sound finalEnemyPowerDown;
     private Sound finalEnemyExplosion;
     private Sound finalEnemyHit;
     private Sound levelCompleted;
@@ -79,7 +79,7 @@ public class AssetSounds {
         showUpPowerFour = am.get(Assets.FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
         timeIsUp = am.get(Assets.FX_FILE_TIME_IS_UP, Sound.class);
         finalEnemyPowerUp = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
-        finalEnemyDown = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
+        finalEnemyPowerDown = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
         finalEnemyExplosion = am.get(Assets.FX_FILE_FINAL_ENEMY_EXPLOSION, Sound.class);
         finalEnemyHit = am.get(Assets.FX_FILE_FINAL_ENEMY_HIT, Sound.class);
         finalEnemyIntro = am.get(Assets.FX_FILE_FINAL_ENEMY_INTRO, Sound.class);
@@ -200,8 +200,8 @@ public class AssetSounds {
         return finalEnemyPowerUp;
     }
 
-    public Sound getFinalEnemyDown() {
-        return finalEnemyDown;
+    public Sound getFinalEnemyPowerDown() {
+        return finalEnemyPowerDown;
     }
 
     public Sound getFinalEnemyExplosion() {
