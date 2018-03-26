@@ -215,6 +215,10 @@ public class PlayScreen extends AbstractScreen {
         updateHero(dt);
         updateHud(dt);
         updateCamera(dt);
+
+        if (DEBUG_MODE) {
+            creator.printDebugStatus();
+        }
     }
 
     private void doPhysicsStep(float dt) {

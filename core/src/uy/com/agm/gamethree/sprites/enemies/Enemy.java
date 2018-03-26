@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 
@@ -27,7 +28,7 @@ public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
     // Constants
-    private static final float MARGIN_METERS = 1.0f;
+    private static final float MARGIN_METERS = 3.0f;
 
     protected World world;
     protected PlayScreen screen;
@@ -45,9 +46,11 @@ public abstract class Enemy extends Sprite {
 
     protected State currentState;
     protected MapObject object;
+    private int id;
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
+        this.id = object.getProperties().get("id", 0, Integer.class);
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
@@ -76,6 +79,10 @@ public abstract class Enemy extends Sprite {
         // By default this Enemy doesn't interact in our world
         b2body.setActive(false);
         currentState = State.INACTIVE;
+    }
+
+    public String getId() {
+        return String.valueOf(id);
     }
 
     // This Enemy doesn't have any b2body
@@ -168,6 +175,15 @@ public abstract class Enemy extends Sprite {
 
     public void onBumpWithFeint() {
         onBump();
+    }
+
+    public void onHit(Weapon weapon) {
+        weapon.onTarget();
+        onHit();
+    }
+
+    public String whoAmI() {
+        return getClassName();
     }
 
     @Override

@@ -210,11 +210,9 @@ public class WorldContactListener implements ContactListener {
             // Hero's weapon - Enemy
             case HERO_WEAPON_BIT | ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
-                    ((Weapon) fixA.getUserData()).onTarget();
-                    ((Enemy) fixB.getUserData()).onHit();
+                    ((Enemy) fixB.getUserData()).onHit((Weapon) fixA.getUserData());
                 } else {
-                    ((Weapon) fixB.getUserData()).onTarget();
-                    ((Enemy) fixA.getUserData()).onHit();
+                    ((Enemy) fixA.getUserData()).onHit((Weapon) fixB.getUserData());
                 }
                 break;
 

@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -27,11 +28,12 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float PERIOD_SECONDS = 1.3f;
-    private static final float RADIUS_METERS = 2.0f;
+    private static final float PERIOD_SECONDS = 1.5f;
+    private static final float RADIUS_METERS = 1.3f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final int SCORE = 15;
 
+    private boolean damage;
     private float stateTime;
     private boolean counterclockwise;
     private float elapsedTime;
@@ -48,6 +50,7 @@ public class EnemyFive extends Enemy {
         // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
+        damage = false;
         stateTime = 0;
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
@@ -186,6 +189,17 @@ public class EnemyFive extends Enemy {
     @Override
     protected TextureRegion getHelpImage() {
         return Assets.getInstance().getScene2d().getHelpEnemyFive();
+    }
+
+    @Override
+    public void onHit(Weapon weapon) {
+        if (!damage) {
+            weapon.onBounce();
+            counterclockwise = !counterclockwise;
+            damage = true;
+        } else {
+            onHit();
+        }
     }
 
     @Override

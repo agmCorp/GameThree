@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -7,6 +8,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -77,6 +80,7 @@ public class B2WorldCreator {
     private Array<Item> items;
     private Array<Weapon> weapons;
     private LinkedBlockingQueue<ActorDef> actorsToCreate;
+    private ArrayMap<String, String> arrayMapDebug;
 
     public B2WorldCreator(PlayScreen screen) {
         MapLayer layer;
@@ -96,6 +100,9 @@ public class B2WorldCreator {
 
         // Queue
         actorsToCreate = new LinkedBlockingQueue<ActorDef>();
+
+        // Debug
+        arrayMapDebug = new ArrayMap<String, String>();
 
         TiledMap map = screen.getMap();
 
@@ -330,5 +337,27 @@ public class B2WorldCreator {
             timer = object.getProperties().get(KEY_POWER_FOUR, 0, Integer.class);
             createGameThreeActor(new ActorDefPower(x, y, timer, PowerFour.class));
         }
+    }
+
+    public void printDebugStatus() {
+        arrayMapDebug.clear();
+        String key;
+        String value;
+
+        for(Enemy enemy : getEnemies()) {
+            key = enemy.whoAmI();
+            value = arrayMapDebug.get(key);
+            value = value == null ? enemy.getId() : value + ", " + enemy.getId();
+            arrayMapDebug.put(key, value);
+        }
+        Gdx.app.debug(TAG, "**** Objects not disposables ****");
+        Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
+        Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
+        Gdx.app.debug(TAG, "***** Items: " + items.size);
+        Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
+        for (ObjectMap.Entry<String, String> entry: arrayMapDebug.entries()) {
+            Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
+        }
+        Gdx.app.debug(TAG, "*********************************");
     }
 }

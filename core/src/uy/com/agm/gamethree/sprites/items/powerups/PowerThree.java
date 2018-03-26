@@ -28,7 +28,7 @@ public class PowerThree extends Item {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 1.0f;
-    private static final float VELOCITY_Y = 1.0f;
+    private static final float VELOCITY_Y = -1.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 5.0f;
     private static final int DEFAULT_TIMER = 10;
@@ -60,7 +60,7 @@ public class PowerThree extends Item {
         // Setbounds is the one that determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), AssetPowerThree.WIDTH_METERS, AssetPowerThree.HEIGHT_METERS);
 
-        velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerThree());

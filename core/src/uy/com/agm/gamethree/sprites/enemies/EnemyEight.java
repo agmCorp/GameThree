@@ -13,6 +13,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -33,13 +34,15 @@ public class EnemyEight extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final int SCORE = 15;
 
+    private boolean damage;
     private float stateTime;
     private Animation enemyEightAnimation;
     private Animation explosionAnimation;
 
-    // The whole path is divided into three sections, we need only two boolean variables
+    // The whole path is divided into three sections
     private boolean path1;
     private boolean path2;
+    private boolean path3;
     private int sign;
     private float elapsedTime;
 
@@ -49,6 +52,7 @@ public class EnemyEight extends Enemy {
         // Setbounds is the one that determines the size of the EnemyEight's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyEight.WIDTH_METERS, AssetEnemyEight.HEIGHT_METERS);
 
+        damage = false;
         stateTime = 0;
 
         // Animations
@@ -57,6 +61,7 @@ public class EnemyEight extends Enemy {
 
         path1 = true;
         path2 = false;
+        path3 = false;
         sign = b2body.getPosition().x < screen.getGameCam().position.x ? -1 : 1;
         elapsedTime = 0;
         checkPath1();
@@ -160,7 +165,11 @@ public class EnemyEight extends Enemy {
             if (path2) {
                 checkPath2(dt);
             } else {
-                checkPath3();
+                if (path3) {
+                    checkPath3();
+                } else {
+                    getAway();
+                }
             }
         }
     }
@@ -185,6 +194,7 @@ public class EnemyEight extends Enemy {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
         if (b2body.getPosition().y >= screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
             path2 = false;
+            path3 = true;
         } else {
             elapsedTime += dt;
             float w = 2 * MathUtils.PI / PATH_PERIOD_SECONDS;
@@ -193,13 +203,23 @@ public class EnemyEight extends Enemy {
     }
 
     private void checkPath3() {
-        // Move to (targetX, targetY) at constant speed
-        float targetX = screen.getGameCam().position.x + sign * (CIRCLE_SHAPE_RADIUS_METERS - screen.getGameViewPort().getWorldWidth() / 2);
-        float targetY = screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4;
+        // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
+        if (b2body.getPosition().y >= screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+            path3 = false;
+        } else {
+            // Move to (targetX, targetY) at constant speed
+            float targetX = screen.getGameCam().position.x + sign * (CIRCLE_SHAPE_RADIUS_METERS - screen.getGameViewPort().getWorldWidth() / 2);
+            float targetY = screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4;
 
-        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY);
-        velocity.set(tmp);
+            tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+            Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY);
+            velocity.set(tmp);
+        }
+    }
+
+    private void getAway() {
+        // Beyond upperEdge (see Enemy.checkBoundaries())
+        velocity.set(0, LINEAR_VELOCITY * 100);
     }
 
     @Override
@@ -210,6 +230,16 @@ public class EnemyEight extends Enemy {
     @Override
     protected TextureRegion getHelpImage() {
         return Assets.getInstance().getScene2d().getHelpEnemyEight();
+    }
+
+    @Override
+    public void onHit(Weapon weapon) {
+        if (!damage) {
+            weapon.onBounce();
+            damage = true;
+        } else {
+            onHit();
+        }
     }
 
     @Override
