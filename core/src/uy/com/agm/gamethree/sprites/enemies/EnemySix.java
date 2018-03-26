@@ -154,9 +154,7 @@ public class EnemySix extends Enemy {
         FixtureDef fdef = new FixtureDef();
         fdef.shape = beam;
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT;  // Depicts what this fixture is
-        fdef.filter.maskBits = WorldContactListener.ITEM_BIT |
-                WorldContactListener.SHIELD_BIT |
-                WorldContactListener.ENEMY_BIT |
+        fdef.filter.maskBits = WorldContactListener.SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         b2body.createFixture(fdef).setUserData(this);
@@ -200,10 +198,8 @@ public class EnemySix extends Enemy {
     private void setDefaultFilter() {
         Filter filter = new Filter();
         filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
-        filter.maskBits = WorldContactListener.ITEM_BIT |
-                WorldContactListener.HERO_WEAPON_BIT |
+        filter.maskBits = WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.SHIELD_BIT |
-                WorldContactListener.ENEMY_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {

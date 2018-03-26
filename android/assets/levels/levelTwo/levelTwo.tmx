@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1829">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1833">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -13,7 +13,7 @@
  </layer>
  <layer name="graphic" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2ElKA0EYhuF/le4sM6Im8S56AGfF+U4Z0QzexQOoZCTpTlzoRXxFRO00aJtFtPleeAhVVEFWP02ZKaWUiltPrtmzO/8b9YxSSql4N06YTeDBTyz73yillFo0zXWl1F9sg3m0GXEmbXF+G1eO2TWaaKGNjvP1bJl1BVXUUEcDY0zgwccUs8DdLuse+hhgiBFWXLNVrKGAIkqBN5MU6zQyyCKHPI5xglOc4RwXgbu7rPewjwMc4mjBN5lb5/szn7vj/D0eIt5TSin1kb6/lVIqfmm2K6XUW03XrIU2OrgJebcos1dBFTXU0YAHH1PM8Bhyt8teD30MMMTo9S0maVZAESWsJ+fvpthLI4MscsiHnHvvJ7N955fvI5d6V1FKqaWlb3ellIpfmu1KKfU/ewEoJlI6
+   eJzt2MlNQmEUQOF/BY8lY1TAXrQAZ41zT4xRBnuxADWMUQYX2ojHnSKJQXZ4TvLl5X+5t4EbgpmZrVpvUQjv0c/vojNmZmZmZmZmZsu0FQthO7bYzg7zu7iJh3CLBppooR3/PlviXUYFVdRQxzNeMMIYE0xndju8u+ihjwGGWItCWMcG8iigOHMzSfJOIY0MssjhFGc4xwUucTWzu8/7AIc4wjFOlrzJ3Md/n/naA/OPeFpwz8zMzMzMzMxWv0YUQhMttHE3525R4l8ZFVRRQx0jjDHBFK9zdjv866KHPgYYft5iEiHkUUARm4mfu0n+pZBGBlnk5swt0t4f7yPX3lXMzMzMzMzM7J/3AbeQOcg=
   </data>
  </layer>
  <layer name="bridge" width="15" height="250">
@@ -60,7 +60,7 @@
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="powerBox" visible="0">
+ <objectgroup name="powerBox">
   <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>
     <property name="powerTwo" type="int" value="15"/>
@@ -92,11 +92,21 @@
     <property name="powerFour" type="int" value="10"/>
    </properties>
   </object>
+  <object id="1831" x="128" y="3264" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="1832" x="224" y="224" width="32" height="32">
+   <properties>
+    <property name="powerThree" type="int" value="15"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="enemyOne" visible="0"/>
- <objectgroup name="enemyTwo" visible="0"/>
- <objectgroup name="enemyThree" visible="0"/>
- <objectgroup name="enemyFour" visible="0">
+ <objectgroup name="enemyOne"/>
+ <objectgroup name="enemyTwo"/>
+ <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyFour">
   <object id="1508" x="384" y="5632" width="32" height="32">
    <properties>
     <property name="timesItFreeze" type="int" value="3"/>
@@ -142,7 +152,7 @@
   <object id="1697" x="220" y="3552" width="32" height="32"/>
   <object id="1698" x="225.333" y="3268" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyFive" visible="0">
+ <objectgroup name="enemyFive">
   <object id="1566" x="152" y="5371" width="32" height="32"/>
   <object id="1567" x="128" y="5248" width="32" height="32"/>
   <object id="1586" x="160" y="5120" width="32" height="32"/>
@@ -254,7 +264,7 @@
   <object id="1784" x="128" y="1728" width="32" height="32"/>
   <object id="1785" x="224" y="1472" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySix" visible="0">
+ <objectgroup name="enemySix">
   <object id="1808" x="96" y="1088" width="32" height="32"/>
   <object id="1811" x="416" y="864" width="32" height="32"/>
   <object id="1818" x="416" y="1312" width="32" height="32"/>
@@ -354,7 +364,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyEight" visible="0">
+ <objectgroup name="enemyEight">
   <object id="1653" x="0" y="3264" width="32" height="32"/>
   <object id="1665" x="448" y="3328" width="32" height="32"/>
   <object id="1666" x="0" y="3584" width="32" height="32"/>
