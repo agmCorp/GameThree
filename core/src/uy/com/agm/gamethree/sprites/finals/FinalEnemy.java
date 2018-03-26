@@ -136,12 +136,14 @@ public abstract class FinalEnemy extends Sprite {
             }
 
             // Release silver bullets if needed
-            if (!screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
+            if (!screen.getPlayer().isHeroDead() && !screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
                 aidSilverBulletTime += dt;
                 if (aidSilverBulletTime > AID_SILVER_BULLET_TIME_SECONDS) {
                     releaseSilverBullet();
                     aidSilverBulletTime = 0;
                 }
+            } else {
+                aidSilverBulletTime = 0;
             }
 
             updateLogic(dt);

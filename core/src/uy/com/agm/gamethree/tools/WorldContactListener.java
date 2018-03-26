@@ -265,15 +265,31 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // HeroTough - Enemy's weapon
+            // Hero - Item
             // Avoid bouncing
+            case HERO_BIT | ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).stop();
+                break;
+
+            // HeroGhost - Item
+            // Avoid bouncing
+            case HERO_GHOST_BIT | ITEM_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_GHOST_BIT ? fixA : fixB;
+                ((Hero) fixC.getUserData()).stop();
+                break;
+
+            // HeroTough - Item/Enemy's weapon
+            // Avoid bouncing
+            case HERO_TOUGH_BIT | ITEM_BIT:
             case HERO_TOUGH_BIT | ENEMY_WEAPON_BIT:
                 fixC = fixA.getFilterData().categoryBits == HERO_TOUGH_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;
 
-            // Shield - Enemy/Enemy's weapon
+            // Shield - Item/Enemy/Enemy's weapon
             // Avoid bouncing
+            case SHIELD_BIT | ITEM_BIT:
             case SHIELD_BIT | ENEMY_BIT:
             case SHIELD_BIT | ENEMY_WEAPON_BIT:
                 fixC = fixA.getFilterData().categoryBits == SHIELD_BIT ? fixA : fixB;

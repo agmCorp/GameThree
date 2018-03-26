@@ -145,7 +145,6 @@ De igual manera si te moviste al espacio que queda entre el limite del path (en 
 camara avanza y te aplasta pero se traba todo porque no tenes hacia donde escapar. Todo funciona lento por un tiempo, se escucha
 un pitido y despues se destraba a duras penas, pero esta mal eso.
 No se como solucionar eso. Pasa lo mismo cuando moris aplastado por un path y el edge...
-- Si agarro items (o shurikens) reboto un poco en versión escritorio. En la version android no se nota porque sigo moviendo el dedo.
 - se corta el audio al morir..el gruñido se escucha cortado.
 
 VIDEO
