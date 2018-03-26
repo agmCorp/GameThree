@@ -137,7 +137,6 @@ DUDAS Y BUGS
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
-- El enemigo final tira aids muy rapido (creo que en estado shoot). Confirmado!
 - Al morir tengo unos segundos de blik. Le puse que podia chocar con borders, edges and obstacles. No le puse que
 pudiera chocar con path, porque si moris y revivis dentro del charco no podes salir.
 El problema es que luego del blink, si te moviste adrede sobre algo el juego se traba.
