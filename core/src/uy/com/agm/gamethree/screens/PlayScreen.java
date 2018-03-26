@@ -122,8 +122,7 @@ public class PlayScreen extends AbstractScreen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
-        // todo gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 70, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -140,7 +139,10 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
-        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
+
+//        final float ALTURA = 70.0f;
+//        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
+//        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
 
         // Create boundaries
         upperEdge = new Edge(this, true);

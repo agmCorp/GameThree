@@ -48,14 +48,20 @@ https://mrbubblewand.files.wordpress.com/2010/01/magic_004.png
 https://mrbubblewand.files.wordpress.com/2010/02/magic_006.png puede ser
 
 -----------------------------------------------------------------------------------
-Para ir a pelear directo con el enemigo final poner en playscreen:
-        // Initially set our gamcam to be centered correctly at the start (bottom) of the map
-        //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, 75, 0);
+Para ir a pelear directo con el enemigo final poner en playscreen (descomentar lo comentado):
+
+        creator = new B2WorldCreator(this);
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
-        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); // todo
+
+//        final float ALTURA = 70.0f;
+//        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
+//        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
+
+        // Create boundaries
+        upperEdge = new Edge(this, true);
+        bottomEdge = new Edge(this, false);
 
 02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6
 
