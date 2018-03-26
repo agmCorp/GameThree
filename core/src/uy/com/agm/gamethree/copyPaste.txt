@@ -48,44 +48,6 @@ https://mrbubblewand.files.wordpress.com/2010/01/magic_004.png
 https://mrbubblewand.files.wordpress.com/2010/02/magic_006.png puede ser
 
 -----------------------------------------------------------------------------------
-FUNCION SENO
-  private float getNewX(float x, float y, float dt) {
-        return (float) Math.sin(2.0f * y - dt) * Constants.V_WIDTH / Constants.PPM;
-    }
-
-    private Vector2 getNewVelocity(float yActual, float dt) {
-        /*
-        origen = (b2body.getPosition().x, 2body.getPosition().y)
-        destino = (getNewX(b2body.getPosition().x, b2body.getPosition().y, dt), b2body.getPosition().y - dt)
-        destino - origen = ()
-         */
-        velocity = new Vector2();
-        velocity.x = getNewX(b2body.getPosition().x, b2body.getPosition().y, dt) - b2body.getPosition().x;
-        velocity.y = dt;
-        velocity.nor();
-        velocity.x = velocity.x * 4.0f;
-        velocity.y = -velocity.y * 4.0f;
-        return velocity;
-    }
-
-	luego......
-
-	 private void stateAlive(float dt) {
-        b2body.setLinearVelocity(getNewVelocity(b2body.getPosition().y, dt));
-
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyOne may have collided with sth. and therefore it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
-        openFireTime += dt;
-        if (openFireTime > Constants.ENEMYONE_FIRE_DELAY_SECONDS) {
-
 Para ir a pelear directo con el enemigo final poner en playscreen:
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         //gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
@@ -97,11 +59,12 @@ Para ir a pelear directo con el enemigo final poner en playscreen:
 
 02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6
 
-----------------
+-----------------------------------------------------------------------------------
 
 MOVIMIENTOS COMPLEJOS:
 
-1) Para hacer ochos y eso.
+1)
+    Para hacer ochos y eso.
 
     private Vector2 getNewTangentialSpeed(float dt) {
         elapsedTime += dt;
@@ -114,13 +77,12 @@ MOVIMIENTOS COMPLEJOS:
 
         float w = 2 * MathUtils.PI / period;
         tmp.set((!counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), (!counterclockwise ? -1 : 1)*radius * w * MathUtils.cos(w * elapsedTime));
-        //tmp.set((counterclockwise ? -1 : 1)*radius * w * MathUtils.cos(w * elapsedTime),(counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime));
         Gdx.app.debug(TAG, "****" + tmp.x + " " + tmp.y + " ELAPSED_TIME " + elapsedTime);
         return tmp;
     }
 
 2)
-elapsedTime += dt;
+    elapsedTime += dt;
 	float w = 2 * MathUtils.PI / PERIOD_SECONDS;
 
 	float t = elapsedTime;
@@ -140,7 +102,8 @@ elapsedTime += dt;
     private float cos(float x) {
         return MathUtils.cos(x);
     }
-------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 	otra mas linda:
 	x = 3 cos(2wt)cos(wt)
 	y = 3 cos(2wt)sin(wt)
@@ -159,27 +122,10 @@ elapsedTime += dt;
         float y = -3*w*(2*sin(w*t)*sin(2*w*t)-cos(w*t)*cos(2*w*t));
         tmp.set(x, y);
         return tmp;
-------------------------------------------------------------------
-	es el movimiento ese en forma de cometa
+-----------------------------------------------------------------------------------
 
-		solucion final:
+	es el movimiento ese en forma de cometa pero no logro controlar su velocidad lineal
 
-		en el constructor
-		counterclockwise = (b2body.getPosition().x < screen.getGameCam().position.x) ? false : true;
-
-		en el metodo de velocidad:
-
-        // parametrica: t**3-3.2t+2, 2t**2
-        elapsedTime += dt / 3; <----- aca le puse /3 para reducir la velocidad, NO LOGRE HACERLO DE OTRA MANERA (NI USANDO W).
-        float max = 2.497f;
-        float min = -2.497f;
-        float t = (max - min) * elapsedTime + min;
-        float x = (3*t*t - 4.5f) * (counterclockwise ? -1:1);
-        float y = 4 * t;
-        tmp.set(x, y);
-        return tmp;
-
----- lo mejorcito ----
         // parametrica: t**3-3.2t+2, 2t**2
         elapsedTime += dt/5;
         float max = 2.497f;
@@ -197,3 +143,8 @@ elapsedTime += dt;
         return tmp;
 
         pero me niego...no lo voy a hacer asi...lo voy a hacer componiendo y listo porque no tengo control.
+
+-----------------------------------------------------------------------------------
+
+    Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
+    tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));

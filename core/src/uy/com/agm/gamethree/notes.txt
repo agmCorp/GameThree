@@ -1,13 +1,15 @@
 IDEAS
 -----
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
+Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
+los que se van de la pantalla).
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - nuevo item vidas
 - hacer splashscreen
 - enemigo que hay que dispararle mucho para matarlo.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
-EnemyBullet (BoomerangBullet) que contemple el movimiento y una estrategia nueva que cree el objeto pasando BoomerangBullet para que el b2worldcreator lo cree.
-- el enemigo final puede estar acompanado de otros simples.
+EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el b2worldcreator lo cree.
+- el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
 - enemigo final que se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
 - enemigo minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
 centro de la pantalla y se van por arriba (copiarlo de enemyEight).
@@ -15,22 +17,14 @@ centro de la pantalla y se van por arriba (copiarlo de enemyEight).
 - Para el próximo enemigofinal puedo hacer que me siga
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
 - enemigo: nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
-- enemigo: nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas
-- Proximo enemigo volador para evitar trabas: viene de arriba (izquierda o derecha), forma 2 círculos en el centro de la
-pantalla (o en el centro del héroe) y se va por abajo (izquieda o derecha).
-- nuevo enemigo: esqueletos que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan.
-Cuando llegan al edge suben y hacen lo mismo. usar esto: https://graphicriver.net/item/tower-defense-desert-pack/20449683?s_rank=11
-- Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
-        tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
-        Tengo más formular en copyPaste.txt
-tira una rafaga (como flor) de balas y se vuelve a ir como nube asi como vino.
-- enemigo que luego de un rato hace blink y desaparece..y vuelve a aparecer. disparando siempre.
+- enemigo: nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
+una rafaga (como flor) de balas, luego se transforma en nube y se va.
+- enemigo que luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
 
 PROXIMOS PASOS
 --------------
 - factor handycap por nivel (solo para los enemigos que reuse?)
 - help de escudo y help de tough
-- AL FIN PUEDO COMENZAR CON EL NIVEL 2
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
@@ -56,13 +50,12 @@ eight - bicho verde cometa
 
 PENDIENTES
 ----------
-- Tengo un escudo nuevo en gif ahi...no parece muy lindo
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
 - Ver si es fácil hacer una animación en scen2d para poner las letras que encontré y capaz el help inicial.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
-- ver si en modo pausa me conviene sacar el hud, seguro la healthbar.
+- ver si en modo pausa me conviene sacar el hud o la healthbar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
@@ -140,7 +133,7 @@ DUDAS Y BUGS
 ------------
 - El back si lo dejo apretado hace ruido.
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
-- Manejo de memoria y uso de Vector2 y uso de Lables en las pantallas.
+- Manejo de memoria y uso de Vector2 y uso de Labels en las pantallas.
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
@@ -154,7 +147,6 @@ un pitido y despues se destraba a duras penas, pero esta mal eso.
 No se como solucionar eso. Pasa lo mismo cuando moris aplastado por un path y el edge...
 - Si agarro items (o shurikens) reboto un poco en versión escritorio. En la version android no se nota porque sigo moviendo el dedo.
 - se corta el audio al morir..el gruñido se escucha cortado.
-- Cuando se me acaben las category_bits que hago? ver mi comentario sobre eso en el codigo (world.setContactFilter(...))
 
 VIDEO
 -----
