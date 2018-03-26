@@ -70,4 +70,8 @@ public class Edge {
     public void start() {
         b2body.setLinearVelocity(0.0f, PlayScreen.GAMECAM_VELOCITY);
     }
+
+    public void speedUp() {
+        b2body.setLinearVelocity(0.0f, PlayScreen.GAMECAM_VELOCITY * 5);
+    }
 }

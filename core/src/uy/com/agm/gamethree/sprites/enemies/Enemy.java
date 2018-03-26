@@ -90,6 +90,11 @@ public abstract class Enemy extends Sprite {
         return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
+    public void terminate() {
+        world.destroyBody(b2body);
+        currentState = State.DEAD;
+    }
+
     protected void checkBoundaries() {
         /* When an Enemy is on camera, it activates (it moves and can collide).
         * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives

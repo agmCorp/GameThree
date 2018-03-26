@@ -28,7 +28,7 @@ public class LevelFactory {
 
     // Constants
     private static final int TIMER_LEVEL_ONE = 400;
-    private static final int TIMER_LEVEL_TWO = 350;
+    private static final int TIMER_LEVEL_TWO = 460;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
