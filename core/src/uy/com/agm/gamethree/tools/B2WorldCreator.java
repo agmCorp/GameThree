@@ -340,24 +340,26 @@ public class B2WorldCreator {
     }
 
     public void printDebugStatus() {
-        arrayMapDebug.clear();
-        String key;
-        String value;
+        if (PlayScreen.DEBUG_MODE) {
+            arrayMapDebug.clear();
+            String key;
+            String value;
 
-        for(Enemy enemy : getEnemies()) {
-            key = enemy.whoAmI();
-            value = arrayMapDebug.get(key);
-            value = value == null ? enemy.getId() : value + ", " + enemy.getId();
-            arrayMapDebug.put(key, value);
+            for (Enemy enemy : getEnemies()) {
+                key = enemy.whoAmI();
+                value = arrayMapDebug.get(key);
+                value = value == null ? enemy.getId() : value + ", " + enemy.getId();
+                arrayMapDebug.put(key, value);
+            }
+            Gdx.app.debug(TAG, "**** Objects not disposables ****");
+            Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
+            Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
+            Gdx.app.debug(TAG, "***** Items: " + items.size);
+            Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
+            for (ObjectMap.Entry<String, String> entry : arrayMapDebug.entries()) {
+                Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
+            }
+            Gdx.app.debug(TAG, "*********************************");
         }
-        Gdx.app.debug(TAG, "**** Objects not disposables ****");
-        Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
-        Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
-        Gdx.app.debug(TAG, "***** Items: " + items.size);
-        Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
-        for (ObjectMap.Entry<String, String> entry: arrayMapDebug.entries()) {
-            Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
-        }
-        Gdx.app.debug(TAG, "*********************************");
     }
 }
