@@ -227,7 +227,7 @@ private Shake shake;
 
 Constructor:
 
-    Shake shake = new Shake();
+    shake = new Shake();
 
     private void updateCamera(float dt) {
         // If Hero is dead, we freeze the camera
