@@ -264,3 +264,24 @@ EN HERO:
             shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y);
         }
     }
+
+ATENCION, PARA MI LAS LINEAS DESPUES DE SHAKE.UPDATE NO IRIAN:
+       gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
+
+        // Update our gamecam with correct coordinates after changes
+        gameCam.update();
+LO QUE SE VE QUE PROBE YO, ERA UN SHAKE Y LUEGO VOLVER AL CENTRO.
+
+LO QUE ESTA FALTANDO EN ESTE ALGORITMO ES LO QUE DICE ACA EN INGLES:
+Once the shake is completed, you then have to ensure you return to the original screen position, or your camera will be out of sync and things won’t look right anymore. I ended up saving the original position of the camera in a baseX and baseY variables and then when the shaking was completed, you simply assign them back to the camera and update it.
+
+ENTONCES PARA MI LO QUE FALTA ES SIMPLEMENTE EN EL CODIGO DEL PIBE ESTE:
+if (shakeDuration > 0){
+BLA BLA
+} else {
+     camera.position.x = center.x;
+     camera.position.y = center.y;
+     camera.update();
+}
+
+IGUAL SEGUN DICE POR AHI, HACER ESTO PROVOCA UN JUMP NOTORIO CUANDO FINALIZA EL SHAKE (https://www.netprogs.com/libgdx-screen-shaking/)
