@@ -188,6 +188,10 @@ HERRAMIENTAS
 https://developer.android.com/topic/performance/reduce-apk-size.html
 - https://cloudconvert.com/svg-to-png: svg to png converter
 - https://bulkresizephotos.com: para redimensionar imagenes batch
+- Tiny png api key 7yaS9nq0e-PmOCid1k6me6gk_bjTamPq (para usar en Texture Packer)
+También lo puedo usar directo en https://tinypng.com/ para imágenes menores a 5 megas.
+Para imágenes más pesadas usar curl. Ver "lecciones aprendidas 24".
+
 
 LECCIONES APRENDIDAS
 --------------------
@@ -484,6 +488,32 @@ LECCIONES APRENDIDAS
 
     (Max - Min) * random(0 to 1) + Min = random(Min to Max)
 
+24)
+    El tamaño grande del apk se debe principalmente a las imágenes y al audio.
+    Para comprimir las imágenes usar Texture Packer seleccionando "Compression TinyPNG".
+    Para usarlo debo tener una key de developer (7yaS9nq0e-PmOCid1k6me6gk_bjTamPq). La conseguí yendo
+    al sitio https://tinypng.com/developers y registrando mi direccion de correo. Te envian un mail
+    en donde podes ver cuantas imágenes llevas comprimidas (maximo 500 por mes): https://tinypng.com/dashboard/developers
+    Para reducir background.png no lo puedo hacer por la web de tinypng.com porque es muy pesada.
+    Utilizo curl para poder usar la api como servicio:
+    C:\Alvaro\Develop\Android\20171202\Texturepacker\curl-7.59.0\I386>enviarImagen.bat background.png
+    Eso después de un rato genera esta salida:
+
+    C:\Alvaro\Develop\Android\20171202\Texturepacker\curl-7.59.0\I386>curl --user api:7yaS9nq0e-PmOCid1k6me6gk_bjTamPq --data-binary @background.png -i https://api.tinify.com/shrink
+    HTTP/1.1 100 Continue
+
+    HTTP/1.1 201 Created
+    Date: Tue, 27 Mar 2018 00:38:42 GMT
+    Content-Type: application/json
+    Content-Length: 203
+    Connection: keep-alive
+    Compression-Count: 7
+    Cache-Control: no-cache
+    Location: https://api.tinify.com/output/htkrx9ru6pjp1heyz4q5grx6egk7bxmq
+
+    {"input":{"size":7833078,"type":"image/png"},"output":{"size":1351755,"type":"image/png","width":2048,"height":2048,"ratio":0.1726,"url":"https://api.tinify.com/output/htkrx9ru6pjp1heyz4q5grx6egk7bxmq"}}
+
+    Entonces si voy a la url que alli dice (https://api.tinify.com/output/htkrx9ru6pjp1heyz4q5grx6egk7bxmq) puedo bajar mi imagen reducida.
 IOS
 ---
 xcode para programar en objectiveC o en swift.
