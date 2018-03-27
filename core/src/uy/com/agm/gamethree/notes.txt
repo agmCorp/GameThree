@@ -23,8 +23,9 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
+- para terminar el nivel me faltan las silverbullets y los coins.
+- el coin deberia ser random con random puntaje, como hice las powerboxes
 - factor handycap por nivel (solo para los enemigos que reuse?)
-- help de escudo y help de tough
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
