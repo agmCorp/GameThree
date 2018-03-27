@@ -160,11 +160,15 @@ shake camera when shooting
 
 NUEVA CLASE:
 
-package uy.com.agm.gamethree.screens;
+package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import java.util.Random;
+
+/**
+ * Created by AGM on 3/27/2018.
+ */
 
 public class Shake {
     float[] samples;
@@ -174,7 +178,7 @@ public class Shake {
 
     int duration = 1; // In seconds, make longer if you want more variation
     int frequency = 35; // hertz
-    float amplitude = 0.1f; // how much you want to shake
+    float amplitude = 0.2f; // how much you want to shake
     boolean falloff = true; // if the shake should decay as it expires
 
     int sampleCount;
@@ -208,8 +212,11 @@ public class Shake {
 
             camera.position.x = center.x + deltaX * amplitude * (falloff ? Math.min(shakeDuration, 1f) : 1f);
             camera.position.y = center.y + deltaY * amplitude * (falloff ? Math.min(shakeDuration, 1f) : 1f);
-            camera.update();
+        } else {
+            camera.position.x = center.x;
+            camera.position.y = center.y;
         }
+        camera.update();
     }
 
     /**
@@ -239,15 +246,8 @@ Constructor:
             stopEdges();
         }
 
-        // Our camera is relative to the edges
-        //gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
-
+        // ACA PUSE 2.4 FUEGO, CAMBIAR
         shake.update(dt, gameCam, new Vector2(2.4f, upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2));
-
-        gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
-
-        // Update our gamecam with correct coordinates after changes
-        gameCam.update();
 
         // Tell our renderer to draw only what our camera can see in our game world.
         renderer.setView(gameCam);
@@ -265,23 +265,9 @@ EN HERO:
         }
     }
 
-ATENCION, PARA MI LAS LINEAS DESPUES DE SHAKE.UPDATE NO IRIAN:
-       gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
-
-        // Update our gamecam with correct coordinates after changes
-        gameCam.update();
-LO QUE SE VE QUE PROBE YO, ERA UN SHAKE Y LUEGO VOLVER AL CENTRO.
-
-LO QUE ESTA FALTANDO EN ESTE ALGORITMO ES LO QUE DICE ACA EN INGLES:
-Once the shake is completed, you then have to ensure you return to the original screen position, or your camera will be out of sync and things won’t look right anymore. I ended up saving the original position of the camera in a baseX and baseY variables and then when the shaking was completed, you simply assign them back to the camera and update it.
-
-ENTONCES PARA MI LO QUE FALTA ES SIMPLEMENTE EN EL CODIGO DEL PIBE ESTE:
-if (shakeDuration > 0){
-BLA BLA
-} else {
-     camera.position.x = center.x;
-     camera.position.y = center.y;
-     camera.update();
-}
+Once the shake is completed, you then have to ensure you return to the original screen position,
+or your camera will be out of sync and things won’t look right anymore.
+I ended up saving the original position of the camera in a baseX and baseY variables and then when the
+shaking was completed, you simply assign them back to the camera and update it.
 
 IGUAL SEGUN DICE POR AHI, HACER ESTO PROVOCA UN JUMP NOTORIO CUANDO FINALIZA EL SHAKE (https://www.netprogs.com/libgdx-screen-shaking/)
