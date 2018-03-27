@@ -23,6 +23,8 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
+- IMPORTANTE: COMO AHORA TENGO SHAKE CAPAZ ME CONVIENE EN ENEMIGO BEAM, NO PONER 0, SINO LA FORMULA
+CAM.X - WIDTH / 2
 - El enemigo7 deberia ser mas chico cuando se clona. Para ello modificar B2WorldCreator.handleCreatingActors(), cuando
 creo EnemySeven hacerlo con otro constructor que setee otro tamano en setbounds. Facilisimo. Achicar el radius tambien y
 ver de hacerlo mas rapido o ver...
