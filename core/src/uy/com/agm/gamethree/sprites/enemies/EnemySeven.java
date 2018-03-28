@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -24,8 +25,9 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class EnemySeven extends Enemy {
     private static final String TAG = EnemySeven.class.getName();
 
-    // Constants (meters = pixels * resizeFactor / PPM)
+    // Constants
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float RESIZE_FACTOR = 0.5f;
     private static final float VELOCITY_X = 3.0f;
     private static final float VELOCITY_Y = -3.0f;
     private static final float FIRE_DELAY_SECONDS = 1.0f;
@@ -40,6 +42,7 @@ public class EnemySeven extends Enemy {
     private Animation explosionAnimation;
     private float changeHorizontalTime;
     private float changeVerticalTime;
+    private boolean isTiny;
 
     public EnemySeven(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -49,7 +52,11 @@ public class EnemySeven extends Enemy {
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
+        if (isTiny) {
+            setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS * RESIZE_FACTOR, AssetEnemySeven.HEIGHT_METERS * RESIZE_FACTOR);
+        } else {
+            setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
+        }
 
         stateTime = 0;
         velocity.set(0, VELOCITY_Y);
@@ -59,6 +66,15 @@ public class EnemySeven extends Enemy {
 
     @Override
     protected void defineEnemy() {
+        float circleShapeRadiusMeters;
+        if (object.getProperties().containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
+            circleShapeRadiusMeters = CIRCLE_SHAPE_RADIUS_METERS;
+            isTiny = false;
+        } else {
+            circleShapeRadiusMeters = CIRCLE_SHAPE_RADIUS_METERS * RESIZE_FACTOR;
+            isTiny = true;
+        }
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -66,7 +82,7 @@ public class EnemySeven extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        shape.setRadius(circleShapeRadiusMeters);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.ITEM_BIT |
