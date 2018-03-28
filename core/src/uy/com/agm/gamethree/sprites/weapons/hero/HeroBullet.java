@@ -99,8 +99,7 @@ public class HeroBullet extends Weapon {
     protected void stateOnTarget(float dt) {
         world.destroyBody(b2body);
         setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
-        //setRegion(muzzleFlashImpactFX);
-        setRegion(Assets.getInstance().getEnemyOne().getEnemyOneStand());
+        setRegion(muzzleFlashImpactFX);
         currentState = State.IMPACT;
     }
 
