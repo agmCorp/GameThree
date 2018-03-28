@@ -62,16 +62,21 @@ public class Shaker {
     }
 
     public void shake(float duration) {
+        // We ignore the shake if it is shorter or equal than the remainder shake
         if (duration > shakeDuration) {
-            amplitude = DEFAULT_AMPLITUDE_METERS;
-            shakeDuration = duration;
+            performShake(DEFAULT_AMPLITUDE_METERS, duration);
         }
     }
 
     public void shake(float amplitude, float duration) {
+        // We ignore the shake if it is shorter or equal than the remainder shake
         if (duration > shakeDuration) {
-            this.amplitude = amplitude;
-            shakeDuration = duration;
+            performShake(amplitude, duration);
         }
+    }
+
+    private void performShake(float amplitude, float duration) {
+        this.amplitude = amplitude;
+        shakeDuration = duration;
     }
 }
