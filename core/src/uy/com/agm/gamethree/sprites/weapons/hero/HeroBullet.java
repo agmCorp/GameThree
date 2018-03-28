@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -19,6 +20,8 @@ public class HeroBullet extends Weapon {
     private static final String TAG = HeroBullet.class.getName();
 
     private float stateTime;
+    private boolean muzzleFlash;
+    private TextureRegion muzzleFlashFX;
     private Animation heroBulletAnimation;
     private Vector2 tmp; // Temp GC friendly vector
 
@@ -36,6 +39,8 @@ public class HeroBullet extends Weapon {
         heroBulletAnimation = animation;
         stateTime = 0;
         currentState = State.SHOT;
+        muzzleFlash = false;
+        muzzleFlashFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlash();
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -72,8 +77,13 @@ public class HeroBullet extends Weapon {
         // Update our Sprite to correspond with the position of our Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
-        setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        if (!muzzleFlash) {
+            muzzleFlash = true;
+            setRegion(muzzleFlashFX);
+        } else {
+            setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
+        }
     }
 
     @Override
