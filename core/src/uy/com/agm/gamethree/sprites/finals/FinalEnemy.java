@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetSilverBullet;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
@@ -110,6 +111,11 @@ public abstract class FinalEnemy extends Sprite {
 
                 // Fight message
                 screen.getHud().showFightMessage();
+
+                // Destroy the surviving enemies
+                for (Enemy enemy : screen.getCreator().getEnemies()) {
+                    enemy.terminate();
+                }
 
                 // Enable shooting
                 screen.getPlayer().enableShooting();
