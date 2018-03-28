@@ -21,14 +21,16 @@ public class AssetHeroBullet {
     public static final float MUZZLE_FLASH_HEIGHT_METERS = 192.0f * 0.6f / PlayScreen.PPM;
 
     private TextureRegion heroBulletStand;
-    private TextureRegion heroBulletMuzzleFlash;
+    private TextureRegion heroBulletMuzzleFlashShot;
+    private TextureRegion heroBulletMuzzleFlashImpact;
     private Animation heroBulletAnimation;
 
     public AssetHeroBullet(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
         heroBulletStand = atlas.findRegion("heroBullet", 1);
-        heroBulletMuzzleFlash = atlas.findRegion("muzzleFlash");
+        heroBulletMuzzleFlashShot = atlas.findRegion("heroBulletMuzzleFlashShot");
+        heroBulletMuzzleFlashImpact = atlas.findRegion("heroBulletMuzzleFlashImpact");
 
         // Animation
         regions = atlas.findRegions("heroBullet");
@@ -40,8 +42,12 @@ public class AssetHeroBullet {
         return heroBulletStand;
     }
 
-    public TextureRegion getHeroBulletMuzzleFlash() {
-        return heroBulletMuzzleFlash;
+    public TextureRegion getHeroBulletMuzzleFlashShot() {
+        return heroBulletMuzzleFlashShot;
+    }
+
+    public TextureRegion getHeroBulletMuzzleFlashImpact() {
+        return heroBulletMuzzleFlashImpact;
     }
 
     public Animation getHeroBulletAnimation() {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -18,24 +19,34 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class EnemyBullet extends Weapon {
     private static final String TAG = EnemyBullet.class.getName();
 
+    private float width;
+    private float height;
     private float stateTime;
+    private boolean showMuzzleFlashShot;
+    private TextureRegion muzzleFlashShotFX;
+    private TextureRegion muzzleFlashImpactFX;
     private Animation enemyBulletAnimation;
     private Vector2 tmp; // Temp GC friendly vector
 
     public EnemyBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
         super(screen, x, y, circleShapeRadius);
+        this.width = width;
+        this.height = height;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
         // Setbounds is the one that determines the size of the EnemyBullet's drawing on the screen
-        setBounds(getX(), getY(), width, height);
+        setBounds(getX(), getY(), Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_HEIGHT_METERS);
 
         velocity.set(velocityX, velocityY);
         setRotation(angle);
         enemyBulletAnimation = animation;
         stateTime = 0;
         currentState = State.SHOT;
+        showMuzzleFlashShot = true;
+        muzzleFlashShotFX = Assets.getInstance().getEnemyBullet().getEnemyBulletMuzzleFlashShot();
+        muzzleFlashImpactFX = Assets.getInstance().getEnemyBullet().getEnemyBulletMuzzleFlashImpact();
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -72,14 +83,24 @@ public class EnemyBullet extends Weapon {
         // Update our Sprite to correspond with the position of our Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
-        setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTime, true));
-        stateTime += dt;
+        if (showMuzzleFlashShot) {
+            setRegion(muzzleFlashShotFX);
+            showMuzzleFlashShot = false;
+        } else {
+            if (stateTime == 0) { // Animation starts
+                setBounds(getX(), getY(), width, height);
+            }
+            setRegion((TextureRegion) enemyBulletAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
+        }
     }
 
     @Override
     protected void stateOnTarget(float dt) {
         world.destroyBody(b2body);
-        currentState = State.FINISHED;
+        setBounds(getX(), getY(), Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_HEIGHT_METERS);
+        setRegion(muzzleFlashImpactFX);
+        currentState = State.IMPACT;
     }
 
     @Override

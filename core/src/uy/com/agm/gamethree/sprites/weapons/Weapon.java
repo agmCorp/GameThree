@@ -26,7 +26,7 @@ public abstract class Weapon extends Sprite {
     protected Vector2 velocity;
 
     protected enum State {
-        SHOT, ONTARGET, FINISHED
+        SHOT, ONTARGET, IMPACT, FINISHED
     }
     protected State currentState;
 
@@ -94,6 +94,9 @@ public abstract class Weapon extends Sprite {
             case ONTARGET:
                 stateOnTarget(dt);
                 break;
+            case IMPACT:
+                currentState = State.FINISHED;
+                break;
             case FINISHED:
                 break;
             default:
@@ -104,7 +107,7 @@ public abstract class Weapon extends Sprite {
 
     @Override
     public void draw(Batch batch) {
-        if (currentState == State.SHOT) {
+        if (currentState != State.FINISHED) {
             super.draw(batch);
         }
     }

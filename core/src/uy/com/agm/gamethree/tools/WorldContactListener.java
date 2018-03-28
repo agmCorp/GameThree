@@ -127,8 +127,13 @@ public class WorldContactListener implements ContactListener {
 
             // Hero - Enemy's weapon
             case HERO_BIT | ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
-                ((Hero) fixC.getUserData()).onDead();
+                if (fixA.getFilterData().categoryBits == HERO_BIT) {
+                    ((Hero) fixA.getUserData()).onDead();
+                    ((Weapon) fixB.getUserData()).onTarget();
+                } else {
+                    ((Hero) fixB.getUserData()).onDead();
+                    ((Weapon) fixA.getUserData()).onTarget();
+                }
                 break;
 
             // HeroTough - Enemy's weapon

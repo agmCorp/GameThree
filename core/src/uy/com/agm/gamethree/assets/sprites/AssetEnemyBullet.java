@@ -17,14 +17,20 @@ public class AssetEnemyBullet {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = 192.0f * 0.3f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 192.0f  * 0.3f / PlayScreen.PPM;
+    public static final float MUZZLE_FLASH_WIDTH_METERS = 192.0f * 0.6f / PlayScreen.PPM;
+    public static final float MUZZLE_FLASH_HEIGHT_METERS = 192.0f * 0.6f / PlayScreen.PPM;
 
     private TextureRegion enemyBulletStand;
+    private TextureRegion enemyBulletMuzzleFlashShot;
+    private TextureRegion enemyBulletMuzzleFlashImpact;
     private Animation enemyBulletAnimation;
 
     public AssetEnemyBullet(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
 
         enemyBulletStand = atlas.findRegion("enemyBullet", 1);
+        enemyBulletMuzzleFlashShot = atlas.findRegion("enemyBulletMuzzleFlashShot");
+        enemyBulletMuzzleFlashImpact = atlas.findRegion("enemyBulletMuzzleFlashImpact");
 
         // Animation
         regions = atlas.findRegions("enemyBullet");
@@ -34,6 +40,14 @@ public class AssetEnemyBullet {
 
     public TextureRegion getEnemyBulletStand() {
         return enemyBulletStand;
+    }
+
+    public TextureRegion getEnemyBulletMuzzleFlashShot() {
+        return enemyBulletMuzzleFlashShot;
+    }
+
+    public TextureRegion getEnemyBulletMuzzleFlashImpact() {
+        return enemyBulletMuzzleFlashImpact;
     }
 
     public Animation getEnemyBulletAnimation() {

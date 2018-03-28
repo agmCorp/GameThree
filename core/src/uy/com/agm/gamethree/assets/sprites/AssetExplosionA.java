@@ -15,8 +15,8 @@ public class AssetExplosionA {
     private static final String TAG = AssetExplosionA.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 167.0f * 0.5f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 167.0f * 0.5f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 167.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 167.0f * 0.8f / PlayScreen.PPM;
 
     private TextureRegion explosionAStand;
     private Animation explosionAAnimation;

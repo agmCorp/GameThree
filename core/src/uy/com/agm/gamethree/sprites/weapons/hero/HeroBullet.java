@@ -22,8 +22,9 @@ public class HeroBullet extends Weapon {
     private float width;
     private float height;
     private float stateTime;
-    private boolean muzzleFlash;
-    private TextureRegion muzzleFlashFX;
+    private boolean showMuzzleFlashShot;
+    private TextureRegion muzzleFlashShotFX;
+    private TextureRegion muzzleFlashImpactFX;
     private Animation heroBulletAnimation;
     private Vector2 tmp; // Temp GC friendly vector
 
@@ -43,8 +44,9 @@ public class HeroBullet extends Weapon {
         heroBulletAnimation = animation;
         stateTime = 0;
         currentState = State.SHOT;
-        muzzleFlash = false;
-        muzzleFlashFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlash();
+        showMuzzleFlashShot = true;
+        muzzleFlashShotFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashShot();
+        muzzleFlashImpactFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashImpact();
 
         // Temp GC friendly vector
         tmp = new Vector2();
@@ -81,9 +83,9 @@ public class HeroBullet extends Weapon {
         // Update our Sprite to correspond with the position of our Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
-        if (!muzzleFlash) {
-            muzzleFlash = true;
-            setRegion(muzzleFlashFX);
+        if (showMuzzleFlashShot) {
+            setRegion(muzzleFlashShotFX);
+            showMuzzleFlashShot = false;
         } else {
             if (stateTime == 0) { // Animation starts
                 setBounds(getX(), getY(), width, height);
@@ -96,7 +98,10 @@ public class HeroBullet extends Weapon {
     @Override
     protected void stateOnTarget(float dt) {
         world.destroyBody(b2body);
-        currentState = State.FINISHED;
+        setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
+        //setRegion(muzzleFlashImpactFX);
+        setRegion(Assets.getInstance().getEnemyOne().getEnemyOneStand());
+        currentState = State.IMPACT;
     }
 
     @Override
