@@ -102,6 +102,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_SQUISH = "audio/sounds/squish.ogg";
     public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
     public static final String FX_FILE_BEAM = "audio/sounds/finalEnemyPowerUp.ogg";
+    public static final String FX_FILE_PUM = "audio/sounds/pum.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -229,6 +230,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_APPLAUSE, Sound.class);
         assetManager.load(FX_FILE_SQUISH, Sound.class);
         assetManager.load(FX_FILE_FROZEN, Sound.class);
+        assetManager.load(FX_FILE_PUM, Sound.class);
     }
 
     private void loadMusic() {

@@ -28,6 +28,7 @@ public class EnemyFour extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
+    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float DENSITY = 1000.0f;
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
@@ -40,6 +41,7 @@ public class EnemyFour extends Enemy {
     private Animation enemyFourAnimation;
     private Animation enemyFourFrozenAnimation;
     private Animation explosionAnimation;
+    private float expScale;
 
     private float b2bodyTargetX;
     private float b2bodyTargetY;
@@ -59,6 +61,7 @@ public class EnemyFour extends Enemy {
         enemyFourAnimation = Assets.getInstance().getEnemyFour().getEnemyFourAnimation();
         enemyFourFrozenAnimation = Assets.getInstance().getEnemyFour().getEnemyFourFrozenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionD().getExplosionDAnimation();
+        expScale = pum ? EXPLOSION_SCALE : 1;
 
         // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
@@ -242,7 +245,11 @@ public class EnemyFour extends Enemy {
         stateTime = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+        if (pum) {
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        } else {
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+        }
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -258,8 +265,8 @@ public class EnemyFour extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionD.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionD.HEIGHT_METERS / 2,
-                        AssetExplosionD.WIDTH_METERS, AssetExplosionD.HEIGHT_METERS);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionD.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionD.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionD.WIDTH_METERS * expScale, AssetExplosionD.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

@@ -50,6 +50,7 @@ public class AssetSounds {
     private Sound squish;
     private Sound frozen;
     private Sound beam;
+    private Sound pum;
 
     public AssetSounds(AssetManager am) {
         bump = am.get(Assets.FX_FILE_BUMP, Sound.class);
@@ -90,6 +91,7 @@ public class AssetSounds {
         squish = am.get(Assets.FX_FILE_SQUISH, Sound.class);
         frozen = am.get(Assets.FX_FILE_FROZEN, Sound.class);
         beam = am.get(Assets.FX_FILE_BEAM, Sound.class);
+        pum = am.get(Assets.FX_FILE_PUM, Sound.class);
     }
 
     public Sound getBump() {
@@ -242,5 +244,9 @@ public class AssetSounds {
 
     public Sound getBeam() {
         return beam;
+    }
+
+    public Sound getPum() {
+        return pum;
     }
 }

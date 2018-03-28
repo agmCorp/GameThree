@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -29,13 +30,11 @@ public abstract class Enemy extends Sprite {
 
     // Constants
     private static final float MARGIN_METERS = 3.0f;
+    private static final float RANDOM_EXPLOSION_PROB = 0.5f;
 
     protected World world;
     protected PlayScreen screen;
     protected Body b2body;
-
-    private ShootContext shootContext;
-    private boolean openFire;
 
     protected Vector2 velocity;
     protected Vector2 tmp; // Temp GC friendly vector
@@ -46,11 +45,15 @@ public abstract class Enemy extends Sprite {
 
     protected State currentState;
     protected MapObject object;
-    private int id;
+    protected boolean pum;
+
+    private ShootContext shootContext;
+    private boolean openFire;
+    private int tiledMapId;
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
-        this.id = object.getProperties().get("id", 0, Integer.class);
+        this.tiledMapId = object.getProperties().get("tiledMapId", 0, Integer.class);
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
@@ -79,10 +82,11 @@ public abstract class Enemy extends Sprite {
         // By default this Enemy doesn't interact in our world
         b2body.setActive(false);
         currentState = State.INACTIVE;
+        pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
     }
 
-    public String getId() {
-        return String.valueOf(id);
+    public String getTiledMapId() {
+        return String.valueOf(tiledMapId);
     }
 
     // This Enemy doesn't have any b2body

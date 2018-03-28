@@ -348,7 +348,7 @@ public class B2WorldCreator {
             for (Enemy enemy : getEnemies()) {
                 key = enemy.whoAmI();
                 value = arrayMapDebug.get(key);
-                value = value == null ? enemy.getId() : value + ", " + enemy.getId();
+                value = value == null ? enemy.getTiledMapId() : value + ", " + enemy.getTiledMapId();
                 arrayMapDebug.put(key, value);
             }
             Gdx.app.debug(TAG, "**** Objects not disposables ****");
