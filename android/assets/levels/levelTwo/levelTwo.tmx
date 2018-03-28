@@ -73,7 +73,7 @@
   </object>
   <object id="1755" x="401.333" y="7777.33" width="32" height="32">
    <properties>
-    <property name="powerThree" type="int" value="7"/>
+    <property name="powerThree" type="int" value="700"/>
     <property name="strength" type="int" value="3"/>
    </properties>
   </object>

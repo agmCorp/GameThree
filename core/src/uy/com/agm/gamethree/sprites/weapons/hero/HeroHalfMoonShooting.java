@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -24,9 +25,10 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
     private static final float MANUAL_FIRE_DELAY_SECONDS = 0.1f;
-    private static final float BULLET_CIRCLESHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
     private static final float BULLET_VELOCITY_X = 0.0f;
     private static final float BULLET_VELOCITY_Y = 7.0f;
+    private static final float RANDOM_OFFSET = 0.8f;
 
     private PlayScreen screen;
     private int numberBullets;
@@ -95,17 +97,17 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             AssetHeroBullet.HEIGHT_METERS,
                             HeroDefaultShooting.DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
-                            BULLET_VELOCITY_X,
-                            BULLET_VELOCITY_Y,
+                            BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
+                            BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                             Assets.getInstance().getHeroBullet().getHeroBulletAnimation());
                 } else {
                     createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
                             AssetBulletA.BULLET_WIDTH_METERS,
                             AssetBulletA.BULLET_HEIGHT_METERS,
-                            BULLET_CIRCLESHAPE_RADIUS_METERS,
+                            BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
-                            BULLET_VELOCITY_X,
-                            BULLET_VELOCITY_Y,
+                            BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
+                            BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                             Assets.getInstance().getBulletA().getBulletAAnimation());
                 }
                 // Sound FX

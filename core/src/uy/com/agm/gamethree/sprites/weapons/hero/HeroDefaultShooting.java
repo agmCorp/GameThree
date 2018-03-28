@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.sprites.weapons.hero;
 
+import com.badlogic.gdx.math.MathUtils;
+
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetSilverBullet;
@@ -24,6 +26,7 @@ public class HeroDefaultShooting implements IShootStrategy {
     public static final float DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 15.0f / PlayScreen.PPM;
     private static final float DEFAULT_BULLET_AUTOMATIC_FIRE_DELAY_SECONDS = 0.33f;
     private static final float DEFAULT_BULLET_MANUAL_FIRE_DELAY_SECONDS = 0.1f;
+    private static final float RANDOM_OFFSET = 0.8f;
 
     // SilverBullet (meters = pixels * resizeFactor / PPM)
     public static final float SILVER_BULLET_VELOCITY_X = 0.0f;
@@ -86,8 +89,8 @@ public class HeroDefaultShooting implements IShootStrategy {
                     AssetHeroBullet.HEIGHT_METERS,
                     DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                     0,
-                    DEFAULT_BULLET_VELOCITY_X,
-                    DEFAULT_BULLET_VELOCITY_Y,
+                    DEFAULT_BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
+                    DEFAULT_BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                     Assets.getInstance().getHeroBullet().getHeroBulletAnimation(),
                     HeroBullet.class));
             // Sound FX
