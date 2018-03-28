@@ -19,6 +19,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class HeroBullet extends Weapon {
     private static final String TAG = HeroBullet.class.getName();
 
+    private float width;
+    private float height;
     private float stateTime;
     private boolean muzzleFlash;
     private TextureRegion muzzleFlashFX;
@@ -27,12 +29,14 @@ public class HeroBullet extends Weapon {
 
     public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
         super(screen, x, y, circleShapeRadius);
+        this.width = width;
+        this.height = height;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
         // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
-        setBounds(getX(), getY(), width, height);
+        setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
 
         velocity.set(velocityX, velocityY);
         setRotation(angle);
@@ -81,6 +85,9 @@ public class HeroBullet extends Weapon {
             muzzleFlash = true;
             setRegion(muzzleFlashFX);
         } else {
+            if (stateTime == 0) { // Animation starts
+                setBounds(getX(), getY(), width, height);
+            }
             setRegion((TextureRegion) heroBulletAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
         }

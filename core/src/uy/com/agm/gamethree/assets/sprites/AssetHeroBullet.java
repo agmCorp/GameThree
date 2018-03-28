@@ -17,6 +17,8 @@ public class AssetHeroBullet {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = 192.0f * 0.6f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 192.0f * 0.6f / PlayScreen.PPM;
+    public static final float MUZZLE_FLASH_WIDTH_METERS = 192.0f * 0.6f / PlayScreen.PPM;
+    public static final float MUZZLE_FLASH_HEIGHT_METERS = 192.0f * 0.6f / PlayScreen.PPM;
 
     private TextureRegion heroBulletStand;
     private TextureRegion heroBulletMuzzleFlash;
