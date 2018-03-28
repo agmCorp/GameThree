@@ -62,11 +62,16 @@ public class Shaker {
     }
 
     public void shake(float duration) {
-        shakeDuration = duration;
+        if (duration > shakeDuration) {
+            amplitude = DEFAULT_AMPLITUDE_METERS;
+            shakeDuration = duration;
+        }
     }
 
     public void shake(float amplitude, float duration) {
-        this.amplitude = amplitude;
-        shakeDuration = duration;
+        if (duration > shakeDuration) {
+            this.amplitude = amplitude;
+            shakeDuration = duration;
+        }
     }
 }
