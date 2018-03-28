@@ -39,6 +39,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final float LINEAR_VELOCITY = 4.0f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 15;
+    private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
+    private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     private static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
@@ -251,6 +253,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
                 break;
             case EXPLODING:
                 stateExploding(dt);
+                screen.getShaker().shake(EXPLOSION_SHAKE_DURATION);
                 break;
             case DEAD:
                 break;
@@ -530,6 +533,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
                 damage--;
                 screen.getHud().decreaseHealth();
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyHit(), FinalEnemy.HIT_MAX_VOLUME);
+                screen.getShaker().shake(HIT_SHAKE_DURATION);
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();
                     currentStateFinalEnemy = StateFinalEnemy.INJURED;

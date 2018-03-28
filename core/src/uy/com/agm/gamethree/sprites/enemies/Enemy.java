@@ -32,7 +32,7 @@ public abstract class Enemy extends Sprite {
     // Constants
     private static final float MARGIN_METERS = 3.0f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
-    private static final int SHAKE_DURATION = 1;
+    private static final float SHAKE_DURATION = 1.0f;
 
     protected World world;
     protected PlayScreen screen;
