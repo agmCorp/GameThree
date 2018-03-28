@@ -32,6 +32,7 @@ public abstract class Enemy extends Sprite {
     // Constants
     private static final float MARGIN_METERS = 3.0f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
+    private static final int SHAKE_DURATION = 1;
 
     protected World world;
     protected PlayScreen screen;
@@ -175,7 +176,7 @@ public abstract class Enemy extends Sprite {
                 case EXPLODING:
                     stateExploding(dt);
                     if (pum) {
-                        screen.getShaker().shake(1);
+                        screen.getShaker().shake(SHAKE_DURATION);
                     }
                     break;
                 case DEAD:
