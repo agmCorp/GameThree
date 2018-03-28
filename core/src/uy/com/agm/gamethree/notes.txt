@@ -24,9 +24,6 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 PROXIMOS PASOS
 --------------
 - hacer una bala grandota y ruidosa con shake capaz
-- El enemigo7 deberia ser mas chico cuando se clona. Para ello modificar B2WorldCreator.handleCreatingActors(), cuando
-creo EnemySeven hacerlo con otro constructor que setee otro tamano en setbounds. Facilisimo. Achicar el radius tambien y
-ver de hacerlo mas rapido o ver...
 - para terminar el nivel me faltan las silverbullets y los coins.
 - el coin deberia ser random con random puntaje, como hice las powerboxes
 - factor handycap por nivel (solo para los enemigos que reuse?)

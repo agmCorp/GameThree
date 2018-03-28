@@ -29,6 +29,7 @@ import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.LevelFactory;
+import uy.com.agm.gamethree.tools.Shaker;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -104,6 +105,9 @@ public class PlayScreen extends AbstractScreen {
     // Final Enemy
     private FinalEnemy finalEnemy;
 
+    // Screen shaker
+    private Shaker shaker;
+
     public PlayScreen(Integer level, Integer score) {
         this.level = level;
         levelCompletedTime = 0;
@@ -166,6 +170,9 @@ public class PlayScreen extends AbstractScreen {
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
+
+        // Screen shaker
+        shaker = new Shaker();
 
         // PlayScreen running
         playScreenState = PlayScreenState.RUNNING;
@@ -308,11 +315,8 @@ public class PlayScreen extends AbstractScreen {
             stopEdges();
         }
 
-        // Our camera is relative to the edges
-        gameCam.position.y = upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2;
-
-        // Update our gamecam with correct coordinates after changes
-        gameCam.update();
+        // Update camera
+        shaker.update(dt, gameCam, new Vector2(gameViewPort.getWorldWidth() / 2, upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2));
 
         // Tell our renderer to draw only what our camera can see in our game world.
         renderer.setView(gameCam);
@@ -340,6 +344,10 @@ public class PlayScreen extends AbstractScreen {
 
     public int getLevel() {
         return level;
+    }
+
+    public Shaker getShaker() {
+        return shaker;
     }
 
     private void render() {

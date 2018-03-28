@@ -19,6 +19,7 @@ import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 
+import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.DEAD;
 import static uy.com.agm.gamethree.sprites.items.Item.OFFSET_METERS;
 
 /**
@@ -30,7 +31,7 @@ public abstract class Enemy extends Sprite {
 
     // Constants
     private static final float MARGIN_METERS = 3.0f;
-    private static final float RANDOM_EXPLOSION_PROB = 0.5f;
+    private static final float RANDOM_EXPLOSION_PROB = 0.2f;
 
     protected World world;
     protected PlayScreen screen;
@@ -91,12 +92,12 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == State.DEAD || currentState == State.EXPLODING;
+        return currentState == DEAD || currentState == State.EXPLODING;
     }
 
     public void terminate() {
         world.destroyBody(b2body);
-        currentState = State.DEAD;
+        currentState = DEAD;
     }
 
     protected void checkBoundaries() {
@@ -119,7 +120,7 @@ public abstract class Enemy extends Sprite {
                     // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
                     if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
                         world.destroyBody(b2body);
-                        currentState = State.DEAD;
+                        currentState = DEAD;
                     }
                 }
             }
@@ -153,7 +154,7 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy can be removed from our game
     public boolean isDisposable() {
-        return currentState == State.DEAD;
+        return currentState == DEAD;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -173,6 +174,9 @@ public abstract class Enemy extends Sprite {
                     break;
                 case EXPLODING:
                     stateExploding(dt);
+                    if (pum) {
+                        screen.getShaker().shake(1);
+                    }
                     break;
                 case DEAD:
                     break;
@@ -197,7 +201,7 @@ public abstract class Enemy extends Sprite {
 
     @Override
     public void draw(Batch batch) {
-        if (currentState != State.DEAD && currentState != State.INACTIVE) {
+        if (currentState != DEAD && currentState != State.INACTIVE) {
             super.draw(batch);
         }
     }

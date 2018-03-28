@@ -289,11 +289,7 @@
    </properties>
   </object>
   <object id="1463" x="144" y="7089" width="32" height="32"/>
-  <object id="1464" x="222.667" y="7149" width="32" height="32">
-   <properties>
-    <property name="enemyBullet" type="int" value="0"/>
-   </properties>
-  </object>
+  <object id="1464" x="222.667" y="7149" width="32" height="32"/>
   <object id="1465" x="308" y="7090.33" width="32" height="32"/>
   <object id="1467" x="368" y="7149" width="32" height="32"/>
   <object id="1471" x="312" y="6949" width="32" height="32"/>
