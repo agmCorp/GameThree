@@ -15,10 +15,11 @@ public class Shaker {
     // Constants
     private static final int SAMPLE_DURATION_SECONDS = 10; // Make longer if you want more variation
     private static final int FREQUENCY_HZ = 35;
-    private static final float AMPLITUDE_METERS = 0.2f;
+    private static final float DEFAULT_AMPLITUDE_METERS = 0.2f;
     private static final boolean FALL_OFF = true; // If the shake should decay as it expires
 
     private float internalTimer;
+    private float amplitude;
     private float shakeDuration;
     private int sampleCount;
     private Random rand;
@@ -26,6 +27,7 @@ public class Shaker {
 
     public Shaker() {
         internalTimer = 0;
+        amplitude = DEFAULT_AMPLITUDE_METERS;
         shakeDuration = 0;
         sampleCount = SAMPLE_DURATION_SECONDS * FREQUENCY_HZ;
         rand = new Random();
@@ -50,8 +52,8 @@ public class Shaker {
             float deltaX = samples[first] * deltaT + samples[second] * (1f - deltaT);
             float deltaY = samples[second] * deltaT + samples[third] * (1f - deltaT);
 
-            camera.position.x = stayCenteredOn.x + deltaX * AMPLITUDE_METERS * (FALL_OFF ? Math.min(shakeDuration, 1f) : 1f);
-            camera.position.y = stayCenteredOn.y + deltaY * AMPLITUDE_METERS * (FALL_OFF ? Math.min(shakeDuration, 1f) : 1f);
+            camera.position.x = stayCenteredOn.x + deltaX * amplitude * (FALL_OFF ? Math.min(shakeDuration, 1f) : 1f);
+            camera.position.y = stayCenteredOn.y + deltaY * amplitude * (FALL_OFF ? Math.min(shakeDuration, 1f) : 1f);
         } else {
             camera.position.x = stayCenteredOn.x;
             camera.position.y = stayCenteredOn.y;
@@ -60,6 +62,11 @@ public class Shaker {
     }
 
     public void shake(float duration) {
+        shakeDuration = duration;
+    }
+
+    public void shake(float amplitude, float duration) {
+        this.amplitude = amplitude;
         shakeDuration = duration;
     }
 }
