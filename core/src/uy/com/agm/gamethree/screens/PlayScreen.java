@@ -426,7 +426,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderHero() {
-        player.draw(game.getBatch());
+        player.draw(game.getBatch());.
     }
 
     private void renderEnemies() {
