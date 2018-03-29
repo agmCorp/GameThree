@@ -177,6 +177,7 @@ public class EnemyTwo extends Enemy {
         initPosY = b2body.getPosition().y - getHeight() / 2;
 
         // Knock back effect
+        b2body.setLinearVelocity(0.0f, 0.0f);
         b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
                 b2body.getPosition().x, b2body.getPosition().y, true);
 
