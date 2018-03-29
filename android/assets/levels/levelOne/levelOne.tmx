@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1305">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1307">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -1202,6 +1202,7 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
+  <object id="1306" x="256" y="7392" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyFour">
   <object id="1248" x="64" y="960" width="32" height="32">

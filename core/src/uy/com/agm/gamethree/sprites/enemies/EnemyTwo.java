@@ -1,11 +1,14 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -30,12 +33,21 @@ public class EnemyTwo extends Enemy {
     private static final float VELOCITY_X = -2.0f;
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final Color KNOCKBACK_COLOR = Color.RED;
+    private static final float KNOCKBACK_SECONDS = 0.2f;
+    private static final float KNOCKBACK_FORCE_X = 1000.0f;
+    private static final float KNOCKBACK_FORCE_Y = 1000.0f;
     private static final int SCORE = 10;
 
     private float stateTime;
     private Animation enemyTwoAnimation;
     private Animation explosionAnimation;
     private float expScale;
+
+    // Knock back effect
+    private boolean knockback;
+    private boolean applyNewFilters;
+    private float kockbackTime;
 
     public EnemyTwo(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -49,6 +61,9 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
 
         stateTime = 0;
+        knockback = false;
+        applyNewFilters = false;
+        kockbackTime = 0;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 
@@ -108,28 +123,57 @@ public class EnemyTwo extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        // Release an item
-        getItemOnHit();
-
-        // Destroy box2D body
-        world.destroyBody(b2body);
-
-        // Explosion animation
-        stateTime = 0;
-
-        // Audio FX and screen shake
-        if (pum) {
-            screen.getShaker().shake(SHAKE_DURATION);
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        if (knockback) {
+            applyNewFilters = true;
+            knockback(dt);
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            // Release an item
+            getItemOnHit();
+
+            // Destroy box2D body
+            world.destroyBody(b2body);
+
+            // Explosion animation
+            stateTime = 0;
+
+            // Audio FX and screen shake
+            if (pum) {
+                screen.getShaker().shake(SHAKE_DURATION);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+            } else {
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            }
+
+            // Set score
+            screen.getHud().addScore(SCORE);
+
+            // Set the new state
+            currentState = State.EXPLODING;
         }
+    }
 
-        // Set score
-        screen.getHud().addScore(SCORE);
+    private void knockback(float dt) {
+        if (applyNewFilters) {
+            // EnemyTwo can't collide with anything
+            Filter filter = new Filter();
+            filter.maskBits = WorldContactListener.NOTHING_BIT;
 
-        // Set the new state
-        currentState = State.EXPLODING;
+            // We set the previous filter in every fixture
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            applyNewFilters = false;
+        }
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true));
+        setColor(KNOCKBACK_COLOR);
+        stateTime += dt;
+
+        kockbackTime += dt;
+        if (kockbackTime > KNOCKBACK_SECONDS) {
+            setColor(Color.WHITE); // Default
+            knockback = false;
+        }
     }
 
     @Override
@@ -167,6 +211,10 @@ public class EnemyTwo extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
+
+        // Knock back effect
+        b2body.applyForce(MathUtils.randomSign() * KNOCKBACK_FORCE_X, KNOCKBACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
+        knockback = true;
     }
 
     @Override
