@@ -55,7 +55,7 @@ public abstract class Enemy extends Sprite {
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
-        this.tiledMapId = object.getProperties().get("tiledMapId", 0, Integer.class);
+        this.tiledMapId = object.getProperties().get("id", 0, Integer.class);
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
@@ -117,13 +117,14 @@ public abstract class Enemy extends Sprite {
                     screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
                 }
             } else {
-//                if (currentState != State.INACTIVE) { // Was on camera...
-//                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
-//                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
-//                        world.destroyBody(b2body);
-//                        currentState = DEAD;
-//                    }
-//                }
+                // If this Enemy is currently playing and is not injured
+                if (currentState != State.INACTIVE && currentState != State.INJURED) {
+                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
+                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
+                        world.destroyBody(b2body);
+                        currentState = DEAD;
+                    }
+                }
             }
         }
     }
