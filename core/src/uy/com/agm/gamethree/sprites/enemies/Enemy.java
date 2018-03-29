@@ -117,13 +117,13 @@ public abstract class Enemy extends Sprite {
                     screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
                 }
             } else {
-                if (currentState != State.INACTIVE) { // Was on camera...
-                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
-                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
-                        world.destroyBody(b2body);
-                        currentState = DEAD;
-                    }
-                }
+//                if (currentState != State.INACTIVE) { // Was on camera...
+//                    // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
+//                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
+//                        world.destroyBody(b2body);
+//                        currentState = DEAD;
+//                    }
+//                }
             }
         }
     }
