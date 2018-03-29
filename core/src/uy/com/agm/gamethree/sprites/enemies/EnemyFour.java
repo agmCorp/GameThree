@@ -63,7 +63,7 @@ public class EnemyFour extends Enemy {
 
     // Knock back effect
     private boolean knockBack;
-    private boolean applyNewFilters;
+    private boolean knockBackStarted;
     private float knockBackTime;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
@@ -99,7 +99,7 @@ public class EnemyFour extends Enemy {
 
         // Knock back effect
         knockBack = false;
-        applyNewFilters = false;
+        knockBackStarted = false;
         knockBackTime = 0;
     }
 
@@ -253,9 +253,6 @@ public class EnemyFour extends Enemy {
 
     private void frozenStateDefrosted(float dt) {
         if (knockBack) {
-            // Knock back effect
-            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
-            applyNewFilters = true;
             knockBack(dt);
         } else {
             // Release an item
@@ -284,16 +281,8 @@ public class EnemyFour extends Enemy {
     }
 
     private void knockBack(float dt) {
-        if (applyNewFilters) {
-            // EnemyFour can't collide with anything
-            Filter filter = new Filter();
-            filter.maskBits = WorldContactListener.NOTHING_BIT;
-
-            // We set the previous filter in every fixture
-            for (Fixture fixture : b2body.getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
-            applyNewFilters = false;
+        if (!knockBackStarted) {
+            initKnockBack();
         }
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyFourAnimation.getKeyFrame(stateTime, true));
@@ -305,6 +294,23 @@ public class EnemyFour extends Enemy {
             setColor(Color.WHITE); // Default
             knockBack = false;
         }
+    }
+
+    private void initKnockBack() {
+        // Knock back effect
+        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
+                b2body.getPosition().x, b2body.getPosition().y, true);
+
+        // EnemyFour can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = WorldContactListener.NOTHING_BIT;
+
+        // We set the previous filter in every fixture
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        knockBackStarted = true;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class EnemyThree extends Enemy {
 
     // Knock back effect
     private boolean knockBack;
-    private boolean applyNewFilters;
+    private boolean knockBackStarted;
     private float knockBackTime;
 
     public EnemyThree(PlayScreen screen, MapObject object) {
@@ -63,7 +63,7 @@ public class EnemyThree extends Enemy {
 
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
         knockBack = false;
-        applyNewFilters = false;
+        knockBackStarted = false;
         knockBackTime = 0;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
@@ -131,9 +131,6 @@ public class EnemyThree extends Enemy {
     @Override
     protected void stateInjured(float dt) {
         if (knockBack) {
-            // Knock back effect
-            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
-            applyNewFilters = true;
             knockBack(dt);
         } else {
             // Release an item
@@ -162,16 +159,8 @@ public class EnemyThree extends Enemy {
     }
 
     private void knockBack(float dt) {
-        if (applyNewFilters) {
-            // EnemyThree can't collide with anything
-            Filter filter = new Filter();
-            filter.maskBits = WorldContactListener.NOTHING_BIT;
-
-            // We set the previous filter in every fixture
-            for (Fixture fixture : b2body.getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
-            applyNewFilters = false;
+        if (!knockBackStarted) {
+            initKnockBack();
         }
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyThreeAnimation.getKeyFrame(stateTime, true));
@@ -183,6 +172,23 @@ public class EnemyThree extends Enemy {
             setColor(Color.WHITE); // Default
             knockBack = false;
         }
+    }
+
+    private void initKnockBack() {
+        // Knock back effect
+        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
+                b2body.getPosition().x, b2body.getPosition().y, true);
+
+        // EnemyThree can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = WorldContactListener.NOTHING_BIT;
+
+        // We set the previous filter in every fixture
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+        }
+
+        knockBackStarted = true;
     }
 
     @Override
