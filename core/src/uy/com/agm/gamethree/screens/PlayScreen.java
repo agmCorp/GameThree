@@ -53,6 +53,9 @@ public class PlayScreen extends AbstractScreen {
     // Box2D Scale(Pixels Per Meter)
     public static final float PPM = 100;
 
+    // Dim screen
+    public static final float DIM_SCREEN_ALPHA = 0.5f;
+
     // Position (y-axis) where the epic fight against the final enemy begins
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
@@ -382,12 +385,11 @@ public class PlayScreen extends AbstractScreen {
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined);
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
-            game.getShapeRenderer().setColor(0, 0, 0, 0.5f);
+            game.getShapeRenderer().setColor(0, 0, 0, DIM_SCREEN_ALPHA);
             game.getShapeRenderer().rect(0, 0, hud.getCamera().viewportWidth, hud.getCamera().viewportHeight);
             game.getShapeRenderer().end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
-
         // Draw hud
         hud.draw();
 
