@@ -40,8 +40,8 @@ public class EnemyFour extends Enemy {
     private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
     private static final float KNOCK_BACK_SECONDS = 0.1f;
-    private static final float KNOCK_BACK_FORCE_X = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
-    private static final float KNOCK_BACK_FORCE_Y = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
+    private static final float KNOCK_BACK_FORCE_X = 1000.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final int SCORE = 35;
 
     private float stateTime;
@@ -308,7 +308,9 @@ public class EnemyFour extends Enemy {
         // We set the previous filter in every fixture
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
+            fixture.setDensity(0.0f);
         }
+        b2body.resetMassData();
 
         knockBackStarted = true;
     }

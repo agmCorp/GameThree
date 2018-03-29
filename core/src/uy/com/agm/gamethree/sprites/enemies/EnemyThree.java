@@ -36,8 +36,8 @@ public class EnemyThree extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 4.0f;
     private static final Color KNOCK_BACK_COLOR = Color.RED;
     private static final float KNOCK_BACK_SECONDS = 0.1f;
-    private static final float KNOCK_BACK_FORCE_X = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
-    private static final float KNOCK_BACK_FORCE_Y = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
+    private static final float KNOCK_BACK_FORCE_X = 1000.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final int SCORE = 20;
 
     private float stateTime;
@@ -186,7 +186,9 @@ public class EnemyThree extends Enemy {
         // We set the previous filter in every fixture
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
+            fixture.setDensity(0.0f);
         }
+        b2body.resetMassData();
 
         knockBackStarted = true;
     }
