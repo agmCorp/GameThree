@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -7,6 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -32,6 +35,10 @@ public class EnemyFive extends Enemy {
     private static final float PERIOD_SECONDS = 2.0f;
     private static final float RADIUS_METERS = 1.3f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
+    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_FORCE_X = 500.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 500.0f;
     private static final int SCORE = 15;
 
     private boolean damage;
@@ -41,6 +48,11 @@ public class EnemyFive extends Enemy {
     private float elapsedTime;
     private Animation enemyFiveAnimation;
     private Animation explosionAnimation;
+
+    // Knock back effect
+    private boolean knockBack;
+    private boolean applyNewFilters;
+    private float knockBackTime;
 
     public EnemyFive(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -57,6 +69,9 @@ public class EnemyFive extends Enemy {
         stateTime = 0;
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
+        knockBack = false;
+        applyNewFilters = false;
+        knockBackTime = 0;
         velocity.set(0.0f, 0.0f); // Initially at rest
     }
 
@@ -117,28 +132,59 @@ public class EnemyFive extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        // Release an item
-        getItemOnHit();
-
-        // Destroy box2D body
-        world.destroyBody(b2body);
-
-        // Explosion animation
-        stateTime = 0;
-
-        // Audio FX and screen shake
-        if (pum) {
-            screen.getShaker().shake(SHAKE_DURATION);
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        if (knockBack) {
+            // Knock back effect
+            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
+            applyNewFilters = true;
+            knockBack(dt);
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            // Release an item
+            getItemOnHit();
+
+            // Destroy box2D body
+            world.destroyBody(b2body);
+
+            // Explosion animation
+            stateTime = 0;
+
+            // Audio FX and screen shake
+            if (pum) {
+                screen.getShaker().shake(SHAKE_DURATION);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+            } else {
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            }
+
+            // Set score
+            screen.getHud().addScore(SCORE);
+
+            // Set the new state
+            currentState = State.EXPLODING;
         }
+    }
 
-        // Set score
-        screen.getHud().addScore(SCORE);
+    private void knockBack(float dt) {
+        if (applyNewFilters) {
+            // EnemyFive can't collide with anything
+            Filter filter = new Filter();
+            filter.maskBits = WorldContactListener.NOTHING_BIT;
 
-        // Set the new state
-        currentState = State.EXPLODING;
+            // We set the previous filter in every fixture
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            applyNewFilters = false;
+        }
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true));
+        setColor(KNOCK_BACK_COLOR);
+        stateTime += dt;
+
+        knockBackTime += dt;
+        if (knockBackTime > KNOCK_BACK_SECONDS) {
+            setColor(Color.WHITE); // Default
+            knockBack = false;
+        }
     }
 
     @Override
@@ -220,6 +266,7 @@ public class EnemyFive extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
+        knockBack = true;
     }
 
     @Override

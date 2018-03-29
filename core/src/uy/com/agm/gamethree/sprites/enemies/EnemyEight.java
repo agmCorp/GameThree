@@ -1,11 +1,14 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -33,6 +36,10 @@ public class EnemyEight extends Enemy {
     private static final float PATH_PERIOD_SECONDS = 1.3f;
     private static final float PATH_RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
+    private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
+    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_FORCE_X = 1000.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final int SCORE = 15;
 
     private boolean damage;
@@ -48,6 +55,11 @@ public class EnemyEight extends Enemy {
     private int sign;
     private float elapsedTime;
 
+    // Knock back effect
+    private boolean knockBack;
+    private boolean applyNewFilters;
+    private float knockBackTime;
+
     public EnemyEight(PlayScreen screen, MapObject object) {
         super(screen, object);
 
@@ -61,6 +73,10 @@ public class EnemyEight extends Enemy {
         enemyEightAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
         expScale = pum ? EXPLOSION_SCALE : 1;
+
+        knockBack = false;
+        applyNewFilters = false;
+        knockBackTime = 0;
 
         path1 = true;
         path2 = false;
@@ -127,28 +143,59 @@ public class EnemyEight extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        // Release an item
-        getItemOnHit();
-
-        // Destroy box2D body
-        world.destroyBody(b2body);
-
-        // Explosion animation
-        stateTime = 0;
-
-        // Audio FX and screen shake
-        if (pum) {
-            screen.getShaker().shake(SHAKE_DURATION);
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        if (knockBack) {
+            // Knock back effect
+            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
+            applyNewFilters = true;
+            knockBack(dt);
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            // Release an item
+            getItemOnHit();
+
+            // Destroy box2D body
+            world.destroyBody(b2body);
+
+            // Explosion animation
+            stateTime = 0;
+
+            // Audio FX and screen shake
+            if (pum) {
+                screen.getShaker().shake(SHAKE_DURATION);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+            } else {
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            }
+
+            // Set score
+            screen.getHud().addScore(SCORE);
+
+            // Set the new state
+            currentState = State.EXPLODING;
         }
+    }
 
-        // Set score
-        screen.getHud().addScore(SCORE);
+    private void knockBack(float dt) {
+        if (applyNewFilters) {
+            // EnemyEight can't collide with anything
+            Filter filter = new Filter();
+            filter.maskBits = WorldContactListener.NOTHING_BIT;
 
-        // Set the new state
-        currentState = State.EXPLODING;
+            // We set the previous filter in every fixture
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            applyNewFilters = false;
+        }
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemyEightAnimation.getKeyFrame(stateTime, true));
+        setColor(KNOCK_BACK_COLOR);
+        stateTime += dt;
+
+        knockBackTime += dt;
+        if (knockBackTime > KNOCK_BACK_SECONDS) {
+            setColor(Color.WHITE); // Default
+            knockBack = false;
+        }
     }
 
     @Override
@@ -260,6 +307,7 @@ public class EnemyEight extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
+        knockBack = true;
     }
 
     @Override

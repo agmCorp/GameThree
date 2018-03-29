@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -37,6 +38,10 @@ public class EnemySix extends Enemy {
     private static final float VELOCITY_Y = 0.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float BEAM_INTERVAL_SECONDS = 4.0f;
+    private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
+    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_FORCE_X = 500.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 500.0f;
     private static final int SCORE = 5;
     private static final float POLYGON_SHAPE_HEIGHT_METERS = 20.0f * 1.0f / PlayScreen.PPM;
 
@@ -53,6 +58,11 @@ public class EnemySix extends Enemy {
     private Animation powerBeamAnimation;
     private Sprite beamSprite;
     private float offsetXMeters;
+
+    // Knock back effect
+    private boolean knockBack;
+    private boolean applyNewFilters;
+    private float knockBackTime;
 
     public EnemySix(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -77,6 +87,11 @@ public class EnemySix extends Enemy {
         // Setbounds is the one that determines the size of the power beam's drawing on the screen
         offsetXMeters = getOffsetXMeters();
         beamSprite.setBounds(getX(), getY(), Math.abs(offsetXMeters), AssetEnemySix.BEAM_HEIGHT_METERS);
+
+        // Knock back effect
+        knockBack = false;
+        applyNewFilters = false;
+        knockBackTime = 0;
 
         velocity.set(VELOCITY_X, VELOCITY_Y); // At rest
     }
@@ -212,28 +227,68 @@ public class EnemySix extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        // Release an item
-        getItemOnHit();
-
-        // Destroy box2D body
-        world.destroyBody(b2body);
-
-        // Explosion animation
-        stateTime = 0;
-
-        // Audio FX and screen shake
-        if (pum) {
-            screen.getShaker().shake(SHAKE_DURATION);
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        if (knockBack) {
+            // Knock back effect
+            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
+            applyNewFilters = true;
+            knockBack(dt);
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            // Release an item
+            getItemOnHit();
+
+            // Destroy box2D body
+            world.destroyBody(b2body);
+
+            // Explosion animation
+            stateTime = 0;
+
+            // Audio FX and screen shake
+            if (pum) {
+                screen.getShaker().shake(SHAKE_DURATION);
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+            } else {
+                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+            }
+
+            // Set score
+            screen.getHud().addScore(SCORE);
+
+            // Set the new state
+            currentState = State.EXPLODING;
+        }
+    }
+
+    private void knockBack(float dt) {
+        if (applyNewFilters) {
+            // EnemySix can't collide with anything
+            Filter filter = new Filter();
+            filter.maskBits = WorldContactListener.NOTHING_BIT;
+
+            // We set the previous filter in every fixture
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            applyNewFilters = false;
+        }
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion((TextureRegion) enemySixIdleAnimation.getKeyFrame(stateTime, true));
+        setColor(KNOCK_BACK_COLOR);
+        stateTime += dt;
+
+        if (beaming) {
+            float offset = offsetXMeters >= 0 ? 0 : offsetXMeters;
+            beamSprite.setPosition(b2body.getPosition().x + offset, b2body.getPosition().y - beamSprite.getHeight() / 2);
+
+            beamSprite.setRegion((TextureRegion) powerBeamAnimation.getKeyFrame(beamStateTime, true));
+            beamSprite.setColor(KNOCK_BACK_COLOR);
+            beamStateTime += dt;
         }
 
-        // Set score
-        screen.getHud().addScore(SCORE);
-
-        // Set the new state
-        currentState = State.EXPLODING;
+        knockBackTime += dt;
+        if (knockBackTime > KNOCK_BACK_SECONDS) {
+            setColor(Color.WHITE); // Default
+            knockBack = false;
+        }
     }
 
     @Override
@@ -271,6 +326,7 @@ public class EnemySix extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
+        knockBack = true;
     }
 
     @Override
