@@ -128,8 +128,9 @@ public class EnemyOne extends Enemy {
         // Explosion animation
         stateTime = 0;
 
-        // Audio FX
+        // Audio FX and screen shake
         if (pum) {
+            screen.getShaker().shake(SHAKE_DURATION);
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
         } else {
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
