@@ -39,6 +39,7 @@ public class EnemyFive extends Enemy {
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 500.0f;
     private static final float KNOCK_BACK_FORCE_Y = 500.0f;
+    private static final boolean CENTER_EXPLOSION_ON_HIT = false;
     private static final int SCORE = 15;
 
     private boolean damage;
@@ -53,8 +54,8 @@ public class EnemyFive extends Enemy {
     private boolean knockBack;
     private boolean knockBackStarted;
     private float knockBackTime;
-    private float initPosX;
-    private float initPosY;
+    private float hitX;
+    private float hitY;
 
     public EnemyFive(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -74,8 +75,8 @@ public class EnemyFive extends Enemy {
         knockBack = false;
         knockBackStarted = false;
         knockBackTime = 0;
-        initPosX = 0;
-        initPosY = 0;
+        hitX = 0;
+        hitY = 0;
         velocity.set(0.0f, 0.0f); // Initially at rest
     }
 
@@ -181,8 +182,8 @@ public class EnemyFive extends Enemy {
 
     private void initKnockBack() {
         // Initial sprite position
-        initPosX = b2body.getPosition().x - getWidth() / 2;
-        initPosY = b2body.getPosition().y - getHeight() / 2;
+        hitX = b2body.getPosition().x - getWidth() / 2;
+        hitY = b2body.getPosition().y - getHeight() / 2;
 
         // Knock back effect
         b2body.setLinearVelocity(0.0f, 0.0f);
@@ -206,9 +207,11 @@ public class EnemyFive extends Enemy {
             currentState = State.DEAD;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // After the knock back, we set the explosion at the point where the enemy was hit with its default tint
-                setColor(Color.WHITE); // Default
-                setPosition(initPosX, initPosY);
+                setColor(Color.WHITE); // Default tint
+                // After the knock back, we set the explosion at the point where the enemy was hit
+                if (CENTER_EXPLOSION_ON_HIT) {
+                    setPosition(hitX, hitY);
+                }
 
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionF.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionF.HEIGHT_METERS * expScale / 2,
