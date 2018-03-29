@@ -358,7 +358,7 @@ public class EnemySix extends Enemy {
     @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD) {
-            if (beaming) {
+            if (beaming && currentState != State.EXPLODING) {
                 beamSprite.draw(batch);
             }
             super.draw(batch);
