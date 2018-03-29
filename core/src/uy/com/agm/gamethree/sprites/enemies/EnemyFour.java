@@ -39,7 +39,7 @@ public class EnemyFour extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
-    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_SECONDS = 0.1f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f * DENSITY * CIRCLE_SHAPE_RADIUS_METERS * CIRCLE_SHAPE_RADIUS_METERS * MathUtils.PI;
     private static final int SCORE = 35;

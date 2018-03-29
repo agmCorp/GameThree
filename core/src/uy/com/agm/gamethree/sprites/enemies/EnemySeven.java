@@ -40,7 +40,7 @@ public class EnemySeven extends Enemy {
     private static final float CHANGE_HORIZONTAL_SECONDS = 2.0f;
     private static final float CHANGE_VERTICAL_SECONDS = 0.2f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
-    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_SECONDS = 0.1f;
     private static final float KNOCK_BACK_FORCE_X = 500.0f;
     private static final float KNOCK_BACK_FORCE_Y = 500.0f;
     private static final int SCORE = 5;
