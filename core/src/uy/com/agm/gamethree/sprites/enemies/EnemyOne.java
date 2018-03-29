@@ -34,6 +34,7 @@ public class EnemyOne extends Enemy {
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
+    private static final Color KNOCKBACK_COLOR = Color.SCARLET;
     private static final float KNOCKBACK_SECONDS = 0.2f;
     private static final float KNOCKBACK_FORCE_X = 1000.0f;
     private static final float KNOCKBACK_FORCE_Y = 1000.0f;
@@ -176,7 +177,7 @@ public class EnemyOne extends Enemy {
         }
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyOneAnimation.getKeyFrame(stateTime, true));
-        setColor(Color.SCARLET);
+        setColor(KNOCKBACK_COLOR);
         stateTime += dt;
 
         kockbackTime += dt;
