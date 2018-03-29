@@ -279,7 +279,6 @@ public class EnemySix extends Enemy {
 
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {
-            setColor(Color.WHITE); // Default
             knockBack = false;
         }
     }
@@ -312,6 +311,8 @@ public class EnemySix extends Enemy {
             currentState = State.DEAD;
         } else {
             if (stateTime == 0) { // Explosion starts
+                // After the knock back, we set the explosion at the point where the enemy was hit with its default tint
+                setColor(Color.WHITE); // Default
                 setPosition(initPosX, initPosY);
 
                 // Setbounds is the one that determines the size of the explosion on the screen
