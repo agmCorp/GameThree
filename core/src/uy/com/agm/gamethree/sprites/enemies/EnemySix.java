@@ -40,7 +40,7 @@ public class EnemySix extends Enemy {
     private static final float BEAM_INTERVAL_SECONDS = 4.0f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
-    private static final float KNOCK_BACK_FORCE_X = 500.0f;
+    private static final float KNOCK_BACK_FORCE_X = 0.0f;
     private static final float KNOCK_BACK_FORCE_Y = 500.0f;
     private static final int SCORE = 5;
     private static final float POLYGON_SHAPE_HEIGHT_METERS = 20.0f * 1.0f / PlayScreen.PPM;
