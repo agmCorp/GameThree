@@ -49,6 +49,8 @@ public class EnemyThree extends Enemy {
     private boolean knockBack;
     private boolean knockBackStarted;
     private float knockBackTime;
+    private float initPosX;
+    private float initPosY;
 
     public EnemyThree(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -65,6 +67,8 @@ public class EnemyThree extends Enemy {
         knockBack = false;
         knockBackStarted = false;
         knockBackTime = 0;
+        initPosX = 0;
+        initPosY = 0;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 
@@ -175,6 +179,10 @@ public class EnemyThree extends Enemy {
     }
 
     private void initKnockBack() {
+        // Initial sprite position
+        initPosX = b2body.getPosition().x - getWidth() / 2;
+        initPosY = b2body.getPosition().y - getHeight() / 2;
+
         // Knock back effect
         b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
                 b2body.getPosition().x, b2body.getPosition().y, true);
@@ -199,6 +207,8 @@ public class EnemyThree extends Enemy {
             currentState = State.DEAD;
         } else {
             if (stateTime == 0) { // Explosion starts
+                setPosition(initPosX, initPosY);
+
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionC.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionC.HEIGHT_METERS * expScale / 2,
                         AssetExplosionC.WIDTH_METERS * expScale, AssetExplosionC.HEIGHT_METERS * expScale);
