@@ -619,7 +619,6 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1322" x="224" y="7456" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="997" x="439" y="5888" width="32" height="32">
