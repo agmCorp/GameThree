@@ -33,7 +33,7 @@ public class EnemyTwo extends Enemy {
     private static final float VELOCITY_X = -2.0f;
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final Color KNOCK_BACK_COLOR = Color.RED;
+    private static final Color KNOCK_BACK_COLOR = Color.BLACK;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;

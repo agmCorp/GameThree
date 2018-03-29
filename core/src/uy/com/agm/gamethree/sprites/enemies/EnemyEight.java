@@ -36,7 +36,7 @@ public class EnemyEight extends Enemy {
     private static final float PATH_PERIOD_SECONDS = 1.3f;
     private static final float PATH_RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
-    private static final Color KNOCK_BACK_COLOR = Color.SCARLET;
+    private static final Color KNOCK_BACK_COLOR = Color.BLACK;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
@@ -197,6 +197,7 @@ public class EnemyEight extends Enemy {
         initPosY = b2body.getPosition().y - getHeight() / 2;
 
         // Knock back effect
+        b2body.setLinearVelocity(0.0f, 0.0f);
         b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
                 b2body.getPosition().x, b2body.getPosition().y, true);
 
