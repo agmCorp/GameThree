@@ -12,8 +12,8 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 /**
  * Created by amorales on 5/3/2018.
@@ -118,9 +118,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
 
     private void createBullet(float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
         tmp.set(velocityX, velocityY).rotate(angle); // I must rotate the velocity to move in that direction, otherwise I'll move in a straight line to the front.
-        screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
-                width, height, circleShapeRadius, angle, tmp.x, tmp.y,
-                animation, HeroBullet.class));
-
+        screen.getCreator().createGameThreeActor(new ActorDef(new HeroBullet(screen, x, y,
+                width, height, circleShapeRadius, angle, tmp.x, tmp.y, animation)));
     }
 }

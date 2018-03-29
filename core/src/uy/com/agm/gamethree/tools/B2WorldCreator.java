@@ -38,9 +38,6 @@ import uy.com.agm.gamethree.sprites.tileobjects.Path;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
-import uy.com.agm.gamethree.tools.actordef.ActorDef;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
-import uy.com.agm.gamethree.tools.actordef.ActorDefPower;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -247,59 +244,35 @@ public class B2WorldCreator {
     public void handleCreatingActors() {
         if (!actorsToCreate.isEmpty()) {
             ActorDef actorDef = actorsToCreate.poll(); // Similar to pop but for a queue, removes the element
+            Object actor = actorDef.getUserData();
 
-            if (actorDef.getType() == EnemySeven.class) {
-                RectangleMapObject object;
-                object = new RectangleMapObject(actorDef.getX() * PlayScreen.PPM,
-                        actorDef.getY() * PlayScreen.PPM,
-                        AssetEnemySeven.WIDTH_METERS * PlayScreen.PPM,
-                        AssetEnemySeven.HEIGHT_METERS * PlayScreen.PPM); // Width and height are irrelevant
-                enemies.add(new EnemySeven(screen, object));
+            if (actor instanceof EnemySeven) {
+                enemies.add((EnemySeven) actor);
             }
 
-            if (actorDef.getType() == ColOne.class) {
-                items.add(new ColOne(screen, actorDef.getX(), actorDef.getY()));
+            if (actor instanceof ColOne) {
+                items.add((ColOne) actor);
             }
-            if (actorDef.getType() == ColSilverBullet.class) {
-                items.add(new ColSilverBullet(screen, actorDef.getX(), actorDef.getY()));
+            if (actor instanceof ColSilverBullet) {
+                items.add((ColSilverBullet) actor);
             }
-            if (actorDef.getType() == PowerOne.class) {
-                items.add(new PowerOne(screen, actorDef.getX(),
-                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
+            if (actor instanceof PowerOne) {
+                items.add((PowerOne) actor);
             }
-            if (actorDef.getType() == PowerTwo.class) {
-                items.add(new PowerTwo(screen, actorDef.getX(),
-                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
+            if (actor instanceof PowerTwo) {
+                items.add((PowerTwo) actor);
             }
-            if (actorDef.getType() == PowerThree.class) {
-                items.add(new PowerThree(screen, actorDef.getX(),
-                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
+            if (actor instanceof PowerThree) {
+                items.add((PowerThree) actor);
             }
-            if (actorDef.getType() == PowerFour.class) {
-                items.add(new PowerFour(screen, actorDef.getX(),
-                        actorDef.getY(), ((ActorDefPower) actorDef).getTimer()));
+            if (actor instanceof PowerFour) {
+                items.add((PowerFour) actor);
             }
-            if (actorDef.getType() == HeroBullet.class) {
-                ActorDefBullet actorDefBullet = (ActorDefBullet) actorDef;
-                weapons.add(new HeroBullet(screen, actorDefBullet.getX(), actorDefBullet.getY(),
-                        actorDefBullet.getWidth(),
-                        actorDefBullet.getHeight(),
-                        actorDefBullet.getCircleShapeRadius(),
-                        actorDefBullet.getAngle(),
-                        actorDefBullet.getVelocityX(),
-                        actorDefBullet.getVelocityY(),
-                        actorDefBullet.getAnimation()));
+            if (actor instanceof HeroBullet) {
+                weapons.add((HeroBullet) actor);
             }
-            if (actorDef.getType() == EnemyBullet.class) {
-                ActorDefBullet actorDefBullet = (ActorDefBullet) actorDef;
-                weapons.add(new EnemyBullet(screen, actorDefBullet.getX(), actorDefBullet.getY(),
-                        actorDefBullet.getWidth(),
-                        actorDefBullet.getHeight(),
-                        actorDefBullet.getCircleShapeRadius(),
-                        actorDefBullet.getAngle(),
-                        actorDefBullet.getVelocityX(),
-                        actorDefBullet.getVelocityY(),
-                        actorDefBullet.getAnimation()));
+            if (actor instanceof EnemyBullet) {
+                weapons.add((EnemyBullet) actor);
             }
         }
     }
@@ -309,33 +282,38 @@ public class B2WorldCreator {
         int timer;
 
         if (mp.containsKey(KEY_ENEMY_SEVEN)) {
+            RectangleMapObject newObject;
             int rnd = MathUtils.random(EnemySeven.MIN_CLONE, EnemySeven.MAX_CLONE);
             for (int i = 0; i < rnd; i++) {
-                createGameThreeActor(new ActorDef(x, y, EnemySeven.class));
+                newObject = new RectangleMapObject(x * PlayScreen.PPM,
+                        y * PlayScreen.PPM,
+                        AssetEnemySeven.WIDTH_METERS * PlayScreen.PPM,
+                        AssetEnemySeven.HEIGHT_METERS * PlayScreen.PPM); // Width and height are irrelevant
+                createGameThreeActor(new ActorDef(new EnemySeven(screen, newObject)));
             }
         }
 
         if (mp.containsKey(KEY_COL_ONE)) {
-            createGameThreeActor(new ActorDef(x, y, ColOne.class));
+            createGameThreeActor(new ActorDef(new ColOne(screen, x, y)));
         }
         if (mp.containsKey(KEY_COL_SILVER_BULLET)) {
-            createGameThreeActor(new ActorDef(x, y, ColSilverBullet.class));
+            createGameThreeActor(new ActorDef(new ColSilverBullet(screen, x, y)));
         }
         if (mp.containsKey(KEY_POWER_ONE)) {
             timer = object.getProperties().get(KEY_POWER_ONE, 0, Integer.class);
-            createGameThreeActor(new ActorDefPower(x, y, timer, PowerOne.class));
+            createGameThreeActor(new ActorDef(new PowerOne(screen, x, y, timer)));
         }
         if (mp.containsKey(KEY_POWER_TWO)) {
             timer = object.getProperties().get(KEY_POWER_TWO, 0, Integer.class);
-            createGameThreeActor(new ActorDefPower(x, y, timer, PowerTwo.class));
+            createGameThreeActor(new ActorDef(new PowerTwo(screen, x, y, timer)));
         }
         if (mp.containsKey(KEY_POWER_THREE)) {
             timer = object.getProperties().get(KEY_POWER_THREE, 0, Integer.class);
-            createGameThreeActor(new ActorDefPower(x, y, timer, PowerThree.class));
+            createGameThreeActor(new ActorDef(new PowerThree(screen, x, y, timer)));
         }
         if (mp.containsKey(KEY_POWER_FOUR)) {
             timer = object.getProperties().get(KEY_POWER_FOUR, 0, Integer.class);
-            createGameThreeActor(new ActorDefPower(x, y, timer, PowerFour.class));
+            createGameThreeActor(new ActorDef(new PowerFour(screen, x, y, timer)));
         }
     }
 

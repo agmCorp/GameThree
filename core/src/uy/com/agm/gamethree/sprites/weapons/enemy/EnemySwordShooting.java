@@ -6,9 +6,9 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 /**
  * Created by amorales on 5/3/2018.
@@ -56,15 +56,14 @@ public class EnemySwordShooting implements IShootStrategy {
         float angle = tmp.angle();
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
-        screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
+        screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
                 AssetBulletC.WIDTH_METERS,
                 AssetBulletC.HEIGHT_METERS,
                 CIRCLE_SHAPE_RADIUS_METERS,
                 angle,
                 tmp.x,
                 tmp.y,
-                Assets.getInstance().getBulletC().getBulletCAnimation(),
-                EnemyBullet.class));
+                Assets.getInstance().getBulletC().getBulletCAnimation())));
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
     }

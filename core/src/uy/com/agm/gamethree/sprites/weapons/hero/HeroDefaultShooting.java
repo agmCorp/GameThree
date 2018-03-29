@@ -9,8 +9,8 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 /**
  * Created by amorales on 5/3/2018.
@@ -66,7 +66,7 @@ public class HeroDefaultShooting implements IShootStrategy {
         if (hero.isSilverBulletEnabled()) {
             if (hero.hasSilverBullets()) {
                 hero.decreaseSilverBullets();
-                screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
+                screen.getCreator().createGameThreeActor(new ActorDef(new HeroBullet(screen, x,
                         y + DEFAULT_BULLET_OFFSET_METERS,
                         AssetSilverBullet.WIDTH_METERS,
                         AssetSilverBullet.HEIGHT_METERS,
@@ -74,8 +74,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                         0,
                         SILVER_BULLET_VELOCITY_X,
                         SILVER_BULLET_VELOCITY_Y,
-                        Assets.getInstance().getSilverBullet().getSilverBulletAnimation(),
-                        HeroBullet.class));
+                        Assets.getInstance().getSilverBullet().getSilverBulletAnimation())));
                 // Sound FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
             } else {
@@ -83,7 +82,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
             }
         } else {
-            screen.getCreator().createGameThreeActor(new ActorDefBullet(x,
+            screen.getCreator().createGameThreeActor(new ActorDef(new HeroBullet(screen, x,
                     y + DEFAULT_BULLET_OFFSET_METERS,
                     AssetHeroBullet.WIDTH_METERS,
                     AssetHeroBullet.HEIGHT_METERS,
@@ -91,8 +90,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                     0,
                     DEFAULT_BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                     DEFAULT_BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
-                    Assets.getInstance().getHeroBullet().getHeroBulletAnimation(),
-                    HeroBullet.class));
+                    Assets.getInstance().getHeroBullet().getHeroBulletAnimation())));
             // Sound FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
         }

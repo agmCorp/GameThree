@@ -6,9 +6,9 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
+import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
-import uy.com.agm.gamethree.tools.actordef.ActorDefBullet;
 
 /**
  * Created by amorales on 5/3/2018.
@@ -53,16 +53,14 @@ public class EnemyDefaultShooting implements IShootStrategy {
         // Move EnemyBullet from Enemy to Hero
         tmp.set(x, y);
         Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, DEFAULT_BULLET_LINEAR_VELOCITY);
-
-        screen.getCreator().createGameThreeActor(new ActorDefBullet(x, y,
+        screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
                 AssetEnemyBullet.WIDTH_METERS,
                 AssetEnemyBullet.HEIGHT_METERS,
                 DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                 0,
                 tmp.x,
                 tmp.y,
-                Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation(),
-                EnemyBullet.class));
+                Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation())));
         // Sound FX
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
     }
