@@ -29,7 +29,6 @@ PROXIMOS PASOS
 - factor handycap por nivel (solo para los enemigos que reuse?)
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
-- cuando termine el nivel 1 y 2, hacer los cambios que dice el video de youtube. La permanencia es interesante, puedo agregar una mancha negra de smog en el piso.
 - tenes mucho material en el mail de linkedin y podes hacer mas amigos.
 
 TENGO

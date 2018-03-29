@@ -120,6 +120,7 @@ public abstract class Enemy extends Sprite {
                 // If this Enemy is currently playing
                 if (currentState == State.ALIVE) {
                     // It's outside bottom edge + MARGIN_METERS or outside upperEdge + MARGIN_METERS
+                    // MARGIN_METERS is important because we don't want to kill an Enemy who is flying around on a repetitive wide path
                     if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
                         world.destroyBody(b2body);
                         currentState = DEAD;
