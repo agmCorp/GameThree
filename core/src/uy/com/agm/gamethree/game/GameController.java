@@ -41,10 +41,12 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        // If Hero is dead, we don't handle any input
-        if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
-            if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
-                player.openFire();
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
+                if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
+                    player.openFire();
+                }
             }
         }
         return true;
@@ -62,39 +64,43 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        // If Hero is dead, we don't handle any input
-        if(!player.isHeroDead()) {
-            /*
-            * DeltaX is positive when I move my finger to the left, negative otherwise.
-            * DeltaY is positive when I move my finger down, negative otherwise.
-            * Both are in pixels, thus to get meters I must divide them by Constants.PPM.
-            */
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (!player.isHeroDead()) {
+                /*
+                * DeltaX is positive when I move my finger to the left, negative otherwise.
+                * DeltaY is positive when I move my finger down, negative otherwise.
+                * Both are in pixels, thus to get meters I must divide them by Constants.PPM.
+                */
 
-            // In b2body y-axes sign is the opposite.
-            deltaY = -deltaY;
+                // In b2body y-axes sign is the opposite.
+                deltaY = -deltaY;
 
-            // Go from origin to target at constant speed
-            candidateVelocity.set(player.getB2body().getPosition().x, player.getB2body().getPosition().y);
-            Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / PlayScreen.PPM, player.getB2body().getPosition().y + deltaY / PlayScreen.PPM, Hero.LINEAR_VELOCITY);
+                // Go from origin to target at constant speed
+                candidateVelocity.set(player.getB2body().getPosition().x, player.getB2body().getPosition().y);
+                Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / PlayScreen.PPM, player.getB2body().getPosition().y + deltaY / PlayScreen.PPM, Hero.LINEAR_VELOCITY);
 
-            // Linear interpolation to avoid character shaking
-            heroVelocity.lerp(candidateVelocity, ALPHA_LERP);
+                // Linear interpolation to avoid character shaking
+                heroVelocity.lerp(candidateVelocity, ALPHA_LERP);
 
-            // Apply the result
-            player.getB2body().setLinearVelocity(heroVelocity);
+                // Apply the result
+                player.getB2body().setLinearVelocity(heroVelocity);
 
-            // Depending on the result, we change the animation if needed
-            evaluateMovementDirection();
+                // Depending on the result, we change the animation if needed
+                evaluateMovementDirection();
+            }
         }
         return true;
     }
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        // If Hero is dead, we don't handle any input
-        if(!player.isHeroDead()) {
-            player.getB2body().setLinearVelocity(0, 0);
-            evaluateMovementDirection();
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (!player.isHeroDead()) {
+                player.getB2body().setLinearVelocity(0, 0);
+                evaluateMovementDirection();
+            }
         }
         return true;
     }
@@ -116,43 +122,47 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyDown(int keycode) {
-        // If Hero is dead, we don't handle any input
-        if(!player.isHeroDead()) {
-            // Control our player using linear velocity
-            if (keycode == Input.Keys.UP) {
-                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
-            }
-            if (keycode == Input.Keys.DOWN) {
-                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Hero.LINEAR_VELOCITY);
-            }
-            if (keycode == Input.Keys.LEFT) {
-                player.getB2body().setLinearVelocity(-Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
-            }
-            if (keycode == Input.Keys.RIGHT) {
-                player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
-            }
-            if (keycode == Input.Keys.SPACE) {
-                if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
-                    player.openFire();
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (!player.isHeroDead()) {
+                // Control our player using linear velocity
+                if (keycode == Input.Keys.UP) {
+                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
                 }
+                if (keycode == Input.Keys.DOWN) {
+                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Hero.LINEAR_VELOCITY);
+                }
+                if (keycode == Input.Keys.LEFT) {
+                    player.getB2body().setLinearVelocity(-Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                }
+                if (keycode == Input.Keys.RIGHT) {
+                    player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                }
+                if (keycode == Input.Keys.SPACE) {
+                    if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
+                        player.openFire();
+                    }
+                }
+                evaluateMovementDirection();
             }
-            evaluateMovementDirection();
         }
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        // If Hero is dead, we don't handle any input
-        if(!player.isHeroDead()) {
-            // Control our player using linear velocity
-            if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
-                player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (!player.isHeroDead()) {
+                // Control our player using linear velocity
+                if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
+                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
+                }
+                if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
+                    player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
+                }
+                evaluateMovementDirection();
             }
-            if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
-                player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
-            }
-            evaluateMovementDirection();
         }
         return true;
     }
