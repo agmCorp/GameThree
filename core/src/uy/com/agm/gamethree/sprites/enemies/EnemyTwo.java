@@ -33,10 +33,10 @@ public class EnemyTwo extends Enemy {
     private static final float VELOCITY_X = -2.0f;
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final Color KNOCKBACK_COLOR = Color.RED;
-    private static final float KNOCKBACK_SECONDS = 0.2f;
-    private static final float KNOCKBACK_FORCE_X = 1000.0f;
-    private static final float KNOCKBACK_FORCE_Y = 1000.0f;
+    private static final Color KNOCK_BACK_COLOR = Color.RED;
+    private static final float KNOCK_BACK_SECONDS = 0.2f;
+    private static final float KNOCK_BACK_FORCE_X = 1000.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final int SCORE = 10;
 
     private float stateTime;
@@ -45,9 +45,9 @@ public class EnemyTwo extends Enemy {
     private float expScale;
 
     // Knock back effect
-    private boolean knockback;
+    private boolean knockBack;
     private boolean applyNewFilters;
-    private float kockbackTime;
+    private float knockBackTime;
 
     public EnemyTwo(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -61,9 +61,9 @@ public class EnemyTwo extends Enemy {
         setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
 
         stateTime = 0;
-        knockback = false;
+        knockBack = false;
         applyNewFilters = false;
-        kockbackTime = 0;
+        knockBackTime = 0;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 
@@ -123,9 +123,11 @@ public class EnemyTwo extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        if (knockback) {
+        if (knockBack) {
+            // Knock back effect
+            b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
             applyNewFilters = true;
-            knockback(dt);
+            knockBack(dt);
         } else {
             // Release an item
             getItemOnHit();
@@ -152,7 +154,7 @@ public class EnemyTwo extends Enemy {
         }
     }
 
-    private void knockback(float dt) {
+    private void knockBack(float dt) {
         if (applyNewFilters) {
             // EnemyTwo can't collide with anything
             Filter filter = new Filter();
@@ -166,13 +168,13 @@ public class EnemyTwo extends Enemy {
         }
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true));
-        setColor(KNOCKBACK_COLOR);
+        setColor(KNOCK_BACK_COLOR);
         stateTime += dt;
 
-        kockbackTime += dt;
-        if (kockbackTime > KNOCKBACK_SECONDS) {
+        knockBackTime += dt;
+        if (knockBackTime > KNOCK_BACK_SECONDS) {
             setColor(Color.WHITE); // Default
-            knockback = false;
+            knockBack = false;
         }
     }
 
@@ -211,10 +213,7 @@ public class EnemyTwo extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.INJURED;
-
-        // Knock back effect
-        b2body.applyForce(MathUtils.randomSign() * KNOCKBACK_FORCE_X, KNOCKBACK_FORCE_Y, b2body.getPosition().x, b2body.getPosition().y, true);
-        knockback = true;
+        knockBack = true;
     }
 
     @Override
