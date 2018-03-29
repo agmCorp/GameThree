@@ -140,8 +140,13 @@ public abstract class Enemy extends Sprite {
 
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
-            shootContext.update(dt);
-            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
+            // An Enemy can shoot only when it is visible
+            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
+                shootContext.update(dt);
+                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
+            }
         }
     }
 
