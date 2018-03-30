@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.assets.sprites;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 
@@ -18,13 +19,16 @@ public class AssetSplat {
     public static final float HEIGHT_METERS = 100.0f * 0.6f / PlayScreen.PPM;
     public static final int MAX_TEXTURES = 16;
 
-    private TextureAtlas atlas;
+    private Array<TextureRegion> splats;
 
     public AssetSplat(TextureAtlas atlas) {
-        this.atlas = atlas;
+        splats = new Array<TextureRegion>();
+        for(int i = 1; i <= MAX_TEXTURES; i++) {
+            splats.add(atlas.findRegion("splat", i));
+        }
     }
 
     public TextureRegion getRandomSplat() {
-        return atlas.findRegion("splat", MathUtils.random(1, MAX_TEXTURES));
+        return splats.get(MathUtils.random(0, MAX_TEXTURES - 1));
     }
 }
