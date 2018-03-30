@@ -327,7 +327,7 @@ public class EnemyFour extends Enemy {
     @Override
     protected void stateExploding(float dt) {
         if (explosionAnimation.isAnimationFinished(stateTime)) {
-            currentState = State.DEAD;
+            currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
                 setColor(Color.WHITE); // Default tint

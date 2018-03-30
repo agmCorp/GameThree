@@ -63,7 +63,7 @@ public class PlayScreen extends AbstractScreen {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -219,12 +219,15 @@ public class PlayScreen extends AbstractScreen {
         // Step in the physics simulation
         doPhysicsStep(dt);
 
+        // The order is not important
         updatePowerBoxes(dt);
         updateItems(dt);
         updateWeapons(dt);
         updateEnemies(dt);
         updateFinalEnemy(dt);
         updateHero(dt);
+
+        // Always at the end
         updateHud(dt);
         updateCamera(dt);
 
@@ -371,6 +374,8 @@ public class PlayScreen extends AbstractScreen {
         game.getBatch().begin();
 
         // This order is important
+        // This determine if a sprite has to be drawn in front or behind another sprite
+        renderSplats();
         renderPowerBoxes();
         renderItems();
         renderWeapons();
@@ -429,9 +434,19 @@ public class PlayScreen extends AbstractScreen {
         player.draw(game.getBatch());
     }
 
+    private void renderSplats() {
+        for (Enemy enemy : creator.getEnemies()) {
+            if (enemy.isSplat()) {
+                enemy.draw(game.getBatch());
+            }
+        }
+    }
+
     private void renderEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.draw(game.getBatch());
+            if (!enemy.isSplat()) {
+                enemy.draw(game.getBatch());
+            }
         }
     }
 

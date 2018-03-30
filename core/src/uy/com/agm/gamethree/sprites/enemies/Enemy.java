@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
@@ -19,11 +21,6 @@ import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
-
-import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.ALIVE;
-import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.DEAD;
-import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.EXPLODING;
-import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.SPLAT;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -43,6 +40,8 @@ public abstract class Enemy extends Sprite {
 
     protected Vector2 velocity;
     protected Vector2 tmp; // Temp GC friendly vector
+
+    private TextureRegion splat;
 
     protected enum State {
         INACTIVE, ALIVE, INJURED, EXPLODING, SPLAT, DEAD
@@ -87,7 +86,9 @@ public abstract class Enemy extends Sprite {
         // By default this Enemy doesn't interact in our world
         b2body.setActive(false);
         currentState = State.INACTIVE;
+
         pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
+        splat = Assets.getInstance().getEnemySix().getEnemySixBeamStand();
     }
 
     public String getTiledMapId() {
@@ -96,12 +97,12 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == DEAD || currentState == EXPLODING || currentState == SPLAT;
+        return currentState == State.DEAD || currentState == State.EXPLODING || currentState == State.SPLAT;
     }
 
     public void terminate() {
         world.destroyBody(b2body);
-        currentState = DEAD;
+        currentState = State.DEAD;
     }
 
     protected void checkBoundaries() {
@@ -117,7 +118,7 @@ public abstract class Enemy extends Sprite {
             case INACTIVE:
                 if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) { // It's on camera
                     b2body.setActive(true);
-                    currentState = ALIVE;
+                    currentState = State.ALIVE;
                     screen.getHud().showDynamicHelp(getClassName(), getHelpImage()); // Show dynamic help
                 }
                 break;
@@ -132,8 +133,11 @@ public abstract class Enemy extends Sprite {
                     if (currentState == State.ALIVE) {
                         world.destroyBody(b2body);
                     }
-                    currentState = DEAD;
+                    currentState = State.DEAD;
                 }
+                break;
+
+            default:
                 break;
         }
     }
@@ -170,7 +174,7 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy can be removed from our game
     public boolean isDisposable() {
-        return currentState == DEAD;
+        return currentState == State.DEAD;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -191,12 +195,22 @@ public abstract class Enemy extends Sprite {
                 case EXPLODING:
                     stateExploding(dt);
                     break;
+                case SPLAT:
+                    stateSplat();
+                    break;
                 case DEAD:
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    protected void stateSplat() {
+        // Setbounds is the one that determines the size of the splat on the screen
+        setBounds(getX() + getWidth() / 2 - AssetEnemySix.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemySix.HEIGHT_METERS / 2,
+                AssetEnemySix.WIDTH_METERS , AssetEnemySix.HEIGHT_METERS);
+        setRegion(splat);
     }
 
     public void onBumpWithFeint() {
@@ -214,9 +228,13 @@ public abstract class Enemy extends Sprite {
 
     @Override
     public void draw(Batch batch) {
-        if (currentState != DEAD && currentState != State.INACTIVE) {
+        if (currentState != State.DEAD && currentState != State.INACTIVE) {
             super.draw(batch);
         }
+    }
+
+    public boolean isSplat() {
+        return currentState == State.SPLAT;
     }
 
     protected abstract void defineEnemy();

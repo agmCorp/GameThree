@@ -24,6 +24,10 @@ import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
+import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.EXPLODING;
+import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.INJURED;
+import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.SPLAT;
+
 /**
  * Created by AGM on 12/9/2017.
  */
@@ -256,7 +260,7 @@ public class EnemySix extends Enemy {
             screen.getHud().addScore(SCORE);
 
             // Set the new state
-            currentState = State.EXPLODING;
+            currentState = EXPLODING;
         }
     }
 
@@ -309,7 +313,7 @@ public class EnemySix extends Enemy {
     @Override
     protected void stateExploding(float dt) {
         if (explosionAnimation.isAnimationFinished(stateTime)) {
-            currentState = State.DEAD;
+            currentState = SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
                 setColor(Color.WHITE); // Default tint
@@ -346,7 +350,7 @@ public class EnemySix extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = State.INJURED;
+        currentState = INJURED;
         knockBack = true;
     }
 
@@ -357,11 +361,11 @@ public class EnemySix extends Enemy {
 
     @Override
     public void draw(Batch batch) {
-        if (currentState != State.DEAD) {
-            if (beaming && currentState != State.EXPLODING) {
+        if (beaming) {
+            if (currentState == State.ALIVE || currentState == State.INJURED) {
                 beamSprite.draw(batch);
             }
-            super.draw(batch);
         }
+        super.draw(batch);
     }
 }
