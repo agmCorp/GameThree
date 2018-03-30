@@ -13,14 +13,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
-
-import static uy.com.agm.gamethree.sprites.enemies.Enemy.State.DEAD;
-import static uy.com.agm.gamethree.sprites.items.Item.OFFSET_METERS;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -93,38 +91,37 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == DEAD || currentState == State.EXPLODING;
+        return currentState == State.DEAD || currentState == State.EXPLODING;
     }
 
     public void terminate() {
         world.destroyBody(b2body);
-        currentState = DEAD;
+        currentState = State.DEAD;
     }
 
     protected void checkBoundaries() {
-        /* When an Enemy is on camera, it activates (it moves and can collide).
-        * You have to be very careful because if the enemy is destroyed, its b2body does not exist and gives
-        * random errors if you try to active it.
+       /* When an Enemy is on camera, it activates (it moves and can collide).
+        * When an Enemy is alive and outside the camera, it dies.
+        * You have to be very careful because if the enemy is destroyed, its b2body doesn't exist and it gives
+        * random errors if you try to access its body.
         */
-        if (!isDestroyed()) {
-            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
-            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+        float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+        float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
-            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                if (currentState == State.INACTIVE) { // Wasn't on camera...
-                    b2body.setActive(true);
-                    currentState = State.ALIVE;
-                    screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
-                }
-            } else {
-                // If this Enemy is currently playing
-                if (currentState == State.ALIVE) {
-                    // It's outside bottom edge + MARGIN_METERS or outside upperEdge + MARGIN_METERS
-                    // MARGIN_METERS is important because we don't want to kill an Enemy who is flying around on a repetitive wide path
-                    if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
-                        world.destroyBody(b2body);
-                        currentState = DEAD;
-                    }
+        if (currentState == State.INACTIVE) {
+            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) { // It's on camera
+                b2body.setActive(true);
+                currentState = State.ALIVE;
+                screen.getHud().showDynamicHelp(getClassName(), getHelpImage()); // Show dynamic help
+            }
+        } else {
+            if (currentState == State.ALIVE) { // If this Enemy is currently playing
+                // It's outside bottom edge + MARGIN_METERS or outside upperEdge + MARGIN_METERS
+                // MARGIN_METERS is important because we don't want to kill an Enemy who is flying around
+                // (going in and out of the camera) on a repetitive wide path
+                if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
+                    world.destroyBody(b2body);
+                    currentState = State.DEAD;
                 }
             }
         }
@@ -132,7 +129,7 @@ public abstract class Enemy extends Sprite {
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
     protected void getItemOnHit() {
-        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + OFFSET_METERS);
+        screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
     }
 
     protected void getItemOnHit(float x, float y) {
@@ -162,7 +159,7 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy can be removed from our game
     public boolean isDisposable() {
-        return currentState == DEAD;
+        return currentState == State.DEAD;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -206,7 +203,7 @@ public abstract class Enemy extends Sprite {
 
     @Override
     public void draw(Batch batch) {
-        if (currentState != DEAD && currentState != State.INACTIVE) {
+        if (currentState != State.DEAD && currentState != State.INACTIVE) {
             super.draw(batch);
         }
     }
