@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
+import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
@@ -88,7 +88,7 @@ public abstract class Enemy extends Sprite {
         currentState = State.INACTIVE;
 
         pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
-        splat = Assets.getInstance().getEnemySix().getEnemySixBeamStand();
+        splat = Assets.getInstance().getSplat().getRandomSplat();
     }
 
     public String getTiledMapId() {
@@ -208,8 +208,8 @@ public abstract class Enemy extends Sprite {
 
     protected void stateSplat() {
         // Setbounds is the one that determines the size of the splat on the screen
-        setBounds(getX() + getWidth() / 2 - AssetEnemySix.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemySix.HEIGHT_METERS / 2,
-                AssetEnemySix.WIDTH_METERS , AssetEnemySix.HEIGHT_METERS);
+        setBounds(getX() + getWidth() / 2 - AssetSplat.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetSplat.HEIGHT_METERS / 2,
+                AssetSplat.WIDTH_METERS , AssetSplat.HEIGHT_METERS);
         setRegion(splat);
     }
 
