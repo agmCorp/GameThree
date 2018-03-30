@@ -90,7 +90,7 @@ public class PlayScreen extends AbstractScreen {
 
     // TiledEditor map variable
     private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    private OrthogonalTiledMapRenderer tiledMapRenderer;
 
     // Box2d variables
     private World world;
@@ -126,7 +126,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Get our map and setup our map renderer
         map = LevelFactory.getLevelMap(this.level);
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initially set our gamcam to be centered correctly at the start (bottom) of the map
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
@@ -209,7 +209,7 @@ public class PlayScreen extends AbstractScreen {
         // We use GameController instead of input.isKeyPressed.
     }
 
-    private void update(float dt) {
+    private void updateGameLogic(float dt) {
         // Handle user input first
         handleInput(dt);
 
@@ -325,7 +325,7 @@ public class PlayScreen extends AbstractScreen {
         shaker.update(dt, gameCam, new Vector2(gameViewPort.getWorldWidth() / 2, upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 - gameViewPort.getWorldHeight() / 2));
 
         // Tell our renderer to draw only what our camera can see in our game world.
-        renderer.setView(gameCam);
+        tiledMapRenderer.setView(gameCam);
     }
 
     public B2WorldCreator getCreator() {
@@ -356,13 +356,13 @@ public class PlayScreen extends AbstractScreen {
         return shaker;
     }
 
-    private void render() {
+    private void renderGame() {
         // Clear the game screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Render our game map
-        renderer.render();
+        tiledMapRenderer.render();
 
         // Renderer our Box2DDebugLines
         if (DEBUG_MODE) {
@@ -610,11 +610,11 @@ public class PlayScreen extends AbstractScreen {
     public void render(float delta) {
         // Separate our update logic from render
         if (playScreenState == PlayScreenState.RUNNING) {
-            update(delta);
+            updateGameLogic(delta);
         }
 
         // Render logic
-        render();
+        renderGame();
 
         // Analyze game results
         if (playScreenState == PlayScreenState.RUNNING) {
@@ -654,7 +654,7 @@ public class PlayScreen extends AbstractScreen {
         // Dispose of all our opened resources
         super.dispose();
         map.dispose();
-        renderer.dispose();
+        tiledMapRenderer.dispose();
         world.dispose();
         if (DEBUG_MODE) {
             b2dr.dispose();
