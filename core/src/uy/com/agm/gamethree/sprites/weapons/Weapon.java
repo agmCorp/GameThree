@@ -61,7 +61,9 @@ public abstract class Weapon extends Sprite {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
 
             if (!(bottomEdge <= getY() + getHeight() && getY() <= upperEdge)) {
-                world.destroyBody(b2body);
+                if(!world.isLocked()) {
+                    world.destroyBody(b2body);
+                }
                 currentState = State.FINISHED;
             }
         }

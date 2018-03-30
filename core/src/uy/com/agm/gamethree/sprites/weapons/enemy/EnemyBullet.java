@@ -97,7 +97,9 @@ public class EnemyBullet extends Weapon {
 
     @Override
     protected void stateOnTarget(float dt) {
-        world.destroyBody(b2body);
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
         setBounds(getX(), getY(), Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_HEIGHT_METERS);
         setRegion(muzzleFlashImpactFX);
         currentState = State.IMPACT;

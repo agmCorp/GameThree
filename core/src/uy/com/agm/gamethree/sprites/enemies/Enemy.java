@@ -101,7 +101,9 @@ public abstract class Enemy extends Sprite {
     }
 
     public void terminate() {
-        world.destroyBody(b2body);
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
         currentState = State.DEAD;
     }
 
@@ -131,7 +133,9 @@ public abstract class Enemy extends Sprite {
                 // (going in and out of the camera) on a repetitive wide path
                 if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
                     if (currentState == State.ALIVE) {
-                        world.destroyBody(b2body);
+                        if(!world.isLocked()) {
+                            world.destroyBody(b2body);
+                        }
                     }
                     currentState = State.DEAD;
                 }

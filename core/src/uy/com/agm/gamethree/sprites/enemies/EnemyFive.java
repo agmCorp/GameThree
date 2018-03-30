@@ -144,7 +144,9 @@ public class EnemyFive extends Enemy {
             getItemOnHit();
 
             // Destroy box2D body
-            world.destroyBody(b2body);
+            if(!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
 
             // Explosion animation
             stateTime = 0;

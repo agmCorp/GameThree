@@ -446,7 +446,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     private void stateInjured(float dt) {
         // Destroy box2D body
-        world.destroyBody(b2body);
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
 
         // Stop level music
         AudioManager.getInstance().stopMusic();

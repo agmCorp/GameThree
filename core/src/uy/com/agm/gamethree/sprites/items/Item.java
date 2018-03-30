@@ -82,7 +82,9 @@ public abstract class Item extends Sprite {
                 if (currentState != State.INACTIVE) { // Was on camera...
                     // It's outside bottom edge + OFFSET or outside upperEdge + OFFSET
                     if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
-                        world.destroyBody(b2body);
+                        if(!world.isLocked()) {
+                            world.destroyBody(b2body);
+                        }
                         currentState = State.FINISHED;
                     }
                 }

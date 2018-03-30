@@ -135,7 +135,9 @@ public class PowerTwo extends Item {
         }
 
         if (stateFadingTime > FADING_SECONDS) {
-            world.destroyBody(b2body);
+            if(!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
             currentState = State.FINISHED;
         }
     }
@@ -143,7 +145,9 @@ public class PowerTwo extends Item {
     @Override
     protected void stateTaken(float dt) {
         // Destroy its b2body
-        world.destroyBody(b2body);
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
         applyPowerTwo();
         currentState = State.FINISHED;
     }

@@ -240,7 +240,9 @@ public class PowerBox extends Sprite {
         getItemOnHit();
 
         // Destroy box2D body
-        world.destroyBody(b2body);
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
 
         // Explosion animation
         stateTime = 0;
@@ -284,7 +286,9 @@ public class PowerBox extends Sprite {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
                     if (bottomEdge > getY() + getHeight()) {
-                        world.destroyBody(b2body);
+                        if(!world.isLocked()) {
+                            world.destroyBody(b2body);
+                        }
                         currentState = State.FINISHED;
                     }
                 }
