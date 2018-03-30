@@ -608,6 +608,8 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+        // Crucial: update logic (take input, creation of new game actors, do physics) -> render -> game results
+
         // Separate our update logic from render
         if (playScreenState == PlayScreenState.RUNNING) {
             updateGameLogic(delta);
