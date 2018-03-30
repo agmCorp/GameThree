@@ -14,6 +14,13 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class Borders extends InteractiveTileObject {
     private static final String TAG = Borders.class.getName();
 
+    /* We have eight borders (left1, left2, left3, left4, right1, right2, right3, right4). These borders
+     * are near 2000 / PPM meters long (20 meters).
+     * Box2D works with floating point numbers and tolerances have to be used to make Box2D perform well.
+     * These tolerances have been tuned to work well with meters-kilogram-second (MKS) units. In particular,
+     * Box2D has been tuned to work well with moving shapes between 0.1 and 10 meters.
+     * Static shapes may be up to 50 meters long without trouble.
+    */
     public Borders(PlayScreen screen, MapObject object) {
         super(screen, object);
         fixture.setUserData(this);
