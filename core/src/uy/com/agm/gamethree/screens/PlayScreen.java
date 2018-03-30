@@ -217,6 +217,11 @@ public class PlayScreen extends AbstractScreen {
         creator.handleCreatingActors();
 
         // Step in the physics simulation
+        // Anything that involves adding fixtures, removing fixtures from a body or creating a body during actual simulation
+        // requires you to do it OUTSIDE the physics step.
+        // The 'physics step' involves WorldContactListener and all the methods it calls on bodies (like onHit, onTake, etc).
+        // So, for instance, in Enemy.onHit() I must never touch the enemy's body (I should just mark it to
+        // modify it inside the Enemy.update() method)
         doPhysicsStep(dt);
 
         // The order is not important
