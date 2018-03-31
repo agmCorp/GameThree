@@ -358,6 +358,7 @@ public class B2WorldCreator {
             }
 
             Gdx.app.debug(TAG, "**** Objects not disposables ****");
+            Gdx.app.debug(TAG, "***** World.bodyCount: " + screen.getWorld().getBodyCount());
             Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
             Gdx.app.debug(TAG, "***** Items: " + items.size);
