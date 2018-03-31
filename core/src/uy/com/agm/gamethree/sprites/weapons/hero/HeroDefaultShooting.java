@@ -31,7 +31,7 @@ public class HeroDefaultShooting implements IShootStrategy {
     // SilverBullet (meters = pixels * resizeFactor / PPM)
     public static final float SILVER_BULLET_VELOCITY_X = 0.0f;
     public static final float SILVER_BULLET_VELOCITY_Y = 6.0f;
-    public static final float SILVER_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 15.0f / PlayScreen.PPM;
+    public static final float SILVER_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 25.0f / PlayScreen.PPM;
     public static final float SILVER_BULLET_FIRE_DELAY_SECONDS = 1.0f;
 
     private PlayScreen screen;

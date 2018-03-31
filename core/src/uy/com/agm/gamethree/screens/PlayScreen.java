@@ -63,7 +63,7 @@ public class PlayScreen extends AbstractScreen {
     public static final float GAMECAM_VELOCITY = 0.304f;
 
     // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -147,9 +147,9 @@ public class PlayScreen extends AbstractScreen {
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
-//        final float ALTURA = 70.0f;
-//        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
-//        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
+        final float ALTURA = 70.0f;
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
 
         // Create boundaries
         upperEdge = new Edge(this, true);
