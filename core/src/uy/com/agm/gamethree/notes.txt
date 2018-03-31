@@ -23,10 +23,8 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
-- hacer el shuriken bien grande
-- con el escudo los enemigos me mueven.
+- algoritmo de revivir seguro
 - hacer una bala grandota y ruidosa con shake capaz
-- para terminar el nivel me faltan las silverbullets y los coins.
 - el coin deberia ser random con random puntaje, como hice las powerboxes
 - factor handycap por nivel (solo para los enemigos que reuse?)
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
