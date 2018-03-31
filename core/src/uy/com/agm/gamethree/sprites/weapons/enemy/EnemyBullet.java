@@ -84,7 +84,7 @@ public class EnemyBullet extends Weapon {
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
         if (showMuzzleFlashShot) {
-            setRegion(muzzleFlashShotFX);
+            setRegion(muzzleFlashShotFX); // Only one first frame
             showMuzzleFlashShot = false;
         } else {
             if (stateTime == 0) { // Animation starts
@@ -101,7 +101,7 @@ public class EnemyBullet extends Weapon {
             world.destroyBody(b2body);
         }
         setBounds(getX(), getY(), Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getEnemyBullet().MUZZLE_FLASH_HEIGHT_METERS);
-        setRegion(muzzleFlashImpactFX);
+        setRegion(muzzleFlashImpactFX); // Only one last frame
         currentState = State.IMPACT;
     }
 
