@@ -57,7 +57,7 @@ public abstract class Enemy extends Sprite {
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
-        this.tiledMapId = object.getProperties().get("id", 0, Integer.class);
+        this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();

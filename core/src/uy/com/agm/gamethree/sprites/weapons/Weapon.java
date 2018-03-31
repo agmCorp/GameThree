@@ -107,6 +107,14 @@ public abstract class Weapon extends Sprite {
         checkBoundaries();
     }
 
+    public String whoAmI() {
+        return getClassName();
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
     @Override
     public void draw(Batch batch) {
         if (currentState != State.FINISHED) {
@@ -119,6 +127,7 @@ public abstract class Weapon extends Sprite {
     }
 
     protected abstract void defineWeapon();
+    protected abstract String getClassName();
     protected abstract void stateShot(float dt);
     protected abstract void stateOnTarget(float dt);
     public abstract void onTarget();

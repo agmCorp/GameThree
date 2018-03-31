@@ -60,6 +60,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_EIGHT = "enemyEight";
     private static final String LAYER_POWER_BOX = "powerBox";
 
+    public static final String KEY_ID = "id";
     public static final String KEY_POWER_ONE = "powerOne";
     public static final String KEY_POWER_TWO = "powerTwo";
     public static final String KEY_POWER_THREE = "powerThree";
@@ -331,6 +332,31 @@ public class B2WorldCreator {
                 value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }
+
+            for (PowerBox powerBox : getPowerBoxes()) {
+                key = powerBox.whoAmI();
+                value = arrayMapDebug.get(key);
+                data = powerBox.getTiledMapId() + " (" + powerBox.getCurrentState() + ")";
+                value = value == null ? data : value + ", " + data;
+                arrayMapDebug.put(key, value);
+            }
+
+            for (Item item : getItems()) {
+                key = item.whoAmI();
+                value = arrayMapDebug.get(key);
+                data = "STATE: " + item.getCurrentState();
+                value = value == null ? data : value + ", " + data;
+                arrayMapDebug.put(key, value);
+            }
+
+            for (Weapon weapon : getWeapons()) {
+                key = weapon.whoAmI();
+                value = arrayMapDebug.get(key);
+                data = "STATE: " + weapon.getCurrentState();
+                value = value == null ? data : value + ", " + data;
+                arrayMapDebug.put(key, value);
+            }
+
             Gdx.app.debug(TAG, "**** Objects not disposables ****");
             Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);

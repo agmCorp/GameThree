@@ -124,6 +124,14 @@ public abstract class Item extends Sprite {
         }
     }
 
+    public String whoAmI() {
+        return getClassName();
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
     @Override
     public void draw(Batch batch) {
         if (currentState == State.WAITING || currentState == State.FADING) {

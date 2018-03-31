@@ -52,9 +52,11 @@ public class PowerBox extends Sprite {
     private State currentState;
     private MapObject object;
     private int damage;
+    private int tiledMapId;
 
     public PowerBox(PlayScreen screen, MapObject object) {
         this.object = object;
+        this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
         this.world = screen.getWorld();
         this.screen = screen;
 
@@ -330,5 +332,17 @@ public class PowerBox extends Sprite {
     // This PowerBox can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
+    }
+
+    public String whoAmI() {
+        return this.getClass().getName();
+    }
+
+    public String getTiledMapId() {
+        return String.valueOf(tiledMapId);
+    }
+
+    public State getCurrentState() {
+        return currentState;
     }
 }

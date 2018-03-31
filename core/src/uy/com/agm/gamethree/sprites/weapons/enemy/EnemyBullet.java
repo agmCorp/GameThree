@@ -74,6 +74,11 @@ public class EnemyBullet extends Weapon {
     }
 
     @Override
+    protected String getClassName() {
+        return this.getClass().getName();
+    }
+
+    @Override
     protected void stateShot(float dt) {
         b2body.setLinearVelocity(velocity);
 
