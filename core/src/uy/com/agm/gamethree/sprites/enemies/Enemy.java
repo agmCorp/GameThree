@@ -232,8 +232,8 @@ public abstract class Enemy extends Sprite {
         return getClassName();
     }
 
-    public State getCurrentState() {
-        return currentState;
+    public String getCurrentState() {
+        return currentState.toString();
     }
 
     @Override

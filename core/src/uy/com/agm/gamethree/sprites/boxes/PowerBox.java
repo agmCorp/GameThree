@@ -342,7 +342,7 @@ public class PowerBox extends Sprite {
         return String.valueOf(tiledMapId);
     }
 
-    public State getCurrentState() {
-        return currentState;
+    public String getCurrentState() {
+        return currentState.toString();
     }
 }

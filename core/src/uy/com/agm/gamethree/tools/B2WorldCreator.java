@@ -344,7 +344,7 @@ public class B2WorldCreator {
             for (Item item : getItems()) {
                 key = item.whoAmI();
                 value = arrayMapDebug.get(key);
-                data = "STATE: " + item.getCurrentState();
+                data = item.getCurrentState();
                 value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }
@@ -352,7 +352,7 @@ public class B2WorldCreator {
             for (Weapon weapon : getWeapons()) {
                 key = weapon.whoAmI();
                 value = arrayMapDebug.get(key);
-                data = "STATE: " + weapon.getCurrentState();
+                data = weapon.getCurrentState();
                 value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }
