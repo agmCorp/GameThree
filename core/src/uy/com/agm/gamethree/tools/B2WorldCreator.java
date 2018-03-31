@@ -322,11 +322,13 @@ public class B2WorldCreator {
             arrayMapDebug.clear();
             String key;
             String value;
+            String data;
 
             for (Enemy enemy : getEnemies()) {
                 key = enemy.whoAmI();
                 value = arrayMapDebug.get(key);
-                value = value == null ? enemy.getTiledMapId() : value + ", " + enemy.getTiledMapId();
+                data = enemy.getTiledMapId() + " (" + enemy.getCurrentState() + ")";
+                value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }
             Gdx.app.debug(TAG, "**** Objects not disposables ****");

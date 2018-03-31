@@ -232,6 +232,10 @@ public abstract class Enemy extends Sprite {
         return getClassName();
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
     @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD && currentState != State.INACTIVE) {
