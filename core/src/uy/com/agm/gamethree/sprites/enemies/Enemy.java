@@ -97,7 +97,7 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == State.DEAD || currentState == State.EXPLODING || currentState == State.SPLAT;
+        return currentState == State.INJURED || currentState == State.EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
     public void terminate() {

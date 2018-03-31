@@ -168,7 +168,7 @@ public class PowerBox extends Sprite {
 
     // This PowerBox doesn't have any b2body
     public boolean isDestroyed() {
-        return currentState == State.FINISHED || currentState == State.EXPLODING;
+        return currentState == State.OPENED || currentState == State.EXPLODING || currentState == State.FINISHED;
     }
 
     // Determine whether or not an item should be released reading a property set in TiledEditor.
