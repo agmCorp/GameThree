@@ -101,10 +101,12 @@ public abstract class Enemy extends Sprite {
     }
 
     public void terminate() {
-        if(!world.isLocked()) {
-            world.destroyBody(b2body);
+        if (!isDestroyed()) {
+            if (!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
+            currentState = State.DEAD;
         }
-        currentState = State.DEAD;
     }
 
     protected void checkBoundaries() {
