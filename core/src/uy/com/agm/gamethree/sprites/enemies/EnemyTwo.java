@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -162,6 +163,13 @@ public class EnemyTwo extends Enemy {
         if (!knockBackStarted) {
             initKnockBack();
         }
+
+        // We don't let this Enemy go beyond the upper edge
+        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
+        if (upperEdge <= b2body.getPosition().y + CIRCLE_SHAPE_RADIUS_METERS) {
+            b2body.setLinearVelocity(0.0f, 0.0f); // Stop
+        }
+
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion((TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true));
         setColor(KNOCK_BACK_COLOR);
@@ -190,7 +198,9 @@ public class EnemyTwo extends Enemy {
         // We set the previous filter in every fixture
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
+            fixture.setDensity(0.0f); // No density
         }
+        b2body.resetMassData();
 
         knockBackStarted = true;
     }
