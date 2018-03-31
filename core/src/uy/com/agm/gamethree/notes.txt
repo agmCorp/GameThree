@@ -53,6 +53,7 @@ eight - bicho verde cometa
 
 PENDIENTES
 ----------
+- poner help al juego con una historia como hice con la granny.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
@@ -148,6 +149,29 @@ camara avanza y te aplasta pero se traba todo porque no tenes hacia donde escapa
 un pitido y despues se destraba a duras penas, pero esta mal eso.
 No se como solucionar eso. Pasa lo mismo cuando moris aplastado por un path y el edge...
 - se corta el audio al morir..el gruñido se escucha cortado.
+
+--------------------------------------------------------------------
+Para encontrar una posicion segura:
+Mi heroe tiene ancho y largo. Sea r un rectangulo de ese ancho y largo, coordenadas variables x, y.
+
+Los unicos objetos con los que no quiero colisionar al revivir son:
+border (se donde esta siempre), edge (se donde esta siempre), boxes, obstacle, path
+
+Para los demas actores (como los enemigos que se mueven o lo items etc.) tengo el blink para que no mueras.
+Ademas no me bloquean.
+
+Entonces lo que puedo hacer es ir variando (x, y) y con r ver si overlap las (boxes, obstacle, path).
+Yo en el creator tengo un arreglo de boxes, me faltan los arreglos de obstacle y path. Ademas por ser estos ultimos InteractiveTileObject ya
+tengo el bounds hermoso.
+Si encuentro un lugar donde no overlap, lo meto ahi.
+
+como voy variando (x, y)?
+Del punto ideal que es donde lo revivo ahora, voy todo a la derecha y luego todo a la izquierda testeando.
+Si no encuentro lugar seguro, subo el y, y hago lo mismo hasta encontrar o llegar al techo.
+Puedo asumir que el macaco lo meto en las 3/4 partes superiores de la pantalla ignorando el 1/4 de abajo...no me calienta.
+Si no encuentro lugar, lo dejo en la posicion ideal y que se joda.
+--------------------------------------------------------------------
+
 
 VIDEO
 -----
