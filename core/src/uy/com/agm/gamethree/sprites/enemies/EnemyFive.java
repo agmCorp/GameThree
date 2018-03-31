@@ -274,7 +274,7 @@ public class EnemyFive extends Enemy {
             counterclockwise = !counterclockwise;
             damage = true;
         } else {
-            onHit();
+            super.onHit(weapon);
         }
     }
 

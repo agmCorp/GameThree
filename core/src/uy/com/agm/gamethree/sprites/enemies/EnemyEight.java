@@ -316,7 +316,7 @@ public class EnemyEight extends Enemy {
             weapon.onBounce();
             damage = true;
         } else {
-            onHit();
+            super.onHit(weapon);
         }
     }
 
