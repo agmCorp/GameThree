@@ -145,11 +145,6 @@ public class EnemyOne extends Enemy {
             // Release an item
             getItemOnHit();
 
-            // Destroy box2D body
-            if(!world.isLocked()) {
-                world.destroyBody(b2body);
-            }
-
             // Explosion animation
             stateTime = 0;
 
@@ -163,6 +158,11 @@ public class EnemyOne extends Enemy {
 
             // Set score
             screen.getHud().addScore(SCORE);
+
+            // Destroy box2D body
+            if(!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
 
             // Set the new state
             currentState = State.EXPLODING;

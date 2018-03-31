@@ -59,9 +59,9 @@ public abstract class Item extends Sprite {
             velocity.y = -velocity.y;
     }
 
-    // This Item doesn't have any b2body
+    // This Item doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentState == State.TAKEN || currentState == State.FINISHED;
+        return currentState == State.FINISHED;
     }
 
     protected void checkBoundaries() {

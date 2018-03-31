@@ -46,9 +46,9 @@ public abstract class Weapon extends Sprite {
         defineWeapon();
     }
 
-    // This Weapon doesn't have any b2body
+    // This Weapon doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentState == State.ONTARGET || currentState == State.IMPACT || currentState == State.FINISHED;
+        return currentState == State.IMPACT || currentState == State.FINISHED;
     }
 
     protected void checkBoundaries() {

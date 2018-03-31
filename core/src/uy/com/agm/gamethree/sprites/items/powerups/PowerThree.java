@@ -141,11 +141,14 @@ public class PowerThree extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyPowerThree();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
-        applyPowerThree();
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

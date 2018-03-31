@@ -141,11 +141,14 @@ public class PowerFour extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyPowerFour();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
-        applyPowerFour();
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

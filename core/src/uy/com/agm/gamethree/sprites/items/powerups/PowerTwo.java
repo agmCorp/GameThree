@@ -144,11 +144,14 @@ public class PowerTwo extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyPowerTwo();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
-        applyPowerTwo();
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

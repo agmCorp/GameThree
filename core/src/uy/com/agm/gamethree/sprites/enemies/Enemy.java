@@ -95,18 +95,19 @@ public abstract class Enemy extends Sprite {
         return String.valueOf(tiledMapId);
     }
 
-    // This Enemy doesn't have any b2body
+    // This Enemy doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentState == State.INJURED || currentState == State.EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
+        return currentState == State.EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
+    // Kill this Enemy
     public void terminate() {
         if (!isDestroyed()) {
             if (!world.isLocked()) {
                 world.destroyBody(b2body);
             }
-            currentState = State.DEAD;
         }
+        currentState = State.DEAD;
     }
 
     protected void checkBoundaries() {

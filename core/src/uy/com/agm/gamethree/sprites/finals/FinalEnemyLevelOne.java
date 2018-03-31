@@ -445,11 +445,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private void stateInjured(float dt) {
-        // Destroy box2D body
-        if(!world.isLocked()) {
-            world.destroyBody(b2body);
-        }
-
         // Stop level music
         AudioManager.getInstance().stopMusic();
 
@@ -461,6 +456,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // Set score
         screen.getHud().addScore(SCORE);
+
+        // Destroy box2D body
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
 
         // Set the new state
         currentStateFinalEnemy = StateFinalEnemy.DYING;

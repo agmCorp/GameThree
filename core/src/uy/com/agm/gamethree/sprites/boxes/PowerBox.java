@@ -168,9 +168,9 @@ public class PowerBox extends Sprite {
         stateTime = 0;
     }
 
-    // This PowerBox doesn't have any b2body
+    // This PowerBox doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentState == State.OPENED || currentState == State.EXPLODING || currentState == State.FINISHED;
+        return currentState == State.EXPLODING || currentState == State.FINISHED;
     }
 
     // Determine whether or not an item should be released reading a property set in TiledEditor.
@@ -241,11 +241,6 @@ public class PowerBox extends Sprite {
         // Release an item
         getItemOnHit();
 
-        // Destroy box2D body
-        if(!world.isLocked()) {
-            world.destroyBody(b2body);
-        }
-
         // Explosion animation
         stateTime = 0;
 
@@ -254,6 +249,11 @@ public class PowerBox extends Sprite {
 
         // Set score
         screen.getHud().addScore(SCORE);
+
+        // Destroy box2D body
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
 
         // Set the new state
         currentState = State.EXPLODING;

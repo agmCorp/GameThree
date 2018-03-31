@@ -102,11 +102,14 @@ public class HeroBullet extends Weapon {
 
     @Override
     protected void stateOnTarget(float dt) {
+        setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
+        setRegion(muzzleFlashImpactFX); // Only one last frame
+
+        // Destroy box2D body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
-        setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
-        setRegion(muzzleFlashImpactFX); // Only one last frame
+
         currentState = State.IMPACT;
     }
 

@@ -141,11 +141,14 @@ public class PowerOne extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyPowerOne();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
-        applyPowerOne();
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

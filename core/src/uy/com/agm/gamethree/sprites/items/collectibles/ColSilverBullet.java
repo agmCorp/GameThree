@@ -130,6 +130,8 @@ public class ColSilverBullet extends Item {
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

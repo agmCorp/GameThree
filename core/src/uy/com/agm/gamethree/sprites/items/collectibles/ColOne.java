@@ -129,6 +129,8 @@ public class ColOne extends Item {
         if(!world.isLocked()) {
             world.destroyBody(b2body);
         }
+
+        // Set the new state
         currentState = State.FINISHED;
     }
 

@@ -86,10 +86,9 @@ public abstract class FinalEnemy extends Sprite {
         return currentStateFinalEnemy == StateFinalEnemy.DEAD;
     }
 
-    // This FinalEnemy doesn't have any b2body
+    // This FinalEnemy doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentStateFinalEnemy == StateFinalEnemy.INJURED ||
-               currentStateFinalEnemy == StateFinalEnemy.DYING ||
+        return currentStateFinalEnemy == StateFinalEnemy.DYING ||
                currentStateFinalEnemy == StateFinalEnemy.EXPLODING ||
                currentStateFinalEnemy == StateFinalEnemy.DEAD;
     }
