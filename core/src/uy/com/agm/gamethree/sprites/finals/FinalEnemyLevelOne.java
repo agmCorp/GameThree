@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -83,6 +84,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private Animation explosionFXAnimation;
     private float explosionFXStateTime;
     private Sprite explosionFXSprite;
+
+    // Splat FX
+    private Sprite splatFXSprite;
 
     // Knock back effect
     private boolean knockBack;
@@ -158,6 +162,20 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         // Place origin of rotation in the center of the Sprite
         explosionFXSprite.setOriginCenter();
+
+        // -------------------- SplatFX --------------------
+
+        // Set the splat's texture
+        Sprite spriteSplat = new Sprite(Assets.getInstance().getEnemyOne().getEnemyOneStand()); // todo
+
+        // Only to set width and height of our spriteSplat (in stateDead(...) we set its position)
+        spriteSplat.setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS); // todo
+
+        // Splat FX Sprite
+        splatFXSprite = new Sprite(spriteSplat);
+
+        // Place origin of rotation in the center of the Sprite
+        splatFXSprite.setOriginCenter();
     }
 
     @Override
@@ -273,6 +291,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 screen.getShaker().shake(EXPLOSION_SHAKE_DURATION);
                 break;
             case DEAD:
+                stateDead();
                 break;
             default:
                 break;
@@ -589,8 +608,20 @@ public class FinalEnemyLevelOne extends FinalEnemy {
            }
 
            // Center the Sprite in tmp
-           explosionFXSprite.setPosition( tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
+           explosionFXSprite.setPosition(tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
        }
+    }
+
+    private void stateDead() {
+            // Apply rotation and flip of the explosion
+            splatFXSprite.setRotation(explosionFXSprite.getRotation());
+            splatFXSprite.setFlip(explosionFXSprite.isFlipX(), explosionFXSprite.isFlipY());
+
+            // Get center of the bounding rectangle of the explosion
+            explosionFXSprite.getBoundingRectangle().getCenter(tmp);
+
+            // Center the Sprite in tmp
+            splatFXSprite.setPosition(tmp.x - splatFXSprite.getWidth() / 2, tmp.y - splatFXSprite.getHeight() / 2);
     }
 
     private void powerStatePowerfulToNormal(float dt) {
@@ -837,9 +868,9 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private boolean isDrawable() {
-        return currentStateFinalEnemy != StateFinalEnemy.DEAD &&
+        return currentStateFinalEnemy != StateFinalEnemy.INACTIVE &&
                 currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
-                currentStateFinalEnemy != StateFinalEnemy.INACTIVE;
+                currentStateFinalEnemy != StateFinalEnemy.DEAD;
     }
 
     private void drawPowers(Batch batch) {
@@ -848,9 +879,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
     }
 
-    private void drawExplosion(Batch batch) {
-        if (currentStateFinalEnemy == StateFinalEnemy.EXPLODING) {
-            explosionFXSprite.draw(batch);
+    private void drawFxs(Batch batch) {
+        switch (currentStateFinalEnemy) {
+            case EXPLODING:
+                explosionFXSprite.draw(batch);
+                break;
+            case DEAD:
+                splatFXSprite.draw(batch);
+                break;
         }
     }
 
@@ -861,7 +897,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             drawPowers(batch);
             super.draw(batch);
         } else {
-            drawExplosion(batch);
+            drawFxs(batch);
         }
     }
 }
