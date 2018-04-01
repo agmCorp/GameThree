@@ -29,6 +29,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private static final float BULLET_VELOCITY_X = 0.0f;
     private static final float BULLET_VELOCITY_Y = 7.0f;
     private static final float RANDOM_OFFSET = 0.8f;
+    protected static final float SHAKE_DURATION = 0.8f;
 
     private PlayScreen screen;
     private int numberBullets;
@@ -120,5 +121,6 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         tmp.set(velocityX, velocityY).rotate(angle); // I must rotate the velocity to move in that direction, otherwise I'll move in a straight line to the front.
         screen.getCreator().createGameThreeActor(new ActorDef(new HeroBullet(screen, x, y,
                 width, height, circleShapeRadius, angle, tmp.x, tmp.y, animation)));
+        screen.getShaker().shake(SHAKE_DURATION);
     }
 }
