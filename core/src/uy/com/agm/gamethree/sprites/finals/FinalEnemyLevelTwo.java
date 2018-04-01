@@ -15,9 +15,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
@@ -38,9 +38,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final String NAME = "SKULLYHOOD";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
-    private static final float LINEAR_VELOCITY = 4.0f;
+    private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 15;
+    private static final int MAX_DAMAGE = 15 * 0 + 2;
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
@@ -169,10 +169,10 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         // -------------------- SplatFX --------------------
 
         // Set the splat's texture
-        Sprite spriteSplat = new Sprite(Assets.getInstance().getEnemyOne().getEnemyOneStand()); // todo
+        Sprite spriteSplat = new Sprite(Assets.getInstance().getSplat().getRandomFinalEnemySplat());
 
         // Only to set width and height of our spriteSplat (in stateDead(...) we set its position)
-        spriteSplat.setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS); // todo
+        spriteSplat.setBounds(getX(), getY(), AssetSplat.FINAL_ENEMY_SPLAT_WIDTH_METERS, AssetSplat.FINAL_ENEMY_SPLAT_HEIGHT_METERS);
 
         // Splat FX Sprite
         splatFXSprite = new Sprite(spriteSplat);

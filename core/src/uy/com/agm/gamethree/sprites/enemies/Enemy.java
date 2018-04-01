@@ -88,7 +88,7 @@ public abstract class Enemy extends Sprite {
         currentState = State.INACTIVE;
 
         pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
-        splat = Assets.getInstance().getSplat().getRandomSplat();
+        splat = Assets.getInstance().getSplat().getRandomEnemySplat();
     }
 
     public String getTiledMapId() {
@@ -215,8 +215,8 @@ public abstract class Enemy extends Sprite {
 
     protected void stateSplat() {
         // Setbounds is the one that determines the size of the splat on the screen
-        setBounds(getX() + getWidth() / 2 - AssetSplat.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetSplat.HEIGHT_METERS / 2,
-                AssetSplat.WIDTH_METERS , AssetSplat.HEIGHT_METERS);
+        setBounds(getX() + getWidth() / 2 - AssetSplat.ENEMY_SPLAT_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetSplat.ENEMY_SPLAT_HEIGHT_METERS / 2,
+                AssetSplat.ENEMY_SPLAT_WIDTH_METERS, AssetSplat.ENEMY_SPLAT_HEIGHT_METERS);
         setRegion(splat);
     }
 
