@@ -23,6 +23,7 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
+- creo que dejarle 10 vidas en la version definitiva no esta mal. Asumiendo que no haya un poder vidas.
 - algoritmo de revivir seguro
 - Seguir viendo las mejoras del video (como slow motion)
 - hacer una bala grandota y ruidosa con shake capaz
