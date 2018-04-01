@@ -540,6 +540,10 @@ LECCIONES APRENDIDAS
     {"input":{"size":7833078,"type":"image/png"},"output":{"size":1351755,"type":"image/png","width":2048,"height":2048,"ratio":0.1726,"url":"https://api.tinify.com/output/htkrx9ru6pjp1heyz4q5grx6egk7bxmq"}}
 
     Entonces si voy a la url que alli dice (https://api.tinify.com/output/htkrx9ru6pjp1heyz4q5grx6egk7bxmq) puedo bajar mi imagen reducida.
+
+25)
+    Por lo que vi, mi delta time (dt) anda por 0.025, a veces menos (0.01algo)
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
