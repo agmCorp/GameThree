@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public class Vector2Util {
+    private static final String TAG = Vector2Util.class.getName();
+
     /*
      * To go from origin to target at constant speed, we must:
      * - subtract their position vectors: target - origin.

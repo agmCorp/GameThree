@@ -20,6 +20,8 @@ import uy.com.agm.gamethree.sprites.weapons.Weapon;
  */
 
 public class WorldContactListener implements ContactListener {
+    private static final String TAG = WorldContactListener.class.getName();
+
     /* Box2D Collision Bits
     * I can have up to 16 different categories for collision. If I require even finer control over what
     * should collide with what, I can set a contact filter callback in the world so that when Box2D
@@ -43,7 +45,6 @@ public class WorldContactListener implements ContactListener {
     public static final short ENEMY_WEAPON_BIT = 2048;
     public static final short FINAL_ENEMY_BIT = 4096;
     public static final short SHIELD_BIT = 8192;
-    private static final String TAG = WorldContactListener.class.getName();
 
     @Override
     public void beginContact(Contact contact) {

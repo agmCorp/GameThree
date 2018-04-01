@@ -23,6 +23,7 @@ import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Landing;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -94,6 +95,9 @@ public class Hero extends Sprite {
     // Temp GC friendly vector
     private Vector2 tmp;
 
+    // Landing helper
+    private Landing landig;
+
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -146,6 +150,9 @@ public class Hero extends Sprite {
         // Blink
         blinkingTime = 0;
         alpha = false;
+
+        // Landing helper
+        landig = new Landing(screen);
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -449,8 +456,14 @@ public class Hero extends Sprite {
         // Stop motion
         stop();
 
-        // Be careful, we broke the simulation because Hero is teleported.
-        b2body.setTransform(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4, b2body.getAngle());
+        // Find an appropriate spot to land
+        landig.land(tmp);
+        if (tmp.x == -1 && tmp.y == -1) { // There is no such place, so, good luck Hero! (use your blink temporary power)
+            tmp.set(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4);
+        }
+
+        // Be careful, we broke the simulation because Hero is teleported on tmp position
+        b2body.setTransform(tmp.x, tmp.y, b2body.getAngle());
 
         // Set Hero active with his initial state
         b2body.setActive(true);
