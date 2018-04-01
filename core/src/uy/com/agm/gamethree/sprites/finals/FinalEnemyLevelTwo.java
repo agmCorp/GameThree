@@ -40,7 +40,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 15 * 0 + 2;
+    private static final int MAX_DAMAGE = 15;
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
