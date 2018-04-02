@@ -143,7 +143,12 @@ el resto del sonido. No lo supe arreglar...
 - Si te moves al espacio que queda entre el limite del path (en el charco toxico) y el edge. Ahi la
 camara avanza y te aplasta pero se traba todo porque no tenes hacia donde escapar. Todo funciona lento por un tiempo, se escucha
 un pitido (por mis multiples audios de onbump) y despues se destraba a duras penas y a veces no se destraba..
-No se como solucionar eso porque no se detectarlo. Path es StaticBody and Edge es KinematicBody
+No se como solucionar eso porque no se detectarlo. Path es StaticBody and Edge es KinematicBody.
+Resumiendo Path(Static) Hero(Dynamic) Edge(Kinematic).
+Al quedarse como en sanguche con hero en medio, el worldContactListener llama infinitamente a path.onbump() (no invoca a ninguna función de edge porque no lo programé).
+Una posible solución es envolver al hero con un sensor circular más grande
+
+
 - se corta el audio al morir..el gruñido se escucha cortado.
 
 VIDEO
