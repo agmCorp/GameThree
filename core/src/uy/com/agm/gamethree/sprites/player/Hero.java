@@ -461,11 +461,8 @@ public class Hero extends Sprite {
         // Find an appropriate spot to land
         tmp = landig.land();
         if (tmp.x == -1 && tmp.y == -1) { // There is no such place, so, good luck Hero! (use your blink temporary power)
-            Gdx.app.debug(TAG, "************$$$ NO HAY SOLUCION ********************"); // TODO
             tmp.set(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4);
         }
-        Gdx.app.debug(TAG, "************$$$ EL PUNTO IDEAL ERA (" + screen.getGameCam().position.x + ", " + (screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) + ")" ); // TODO
-        Gdx.app.debug(TAG, "************$$$ COLOCO A HERO EN (" + tmp.x + ", " + tmp.y + ")" ); // TODO
 
         // Be careful, we broke the simulation because Hero is teleported on tmp position
         b2body.setTransform(tmp.x, tmp.y, b2body.getAngle());
