@@ -152,7 +152,7 @@ public class Landing {
     // false si no colisiona
     private boolean collides(Vector2 v) {
         // BORDER EDGE OBSTACLE PATH POWERBOX
-        Gdx.app.debug(TAG, "************ (" + v.x + ", " + v.y + ")");
+        Gdx.app.debug(TAG, "************$$$ (" + v.x + ", " + v.y + ")");
 
         rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
         boolean collision = false;
@@ -162,6 +162,7 @@ public class Landing {
             for (Border border : screen.getCreator().getBorders()) {
                 if (rectangleTmp.overlaps(border.getBoundsMeters())) {
                     collision = true;
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON BORDER " + border.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -172,6 +173,7 @@ public class Landing {
             for (Edge edge : screen.getCreator().getEdges()) {
                 if (rectangleTmp.overlaps(edge.getBoundsMeters())) {
                     collision = true;
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON EDGE " + edge.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -182,6 +184,7 @@ public class Landing {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
                 if (rectangleTmp.overlaps(obstacle.getBoundsMeters())) {
                     collision = true;
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON OBSTACLE " + obstacle.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -192,6 +195,7 @@ public class Landing {
             for (Path path : screen.getCreator().getPaths()) {
                 if (rectangleTmp.overlaps(path.getBoundsMeters())) {
                     collision = true;
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON PATH " + path.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -202,6 +206,7 @@ public class Landing {
             for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
                 if (rectangleTmp.overlaps(powerBox.getBoundsMeters())) {
                     collision = true;
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON POWERBOX " + powerBox.getBoundsMeters().toString());
                     break;
                 }
             }
