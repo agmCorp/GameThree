@@ -27,16 +27,18 @@ public class Landing {
     private static final float MARGIN_METERS = 0.2f;
 
     private PlayScreen screen;
-
-    // Temporary GC friendly rectangle
-    private Rectangle rectangleTmp;
+    private Rectangle rectangleHero;
 
     // Temporary GC friendly vector
     private Vector2 v;
 
     public Landing(PlayScreen screen) {
         this.screen = screen;
-        rectangleTmp = new Rectangle();
+
+        // Approximate surface that our hero represents on the screen (with a security margin)
+        rectangleHero = new Rectangle();
+        rectangleHero.setSize(AssetHero.WIDTH_METERS + MARGIN_METERS, AssetHero.HEIGHT_METERS + MARGIN_METERS);
+
         v = new Vector2();
     }
 
@@ -155,16 +157,16 @@ public class Landing {
         // BORDER EDGE OBSTACLE PATH POWERBOX
         Gdx.app.debug(TAG, "************$$$ (" + v.x + ", " + v.y + ")");
 
-        // Approximate surface that our hero represents on the screen (with a security margin)
-        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS + MARGIN_METERS, AssetHero.HEIGHT_METERS + MARGIN_METERS);
+        // Candidate position
+        rectangleHero.setPosition(v.x, v.y);
         boolean collision = false;
 
         // Borders
         if (!collision) {
             for (Border border : screen.getCreator().getBorders()) {
-                if (rectangleTmp.overlaps(border.getBoundsMeters())) {
+                if (rectangleHero.overlaps(border.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON BORDER " + border.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON BORDER " + border.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -173,9 +175,9 @@ public class Landing {
         // Edges
         if (!collision) {
             for (Edge edge : screen.getCreator().getEdges()) {
-                if (rectangleTmp.overlaps(edge.getBoundsMeters())) {
+                if (rectangleHero.overlaps(edge.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON EDGE " + edge.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON EDGE " + edge.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -184,9 +186,9 @@ public class Landing {
         // Obstacles
         if (!collision) {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
-                if (rectangleTmp.overlaps(obstacle.getBoundsMeters())) {
+                if (rectangleHero.overlaps(obstacle.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON OBSTACLE " + obstacle.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON OBSTACLE " + obstacle.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -195,9 +197,9 @@ public class Landing {
         // Paths
         if (!collision) {
             for (Path path : screen.getCreator().getPaths()) {
-                if (rectangleTmp.overlaps(path.getBoundsMeters())) {
+                if (rectangleHero.overlaps(path.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON PATH " + path.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON PATH " + path.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -206,13 +208,16 @@ public class Landing {
         // PowerBoxes
         if (!collision) {
             for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
-                if (rectangleTmp.overlaps(powerBox.getBoundsMeters())) {
+                if (rectangleHero.overlaps(powerBox.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION CON POWERBOX " + powerBox.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON POWERBOX " + powerBox.getBoundsMeters().toString());
                     break;
                 }
             }
         }
+
+//        // // TODO: 4/2/2018
+//        collision = !collision;
 
         return collision;
     }
