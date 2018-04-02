@@ -180,7 +180,6 @@ public class Landing {
         // Obstacles
         if (!collision) {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
-                Gdx.app.debug(TAG, "************ OBSTACULO " + obstacle.getBoundsMeters().x + ", " + obstacle.getBoundsMeters().y + ", " + obstacle.getBoundsMeters().getWidth() + ", " + obstacle.getBoundsMeters().getHeight());
                 if (rectangleTmp.overlaps(obstacle.getBoundsMeters())) {
                     collision = true;
                     break;
