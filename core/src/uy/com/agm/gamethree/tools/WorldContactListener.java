@@ -143,7 +143,7 @@ public class WorldContactListener implements ContactListener {
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
 
-            // Enemy - Borders
+            // Enemy - Border
             case ENEMY_BIT | BORDER_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Enemy) fixC.getUserData()).onBump();
@@ -222,13 +222,13 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Enemy's weapon - Borders
+            // Enemy's weapon - Border
             case ENEMY_WEAPON_BIT | BORDER_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_WEAPON_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
-            // Final enemy - Borders
+            // Final enemy - Border
             case FINAL_ENEMY_BIT | BORDER_BIT:
                 fixC = fixA.getFilterData().categoryBits == FINAL_ENEMY_BIT ? fixA : fixB;
                 ((FinalEnemy) fixC.getUserData()).onHitWall(true);

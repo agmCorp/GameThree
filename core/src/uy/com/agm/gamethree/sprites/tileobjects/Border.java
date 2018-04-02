@@ -11,8 +11,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/4/2017.
  */
 
-public class Borders extends InteractiveTileObject {
-    private static final String TAG = Borders.class.getName();
+public class Border extends InteractiveTileObject {
+    private static final String TAG = Border.class.getName();
 
     /* We have eight borders (left1, left2, left3, left4, right1, right2, right3, right4). These borders
      * are near 2000 / PPM meters long (20 meters).
@@ -21,7 +21,7 @@ public class Borders extends InteractiveTileObject {
      * Box2D has been tuned to work well with moving shapes between 0.1 and 10 meters.
      * Static shapes may be up to 50 meters long without trouble.
     */
-    public Borders(PlayScreen screen, MapObject object) {
+    public Border(PlayScreen screen, MapObject object) {
         super(screen, object);
         fixture.setUserData(this);
         setCategoryFilter(WorldContactListener.BORDER_BIT);

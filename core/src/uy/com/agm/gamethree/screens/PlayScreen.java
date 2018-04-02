@@ -151,9 +151,9 @@ public class PlayScreen extends AbstractScreen {
 //        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
 //        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
 
-        // Create boundaries
-        upperEdge = new Edge(this, true);
-        bottomEdge = new Edge(this, false);
+        // Boundaries
+        upperEdge = creator.getUpperEdge();
+        bottomEdge = creator.getBottomEdge();
 
         // Create the final enemy in our game world
         finalEnemy = LevelFactory.getFinalEnemy(this, this.level);

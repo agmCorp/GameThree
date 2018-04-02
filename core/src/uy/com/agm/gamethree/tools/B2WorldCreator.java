@@ -15,6 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyEight;
@@ -32,7 +33,7 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
-import uy.com.agm.gamethree.sprites.tileobjects.Borders;
+import uy.com.agm.gamethree.sprites.tileobjects.Border;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.tileobjects.Path;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
@@ -73,10 +74,17 @@ public class B2WorldCreator {
     public static final String KEY_ENEMY_SEVEN = "enemySeven";
 
     private PlayScreen screen;
+    private Array<Border> borders;
+    private Array<Edge> edges;
+    private Edge upperEdge;
+    private Edge bottomEdge;
+    private Array<Obstacle> obstacles;
+    private Array<Path> paths;
     private Array<Enemy> enemies;
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
     private Array<Weapon> weapons;
+
     private LinkedBlockingQueue<ActorDef> actorsToCreate;
     private ArrayMap<String, String> arrayMapDebug;
 
@@ -84,16 +92,13 @@ public class B2WorldCreator {
         MapLayer layer;
         this.screen = screen;
 
-        // Enemies
+        borders = new Array<Border>();
+        edges = new Array<Edge>();
+        obstacles = new Array<Obstacle>();
+        paths = new Array<Path>();
         enemies = new Array<Enemy>();
-
-        // PowerBoxes
         powerBoxes = new Array<PowerBox>();
-
-        // Items
         items = new Array<Item>();
-
-        // Weapons
         weapons = new Array<Weapon>();
 
         // Queue
@@ -108,15 +113,21 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_BORDER);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                new Borders(screen, object);
+                borders.add(new Border(screen, object));
             }
         }
+
+        // Edges
+        upperEdge = new Edge(screen, true);
+        bottomEdge = new Edge(screen, false);
+        edges.add(upperEdge);
+        edges.add(bottomEdge);
 
         // Layer: obstacle
         layer = map.getLayers().get(LAYER_OBSTACLE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                new Obstacle(screen, object);
+                obstacles.add(new Obstacle(screen, object));
             }
         }
 
@@ -124,7 +135,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_PATH);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                new Path(screen, object);
+                paths.add(new Path(screen, object));
             }
         }
 
@@ -204,6 +215,30 @@ public class B2WorldCreator {
                 powerBoxes.add(new PowerBox(screen, object));
             }
         }
+    }
+
+    public Array<Border> getBorders() {
+        return borders;
+    }
+
+    public Array<Edge> getEdges() {
+        return edges;
+    }
+
+    public Edge getUpperEdge() {
+        return upperEdge;
+    }
+
+    public Edge getBottomEdge() {
+        return bottomEdge;
+    }
+
+    public Array<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
+    public Array<Path> getPaths() {
+        return paths;
     }
 
     public Array<Enemy> getEnemies() {
