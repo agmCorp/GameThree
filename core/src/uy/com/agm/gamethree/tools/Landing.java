@@ -20,10 +20,11 @@ public class Landing {
     private static final String TAG = WorldContactListener.class.getName();
 
     // Constants
-    private static final float INCREMENT_X_METERS = 1.0f; // todo
-    private static final float INCREMENT_Y_METERS = 1.0f; // todo
     private static final boolean SEARCH_LEFT = false;
     private static final boolean SEARCH_UP = true;
+    private static final float INCREMENT_X_METERS = 0.4f; // World width / 0.4f = 12 cells
+    private static final float INCREMENT_Y_METERS = 0.4f; // World height / 0.4f = 20 cells
+    private static final float MARGIN_METERS = 0.2f;
 
     private PlayScreen screen;
 
@@ -154,7 +155,8 @@ public class Landing {
         // BORDER EDGE OBSTACLE PATH POWERBOX
         Gdx.app.debug(TAG, "************$$$ (" + v.x + ", " + v.y + ")");
 
-        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
+        // Approximate surface that our hero represents on the screen (with a security margin)
+        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS + MARGIN_METERS, AssetHero.HEIGHT_METERS + MARGIN_METERS);
         boolean collision = false;
 
         // Borders
