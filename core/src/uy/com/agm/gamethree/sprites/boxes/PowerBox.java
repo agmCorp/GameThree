@@ -53,6 +53,7 @@ public class PowerBox extends Sprite {
     private MapObject object;
     private int damage;
     private int tiledMapId;
+    private Rectangle bounds;
 
     public PowerBox(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -61,13 +62,13 @@ public class PowerBox extends Sprite {
         this.screen = screen;
 
         // Get the rectangle drawn in TiledEditor (pixels)
-        Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        bounds = ((RectangleMapObject) object).getRectangle();
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
         * This point will be used by definePowerBox() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(rect.getX() / PlayScreen.PPM, rect.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
+        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
         definePowerBox();
 
         // By default this PowerBox doesn't interact in our world
@@ -344,5 +345,9 @@ public class PowerBox extends Sprite {
 
     public String getCurrentState() {
         return currentState.toString();
+    }
+
+    public Rectangle getBoundsMeters() {
+        return bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
     }
 }

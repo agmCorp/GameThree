@@ -6,7 +6,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.tileobjects.Border;
+import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
+import uy.com.agm.gamethree.sprites.tileobjects.Path;
 
 /**
  * Created by AGM on 4/1/2018.
@@ -87,7 +91,7 @@ public class Landing {
     // precondicion v.x >= xA y v.x < xB
     private void searchX(Vector2 v, boolean left, float offset, float xA, float xB) {
         boolean end = false;
-        boolean collision = checkCollision(v);
+        boolean collision = collides(v);
 
         while (collision && !end) {
             if (left) {
@@ -98,7 +102,7 @@ public class Landing {
                 end = v.x > xB - offset ;
             }
             if (!end) {
-                collision = checkCollision(v);
+                collision = collides(v);
             } else {
                 v.x = -1;
             }
@@ -144,14 +148,65 @@ public class Landing {
         } while (!end);
     }
 
-    private boolean checkCollision(Vector2 v) {
-        Gdx.app.debug(TAG, "************ (" + v.x + ", " + v.y + ")");
-        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
+    // true si colisiona
+    // false si no colisiona
+    private boolean collides(Vector2 v) {
         // BORDER EDGE OBSTACLE PATH POWERBOX
+        Gdx.app.debug(TAG, "************ (" + v.x + ", " + v.y + ")");
 
-        for(Border border : screen.getCreator().getBorders()) {
-            rectangleTmp.overlaps(border.getBounds());
+        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
+        boolean collision = false;
+
+        // Borders
+        if (!collision) {
+            for (Border border : screen.getCreator().getBorders()) {
+                if (rectangleTmp.overlaps(border.getBoundsMeters())) {
+                    collision = true;
+                    break;
+                }
+            }
         }
-        return true;
+
+        // Edges
+        if (!collision) {
+            for (Edge edge : screen.getCreator().getEdges()) {
+                if (rectangleTmp.overlaps(edge.getBoundsMeters())) {
+                    collision = true;
+                    break;
+                }
+            }
+        }
+
+        // Obstacles
+        if (!collision) {
+            for (Obstacle obstacle : screen.getCreator().getObstacles()) {
+                if (rectangleTmp.overlaps(obstacle.getBoundsMeters())) {
+                    collision = true;
+                    break;
+                }
+            }
+        }
+
+        // Paths
+        if (!collision) {
+            for (Path path : screen.getCreator().getPaths()) {
+                if (rectangleTmp.overlaps(path.getBoundsMeters())) {
+                    collision = true;
+                    break;
+                }
+            }
+        }
+
+        // PowerBoxes
+        if (!collision) {
+            for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
+                if (rectangleTmp.overlaps(powerBox.getBoundsMeters())) {
+                    collision = true;
+                    break;
+                }
+            }
+        }
+
+        return collision;
     }
 }

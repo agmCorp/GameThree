@@ -147,7 +147,7 @@ public class PlayScreen extends AbstractScreen {
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
 
-//        final float ALTURA = 72.0f;
+//        final float ALTURA = 70.0f;
 //        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0);
 //        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle());
 

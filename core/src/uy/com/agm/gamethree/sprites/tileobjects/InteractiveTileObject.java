@@ -59,8 +59,8 @@ public abstract class InteractiveTileObject {
         fixture.setFilterData(filter);
     }
 
-    public Rectangle getBounds() {
-        return bounds;
+    public Rectangle getBoundsMeters() {
+        return bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
     }
 
     public abstract void onBump();
