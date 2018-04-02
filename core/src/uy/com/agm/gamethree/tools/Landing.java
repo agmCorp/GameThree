@@ -1,6 +1,8 @@
 package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -27,22 +29,21 @@ public class Landing {
     private static final float MARGIN_METERS = 0.2f;
 
     private PlayScreen screen;
-    private Rectangle rectangleHero;
+    private Circle circleHero;
 
     // Temporary GC friendly vector
     private Vector2 v;
 
     public Landing(PlayScreen screen) {
         this.screen = screen;
-
-        // Approximate surface that our hero represents on the screen (with a security margin)
-        rectangleHero = new Rectangle();
-        rectangleHero.setSize(AssetHero.WIDTH_METERS + MARGIN_METERS, AssetHero.HEIGHT_METERS + MARGIN_METERS);
+        circleHero = new Circle();
+        circleHero.setRadius(screen.getPlayer().CIRCLE_SHAPE_RADIUS_METERS + MARGIN_METERS);
 
         v = new Vector2();
     }
 
     // retorna -1, -1 si no hay solucion. Quien lo llama tiene que hacer el if.
+    // documentar que retorna un vector para usar con box2d (en el centro)
     public Vector2 land() {
         float camX = screen.getGameCam().position.x;
         float camY = screen.getGameCam().position.y;
@@ -51,10 +52,10 @@ public class Landing {
 
         float x0 = camX;
         float y0 = camY - worldHeight / 4;
-        float xA = camX - worldWidth / 2;
-        float xB = camX + worldWidth / 2;
-        float yA = camY - worldHeight / 2;
-        float yB = camY + worldHeight / 2;
+        float xA = camX - worldWidth / 2 + circleHero.radius;
+        float xB = camX + worldWidth / 2 - circleHero.radius;
+        float yA = camY - worldHeight / 2 + circleHero.radius;
+        float yB = camY + worldHeight / 2 - circleHero.radius;
 
         v.set(x0, y0);
         searchXY(v, SEARCH_LEFT, SEARCH_UP, INCREMENT_X_METERS, INCREMENT_Y_METERS, xA, xB, yA, yB);
@@ -155,18 +156,19 @@ public class Landing {
     // false si no colisiona
     private boolean collides(Vector2 v) {
         // BORDER EDGE OBSTACLE PATH POWERBOX
-        Gdx.app.debug(TAG, "************$$$ (" + v.x + ", " + v.y + ")");
 
         // Candidate position
-        rectangleHero.setPosition(v.x, v.y);
+        circleHero.setPosition(v.x, v.y);
         boolean collision = false;
+
+        Gdx.app.debug(TAG, "**************$$$ CANDIDATE POSITION " + circleHero.toString());
 
         // Borders
         if (!collision) {
             for (Border border : screen.getCreator().getBorders()) {
-                if (rectangleHero.overlaps(border.getBoundsMeters())) {
+                if (Intersector.overlaps(circleHero, border.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON BORDER " + border.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON BORDER " + border.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -175,9 +177,9 @@ public class Landing {
         // Edges
         if (!collision) {
             for (Edge edge : screen.getCreator().getEdges()) {
-                if (rectangleHero.overlaps(edge.getBoundsMeters())) {
+                if (Intersector.overlaps(circleHero, edge.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON EDGE " + edge.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON EDGE " + edge.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -186,9 +188,9 @@ public class Landing {
         // Obstacles
         if (!collision) {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
-                if (rectangleHero.overlaps(obstacle.getBoundsMeters())) {
+                if (Intersector.overlaps(circleHero, obstacle.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON OBSTACLE " + obstacle.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON OBSTACLE " + obstacle.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -197,9 +199,9 @@ public class Landing {
         // Paths
         if (!collision) {
             for (Path path : screen.getCreator().getPaths()) {
-                if (rectangleHero.overlaps(path.getBoundsMeters())) {
+                if (Intersector.overlaps(circleHero, path.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON PATH " + path.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON PATH " + path.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -208,16 +210,16 @@ public class Landing {
         // PowerBoxes
         if (!collision) {
             for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
-                if (rectangleHero.overlaps(powerBox.getBoundsMeters())) {
+                if (Intersector.overlaps(circleHero, powerBox.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + rectangleHero.toString() + " CON POWERBOX " + powerBox.getBoundsMeters().toString());
+                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON POWERBOX " + powerBox.getBoundsMeters().toString());
                     break;
                 }
             }
         }
 
 //        // // TODO: 4/2/2018
-//        collision = !collision;
+        collision = !collision;
 
         return collision;
     }
