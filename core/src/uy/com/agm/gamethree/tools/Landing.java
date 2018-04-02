@@ -22,11 +22,11 @@ public class Landing {
     private static final String TAG = WorldContactListener.class.getName();
 
     // Constants
-    private static final boolean SEARCH_LEFT = false;
-    private static final boolean SEARCH_UP = true;
-    private static final float INCREMENT_X_METERS = 0.4f; // World width / 0.4f = 12 cells
-    private static final float INCREMENT_Y_METERS = 0.4f; // World height / 0.4f = 20 cells
-    private static final float MARGIN_METERS = 0.2f;
+    private static final boolean SEARCH_LEFT = false; // Arbitrary
+    private static final boolean SEARCH_UP = true; // Arbitrary
+    private static final float INCREMENT_X_METERS = 0.4f; // Arbitrary
+    private static final float INCREMENT_Y_METERS = 0.4f; // Arbitrary
+    private static final float MARGIN_METERS = 0.2f; // Arbitrary
 
     private PlayScreen screen;
     private Circle circleHero;
@@ -42,8 +42,12 @@ public class Landing {
         v = new Vector2();
     }
 
-    // retorna -1, -1 si no hay solucion. Quien lo llama tiene que hacer el if.
-    // documentar que retorna un vector para usar con box2d (en el centro)
+     /* Check collisions against borders, edges, obstacles, paths and powerBoxes (that is, actors at rest scattered on the game).
+      * Returns a safe position where to land (collision free) or (-1, -1) otherwise.
+      * To work this out, this method considers that Hero is a circle (like its b2body but a bit arbitrarily bigger) and tests
+      * every position inside xA, xB, yA, yB starting at (x0, y0) and moving left/right and up/down (see SEARCH_LEFT and SEARCH_UP) using increments defined on INCREMENT_X_METERS and INCREMENT_Y_METERS.
+      * Thus, if a solution exists, it is near (x0, y0).
+     */
     public Vector2 land() {
         float camX = screen.getGameCam().position.x;
         float camY = screen.getGameCam().position.y;
@@ -62,8 +66,8 @@ public class Landing {
         return v;
     }
 
-    // precondicion la de searchY y la de searchX
-    // retorna (-1, -1) si no encuentra
+    // Returns a safe position where to land, (-1, -1) otherwise.
+    // Precondition: see searchY(...) and searchX(...)
     private void searchXY(Vector2 v, boolean left, boolean up, float offsetX, float offsetY, float xA, float xB, float yA, float yB) {
         float x0 = v.x;
         float y0 = v.y;
@@ -91,8 +95,8 @@ public class Landing {
         }
     }
 
-    // retorna x = -1 si no encuentra (y lo deja como estaba).
-    // precondicion v.x >= xA y v.x < xB
+    // Returns a safe position where to land, (-1, v.y) otherwise (this method doesn't change v.y)
+    // Precondition: v.x >= xA and v.x < xB
     private void searchX(Vector2 v, boolean left, float offset, float xA, float xB) {
         boolean end = false;
         boolean collision = collides(v);
@@ -113,9 +117,8 @@ public class Landing {
         }
     }
 
-    // retorna y = -1 si no encuentra (x lo deja como estaba)
-    // precondicion la de searchX
-    // ademas v.y >= yA y v.y < yB
+    // Returns a safe position where to land, (v.x, -1) otherwise (this method doesn't change v.x)
+    // Precondition: v.y >= yA y v.y < yB
     private void searchY(Vector2 v, boolean left, boolean up, float offsetX, float offsetY, float xA, float xB, float yA, float yB) {
         float x0 = v.x;
         boolean end;
@@ -152,23 +155,19 @@ public class Landing {
         } while (!end);
     }
 
-    // true si colisiona
-    // false si no colisiona
+    // Returns true if and only if circleHero overlaps borders, edges, obstacles, paths or powerBoxes.
     private boolean collides(Vector2 v) {
-        // BORDER EDGE OBSTACLE PATH POWERBOX
-
         // Candidate position
         circleHero.setPosition(v.x, v.y);
         boolean collision = false;
 
-        Gdx.app.debug(TAG, "**************$$$ CANDIDATE POSITION " + circleHero.toString());
+        // Check collisions of each object in the game as it's more efficient than checking if it's visible or not.
 
         // Borders
         if (!collision) {
             for (Border border : screen.getCreator().getBorders()) {
                 if (Intersector.overlaps(circleHero, border.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON BORDER " + border.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -179,7 +178,6 @@ public class Landing {
             for (Edge edge : screen.getCreator().getEdges()) {
                 if (Intersector.overlaps(circleHero, edge.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON EDGE " + edge.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -190,7 +188,6 @@ public class Landing {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
                 if (Intersector.overlaps(circleHero, obstacle.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON OBSTACLE " + obstacle.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -201,7 +198,6 @@ public class Landing {
             for (Path path : screen.getCreator().getPaths()) {
                 if (Intersector.overlaps(circleHero, path.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON PATH " + path.getBoundsMeters().toString());
                     break;
                 }
             }
@@ -212,14 +208,10 @@ public class Landing {
             for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
                 if (Intersector.overlaps(circleHero, powerBox.getBoundsMeters())) {
                     collision = true;
-                    Gdx.app.debug(TAG, "*****************$$$ HAY COLISION HERO " + circleHero.toString() + " CON POWERBOX " + powerBox.getBoundsMeters().toString());
                     break;
                 }
             }
         }
-
-//        // // TODO: 4/2/2018
-        collision = !collision;
 
         return collision;
     }
