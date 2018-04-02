@@ -39,9 +39,10 @@ public abstract class InteractiveTileObject {
         this.map = screen.getMap();
         this.bounds = ((RectangleMapObject) object).getRectangle();
 
-        defineInteractiveTileObject();
+        // We set bounds in meters (see getBoundsMeters())
+        bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
 
-        rectangleTmp = new Rectangle();
+        defineInteractiveTileObject();
     }
 
     private void defineInteractiveTileObject() {
@@ -50,10 +51,10 @@ public abstract class InteractiveTileObject {
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / PlayScreen.PPM, (bounds.getY() + bounds.getHeight() / 2) / PlayScreen.PPM);
+        bdef.position.set(bounds.getX() + bounds.getWidth() / 2, bounds.getY() + bounds.getHeight() / 2);
 
         b2body = world.createBody(bdef);
-        shape.setAsBox(bounds.getWidth() / 2 / PlayScreen.PPM, bounds.getHeight() / 2 / PlayScreen.PPM);
+        shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
     }
@@ -65,12 +66,7 @@ public abstract class InteractiveTileObject {
     }
 
     public Rectangle getBoundsMeters() {
-        float x = bounds.x / PlayScreen.PPM;
-        float y = bounds.y / PlayScreen.PPM;
-        float width = bounds.width / PlayScreen.PPM;
-        float height = bounds.height / PlayScreen.PPM;
-
-        return rectangleTmp.set(x, y, width, height);
+        return bounds;
     }
 
     public abstract void onBump();

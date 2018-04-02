@@ -31,11 +31,14 @@ public class Edge {
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;
         this.world = screen.getWorld();
+
+        // We set bounds in meters (see getBoundsMeters())
         if (isUpper) {
             this.bounds = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - HEIGHT_METERS, WIDTH_METERS, HEIGHT_METERS);
         } else {
             this.bounds = new Rectangle(0, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2, WIDTH_METERS, HEIGHT_METERS);
         }
+
         defineEdge();
         start();
     }

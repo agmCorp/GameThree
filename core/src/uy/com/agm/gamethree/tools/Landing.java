@@ -6,7 +6,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.tileobjects.Border;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
+import uy.com.agm.gamethree.sprites.tileobjects.Path;
 
 /**
  * Created by AGM on 4/1/2018.
@@ -152,7 +156,7 @@ public class Landing {
 
         rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
         boolean collision = false;
-/*
+
         // Borders
         if (!collision) {
             for (Border border : screen.getCreator().getBorders()) {
@@ -172,7 +176,7 @@ public class Landing {
                 }
             }
         }
-*/
+
         // Obstacles
         if (!collision) {
             for (Obstacle obstacle : screen.getCreator().getObstacles()) {
@@ -183,7 +187,7 @@ public class Landing {
                 }
             }
         }
-/*
+
         // Paths
         if (!collision) {
             for (Path path : screen.getCreator().getPaths()) {
@@ -203,7 +207,7 @@ public class Landing {
                 }
             }
         }
-*/
+
         return !collision;
     }
 }
