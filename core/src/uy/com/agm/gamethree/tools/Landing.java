@@ -43,7 +43,7 @@ public class Landing {
     }
 
      /* Check collisions against borders, edges, obstacles, paths and powerBoxes (that is, actors at rest scattered on the game).
-      * Returns a safe position where to land (collision free) or (-1, -1) otherwise.
+      * Returns a safe position in meters where to land (collision free) or (-1, -1) otherwise.
       * To work this out, this method considers that Hero is a circle (like its b2body but a bit arbitrarily bigger) and tests
       * every position inside xA, xB, yA, yB starting at (x0, y0) and moving left/right and up/down (see SEARCH_LEFT and SEARCH_UP) using increments defined on INCREMENT_X_METERS and INCREMENT_Y_METERS.
       * Thus, if a solution exists, it is near (x0, y0).
