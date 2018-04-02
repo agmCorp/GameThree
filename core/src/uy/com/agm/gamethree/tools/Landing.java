@@ -212,6 +212,6 @@ public class Landing {
             }
         }
 
-        return !collision;
+        return collision;
     }
 }
