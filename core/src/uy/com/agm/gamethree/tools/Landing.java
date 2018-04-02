@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.tileobjects.Border;
 
 /**
  * Created by AGM on 4/1/2018.
@@ -25,15 +27,16 @@ public class Landing {
     private Rectangle rectangleTmp;
 
     // Temporary GC friendly vector
-    private Vector2 tmp;
+    private Vector2 v;
 
     public Landing(PlayScreen screen) {
         this.screen = screen;
+        rectangleTmp = new Rectangle();
+        v = new Vector2();
     }
 
-    // tmp es para devolver el resultado, da lo mismo que tenga seteado al comenzar
     // retorna -1, -1 si no hay solucion. Quien lo llama tiene que hacer el if.
-    public void land(Vector2 v) {
+    public Vector2 land() {
         float camX = screen.getGameCam().position.x;
         float camY = screen.getGameCam().position.y;
         float worldWidth = screen.getGameViewPort().getWorldWidth();
@@ -48,6 +51,7 @@ public class Landing {
 
         v.set(x0, y0);
         searchXY(v, SEARCH_LEFT, SEARCH_UP, INCREMENT_X_METERS, INCREMENT_Y_METERS, xA, xB, yA, yB);
+        return v;
     }
 
     // precondicion la de searchY y la de searchX
@@ -142,7 +146,12 @@ public class Landing {
 
     private boolean checkCollision(Vector2 v) {
         Gdx.app.debug(TAG, "************ (" + v.x + ", " + v.y + ")");
+        rectangleTmp.set(v.x, v.y, AssetHero.WIDTH_METERS, AssetHero.HEIGHT_METERS);
+        // BORDER EDGE OBSTACLE PATH POWERBOX
 
+        for(Border border : screen.getCreator().getBorders()) {
+            rectangleTmp.overlaps(border.getBounds());
+        }
         return true;
     }
 }

@@ -457,7 +457,7 @@ public class Hero extends Sprite {
         stop();
 
         // Find an appropriate spot to land
-        landig.land(tmp);
+        tmp = landig.land();
         if (tmp.x == -1 && tmp.y == -1) { // There is no such place, so, good luck Hero! (use your blink temporary power)
             tmp.set(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4);
         }
