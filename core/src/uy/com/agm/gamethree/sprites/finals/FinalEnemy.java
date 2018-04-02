@@ -39,7 +39,7 @@ public abstract class FinalEnemy extends Sprite {
     protected PlayScreen screen;
     protected Body b2body;
     protected Vector2 velocity;
-    protected Vector2 tmp; // Temp GC friendly vector
+    protected Vector2 tmp; // Temporary GC friendly vector
     protected StateFinalEnemy currentStateFinalEnemy;
     private float introTime;
     private boolean playingIntro;
@@ -59,7 +59,7 @@ public abstract class FinalEnemy extends Sprite {
         this.screen = screen;
         this.velocity = new Vector2();
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.

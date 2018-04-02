@@ -39,7 +39,7 @@ public abstract class Enemy extends Sprite {
     protected Body b2body;
 
     protected Vector2 velocity;
-    protected Vector2 tmp; // Temp GC friendly vector
+    protected Vector2 tmp; // Temporary GC friendly vector
 
     private TextureRegion splat;
 
@@ -65,7 +65,7 @@ public abstract class Enemy extends Sprite {
         // Shooting strategy initialization
         shootContext = new ShootContext(getShootStrategy());
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
 
         // Fire property

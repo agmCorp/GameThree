@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -19,6 +20,12 @@ public class Landing {
     private static final boolean SEARCH_UP = true;
 
     private PlayScreen screen;
+
+    // Temporary GC friendly rectangle
+    private Rectangle rectangleTmp;
+
+    // Temporary GC friendly vector
+    private Vector2 tmp;
 
     public Landing(PlayScreen screen) {
         this.screen = screen;
@@ -135,6 +142,7 @@ public class Landing {
 
     private boolean checkCollision(Vector2 v) {
         Gdx.app.debug(TAG, "************ (" + v.x + ", " + v.y + ")");
+
         return true;
     }
 }

@@ -25,14 +25,14 @@ public class EnemyDefaultShooting implements IShootStrategy {
     private PlayScreen screen;
     private float openFireTime;
     private float fireDelay;
-    private Vector2 tmp; // Temp GC friendly vector
+    private Vector2 tmp; // Temporary GC friendly vector
 
     public EnemyDefaultShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
         this.screen = screen;
         this.openFireTime = initialOpenFireTime;
         this.fireDelay = fireDelay;
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
     }
 

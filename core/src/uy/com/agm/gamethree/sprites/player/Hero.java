@@ -92,7 +92,7 @@ public class Hero extends Sprite {
     private float blinkingTime;
     private boolean alpha;
 
-    // Temp GC friendly vector
+    // Temporary GC friendly vector
     private Vector2 tmp;
 
     // Landing helper
@@ -144,7 +144,7 @@ public class Hero extends Sprite {
         heroDefaultShooting = new HeroDefaultShooting(screen);
         shootContext = new ShootContext(heroDefaultShooting);
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
 
         // Blink

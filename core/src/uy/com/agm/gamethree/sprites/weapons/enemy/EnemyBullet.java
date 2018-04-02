@@ -26,7 +26,7 @@ public class EnemyBullet extends Weapon {
     private TextureRegion muzzleFlashShotFX;
     private TextureRegion muzzleFlashImpactFX;
     private Animation enemyBulletAnimation;
-    private Vector2 tmp; // Temp GC friendly vector
+    private Vector2 tmp; // Temporary GC friendly vector
 
     public EnemyBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
         super(screen, x, y, circleShapeRadius);
@@ -48,7 +48,7 @@ public class EnemyBullet extends Weapon {
         muzzleFlashShotFX = Assets.getInstance().getEnemyBullet().getEnemyBulletMuzzleFlashShot();
         muzzleFlashImpactFX = Assets.getInstance().getEnemyBullet().getEnemyBulletMuzzleFlashImpact();
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
     }
 

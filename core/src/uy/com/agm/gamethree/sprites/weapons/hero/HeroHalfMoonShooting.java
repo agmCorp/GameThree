@@ -35,7 +35,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private int numberBullets;
     private float openFireTime;
     private float fireDelay;
-    private Vector2 tmp; // Temp GC friendly vector
+    private Vector2 tmp; // Temporary GC friendly vector
 
     public HeroHalfMoonShooting(PlayScreen screen, int numberBullets) {
         this.screen = screen;
@@ -43,7 +43,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
         this.openFireTime = 0;
         this.fireDelay = GameSettings.getInstance().isManualShooting() ? MANUAL_FIRE_DELAY_SECONDS : AUTOMATIC_FIRE_DELAY_SECONDS;
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
     }
 

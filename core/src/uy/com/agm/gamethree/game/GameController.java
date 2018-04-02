@@ -20,7 +20,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     // Constants
     private static final float ALPHA_LERP = 0.2f;
 
-    private Vector2 candidateVelocity; // Temp GC friendly vector
+    private Vector2 candidateVelocity; // Temporary GC friendly vector
     private Vector2 heroVelocity;
     private PlayScreen screen;
     private Hero player;

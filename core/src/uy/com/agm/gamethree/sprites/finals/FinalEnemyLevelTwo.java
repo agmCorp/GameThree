@@ -71,7 +71,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
     // Circle on the screen where FinalEnemyLevelTwo must go
     private Circle target;
-    private Circle tmpCircle; // Temp GC friendly circle
+    private Circle tmpCircle; // Temporary GC friendly circle
 
     // Power FX
     private PowerState currentPowerState;
@@ -126,7 +126,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         // Initialize target
         target = new Circle(0, 0, TARGET_RADIUS_METERS);
 
-        // Temp GC friendly circle
+        // Temporary GC friendly circle
         tmpCircle = new Circle();
 
         // Move to a new target at constant speed

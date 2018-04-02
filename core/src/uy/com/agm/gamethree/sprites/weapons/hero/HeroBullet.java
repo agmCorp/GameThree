@@ -26,7 +26,7 @@ public class HeroBullet extends Weapon {
     private TextureRegion muzzleFlashShotFX;
     private TextureRegion muzzleFlashImpactFX;
     private Animation heroBulletAnimation;
-    private Vector2 tmp; // Temp GC friendly vector
+    private Vector2 tmp; // Temporary GC friendly vector
 
     public HeroBullet(PlayScreen screen, float x, float y, float width, float height, float circleShapeRadius, float angle, float velocityX, float velocityY, Animation animation) {
         super(screen, x, y, circleShapeRadius);
@@ -48,7 +48,7 @@ public class HeroBullet extends Weapon {
         muzzleFlashShotFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashShot();
         muzzleFlashImpactFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashImpact();
 
-        // Temp GC friendly vector
+        // Temporary GC friendly vector
         tmp = new Vector2();
     }
 
