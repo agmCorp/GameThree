@@ -29,6 +29,9 @@ public abstract class InteractiveTileObject {
     protected Body b2body;
     protected Fixture fixture;
 
+    // Temporary GC friendly rectangle
+    private Rectangle rectangleTmp;
+
     public InteractiveTileObject(PlayScreen screen, MapObject object) {
         this.screen = screen;
         this.world = screen.getWorld();
@@ -37,6 +40,8 @@ public abstract class InteractiveTileObject {
         this.bounds = ((RectangleMapObject) object).getRectangle();
 
         defineInteractiveTileObject();
+
+        rectangleTmp = new Rectangle();
     }
 
     private void defineInteractiveTileObject() {
@@ -60,7 +65,12 @@ public abstract class InteractiveTileObject {
     }
 
     public Rectangle getBoundsMeters() {
-        return bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
+        float x = bounds.x / PlayScreen.PPM;
+        float y = bounds.y / PlayScreen.PPM;
+        float width = bounds.width / PlayScreen.PPM;
+        float height = bounds.height / PlayScreen.PPM;
+
+        return rectangleTmp.set(x, y, width, height);
     }
 
     public abstract void onBump();

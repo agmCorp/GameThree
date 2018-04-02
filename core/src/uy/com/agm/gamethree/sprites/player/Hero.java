@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -459,6 +460,7 @@ public class Hero extends Sprite {
         // Find an appropriate spot to land
         tmp = landig.land();
         if (tmp.x == -1 && tmp.y == -1) { // There is no such place, so, good luck Hero! (use your blink temporary power)
+            Gdx.app.debug(TAG, "************ NO HAY SOLUCION ********************");
             tmp.set(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4);
         }
 
