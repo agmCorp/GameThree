@@ -38,6 +38,7 @@ public class PowerBox extends Sprite {
     private World world;
     private PlayScreen screen;
     private Body b2body;
+    private Rectangle boundsMeters;
 
     private TextureRegion powerBoxStand;
     private TextureRegion powerBoxDamagedLittle;
@@ -53,7 +54,6 @@ public class PowerBox extends Sprite {
     private MapObject object;
     private int damage;
     private int tiledMapId;
-    private Rectangle bounds;
 
     public PowerBox(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -62,17 +62,16 @@ public class PowerBox extends Sprite {
         this.screen = screen;
 
         // Get the rectangle drawn in TiledEditor (pixels)
-        bounds = ((RectangleMapObject) object).getRectangle();
-
-        // We set bounds in meters (see getBoundsMeters())
-        bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
+        Rectangle bounds = ((RectangleMapObject) object).getRectangle();
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
         * This point will be used by definePowerBox() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(bounds.getX(), bounds.getY(), AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
+        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
         definePowerBox();
+
+        boundsMeters = new Rectangle(getX(), getY(), getWidth(), getHeight());
 
         // By default this PowerBox doesn't interact in our world
         b2body.setActive(false);
@@ -351,6 +350,6 @@ public class PowerBox extends Sprite {
     }
 
     public Rectangle getBoundsMeters() {
-        return bounds;
+        return boundsMeters;
     }
 }

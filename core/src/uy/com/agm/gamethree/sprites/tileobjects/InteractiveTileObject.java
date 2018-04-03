@@ -25,23 +25,18 @@ public abstract class InteractiveTileObject {
     protected World world;
     protected MapObject object;
     protected TiledMap map;
-    protected Rectangle bounds;
     protected Body b2body;
     protected Fixture fixture;
 
-    // Temporary GC friendly rectangle
-    private Rectangle rectangleTmp;
+    private Rectangle boundsMeters;
 
     public InteractiveTileObject(PlayScreen screen, MapObject object) {
         this.screen = screen;
         this.world = screen.getWorld();
         this.object = object;
         this.map = screen.getMap();
-        this.bounds = ((RectangleMapObject) object).getRectangle();
-
-        // We set bounds in meters (see getBoundsMeters())
-        bounds.set(bounds.x / PlayScreen.PPM, bounds.y / PlayScreen.PPM, bounds.width / PlayScreen.PPM, bounds.height / PlayScreen.PPM);
-
+        Rectangle bounds = ((RectangleMapObject) object).getRectangle();
+        this.boundsMeters = new Rectangle(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, bounds.getWidth() / PlayScreen.PPM, bounds.getHeight() / PlayScreen.PPM);
         defineInteractiveTileObject();
     }
 
@@ -51,10 +46,10 @@ public abstract class InteractiveTileObject {
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set(bounds.getX() + bounds.getWidth() / 2, bounds.getY() + bounds.getHeight() / 2);
+        bdef.position.set(boundsMeters.getX() + boundsMeters.getWidth() / 2, boundsMeters.getY() + boundsMeters.getHeight() / 2);
 
         b2body = world.createBody(bdef);
-        shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
+        shape.setAsBox(boundsMeters.getWidth() / 2, boundsMeters.getHeight() / 2);
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
     }
@@ -66,7 +61,7 @@ public abstract class InteractiveTileObject {
     }
 
     public Rectangle getBoundsMeters() {
-        return bounds;
+        return boundsMeters;
     }
 
     public abstract void onBump();

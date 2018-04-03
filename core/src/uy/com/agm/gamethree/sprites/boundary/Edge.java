@@ -24,19 +24,17 @@ public class Edge {
 
     private PlayScreen screen;
     private World world;
-    private Rectangle bounds;
-
+    private Rectangle boundsMeters;
     private Body b2body;
 
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;
         this.world = screen.getWorld();
 
-        // We set bounds in meters (see getBoundsMeters())
         if (isUpper) {
-            this.bounds = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - HEIGHT_METERS, WIDTH_METERS, HEIGHT_METERS);
+            this.boundsMeters = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - HEIGHT_METERS, WIDTH_METERS, HEIGHT_METERS);
         } else {
-            this.bounds = new Rectangle(0, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2, WIDTH_METERS, HEIGHT_METERS);
+            this.boundsMeters = new Rectangle(0, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2, WIDTH_METERS, HEIGHT_METERS);
         }
 
         defineEdge();
@@ -45,13 +43,13 @@ public class Edge {
 
     private void defineEdge() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(bounds.getX() + bounds.getWidth() / 2, bounds.getY() + bounds.getHeight() / 2);
+        bdef.position.set(boundsMeters.getX() + boundsMeters.getWidth() / 2, boundsMeters.getY() + boundsMeters.getHeight() / 2);
         bdef.type = BodyDef.BodyType.KinematicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(bounds.getWidth() / 2, bounds.getHeight() / 2);
+        shape.setAsBox(boundsMeters.getWidth() / 2, boundsMeters.getHeight() / 2);
 
         fdef.filter.categoryBits = WorldContactListener.EDGE_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.FINAL_ENEMY_BIT |
@@ -67,7 +65,7 @@ public class Edge {
     }
 
     public Rectangle getBoundsMeters() {
-        return bounds;
+        return boundsMeters;
     }
 
     public void stop() {
