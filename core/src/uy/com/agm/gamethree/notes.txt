@@ -23,26 +23,6 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
-ENFOQUE 1:
-DEJAR LOS REMOVE EN CREATOR COMO API:
-
-        Iterator<Enemy> iterator = creator.getEnemies().iterator();
-        Enemy enemy;
-        while(iterator.hasNext()){
-            enemy = iterator.next();
-            enemy.update(dt);
-            if(enemy.isDisposable()){
-                iterator.remove();
-            }
-        }
-
-otra manera:
-for (Iterator<Integer> it = list.iterator(); it.hasNext(); ) {
-    Integer integer = it.next();
-    ...
-
-hago el remove adentro..capaz no anda, stack overflow dice que funciona
-
 - para terminar el nivel me faltan las silverbullets y los coins.
 - resolver aplastamiento?
 - EnemyOne a veces se va indefinidamente para arriba.

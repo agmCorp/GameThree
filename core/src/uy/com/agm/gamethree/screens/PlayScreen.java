@@ -15,6 +15,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Iterator;
+
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -255,49 +257,49 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void updateEnemies(float dt) {
-        for (Enemy enemy : creator.getEnemies()) {
+        Enemy enemy;
+        Iterator<Enemy> iterator = creator.getEnemies().iterator();
+        while(iterator.hasNext()) {
+            enemy = iterator.next();
             enemy.update(dt);
-        }
-        // Clean up collection
-        for(Enemy enemy : creator.getEnemies()) {
-            if (enemy.isDisposable()) {
-                creator.removeEnemy(enemy);
+            if(enemy.isDisposable()){
+                iterator.remove();
             }
         }
     }
 
     private void updatePowerBoxes(float dt) {
-        for (PowerBox powerBox : creator.getPowerBoxes()) {
+        PowerBox powerBox;
+        Iterator<PowerBox> iterator = creator.getPowerBoxes().iterator();
+        while(iterator.hasNext()) {
+            powerBox = iterator.next();
             powerBox.update(dt);
-        }
-        // Clean up collection
-        for(PowerBox powerBox : creator.getPowerBoxes()) {
-            if (powerBox.isDisposable()) {
-                creator.removePowerBox(powerBox);
+            if(powerBox.isDisposable()){
+                iterator.remove();
             }
         }
     }
 
     private void updateItems(float dt) {
-        for (Item item : creator.getItems()) {
+        Item item;
+        Iterator<Item> iterator = creator.getItems().iterator();
+        while(iterator.hasNext()) {
+            item = iterator.next();
             item.update(dt);
-        }
-        // Clean up collection
-        for(Item item : creator.getItems()) {
-            if (item.isDisposable()) {
-                creator.removeItem(item);
+            if(item.isDisposable()){
+                iterator.remove();
             }
         }
     }
 
     private void updateWeapons(float dt) {
-        for (Weapon weapon : creator.getWeapons()) {
+        Weapon weapon;
+        Iterator<Weapon> iterator = creator.getWeapons().iterator();
+        while(iterator.hasNext()) {
+            weapon = iterator.next();
             weapon.update(dt);
-        }
-        // Clean up collection
-        for(Weapon weapon : creator.getWeapons()) {
-            if (weapon.isDisposable()) {
-                creator.removeWeapon(weapon);
+            if(weapon.isDisposable()){
+                iterator.remove();
             }
         }
     }
