@@ -34,7 +34,6 @@ public class PowerBox extends Sprite {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float RESTITUTION = 1.0f; // Perfectly elastic collision
     private static final int SCORE = 10;
 
     private World world;
@@ -201,9 +200,7 @@ public class PowerBox extends Sprite {
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
-        Fixture fixture = b2body.createFixture(fdef);
-        fixture.setRestitution(RESTITUTION); // Avoid contact after a collision
-        fixture.setUserData(this);
+        b2body.createFixture(fdef).setUserData(this);
     }
 
     public void update(float dt) {

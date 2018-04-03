@@ -536,8 +536,6 @@ public class Hero extends Sprite {
     }
 
     // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
-    // All this fixtures have RESTITUTION (perfectly elastic collision), so Hero bounces when he hit them.
-    // This is important because if Hero is still in contact with the fixture, the collision is not detected anymore.
     public void checkSmashing() {
         final float OFFSET = 1.0f;
         float startX = screen.getBottomEdge().getB2body().getPosition().x;
