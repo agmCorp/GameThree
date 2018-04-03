@@ -36,6 +36,10 @@ DEJAR LOS REMOVE EN CREATOR COMO API:
             }
         }
 
+otra manera:
+for (Iterator<Integer> it = list.iterator(); it.hasNext(); ) {
+    Integer integer = it.next();
+    ...
 
 hago el remove adentro..capaz no anda, stack overflow dice que funciona
 
