@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -38,6 +39,7 @@ public class Hero extends Sprite {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float LINEAR_VELOCITY = 5.2f;
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
+    public static final float MIN_SMASH_DISTANCE = CIRCLE_SHAPE_RADIUS_METERS + 0.4f;
     private static final float DEATH_LINEAR_VELOCITY = 5.0f;
     private static final int LIVES_START = 30;
     private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
@@ -266,9 +268,6 @@ public class Hero extends Sprite {
 
         // Reset rotation
         setRotation(0.0f);
-
-        // If our Hero is standing, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
-        checkCrashing();
     }
 
     private void heroStateMovingLeftRight(float dt) {
@@ -293,10 +292,6 @@ public class Hero extends Sprite {
 
         // Reset rotation
         setRotation(0.0f);
-
-        // If our Hero is moving to the left or to the right, he could be smashed between an object and the bottomEdge
-        // when the camera moves dragging him.
-        checkCrashing();
     }
 
     private void heroStateMovingUp(float dt) {
@@ -321,9 +316,6 @@ public class Hero extends Sprite {
 
         // Calculate rotation
         setRotationAngle();
-
-        // If our Hero is moving up, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
-        checkCrashing();
     }
 
     private void heroStateMovingDown(float dt) {
@@ -348,9 +340,6 @@ public class Hero extends Sprite {
 
         // Calculate rotation
         setRotationAngle();
-
-        // If our Hero is moving down, he could be smashed between an object and the bottomEdge when the camera moves dragging him.
-        checkCrashing();
     }
 
     private void heroStateDyingUp(float dt) {
@@ -546,13 +535,15 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.DYING_UP;
     }
 
-    // if Hero goes beyond the lower limit, he must have been crushed by an object.
-    private void checkCrashing() {
-        float bottomEdge = screen.getBottomEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; //  Upper edge of the bottomEdge :)
-        float heroUpperEdge = getY() + getHeight();
+    // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
+    // All this fixtures have RESTITUTION (perfectly elastic collision), so Hero bounces when he hit them.
+    // This is important because if Hero is still in contact with the fixture, the collision is not detected anymore.
+    public void checkSmashing() {
+        final float OFFSET = 1.0f;
+        float startX = screen.getBottomEdge().getB2body().getPosition().x;
+        float startY = screen.getBottomEdge().getB2body().getPosition().y;
 
-        // Beyond bottom edge
-        if (bottomEdge > heroUpperEdge) {
+        if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET, startY, b2body.getPosition().x, b2body.getPosition().y) <= MIN_SMASH_DISTANCE) {
             onDead();
         }
     }

@@ -21,6 +21,9 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public abstract class InteractiveTileObject {
     private static final String TAG = InteractiveTileObject.class.getName();
 
+    // Constants
+    private static final float RESTITUTION = 1.0f; // Perfectly elastic collision
+
     protected PlayScreen screen;
     protected World world;
     protected MapObject object;
@@ -52,6 +55,7 @@ public abstract class InteractiveTileObject {
         shape.setAsBox(boundsMeters.getWidth() / 2, boundsMeters.getHeight() / 2);
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
+        fixture.setRestitution(RESTITUTION); // Avoid contact after a collision
     }
 
     public void setCategoryFilter(short filterBit) {

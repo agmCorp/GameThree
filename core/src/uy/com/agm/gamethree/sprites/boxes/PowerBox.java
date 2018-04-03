@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -33,6 +34,7 @@ public class PowerBox extends Sprite {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float RESTITUTION = 1.0f; // Perfectly elastic collision
     private static final int SCORE = 10;
 
     private World world;
@@ -199,7 +201,9 @@ public class PowerBox extends Sprite {
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 
         fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
+        Fixture fixture = b2body.createFixture(fdef);
+        fixture.setRestitution(RESTITUTION); // Avoid contact after a collision
+        fixture.setUserData(this);
     }
 
     public void update(float dt) {
@@ -303,6 +307,7 @@ public class PowerBox extends Sprite {
 
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+        screen.getPlayer().checkSmashing();
     }
 
     public void onHit() {
