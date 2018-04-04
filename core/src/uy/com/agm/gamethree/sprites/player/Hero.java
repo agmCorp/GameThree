@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -19,6 +21,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
@@ -44,6 +47,8 @@ public class Hero extends Sprite {
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
+    private static final float SENSOR_HEIGHT = 0.01f; // The thinner the better
+    private static final float OFFSET = 1.0f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -73,6 +78,9 @@ public class Hero extends Sprite {
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
+    private Rectangle homemadeSensor;
+    private Circle circleHero;
+
 
     // Silver bullets
     private int silverBullets;
@@ -129,6 +137,9 @@ public class Hero extends Sprite {
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = LIVES_START;
+        homemadeSensor = new Rectangle();
+        circleHero = new Circle();
+        circleHero.setRadius(Hero.CIRCLE_SHAPE_RADIUS_METERS);
 
         // SilverBullets variables initialization
         silverBullets = 0;
@@ -534,15 +545,38 @@ public class Hero extends Sprite {
     }
 
     // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
-    public void checkSmashing() {
-        final float OFFSET = 1.0f;
-        float startX = screen.getBottomEdge().getB2body().getPosition().x;
-        float startY = screen.getBottomEdge().getB2body().getPosition().y;
+    private void checkSmashing(Fixture fixture) {
+        Rectangle boundsMeters;
 
-        if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET, startY, b2body.getPosition().x, b2body.getPosition().y) <= MIN_SMASH_DISTANCE) {
-            onDead();
+        Vector2 heroPosition = b2body.getPosition();
+        circleHero.setPosition(heroPosition.x, heroPosition.y);
+        float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+
+        switch (fixture.getFilterData().categoryBits) {
+            case WorldContactListener.OBSTACLE_BIT:
+                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
+                break;
+            case WorldContactListener.PATH_BIT:
+                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
+                break;
+            case WorldContactListener.POWER_BOX_BIT:
+                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
+                break;
+            default:
+                boundsMeters = null;
+                break;
+        }
+
+        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT, boundsMeters.getWidth(), SENSOR_HEIGHT);
+        if (Intersector.overlaps(circleHero, homemadeSensor)) {
+            float startX = screen.getBottomEdge().getB2body().getPosition().x;
+            float startY = screen.getBottomEdge().getB2body().getPosition().y;
+            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS) {
+                onDead();
+            }
         }
     }
+
 
     private void setDefaultFilter() {
         Filter filter = new Filter();
