@@ -29,6 +29,7 @@ public class LevelFactory {
     // Constants
     private static final int TIMER_LEVEL_ONE = 400;
     private static final int TIMER_LEVEL_TWO = 460;
+    private static final int TIMER_LEVEL_THREE = 300;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -44,6 +45,12 @@ public class LevelFactory {
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 AssetFinalEnemyLevelTwo.HEIGHT_METERS + AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
+
+            case 3:
+                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                AssetFinalEnemyLevelOne.HEIGHT_METERS + AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+                break;
             default:
                 finalEnemy = null;
                 break;
@@ -52,7 +59,7 @@ public class LevelFactory {
     }
 
     public static int getLevelTimer(int level) {
-        int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO};
+        int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO, TIMER_LEVEL_THREE};
         return  levelTimers[level - 1];
     }
 
@@ -64,6 +71,9 @@ public class LevelFactory {
                 music = Assets.getInstance().getMusic().getSongLevelOne();
                 break;
             case 2:
+                music = Assets.getInstance().getMusic().getSongLevelTwo();
+                break;
+            case 3:
                 music = Assets.getInstance().getMusic().getSongLevelTwo();
                 break;
             default:
@@ -82,6 +92,9 @@ public class LevelFactory {
                 break;
             case 2:
                 map = Assets.getInstance().getMaps().getMapLevelTwo();
+                break;
+            case 3:
+                map = Assets.getInstance().getMaps().getMapLevelThree();
                 break;
             default:
                 map = null;
@@ -107,6 +120,8 @@ public class LevelFactory {
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(FinalEnemyLevelTwo.class.getName(), new DynamicHelpDef(true));
                 break;
+            case 3:
+                break;
             default:
                 break;
         }
@@ -121,6 +136,9 @@ public class LevelFactory {
                 break;
             case 2:
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelTwo();
+                break;
+            case 3:
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
                 break;
             default:
                 helpColSilverBullet = null;

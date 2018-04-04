@@ -119,6 +119,7 @@ public class Assets implements Disposable, AssetErrorListener {
     // Location of the map file for each level
     public static final String MAP_FILE_LEVEL_ONE = "levels/levelOne/levelOne.tmx";
     public static final String MAP_FILE_LEVEL_TWO = "levels/levelTwo/levelTwo.tmx";
+    public static final String MAP_FILE_LEVEL_THREE = "levels/levelThree/levelThree.tmx";
 
     private static Assets instance;
     private AssetManager assetManager;
@@ -192,6 +193,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(MAP_FILE_LEVEL_ONE, TiledMap.class);
         assetManager.load(MAP_FILE_LEVEL_TWO, TiledMap.class);
+        assetManager.load(MAP_FILE_LEVEL_THREE, TiledMap.class);
     }
 
     private void loadSounds() {

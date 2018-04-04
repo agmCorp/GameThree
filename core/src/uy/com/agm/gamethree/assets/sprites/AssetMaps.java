@@ -16,10 +16,12 @@ public class AssetMaps {
 
     private TiledMap mapLevelOne;
     private TiledMap mapLevelTwo;
+    private TiledMap mapLevelThree;
 
     public AssetMaps(AssetManager am) {
         mapLevelOne = getMap(am, Assets.MAP_FILE_LEVEL_ONE);
         mapLevelTwo = getMap(am, Assets.MAP_FILE_LEVEL_TWO);
+        mapLevelThree = getMap(am, Assets.MAP_FILE_LEVEL_THREE);
     }
 
     private TiledMap getMap(AssetManager am, String mapFile) {
@@ -37,5 +39,9 @@ public class AssetMaps {
 
     public TiledMap getMapLevelTwo() {
         return mapLevelTwo;
+    }
+
+    public TiledMap getMapLevelThree() {
+        return mapLevelThree;
     }
 }
