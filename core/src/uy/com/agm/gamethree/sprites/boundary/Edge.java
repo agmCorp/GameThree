@@ -31,7 +31,7 @@ public class Edge {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = AbstractScreen.V_WIDTH / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 1.0f * 1.0f / PlayScreen.PPM;
-    private static final float SENSOR_HEIGHT = 0.01f; // The thinner the better
+    private static final float SENSOR_HEIGHT_METERS = 0.01f; // The thinner the better
 
     private PlayScreen screen;
     private World world;
@@ -97,6 +97,7 @@ public class Edge {
     }
 
     public void onBump() {
+        /*
         Hero hero = screen.getPlayer();
         Vector2 heroPosition = hero.getB2body().getPosition();
 
@@ -119,11 +120,12 @@ public class Edge {
                     }
                     return true;
                 }
-            }, heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT);
+            }, heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS);
 
             while (foundBodies.size() > 0) {
                 hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
             }
         }
+        */
     }
 }

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,8 +47,8 @@ public class Hero extends Sprite {
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
-    private static final float SENSOR_HEIGHT = 0.01f; // The thinner the better
-    private static final float OFFSET = 1.0f;
+    private static final float SENSOR_HEIGHT_METERS = 0.01f; // The thinner the better
+    private static final float OFFSET_METERS = 1.0f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -550,13 +551,18 @@ public class Hero extends Sprite {
         circleHero.setPosition(heroPosition.x, heroPosition.y);
         float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
 
-        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT, boundsMeters.getWidth(), SENSOR_HEIGHT);
+
+        Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
+        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
         if (Intersector.overlaps(circleHero, homemadeSensor)) {
+            Gdx.app.debug(TAG, "********************$ OVERLAPS ");
             float startX = screen.getBottomEdge().getB2body().getPosition().x;
             float startY = screen.getBottomEdge().getB2body().getPosition().y;
-            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS) {
+            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS) {
                 onDead();
             }
+        } else {
+            Gdx.app.debug(TAG, "********************$ NO OVERLAPS! ");
         }
     }
 
