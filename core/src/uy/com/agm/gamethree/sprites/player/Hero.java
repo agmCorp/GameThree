@@ -557,12 +557,15 @@ public class Hero extends Sprite {
 
         homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
         Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " OBJETO " + boundsMeters.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
-        Gdx.app.debug(TAG, "********************$ GAPREAL " + (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY()));
+        Gdx.app.debug(TAG, "********************$ GAPREAL " + (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY())); // el sensor debe ser de 0.1
         if (Intersector.overlaps(circleHero, homemadeSensor)) {
-            Gdx.app.debug(TAG, "********************$ OVERLAPS ");
+            Gdx.app.debug(TAG, "********************$ OVERLAPS");
             float startX = screen.getBottomEdge().getB2body().getPosition().x;
             float startY = screen.getBottomEdge().getB2body().getPosition().y;
-            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS + 0.1F) {
+
+            Gdx.app.debug(TAG, "********************$ real distancia " + Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) + "mi comparacion " + 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS);
+
+            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS + 0.1F) {  // aca hay un margen de 0.0099996
                 onDead();
             }
         } else {
