@@ -79,4 +79,6 @@ public class Edge {
     public void speedUp() {
         b2body.setLinearVelocity(0.0f, PlayScreen.GAMECAM_VELOCITY * 5);
     }
+
+    public void onBump() {}
 }
