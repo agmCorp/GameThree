@@ -47,7 +47,7 @@ public class Hero extends Sprite {
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
-    private static final float SENSOR_HEIGHT_METERS = 0.01f; // The thinner the better
+    private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
     private static final float OFFSET_METERS = 1.0f;
 
     private enum HeroState {
@@ -550,15 +550,19 @@ public class Hero extends Sprite {
         Vector2 heroPosition = b2body.getPosition();
         circleHero.setPosition(heroPosition.x, heroPosition.y);
         float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+//
+//        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ CIRCULO 1.8974235,2.556165,0.32 OBJETO [1.68,2.91,0.408,0.512] HOMEMADESENSOR [1.68,2.8100002,0.408,0.1]
+//        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ GAPREAL -0.033835173
+//        04-04 19:11:16.684 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ OVERLAPS
 
-
-        Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
         homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
+        Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " OBJETO " + boundsMeters.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
+        Gdx.app.debug(TAG, "********************$ GAPREAL " + (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY()));
         if (Intersector.overlaps(circleHero, homemadeSensor)) {
             Gdx.app.debug(TAG, "********************$ OVERLAPS ");
             float startX = screen.getBottomEdge().getB2body().getPosition().x;
             float startY = screen.getBottomEdge().getB2body().getPosition().y;
-            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS) {
+            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS + 0.1F) {
                 onDead();
             }
         } else {
