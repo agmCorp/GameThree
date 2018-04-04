@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.boundary;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -97,7 +98,8 @@ public class Edge {
     }
 
     public void onBump() {
-        /*
+        Gdx.app.debug(TAG, "******************** choque ");
+
         Hero hero = screen.getPlayer();
         Vector2 heroPosition = hero.getB2body().getPosition();
 
@@ -106,26 +108,28 @@ public class Edge {
                 @Override
                 public boolean reportFixture(Fixture fixture) {
                     Object obj = fixture.getUserData();
-
+                    Gdx.app.debug(TAG, "******************** HOLA ");
                     if (obj instanceof Obstacle) {
+                        Gdx.app.debug(TAG, "******************** OBSTACLE ");
                         foundBodies.add(((Obstacle)obj).getBoundsMeters());
                     } else {
                         if (obj instanceof Path) {
+                            Gdx.app.debug(TAG, "******************** PATH ");
                             foundBodies.add(((Path)obj).getBoundsMeters());
                         } else {
                             if (obj instanceof PowerBox) {
+                                Gdx.app.debug(TAG, "******************** POWER ");
                                 foundBodies.add(((PowerBox)obj).getBoundsMeters());
                             }
                         }
                     }
                     return true;
                 }
-            }, heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS);
+            }, heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS * 1000);
 
             while (foundBodies.size() > 0) {
                 hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
             }
         }
-        */
     }
 }
