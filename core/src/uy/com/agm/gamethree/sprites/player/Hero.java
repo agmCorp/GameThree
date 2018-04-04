@@ -543,11 +543,9 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.DYING_UP;
     }
 
-
-
-
     // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
-    public void checkSmashing(Rectangle boundsMeters) {
+    // ESTO NO PUEDE IR ACA!! DEBO EXPLICAR QUE RECIBE EN BOUNDSMETERS EL BOUNDS DE LA FIXTURE CONTRA LA QUE CHOCHA ASUMIENDO QUE ES POWERBOX, PATH, OBSTACLE
+    public void checkSmashing(Rectangle boundsMeters) { // TODO
         Vector2 heroPosition = b2body.getPosition();
         circleHero.setPosition(heroPosition.x, heroPosition.y);
         float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;

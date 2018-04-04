@@ -303,6 +303,7 @@ public class PowerBox extends Sprite {
 
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+        screen.getPlayer().checkSmashing(boundsMeters);
     }
 
     public void onHit() {

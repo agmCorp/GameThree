@@ -27,8 +27,7 @@ public abstract class InteractiveTileObject {
     protected TiledMap map;
     protected Body b2body;
     protected Fixture fixture;
-
-    private Rectangle boundsMeters;
+    protected Rectangle boundsMeters;
 
     public InteractiveTileObject(PlayScreen screen, MapObject object) {
         this.screen = screen;
