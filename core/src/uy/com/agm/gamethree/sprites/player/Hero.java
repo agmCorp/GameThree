@@ -21,7 +21,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
@@ -544,28 +543,14 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.DYING_UP;
     }
 
-    // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
-    private void checkSmashing(Fixture fixture) {
-        Rectangle boundsMeters;
 
+
+
+    // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
+    public void checkSmashing(Rectangle boundsMeters) {
         Vector2 heroPosition = b2body.getPosition();
         circleHero.setPosition(heroPosition.x, heroPosition.y);
         float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-
-        switch (fixture.getFilterData().categoryBits) {
-            case WorldContactListener.OBSTACLE_BIT:
-                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
-                break;
-            case WorldContactListener.PATH_BIT:
-                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
-                break;
-            case WorldContactListener.POWER_BOX_BIT:
-                boundsMeters = ((Obstacle) fixture.getUserData()).getBoundsMeters();
-                break;
-            default:
-                boundsMeters = null;
-                break;
-        }
 
         homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT, boundsMeters.getWidth(), SENSOR_HEIGHT);
         if (Intersector.overlaps(circleHero, homemadeSensor)) {
