@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +19,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
@@ -212,7 +210,7 @@ public class Hero extends Sprite {
 
     private void openFireAutomatic() {
         if (!GameSettings.getInstance().isManualShooting() && !isSilverBulletEnabled()) {
-            if (!isHeroDead() && !screen.getFinalEnemy().isDestroyed()) {
+            if (!isDead() && !screen.getFinalEnemy().isDestroyed()) {
                 openFire();
             }
         }
@@ -462,7 +460,7 @@ public class Hero extends Sprite {
     }
 
     private void checkLevelTimeUp() {
-        if (screen.getHud().isTimeIsUp() && !isHeroDead()) {
+        if (screen.getHud().isTimeIsUp() && !isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getTimeIsUp());
             screen.getHud().showTimeIsUpMessage();
@@ -647,7 +645,7 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
     }
 
-    public boolean isHeroDead() {
+    public boolean isDead() {
         return currentHeroState == HeroState.DEAD ||
                 currentHeroState == HeroState.DYING_UP ||
                 currentHeroState == HeroState.DYING_DOWN;

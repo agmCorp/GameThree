@@ -164,7 +164,7 @@ public class PowerOne extends Item {
 
     private void applyPowerOne() {
         // WA: Hero could have died between use method and applyPowerOne method
-        if (!screen.getPlayer().isHeroDead()) {
+        if (!screen.getPlayer().isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
 

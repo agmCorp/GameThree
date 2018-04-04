@@ -133,7 +133,7 @@ public abstract class FinalEnemy extends Sprite {
             if (playingIntro) {
                 introTime += dt;
                 if (introTime > INTRO_TIME_SECONDS) {
-                    if (!screen.getPlayer().isHeroDead() && !isDestroyed()) {
+                    if (!screen.getPlayer().isDead() && !isDestroyed()) {
                         AudioManager.getInstance().resumeMusic();
                     }
                     screen.getHud().hideMessage();
@@ -142,7 +142,7 @@ public abstract class FinalEnemy extends Sprite {
             }
 
             // Release silver bullets if needed
-            if (!screen.getPlayer().isHeroDead() && !screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
+            if (!screen.getPlayer().isDead() && !screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
                 aidSilverBulletTime += dt;
                 if (aidSilverBulletTime > AID_SILVER_BULLET_TIME_SECONDS) {
                     releaseSilverBullet();

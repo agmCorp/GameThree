@@ -309,7 +309,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void updateHud(float dt) {
-        if(!player.isHeroDead() && !finalEnemy.isDestroyed()) {
+        if(!player.isDead() && !finalEnemy.isDestroyed()) {
             hud.update(dt);
         }
     }
@@ -320,7 +320,7 @@ public class PlayScreen extends AbstractScreen {
 
     private void updateCamera(float dt) {
         // If Hero is dead, we freeze the camera
-        if(!player.isHeroDead()) {
+        if(!player.isDead()) {
             if (isTheEndOfTheWorld()) {
                 stopEdges();
             }
@@ -565,7 +565,7 @@ public class PlayScreen extends AbstractScreen {
             startEdges();
         }
 
-        finish = !finish && !player.isSilverBulletEnabled() && !player.isHeroDead() && isChallengeBegin();
+        finish = !finish && !player.isSilverBulletEnabled() && !player.isDead() && isChallengeBegin();
         if (finish) {
             // Show help
             finalEnemy.showChallengeBeginHelp();
@@ -607,7 +607,7 @@ public class PlayScreen extends AbstractScreen {
 
     public void setPlayScreenStateRunning(){
         this.playScreenState = PlayScreenState.RUNNING;
-        if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
+        if (!player.isDead() && !finalEnemy.isDestroyed()) {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();

@@ -164,7 +164,7 @@ public class PowerFour extends Item {
 
     private void applyPowerFour() {
         // WA: Hero could have died between use method and applyPowerFour method
-        if (!screen.getPlayer().isHeroDead()) {
+        if (!screen.getPlayer().isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
 

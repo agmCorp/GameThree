@@ -167,7 +167,7 @@ public class PowerTwo extends Item {
 
     private void applyPowerTwo() {
         // WA: Hero could have died between use method and applyPowerTwo method
-        if (!screen.getPlayer().isHeroDead()) {
+        if (!screen.getPlayer().isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo());
 

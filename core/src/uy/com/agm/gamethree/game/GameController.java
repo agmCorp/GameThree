@@ -44,7 +44,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
             // If Hero is dead, we don't handle any input
             if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
-                if (!player.isHeroDead() && !finalEnemy.isDestroyed()) {
+                if (!player.isDead() && !finalEnemy.isDestroyed()) {
                     player.openFire();
                 }
             }
@@ -66,7 +66,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
             // If Hero is dead, we don't handle any input
-            if (!player.isHeroDead()) {
+            if (!player.isDead()) {
                 /*
                 * DeltaX is positive when I move my finger to the left, negative otherwise.
                 * DeltaY is positive when I move my finger down, negative otherwise.
@@ -97,7 +97,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean panStop(float x, float y, int pointer, int button) {
         if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
             // If Hero is dead, we don't handle any input
-            if (!player.isHeroDead()) {
+            if (!player.isDead()) {
                 player.getB2body().setLinearVelocity(0, 0);
                 evaluateMovementDirection();
             }
@@ -124,7 +124,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean keyDown(int keycode) {
         if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
             // If Hero is dead, we don't handle any input
-            if (!player.isHeroDead()) {
+            if (!player.isDead()) {
                 // Control our player using linear velocity
                 if (keycode == Input.Keys.UP) {
                     player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
@@ -153,7 +153,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     public boolean keyUp(int keycode) {
         if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
             // If Hero is dead, we don't handle any input
-            if (!player.isHeroDead()) {
+            if (!player.isDead()) {
                 // Control our player using linear velocity
                 if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
                     player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);

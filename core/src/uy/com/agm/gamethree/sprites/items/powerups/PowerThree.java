@@ -164,7 +164,7 @@ public class PowerThree extends Item {
 
     private void applyPowerThree() {
         // WA: Hero could have died between use method and applyPowerThree method
-        if (!screen.getPlayer().isHeroDead()) {
+        if (!screen.getPlayer().isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerThree());
 
