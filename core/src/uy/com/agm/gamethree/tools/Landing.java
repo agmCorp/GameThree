@@ -1,16 +1,11 @@
 package uy.com.agm.gamethree.tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
-import uy.com.agm.gamethree.sprites.tileobjects.Border;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.tileobjects.Path;
 
@@ -42,11 +37,12 @@ public class Landing {
         v = new Vector2();
     }
 
-     /* Check collisions against borders, edges, obstacles, paths and powerBoxes (that is, actors at rest scattered on the game).
+     /* Check collisions against obstacles, paths and powerBoxes (that is, actors at rest scattered on the game).
       * Returns a safe position in meters where to land (collision free) or (-1, -1) otherwise.
       * To work this out, this method considers that Hero is a circle (like its b2body but a bit arbitrarily bigger) and tests
-      * every position inside xA, xB, yA, yB starting at (x0, y0) and moving left/right and up/down (see SEARCH_LEFT and SEARCH_UP) using increments defined on INCREMENT_X_METERS and INCREMENT_Y_METERS.
-      * Thus, if a solution exists, it is near (x0, y0).
+      * every position inside xA, xB, yA, yB starting at (x0, y0) and moving left/right and up/down (see SEARCH_LEFT and SEARCH_UP)
+      * using increments defined on INCREMENT_X_METERS and INCREMENT_Y_METERS.
+      * Thus, if a solution exists, it's near (x0, y0).
      */
     public Vector2 land() {
         float camX = screen.getGameCam().position.x;
@@ -155,33 +151,13 @@ public class Landing {
         } while (!end);
     }
 
-    // Returns true if and only if circleHero overlaps borders, edges, obstacles, paths or powerBoxes.
+    // Returns true if and only if circleHero overlaps obstacles, paths or powerBoxes.
     private boolean collides(Vector2 v) {
         // Candidate position
         circleHero.setPosition(v.x, v.y);
         boolean collision = false;
 
         // Check collisions of each object in the game as it's more efficient than checking if it's visible or not.
-
-        // Borders
-        if (!collision) {
-            for (Border border : screen.getCreator().getBorders()) {
-                if (Intersector.overlaps(circleHero, border.getBoundsMeters())) {
-                    collision = true;
-                    break;
-                }
-            }
-        }
-
-        // Edges
-        if (!collision) {
-            for (Edge edge : screen.getCreator().getEdges()) {
-                if (Intersector.overlaps(circleHero, edge.getBoundsMeters())) {
-                    collision = true;
-                    break;
-                }
-            }
-        }
 
         // Obstacles
         if (!collision) {
