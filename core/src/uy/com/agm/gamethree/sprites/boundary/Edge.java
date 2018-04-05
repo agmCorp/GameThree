@@ -90,7 +90,7 @@ public class Edge {
     public void onBump() {
         Hero hero = screen.getPlayer();
         Vector2 heroPosition = hero.getB2body().getPosition();
-        Gdx.app.debug(TAG, "******************** ENTRO AL CHOQUE ");
+        Gdx.app.debug(TAG, "******************** ENTRO AL CHOQUE   ");
 
         if (b2body.getPosition().y < screen.getGameCam().position.y) { // Bottom edge
             Vector3 v1 = new Vector3(heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 0);
