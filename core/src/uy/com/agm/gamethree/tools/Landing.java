@@ -19,8 +19,8 @@ public class Landing {
     // Constants
     private static final boolean SEARCH_LEFT = false; // Arbitrary
     private static final boolean SEARCH_UP = true; // Arbitrary
-    private static final float INCREMENT_X_METERS = 0.4f; // Arbitrary
-    private static final float INCREMENT_Y_METERS = 0.4f; // Arbitrary
+    private static final float INCREMENT_X_METERS = 0.4f; // Arbitrary (the thinner the more accurate)
+    private static final float INCREMENT_Y_METERS = 0.4f; // Arbitrary (the thinner the more accurate)
     private static final float MARGIN_METERS = 0.2f; // Arbitrary
 
     private PlayScreen screen;
@@ -52,6 +52,8 @@ public class Landing {
 
         float x0 = camX;
         float y0 = camY - worldHeight / 4;
+
+        // Collision against Borders or Edges are not possible
         float xA = camX - worldWidth / 2 + circleHero.radius;
         float xB = camX + worldWidth / 2 - circleHero.radius;
         float yA = camY - worldHeight / 2 + circleHero.radius;
@@ -151,7 +153,8 @@ public class Landing {
         } while (!end);
     }
 
-    // Returns true if and only if circleHero overlaps obstacles, paths or powerBoxes.
+    // Returns true if and only if circleHero overlaps obstacles, paths or powerBoxes
+    // We could, but we don't need to check against edges or borders (see land() and xA, xB, yA, yB definition)
     private boolean collides(Vector2 v) {
         // Candidate position
         circleHero.setPosition(v.x, v.y);

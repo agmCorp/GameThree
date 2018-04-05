@@ -1,5 +1,6 @@
 IDEAS
 -----
+- AGREGAR AABB A LANDING
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
 los que se van de la pantalla).
