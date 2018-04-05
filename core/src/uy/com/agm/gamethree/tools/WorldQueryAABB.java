@@ -18,14 +18,14 @@ import uy.com.agm.gamethree.sprites.tileobjects.Path;
 public class WorldQueryAABB implements QueryCallback {
     private static final String TAG = WorldQueryAABB.class.getName();
 
-    private LinkedBlockingQueue<Rectangle> foundBodies;
+    // Collisions
+    private static LinkedBlockingQueue<Rectangle> foundBodies;
 
     // Singleton: unique instance
     private static WorldQueryAABB instance;
 
     // Singleton: prevent instantiation from other classes
     private WorldQueryAABB() {
-        // Near collisions
         foundBodies = new LinkedBlockingQueue<Rectangle>();
     }
 
@@ -37,28 +37,26 @@ public class WorldQueryAABB implements QueryCallback {
         return instance;
     }
 
-    public LinkedBlockingQueue<Rectangle> getFoundBodies() {
+    public static LinkedBlockingQueue<Rectangle> getFoundBodies() {
         return foundBodies;
     }
 
     @Override
     public boolean reportFixture(Fixture fixture) {
         Object obj = fixture.getUserData();
-        Gdx.app.debug(TAG, "******************** soy el reportFixture " + fixture.getFilterData().categoryBits);
-
-        if (obj instanceof Obstacle) {
-            Gdx.app.debug(TAG, "******************** OBSTACLE ");
-            foundBodies.add(((Obstacle)obj).getBoundsMeters());
-        } else {
-            if (obj instanceof Path) {
+        switch (fixture.getFilterData().categoryBits) {
+            case WorldContactListener.POWER_BOX_BIT:
+                Gdx.app.debug(TAG, "******************** POWERBOX ");
+                foundBodies.add(((PowerBox) obj).getBoundsMeters());
+                break;
+            case WorldContactListener.OBSTACLE_BIT:
+                Gdx.app.debug(TAG, "******************** OBSTACLE ");
+                foundBodies.add(((Obstacle) obj).getBoundsMeters());
+                break;
+            case WorldContactListener.PATH_BIT:
                 Gdx.app.debug(TAG, "******************** PATH ");
-                foundBodies.add(((Path)obj).getBoundsMeters());
-            } else {
-                if (obj instanceof PowerBox) {
-                    Gdx.app.debug(TAG, "******************** POWER ");
-                    foundBodies.add(((PowerBox)obj).getBoundsMeters());
-                }
-            }
+                foundBodies.add(((Path) obj).getBoundsMeters());
+                break;
         }
         return true;
     }

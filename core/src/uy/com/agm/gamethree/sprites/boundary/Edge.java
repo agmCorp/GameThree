@@ -3,12 +3,13 @@ package uy.com.agm.gamethree.sprites.boundary;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -27,7 +28,7 @@ public class Edge {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = AbstractScreen.V_WIDTH / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 1.0f * 1.0f / PlayScreen.PPM;
-    private static final float SENSOR_HEIGHT_METERS = 0.01f; // The thinner the better
+    private static final float SENSOR_HEIGHT_METERS = 2;//0.1f;//0.01f; // The thinner the better todo
 
     private PlayScreen screen;
     private World world;
@@ -90,22 +91,21 @@ public class Edge {
     public void onBump() {
         Hero hero = screen.getPlayer();
         Vector2 heroPosition = hero.getB2body().getPosition();
-        Gdx.app.debug(TAG, "******************** ENTRO AL CHOQUE   ");
+        Gdx.app.debug(TAG, "******************** INICIO CHOQUE CON EDGE ****************** ");
 
         if (b2body.getPosition().y < screen.getGameCam().position.y) { // Bottom edge
-            Vector3 v1 = new Vector3(heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 0);
-            screen.getGameCam().unproject(v1);
+            float lowerX = heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS;
+            float lowerY = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+            float upperX = heroPosition.x + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+            float upperY = lowerY + SENSOR_HEIGHT_METERS;
 
-            Vector3 v2 = new Vector3(2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, 3, 0);
-            screen.getGameCam().unproject(v2);
+            world.QueryAABB(WorldQueryAABB.getInstance(), lowerX, lowerY, upperX, upperY);
 
-            world.QueryAABB(WorldQueryAABB.getInstance(), v1.x, v1.y, v2.x, v2.y);
-
-            //heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS);
-
-//            while (foundBodies.size() > 0) {
-//                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
-//            }
+            LinkedBlockingQueue<Rectangle> foundBodies = WorldQueryAABB.getFoundBodies();
+            while (foundBodies.size() > 0) {
+                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
+            }
         }
+        Gdx.app.debug(TAG, "******************** FIN CHOQUE CON EDGE ****************** ");
     }
 }

@@ -23,6 +23,12 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
+ActorDef en lugar de Object UserData, podria poner IActor userData;
+IActor es una interfaz que tiene el metodo getCategoryBits.
+Haria que todos mis objetos que van a usar ActorDef implementen esa interfaz.
+Entonces en lugar de usar instanceOf puedo usar getCategoryBits, ver si sirve de algo, porque no tengo una category bits llamada POWERONE...
+esto lo pense muy rapido, lo anoto para que lo veas despues.
+
 - en donde engancho los bordes, el hero se traba.
 - para terminar el nivel me faltan las silverbullets y los coins.
 - resolver aplastamiento? probar en deskotp

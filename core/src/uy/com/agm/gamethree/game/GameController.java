@@ -1,14 +1,17 @@
 package uy.com.agm.gamethree.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.player.Hero;
 import uy.com.agm.gamethree.tools.Vector2Util;
+import uy.com.agm.gamethree.tools.WorldQueryAABB;
 
 /**
  * Created by AGM on 12/6/2017.
@@ -36,6 +39,21 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
+        // todo borrar
+
+        Gdx.app.debug(TAG, "YO CLICKEO EN " + x + " " + y);
+
+        // translate the mouse coordinates to world coordinates
+        Vector3 testPoint = new Vector3();
+        testPoint.set(x, y, 0);
+        screen.getGameCam().unproject(testPoint);
+
+        Gdx.app.debug(TAG, "UNPROJECT " + testPoint.x + " " + testPoint.y);
+
+        // ask the world which bodies are within the given
+        // bounding box around the mouse pointer
+        screen.getWorld().QueryAABB(WorldQueryAABB.getInstance(), testPoint.x - 0.1f, testPoint.y - 0.1f, testPoint.x + 0.1f, testPoint.y + 0.1f);
+
         return false;
     }
 

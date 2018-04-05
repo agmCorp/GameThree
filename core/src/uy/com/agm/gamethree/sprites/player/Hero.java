@@ -1,11 +1,13 @@
 package uy.com.agm.gamethree.sprites.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -543,32 +545,34 @@ public class Hero extends Sprite {
     }
 
     // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
-    // ESTO NO PUEDE IR ACA!! DEBO EXPLICAR QUE RECIBE EN BOUNDSMETERS EL BOUNDS DE LA FIXTURE CONTRA LA QUE CHOCHA ASUMIENDO QUE ES POWERBOX, PATH, OBSTACLE
+    // todo ESTO NO PUEDE IR ACA!! DEBO EXPLICAR QUE RECIBE EN BOUNDSMETERS EL BOUNDS DE LA FIXTURE CONTRA
+    // LA QUE CHOCHA ASUMIENDO QUE ES POWERBOX, PATH, OBSTACLE
     public void checkSmashing(Rectangle boundsMeters) { // TODO
-//        Vector2 heroPosition = b2body.getPosition();
-//        circleHero.setPosition(heroPosition.x, heroPosition.y);
-//        float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-////
-////        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ CIRCULO 1.8974235,2.556165,0.32 OBJETO [1.68,2.91,0.408,0.512] HOMEMADESENSOR [1.68,2.8100002,0.408,0.1]
-////        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ GAPREAL -0.033835173
-////        04-04 19:11:16.684 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ OVERLAPS
+        Vector2 heroPosition = b2body.getPosition();
+        circleHero.setPosition(heroPosition.x, heroPosition.y);
+        float upperEdgeHero = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
 //
-//        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
-//        Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " OBJETO " + boundsMeters.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
-//        Gdx.app.debug(TAG, "********************$ GAPREAL " + (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY())); // el sensor debe ser de 0.1
-//        if (Intersector.overlaps(circleHero, homemadeSensor)) {
-//            Gdx.app.debug(TAG, "********************$ OVERLAPS");
-//            float startX = screen.getBottomEdge().getB2body().getPosition().x;
-//            float startY = screen.getBottomEdge().getB2body().getPosition().y;
-//
-//            Gdx.app.debug(TAG, "********************$ real distancia " + Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) + "mi comparacion " + 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS);
-//
-//            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS + 0.1F) {  // aca hay un margen de 0.0099996
-//                onDead();
-//            }
-//        } else {
-//            Gdx.app.debug(TAG, "********************$ NO OVERLAPS! ");
-//        }
+//        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ CIRCULO 1.8974235,2.556165,0.32 OBJETO [1.68,2.91,0.408,0.512] HOMEMADESENSOR [1.68,2.8100002,0.408,0.1]
+//        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ GAPREAL -0.033835173
+//        04-04 19:11:16.684 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ OVERLAPS
+
+        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
+        Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " POWERBOX/PATH/OBJECT " + boundsMeters.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
+        float gap = (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY());
+        Gdx.app.debug(TAG, "********************$ GAPREAL " + gap); // el sensor debe ser de 0.1
+        if (Intersector.overlaps(circleHero, homemadeSensor)) {
+            Gdx.app.debug(TAG, "********************$ OVERLAPS");
+            float startX = screen.getBottomEdge().getB2body().getPosition().x;
+            float startY = screen.getBottomEdge().getB2body().getPosition().y;
+
+            Gdx.app.debug(TAG, "********************$ real distancia " + Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) + "mi comparacion " + 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS);
+
+            if (Intersector.distanceLinePoint(startX, startY, startX + OFFSET_METERS, startY, heroPosition.x, upperEdgeHero) <= 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS + 0.1F) {  // TODO aca hay un margen de 0.0099996
+                onDead();
+            }
+        } else {
+            Gdx.app.debug(TAG, "********************$ NO OVERLAPS! ");
+        }
     }
 
 
