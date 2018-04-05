@@ -556,7 +556,7 @@ public class Hero extends Sprite {
 //        04-04 19:11:16.674 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ GAPREAL -0.033835173
 //        04-04 19:11:16.684 13196-13334/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.player.Hero: ********************$ OVERLAPS
 
-        homemadeSensor.set(boundsMeters.getX(), boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth(), SENSOR_HEIGHT_METERS);
+        homemadeSensor.set(boundsMeters.getX() + 0.4f, boundsMeters.getY() - SENSOR_HEIGHT_METERS, boundsMeters.getWidth() - 0.8f, SENSOR_HEIGHT_METERS);
         //Gdx.app.debug(TAG, "********************$ CIRCULO " + circleHero.toString() + " POWERBOX/PATH/OBJECT " + boundsMeters.toString() + " HOMEMADESENSOR " + homemadeSensor.toString());
         //float gap = (heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS - boundsMeters.getY());
         //Gdx.app.debug(TAG, "********************$ GAPREAL " + gap); // el sensor debe ser de 0.1
