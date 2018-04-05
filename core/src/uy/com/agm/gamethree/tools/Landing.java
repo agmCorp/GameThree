@@ -14,6 +14,14 @@ import uy.com.agm.gamethree.sprites.tileobjects.Path;
  */
 
 public class Landing {
+
+    // TODO
+    /*
+    * ACA PUEDO TENER UNA INSTANCIA DEL WORLDAABB HECHA CON NEW COMO SIEMPRE (EL WORDLAABB DENTRO EN SU CONTRUCTOR HACE NEW DE SU LISTA COMO SIEMPRE).
+    * EL WORLDAABB ME LA RETORNA LLENA.
+    * HAY SOLO UNA INSTALNCIA DEL LANDING, HAY SOLO UNA INSTANCIA DE WORLDAABB.
+     */
+
     private static final String TAG = WorldContactListener.class.getName();
 
     // Constants
