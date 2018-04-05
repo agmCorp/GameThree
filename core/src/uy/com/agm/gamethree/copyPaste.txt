@@ -272,3 +272,25 @@ I ended up saving the original position of the camera in a baseX and baseY varia
 shaking was completed, you simply assign them back to the camera and update it.
 
 IGUAL SEGUN DICE POR AHI, HACER ESTO PROVOCA UN JUMP NOTORIO CUANDO FINALIZA EL SHAKE (https://www.netprogs.com/libgdx-screen-shaking/)
+
+----------------------------------------------------
+para reconocer con queryAABB el objeto que clickeo:
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        // todo borrar
+
+        Gdx.app.debug(TAG, "YO CLICKEO EN " + x + " " + y);
+
+        // translate the mouse coordinates to world coordinates
+        Vector3 testPoint = new Vector3();
+        testPoint.set(x, y, 0);
+        screen.getGameCam().unproject(testPoint);
+
+        Gdx.app.debug(TAG, "UNPROJECT " + testPoint.x + " " + testPoint.y);
+
+        // ask the world which bodies are within the given
+        // bounding box around the mouse pointer
+        screen.getWorld().QueryAABB(WorldQueryAABB.getInstance(), testPoint.x - 0.1f, testPoint.y - 0.1f, testPoint.x + 0.1f, testPoint.y + 0.1f);
+
+        return false;
+    }
