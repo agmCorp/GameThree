@@ -89,23 +89,24 @@ public class Edge {
     }
 
     public void onBump() {
-        Hero hero = screen.getPlayer();
-        Vector2 heroPosition = hero.getB2body().getPosition();
-        Gdx.app.debug(TAG, "AABB******************** INICIO CHOQUE CON EDGE ****************** ");
-
-        if (b2body.getPosition().y < screen.getGameCam().position.y) { // Bottom edge
-            float lowerX = heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS;
-            float lowerY = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-            float upperX = heroPosition.x + Hero.CIRCLE_SHAPE_RADIUS_METERS;
-            float upperY = lowerY + SENSOR_HEIGHT_METERS;
-
-            world.QueryAABB(WorldQueryAABB.getInstance(), lowerX, lowerY, upperX, upperY);
-
-            LinkedBlockingQueue<Rectangle> foundBodies = WorldQueryAABB.getFoundBodies();
-            while (foundBodies.size() > 0) {
-                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
-            }
-        }
-        Gdx.app.debug(TAG, "AABB******************** FIN CHOQUE CON EDGE ****************** ");
+//        Hero hero = screen.getPlayer();
+//        Vector2 heroPosition = hero.getB2body().getPosition();
+//        Gdx.app.debug(TAG, "AABB******************** INICIO CHOQUE CON EDGE ****************** ");
+//
+//        if (b2body.getPosition().y < screen.getGameCam().position.y) { // Bottom edge
+//            float lowerX = heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS;
+//            float lowerY = heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+//            float upperX = heroPosition.x + Hero.CIRCLE_SHAPE_RADIUS_METERS;
+//            float upperY = lowerY + SENSOR_HEIGHT_METERS;
+//
+//            world.QueryAABB(WorldQueryAABB.getInstance(), lowerX, lowerY, upperX, upperY);
+//
+//            LinkedBlockingQueue<Rectangle> foundBodies = WorldQueryAABB.getFoundBodies();
+//            while (foundBodies.size() > 0) {
+//                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
+//            }
+//        }
+//        Gdx.app.debug(TAG, "AABB******************** FIN CHOQUE CON EDGE ****************** ");
+        Gdx.app.debug(TAG, "****** SOY EL EDGE "); // TODO
     }
 }

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.tileobjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -23,6 +24,7 @@ public class Path extends InteractiveTileObject {
     @Override
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
-        screen.getPlayer().checkSmashing(boundsMeters);
+        Gdx.app.debug(TAG, "****** SOY EL PATH "); // TODO
+        //screen.getPlayer().checkSmashing(boundsMeters);
     }
 }

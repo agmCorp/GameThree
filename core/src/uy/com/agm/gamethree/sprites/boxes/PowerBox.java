@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.boxes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -303,7 +304,8 @@ public class PowerBox extends Sprite {
 
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
-        screen.getPlayer().checkSmashing(boundsMeters);
+        Gdx.app.debug(TAG, "****** SOY EL POWERBOX "); // TODO
+        //screen.getPlayer().checkSmashing(boundsMeters);
     }
 
     public void onHit() {
