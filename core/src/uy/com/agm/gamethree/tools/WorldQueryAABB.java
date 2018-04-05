@@ -46,15 +46,15 @@ public class WorldQueryAABB implements QueryCallback {
         Object obj = fixture.getUserData();
         switch (fixture.getFilterData().categoryBits) {
             case WorldContactListener.POWER_BOX_BIT:
-                Gdx.app.debug(TAG, "******************** POWERBOX ");
+                Gdx.app.debug(TAG, "AABB******************** POWERBOX ");
                 foundBodies.add(((PowerBox) obj).getBoundsMeters());
                 break;
             case WorldContactListener.OBSTACLE_BIT:
-                Gdx.app.debug(TAG, "******************** OBSTACLE ");
+                Gdx.app.debug(TAG, "AABB******************* OBSTACLE ");
                 foundBodies.add(((Obstacle) obj).getBoundsMeters());
                 break;
             case WorldContactListener.PATH_BIT:
-                Gdx.app.debug(TAG, "******************** PATH ");
+                Gdx.app.debug(TAG, "AABB******************** PATH ");
                 foundBodies.add(((Path) obj).getBoundsMeters());
                 break;
         }
