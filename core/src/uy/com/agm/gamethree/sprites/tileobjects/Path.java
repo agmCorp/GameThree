@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.sprites.tileobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 
 import uy.com.agm.gamethree.assets.Assets;

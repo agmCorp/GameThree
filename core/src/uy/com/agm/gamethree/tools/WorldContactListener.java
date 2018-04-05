@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
@@ -69,14 +68,6 @@ public class WorldContactListener implements ContactListener {
                         fixA.getFilterData().categoryBits == OBSTACLE_BIT ||
                         fixA.getFilterData().categoryBits == PATH_BIT) ? fixA : fixB;
                 ((InteractiveTileObject) fixC.getUserData()).onBump();
-                break;
-
-            // Hero/HeroGhost/HeroTough - Edge
-            case HERO_BIT | EDGE_BIT:
-            case HERO_GHOST_BIT | EDGE_BIT:
-            case HERO_TOUGH_BIT | EDGE_BIT:
-                fixC = fixA.getFilterData().categoryBits == EDGE_BIT ? fixA : fixB;
-                ((Edge) fixC.getUserData()).onBump();
                 break;
 
             // Hero/HeroGhost/HeroTough - PowerBox
