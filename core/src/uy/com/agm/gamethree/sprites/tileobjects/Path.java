@@ -24,7 +24,5 @@ public class Path extends InteractiveTileObject {
     @Override
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
-        Gdx.app.debug(TAG, "****** SOY EL PATH "); // TODO
-        //screen.getPlayer().checkSmashing(boundsMeters);
     }
 }

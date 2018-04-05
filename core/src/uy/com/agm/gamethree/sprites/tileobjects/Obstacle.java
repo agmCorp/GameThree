@@ -24,7 +24,5 @@ public class Obstacle extends InteractiveTileObject {
     @Override
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
-        Gdx.app.debug(TAG, "****** SOY EL OBSTACLE "); // TODO
-        //screen.getPlayer().checkSmashing(boundsMeters);
     }
 }

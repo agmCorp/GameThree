@@ -304,8 +304,6 @@ public class PowerBox extends Sprite {
 
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
-        Gdx.app.debug(TAG, "****** SOY EL POWERBOX "); // TODO
-        //screen.getPlayer().checkSmashing(boundsMeters);
     }
 
     public void onHit() {
