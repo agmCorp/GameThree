@@ -3,23 +3,18 @@ package uy.com.agm.gamethree.sprites.boundary;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
-import uy.com.agm.gamethree.sprites.tileobjects.Path;
 import uy.com.agm.gamethree.tools.WorldContactListener;
+import uy.com.agm.gamethree.tools.WorldQueryAABB;
 
 
 /**
@@ -39,8 +34,6 @@ public class Edge {
     private Rectangle boundsMeters;
     private Body b2body;
 
-    private LinkedBlockingQueue<Rectangle> foundBodies;
-
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;
         this.world = screen.getWorld();
@@ -53,9 +46,6 @@ public class Edge {
 
         defineEdge();
         start();
-
-        // Near collisions
-        foundBodies = new LinkedBlockingQueue<Rectangle>();
     }
 
     private void defineEdge() {
@@ -98,38 +88,24 @@ public class Edge {
     }
 
     public void onBump() {
-        Gdx.app.debug(TAG, "******************** choque ");
-
         Hero hero = screen.getPlayer();
         Vector2 heroPosition = hero.getB2body().getPosition();
+        Gdx.app.debug(TAG, "******************** ENTRO AL CHOQUE ");
 
         if (b2body.getPosition().y < screen.getGameCam().position.y) { // Bottom edge
-            world.QueryAABB(new QueryCallback() {
-                @Override
-                public boolean reportFixture(Fixture fixture) {
-                    Object obj = fixture.getUserData();
-                    Gdx.app.debug(TAG, "******************** HOLA ");
-                    if (obj instanceof Obstacle) {
-                        Gdx.app.debug(TAG, "******************** OBSTACLE ");
-                        foundBodies.add(((Obstacle)obj).getBoundsMeters());
-                    } else {
-                        if (obj instanceof Path) {
-                            Gdx.app.debug(TAG, "******************** PATH ");
-                            foundBodies.add(((Path)obj).getBoundsMeters());
-                        } else {
-                            if (obj instanceof PowerBox) {
-                                Gdx.app.debug(TAG, "******************** POWER ");
-                                foundBodies.add(((PowerBox)obj).getBoundsMeters());
-                            }
-                        }
-                    }
-                    return true;
-                }
-            }, heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS * 1000);
+            Vector3 v1 = new Vector3(heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 0);
+            screen.getGameCam().unproject(v1);
 
-            while (foundBodies.size() > 0) {
-                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
-            }
+            Vector3 v2 = new Vector3(2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, 3, 0);
+            screen.getGameCam().unproject(v2);
+
+            world.QueryAABB(WorldQueryAABB.getInstance(), v1.x, v1.y, v2.x, v2.y);
+
+            //heroPosition.x - Hero.CIRCLE_SHAPE_RADIUS_METERS, heroPosition.y + Hero.CIRCLE_SHAPE_RADIUS_METERS, 2 * Hero.CIRCLE_SHAPE_RADIUS_METERS, SENSOR_HEIGHT_METERS);
+
+//            while (foundBodies.size() > 0) {
+//                hero.checkSmashing(foundBodies.poll()); // Poll is similar to pop but for a queue, removes the element
+//            }
         }
     }
 }

@@ -338,7 +338,7 @@ public class B2WorldCreator {
     }
 
     public void printDebugStatus() {
-        if (PlayScreen.DEBUG_MODE) {
+        if (PlayScreen.DEBUG_MODE && false) {
             arrayMapDebug.clear();
             String key;
             String value;
