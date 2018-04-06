@@ -36,17 +36,14 @@ public class Hero extends Sprite {
     private static final String TAG = Hero.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float LINEAR_VELOCITY = 5.2f;
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
-    public static final float MIN_SMASH_DISTANCE = CIRCLE_SHAPE_RADIUS_METERS + 0.4f;
+    public static final float LINEAR_VELOCITY = 5.2f;
     private static final float DEATH_LINEAR_VELOCITY = 5.0f;
     private static final int LIVES_START = 30;
     private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
-    private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
-    private static final float OFFSET_METERS = 1.0f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -76,9 +73,6 @@ public class Hero extends Sprite {
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
-    private Rectangle homemadeSensor;
-    private Circle circleHero;
-
 
     // Silver bullets
     private int silverBullets;
@@ -103,7 +97,7 @@ public class Hero extends Sprite {
     private Vector2 tmp;
 
     // Landing helper
-    private Landing landig;
+    private Landing landing;
 
     public Hero(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
@@ -135,9 +129,6 @@ public class Hero extends Sprite {
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = LIVES_START;
-        homemadeSensor = new Rectangle();
-        circleHero = new Circle();
-        circleHero.setRadius(Hero.CIRCLE_SHAPE_RADIUS_METERS);
 
         // SilverBullets variables initialization
         silverBullets = 0;
@@ -162,7 +153,7 @@ public class Hero extends Sprite {
         alpha = false;
 
         // Landing helper
-        landig = new Landing(screen);
+        landing = new Landing(screen);
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -455,7 +446,7 @@ public class Hero extends Sprite {
         stop();
 
         // Find an appropriate spot to land
-        tmp = landig.land();
+        tmp = landing.land();
         if (tmp.x == -1 && tmp.y == -1) { // There is no such place, so, good luck Hero! (use your blink temporary power)
             tmp.set(screen.getGameCam().position.x, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4);
         }
@@ -514,51 +505,6 @@ public class Hero extends Sprite {
         }
     }
 
-    public void onDead() {
-        // Pause music and play sound effect
-        AudioManager.getInstance().pauseMusic();
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
-
-        /*
-         * We must change his b2body to avoid collisions.
-         * This can't be done here because this method is called from WorldContactListener that is invoked
-         * from PlayScreen.update.world.step(...).
-         * No b2body can be changed when the simulation is occurring, we must wait for the next update cycle.
-         * Therefore, we use a flag in order to point out this behavior and change it later.
-         */
-        applyNewFilters = true;
-
-        // Stop motion
-        stop();
-
-        // Reset rotation
-        setRotation(0.0f);
-
-        // We take away his power effect
-        currentPowerState = PowerState.NORMAL;
-
-        // Start dying up
-        heroStateTime = 0;
-        currentHeroState = HeroState.DYING_UP;
-    }
-
-    private void setDefaultFilter() {
-        Filter filter = new Filter();
-        filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
-        filter.maskBits = WorldContactListener.BORDER_BIT |
-                WorldContactListener.EDGE_BIT |
-                WorldContactListener.OBSTACLE_BIT |
-                WorldContactListener.PATH_BIT |
-                WorldContactListener.POWER_BOX_BIT |
-                WorldContactListener.ITEM_BIT |
-                WorldContactListener.ENEMY_BIT |
-                WorldContactListener.FINAL_ENEMY_BIT |
-                WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
-    }
-
     private void defineHero() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX(), getY());
@@ -587,6 +533,21 @@ public class Hero extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
+    private void setDefaultFilter() {
+        Filter filter = new Filter();
+        filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.EDGE_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.PATH_BIT |
+                WorldContactListener.POWER_BOX_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.ENEMY_BIT |
+                WorldContactListener.FINAL_ENEMY_BIT |
+                WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        setFilterData(filter);
+    }
+
     private void setRotationAngle() {
         if (b2body.getLinearVelocity().len() > 0.0f) {
             setRotation(90.0f);
@@ -596,6 +557,42 @@ public class Hero extends Sprite {
             }
             rotate(velAngle);
         }
+    }
+
+    public void setFilterData(Filter filter) {
+        for (Fixture fixture : b2body.getFixtureList()) {
+            if (!fixture.isSensor()) {
+                fixture.setFilterData(filter);
+            }
+        }
+    }
+
+    public void onDead() {
+        // Pause music and play sound effect
+        AudioManager.getInstance().pauseMusic();
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
+
+        /*
+         * We must change his b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be changed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore, we use a flag in order to point out this behavior and change it later.
+         */
+        applyNewFilters = true;
+
+        // Stop motion
+        stop();
+
+        // Reset rotation
+        setRotation(0.0f);
+
+        // We take away his power effect
+        currentPowerState = PowerState.NORMAL;
+
+        // Start dying up
+        heroStateTime = 0;
+        currentHeroState = HeroState.DYING_UP;
     }
 
     public void draw(SpriteBatch batch) {
