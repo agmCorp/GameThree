@@ -128,7 +128,7 @@ public class Landing {
                 end = v.x < xA;
             } else {
                 v.x = v.x + offset;
-                end = v.x > xB - offset ;
+                end = v.x > xB - offset;
             }
             if (!end) {
                 collision = collides(v);
