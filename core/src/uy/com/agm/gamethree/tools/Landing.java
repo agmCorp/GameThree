@@ -1,11 +1,16 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.tileobjects.IMotionlessObject;
 import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
 import uy.com.agm.gamethree.sprites.tileobjects.Path;
 
@@ -14,14 +19,6 @@ import uy.com.agm.gamethree.sprites.tileobjects.Path;
  */
 
 public class Landing {
-
-    // TODO
-    /*
-    * ACA PUEDO TENER UNA INSTANCIA DEL WORLDAABB HECHA CON NEW COMO SIEMPRE (EL WORDLAABB DENTRO EN SU CONTRUCTOR HACE NEW DE SU LISTA COMO SIEMPRE).
-    * EL WORLDAABB ME LA RETORNA LLENA.
-    * HAY SOLO UNA INSTALNCIA DEL LANDING, HAY SOLO UNA INSTANCIA DE WORLDAABB.
-     */
-
     private static final String TAG = WorldContactListener.class.getName();
 
     // Constants
@@ -33,21 +30,32 @@ public class Landing {
 
     private PlayScreen screen;
     private Circle circleHero;
+    private WorldQueryAABB worldQueryAABB;
+    private Array<Short> categoryBits;
+    private Array<Rectangle> boundBodies;
 
     // Temporary GC friendly vector
     private Vector2 v;
 
     public Landing(PlayScreen screen) {
         this.screen = screen;
-        circleHero = new Circle();
-        circleHero.setRadius(screen.getPlayer().CIRCLE_SHAPE_RADIUS_METERS + MARGIN_METERS);
+        this.circleHero = new Circle();
+        this.circleHero.setRadius(screen.getPlayer().CIRCLE_SHAPE_RADIUS_METERS + MARGIN_METERS);
+        this.worldQueryAABB = new WorldQueryAABB(screen);
 
+        // We only check collisions against obstacles, paths and powerBoxes
+        this.categoryBits = new Array<Short>();
+        this.categoryBits.add(WorldContactListener.OBSTACLE_BIT);
+        this.categoryBits.add(WorldContactListener.PATH_BIT);
+        this.categoryBits.add(WorldContactListener.POWER_BOX_BIT);
+
+        this.boundBodies = new Array<Rectangle>();
         v = new Vector2();
     }
 
-     /* Check collisions against obstacles, paths and powerBoxes (that is, actors at rest scattered on the game).
+     /* Check collisions against obstacles, paths and powerBoxes (that is, actors at rest scattered on the current screen).
       * Returns a safe position in meters where to land (collision free) or (-1, -1) otherwise.
-      * To work this out, this method considers that Hero is a circle (like its b2body but a bit arbitrarily bigger) and tests
+      * To work this out, this method considers that Hero is a circle (like its b2body but a bit arbitrarily bigger -see MARGIN_METERS-) and tests
       * every position inside xA, xB, yA, yB starting at (x0, y0) and moving left/right and up/down (see SEARCH_LEFT and SEARCH_UP)
       * using increments defined on INCREMENT_X_METERS and INCREMENT_Y_METERS.
       * Thus, if a solution exists, it's near (x0, y0).
@@ -58,10 +66,17 @@ public class Landing {
         float worldWidth = screen.getGameViewPort().getWorldWidth();
         float worldHeight = screen.getGameViewPort().getWorldHeight();
 
+        // Find bodies on the entire current screen
+        Array<Fixture> foundBodies = worldQueryAABB.findBodies(categoryBits, camX - worldWidth / 2, camY - worldHeight / 2, camX + worldWidth / 2, camY + worldHeight / 2);
+        boundBodies.clear();
+        for(Fixture fixture : foundBodies) {
+            boundBodies.add(((IMotionlessObject) fixture.getUserData()).getBoundsMeters());
+        }
+
         float x0 = camX;
         float y0 = camY - worldHeight / 4;
 
-        // Collision against Borders or Edges are not possible
+        // Excludes Borders and Edges
         float xA = camX - worldWidth / 2 + circleHero.radius;
         float xB = camX + worldWidth / 2 - circleHero.radius;
         float yA = camY - worldHeight / 2 + circleHero.radius;
@@ -161,45 +176,18 @@ public class Landing {
         } while (!end);
     }
 
-    // Returns true if and only if circleHero overlaps obstacles, paths or powerBoxes
-    // We could, but we don't need to check against edges or borders (see land() and xA, xB, yA, yB definition)
+    // Returns true if and only if circleHero overlaps any bound in boundBodies
     private boolean collides(Vector2 v) {
         // Candidate position
         circleHero.setPosition(v.x, v.y);
         boolean collision = false;
 
-        // Check collisions of each object in the game as it's more efficient than checking if it's visible or not.
-
-        // Obstacles
-        if (!collision) {
-            for (Obstacle obstacle : screen.getCreator().getObstacles()) {
-                if (Intersector.overlaps(circleHero, obstacle.getBoundsMeters())) {
-                    collision = true;
-                    break;
-                }
+        for(Rectangle rectangle : boundBodies) {
+            if (Intersector.overlaps(circleHero, rectangle)) {
+                collision = true;
+                break;
             }
         }
-
-        // Paths
-        if (!collision) {
-            for (Path path : screen.getCreator().getPaths()) {
-                if (Intersector.overlaps(circleHero, path.getBoundsMeters())) {
-                    collision = true;
-                    break;
-                }
-            }
-        }
-
-        // PowerBoxes
-        if (!collision) {
-            for (PowerBox powerBox : screen.getCreator().getPowerBoxes()) {
-                if (Intersector.overlaps(circleHero, powerBox.getBoundsMeters())) {
-                    collision = true;
-                    break;
-                }
-            }
-        }
-
         return collision;
     }
 }

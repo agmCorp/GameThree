@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
+import uy.com.agm.gamethree.sprites.tileobjects.IMotionlessObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -28,7 +29,7 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/17/2017.
  */
 
-public class PowerBox extends Sprite {
+public class PowerBox extends Sprite implements IMotionlessObject {
     private static final String TAG = PowerBox.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
@@ -349,6 +350,7 @@ public class PowerBox extends Sprite {
         return currentState.toString();
     }
 
+    @Override
     public Rectangle getBoundsMeters() {
         return boundsMeters;
     }

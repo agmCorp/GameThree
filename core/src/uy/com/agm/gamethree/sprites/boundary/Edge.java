@@ -65,10 +65,6 @@ public class Edge {
         return b2body;
     }
 
-    public Rectangle getBoundsMeters() {
-        return boundsMeters;
-    }
-
     public void stop() {
         b2body.setLinearVelocity(0.0f, 0.0f);
     }

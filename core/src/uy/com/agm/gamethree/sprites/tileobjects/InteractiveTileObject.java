@@ -18,7 +18,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  * Created by AGM on 12/4/2017.
  */
 
-public abstract class InteractiveTileObject {
+public abstract class InteractiveTileObject implements IMotionlessObject {
     private static final String TAG = InteractiveTileObject.class.getName();
 
     protected PlayScreen screen;
@@ -53,15 +53,16 @@ public abstract class InteractiveTileObject {
         fixture = b2body.createFixture(fdef);
     }
 
-    public void setCategoryFilter(short filterBit) {
+    protected void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit; // Depicts what this fixture is
         fixture.setFilterData(filter);
     }
 
+    public abstract void onBump();
+
+    @Override
     public Rectangle getBoundsMeters() {
         return boundsMeters;
     }
-
-    public abstract void onBump();
 }
