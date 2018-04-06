@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -211,9 +210,7 @@ public class PowerTwo extends Item {
                     WorldContactListener.PATH_BIT |
                     WorldContactListener.POWER_BOX_BIT |
                     WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-            for (Fixture fixture : hero.getB2body().getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
+            hero.setFilterData(filter);
 
             // Shield only collide with enemies' bullets
             FixtureDef fdef = new FixtureDef();

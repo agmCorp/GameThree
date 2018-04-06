@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -188,9 +187,7 @@ public class PowerOne extends Item {
                     WorldContactListener.PATH_BIT |
                     WorldContactListener.POWER_BOX_BIT |
                     WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-            for (Fixture fixture : hero.getB2body().getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
+            hero.setFilterData(filter);
 
             // Set the power's texture
             Sprite spritePower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());

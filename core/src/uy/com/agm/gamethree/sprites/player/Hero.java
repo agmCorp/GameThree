@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -14,12 +12,14 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroDefaultShooting;
@@ -44,6 +44,8 @@ public class Hero extends Sprite {
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
+    private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
+    private static final float SENSOR_OFFSET_METERS = 0.1f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -347,9 +349,7 @@ public class Hero extends Sprite {
             filter.maskBits = WorldContactListener.NOTHING_BIT;
 
             // We set the previous filter in every fixture
-            for (Fixture fixture : b2body.getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
+            setFilterData(filter);
             applyNewFilters = false;
         }
 
@@ -435,9 +435,7 @@ public class Hero extends Sprite {
                 WorldContactListener.EDGE_BIT |
                 WorldContactListener.PATH_BIT |
                 WorldContactListener.OBSTACLE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-        }
+        setFilterData(filter);
 
         setDefaultFilterTime = 0;
         isPlayingAgain = true;
@@ -531,6 +529,19 @@ public class Hero extends Sprite {
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
+
+        createSensor();
+    }
+
+    private void createSensor() {
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS - SENSOR_OFFSET_METERS), 0);
+        FixtureDef sensor = new FixtureDef();
+        sensor.shape = polygonShape;
+        sensor.filter.categoryBits = WorldContactListener.HERO_BIT;  // Depicts what this fixture is
+        sensor.filter.maskBits = WorldContactListener.EDGE_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        sensor.isSensor = true;
+        b2body.createFixture(sensor).setUserData(this);
     }
 
     private void setDefaultFilter() {
@@ -563,6 +574,18 @@ public class Hero extends Sprite {
         for (Fixture fixture : b2body.getFixtureList()) {
             if (!fixture.isSensor()) {
                 fixture.setFilterData(filter);
+            }
+        }
+    }
+
+    // Check if Hero should be smashed by a Path, Obstacle or PowerBox.
+    public void checkSmashingCollision() {
+        if (!isDead()) {
+            float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS - SENSOR_HEIGHT_METERS / 2; // Center of the sensor
+            float edge = screen.getBottomEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; // Upper edge of the bottom edge
+
+            if (sensor <= edge) {
+                onDead();
             }
         }
     }
@@ -603,7 +626,7 @@ public class Hero extends Sprite {
             }
         }
         // Hero
-        super.draw(batch);
+       // super.draw(batch);
     }
 
     public void disableShooting() {
