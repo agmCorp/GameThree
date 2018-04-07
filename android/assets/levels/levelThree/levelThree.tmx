@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1924">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1925">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -140,7 +140,9 @@
  </objectgroup>
  <objectgroup name="enemyFour"/>
  <objectgroup name="enemyFive"/>
- <objectgroup name="enemySix"/>
+ <objectgroup name="enemySix">
+  <object id="1924" x="352" y="7232" width="32" height="32"/>
+ </objectgroup>
  <objectgroup name="enemySeven"/>
  <objectgroup name="enemyEight"/>
 </map>

@@ -542,6 +542,7 @@ public class Hero extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
 
         // Create the sensor
+        // Although the sensor has the same categoryBit as the main fixture, this fixture only collides with Edge.
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS - SENSOR_OFFSET_METERS), 0);
         FixtureDef sensor = new FixtureDef();
