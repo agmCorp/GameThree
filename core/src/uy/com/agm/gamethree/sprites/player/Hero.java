@@ -521,14 +521,16 @@ public class Hero extends Sprite {
         /* Removes all the fixtures to create their default versions.
          * If the sensor was partially below the Edge, when the sensor is destroyed the framework (b2body.destroyFixture(sensorFixture))
          * executes WorldContactListener.endContact(...) killing Hero.
-         * To avoid this inconvenience, userData is set to null before destroying the fixture.
+         * To avoid this inconvenience, userData is set to null before destroying the sensor.
          * That way, the endContact event can determine if it should validate the position of the sensor (case userData != null)
          * or not validate it (case userData == null).
         */
         Fixture fixture;
         while (b2body.getFixtureList().size > 0) {
             fixture = b2body.getFixtureList().first();
-            fixture.setUserData(null);
+            if (fixture.isSensor()) {
+                fixture.setUserData(null);
+            }
             b2body.destroyFixture(fixture);
         }
 
@@ -632,7 +634,7 @@ public class Hero extends Sprite {
             }
         }
         // Hero
-       // super.draw(batch);
+        super.draw(batch);
     }
 
     public void disableShooting() {
