@@ -24,6 +24,7 @@ una rafaga (como flor) de balas, luego se transforma en nube y se va.
 
 PROXIMOS PASOS
 --------------
+- las vidas no deberian resetearse por nivel aunque no se como hacerlo.
 - en donde engancho los bordes, el hero se traba.
 - para terminar el nivel me faltan las silverbullets y los coins.
 - EnemyOne a veces se va indefinidamente para arriba.
