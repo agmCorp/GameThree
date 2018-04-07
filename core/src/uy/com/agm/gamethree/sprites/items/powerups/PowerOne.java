@@ -178,7 +178,7 @@ public class PowerOne extends Item {
             Hero hero = screen.getPlayer();
             hero.powerDown();
 
-            // Hero can't collide with enemies nor bullets
+            // Hero can't collide with bullets and some types of enemies
             Filter filter = new Filter();
             filter.categoryBits = WorldContactListener.HERO_GHOST_BIT;  // Depicts what this fixture is
             filter.maskBits = WorldContactListener.BORDER_BIT |
@@ -186,7 +186,8 @@ public class PowerOne extends Item {
                     WorldContactListener.OBSTACLE_BIT |
                     WorldContactListener.PATH_BIT |
                     WorldContactListener.POWER_BOX_BIT |
-                    WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                    WorldContactListener.ITEM_BIT |
+                    WorldContactListener.ENEMY_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
             hero.setFilterData(filter);
 
             // Set the power's texture
