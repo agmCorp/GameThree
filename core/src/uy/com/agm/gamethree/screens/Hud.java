@@ -271,7 +271,7 @@ public class Hud extends AbstractScreen {
         // FPS info
         defineFpsTable();
 
-        if (PlayScreen.DEBUG_MODE) {
+        if (PlayScreen.SHOW_FPS) {
             // Add a second row to the table
             bottomTable.row();
             // Add FPS info
@@ -304,8 +304,8 @@ public class Hud extends AbstractScreen {
         // Add value
         fpsTable.add(fpsValueLabel);
 
-        // Hidden if not in debug mode
-        fpsTable.setVisible(PlayScreen.DEBUG_MODE);
+        // Visible when SHOW_FPS is true
+        fpsTable.setVisible(PlayScreen.SHOW_FPS);
     }
 
     private void defineHealthBarTable() {

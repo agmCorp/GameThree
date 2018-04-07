@@ -70,6 +70,12 @@ public class PlayScreen extends AbstractScreen {
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
 
+    // Show/hide FPS counter
+    public static final boolean SHOW_FPS = true;
+
+    // Print body count
+    public static final boolean DEBUG_BODY_COUNT = false;
+
     public enum PlayScreenState
     {
         PAUSED, RUNNING
