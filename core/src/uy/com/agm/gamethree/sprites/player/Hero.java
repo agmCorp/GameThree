@@ -518,7 +518,7 @@ public class Hero extends Sprite {
     }
 
     private void setDefaultFixture() {
-        /* Removes all the fixtures to create them again with their default versions.
+        /* Removes all the fixtures to create their default versions.
          * If the sensor was partially below the Edge, when the sensor is destroyed the framework (b2body.destroyFixture(sensorFixture))
          * executes WorldContactListener.endContact(...) killing Hero.
          * To avoid this inconvenience, userData is set to null before destroying the fixture.
