@@ -518,22 +518,28 @@ public class Hero extends Sprite {
     }
 
     private void setDefaultFixture() {
-        // Remove all fixtures (WA - Iterators doesn't work)
+        /* Removes all the fixtures to create them again with their default versions.
+         * If the sensor was partially below the Edge, when the sensor is destroyed the framework (b2body.destroyFixture(sensorFixture))
+         * executes WorldContactListener.endContact(...) killing Hero.
+         * To avoid this inconvenience, userData is set to null before destroying the fixture.
+         * That way, the endContact event can determine if it should validate the position of the sensor (case userData != null)
+         * or not validate it (case userData == null).
+        */
+        Fixture fixture;
         while (b2body.getFixtureList().size > 0) {
-            b2body.destroyFixture(b2body.getFixtureList().first());
+            fixture = b2body.getFixtureList().first();
+            fixture.setUserData(null);
+            b2body.destroyFixture(fixture);
         }
 
-        // Create default fixture
+        // Create default (main) fixture
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
 
-        createSensor();
-    }
-
-    private void createSensor() {
+        // Create the sensor
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS - SENSOR_OFFSET_METERS), 0);
         FixtureDef sensor = new FixtureDef();

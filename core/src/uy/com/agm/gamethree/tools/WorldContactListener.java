@@ -271,11 +271,14 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // Sensor - Edge
+            // Sensor/Hero - Edge
+            // Sensor and Hero use the same categoryBit but we are only interested in the sensor here
             case HERO_BIT | EDGE_BIT:
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
-                if (fixC.isSensor()) {
-                    ((Hero) fixC.getUserData()).checkSmashingCollision();
+                if (fixC.getUserData() != null) { // See Hero.setDefaultFixture()
+                    if (fixC.isSensor()) {
+                        ((Hero) fixC.getUserData()).checkSmashingCollision();
+                    }
                 }
                 break;
 
