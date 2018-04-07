@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1858">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1859">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
    eJzt1MN2mI0CQNEaSW3burUntW3bNie1bds2J2VqpG7q1LYHd/cx/rW+wX6AMznv40aJ8oGPfOIzX/jKN77zg5/84jd/+EuBkChR/kdBClGYIhSlGMUpQUlKUZoylKU3fehLP/ozgIEMYjBDGMowhjOCkWxnBzvZxW72sJd97OcABznEYY5wlPd84COf+MwXvvKN7/zgJ7/4zR/+UiBULwUpRGGKUJRiFKcEJSlFacpQlt70oS/96M8ABjKIwQxhKMMYzghGsp0d7GQXu9nDXvaxnwMc5BCHOcJR3vOBj3ziM1/4yje+84Of/OI3f/hLgXh6KUghClOEohSjOCUoSSlKU4ay9KYPfelHfwYwkEEMZghDGcZwRjCS7exgJ7vYzR72so/9HOAghzjMEY7yng985BOf+cJXvvGdH/zkF7/5w18KxNdLQQpRmCIUpRjFKUFJSlGaMpSlN33oSz/6M4CBDGIwQxjKMIYzgpFsZwc72cVu9rCXfeznAAc5xGGOcJT3fOAjn/jMF77yje/84Ce/+M0f/lIggV4KUojCFKEoxShOCUpSitKUoSy96UNf+tGfAQxkEIMZwlCGMZwRjGQ7O9jJLnazh73sYz8HOMghDnOEo7znAx/5xGe+8JVvfOcHP/nFb/7wlwIJ9VKQQhSmCEUpRnFKUJJSlKYMZelNH/rSj/4MYCCDGMwQhjKM4YxgJNvZwU52sZs97GUf+znAQQ5xmCMc5T0f+MgnPvOFr3zjOz/4yS9+84e/PPToRzzmCZE85RnPecFLXvGaN7zlHRn9LhOZyUJWspGdHOQkF7nJQ17ykZ82tKUd7elARzrRmS50pRvd6UFPerGClaxiNWtYyzrWs4GNbGIzW9jKNh7yiMc8IZKnPOM5L3jJK17zhre8I6PfZSIzWchKNrKTg5zkIjd5yEs+8tOGtrSjPR3oSCc604WudKM7PehJL1awklWsZg1rWcd6NrCRTWxmC1vZxkMe8ZgnRPKUZzznBS95xWve8JZ3ZPS7TGQmC1nJRnZykJNc5CYPeclHftrQlna0pwMd6URnutCVbnSnBz3pxQpWsorVrGEt61jPBjayic1sYSvbeMgjHvOESJ7yjOe84CWveM0b3vKOjH6XicxkISvZyE4OcpKL3OQhL/nITxva0o72dKAjnehMF7rSje70oCe9WMFKVrGaNaxlHevZwEY2sZktbGUbD3nEY54QyVOe8ZwXvOQVr3nDW96R0e8ykZksZCUb2clBTnKRmzzkJR/5aUNb2tGeDnSkE53pQle60Z0e9KQXK1jJKlazhrWsYz0b2MgmNrOFrWzjIY94zBMiecoznvOCl7ziNW94yzsy+l0mMpOFrGQjOznISS5yk4e85CM/bWhLO9rTgY50ojNd6Eo3utODnvRiBStZxWrWsJZ1rGcDG9nEZrawlW3//swjHvOESJ7yjOe84CWveM0b3vIueHvw9uDtwduDtwdvD94evD14e/D24O3/ibdf8eirhHON69zgJre4zR3uEsE97vOARH6XmCQkJRnJSUFKUpGaNKQlHenJQF3qUZ8GNKQRjWlCU5rRnBa0pBWtmcksZjOHucxjPgtYyCIWs4SlLGM5V7hKONe4zg1ucovb3OEuEdzjPg9I5HeJSUJSkpGcFKQkFalJQ1rSkZ4M1KUe9WlAQxrRmCY0pRnNaUFLWtGamcxiNnOYyzzms4CFLGIxS1jKMpZzhauEc43r3OAmt7jNHe4SwT3u84BEfpeYJCQlGclJQUpSkZo0pCUd6clAXepRnwY0pBGNaUJTmtGcFrSkFa2ZySxmM4e5zGM+C1jIIhazhKUsYzlXuEo417jODW5yi9vc4S4R3OM+D0jkd4lJQlKSkZwUpCQVqUlDWtKRngzUpR71aUBDGtGYJjSlGc1pQUta0ZqZzGI2c5jLPOazgIUsYjFLWMoylnOFq4Rzjevc4Ca3uM0d7hLBPe7zgER+l5gkJCUZyUlBSlKRmjSkJR3pyUBd6lGfBjSkEY1pQlOa0ZwWtKQVrZnJLGYzh7nMYz4LWMgiFrOEpSxjOVe4SjjXuM4NbnKL29zhLhHc4z4PSOR3iUlCUpKRnBSkJBWpSUNa0pGeDNSlHvVpQEMa0ZgmNKUZzWlBS1rRmpnMYjZzmMs85rOAhSxiMUtYyjKW//szVwnnGte5wU1ucZs73CWCe9znQfD24O3B24O3B28P3h68PXh78Pbg7cHb/xNvP+bRxznBSU5xmjDOcJZznOcCF7nEZaL6XTSiE4OYxCI2cYhLCKHEIz4JSEg5ylOBilSiMlWoSjWqU4Oa1KI2dRjFaMYwlnGMZwITmcRkpjCVaUxnBsc4zglOcorThHGGs5zjPBe4yCUuE9XvohGdGMQkFrGJQ1xCCCUe8UlAQspRngpUpBKVqUJVqlGdGtSkFrWpwyhGM4axjGM8E5jIJCYzhalMYzozOMZxTnCSU5wmjDOc5RznucBFLnGZqH4XjejEICaxiE0c4hJCKPGITwISUo7yVKAilahMFapSjerUoCa1qE0dRjGaMYxlHOOZwEQmMZkpTGUa05nBMY5zgpOc4jRhnOEs5zjPBS5yictE9btoRCcGMYlFbOIQlxBCiUd8EpCQcpSnAhWpRGWqUJVqVKcGNalFbeowitGMYSzjGM8EJjKJyUxhKtOYzgyOcZwTnOQUpwnjDGc5x3kucJFLXCaq30UjOjGISSxiE4e4hBBKPOKTgISUozwVqEglKlOFqlSjOjWoSS1qU4dRjGYMYxnHeCYwkUlMZgpTmcZ0ZnCM45zgJKc4TRhnOMs5znOBi1ziMlH9LhrRiUFMYhGbOMQlhFDiEZ8EJKQc5alARSpRmSpUpRrVqUFNalGbOoxiNGMYyzjGM4GJTGIyU5jKNKYz49+fOc4JTnKK04RxhrOc4zwXuMglLgdvD94evD14e/D24O3B24O3B28P3h68/T/x9v8D3dbo1A==
   </data>
  </layer>
- <layer name="green" width="15" height="250">
+ <layer name="green" width="15" height="250" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt2jkSQUEYReGODHvBI8CmDE+ATRkD3qaMVYbUCQWC1gJUna/qZP8NOu8QJEn/oFYJoU4NyqhJrUrctsddnwY0pJxGkdsZd3Na0JJWtI7c7rjb04GOdKJz5LZW5b3UoIya1KrGbXvc9WlAQ8ppFLmVJEmSJEm/bVwKYULT0vvbDZstFQnbK5sb3RO27XIIHeqW39+O2UxomrDdsNlSkbC9srnRPWH77PLhXpIkSZIkfZf/VfyvIkmSJEmS9MoDQlEzYA==
   </data>
  </layer>
- <layer name="graphic" width="15" height="250">
+ <layer name="graphic" width="15" height="250" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt2MlNQmEUQOF/BY8lY1TAXrQAZ41zT4xRBnuxADWMUQYX2ojHnSKJQXZ4TvLl5X+5t4EbgpmZrVpvUQjv0c/vojNmZmZmZmZmZsu0FQthO7bYzg7zu7iJh3CLBppooR3/PlviXUYFVdRQxzNeMMIYE0xndju8u+ihjwGGWItCWMcG8iigOHMzSfJOIY0MssjhFGc4xwUucTWzu8/7AIc4wjFOlrzJ3Md/n/naA/OPeFpwz8zMzMzMzMxWv0YUQhMttHE3525R4l8ZFVRRQx0jjDHBFK9zdjv866KHPgYYft5iEiHkUUARm4mfu0n+pZBGBlnk5swt0t4f7yPX3lXMzMzMzMzM7J/3AbeQOcg=
   </data>
  </layer>
- <layer name="bridge" width="15" height="250">
+ <layer name="bridge" width="15" height="250" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt2DESgjAQBdCtwIOoDYeyksIcysZKz0UDlzD0FEwCw4y+V+7k76b+EQAAAAAA/INbU559VmSpcz4dc/d10F0AAAD4Vfcmol/oWNLOvctQsf/SRlzb7f4ySxvvW2uquNsV9iSPnEuF2XfOfVZkh4U3Y55Nuh0AAABgR1+PhQsi
   </data>
  </layer>
- <objectgroup name="border" visible="0">
+ <objectgroup name="border">
   <object id="5" name="left1" x="0" y="0" width="1" height="2177.41"/>
   <object id="1833" name="left2" x="0" y="2177.5" width="1" height="2042.59"/>
   <object id="1834" name="left3" x="0" y="4220.42" width="1" height="1628.67"/>
@@ -31,7 +31,7 @@
   <object id="1838" name="right3" x="479" y="3717.06" width="1" height="2295.33"/>
   <object id="1839" name="right4" x="479" y="6018.64" width="1" height="1980.97"/>
  </objectgroup>
- <objectgroup name="obstacle" visible="0">
+ <objectgroup name="obstacle">
   <object id="1313" x="4" y="3170.67" width="170.667" height="54.6667"/>
   <object id="1316" x="2" y="3126.67" width="105.333" height="38.6667"/>
   <object id="1317" x="114.667" y="3142" width="32" height="24"/>
@@ -73,11 +73,11 @@
   <object id="1851" x="56" y="1536.99" width="25.3333" height="24.6673"/>
   <object id="1852" x="5.66667" y="838" width="36.6667" height="55.3333"/>
  </objectgroup>
- <objectgroup name="path" visible="0">
+ <objectgroup name="path">
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="powerBox" visible="0">
+ <objectgroup name="powerBox">
   <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>
     <property name="powerTwo" type="int" value="15"/>
@@ -131,6 +131,7 @@
   <object id="1854" x="257.333" y="577.333" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="strength" type="int" value="3"/>
    </properties>
   </object>
@@ -150,19 +151,21 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne" visible="0"/>
- <objectgroup name="enemyTwo" visible="0"/>
- <objectgroup name="enemyThree" visible="0"/>
- <objectgroup name="enemyFour" visible="0">
+ <objectgroup name="enemyOne"/>
+ <objectgroup name="enemyTwo"/>
+ <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyFour">
   <object id="1508" x="384" y="5632" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="timesItFreeze" type="int" value="3"/>
    </properties>
   </object>
   <object id="1509" x="320" y="5696" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="timesItFreeze" type="int" value="3"/>
    </properties>
   </object>
@@ -175,11 +178,13 @@
   <object id="1511" x="160" y="5824" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1512" x="256" y="5888" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1513" x="128" y="5952" width="32" height="32">
@@ -200,6 +205,7 @@
   <object id="1516" x="236" y="6038.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="timesItFreeze" type="int" value="2"/>
    </properties>
   </object>
@@ -211,6 +217,7 @@
   <object id="1518" x="120" y="6260" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1521" x="364" y="6254.67" width="32" height="32">
@@ -227,6 +234,7 @@
   <object id="1523" x="352" y="6368" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1647" x="64" y="3680" width="32" height="32">
@@ -262,24 +270,31 @@
   <object id="1695" x="352" y="3302.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1696" x="100" y="3330.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1697" x="220" y="3552" width="32" height="32"/>
+  <object id="1697" x="220" y="3552" width="32" height="32">
+   <properties>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
   <object id="1698" x="225.333" y="3268" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyFive" visible="0">
+ <objectgroup name="enemyFive">
   <object id="1566" x="152" y="5371" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1567" x="128" y="5248" width="32" height="32">
@@ -305,11 +320,13 @@
   <object id="1591" x="128" y="4736" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1594" x="305" y="4602" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1595" x="320" y="4480" width="32" height="32">
@@ -327,6 +344,7 @@
   <object id="1616" x="192" y="4224" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -338,6 +356,7 @@
   <object id="1634" x="288" y="5184" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1635" x="352" y="5056" width="32" height="32">
@@ -348,6 +367,7 @@
   <object id="1636" x="307" y="4929" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1637" x="256" y="4800" width="32" height="32">
@@ -369,6 +389,7 @@
   <object id="1640" x="234" y="4413" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -381,12 +402,14 @@
   <object id="1642" x="256" y="5440" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
   <object id="1643" x="225.333" y="3772" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -406,6 +429,7 @@
   <object id="1717" x="240" y="3060" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1718" x="362.667" y="3034.67" width="32" height="32">
@@ -421,6 +445,7 @@
   <object id="1721" x="134.667" y="2850.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="powerTwo" type="int" value="5"/>
    </properties>
   </object>
@@ -458,6 +483,7 @@
   <object id="1731" x="314.667" y="2780" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1734" x="173.333" y="2677.33" width="32" height="32">
@@ -473,10 +499,15 @@
   <object id="1738" x="360" y="2648" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1740" x="422.667" y="2538.67" width="32" height="32"/>
+  <object id="1740" x="422.667" y="2538.67" width="32" height="32">
+   <properties>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
   <object id="1741" x="440" y="2589.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -500,23 +531,27 @@
   <object id="1784" x="128" y="1728" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1785" x="224" y="1472" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySix" visible="0">
+ <objectgroup name="enemySix">
   <object id="1808" x="96" y="1088" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1811" x="416" y="864" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1818" x="416" y="1312" width="32" height="32">
@@ -561,10 +596,11 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven" visible="0">
+ <objectgroup name="enemySeven">
   <object id="1461" x="30.6667" y="7098.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1462" x="98.6667" y="7017" width="32" height="32">
@@ -591,11 +627,13 @@
   <object id="1471" x="312" y="6949" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1475" x="212" y="7025" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="powerTwo" type="int" value="15"/>
    </properties>
   </object>
@@ -618,6 +656,7 @@
   <object id="1484" x="205.333" y="6862.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1488" x="78.6667" y="6831.67" width="32" height="32">
@@ -634,11 +673,13 @@
   <object id="1494" x="214.001" y="6766.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1495" x="314" y="6702.66" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1496" x="374" y="6761.34" width="32" height="32">
@@ -650,6 +691,7 @@
   <object id="1497" x="314" y="6477.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1499" x="247.334" y="6636" width="32" height="32">
@@ -660,6 +702,7 @@
   <object id="1500" x="127.333" y="6530.66" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1501" x="24.6668" y="6554.67" width="32" height="32">
@@ -719,6 +762,7 @@
   <object id="1623" x="87.3335" y="3884" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1624" x="118" y="3978.67" width="32" height="32">
@@ -735,11 +779,13 @@
   <object id="1626" x="323.333" y="3937.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1627" x="374" y="4142.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1628" x="239.333" y="4133.33" width="32" height="32">
@@ -750,6 +796,7 @@
   <object id="1629" x="143.333" y="4080" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="powerFour" type="int" value="17"/>
    </properties>
   </object>
@@ -773,6 +820,7 @@
   <object id="1667" x="448" y="3776" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1668" x="0" y="3904" width="32" height="32">
@@ -788,6 +836,7 @@
   <object id="1670" x="0" y="4160" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1671" x="448" y="4384" width="32" height="32">
@@ -808,6 +857,7 @@
   <object id="1674" x="0" y="2656" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1675" x="0" y="2752" width="32" height="32">
@@ -823,6 +873,7 @@
   <object id="1677" x="448" y="2400" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1678" x="448" y="2496" width="32" height="32">
@@ -853,6 +904,7 @@
   <object id="1700" x="448" y="1728" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1701" x="448" y="1824" width="32" height="32">
@@ -868,6 +920,7 @@
   <object id="1703" x="448" y="2016" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1704" x="448" y="2112" width="32" height="32">
@@ -879,6 +932,7 @@
   <object id="1705" x="448" y="2208" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1706" x="441.333" y="2306.67" width="32" height="32">
@@ -890,6 +944,7 @@
   <object id="1707" x="0" y="1856" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1708" x="0" y="1952" width="32" height="32">
@@ -906,6 +961,7 @@
   <object id="1710" x="0" y="2144" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1711" x="0" y="2240" width="32" height="32">
@@ -916,6 +972,7 @@
   <object id="1712" x="0" y="2336" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1713" x="0" y="2432" width="32" height="32">
@@ -932,6 +989,7 @@
   <object id="1787" x="0" y="1600" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1788" x="448" y="1440" width="32" height="32">
@@ -962,11 +1020,13 @@
   <object id="1793" x="0" y="960" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="1794" x="0" y="832" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
  </objectgroup>

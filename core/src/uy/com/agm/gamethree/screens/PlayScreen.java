@@ -41,7 +41,20 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
-    // Constants
+    // Boxes around sprites, box2d bodies and scene2d tables
+    // Debug message log enabled
+    public static final boolean DEBUG_MODE = false;
+
+    // Show/hide background image
+    public static final boolean HIDE_BACKGROUND = false;
+
+    // Show/hide FPS counter
+    public static final boolean SHOW_FPS = false;
+
+    // Print box2d bodies count
+    public static final boolean DEBUG_BODY_COUNT = false;
+
+    // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
 
     // World physics simulation parameters
@@ -64,20 +77,8 @@ public class PlayScreen extends AbstractScreen {
     // Game cam velocity (m/s)
     public static final float GAMECAM_VELOCITY = 0.304f;
 
-    // Debug mode enabled by default
-    public static final boolean DEBUG_MODE = true;
-
-    // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
-
-    // Show/hide FPS counter
-    public static final boolean SHOW_FPS = false;
-
-    // Print body count
-    public static final boolean DEBUG_BODY_COUNT = false;
-
-    public enum PlayScreenState
-    {
+    // Game state
+    public enum PlayScreenState {
         PAUSED, RUNNING
     }
     private PlayScreenState playScreenState;

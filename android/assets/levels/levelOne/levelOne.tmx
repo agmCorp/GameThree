@@ -310,18 +310,21 @@
   <object id="1371" x="172.75" y="544.75" width="30.5" height="30.5">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="strength" type="int" value="1"/>
    </properties>
   </object>
   <object id="1372" x="225.75" y="596.75" width="30.5" height="30.5">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="strength" type="int" value="3"/>
    </properties>
   </object>
   <object id="1373" x="278.75" y="543.75" width="30.5" height="30.5">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
     <property name="strength" type="int" value="2"/>
    </properties>
   </object>
