@@ -6,21 +6,25 @@ los que se van de la pantalla).
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - nuevo item vidas
 - hacer splashscreen
-- enemigo que hay que dispararle mucho para matarlo.
+- enemigos:
+    - hay que dispararle mucho para matarlo.
+    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
+    - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
+    - minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
+      centro de la pantalla y se van por arriba (copiarlo de enemyEight).
+    - enemigofinal que me sigue
+    - nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
+    - nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
+      una rafaga (como flor) de balas, luego se transforma en nube y se va.
+    - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
-EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el b2worldcreator lo cree.
-- el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
-- enemigo final que se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
-- enemigo minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
-centro de la pantalla y se van por arriba (copiarlo de enemyEight).
+EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
+b2worldcreator lo cree.
 - minuto 33.43 puentes dinámicos
-- Para el próximo enemigofinal puedo hacer que me siga
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
-- enemigo: nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
-- enemigo: nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
-una rafaga (como flor) de balas, luego se transforma en nube y se va.
-- enemigo que luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
 - puedo hacer el poder que los mata a todos, usando AABB
+- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
+Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 
 PROXIMOS PASOS
 --------------
@@ -32,10 +36,6 @@ El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
 - Seguir viendo las mejoras del video (como slow motion)
 - hacer una bala grandota y ruidosa con shake capaz
 - el coin deberia ser random con random puntaje, como hice las powerboxes
-- factor handycap por nivel (solo para los enemigos que reuse?)
-- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
-Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
-- tenes mucho material en el mail de linkedin y podes hacer mas amigos.
 
 TENGO
 -----
@@ -56,7 +56,7 @@ eight - bicho verde cometa
 
 PENDIENTES
 ----------
-- poner help al juego con una historia como hice con la granny.
+- poner help al juego con una historia como hice con la granny. Tal vez una pantalla que muestre un avance por un mapa según los niveles.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
@@ -72,8 +72,6 @@ support this game:
 (icono corazón) Support the developer by paying above the minimum price
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
-- Inventar una etiqueta random en las powerbox para generar poder random (por ejemplo, para la box del enemigo final).
-Debe ser un random configurable (para el set de poderes que quiera).
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
     dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
