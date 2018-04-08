@@ -62,7 +62,7 @@ public class Hero extends Sprite {
     // Hero
     private HeroState currentHeroState;
     private HeroState previousHeroState;
-    private TextureRegion heroStand;
+    private TextureRegion heroStandUp;
     private Animation heroMovingUpAnimation;
     private Animation heroMovingDownAnimation;
     private Animation heroMovingLeftRightAnimation;
@@ -118,7 +118,7 @@ public class Hero extends Sprite {
         // Hero variables initialization
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
-        heroStand = Assets.getInstance().getHero().getHeroStandUp();
+        heroStandUp = Assets.getInstance().getHero().getHeroStandUp();
         heroMovingUpAnimation = Assets.getInstance().getHero().getHeroMovingUpAnimation();
         heroMovingDownAnimation = Assets.getInstance().getHero().getHeroMovingDownAnimation();
         heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
@@ -264,7 +264,7 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion(heroStand);
+        setRegion(heroStandUp);
 
         // Reset rotation
         setRotation(0.0f);
