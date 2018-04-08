@@ -145,6 +145,9 @@ El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
 - se corta el audio al morir..el gruñido se escucha cortado.
+- En mi nivel de prueba, llegue al final donde estaba la arana y dio time is up. Ahi mori y la arana me comenzo a disparar.
+Aparentemente algun disparo me agarro entre que termine de morir y el tiempo en donde aparece la pantalla de game over y me
+volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el ondead otra vez). No lo pude reproducir mas.
 
 VIDEO
 -----
