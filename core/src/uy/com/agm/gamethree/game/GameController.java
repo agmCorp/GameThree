@@ -41,15 +41,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
-            // If Hero is dead, we don't handle any input
-            if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
-                if (!player.isDead() && !finalEnemy.isDestroyed()) {
-                    player.openFire();
-                }
-            }
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -162,7 +154,6 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                     case Input.Keys.DOWN:
                         player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
                         break;
-
                     case Input.Keys.LEFT:
                     case Input.Keys.RIGHT:
                         player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
@@ -186,7 +177,15 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            // If Hero is dead, we don't handle any input
+            if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
+                if (!player.isDead() && !finalEnemy.isDestroyed()) {
+                    player.openFire();
+                }
+            }
+        }
+        return true;
     }
 
     @Override
