@@ -438,6 +438,12 @@ LECCIONES APRENDIDAS
     Para usar esa herramienta hice:
     >pngcrush.exe background.png salidaBackground.png
 
+    De todos modos, lo mejor que encontre para reducir el tamano de las imagenes es usar TinyPng. Lo tiene
+    integrado el TexturePacker, basta con hacerse una cuenta en TinyPng y obtener una clave para usar sus
+    servicios. Eligiendo TinyPng en el combo del TexturePacker, reduzco todos los dinamicObjects. Para backgroud.png
+    debo usar el curl (para invocar al servicio) porque la imagen es mayor a 5 megas (sino podria usar directo el
+    sitio web).
+
 19)
     A dynamic body is a body which is affected by world forces and react to collisions. And you already met a million of them.
     A static body is a body which isn’t affected by world forces it does not react to collisions. It can’t be moved. Fullstop.
