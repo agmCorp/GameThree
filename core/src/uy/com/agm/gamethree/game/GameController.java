@@ -126,22 +126,24 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 // Control our player using linear velocity
-                if (keycode == Input.Keys.UP) {
-                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
-                }
-                if (keycode == Input.Keys.DOWN) {
-                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Hero.LINEAR_VELOCITY);
-                }
-                if (keycode == Input.Keys.LEFT) {
-                    player.getB2body().setLinearVelocity(-Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
-                }
-                if (keycode == Input.Keys.RIGHT) {
-                    player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
-                }
-                if (keycode == Input.Keys.SPACE) {
-                    if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
-                        player.openFire();
-                    }
+                switch (keycode) {
+                    case Input.Keys.UP:
+                        player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, Hero.LINEAR_VELOCITY);
+                        break;
+                    case Input.Keys.DOWN:
+                        player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, -Hero.LINEAR_VELOCITY);
+                        break;
+                    case Input.Keys.LEFT:
+                        player.getB2body().setLinearVelocity(-Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                        break;
+                    case Input.Keys.RIGHT:
+                        player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
+                        break;
+                    case Input.Keys.SPACE:
+                        if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
+                            player.openFire();
+                        }
+                        break;
                 }
                 evaluateMovementDirection();
             }
@@ -155,11 +157,16 @@ public class GameController implements GestureDetector.GestureListener, InputPro
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 // Control our player using linear velocity
-                if (keycode == Input.Keys.UP || keycode == Input.Keys.DOWN) {
-                    player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
-                }
-                if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
-                    player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
+                switch (keycode) {
+                    case Input.Keys.UP:
+                    case Input.Keys.DOWN:
+                        player.getB2body().setLinearVelocity(player.getB2body().getLinearVelocity().x, 0);
+                        break;
+
+                    case Input.Keys.LEFT:
+                    case Input.Keys.RIGHT:
+                        player.getB2body().setLinearVelocity(0, player.getB2body().getLinearVelocity().y);
+                        break;
                 }
                 evaluateMovementDirection();
             }
