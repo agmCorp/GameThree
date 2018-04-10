@@ -65,7 +65,15 @@ eight - bicho verde cometa
 PENDIENTES
 ----------
 - Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
-Hay que ver el impoacto de los gets en esto.
+Hay que ver el impoacto de los gets en esto. Es decir,
+b2worldcreator
+- crea el hero
+- crea el final
+- tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
+Tendria que tener un worldRender que me permita quitar casi toda la logica del metodo render de playscreen.
+Creo que no puede crear el batch (lo tiene que seguir teniendo GameThree) porque sino cada vez que salgo y entro de playscreen se
+crearía el batch y no está bien.
+PlayScreen tendría el mapa, la camara, el hud.
 - poner help al juego con una historia como hice con la granny. Tal vez una pantalla que muestre un avance por un mapa según los niveles.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
