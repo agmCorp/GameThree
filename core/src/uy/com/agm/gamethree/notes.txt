@@ -1,5 +1,7 @@
 IDEAS
 -----
+- Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...
+- Copiar la historia del juego de knightmare remake! :D
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
 los que se van de la pantalla).
@@ -28,6 +30,8 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 
 PROXIMOS PASOS
 --------------
+- Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
+- Cuando el enemigo agarra el powerFour debería dejar de disparar!
 - En el nivel 1 cuando están los enemigos 3 hay un murciélago que se queda pegado
 - las vidas no deberian resetearse por nivel aunque no se como hacerlo.
 El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
