@@ -64,6 +64,8 @@ eight - bicho verde cometa
 
 PENDIENTES
 ----------
+- Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
+Hay que ver el impoacto de los gets en esto.
 - poner help al juego con una historia como hice con la granny. Tal vez una pantalla que muestre un avance por un mapa según los niveles.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
