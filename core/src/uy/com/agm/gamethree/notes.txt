@@ -32,6 +32,10 @@ PROXIMOS PASOS
 --------------
 - Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
 - Cuando el enemigo agarra el powerFour debería dejar de disparar!
+Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
+En el powerDown debería hacer:
+if !screen.challegeBegins (pasar a public) enableshooting.
+Creo
 - En el nivel 1 cuando están los enemigos 3 hay un murciélago que se queda pegado
 - las vidas no deberian resetearse por nivel aunque no se como hacerlo.
 El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
