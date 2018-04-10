@@ -65,7 +65,7 @@ public class PlayScreen extends AbstractScreen {
     // Each screen is 800px height, so the whole world (see TiledEditor) is 8000px.
     public static final int WORLD_SCREENS = 10;
 
-    // Box2D Scale(Pixels Per Meter)
+    // Box2D Scale (Pixels Per Meter)
     public static final float PPM = 100;
 
     // Dim screen
