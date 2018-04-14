@@ -114,27 +114,6 @@
     <property name="powerThree" type="int" value="15"/>
    </properties>
   </object>
-  <object id="1832" x="160" y="514.667" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="powerThree" type="int" value="15"/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="1853" x="257.333" y="514.667" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="powerOne" type="int" value="6"/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="1854" x="257.333" y="577.333" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="colSilverBullet" value=""/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
   <object id="1855" x="351" y="3360" width="32" height="32">
    <properties>
     <property name="powerFour" type="int" value="20"/>

@@ -39,6 +39,7 @@ public class EnemyTwo extends Enemy {
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final boolean CENTER_EXPLOSION_ON_HIT = false;
+    private static final float RESTITUTION = 1.0f;
     private static final int SCORE = 10;
 
     private float stateTime;
@@ -90,6 +91,7 @@ public class EnemyTwo extends Enemy {
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
+        fdef.restitution = RESTITUTION; // Elastic collision to avoid sticking to walls
         b2body.createFixture(fdef).setUserData(this);
     }
 

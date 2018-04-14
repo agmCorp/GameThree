@@ -43,13 +43,13 @@ public class PlayScreen extends AbstractScreen {
 
     // Boxes around sprites, box2d bodies and scene2d tables
     // Debug message log enabled
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
 
     // Show/hide FPS counter
-    public static final boolean SHOW_FPS = false;
+    public static final boolean SHOW_FPS = true;
 
     // Print box2d bodies count
     public static final boolean DEBUG_BODY_COUNT = false;
@@ -151,7 +151,7 @@ public class PlayScreen extends AbstractScreen {
             b2dr = new Box2DDebugRenderer();
         }
 
-//        final float ALTURA = 40.0f; // todo
+//        final float ALTURA = 60.0f; // todo
 //        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
 
         creator = new B2WorldCreator(this);

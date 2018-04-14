@@ -1,86 +1,52 @@
-IDEAS
------
-- Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...
-- Copiar la historia del juego de knightmare remake! :D
-- estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
-Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
-los que se van de la pantalla).
-- incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-- nuevo item vidas
-- hacer splashscreen
-- enemigos:
-    - hay que dispararle mucho para matarlo.
-    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
-    - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
-    - minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
-      centro de la pantalla y se van por arriba (copiarlo de enemyEight).
-    - enemigofinal que me sigue
-    - nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
-    - nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
-      una rafaga (como flor) de balas, luego se transforma en nube y se va.
-    - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
-- se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
-EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
-b2worldcreator lo cree.
-- minuto 33.43 puentes dinámicos
-- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
-- puedo hacer el poder que los mata a todos, usando AABB
-- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
-Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
+HACER PRIORIDAD 1
+-----------------
+- Comenzar background nivel 3
+- Comenzar EnemigoFinal nivel 3
+- poner más powerboxes en el alambre y en el muro del nivel 2
+- Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
+Hay que ver el impoacto de los gets en esto. Es decir,
+b2worldcreator
+    - crea el hero
+    - crea el final
+    - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
 
-PROXIMOS PASOS
---------------
+HACER PRIORIDAD 2
+-----------------
+- el enemigofinal me reportan que no está bueno que quede tanto en la parte baja de la pantalla porque allí no se le puede
+  pegar
+- hacer un mapa de los niveles
+- poner una intro y una historia
+- Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
+  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum capaz lo puedo hacer con una función que recibe
+  el audio por parámetro y ella decide si lo reproduce o si reproduce el pum. El knockback debe ir como funcion o como estado
+  del enemigo así como splat.
+- El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
+para los poderes y otro para las armas.
+- poner una pausa al morir, para que se vea bien el impacto
+- hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
+- EnemyOne a veces se va indefinidamente para arriba.
+- Seguir viendo las mejoras del video (como slow motion)
+- hacer una bala grandota y ruidosa con shake capaz
+- el coin deberia ser random con random puntaje, como hice las powerboxes
+- incluir highscores. En la pantalla de level completed si hubo highscore se indica.
+- Ver que hago con las vidas y el score entre niveles. Las vidas no deberian resetearse por nivel aunque no se como hacerlo.
+El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
+
+HACER PRIORIDAD 3
+-----------------
+- poner alguna animacion linda de hero cuando mata al enemigo final y gana el nivel.
 - Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
 - Cuando el enemigo agarra el powerFour debería dejar de disparar!
 Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
 En el powerDown debería hacer:
 if !screen.challegeBegins (pasar a public) enableshooting.
 Creo
-- En el nivel 1 cuando están los enemigos 3 hay un murciélago que se queda pegado
-- las vidas no deberian resetearse por nivel aunque no se como hacerlo.
-El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
-- EnemyOne a veces se va indefinidamente para arriba.
-- creo que dejarle 10 vidas en la version definitiva no esta mal. Asumiendo que no haya un poder vidas.
-- Seguir viendo las mejoras del video (como slow motion)
-- hacer una bala grandota y ruidosa con shake capaz
-- el coin deberia ser random con random puntaje, como hice las powerboxes
-
-TENGO
------
-- borders, edges, paths, obstacles, powerboxes, enemies, finals, items, weapons
-- enemigos comunes 8 (uso 3 o 4 enemigos por nivel):
-one - amarillo
-two - murcielago
-three - bola negra
-four - congelados
-five - dragon en circulos
-six - rayo
-seven - se multiplica
-eight - bicho verde cometa
-- enemigos finales: 2
-- poderes 4 (2 poderes por nivel)
-- 1 moneda
-- 1 shuriken
-
-PENDIENTES
-----------
-- Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
-Hay que ver el impoacto de los gets en esto. Es decir,
-b2worldcreator
-- crea el hero
-- crea el final
-- tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
-Tendria que tener un worldRender que me permita quitar casi toda la logica del metodo render de playscreen.
-Creo que no puede crear el batch (lo tiene que seguir teniendo GameThree) porque sino cada vez que salgo y entro de playscreen se
-crearía el batch y no está bien.
-PlayScreen tendría el mapa, la camara, el hud.
-- poner help al juego con una historia como hice con la granny. Tal vez una pantalla que muestre un avance por un mapa según los niveles.
+- poner help al juego con una historia como hice con la granny.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
 - Ver si es fácil hacer una animación en scen2d para poner las letras que encontré y capaz el help inicial.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
-- ver si en modo pausa me conviene sacar el hud o la healthbar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
@@ -104,37 +70,69 @@ Pay with paypal, pay with card bitcoin
     velocidad --- contemplado en la estrategia
     sonido --- contemplado en la estrategia
 
-ALCANCE
--------
-- El level tiene puentes
-Hay 2 tipos de elementos:
-	1) bola de poder
-		- *nada
-		- *escudo
-		- invisibilidad (seria algo así como que puedo caminar por toda la pantalla sin colisionar
-		  con anda)
-		- detener pantalla (por tiempo)
-		- *te pones rojo y chocas a todos (por tiempo)
-		- *invulnerabilidad (te rodea una burbuja) es por tiempo
-		- explotar a todos los enemigos de una vez (ya puedo hacerlo, me faltaria una funcion en cada enemigo que lo haga explotar, seria abstract en Enemy a implementar en derivadas).
-	2) bola de armas
-		- nada
-		- boomeran
-		- *triple bola de fuego
-		- doble fecha
-		- *flecha simple (arma por defecto)
+SOLO IDEAS
+----------
+- Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...
+- Copiar la historia del juego de knightmare remake! :D
+- estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
+Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
+los que se van de la pantalla).
+- nuevo item vidas
+- hacer splashscreen
+- enemigos:
+    - hay que dispararle mucho para matarlo.
+    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
+    - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire. Usar el gif del pulpo azul con ojos grandes.
+    - minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
+      centro de la pantalla y se van por arriba (copiarlo de enemyEight).
+    - enemigofinal que me sigue
+    - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
+      rodeados por una gran textura que es el enemigo!
+    - nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
+    - nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
+      una rafaga (como flor) de balas, luego se transforma en nube y se va.
+    - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
+- se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
+EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
+b2worldcreator lo cree.
+- minuto 33.43 puentes dinámicos
+- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
+- puedo hacer el poder que los mata a todos, usando AABB
+- para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
+Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 
-*Bloques con sorpresas
+DUDAS Y BUGS
+------------
+- El back si lo dejo apretado hace ruido.
+- No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
+- Manejo de memoria y uso de Vector2 y uso de Labels en las pantallas.
+El vector2 no tiene dispose, las labels tampoco...
+- Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
+el resto del sonido. No lo supe arreglar...
+- se corta el audio al morir..el gruñido se escucha cortado.
+- En mi nivel de prueba, llegue al final donde estaba la arana y dio time is up. Ahi mori y la arana me comenzo a disparar.
+Aparentemente algun disparo me agarro entre que termine de morir y el tiempo en donde aparece la pantalla de game over y me
+volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el ondead otra vez). No lo pude reproducir mas.
 
-*enemigo1: bolas negras que bajan derecho
-		  luego disparan
-*enemigo2: bandada murcielagos
-		  luego disparan
-		  luego vienen desfazados los murcielagos
-*enemigo3 (hice otro): caballeros que bajan derecho luego se mueven un poco a la derecha o la izquierda y luego bajan de nuevo y disparan
-*enemigo4 (hice otro): nubes (viajan tranqui como funcion seno (sobre eje x) y luego se te tiran arriba rapido)
+TENGO
+-----
+- borders, edges, paths, obstacles, powerboxes, enemies, finals, items, weapons
+- enemigos comunes 8 (uso 3 o 4 enemigos por nivel):
+one - amarillo
+two - murcielago
+three - bola negra
+four - congelados
+five - dragon en circulos
+six - rayo
+seven - se multiplica
+eight - bicho verde cometa
+- enemigos finales: 2
+- poderes 4 (2 poderes por nivel)
+- 1 moneda
+- 1 shuriken
 
-Estimacion:
+ESTIMACION
+----------
 En youtube el knight se desplaza 10 pixels por segundo aprox.
 El primer nivel dura 5 minutos (300 segundos).
 En youtube el knight tiene 260 pixels de alto.
@@ -151,23 +149,6 @@ En mi juego seria 0.304 la velocidad.
 En mi juego serian 13 pantallas
 
 Yo igual hice 10 pantallas, 13 me parece mucho porque me cuesta llenarlas de enemigos.
-
-DUDAS Y BUGS
-------------
-- El back si lo dejo apretado hace ruido.
-- No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
-- Manejo de memoria y uso de Vector2 y uso de Labels en las pantallas.
-El vector2 no tiene dispose, las labels tampoco...
-- Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
-el resto del sonido. No lo supe arreglar...
-- se corta el audio al morir..el gruñido se escucha cortado.
-- En mi nivel de prueba, llegue al final donde estaba la arana y dio time is up. Ahi mori y la arana me comenzo a disparar.
-Aparentemente algun disparo me agarro entre que termine de morir y el tiempo en donde aparece la pantalla de game over y me
-volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el ondead otra vez). No lo pude reproducir mas.
-
-VIDEO
------
-FELICITACIONES
 
 TILESET
 -------
@@ -210,7 +191,6 @@ https://developer.android.com/topic/performance/reduce-apk-size.html
 - Tiny png api key 7yaS9nq0e-PmOCid1k6me6gk_bjTamPq (para usar en Texture Packer)
 También lo puedo usar directo en https://tinypng.com/ para imágenes menores a 5 megas.
 Para imágenes más pesadas usar curl. Ver "lecciones aprendidas 24".
-
 
 LECCIONES APRENDIDAS
 --------------------
