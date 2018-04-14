@@ -17,8 +17,7 @@ HACER PRIORIDAD 2
 - hacer un mapa de los niveles
 - poner una intro y una historia
 - Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
-  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum capaz lo puedo hacer con una función que recibe
-  el audio por parámetro y ella decide si lo reproduce o si reproduce el pum. El knockback debe ir como funcion o como estado
+  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
   del enemigo así como splat.
 - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
 para los poderes y otro para las armas.
