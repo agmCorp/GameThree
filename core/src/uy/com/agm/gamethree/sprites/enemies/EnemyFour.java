@@ -32,7 +32,6 @@ public class EnemyFour extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
-    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float DENSITY = 1000.0f;
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
@@ -50,7 +49,6 @@ public class EnemyFour extends Enemy {
     private Animation enemyFourAnimation;
     private Animation enemyFourFrozenAnimation;
     private Animation explosionAnimation;
-    private float expScale;
 
     private float b2bodyTargetX;
     private float b2bodyTargetY;
@@ -77,7 +75,6 @@ public class EnemyFour extends Enemy {
         enemyFourAnimation = Assets.getInstance().getEnemyFour().getEnemyFourAnimation();
         enemyFourFrozenAnimation = Assets.getInstance().getEnemyFour().getEnemyFourFrozenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionD().getExplosionDAnimation();
-        expScale = pum ? EXPLOSION_SCALE : 1;
 
         // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
@@ -267,13 +264,8 @@ public class EnemyFour extends Enemy {
             // Explosion animation
             stateTime = 0;
 
-            // Audio FX and screen shake
-            if (pum) {
-                screen.getShaker().shake(SHAKE_DURATION);
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
-            } else {
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
-            }
+            // Audio FX
+            pum(Assets.getInstance().getSounds().getHit());
 
             // Set score
             screen.getHud().addScore(SCORE);

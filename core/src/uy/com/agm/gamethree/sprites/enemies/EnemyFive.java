@@ -20,7 +20,6 @@ import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -32,7 +31,6 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float PERIOD_SECONDS = 2.0f;
     private static final float RADIUS_METERS = 1.3f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
@@ -44,7 +42,6 @@ public class EnemyFive extends Enemy {
     private static final int SCORE = 15;
 
     private boolean damage;
-    private float expScale;
     private float stateTime;
     private boolean counterclockwise;
     private float elapsedTime;
@@ -64,7 +61,6 @@ public class EnemyFive extends Enemy {
         // Animations
         enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
-        expScale = pum ? EXPLOSION_SCALE : 1;
 
         // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
@@ -147,13 +143,8 @@ public class EnemyFive extends Enemy {
             // Explosion animation
             stateTime = 0;
 
-            // Audio FX and screen shake
-            if (pum) {
-                screen.getShaker().shake(SHAKE_DURATION);
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
-            } else {
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
-            }
+            // Audio FX
+            pum(Assets.getInstance().getSounds().getHit());
 
             // Set score
             screen.getHud().addScore(SCORE);

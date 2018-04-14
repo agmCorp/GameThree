@@ -18,7 +18,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -30,7 +29,6 @@ public class EnemyOne extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float VELOCITY_X = 1.0f;
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
@@ -47,7 +45,6 @@ public class EnemyOne extends Enemy {
     private Animation explosionAnimation;
     private boolean changeDirection;
     private float changeDirectionTime;
-    private float expScale;
 
     // Knock back effect
     private boolean knockBack;
@@ -62,7 +59,6 @@ public class EnemyOne extends Enemy {
         // Animations
         enemyOneAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
-        expScale = pum ? EXPLOSION_SCALE : 1;
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
@@ -149,13 +145,8 @@ public class EnemyOne extends Enemy {
             // Explosion animation
             stateTime = 0;
 
-            // Audio FX and screen shake
-            if (pum) {
-                screen.getShaker().shake(SHAKE_DURATION);
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
-            } else {
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
-            }
+            // Audio FX
+            pum(Assets.getInstance().getSounds().getHit());
 
             // Set score
             screen.getHud().addScore(SCORE);

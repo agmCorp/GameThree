@@ -18,7 +18,6 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
 import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -31,7 +30,6 @@ public class EnemySeven extends Enemy {
 
     // Constants
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float RESIZE_FACTOR = 0.5f;
     private static final float VELOCITY_X = 3.0f;
     private static final float VELOCITY_Y = -3.0f;
@@ -53,7 +51,6 @@ public class EnemySeven extends Enemy {
     private float changeHorizontalTime;
     private float changeVerticalTime;
     private boolean isTiny;
-    private float expScale;
 
     // Knock back effect
     private boolean knockBack;
@@ -68,7 +65,6 @@ public class EnemySeven extends Enemy {
         // Animations
         enemySevenAnimation = Assets.getInstance().getEnemySeven().getEnemySevenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
-        expScale = pum ? EXPLOSION_SCALE : 1;
 
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         if (isTiny) {
@@ -171,13 +167,8 @@ public class EnemySeven extends Enemy {
             // Explosion animation
             stateTime = 0;
 
-            // Audio FX and screen shake
-            if (pum) {
-                screen.getShaker().shake(SHAKE_DURATION);
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
-            } else {
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
-            }
+            // Audio FX
+            pum(Assets.getInstance().getSounds().getHit());
 
             // Set score
             screen.getHud().addScore(SCORE);

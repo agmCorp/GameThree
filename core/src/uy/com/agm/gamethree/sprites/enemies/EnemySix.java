@@ -38,7 +38,6 @@ public class EnemySix extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float EXPLOSION_SCALE = 3.0f;
     private static final float VELOCITY_X = 0.0f;
     private static final float VELOCITY_Y = 0.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
@@ -55,7 +54,6 @@ public class EnemySix extends Enemy {
     private Animation enemySixIdleAnimation;
     private Animation enemySixBeamAnimation;
     private Animation explosionAnimation;
-    private float expScale;
 
     // Power beam
     private float beamStateTime;
@@ -79,7 +77,6 @@ public class EnemySix extends Enemy {
         enemySixIdleAnimation = Assets.getInstance().getEnemySix().getEnemySixIdleAnimation();
         enemySixBeamAnimation = Assets.getInstance().getEnemySix().getEnemySixBeamAnimation();
         explosionAnimation = Assets.getInstance().getExplosionG().getExplosionGAnimation();
-        expScale = pum ? EXPLOSION_SCALE : 1;
         stateTime = 0;
 
         // Power beam variables initialization
@@ -246,13 +243,8 @@ public class EnemySix extends Enemy {
             // Explosion animation
             stateTime = 0;
 
-            // Audio FX and screen shake
-            if (pum) {
-                screen.getShaker().shake(SHAKE_DURATION);
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
-            } else {
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
-            }
+            // Audio FX
+            pum(Assets.getInstance().getSounds().getHit());
 
             // Set score
             screen.getHud().addScore(SCORE);

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,6 +21,7 @@ import uy.com.agm.gamethree.sprites.weapons.IShootStrategy;
 import uy.com.agm.gamethree.sprites.weapons.ShootContext;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyDefaultShooting;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 
 /**
@@ -32,7 +34,14 @@ public abstract class Enemy extends Sprite {
     // Constants
     private static final float MARGIN_METERS = 3.0f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
-    protected static final float SHAKE_DURATION = 1.0f;
+    private static final float SHAKE_DURATION = 1.0f;
+    private static final float EXPLOSION_SCALE = 3.0f;
+
+    private TextureRegion splat;
+    private boolean pum;
+    private ShootContext shootContext;
+    private boolean openFire;
+    private int tiledMapId;
 
     protected World world;
     protected PlayScreen screen;
@@ -41,19 +50,13 @@ public abstract class Enemy extends Sprite {
     protected Vector2 velocity;
     protected Vector2 tmp; // Temporary GC friendly vector
 
-    private TextureRegion splat;
-
     protected enum State {
         INACTIVE, ALIVE, INJURED, EXPLODING, SPLAT, DEAD
     }
 
     protected State currentState;
     protected MapObject object;
-    protected boolean pum;
-
-    private ShootContext shootContext;
-    private boolean openFire;
-    private int tiledMapId;
+    protected float expScale;
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -88,6 +91,7 @@ public abstract class Enemy extends Sprite {
         currentState = State.INACTIVE;
 
         pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
+        expScale = pum ? EXPLOSION_SCALE : 1;
         splat = Assets.getInstance().getSplat().getRandomEnemySplat();
     }
 
@@ -210,6 +214,16 @@ public abstract class Enemy extends Sprite {
                 default:
                     break;
             }
+        }
+    }
+
+    protected void pum(Sound hitSound) {
+        // Audio FX and screen shake
+        if (pum) {
+            screen.getShaker().shake(SHAKE_DURATION);
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+        } else {
+            AudioManager.getInstance().play(hitSound);
         }
     }
 
