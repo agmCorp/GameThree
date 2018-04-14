@@ -16,6 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.boundary.KinematicBridge;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyEight;
@@ -51,6 +52,7 @@ public class B2WorldCreator {
     private static final String LAYER_BORDER = "border";
     private static final String LAYER_OBSTACLE = "obstacle";
     private static final String LAYER_PATH = "path";
+    private static final String LAYER_KINEMATIC_BRIDGE = "kinematicBridge";
     private static final String LAYER_ENEMY_ONE = "enemyOne";
     private static final String LAYER_ENEMY_TWO = "enemyTwo";
     private static final String LAYER_ENEMY_THREE = "enemyThree";
@@ -80,6 +82,7 @@ public class B2WorldCreator {
     private Edge bottomEdge;
     private Array<Obstacle> obstacles;
     private Array<Path> paths;
+    private Array<KinematicBridge> kinematicBridges;
     private Array<Enemy> enemies;
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
@@ -96,6 +99,7 @@ public class B2WorldCreator {
         edges = new Array<Edge>();
         obstacles = new Array<Obstacle>();
         paths = new Array<Path>();
+        kinematicBridges = new Array<KinematicBridge>();
         enemies = new Array<Enemy>();
         powerBoxes = new Array<PowerBox>();
         items = new Array<Item>();
@@ -136,6 +140,14 @@ public class B2WorldCreator {
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 paths.add(new Path(screen, object));
+            }
+        }
+
+        // Layer: kinematicBridge
+        layer = map.getLayers().get(LAYER_KINEMATIC_BRIDGE);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                kinematicBridges.add(new KinematicBridge(screen, object));
             }
         }
 
@@ -239,6 +251,10 @@ public class B2WorldCreator {
 
     public Array<Path> getPaths() {
         return paths;
+    }
+
+    public Array<KinematicBridge> getKinematicBridges() {
+        return kinematicBridges;
     }
 
     public Array<Enemy> getEnemies() {

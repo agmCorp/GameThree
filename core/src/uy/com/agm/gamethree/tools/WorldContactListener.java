@@ -35,16 +35,17 @@ public class WorldContactListener implements ContactListener {
     public static final short EDGE_BIT = 2;
     public static final short OBSTACLE_BIT = 4;
     public static final short PATH_BIT = 8;
-    public static final short HERO_BIT = 16;
-    public static final short HERO_GHOST_BIT = 32;
-    public static final short HERO_TOUGH_BIT = 64;
-    public static final short POWER_BOX_BIT = 128;
-    public static final short ENEMY_BIT = 256;
-    public static final short ITEM_BIT = 512;
-    public static final short HERO_WEAPON_BIT = 1024;
-    public static final short ENEMY_WEAPON_BIT = 2048;
-    public static final short FINAL_ENEMY_BIT = 4096;
-    public static final short SHIELD_BIT = 8192;
+    public static final short KINEMATIC_BRIDGE_BIT = 16;
+    public static final short HERO_BIT = 32;
+    public static final short HERO_GHOST_BIT = 64;
+    public static final short HERO_TOUGH_BIT = 128;
+    public static final short POWER_BOX_BIT = 256;
+    public static final short ENEMY_BIT = 512;
+    public static final short ITEM_BIT = 1024;
+    public static final short HERO_WEAPON_BIT = 2048;
+    public static final short ENEMY_WEAPON_BIT = 4096;
+    public static final short FINAL_ENEMY_BIT = 8192;
+    public static final short SHIELD_BIT = 16384;
 
     @Override
     public void beginContact(Contact contact) {

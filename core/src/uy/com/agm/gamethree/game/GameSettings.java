@@ -23,7 +23,7 @@ public class GameSettings {
     private static final float DEFAULT_VOLUME = 0.5f;
     private static final float MIN_VOLUME = 0.0f;
     private static final float MAX_VOLUME = 1.0f;
-    public static final int MAX_AVAILABLE_LEVEL = 2;
+    public static final int MAX_AVAILABLE_LEVEL = 3;
 
     // Singleton: unique instance
     private static GameSettings instance;
