@@ -16,15 +16,18 @@ HACER PRIORIDAD 2
   pegar
 - hacer un mapa de los niveles
 - poner una intro y una historia
-- Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge.
 - Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
   Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
-  del enemigo así como splat.
+  del enemigo así como splat pero estuve viendo que es medio complejo.
 - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
 para los poderes y otro para las armas.
 - poner una pausa al morir, para que se vea bien el impacto
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
-- EnemyOne a veces se va indefinidamente para arriba.
+- EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
+por 1 segundo va hacia arriba, pero luego choca con un enemigo y ejecutra onbump y cambia de velocidad hacia abajo
+y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se queda hacia arriba.
+Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
+hay que pensarlo.
 - Seguir viendo las mejoras del video (como slow motion)
 - hacer una bala grandota y ruidosa con shake capaz
 - el coin deberia ser random con random puntaje, como hice las powerboxes
@@ -34,9 +37,13 @@ El puntaje tiene el mismo problema que las vidas (el play again pone score 0)
 
 HACER PRIORIDAD 3
 -----------------
+- Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge.
+Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
+Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.
+Esa interfaz la puedo usar ademas dentro de ActorDef.
 - poner alguna animacion linda de hero cuando mata al enemigo final y gana el nivel.
 - Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
-- Cuando el enemigo agarra el powerFour debería dejar de disparar!
+- Cuando el enemigo agarra el powerFour debería dejar de disparar! creo que no es buena idea pero bueno...
 Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
 En el powerDown debería hacer:
 if !screen.challegeBegins (pasar a public) enableshooting.
