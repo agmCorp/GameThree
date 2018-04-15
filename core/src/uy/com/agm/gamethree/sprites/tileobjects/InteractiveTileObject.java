@@ -2,7 +2,6 @@ package uy.com.agm.gamethree.sprites.tileobjects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -24,7 +23,6 @@ public abstract class InteractiveTileObject implements IBlockingObject {
     protected PlayScreen screen;
     protected World world;
     protected MapObject object;
-    protected TiledMap map;
     protected Body b2body;
     protected Fixture fixture;
     protected Rectangle boundsMeters;
@@ -33,7 +31,6 @@ public abstract class InteractiveTileObject implements IBlockingObject {
         this.screen = screen;
         this.world = screen.getWorld();
         this.object = object;
-        this.map = screen.getMap();
         Rectangle bounds = ((RectangleMapObject) object).getRectangle();
         this.boundsMeters = new Rectangle(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, bounds.getWidth() / PlayScreen.PPM, bounds.getHeight() / PlayScreen.PPM);
         defineInteractiveTileObject();
