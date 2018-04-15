@@ -39,14 +39,14 @@ public abstract class StaticBackgroundObject implements IAvoidLandingObject {
 
     private void defineStaticBackgroundObject() {
         BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set(boundsMeters.getX() + boundsMeters.getWidth() / 2, boundsMeters.getY() + boundsMeters.getHeight() / 2);
-
         b2body = world.createBody(bdef);
+
+        PolygonShape shape = new PolygonShape();
         shape.setAsBox(boundsMeters.getWidth() / 2, boundsMeters.getHeight() / 2);
+
+        FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
         fixture = b2body.createFixture(fdef);
     }
