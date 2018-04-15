@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2021">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2024">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -71,27 +71,15 @@
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="bridge"/>
- <objectgroup name="powerBox">
-  <object id="2016" x="96" y="7488" width="32" height="32">
-   <properties>
-    <property name="strength" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="2019" x="288" y="7467" width="32" height="32">
-   <properties>
-    <property name="strength" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="2020" x="289" y="7600" width="32" height="32">
-   <properties>
-    <property name="strength" type="int" value="4"/>
-   </properties>
-  </object>
+ <objectgroup name="bridge">
+  <object id="2023" x="192" y="7552" width="32" height="32"/>
  </objectgroup>
+ <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
- <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyThree">
+  <object id="2021" x="96" y="7616" width="32" height="32"/>
+ </objectgroup>
  <objectgroup name="enemyFour"/>
  <objectgroup name="enemyFive"/>
  <objectgroup name="enemySix"/>

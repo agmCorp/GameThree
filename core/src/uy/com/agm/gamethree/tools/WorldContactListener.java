@@ -55,7 +55,7 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // Hero/HeroGhost/HeroTough - InteractiveTileObjects/Bridge
+            // Hero/HeroGhost/HeroTough - Border/Obstacle/Path/Bridge
             case HERO_BIT | BORDER_BIT:
             case HERO_BIT | OBSTACLE_BIT:
             case HERO_BIT | PATH_BIT:
@@ -154,7 +154,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixC.getUserData()).onBump();
                 break;
 
-            // Enemy - InteractiveTileObjects/Bridge
+            // Enemy - Obstacle/Path/Bridge
             case ENEMY_BIT | OBSTACLE_BIT:
             case ENEMY_BIT | PATH_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
@@ -173,7 +173,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixB.getUserData()).onBump();
                 break;
 
-            // Item - InteractiveTileObjects/Bridge
+            // Item - Border/Obstacle/Path/Bridge
             case ITEM_BIT | BORDER_BIT:
             case ITEM_BIT | OBSTACLE_BIT:
             case ITEM_BIT | PATH_BIT:
@@ -199,7 +199,7 @@ public class WorldContactListener implements ContactListener {
                 ((Item) fixB.getUserData()).onBump();
                 break;
 
-            // Hero's weapon - InteractiveTileObjects & Items
+            // Hero's weapon - Border/Obstacle/Item
             case HERO_WEAPON_BIT | BORDER_BIT:
             case HERO_WEAPON_BIT | OBSTACLE_BIT:
             case HERO_WEAPON_BIT | ITEM_BIT:

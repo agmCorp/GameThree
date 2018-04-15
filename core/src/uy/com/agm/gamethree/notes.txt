@@ -16,6 +16,7 @@ HACER PRIORIDAD 2
   pegar
 - hacer un mapa de los niveles
 - poner una intro y una historia
+- Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge.
 - Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
   Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
   del enemigo así como splat.
