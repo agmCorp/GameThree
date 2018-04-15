@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -179,6 +180,8 @@ public class Landing {
         boolean collision = false;
 
         for(Rectangle rectangle : boundBodies) {
+            Gdx.app.debug(TAG, "*** bounds " + rectangle.toString());
+
             if (Intersector.overlaps(circleHero, rectangle)) {
                 collision = true;
                 break;

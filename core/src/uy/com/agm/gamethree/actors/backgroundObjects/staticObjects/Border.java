@@ -26,6 +26,7 @@ public class Border extends StaticBackgroundObject {
     */
     public Border(PlayScreen screen, MapObject object) {
         super(screen, object);
+
         // The default value is 0xFFFF for maskBits, or in other words this fixture will collide
         // with every other fixture as long as the other fixture has this categoryBit in its maskBits list.
         Filter filter = new Filter();

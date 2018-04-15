@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetKinematicBridge;
+import uy.com.agm.gamethree.assets.sprites.AssetBridge;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -56,7 +56,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         * This point will be used by defineBridge() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetKinematicBridge.WIDTH_METERS, AssetKinematicBridge.HEIGHT_METERS);
+        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetBridge.WIDTH_METERS, AssetBridge.HEIGHT_METERS);
         defineBridge();
 
         // The bridge crosses the entire screen
@@ -69,7 +69,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         b2body.setActive(false);
 
         // Textures
-        bridgeStand = Assets.getInstance().getKinematicBridge().getKinematicBridgeA();
+        bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeA();
 
         // Initial state
         currentState = State.INACTIVE;
