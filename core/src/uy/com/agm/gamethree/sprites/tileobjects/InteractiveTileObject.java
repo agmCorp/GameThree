@@ -18,7 +18,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  * Created by AGM on 12/4/2017.
  */
 
-public abstract class InteractiveTileObject implements IMotionlessObject {
+public abstract class InteractiveTileObject implements IBlockingObject {
     private static final String TAG = InteractiveTileObject.class.getName();
 
     protected PlayScreen screen;
@@ -54,6 +54,8 @@ public abstract class InteractiveTileObject implements IMotionlessObject {
     }
 
     protected void setCategoryFilter(short filterBit) {
+        // The default value is 0xFFFF for maskBits, or in other words this fixture will collide
+        // with every other fixture as long as the other fixture has this categoryBit in its maskBits list.
         Filter filter = new Filter();
         filter.categoryBits = filterBit; // Depicts what this fixture is
         fixture.setFilterData(filter);

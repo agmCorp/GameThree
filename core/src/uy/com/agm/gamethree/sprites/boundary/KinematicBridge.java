@@ -10,14 +10,17 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.tileobjects.IBlockingObject;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 4/14/2018.
  */
 
-public class KinematicBridge {
+public class KinematicBridge implements IBlockingObject {
     private static final String TAG = KinematicBridge.class.getName();
 
     private PlayScreen screen;
@@ -76,14 +79,18 @@ public class KinematicBridge {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
-        setFilters(fdef);
+        // The default value is 0xFFFF for maskBits, or in other words this fixture will collide
+        // with every other fixture as long as the other fixture has this categoryBit in its maskBits list.
+        fdef.filter.categoryBits = WorldContactListener.PATH_BIT;  // Depicts what this fixture is
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    private void setFilters(FixtureDef fixtureDef) {
-        fixtureDef.filter.categoryBits = WorldContactListener.KINEMATIC_BRIDGE_BIT;  // Depicts what this fixture is
-        fixtureDef.filter.maskBits = WorldContactListener.HERO_BIT |
-                WorldContactListener.HERO_GHOST_BIT |
-                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+    public void onBump() {
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+    }
+
+    @Override
+    public Rectangle getBoundsMeters() {
+        return null;
     }
 }
