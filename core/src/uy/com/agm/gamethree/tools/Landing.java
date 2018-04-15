@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileobjects.IBlockingObject;
+import uy.com.agm.gamethree.sprites.tileobjects.IAvoidLandingObject;
 
 /**
  * Created by AGM on 4/1/2018.
@@ -66,7 +66,7 @@ public class Landing {
         Array<Fixture> foundBodies = worldQueryAABB.findBodies(categoryBits, camX - worldWidth / 2, camY - worldHeight / 2, camX + worldWidth / 2, camY + worldHeight / 2);
         boundBodies.clear();
         for(Fixture fixture : foundBodies) {
-            boundBodies.add(((IBlockingObject) fixture.getUserData()).getBoundsMeters());
+            boundBodies.add(((IAvoidLandingObject) fixture.getUserData()).getBoundsMeters());
         }
 
         float x0 = camX;

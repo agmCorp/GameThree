@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetKinematicBridge;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileobjects.IBlockingObject;
+import uy.com.agm.gamethree.sprites.tileobjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -25,7 +25,7 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 4/14/2018.
  */
 
-public class KinematicBridge  extends Sprite implements IBlockingObject {
+public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
     private static final String TAG = KinematicBridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)

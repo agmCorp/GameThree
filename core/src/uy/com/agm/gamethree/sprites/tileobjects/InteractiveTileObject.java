@@ -17,7 +17,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  * Created by AGM on 12/4/2017.
  */
 
-public abstract class InteractiveTileObject implements IBlockingObject {
+public abstract class InteractiveTileObject implements IAvoidLandingObject {
     private static final String TAG = InteractiveTileObject.class.getName();
 
     protected PlayScreen screen;
