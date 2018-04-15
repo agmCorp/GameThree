@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
+import uy.com.agm.gamethree.assets.sprites.AssetKinematicBridge;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.tileobjects.IBlockingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -56,20 +56,20 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         * This point will be used by defineKinematicBridge() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS * 3, AssetPowerBox.HEIGHT_METERS); // todo
+        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetKinematicBridge.WIDTH_METERS, AssetKinematicBridge.HEIGHT_METERS);
         defineKinematicBridge();
 
         // The bridge crosses the entire screen
         boundsMeters = new Rectangle(0, getY(), screen.getGameViewPort().getWorldWidth(), getHeight());
 
-        // Constant speed
+        // Constant velocity
         b2body.setLinearVelocity(VELOCITY_X, VELOCITY_Y);
 
         // By default this KinematicBridge doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
-        bridgeStand = Assets.getInstance().getPowerBox().getBrickAStand();
+        bridgeStand = Assets.getInstance().getKinematicBridge().getKinematicBridgeA();
 
         // Initial state
         currentState = State.INACTIVE;
@@ -175,7 +175,7 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         return currentState == State.FINISHED;
     }
 
-    // This PowerBox can be removed from our game
+    // This KinematicBridge can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }

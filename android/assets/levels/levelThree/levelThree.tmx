@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1926">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1929">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -72,7 +72,9 @@
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
  <objectgroup name="kinematicBridge">
-  <object id="1925" x="288" y="7362" width="32" height="32"/>
+  <object id="1926" x="101" y="7552" width="32" height="32"/>
+  <object id="1927" x="187" y="7323" width="32" height="32"/>
+  <object id="1928" x="308" y="7114" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
