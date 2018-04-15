@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -13,10 +14,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetBridge;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -63,7 +64,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         boundsMeters = new Rectangle(0, getY(), screen.getGameViewPort().getWorldWidth(), getHeight());
 
         // Constant velocity
-        b2body.setLinearVelocity(VELOCITY_X, VELOCITY_Y);
+        b2body.setLinearVelocity(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
         // By default this Bridge doesn't interact in our world
         b2body.setActive(false);
@@ -84,7 +85,8 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(getWidth() / 2, getHeight() / 2);
-        fdef.filter.categoryBits = WorldContactListener.NOTHING_BIT; // Depicts what this fixture is
+        fdef.filter.categoryBits = WorldContactListener.PATH_BIT; // Depicts what this fixture is
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT; // Depicts what this Fixture can collide with
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -108,6 +110,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = shape;
+
         // The default value is 0xFFFF for maskBits, or in other words this fixture will collide
         // with every other fixture as long as the other fixture has this categoryBit in its maskBits list.
         fdef.filter.categoryBits = WorldContactListener.PATH_BIT;  // Depicts what this fixture is
@@ -154,7 +157,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         }
     }
 
-    protected void stateMoving(float dt) {
+    private void stateMoving(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, the Bridge has a new position after running the physical simulation.
@@ -165,6 +168,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(bridgeStand);
 
+        // Kinematic bodies do not collide with static ones (we can't use WorldContactListener)
         float velX;
         if (getX() <= 0 || getX() + getWidth() >= screen.getGameViewPort().getWorldWidth()) {
             velX = b2body.getLinearVelocity().x * -1;
