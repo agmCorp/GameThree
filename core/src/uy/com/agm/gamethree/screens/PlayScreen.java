@@ -279,7 +279,7 @@ public class PlayScreen extends AbstractScreen {
 
     private void updateKinematicBridges(float dt) {
         Bridge bridge;
-        Iterator<Bridge> iterator = creator.getKinematicBridges().iterator();
+        Iterator<Bridge> iterator = creator.getBridges().iterator();
         while(iterator.hasNext()) {
             bridge = iterator.next();
             bridge.update(dt);
@@ -464,7 +464,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderKinematicBridges() {
-        for (Bridge bridge : creator.getKinematicBridges()) {
+        for (Bridge bridge : creator.getBridges()) {
             bridge.draw(game.getBatch());
         }
     }

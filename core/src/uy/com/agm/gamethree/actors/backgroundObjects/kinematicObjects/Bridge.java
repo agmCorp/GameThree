@@ -53,11 +53,11 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         Rectangle bounds = ((RectangleMapObject) object).getRectangle();
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
-        * This point will be used by defineKinematicBridge() calling getX(), getY() to center its b2body.
+        * This point will be used by defineBridge() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
         setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetKinematicBridge.WIDTH_METERS, AssetKinematicBridge.HEIGHT_METERS);
-        defineKinematicBridge();
+        defineBridge();
 
         // The bridge crosses the entire screen
         boundsMeters = new Rectangle(0, getY(), screen.getGameViewPort().getWorldWidth(), getHeight());
@@ -75,7 +75,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         currentState = State.INACTIVE;
     }
 
-    private void defineKinematicBridge() {
+    private void defineBridge() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2, getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.KinematicBody;

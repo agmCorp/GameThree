@@ -52,7 +52,7 @@ public class B2WorldCreator {
     private static final String LAYER_BORDER = "border";
     private static final String LAYER_OBSTACLE = "obstacle";
     private static final String LAYER_PATH = "path";
-    private static final String LAYER_KINEMATIC_BRIDGE = "kinematicBridge";
+    private static final String LAYER_BRIDGE = "bridge";
     private static final String LAYER_ENEMY_ONE = "enemyOne";
     private static final String LAYER_ENEMY_TWO = "enemyTwo";
     private static final String LAYER_ENEMY_THREE = "enemyThree";
@@ -82,7 +82,7 @@ public class B2WorldCreator {
     private Edge bottomEdge;
     private Array<Obstacle> obstacles;
     private Array<Path> paths;
-    private Array<Bridge> kinematicBridges;
+    private Array<Bridge> bridges;
     private Array<Enemy> enemies;
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
@@ -99,7 +99,7 @@ public class B2WorldCreator {
         edges = new Array<Edge>();
         obstacles = new Array<Obstacle>();
         paths = new Array<Path>();
-        kinematicBridges = new Array<Bridge>();
+        bridges = new Array<Bridge>();
         enemies = new Array<Enemy>();
         powerBoxes = new Array<PowerBox>();
         items = new Array<Item>();
@@ -143,11 +143,11 @@ public class B2WorldCreator {
             }
         }
 
-        // Layer: kinematicBridge
-        layer = map.getLayers().get(LAYER_KINEMATIC_BRIDGE);
+        // Layer: bridge
+        layer = map.getLayers().get(LAYER_BRIDGE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                kinematicBridges.add(new Bridge(screen, object));
+                bridges.add(new Bridge(screen, object));
             }
         }
 
@@ -253,8 +253,8 @@ public class B2WorldCreator {
         return paths;
     }
 
-    public Array<Bridge> getKinematicBridges() {
-        return kinematicBridges;
+    public Array<Bridge> getBridges() {
+        return bridges;
     }
 
     public Array<Enemy> getEnemies() {
@@ -360,7 +360,7 @@ public class B2WorldCreator {
             String value;
             String data;
 
-            for (Bridge bridge : getKinematicBridges()) {
+            for (Bridge bridge : getBridges()) {
                 key = bridge.whoAmI();
                 value = arrayMapDebug.get(key);
                 data = bridge.getTiledMapId() + " (" + bridge.getCurrentState() + ")";
@@ -405,7 +405,7 @@ public class B2WorldCreator {
             Gdx.app.debug(TAG, "***** Edges: " + edges.size);
             Gdx.app.debug(TAG, "***** Obstacles: " + obstacles.size);
             Gdx.app.debug(TAG, "***** Path: " + paths.size);
-            Gdx.app.debug(TAG, "***** Kinematic bridges: " + kinematicBridges.size);
+            Gdx.app.debug(TAG, "***** Bridges: " + bridges.size);
             Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
             Gdx.app.debug(TAG, "***** Items: " + items.size);
