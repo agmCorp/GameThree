@@ -74,43 +74,7 @@
  <objectgroup name="kinematicBridge">
   <object id="1925" x="288" y="7362" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="powerBox">
-  <object id="1758" x="352" y="4256" width="32" height="32">
-   <properties>
-    <property name="powerFour" type="int" value="15"/>
-   </properties>
-  </object>
-  <object id="1759" x="96" y="4448" width="32" height="32">
-   <properties>
-    <property name="powerFour" type="int" value="10"/>
-   </properties>
-  </object>
-  <object id="1831" x="128" y="3264" width="32" height="32">
-   <properties>
-    <property name="powerOne" type="int" value="10"/>
-   </properties>
-  </object>
-  <object id="1832" x="160" y="514.667" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="powerThree" type="int" value="15"/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="1853" x="257.333" y="514.667" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="powerOne" type="int" value="6"/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="1854" x="257.333" y="577.333" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="strength" type="int" value="3"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
