@@ -22,6 +22,7 @@ import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.sprites.boundary.Edge;
+import uy.com.agm.gamethree.sprites.boundary.KinematicBridge;
 import uy.com.agm.gamethree.sprites.boxes.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
@@ -234,6 +235,7 @@ public class PlayScreen extends AbstractScreen {
         doPhysicsStep(dt);
 
         // The order is not important
+        updateKinematicBridges(dt);
         updatePowerBoxes(dt);
         updateItems(dt);
         updateWeapons(dt);
@@ -270,6 +272,18 @@ public class PlayScreen extends AbstractScreen {
             enemy = iterator.next();
             enemy.update(dt);
             if(enemy.isDisposable()){
+                iterator.remove();
+            }
+        }
+    }
+
+    private void updateKinematicBridges(float dt) {
+        KinematicBridge kinematicBridge;
+        Iterator<KinematicBridge> iterator = creator.getKinematicBridges().iterator();
+        while(iterator.hasNext()) {
+            kinematicBridge = iterator.next();
+            kinematicBridge.update(dt);
+            if(kinematicBridge.isDisposable()){
                 iterator.remove();
             }
         }
@@ -389,6 +403,7 @@ public class PlayScreen extends AbstractScreen {
 
         // This order is important
         // This determine if a sprite has to be drawn in front or behind another sprite
+        renderKinematicBridges();
         renderSplats();
         renderPowerBoxes();
         renderItems();
@@ -446,6 +461,12 @@ public class PlayScreen extends AbstractScreen {
 
     private void renderHero() {
         player.draw(game.getBatch());
+    }
+
+    private void renderKinematicBridges() {
+        for (KinematicBridge kinematicBridge : creator.getKinematicBridges()) {
+            kinematicBridge.draw(game.getBatch());
+        }
     }
 
     private void renderSplats() {

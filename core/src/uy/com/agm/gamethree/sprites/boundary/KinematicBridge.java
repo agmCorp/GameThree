@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.sprites.boundary;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -17,6 +18,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.tileobjects.IBlockingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -38,13 +40,14 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
     private Vector2 tmp; // Temporary GC friendly vector
 
     private enum State {
-        WAITING, FINISHED
+        INACTIVE, MOVING, FINISHED
     }
     private State currentState;
-
+    private int tiledMapId;
     private TextureRegion bridgeStand;
 
     public KinematicBridge(PlayScreen screen, MapObject object) {
+        this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
         this.screen = screen;
         this.world = screen.getWorld();
 
@@ -65,11 +68,11 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         tmp = new Vector2();
 
         // By default this KinematicBridge doesn't interact in our world
-        //b2body.setActive(false); TODO
+        b2body.setActive(false);
 
         // Textures
         bridgeStand = Assets.getInstance().getPowerBox().getBrickAStand();
-        currentState = State.WAITING;
+        currentState = State.INACTIVE;
     }
 
     private void defineKinematicBridge() {
@@ -112,16 +115,18 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
     }
 
     public void update(float dt) {
-        switch (currentState) {
-            case WAITING:
-              //  stateWaiting();
-                break;
-            case FINISHED:
-                break;
-            default:
-                break;
-        }
         checkBoundaries();
+        if (currentState != State.INACTIVE) {
+            switch (currentState) {
+                case MOVING:
+                  //  stateMoving(dt);
+                    break;
+                case FINISHED:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void checkBoundaries() {
@@ -132,9 +137,9 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         if (!isDestroyed()) {
             float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
-
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
+                currentState = State.MOVING;
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -154,12 +159,35 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         return currentState == State.FINISHED;
     }
 
+    // This PowerBox can be removed from our game
+    public boolean isDisposable() {
+        return currentState == State.FINISHED;
+    }
+
+    public void draw(Batch batch) {
+        if (currentState != State.INACTIVE && currentState != State.FINISHED) {
+           // super.draw(batch); todo
+        }
+    }
+
+    public String whoAmI() {
+        return this.getClass().getName();
+    }
+
+    public String getTiledMapId() {
+        return String.valueOf(tiledMapId);
+    }
+
+    public String getCurrentState() {
+        return currentState.toString();
+    }
+
     public void onBump() {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
     }
 
     @Override
     public Rectangle getBoundsMeters() {
-        return null;
+        return boundsMeters;
     }
 }

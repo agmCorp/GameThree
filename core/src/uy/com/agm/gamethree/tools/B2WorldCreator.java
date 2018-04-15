@@ -360,6 +360,14 @@ public class B2WorldCreator {
             String value;
             String data;
 
+            for (KinematicBridge kinematicBridge : getKinematicBridges()) {
+                key = kinematicBridge.whoAmI();
+                value = arrayMapDebug.get(key);
+                data = kinematicBridge.getTiledMapId() + " (" + kinematicBridge.getCurrentState() + ")";
+                value = value == null ? data : value + ", " + data;
+                arrayMapDebug.put(key, value);
+            }
+
             for (Enemy enemy : getEnemies()) {
                 key = enemy.whoAmI();
                 value = arrayMapDebug.get(key);
@@ -392,12 +400,17 @@ public class B2WorldCreator {
                 arrayMapDebug.put(key, value);
             }
 
-            Gdx.app.debug(TAG, "**** Objects not disposables ****");
             Gdx.app.debug(TAG, "***** World.bodyCount: " + screen.getWorld().getBodyCount());
+            Gdx.app.debug(TAG, "***** Borders: " + borders.size);
+            Gdx.app.debug(TAG, "***** Edges: " + edges.size);
+            Gdx.app.debug(TAG, "***** Obstacles: " + obstacles.size);
+            Gdx.app.debug(TAG, "***** Path: " + paths.size);
+            Gdx.app.debug(TAG, "***** Kinematic bridges: " + kinematicBridges.size);
             Gdx.app.debug(TAG, "***** Enemies: " + enemies.size);
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
             Gdx.app.debug(TAG, "***** Items: " + items.size);
             Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
+            Gdx.app.debug(TAG, "***** Objects not disposables detail (KinematicBridge, Enemy, PowerBox, Item, Weapon) ****");
             for (ObjectMap.Entry<String, String> entry : arrayMapDebug.entries()) {
                 Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
             }
