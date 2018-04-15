@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.boundary;
+package uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;

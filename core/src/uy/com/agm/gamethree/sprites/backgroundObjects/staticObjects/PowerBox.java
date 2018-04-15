@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.boxes;
+package uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -20,7 +20,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.sprites.items.Item;
-import uy.com.agm.gamethree.sprites.tileobjects.IAvoidLandingObject;
+import uy.com.agm.gamethree.sprites.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;

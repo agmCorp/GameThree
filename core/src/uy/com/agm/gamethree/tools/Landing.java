@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileobjects.IAvoidLandingObject;
+import uy.com.agm.gamethree.sprites.backgroundObjects.IAvoidLandingObject;
 
 /**
  * Created by AGM on 4/1/2018.

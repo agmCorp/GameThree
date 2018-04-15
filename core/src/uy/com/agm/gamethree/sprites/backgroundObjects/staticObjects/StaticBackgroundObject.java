@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.tileobjects;
+package uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -12,13 +12,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.sprites.backgroundObjects.IAvoidLandingObject;
 
 /**
  * Created by AGM on 12/4/2017.
  */
 
-public abstract class InteractiveTileObject implements IAvoidLandingObject {
-    private static final String TAG = InteractiveTileObject.class.getName();
+public abstract class StaticBackgroundObject implements IAvoidLandingObject {
+    private static final String TAG = StaticBackgroundObject.class.getName();
 
     protected PlayScreen screen;
     protected World world;
@@ -27,7 +28,7 @@ public abstract class InteractiveTileObject implements IAvoidLandingObject {
     protected Fixture fixture;
     protected Rectangle boundsMeters;
 
-    public InteractiveTileObject(PlayScreen screen, MapObject object) {
+    public StaticBackgroundObject(PlayScreen screen, MapObject object) {
         this.screen = screen;
         this.world = screen.getWorld();
         this.object = object;

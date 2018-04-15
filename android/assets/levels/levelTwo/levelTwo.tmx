@@ -77,7 +77,7 @@
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="kinematicBridge"/>
+ <objectgroup name="bridge"/>
  <objectgroup name="powerBox">
   <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>

@@ -15,9 +15,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.boundary.Edge;
-import uy.com.agm.gamethree.sprites.boundary.KinematicBridge;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects.Edge;
+import uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects.Bridge;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyEight;
 import uy.com.agm.gamethree.sprites.enemies.EnemyFive;
@@ -34,9 +34,9 @@ import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
 import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
-import uy.com.agm.gamethree.sprites.tileobjects.Border;
-import uy.com.agm.gamethree.sprites.tileobjects.Obstacle;
-import uy.com.agm.gamethree.sprites.tileobjects.Path;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.Border;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.Obstacle;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.Path;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 import uy.com.agm.gamethree.sprites.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.sprites.weapons.hero.HeroBullet;
@@ -82,7 +82,7 @@ public class B2WorldCreator {
     private Edge bottomEdge;
     private Array<Obstacle> obstacles;
     private Array<Path> paths;
-    private Array<KinematicBridge> kinematicBridges;
+    private Array<Bridge> kinematicBridges;
     private Array<Enemy> enemies;
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
@@ -99,7 +99,7 @@ public class B2WorldCreator {
         edges = new Array<Edge>();
         obstacles = new Array<Obstacle>();
         paths = new Array<Path>();
-        kinematicBridges = new Array<KinematicBridge>();
+        kinematicBridges = new Array<Bridge>();
         enemies = new Array<Enemy>();
         powerBoxes = new Array<PowerBox>();
         items = new Array<Item>();
@@ -147,7 +147,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_KINEMATIC_BRIDGE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                kinematicBridges.add(new KinematicBridge(screen, object));
+                kinematicBridges.add(new Bridge(screen, object));
             }
         }
 
@@ -253,7 +253,7 @@ public class B2WorldCreator {
         return paths;
     }
 
-    public Array<KinematicBridge> getKinematicBridges() {
+    public Array<Bridge> getKinematicBridges() {
         return kinematicBridges;
     }
 
@@ -360,10 +360,10 @@ public class B2WorldCreator {
             String value;
             String data;
 
-            for (KinematicBridge kinematicBridge : getKinematicBridges()) {
-                key = kinematicBridge.whoAmI();
+            for (Bridge bridge : getKinematicBridges()) {
+                key = bridge.whoAmI();
                 value = arrayMapDebug.get(key);
-                data = kinematicBridge.getTiledMapId() + " (" + kinematicBridge.getCurrentState() + ")";
+                data = bridge.getTiledMapId() + " (" + bridge.getCurrentState() + ")";
                 value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }
@@ -412,7 +412,7 @@ public class B2WorldCreator {
             Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
             Gdx.app.debug(TAG, "***** FinalEnemy: " + (screen.getFinalEnemy().isDisposable() ? 0 : 1));
             Gdx.app.debug(TAG, "***** Hero always 1");
-            Gdx.app.debug(TAG, "***** Objects not disposables detail (KinematicBridge, Enemy, PowerBox, Item, Weapon) ****");
+            Gdx.app.debug(TAG, "***** Objects not disposables detail (Bridge, Enemy, PowerBox, Item, Weapon) ****");
             for (ObjectMap.Entry<String, String> entry : arrayMapDebug.entries()) {
                 Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
             }

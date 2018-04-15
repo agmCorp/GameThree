@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.boundary;
+package uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetKinematicBridge;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.tileobjects.IAvoidLandingObject;
+import uy.com.agm.gamethree.sprites.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -25,8 +25,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 4/14/2018.
  */
 
-public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
-    private static final String TAG = KinematicBridge.class.getName();
+public class Bridge extends Sprite implements IAvoidLandingObject {
+    private static final String TAG = Bridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float VELOCITY_X = -1.0f;
@@ -44,7 +44,7 @@ public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
     private int tiledMapId;
     private TextureRegion bridgeStand;
 
-    public KinematicBridge(PlayScreen screen, MapObject object) {
+    public Bridge(PlayScreen screen, MapObject object) {
         this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
         this.screen = screen;
         this.world = screen.getWorld();
@@ -65,7 +65,7 @@ public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
         // Constant velocity
         b2body.setLinearVelocity(VELOCITY_X, VELOCITY_Y);
 
-        // By default this KinematicBridge doesn't interact in our world
+        // By default this Bridge doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
@@ -130,8 +130,8 @@ public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
     }
 
     private void checkBoundaries() {
-        /* When a KinematicBridge is on camera, it activates (it can collide).
-        * You have to be very careful because if the kinematic bridge is destroyed, its b2body does not exist and gives
+        /* When a Bridge is on camera, it activates (it can collide).
+        * You have to be very careful because if the bridge is destroyed, its b2body does not exist and gives
         * random errors if you try to active it.
         */
         if (!isDestroyed()) {
@@ -157,7 +157,7 @@ public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
     protected void stateMoving(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, the KinematicBridge has a new position after running the physical simulation.
+        * At this time, the Bridge has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -172,12 +172,12 @@ public class KinematicBridge  extends Sprite implements IAvoidLandingObject {
         }
     }
 
-    // This KinematicBridge doesn't have any b2body inside these states
+    // This Bridge doesn't have any b2body inside these states
     public boolean isDestroyed() {
         return currentState == State.FINISHED;
     }
 
-    // This KinematicBridge can be removed from our game
+    // This Bridge can be removed from our game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }

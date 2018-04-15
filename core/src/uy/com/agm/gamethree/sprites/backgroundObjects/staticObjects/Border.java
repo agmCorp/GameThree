@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.tileobjects;
+package uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects;
 
 import com.badlogic.gdx.maps.MapObject;
 
@@ -11,7 +11,7 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/4/2017.
  */
 
-public class Border extends InteractiveTileObject {
+public class Border extends StaticBackgroundObject {
     private static final String TAG = Border.class.getName();
 
     /* We have eight borders (left1, left2, left3, left4, right1, right2, right3, right4). These borders

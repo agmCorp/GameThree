@@ -6,14 +6,14 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import uy.com.agm.gamethree.sprites.boundary.KinematicBridge;
-import uy.com.agm.gamethree.sprites.boxes.PowerBox;
+import uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects.Bridge;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.sprites.enemies.Enemy;
 import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
 import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
 import uy.com.agm.gamethree.sprites.items.Item;
 import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.tileobjects.InteractiveTileObject;
+import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.StaticBackgroundObject;
 import uy.com.agm.gamethree.sprites.weapons.Weapon;
 
 /**
@@ -55,7 +55,7 @@ public class WorldContactListener implements ContactListener {
 
         int collisionDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         switch (collisionDef) {
-            // Hero/HeroGhost/HeroTough - InteractiveTileObjects/KinematicBridge
+            // Hero/HeroGhost/HeroTough - InteractiveTileObjects/Bridge
             case HERO_BIT | BORDER_BIT:
             case HERO_BIT | OBSTACLE_BIT:
             case HERO_BIT | PATH_BIT:
@@ -68,10 +68,10 @@ public class WorldContactListener implements ContactListener {
                 fixC = (fixA.getFilterData().categoryBits == BORDER_BIT ||
                         fixA.getFilterData().categoryBits == OBSTACLE_BIT ||
                         fixA.getFilterData().categoryBits == PATH_BIT) ? fixA : fixB;
-                if (fixC.getUserData() instanceof KinematicBridge) {
-                    ((KinematicBridge) fixC.getUserData()).onBump();
+                if (fixC.getUserData() instanceof Bridge) {
+                    ((Bridge) fixC.getUserData()).onBump();
                 } else {
-                    ((InteractiveTileObject) fixC.getUserData()).onBump();
+                    ((StaticBackgroundObject) fixC.getUserData()).onBump();
                 }
                 break;
 
@@ -154,7 +154,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixC.getUserData()).onBump();
                 break;
 
-            // Enemy - InteractiveTileObjects/KinematicBridge
+            // Enemy - InteractiveTileObjects/Bridge
             case ENEMY_BIT | OBSTACLE_BIT:
             case ENEMY_BIT | PATH_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
@@ -173,7 +173,7 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixB.getUserData()).onBump();
                 break;
 
-            // Item - InteractiveTileObjects/KinematicBridge
+            // Item - InteractiveTileObjects/Bridge
             case ITEM_BIT | BORDER_BIT:
             case ITEM_BIT | OBSTACLE_BIT:
             case ITEM_BIT | PATH_BIT:

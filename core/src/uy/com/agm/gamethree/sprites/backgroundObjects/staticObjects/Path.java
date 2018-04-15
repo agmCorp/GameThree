@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.sprites.tileobjects;
+package uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects;
 
 import com.badlogic.gdx.maps.MapObject;
 
@@ -11,13 +11,13 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/4/2017.
  */
 
-public class Obstacle extends InteractiveTileObject {
-    private static final String TAG = Obstacle.class.getName();
+public class Path extends StaticBackgroundObject {
+    private static final String TAG = Path.class.getName();
 
-    public Obstacle(PlayScreen screen, MapObject object) {
+    public Path(PlayScreen screen, MapObject object) {
         super(screen, object);
         fixture.setUserData(this);
-        setCategoryFilter(WorldContactListener.OBSTACLE_BIT);
+        setCategoryFilter(WorldContactListener.PATH_BIT);
     }
 
     @Override
