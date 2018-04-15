@@ -6,15 +6,15 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import uy.com.agm.gamethree.sprites.backgroundObjects.kinematicObjects.Bridge;
-import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.PowerBox;
-import uy.com.agm.gamethree.sprites.enemies.Enemy;
-import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.items.Item;
-import uy.com.agm.gamethree.sprites.player.Hero;
-import uy.com.agm.gamethree.sprites.backgroundObjects.staticObjects.StaticBackgroundObject;
-import uy.com.agm.gamethree.sprites.weapons.Weapon;
+import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
+import uy.com.agm.gamethree.actors.enemies.Enemy;
+import uy.com.agm.gamethree.actors.enemies.EnemyThree;
+import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.items.Item;
+import uy.com.agm.gamethree.actors.player.Hero;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.StaticBackgroundObject;
+import uy.com.agm.gamethree.actors.weapons.Weapon;
 
 /**
  * Created by AGM on 12/8/2017.

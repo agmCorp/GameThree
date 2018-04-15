@@ -9,15 +9,15 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.sprites.enemies.EnemyThree;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemy;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne;
-import uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelTwo;
-import uy.com.agm.gamethree.sprites.items.collectibles.ColSilverBullet;
-import uy.com.agm.gamethree.sprites.items.powerups.PowerFour;
-import uy.com.agm.gamethree.sprites.items.powerups.PowerOne;
-import uy.com.agm.gamethree.sprites.items.powerups.PowerThree;
-import uy.com.agm.gamethree.sprites.items.powerups.PowerTwo;
+import uy.com.agm.gamethree.actors.enemies.EnemyThree;
+import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelOne;
+import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelTwo;
+import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
+import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
+import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
+import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
 
 /**
  * Created by AGM on 1/20/2018.
