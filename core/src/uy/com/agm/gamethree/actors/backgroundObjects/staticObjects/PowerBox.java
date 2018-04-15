@@ -2,25 +2,19 @@ package uy.com.agm.gamethree.actors.backgroundObjects.staticObjects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Shape;
 
+import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.items.Item;
-import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -29,17 +23,12 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/17/2017.
  */
 
-public class PowerBox extends Sprite implements IAvoidLandingObject {
+public class PowerBox extends StaticBackgroundObject {
     private static final String TAG = PowerBox.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final int SCORE = 10;
-
-    private World world;
-    private PlayScreen screen;
-    private Body b2body;
-    private Rectangle boundsMeters;
 
     private TextureRegion powerBoxStand;
     private TextureRegion powerBoxDamagedLittle;
@@ -52,27 +41,27 @@ public class PowerBox extends Sprite implements IAvoidLandingObject {
         WAITING, OPENED, EXPLODING, FINISHED
     }
     private State currentState;
-    private MapObject object;
     private int damage;
-    private int tiledMapId;
 
     public PowerBox(PlayScreen screen, MapObject object) {
-        this.object = object;
-        this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
-        this.world = screen.getWorld();
-        this.screen = screen;
+        super(screen, object);
 
-        // Get the rectangle drawn in TiledEditor (pixels)
-        Rectangle bounds = ((RectangleMapObject) object).getRectangle();
+        Filter filter = new Filter();
+        filter.categoryBits = WorldContactListener.POWER_BOX_BIT; // Depicts what this fixture is
+        filter.maskBits = WorldContactListener.ENEMY_BIT |
+                WorldContactListener.ITEM_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.HERO_BIT |
+                WorldContactListener.HERO_GHOST_BIT |
+                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+        fixture.setFilterData(filter);
+        fixture.setUserData(this);
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
         * This point will be used by definePowerBox() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
-        setBounds(bounds.getX() / PlayScreen.PPM, bounds.getY() / PlayScreen.PPM, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
-        definePowerBox();
-
-        boundsMeters = new Rectangle(getX(), getY(), getWidth(), getHeight());
+        setBounds(b2body.getPosition().x - AssetPowerBox.WIDTH_METERS / 2, b2body.getPosition().y - AssetPowerBox.HEIGHT_METERS / 2, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
 
         // By default this PowerBox doesn't interact in our world
         b2body.setActive(false);
@@ -182,27 +171,6 @@ public class PowerBox extends Sprite implements IAvoidLandingObject {
         screen.getCreator().getItemOnHit(object, b2body.getPosition().x, b2body.getPosition().y + Item.OFFSET_METERS);
     }
 
-    private void definePowerBox() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(getX() + getWidth() / 2, getY() + getHeight() / 2); // In b2box the origin is at the center of the body
-        bdef.type = BodyDef.BodyType.StaticBody;
-        b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
-        fdef.filter.categoryBits = WorldContactListener.POWER_BOX_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
-                WorldContactListener.ITEM_BIT |
-                WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.HERO_BIT |
-                WorldContactListener.HERO_GHOST_BIT |
-                WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-    }
-
     public void update(float dt) {
         switch (currentState) {
             case WAITING:
@@ -306,6 +274,13 @@ public class PowerBox extends Sprite implements IAvoidLandingObject {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
     }
 
+    @Override
+    protected Shape getShape() {
+        CircleShape shape = new CircleShape();
+        shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        return shape;
+    }
+
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.
@@ -342,16 +317,7 @@ public class PowerBox extends Sprite implements IAvoidLandingObject {
         return this.getClass().getName();
     }
 
-    public String getTiledMapId() {
-        return String.valueOf(tiledMapId);
-    }
-
     public String getCurrentState() {
         return currentState.toString();
-    }
-
-    @Override
-    public Rectangle getBoundsMeters() {
-        return boundsMeters;
     }
 }

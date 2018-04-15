@@ -53,7 +53,7 @@ public class PlayScreen extends AbstractScreen {
     public static final boolean SHOW_FPS = true;
 
     // Print box2d bodies count
-    public static final boolean DEBUG_BODY_COUNT = false;
+    public static final boolean DEBUG_BODY_COUNT = true;
 
     // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;

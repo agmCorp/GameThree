@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1929">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1936">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -71,12 +71,39 @@
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="bridge">
-  <object id="1926" x="101" y="7552" width="32" height="32"/>
-  <object id="1927" x="187" y="7323" width="32" height="32"/>
-  <object id="1928" x="308" y="7114" width="32" height="32"/>
+ <objectgroup name="bridge"/>
+ <objectgroup name="powerBox">
+  <object id="1929" x="64" y="7488" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1930" x="192" y="7488" width="32" height="32">
+   <properties>
+    <property name="powerTwo" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1932" x="288" y="7488" width="32" height="32">
+   <properties>
+    <property name="powerThree" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1933" x="416" y="7488" width="32" height="32">
+   <properties>
+    <property name="powerFour" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1934" x="256" y="7328" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1935" x="160" y="7232" width="64" height="64">
+   <properties>
+    <property name="powerTwo" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
