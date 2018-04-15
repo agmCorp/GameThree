@@ -165,8 +165,10 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(bridgeStand);
 
+        float velX;
         if (getX() <= 0 || getX() + getWidth() >= screen.getGameViewPort().getWorldWidth()) {
-            b2body.setLinearVelocity(b2body.getLinearVelocity().x * -1, VELOCITY_Y);
+            velX = b2body.getLinearVelocity().x * -1;
+            b2body.setLinearVelocity(velX, VELOCITY_Y);
         }
     }
 

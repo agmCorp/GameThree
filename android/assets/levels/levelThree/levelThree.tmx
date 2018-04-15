@@ -13,7 +13,7 @@
  </layer>
  <layer name="graphic" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2MlNQmEUQOF/BY8lY1TAXrQAZ41zT4xRBnuxADWMUQYX2ojHnSKJQXZ4TvLl5X+5t4EbgpmZrVpvUQjv0c/vojNmZmZmZmZmZsu0FQthO7bYzg7zu7iJh3CLBppooR3/PlviXUYFVdRQxzNeMMIYE0xndju8u+ihjwGGWItCWMcG8iigOHMzSfJOIY0MssjhFGc4xwUucTWzu8/7AIc4wjFOlrzJ3Md/n/naA/OPeFpwz8zMzMzMzMxWv0YUQhMttHE3525R4l8ZFVRRQx0jjDHBFK9zdjv866KHPgYYft5iEiHkUUARm4mfu0n+pZBGBlnk5swt0t4f7yPX3lXMzMzMzMzM7J/3AbeQOcg=
+   eJzt2VdKQ1EURuFjy72xYsU+lxh779jnktg7VuxzsZdExRKxP+hEXCKixoBcfZHwL/gI57LPe9jHGKWUUtHWk23Ms/391+mMUkoppZRSSiml1F/yuIwpcTm7U898A5YsY5axglWsYd36OjvDeRZzmMcCFnGNG9ziDvd4CLt7xvkcF7hECFfItY3JQz4KUIiisJ1JOucMZCIL2chBBzrRhW70oDfsbhPnZrSgFW1o/+NOZtP6eeZzx8yf4NThPaWUUkoppZRSSkV/K7Yxq1jDOjYi7C1m+DaLOcxjAYu4xR3u8YDHCHfP+HaOC1wihKvXXYzbmAIUogjF7u930/mWgUxkIRs5Eeac1PjL/Uif9ipKKaWUiuLe3/i8KEUZylGBSlShGjWoRZ3r443PBz/6MYBBDGEYIxjFGMYxgUlMYRqb2MI2drCLPezjAIc4QgBBHOMEp4jh/1ks4hCPBLhgwYYbiUhCMlKQijR4UAIvSlGGclSgElWoRg1qUYd6NMAHP/oxgEEMYRgjGMUYxjGBSUxh2np749vCNnawiz3s4wCHOEIAQUtvfEoppf5fL9KpbMI=
   </data>
  </layer>
  <layer name="bridge" width="15" height="250">
@@ -74,7 +74,7 @@
  <objectgroup name="kinematicBridge">
   <object id="1926" x="101" y="7552" width="32" height="32"/>
   <object id="1927" x="187" y="7323" width="32" height="32"/>
-  <object id="1928" x="308" y="7114" width="32" height="32"/>
+  <object id="1928" x="260" y="7070" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
