@@ -29,15 +29,13 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
     private static final String TAG = KinematicBridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float VELOCITY_X = 1.0f;
-    private static final float VELOCITY_Y = -1.0f;
+    private static final float VELOCITY_X = -1.0f;
+    private static final float VELOCITY_Y = 0.0f;
 
     private PlayScreen screen;
     private World world;
     private Rectangle boundsMeters;
     private Body b2body;
-    private Vector2 velocity;
-    private Vector2 tmp; // Temporary GC friendly vector
 
     private enum State {
         INACTIVE, MOVING, FINISHED
@@ -64,14 +62,16 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         // The bridge crosses the entire screen
         boundsMeters = new Rectangle(0, getY(), screen.getGameViewPort().getWorldWidth(), getHeight());
 
-        this.velocity = new Vector2(VELOCITY_X, VELOCITY_Y);
-        tmp = new Vector2();
+        // Constant speed
+        b2body.setLinearVelocity(VELOCITY_X, VELOCITY_Y);
 
         // By default this KinematicBridge doesn't interact in our world
         b2body.setActive(false);
 
         // Textures
         bridgeStand = Assets.getInstance().getPowerBox().getBrickAStand();
+
+        // Initial state
         currentState = State.INACTIVE;
     }
 
@@ -119,7 +119,7 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         if (currentState != State.INACTIVE) {
             switch (currentState) {
                 case MOVING:
-                  //  stateMoving(dt);
+                    stateMoving(dt);
                     break;
                 case FINISHED:
                     break;
@@ -154,6 +154,22 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
         }
     }
 
+    protected void stateMoving(float dt) {
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, the KinematicBridge has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion(bridgeStand);
+
+        if (getX() <= 0 || getX() + getWidth() >= screen.getGameViewPort().getWorldWidth()) {
+            b2body.setLinearVelocity(b2body.getLinearVelocity().x * -1, VELOCITY_Y);
+        }
+    }
+
     // This KinematicBridge doesn't have any b2body inside these states
     public boolean isDestroyed() {
         return currentState == State.FINISHED;
@@ -166,7 +182,7 @@ public class KinematicBridge  extends Sprite implements IBlockingObject {
 
     public void draw(Batch batch) {
         if (currentState != State.INACTIVE && currentState != State.FINISHED) {
-           // super.draw(batch); todo
+            super.draw(batch);
         }
     }
 

@@ -410,6 +410,8 @@ public class B2WorldCreator {
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
             Gdx.app.debug(TAG, "***** Items: " + items.size);
             Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
+            Gdx.app.debug(TAG, "***** FinalEnemy: " + (screen.getFinalEnemy().isDisposable() ? 0 : 1));
+            Gdx.app.debug(TAG, "***** Hero always 1");
             Gdx.app.debug(TAG, "***** Objects not disposables detail (KinematicBridge, Enemy, PowerBox, Item, Weapon) ****");
             for (ObjectMap.Entry<String, String> entry : arrayMapDebug.entries()) {
                 Gdx.app.debug(TAG, "***** " + entry.key + ": " + entry.value);
