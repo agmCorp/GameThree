@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- camara lenta o stop al morir para ver por que moriste
 - hacer el level 2 mas facil, mucho bicho.
 - Comenzar background nivel 3
 - Comenzar EnemigoFinal nivel 3
@@ -21,7 +20,7 @@ HACER PRIORIDAD 2
   del enemigo así como splat pero estuve viendo que es medio complejo.
 - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
 para los poderes y otro para las armas.
-- poner una pausa al morir, para que se vea bien el impacto
+- poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
 - EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
 por 1 segundo va hacia arriba, pero luego choca con un enemigo y ejecutra onbump y cambia de velocidad hacia abajo
@@ -29,6 +28,8 @@ y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se 
 Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
 hay que pensarlo.
 - Seguir viendo las mejoras del video (como slow motion)
+- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
+- puedo hacer el poder que los mata a todos, usando AABB
 - hacer una bala grandota y ruidosa con shake capaz
 - el coin deberia ser random con random puntaje, como hice las powerboxes
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
@@ -56,6 +57,7 @@ la pantalla
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
+- nuevo item vidas
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
 - agregar credits con cuenta bancaria para donación, algo asi:
@@ -63,6 +65,7 @@ support this game:
 (icono corazón) Support the developer by paying above the minimum price
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
+Agregar en agredecimientos a Juan LLopart
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
     dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
@@ -80,11 +83,11 @@ Pay with paypal, pay with card bitcoin
 SOLO IDEAS
 ----------
 - Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...
+creo que basta con hacerle a hero un método drawEspecial() que haga la animacion y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Copiar la historia del juego de knightmare remake! :D
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
 los que se van de la pantalla).
-- nuevo item vidas
 - hacer splashscreen
 - enemigos:
     - hay que dispararle mucho para matarlo.
@@ -103,8 +106,6 @@ los que se van de la pantalla).
 EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
 b2worldcreator lo cree.
 - minuto 33.43 puentes dinámicos
-- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
-- puedo hacer el poder que los mata a todos, usando AABB
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 
