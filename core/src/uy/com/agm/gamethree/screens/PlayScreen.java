@@ -152,7 +152,7 @@ public class PlayScreen extends AbstractScreen {
             b2dr = new Box2DDebugRenderer();
         }
 
-//        final float ALTURA = 60.0f; // todo
+//        final float ALTURA = 70.0f; // todo
 //        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
 
         creator = new B2WorldCreator(this);
