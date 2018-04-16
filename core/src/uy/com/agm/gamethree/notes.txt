@@ -1,7 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
 - camara lenta o stop al morir para ver por que moriste
-- el enemigo final no debe idle abajo, sino desde la mitad hacia arriba o por ahi
 - hacer el level 2 mas facil, mucho bicho.
 - Comenzar background nivel 3
 - Comenzar EnemigoFinal nivel 3

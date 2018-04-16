@@ -220,6 +220,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private StateFinalEnemy getNewRandomState(float dt) {
         boolean blnOption;
         StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
+        float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4;
 
         // Set a new currentStateFinalEnemy
         changeTime += dt;
@@ -237,8 +238,13 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
             switch (currentStateFinalEnemy) {
                 case WALKING:
                     if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        timeToChange = IDLE_STATE_TIME_SECONDS;
+                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            timeToChange = IDLE_STATE_TIME_SECONDS;
+                        } else {
+                            // Continues with the same state
+                            timeToChange = getNextTimeToChange();
+                        }
                     } else {
                         newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
                         timeToChange = getNextTimeToChange();
@@ -257,8 +263,13 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
                         newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
                         timeToChange = getNextTimeToChange();
                     } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-                        timeToChange = IDLE_STATE_TIME_SECONDS;
+                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            timeToChange = IDLE_STATE_TIME_SECONDS;
+                        } else {
+                            // Continues with the same state
+                            timeToChange = getNextTimeToChange();
+                        }
                     }
                     break;
             }
