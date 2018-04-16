@@ -403,8 +403,8 @@ public class PlayScreen extends AbstractScreen {
 
         // This order is important
         // This determine if a sprite has to be drawn in front or behind another sprite
-        renderKinematicBridges();
         renderSplats();
+        renderKinematicBridges();
         renderPowerBoxes();
         renderItems();
         renderWeapons();
