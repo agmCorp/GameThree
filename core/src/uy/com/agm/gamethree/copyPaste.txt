@@ -327,3 +327,42 @@ para reconocer con queryAABB el objeto que clickeo:
                 Gdx.app.debug(TAG, "********************$ NO OVERLAPS! ");
             }
         }
+--------------------------------------------------------------------------------------------
+
+PAUSA AL MORIR PARA MOSTRAR EL IMPACTO:
+
+playscreen: nuevo estado ESPERA
+
+    public void setEspera() {
+        playScreenState = PlayScreenState.ESPERA;
+    }
+    public boolean isEspera() {
+        return playScreenState == PlayScreenState.ESPERA;
+    }
+
+	    @Override
+    public void render(float delta) {
+        // Crucial: update logic (take input, creation of new game actors, do physics) -> render -> game results
+        if (playScreenState == PlayScreenState.ESPERA) {
+            espera += delta;
+            if (espera > 3) // SEGUNDOS {
+                playScreenState = PlayScreenState.RUNNING;
+                espera = 0;
+            }
+        }
+
+Hero:
+         case MOVING_LEFT_RIGHT:
+                heroStateMovingLeftRight(dt);
+                break;
+            case DYING_UP:
+                if (!screen.isEspera()) {
+                    heroStateDyingUp(dt);
+                }
+                break;
+
+
+  private void heroStateDyingUp(float dt) {
+        if (applyNewFilters) {
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead()); // me conviene renombrar la variable applynewfilter por algo mas lindo
+
