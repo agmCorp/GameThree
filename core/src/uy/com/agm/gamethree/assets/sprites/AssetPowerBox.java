@@ -92,7 +92,7 @@ public class AssetPowerBox {
     }
 
     public int getRandomIndexBrick() {
-        return MathUtils.random(1, AssetPowerBox.MAX_TEXTURES);
+        return MathUtils.random(AssetPowerBox.MAX_TEXTURES - 1);
     }
 
     public TextureRegion getBrickStand(int index) {
