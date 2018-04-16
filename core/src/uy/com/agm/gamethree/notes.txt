@@ -1,5 +1,8 @@
 HACER PRIORIDAD 1
 -----------------
+- camara lenta o stop al morir para ver por que moriste
+- el enemigo final no debe idle abajo, sino desde la mitad hacia arriba o por ahi
+- hacer el level 2 mas facil, mucho bicho.
 - Comenzar background nivel 3
 - Comenzar EnemigoFinal nivel 3
 - poner más powerboxes en el alambre y en el muro del nivel 2
@@ -12,8 +15,6 @@ b2worldcreator
 
 HACER PRIORIDAD 2
 -----------------
-- el enemigofinal me reportan que no está bueno que quede tanto en la parte baja de la pantalla porque allí no se le puede
-  pegar
 - hacer un mapa de los niveles
 - poner una intro y una historia
 - Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
