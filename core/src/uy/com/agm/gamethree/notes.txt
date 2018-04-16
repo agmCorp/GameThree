@@ -82,6 +82,8 @@ Agregar en agredecimientos a Juan LLopart
 
 SOLO IDEAS
 ----------
+- Si hero le gana al boss, puedo poner al final del hero.update(): if boss is dead, then currentstate = dancing.
+Y en el update si el estado es dancing, hacer una animacion graciosa.
 - Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...
 creo que basta con hacerle a hero un método drawEspecial() que haga la animacion y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Copiar la historia del juego de knightmare remake! :D
