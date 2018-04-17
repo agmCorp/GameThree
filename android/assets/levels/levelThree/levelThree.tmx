@@ -13,7 +13,7 @@
  </layer>
  <layer name="barrier" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2NlRIlAURVFsZRLRmJhniIl5hpgEBUSBlHol0P2rVt1dtQK4Ve/9nEQiiqIo+l+FVCJRpESZClVq1GnQpEWbDl169BkwZMSYCVNmzFmwZMWaDVte2bHnjXcOHDnxwZlPvrhw5cZdOpH4wz0PJEmRJkOWR3I8keeZFwoUKVGmQpUadRo0adGmQ5cefQYMGTFmwpQZcxYsWbFmw5ZXdux5450DR058cOaTLy5cuaW/+4VEURRFURRFURRFUfSvYlf5+bvKXca93PNAkhRpMmR5JMcTeZ55oUCREmUqVKlRp0GTFm06dOnRZ8CQEWMmTJkxZ8GSFWs2bHllx5433jlw5MQHZz754sKVG3dZ93LPA0lSpMmQ5ZEcT+R55oUCRUqUqVClRp0GTVq06dClR58BQ0aMmTBlxpwFS1as2bDNfvcvjqIoiqIoiqIoin5jscn8/E0miqIoiqIoiqIoiqLot/cXgg3BbA==
+   eJzt2FlOIkAYhVFUZBDRNSHzvCbmGdYkowPglvok7qATk27zf8l5raRST3UTiSiKouhvq6V+7uybTCJxyx1J7kmRJkOWB3I8kueJZwq8UKREmQpVatRp0KRFmw5devQZMGTEmAlTZsxZsGTFmg2vbNmx58CRE2+888EnZy5c+eIm677ckeSeFGkyZHkgxyN5nnimwAtFSpSpUKVGnQZNWrTp0KVHnwFDRoyZMGXGnAVLVqzZZH/u7aMoiqIoiqIoiqLot1RI+bNTpESZCtXU965Sp0GTFm06dOnRZ8CQEWMmTJkxZ8GSFWs2vLJlx54DR0688c4Hn5y5cOWLm3QiccsdSe5JkSZDlgdyPJLniWcKvFCkRJkKVWrUadCkRZsOXXr0GTBkxJgJU2bMWbBkxZoNr2zZsefAkRNvvPPBJ2cuXPlKxwYVG1QURVEURVEURVH0G4tN5t/fZKIoiqIoiqIoiqIoiv73/gCzn7c9
   </data>
  </layer>
  <layer name="staticBridge" width="15" height="250">
@@ -36,7 +36,7 @@
  <objectgroup name="bridge">
   <object id="2024" x="232" y="3246" width="36" height="36"/>
   <object id="2025" x="262" y="3446" width="38" height="38"/>
-  <object id="2026" x="228" y="878" width="30" height="30"/>
+  <object id="2026" x="226" y="932" width="30" height="30"/>
   <object id="2027" x="216" y="5634" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="powerBox"/>
