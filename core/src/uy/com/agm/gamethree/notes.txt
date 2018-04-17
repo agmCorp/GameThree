@@ -2,7 +2,7 @@ HACER PRIORIDAD 1
 -----------------
 -- LO QUE DEBO HACER ES PRIMERO FILMAR EL VIDEO DE COMO SE VE EN MI CELULAR, 1, 2, Y 3
 LUEGO CREAR DINAMICOBJECTS Y SCENE2D Y COMPARAR
-
+- poner random velocidad a los puentes.
 - hacer el level 2 mas facil, mucho bicho.
 - Comenzar EnemigoFinal nivel 3
 - poner más powerboxes en el alambre y en el muro del nivel 2
