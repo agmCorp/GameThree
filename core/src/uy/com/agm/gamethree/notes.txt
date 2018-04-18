@@ -123,6 +123,7 @@ el resto del sonido. No lo supe arreglar...
 - En mi nivel de prueba, llegue al final donde estaba la arana y dio time is up. Ahi mori y la arana me comenzo a disparar.
 Aparentemente algun disparo me agarro entre que termine de morir y el tiempo en donde aparece la pantalla de game over y me
 volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el ondead otra vez). No lo pude reproducir mas.
+- No estoy seguro, pero el FinalEnemyLevelOne, al matarlo (por ejemplo cuando esta parado en el borde derecho) muere en imagen espejo.
 
 TENGO
 -----
