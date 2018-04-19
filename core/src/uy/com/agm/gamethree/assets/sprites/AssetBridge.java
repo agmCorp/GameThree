@@ -13,8 +13,8 @@ public class AssetBridge {
     private static final String TAG = AssetBridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 300.0f * 0.5f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 300.0f * 0.5f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 300.0f * 0.64f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 300.0f * 0.64f / PlayScreen.PPM;
 
     private TextureRegion bridgeA;
 
