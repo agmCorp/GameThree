@@ -11,14 +11,14 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
