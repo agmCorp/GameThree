@@ -70,7 +70,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         b2body.setActive(false);
 
         // Textures
-        bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeA();
+        bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeB();
 
         // Initial state
         currentState = State.INACTIVE;
