@@ -39,7 +39,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
     private Body b2body;
 
     private enum State {
-        INACTIVE, MOVING, FINISHED
+        INACTIVE, MOVING_LEFT, MOVING_RIGHT, FINISHED
     }
     private State currentState;
     private int tiledMapId;
@@ -121,8 +121,11 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         checkBoundaries();
         if (currentState != State.INACTIVE) {
             switch (currentState) {
-                case MOVING:
-                    stateMoving(dt);
+                case MOVING_LEFT:
+                    stateMovingLeft(dt);
+                    break;
+                case MOVING_RIGHT:
+                    stateMovingRight(dt);
                     break;
                 case FINISHED:
                     break;
@@ -142,7 +145,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
             if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
                 b2body.setActive(true);
-                currentState = State.MOVING;
+                currentState = b2body.getLinearVelocity().x > 0 ? State.MOVING_RIGHT : State.MOVING_LEFT;
             } else {
                 if (b2body.isActive()) { // Was on camera...
                     // It's outside bottom edge
@@ -157,7 +160,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         }
     }
 
-    private void stateMoving(float dt) {
+    private void stateMovingLeft(float dt) {
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, the Bridge has a new position after running the physical simulation.
@@ -170,9 +173,30 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
 
         // Kinematic bodies do not collide with static ones (we can't use WorldContactListener)
         float velX;
-        if (getX() <= 0 || getX() + getWidth() >= screen.getGameViewPort().getWorldWidth()) {
+        if (getX() <= 0) {
             velX = b2body.getLinearVelocity().x * -1;
             b2body.setLinearVelocity(velX, VELOCITY_Y);
+            currentState = State.MOVING_RIGHT;
+        }
+    }
+
+    private void stateMovingRight(float dt) {
+        /* Update our Sprite to correspond with the position of our Box2D body:
+        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
+        * At this time, the Bridge has a new position after running the physical simulation.
+        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
+        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
+        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
+         */
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setRegion(bridgeStand);
+
+        // Kinematic bodies do not collide with static ones (we can't use WorldContactListener)
+        float velX;
+        if (getX() + getWidth() >= screen.getGameViewPort().getWorldWidth()) {
+            velX = b2body.getLinearVelocity().x * -1;
+            b2body.setLinearVelocity(velX, VELOCITY_Y);
+            currentState = State.MOVING_LEFT;
         }
     }
 
