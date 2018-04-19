@@ -17,12 +17,18 @@ public class AssetBridge {
     public static final float HEIGHT_METERS = 300.0f * 0.64f / PlayScreen.PPM;
 
     private TextureRegion bridgeA;
+    private TextureRegion bridgeB;
 
     public AssetBridge(TextureAtlas atlas) {
         bridgeA = atlas.findRegion("bridgeA");
+        bridgeB = atlas.findRegion("bridgeB");
     }
 
     public TextureRegion getBridgeA() {
         return bridgeA;
+    }
+
+    public TextureRegion getBridgeB() {
+        return bridgeB;
     }
 }
