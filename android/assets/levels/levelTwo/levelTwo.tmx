@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1866">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1866">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -643,13 +643,13 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1674" x="3" y="2459" width="32" height="32">
+  <object id="1674" x="0" y="2459" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1676" x="1" y="2618" width="32" height="32">
+  <object id="1676" x="0" y="2618" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
@@ -659,62 +659,62 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1681" x="446" y="2523" width="32" height="32">
+  <object id="1681" x="448" y="2523" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1683" x="447" y="2750" width="32" height="32">
+  <object id="1683" x="448" y="2750" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1700" x="447" y="1574" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="colSilverBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1702" x="447" y="1785" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-   </properties>
-  </object>
-  <object id="1705" x="445" y="2003" width="32" height="32">
+  <object id="1700" x="448" y="1574" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1706" x="446.333" y="2154.67" width="32" height="32">
+  <object id="1702" x="448" y="1785" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="1705" x="448" y="2003" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1706" x="448" y="2154.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1707" x="2" y="1722" width="32" height="32">
+  <object id="1707" x="0" y="1722" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1709" x="3" y="1896" width="32" height="32">
+  <object id="1709" x="0" y="1896" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1711" x="1" y="2092" width="32" height="32">
+  <object id="1711" x="0" y="2092" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1713" x="2" y="2264" width="32" height="32">
+  <object id="1713" x="0" y="2264" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1787" x="2" y="1527" width="32" height="32">
+  <object id="1787" x="0" y="1527" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
@@ -752,7 +752,7 @@
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1862" x="449" y="1081" width="32" height="32">
+  <object id="1862" x="448" y="1081" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
@@ -762,12 +762,12 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1864" x="444" y="2984" width="32" height="32">
+  <object id="1864" x="448" y="2984" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1865" x="2" y="2794" width="32" height="32">
+  <object id="1865" x="0" y="2794" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>

@@ -31,8 +31,10 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float PERIOD_SECONDS = 2.0f;
-    private static final float RADIUS_METERS = 1.3f;
+    private static final float MAX_PERIOD_SECONDS = 2.1f;
+    private static final float MIN_PERIOD_SECONDS = 1.4f;
+    private static final float MAX_RADIUS_METERS = 1.31f;
+    private static final float MIN_RADIUS_METERS = 0.7f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
@@ -42,6 +44,8 @@ public class EnemyFive extends Enemy {
     private static final int SCORE = 15;
 
     private boolean damage;
+    private float radius;
+    private float period;
     private float stateTime;
     private boolean counterclockwise;
     private float elapsedTime;
@@ -66,6 +70,8 @@ public class EnemyFive extends Enemy {
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
         damage = false;
+        radius = MathUtils.random(MIN_RADIUS_METERS, MAX_RADIUS_METERS);
+        period = MathUtils.random(MIN_PERIOD_SECONDS, MAX_PERIOD_SECONDS);
         stateTime = 0;
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
@@ -249,13 +255,13 @@ public class EnemyFive extends Enemy {
 
         elapsedTime += dt;
 
-        if (elapsedTime >= PERIOD_SECONDS) {
+        if (elapsedTime >= period) {
             elapsedTime = 0;
             counterclockwise = !counterclockwise;
         }
 
-        float w = 2 * MathUtils.PI / PERIOD_SECONDS;
-        tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
+        float w = 2 * MathUtils.PI / period;
+        tmp.set((counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), radius * w * MathUtils.cos(w * elapsedTime));
         return tmp;
     }
 
