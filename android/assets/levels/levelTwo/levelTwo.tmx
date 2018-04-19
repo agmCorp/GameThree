@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1866">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1870">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -21,7 +21,7 @@
    eJzt2DESgjAQBdCtwIOoDYeyksIcysZKz0UDlzD0FEwCw4y+V+7k76b+EQAAAAAA/INbU559VmSpcz4dc/d10F0AAAD4Vfcmol/oWNLOvctQsf/SRlzb7f4ySxvvW2uquNsV9iSPnEuF2XfOfVZkh4U3Y55Nuh0AAABgR1+PhQsi
   </data>
  </layer>
- <objectgroup name="border">
+ <objectgroup name="border" visible="0">
   <object id="5" name="left1" x="0" y="0" width="1" height="2177.41"/>
   <object id="1833" name="left2" x="0" y="2177.5" width="1" height="2042.59"/>
   <object id="1834" name="left3" x="0" y="4220.42" width="1" height="1628.67"/>
@@ -31,7 +31,7 @@
   <object id="1838" name="right3" x="479" y="3717.06" width="1" height="2295.33"/>
   <object id="1839" name="right4" x="479" y="6018.64" width="1" height="1980.97"/>
  </objectgroup>
- <objectgroup name="obstacle">
+ <objectgroup name="obstacle" visible="0">
   <object id="1313" x="4" y="3170.67" width="170.667" height="54.6667"/>
   <object id="1316" x="2" y="3126.67" width="105.333" height="38.6667"/>
   <object id="1317" x="114.667" y="3142" width="32" height="24"/>
@@ -73,11 +73,11 @@
   <object id="1851" x="56" y="1536.99" width="25.3333" height="24.6673"/>
   <object id="1852" x="5.66667" y="838" width="36.6667" height="55.3333"/>
  </objectgroup>
- <objectgroup name="path">
+ <objectgroup name="path" visible="0">
   <object id="1309" x="3" y="801.5" width="187" height="14.5"/>
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
- <objectgroup name="bridge"/>
+ <objectgroup name="bridge" visible="0"/>
  <objectgroup name="powerBox">
   <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>
@@ -770,6 +770,30 @@
   <object id="1865" x="0" y="2794" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="1866" x="0" y="836" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1867" x="0" y="840.667" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1868" x="0" y="845.667" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1869" x="0" y="850.667" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
  </objectgroup>
