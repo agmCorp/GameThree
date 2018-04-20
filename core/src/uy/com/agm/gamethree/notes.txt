@@ -460,11 +460,11 @@ LECCIONES APRENDIDAS
     with a linear velocity like a dynamic body.
 
 20)
-   Mi criterio es el siguiente: En los eventos invocados por WorldContactListener solo seteo estados. No toco velocidades ni nada, ni mucho menos toco el box2d.
+   Mi criterio es el siguiente: En los eventos invocados por WorldContactListener.beginContact solo seteo estados. No toco velocidades ni nada, ni mucho menos toco el box2d.
+   "No b2body can be changed when the simulation is occurring, we must wait for the next update cycle."
    En los update, según el estado es que cambio velocidades, posiciones, box2d, etc. Ese es mi criterio.
    Por eso por ejemplo en EnemyOne aparecen cosas como b2body.setLinearVelocity(velocity) dentro de stateAlive(float dt).
-   Toco velocidades directamente dentro de WorldContactListener en endContact, porque al parecer allí es seguro.
-   Espero haber respetado siempre eso. Creo que en Hero.ondead() no lo respeto porque hago stop().
+   Toco velocidades directamente dentro de WorldContactListener en endContact, porque al parecer allí es seguro (solo lo hago al invocar Hero.stop()).
 
 21)
    Con setBound defino su tamaño y luego, si quiero, son setPosition su posición. Esta ultima tiene sentido llamarla si deseo cambiar la posición del sprite, por ejemplo,

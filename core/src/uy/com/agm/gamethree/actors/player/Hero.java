@@ -344,6 +344,9 @@ public class Hero extends Sprite {
 
     private void heroStateDyingUp(float dt) {
         if (applyNewFilters) {
+            // Stop motion
+            stop();
+
             // Hero can't collide with anything
             Filter filter = new Filter();
             filter.maskBits = WorldContactListener.NOTHING_BIT;
@@ -612,9 +615,6 @@ public class Hero extends Sprite {
          * Therefore, we use a flag in order to point out this behavior and change it later.
          */
         applyNewFilters = true;
-
-        // Stop motion
-        stop();
 
         // Reset rotation
         setRotation(0.0f);

@@ -30,7 +30,8 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
     private static final String TAG = Bridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float VELOCITY_X = -1.0f;
+    private static final float MIN_VELOCITY_X = -1.0f;
+    private static final float MAX_VELOCITY_X = -2.0f;
     private static final float VELOCITY_Y = 0.0f;
 
     private PlayScreen screen;
@@ -64,7 +65,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         boundsMeters = new Rectangle(0, getY(), screen.getGameViewPort().getWorldWidth(), getHeight());
 
         // Constant velocity
-        b2body.setLinearVelocity(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
+        b2body.setLinearVelocity(MathUtils.randomSign() * MathUtils.random(MIN_VELOCITY_X, MAX_VELOCITY_X), VELOCITY_Y);
 
         // By default this Bridge doesn't interact in our world
         b2body.setActive(false);
