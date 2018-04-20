@@ -424,7 +424,7 @@ public class Hero extends Sprite {
 
     public void playAgain() {
         // Play music again
-        screen.playLevelMusic();
+        AudioManager.getInstance().resumeMusic();
 
         // We take away his powers and force powerTimeUp
         powerDown();

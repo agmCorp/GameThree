@@ -179,7 +179,7 @@ public class PlayScreen extends AbstractScreen {
         hud.showInitialHelp();
 
         // Start playing level music
-        playLevelMusic();
+        AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
@@ -574,10 +574,6 @@ public class PlayScreen extends AbstractScreen {
 
     public Hud getHud() {
         return hud;
-    }
-
-    public void playLevelMusic() {
-        AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
     }
 
     private void gameResults(float delta) {
