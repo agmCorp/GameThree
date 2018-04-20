@@ -108,8 +108,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
+    public static final String MUSIC_FILE_FINAL_ENEMY_FIGHT = "audio/music/finalEnemyFight.ogg";
     public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
     public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
+    public static final String MUSIC_FILE_LEVEL_THREE = "audio/music/levelThree.ogg";
 
     // Location of description file for texture atlas (dinamic game objects)
     private static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
@@ -241,8 +243,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private void loadMusic() {
         assetManager.load(MUSIC_FILE_MAIN_MENU, Music.class);
+        assetManager.load(MUSIC_FILE_FINAL_ENEMY_FIGHT, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_ONE, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_TWO, Music.class);
+        assetManager.load(MUSIC_FILE_LEVEL_THREE, Music.class);
     }
 
     public void init(AssetManager assetManager) {

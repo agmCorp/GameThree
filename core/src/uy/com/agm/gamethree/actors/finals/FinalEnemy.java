@@ -101,8 +101,8 @@ public abstract class FinalEnemy extends Sprite {
         if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
             // When our final enemy is on camera, it activates
             if (finalEnemyStarts()) {
-                // Pause music for a few seconds
-                AudioManager.getInstance().pauseMusic();
+                // Stop music for a few seconds
+                AudioManager.getInstance().stopMusic();
                 introTime = 0;
                 playingIntro = true;
 
@@ -134,7 +134,7 @@ public abstract class FinalEnemy extends Sprite {
                 introTime += dt;
                 if (introTime > INTRO_TIME_SECONDS) {
                     if (!screen.getPlayer().isDead() && !isDestroyed()) {
-                        AudioManager.getInstance().resumeMusic();
+                        AudioManager.getInstance().play(Assets.getInstance().getMusic().getSongFinalEnemyFight());
                     }
                     screen.getHud().hideMessage();
                     playingIntro = false;
