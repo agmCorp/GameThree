@@ -94,7 +94,8 @@ public class EnemyFive extends Enemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = WorldContactListener.HERO_WEAPON_BIT |
+        fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
@@ -301,6 +302,6 @@ public class EnemyFive extends Enemy {
 
     @Override
     public void onBump() {
-        // Nothing to do here
+        counterclockwise = !counterclockwise;
     }
 }
