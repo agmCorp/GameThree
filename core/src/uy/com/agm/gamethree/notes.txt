@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- ver eso del cambio de velocidad en contactlisterer. tomar nota de los eventos y relevar
 - poner random velocidad a los puentes o algo para que no queden alineados.
 - probar que los azules choquen contra bordes y cambien de sentido.
 - Comenzar EnemigoFinal nivel 3
