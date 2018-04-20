@@ -32,6 +32,7 @@ public class EnemyEight extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 5.0f;
+    private static final float DENSITY = 1000.0f;
     private static final float PATH_PERIOD_SECONDS = 1.3f;
     private static final float PATH_RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
@@ -104,6 +105,7 @@ public class EnemyEight extends Enemy {
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
+        fdef.density = DENSITY; // Hard to push
         b2body.createFixture(fdef).setUserData(this);
     }
 
