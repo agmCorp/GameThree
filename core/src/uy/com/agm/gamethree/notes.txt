@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- Elegir música
 - Comenzar EnemigoFinal nivel 3
 - poner más powerboxes en el alambre y en el muro del nivel 2
 - Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
@@ -108,6 +109,9 @@ b2worldcreator lo cree.
 - minuto 33.43 puentes dinámicos
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
+- Frases:
+    - Humans are the real monsters
+    - La que anoté por ahí en el papel: You were the monster all along
 
 DUDAS Y BUGS
 ------------
