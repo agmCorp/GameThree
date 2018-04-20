@@ -1,6 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
-- Elegir música
+- Repasar las splat con el plugin
 - Comenzar EnemigoFinal nivel 3
 - poner más powerboxes en el alambre y en el muro del nivel 2
 - Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
