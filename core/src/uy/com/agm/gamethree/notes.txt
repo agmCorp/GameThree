@@ -1,7 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
-- poner random velocidad a los puentes.
-- hacer el level 2 mas facil, mucho bicho.
+- poner random velocidad a los puentes o algo para que no queden alineados.
+- probar que los azules choquen contra bordes y cambien de sentido.
 - Comenzar EnemigoFinal nivel 3
 - poner más powerboxes en el alambre y en el muro del nivel 2
 - Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
