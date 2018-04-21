@@ -12,6 +12,7 @@ import uy.com.agm.gamethree.assets.Assets;
 public class AssetSounds {
     private static final String TAG = AssetSounds.class.getName();
 
+    private Sound gameOver;
     private Sound bump;
     private Sound crack;
     private Sound dead;
@@ -53,6 +54,7 @@ public class AssetSounds {
     private Sound pum;
 
     public AssetSounds(AssetManager am) {
+        gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
         bump = am.get(Assets.FX_FILE_BUMP, Sound.class);
         crack = am.get(Assets.FX_FILE_CRACK, Sound.class);
         dead = am.get(Assets.FX_FILE_DEAD, Sound.class);
@@ -92,6 +94,10 @@ public class AssetSounds {
         frozen = am.get(Assets.FX_FILE_FROZEN, Sound.class);
         beam = am.get(Assets.FX_FILE_BEAM, Sound.class);
         pum = am.get(Assets.FX_FILE_PUM, Sound.class);
+    }
+
+    public Sound getGameOver() {
+        return gameOver;
     }
 
     public Sound getBump() {

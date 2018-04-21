@@ -1,7 +1,11 @@
 HACER PRIORIDAD 1
 -----------------
-- Repasar las splat con el plugin
 - Comenzar EnemigoFinal nivel 3
+- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
+- puedo hacer el poder que los mata a todos, usando AABB
+- el coin deberia ser random con random puntaje, como hice las powerboxes
+- El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
+para los poderes y otro para las armas.
 - poner más powerboxes en el alambre y en el muro del nivel 2
 - Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
 Hay que ver el impoacto de los gets en esto. Es decir,
@@ -17,8 +21,6 @@ HACER PRIORIDAD 2
 - Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
   Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
   del enemigo así como splat pero estuve viendo que es medio complejo.
-- El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
-para los poderes y otro para las armas.
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
 - EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
@@ -27,10 +29,7 @@ y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se 
 Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
 hay que pensarlo.
 - Seguir viendo las mejoras del video (como slow motion)
-- nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
-- puedo hacer el poder que los mata a todos, usando AABB
 - hacer una bala grandota y ruidosa con shake capaz
-- el coin deberia ser random con random puntaje, como hice las powerboxes
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Ver que hago con las vidas y el score entre niveles. Las vidas no deberian resetearse por nivel aunque no se como hacerlo.
 El puntaje tiene el mismo problema que las vidas (el play again pone score 0)

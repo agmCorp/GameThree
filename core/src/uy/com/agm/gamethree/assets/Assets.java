@@ -66,6 +66,7 @@ public class Assets implements Disposable, AssetErrorListener {
     // Constants
 
     // Sound FXs
+    public static final String FX_FILE_GAME_OVER = "audio/sounds/gameOver.ogg";
     public static final String FX_FILE_BUMP = "audio/sounds/bump.ogg";
     public static final String FX_FILE_CRACK = "audio/sounds/crack.ogg";
     public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
@@ -201,6 +202,7 @@ public class Assets implements Disposable, AssetErrorListener {
     }
 
     private void loadSounds() {
+        assetManager.load(FX_FILE_GAME_OVER, Sound.class);
         assetManager.load(FX_FILE_BUMP, Sound.class);
         assetManager.load(FX_FILE_CRACK, Sound.class);
         assetManager.load(FX_FILE_DEAD, Sound.class);

@@ -22,6 +22,7 @@ public class MainMenuScreen extends AbstractScreen {
 
     public MainMenuScreen() {
         super();
+
         // Play menu music
         AudioManager.getInstance().play(Assets.getInstance().getMusic().getSongMainMenu());
     }

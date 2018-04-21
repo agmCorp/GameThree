@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -18,6 +19,9 @@ public class GameOverScreen extends AbstractScreen {
 
     public GameOverScreen() {
         super();
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getGameOver());
     }
 
     @Override

@@ -31,6 +31,9 @@ public class LevelCompletedScreen extends AbstractScreen {
             GameSettings.getInstance().addAvailableLevel(nextLevel);
             GameSettings.getInstance().save();
         }
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getAplause());
     }
 
     @Override
@@ -93,9 +96,6 @@ public class LevelCompletedScreen extends AbstractScreen {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.finalScore));
         }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getAplause());
 
         // Adds created table to stage
         addActor(table);
