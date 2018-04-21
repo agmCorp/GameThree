@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1901">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1907">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -229,8 +229,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyFive" visible="0">
-  <object id="1643" x="252" y="3951.67" width="32" height="32">
+ <objectgroup name="enemyFive">
+  <object id="1643" x="82" y="4503.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
@@ -325,25 +325,19 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1887" x="112.5" y="5436.16" width="32" height="32">
+  <object id="1887" x="120.5" y="5436.16" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1888" x="320.167" y="5438.84" width="32" height="32">
+  <object id="1888" x="324.167" y="5434.84" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1889" x="227.833" y="5263.49" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1890" x="123.5" y="5086.49" width="32" height="32">
+  <object id="1890" x="163.5" y="5096.49" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
@@ -356,52 +350,76 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1892" x="335.5" y="5082.49" width="32" height="32">
+  <object id="1892" x="325.5" y="5092.49" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1894" x="190.5" y="4494.16" width="32" height="32">
+  <object id="1894" x="118.5" y="4774.16" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1895" x="296.5" y="4300.16" width="32" height="32">
+  <object id="1895" x="294.5" y="4744.16" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1896" x="120.5" y="4184.16" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="colSilverBullet" value=""/>
-    <property name="enemyBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1897" x="256.5" y="4056.16" width="32" height="32">
+  <object id="1896" x="148.5" y="4618.16" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1898" x="167.5" y="3855.16" width="32" height="32">
+  <object id="1897" x="322.5" y="4576.16" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1899" x="131" y="4734" width="32" height="32">
+  <object id="1898" x="249.5" y="4469.16" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1899" x="59" y="4894" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="1900" x="343" y="4730" width="32" height="32">
+  <object id="1900" x="389" y="4896" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1902" x="228" y="5280" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1903" x="402" y="5280" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1905" x="56" y="5284" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1906" x="398" y="4454" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
@@ -463,7 +481,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven">
+ <objectgroup name="enemySeven" visible="0">
   <object id="1461" x="30.6667" y="7098.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -592,51 +610,56 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1617" x="108.334" y="4996" width="32" height="32">
+  <object id="1617" x="88.334" y="4320" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1618" x="282" y="4665" width="32" height="32">
+  <object id="1618" x="262" y="3989" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1619" x="398.667" y="4749.33" width="32" height="32">
+  <object id="1619" x="378.667" y="4073.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="powerFour" type="int" value="10"/>
    </properties>
   </object>
-  <object id="1623" x="87.3335" y="4777" width="32" height="32">
+  <object id="1623" x="67.3335" y="4101" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1624" x="118" y="4871.67" width="32" height="32">
+  <object id="1624" x="98" y="4195.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1625" x="225" y="4925.67" width="32" height="32">
+  <object id="1625" x="205" y="4249.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="1626" x="329.333" y="4847.33" width="32" height="32">
-   <properties>
-    <property name="colOne" value=""/>
-    <property name="colSilverBullet" value=""/>
-   </properties>
-  </object>
-  <object id="1627" x="354" y="4947.67" width="32" height="32">
+  <object id="1626" x="309.333" y="4171.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="1628" x="238.333" y="5051.33" width="32" height="32">
+  <object id="1627" x="334" y="4271.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
+  <object id="1628" x="218.333" y="4375.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
+  <object id="1904" x="204" y="4108" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>

@@ -31,8 +31,8 @@ public class EnemyFive extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float MAX_PERIOD_SECONDS = 2.3f;
-    private static final float MIN_PERIOD_SECONDS = 1.8f;
+    private static final float MAX_PERIOD_SECONDS = 2.0f;
+    private static final float MIN_PERIOD_SECONDS = 1.5f;
     private static final float MAX_RADIUS_METERS = 1.0f;
     private static final float MIN_RADIUS_METERS = 0.7f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;

@@ -27,28 +27,28 @@ helpEnemyThree
   index: -1
 helpFinalEnemyLevelOne
   rotate: false
-  xy: 484, 412
+  xy: 886, 412
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelTwo
   rotate: false
-  xy: 886, 412
+  xy: 484, 412
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpInitialAutomatic
   rotate: false
-  xy: 1288, 587
+  xy: 703, 185
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 703, 185
+  xy: 1507, 587
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
@@ -76,7 +76,7 @@ helpPowerThree
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 1507, 587
+  xy: 1288, 587
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
