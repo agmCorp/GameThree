@@ -131,7 +131,7 @@
  <objectgroup name="powerBox">
   <object id="2181" x="224" y="448" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="0"/>
+    <property name="powerOne" type="int" value="500"/>
    </properties>
   </object>
  </objectgroup>

@@ -175,7 +175,7 @@ public abstract class FinalEnemy extends Sprite {
     }
 
     public void showChallengeBeginHelp() {
-        // TODO screen.getHud().showModalImage(getHelpImage());
+        screen.getHud().showModalImage(getHelpImage());
     }
 
     protected void openFire(float dt) {

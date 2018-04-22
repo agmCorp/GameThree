@@ -90,8 +90,9 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
     // todo
     float elapsedTime = 0;
-    boolean counterclockwise = true;
-    boolean mecagoenvos = true;
+    boolean counterclockwisex = true;
+    boolean counterclockwisey = true;
+    boolean horizontal = false;
 
     public FinalEnemyLevelThree(PlayScreen screen, float x, float y) {
         super(screen, x, y, AssetFinalEnemyLevelTwo.WIDTH_METERS, AssetFinalEnemyLevelTwo.HEIGHT_METERS);
@@ -191,14 +192,13 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private void setDefaultFilter() {
         Filter filter = new Filter();
         filter.categoryBits = WorldContactListener.FINAL_ENEMY_BIT; // Depicts what this fixture is
-//        filter.maskBits = WorldContactListener.BORDER_BIT |
-//                WorldContactListener.EDGE_BIT |
-//                WorldContactListener.OBSTACLE_BIT |
-//                WorldContactListener.HERO_WEAPON_BIT |
-//                WorldContactListener.SHIELD_BIT |
-//                WorldContactListener.HERO_TOUGH_BIT |
-//                WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
-        filter.maskBits = WorldContactListener.SHIELD_BIT;
+        filter.maskBits = WorldContactListener.BORDER_BIT |
+                WorldContactListener.EDGE_BIT |
+                WorldContactListener.OBSTACLE_BIT |
+                WorldContactListener.HERO_WEAPON_BIT |
+                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_TOUGH_BIT |
+                WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {
             fixture.setFilterData(filter);
         }
@@ -209,67 +209,62 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     }
 
     private StateFinalEnemy getNewRandomState(float dt) {
-//        boolean blnOption;
-//        StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
-//        float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4;
-//
-//        // Set a new currentStateFinalEnemy
-//        changeTime += dt;
-//        if (changeTime >= timeToChange) {
-//            // Reset random state variables
-//            changeTime = 0;
-//
-//            // Reset variable animation
-//            stateFinalEnemyTime = 0;
-//
-//            // Random option
-//            blnOption = MathUtils.randomBoolean();
-//
-//            // Decide which state must return
-//            switch (currentStateFinalEnemy) {
-//                case WALKING:
-//                    if (blnOption) {
-//                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
-//                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-//                            timeToChange = IDLE_STATE_TIME_SECONDS;
-//                        } else {
-//                            // Continues with the same state
-//                            timeToChange = getNextTimeToChange();
-//                        }
-//                    } else {
-//                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-//                        timeToChange = getNextTimeToChange();
-//                    }
-//                    break;
-//                case IDLE:
-//                    if (blnOption) {
-//                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-//                    } else {
-//                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
-//                    }
-//                    timeToChange = getNextTimeToChange();
-//                    break;
-//                case SHOOTING:
-//                    if (blnOption) {
-//                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-//                        timeToChange = getNextTimeToChange();
-//                    } else {
-//                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
-//                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
-//                            timeToChange = IDLE_STATE_TIME_SECONDS;
-//                        } else {
-//                            // Continues with the same state
-//                            timeToChange = getNextTimeToChange();
-//                        }
-//                    }
-//                    break;
-//            }
-//        }
-//        return newRandomStateFinalEnemy;
+        boolean blnOption;
+        StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
+        float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4;
 
+        // Set a new currentStateFinalEnemy
+        changeTime += dt;
+        if (changeTime >= timeToChange) {
+            // Reset random state variables
+            changeTime = 0;
 
-        StateFinalEnemy newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
-        timeToChange = getNextTimeToChange();
+            // Reset variable animation
+            stateFinalEnemyTime = 0;
+
+            // Random option
+            blnOption = MathUtils.randomBoolean();
+
+            // Decide which state must return
+            switch (currentStateFinalEnemy) {
+                case WALKING:
+                    if (blnOption) {
+                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            timeToChange = IDLE_STATE_TIME_SECONDS;
+                        } else {
+                            // Continues with the same state
+                            timeToChange = getNextTimeToChange();
+                        }
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        timeToChange = getNextTimeToChange();
+                    }
+                    break;
+                case IDLE:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                    } else {
+                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                    }
+                    timeToChange = getNextTimeToChange();
+                    break;
+                case SHOOTING:
+                    if (blnOption) {
+                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        timeToChange = getNextTimeToChange();
+                    } else {
+                        if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
+                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            timeToChange = IDLE_STATE_TIME_SECONDS;
+                        } else {
+                            // Continues with the same state
+                            timeToChange = getNextTimeToChange();
+                        }
+                    }
+                    break;
+            }
+        }
         return newRandomStateFinalEnemy;
     }
 
@@ -351,25 +346,33 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     }
 
     private Vector2 getNewTangentialSpeed(float dt) {
-        float periodx = 5;
-        float periody = 10;
+        float periodx = 2;
+        float periody = 3;
 
         float radiusx = 1f;
         float radiusy = 2f;
 
-        if (elapsedTime >= periodx) {
-            elapsedTime = 0;
-            counterclockwise = !counterclockwise;
-            //mecagoenvos = MathUtils.randomBoolean();
+        if (horizontal) {
+            if (elapsedTime >= periodx) {
+                elapsedTime = 0;
+                counterclockwisex = MathUtils.randomBoolean();
+                horizontal = MathUtils.randomBoolean();
+            }
+        } else {
+            if (elapsedTime >= periody) {
+                elapsedTime = 0;
+                counterclockwisey = MathUtils.randomBoolean();
+                horizontal = MathUtils.randomBoolean();
+            }
         }
 
         float wx = 2 * MathUtils.PI / periodx;
         float wy = 2 * MathUtils.PI / periody;
 
-        if (mecagoenvos) {
-            tmp.set((counterclockwise ? -1 : 1) * radiusx * wx * MathUtils.sin(wx * elapsedTime), radiusx * wx * MathUtils.cos(wx * elapsedTime));
+        if (horizontal) {
+            tmp.set((counterclockwisex ? -1 : 1) * radiusx * wx * MathUtils.sin(wx * elapsedTime), radiusx * wx * MathUtils.cos(wx * elapsedTime));
         } else {
-            tmp.set(radiusy * wy * MathUtils.cos(wy * elapsedTime), (counterclockwise ? -1 : 1) * radiusy * wy * MathUtils.sin(wy * elapsedTime));
+            tmp.set(radiusy * wy * MathUtils.cos(wy * elapsedTime), (counterclockwisey ? -1 : 1) * radiusy * wy * MathUtils.sin(wy * elapsedTime));
         }
 
         elapsedTime += dt;
@@ -721,7 +724,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         // We draw FinalEnemyLevelTwo in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
-            //super.draw(batch);
+            super.draw(batch);
         } else {
             drawFxs(batch);
         }

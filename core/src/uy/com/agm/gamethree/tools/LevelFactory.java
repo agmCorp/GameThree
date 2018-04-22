@@ -48,12 +48,10 @@ public class LevelFactory {
 //                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
 //                break;
             case 3:
-                float radiusx = 4.8f / 4;
-                float radiusy = 4f;
-                finalEnemy = new FinalEnemyLevelThree(screen,
-                        screen.getGameCam().position.x - AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -  radiusy);
-
+                finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS - screen.getGameViewPort().getWorldHeight() / 2 -
+                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
 
 
                         /*

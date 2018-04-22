@@ -335,7 +335,7 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private boolean isTheEndOfTheWorld() {
+    public boolean isTheEndOfTheWorld() {
         return upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 >= gameViewPort.getWorldHeight() * WORLD_SCREENS;
     }
 
