@@ -675,12 +675,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     @Override
-    protected boolean finalEnemyStarts() {
-        checkBoundaries();
-        return b2body.isActive();
-    }
-
-    @Override
     protected String getFinalEnemyName() {
         return NAME;
     }
@@ -698,18 +692,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     @Override
     protected TextureRegion getHelpImage() {
         return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelTwo();
-    }
-
-    private void checkBoundaries() {
-        /* When a FinalEnemyLevelTwo is on camera, it activates (it can collide).
-        * You have to be very careful because if the final level Two enemy is destroyed, its b2body does not exist and gives
-        * random errors if you try to active it.
-        */
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2; //  Upper edge of the upperEdge :)
-
-        if (upperEdge > b2body.getPosition().y + CIRCLE_SHAPE_RADIUS_METERS) {
-            b2body.setActive(true);
-        }
     }
 
     private boolean isDrawable() {

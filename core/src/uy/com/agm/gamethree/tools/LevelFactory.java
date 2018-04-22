@@ -16,6 +16,7 @@ import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
 import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
@@ -35,34 +36,24 @@ public class LevelFactory {
         FinalEnemy finalEnemy;
 
         switch (level) {
-//            case 1:
-//                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
-//                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
-//                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-//                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
-//                break;
-//            case 2:
-//                finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x -
-//                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
-//                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-//                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
-//                break;
+            case 1:
+                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+                break;
+            case 2:
+                finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
+                break;
             case 3:
                 finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
                         AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS - screen.getGameViewPort().getWorldHeight() / 2 -
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                screen.getGameViewPort().getWorldHeight() / 2 -
                                 AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
-
-
-                        /*
-
-                        screen.getGameCam().position.x +
-                        radius -
-                        AssetFinalEnemyLevelTwo.WIDTH_METERS +
-                        (AssetFinalEnemyLevelTwo.WIDTH_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS)
-                        - radius + FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS/2 ,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS - 2);*/
-
                 break;
             default:
                 finalEnemy = null;

@@ -100,7 +100,9 @@ public abstract class FinalEnemy extends Sprite {
     public void update(float dt) {
         if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
             // When our final enemy is on camera, it activates
-            if (finalEnemyStarts()) {
+            if (screen.isTheEndOfTheWorld()) {
+                b2body.setActive(true);
+
                 // Stop music for a few seconds
                 AudioManager.getInstance().stopMusic();
                 introTime = 0;
@@ -193,7 +195,6 @@ public abstract class FinalEnemy extends Sprite {
     protected abstract void updateLogic(float dt);
     public abstract void onHit(Weapon weapon);
     public abstract void onHitWall(boolean isBorder);
-    protected abstract boolean finalEnemyStarts();
     protected abstract String getFinalEnemyName();
     protected abstract int getFinalEnemyDamage();
     protected abstract void setInitialState();
