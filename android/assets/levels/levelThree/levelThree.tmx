@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2181">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2182">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250">
   <data encoding="base64" compression="zlib">
@@ -13,7 +13,7 @@
  </layer>
  <layer name="barrier" width="15" height="250">
   <data encoding="base64" compression="zlib">
-   eJzt2FlOIkAYhVFUZBDRNSHzvCbmGdYkowPglvok7qATk27zf8l5raRST3UTiSiKouhvq6V+7uybTCJxyx1J7kmRJkOWB3I8kueJZwq8UKREmQpVatRp0KRFmw5devQZMGTEmAlTZsxZsGTFmg2vbNmx58CRE2+888EnZy5c+eIm677ckeSeFGkyZHkgxyN5nnimwAtFSpSpUKVGnQZNWrTp0KVHnwFDRoyZMGXGnAVLVqzZZH/u7aMoiqIoiqIoiqLot1RI+bNTpESZCtXU965Sp0GTFm06dOnRZ8CQEWMmTJkxZ8GSFWs2vLJlx54DR0688c4Hn5y5cOWLm3QiccsdSe5JkSZDlgdyPJLniWcKvFCkRJkKVWrUadCkRZsOXXr0GTBkxJgJU2bMWbBkxZoNr2zZsefAkRNvvPPBJ2cuXPlKxwYVG1QURVEURVEURVH0G4tN5t/fZKIoiqIoiqIoiqIoiv73/gCzn7c9
+   eJzt2NdNI1AURVGTHIg1GecArsk52zWRM7Q0q4thRmdLq4An3Z93CoWUUkq/sYNyoXDIEcecUKREmQqnnHHOBZdcUeWaGnUaNGnRpkOXHn1uuGXAkBFjJkyZMWfBkhVrNmzZseeOex545IlnXnjljXc++OSLb344qHgvRxxzQpESZSqccsY5F1xyRZVratRp0KRFmw5devS54ZYBQ0aMmTBlxpwFS1as2bBlx77yty8kpZRSSimllFL6/VWL/uzUqNOgSYs2Hbr06HPDLQOGjBgzYcqMOQuWrFizYcuOPXfc88AjTzzzwitvvPPBJ19888NBqVA45IhjTihSokyFU84454JLrqhyTY06DZq0aNOhS48+N9wyYMiIMROmzJizYMmKNRu27Nhzxz0PPPLEMy+88sY7H3zyxTc/pWxQ2aBSSimllFJKKf2PZZP5/ZtMSimllFJKKaWU0r/eH3Mdtu8=
   </data>
  </layer>
  <layer name="staticBridge" width="15" height="250">
@@ -128,7 +128,13 @@
   <object id="2026" x="226" y="932" width="30" height="30"/>
   <object id="2027" x="216" y="5634" width="40" height="40"/>
  </objectgroup>
- <objectgroup name="powerBox"/>
+ <objectgroup name="powerBox">
+  <object id="2181" x="224" y="448" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>

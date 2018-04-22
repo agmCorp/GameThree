@@ -44,10 +44,10 @@ public class PlayScreen extends AbstractScreen {
 
     // Boxes around sprites, box2d bodies and scene2d tables
     // Debug message log enabled
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     // Show/hide FPS counter
     public static final boolean SHOW_FPS = true;
@@ -152,14 +152,14 @@ public class PlayScreen extends AbstractScreen {
             b2dr = new Box2DDebugRenderer();
         }
 
-        //final float ALTURA = 50.0f; // todo
-        //gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
+        final float ALTURA = 70.0f; // todo
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
 
         creator = new B2WorldCreator(this);
 
         // Create the hero in our game world
         player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
-        //player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
+        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
 
         // Boundaries
         upperEdge = creator.getUpperEdge();

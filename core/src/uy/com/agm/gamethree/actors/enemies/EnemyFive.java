@@ -254,8 +254,6 @@ public class EnemyFive extends Enemy {
          *
          */
 
-        elapsedTime += dt;
-
         if (elapsedTime >= period) {
             elapsedTime = 0;
             counterclockwise = !counterclockwise;
@@ -263,6 +261,7 @@ public class EnemyFive extends Enemy {
 
         float w = 2 * MathUtils.PI / period;
         tmp.set((counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), radius * w * MathUtils.cos(w * elapsedTime));
+        elapsedTime += dt;
         return tmp;
     }
 

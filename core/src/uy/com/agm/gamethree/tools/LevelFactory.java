@@ -5,19 +5,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelOne;
+import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelTwo;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
 import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
 import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
+import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -35,21 +35,36 @@ public class LevelFactory {
         FinalEnemy finalEnemy;
 
         switch (level) {
-            case 1:
-                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelOne.HEIGHT_METERS + AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
-                break;
-            case 2:
-                finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelTwo.HEIGHT_METERS + AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
-                break;
-
+//            case 1:
+//                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
+//                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
+//                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+//                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+//                break;
+//            case 2:
+//                finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x -
+//                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+//                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+//                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
+//                break;
             case 3:
-                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x,
-                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelOne.HEIGHT_METERS + AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+                float radiusx = 4.8f / 4;
+                float radiusy = 4f;
+                finalEnemy = new FinalEnemyLevelThree(screen,
+                        screen.getGameCam().position.x - AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -  radiusy);
+
+
+
+                        /*
+
+                        screen.getGameCam().position.x +
+                        radius -
+                        AssetFinalEnemyLevelTwo.WIDTH_METERS +
+                        (AssetFinalEnemyLevelTwo.WIDTH_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS)
+                        - radius + FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS/2 ,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS - 2);*/
+
                 break;
             default:
                 finalEnemy = null;
