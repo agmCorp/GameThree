@@ -19,7 +19,7 @@ public class EnemyBlastShooting implements IShootStrategy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
-    private static final float SWORD_LINEAR_VELOCITY = 2.0f;
+    private static final float BLAST_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
     private float openFireTime;
@@ -52,7 +52,7 @@ public class EnemyBlastShooting implements IShootStrategy {
         float angle;
 
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, SWORD_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, BLAST_LINEAR_VELOCITY);
 
         for(int i = 0; i < 4; i++) {
             if (i > 0) {

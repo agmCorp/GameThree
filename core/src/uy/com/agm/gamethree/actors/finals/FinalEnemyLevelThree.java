@@ -36,8 +36,12 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final String NAME = "BEHOLDER";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
+    private static final float HORIZONTAL_PERIOD_SECONDS = 2.0f;
+    private static final float VERTICAL_PERIOD_SECONDS = 3.0f;
+    private static final float HORIZONTAL_RADIUS_METERS = 1.0f;
+    private static final float VERTICAL_RADIUS_METERS = 2.0f;
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 1;
+    private static final int MAX_DAMAGE = 1; // TODO
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
@@ -57,6 +61,10 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private float changeTime;
     private float timeToChange;
     private float agonyTime;
+    private float elapsedTime;
+    private boolean horizontalCounterclockwise;
+    private boolean verticalCounterclockwise;
+    private boolean movingHorizontal;
 
     private Animation finalEnemyLevelThreeWalkAnimation;
     private Animation finalEnemyLevelThreeIdleAnimation;
@@ -84,12 +92,6 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private float hitX;
     private float hitY;
 
-    // todo
-    float elapsedTime = 0;
-    boolean counterclockwisex = true;
-    boolean counterclockwisey = true;
-    boolean horizontal = false;
-
     public FinalEnemyLevelThree(PlayScreen screen, float x, float y) {
         super(screen, x, y, AssetFinalEnemyLevelThree.WIDTH_METERS, AssetFinalEnemyLevelThree.HEIGHT_METERS);
 
@@ -105,6 +107,10 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
+        elapsedTime = 0;
+        horizontalCounterclockwise = MathUtils.randomBoolean();
+        verticalCounterclockwise = MathUtils.randomBoolean();
+        movingHorizontal = MathUtils.randomBoolean();
         velocity.set(0.0f, 0.0f); // Initially at rest
 
         // Knock back effect
@@ -336,39 +342,46 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         }
     }
 
-    private Vector2 getNewTangentialSpeed(float dt) { // todo
-        float periodx = 2;
-        float periody = 3;
+    private Vector2 getNewTangentialSpeed(float dt) {
+        /* Parametric equation of a Circle:
+         * x = center_x + radius * cos(angle)
+         * y = center_y + radius * sin(angle)
+         *
+         * Here 'angle' is the fraction of angular velocity (w) traveled in deltaTime (t).
+         * Therefore:
+         * w = 2 * PI / PERIOD
+         *
+         * Thus:
+         * x = center_x + radius * cos(w * t)
+         * y = center_y + radius * sin(w * t)
+         *
+         * Velocity (derivative d/dt)
+         * x = -r * w * sin(w * t)
+         * y = r * w * cos(w * t)
+         *
+         * Here, the negative sign indicates counterclockwise movement.
+         * We play with counterclockwise, tmp.set(x, y) and tmp.set(y, x) to decorate this movement.
+         */
 
-        float radiusx = 1f;
-        float radiusy = 2f;
-
-        if (horizontal) {
-            if (elapsedTime >= periodx) {
+        float w;
+        if (movingHorizontal) {
+            if (elapsedTime >= HORIZONTAL_PERIOD_SECONDS) {
                 elapsedTime = 0;
-                counterclockwisex = MathUtils.randomBoolean();
-                horizontal = MathUtils.randomBoolean();
+                horizontalCounterclockwise = MathUtils.randomBoolean();
+                movingHorizontal = MathUtils.randomBoolean();
             }
+            w = 2 * MathUtils.PI / HORIZONTAL_PERIOD_SECONDS;
+            tmp.set((horizontalCounterclockwise ? -1 : 1) * HORIZONTAL_RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), HORIZONTAL_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         } else {
-            if (elapsedTime >= periody) {
+            if (elapsedTime >= VERTICAL_PERIOD_SECONDS) {
                 elapsedTime = 0;
-                counterclockwisey = MathUtils.randomBoolean();
-                horizontal = MathUtils.randomBoolean();
+                verticalCounterclockwise = MathUtils.randomBoolean();
+                movingHorizontal = MathUtils.randomBoolean();
             }
+            w = 2 * MathUtils.PI / VERTICAL_PERIOD_SECONDS;
+            tmp.set(VERTICAL_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime), (verticalCounterclockwise ? -1 : 1) * VERTICAL_RADIUS_METERS * w * MathUtils.sin(w * elapsedTime));
         }
-
-        float wx = 2 * MathUtils.PI / periodx;
-        float wy = 2 * MathUtils.PI / periody;
-
-        if (horizontal) {
-            tmp.set((counterclockwisex ? -1 : 1) * radiusx * wx * MathUtils.sin(wx * elapsedTime), radiusx * wx * MathUtils.cos(wx * elapsedTime));
-        } else {
-            tmp.set(radiusy * wy * MathUtils.cos(wy * elapsedTime), (counterclockwisey ? -1 : 1) * radiusy * wy * MathUtils.sin(wy * elapsedTime));
-        }
-
         elapsedTime += dt;
-
-
         return tmp;
     }
 
