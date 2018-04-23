@@ -604,10 +604,6 @@ public class Hero extends Sprite {
     }
 
     public void onDead() {
-        // Pause music and play sound effect
-        AudioManager.getInstance().pauseMusic();
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
-
         /*
          * We must change his b2body to avoid collisions.
          * This can't be done here because this method is called from WorldContactListener that is invoked
@@ -616,6 +612,10 @@ public class Hero extends Sprite {
          * Therefore, we use a flag in order to point out this behavior and change it later.
          */
         applyNewFilters = true;
+
+        // Pause music and play sound effect
+        AudioManager.getInstance().pauseMusic();
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
 
         // Reset rotation
         setRotation(0.0f);
