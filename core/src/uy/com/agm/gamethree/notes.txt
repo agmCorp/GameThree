@@ -12,10 +12,7 @@ b2worldcreator
     - crea el hero
     - crea el final
     - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
-- jodido de dificil: subir el knockback a enemy y a finalenemy. Ojo que no es trivial.
-  Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
-  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
-  del enemigo así como splat pero estuve viendo que es medio complejo.
+- Pasar el knockback de los finalEnemy a su base
 
 HACER PRIORIDAD 2
 -----------------
