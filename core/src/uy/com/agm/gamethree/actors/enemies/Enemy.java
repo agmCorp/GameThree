@@ -42,7 +42,7 @@ public abstract class Enemy extends Sprite {
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
-    private static final float KNOCK_BACK_SECONDS = 12;//0.2f;// todo
+    private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
 
@@ -274,8 +274,6 @@ public abstract class Enemy extends Sprite {
         // Apply previous flip and rotation state
         setFlip(isFlipX, isFlipY);
         setRotation(rotation);
-
-        // enemysix jode todo
 
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {
