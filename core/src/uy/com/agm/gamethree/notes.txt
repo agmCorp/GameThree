@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- Comenzar EnemigoFinal nivel 3
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular.
 - puedo hacer el poder que los mata a todos, usando AABB
 - el coin deberia ser random con random puntaje, como hice las powerboxes
@@ -13,14 +12,15 @@ b2worldcreator
     - crea el hero
     - crea el final
     - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
+- jodido de dificil: subir el knockback a enemy y a finalenemy. Ojo que no es trivial.
+  Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
+  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
+  del enemigo así como splat pero estuve viendo que es medio complejo.
 
 HACER PRIORIDAD 2
 -----------------
 - hacer un mapa de los niveles
 - poner una intro y una historia
-- Bajo ningun concepto el knockBack y el pum deben quedar en cada enemigo. Buscarle la vuelta para subirlos a la clase
-  Enemy y FinalEnemy porque son cosas comunes a todos e idénticas. El pum ya lo hice. El knockback debe ir como funcion o como estado
-  del enemigo así como splat pero estuve viendo que es medio complejo.
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
 - EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
