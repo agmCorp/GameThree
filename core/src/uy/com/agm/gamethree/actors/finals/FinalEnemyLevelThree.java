@@ -20,7 +20,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -36,9 +36,8 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final String NAME = "BEHOLDER";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
-    private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 15;
+    private static final int MAX_DAMAGE = 1;
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
@@ -59,13 +58,10 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private float timeToChange;
     private float agonyTime;
 
-    private Animation finalEnemyLevelTwoMovingUpAnimation;
-    private Animation finalEnemyLevelTwoMovingDownAnimation;
-    private Animation finalEnemyLevelTwoMovingLeftRightAnimation;
-    private Animation finalEnemyLevelTwoIdleAnimation;
-    private Animation finalEnemyLevelTwoShootingUpAnimation;
-    private Animation finalEnemyLevelTwoShootingDownAnimation;
-    private Animation finalEnemyLevelTwoDyingAnimation;
+    private Animation finalEnemyLevelThreeWalkAnimation;
+    private Animation finalEnemyLevelThreeIdleAnimation;
+    private Animation finalEnemyLevelThreeShootAnimation;
+    private Animation finalEnemyLevelThreeDyingAnimation;
 
     // Power FX
     private PowerState currentPowerState;
@@ -95,23 +91,21 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     boolean horizontal = false;
 
     public FinalEnemyLevelThree(PlayScreen screen, float x, float y) {
-        super(screen, x, y, AssetFinalEnemyLevelTwo.WIDTH_METERS, AssetFinalEnemyLevelTwo.HEIGHT_METERS);
+        super(screen, x, y, AssetFinalEnemyLevelThree.WIDTH_METERS, AssetFinalEnemyLevelThree.HEIGHT_METERS);
 
         // Animations
-        finalEnemyLevelTwoMovingUpAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingUpAnimation();
-        finalEnemyLevelTwoMovingDownAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingDownAnimation();
-        finalEnemyLevelTwoMovingLeftRightAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoMovingLeftRightAnimation();
-        finalEnemyLevelTwoIdleAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoIdleAnimation();
-        finalEnemyLevelTwoShootingUpAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootingUpAnimation();
-        finalEnemyLevelTwoShootingDownAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoShootingDownAnimation();
-        finalEnemyLevelTwoDyingAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoDeathAnimation();
+        finalEnemyLevelThreeWalkAnimation = Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreeWalkAnimation();
+        finalEnemyLevelThreeIdleAnimation = Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreeIdleAnimation();
+        finalEnemyLevelThreeShootAnimation = Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreeShootAnimation();
+        finalEnemyLevelThreeDyingAnimation = Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreeDeathAnimation();
 
-        // FinalEnemyLevelTwo variables initialization
+        // FinalEnemyLevelThree variables initialization
         damage = MAX_DAMAGE;
         stateFinalEnemyTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
+        velocity.set(0.0f, 0.0f); // Initially at rest
 
         // Knock back effect
         knockBack = false;
@@ -120,24 +114,18 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         hitX = 0;
         hitY = 0;
 
-        // Place origin of rotation in the center of the Sprite
-        setOriginCenter();
-
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
         currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoPowerAnimation();
+        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreePowerAnimation();
         powerFXStateTime = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoPowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelThree().getFinalEnemyLevelThreePowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        powerFXSprite.setBounds(getX(), getY(), AssetFinalEnemyLevelTwo.POWER_WIDTH_METERS, AssetFinalEnemyLevelTwo.POWER_HEIGHT_METERS);
-
-        // Place origin of rotation in the center of the Sprite
-        powerFXSprite.setOriginCenter();
+        powerFXSprite.setBounds(getX(), getY(), AssetFinalEnemyLevelThree.POWER_WIDTH_METERS, AssetFinalEnemyLevelThree.POWER_HEIGHT_METERS);
 
         // -------------------- ExplosionFX --------------------
 
@@ -154,9 +142,6 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         // Explosion FX Sprite
         explosionFXSprite = new Sprite(spriteExplosion);
 
-        // Place origin of rotation in the center of the Sprite
-        explosionFXSprite.setOriginCenter();
-
         // -------------------- SplatFX --------------------
 
         // Set the splat's texture
@@ -167,9 +152,6 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
         // Splat FX Sprite
         splatFXSprite = new Sprite(spriteSplat);
-
-        // Place origin of rotation in the center of the Sprite
-        splatFXSprite.setOriginCenter();
     }
 
     @Override
@@ -302,7 +284,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
                 break;
         }
 
-        // FinalEnemyLevelTwo could have been destroyed
+        // FinalEnemyLevelThree could have been destroyed
         if (!isDestroyed()) {
             switchPowerState(dt);
         }
@@ -322,7 +304,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     }
 
     private void stateWalking(float dt) {
-        // Set velocity calculated to reach the target circle
+        // Set new velocity (see getNewTangentialSpeed(...))
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -333,11 +315,10 @@ public class FinalEnemyLevelThree extends FinalEnemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // Depending on the velocity, set the sprite's rotation angle
-        setRotationAngle();
-
-        // Depending on the velocity, set the appropriate sprite animation
-        setAnimation(dt);
+        TextureRegion region = (TextureRegion) finalEnemyLevelThreeWalkAnimation.getKeyFrame(stateFinalEnemyTime);
+        setRegionFlip(region);
+        setRegion(region);
+        stateFinalEnemyTime += dt;
 
         velocity.set(getNewTangentialSpeed(dt));
 
@@ -345,7 +326,17 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         currentStateFinalEnemy = getNewRandomState(dt);
     }
 
-    private Vector2 getNewTangentialSpeed(float dt) {
+    private void setRegionFlip(TextureRegion region) {
+        float heroX = screen.getPlayer().getB2body().getPosition().x;
+        if (heroX > b2body.getPosition().x && !region.isFlipX()) {
+            region.flip(true, false);
+        }
+        if (heroX <= b2body.getPosition().x && region.isFlipX()) {
+            region.flip(true, false);
+        }
+    }
+
+    private Vector2 getNewTangentialSpeed(float dt) { // todo
         float periodx = 2;
         float periody = 3;
 
@@ -381,37 +372,9 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         return tmp;
     }
 
-    private void setRotationAngle() {
-        if (b2body.getLinearVelocity().len() > 0.0f) {
-            setRotation(90.0f);
-            float velAngle = this.b2body.getLinearVelocity().angle();
-            if (0 <= velAngle && velAngle <= 180.0f) {
-                setRotation(270.0f);
-            }
-            rotate(velAngle);
-        }
-    }
-
-    private void setAnimation(float dt) {
-        float vy = b2body.getLinearVelocity().y;
-        if (vy > 0.0f) {
-            setRegion((TextureRegion) finalEnemyLevelTwoMovingUpAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        } else {
-            if (vy < 0.0f) {
-                setRegion((TextureRegion) finalEnemyLevelTwoMovingDownAnimation.getKeyFrame(stateFinalEnemyTime, true));
-            } else { // vy == 0
-                setRegion((TextureRegion) finalEnemyLevelTwoMovingLeftRightAnimation.getKeyFrame(stateFinalEnemyTime, true));
-            }
-        }
-        stateFinalEnemyTime += dt;
-    }
-
     private void stateIdle(float dt) {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
-
-        // Preserve the rotation state
-        float rotation = getRotation();
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -420,11 +383,11 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelTwoIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        stateFinalEnemyTime += dt;
 
-        // Apply previous rotation state
-        setRotation(rotation);
+        TextureRegion region = (TextureRegion) finalEnemyLevelThreeIdleAnimation.getKeyFrame(stateFinalEnemyTime);
+        setRegionFlip(region);
+        setRegion(region);
+        stateFinalEnemyTime += dt;
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
@@ -442,19 +405,9 @@ public class FinalEnemyLevelThree extends FinalEnemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // Calculate shooting angle
-        float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
-                .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
-
-        // Depending on the angle, set the sprite's rotation angle and animation
-        setRotation(90.0f);
-        if (0 <= angle && angle <= 180.0f) {
-            setRegion((TextureRegion) finalEnemyLevelTwoShootingUpAnimation.getKeyFrame(stateFinalEnemyTime, true));
-            setRotation(270.0f);
-        } else {
-            setRegion((TextureRegion) finalEnemyLevelTwoShootingDownAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        }
-        rotate(angle);
+        TextureRegion region = (TextureRegion) finalEnemyLevelThreeShootAnimation.getKeyFrame(stateFinalEnemyTime);
+        setRegionFlip(region);
+        setRegion(region);
         stateFinalEnemyTime += dt;
 
         // Shoot time!
@@ -502,7 +455,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         }
 
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelTwoIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
+        setRegion((TextureRegion) finalEnemyLevelThreeIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
         setColor(KNOCK_BACK_COLOR);
         stateFinalEnemyTime += dt;
 
@@ -551,14 +504,15 @@ public class FinalEnemyLevelThree extends FinalEnemy {
             // Default tint
             setColor(Color.WHITE);
 
-            // Preserve the rotation state
-            float rotation = getRotation();
+            // Preserve the flip state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
 
-            setRegion((TextureRegion) finalEnemyLevelTwoDyingAnimation.getKeyFrame(stateFinalEnemyTime, true));
+            setRegion((TextureRegion) finalEnemyLevelThreeDyingAnimation.getKeyFrame(stateFinalEnemyTime, true));
             stateFinalEnemyTime += dt;
 
-            // Apply previous rotation state
-            setRotation(rotation);
+            // Apply previous flip state
+            setFlip(isFlipX, isFlipY);
         }
     }
 
@@ -574,9 +528,6 @@ public class FinalEnemyLevelThree extends FinalEnemy {
            explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTime, true));
            explosionFXStateTime += dt;
 
-           // Apply rotation of the main character
-           explosionFXSprite.setRotation(getRotation());
-
            // After the knock back, we set the explosion at the point where the final enemy was hit
            if (CENTER_EXPLOSION_ON_HIT) {
                tmp.set(hitX, hitY);
@@ -591,10 +542,6 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     }
 
     private void stateDead() {
-        // Apply rotation and flip of the explosion
-        splatFXSprite.setRotation(explosionFXSprite.getRotation());
-        splatFXSprite.setFlip(explosionFXSprite.isFlipX(), explosionFXSprite.isFlipY());
-
         // Get center of the bounding rectangle of the explosion
         explosionFXSprite.getBoundingRectangle().getCenter(tmp);
 
@@ -613,10 +560,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
             powerFXStateTime += dt;
 
-            // Apply rotation of the main character
-            powerFXSprite.setRotation(getRotation());
-
-            // Update our Sprite to correspond with the position of our finalEnemyLevelTwo's Box2D body
+            // Update our Sprite to correspond with the position of our FinalEnemyLevelThree's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
@@ -674,7 +618,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelTwo();
+        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelThree();
     }
 
     private boolean isDrawable() {
@@ -702,7 +646,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
     @Override
     public void draw(Batch batch) {
-        // We draw FinalEnemyLevelTwo in these states: WALKING IDLE SHOOTING INJURED DYING
+        // We draw FinalEnemyLevelThree in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
             super.draw(batch);

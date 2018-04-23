@@ -19,6 +19,7 @@ import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.fonts.AssetFonts;
 import uy.com.agm.gamethree.assets.i18n.AssetI18NGameThree;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
+import uy.com.agm.gamethree.assets.sprites.AssetBridge;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletB;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
@@ -40,11 +41,11 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionG;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
-import uy.com.agm.gamethree.assets.sprites.AssetBridge;
 import uy.com.agm.gamethree.assets.sprites.AssetMaps;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerFour;
@@ -165,6 +166,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetToughMode toughMode;
     private AssetFinalEnemyLevelOne finalEnemyLevelOne;
     private AssetFinalEnemyLevelTwo finalEnemyLevelTwo;
+    private AssetFinalEnemyLevelThree finalEnemyLevelThree;
 
     private AssetMaps maps;
     private AssetSounds sounds;
@@ -335,6 +337,7 @@ public class Assets implements Disposable, AssetErrorListener {
         toughMode = new AssetToughMode(atlasDinamicObjects);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDinamicObjects);
         finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDinamicObjects);
+        finalEnemyLevelThree = new AssetFinalEnemyLevelThree(atlasDinamicObjects);
         maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
@@ -503,6 +506,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetFinalEnemyLevelTwo getFinalEnemyLevelTwo() {
         return finalEnemyLevelTwo;
+    }
+
+    public AssetFinalEnemyLevelThree getFinalEnemyLevelThree() {
+        return finalEnemyLevelThree;
     }
 
     public AssetMaps getMaps() {

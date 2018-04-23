@@ -31,6 +31,7 @@ public class AssetScene2d {
     private TextureRegion helpColSilverBulletLevelTwo;
     private TextureRegion helpFinalEnemyLevelOne;
     private TextureRegion helpFinalEnemyLevelTwo;
+    private TextureRegion helpFinalEnemyLevelThree;
     private TextureRegion table;
 
     public AssetScene2d(TextureAtlas atlas) {
@@ -56,6 +57,7 @@ public class AssetScene2d {
         helpColSilverBulletLevelTwo = atlas.findRegion("helpColSilverBulletLevelTwo");
         helpFinalEnemyLevelOne = atlas.findRegion("helpFinalEnemyLevelOne");
         helpFinalEnemyLevelTwo = atlas.findRegion("helpFinalEnemyLevelTwo");
+        helpFinalEnemyLevelThree = atlas.findRegion("helpFinalEnemyLevelTwo"); // todo
         table = atlas.findRegion("table");
     }
 
@@ -141,6 +143,10 @@ public class AssetScene2d {
 
     public TextureRegion getHelpFinalEnemyLevelTwo() {
         return helpFinalEnemyLevelTwo;
+    }
+
+    public TextureRegion getHelpFinalEnemyLevelThree() {
+        return helpFinalEnemyLevelThree;
     }
 
     public TextureRegion getTable() {

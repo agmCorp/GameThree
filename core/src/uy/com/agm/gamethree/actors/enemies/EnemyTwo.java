@@ -164,9 +164,19 @@ public class EnemyTwo extends Enemy {
         }
 
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Preserve the flip and rotation state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+        float rotation = getRotation();
+
         setRegion((TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true));
         setColor(KNOCK_BACK_COLOR);
         stateTime += dt;
+
+        // Apply previous flip and rotation state
+        setFlip(isFlipX, isFlipY);
+        setRotation(rotation);
 
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {

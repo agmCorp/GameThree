@@ -125,7 +125,7 @@
  <objectgroup name="bridge">
   <object id="2024" x="232" y="3246" width="36" height="36"/>
   <object id="2025" x="262" y="3446" width="38" height="38"/>
-  <object id="2026" x="226" y="932" width="30" height="30"/>
+  <object id="2026" x="226" y="959" width="30" height="30"/>
   <object id="2027" x="216" y="5634" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="powerBox">

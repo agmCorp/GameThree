@@ -271,9 +271,19 @@ public class EnemySix extends Enemy {
         }
 
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Preserve the flip and rotation state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+        float rotation = getRotation();
+
         setRegion((TextureRegion) enemySixIdleAnimation.getKeyFrame(stateTime, true));
         setColor(KNOCK_BACK_COLOR);
         stateTime += dt;
+
+        // Apply previous flip and rotation state
+        setFlip(isFlipX, isFlipY);
+        setRotation(rotation);
 
         if (beaming) {
             float offset = offsetXMeters >= 0 ? 0 : offsetXMeters;
