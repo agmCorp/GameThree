@@ -47,6 +47,7 @@ public class Edge {
         bdef.position.set(boundsMeters.getX() + boundsMeters.getWidth() / 2, boundsMeters.getY() + boundsMeters.getHeight() / 2);
         bdef.type = BodyDef.BodyType.KinematicBody;
         b2body = world.createBody(bdef);
+        b2body.setFixedRotation(true);
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();

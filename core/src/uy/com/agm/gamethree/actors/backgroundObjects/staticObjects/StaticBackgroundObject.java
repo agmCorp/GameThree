@@ -45,6 +45,7 @@ public abstract class StaticBackgroundObject extends Sprite implements IAvoidLan
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set(boundsMeters.getX() + boundsMeters.getWidth() / 2, boundsMeters.getY() + boundsMeters.getHeight() / 2);
         b2body = world.createBody(bdef);
+        b2body.setFixedRotation(true);
 
         FixtureDef fdef = new FixtureDef();
         fdef.shape = getShape();

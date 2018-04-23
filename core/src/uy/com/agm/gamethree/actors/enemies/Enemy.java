@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.actors.enemies;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,18 +12,22 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetSplat;
-import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.ShootContext;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetSplat;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
+import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -36,12 +41,18 @@ public abstract class Enemy extends Sprite {
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;
+    private static final Color KNOCK_BACK_COLOR = Color.BLACK;
+    private static final float KNOCK_BACK_SECONDS = 12;//0.2f;// todo
+    private static final float KNOCK_BACK_FORCE_X = 1000.0f;
+    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
 
     private TextureRegion splat;
     private boolean pum;
     private ShootContext shootContext;
     private boolean openFire;
     private int tiledMapId;
+    private boolean knockBackStarted;
+    private float knockBackTime;
 
     protected World world;
     protected PlayScreen screen;
@@ -51,7 +62,7 @@ public abstract class Enemy extends Sprite {
     protected Vector2 tmp; // Temporary GC friendly vector
 
     protected enum State {
-        INACTIVE, ALIVE, INJURED, EXPLODING, SPLAT, DEAD
+        INACTIVE, ALIVE, KNOCKBACK, INJURED, EXPLODING, SPLAT, DEAD
     }
 
     protected State currentState;
@@ -93,6 +104,8 @@ public abstract class Enemy extends Sprite {
         pum = MathUtils.random() <= RANDOM_EXPLOSION_PROB;
         expScale = pum ? EXPLOSION_SCALE : 1;
         splat = Assets.getInstance().getSplat().getRandomEnemySplat();
+        knockBackStarted = false;
+        knockBackTime = 0;
     }
 
     public String getTiledMapId() {
@@ -200,10 +213,14 @@ public abstract class Enemy extends Sprite {
                 case ALIVE:
                     stateAlive(dt);
                     break;
+                case KNOCKBACK:
+                    stateKnockback(dt);
+                    break;
                 case INJURED:
                     stateInjured(dt);
                     break;
                 case EXPLODING:
+                    setColor(Color.WHITE); // Default tint
                     stateExploding(dt);
                     break;
                 case SPLAT:
@@ -225,6 +242,65 @@ public abstract class Enemy extends Sprite {
         } else {
             AudioManager.getInstance().play(hitSound);
         }
+    }
+
+    protected void stateKnockback(float dt) {
+        if (!knockBackStarted) {
+            initKnockBack();
+        }
+
+        // We don't let this Enemy go beyond the screen
+        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
+        float borderLeft = screen.getGameCam().position.x - screen.getGameViewPort().getWorldWidth() / 2;;
+        float borderRight = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2;
+        float enemyUpperEdge = b2body.getPosition().y + getCircleShapeRadiusMeters();
+        float enemyLeftEdge = b2body.getPosition().x - getCircleShapeRadiusMeters();
+        float enemyRightEdge = b2body.getPosition().x + getCircleShapeRadiusMeters();
+
+        if (upperEdge <= enemyUpperEdge || enemyLeftEdge <= borderLeft || borderRight <= enemyRightEdge) {
+            b2body.setLinearVelocity(0.0f, 0.0f); // Stop
+        }
+
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+        // Preserve the flip and rotation state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+        float rotation = getRotation();
+
+        setRegion(getKnockBackFrame(dt));
+        setColor(KNOCK_BACK_COLOR);
+
+        // Apply previous flip and rotation state
+        setFlip(isFlipX, isFlipY);
+        setRotation(rotation);
+
+        // enemysix jode todo
+
+        knockBackTime += dt;
+        if (knockBackTime > KNOCK_BACK_SECONDS) {
+            currentState = State.INJURED;
+        }
+    }
+
+    private void initKnockBack() {
+        // Knock back effect
+        b2body.setLinearVelocity(0.0f, 0.0f);
+        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
+                b2body.getPosition().x, b2body.getPosition().y, true);
+
+        // Enemy can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = WorldContactListener.NOTHING_BIT;
+
+        // We set the previous filter in every fixture
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+            fixture.setDensity(0.0f); // No density
+        }
+        b2body.resetMassData();
+
+        knockBackStarted = true;
     }
 
     protected void stateSplat() {
@@ -264,6 +340,8 @@ public abstract class Enemy extends Sprite {
 
     protected abstract void defineEnemy();
     protected abstract IShootStrategy getShootStrategy();
+    protected abstract float getCircleShapeRadiusMeters();
+    protected abstract TextureRegion getKnockBackFrame(float dt);
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);

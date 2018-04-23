@@ -71,6 +71,7 @@ public class PowerFour extends Item {
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+        b2body.setFixedRotation(true);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();

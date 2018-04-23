@@ -511,6 +511,7 @@ public class Hero extends Sprite {
         bdef.position.set(getX(), getY());
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+        b2body.setFixedRotation(true);
 
         setDefaultFixtureFilter();
     }

@@ -1,23 +1,19 @@
 package uy.com.agm.gamethree.actors.enemies;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyThree;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
-import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -33,23 +29,11 @@ public class EnemyThree extends Enemy {
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 4.0f;
-    private static final Color KNOCK_BACK_COLOR = Color.BLACK;
-    private static final float KNOCK_BACK_SECONDS = 0.2f;
-    private static final float KNOCK_BACK_FORCE_X = 0.0f;
-    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
-    private static final boolean CENTER_EXPLOSION_ON_HIT = false;
     private static final int SCORE = 20;
 
     private float stateTime;
     private Animation enemyThreeAnimation;
     private Animation explosionAnimation;
-
-    // Knock back effect
-    private boolean knockBack;
-    private boolean knockBackStarted;
-    private float knockBackTime;
-    private float hitX;
-    private float hitY;
 
     public EnemyThree(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -62,11 +46,6 @@ public class EnemyThree extends Enemy {
         setBounds(getX(), getY(), AssetEnemyThree.WIDTH_METERS, AssetEnemyThree.HEIGHT_METERS);
 
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-        knockBack = false;
-        knockBackStarted = false;
-        knockBackTime = 0;
-        hitX = 0;
-        hitY = 0;
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 
@@ -76,6 +55,7 @@ public class EnemyThree extends Enemy {
         bdef.position.set(getX(), getY()); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+        b2body.setFixedRotation(true);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -99,6 +79,18 @@ public class EnemyThree extends Enemy {
     @Override
     protected IShootStrategy getShootStrategy() {
         return new EnemyDefaultShooting(screen, MathUtils.random(0, FIRE_DELAY_SECONDS), FIRE_DELAY_SECONDS);
+    }
+
+    @Override
+    protected float getCircleShapeRadiusMeters() {
+        return CIRCLE_SHAPE_RADIUS_METERS;
+    }
+
+    @Override
+    protected TextureRegion getKnockBackFrame(float dt) {
+        TextureRegion region = (TextureRegion) enemyThreeAnimation.getKeyFrame(stateTime, true);
+        stateTime += dt;
+        return region;
     }
 
     @Override
@@ -132,85 +124,25 @@ public class EnemyThree extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
-        if (knockBack) {
-            knockBack(dt);
-        } else {
-            // Release an item
-            getItemOnHit();
+        // Release an item
+        getItemOnHit();
 
-            // Explosion animation
-            stateTime = 0;
+        // Explosion animation
+        stateTime = 0;
 
-            // Audio FX
-            pum(Assets.getInstance().getSounds().getSquish());
+        // Audio FX
+        pum(Assets.getInstance().getSounds().getSquish());
 
-            // Set score
-            screen.getHud().addScore(SCORE);
+        // Set score
+        screen.getHud().addScore(SCORE);
 
-            // Destroy box2D body
-            if(!world.isLocked()) {
-                world.destroyBody(b2body);
-            }
-
-            // Set the new state
-            currentState = State.EXPLODING;
-        }
-    }
-
-    private void knockBack(float dt) {
-        if (!knockBackStarted) {
-            initKnockBack();
+        // Destroy box2D body
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
         }
 
-        // We don't let this Enemy go beyond the upper edge
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-        if (upperEdge <= b2body.getPosition().y + CIRCLE_SHAPE_RADIUS_METERS) {
-            b2body.setLinearVelocity(0.0f, 0.0f); // Stop
-        }
-
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-        // Preserve the flip and rotation state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
-        float rotation = getRotation();
-
-        setRegion((TextureRegion) enemyThreeAnimation.getKeyFrame(stateTime, true));
-        setColor(KNOCK_BACK_COLOR);
-        stateTime += dt;
-
-        // Apply previous flip and rotation state
-        setFlip(isFlipX, isFlipY);
-        setRotation(rotation);
-
-        knockBackTime += dt;
-        if (knockBackTime > KNOCK_BACK_SECONDS) {
-            knockBack = false;
-        }
-    }
-
-    private void initKnockBack() {
-        // Initial sprite position
-        hitX = b2body.getPosition().x - getWidth() / 2;
-        hitY = b2body.getPosition().y - getHeight() / 2;
-
-        // Knock back effect
-        b2body.setLinearVelocity(0.0f, 0.0f);
-        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
-                b2body.getPosition().x, b2body.getPosition().y, true);
-
-        // EnemyThree can't collide with anything
-        Filter filter = new Filter();
-        filter.maskBits = WorldContactListener.NOTHING_BIT;
-
-        // We set the previous filter in every fixture
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-            fixture.setDensity(0.0f); // No density
-        }
-        b2body.resetMassData();
-
-        knockBackStarted = true;
+        // Set the new state
+        currentState = State.EXPLODING;
     }
 
     @Override
@@ -219,12 +151,6 @@ public class EnemyThree extends Enemy {
             currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                setColor(Color.WHITE); // Default tint
-                // After the knock back, we set the explosion at the point where the enemy was hit
-                if (CENTER_EXPLOSION_ON_HIT) {
-                    setPosition(hitX, hitY);
-                }
-
                 // Setbounds is the one that determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionC.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionC.HEIGHT_METERS * expScale / 2,
                         AssetExplosionC.WIDTH_METERS * expScale, AssetExplosionC.HEIGHT_METERS * expScale);
@@ -253,8 +179,7 @@ public class EnemyThree extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = State.INJURED;
-        knockBack = true;
+        currentState = State.KNOCKBACK;
     }
 
     @Override
