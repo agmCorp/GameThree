@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.finals;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,15 +13,14 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
+import uy.com.agm.gamethree.actors.weapons.Weapon;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
-import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
-import uy.com.agm.gamethree.actors.weapons.Weapon;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -48,11 +46,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
     private static final float DYING_STATE_TIME_SECONDS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
-    private static final Color KNOCK_BACK_COLOR = Color.BLACK;
-    private static final float KNOCK_BACK_SECONDS = 0.2f;
-    private static final float KNOCK_BACK_FORCE_X = 0.0f;
-    private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
-    private static final boolean CENTER_EXPLOSION_ON_HIT = false;
     private static final int SCORE = 500;
 
     private int damage;
@@ -87,13 +80,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     // Splat FX
     private Sprite splatFXSprite;
 
-    // Knock back effect
-    private boolean knockBack;
-    private boolean knockBackStarted;
-    private float knockBackTime;
-    private float hitX;
-    private float hitY;
-
     public FinalEnemyLevelTwo(PlayScreen screen, float x, float y) {
         super(screen, x, y, AssetFinalEnemyLevelTwo.WIDTH_METERS, AssetFinalEnemyLevelTwo.HEIGHT_METERS);
 
@@ -112,13 +98,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
-
-        // Knock back effect
-        knockBack = false;
-        knockBackStarted = false;
-        knockBackTime = 0;
-        hitX = 0;
-        hitY = 0;
 
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
@@ -283,6 +262,18 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     @Override
+    protected float getCircleShapeRadiusMeters() {
+        return CIRCLE_SHAPE_RADIUS_METERS;
+    }
+
+    @Override
+    protected TextureRegion getKnockBackFrame(float dt) {
+        TextureRegion region = (TextureRegion) finalEnemyLevelTwoIdleAnimation.getKeyFrame(stateFinalEnemyTime, true);
+        stateFinalEnemyTime += dt;
+        return region;
+    }
+
+    @Override
     public void updateLogic(float dt) {
         switch (currentStateFinalEnemy) {
             case WALKING:
@@ -293,6 +284,9 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
                 break;
             case SHOOTING:
                 stateShooting(dt);
+                break;
+            case KNOCK_BACK:
+                stateKnockBack(dt);
                 break;
             case INJURED:
                 stateInjured(dt);
@@ -482,85 +476,25 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     private void stateInjured(float dt) {
-        if (knockBack) {
-            knockBack(dt);
-        } else {
-            // Stop level music
-            AudioManager.getInstance().stopMusic();
+        // Stop level music
+        AudioManager.getInstance().stopMusic();
 
-            // Death animation
-            stateFinalEnemyTime = 0;
+        // Death animation
+        stateFinalEnemyTime = 0;
 
-            // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
 
-            // Set score
-            screen.getHud().addScore(SCORE);
+        // Set score
+        screen.getHud().addScore(SCORE);
 
-            // Destroy box2D body
-            if (!world.isLocked()) {
-                world.destroyBody(b2body);
-            }
-
-            // Set the new state
-            currentStateFinalEnemy = StateFinalEnemy.DYING;
-        }
-    }
-
-    private void knockBack(float dt) {
-        if (!knockBackStarted) {
-            initKnockBack();
+        // Destroy box2D body
+        if (!world.isLocked()) {
+            world.destroyBody(b2body);
         }
 
-        // We don't let this Enemy go beyond the upper edge
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-        if (upperEdge <= b2body.getPosition().y + CIRCLE_SHAPE_RADIUS_METERS) {
-            b2body.setLinearVelocity(0.0f, 0.0f); // Stop
-        }
-
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-        // Preserve the flip and rotation state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
-        float rotation = getRotation();
-
-        setRegion((TextureRegion) finalEnemyLevelTwoIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        setColor(KNOCK_BACK_COLOR);
-        stateFinalEnemyTime += dt;
-
-        // Apply previous flip and rotation state
-        setFlip(isFlipX, isFlipY);
-        setRotation(rotation);
-
-        knockBackTime += dt;
-        if (knockBackTime > KNOCK_BACK_SECONDS) {
-            knockBack = false;
-        }
-    }
-
-    private void initKnockBack() {
-        // Initial sprite position
-        hitX = b2body.getPosition().x - getWidth() / 2;
-        hitY = b2body.getPosition().y - getHeight() / 2;
-
-        // Knock back effect
-        b2body.setLinearVelocity(0.0f, 0.0f);
-        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
-                b2body.getPosition().x, b2body.getPosition().y, true);
-
-        // EnemyOne can't collide with anything
-        Filter filter = new Filter();
-        filter.maskBits = WorldContactListener.NOTHING_BIT;
-
-        // We set the previous filter in every fixture
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-            fixture.setDensity(0.0f); // No density
-        }
-        b2body.resetMassData();
-
-        knockBackStarted = true;
+        // Set the new state
+        currentStateFinalEnemy = StateFinalEnemy.DYING;
     }
 
     private void stateDying(float dt) {
@@ -575,9 +509,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
         } else {
-            // Default tint
-            setColor(Color.WHITE);
-
             // Preserve the rotation state
             float rotation = getRotation();
 
@@ -604,13 +535,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
            // Apply rotation of the main character
            explosionFXSprite.setRotation(getRotation());
 
-           // After the knock back, we set the explosion at the point where the final enemy was hit
-           if (CENTER_EXPLOSION_ON_HIT) {
-               tmp.set(hitX, hitY);
-           } else {
-               // Get center of its bounding rectangle
-               getBoundingRectangle().getCenter(tmp);
-           }
+           // Get center of its bounding rectangle
+           getBoundingRectangle().getCenter(tmp);
 
            // Center the Sprite in tmp
            explosionFXSprite.setPosition(tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
@@ -668,8 +594,7 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
                 screen.getShaker().shake(HIT_SHAKE_DURATION);
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();
-                    currentStateFinalEnemy = StateFinalEnemy.INJURED;
-                    knockBack = true;
+                    currentStateFinalEnemy = StateFinalEnemy.KNOCK_BACK;
                 }
             } else {
                 weapon.onBounce();

@@ -267,7 +267,7 @@ public class EnemyEight extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = State.KNOCKBACK;
+        currentState = State.KNOCK_BACK;
     }
 
     @Override

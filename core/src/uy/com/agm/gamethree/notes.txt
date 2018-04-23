@@ -12,7 +12,6 @@ b2worldcreator
     - crea el hero
     - crea el final
     - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
-- Pasar el knockback de los finalEnemy a su base
 
 HACER PRIORIDAD 2
 -----------------

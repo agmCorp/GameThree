@@ -62,7 +62,7 @@ public abstract class Enemy extends Sprite {
     protected Vector2 tmp; // Temporary GC friendly vector
 
     protected enum State {
-        INACTIVE, ALIVE, KNOCKBACK, INJURED, EXPLODING, SPLAT, DEAD
+        INACTIVE, ALIVE, KNOCK_BACK, INJURED, EXPLODING, SPLAT, DEAD
     }
 
     protected State currentState;
@@ -213,14 +213,13 @@ public abstract class Enemy extends Sprite {
                 case ALIVE:
                     stateAlive(dt);
                     break;
-                case KNOCKBACK:
-                    stateKnockback(dt);
+                case KNOCK_BACK:
+                    stateKnockBack(dt);
                     break;
                 case INJURED:
                     stateInjured(dt);
                     break;
                 case EXPLODING:
-                    setColor(Color.WHITE); // Default tint
                     stateExploding(dt);
                     break;
                 case SPLAT:
@@ -244,40 +243,39 @@ public abstract class Enemy extends Sprite {
         }
     }
 
-    protected void stateKnockback(float dt) {
+    protected void stateKnockBack(float dt) {
         if (!knockBackStarted) {
             initKnockBack();
         }
 
-        // We don't let this Enemy go beyond the screen
-        float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-        float borderLeft = screen.getGameCam().position.x - screen.getGameViewPort().getWorldWidth() / 2;;
-        float borderRight = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2;
-        float enemyUpperEdge = b2body.getPosition().y + getCircleShapeRadiusMeters();
-        float enemyLeftEdge = b2body.getPosition().x - getCircleShapeRadiusMeters();
-        float enemyRightEdge = b2body.getPosition().x + getCircleShapeRadiusMeters();
-
-        if (upperEdge <= enemyUpperEdge || enemyLeftEdge <= borderLeft || borderRight <= enemyRightEdge) {
-            b2body.setLinearVelocity(0.0f, 0.0f); // Stop
-        }
-
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-        // Preserve the flip and rotation state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
-        float rotation = getRotation();
-
-        setRegion(getKnockBackFrame(dt));
-        setColor(KNOCK_BACK_COLOR);
-
-        // Apply previous flip and rotation state
-        setFlip(isFlipX, isFlipY);
-        setRotation(rotation);
-
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {
             currentState = State.INJURED;
+        } else {
+            // We don't let this Enemy go beyond the screen
+            float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
+            float borderLeft = screen.getGameCam().position.x - screen.getGameViewPort().getWorldWidth() / 2;;
+            float borderRight = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2;
+            float enemyUpperEdge = b2body.getPosition().y + getCircleShapeRadiusMeters();
+            float enemyLeftEdge = b2body.getPosition().x - getCircleShapeRadiusMeters();
+            float enemyRightEdge = b2body.getPosition().x + getCircleShapeRadiusMeters();
+
+            if (upperEdge <= enemyUpperEdge || enemyLeftEdge <= borderLeft || borderRight <= enemyRightEdge) {
+                b2body.setLinearVelocity(0.0f, 0.0f); // Stop
+            }
+
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
+            // Preserve the flip and rotation state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
+            float rotation = getRotation();
+
+            setRegion(getKnockBackFrame(dt));
+
+            // Apply previous flip and rotation state
+            setFlip(isFlipX, isFlipY);
+            setRotation(rotation);
         }
     }
 
@@ -328,6 +326,7 @@ public abstract class Enemy extends Sprite {
     @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD && currentState != State.INACTIVE) {
+            setColor(currentState == State.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
             super.draw(batch);
         }
     }
