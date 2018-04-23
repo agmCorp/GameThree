@@ -34,7 +34,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private static final String TAG = FinalEnemyLevelThree.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final String NAME = "BEHOLDER";
+    private static final String NAME = "THE BEHOLDER";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float HORIZONTAL_PERIOD_SECONDS = 2.0f;
     private static final float VERTICAL_PERIOD_SECONDS = 3.0f;
