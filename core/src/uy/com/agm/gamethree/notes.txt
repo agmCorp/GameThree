@@ -2,7 +2,6 @@ HACER PRIORIDAD 1
 -----------------
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
-- el coin deberia ser random con random puntaje, como hice las powerboxes
 ***DIFICIL - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
 para los poderes y otro para las armas.
 - poner más powerboxes en el alambre y en el muro del nivel 2
