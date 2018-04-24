@@ -28,10 +28,10 @@ public class ColOne extends Item {
     private static final float WAITING_SECONDS = 3.0f;
     private static final float FADING_SECONDS = 2.0f;
     private static final int GOLD_SCORE = 50;
-    private static final float GOLD_PROBABILITY = 0.1f; // 10%
     private static final int SILVER_SCORE = 25;
-    private static final float SILVER_PROBABILITY = 0.3f;  // 30%
     private static final int BRONZE_SCORE = 10;
+    private static final float GOLD_PROBABILITY = 0.1f; // 10%
+    private static final float SILVER_PROBABILITY = 0.3f;  // 30%
 
     private float stateTime;
     private float stateWaitingTime;
