@@ -214,12 +214,14 @@ public abstract class Enemy extends Sprite {
                     stateAlive(dt);
                     break;
                 case KNOCK_BACK:
+                    setColor(KNOCK_BACK_COLOR);
                     stateKnockBack(dt);
                     break;
                 case INJURED:
                     stateInjured(dt);
                     break;
                 case EXPLODING:
+                    setColor(Color.WHITE); // Default tint
                     stateExploding(dt);
                     break;
                 case SPLAT:
@@ -326,7 +328,6 @@ public abstract class Enemy extends Sprite {
     @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD && currentState != State.INACTIVE) {
-            setColor(currentState == State.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
             super.draw(batch);
         }
     }

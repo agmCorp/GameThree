@@ -128,6 +128,7 @@ volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el 
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
 
+
 TENGO
 -----
 - borders, edges, paths, obstacles, powerboxes, enemies, finals, items, weapons
