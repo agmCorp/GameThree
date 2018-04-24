@@ -127,16 +127,6 @@ volvio a matar. Hice otra vez el audio y el movimiento de muerte (se ejecuto el 
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
-- Luego del knockback, viene el estado injured. En estado injured, los enemigos se dibujan con el setRegion puesto en stateKnockBack pero con tint white.
-El enemyFour necesita que se dibuje ese estado porque es cuando pone la textura de congelado. Los demás enemigos (por ejemplo EnemyOne) no lo necesitan.
-El draw está en enemy y decidí dibujar el estado injured porque sino los four no se ven congelados. Como consecuencia, al matar los enemigos, luego del knockback negro se ve
-el enemigo en color un frame y luego se ve la explosión. Antes como el knockback era a nivel de cada enemigo no pasaba. Lo dejé igual en los finalEnemy por consistencia.
-Pasa lo mismo en la transición injured->explosion en donde el estado es explosion pero la textura es de injured (de knockback).
-O sea, es algo general:
-Tengo los estados A, B y C (B no se dibuja).
-en stateA seteo regionA, evaluo condiciones y hago currentstate=B. Luego en stateB (no se dibuja) evaluo condiciones y hago currentstate=C, ahi como el draw es despues del update se empieza a dibujar C
-con la regionB. Eso no esta bien.
-Solo se me ocurre manejar 2 variables, currentstate, nextstate. Los stateA, stateB, stateC setean nextstate. Luego en el comienzo del update(dt) hago currentstate = nextstate. Pero no se que afecta.
 
 TENGO
 -----
