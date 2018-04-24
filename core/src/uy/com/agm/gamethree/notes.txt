@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- hacer los enemigos nivel 3.
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
 ***DIFICIL - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
