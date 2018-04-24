@@ -39,13 +39,13 @@ public class WorldContactListener implements ContactListener {
     public static final short HERO_BIT = 16;
     public static final short HERO_GHOST_BIT = 32;
     public static final short HERO_TOUGH_BIT = 64;
-    public static final short POWER_BOX_BIT = 128;
-    public static final short ENEMY_BIT = 256;
-    public static final short ITEM_BIT = 512;
-    public static final short HERO_WEAPON_BIT = 1024;
-    public static final short ENEMY_WEAPON_BIT = 2048;
-    public static final short FINAL_ENEMY_BIT = 4096;
-    public static final short SHIELD_BIT = 8192;
+    public static final short HERO_SHIELD_BIT = 128;
+    public static final short HERO_WEAPON_BIT = 256;
+    public static final short POWER_BOX_BIT = 512;
+    public static final short ITEM_BIT = 1024;
+    public static final short ENEMY_BIT = 2048;
+    public static final short ENEMY_WEAPON_BIT = 4096;
+    public static final short FINAL_ENEMY_BIT = 8192;
 
     @Override
     public void beginContact(Contact contact) {
@@ -261,7 +261,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Shield - Enemy's weapon
-            case SHIELD_BIT | ENEMY_WEAPON_BIT:
+            case HERO_SHIELD_BIT | ENEMY_WEAPON_BIT:
                 fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
                 ((Weapon) fixC.getUserData()).onBounce();
                 break;
@@ -309,10 +309,10 @@ public class WorldContactListener implements ContactListener {
 
             // Shield - Item/Enemy/Enemy's weapon
             // Avoid bouncing
-            case SHIELD_BIT | ITEM_BIT:
-            case SHIELD_BIT | ENEMY_BIT:
-            case SHIELD_BIT | ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == SHIELD_BIT ? fixA : fixB;
+            case HERO_SHIELD_BIT | ITEM_BIT:
+            case HERO_SHIELD_BIT | ENEMY_BIT:
+            case HERO_SHIELD_BIT | ENEMY_WEAPON_BIT:
+                fixC = fixA.getFilterData().categoryBits == HERO_SHIELD_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;
         }

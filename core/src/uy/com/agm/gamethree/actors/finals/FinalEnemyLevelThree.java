@@ -163,7 +163,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
                 WorldContactListener.EDGE_BIT |
                 WorldContactListener.OBSTACLE_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_TOUGH_BIT |
                 WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         for (Fixture fixture : b2body.getFixtureList()) {

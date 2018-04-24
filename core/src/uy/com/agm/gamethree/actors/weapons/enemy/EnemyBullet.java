@@ -65,7 +65,7 @@ public class EnemyBullet extends Weapon {
         shape.setRadius(circleShapeRadius);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
-                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_TOUGH_BIT |
                 WorldContactListener.HERO_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
 

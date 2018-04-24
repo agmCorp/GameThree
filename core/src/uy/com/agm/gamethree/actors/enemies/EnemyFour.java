@@ -97,7 +97,7 @@ public class EnemyFour extends Enemy {
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;

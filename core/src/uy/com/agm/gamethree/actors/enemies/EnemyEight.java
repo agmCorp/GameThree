@@ -80,7 +80,7 @@ public class EnemyEight extends Enemy {
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;

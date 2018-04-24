@@ -216,7 +216,7 @@ public class PowerTwo extends Item {
             // Shield only collide with enemies' bullets
             FixtureDef fdef = new FixtureDef();
             fdef.shape = shield;
-            fdef.filter.categoryBits = WorldContactListener.SHIELD_BIT;  // Depicts what this fixture is
+            fdef.filter.categoryBits = WorldContactListener.HERO_SHIELD_BIT;  // Depicts what this fixture is
             fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
                     WorldContactListener.FINAL_ENEMY_BIT |
                     WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)

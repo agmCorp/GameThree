@@ -71,7 +71,7 @@ public class EnemyOne extends Enemy {
                 WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.SHIELD_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.ENEMY_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
