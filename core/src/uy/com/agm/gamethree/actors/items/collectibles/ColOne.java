@@ -27,17 +27,35 @@ public class ColOne extends Item {
     private static final float VELOCITY_Y = 0.0f;
     private static final float WAITING_SECONDS = 3.0f;
     private static final float FADING_SECONDS = 2.0f;
-    private static final int SCORE = 25;
+    private static final int GOLD_SCORE = 50;
+    private static final float GOLD_PROBABILITY = 0.1f; // 10%
+    private static final int SILVER_SCORE = 25;
+    private static final float SILVER_PROBABILITY = 0.3f;  // 30%
+    private static final int BRONZE_SCORE = 10;
 
     private float stateTime;
     private float stateWaitingTime;
     private float stateFadingTime;
     private Animation colOneAnimation;
+    private int score;
 
     public ColOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        colOneAnimation = Assets.getInstance().getColOne().getColOneAnimation();
+        float rnd = MathUtils.random();
+        if (rnd <= GOLD_PROBABILITY) {
+            colOneAnimation = Assets.getInstance().getColOne().getGoldAnimation();
+            score = GOLD_SCORE;
+        } else {
+            if (rnd <= GOLD_PROBABILITY + SILVER_PROBABILITY) {
+                colOneAnimation = Assets.getInstance().getColOne().getSilverAnimation();
+                score = SILVER_SCORE;
+            } else {
+                colOneAnimation = Assets.getInstance().getColOne().getBronzeAnimation();
+                score = BRONZE_SCORE;
+            }
+        }
+
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
@@ -160,7 +178,7 @@ public class ColOne extends Item {
         AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne());
 
         // Set score
-        screen.getHud().addScore(SCORE);
+        screen.getHud().addScore(score);
     }
 
     @Override
