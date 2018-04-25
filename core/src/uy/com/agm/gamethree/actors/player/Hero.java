@@ -497,8 +497,11 @@ public class Hero extends Sprite {
         if (isPlayingAgain) {
             activateBlink(dt, this);
 
+            // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
+            // could have died crushed.
+            // If Hero is dead we don't set default filters.
             setDefaultFilterTime += dt;
-            if (setDefaultFilterTime > PLAY_AGAIN_WARM_UP_TIME) {
+            if (setDefaultFilterTime > PLAY_AGAIN_WARM_UP_TIME && !isDead()) {
                 setDefaultFilter();
                 deactivateBlink(this);
                 isPlayingAgain = false;
