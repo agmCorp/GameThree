@@ -163,11 +163,17 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
-        // Time is up : too late our Hero dies T_T
-        checkLevelTimeUp();
 
-        // If Hero is playing again, set his default filter after a few seconds
-        timeToSetDefaultFilter(dt);
+        if (!isDead()) {
+            // Time is up : too late our Hero dies T_T
+            checkLevelTimeUp();
+
+            // If Hero is playing again, set his default filter after a few seconds.
+            // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
+            // could have died crushed.
+            // If Hero is dead we don't set default filters.
+            timeToSetDefaultFilter(dt);
+        }
 
         switch (currentHeroState) {
             case STANDING:
@@ -430,7 +436,8 @@ public class Hero extends Sprite {
         powerDown();
         screen.getHud().forcePowerTimeUp();
 
-        // Our Hero can collide with powerBoxes, borders, edges, paths and obstacles only
+        // Our Hero can collide with powerBoxes, borders, edges, paths and obstacles only.
+        // However, he could die crushed.
         Filter filter = new Filter();
         filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is
         filter.maskBits = WorldContactListener.POWER_BOX_BIT |
@@ -461,7 +468,7 @@ public class Hero extends Sprite {
     }
 
     private void checkLevelTimeUp() {
-        if (screen.getHud().isTimeIsUp() && !isDead()) {
+        if (screen.getHud().isTimeIsUp()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getTimeIsUp());
             screen.getHud().showTimeIsUpMessage();
@@ -497,11 +504,8 @@ public class Hero extends Sprite {
         if (isPlayingAgain) {
             activateBlink(dt, this);
 
-            // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
-            // could have died crushed.
-            // If Hero is dead we don't set default filters.
             setDefaultFilterTime += dt;
-            if (setDefaultFilterTime > PLAY_AGAIN_WARM_UP_TIME && !isDead()) {
+            if (setDefaultFilterTime > PLAY_AGAIN_WARM_UP_TIME) {
                 setDefaultFilter();
                 deactivateBlink(this);
                 isPlayingAgain = false;
