@@ -22,6 +22,7 @@ public class Edge {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = AbstractScreen.V_WIDTH / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 1.0f * 1.0f / PlayScreen.PPM;
+    public static final float SPEED_UP_VELOCITY = PlayScreen.GAMECAM_VELOCITY * 5;
 
     private PlayScreen screen;
     private World world;
@@ -75,6 +76,6 @@ public class Edge {
     }
 
     public void speedUp() {
-        b2body.setLinearVelocity(0.0f, PlayScreen.GAMECAM_VELOCITY * 5);
+        b2body.setLinearVelocity(0.0f, SPEED_UP_VELOCITY);
     }
 }
