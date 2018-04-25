@@ -33,13 +33,12 @@ public class Edge {
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;
         this.world = screen.getWorld();
-
+        velocity = PlayScreen.GAMECAM_VELOCITY;
         if (isUpper) {
             this.boundsMeters = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - HEIGHT_METERS, WIDTH_METERS, HEIGHT_METERS);
         } else {
             this.boundsMeters = new Rectangle(0, screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2, WIDTH_METERS, HEIGHT_METERS);
         }
-        velocity = 0.0f;
         defineEdge();
         start();
     }
@@ -73,7 +72,6 @@ public class Edge {
     }
 
     public void start() {
-        velocity = velocity != 0 ? velocity : PlayScreen.GAMECAM_VELOCITY;
         b2body.setLinearVelocity(0.0f, velocity);
     }
 
