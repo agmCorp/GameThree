@@ -68,6 +68,18 @@ public class AudioManager {
         }
     }
 
+    public void setMusic(Music music) {
+        playingMusic = music;
+    }
+
+    public void playMusic() {
+        if (GameSettings.getInstance().isMusic()) {
+            playingMusic.setLooping(true);
+            playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
+            playingMusic.play();
+        }
+    }
+
     public void play(Music music) {
         // Stop previous music
         if (playingMusic != null) {
@@ -78,11 +90,7 @@ public class AudioManager {
 
         // Play new music
         playingMusic = music;
-        if (GameSettings.getInstance().isMusic()) {
-            music.setLooping(true);
-            music.setVolume(GameSettings.getInstance().getVolMusic());
-            music.play();
-        }
+        playMusic();
     }
 
     public void resumeMusic() {

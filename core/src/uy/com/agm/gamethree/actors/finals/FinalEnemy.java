@@ -117,10 +117,13 @@ public abstract class FinalEnemy extends Sprite {
 
                 // Stop music for a few seconds
                 AudioManager.getInstance().stopMusic();
+
+                // Set new Music (without playing it yet)
+                AudioManager.getInstance().setMusic(Assets.getInstance().getMusic().getSongFinalEnemyFight());
+
+                // Intro FX
                 introTime = 0;
                 playingIntro = true;
-
-                // Audio FX
                 AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyIntro());
 
                 // Fight message
@@ -148,7 +151,7 @@ public abstract class FinalEnemy extends Sprite {
                 introTime += dt;
                 if (introTime > INTRO_TIME_SECONDS) {
                     if (!screen.getPlayer().isDead() && !isDestroyed()) {
-                        AudioManager.getInstance().play(Assets.getInstance().getMusic().getSongFinalEnemyFight());
+                        AudioManager.getInstance().playMusic();
                     }
                     screen.getHud().hideMessage();
                     playingIntro = false;
