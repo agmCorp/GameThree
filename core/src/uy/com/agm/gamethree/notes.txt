@@ -12,6 +12,7 @@ b2worldcreator
     - crea el hero
     - crea el final
     - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
+MUCHO OJO CON LAS REFERENCIAS GLOBALES EN CONSTRUCTORES.
 
 HACER PRIORIDAD 2
 -----------------
