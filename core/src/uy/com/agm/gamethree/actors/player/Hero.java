@@ -627,6 +627,9 @@ public class Hero extends Sprite {
         // Reset rotation
         setRotation(0.0f);
 
+        // Hero could have died crushed after reviving (see playAgain()), so we must deactivate blinking.
+        deactivateBlink(this);
+
         // We take away his power effect
         currentPowerState = PowerState.NORMAL;
 
