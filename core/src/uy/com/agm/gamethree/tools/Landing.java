@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
@@ -36,7 +37,7 @@ public class Landing {
     public Landing(PlayScreen screen) {
         this.screen = screen;
         this.circleHero = new Circle();
-        this.circleHero.setRadius(screen.getPlayer().CIRCLE_SHAPE_RADIUS_METERS + MARGIN_METERS);
+        this.circleHero.setRadius(Hero.CIRCLE_SHAPE_RADIUS_METERS + MARGIN_METERS);
         this.worldQueryAABB = new WorldQueryAABB(screen);
 
         // We only check collisions against obstacles, paths and powerBoxes
