@@ -627,7 +627,8 @@ public class Hero extends Sprite {
         // Reset rotation
         setRotation(0.0f);
 
-        // Hero could have died crushed after reviving (see playAgain()), so we must deactivate blinking.
+        // Hero could have died crushed after reviving (see playAgain()), so we must deactivate blinking (ensuring in
+        // this way alpha = 1 at the beginning of DYING_UP state).
         deactivateBlink(this);
 
         // We take away his power effect
