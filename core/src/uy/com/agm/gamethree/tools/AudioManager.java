@@ -70,6 +70,10 @@ public class AudioManager {
 
     public void setMusic(Music music) {
         playingMusic = music;
+        if (GameSettings.getInstance().isMusic()) {
+            playingMusic.setLooping(true);
+            playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
+        }
     }
 
     public void playMusic() {
