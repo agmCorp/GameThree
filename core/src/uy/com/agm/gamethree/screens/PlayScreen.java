@@ -157,16 +157,16 @@ public class PlayScreen extends AbstractScreen {
 
         creator = new B2WorldCreator(this);
 
-        // Create the hero in our game world
-        player = new Hero(this, gameCam.position.x, gameCam.position.y / 2);
+        // Get our hero
+        player = creator.getHero();
         //player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
 
         // Boundaries
         upperEdge = creator.getUpperEdge();
         bottomEdge = creator.getBottomEdge();
 
-        // Create the final enemy in our game world
-        finalEnemy = LevelFactory.getFinalEnemy(this, this.level);
+        // Get the final enemy
+        finalEnemy = creator.getFinalEnemy();
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
@@ -358,10 +358,6 @@ public class PlayScreen extends AbstractScreen {
 
     public B2WorldCreator getCreator() {
         return creator;
-    }
-
-    public Hero getPlayer() {
-        return player;
     }
 
     public FinalEnemy getFinalEnemy() {

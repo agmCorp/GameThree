@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
@@ -76,6 +78,8 @@ public class B2WorldCreator {
     public static final String KEY_ENEMY_SEVEN = "enemySeven";
 
     private PlayScreen screen;
+    private Hero hero;
+    private FinalEnemy finalEnemy;
     private Array<Border> borders;
     private Array<Edge> edges;
     private Edge upperEdge;
@@ -111,7 +115,14 @@ public class B2WorldCreator {
         // Debug
         arrayMapDebug = new ArrayMap<String, String>();
 
+        // TiledEditor map
         TiledMap map = screen.getMap();
+
+        // Create the hero in our game world
+        hero = new Hero(screen, screen.getGameCam().position.x, screen.getGameCam().position.y / 2);
+
+        // Create the final enemy in our game world
+        finalEnemy = LevelFactory.getFinalEnemy(screen, screen.getLevel());
 
         // Layer: border
         layer = map.getLayers().get(LAYER_BORDER);
@@ -227,6 +238,14 @@ public class B2WorldCreator {
                 powerBoxes.add(new PowerBox(screen, object));
             }
         }
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public FinalEnemy getFinalEnemy() {
+        return finalEnemy;
     }
 
     public Array<Border> getBorders() {

@@ -164,8 +164,10 @@ public class PowerThree extends Item {
     }
 
     private void applyPowerThree() {
+        Hero hero = screen.getCreator().getHero();
+
         // WA: Hero could have died between use method and applyPowerThree method
-        if (!screen.getPlayer().isDead()) {
+        if (!hero.isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerThree());
 
@@ -177,11 +179,10 @@ public class PowerThree extends Item {
             hud.addScore(SCORE);
 
             // Disable previous power (if any)
-            Hero hero = screen.getPlayer();
             hero.powerDown();
 
             // Apply fire power
-            screen.getPlayer().applyFirePower(new HeroHalfMoonShooting(screen, numberBullets));
+            hero.applyFirePower(new HeroHalfMoonShooting(screen, numberBullets));
         }
     }
 

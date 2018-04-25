@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -477,7 +478,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         stateFinalEnemyTime += dt;
 
         // Calculate shooting angle
-        float angle = tmp.set(screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y)
+        Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
+        float angle = tmp.set(heroPosition.x, heroPosition.y)
                 .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
         setRotation(angle);
         setFlip(true, true);
@@ -603,7 +605,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     public void onHit(Weapon weapon) {
-        if (screen.getPlayer().isSilverBulletEnabled()) {
+        if (screen.getCreator().getHero().isSilverBulletEnabled()) {
             if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
                 weapon.onTarget();
                 damage--;

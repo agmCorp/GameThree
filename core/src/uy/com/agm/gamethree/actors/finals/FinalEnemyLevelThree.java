@@ -327,7 +327,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     }
 
     private void setRegionFlip(TextureRegion region) {
-        float heroX = screen.getPlayer().getB2body().getPosition().x;
+        float heroX = screen.getCreator().getHero().getB2body().getPosition().x;
         if (heroX > b2body.getPosition().x && !region.isFlipX()) {
             region.flip(true, false);
         }
@@ -525,7 +525,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
     @Override
     public void onHit(Weapon weapon) {
-        if (screen.getPlayer().isSilverBulletEnabled()) {
+        if (screen.getCreator().getHero().isSilverBulletEnabled()) {
             if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
                 weapon.onTarget();
                 damage--;

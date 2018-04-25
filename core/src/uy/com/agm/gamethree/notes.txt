@@ -6,13 +6,6 @@ HACER PRIORIDAD 1
 ***DIFICIL - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
 para los poderes y otro para las armas.
 - poner más powerboxes en el alambre y en el muro del nivel 2
-- Creo que debería mover el player de PlayScreen y el finalEnemy a b2WorldCreator. Este último debería ser el que proporciona todos los personajes.
-Hay que ver el impoacto de los gets en esto. Es decir,
-b2worldcreator
-    - crea el hero
-    - crea el final
-    - tiene un metodo update que hace update de todos los objetos (powerboxes.update, hero.update, etc)
-MUCHO OJO CON LAS REFERENCIAS GLOBALES EN CONSTRUCTORES.
 
 HACER PRIORIDAD 2
 -----------------

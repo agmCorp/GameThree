@@ -163,8 +163,10 @@ public class PowerOne extends Item {
     }
 
     private void applyPowerOne() {
+        Hero hero = screen.getCreator().getHero();
+
         // WA: Hero could have died between use method and applyPowerOne method
-        if (!screen.getPlayer().isDead()) {
+        if (!hero.isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
 
@@ -176,7 +178,6 @@ public class PowerOne extends Item {
             hud.addScore(SCORE);
 
             // Disable previous power (if any)
-            Hero hero = screen.getPlayer();
             hero.powerDown();
 
             // Hero can't collide with bullets and some types of enemies

@@ -50,9 +50,9 @@ public class EnemyBlastShooting implements IShootStrategy {
 
     private void shootImp(float x, float y) {
         float angle;
-
+        Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, screen.getPlayer().getB2body().getPosition().x, screen.getPlayer().getB2body().getPosition().y, BLAST_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, BLAST_LINEAR_VELOCITY);
 
         for(int i = 0; i < 4; i++) {
             if (i > 0) {

@@ -47,7 +47,7 @@ public class HeroDefaultShooting implements IShootStrategy {
     @Override
     public void updateShoot(float dt) {
         openFireTime += dt;
-        if (screen.getPlayer().isSilverBulletEnabled()) {
+        if (screen.getCreator().getHero().isSilverBulletEnabled()) {
             fireDelay = SILVER_BULLET_FIRE_DELAY_SECONDS;
         }
     }
@@ -61,7 +61,7 @@ public class HeroDefaultShooting implements IShootStrategy {
     }
 
     private void shootImp(float x, float y) {
-        Hero hero = screen.getPlayer();
+        Hero hero = screen.getCreator().getHero();
 
         if (hero.isSilverBulletEnabled()) {
             if (hero.hasSilverBullets()) {

@@ -50,7 +50,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     @Override
     public void updateShoot(float dt) {
         openFireTime += dt;
-        if (screen.getPlayer().isSilverBulletEnabled()) {
+        if (screen.getCreator().getHero().isSilverBulletEnabled()) {
             fireDelay = HeroDefaultShooting.SILVER_BULLET_FIRE_DELAY_SECONDS;
         }
     }
@@ -66,7 +66,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private void shootImp(float x, float y) {
         float directionDegrees = 180.0f / (numberBullets + 1);
         float angle;
-        Hero hero = screen.getPlayer();
+        Hero hero = screen.getCreator().getHero();
 
         for (int i = 1; i <= numberBullets; i++) {
             angle = directionDegrees * i;

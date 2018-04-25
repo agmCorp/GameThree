@@ -163,8 +163,10 @@ public class PowerFour extends Item {
     }
 
     private void applyPowerFour() {
+        Hero hero = screen.getCreator().getHero();
+
         // WA: Hero could have died between use method and applyPowerFour method
-        if (!screen.getPlayer().isDead()) {
+        if (!hero.isDead()) {
             // Audio FX
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
 
@@ -176,7 +178,6 @@ public class PowerFour extends Item {
             hud.addScore(SCORE);
 
             // Disable previous power (if any)
-            Hero hero = screen.getPlayer();
             hero.powerDown();
 
             // Create a new Filter

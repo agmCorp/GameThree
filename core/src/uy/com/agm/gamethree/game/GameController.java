@@ -30,7 +30,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         candidateVelocity = new Vector2(0.0f, 0.0f);
         heroVelocity = new Vector2(0.0f, 0.0f);
         this.screen = screen;
-        this.player = screen.getPlayer();
+        this.player = screen.getCreator().getHero();
         this.finalEnemy = screen.getFinalEnemy();
     }
 

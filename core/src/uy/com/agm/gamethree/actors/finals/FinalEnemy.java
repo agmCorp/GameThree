@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.ShootContext;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
@@ -110,6 +111,8 @@ public abstract class FinalEnemy extends Sprite {
     }
 
     public void update(float dt) {
+        Hero hero = screen.getCreator().getHero();
+
         if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
             // When our final enemy is on camera, it activates
             if (screen.isTheEndOfTheWorld()) {
@@ -135,7 +138,7 @@ public abstract class FinalEnemy extends Sprite {
                 }
 
                 // Enable shooting
-                screen.getPlayer().enableShooting();
+                hero.enableShooting();
 
                 // HealthBar
                 screen.getHud().showHealthBarInfo(getFinalEnemyName(), getFinalEnemyDamage());
@@ -150,7 +153,7 @@ public abstract class FinalEnemy extends Sprite {
             if (playingIntro) {
                 introTime += dt;
                 if (introTime > INTRO_TIME_SECONDS) {
-                    if (!screen.getPlayer().isDead() && !isDestroyed()) {
+                    if (!hero.isDead() && !isDestroyed()) {
                         AudioManager.getInstance().playMusic();
                     }
                     screen.getHud().hideMessage();
@@ -159,7 +162,7 @@ public abstract class FinalEnemy extends Sprite {
             }
 
             // Release silver bullets if needed
-            if (!screen.getPlayer().isDead() && !screen.getPlayer().hasSilverBullets() && !isDestroyed()) {
+            if (!hero.isDead() && !hero.hasSilverBullets() && !isDestroyed()) {
                 aidSilverBulletTime += dt;
                 if (aidSilverBulletTime > AID_SILVER_BULLET_TIME_SECONDS) {
                     releaseSilverBullet();
