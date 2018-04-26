@@ -19,12 +19,14 @@ public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
 
     private int currentLevel;
+    private int lives;
     private int finalScore;
     private int nextLevel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer finalScore) {
+    public LevelCompletedScreen(Integer currentLevel, Integer lives, Integer finalScore) {
         super();
         this.currentLevel = currentLevel;
+        this.lives = lives;
         this.finalScore = finalScore;
         this.nextLevel = currentLevel + 1;
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
@@ -67,7 +69,6 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
         Label levelCompletedLabel = new Label(i18NGameThreeBundle.format("levelCompleted.completed"), labelStyleBig);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
-        Label playAgainLabel = new Label(i18NGameThreeBundle.format("levelCompleted.playAgain"), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
         Label backLabel = new Label(i18NGameThreeBundle.format("levelCompleted.backToMenu"), labelStyleNormal);
@@ -79,21 +80,19 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP).center();
         table.row();
-        table.add(playAgainLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             table.row();
-            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP).center();
+            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP).center();
+            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
         }
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
 
         // Events
-        playAgainLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.currentLevel, 0));
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.finalScore));
+            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.lives, this.finalScore));
         }
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 

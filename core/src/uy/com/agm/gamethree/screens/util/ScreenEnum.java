@@ -34,13 +34,13 @@ public enum ScreenEnum {
 
     GAME {
         public AbstractScreen getScreen(Object... params) {
-            return new PlayScreen((Integer) params[0], (Integer) params[1]);
+            return new PlayScreen((Integer) params[0], (Integer) params[1], (Integer) params[2]);
         }
     },
 
     LEVEL_COMPLETED {
         public AbstractScreen getScreen(Object... params) {
-            return new LevelCompletedScreen((Integer) params[0], (Integer) params[1]);
+            return new LevelCompletedScreen((Integer) params[0], (Integer) params[1], (Integer) params[1]);
         }
     },
 

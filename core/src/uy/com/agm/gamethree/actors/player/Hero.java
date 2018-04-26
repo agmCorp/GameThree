@@ -38,8 +38,8 @@ public class Hero extends Sprite {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
     public static final float LINEAR_VELOCITY = 5.2f;
+    public static final int LIVES_START = 30;
     private static final float DEATH_LINEAR_VELOCITY = 5.0f;
-    private static final int LIVES_START = 30;
     private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
     private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
@@ -737,6 +737,10 @@ public class Hero extends Sprite {
 
     public int getLives() {
         return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public void addSilverBullet() {

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -62,7 +63,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelLabel).padTop(AbstractScreen.PAD_TOP);
 
             // Events
-            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, 0));
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, Hero.LIVES_START, 0));
         }
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
