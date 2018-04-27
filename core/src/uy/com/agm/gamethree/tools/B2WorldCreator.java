@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import uy.com.agm.gamethree.actors.enemies.EnemyNine;
 import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
@@ -63,6 +64,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_SIX = "enemySix";
     private static final String LAYER_ENEMY_SEVEN = "enemySeven";
     private static final String LAYER_ENEMY_EIGHT = "enemyEight";
+    private static final String LAYER_ENEMY_NINE = "enemyNine";
     private static final String LAYER_POWER_BOX = "powerBox";
 
     public static final String KEY_ID = "id";
@@ -228,6 +230,14 @@ public class B2WorldCreator {
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyEight(screen, object));
+            }
+        }
+
+        // Layer: enemyNine
+        layer = map.getLayers().get(LAYER_ENEMY_NINE);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyNine(screen, object));
             }
         }
 

@@ -152,15 +152,15 @@ public class PlayScreen extends AbstractScreen {
             b2dr = new Box2DDebugRenderer();
         }
 
-        final float ALTURA = 70.0f; // todo
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
+        //final float ALTURA = 70.0f; // todo
+        //gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
 
         creator = new B2WorldCreator(this);
 
         // Get our hero
         player = creator.getHero();
         player.setLives(lives);
-        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
+        //player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
 
         // Boundaries
         upperEdge = creator.getUpperEdge();
