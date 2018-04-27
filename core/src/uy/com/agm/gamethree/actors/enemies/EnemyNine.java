@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
+import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
@@ -27,21 +28,21 @@ public class EnemyNine extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float LINEAR_VELOCITY = 8.0f;
+    private static final float PERIOD_SECONDS = 1.3f;
+    private static final float RADIUS_METERS = 2.0f;
+    private static final float RAID_LINEAR_VELOCITY = 8.0f;
     private static final float DENSITY = 1000.0f;
-    private static final float PATH_PERIOD_SECONDS = 1.3f;
-    private static final float PATH_RADIUS_METERS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final int SCORE = 15;
 
     private float stateTime;
     private Animation enemyNineAnimation;
+    private Animation enemyNineRaidAnimation;
     private Animation explosionAnimation;
 
-    // The whole path is divided into two sections
-    private boolean path1;
-    private boolean path2;
-    private boolean movingLeft;
+    private boolean raid;
+    private boolean goingLeft;
+    private boolean damage;
     private float elapsedTime;
 
     public EnemyNine(PlayScreen screen, MapObject object) {
@@ -54,13 +55,13 @@ public class EnemyNine extends Enemy {
 
         // Animations
         enemyNineAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
+        enemyNineRaidAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
-        path1 = true;
-        path2 = false;
-        movingLeft = b2body.getPosition().x >= screen.getGameCam().position.x;
+        raid = false;
+        goingLeft = MathUtils.randomBoolean();
+        damage = false;
         elapsedTime = 0;
-        //checkPath1(); // todo
     }
 
     @Override
@@ -96,7 +97,7 @@ public class EnemyNine extends Enemy {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) enemyNineAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyNineRaidAnimation.getKeyFrame(stateTime, true);
         stateTime += dt;
         return region;
     }
@@ -115,12 +116,27 @@ public class EnemyNine extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyNineAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
-            region.flip(true, false);
-        }
-        if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
-            region.flip(true, false);
+        TextureRegion region;
+        if (raid) {
+            region = (TextureRegion) enemyNineRaidAnimation.getKeyFrame(stateTime, true);
+        } else {
+            region = (TextureRegion) enemyNineAnimation.getKeyFrame(stateTime, true);
+            if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
+                region.flip(true, false);
+            }
+            if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
+                region.flip(true, false);
+            }
+
+            // Set new tangential speed (derivative d/dt of the parametric equation of a Circle)
+            elapsedTime += dt;
+            float w = 2 * MathUtils.PI / PERIOD_SECONDS;
+            velocity.set(goingLeft ? -1 : 1, RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
+
+            // Change direction
+            if (b2body.getPosition().x <= 0 && goingLeft || b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS >= screen.getGameViewPort().getWorldWidth() && !goingLeft) {
+                goingLeft = !goingLeft;
+            }
         }
 
         setRegion(region);
@@ -128,8 +144,6 @@ public class EnemyNine extends Enemy {
 
         // Shoot time!
         super.openFire(dt);
-
-        checkPath(dt);
     }
 
     @Override
@@ -170,31 +184,6 @@ public class EnemyNine extends Enemy {
         }
     }
 
-    private void checkPath(float dt) {
-        if (path1) {
-            checkPath1(dt);
-        } else {
-            if (path2) {
-                checkPath2(dt);
-            }
-        }
-    }
-
-    private void checkPath1(float dt) {
-        elapsedTime += dt;
-        float w = 2 * MathUtils.PI / PATH_PERIOD_SECONDS;
-        velocity.set(movingLeft ? -1 : 1, PATH_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
-        if (b2body.getPosition().x <= 0 && movingLeft || b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS >= screen.getGameViewPort().getWorldWidth() && !movingLeft) {
-            movingLeft = !movingLeft;
-        }
-    }
-
-    private void checkPath2(float dt) {
-//        Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
-//        velocity.set(b2body.getPosition().x, b2body.getPosition().y);
-//        Vector2Util.goToTarget(velocity, heroPosition.x, heroPosition.y, LINEAR_VELOCITY);
-    }
-
     @Override
     protected String getClassName() {
         return this.getClass().getName();
@@ -206,23 +195,35 @@ public class EnemyNine extends Enemy {
     }
 
     @Override
-    public void onHit() {
-        if (path1) {
-            path1 = false;
-            path2 = true;
+    public void onHit(Weapon weapon) {
+        if (raid) {
+            if (!damage) {
+                damage = true;
+            } else {
+                super.onHit(weapon);
+            }
+        } else {
+            weapon.onTarget();
+            raid = true;
+            stateTime = 0;
+
+            // Raid
             Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
             velocity.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(velocity, heroPosition.x, heroPosition.y, LINEAR_VELOCITY);
-        } else {
-            /*
-             * We must remove its b2body to avoid collisions.
-             * This can't be done here because this method is called from WorldContactListener that is invoked
-             * from PlayScreen.update.world.step(...).
-             * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
-             * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
-             */
-            currentState = State.KNOCK_BACK;
+            Vector2Util.goToTarget(velocity, heroPosition.x, heroPosition.y, RAID_LINEAR_VELOCITY);
         }
+    }
+
+    @Override
+    public void onHit() {
+        /*
+         * We must remove its b2body to avoid collisions.
+         * This can't be done here because this method is called from WorldContactListener that is invoked
+         * from PlayScreen.update.world.step(...).
+         * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
+         * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
+         */
+        currentState = State.KNOCK_BACK;
     }
 
     @Override
