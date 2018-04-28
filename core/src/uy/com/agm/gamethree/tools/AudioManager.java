@@ -50,7 +50,6 @@ public class AudioManager {
     }
 
     public void playSound(Sound sound) {
-        playingSound = sound;
         playSound(sound, 1);
     }
 
@@ -63,6 +62,7 @@ public class AudioManager {
     }
 
     public void playSound(Sound sound, float volume, float pitch, float pan) {
+        playingSound = sound;
         if (GameSettings.getInstance().isSound()) {
             sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }
