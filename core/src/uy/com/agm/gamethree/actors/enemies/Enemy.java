@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.items.Item;
@@ -46,7 +47,6 @@ public abstract class Enemy extends Sprite {
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final float SPEAK_TIME_SECONDS = 2.0f;
-    private static final float SPEAK_VOLUME = 0.5f;
 
     private TextureRegion splat;
     private boolean pum;
@@ -55,7 +55,6 @@ public abstract class Enemy extends Sprite {
     private int tiledMapId;
     private boolean knockBackStarted;
     private float knockBackTime;
-    private float speakTime;
 
     protected World world;
     protected PlayScreen screen;
@@ -109,7 +108,6 @@ public abstract class Enemy extends Sprite {
         splat = Assets.getInstance().getSplat().getRandomEnemySplat();
         knockBackStarted = false;
         knockBackTime = 0;
-        speakTime = SPEAK_TIME_SECONDS;
     }
 
     public String getTiledMapId() {
@@ -241,16 +239,22 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void speak(float dt) {
-        Sound voice;
-
-        speakTime += dt;
-        if (speakTime >= SPEAK_TIME_SECONDS) {
-            voice = getVoice();
-            if (voice != null) {
-                AudioManager.getInstance().playSound(voice, SPEAK_VOLUME);
+        Sound voice = getVoice();
+        Assets assets = Assets.getInstance();
+        String filename = assets.getAssetFileName(voice);
+        Long startTime = assets.getSounds().getStartTime(filename);
+        if (startTime == null) {
+            speak(assets, filename, voice);
+        } else {
+            if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - startTime) >= SPEAK_TIME_SECONDS * 1000) { // debo saber si la hora es vieja
+                speak(assets, filename, voice);
             }
-            speakTime = 0;
         }
+    }
+
+    private void speak(Assets assets, String filename, Sound voice) {
+        assets.getSounds().setStartTime(filename, TimeUtils.nanoTime());
+        AudioManager.getInstance().playSound(voice);
     }
 
     protected void pum(Sound hitSound) {

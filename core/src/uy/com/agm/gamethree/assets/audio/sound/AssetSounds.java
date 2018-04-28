@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.assets.audio.sound;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import uy.com.agm.gamethree.assets.Assets;
 
@@ -11,6 +12,9 @@ import uy.com.agm.gamethree.assets.Assets;
 
 public class AssetSounds {
     private static final String TAG = AssetSounds.class.getName();
+
+    // Keeps a sound filename and the moment it started in nanoseconds.
+    private ArrayMap<String, Long> trackSounds;
 
     private Sound gameOver;
     private Sound bump;
@@ -62,6 +66,7 @@ public class AssetSounds {
     private Sound whistle;
 
     public AssetSounds(AssetManager am) {
+        trackSounds = new ArrayMap<String, Long>();
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
         bump = am.get(Assets.FX_FILE_BUMP, Sound.class);
         crack = am.get(Assets.FX_FILE_CRACK, Sound.class);
@@ -110,6 +115,14 @@ public class AssetSounds {
         dragon = am.get(Assets.FX_FILE_DRAGON, Sound.class);
         buzz = am.get(Assets.FX_FILE_BUZZ, Sound.class);
         whistle = am.get(Assets.FX_FILE_WHISTLE, Sound.class);
+    }
+
+    public void setStartTime(String soundFilename, Long nanoTime) {
+        trackSounds.put(soundFilename, nanoTime);
+    }
+
+    public Long getStartTime(String soundFilename) {
+        return trackSounds.get(soundFilename);
     }
 
     public Sound getGameOver() {

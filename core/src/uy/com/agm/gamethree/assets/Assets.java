@@ -567,4 +567,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetMusic getMusic() {
         return music;
     }
+
+    public <T> String getAssetFileName(T asset) {
+        return assetManager.getAssetFileName(asset);
+    }
 }
