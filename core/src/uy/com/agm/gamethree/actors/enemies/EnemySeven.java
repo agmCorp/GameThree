@@ -201,7 +201,7 @@ public class EnemySeven extends Enemy {
     @Override
     protected void speak() {
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPop());
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getSpring());
     }
 
     @Override

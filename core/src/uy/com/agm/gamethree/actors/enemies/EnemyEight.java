@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -249,7 +250,8 @@ public class EnemyEight extends Enemy {
 
     @Override
     protected void speak() {
-        // Nothing yet
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBuzz());
     }
 
     @Override

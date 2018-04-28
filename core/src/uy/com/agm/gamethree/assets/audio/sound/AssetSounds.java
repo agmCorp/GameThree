@@ -54,8 +54,12 @@ public class AssetSounds {
     private Sound pum;
     private Sound chirp;
     private Sound squeak;
-    private Sound pop;
+    private Sound spring;
     private Sound growl;
+    private Sound warble;
+    private Sound dragon;
+    private Sound buzz;
+    private Sound whistle;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -100,8 +104,12 @@ public class AssetSounds {
         pum = am.get(Assets.FX_FILE_PUM, Sound.class);
         chirp = am.get(Assets.FX_FILE_CHIRP, Sound.class);
         squeak = am.get(Assets.FX_FILE_SQUEAK, Sound.class);
-        pop = am.get(Assets.FX_FILE_POP, Sound.class);
+        spring = am.get(Assets.FX_FILE_SPRING, Sound.class);
         growl = am.get(Assets.FX_FILE_GROWL, Sound.class);
+        warble = am.get(Assets.FX_FILE_WARBLE, Sound.class);
+        dragon = am.get(Assets.FX_FILE_DRAGON, Sound.class);
+        buzz = am.get(Assets.FX_FILE_BUZZ, Sound.class);
+        whistle = am.get(Assets.FX_FILE_WHISTLE, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -272,11 +280,27 @@ public class AssetSounds {
         return squeak;
     }
 
-    public Sound getPop() {
-        return pop;
+    public Sound getSpring() {
+        return spring;
     }
 
     public Sound getGrowl() {
         return growl;
+    }
+
+    public Sound getWarble() {
+        return warble;
+    }
+
+    public Sound getDragon() {
+        return dragon;
+    }
+
+    public Sound getBuzz() {
+        return buzz;
+    }
+
+    public Sound getWhistle() {
+        return whistle;
     }
 }

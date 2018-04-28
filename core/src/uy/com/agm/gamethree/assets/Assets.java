@@ -113,8 +113,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_PUM = "audio/sounds/pum.ogg";
     public static final String FX_FILE_CHIRP = "audio/sounds/chirp.ogg";
     public static final String FX_FILE_SQUEAK = "audio/sounds/squeak.ogg";
-    public static final String FX_FILE_POP = "audio/sounds/pop.ogg";
+    public static final String FX_FILE_SPRING = "audio/sounds/spring.ogg";
     public static final String FX_FILE_GROWL = "audio/sounds/growl.ogg";
+    public static final String FX_FILE_WARBLE = "audio/sounds/warble.ogg";
+    public static final String FX_FILE_DRAGON = "audio/sounds/dragon.ogg";
+    public static final String FX_FILE_BUZZ = "audio/sounds/buzz.ogg";
+    public static final String FX_FILE_WHISTLE = "audio/sounds/whistle.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -257,8 +261,12 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_PUM, Sound.class);
         assetManager.load(FX_FILE_CHIRP, Sound.class);
         assetManager.load(FX_FILE_SQUEAK, Sound.class);
-        assetManager.load(FX_FILE_POP, Sound.class);
+        assetManager.load(FX_FILE_SPRING, Sound.class);
         assetManager.load(FX_FILE_GROWL, Sound.class);
+        assetManager.load(FX_FILE_WARBLE, Sound.class);
+        assetManager.load(FX_FILE_DRAGON, Sound.class);
+        assetManager.load(FX_FILE_BUZZ, Sound.class);
+        assetManager.load(FX_FILE_WHISTLE, Sound.class);
     }
 
     private void loadMusic() {

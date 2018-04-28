@@ -291,7 +291,8 @@ public class EnemyFour extends Enemy {
 
     @Override
     protected void speak() {
-        // Nothing yet
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getWarble());
     }
 
     private void checkPath() {

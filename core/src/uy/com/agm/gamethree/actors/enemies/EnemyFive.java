@@ -16,6 +16,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionI;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -214,7 +215,8 @@ public class EnemyFive extends Enemy {
 
     @Override
     protected void speak() {
-        // Nothing yet
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDragon());
     }
 
     @Override

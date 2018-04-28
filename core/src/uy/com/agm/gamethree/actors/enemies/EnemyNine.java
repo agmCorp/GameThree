@@ -198,7 +198,8 @@ public class EnemyNine extends Enemy {
 
     @Override
     protected void speak() {
-        // Nothing yet
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getWhistle());
     }
 
     @Override

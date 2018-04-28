@@ -45,7 +45,7 @@ public abstract class Enemy extends Sprite {
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
-    private static final float SPEAK_TIME_SECONDS = 4.0f;
+    private static final float SPEAK_TIME_SECONDS = 2.0f;
 
     private TextureRegion splat;
     private boolean pum;
