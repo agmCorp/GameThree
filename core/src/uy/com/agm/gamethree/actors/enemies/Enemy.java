@@ -240,12 +240,14 @@ public abstract class Enemy extends Sprite {
 
     protected void speak() {
         Sound voice = getVoice();
-        Long lastPlayingTime = AudioManager.getInstance().getLastPlayingTime(voice);
-        if (lastPlayingTime == null) {
-            AudioManager.getInstance().playSound(voice);
-        } else {
-            if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= SPEAK_TIME_SECONDS * 1000) {
+        if (voice != null) {
+            Long lastPlayingTime = AudioManager.getInstance().getLastPlayingTime(voice);
+            if (lastPlayingTime == null) {
                 AudioManager.getInstance().playSound(voice);
+            } else {
+                if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= SPEAK_TIME_SECONDS * 1000) {
+                    AudioManager.getInstance().playSound(voice);
+                }
             }
         }
     }
