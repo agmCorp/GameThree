@@ -51,7 +51,7 @@ public class AssetSounds {
     private Sound levelCompleted;
     private Sound boing;
     private Sound click;
-    private Sound aplause;
+    private Sound applause;
     private Sound squish;
     private Sound frozen;
     private Sound beam;
@@ -102,7 +102,7 @@ public class AssetSounds {
         levelCompleted = am.get(Assets.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Assets.FX_FILE_BOUNCE, Sound.class);
         click = am.get(Assets.FX_FILE_CLICK, Sound.class);
-        aplause = am.get(Assets.FX_FILE_APPLAUSE, Sound.class);
+        applause = am.get(Assets.FX_FILE_APPLAUSE, Sound.class);
         squish = am.get(Assets.FX_FILE_SQUISH, Sound.class);
         frozen = am.get(Assets.FX_FILE_FROZEN, Sound.class);
         beam = am.get(Assets.FX_FILE_BEAM, Sound.class);
@@ -265,8 +265,8 @@ public class AssetSounds {
         return click;
     }
 
-    public Sound getAplause() {
-        return aplause;
+    public Sound getApplause() {
+        return applause;
     }
 
     public Sound getSquish() {
