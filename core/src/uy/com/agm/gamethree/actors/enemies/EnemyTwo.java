@@ -168,6 +168,12 @@ public class EnemyTwo extends Enemy {
     }
 
     @Override
+    protected void speak() {
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getSqueak());
+    }
+
+    @Override
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.
@@ -182,8 +188,5 @@ public class EnemyTwo extends Enemy {
     @Override
     public void onBump() {
         reverseVelocity(true, false);
-
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getSqueak());
     }
 }

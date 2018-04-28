@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -173,6 +174,12 @@ public class EnemyOne extends Enemy {
     @Override
     protected TextureRegion getHelpImage() {
         return Assets.getInstance().getScene2d().getHelpEnemyOne();
+    }
+
+    @Override
+    protected void speak() {
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getGrowl());
     }
 
     @Override

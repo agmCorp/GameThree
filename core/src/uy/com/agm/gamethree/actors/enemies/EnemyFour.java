@@ -289,6 +289,11 @@ public class EnemyFour extends Enemy {
         return Assets.getInstance().getScene2d().getHelpEnemyFour();
     }
 
+    @Override
+    protected void speak() {
+        // Nothing yet
+    }
+
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
             if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target

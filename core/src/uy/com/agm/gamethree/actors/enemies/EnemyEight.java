@@ -248,6 +248,11 @@ public class EnemyEight extends Enemy {
     }
 
     @Override
+    protected void speak() {
+        // Nothing yet
+    }
+
+    @Override
     public void onHit(Weapon weapon) {
         if (!damage) {
             weapon.onBounce();

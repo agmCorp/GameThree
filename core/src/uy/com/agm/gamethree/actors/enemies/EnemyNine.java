@@ -197,6 +197,11 @@ public class EnemyNine extends Enemy {
     }
 
     @Override
+    protected void speak() {
+        // Nothing yet
+    }
+
+    @Override
     public void onHit(Weapon weapon) {
         if (raid) {
             if (!damage) {

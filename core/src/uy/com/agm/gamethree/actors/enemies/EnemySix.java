@@ -272,6 +272,11 @@ public class EnemySix extends Enemy {
     }
 
     @Override
+    protected void speak() {
+        // Nothing yet
+    }
+
+    @Override
     public void onHit() {
         /*
          * We must remove its b2body to avoid collisions.

@@ -108,7 +108,7 @@ public abstract class Enemy extends Sprite {
         splat = Assets.getInstance().getSplat().getRandomEnemySplat();
         knockBackStarted = false;
         knockBackTime = 0;
-        speakTime = 0;
+        speakTime = SPEAK_TIME_SECONDS;
     }
 
     public String getTiledMapId() {
@@ -243,7 +243,7 @@ public abstract class Enemy extends Sprite {
         speakTime += dt;
         if (speakTime >= SPEAK_TIME_SECONDS) {
             speak();
-            speakTime = MathUtils.random(SPEAK_TIME_SECONDS);
+            speakTime = 0;
         }
     }
 
