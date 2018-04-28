@@ -62,7 +62,7 @@ public class EnemySix extends Enemy {
         enemySixIdleAnimation = Assets.getInstance().getEnemySix().getEnemySixIdleAnimation();
         enemySixBeamAnimation = Assets.getInstance().getEnemySix().getEnemySixBeamAnimation();
         explosionAnimation = Assets.getInstance().getExplosionG().getExplosionGAnimation();
-        stateTime = 0;
+        stateTime = MathUtils.random(0, enemySixIdleAnimation.getAnimationDuration()); // To be untimely with others
 
         // Power beam variables initialization
         beamStateTime = 0;

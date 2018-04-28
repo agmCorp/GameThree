@@ -52,6 +52,10 @@ public class AssetSounds {
     private Sound frozen;
     private Sound beam;
     private Sound pum;
+    private Sound chirp;
+    private Sound squeak;
+    private Sound pop;
+    private Sound growl;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -94,6 +98,10 @@ public class AssetSounds {
         frozen = am.get(Assets.FX_FILE_FROZEN, Sound.class);
         beam = am.get(Assets.FX_FILE_BEAM, Sound.class);
         pum = am.get(Assets.FX_FILE_PUM, Sound.class);
+        chirp = am.get(Assets.FX_FILE_CHIRP, Sound.class);
+        squeak = am.get(Assets.FX_FILE_SQUEAK, Sound.class);
+        pop = am.get(Assets.FX_FILE_POP, Sound.class);
+        growl = am.get(Assets.FX_FILE_GROWL, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -254,5 +262,21 @@ public class AssetSounds {
 
     public Sound getPum() {
         return pum;
+    }
+
+    public Sound getChirp() {
+        return chirp;
+    }
+
+    public Sound getSqueak() {
+        return squeak;
+    }
+
+    public Sound getPop() {
+        return pop;
+    }
+
+    public Sound getGrowl() {
+        return growl;
     }
 }

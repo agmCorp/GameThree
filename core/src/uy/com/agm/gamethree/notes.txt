@@ -1,6 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
 - hacer los enemigos nivel 3.
+- enemigo9 audio al atacar.
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
 ***DIFICIL - El poder de disparo debería convivir con los demás poderes. Lo unico que se me ocurre es que existan 2 timers, uno
@@ -77,6 +78,7 @@ Agregar en agredecimientos a Juan LLopart
 
 SOLO IDEAS
 ----------
+- Animación o ruido distinto al ser aplastado.
 - Copiar la historia del juego de knightmare remake! :D
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o

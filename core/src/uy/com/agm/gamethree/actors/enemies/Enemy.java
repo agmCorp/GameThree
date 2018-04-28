@@ -45,6 +45,7 @@ public abstract class Enemy extends Sprite {
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
+    private static final float SPEAK_TIME_SECONDS = 4.0f;
 
     private TextureRegion splat;
     private boolean pum;
@@ -53,6 +54,7 @@ public abstract class Enemy extends Sprite {
     private int tiledMapId;
     private boolean knockBackStarted;
     private float knockBackTime;
+    private float speakTime;
 
     protected World world;
     protected PlayScreen screen;
@@ -106,6 +108,7 @@ public abstract class Enemy extends Sprite {
         splat = Assets.getInstance().getSplat().getRandomEnemySplat();
         knockBackStarted = false;
         knockBackTime = 0;
+        speakTime = 0;
     }
 
     public String getTiledMapId() {
@@ -211,6 +214,7 @@ public abstract class Enemy extends Sprite {
         if (currentState != State.INACTIVE) {
             switch (currentState) {
                 case ALIVE:
+                    speak(dt);
                     stateAlive(dt);
                     break;
                 case KNOCK_BACK:
@@ -232,6 +236,14 @@ public abstract class Enemy extends Sprite {
                 default:
                     break;
             }
+        }
+    }
+
+    protected void speak(float dt) {
+        speakTime += dt;
+        if (speakTime >= SPEAK_TIME_SECONDS) {
+            speak();
+            speakTime = MathUtils.random(SPEAK_TIME_SECONDS);
         }
     }
 
@@ -345,6 +357,7 @@ public abstract class Enemy extends Sprite {
     protected abstract void stateExploding(float dt);
     protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
+    protected abstract void speak();
     public abstract void onHit();
     public abstract void onBump();
 }

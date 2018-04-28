@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -57,7 +58,8 @@ public class EnemySeven extends Enemy {
             setBounds(getX(), getY(), AssetEnemySeven.WIDTH_METERS, AssetEnemySeven.HEIGHT_METERS);
         }
 
-        stateTime = 0;
+        // Variables initialization
+        stateTime = MathUtils.random(0, enemySevenAnimation.getAnimationDuration()); // To walk untimely with others
         velocity.set(0, VELOCITY_Y);
         changeHorizontalTime = 0;
         changeVerticalTime = 0;
@@ -211,5 +213,8 @@ public class EnemySeven extends Enemy {
     @Override
     public void onBump() {
         reverseVelocity(true, false);
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPop());
     }
 }

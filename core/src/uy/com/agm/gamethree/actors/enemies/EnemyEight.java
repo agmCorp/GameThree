@@ -52,19 +52,18 @@ public class EnemyEight extends Enemy {
         // Setbounds is the one that determines the size of the EnemyEight's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyEight.WIDTH_METERS, AssetEnemyEight.HEIGHT_METERS);
 
-        damage = false;
-        stateTime = 0;
-
         // Animations
         enemyEightAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
+        // Variables initialization
+        damage = false;
+        stateTime = MathUtils.random(0, enemyEightAnimation.getAnimationDuration()); // To flap untimely with others
         path1 = true;
         path2 = false;
         path3 = false;
         sign = b2body.getPosition().x < screen.getGameCam().position.x ? -1 : 1;
         elapsedTime = 0;
-        checkPath1();
     }
 
     @Override

@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
@@ -45,7 +46,8 @@ public class EnemyTwo extends Enemy {
         // Setbounds is the one that determines the size of the EnemyTwo's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
 
-        stateTime = 0;
+        // Variables initialization
+        stateTime = MathUtils.random(0, enemyTwoAnimation.getAnimationDuration()); // To flap untimely with others
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }
 
@@ -180,5 +182,8 @@ public class EnemyTwo extends Enemy {
     @Override
     public void onBump() {
         reverseVelocity(true, false);
+
+        // Audio FX
+        AudioManager.getInstance().play(Assets.getInstance().getSounds().getSqueak());
     }
 }

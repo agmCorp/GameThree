@@ -13,9 +13,10 @@ import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyNine;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionH;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -29,7 +30,7 @@ public class EnemyNine extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float PERIOD_SECONDS = 1.3f;
-    private static final float RADIUS_METERS = 2.0f;
+    private static final float RADIUS_METERS = 1.0f;
     private static final float RAID_LINEAR_VELOCITY = 8.0f;
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
@@ -48,19 +49,19 @@ public class EnemyNine extends Enemy {
     public EnemyNine(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Setbounds is the one that determines the size of the EnemyEight's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyEight.WIDTH_METERS, AssetEnemyEight.HEIGHT_METERS);
-
-        stateTime = 0;
+        // Setbounds is the one that determines the size of the EnemyNine's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyNine.WIDTH_METERS, AssetEnemyNine.HEIGHT_METERS);
 
         // Animations
-        enemyNineAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
-        enemyNineRaidAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
+        enemyNineAnimation = Assets.getInstance().getEnemyNine().getEnemyNineAnimation();
+        enemyNineRaidAnimation = Assets.getInstance().getEnemyNine().getEnemyNineRaidAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionH().getExplosionHAnimation();
 
+        // Variables initialization
         raid = false;
         goingLeft = MathUtils.randomBoolean();
         damage = false;
+        stateTime = MathUtils.random(0, enemyNineAnimation.getAnimationDuration()); // To flap untimely with others
         elapsedTime = 0;
     }
 
@@ -109,7 +110,7 @@ public class EnemyNine extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyEight may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyNine may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -121,10 +122,10 @@ public class EnemyNine extends Enemy {
             region = (TextureRegion) enemyNineRaidAnimation.getKeyFrame(stateTime, true);
         } else {
             region = (TextureRegion) enemyNineAnimation.getKeyFrame(stateTime, true);
-            if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
+            if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
                 region.flip(true, false);
             }
-            if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
+            if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
                 region.flip(true, false);
             }
 
@@ -134,7 +135,8 @@ public class EnemyNine extends Enemy {
             velocity.set(goingLeft ? -1 : 1, RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
 
             // Change direction
-            if (b2body.getPosition().x <= 0 && goingLeft || b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS >= screen.getGameViewPort().getWorldWidth() && !goingLeft) {
+            if (b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS <= 0 && goingLeft ||
+                    b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS >= screen.getGameViewPort().getWorldWidth() && !goingLeft) {
                 goingLeft = !goingLeft;
             }
         }
@@ -176,8 +178,8 @@ public class EnemyNine extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionF.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionF.HEIGHT_METERS * expScale / 2,
-                        AssetExplosionF.WIDTH_METERS * expScale, AssetExplosionF.HEIGHT_METERS * expScale);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionH.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionH.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionH.WIDTH_METERS * expScale, AssetExplosionH.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
@@ -191,13 +193,14 @@ public class EnemyNine extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyEight();
+        return Assets.getInstance().getScene2d().getHelpEnemyNine();
     }
 
     @Override
     public void onHit(Weapon weapon) {
         if (raid) {
             if (!damage) {
+                weapon.onBounce();
                 damage = true;
             } else {
                 super.onHit(weapon);
@@ -211,6 +214,9 @@ public class EnemyNine extends Enemy {
             Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
             velocity.set(b2body.getPosition().x, b2body.getPosition().y);
             Vector2Util.goToTarget(velocity, heroPosition.x, heroPosition.y, RAID_LINEAR_VELOCITY);
+
+            // Audio FX
+            AudioManager.getInstance().play(Assets.getInstance().getSounds().getChirp());
         }
     }
 

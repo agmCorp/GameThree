@@ -63,13 +63,12 @@ public class EnemyFour extends Enemy {
         // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
-        // State variables initialization
-        stateTime = 0;
-
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
         b2bodyTargetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
         b2bodyTargetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();
 
+        // Variables initialization
+        stateTime = MathUtils.random(0, enemyFourAnimation.getAnimationDuration()); // To flap untimely with others;
         tmp.set(getX(), getY());
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
         velocity.set(tmp);

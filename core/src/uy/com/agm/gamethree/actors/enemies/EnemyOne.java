@@ -47,7 +47,8 @@ public class EnemyOne extends Enemy {
         // Setbounds is the one that determines the size of the EnemyOne's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
 
-        stateTime = 0;
+        // Variables initialization
+        stateTime = MathUtils.random(0, enemyOneAnimation.getAnimationDuration()); // To walk untimely with others
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
         changeDirection = false;
         changeDirectionTime = 0;

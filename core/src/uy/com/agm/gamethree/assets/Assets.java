@@ -29,6 +29,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFour;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyNine;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
@@ -41,6 +42,8 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionD;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionG;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionH;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionI;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
@@ -108,6 +111,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
     public static final String FX_FILE_BEAM = "audio/sounds/finalEnemyPowerUp.ogg";
     public static final String FX_FILE_PUM = "audio/sounds/pum.ogg";
+    public static final String FX_FILE_CHIRP = "audio/sounds/chirp.ogg";
+    public static final String FX_FILE_SQUEAK = "audio/sounds/squeak.ogg";
+    public static final String FX_FILE_POP = "audio/sounds/pop.ogg";
+    public static final String FX_FILE_GROWL = "audio/sounds/growl.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -141,6 +148,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetEnemySix enemySix;
     private AssetEnemySeven enemySeven;
     private AssetEnemyEight enemyEight;
+    private AssetEnemyNine enemyNine;
     private AssetBridge kinematicBridge;
     private AssetSplat splat;
     private AssetPowerBox powerBox;
@@ -156,6 +164,8 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionE explosionE;
     private AssetExplosionF explosionF;
     private AssetExplosionG explosionG;
+    private AssetExplosionH explosionH;
+    private AssetExplosionI explosionI;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
     private AssetSilverBullet silverBullet;
@@ -245,6 +255,10 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_SQUISH, Sound.class);
         assetManager.load(FX_FILE_FROZEN, Sound.class);
         assetManager.load(FX_FILE_PUM, Sound.class);
+        assetManager.load(FX_FILE_CHIRP, Sound.class);
+        assetManager.load(FX_FILE_SQUEAK, Sound.class);
+        assetManager.load(FX_FILE_POP, Sound.class);
+        assetManager.load(FX_FILE_GROWL, Sound.class);
     }
 
     private void loadMusic() {
@@ -313,6 +327,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemySix = new AssetEnemySix(atlasDinamicObjects);
         enemySeven = new AssetEnemySeven(atlasDinamicObjects);
         enemyEight = new AssetEnemyEight(atlasDinamicObjects);
+        enemyNine = new AssetEnemyNine(atlasDinamicObjects);
         kinematicBridge = new AssetBridge(atlasDinamicObjects);
         splat = new AssetSplat(atlasDinamicObjects);
         powerBox = new AssetPowerBox(atlasDinamicObjects);
@@ -328,6 +343,8 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionE = new AssetExplosionE(atlasDinamicObjects);
         explosionF = new AssetExplosionF(atlasDinamicObjects);
         explosionG = new AssetExplosionG(atlasDinamicObjects);
+        explosionH = new AssetExplosionH(atlasDinamicObjects);
+        explosionI = new AssetExplosionI(atlasDinamicObjects);
         heroBullet = new AssetHeroBullet(atlasDinamicObjects);
         enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
         silverBullet = new AssetSilverBullet(atlasDinamicObjects);
@@ -407,6 +424,10 @@ public class Assets implements Disposable, AssetErrorListener {
         return enemyEight;
     }
 
+    public AssetEnemyNine getEnemyNine() {
+        return enemyNine;
+    }
+
     public AssetBridge getKinematicBridge() {
         return kinematicBridge;
     }
@@ -465,6 +486,14 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetExplosionG getExplosionG() {
         return explosionG;
+    }
+
+    public AssetExplosionH getExplosionH() {
+        return explosionH;
+    }
+
+    public AssetExplosionI getExplosionI() {
+        return explosionI;
     }
 
     public AssetHeroBullet getHeroBullet() {

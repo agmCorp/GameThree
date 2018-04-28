@@ -14,7 +14,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFive;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionI;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -48,15 +48,16 @@ public class EnemyFive extends Enemy {
 
         // Animations
         enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionI().getExplosionIAnimation();
 
         // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
+        // Variables initialization
         damage = false;
         radius = MathUtils.random(MIN_RADIUS_METERS, MAX_RADIUS_METERS);
         period = MathUtils.random(MIN_PERIOD_SECONDS, MAX_PERIOD_SECONDS);
-        stateTime = 0;
+        stateTime = MathUtils.random(0, enemyFiveAnimation.getAnimationDuration()); // To flap untimely with others
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
         velocity.set(0.0f, 0.0f); // Initially at rest
@@ -161,8 +162,8 @@ public class EnemyFive extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Setbounds is the one that determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionF.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionF.HEIGHT_METERS * expScale / 2,
-                        AssetExplosionF.WIDTH_METERS * expScale, AssetExplosionF.HEIGHT_METERS * expScale);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionI.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionI.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionI.WIDTH_METERS * expScale, AssetExplosionI.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

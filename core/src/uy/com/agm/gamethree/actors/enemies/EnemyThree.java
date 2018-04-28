@@ -45,6 +45,7 @@ public class EnemyThree extends Enemy {
         // Setbounds is the one that determines the size of the EnemyThree's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyThree.WIDTH_METERS, AssetEnemyThree.HEIGHT_METERS);
 
+        // Variables initialization
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
         velocity.set(VELOCITY_X, VELOCITY_Y);
     }

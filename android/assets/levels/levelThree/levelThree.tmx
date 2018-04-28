@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2212">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2223">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250">
@@ -145,10 +145,21 @@
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
  <objectgroup name="enemyFour"/>
- <objectgroup name="enemyFive"/>
+ <objectgroup name="enemyFive">
+  <object id="2216" x="64" y="6560" width="32" height="32"/>
+  <object id="2219" x="256" y="6528" width="32" height="32"/>
+  <object id="2220" x="256" y="6624" width="32" height="32"/>
+  <object id="2221" x="160" y="6720" width="32" height="32"/>
+  <object id="2222" x="320" y="6720" width="32" height="32"/>
+ </objectgroup>
  <objectgroup name="enemySix"/>
  <objectgroup name="enemySeven"/>
- <objectgroup name="enemyEight"/>
+ <objectgroup name="enemyEight">
+  <object id="2212" x="0" y="6144" width="32" height="32"/>
+  <object id="2213" x="10" y="6061" width="32" height="32"/>
+  <object id="2214" x="5" y="6233" width="32" height="32"/>
+  <object id="2215" x="-1" y="6386" width="32" height="32"/>
+ </objectgroup>
  <objectgroup name="enemyNine">
   <object id="2202" x="320" y="7200" width="32" height="32"/>
   <object id="2204" x="182" y="7123.33" width="32" height="32"/>
