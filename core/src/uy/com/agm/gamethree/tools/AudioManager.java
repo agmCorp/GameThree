@@ -2,7 +2,10 @@ package uy.com.agm.gamethree.tools;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.TimeUtils;
 
+import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameSettings;
 
 /**
@@ -12,12 +15,16 @@ import uy.com.agm.gamethree.game.GameSettings;
 public class AudioManager {
     private static final String TAG = AudioManager.class.getName();
 
+    // Keeps a sound filename and the last playing time in nanoseconds.
+    private ArrayMap<String, Long> trackSounds;
+
     private static  AudioManager instance;
     private Sound playingSound;
     private Music playingMusic;
 
     // Singleton: prevent instantiation from other classes
     private AudioManager() {
+        trackSounds = new ArrayMap<String, Long>();
     }
 
     // Singleton: retrieve instance
@@ -63,6 +70,7 @@ public class AudioManager {
 
     public void playSound(Sound sound, float volume, float pitch, float pan) {
         playingSound = sound;
+        trackSounds.put(Assets.getInstance().getAssetFileName(playingSound), TimeUtils.nanoTime());
         if (GameSettings.getInstance().isSound()) {
             sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }
@@ -128,5 +136,10 @@ public class AudioManager {
                 playingMusic.pause();
             }
         }
+    }
+
+    // Returns null if the sound was never played
+    public Long getLastPlayingTime(Sound sound) {
+        return trackSounds.get(Assets.getInstance().getAssetFileName(sound));
     }
 }

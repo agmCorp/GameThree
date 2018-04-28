@@ -213,7 +213,7 @@ public abstract class Enemy extends Sprite {
         if (currentState != State.INACTIVE) {
             switch (currentState) {
                 case ALIVE:
-                    speak(dt);
+                    speak();
                     stateAlive(dt);
                     break;
                 case KNOCK_BACK:
@@ -238,23 +238,16 @@ public abstract class Enemy extends Sprite {
         }
     }
 
-    protected void speak(float dt) {
+    protected void speak() {
         Sound voice = getVoice();
-        Assets assets = Assets.getInstance();
-        String filename = assets.getAssetFileName(voice);
-        Long startTime = assets.getSounds().getStartTime(filename);
-        if (startTime == null) {
-            speak(assets, filename, voice);
+        Long lastPlayingTime = AudioManager.getInstance().getLastPlayingTime(voice);
+        if (lastPlayingTime == null) {
+            AudioManager.getInstance().playSound(voice);
         } else {
-            if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - startTime) >= SPEAK_TIME_SECONDS * 1000) { // debo saber si la hora es vieja
-                speak(assets, filename, voice);
+            if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= SPEAK_TIME_SECONDS * 1000) {
+                AudioManager.getInstance().playSound(voice);
             }
         }
-    }
-
-    private void speak(Assets assets, String filename, Sound voice) {
-        assets.getSounds().setStartTime(filename, TimeUtils.nanoTime());
-        AudioManager.getInstance().playSound(voice);
     }
 
     protected void pum(Sound hitSound) {
