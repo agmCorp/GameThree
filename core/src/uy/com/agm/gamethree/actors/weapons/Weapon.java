@@ -79,7 +79,7 @@ public abstract class Weapon extends Sprite {
     }
 
     public void onBounce() {
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBoing());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBoing());
         reverseVelocity(true, true);
     }
 

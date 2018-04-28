@@ -62,7 +62,7 @@ public class PowerOne extends Item {
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerOne());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpPowerOne());
     }
 
     @Override
@@ -168,7 +168,7 @@ public class PowerOne extends Item {
         // WA: Hero could have died between use method and applyPowerOne method
         if (!hero.isDead()) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerOne());
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();

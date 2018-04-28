@@ -66,7 +66,7 @@ public class ColOne extends Item {
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpColOne());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpColOne());
     }
 
     @Override
@@ -175,7 +175,7 @@ public class ColOne extends Item {
         currentState = State.TAKEN;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColOne());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColOne());
 
         // Set score
         screen.getHud().addScore(score);

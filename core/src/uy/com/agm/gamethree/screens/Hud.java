@@ -365,7 +365,7 @@ public class Hud extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         setGameStatePaused();
                         return true;
                     }
@@ -376,7 +376,7 @@ public class Hud extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         setGameStateRunning();
                         return true;
                     }
@@ -387,7 +387,7 @@ public class Hud extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         setGameStateRunning();
                         return true;
                     }
@@ -398,7 +398,7 @@ public class Hud extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         quit();
                         return true;
                     }
@@ -597,8 +597,8 @@ public class Hud extends AbstractScreen {
             if (time > 0) {
                 time--;
                 if (time <= LEVEL_TIMER_NOTIFICATION) {
-                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getClock());
-                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeepB());
+                    AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClock());
+                    AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepB());
                     if (isMessageVisible()) {
                         hideMessage();
                     } else {
@@ -620,7 +620,7 @@ public class Hud extends AbstractScreen {
                 if (powerTime > 0) {
                     powerTime--;
                     if (powerTime <= POWER_TIMER_NOTIFICATION) {
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeepA());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepA());
                     }
                     powerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, powerTime));
                 } else {

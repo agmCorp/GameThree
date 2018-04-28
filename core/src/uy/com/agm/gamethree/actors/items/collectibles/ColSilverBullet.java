@@ -49,7 +49,7 @@ public class ColSilverBullet extends Item {
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpColSilverBullet());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpColSilverBullet());
     }
 
     @Override
@@ -158,7 +158,7 @@ public class ColSilverBullet extends Item {
         currentState = State.TAKEN;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpColSilverBullet());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColSilverBullet());
 
         // Set score
         screen.getHud().addScore(SCORE);

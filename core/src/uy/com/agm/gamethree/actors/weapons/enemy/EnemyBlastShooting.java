@@ -72,6 +72,6 @@ public class EnemyBlastShooting implements IShootStrategy {
         }
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
     }
 }

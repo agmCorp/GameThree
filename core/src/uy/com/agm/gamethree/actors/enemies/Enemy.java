@@ -46,6 +46,7 @@ public abstract class Enemy extends Sprite {
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
     private static final float SPEAK_TIME_SECONDS = 2.0f;
+    private static final float SPEAK_VOLUME = 0.5f;
 
     private TextureRegion splat;
     private boolean pum;
@@ -240,9 +241,14 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void speak(float dt) {
+        Sound voice;
+
         speakTime += dt;
         if (speakTime >= SPEAK_TIME_SECONDS) {
-            speak();
+            voice = getVoice();
+            if (voice != null) {
+                AudioManager.getInstance().playSound(voice, SPEAK_VOLUME);
+            }
             speakTime = 0;
         }
     }
@@ -251,9 +257,9 @@ public abstract class Enemy extends Sprite {
         // Audio FX and screen shake
         if (pum) {
             screen.getShaker().shake(SHAKE_DURATION);
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPum());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPum());
         } else {
-            AudioManager.getInstance().play(hitSound);
+            AudioManager.getInstance().playSound(hitSound);
         }
     }
 
@@ -357,7 +363,7 @@ public abstract class Enemy extends Sprite {
     protected abstract void stateExploding(float dt);
     protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
-    protected abstract void speak();
+    protected abstract Sound getVoice();
     public abstract void onHit();
     public abstract void onBump();
 }

@@ -37,7 +37,7 @@ public class Border extends StaticBackgroundObject {
 
     @Override
     public void onBump() {
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBump());
     }
 
     @Override

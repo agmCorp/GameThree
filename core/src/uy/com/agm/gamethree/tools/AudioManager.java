@@ -49,20 +49,20 @@ public class AudioManager {
         }
     }
 
-    public void play(Sound sound) {
+    public void playSound(Sound sound) {
         playingSound = sound;
-        play(sound, 1);
+        playSound(sound, 1);
     }
 
-    public void play(Sound sound, float volume) {
-        play(sound, volume, 1);
+    public void playSound(Sound sound, float volume) {
+        playSound(sound, volume, 1);
     }
 
-    public void play(Sound sound, float volume, float pitch) {
-        play(sound, volume, pitch, 0);
+    public void playSound(Sound sound, float volume, float pitch) {
+        playSound(sound, volume, pitch, 0);
     }
 
-    public void play(Sound sound, float volume, float pitch, float pan) {
+    public void playSound(Sound sound, float volume, float pitch, float pan) {
         if (GameSettings.getInstance().isSound()) {
             sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }
@@ -84,7 +84,7 @@ public class AudioManager {
         }
     }
 
-    public void play(Music music) {
+    public void playMusic(Music music) {
         // Stop previous music
         if (playingMusic != null) {
             if (playingMusic != music) {

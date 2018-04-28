@@ -54,7 +54,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             // Audio FX
             AudioManager.getInstance().stopSound();
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
     }

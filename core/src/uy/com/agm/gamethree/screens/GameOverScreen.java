@@ -21,7 +21,7 @@ public class GameOverScreen extends AbstractScreen {
         super();
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getGameOver());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getGameOver());
     }
 
     @Override

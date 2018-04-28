@@ -432,7 +432,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         stateFinalEnemyTime = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyExplosion());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -453,7 +453,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
             explosionFXStateTime = 0;
 
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyExplosion());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyExplosion());
 
             // Set the new state
             currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
@@ -473,7 +473,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
    private void stateExploding(float dt) {
        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
            // Audio FX
-           AudioManager.getInstance().play(Assets.getInstance().getSounds().getLevelCompleted());
+           AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getLevelCompleted());
 
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;
@@ -503,7 +503,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyPowerDown());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyPowerDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
@@ -519,7 +519,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
         if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyPowerUp());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyPowerUp());
         }
     }
 
@@ -530,7 +530,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
                 weapon.onTarget();
                 damage--;
                 screen.getHud().decreaseHealth();
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyHit(), FinalEnemy.HIT_MAX_VOLUME);
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyHit(), FinalEnemy.HIT_MAX_VOLUME);
                 screen.getShaker().shake(HIT_SHAKE_DURATION);
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();

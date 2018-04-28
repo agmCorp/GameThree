@@ -76,10 +76,10 @@ public class HeroDefaultShooting implements IShootStrategy {
                         SILVER_BULLET_VELOCITY_Y,
                         Assets.getInstance().getSilverBullet().getSilverBulletAnimation())));
                 // Sound FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootSwish());
             } else {
                 // Sound FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootEmpty());
             }
         } else {
             screen.getCreator().createGameThreeActor(new ActorDef(new HeroBullet(screen, x,
@@ -92,7 +92,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                     DEFAULT_BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                     Assets.getInstance().getHeroBullet().getHeroBulletAnimation())));
             // Sound FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());
         }
     }
 }

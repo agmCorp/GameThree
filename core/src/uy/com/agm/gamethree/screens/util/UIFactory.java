@@ -21,7 +21,7 @@ public class UIFactory {
                                              float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().stopSound();
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
 
                         // Display screen
                         ScreenManager.getInstance().showScreen(dstScreen, params);

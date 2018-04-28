@@ -127,7 +127,7 @@ public abstract class FinalEnemy extends Sprite {
                 // Intro FX
                 introTime = 0;
                 playingIntro = true;
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getFinalEnemyIntro());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyIntro());
 
                 // Fight message
                 screen.getHud().showFightMessage();

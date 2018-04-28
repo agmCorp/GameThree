@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -184,7 +185,7 @@ public class EnemyFour extends Enemy {
             b2bodyLinearVelX = b2body.getLinearVelocity().x;
 
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
 
             // Stop motion
             stop();
@@ -219,7 +220,7 @@ public class EnemyFour extends Enemy {
         stateFrozenTime += dt;
         if (stateFrozenTime >= FROZEN_TIME_SECONDS) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getFrozen());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
 
             // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
             setBounds(b2body.getPosition().x, b2body.getPosition().y, AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
@@ -290,9 +291,8 @@ public class EnemyFour extends Enemy {
     }
 
     @Override
-    protected void speak() {
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getWarble());
+    protected Sound getVoice() {
+        return Assets.getInstance().getSounds().getWarble();
     }
 
     private void checkPath() {

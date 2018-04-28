@@ -180,7 +180,7 @@ public class PlayScreen extends AbstractScreen {
         hud.showInitialHelp();
 
         // Start playing level music
-        AudioManager.getInstance().play(LevelFactory.getLevelMusic(this.level));
+        AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));

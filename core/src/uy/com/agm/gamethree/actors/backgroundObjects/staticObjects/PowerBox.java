@@ -134,7 +134,7 @@ public class PowerBox extends StaticBackgroundObject {
         stateTime = 0;
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getOpenPowerBox());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getOpenPowerBox());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -188,7 +188,7 @@ public class PowerBox extends StaticBackgroundObject {
     }
 
     public void onBump() {
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBump());
     }
 
     @Override
@@ -210,7 +210,7 @@ public class PowerBox extends StaticBackgroundObject {
         if (damage >= strength - 1) {
             currentState = State.OPENED;
         } else {
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getCrack());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getCrack());
             damage++;
         }
     }

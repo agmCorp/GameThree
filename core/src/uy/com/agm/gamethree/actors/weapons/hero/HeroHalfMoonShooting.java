@@ -83,13 +83,13 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             HeroDefaultShooting.SILVER_BULLET_VELOCITY_Y,
                             Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
                     // Sound FX
-                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootSwish());
+                    AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootSwish());
                     if (i == numberBullets) {
                         hero.decreaseSilverBullets();
                     }
                 } else {
                     // Sound FX
-                    AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShootEmpty());
+                    AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootEmpty());
                 }
             } else {
                 if (screen.getHud().isPowerRunningOut()) {
@@ -112,7 +112,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             Assets.getInstance().getBulletA().getBulletAAnimation());
                 }
                 // Sound FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());
             }
         }
     }

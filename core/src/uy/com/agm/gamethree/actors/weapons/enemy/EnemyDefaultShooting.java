@@ -63,6 +63,6 @@ public class EnemyDefaultShooting implements IShootStrategy {
                 tmp.y,
                 Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation())));
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
     }
 }

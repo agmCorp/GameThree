@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -147,7 +148,7 @@ public class EnemySix extends Enemy {
         beamIntervalTime += dt;
         if (beamIntervalTime > BEAM_INTERVAL_SECONDS) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getBeam());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeam());
 
             stateTime = 0;
             beamStateTime = 0;
@@ -272,8 +273,9 @@ public class EnemySix extends Enemy {
     }
 
     @Override
-    protected void speak() {
+    protected Sound getVoice() {
         // Nothing yet
+        return null;
     }
 
     @Override

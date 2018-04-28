@@ -35,7 +35,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         }
 
         // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getAplause());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getAplause());
     }
 
     @Override

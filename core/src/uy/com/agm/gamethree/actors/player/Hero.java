@@ -248,7 +248,7 @@ public class Hero extends Sprite {
         }
         if (screen.getHud().isPowerTimeUp()) {
             powerDown();
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPowerDown());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPowerDown());
         }
     }
 
@@ -470,7 +470,7 @@ public class Hero extends Sprite {
     private void checkLevelTimeUp() {
         if (screen.getHud().isTimeIsUp()) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getTimeIsUp());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getTimeIsUp());
             screen.getHud().showTimeIsUpMessage();
             lives = 1; // Force game over
             onDead();
@@ -622,7 +622,7 @@ public class Hero extends Sprite {
 
         // Pause music and play sound effect
         AudioManager.getInstance().pauseMusic();
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getDead());
 
         // Reset rotation
         setRotation(0.0f);

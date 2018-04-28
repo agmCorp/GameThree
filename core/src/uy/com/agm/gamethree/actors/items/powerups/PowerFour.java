@@ -62,7 +62,7 @@ public class PowerFour extends Item {
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerFour());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpPowerFour());
     }
 
     @Override
@@ -168,7 +168,7 @@ public class PowerFour extends Item {
         // WA: Hero could have died between use method and applyPowerFour method
         if (!hero.isDead()) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerFour());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerFour());
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();

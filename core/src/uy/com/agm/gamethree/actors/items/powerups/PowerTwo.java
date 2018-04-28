@@ -65,7 +65,7 @@ public class PowerTwo extends Item {
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getShowUpPowerTwo());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpPowerTwo());
     }
 
     @Override
@@ -171,7 +171,7 @@ public class PowerTwo extends Item {
         // WA: Hero could have died between use method and applyPowerTwo method
         if (!hero.isDead()) {
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerTwo());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerTwo());
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();

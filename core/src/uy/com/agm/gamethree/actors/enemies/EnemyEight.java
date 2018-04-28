@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -15,7 +16,6 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -249,9 +249,8 @@ public class EnemyEight extends Enemy {
     }
 
     @Override
-    protected void speak() {
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBuzz());
+    protected Sound getVoice() {
+        return Assets.getInstance().getSounds().getBuzz();
     }
 
     @Override

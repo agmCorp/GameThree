@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -172,8 +173,9 @@ public class EnemyThree extends Enemy {
     }
 
     @Override
-    protected void speak() {
+    protected Sound getVoice() {
         // Nothing yet
+        return null;
     }
 
     @Override

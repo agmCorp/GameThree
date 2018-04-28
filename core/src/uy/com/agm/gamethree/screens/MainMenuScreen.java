@@ -24,7 +24,7 @@ public class MainMenuScreen extends AbstractScreen {
         super();
 
         // Play menu music
-        AudioManager.getInstance().play(Assets.getInstance().getMusic().getSongMainMenu());
+        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongMainMenu());
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MainMenuScreen extends AbstractScreen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
-                        AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         Gdx.app.exit();
                         return false;
                     }

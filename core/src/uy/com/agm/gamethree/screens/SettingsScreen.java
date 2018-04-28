@@ -149,7 +149,7 @@ public class SettingsScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 // Audio FX
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getClick());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                 changeShooting();
                 save();
                 return true;
@@ -166,16 +166,16 @@ public class SettingsScreen extends AbstractScreen {
         // Audio FX
         switch (MathUtils.random(1, 4)) {
             case 1:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getPickUpPowerOne());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerOne());
                 break;
             case 2:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHeroShoot());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());
                 break;
             case 3:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getEnemyShoot());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
                 break;
             case 4:
-                AudioManager.getInstance().play(Assets.getInstance().getSounds().getHit());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHit());
                 break;
         }
     }

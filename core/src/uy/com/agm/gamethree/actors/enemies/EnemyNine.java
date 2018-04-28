@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.enemies;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -197,9 +198,8 @@ public class EnemyNine extends Enemy {
     }
 
     @Override
-    protected void speak() {
-        // Audio FX
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getWhistle());
+    protected Sound getVoice() {
+        return Assets.getInstance().getSounds().getWhistle();
     }
 
     @Override
@@ -222,7 +222,7 @@ public class EnemyNine extends Enemy {
             Vector2Util.goToTarget(velocity, heroPosition.x, heroPosition.y, RAID_LINEAR_VELOCITY);
 
             // Audio FX
-            AudioManager.getInstance().play(Assets.getInstance().getSounds().getChirp());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getChirp());
         }
     }
 

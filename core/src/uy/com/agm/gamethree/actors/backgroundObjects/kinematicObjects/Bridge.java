@@ -231,7 +231,7 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
     }
 
     public void onBump() {
-        AudioManager.getInstance().play(Assets.getInstance().getSounds().getBump());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBump());
     }
 
     @Override
