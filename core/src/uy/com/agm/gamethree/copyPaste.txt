@@ -151,11 +151,6 @@ MOVIMIENTOS COMPLEJOS:
 
         pero me niego...no lo voy a hacer asi...lo voy a hacer componiendo y listo porque no tengo control.
 
------------------------------------------------------------------------------------
-
-    Con esta formula hago que el enemigo se mueva como el enemigo 4, yendo hacia la izquierda:
-    tmp.set(-1, radius * w * MathUtils.cos(w * elapsedTime));
-
 ----------------------------------------------------
 para reconocer con queryAABB el objeto que clickeo:
     @Override
