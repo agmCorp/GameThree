@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- PROBLEMA ENORMA DE LA ARANA
 - hacer los enemigos nivel 3.
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
@@ -14,12 +13,9 @@ HACER PRIORIDAD 2
 - poner una intro y una historia
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
-- EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
-por 1 segundo va hacia arriba, pero luego choca con un enemigo y ejecutra onbump y cambia de velocidad hacia abajo
-y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se queda hacia arriba.
-Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
-hay que pensarlo.
-- Seguir viendo las mejoras del video (como slow motion)
+- Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
+pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
+la pantalla
 - hacer una bala grandota y ruidosa con shake capaz
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 
@@ -38,9 +34,6 @@ Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...cr
 y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
 - poner help al juego con una historia como hice con la granny.
-- evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
-pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
-la pantalla
 - Ver si es fácil hacer una animación en scen2d para poner las letras que encontré y capaz el help inicial.
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
@@ -110,6 +103,14 @@ el resto del sonido. No lo supe arreglar...
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
+- Una vez se me quedó la araña trabada en la esquina superior izquierda, luego de haber jugado todo el nivel normal.
+Intenté reproducirlo teletransportandome y dejando la araña jugar sola por varios minutos y no lo logré.
+Intenté reproducirlo teletransportandome y muriendo aplastado antes de entrar a la epic fight y tampoco.
+- EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
+por 1 segundo va hacia arriba, pero luego choca con un enemigo y ejecutra onbump y cambia de velocidad hacia abajo
+y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se queda hacia arriba.
+Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
+hay que pensarlo.
 
 TENGO
 -----
