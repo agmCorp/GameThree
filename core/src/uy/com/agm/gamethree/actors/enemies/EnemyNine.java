@@ -29,7 +29,7 @@ public class EnemyNine extends Enemy {
     private static final String TAG = EnemyNine.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float PERIOD_SECONDS = 1.3f;
     private static final float RADIUS_METERS = 1.0f;
     private static final float RAID_LINEAR_VELOCITY = 8.0f;

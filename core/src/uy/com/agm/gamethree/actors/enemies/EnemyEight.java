@@ -27,7 +27,7 @@ public class EnemyEight extends Enemy {
     private static final String TAG = EnemyEight.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 5.0f;
     private static final float DENSITY = 1000.0f;
     private static final float PERIOD_SECONDS = 1.6f;
