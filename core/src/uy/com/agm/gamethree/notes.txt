@@ -428,14 +428,14 @@ LECCIONES APRENDIDAS
         }
 
     Lo interesante además es el uso de la herramienta pngcrush.exe, que reduce el tamaño de los pngs.
-    Si reduzco los dinamicObjects.png, gano algo así como medio mega en total.
+    Si reduzco los dynamicObjects.png, gano algo así como medio mega en total.
     Pero la reducción más drástica se da con background.png (de cada nivel) en donde gano más de 2 megas.
     Para usar esa herramienta hice:
     >pngcrush.exe background.png salidaBackground.png
 
     De todos modos, lo mejor que encontre para reducir el tamano de las imagenes es usar TinyPng. Lo tiene
     integrado el TexturePacker, basta con hacerse una cuenta en TinyPng y obtener una clave para usar sus
-    servicios. Eligiendo TinyPng en el combo del TexturePacker, reduzco todos los dinamicObjects. Para backgroud.png
+    servicios. Eligiendo TinyPng en el combo del TexturePacker, reduzco todos los dynamicObjects. Para backgroud.png
     debo usar el curl (para invocar al servicio) porque la imagen es mayor a 5 megas (sino podria usar directo el
     sitio web).
 

@@ -133,8 +133,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
     public static final String MUSIC_FILE_LEVEL_THREE = "audio/music/levelThree.ogg";
 
-    // Location of description file for texture atlas (dinamic game objects)
-    private static final String TEXTURE_ATLAS_OBJECTS = "atlas/dinamicObjects/dinamicObjects.atlas";
+    // Location of description file for texture atlas (dynamic game objects)
+    private static final String TEXTURE_ATLAS_OBJECTS = "atlas/dynamicObjects/dynamicObjects.atlas";
 
     // Location of description file for texture atlas (GUI)
     private static final String TEXTURE_ATLAS_UI = "atlas/scene2d/scene2d.atlas";
@@ -329,57 +329,57 @@ public class Assets implements Disposable, AssetErrorListener {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
-        // Enable texture filtering for pixel smoothing (dinamic game objects)
-        TextureAtlas atlasDinamicObjects = assetManager.get(TEXTURE_ATLAS_OBJECTS);
-        for (Texture texture : atlasDinamicObjects.getTextures()) {
+        // Enable texture filtering for pixel smoothing (dynamic game objects)
+        TextureAtlas atlasDynamicObjects = assetManager.get(TEXTURE_ATLAS_OBJECTS);
+        for (Texture texture : atlasDynamicObjects.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
         i18NGameThree = new AssetI18NGameThree(assetManager);
         scene2d = new AssetScene2d(atlasUI);
         fonts = new AssetFonts();
-        hero = new AssetHero(atlasDinamicObjects);
-        enemyOne = new AssetEnemyOne(atlasDinamicObjects);
-        enemyTwo = new AssetEnemyTwo(atlasDinamicObjects);
-        enemyThree = new AssetEnemyThree(atlasDinamicObjects);
-        enemyFour = new AssetEnemyFour(atlasDinamicObjects);
-        enemyFive = new AssetEnemyFive(atlasDinamicObjects);
-        enemySix = new AssetEnemySix(atlasDinamicObjects);
-        enemySeven = new AssetEnemySeven(atlasDinamicObjects);
-        enemyEight = new AssetEnemyEight(atlasDinamicObjects);
-        enemyNine = new AssetEnemyNine(atlasDinamicObjects);
-        enemyTen = new AssetEnemyTen(atlasDinamicObjects);
-        kinematicBridge = new AssetBridge(atlasDinamicObjects);
-        splat = new AssetSplat(atlasDinamicObjects);
-        powerBox = new AssetPowerBox(atlasDinamicObjects);
-        colOne = new AssetColOne(atlasDinamicObjects);
-        powerOne = new AssetPowerOne(atlasDinamicObjects);
-        powerTwo = new AssetPowerTwo(atlasDinamicObjects);
-        powerThree = new AssetPowerThree(atlasDinamicObjects);
-        powerFour = new AssetPowerFour(atlasDinamicObjects);
-        explosionA = new AssetExplosionA(atlasDinamicObjects);
-        explosionB = new AssetExplosionB(atlasDinamicObjects);
-        explosionC = new AssetExplosionC(atlasDinamicObjects);
-        explosionD = new AssetExplosionD(atlasDinamicObjects);
-        explosionE = new AssetExplosionE(atlasDinamicObjects);
-        explosionF = new AssetExplosionF(atlasDinamicObjects);
-        explosionG = new AssetExplosionG(atlasDinamicObjects);
-        explosionH = new AssetExplosionH(atlasDinamicObjects);
-        explosionI = new AssetExplosionI(atlasDinamicObjects);
-        explosionJ = new AssetExplosionJ(atlasDinamicObjects);
-        heroBullet = new AssetHeroBullet(atlasDinamicObjects);
-        enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
-        silverBullet = new AssetSilverBullet(atlasDinamicObjects);
-        ghostMode = new AssetGhostMode(atlasDinamicObjects);
-        shield = new AssetShield(atlasDinamicObjects);
-        bulletA = new AssetBulletA(atlasDinamicObjects);
-        bulletB = new AssetBulletB(atlasDinamicObjects);
-        bulletC = new AssetBulletC(atlasDinamicObjects);
-        bulletD = new AssetBulletD(atlasDinamicObjects);
-        toughMode = new AssetToughMode(atlasDinamicObjects);
-        finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDinamicObjects);
-        finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDinamicObjects);
-        finalEnemyLevelThree = new AssetFinalEnemyLevelThree(atlasDinamicObjects);
+        hero = new AssetHero(atlasDynamicObjects);
+        enemyOne = new AssetEnemyOne(atlasDynamicObjects);
+        enemyTwo = new AssetEnemyTwo(atlasDynamicObjects);
+        enemyThree = new AssetEnemyThree(atlasDynamicObjects);
+        enemyFour = new AssetEnemyFour(atlasDynamicObjects);
+        enemyFive = new AssetEnemyFive(atlasDynamicObjects);
+        enemySix = new AssetEnemySix(atlasDynamicObjects);
+        enemySeven = new AssetEnemySeven(atlasDynamicObjects);
+        enemyEight = new AssetEnemyEight(atlasDynamicObjects);
+        enemyNine = new AssetEnemyNine(atlasDynamicObjects);
+        enemyTen = new AssetEnemyTen(atlasDynamicObjects);
+        kinematicBridge = new AssetBridge(atlasDynamicObjects);
+        splat = new AssetSplat(atlasDynamicObjects);
+        powerBox = new AssetPowerBox(atlasDynamicObjects);
+        colOne = new AssetColOne(atlasDynamicObjects);
+        powerOne = new AssetPowerOne(atlasDynamicObjects);
+        powerTwo = new AssetPowerTwo(atlasDynamicObjects);
+        powerThree = new AssetPowerThree(atlasDynamicObjects);
+        powerFour = new AssetPowerFour(atlasDynamicObjects);
+        explosionA = new AssetExplosionA(atlasDynamicObjects);
+        explosionB = new AssetExplosionB(atlasDynamicObjects);
+        explosionC = new AssetExplosionC(atlasDynamicObjects);
+        explosionD = new AssetExplosionD(atlasDynamicObjects);
+        explosionE = new AssetExplosionE(atlasDynamicObjects);
+        explosionF = new AssetExplosionF(atlasDynamicObjects);
+        explosionG = new AssetExplosionG(atlasDynamicObjects);
+        explosionH = new AssetExplosionH(atlasDynamicObjects);
+        explosionI = new AssetExplosionI(atlasDynamicObjects);
+        explosionJ = new AssetExplosionJ(atlasDynamicObjects);
+        heroBullet = new AssetHeroBullet(atlasDynamicObjects);
+        enemyBullet = new AssetEnemyBullet(atlasDynamicObjects);
+        silverBullet = new AssetSilverBullet(atlasDynamicObjects);
+        ghostMode = new AssetGhostMode(atlasDynamicObjects);
+        shield = new AssetShield(atlasDynamicObjects);
+        bulletA = new AssetBulletA(atlasDynamicObjects);
+        bulletB = new AssetBulletB(atlasDynamicObjects);
+        bulletC = new AssetBulletC(atlasDynamicObjects);
+        bulletD = new AssetBulletD(atlasDynamicObjects);
+        toughMode = new AssetToughMode(atlasDynamicObjects);
+        finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDynamicObjects);
+        finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDynamicObjects);
+        finalEnemyLevelThree = new AssetFinalEnemyLevelThree(atlasDynamicObjects);
         maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
