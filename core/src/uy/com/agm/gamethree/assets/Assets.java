@@ -298,7 +298,7 @@ public class Assets implements Disposable, AssetErrorListener {
         // Load i18n
         loadI18NGameThree();
 
-        // Load texture atlas (dinamic game objects)
+        // Load texture atlas (dynamic game objects)
         loadTextureAtlasObjects();
 
         // Load texture atlas (UI)
