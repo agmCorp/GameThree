@@ -387,7 +387,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     @Override
     public void error(AssetDescriptor assetDescriptor, Throwable throwable) {
-        Gdx.app.error(TAG, "Error loding asset: '" + assetDescriptor.fileName + "'", (Exception) throwable);
+        Gdx.app.error(TAG, "Error loading asset: '" + assetDescriptor.fileName + "'", (Exception) throwable);
     }
 
     @Override
