@@ -13,7 +13,7 @@ import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyTen;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -37,7 +37,7 @@ public class EnemyTen extends Enemy {
     private static final int SCORE = 15;
 
     private float stateTime;
-    private Animation enemyEightAnimation;
+    private Animation enemyTenAnimation;
     private Animation explosionAnimation;
 
     // The whole path is divided into three sections
@@ -50,15 +50,15 @@ public class EnemyTen extends Enemy {
     public EnemyTen(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Setbounds is the one that determines the size of the EnemyEight's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyEight.WIDTH_METERS, AssetEnemyEight.HEIGHT_METERS);
+        // Setbounds is the one that determines the size of the EnemyTen's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyTen.WIDTH_METERS, AssetEnemyTen.HEIGHT_METERS);
 
         // Animations
-        enemyEightAnimation = Assets.getInstance().getEnemyEight().getEnemyEightAnimation();
+        enemyTenAnimation = Assets.getInstance().getEnemyTen().getEnemyTenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionF().getExplosionFAnimation();
 
         // Variables initialization
-        stateTime = MathUtils.random(0, enemyEightAnimation.getAnimationDuration()); // To flap untimely with others
+        stateTime = MathUtils.random(0, enemyTenAnimation.getAnimationDuration()); // To flap untimely with others
         path1 = true;
         path2 = false;
         path3 = false;
@@ -99,7 +99,7 @@ public class EnemyTen extends Enemy {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) enemyEightAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyTenAnimation.getKeyFrame(stateTime, true);
         stateTime += dt;
         return region;
     }
@@ -111,14 +111,14 @@ public class EnemyTen extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyEight may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyTen may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyEightAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyTenAnimation.getKeyFrame(stateTime, true);
         if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
@@ -191,7 +191,7 @@ public class EnemyTen extends Enemy {
 
     private void checkPath1() {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y <= screen.getGameCam().position.y) { // EnemyEight reaches target
+        if (b2body.getPosition().y <= screen.getGameCam().position.y) { // EnemyTen reaches target
             path1 = false;
             path2 = true;
         } else {
@@ -218,7 +218,7 @@ public class EnemyTen extends Enemy {
 
     private void checkPath3() {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y >= screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2) { // EnemyEight reaches target
+        if (b2body.getPosition().y >= screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2) { // EnemyTen reaches target
             path3 = false;
         } else {
             // Move to (targetX, targetY) at constant speed
@@ -243,7 +243,7 @@ public class EnemyTen extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyEight();
+        return Assets.getInstance().getScene2d().getHelpEnemyTen();
     }
 
     @Override

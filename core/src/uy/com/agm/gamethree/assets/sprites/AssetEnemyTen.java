@@ -15,8 +15,8 @@ public class AssetEnemyTen {
     private static final String TAG = AssetEnemyTen.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 130.0f * 0.6f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 130.0f * 0.6f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 130.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 130.0f * 0.8f / PlayScreen.PPM;
 
     private TextureRegion enemyTenStand;
     private Animation enemyTenAnimation;
