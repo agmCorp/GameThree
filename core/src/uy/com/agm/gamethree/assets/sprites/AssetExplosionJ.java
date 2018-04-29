@@ -15,8 +15,8 @@ public class AssetExplosionJ {
     private static final String TAG = AssetExplosionJ.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 128.0f * 3.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 128.0f * 3.0f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 256.0f * 1.5f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 256.0f * 1.5f / PlayScreen.PPM;
 
     private TextureRegion explosionJStand;
     private Animation explosionJAnimation;
