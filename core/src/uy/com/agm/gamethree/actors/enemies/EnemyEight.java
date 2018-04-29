@@ -30,8 +30,8 @@ public class EnemyEight extends Enemy {
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 5.0f;
     private static final float DENSITY = 1000.0f;
-    private static final float PATH_PERIOD_SECONDS = 1.3f;
-    private static final float PATH_RADIUS_METERS = 2.0f;
+    private static final float PERIOD_SECONDS = 1.6f;
+    private static final float RADIUS_METERS = 2.4f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final int SCORE = 15;
 
@@ -213,22 +213,22 @@ public class EnemyEight extends Enemy {
             path3 = true;
         } else {
             elapsedTime += dt;
-            float w = 2 * MathUtils.PI / PATH_PERIOD_SECONDS;
-            velocity.set(sign * PATH_RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), -PATH_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
+            float w = 2 * MathUtils.PI / PERIOD_SECONDS;
+            velocity.set(sign * RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), -RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         }
     }
 
     private void checkPath3() {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y >= screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+        if (b2body.getPosition().y >= screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2) { // EnemyEight reaches target
             path3 = false;
         } else {
             // Move to (targetX, targetY) at constant speed
-            float targetX = screen.getGameCam().position.x + sign * (CIRCLE_SHAPE_RADIUS_METERS - screen.getGameViewPort().getWorldWidth() / 2);
-            float targetY = screen.getGameCam().position.y + 3 * screen.getGameViewPort().getWorldHeight() / 4;
+            float targetX = screen.getGameCam().position.x - sign * screen.getGameViewPort().getWorldWidth() / 2;
+            float targetY = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
 
             tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY);
+            Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY); // Corner of the screen
             velocity.set(tmp);
         }
     }
