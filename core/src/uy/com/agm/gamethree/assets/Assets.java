@@ -79,7 +79,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
     public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
-    public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/gunReload.ogg";
+    public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/ohoh.ogg";
     public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
     public static final String FX_FILE_OPEN_POWER_BOX = "audio/sounds/openPowerBox.ogg";
