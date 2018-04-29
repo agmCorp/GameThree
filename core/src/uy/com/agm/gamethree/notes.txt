@@ -22,9 +22,6 @@ hay que pensarlo.
 - Seguir viendo las mejoras del video (como slow motion)
 - hacer una bala grandota y ruidosa con shake capaz
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-- Ver que hago con las vidas y el score entre niveles. Las vidas no deberian resetearse por nivel aunque no se como hacerlo.
-El puntaje creo tiene el mismo problema que las vidas (el play again pone score 0)
-Creo que 5 vidas por nivel está bien.
 
 HACER PRIORIDAD 3
 -----------------
@@ -40,11 +37,6 @@ Y en el update si el estado es dancing, hacer una animacion graciosa.
 Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga la animacion
 y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Capaz que lo mejor es que el fire sea con este ritmo: xx....xx...xx.... o sea, dos o tres rapidos y espacio
-- Cuando el enemigo agarra el powerFour debería dejar de disparar! creo que no es buena idea pero bueno...
-Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
-En el powerDown debería hacer:
-if !screen.challegeBegins (pasar a public) enableshooting.
-Creo
 - poner help al juego con una historia como hice con la granny.
 - evaluar las cosas de este video https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
@@ -88,12 +80,9 @@ los que se van de la pantalla).
     - hay que dispararle mucho para matarlo.
     - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
     - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire.
-    - minuto 21.40 https://www.youtube.com/watch?v=SJM6mxXgW50: vienen de arriba, hacen 2 circulos completos en el
-      centro de la pantalla y se van por arriba (copiarlo de enemyEight).
     - enemigofinal que me sigue
     - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
       rodeados por una gran textura que es el enemigo!
-    - nube que se mueve en funcion seno y cuando recibe un disparo se lanza derecho directo al hero
     - nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
       una rafaga (como flor) de balas, luego se transforma en nube y se va.
     - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
@@ -117,7 +106,6 @@ DUDAS Y BUGS
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
-- se corta el audio al morir..el gruñido se escucha cortado.
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
@@ -134,9 +122,11 @@ five - dragon en circulos
 six - rayo
 seven - se multiplica
 eight - bicho verde cometa
-- enemigos finales: 2
+nine - fenix
+ten - 2 circulos
+- enemigos finales: 3
 - poderes 4 (2 poderes por nivel)
-- 1 moneda
+- 1 moneda x 3
 - 1 shuriken
 
 ESTIMACION

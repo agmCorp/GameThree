@@ -212,3 +212,8 @@ Hero:
         if (applyNewFilters) {
             AudioManager.getInstance().play(Assets.getInstance().getSounds().getDead()); // me conviene renombrar la variable applynewfilter por algo mas lindo
 
+--------------------------------------------------------------------------------------------
+Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
+En el powerDown debería hacer:
+if !screen.challegeBegins (pasar a public) enableshooting.
+Creo
