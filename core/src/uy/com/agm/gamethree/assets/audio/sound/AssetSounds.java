@@ -61,7 +61,7 @@ public class AssetSounds {
     private Sound buzz;
     private Sound whistle;
     private Sound juicy;
-    private Sound footsteps;
+    private Sound marching;
     private Sound flap;
     private Sound bite;
 
@@ -115,7 +115,7 @@ public class AssetSounds {
         buzz = am.get(Assets.FX_FILE_BUZZ, Sound.class);
         whistle = am.get(Assets.FX_FILE_WHISTLE, Sound.class);
         juicy = am.get(Assets.FX_FILE_JUICY, Sound.class);
-        footsteps = am.get(Assets.FX_FILE_FOOTSTEPS, Sound.class);
+        marching = am.get(Assets.FX_FILE_MARCHING, Sound.class);
         flap = am.get(Assets.FX_FILE_FLAP, Sound.class);
         bite = am.get(Assets.FX_FILE_BITE, Sound.class);
     }
@@ -316,8 +316,8 @@ public class AssetSounds {
         return juicy;
     }
 
-    public Sound getFootsteps() {
-        return footsteps;
+    public Sound getMarching() {
+        return marching;
     }
 
     public Sound getFlap() {

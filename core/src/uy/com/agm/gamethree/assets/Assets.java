@@ -45,6 +45,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionF;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionG;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionH;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionI;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionJ;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
@@ -121,7 +122,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_BUZZ = "audio/sounds/buzz.ogg";
     public static final String FX_FILE_WHISTLE = "audio/sounds/whistle.ogg";
     public static final String FX_FILE_JUICY = "audio/sounds/juicy.ogg";
-    public static final String FX_FILE_FOOTSTEPS = "audio/sounds/footsteps.ogg";
+    public static final String FX_FILE_MARCHING = "audio/sounds/marching.ogg";
     public static final String FX_FILE_FLAP = "audio/sounds/flap.ogg";
     public static final String FX_FILE_BITE = "audio/sounds/bite.ogg";
 
@@ -176,6 +177,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionG explosionG;
     private AssetExplosionH explosionH;
     private AssetExplosionI explosionI;
+    private AssetExplosionJ explosionJ;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
     private AssetSilverBullet silverBullet;
@@ -274,7 +276,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_BUZZ, Sound.class);
         assetManager.load(FX_FILE_WHISTLE, Sound.class);
         assetManager.load(FX_FILE_JUICY, Sound.class);
-        assetManager.load(FX_FILE_FOOTSTEPS, Sound.class);
+        assetManager.load(FX_FILE_MARCHING, Sound.class);
         assetManager.load(FX_FILE_FLAP, Sound.class);
         assetManager.load(FX_FILE_BITE, Sound.class);
     }
@@ -364,6 +366,7 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionG = new AssetExplosionG(atlasDinamicObjects);
         explosionH = new AssetExplosionH(atlasDinamicObjects);
         explosionI = new AssetExplosionI(atlasDinamicObjects);
+        explosionJ = new AssetExplosionJ(atlasDinamicObjects);
         heroBullet = new AssetHeroBullet(atlasDinamicObjects);
         enemyBullet = new AssetEnemyBullet(atlasDinamicObjects);
         silverBullet = new AssetSilverBullet(atlasDinamicObjects);
@@ -517,6 +520,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetExplosionI getExplosionI() {
         return explosionI;
+    }
+
+    public AssetExplosionJ getExplosionJ() {
+        return explosionJ;
     }
 
     public AssetHeroBullet getHeroBullet() {

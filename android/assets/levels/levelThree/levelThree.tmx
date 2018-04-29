@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2263">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2268">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -144,7 +144,13 @@
  <objectgroup name="enemySix"/>
  <objectgroup name="enemySeven"/>
  <objectgroup name="enemyEight"/>
- <objectgroup name="enemyNine"/>
+ <objectgroup name="enemyNine">
+  <object id="2263" x="256" y="7584" width="32" height="32"/>
+  <object id="2264" x="352" y="7584" width="32" height="32"/>
+  <object id="2265" x="160" y="7488" width="32" height="32"/>
+  <object id="2266" x="256" y="7520" width="32" height="32"/>
+  <object id="2267" x="160" y="7616" width="32" height="32"/>
+ </objectgroup>
  <objectgroup name="enemyTen">
   <object id="2241" x="0" y="6144" width="32" height="32"/>
   <object id="2242" x="0" y="6176" width="32" height="32"/>
