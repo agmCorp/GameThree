@@ -167,8 +167,7 @@ public class EnemyThree extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        // Nothing yet
-        return null;
+        return Assets.getInstance().getSounds().getBite();
     }
 
     @Override

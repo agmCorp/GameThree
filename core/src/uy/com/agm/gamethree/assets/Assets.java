@@ -120,6 +120,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_DRAGON = "audio/sounds/dragon.ogg";
     public static final String FX_FILE_BUZZ = "audio/sounds/buzz.ogg";
     public static final String FX_FILE_WHISTLE = "audio/sounds/whistle.ogg";
+    public static final String FX_FILE_JUICY = "audio/sounds/juicy.ogg";
+    public static final String FX_FILE_FOOTSTEPS = "audio/sounds/footsteps.ogg";
+    public static final String FX_FILE_FLAP = "audio/sounds/flap.ogg";
+    public static final String FX_FILE_BITE = "audio/sounds/bite.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -269,6 +273,10 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_DRAGON, Sound.class);
         assetManager.load(FX_FILE_BUZZ, Sound.class);
         assetManager.load(FX_FILE_WHISTLE, Sound.class);
+        assetManager.load(FX_FILE_JUICY, Sound.class);
+        assetManager.load(FX_FILE_FOOTSTEPS, Sound.class);
+        assetManager.load(FX_FILE_FLAP, Sound.class);
+        assetManager.load(FX_FILE_BITE, Sound.class);
     }
 
     private void loadMusic() {

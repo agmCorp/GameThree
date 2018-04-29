@@ -200,7 +200,7 @@ public class EnemySeven extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getSpring();
+        return Assets.getInstance().getSounds().getFootsteps();
     }
 
     @Override

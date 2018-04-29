@@ -2,7 +2,6 @@ package uy.com.agm.gamethree.assets.audio.sound;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import uy.com.agm.gamethree.assets.Assets;
 
@@ -61,6 +60,10 @@ public class AssetSounds {
     private Sound dragon;
     private Sound buzz;
     private Sound whistle;
+    private Sound juicy;
+    private Sound footsteps;
+    private Sound flap;
+    private Sound bite;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -111,6 +114,10 @@ public class AssetSounds {
         dragon = am.get(Assets.FX_FILE_DRAGON, Sound.class);
         buzz = am.get(Assets.FX_FILE_BUZZ, Sound.class);
         whistle = am.get(Assets.FX_FILE_WHISTLE, Sound.class);
+        juicy = am.get(Assets.FX_FILE_JUICY, Sound.class);
+        footsteps = am.get(Assets.FX_FILE_FOOTSTEPS, Sound.class);
+        flap = am.get(Assets.FX_FILE_FLAP, Sound.class);
+        bite = am.get(Assets.FX_FILE_BITE, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -303,5 +310,21 @@ public class AssetSounds {
 
     public Sound getWhistle() {
         return whistle;
+    }
+
+    public Sound getJuicy() {
+        return juicy;
+    }
+
+    public Sound getFootsteps() {
+        return footsteps;
+    }
+
+    public Sound getFlap() {
+        return flap;
+    }
+
+    public Sound getBite() {
+        return bite;
     }
 }

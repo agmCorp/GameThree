@@ -142,7 +142,7 @@ public class EnemyFive extends Enemy {
         stateTime = 0;
 
         // Audio FX
-        pum(Assets.getInstance().getSounds().getHit());
+        pum(Assets.getInstance().getSounds().getJuicy());
 
         // Set score
         screen.getHud().addScore(SCORE);

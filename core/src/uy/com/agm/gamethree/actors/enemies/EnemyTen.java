@@ -248,7 +248,7 @@ public class EnemyTen extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getBuzz();
+        return Assets.getInstance().getSounds().getFlap();
     }
 
     @Override
