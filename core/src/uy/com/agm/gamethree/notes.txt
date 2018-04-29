@@ -106,6 +106,7 @@ DUDAS Y BUGS
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
+- A veces los sonidos no se reproducen
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
