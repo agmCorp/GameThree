@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2223">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2237">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250">
@@ -135,39 +135,28 @@
     <property name="powerOne" type="int" value="500"/>
    </properties>
   </object>
-  <object id="2211" x="224" y="7680" width="32" height="32">
-   <properties>
-    <property name="powerTwo" type="int" value="500"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
  <objectgroup name="enemyFour"/>
- <objectgroup name="enemyFive">
-  <object id="2216" x="64" y="6560" width="32" height="32"/>
-  <object id="2219" x="256" y="6528" width="32" height="32"/>
-  <object id="2220" x="256" y="6624" width="32" height="32"/>
-  <object id="2221" x="160" y="6720" width="32" height="32"/>
-  <object id="2222" x="320" y="6720" width="32" height="32"/>
- </objectgroup>
+ <objectgroup name="enemyFive"/>
  <objectgroup name="enemySix"/>
  <objectgroup name="enemySeven"/>
- <objectgroup name="enemyEight">
-  <object id="2212" x="0" y="6144" width="32" height="32"/>
-  <object id="2213" x="10" y="6061" width="32" height="32"/>
-  <object id="2214" x="5" y="6233" width="32" height="32"/>
-  <object id="2215" x="-1" y="6386" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="enemyNine">
-  <object id="2202" x="320" y="7200" width="32" height="32"/>
-  <object id="2204" x="182" y="7123.33" width="32" height="32"/>
-  <object id="2205" x="204" y="7328.67" width="32" height="32"/>
-  <object id="2206" x="72" y="7252" width="32" height="32"/>
-  <object id="2207" x="287.333" y="7302" width="32" height="32"/>
-  <object id="2208" x="164.667" y="7217.33" width="32" height="32"/>
-  <object id="2209" x="308" y="7139.33" width="32" height="32"/>
-  <object id="2210" x="36" y="7150" width="32" height="32"/>
+ <objectgroup name="enemyEight"/>
+ <objectgroup name="enemyNine"/>
+ <objectgroup name="enemyTen">
+  <object id="2225" x="32" y="7104" width="32" height="32"/>
+  <object id="2226" x="34" y="7062" width="32" height="32"/>
+  <object id="2227" x="34" y="7018" width="32" height="32"/>
+  <object id="2228" x="35" y="6974" width="32" height="32"/>
+  <object id="2229" x="34" y="6933" width="32" height="32"/>
+  <object id="2230" x="34" y="6891" width="32" height="32"/>
+  <object id="2231" x="432.5" y="6618.5" width="32" height="32"/>
+  <object id="2232" x="434.5" y="6576.5" width="32" height="32"/>
+  <object id="2233" x="434.5" y="6532.5" width="32" height="32"/>
+  <object id="2234" x="435.5" y="6488.5" width="32" height="32"/>
+  <object id="2235" x="434.5" y="6447.5" width="32" height="32"/>
+  <object id="2236" x="434.5" y="6405.5" width="32" height="32"/>
  </objectgroup>
 </map>

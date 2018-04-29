@@ -1261,4 +1261,5 @@
  <objectgroup name="enemySeven"/>
  <objectgroup name="enemyEight"/>
  <objectgroup name="enemyNine"/>
+ <objectgroup name="enemyTen"/>
 </map>

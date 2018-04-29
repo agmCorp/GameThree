@@ -26,7 +26,7 @@ public class EnemyThree extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float VELOCITY_X = 0.0f;
+    private static final float VELOCITY_X = 1.0f;
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 4.0f;
@@ -68,8 +68,8 @@ public class EnemyThree extends Enemy {
                 WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
-                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.ENEMY_BIT |
+                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
@@ -110,13 +110,6 @@ public class EnemyThree extends Enemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         TextureRegion region = (TextureRegion) enemyThreeAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
-            region.flip(true, false);
-        }
-        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
-            region.flip(true, false);
-        }
-
         setRegion(region);
         stateTime += dt;
 
@@ -192,6 +185,6 @@ public class EnemyThree extends Enemy {
 
     @Override
     public void onBump() {
-        // Nothing to do here
+        reverseVelocity(true, false);
     }
 }

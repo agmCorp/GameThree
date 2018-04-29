@@ -13,23 +13,24 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-import uy.com.agm.gamethree.actors.enemies.EnemyNine;
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
-import uy.com.agm.gamethree.actors.player.Hero;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
-import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
+import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Border;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Obstacle;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Path;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.enemies.EnemyEight;
 import uy.com.agm.gamethree.actors.enemies.EnemyFive;
 import uy.com.agm.gamethree.actors.enemies.EnemyFour;
+import uy.com.agm.gamethree.actors.enemies.EnemyNine;
 import uy.com.agm.gamethree.actors.enemies.EnemyOne;
 import uy.com.agm.gamethree.actors.enemies.EnemySeven;
 import uy.com.agm.gamethree.actors.enemies.EnemySix;
+import uy.com.agm.gamethree.actors.enemies.EnemyTen;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwo;
+import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
@@ -37,12 +38,12 @@ import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
 import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
 import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
-import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Border;
-import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Obstacle;
-import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Path;
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.actors.weapons.hero.HeroBullet;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
+import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
  * Created by AGM on 12/4/2017.
@@ -65,6 +66,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_SEVEN = "enemySeven";
     private static final String LAYER_ENEMY_EIGHT = "enemyEight";
     private static final String LAYER_ENEMY_NINE = "enemyNine";
+    private static final String LAYER_ENEMY_TEN = "enemyTen";
     private static final String LAYER_POWER_BOX = "powerBox";
 
     public static final String KEY_ID = "id";
@@ -238,6 +240,14 @@ public class B2WorldCreator {
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyNine(screen, object));
+            }
+        }
+
+        // Layer: enemyTen
+        layer = map.getLayers().get(LAYER_ENEMY_TEN);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyTen(screen, object));
             }
         }
 
