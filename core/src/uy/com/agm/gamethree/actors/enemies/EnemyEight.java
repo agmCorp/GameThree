@@ -256,7 +256,7 @@ public class EnemyEight extends Enemy {
 
     @Override
     protected float getSpeakTimeSeconds() {
-        return 0;
+        return SPEAK_TIME_SECONDS;
     }
 
     @Override
