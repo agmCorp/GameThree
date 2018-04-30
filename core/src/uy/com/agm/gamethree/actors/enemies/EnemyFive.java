@@ -33,6 +33,7 @@ public class EnemyFive extends Enemy {
     private static final float MAX_RADIUS_METERS = 1.0f;
     private static final float MIN_RADIUS_METERS = 0.7f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final int SCORE = 15;
 
     private boolean damage;
@@ -216,6 +217,11 @@ public class EnemyFive extends Enemy {
     @Override
     protected Sound getVoice() {
         return Assets.getInstance().getSounds().getDragon();
+    }
+
+    @Override
+    protected float getSpeakTimeSeconds() {
+        return SPEAK_TIME_SECONDS;
     }
 
     @Override

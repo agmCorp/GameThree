@@ -35,6 +35,7 @@ public class EnemyFour extends Enemy {
     private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float FROZEN_TIME_SECONDS = 4.0f;
+    private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final int SCORE = 35;
 
     private float stateTime;
@@ -293,6 +294,11 @@ public class EnemyFour extends Enemy {
     @Override
     protected Sound getVoice() {
         return Assets.getInstance().getSounds().getWarble();
+    }
+
+    @Override
+    protected float getSpeakTimeSeconds() {
+        return SPEAK_TIME_SECONDS;
     }
 
     private void checkPath() {

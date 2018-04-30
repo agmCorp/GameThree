@@ -30,6 +30,7 @@ public class EnemyThree extends Enemy {
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 4.0f;
+    private static final float SPEAK_TIME_SECONDS = 2.5f;
     private static final int SCORE = 20;
 
     private float stateTime;
@@ -168,6 +169,11 @@ public class EnemyThree extends Enemy {
     @Override
     protected Sound getVoice() {
         return Assets.getInstance().getSounds().getBite();
+    }
+
+    @Override
+    protected float getSpeakTimeSeconds() {
+        return SPEAK_TIME_SECONDS;
     }
 
     @Override

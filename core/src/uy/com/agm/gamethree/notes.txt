@@ -9,6 +9,11 @@ para los poderes y otro para las armas.
 
 HACER PRIORIDAD 2
 -----------------
+- Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
+La idea está buena para tener que matar bichos, puede ayudar incluso con las estrellitas al final del nivel.
+Tengo que pensar el tema de los limites de la pantalla, porque hay bichos que salen y entran de la pantalla.
+Capaz puedo tener un limite grande para el edge superior y otro más chico para el inferior. Estaría bueno tener un help para la primera vez que se me
+escape un bicho y avisar que hay un contador de bichos.
 - hacer un mapa de los niveles
 - poner una intro y una historia
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.

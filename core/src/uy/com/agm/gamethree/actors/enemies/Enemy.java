@@ -46,7 +46,6 @@ public abstract class Enemy extends Sprite {
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
-    private static final float SPEAK_TIME_SECONDS = 2.0f;
 
     private TextureRegion splat;
     private boolean pum;
@@ -245,7 +244,7 @@ public abstract class Enemy extends Sprite {
             if (lastPlayingTime == null) {
                 AudioManager.getInstance().playSound(voice);
             } else {
-                if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= SPEAK_TIME_SECONDS * 1000) {
+                if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= getSpeakTimeSeconds() * 1000) {
                     AudioManager.getInstance().playSound(voice);
                 }
             }
@@ -357,12 +356,13 @@ public abstract class Enemy extends Sprite {
     protected abstract IShootStrategy getShootStrategy();
     protected abstract float getCircleShapeRadiusMeters();
     protected abstract TextureRegion getKnockBackFrame(float dt);
+    protected abstract Sound getVoice();
+    protected abstract float getSpeakTimeSeconds();
+    protected abstract String getClassName();
+    protected abstract TextureRegion getHelpImage();
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);
-    protected abstract String getClassName();
-    protected abstract TextureRegion getHelpImage();
-    protected abstract Sound getVoice();
     public abstract void onHit();
     public abstract void onBump();
 }

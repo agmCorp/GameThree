@@ -40,8 +40,9 @@ public class EnemySix extends Enemy {
     private static final float VELOCITY_Y = 0.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float BEAM_INTERVAL_SECONDS = 4.0f;
-    private static final int SCORE = 5;
+    private static final float SPEAK_TIME_SECONDS = 4.0f;
     private static final float POLYGON_SHAPE_HEIGHT_METERS = 20.0f * 1.0f / PlayScreen.PPM;
+    private static final int SCORE = 5;
 
     private float stateTime;
     private Animation enemySixIdleAnimation;
@@ -276,6 +277,11 @@ public class EnemySix extends Enemy {
     protected Sound getVoice() {
         // Nothing yet
         return null;
+    }
+
+    @Override
+    protected float getSpeakTimeSeconds() {
+        return SPEAK_TIME_SECONDS;
     }
 
     @Override
