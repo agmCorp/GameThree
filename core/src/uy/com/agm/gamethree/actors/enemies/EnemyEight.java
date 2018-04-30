@@ -33,7 +33,7 @@ public class EnemyEight extends Enemy {
     private static final float PERIOD_SECONDS = 1.6f;
     private static final float RADIUS_METERS = 2.4f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
-    private static final float SPEAK_TIME_SECONDS = 2.0f;
+    private static final float SPEAK_TIME_SECONDS = 1.5f;
     private static final int SCORE = 15;
 
     private boolean damage;
