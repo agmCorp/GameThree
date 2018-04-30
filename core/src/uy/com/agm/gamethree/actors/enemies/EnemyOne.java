@@ -30,7 +30,7 @@ public class EnemyOne extends Enemy {
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
-    private static final float SPEAK_TIME_SECONDS = 4.0f;
+    private static final float SPEAK_TIME_SECONDS = 4.5f;
     private static final int SCORE = 5;
 
     private float stateTime;
