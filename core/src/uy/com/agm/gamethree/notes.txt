@@ -77,6 +77,7 @@ SOLO IDEAS
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
 los que se van de la pantalla).
+Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - hacer splashscreen
 - enemigos:
     - hay que dispararle mucho para matarlo.
