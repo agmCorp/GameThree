@@ -499,6 +499,7 @@ public class Hud extends AbstractScreen {
     public void showAbilityPowerInfo(String abilityPowerName, int maxTime) {
         abilityPowerNameLabel.setText(abilityPowerName);
         abilityPowerTime = maxTime;
+        abilityPowerTimeCount = 0;
         abilityBar.setInitialEnergy(POWER_TIMER_NOTIFICATION, abilityPowerTime);
         abilityPowerTable.setVisible(true);
     }
@@ -506,6 +507,7 @@ public class Hud extends AbstractScreen {
     public void showWeaponPowerInfo(String weaponPowerName, int maxTime) {
         weaponPowerNameLabel.setText(weaponPowerName);
         weaponPowerTime = maxTime;
+        weaponPowerTimeCount = 0;
         weaponBar.setInitialEnergy(POWER_TIMER_NOTIFICATION, weaponPowerTime);
         weaponPowerTable.setVisible(true);
     }
