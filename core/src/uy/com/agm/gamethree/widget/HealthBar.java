@@ -61,6 +61,9 @@ public class HealthBar extends ProgressBar {
         currentEnergy--;
         if (currentEnergy > 0) {
             setValue(getValue() - MAX / fullEnergy);
+            if (currentEnergy * 100 / fullEnergy <= 20.0f) {
+                getStyle().knobBefore = getColoredDrawable(WIDTH, HEIGHT, Color.YELLOW);
+            }
         } else {
             setValue(0);
         }
