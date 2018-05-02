@@ -499,14 +499,14 @@ public class Hud extends AbstractScreen {
     public void showAbilityPowerInfo(String abilityPowerName, int maxTime) {
         abilityPowerNameLabel.setText(abilityPowerName);
         abilityPowerTime = maxTime;
-        abilityBar.setInitialEnergy(abilityPowerTime);
+        abilityBar.setInitialEnergy(POWER_TIMER_NOTIFICATION, abilityPowerTime);
         abilityPowerTable.setVisible(true);
     }
 
     public void showWeaponPowerInfo(String weaponPowerName, int maxTime) {
         weaponPowerNameLabel.setText(weaponPowerName);
         weaponPowerTime = maxTime;
-        weaponBar.setInitialEnergy(weaponPowerTime);
+        weaponBar.setInitialEnergy(POWER_TIMER_NOTIFICATION, weaponPowerTime);
         weaponPowerTable.setVisible(true);
     }
 
@@ -625,7 +625,7 @@ public class Hud extends AbstractScreen {
 
     public void showHealthBarInfo(String enemyName, int energy) {
         enemyNameLabel.setText(enemyName);
-        healthBar.setInitialEnergy(energy);
+        healthBar.setInitialEnergy(energy / 3, energy);
         healthBarTable.setVisible(true);
     }
 
@@ -679,7 +679,7 @@ public class Hud extends AbstractScreen {
                 if (abilityPowerTime > 0) {
                     abilityPowerTime--;
                     abilityBar.decrease();
-                    if (abilityPowerTime <= POWER_TIMER_NOTIFICATION) {
+                    if (abilityPowerTime < POWER_TIMER_NOTIFICATION) {
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepA());
                     }
                 } else {
@@ -697,7 +697,7 @@ public class Hud extends AbstractScreen {
                 if (weaponPowerTime > 0) {
                     weaponPowerTime--;
                     weaponBar.decrease();
-                    if (weaponPowerTime <= POWER_TIMER_NOTIFICATION) {
+                    if (weaponPowerTime < POWER_TIMER_NOTIFICATION) {
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepC());
                     }
                 } else {
