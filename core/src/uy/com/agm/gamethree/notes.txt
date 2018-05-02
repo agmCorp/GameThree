@@ -4,7 +4,6 @@ HACER PRIORIDAD 1
 - hacer los enemigos nivel 3.
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
-- poner más powerboxes en el alambre y en el muro del nivel 2
 
 HACER PRIORIDAD 2
 -----------------
