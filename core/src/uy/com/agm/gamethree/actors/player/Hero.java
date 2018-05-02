@@ -51,10 +51,6 @@ public class Hero extends Sprite {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
     }
 
-    private enum PowerState {
-        NORMAL, POWERFUL
-    }
-
     private World world;
     private PlayScreen screen;
     private Body b2body;
@@ -80,16 +76,19 @@ public class Hero extends Sprite {
     private int silverBullets;
     private boolean silverBulletEnabled;
 
-    // Power FX
-    private PowerState currentPowerState;
-    private Animation powerFXAnimation;
-    private float powerFXStateTime;
-    private Sprite powerFXSprite;
-    private boolean powerFXAllowRotation;
+    // Ability power FX
+    private Animation abilityPowerFXAnimation;
+    private float abilityPowerFXStateTime;
+    private Sprite abilityPowerFXSprite;
+    private boolean abilityPowerFXAllowRotation;
 
     // Shooting strategy
     private ShootContext shootContext;
     private IShootStrategy heroDefaultShooting;
+
+    // Indicates type of power
+    private boolean abilityPower;
+    private boolean weaponPower;
 
     // Blink
     private float blinkingTime;
@@ -136,12 +135,15 @@ public class Hero extends Sprite {
         silverBullets = 0;
         silverBulletEnabled = false;
 
-        // PowerFX variables initialization (we don't know which power will be yet)
-        currentPowerState = PowerState.NORMAL;
-        powerFXAnimation = null;
-        powerFXStateTime = 0;
-        powerFXSprite = null;
-        powerFXAllowRotation = false;
+        // Ability power FX variables initialization (we don't know which ability power will be yet)
+        abilityPowerFXAnimation = null;
+        abilityPowerFXStateTime = 0;
+        abilityPowerFXSprite = null;
+        abilityPowerFXAllowRotation = false;
+
+        // Power state initialization
+        abilityPower = false;
+        weaponPower = false;
 
         // Shooting strategy initialization
         heroDefaultShooting = new HeroDefaultShooting(screen);
@@ -163,7 +165,6 @@ public class Hero extends Sprite {
     }
 
     public void update(float dt) {
-
         if (!isDead()) {
             // Time is up : too late our Hero dies T_T
             checkLevelTimeUp();
@@ -177,15 +178,19 @@ public class Hero extends Sprite {
 
         switch (currentHeroState) {
             case STANDING:
+                heroPowerState(dt);
                 heroStateStanding(dt);
                 break;
             case MOVING_UP:
+                heroPowerState(dt);
                 heroStateMovingUp(dt);
                 break;
             case MOVING_DOWN:
+                heroPowerState(dt);
                 heroStateMovingDown(dt);
                 break;
             case MOVING_LEFT_RIGHT:
+                heroPowerState(dt);
                 heroStateMovingLeftRight(dt);
                 break;
             case DYING_UP:
@@ -201,19 +206,19 @@ public class Hero extends Sprite {
                 break;
         }
 
-        switch (currentPowerState) {
-            case NORMAL:
-                break;
-            case POWERFUL:
-                powerStatePowerful(dt);
-                break;
-            default:
-                break;
-        }
-
         // Shoot time!
         shootContext.update(dt);
         openFireAutomatic();
+    }
+
+    private void heroPowerState(float dt) {
+        if (abilityPower) {
+            powerStateAbilityPower(dt);
+        }
+
+        if (weaponPower) {
+            powerStateWeaponPower(dt);
+        }
     }
 
     private void openFireAutomatic() {
@@ -224,41 +229,52 @@ public class Hero extends Sprite {
         }
     }
 
-    private boolean visualPowerFX() {
-        return powerFXSprite != null;
-    }
+    private void powerStateAbilityPower(float dt) {
+        abilityPowerFXSprite.setRegion((TextureRegion) abilityPowerFXAnimation.getKeyFrame(abilityPowerFXStateTime, true));
+        abilityPowerFXStateTime += dt;
 
-    private void powerStatePowerful(float dt) {
-        if (visualPowerFX()) { // if powerFXSprite is null (for instance, Hero has a fire power) we don't need to set any TextureRegion
-            powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
-            powerFXStateTime += dt;
+        // Update our Sprite to correspond with the position of our Hero's Box2D body
+        abilityPowerFXSprite.setPosition(b2body.getPosition().x - abilityPowerFXSprite.getWidth() / 2, b2body.getPosition().y - abilityPowerFXSprite.getHeight() / 2);
 
-            // Update our Sprite to correspond with the position of our Hero's Box2D body
-            powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
-
-            // Apply rotation of the main character
-            if (powerFXAllowRotation) {
-                powerFXSprite.setRotation(getRotation());
-            }
-
-            // When Hero's power is running out, power FX blinks
-            if (screen.getHud().isPowerRunningOut()) {
-                activateBlink(dt, powerFXSprite);
-            }
+        // Apply rotation of the main character
+        if (abilityPowerFXAllowRotation) {
+            abilityPowerFXSprite.setRotation(getRotation());
         }
-        if (screen.getHud().isPowerTimeUp()) {
-            powerDown();
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPowerDown());
+
+        // When Hero's ability power is running out, power FX blinks
+        if (screen.getHud().isAbilityPowerRunningOut()) {
+            activateBlink(dt, abilityPowerFXSprite);
+        }
+
+        if (screen.getHud().isAbilityPowerTimeUp()) {
+            abilityPowerDown();
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getAbilityPowerDown());
         }
     }
 
-    public void powerDown() {
+    private void powerStateWeaponPower(float dt) {
+        if (screen.getHud().isWeaponPowerTimeUp()) {
+            weaponPowerDown();
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getWeaponPowerDown());
+        }
+    }
+
+    private void powersDown() {
+        abilityPowerDown();
+        weaponPowerDown();
+    }
+
+    public void abilityPowerDown() {
         setDefaultFixtureFilter();
-        deactivateBlink(powerFXSprite);
-        powerFXSprite = null;
-        powerFXStateTime = 0;
+        deactivateBlink(abilityPowerFXSprite);
+        abilityPowerFXSprite = null;
+        abilityPowerFXStateTime = 0;
+        abilityPower = false;
+    }
+
+    public void weaponPowerDown() {
         shootContext.setStrategy(heroDefaultShooting);
-        currentPowerState = PowerState.NORMAL;
+        weaponPower = false;
     }
 
     private void heroStateStanding(float dt) {
@@ -353,12 +369,17 @@ public class Hero extends Sprite {
             // Stop motion
             stop();
 
+            // We take away all his powers and force powerTimeUp
+            powersDown();
+            screen.getHud().forcePowersTimeUp();
+
             // Hero can't collide with anything
             Filter filter = new Filter();
             filter.maskBits = WorldContactListener.NOTHING_BIT;
 
             // We set the previous filter in every fixture
             setFilterData(filter);
+
             applyNewFilters = false;
         }
 
@@ -431,10 +452,6 @@ public class Hero extends Sprite {
     public void playAgain() {
         // Play music again
         AudioManager.getInstance().resumeMusic();
-
-        // We take away his powers and force powerTimeUp
-        powerDown();
-        screen.getHud().forcePowerTimeUp();
 
         // Our Hero can collide with powerBoxes, borders, edges, paths and obstacles only.
         // However, he could die crushed.
@@ -631,20 +648,15 @@ public class Hero extends Sprite {
         // this way alpha = 1 at the beginning of DYING_UP state).
         deactivateBlink(this);
 
-        // We take away his power effect
-        currentPowerState = PowerState.NORMAL;
-
         // Start dying up
         heroStateTime = 0;
         currentHeroState = HeroState.DYING_UP;
     }
 
     public void draw(SpriteBatch batch) {
-        if (currentPowerState != PowerState.NORMAL) {
-            if (visualPowerFX()) {
-                // Power FX
-                powerFXSprite.draw(batch);
-            }
+        // Ability power FX
+        if (abilityPower) {
+            abilityPowerFXSprite.draw(batch);
         }
         // Hero
         super.draw(batch);
@@ -706,24 +718,24 @@ public class Hero extends Sprite {
         return b2body;
     }
 
-    public void applyPowerFX(Animation animation, Sprite power, boolean allowRotation) {
-        currentPowerState = PowerState.POWERFUL;
+    public void applyAbilityPowerFX(Animation abilityPowerAnimation, Sprite spriteAbilityPower, boolean allowRotation) {
+        abilityPower = true;
 
-        // Set the animation
-        powerFXAnimation = animation;
+        // Set the power animation
+        abilityPowerFXAnimation = abilityPowerAnimation;
 
         // Set the sprite (if null, we don't draw it (see .draw(...))
-        powerFXSprite = power;
+        abilityPowerFXSprite = spriteAbilityPower;
 
         // Place origin of rotation in the center of the Sprite
-        powerFXSprite.setOriginCenter();
+        abilityPowerFXSprite.setOriginCenter();
 
         // Indicates if this Sprite must rotate just like our Hero does
-        powerFXAllowRotation = allowRotation;
+        abilityPowerFXAllowRotation = allowRotation;
     }
 
     public void applyFirePower(IShootStrategy shootStrategy) {
-        currentPowerState = PowerState.POWERFUL;
+        weaponPower = true;
         shootContext.setStrategy(shootStrategy);
     }
 

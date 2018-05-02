@@ -172,13 +172,13 @@ public class PowerFour extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer);
+            hud.showAbilityPowerInfo(i18NGameThreeBundle.format("powerFour.name"), timer);
 
             // Set score
             hud.addScore(SCORE);
 
-            // Disable previous power (if any)
-            hero.powerDown();
+            // Disable previous ability power (if any)
+            hero.abilityPowerDown();
 
             // Create a new Filter
             Filter filter = new Filter();
@@ -195,13 +195,13 @@ public class PowerFour extends Item {
             hero.setFilterData(filter);
 
             // Set the power's texture
-            Sprite spritePower = new Sprite(Assets.getInstance().getToughMode().getToughModeStand());
+            Sprite spriteAbilityPower = new Sprite(Assets.getInstance().getToughMode().getToughModeStand());
 
-            // Only to set width and height of our spritePower
-            spritePower.setBounds(hero.getX(), hero.getY(), AssetToughMode.WIDTH_METERS, AssetToughMode.HEIGHT_METERS);
+            // Only to set width and height of our spriteAbilityPower
+            spriteAbilityPower.setBounds(hero.getX(), hero.getY(), AssetToughMode.WIDTH_METERS, AssetToughMode.HEIGHT_METERS);
 
             // Apply effect
-            hero.applyPowerFX(Assets.getInstance().getToughMode().getToughModeAnimation(), spritePower, false);
+            hero.applyAbilityPowerFX(Assets.getInstance().getToughMode().getToughModeAnimation(), spriteAbilityPower, false);
         }
     }
 

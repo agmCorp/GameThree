@@ -74,21 +74,21 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label backLabel = new Label(i18NGameThreeBundle.format("levelCompleted.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(currentLevelLabel).center();
+        table.add(currentLevelLabel);
         table.row();
-        table.add(levelCompletedLabel).padTop(AbstractScreen.PAD_TOP).center();
+        table.add(levelCompletedLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP).center();
+        table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             table.row();
-            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
+            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP * 2);
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
+            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP * 2);
         }
         table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2).center();
+        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {

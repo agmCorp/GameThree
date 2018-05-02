@@ -173,13 +173,13 @@ public class PowerThree extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer);
+            hud.showWeaponPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer);
 
             // Set score
             hud.addScore(SCORE);
 
-            // Disable previous power (if any)
-            hero.powerDown();
+            // Disable previous weapon power (if any)
+            hero.weaponPowerDown();
 
             // Apply fire power
             hero.applyFirePower(new HeroHalfMoonShooting(screen, numberBullets));

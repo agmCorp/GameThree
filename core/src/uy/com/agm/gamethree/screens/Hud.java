@@ -34,10 +34,10 @@ public class Hud extends AbstractScreen {
 
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
-    private static final float UPPERTABLE_CELL_HEIGHT = 30.0f;
+    private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float BUTTON_WIDTH = 100.0f;
-    private static final float HEALTHBAR_PADBOTTOM = 30.0f;
-    private static final String FORMAT_SCORE = "%6d";
+    private static final float HEALTHBAR_PAD_BOTTOM = 30.0f;
+    private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
@@ -67,11 +67,17 @@ public class Hud extends AbstractScreen {
     private int silverBullets;
     private Label silverBulletValueLablel;
 
-    private Table powerTable;
-    private Label powerNameLabel;
-    private int powerTime;
-    private float powerTimeCount;
-    private Label powerTimeValueLabel;
+    private Table abilityPowerTable;
+    private Label abilityPowerNameLabel;
+    private int abilityPowerTime;
+    private float abilityPowerTimeCount;
+    private Label abilityPowerTimeValueLabel;
+
+    private Table weaponPowerTable;
+    private Label weaponPowerNameLabel;
+    private int weaponPowerTime;
+    private float weaponPowerTimeCount;
+    private Label weaponPowerTimeValueLabel;
 
     private Table centerTable;
     private Label messageLabel;
@@ -112,8 +118,8 @@ public class Hud extends AbstractScreen {
         timeCount = 0;
         this.lives = lives;
         silverBullets = 0;
-        powerTime = 0;
-        powerTimeCount = 0;
+        abilityPowerTime = 0;
+        abilityPowerTimeCount = 0;
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
@@ -140,8 +146,11 @@ public class Hud extends AbstractScreen {
         // Define a table used to organize our hud's labels
         upperTable = new Table();
 
+        // Defaults for all cells
+        upperTable.defaults().width(V_WIDTH / 4);
+
         // Cell height
-        upperTable.row().height(UPPERTABLE_CELL_HEIGHT);
+        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
 
         // Debug lines
         upperTable.setDebug(PlayScreen.DEBUG_MODE);
@@ -154,67 +163,100 @@ public class Hud extends AbstractScreen {
 
         // Define our labels based on labelStyle
         Label scoreLabel = new Label(i18NGameThreeBundle.format("hud.score"), labelStyleSmall);
+        scoreLabel.setAlignment(Align.center);
         Label timeLabel = new Label(i18NGameThreeBundle.format("hud.time"), labelStyleSmall);
+        timeLabel.setAlignment(Align.center);
 
-        // Add labels to the table giving them all equal width with expandX
-        upperTable.add(scoreLabel).expandX();
-        upperTable.add(timeLabel).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit)).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getSilverBullet().getSilverBulletStand()), Scaling.fit)).expandX();
+        // Add labels to the table
+        upperTable.add(scoreLabel);
+        upperTable.add(timeLabel);
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit));
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getSilverBullet().getSilverBulletStand()), Scaling.fit));
 
         // Add a second row to our table
-        upperTable.row().height(UPPERTABLE_CELL_HEIGHT);
+        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
 
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SCORE, score), labelStyleSmall);
+        scoreValueLabel.setAlignment(Align.center);
         timeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_TIME, time), labelStyleSmall);
+        timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
+        livesValueLabel.setAlignment(Align.center);
         silverBulletValueLablel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
+        silverBulletValueLablel.setAlignment(Align.center);
 
         // Add values
-        upperTable.add(scoreValueLabel).expandX();
-        upperTable.add(timeValueLabel).expandX();
-        upperTable.add(livesValueLabel).expandX();
-        upperTable.add(silverBulletValueLablel).expandX();
+        upperTable.add(scoreValueLabel);
+        upperTable.add(timeValueLabel);
+        upperTable.add(livesValueLabel);
+        upperTable.add(silverBulletValueLablel);
 
         // Add a third row to our table
         upperTable.row();
 
-        // Add power info
-        definePowerTable();
-        upperTable.add(powerTable).colspan(upperTable.getColumns());
+        // Add ability power info
+        defineAbilityPowerTable();
+        upperTable.add(abilityPowerTable).colspan(upperTable.getColumns() / 2);
+
+        // Add weapon power info
+        defineWeaponPowerTable();
+        upperTable.add(weaponPowerTable).colspan(upperTable.getColumns() / 2);
 
         // Add table to the stage
         addActor(upperTable);
     }
 
-    private void definePowerTable() {
-        // Define a table used to organize the power info
-        powerTable = new Table();
-
-        // Cell height
-        powerTable.row().height(UPPERTABLE_CELL_HEIGHT);
+    private void defineAbilityPowerTable() {
+        // Define a table used to organize the ability power info
+        abilityPowerTable = new Table();
 
         // Debug lines
-        powerTable.setDebug(PlayScreen.DEBUG_MODE);
+        abilityPowerTable.setDebug(PlayScreen.DEBUG_MODE);
 
         // Define a label based on labelStyle
-        powerNameLabel = new Label("POWERNAME", labelStyleSmall);
+        abilityPowerNameLabel = new Label("ABILITY_POWER_NAME", labelStyleSmall);
 
         // Add values
-        powerTable.add(powerNameLabel);
+        abilityPowerTable.add(abilityPowerNameLabel);
 
-        // Add a second row to the table
-        powerTable.row().height(UPPERTABLE_CELL_HEIGHT);
+        // Add a second row to our table
+        abilityPowerTable.row();
 
         // Define a label based on labelStyle
-        powerTimeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_POWER_TIME, powerTime), labelStyleSmall);
+        abilityPowerTimeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_POWER_TIME, abilityPowerTime), labelStyleSmall);
 
         // Add values
-        powerTable.add(powerTimeValueLabel);
+        abilityPowerTable.add(abilityPowerTimeValueLabel).expandX();
 
         // Initially hidden
-        powerTable.setVisible(false);
+        abilityPowerTable.setVisible(false);
+    }
+
+    private void defineWeaponPowerTable() {
+        // Define a table used to organize the weapon power info
+        weaponPowerTable = new Table();
+
+        // Debug lines
+        weaponPowerTable.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Define a label based on labelStyle
+        weaponPowerNameLabel = new Label("WEAPON_POWER_NAME", labelStyleSmall);
+
+        // Add values
+        weaponPowerTable.add(weaponPowerNameLabel);
+
+        // Add a second row to our table
+        weaponPowerTable.row();
+
+        // Define a label based on labelStyle
+        weaponPowerTimeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_POWER_TIME, weaponPowerTime), labelStyleSmall);
+
+        // Add values
+        weaponPowerTable.add(weaponPowerTimeValueLabel).expandX();
+
+        // Initially hidden
+        weaponPowerTable.setVisible(false);
     }
 
     private void defineCenterTable() {
@@ -325,7 +367,7 @@ public class Hud extends AbstractScreen {
         healthBarTable.row();
 
         // Add health bar
-        healthBarTable.add(healthBar).padBottom(HEALTHBAR_PADBOTTOM);
+        healthBarTable.add(healthBar).padBottom(HEALTHBAR_PAD_BOTTOM);
 
         // Initially hidden
         healthBarTable.setVisible(false);
@@ -457,19 +499,34 @@ public class Hud extends AbstractScreen {
         defineButtonsTable();
     }
 
-    public void showPowerInfo(String powerName, int maxTime) {
-        powerNameLabel.setText(powerName);
-        powerTime = maxTime;
-        powerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, powerTime));
-        powerTable.setVisible(true);
+    public void showAbilityPowerInfo(String abilityPowerName, int maxTime) {
+        abilityPowerNameLabel.setText(abilityPowerName);
+        abilityPowerTime = maxTime;
+        abilityPowerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, abilityPowerTime));
+        abilityPowerTable.setVisible(true);
     }
 
-    public void hidePowerInfo() {
-        powerTable.setVisible(false);
+    public void showWeaponPowerInfo(String weaponPowerName, int maxTime) {
+        weaponPowerNameLabel.setText(weaponPowerName);
+        weaponPowerTime = maxTime;
+        weaponPowerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, weaponPowerTime));
+        weaponPowerTable.setVisible(true);
     }
 
-    public boolean isPowerInfoVisible() {
-        return powerTable.isVisible();
+    public void hideAbilityPowerInfo() {
+        abilityPowerTable.setVisible(false);
+    }
+
+    public void hideWeaponPowerInfo() {
+        weaponPowerTable.setVisible(false);
+    }
+
+    public boolean isAbilityPowerInfoVisible() {
+        return abilityPowerTable.isVisible();
+    }
+
+    public boolean isWeaponPowerInfoVisible() {
+        return weaponPowerTable.isVisible();
     }
 
     public void showMessage(String message) {
@@ -585,7 +642,7 @@ public class Hud extends AbstractScreen {
 
     public void update(float dt) {
         updateWorldTime(dt);
-        updatePowerTime(dt);
+        updatePowersTime(dt);
         updateFPS();
         overlayTemporaryScreen(dt);
         overlayTemporaryMessage(dt);
@@ -613,20 +670,43 @@ public class Hud extends AbstractScreen {
         }
     }
 
-    private void updatePowerTime(float dt) {
-        if (isPowerInfoVisible()) {
-            powerTimeCount += dt;
-            if (powerTimeCount >= 1) {
-                if (powerTime > 0) {
-                    powerTime--;
-                    if (powerTime <= POWER_TIMER_NOTIFICATION) {
+    private void updatePowersTime(float dt) {
+        updateAbilityPowerTime(dt);
+        updateWeaponPowerTime(dt);
+    }
+
+    private void updateAbilityPowerTime(float dt) {
+        if (isAbilityPowerInfoVisible()) {
+            abilityPowerTimeCount += dt;
+            if (abilityPowerTimeCount >= 1) {
+                if (abilityPowerTime > 0) {
+                    abilityPowerTime--;
+                    if (abilityPowerTime <= POWER_TIMER_NOTIFICATION) {
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepA());
                     }
-                    powerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, powerTime));
+                    abilityPowerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, abilityPowerTime));
                 } else {
-                    hidePowerInfo();
+                    hideAbilityPowerInfo();
                 }
-                powerTimeCount = 0;
+                abilityPowerTimeCount = 0;
+            }
+        }
+    }
+
+    private void updateWeaponPowerTime(float dt) {
+        if (isWeaponPowerInfoVisible()) {
+            weaponPowerTimeCount += dt;
+            if (weaponPowerTimeCount >= 1) {
+                if (weaponPowerTime > 0) {
+                    weaponPowerTime--;
+                    if (weaponPowerTime <= POWER_TIMER_NOTIFICATION) {
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepC());
+                    }
+                    weaponPowerTimeValueLabel.setText(String.format(Locale.getDefault(), FORMAT_POWER_TIME, weaponPowerTime));
+                } else {
+                    hideWeaponPowerInfo();
+                }
+                weaponPowerTimeCount = 0;
             }
         }
     }
@@ -677,16 +757,25 @@ public class Hud extends AbstractScreen {
         return timeIsUp;
     }
 
-    public boolean isPowerTimeUp() {
-        return powerTime <= 0;
+    public boolean isAbilityPowerTimeUp() {
+        return abilityPowerTime <= 0;
     }
 
-    public boolean isPowerRunningOut() {
-        return powerTime <= POWER_TIMER_NOTIFICATION;
+    public boolean isWeaponPowerTimeUp() {
+        return weaponPowerTime <= 0;
     }
 
-    public void forcePowerTimeUp() {
-        hidePowerInfo();
+    public boolean isAbilityPowerRunningOut() {
+        return abilityPowerTime <= POWER_TIMER_NOTIFICATION;
+    }
+
+    public boolean isWeaponPowerRunningOut() {
+        return weaponPowerTime <= POWER_TIMER_NOTIFICATION;
+    }
+
+    public void forcePowersTimeUp() {
+        hideAbilityPowerInfo();
+        hideWeaponPowerInfo();
     }
 
     public void decreaseLives(int quantity) {

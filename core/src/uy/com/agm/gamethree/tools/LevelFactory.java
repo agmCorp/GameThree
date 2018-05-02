@@ -24,13 +24,14 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  * Created by AGM on 1/20/2018.
  */
 
-public class LevelFactory {
+public class LevelFactory { // todo avanzar para nivel 3 y 4
     private static final String TAG = LevelFactory.class.getName();
 
     // Constants
     private static final int TIMER_LEVEL_ONE = 400;
     private static final int TIMER_LEVEL_TWO = 460;
     private static final int TIMER_LEVEL_THREE = 300;
+    private static final int TIMER_LEVEL_FOUR = 100;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -55,6 +56,13 @@ public class LevelFactory {
                                 screen.getGameViewPort().getWorldHeight() / 2 -
                                 AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
                 break;
+            case 4:
+                finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
+                                screen.getGameViewPort().getWorldHeight() / 2 -
+                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
+                break;
             default:
                 finalEnemy = null;
                 break;
@@ -63,7 +71,7 @@ public class LevelFactory {
     }
 
     public static int getLevelTimer(int level) {
-        int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO, TIMER_LEVEL_THREE};
+        int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO, TIMER_LEVEL_THREE, TIMER_LEVEL_FOUR};
         return  levelTimers[level - 1];
     }
 
@@ -78,6 +86,9 @@ public class LevelFactory {
                 music = Assets.getInstance().getMusic().getSongLevelTwo();
                 break;
             case 3:
+                music = Assets.getInstance().getMusic().getSongLevelThree();
+                break;
+            case 4:
                 music = Assets.getInstance().getMusic().getSongLevelThree();
                 break;
             default:
@@ -99,6 +110,9 @@ public class LevelFactory {
                 break;
             case 3:
                 map = Assets.getInstance().getMaps().getMapLevelThree();
+                break;
+            case 4:
+                map = Assets.getInstance().getMaps().getMapLevelFour();
                 break;
             default:
                 map = null;
@@ -126,6 +140,8 @@ public class LevelFactory {
                 break;
             case 3:
                 break;
+            case 4:
+                break;
             default:
                 break;
         }
@@ -142,6 +158,9 @@ public class LevelFactory {
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelTwo();
                 break;
             case 3:
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
+                break;
+            case 4:
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
                 break;
             default:

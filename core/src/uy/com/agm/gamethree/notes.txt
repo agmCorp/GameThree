@@ -31,8 +31,8 @@ la pantalla
 HACER PRIORIDAD 3
 -----------------
 - Analizar si los items no deberían chocar contra edge para no irse nunca de la pantalla, ojo, creo que lo había descartado antes.
-- Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge.
-Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
+- Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge. Intenté una
+vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.
 Esa interfaz la puedo usar ademas dentro de ActorDef.
 - poner particulas parece facil, capaz lluvia.

@@ -35,7 +35,7 @@ public class EnemySeven extends Enemy {
     public static final int MAX_CLONE = 5;
     private static final float CHANGE_HORIZONTAL_SECONDS = 2.0f;
     private static final float CHANGE_VERTICAL_SECONDS = 0.2f;
-    private static final float SPEAK_TIME_SECONDS = 2.3f;
+    private static final float SPEAK_TIME_SECONDS = 2.0f;
     private static final int SCORE = 5;
 
     private float stateTime;

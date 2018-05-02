@@ -5,6 +5,8 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ObjectSet;
 
+import uy.com.agm.gamethree.screens.PlayScreen;
+
 /**
  * Created by AGM on 1/18/2018.
  */
@@ -23,7 +25,7 @@ public class GameSettings {
     private static final float DEFAULT_VOLUME = 0.5f;
     private static final float MIN_VOLUME = 0.0f;
     private static final float MAX_VOLUME = 1.0f;
-    public static final int MAX_AVAILABLE_LEVEL = 3;
+    public static final int MAX_AVAILABLE_LEVEL = 4;
 
     // Singleton: unique instance
     private static GameSettings instance;
@@ -63,7 +65,7 @@ public class GameSettings {
         int level = 2;
         boolean availableLevel;
         do {
-            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, false) && level <= MAX_AVAILABLE_LEVEL;
+            availableLevel = prefs.getBoolean(AVAILABLE_LEVEL + level, PlayScreen.DEBUG_MODE) && level <= MAX_AVAILABLE_LEVEL;
             if (availableLevel) {
                 availableLevels.add(level);
                 level++;

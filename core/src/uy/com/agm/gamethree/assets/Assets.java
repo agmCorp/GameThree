@@ -90,9 +90,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_PICK_UP_POWER_TWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWER_THREE = "audio/sounds/pickUpPowerThree.ogg";
     public static final String FX_FILE_PICK_UP_POWER_FOUR = "audio/sounds/pickUpPowerFour.ogg";
-    public static final String FX_FILE_POWER_DOWN = "audio/sounds/powerDown.ogg";
+    public static final String FX_FILE_ABILITY_POWER_DOWN = "audio/sounds/abilityPowerDown.ogg";
+    public static final String FX_FILE_WEAPON_POWER_DOWN = "audio/sounds/weaponPowerDown.ogg";
     public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
     public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
+    public static final String FX_FILE_BEEP_C = "audio/sounds/beepC.ogg";
     public static final String FX_FILE_SHOW_UP_COL_ONE = "audio/sounds/showUpColOne.ogg";
     public static final String FX_FILE_SHOW_UP_COL_SILVER_BULLET = "audio/sounds/showUpColSilverBullet.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_ONE = "audio/sounds/showUpPowerOne.ogg";
@@ -143,6 +145,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String MAP_FILE_LEVEL_ONE = "levels/levelOne/levelOne.tmx";
     public static final String MAP_FILE_LEVEL_TWO = "levels/levelTwo/levelTwo.tmx";
     public static final String MAP_FILE_LEVEL_THREE = "levels/levelThree/levelThree.tmx";
+    public static final String MAP_FILE_LEVEL_FOUR = "levels/levelFour/levelFour.tmx";
 
     private static Assets instance;
     private AssetManager assetManager;
@@ -225,6 +228,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(MAP_FILE_LEVEL_ONE, TiledMap.class);
         assetManager.load(MAP_FILE_LEVEL_TWO, TiledMap.class);
         assetManager.load(MAP_FILE_LEVEL_THREE, TiledMap.class);
+        assetManager.load(MAP_FILE_LEVEL_FOUR, TiledMap.class);
     }
 
     private void loadSounds() {
@@ -245,9 +249,11 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_PICK_UP_POWER_TWO, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_THREE, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_FOUR, Sound.class);
-        assetManager.load(FX_FILE_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_ABILITY_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_WEAPON_POWER_DOWN, Sound.class);
         assetManager.load(FX_FILE_BEEP_A, Sound.class);
         assetManager.load(FX_FILE_BEEP_B, Sound.class);
+        assetManager.load(FX_FILE_BEEP_C, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_COL_ONE, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_COL_SILVER_BULLET, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_ONE, Sound.class);

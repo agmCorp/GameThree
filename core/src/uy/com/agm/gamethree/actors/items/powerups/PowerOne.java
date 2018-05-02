@@ -172,13 +172,13 @@ public class PowerOne extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer);
+            hud.showAbilityPowerInfo(i18NGameThreeBundle.format("powerOne.name"), timer);
 
             // Set score
             hud.addScore(SCORE);
 
-            // Disable previous power (if any)
-            hero.powerDown();
+            // Disable previous ability power (if any)
+            hero.abilityPowerDown();
 
             // Hero can't collide with bullets and some types of enemies
             Filter filter = new Filter();
@@ -193,13 +193,13 @@ public class PowerOne extends Item {
             hero.setFilterData(filter);
 
             // Set the power's texture
-            Sprite spritePower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
+            Sprite spriteAbilityPower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
 
-            // Only to set width and height of our spritePower
-            spritePower.setBounds(hero.getX(), hero.getY(), AssetGhostMode.WIDTH_METERS, AssetGhostMode.HEIGHT_METERS);
+            // Only to set width and height of our spriteAbilityPower
+            spriteAbilityPower.setBounds(hero.getX(), hero.getY(), AssetGhostMode.WIDTH_METERS, AssetGhostMode.HEIGHT_METERS);
 
             // Apply effect
-            hero.applyPowerFX(Assets.getInstance().getGhostMode().getGhostModeAnimation(), spritePower, true);
+            hero.applyAbilityPowerFX(Assets.getInstance().getGhostMode().getGhostModeAnimation(), spriteAbilityPower, true);
         }
     }
 

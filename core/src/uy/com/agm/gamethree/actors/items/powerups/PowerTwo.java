@@ -175,13 +175,13 @@ public class PowerTwo extends Item {
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer);
+            hud.showAbilityPowerInfo(i18NGameThreeBundle.format("powerTwo.name"), timer);
 
             // Set score
             hud.addScore(SCORE);
 
-            // Disable previous power (if any)
-            hero.powerDown();
+            // Disable previous ability power (if any)
+            hero.abilityPowerDown();
 
             // Create the Shield (regular octagon)
             PolygonShape shield = new PolygonShape();
@@ -224,13 +224,13 @@ public class PowerTwo extends Item {
             hero.getB2body().createFixture(fdef).setUserData(hero);
 
             // Set the power's texture
-            Sprite spritePower = new Sprite(Assets.getInstance().getShield().getShieldStand());
+            Sprite spriteAbilityPower = new Sprite(Assets.getInstance().getShield().getShieldStand());
 
-            // Only to set width and height of our spritePower
-            spritePower.setBounds(hero.getX(), hero.getY(), AssetShield.WIDTH_METERS, AssetShield.HEIGHT_METERS);
+            // Only to set width and height of our spriteAbilityPower
+            spriteAbilityPower.setBounds(hero.getX(), hero.getY(), AssetShield.WIDTH_METERS, AssetShield.HEIGHT_METERS);
 
             // Apply effect
-            hero.applyPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spritePower, false);
+            hero.applyAbilityPowerFX(Assets.getInstance().getShield().getShieldAnimation(), spriteAbilityPower, false);
         }
     }
 

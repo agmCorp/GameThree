@@ -92,7 +92,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootEmpty());
                 }
             } else {
-                if (screen.getHud().isPowerRunningOut()) {
+                if (screen.getHud().isWeaponPowerRunningOut()) {
                     createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
                             AssetHeroBullet.WIDTH_METERS,
                             AssetHeroBullet.HEIGHT_METERS,

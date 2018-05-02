@@ -29,9 +29,11 @@ public class AssetSounds {
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
     private Sound pickUpPowerFour;
-    private Sound powerDown;
+    private Sound abilityPowerDown;
+    private Sound weaponPowerDown;
     private Sound beepA;
     private Sound beepB;
+    private Sound beepC;
     private Sound showUpColOne;
     private Sound showUpColSilverBullet;
     private Sound showUpPowerOne;
@@ -83,9 +85,11 @@ public class AssetSounds {
         pickUpPowerTwo = am.get(Assets.FX_FILE_PICK_UP_POWER_TWO, Sound.class);
         pickUpPowerThree = am.get(Assets.FX_FILE_PICK_UP_POWER_THREE, Sound.class);
         pickUpPowerFour = am.get(Assets.FX_FILE_PICK_UP_POWER_FOUR, Sound.class);
-        powerDown = am.get(Assets.FX_FILE_POWER_DOWN, Sound.class);
+        abilityPowerDown = am.get(Assets.FX_FILE_ABILITY_POWER_DOWN, Sound.class);
+        weaponPowerDown = am.get(Assets.FX_FILE_WEAPON_POWER_DOWN, Sound.class);
         beepA = am.get(Assets.FX_FILE_BEEP_A, Sound.class);
         beepB = am.get(Assets.FX_FILE_BEEP_B, Sound.class);
+        beepC = am.get(Assets.FX_FILE_BEEP_C, Sound.class);
         showUpColOne = am.get(Assets.FX_FILE_SHOW_UP_COL_ONE, Sound.class);
         showUpColSilverBullet = am.get(Assets.FX_FILE_SHOW_UP_COL_SILVER_BULLET, Sound.class);
         showUpPowerOne = am.get(Assets.FX_FILE_SHOW_UP_POWER_ONE, Sound.class);
@@ -188,8 +192,12 @@ public class AssetSounds {
         return pickUpPowerFour;
     }
 
-    public Sound getPowerDown() {
-        return powerDown;
+    public Sound getAbilityPowerDown() {
+        return abilityPowerDown;
+    }
+
+    public Sound getWeaponPowerDown() {
+        return weaponPowerDown;
     }
 
     public Sound getBeepA() {
@@ -198,6 +206,10 @@ public class AssetSounds {
 
     public Sound getBeepB() {
         return beepB;
+    }
+
+    public Sound getBeepC() {
+        return beepC;
     }
 
     public Sound getShowUpColOne() {
