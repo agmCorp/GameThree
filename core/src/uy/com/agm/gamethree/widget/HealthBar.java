@@ -23,7 +23,11 @@ public class HealthBar extends ProgressBar {
     private static final float STEP = 0.01f;
     private static final float ANIMATION_DURATION = 0.25f;
 
-    private Drawable warningColor;
+    private Drawable knobBeforeWarningColor;
+    private Drawable backgroundColor;
+    private Drawable knobColor;
+    private Drawable knobBeforeColor;
+
     private int warningBefore;
     private int currentEnergy;
     private int fullEnergy;
@@ -31,20 +35,32 @@ public class HealthBar extends ProgressBar {
     public HealthBar() {
         super(MIN, MAX, STEP, false, new ProgressBarStyle());
 
-        this.warningColor = getColoredDrawable(WIDTH, HEIGHT, Color.YELLOW);
+        this.knobBeforeWarningColor = getColoredDrawable(WIDTH, HEIGHT, Color.YELLOW);
+        this.backgroundColor = getColoredDrawable(WIDTH, HEIGHT, Color.RED);
+        this.knobColor = getColoredDrawable(0, HEIGHT, Color.GREEN);
+        this.knobBeforeColor = getColoredDrawable(WIDTH, HEIGHT, Color.GREEN);
+
         this.warningBefore = 0;
         this.currentEnergy = 0;
         this.fullEnergy = 0;
 
-        getStyle().background = getColoredDrawable(WIDTH, HEIGHT, Color.RED);
-        getStyle().knob = getColoredDrawable(0, HEIGHT, Color.GREEN);
-        getStyle().knobBefore = getColoredDrawable(WIDTH, HEIGHT, Color.GREEN);
-
         setHeight(HEIGHT);
+        setAnimateDuration(ANIMATION_DURATION);
+
         setFull();
     }
 
-    // Creates an image of determined size filled with determined color.
+    private void setFull() {
+        setDefaultColors();
+        setValue(MAX);
+    }
+
+    private void setDefaultColors() {
+        getStyle().background = backgroundColor;
+        getStyle().knob = knobColor;
+        getStyle().knobBefore = knobBeforeColor;
+    }
+
     private Drawable getColoredDrawable(int width, int height, Color color) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);
@@ -54,15 +70,11 @@ public class HealthBar extends ProgressBar {
         return drawable;
     }
 
-    private void setFull() {
-        setValue(MAX);
-        setAnimateDuration(ANIMATION_DURATION);
-    }
-
     public void setInitialEnergy(int warningBefore, int energy) {
         this.warningBefore = Math.min(warningBefore, energy);
         this.currentEnergy = energy;
         this.fullEnergy = energy;
+        setFull();
     }
 
     public void decrease() {
@@ -70,7 +82,7 @@ public class HealthBar extends ProgressBar {
         if (currentEnergy > 0) {
             setValue(getValue() - MAX / fullEnergy);
             if (currentEnergy < warningBefore) {
-                getStyle().knobBefore = warningColor;
+                getStyle().knobBefore = knobBeforeWarningColor;
             }
         } else {
             setValue(0);

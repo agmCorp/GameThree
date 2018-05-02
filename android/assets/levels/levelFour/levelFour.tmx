@@ -132,27 +132,27 @@
  <objectgroup name="powerBox">
   <object id="2268" x="189" y="7567" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="5"/>
+    <property name="powerOne" type="int" value="20"/>
    </properties>
   </object>
   <object id="2269" x="246" y="7565" width="32" height="32">
    <properties>
-    <property name="powerTwo" type="int" value="12"/>
+    <property name="powerTwo" type="int" value="20"/>
    </properties>
   </object>
   <object id="2270" x="309" y="7571" width="32" height="32">
    <properties>
-    <property name="powerThree" type="int" value="13"/>
+    <property name="powerThree" type="int" value="5"/>
    </properties>
   </object>
   <object id="2271" x="372" y="7571" width="32" height="32">
    <properties>
-    <property name="powerFour" type="int" value="14"/>
+    <property name="powerFour" type="int" value="5"/>
    </properties>
   </object>
   <object id="2272" x="431" y="7571" width="32" height="32">
    <properties>
-    <property name="powerThree" type="int" value="15"/>
+    <property name="powerThree" type="int" value="5"/>
    </properties>
   </object>
  </objectgroup>
