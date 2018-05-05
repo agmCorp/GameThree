@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- testear poderes
 - hacer los enemigos nivel 3.
 - nuevo poder de fuego que dispare hacia atrás y hacia los costados...o en todas direcciones circular. Afecta el knockback
 - puedo hacer el poder que los mata a todos, usando AABB
