@@ -16,7 +16,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyHalfMoonShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEleven;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionK;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -56,7 +56,7 @@ public class EnemyEleven extends Enemy {
         // Animations
         enemyElevenAnimation = Assets.getInstance().getEnemyEleven().getEnemyElevenAnimation();
         enemyElevenShootAnimation = Assets.getInstance().getEnemyEleven().getEnemyElevenShootAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionK().getExplosionKAnimation();
 
         // Determines the size of the EnemyEleven's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyEleven.WIDTH_METERS, AssetEnemyEleven.HEIGHT_METERS);
@@ -206,8 +206,8 @@ public class EnemyEleven extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionA.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionA.HEIGHT_METERS * expScale / 2,
-                        AssetExplosionA.WIDTH_METERS * expScale, AssetExplosionA.HEIGHT_METERS * expScale);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionK.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionK.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionK.WIDTH_METERS * expScale, AssetExplosionK.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
