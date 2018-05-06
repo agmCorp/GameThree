@@ -84,8 +84,6 @@ Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
     - enemigofinal que me sigue
     - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
       rodeados por una gran textura que es el enemigo!
-    - nube que viene desde arriba hasta el centro de la pantalla, luego se transforma en un enemigo que si no le disparas tira
-      una rafaga (como flor) de balas, luego se transforma en nube y se va.
     - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
 EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
@@ -123,7 +121,7 @@ hay que pensarlo.
 TENGO
 -----
 - borders, edges, paths, obstacles, powerboxes, enemies, finals, items, weapons
-- enemigos comunes 8 (uso 3 o 4 enemigos por nivel):
+- enemigos comunes 11 (uso 3 o 4 enemigos por nivel):
 one - amarillo
 two - murcielago
 three - bola negra
@@ -134,8 +132,9 @@ seven - se multiplica
 eight - bicho verde cometa
 nine - fenix
 ten - 2 circulos
+eleven - hombres de piedra
 - enemigos finales: 3
-- poderes 4 (2 poderes por nivel)
+- poderes 5 -3 de habilidad, 2 de fuego- (2 poderes por nivel)
 - 1 moneda x 3
 - 1 shuriken
 
