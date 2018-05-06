@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
-import uy.com.agm.gamethree.actors.weapons.hero.HeroHalfMoonShooting;
+import uy.com.agm.gamethree.actors.weapons.hero.HeroCrossShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerFive;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -22,8 +22,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/14/2017.
  */
 
-public class PowerThree extends Item {
-    private static final String TAG = PowerThree.class.getName();
+public class PowerFive extends Item {
+    private static final String TAG = PowerFive.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
@@ -32,8 +32,6 @@ public class PowerThree extends Item {
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 5.0f;
     private static final int DEFAULT_TIMER = 10;
-    private static final int MIN_BULLETS = 2;
-    private static final int MAX_BULLETS = 6;
     private static final int SCORE = 20;
 
     private int timer;
@@ -41,30 +39,28 @@ public class PowerThree extends Item {
     private float stateTime;
     private float stateWaitingTime;
     private float stateFadingTime;
-    private Animation powerThreeAnimation;
-    private int numberBullets;
+    private Animation powerFiveAnimation;
 
     // Fire power
-    public PowerThree(PlayScreen screen, float x, float y, int timer) {
+    public PowerFive(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
-        powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
-        numberBullets = MathUtils.random(MIN_BULLETS, MAX_BULLETS);
+        powerFiveAnimation = Assets.getInstance().getPowerFive().getPowerFiveAnimation();
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), AssetPowerThree.WIDTH_METERS, AssetPowerThree.HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetPowerFive.WIDTH_METERS, AssetPowerFive.HEIGHT_METERS);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpPowerThree());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpPowerFive());
     }
 
     @Override
@@ -97,13 +93,13 @@ public class PowerThree extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerThree may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerFive may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) powerFiveAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         stateWaitingTime += dt;
@@ -117,13 +113,13 @@ public class PowerThree extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, PowerThree may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, PowerFive may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) powerThreeAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) powerFiveAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         stateFadingTime += dt;
@@ -143,7 +139,7 @@ public class PowerThree extends Item {
 
     @Override
     protected void stateTaken(float dt) {
-        applyPowerThree();
+        applyPowerFive();
 
         // Destroy its b2body
         if(!world.isLocked()) {
@@ -161,20 +157,20 @@ public class PowerThree extends Item {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpPowerThree();
+        return Assets.getInstance().getScene2d().getHelpPowerFive();
     }
 
-    private void applyPowerThree() {
+    private void applyPowerFive() {
         Hero hero = screen.getCreator().getHero();
 
-        // WA: Hero could have died between use method and applyPowerThree method
+        // WA: Hero could have died between use method and applyPowerFive method
         if (!hero.isDead()) {
             // Audio FX
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerThree());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerFive());
 
             // Show the power's name and its countdown
             Hud hud = screen.getHud();
-            hud.showWeaponPowerInfo(i18NGameThreeBundle.format("powerThree.name"), timer);
+            hud.showWeaponPowerInfo(i18NGameThreeBundle.format("powerFive.name"), timer);
 
             // Set score
             hud.addScore(SCORE);
@@ -183,7 +179,7 @@ public class PowerThree extends Item {
             hero.weaponPowerDown();
 
             // Apply fire power
-            hero.applyFirePower(new HeroHalfMoonShooting(screen, numberBullets));
+            hero.applyFirePower(new HeroCrossShooting(screen));
         }
     }
 

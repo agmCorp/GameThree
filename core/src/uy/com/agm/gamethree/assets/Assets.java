@@ -57,6 +57,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetMaps;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerBox;
+import uy.com.agm.gamethree.assets.sprites.AssetPowerFive;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerFour;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerOne;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerThree;
@@ -94,6 +95,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_PICK_UP_POWER_TWO = "audio/sounds/pickUpPowerTwo.ogg";
     public static final String FX_FILE_PICK_UP_POWER_THREE = "audio/sounds/pickUpPowerThree.ogg";
     public static final String FX_FILE_PICK_UP_POWER_FOUR = "audio/sounds/pickUpPowerFour.ogg";
+    public static final String FX_FILE_PICK_UP_POWER_FIVE = "audio/sounds/pickUpPowerFive.ogg";
     public static final String FX_FILE_ABILITY_POWER_DOWN = "audio/sounds/abilityPowerDown.ogg";
     public static final String FX_FILE_WEAPON_POWER_DOWN = "audio/sounds/weaponPowerDown.ogg";
     public static final String FX_FILE_BEEP_A = "audio/sounds/beepA.ogg";
@@ -105,6 +107,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_SHOW_UP_POWER_TWO = "audio/sounds/showUpPowerTwo.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_THREE = "audio/sounds/showUpPowerThree.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_FOUR = "audio/sounds/showUpPowerFour.ogg";
+    public static final String FX_FILE_SHOW_UP_POWER_FIVE = "audio/sounds/showUpPowerFive.ogg";
     public static final String FX_FILE_TIME_IS_UP = "audio/sounds/timeIsUp.ogg";
     public static final String FX_FILE_FINAL_ENEMY_POWER_UP = "audio/sounds/finalEnemyPowerUp.ogg";
     public static final String FX_FILE_FINAL_ENEMY_POWER_DOWN = "audio/sounds/finalEnemyPowerDown.ogg";
@@ -133,6 +136,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_BITE = "audio/sounds/bite.ogg";
     public static final String FX_FILE_ROCK_SCRAPE = "audio/sounds/rockScrape.ogg";
     public static final String FX_FILE_PEBBLES = "audio/sounds/pebbles.ogg";
+    public static final String FX_FILE_BLADE = "audio/sounds/blade.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -178,6 +182,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetPowerTwo powerTwo;
     private AssetPowerThree powerThree;
     private AssetPowerFour powerFour;
+    private AssetPowerFive powerFive;
     private AssetExplosionA explosionA;
     private AssetExplosionB explosionB;
     private AssetExplosionC explosionC;
@@ -259,6 +264,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_PICK_UP_POWER_TWO, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_THREE, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_FOUR, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_POWER_FIVE, Sound.class);
         assetManager.load(FX_FILE_ABILITY_POWER_DOWN, Sound.class);
         assetManager.load(FX_FILE_WEAPON_POWER_DOWN, Sound.class);
         assetManager.load(FX_FILE_BEEP_A, Sound.class);
@@ -270,6 +276,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_SHOW_UP_POWER_TWO, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_THREE, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_POWER_FIVE, Sound.class);
         assetManager.load(FX_FILE_TIME_IS_UP, Sound.class);
         assetManager.load(FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
         assetManager.load(FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
@@ -297,6 +304,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_BITE, Sound.class);
         assetManager.load(FX_FILE_ROCK_SCRAPE, Sound.class);
         assetManager.load(FX_FILE_PEBBLES, Sound.class);
+        assetManager.load(FX_FILE_BLADE, Sound.class);
     }
 
     private void loadMusic() {
@@ -376,6 +384,7 @@ public class Assets implements Disposable, AssetErrorListener {
         powerTwo = new AssetPowerTwo(atlasDynamicObjects);
         powerThree = new AssetPowerThree(atlasDynamicObjects);
         powerFour = new AssetPowerFour(atlasDynamicObjects);
+        powerFive = new AssetPowerFive(atlasDynamicObjects);
         explosionA = new AssetExplosionA(atlasDynamicObjects);
         explosionB = new AssetExplosionB(atlasDynamicObjects);
         explosionC = new AssetExplosionC(atlasDynamicObjects);
@@ -509,6 +518,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetPowerFour getPowerFour() {
         return powerFour;
+    }
+
+    public AssetPowerFive getPowerFive() {
+        return powerFive;
     }
 
     public AssetExplosionA getExplosionA() {

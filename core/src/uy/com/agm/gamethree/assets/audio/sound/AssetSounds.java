@@ -30,6 +30,7 @@ public class AssetSounds {
     private Sound pickUpPowerTwo;
     private Sound pickUpPowerThree;
     private Sound pickUpPowerFour;
+    private Sound pickUpPowerFive;
     private Sound abilityPowerDown;
     private Sound weaponPowerDown;
     private Sound beepA;
@@ -41,6 +42,7 @@ public class AssetSounds {
     private Sound showUpPowerTwo;
     private Sound showUpPowerThree;
     private Sound showUpPowerFour;
+    private Sound showUpPowerFive;
     private Sound timeIsUp;
     private Sound finalEnemyIntro;
     private Sound finalEnemyPowerUp;
@@ -69,6 +71,7 @@ public class AssetSounds {
     private Sound bite;
     private Sound rockScrape;
     private Sound pebbles;
+    private Sound blade;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -89,6 +92,7 @@ public class AssetSounds {
         pickUpPowerTwo = am.get(Assets.FX_FILE_PICK_UP_POWER_TWO, Sound.class);
         pickUpPowerThree = am.get(Assets.FX_FILE_PICK_UP_POWER_THREE, Sound.class);
         pickUpPowerFour = am.get(Assets.FX_FILE_PICK_UP_POWER_FOUR, Sound.class);
+        pickUpPowerFive = am.get(Assets.FX_FILE_PICK_UP_POWER_FIVE, Sound.class);
         abilityPowerDown = am.get(Assets.FX_FILE_ABILITY_POWER_DOWN, Sound.class);
         weaponPowerDown = am.get(Assets.FX_FILE_WEAPON_POWER_DOWN, Sound.class);
         beepA = am.get(Assets.FX_FILE_BEEP_A, Sound.class);
@@ -100,6 +104,7 @@ public class AssetSounds {
         showUpPowerTwo = am.get(Assets.FX_FILE_SHOW_UP_POWER_TWO, Sound.class);
         showUpPowerThree = am.get(Assets.FX_FILE_SHOW_UP_POWER_THREE, Sound.class);
         showUpPowerFour = am.get(Assets.FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
+        showUpPowerFive = am.get(Assets.FX_FILE_SHOW_UP_POWER_FIVE, Sound.class);
         timeIsUp = am.get(Assets.FX_FILE_TIME_IS_UP, Sound.class);
         finalEnemyPowerUp = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
         finalEnemyPowerDown = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
@@ -128,6 +133,7 @@ public class AssetSounds {
         bite = am.get(Assets.FX_FILE_BITE, Sound.class);
         rockScrape = am.get(Assets.FX_FILE_ROCK_SCRAPE, Sound.class);
         pebbles = am.get(Assets.FX_FILE_PEBBLES, Sound.class);
+        blade = am.get(Assets.FX_FILE_BLADE, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -202,6 +208,10 @@ public class AssetSounds {
         return pickUpPowerFour;
     }
 
+    public Sound getPickUpPowerFive() {
+        return pickUpPowerFive;
+    }
+
     public Sound getAbilityPowerDown() {
         return abilityPowerDown;
     }
@@ -244,6 +254,10 @@ public class AssetSounds {
 
     public Sound getShowUpPowerFour() {
         return showUpPowerFour;
+    }
+
+    public Sound getShowUpPowerFive() {
+        return showUpPowerFive;
     }
 
     public Sound getTimeIsUp() {
@@ -356,5 +370,9 @@ public class AssetSounds {
 
     public Sound getPebbles() {
         return pebbles;
+    }
+
+    public Sound getBlade() {
+        return blade;
     }
 }

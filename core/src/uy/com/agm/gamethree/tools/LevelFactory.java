@@ -11,6 +11,7 @@ import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelTwo;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.actors.items.powerups.PowerFive;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
 import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
@@ -139,8 +140,10 @@ public class LevelFactory { // todo avanzar para nivel 3 y 4
                 dynamic.put(FinalEnemyLevelTwo.class.getName(), new DynamicHelpDef(true));
                 break;
             case 3:
+                dynamic.put(PowerFive.class.getName(), new DynamicHelpDef());
                 break;
             case 4:
+                dynamic.put(PowerFive.class.getName(), new DynamicHelpDef());
                 break;
             default:
                 break;

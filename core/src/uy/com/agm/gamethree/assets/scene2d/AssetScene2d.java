@@ -29,6 +29,7 @@ public class AssetScene2d {
     private TextureRegion helpPowerTwo;
     private TextureRegion helpPowerThree;
     private TextureRegion helpPowerFour;
+    private TextureRegion helpPowerFive;
     private TextureRegion helpColOne;
     private TextureRegion helpColSilverBulletLevelOne;
     private TextureRegion helpColSilverBulletLevelTwo;
@@ -58,6 +59,7 @@ public class AssetScene2d {
         helpPowerTwo = atlas.findRegion("helpPowerTwo");
         helpPowerThree = atlas.findRegion("helpPowerThree");
         helpPowerFour = atlas.findRegion("helpPowerFour");
+        helpPowerFive = atlas.findRegion("helpPowerFive");
         helpColOne = atlas.findRegion("helpColOne");
         helpColSilverBulletLevelOne = atlas.findRegion("helpColSilverBulletLevelOne");
         helpColSilverBulletLevelTwo = atlas.findRegion("helpColSilverBulletLevelTwo");
@@ -141,6 +143,10 @@ public class AssetScene2d {
 
     public TextureRegion getHelpPowerFour() {
         return helpPowerFour;
+    }
+
+    public TextureRegion getHelpPowerFive() {
+        return helpPowerFive;
     }
 
     public TextureRegion getHelpColOne() {

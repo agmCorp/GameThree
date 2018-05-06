@@ -35,6 +35,7 @@ import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.actors.items.powerups.PowerFive;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
 import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
@@ -76,6 +77,7 @@ public class B2WorldCreator {
     public static final String KEY_POWER_TWO = "powerTwo";
     public static final String KEY_POWER_THREE = "powerThree";
     public static final String KEY_POWER_FOUR = "powerFour";
+    public static final String KEY_POWER_FIVE = "powerFive";
     public static final String KEY_COL_ONE = "colOne";
     public static final String KEY_COL_SILVER_BULLET = "colSilverBullet";
     public static final String KEY_STRENGTH = "strength";
@@ -353,6 +355,9 @@ public class B2WorldCreator {
             if (actor instanceof PowerFour) {
                 items.add((PowerFour) actor);
             }
+            if (actor instanceof PowerFive) {
+                items.add((PowerFive) actor);
+            }
             if (actor instanceof HeroBullet) {
                 weapons.add((HeroBullet) actor);
             }
@@ -399,6 +404,10 @@ public class B2WorldCreator {
         if (mp.containsKey(KEY_POWER_FOUR)) {
             timer = object.getProperties().get(KEY_POWER_FOUR, 0, Integer.class);
             createGameThreeActor(new ActorDef(new PowerFour(screen, x, y, timer)));
+        }
+        if (mp.containsKey(KEY_POWER_FIVE)) {
+            timer = object.getProperties().get(KEY_POWER_FIVE, 0, Integer.class);
+            createGameThreeActor(new ActorDef(new PowerFive(screen, x, y, timer)));
         }
     }
 
