@@ -1,7 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
-- hacer los enemigos nivel 3.
-- puedo hacer el poder que los mata a todos, usando AABB
+- A grandes razgos: 1 enemigo, 1 poder aabb, 1 col vida, help del boss.
 
 HACER PRIORIDAD 2
 -----------------
