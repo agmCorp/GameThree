@@ -18,6 +18,7 @@ public class AssetSounds {
     private Sound dead;
     private Sound enemyShoot;
     private Sound heroShoot;
+    private Sound shoot;
     private Sound heroShootEmpty;
     private Sound heroShootSwish;
     private Sound hit;
@@ -66,6 +67,8 @@ public class AssetSounds {
     private Sound marching;
     private Sound flap;
     private Sound bite;
+    private Sound rockScrape;
+    private Sound pebbles;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -74,6 +77,7 @@ public class AssetSounds {
         dead = am.get(Assets.FX_FILE_DEAD, Sound.class);
         enemyShoot = am.get(Assets.FX_FILE_ENEMY_SHOOT, Sound.class);
         heroShoot = am.get(Assets.FX_FILE_HERO_SHOOT, Sound.class);
+        shoot = am.get(Assets.FX_FILE_SHOOT, Sound.class);
         heroShootEmpty = am.get(Assets.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         heroShootSwish = am.get(Assets.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         hit = am.get(Assets.FX_FILE_HIT, Sound.class);
@@ -122,6 +126,8 @@ public class AssetSounds {
         marching = am.get(Assets.FX_FILE_MARCHING, Sound.class);
         flap = am.get(Assets.FX_FILE_FLAP, Sound.class);
         bite = am.get(Assets.FX_FILE_BITE, Sound.class);
+        rockScrape = am.get(Assets.FX_FILE_ROCK_SCRAPE, Sound.class);
+        pebbles = am.get(Assets.FX_FILE_PEBBLES, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -146,6 +152,10 @@ public class AssetSounds {
 
     public Sound getHeroShoot() {
         return heroShoot;
+    }
+
+    public Sound getShoot() {
+        return shoot;
     }
 
     public Sound getHeroShootEmpty() {
@@ -338,5 +348,13 @@ public class AssetSounds {
 
     public Sound getBite() {
         return bite;
+    }
+
+    public Sound getRockScrape() {
+        return rockScrape;
+    }
+
+    public Sound getPebbles() {
+        return pebbles;
     }
 }

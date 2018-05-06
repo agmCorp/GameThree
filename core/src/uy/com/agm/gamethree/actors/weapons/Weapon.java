@@ -26,7 +26,7 @@ public abstract class Weapon extends Sprite {
     protected Vector2 velocity;
 
     protected enum State {
-        SHOT, ONTARGET, IMPACT, FINISHED
+        SHOOT, ONTARGET, IMPACT, FINISHED
     }
     protected State currentState;
 
@@ -52,7 +52,7 @@ public abstract class Weapon extends Sprite {
     }
 
     protected void checkBoundaries() {
-        /* A Weapon is always shot on camera.
+        /* A Weapon is always shoot on camera.
         * You have to be very careful because if the weapon is destroyed, its b2body does not exist and gives
         * random errors if you try to access its b2body.
         */
@@ -90,8 +90,8 @@ public abstract class Weapon extends Sprite {
 
     public void update(float dt) {
         switch (currentState) {
-            case SHOT:
-                stateShot(dt);
+            case SHOOT:
+                stateShoot(dt);
                 break;
             case ONTARGET:
                 stateOnTarget(dt);
@@ -128,7 +128,7 @@ public abstract class Weapon extends Sprite {
 
     protected abstract void defineWeapon();
     protected abstract String getClassName();
-    protected abstract void stateShot(float dt);
+    protected abstract void stateShoot(float dt);
     protected abstract void stateOnTarget(float dt);
     public abstract void onTarget();
 }

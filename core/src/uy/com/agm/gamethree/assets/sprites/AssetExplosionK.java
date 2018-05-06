@@ -28,7 +28,7 @@ public class AssetExplosionK {
 
         // Animation
         regions = atlas.findRegions("explosionK");
-        explosionKAnimation = new Animation(0.5f / 18.0f, regions);
+        explosionKAnimation = new Animation(1.0f / 18.0f, regions);
         regions.clear();
     }
 

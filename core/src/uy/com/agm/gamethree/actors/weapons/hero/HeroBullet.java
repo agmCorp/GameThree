@@ -22,8 +22,8 @@ public class HeroBullet extends Weapon {
     private float width;
     private float height;
     private float stateTime;
-    private boolean showMuzzleFlashShot;
-    private TextureRegion muzzleFlashShotFX;
+    private boolean showMuzzleFlashShoot;
+    private TextureRegion muzzleFlashShootFX;
     private TextureRegion muzzleFlashImpactFX;
     private Animation heroBulletAnimation;
     private Vector2 tmp; // Temporary GC friendly vector
@@ -43,9 +43,9 @@ public class HeroBullet extends Weapon {
         setRotation(angle);
         heroBulletAnimation = animation;
         stateTime = 0;
-        currentState = State.SHOT;
-        showMuzzleFlashShot = true;
-        muzzleFlashShotFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashShot();
+        currentState = State.SHOOT;
+        showMuzzleFlashShoot = true;
+        muzzleFlashShootFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashShoot();
         muzzleFlashImpactFX = Assets.getInstance().getHeroBullet().getHeroBulletMuzzleFlashImpact();
 
         // Temporary GC friendly vector
@@ -80,7 +80,7 @@ public class HeroBullet extends Weapon {
     }
 
     @Override
-    protected void stateShot(float dt) {
+    protected void stateShoot(float dt) {
         b2body.setLinearVelocity(velocity);
 
         // Get the bounding rectangle that could have been changed after applying setRotation
@@ -89,9 +89,9 @@ public class HeroBullet extends Weapon {
         // Update our Sprite to correspond with the position of our Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
-        if (showMuzzleFlashShot) {
-            setRegion(muzzleFlashShotFX); // Only one first frame
-            showMuzzleFlashShot = false;
+        if (showMuzzleFlashShoot) {
+            setRegion(muzzleFlashShootFX); // Only one first frame
+            showMuzzleFlashShoot = false;
         } else {
             if (stateTime == 0) { // Animation starts
                 setBounds(getX(), getY(), width, height);

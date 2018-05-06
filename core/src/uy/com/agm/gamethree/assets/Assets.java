@@ -82,6 +82,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
     public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
+    public static final String FX_FILE_SHOOT = "audio/sounds/shoot.ogg";
     public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/ohoh.ogg";
     public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
@@ -130,6 +131,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_MARCHING = "audio/sounds/marching.ogg";
     public static final String FX_FILE_FLAP = "audio/sounds/flap.ogg";
     public static final String FX_FILE_BITE = "audio/sounds/bite.ogg";
+    public static final String FX_FILE_ROCK_SCRAPE = "audio/sounds/rockScrape.ogg";
+    public static final String FX_FILE_PEBBLES = "audio/sounds/pebbles.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -244,6 +247,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_DEAD, Sound.class);
         assetManager.load(FX_FILE_ENEMY_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         assetManager.load(FX_FILE_HIT, Sound.class);
@@ -291,6 +295,8 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_MARCHING, Sound.class);
         assetManager.load(FX_FILE_FLAP, Sound.class);
         assetManager.load(FX_FILE_BITE, Sound.class);
+        assetManager.load(FX_FILE_ROCK_SCRAPE, Sound.class);
+        assetManager.load(FX_FILE_PEBBLES, Sound.class);
     }
 
     private void loadMusic() {

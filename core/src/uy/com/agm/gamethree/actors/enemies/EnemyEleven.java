@@ -36,7 +36,7 @@ public class EnemyEleven extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final int MIN_BULLETS = 2;
     private static final int MAX_BULLETS = 3;
-    private static final float SPEAK_TIME_SECONDS = 4.5f;
+    private static final float SPEAK_TIME_SECONDS = 2.0f;
     private static final int SCORE = 20;
 
     private float stateTime;
@@ -185,7 +185,7 @@ public class EnemyEleven extends Enemy {
         stateTime = 0;
 
         // Audio FX
-        pum(Assets.getInstance().getSounds().getHit());
+        pum(Assets.getInstance().getSounds().getPebbles());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -226,7 +226,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getGrowl();
+        return Assets.getInstance().getSounds().getRockScrape();
     }
 
     @Override

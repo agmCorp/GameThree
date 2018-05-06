@@ -60,7 +60,7 @@ Agregar en agredecimientos a Juan LLopart
     animacion, --- contemplado en la estrategia
     tipo de movimiento (boomerang):
         se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
-        y luego en el stateShot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
+        y luego en el stateShoot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
         definir una clase nueva FancyBullet que herede de Weapon y tenga toda su lógica loca adentro (como la tiene HeroBullet o EnemyBullet).
         Luego el B2WorldCreator la contemplaría.
     velocidad --- contemplado en la estrategia
