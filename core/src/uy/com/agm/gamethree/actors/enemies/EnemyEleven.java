@@ -15,7 +15,7 @@ import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBlastShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyEleven;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -33,16 +33,16 @@ public class EnemyEleven extends Enemy {
     private static final float TARGET_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float SHOOT_TIME_SECONDS = 3.0f;
-    private static final float FIRE_DELAY_SECONDS = 1.0f;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 4.5f;
     private static final int SCORE = 20;
 
     private float stateTime;
-    private Animation enemyElevenWalkAnimation;
+    private Animation enemyElevenAnimation;
     private Animation enemyElevenShootAnimation;
     private Animation explosionAnimation;
     private float shootTime;
-    private boolean shooting;
+    private boolean isShooting;
 
     // Circle on the screen where EnemyEleven must go
     private Circle target;
@@ -52,12 +52,12 @@ public class EnemyEleven extends Enemy {
         super(screen, object);
 
         // Animations
-        enemyElevenWalkAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
-        enemyElevenShootAnimation = Assets.getInstance().getEnemySeven().getEnemySevenAnimation();
+        enemyElevenAnimation = Assets.getInstance().getEnemyEleven().getEnemyElevenAnimation();
+        enemyElevenShootAnimation = Assets.getInstance().getEnemyEleven().getEnemyElevenShootAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
         // Determines the size of the EnemyEleven's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetEnemyEleven.WIDTH_METERS, AssetEnemyEleven.HEIGHT_METERS);
 
         // Move to target at constant speed
         float worldHeight = screen.getGameViewPort().getWorldHeight();
@@ -68,9 +68,9 @@ public class EnemyEleven extends Enemy {
         velocity.set(tmp);
 
         // Variables initialization
-        stateTime = MathUtils.random(0, enemyElevenWalkAnimation.getAnimationDuration()); // To walk untimely with others
+        stateTime = MathUtils.random(0, enemyElevenAnimation.getAnimationDuration()); // To walk untimely with others
         shootTime = 0;
-        shooting = false;
+        isShooting = false;
 
         // Temporary GC friendly circle
         tmpCircle = new Circle();
@@ -99,7 +99,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyBlastShooting(screen, 0, FIRE_DELAY_SECONDS);
+        return new EnemyBlastShooting(screen, FIRE_DELAY_SECONDS, FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) enemyElevenWalkAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyElevenShootAnimation.getKeyFrame(stateTime, true);
         stateTime += dt;
         return region;
     }
@@ -122,15 +122,23 @@ public class EnemyEleven extends Enemy {
         // Update our Sprite to correspond with the position of our Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        if (shooting) {
+        if (isShooting) {
+            // Preserve the flip and rotation state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
+
             setRegion((TextureRegion) enemyElevenShootAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
 
+            // Apply previous flip and rotation state
+            setFlip(isFlipX, isFlipY);
+
             shootTime += dt;
             if (shootTime >= SHOOT_TIME_SECONDS) {
-                shooting = false;
+                isShooting = false;
                 stateTime = 0;
-                // Move to target at constant speed
+
+                // Move to new target at constant speed
                 float gameCamY = screen.getGameCam().position.y;
                 float worldHeight = screen.getGameViewPort().getWorldHeight();
                 target.setPosition(MathUtils.random(0, screen.getGameViewPort().getWorldWidth()),
@@ -143,14 +151,23 @@ public class EnemyEleven extends Enemy {
                 shoot(dt);
             }
         } else {
-            setRegion((TextureRegion) enemyElevenWalkAnimation.getKeyFrame(stateTime, true));
+            TextureRegion region = (TextureRegion) enemyElevenAnimation.getKeyFrame(stateTime, true);
+
+            if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
+                region.flip(true, false);
+            }
+            if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
+                region.flip(true, false);
+            }
+
+            setRegion(region);
             stateTime += dt;
 
             // EnemyEleven reaches target
             tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
             if (target.overlaps(tmpCircle)) {
                 velocity.set(0.0f, 0.0f); // Stop motion
-                shooting = true;
+                isShooting = true;
                 stateTime = 0;
                 shootTime = 0;
             }
@@ -202,7 +219,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyOne();
+        return Assets.getInstance().getScene2d().getHelpEnemyEleven();
     }
 
     @Override
@@ -217,8 +234,8 @@ public class EnemyEleven extends Enemy {
 
     @Override
     public void onHit(Weapon weapon) {
-        if (!shooting) {
-            weapon.onBounce();
+        if (!isShooting) {
+            weapon.onTarget();
         } else {
             super.onHit(weapon);
         }
