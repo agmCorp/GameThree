@@ -532,6 +532,10 @@ LECCIONES APRENDIDAS
 25)
     Por lo que vi, mi delta time (dt) anda por 0.025, a veces menos (0.01algo)
 
+26)
+    A veces los ogg no se escuchan, para ello debo modificar su tasa de muestreo a 44100hz.
+    Para subir el volumen a un ogg, con Audacity modificar la barrita a la izquierda que dice - +.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.

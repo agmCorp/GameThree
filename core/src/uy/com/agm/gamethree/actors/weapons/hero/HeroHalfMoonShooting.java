@@ -25,7 +25,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float AUTOMATIC_FIRE_DELAY_SECONDS = 0.2f;
     private static final float MANUAL_FIRE_DELAY_SECONDS = 0.1f;
-    private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
     private static final float BULLET_VELOCITY_X = 0.0f;
     private static final float BULLET_VELOCITY_Y = 7.0f;
     private static final float RANDOM_OFFSET = 0.8f;

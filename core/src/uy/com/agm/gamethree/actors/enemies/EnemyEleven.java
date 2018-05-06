@@ -62,10 +62,11 @@ public class EnemyEleven extends Enemy {
         setBounds(getX(), getY(), AssetEnemyEleven.WIDTH_METERS, AssetEnemyEleven.HEIGHT_METERS);
 
         // Move to target at constant speed
-        float worldHeight = screen.getGameViewPort().getWorldHeight();
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        target = new Circle(MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS),
-                tmp.y - MathUtils.random(worldHeight / 4, 3 * worldHeight / 4), TARGET_RADIUS_METERS);
+        float worldHeight = screen.getGameViewPort().getWorldHeight();
+        float x = MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS);
+        float y = tmp.y - MathUtils.random(worldHeight / 4, 3 * worldHeight / 4);
+        target = new Circle(x, y, TARGET_RADIUS_METERS);
         Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
         velocity.set(tmp);
 
@@ -143,8 +144,9 @@ public class EnemyEleven extends Enemy {
                 // Move to new target at constant speed
                 float gameCamY = screen.getGameCam().position.y;
                 float worldHeight = screen.getGameViewPort().getWorldHeight();
-                target.setPosition(MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS),
-                        MathUtils.random(gameCamY - worldHeight / 2, gameCamY + worldHeight / 2));
+                float x = MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS);
+                float y = MathUtils.random(gameCamY - worldHeight / 2, gameCamY + worldHeight / 2);
+                target.setPosition(x, y);
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
                 Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
                 velocity.set(tmp);

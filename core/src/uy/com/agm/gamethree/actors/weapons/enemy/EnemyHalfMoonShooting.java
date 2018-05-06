@@ -19,7 +19,7 @@ public class EnemyHalfMoonShooting implements IShootStrategy {
     private static final String TAG = EnemyHalfMoonShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float BULLET_VELOCITY_X = 0.0f;
     private static final float BULLET_VELOCITY_Y = -2.0f;
 
