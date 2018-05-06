@@ -3,53 +3,77 @@ package uy.com.agm.gamethree.actors.enemies;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
+import uy.com.agm.gamethree.actors.weapons.Weapon;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBlastShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyOne;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/9/2017.
  */
 
-public class EnemyTwo extends Enemy {
-    private static final String TAG = EnemyTwo.class.getName();
+public class EnemyEleven extends Enemy {
+    private static final String TAG = EnemyEleven.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float VELOCITY_X = -2.0f;
-    private static final float VELOCITY_Y = -1.0f;
-    private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final float RESTITUTION = 1.0f;
-    private static final float SPEAK_TIME_SECONDS = 3.0f;
-    private static final int SCORE = 10;
+    private static final float TARGET_RADIUS_METERS = 10.0f / PlayScreen.PPM;
+    private static final float LINEAR_VELOCITY = 3.0f;
+    private static final float SHOOT_TIME_SECONDS = 3.0f;
+    private static final float FIRE_DELAY_SECONDS = 1.0f;
+    private static final float SPEAK_TIME_SECONDS = 4.5f;
+    private static final int SCORE = 20;
 
     private float stateTime;
-    private Animation enemyTwoAnimation;
+    private Animation enemyElevenWalkAnimation;
+    private Animation enemyElevenShootAnimation;
     private Animation explosionAnimation;
+    private float shootTime;
+    private boolean shooting;
 
-    public EnemyTwo(PlayScreen screen, MapObject object) {
+    // Circle on the screen where EnemyEleven must go
+    private Circle target;
+    private Circle tmpCircle; // Temporary GC friendly circle
+
+    public EnemyEleven(PlayScreen screen, MapObject object) {
         super(screen, object);
 
         // Animations
-        enemyTwoAnimation = Assets.getInstance().getEnemyTwo().getEnemyTwoAnimation();
+        enemyElevenWalkAnimation = Assets.getInstance().getEnemyOne().getEnemyOneAnimation();
+        enemyElevenShootAnimation = Assets.getInstance().getEnemySeven().getEnemySevenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionA().getExplosionAAnimation();
 
-        // Determines the size of the EnemyTwo's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyTwo.WIDTH_METERS, AssetEnemyTwo.HEIGHT_METERS);
+        // Determines the size of the EnemyEleven's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyOne.WIDTH_METERS, AssetEnemyOne.HEIGHT_METERS);
+
+        // Move to target at constant speed
+        float worldHeight = screen.getGameViewPort().getWorldHeight();
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        target = new Circle(MathUtils.random(0, screen.getGameViewPort().getWorldWidth()),
+                tmp.y - MathUtils.random(worldHeight / 4, 3 * worldHeight / 4), TARGET_RADIUS_METERS);
+        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
+        velocity.set(tmp);
 
         // Variables initialization
-        stateTime = MathUtils.random(0, enemyTwoAnimation.getAnimationDuration()); // To flap untimely with others
-        velocity.set(VELOCITY_X, VELOCITY_Y);
+        stateTime = MathUtils.random(0, enemyElevenWalkAnimation.getAnimationDuration()); // To walk untimely with others
+        shootTime = 0;
+        shooting = false;
+
+        // Temporary GC friendly circle
+        tmpCircle = new Circle();
     }
 
     @Override
@@ -70,13 +94,12 @@ public class EnemyTwo extends Enemy {
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         fdef.shape = shape;
-        fdef.restitution = RESTITUTION; // Elastic collision to avoid sticking to walls
         b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyDefaultShooting(screen, MathUtils.random(0, FIRE_DELAY_SECONDS), FIRE_DELAY_SECONDS);
+        return new EnemyBlastShooting(screen, 0, FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -86,38 +109,52 @@ public class EnemyTwo extends Enemy {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true);
+        TextureRegion region = (TextureRegion) enemyElevenWalkAnimation.getKeyFrame(stateTime, true);
         stateTime += dt;
         return region;
     }
 
     @Override
     protected void stateAlive(float dt) {
-        // Set velocity because It could have been changed (see reverseVelocity)
+        // Set velocity because It could have been changed in this method
         b2body.setLinearVelocity(velocity);
 
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
+        // Update our Sprite to correspond with the position of our Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyTwoAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
-            region.flip(true, false);
-        }
-        if (b2body.getLinearVelocity().x < 0 && region.isFlipX()) {
-            region.flip(true, false);
-        }
+        if (shooting) {
+            setRegion((TextureRegion) enemyElevenShootAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
 
-        setRegion(region);
-        stateTime += dt;
+            shootTime += dt;
+            if (shootTime >= SHOOT_TIME_SECONDS) {
+                shooting = false;
+                stateTime = 0;
+                // Move to target at constant speed
+                float gameCamY = screen.getGameCam().position.y;
+                float worldHeight = screen.getGameViewPort().getWorldHeight();
+                target.setPosition(MathUtils.random(0, screen.getGameViewPort().getWorldWidth()),
+                        MathUtils.random(gameCamY - worldHeight / 2, gameCamY + worldHeight / 2));
+                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+                Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
+                velocity.set(tmp);
+            } else {
+                // Shoot time!
+                shoot(dt);
+            }
+        } else {
+            setRegion((TextureRegion) enemyElevenWalkAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
 
-        // Shoot time!
-        super.openFire(dt);
+            // EnemyEleven reaches target
+            tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
+            if (target.overlaps(tmpCircle)) {
+                velocity.set(0.0f, 0.0f); // Stop motion
+                shooting = true;
+                stateTime = 0;
+                shootTime = 0;
+            }
+        }
     }
 
     @Override
@@ -165,17 +202,26 @@ public class EnemyTwo extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyTwo();
+        return Assets.getInstance().getScene2d().getHelpEnemyOne();
     }
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getSqueak();
+        return Assets.getInstance().getSounds().getGrowl();
     }
 
     @Override
     protected float getSpeakTimeSeconds() {
         return SPEAK_TIME_SECONDS;
+    }
+
+    @Override
+    public void onHit(Weapon weapon) {
+        if (!shooting) {
+            weapon.onBounce();
+        } else {
+            super.onHit(weapon);
+        }
     }
 
     @Override
@@ -192,6 +238,12 @@ public class EnemyTwo extends Enemy {
 
     @Override
     public void onBump() {
-        reverseVelocity(true, false);
+        // Nothing to do here
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(target.x, target.y, target.radius);
+        super.renderDebug(shapeRenderer);
     }
 }

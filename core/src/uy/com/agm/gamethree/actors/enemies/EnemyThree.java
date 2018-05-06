@@ -44,7 +44,7 @@ public class EnemyThree extends Enemy {
         enemyThreeAnimation = Assets.getInstance().getEnemyThree().getEnemyThreeAnimation();
         explosionAnimation = Assets.getInstance().getExplosionC().getExplosionCAnimation();
 
-        // Setbounds is the one that determines the size of the EnemyThree's drawing on the screen
+        // Determines the size of the EnemyThree's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyThree.WIDTH_METERS, AssetEnemyThree.HEIGHT_METERS);
 
         // Variables initialization
@@ -147,7 +147,7 @@ public class EnemyThree extends Enemy {
             currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionC.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionC.HEIGHT_METERS * expScale / 2,
                         AssetExplosionC.WIDTH_METERS * expScale, AssetExplosionC.HEIGHT_METERS * expScale);
             }

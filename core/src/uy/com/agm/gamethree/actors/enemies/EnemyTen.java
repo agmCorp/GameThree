@@ -51,7 +51,7 @@ public class EnemyTen extends Enemy {
     public EnemyTen(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Setbounds is the one that determines the size of the EnemyTen's drawing on the screen
+        // Determines the size of the EnemyTen's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyTen.WIDTH_METERS, AssetEnemyTen.HEIGHT_METERS);
 
         // Animations
@@ -165,7 +165,7 @@ public class EnemyTen extends Enemy {
             currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionJ.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionJ.HEIGHT_METERS * expScale / 2,
                         AssetExplosionJ.WIDTH_METERS * expScale, AssetExplosionJ.HEIGHT_METERS * expScale);
             }

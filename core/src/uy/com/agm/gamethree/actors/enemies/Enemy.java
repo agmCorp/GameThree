@@ -178,13 +178,17 @@ public abstract class Enemy extends Sprite {
 
     protected void openFire(float dt) {
         if (openFire && !isDestroyed()) {
-            // An Enemy can shoot only when it is visible
-            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
-            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
-            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                shootContext.update(dt);
-                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
-            }
+            shoot(dt);
+        }
+    }
+
+    protected void shoot(float dt) {
+        // An Enemy can shoot only when it is visible
+        float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+        float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+        if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
+            shootContext.update(dt);
+            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
         }
     }
 
@@ -318,7 +322,7 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void stateSplat() {
-        // Setbounds is the one that determines the size of the splat on the screen
+        // Determines the size of the splat on the screen
         setBounds(getX() + getWidth() / 2 - AssetSplat.ENEMY_SPLAT_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetSplat.ENEMY_SPLAT_HEIGHT_METERS / 2,
                 AssetSplat.ENEMY_SPLAT_WIDTH_METERS, AssetSplat.ENEMY_SPLAT_HEIGHT_METERS);
         setRegion(splat);

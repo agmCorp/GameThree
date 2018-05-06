@@ -36,7 +36,7 @@ public class HeroBullet extends Weapon {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Setbounds is the one that determines the size of the HeroBullet's drawing on the screen
+        // Determines the size of the HeroBullet's drawing on the screen
         setBounds(getX(), getY(), Assets.getInstance().getHeroBullet().MUZZLE_FLASH_WIDTH_METERS, Assets.getInstance().getHeroBullet().MUZZLE_FLASH_HEIGHT_METERS);
 
         velocity.set(velocityX, velocityY);

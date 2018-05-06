@@ -73,10 +73,10 @@ public class EnemySix extends Enemy {
         powerBeamAnimation = Assets.getInstance().getEnemySix().getPowerBeamAnimation();
         beamSprite = new Sprite(new Sprite(Assets.getInstance().getEnemySix().getPowerBeamStand()));
 
-        // Setbounds is the one that determines the size of the EnemySix's drawing on the screen
+        // Determines the size of the EnemySix's drawing on the screen
         setBounds(getX(), getY(), AssetEnemySix.WIDTH_METERS, AssetEnemySix.HEIGHT_METERS);
 
-        // Setbounds is the one that determines the size of the power beam's drawing on the screen
+        // Determines the size of the power beam's drawing on the screen
         offsetXMeters = getOffsetXMeters();
         beamSprite.setBounds(getX(), getY(), Math.abs(offsetXMeters), AssetEnemySix.BEAM_HEIGHT_METERS);
 
@@ -254,7 +254,7 @@ public class EnemySix extends Enemy {
             currentState = SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionG.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionG.HEIGHT_METERS * expScale / 2,
                         AssetExplosionG.WIDTH_METERS * expScale, AssetExplosionG.HEIGHT_METERS * expScale);
             }

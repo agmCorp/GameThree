@@ -57,7 +57,7 @@ public class PowerThree extends Item {
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
-        // Setbounds is the one that determines the size of the Item's drawing on the screen
+        // Determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), AssetPowerThree.WIDTH_METERS, AssetPowerThree.HEIGHT_METERS);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);

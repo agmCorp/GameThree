@@ -62,7 +62,7 @@ public class EnemyFour extends Enemy {
         enemyFourFrozenAnimation = Assets.getInstance().getEnemyFour().getEnemyFourFrozenAnimation();
         explosionAnimation = Assets.getInstance().getExplosionD().getExplosionDAnimation();
 
-        // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
+        // Determines the size of the EnemyFour's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
@@ -178,7 +178,7 @@ public class EnemyFour extends Enemy {
         b2body.setLinearVelocity(velocity);
 
         if (stateTime == 0) { // Frozen state starts
-            // Setbounds is the one that determines the size of the frozen sprite on the screen
+            // Determines the size of the frozen sprite on the screen
             setBounds(getX() + getWidth() / 2 - AssetEnemyFour.FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemyFour.FROZEN_HEIGHT_METERS / 2,
                     AssetEnemyFour.FROZEN_WIDTH_METERS, AssetEnemyFour.FROZEN_HEIGHT_METERS);
 
@@ -223,7 +223,7 @@ public class EnemyFour extends Enemy {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
 
-            // Setbounds is the one that determines the size of the EnemyFour's drawing on the screen
+            // Determines the size of the EnemyFour's drawing on the screen
             setBounds(b2body.getPosition().x, b2body.getPosition().y, AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
             timesItFreeze--;
@@ -272,7 +272,7 @@ public class EnemyFour extends Enemy {
             currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionD.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionD.HEIGHT_METERS * expScale / 2,
                         AssetExplosionD.WIDTH_METERS * expScale, AssetExplosionD.HEIGHT_METERS * expScale);
             }

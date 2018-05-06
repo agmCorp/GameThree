@@ -52,7 +52,7 @@ public class EnemyFive extends Enemy {
         enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
         explosionAnimation = Assets.getInstance().getExplosionI().getExplosionIAnimation();
 
-        // Setbounds is the one that determines the size of the EnemyFive's drawing on the screen
+        // Determines the size of the EnemyFive's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFive.WIDTH_METERS, AssetEnemyFive.HEIGHT_METERS);
 
         // Variables initialization
@@ -163,7 +163,7 @@ public class EnemyFive extends Enemy {
             currentState = State.SPLAT;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionI.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionI.HEIGHT_METERS * expScale / 2,
                         AssetExplosionI.WIDTH_METERS * expScale, AssetExplosionI.HEIGHT_METERS * expScale);
             }

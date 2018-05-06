@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Path;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.enemies.EnemyEight;
+import uy.com.agm.gamethree.actors.enemies.EnemyEleven;
 import uy.com.agm.gamethree.actors.enemies.EnemyFive;
 import uy.com.agm.gamethree.actors.enemies.EnemyFour;
 import uy.com.agm.gamethree.actors.enemies.EnemyNine;
@@ -67,6 +68,7 @@ public class B2WorldCreator {
     private static final String LAYER_ENEMY_EIGHT = "enemyEight";
     private static final String LAYER_ENEMY_NINE = "enemyNine";
     private static final String LAYER_ENEMY_TEN = "enemyTen";
+    private static final String LAYER_ENEMY_ELEVEN = "enemyEleven";
     private static final String LAYER_POWER_BOX = "powerBox";
 
     public static final String KEY_ID = "id";
@@ -248,6 +250,14 @@ public class B2WorldCreator {
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
                 enemies.add(new EnemyTen(screen, object));
+            }
+        }
+
+        // Layer: enemyEleven
+        layer = map.getLayers().get(LAYER_ENEMY_ELEVEN);
+        if (layer != null) {
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                enemies.add(new EnemyEleven(screen, object));
             }
         }
 

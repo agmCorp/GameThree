@@ -56,7 +56,7 @@ public class PowerOne extends Item {
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
-        // Setbounds is the one that determines the size of the Item's drawing on the screen
+        // Determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(), AssetPowerOne.WIDTH_METERS, AssetPowerOne.HEIGHT_METERS);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);

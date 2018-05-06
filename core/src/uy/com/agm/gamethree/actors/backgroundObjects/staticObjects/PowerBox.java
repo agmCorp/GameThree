@@ -153,7 +153,7 @@ public class PowerBox extends StaticBackgroundObject {
             currentState = State.FINISHED;
         } else {
             if (stateTime == 0) { // Explosion starts
-                // Setbounds is the one that determines the size of the explosion on the screen
+                // Determines the size of the explosion on the screen
                 setBounds(getX() + getWidth() / 2 - AssetExplosionB.WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetExplosionB.HEIGHT_METERS / 2,
                         AssetExplosionB.WIDTH_METERS, AssetExplosionB.HEIGHT_METERS);
             }
