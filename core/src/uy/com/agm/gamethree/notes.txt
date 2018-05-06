@@ -17,6 +17,10 @@ y el enemigo anda en ciculos grandes.
 - hacer un mapa de los niveles
 - poner una intro y una historia
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
+No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
+En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
+Pero capaz se podria poner al morir aplastado. Podria ademas poner un audio de aplastamiento y hasta capaz una animacion o
+parpadeo antes de dyingup.
 - hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
