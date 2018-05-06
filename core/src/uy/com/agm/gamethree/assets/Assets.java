@@ -24,6 +24,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletB;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletD;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletE;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
@@ -192,6 +193,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetBulletB bulletB;
     private AssetBulletC bulletC;
     private AssetBulletD bulletD;
+    private AssetBulletE bulletE;
     private AssetToughMode toughMode;
     private AssetFinalEnemyLevelOne finalEnemyLevelOne;
     private AssetFinalEnemyLevelTwo finalEnemyLevelTwo;
@@ -385,6 +387,7 @@ public class Assets implements Disposable, AssetErrorListener {
         bulletB = new AssetBulletB(atlasDynamicObjects);
         bulletC = new AssetBulletC(atlasDynamicObjects);
         bulletD = new AssetBulletD(atlasDynamicObjects);
+        bulletE = new AssetBulletE(atlasDynamicObjects);
         toughMode = new AssetToughMode(atlasDynamicObjects);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDynamicObjects);
         finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDynamicObjects);
@@ -573,6 +576,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetBulletD getBulletD() {
         return bulletD;
+    }
+
+    public AssetBulletE getBulletE() {
+        return bulletE;
     }
 
     public AssetToughMode getToughMode() {

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.weapons.hero;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.MathUtils;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -38,10 +39,17 @@ public class HeroDefaultShooting implements IShootStrategy {
     private float openFireTime;
     private float fireDelay;
 
+    private Animation heroBulletAnimation;
+    private Animation heroSilverBulletAnimation;
+
     public HeroDefaultShooting(PlayScreen screen) {
         this.screen = screen;
         this.openFireTime = 0;
         this.fireDelay = GameSettings.getInstance().isManualShooting() ? DEFAULT_BULLET_MANUAL_FIRE_DELAY_SECONDS : DEFAULT_BULLET_AUTOMATIC_FIRE_DELAY_SECONDS;
+
+        // Animations
+        heroBulletAnimation = Assets.getInstance().getHeroBullet().getHeroBulletAnimation();
+        heroSilverBulletAnimation = Assets.getInstance().getSilverBullet().getSilverBulletAnimation();
     }
 
     @Override
@@ -74,7 +82,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                         0,
                         SILVER_BULLET_VELOCITY_X,
                         SILVER_BULLET_VELOCITY_Y,
-                        Assets.getInstance().getSilverBullet().getSilverBulletAnimation())));
+                        heroSilverBulletAnimation)));
                 // Sound FX
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootSwish());
             } else {
@@ -90,7 +98,7 @@ public class HeroDefaultShooting implements IShootStrategy {
                     0,
                     DEFAULT_BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                     DEFAULT_BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
-                    Assets.getInstance().getHeroBullet().getHeroBulletAnimation())));
+                    heroBulletAnimation)));
             // Sound FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());
         }

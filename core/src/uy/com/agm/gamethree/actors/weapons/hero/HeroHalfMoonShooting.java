@@ -37,6 +37,10 @@ public class HeroHalfMoonShooting implements IShootStrategy {
     private float fireDelay;
     private Vector2 tmp; // Temporary GC friendly vector
 
+    private Animation heroBulletAnimation;
+    private Animation heroSilverBulletAnimation;
+    private Animation bulletAnimation;
+
     public HeroHalfMoonShooting(PlayScreen screen, int numberBullets) {
         this.screen = screen;
         this.numberBullets = numberBullets;
@@ -45,6 +49,11 @@ public class HeroHalfMoonShooting implements IShootStrategy {
 
         // Temporary GC friendly vector
         tmp = new Vector2();
+
+        // Animations
+        heroBulletAnimation = Assets.getInstance().getHeroBullet().getHeroBulletAnimation();
+        heroSilverBulletAnimation = Assets.getInstance().getSilverBullet().getSilverBulletAnimation();
+        bulletAnimation = Assets.getInstance().getBulletA().getBulletAAnimation();
     }
 
     @Override
@@ -81,7 +90,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             angle,
                             HeroDefaultShooting.SILVER_BULLET_VELOCITY_X,
                             HeroDefaultShooting.SILVER_BULLET_VELOCITY_Y,
-                            Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
+                            heroSilverBulletAnimation);
                     // Sound FX
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootSwish());
                     if (i == numberBullets) {
@@ -100,7 +109,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             angle,
                             BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                             BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
-                            Assets.getInstance().getHeroBullet().getHeroBulletAnimation());
+                            heroBulletAnimation);
                 } else {
                     createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
                             AssetBulletA.BULLET_WIDTH_METERS,
@@ -109,7 +118,7 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             angle,
                             BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
                             BULLET_VELOCITY_Y + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun
-                            Assets.getInstance().getBulletA().getBulletAAnimation());
+                            bulletAnimation);
                 }
                 // Sound FX
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());

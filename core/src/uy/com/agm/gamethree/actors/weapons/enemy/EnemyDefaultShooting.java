@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.weapons.enemy;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -27,6 +28,8 @@ public class EnemyDefaultShooting implements IShootStrategy {
     private float fireDelay;
     private Vector2 tmp; // Temporary GC friendly vector
 
+    private Animation enemyBulletAnimation;
+
     public EnemyDefaultShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
         this.screen = screen;
         this.openFireTime = initialOpenFireTime;
@@ -34,6 +37,9 @@ public class EnemyDefaultShooting implements IShootStrategy {
 
         // Temporary GC friendly vector
         tmp = new Vector2();
+
+        // Animations
+        enemyBulletAnimation = Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation();
     }
 
     @Override
@@ -61,7 +67,7 @@ public class EnemyDefaultShooting implements IShootStrategy {
                 0,
                 tmp.x,
                 tmp.y,
-                Assets.getInstance().getEnemyBullet().getEnemyBulletAnimation())));
+                enemyBulletAnimation)));
         // Sound FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
     }

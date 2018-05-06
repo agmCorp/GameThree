@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBlastShooting;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemyHalfMoonShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEleven;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
@@ -34,6 +34,8 @@ public class EnemyEleven extends Enemy {
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float SHOOT_TIME_SECONDS = 3.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
+    private static final int MIN_BULLETS = 2;
+    private static final int MAX_BULLETS = 3;
     private static final float SPEAK_TIME_SECONDS = 4.5f;
     private static final int SCORE = 20;
 
@@ -62,7 +64,7 @@ public class EnemyEleven extends Enemy {
         // Move to target at constant speed
         float worldHeight = screen.getGameViewPort().getWorldHeight();
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        target = new Circle(MathUtils.random(0, screen.getGameViewPort().getWorldWidth()),
+        target = new Circle(MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS),
                 tmp.y - MathUtils.random(worldHeight / 4, 3 * worldHeight / 4), TARGET_RADIUS_METERS);
         Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
         velocity.set(tmp);
@@ -99,7 +101,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyBlastShooting(screen, FIRE_DELAY_SECONDS, FIRE_DELAY_SECONDS);
+        return new EnemyHalfMoonShooting(screen, FIRE_DELAY_SECONDS, FIRE_DELAY_SECONDS, MathUtils.random(MIN_BULLETS, MAX_BULLETS));
     }
 
     @Override
@@ -141,7 +143,7 @@ public class EnemyEleven extends Enemy {
                 // Move to new target at constant speed
                 float gameCamY = screen.getGameCam().position.y;
                 float worldHeight = screen.getGameViewPort().getWorldHeight();
-                target.setPosition(MathUtils.random(0, screen.getGameViewPort().getWorldWidth()),
+                target.setPosition(MathUtils.random(0 + CIRCLE_SHAPE_RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - CIRCLE_SHAPE_RADIUS_METERS),
                         MathUtils.random(gameCamY - worldHeight / 2, gameCamY + worldHeight / 2));
                 tmp.set(b2body.getPosition().x, b2body.getPosition().y);
                 Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);

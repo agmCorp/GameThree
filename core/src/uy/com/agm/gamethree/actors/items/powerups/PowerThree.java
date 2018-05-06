@@ -32,8 +32,9 @@ public class PowerThree extends Item {
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 5.0f;
     private static final int DEFAULT_TIMER = 10;
-    private static final int SCORE = 20;
+    private static final int MIN_BULLETS = 2;
     private static final int MAX_BULLETS = 6;
+    private static final int SCORE = 20;
 
     private int timer;
     private I18NBundle i18NGameThreeBundle;
@@ -52,7 +53,7 @@ public class PowerThree extends Item {
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         powerThreeAnimation = Assets.getInstance().getPowerThree().getPowerThreeAnimation();
-        numberBullets = MathUtils.random(2, MAX_BULLETS);
+        numberBullets = MathUtils.random(MIN_BULLETS, MAX_BULLETS);
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;

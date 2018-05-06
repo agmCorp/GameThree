@@ -167,11 +167,11 @@
  <objectgroup name="enemyNine"/>
  <objectgroup name="enemyTen"/>
  <objectgroup name="enemyEleven">
-  <object id="2273" x="142" y="6014" width="32" height="32"/>
-  <object id="2274" x="246" y="6084" width="32" height="32"/>
-  <object id="2275" x="170" y="6202" width="32" height="32"/>
-  <object id="2276" x="392" y="6112" width="32" height="32"/>
-  <object id="2277" x="254" y="6268" width="32" height="32"/>
-  <object id="2278" x="72" y="6288" width="32" height="32"/>
+  <object id="2273" x="148" y="6522" width="32" height="32"/>
+  <object id="2274" x="252" y="6592" width="32" height="32"/>
+  <object id="2275" x="176" y="6710" width="32" height="32"/>
+  <object id="2276" x="398" y="6620" width="32" height="32"/>
+  <object id="2277" x="260" y="6776" width="32" height="32"/>
+  <object id="2278" x="78" y="6796" width="32" height="32"/>
  </objectgroup>
 </map>
