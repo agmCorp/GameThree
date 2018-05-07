@@ -16,6 +16,12 @@ Excepto para enemyThree, con onHit lo "mato naturalmente" pues es lo que usa her
 para el seven hago que salgan mas chiquitos, etc. Eso es "matar naturalmente" y lo logro con onhit().
 Tambien tengo explode que lo hace explotar como sea.
 
+Creo que lo mejor es solo detener su movimiento y que se joda el jugador.
+
+- capaz que me conviene revisar las funciones onhit de enemy y tener 2: onhit(Hero hero) y onhit(Weapon weapon) y que cada
+uno implemente ambas y listo, o llame a super si no tiene nada particular. onBum que tambien reciba el objeto. Lo mismo con FinalEnemy.
+Merecen ponerles orden.
+
 HACER PRIORIDAD 2
 -----------------
 - Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
