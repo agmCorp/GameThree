@@ -18,6 +18,14 @@ Lo que hace eso es la discriminación de si es enemyThree o no.
 Entonces en enemy tengo onHitAbilityPower(Hero hero) y onHit(Weapon weapon) que si quieren las hijas me la redefinen.
 Abstracta solo onhit().
 
+esto es al pedo:
+    public void explode() {
+        if (currentState == State.ALIVE) {
+            onHit();
+        }
+    }
+para eso en el poder...en el ontake hago todos los onhit y listo.
+
 HACER PRIORIDAD 2
 -----------------
 - Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
