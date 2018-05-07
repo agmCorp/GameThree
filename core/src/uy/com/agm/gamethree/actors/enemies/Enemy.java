@@ -247,7 +247,7 @@ public abstract class Enemy extends Sprite {
                 case KNOCK_BACK:
                     stateKnockBack(dt);
                     break;
-                case INJURED: // This state doesn't set a Texture to draw, it uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
+                case INJURED: // This state, in some cases, doesn't set a Texture to draw, it uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
                     stateInjured(dt);
                     break;
                 case EXPLODING:
