@@ -28,7 +28,7 @@ public class AssetPowerFive {
 
         // Animation
         regions = atlas.findRegions("powerFive");
-        powerFiveAnimation = new Animation(0.5f / 26.0f, regions, Animation.PlayMode.LOOP);
+        powerFiveAnimation = new Animation(1.0f / 26.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

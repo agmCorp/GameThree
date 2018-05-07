@@ -45,10 +45,10 @@ public class PlayScreen extends AbstractScreen {
     // Boxes around sprites, box2d bodies and scene2d tables
     // Debug message log enabled
     // Enable all levels
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     // Show/hide FPS counter
     public static final boolean SHOW_FPS = true;

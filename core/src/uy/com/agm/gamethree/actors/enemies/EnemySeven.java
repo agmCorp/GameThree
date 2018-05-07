@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -224,5 +225,14 @@ public class EnemySeven extends Enemy {
     @Override
     public void onBump() {
         reverseVelocity(true, false);
+    }
+
+    @Override
+    public void explode() {
+        MapProperties mp = object.getProperties();
+        if (mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
+            mp.remove(B2WorldCreator.KEY_ENEMY_SEVEN);
+        }
+        super.explode();
     }
 }

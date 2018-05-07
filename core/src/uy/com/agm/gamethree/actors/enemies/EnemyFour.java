@@ -348,4 +348,10 @@ public class EnemyFour extends Enemy {
     public void onBump() {
         reverseVelocity(true, false);
     }
+
+    @Override
+    public void explode() {
+        currentFrozenState = FrozenState.DEFROSTED;
+        super.explode();
+    }
 }

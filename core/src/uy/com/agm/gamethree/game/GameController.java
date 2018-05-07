@@ -5,9 +5,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.player.Hero;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
 
 /**
@@ -134,6 +135,11 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                     case Input.Keys.SPACE:
                         if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
                             player.openFire();
+                        }
+                        break;
+                    case Input.Keys.E: // TODO
+                        for (Enemy enemy : screen.getCreator().getEnemies()) {
+                            enemy.explode();
                         }
                         break;
                 }

@@ -128,6 +128,12 @@ public abstract class Enemy extends Sprite {
         currentState = State.DEAD;
     }
 
+    public void explode() {
+        if (!isDestroyed()) {
+            currentState = State.KNOCK_BACK;
+        }
+    }
+
     protected void checkBoundaries() {
        /* When an Enemy is on camera, it activates (it moves and can collide).
         * When an Enemy is alive and outside the camera, it dies.

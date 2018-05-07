@@ -15,14 +15,14 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetHero;
-import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.ShootContext;
 import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetHero;
+import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
 import uy.com.agm.gamethree.tools.Vector2Util;
