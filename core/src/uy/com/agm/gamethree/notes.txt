@@ -4,13 +4,17 @@ HACER PRIORIDAD 1
 Un poder podria ser detener la pantalla por tiempo.
 Cada enemigo deberia tener un metodo stop y asegurarme que no disparen.
 
-Hice una version borrador marcada con "todo" para detener todo y que no dispare.
+Hice una version borrador marcada con "todo" para detener el movimiento y que no dispare.
 El tema es que no los puedo matar con un disparo, mas que nada los invulnerables.
 El beam sigue tirando el rayo en modo quieto.
 Deberia pensar como usar el explode cuando reciben un balazo.
 Seria tan facil como "onhit" explode...pero no se como hacerlo en la clase enemy.
 Capaz que lo que puedo hacer en lugar de detener, enlentecer. Pero no queda, creo que lo hace muchas veces seguidas y por ende detiene.
 Capaz que puedo programarlo en el metodo onhit(weapon).
+
+Excepto para enemyThree, con onHit lo "mato naturalmente" pues es lo que usa hero_tough. Por ejemplo, para enemyfour lo congelo,
+para el seven hago que salgan mas chiquitos, etc. Eso es "matar naturalmente" y lo logro con onhit().
+Tambien tengo explode que lo hace explotar como sea.
 
 HACER PRIORIDAD 2
 -----------------
