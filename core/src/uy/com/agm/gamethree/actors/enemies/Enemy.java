@@ -136,13 +136,13 @@ public abstract class Enemy extends Sprite {
     }
 
     public void explode() {
-        if (!isDestroyed()) {
-            currentState = KNOCK_BACK;
+        if (currentState == State.ALIVE) {
+            onHit();
         }
     }
 
     public void quieto() { // todo
-        if (!isDestroyed()) {
+        if (currentState == State.ALIVE) {
             velocity.set(0, 0);
         }
     }
@@ -245,14 +245,12 @@ public abstract class Enemy extends Sprite {
                     }
                     break;
                 case KNOCK_BACK:
-                    setColor(KNOCK_BACK_COLOR);
                     stateKnockBack(dt);
                     break;
-                case INJURED:
+                case INJURED: // This state doesn't set a Texture to draw, it uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
                     stateInjured(dt);
                     break;
                 case EXPLODING:
-                    setColor(Color.WHITE); // Default tint
                     stateExploding(dt);
                     break;
                 case SPLAT:
@@ -373,6 +371,16 @@ public abstract class Enemy extends Sprite {
     @Override
     public void draw(Batch batch) {
         if (currentState != State.DEAD && currentState != State.INACTIVE) {
+
+            // Set the tint
+            if (currentState == State.KNOCK_BACK) {
+                setColor(KNOCK_BACK_COLOR); // Knock back
+            } else {
+                if (currentState == State.EXPLODING) {
+                    setColor(Color.WHITE); // Default
+                }
+            }
+
             super.draw(batch);
         }
     }

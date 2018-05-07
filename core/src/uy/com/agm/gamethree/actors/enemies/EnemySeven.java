@@ -218,21 +218,13 @@ public class EnemySeven extends Enemy {
          * from PlayScreen.update.world.step(...).
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
+         *
          */
-        currentState = isTiny ? State.KNOCK_BACK : State.INJURED;
+        currentState = isTiny ? State.KNOCK_BACK : State.INJURED; // It looks better a knock back effect only on "tiny" enemies
     }
 
     @Override
     public void onBump() {
         reverseVelocity(true, false);
-    }
-
-    @Override
-    public void explode() {
-        MapProperties mp = object.getProperties();
-        if (mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
-            mp.remove(B2WorldCreator.KEY_ENEMY_SEVEN);
-        }
-        super.explode();
     }
 }

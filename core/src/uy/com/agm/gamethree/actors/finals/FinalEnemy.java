@@ -205,6 +205,7 @@ public abstract class FinalEnemy extends Sprite {
 
     @Override
     public void draw(Batch batch) {
+        // Set the tint
         setColor(currentStateFinalEnemy == StateFinalEnemy.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
         super.draw(batch);
     }

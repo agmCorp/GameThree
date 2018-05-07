@@ -329,7 +329,7 @@ public class B2WorldCreator {
     }
 
     public void handleCreatingActors() {
-        if (!actorsToCreate.isEmpty()) {
+        while (!actorsToCreate.isEmpty()) {
             ActorDef actorDef = actorsToCreate.poll(); // Similar to pop but for a queue, removes the element
             Object actor = actorDef.getUserData();
 

@@ -1,6 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
-- A grandes razgos: 1 enemigo, 1 poder aabb, 1 col vida, help del boss.
+- A grandes razgos: 1 enemigo, 1 col aabb que los explota, 1 poder aabb que los deja quietos, 1 col vida, help del boss.
+1 poder aabb que los deja quietos:
 Un poder podria ser detener la pantalla por tiempo.
 Cada enemigo deberia tener un metodo stop y asegurarme que no disparen.
 
@@ -12,14 +13,14 @@ Seria tan facil como "onhit" explode...pero no se como hacerlo en la clase enemy
 Capaz que lo que puedo hacer en lugar de detener, enlentecer. Pero no queda, creo que lo hace muchas veces seguidas y por ende detiene.
 Capaz que puedo programarlo en el metodo onhit(weapon).
 
-Excepto para enemyThree, con onHit lo "mato naturalmente" pues es lo que usa hero_tough. Por ejemplo, para enemyfour lo congelo,
+Con onHit lo "mato naturalmente" pues es lo que usa hero_tough. Por ejemplo, para enemyfour lo congelo,
 para el seven hago que salgan mas chiquitos, etc. Eso es "matar naturalmente" y lo logro con onhit().
 Tambien tengo explode que lo hace explotar como sea.
 
 Creo que lo mejor es solo detener su movimiento y que se joda el jugador.
 
 - capaz que me conviene revisar las funciones onhit de enemy y tener 2: onhit(Hero hero) y onhit(Weapon weapon) y que cada
-uno implemente ambas y listo, o llame a super si no tiene nada particular. onBum que tambien reciba el objeto. Lo mismo con FinalEnemy.
+uno implemente ambas y listo, o llame a super si no tiene nada particular. onBump que tambien reciba el objeto. Lo mismo con FinalEnemy.
 Merecen ponerles orden.
 
 HACER PRIORIDAD 2
