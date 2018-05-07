@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2328">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2329">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -135,15 +135,28 @@
     <property name="powerFive" type="int" value="500"/>
    </properties>
   </object>
+  <object id="2328" x="275" y="7573" width="32" height="32">
+   <properties>
+    <property name="powerFour" type="int" value="500"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyOne">
-  <object id="2317" x="64" y="7424" width="32" height="32"/>
+  <object id="2317" x="64" y="7424" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyTwo">
   <object id="2318" x="160" y="7424" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyThree">
-  <object id="2319" x="256" y="7424" width="32" height="32"/>
+  <object id="2319" x="256" y="7424" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyFour">
   <object id="2320" x="64" y="7360" width="32" height="32"/>
@@ -155,7 +168,11 @@
   <object id="2322" x="192" y="7360" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemySeven">
-  <object id="2323" x="288" y="7360" width="32" height="32"/>
+  <object id="2323" x="288" y="7360" width="32" height="32">
+   <properties>
+    <property name="enemyBullet" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyEight">
   <object id="2324" x="64" y="7296" width="32" height="32"/>

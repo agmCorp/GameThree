@@ -142,6 +142,11 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                             enemy.explode();
                         }
                         break;
+                    case Input.Keys.Q: // TODO
+                        for (Enemy enemy : screen.getCreator().getEnemies()) {
+                            enemy.quieto = !enemy.quieto;
+                        }
+                        break;
                 }
                 evaluateMovementDirection();
             }

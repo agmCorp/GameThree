@@ -30,6 +30,10 @@ import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
+import static uy.com.agm.gamethree.actors.enemies.Enemy.State.EXPLODING;
+import static uy.com.agm.gamethree.actors.enemies.Enemy.State.INJURED;
+import static uy.com.agm.gamethree.actors.enemies.Enemy.State.KNOCK_BACK;
+
 /**
  * Created by AGM on 12/9/2017.
  */
@@ -69,6 +73,9 @@ public abstract class Enemy extends Sprite {
     protected State currentState;
     protected MapObject object;
     protected float expScale;
+
+    // // TODO: 5/7/2018
+    public boolean quieto = false;
 
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -115,7 +122,7 @@ public abstract class Enemy extends Sprite {
 
     // This Enemy doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentState == State.EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
+        return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
     // Kill this Enemy
@@ -130,7 +137,13 @@ public abstract class Enemy extends Sprite {
 
     public void explode() {
         if (!isDestroyed()) {
-            currentState = State.KNOCK_BACK;
+            currentState = KNOCK_BACK;
+        }
+    }
+
+    public void quieto() { // todo
+        if (!isDestroyed()) {
+            velocity.set(0, 0);
         }
     }
 
@@ -189,12 +202,15 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void shoot(float dt) {
-        // An Enemy can shoot only when it is visible
-        float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
-        float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
-        if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-            shootContext.update(dt);
-            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
+        // // TODO: 5/7/2018
+        if (!quieto) {
+            // An Enemy can shoot only when it is visible
+            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
+                shootContext.update(dt);
+                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
+            }
         }
     }
 
@@ -224,6 +240,9 @@ public abstract class Enemy extends Sprite {
                 case ALIVE:
                     speak();
                     stateAlive(dt);
+                    if (quieto) {
+                        quieto(); // todo basta con esto.
+                    }
                     break;
                 case KNOCK_BACK:
                     setColor(KNOCK_BACK_COLOR);
@@ -278,7 +297,7 @@ public abstract class Enemy extends Sprite {
 
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {
-            currentState = State.INJURED;
+            currentState = INJURED;
         } else {
             // We don't let this Enemy go beyond the screen
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
