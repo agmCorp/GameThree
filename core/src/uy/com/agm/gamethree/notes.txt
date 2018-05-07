@@ -1,15 +1,15 @@
 HACER PRIORIDAD 1
 -----------------
 - A grandes razgos: 1 enemigo, 1 col aabb que los explota, 1 poder aabb que los deja quietos, 1 col vida, help del boss.
+
 1 poder aabb que los deja quietos:
-Un poder podria ser detener la pantalla por tiempo.
 Cada enemigo deberia tener un metodo stop y asegurarme que no disparen.
 
 Hice una version borrador marcada con "todo" para detener el movimiento y que no dispare.
 El tema es que no los puedo matar con un disparo, mas que nada los invulnerables.
 El beam sigue tirando el rayo en modo quieto.
 Deberia pensar como usar el explode cuando reciben un balazo.
-Seria tan facil como "onhit" explode...pero no se como hacerlo en la clase enemy.
+Seria tan facil como "al recibir bala" explode()...pero no se como hacerlo en la clase enemy.
 Capaz que lo que puedo hacer en lugar de detener, enlentecer. Pero no queda, creo que lo hace muchas veces seguidas y por ende detiene.
 Capaz que puedo programarlo en el metodo onhit(weapon).
 
