@@ -13,6 +13,10 @@ Capaz que lo que puedo hacer en lugar de detener, enlentecer. Capaz queda más b
 - capaz que me conviene revisar las funciones onhit de enemy y tener 2: onhit(Hero hero) y onhit(Weapon weapon) y que cada
 uno implemente ambas y listo, o llame a super si no tiene nada particular. onBump que tambien reciba el objeto. Lo mismo con FinalEnemy.
 Merecen ponerles orden.
+Lo más feliz que se me ocurre es dejar todo asi y agregar una funcion nueva en Enemy llamada onHitAbilityPower(Hero hero).
+Lo que hace eso es la discriminación de si es enemyThree o no.
+Entonces en enemy tengo onHitAbilityPower(Hero hero) y onHit(Weapon weapon) que si quieren las hijas me la redefinen.
+Abstracta solo onhit().
 
 HACER PRIORIDAD 2
 -----------------
