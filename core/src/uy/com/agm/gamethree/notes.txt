@@ -14,7 +14,6 @@ Capaz que lo que puedo hacer en lugar de detener, enlentecer. Capaz queda más b
 uno implemente ambas y listo, o llame a super si no tiene nada particular. onBump que tambien reciba el objeto. Lo mismo con FinalEnemy.
 Merecen ponerles orden.
 
-
 HACER PRIORIDAD 2
 -----------------
 - Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
