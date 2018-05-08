@@ -19,6 +19,9 @@ Entonces en enemy tengo onHitAbilityPower(Hero hero) y onHit(Weapon weapon) que 
 Abstracta solo onhit().
 
 
+QUE INCOMODO QUE ESTOY ACA, ME HARTÉ!! HACER EL 4 DE VUELTA, YA FUE, ME ASQUEÓ.
+EL EXPLOTAR QUE EXPLOTE TODO, LO BORRA DEL MAPA. FUNCOINES ONHIT(WEAPON) Y ONDESTROY() MATA. LUEGO TERMINATE() QUE LO BORRA DEL JUEGO.
+
 
 HACER PRIORIDAD 2
 -----------------
