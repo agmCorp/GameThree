@@ -32,7 +32,6 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 
 import static uy.com.agm.gamethree.actors.enemies.Enemy.State.EXPLODING;
 import static uy.com.agm.gamethree.actors.enemies.Enemy.State.INJURED;
-import static uy.com.agm.gamethree.actors.enemies.Enemy.State.KNOCK_BACK;
 
 /**
  * Created by AGM on 12/9/2017.
@@ -135,10 +134,8 @@ public abstract class Enemy extends Sprite {
         currentState = State.DEAD;
     }
 
-    public void explode() {
-        if (currentState == State.ALIVE) {
-            onHit();
-        }
+    public boolean isAlive() {
+        return currentState == State.ALIVE;
     }
 
     public void quieto() { // todo
@@ -247,7 +244,9 @@ public abstract class Enemy extends Sprite {
                 case KNOCK_BACK:
                     stateKnockBack(dt);
                     break;
-                case INJURED: // This state, in some cases, doesn't set a Texture to draw, it uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
+                case INJURED:
+                    // In most cases, this state doesn't set a Texture to draw (see EnemyOne and EnemyFour for instance).
+                    // It uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
                     stateInjured(dt);
                     break;
                 case EXPLODING:

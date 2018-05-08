@@ -26,36 +26,6 @@ esto es al pedo:
     }
 para eso en el poder...en el ontake hago todos los onhit y listo.
 
-me harté:
-
-
-    @Override
-    public void draw(Batch batch) {
-        if (currentState != State.DEAD && currentState != State.INACTIVE) {
-
-            // Set the tint
-            if (currentState == State.KNOCK_BACK) {
-                setColor(KNOCK_BACK_COLOR); // Knock back
-            } else {
-                if (currentState == State.EXPLODING) {
-                    setColor(Color.WHITE); // Default
-                }
-            }
-
-            super.draw(batch);
-        }
-    }
-
-lo anterior deberia ser asi (NO DIBUJA EN INJURED QUE NO SETEA REGION). PUEDO USAR UN METODO ISDRAWABLE.
-if (currentState != State.DEAD && currentState != State.INACTIVE && currentState != State.INJURED) {
-            if (currentState == State.KNOCK_BACK) {
-                setColor(KNOCK_BACK_COLOR); // Knock back
-            } else {
-                setColor(Color.WHITE); // Default
-            }
-            super.draw(batch);
-}
-
 HACER PRIORIDAD 2
 -----------------
 - Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.

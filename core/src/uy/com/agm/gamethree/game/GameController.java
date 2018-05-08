@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
@@ -140,7 +139,9 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                         break;
                     case Input.Keys.E: // TODO
                         for (Enemy enemy : screen.getCreator().getEnemies()) {
-                            enemy.explode();
+                            if (enemy.isAlive()) {
+                                enemy.onHit();
+                            }
                         }
                         break;
                     case Input.Keys.Q: // TODO
