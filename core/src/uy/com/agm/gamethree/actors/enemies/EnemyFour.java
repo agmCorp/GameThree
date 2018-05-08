@@ -152,10 +152,10 @@ public class EnemyFour extends Enemy {
         super.openFire(dt);
 
         checkPath();
+        checkFrozenState(dt);
     }
 
-    @Override
-    protected void stateInjured(float dt) {
+    private void checkFrozenState(float dt) {
         switch (currentFrozenState) {
             case INITIAL:
                 stateTime = 0;
@@ -171,6 +171,10 @@ public class EnemyFour extends Enemy {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void stateInjured(float dt) {
     }
 
     private void stateFrozen(float dt) {

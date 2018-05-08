@@ -6,6 +6,11 @@ HACER PRIORIDAD 1
 1 poder aabb que los deja quietos:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta. Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 
+QUEDE EN QUE:
+SI LE DISPARO LO CONGELO
+SI TOUGH EXPLOTA
+SI DESTROY EXPLOTA
+
 HACER PRIORIDAD 2
 -----------------
 - Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
