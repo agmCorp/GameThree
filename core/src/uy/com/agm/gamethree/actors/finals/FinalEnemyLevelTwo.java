@@ -68,7 +68,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private Circle tmpCircle; // Temporary GC friendly circle
 
     // Power FX
-    private PowerState currentPowerState;
     private Animation powerFXAnimation;
     private float powerFXStateTime;
     private Sprite powerFXSprite;
@@ -115,7 +114,6 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
-        currentPowerState = PowerState.NORMAL;
         powerFXAnimation = Assets.getInstance().getFinalEnemyLevelTwo().getFinalEnemyLevelTwoPowerAnimation();
         powerFXStateTime = 0;
 

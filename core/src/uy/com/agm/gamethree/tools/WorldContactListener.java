@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
@@ -154,17 +155,15 @@ public class WorldContactListener implements ContactListener {
                 ((Enemy) fixC.getUserData()).onBump();
                 break;
 
-            // Enemy - Obstacle/Path/Bridge
+            // Enemy - Obstacle/Path/Bridge/PowerBox
             case ENEMY_BIT | OBSTACLE_BIT:
             case ENEMY_BIT | PATH_BIT:
-                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).onBumpWithFeint();
-                break;
-
-            // Enemy - PowerBox
             case ENEMY_BIT | POWER_BOX_BIT:
-                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
-                ((Enemy) fixC.getUserData()).onBumpWithFeint();
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
+                    ((Enemy) fixA.getUserData()).onBump((IAvoidLandingObject) fixB);
+                } else {
+                    ((Enemy) fixB.getUserData()).onBump((IAvoidLandingObject) fixA);
+                }
                 break;
 
             // Enemy - Enemy

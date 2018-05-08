@@ -142,13 +142,8 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                     case Input.Keys.E: // TODO
                         for (Enemy enemy : screen.getCreator().getEnemies()) {
                             if (enemy.isAlive()) {
-                                enemy.onHit();
+                                enemy.onDestroy();
                             }
-                        }
-                        break;
-                    case Input.Keys.Q: // TODO
-                        for (Enemy enemy : screen.getCreator().getEnemies()) {
-                            enemy.quieto = !enemy.quieto;
                         }
                         break;
                 }

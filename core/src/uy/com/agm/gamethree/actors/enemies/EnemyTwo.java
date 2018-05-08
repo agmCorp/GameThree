@@ -194,4 +194,9 @@ public class EnemyTwo extends Enemy {
     public void onBump() {
         reverseVelocity(true, false);
     }
+
+    @Override
+    public void onDestroy() {
+        onHit();
+    }
 }

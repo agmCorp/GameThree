@@ -251,4 +251,9 @@ public class EnemyFive extends Enemy {
     public void onBump() {
         counterclockwise = !counterclockwise;
     }
+
+    @Override
+    public void onDestroy() {
+        onHit();
+    }
 }

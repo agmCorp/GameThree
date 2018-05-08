@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
@@ -41,7 +42,8 @@ public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
     // Constants
-    private static final float MARGIN_METERS = 3.0f;
+    private static final float MARGIN_UPPER_METERS = 3.0f;
+    private static final float MARGIN_BOTTOM_METERS = 3.0f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;
@@ -73,9 +75,6 @@ public abstract class Enemy extends Sprite {
     protected MapObject object;
     protected float expScale;
 
-    // // TODO: 5/7/2018
-    public boolean quieto = false;
-
     public Enemy(PlayScreen screen, MapObject object) {
         this.object = object;
         this.tiledMapId = object.getProperties().get(B2WorldCreator.KEY_ID, 0, Integer.class);
@@ -98,7 +97,7 @@ public abstract class Enemy extends Sprite {
         /* Set this Sprite's position on the lower left vertex of a Rectangle determined by TiledEditor.
         * At this moment we don't have Enemy.width and Enemy.height because this is an abstract class.
         * Width and height will be determined in classes that inherit from this one.
-        * This point will be used by defineEnemy() calling getX(), getY() to center its b2body.
+        * This position will be used by defineEnemy() calling getX(), getY() to center its b2body.
         * SetPosition always receives world coordinates.
         */
         setPosition(rect.getX() / PlayScreen.PPM, rect.getY() / PlayScreen.PPM);
@@ -115,29 +114,16 @@ public abstract class Enemy extends Sprite {
         knockBackTime = 0;
     }
 
-    public String getTiledMapId() {
-        return String.valueOf(tiledMapId);
-    }
-
-    // This Enemy doesn't have any b2body inside these states
-    public boolean isDestroyed() {
-        return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
-    }
-
-    public void quieto() { // todo
-        if (currentState == State.ALIVE) {
-            velocity.set(0, 0);
-        }
-    }
-
-    protected void checkBoundaries() {
+    private void checkBoundaries() {
        /* When an Enemy is on camera, it activates (it moves and can collide).
         * When an Enemy is alive and outside the camera, it dies.
         * You have to be very careful because if the enemy is destroyed, its b2body doesn't exist and it gives
         * random errors if you try to access its body.
         */
-        float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
-        float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+        float camY = screen.getGameCam().position.y;
+        float worldHeight = screen.getGameViewPort().getWorldHeight();
+        float upperEdge = camY + worldHeight / 2;
+        float bottomEdge = camY - worldHeight / 2;
 
         switch (currentState) {
             case INACTIVE:
@@ -151,10 +137,10 @@ public abstract class Enemy extends Sprite {
             case ALIVE:
             case EXPLODING:
             case SPLAT:
-                // It's outside bottom edge + MARGIN_METERS or outside upperEdge + MARGIN_METERS
-                // MARGIN_METERS is important because we don't want to kill an Enemy who is flying around
+                // It's outside bottom edge + MARGIN_BOTTOM_METERS or outside upperEdge + MARGIN_UPPER_METERS
+                // Margin is important because we don't want to kill an Enemy who is flying around
                 // (going in and out of the camera) on a repetitive wide path
-                if (bottomEdge > getY() + getHeight() + MARGIN_METERS || upperEdge < getY() - MARGIN_METERS) {
+                if (bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS || upperEdge < getY() - MARGIN_UPPER_METERS) {
                     if (currentState == State.ALIVE) {
                         if(!world.isLocked()) {
                             world.destroyBody(b2body);
@@ -167,6 +153,26 @@ public abstract class Enemy extends Sprite {
             default:
                 break;
         }
+    }
+
+    private void initKnockBack() {
+        // Knock back effect
+        b2body.setLinearVelocity(0.0f, 0.0f);
+        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
+                b2body.getPosition().x, b2body.getPosition().y, true);
+
+        // Enemy can't collide with anything
+        Filter filter = new Filter();
+        filter.maskBits = WorldContactListener.NOTHING_BIT;
+
+        // We set the previous filter in every fixture
+        for (Fixture fixture : b2body.getFixtureList()) {
+            fixture.setFilterData(filter);
+            fixture.setDensity(0.0f); // No density
+        }
+        b2body.resetMassData();
+
+        knockBackStarted = true;
     }
 
     // Determine whether or not a power should be released reading a property set in TiledEditor.
@@ -185,15 +191,15 @@ public abstract class Enemy extends Sprite {
     }
 
     protected void shoot(float dt) {
-        // // TODO: 5/7/2018
-        if (!quieto) {
-            // An Enemy can shoot only when it is visible
-            float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
-            float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
-            if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
-                shootContext.update(dt);
-                shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
-            }
+        // An Enemy can shoot only when it is visible
+        float camY = screen.getGameCam().position.y;
+        float worldHeight = screen.getGameViewPort().getWorldHeight();
+        float upperEdge = camY + worldHeight / 2;
+        float bottomEdge = camY - worldHeight / 2;
+
+        if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) {
+            shootContext.update(dt);
+            shootContext.shoot(b2body.getPosition().x, b2body.getPosition().y - EnemyDefaultShooting.DEFAULT_BULLET_OFFSET_METERS);
         }
     }
 
@@ -203,59 +209,6 @@ public abstract class Enemy extends Sprite {
         }
         if (y) {
             velocity.y *= -1;
-        }
-    }
-
-    // Makes this Enemy disposable
-    public void dispose() {
-        if (!isDestroyed()) {
-            if (!world.isLocked()) {
-                world.destroyBody(b2body);
-            }
-        }
-        currentState = State.DEAD;
-    }
-
-    // This Enemy can be removed from our game
-    public boolean isDisposable() {
-        return currentState == State.DEAD;
-    }
-
-    public void renderDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
-    }
-
-    public void update(float dt) {
-        checkBoundaries();
-
-        if (currentState != State.INACTIVE) {
-            switch (currentState) {
-                case ALIVE:
-                    speak();
-                    stateAlive(dt);
-                    if (quieto) {
-                        quieto(); // todo basta con esto.
-                    }
-                    break;
-                case KNOCK_BACK:
-                    stateKnockBack(dt);
-                    break;
-                case INJURED:
-                    // In most cases, this state doesn't set a Texture to draw (see EnemyOne and EnemyFour for instance).
-                    // It uses the Texture defined in the previous state (KNOCK_BACK or ALIVE).
-                    stateInjured(dt);
-                    break;
-                case EXPLODING:
-                    stateExploding(dt);
-                    break;
-                case SPLAT:
-                    stateSplat();
-                    break;
-                case DEAD:
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -293,12 +246,15 @@ public abstract class Enemy extends Sprite {
             currentState = INJURED;
         } else {
             // We don't let this Enemy go beyond the screen
+            float camX = screen.getGameCam().position.x;
+            float worldWidth = screen.getGameViewPort().getWorldWidth();
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-            float borderLeft = screen.getGameCam().position.x - screen.getGameViewPort().getWorldWidth() / 2;;
-            float borderRight = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2;
-            float enemyUpperEdge = b2body.getPosition().y + getCircleShapeRadiusMeters();
-            float enemyLeftEdge = b2body.getPosition().x - getCircleShapeRadiusMeters();
-            float enemyRightEdge = b2body.getPosition().x + getCircleShapeRadiusMeters();
+            float borderLeft = camX - worldWidth / 2;;
+            float borderRight = camX + worldWidth / 2;
+            float circleShapeRadius = getCircleShapeRadiusMeters();
+            float enemyUpperEdge = b2body.getPosition().y + circleShapeRadius;
+            float enemyLeftEdge = b2body.getPosition().x - circleShapeRadius;
+            float enemyRightEdge = b2body.getPosition().x + circleShapeRadius;
 
             if (upperEdge <= enemyUpperEdge || enemyLeftEdge <= borderLeft || borderRight <= enemyRightEdge) {
                 b2body.setLinearVelocity(0.0f, 0.0f); // Stop
@@ -319,25 +275,6 @@ public abstract class Enemy extends Sprite {
         }
     }
 
-    private void initKnockBack() {
-        // Knock back effect
-        b2body.setLinearVelocity(0.0f, 0.0f);
-        b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
-                b2body.getPosition().x, b2body.getPosition().y, true);
-
-        // Enemy can't collide with anything
-        Filter filter = new Filter();
-        filter.maskBits = WorldContactListener.NOTHING_BIT;
-
-        // We set the previous filter in every fixture
-        for (Fixture fixture : b2body.getFixtureList()) {
-            fixture.setFilterData(filter);
-            fixture.setDensity(0.0f); // No density
-        }
-        b2body.resetMassData();
-
-        knockBackStarted = true;
-    }
 
     protected void stateSplat() {
         // Determines the size of the splat on the screen
@@ -346,21 +283,57 @@ public abstract class Enemy extends Sprite {
         setRegion(splat);
     }
 
-    public void onBumpWithFeint() {
-        onBump();
+    // Debug method
+    public String getTiledMapId() {
+        return String.valueOf(tiledMapId);
     }
 
-    public void onHit(Weapon weapon) {
-        weapon.onTarget();
-        onHit();
+    // Debug method
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 
+    // Debug method
     public String whoAmI() {
         return getClassName();
     }
 
-    public String getCurrentState() {
+    // Debug method
+    public String getNameCurrentState() {
         return currentState.toString();
+    }
+
+    // Life cycle: INACTIVE->ALIVE->KNOCK_BACK->INJURED->EXPLODING->SPLAT->DEAD
+    public void update(float dt) {
+        checkBoundaries();
+
+        if (currentState != State.INACTIVE) {
+            switch (currentState) {
+                case ALIVE:
+                    speak();
+                    stateAlive(dt);
+                    break;
+                case KNOCK_BACK:
+                    stateKnockBack(dt);
+                    break;
+                case INJURED:
+                    // This state doesn't set a Texture to draw, instead it uses the Texture defined
+                    // in the previous state (KNOCK_BACK).
+                    // INJURED is a transition state used to remove the body from the world.
+                    stateInjured(dt);
+                    break;
+                case EXPLODING:
+                    stateExploding(dt);
+                    break;
+                case SPLAT:
+                    stateSplat();
+                    break;
+                case DEAD:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     @Override
@@ -380,12 +353,41 @@ public abstract class Enemy extends Sprite {
         }
     }
 
+    // Makes this Enemy disposable
+    public void dispose() {
+        if (!isDestroyed()) {
+            if (!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
+        }
+        currentState = State.DEAD;
+    }
+
+    // This Enemy doesn't have any b2body inside these states
+    public boolean isDestroyed() {
+        return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
+    }
+
+    // This Enemy can be removed from our game
+    public boolean isDisposable() {
+        return currentState == State.DEAD;
+    }
+
     public boolean isSplat() {
         return currentState == State.SPLAT;
     }
 
     public boolean isAlive() {
         return currentState == State.ALIVE;
+    }
+
+    public void onBump(IAvoidLandingObject obj) {
+        onBump();
+    }
+
+    public void onHit(Weapon weapon) {
+        weapon.onTarget();
+        onHit();
     }
 
     protected abstract void defineEnemy();
@@ -401,4 +403,5 @@ public abstract class Enemy extends Sprite {
     protected abstract void stateExploding(float dt);
     public abstract void onHit();
     public abstract void onBump();
+    public abstract void onDestroy();
 }

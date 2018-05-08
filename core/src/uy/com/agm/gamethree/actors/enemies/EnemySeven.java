@@ -227,4 +227,13 @@ public class EnemySeven extends Enemy {
     public void onBump() {
         reverseVelocity(true, false);
     }
+
+    @Override
+    public void onDestroy() {
+        MapProperties mp = object.getProperties();
+        if (mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
+            mp.remove(B2WorldCreator.KEY_ENEMY_SEVEN);
+        }
+        currentState = State.KNOCK_BACK;
+    }
 }

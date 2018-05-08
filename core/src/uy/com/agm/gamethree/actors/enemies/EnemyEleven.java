@@ -263,6 +263,11 @@ public class EnemyEleven extends Enemy {
     }
 
     @Override
+    public void onDestroy() {
+        onHit();
+    }
+
+    @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.circle(target.x, target.y, target.radius);
         super.renderDebug(shapeRenderer);

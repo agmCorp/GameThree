@@ -29,6 +29,7 @@ public class EnemyTen extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 5.0f;
+    private static final float BOOST_VELOCITY = 100.0f;
     private static final float DENSITY = 1000.0f;
     private static final float PERIOD_SECONDS = 2.0f;
     private static final float RADIUS_METERS = 2.4f;
@@ -234,7 +235,7 @@ public class EnemyTen extends Enemy {
 
     private void getAway() {
         // Beyond upperEdge (see Enemy.checkBoundaries())
-        velocity.set(0, LINEAR_VELOCITY * 100);
+        velocity.set(0, LINEAR_VELOCITY * BOOST_VELOCITY);
     }
 
     @Override
@@ -281,5 +282,10 @@ public class EnemyTen extends Enemy {
     @Override
     public void onBump() {
         // Nothing to do here
+    }
+
+    @Override
+    public void onDestroy() {
+        onHit();
     }
 }

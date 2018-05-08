@@ -248,4 +248,9 @@ public class EnemyNine extends Enemy {
     public void onBump() {
         // Nothing to do here
     }
+
+    @Override
+    public void onDestroy() {
+        onHit();
+    }
 }

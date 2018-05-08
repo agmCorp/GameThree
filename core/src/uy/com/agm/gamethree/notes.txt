@@ -1,27 +1,10 @@
 HACER PRIORIDAD 1
 -----------------
+- intentar achicar los margin en enemy haciendo que el bicho arranque primero hacia abajo.
 - A grandes razgos: 1 enemigo, 1 col aabb que los explota, 1 poder aabb que los deja quietos, 1 col vida, help del boss.
 
 1 poder aabb que los deja quietos:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta. Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
-
-Hice una version borrador marcada con "todo" para detener el movimiento y que no dispare.
-El tema es que no los puedo matar con un disparo, mas que nada los invulnerables.
-El beam sigue tirando el rayo en modo quieto.
-Capaz que lo que puedo hacer en lugar de detener, enlentecer. Capaz queda más bonito y me saco el problema de la invulnerabilidad. Puedo hacer que el freeze reciba un porcentaje de lentitud.
-
-- capaz que me conviene revisar las funciones onhit de enemy y tener 2: onhit(Hero hero) y onhit(Weapon weapon) y que cada
-uno implemente ambas y listo, o llame a super si no tiene nada particular. onBump que tambien reciba el objeto. Lo mismo con FinalEnemy.
-Merecen ponerles orden.
-Lo más feliz que se me ocurre es dejar todo asi y agregar una funcion nueva en Enemy llamada onHitAbilityPower(Hero hero).
-Lo que hace eso es la discriminación de si es enemyThree o no.
-Entonces en enemy tengo onHitAbilityPower(Hero hero) y onHit(Weapon weapon) que si quieren las hijas me la redefinen.
-Abstracta solo onhit().
-
-
-QUE INCOMODO QUE ESTOY ACA, ME HARTÉ!! HACER EL 4 DE VUELTA, YA FUE, ME ASQUEÓ.
-EL EXPLOTAR QUE EXPLOTE TODO, LO BORRA DEL MAPA. FUNCOINES ONHIT(WEAPON) Y ONDESTROY() MATA. LUEGO TERMINATE() QUE LO BORRA DEL JUEGO.
-
 
 HACER PRIORIDAD 2
 -----------------

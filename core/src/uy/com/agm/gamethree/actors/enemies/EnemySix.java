@@ -298,13 +298,18 @@ public class EnemySix extends Enemy {
 
     @Override
     public void onBump() {
-        // Nothing to do here
+        // Nothing to do here (this enemy is always at rest)
+    }
+
+    @Override
+    public void onDestroy() {
+        onHit();
     }
 
     @Override
     public void draw(Batch batch) {
         if (beaming) {
-            if (currentState == State.ALIVE || currentState == State.INJURED) {
+            if (!isDestroyed()) {
                 beamSprite.draw(batch);
             }
         }

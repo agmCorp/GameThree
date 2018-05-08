@@ -25,13 +25,13 @@ import uy.com.agm.gamethree.screens.PlayScreen;
  * Created by AGM on 1/20/2018.
  */
 
-public class LevelFactory { // todo avanzar para nivel 3 y 4
+public class LevelFactory {
     private static final String TAG = LevelFactory.class.getName();
 
     // Constants
     private static final int TIMER_LEVEL_ONE = 400;
     private static final int TIMER_LEVEL_TWO = 460;
-    private static final int TIMER_LEVEL_THREE = 300;
+    private static final int TIMER_LEVEL_THREE = 500;
     private static final int TIMER_LEVEL_FOUR = 100;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
@@ -161,7 +161,7 @@ public class LevelFactory { // todo avanzar para nivel 3 y 4
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelTwo();
                 break;
             case 3:
-                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelThree();
                 break;
             case 4:
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();

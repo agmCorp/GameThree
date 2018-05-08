@@ -70,7 +70,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     private Animation finalEnemyLevelOneDyingAnimation;
 
     // Power FX
-    private PowerState currentPowerState;
     private Animation powerFXAnimation;
     private float powerFXStateTime;
     private Sprite powerFXSprite;
@@ -113,7 +112,6 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
-        currentPowerState = PowerState.NORMAL;
         powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerAnimation();
         powerFXStateTime = 0;
 

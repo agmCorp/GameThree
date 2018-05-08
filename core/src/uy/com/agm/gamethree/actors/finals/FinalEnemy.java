@@ -50,6 +50,7 @@ public abstract class FinalEnemy extends Sprite {
     protected Vector2 velocity;
     protected Vector2 tmp; // Temporary GC friendly vector
     protected StateFinalEnemy currentStateFinalEnemy;
+    protected PowerState currentPowerState;
     private float introTime;
     private boolean playingIntro;
     private float aidSilverBulletTime;
@@ -90,6 +91,7 @@ public abstract class FinalEnemy extends Sprite {
         // By default this FinalEnemy doesn't interact in our world
         b2body.setActive(false);
         currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
+        currentPowerState = PowerState.NORMAL;
         knockBackStarted = false;
         knockBackTime = 0;
     }
@@ -220,12 +222,15 @@ public abstract class FinalEnemy extends Sprite {
             currentStateFinalEnemy = StateFinalEnemy.INJURED;
         } else {
             // We don't let this FinalEnemy go beyond the screen
+            float camX = screen.getGameCam().position.x;
+            float worldWidth = screen.getGameViewPort().getWorldWidth();
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-            float borderLeft = screen.getGameCam().position.x - screen.getGameViewPort().getWorldWidth() / 2;;
-            float borderRight = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2;
-            float enemyUpperEdge = b2body.getPosition().y + getCircleShapeRadiusMeters();
-            float enemyLeftEdge = b2body.getPosition().x - getCircleShapeRadiusMeters();
-            float enemyRightEdge = b2body.getPosition().x + getCircleShapeRadiusMeters();
+            float borderLeft = camX - worldWidth / 2;;
+            float borderRight = camX + worldWidth / 2;
+            float circleShapeRadius = getCircleShapeRadiusMeters();
+            float enemyUpperEdge = b2body.getPosition().y + circleShapeRadius;
+            float enemyLeftEdge = b2body.getPosition().x - circleShapeRadius;
+            float enemyRightEdge = b2body.getPosition().x + circleShapeRadius;
 
             if (upperEdge <= enemyUpperEdge || enemyLeftEdge <= borderLeft || borderRight <= enemyRightEdge) {
                 b2body.setLinearVelocity(0.0f, 0.0f); // Stop

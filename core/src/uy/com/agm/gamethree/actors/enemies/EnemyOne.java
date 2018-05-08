@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
+import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
@@ -27,6 +28,7 @@ public class EnemyOne extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 1.0f;
+    private static final float BOOST_VELOCITY = 2.0f;
     private static final float VELOCITY_Y = -1.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float CHANGE_DIRECTION_SECONDS = 1.0f;
@@ -200,8 +202,8 @@ public class EnemyOne extends Enemy {
     }
 
     @Override
-    public void onBumpWithFeint() {
-        velocity.x = MathUtils.randomSign() * VELOCITY_X * 2.0f;
+    public void onBump(IAvoidLandingObject obj) {
+        velocity.x = MathUtils.randomSign() * VELOCITY_X * BOOST_VELOCITY;
         velocity.y *= -1;
         changeDirection = true;
         changeDirectionTime = 0;
@@ -210,5 +212,10 @@ public class EnemyOne extends Enemy {
     @Override
     public void onBump() {
         reverseVelocity(true, false);
+    }
+
+    @Override
+    public void onDestroy() {
+        onHit();
     }
 }

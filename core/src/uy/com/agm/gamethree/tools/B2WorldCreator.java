@@ -429,7 +429,7 @@ public class B2WorldCreator {
             for (Enemy enemy : getEnemies()) {
                 key = enemy.whoAmI();
                 value = arrayMapDebug.get(key);
-                data = enemy.getTiledMapId() + " (" + enemy.getCurrentState() + ")";
+                data = enemy.getTiledMapId() + " (" + enemy.getNameCurrentState() + ")";
                 value = value == null ? data : value + ", " + data;
                 arrayMapDebug.put(key, value);
             }

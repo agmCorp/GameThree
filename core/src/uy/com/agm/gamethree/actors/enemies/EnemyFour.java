@@ -348,4 +348,9 @@ public class EnemyFour extends Enemy {
     public void onBump() {
         reverseVelocity(true, false);
     }
+
+    @Override
+    public void onDestroy() {
+        // ANDA A LA CONCHA DE TU MADRE
+    }
 }
