@@ -124,7 +124,7 @@ public abstract class Enemy extends Sprite {
         return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
-    // Kill this Enemy
+    // Kills this Enemy
     public void terminate() {
         if (!isDestroyed()) {
             if (!world.isLocked()) {
