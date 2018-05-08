@@ -33,6 +33,7 @@ public class EnemyFour extends Enemy {
     private static final float DENSITY = 1000.0f;
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
     private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
+    private static final int TIMES_IT_FREEZE_DEFAULT = 1;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
@@ -46,12 +47,13 @@ public class EnemyFour extends Enemy {
     private float b2bodyTargetX;
     private float b2bodyTargetY;
 
-    private enum FrozenState {
+    private enum DamageState {
         INITIAL, FROZEN, DEFROSTED
     }
-    private FrozenState currentFrozenState;
+    private DamageState currentDamageState;
+
     private float b2bodyLinearVelX;
-    private float stateFrozenTime;
+    private float damageStateTime;
     private int timesItFreeze;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
@@ -76,12 +78,12 @@ public class EnemyFour extends Enemy {
         velocity.set(tmp);
 
         // Frozen state variables initialization
-        currentFrozenState = FrozenState.INITIAL;
+        currentDamageState = DamageState.INITIAL;
         b2bodyLinearVelX = 0;
-        stateFrozenTime = 0;
+        damageStateTime = 0;
 
         // Indicates how many times this enemy can be frozen.
-        timesItFreeze = object.getProperties().get(B2WorldCreator.KEY_TIMES_IT_FREEZE, 1, Integer.class);
+        timesItFreeze = object.getProperties().get(B2WorldCreator.KEY_TIMES_IT_FREEZE, TIMES_IT_FREEZE_DEFAULT, Integer.class);
     }
 
     @Override
@@ -148,18 +150,21 @@ public class EnemyFour extends Enemy {
         setRegion(region);
         stateTime += dt;
 
+        checkPath();
+
+        checkDamageState(dt);
+
         // Shoot time!
         super.openFire(dt);
 
-        checkPath();
-        checkFrozenState(dt);
-    }
 
-    private void checkFrozenState(float dt) {
-        switch (currentFrozenState) {
+    }
+//--------------------------------------------------------------
+    private void checkDamageState(float dt) {
+        switch (currentDamageState) {
             case INITIAL:
                 stateTime = 0;
-                currentFrozenState = FrozenState.FROZEN;
+                currentDamageState = DamageState.FROZEN;
                 stateFrozen(dt);
                 break;
             case FROZEN:
@@ -175,6 +180,25 @@ public class EnemyFour extends Enemy {
 
     @Override
     protected void stateInjured(float dt) {
+        // Release an item
+        getItemOnHit();
+
+        // Explosion animation
+        stateTime = 0;
+
+        // Audio FX
+        pum(Assets.getInstance().getSounds().getHit());
+
+        // Set score
+        screen.getHud().addScore(SCORE);
+
+        // Destroy box2D body
+        if(!world.isLocked()) {
+            world.destroyBody(b2body);
+        }
+
+        // Set the new state
+        currentState = State.EXPLODING;
     }
 
     private void stateFrozen(float dt) {
@@ -222,8 +246,8 @@ public class EnemyFour extends Enemy {
     }
 
     private void checkDefrost(float dt) {
-        stateFrozenTime += dt;
-        if (stateFrozenTime >= FROZEN_TIME_SECONDS) {
+        damageStateTime += dt;
+        if (damageStateTime >= FROZEN_TIME_SECONDS) {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
 
@@ -232,9 +256,9 @@ public class EnemyFour extends Enemy {
 
             timesItFreeze--;
             if (timesItFreeze > 0) {
-                currentFrozenState = FrozenState.INITIAL;
+                currentDamageState = DamageState.INITIAL;
             } else {
-                currentFrozenState = FrozenState.DEFROSTED;
+                currentDamageState = DamageState.DEFROSTED; // aca sería knockback
             }
             currentState = State.ALIVE;
 
@@ -244,30 +268,8 @@ public class EnemyFour extends Enemy {
             velocity.set(tmp);
 
             stateTime = 0;
-            stateFrozenTime = 0;
+            damageStateTime = 0;
         }
-    }
-
-    private void stateDefrosted(float dt) {
-        // Release an item
-        getItemOnHit();
-
-        // Explosion animation
-        stateTime = 0;
-
-        // Audio FX
-        pum(Assets.getInstance().getSounds().getHit());
-
-        // Set score
-        screen.getHud().addScore(SCORE);
-
-        // Destroy box2D body
-        if(!world.isLocked()) {
-            world.destroyBody(b2body);
-        }
-
-        // Set the new state
-        currentState = State.EXPLODING;
     }
 
     @Override
@@ -345,7 +347,7 @@ public class EnemyFour extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = currentFrozenState == FrozenState.DEFROSTED ? State.KNOCK_BACK : State.INJURED;
+        currentState = currentDamageState == DamageState.DEFROSTED ? State.KNOCK_BACK : State.INJURED;
     }
 
     @Override
