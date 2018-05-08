@@ -134,7 +134,7 @@ public abstract class FinalEnemy extends Sprite {
 
                 // Destroy the surviving enemies
                 for (Enemy enemy : screen.getCreator().getEnemies()) {
-                    enemy.terminate();
+                    enemy.dispose();
                 }
 
                 // Enable shooting

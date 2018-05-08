@@ -124,16 +124,6 @@ public abstract class Enemy extends Sprite {
         return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
-    // Kills this Enemy
-    public void terminate() {
-        if (!isDestroyed()) {
-            if (!world.isLocked()) {
-                world.destroyBody(b2body);
-            }
-        }
-        currentState = State.DEAD;
-    }
-
     public void quieto() { // todo
         if (currentState == State.ALIVE) {
             velocity.set(0, 0);
@@ -214,6 +204,16 @@ public abstract class Enemy extends Sprite {
         if (y) {
             velocity.y *= -1;
         }
+    }
+
+    // Makes this Enemy disposable
+    public void dispose() {
+        if (!isDestroyed()) {
+            if (!world.isLocked()) {
+                world.destroyBody(b2body);
+            }
+        }
+        currentState = State.DEAD;
     }
 
     // This Enemy can be removed from our game
