@@ -182,7 +182,7 @@ public class EnemyFour extends Enemy {
             setBounds(getX() + getWidth() / 2 - AssetEnemyFour.FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemyFour.FROZEN_HEIGHT_METERS / 2,
                     AssetEnemyFour.FROZEN_WIDTH_METERS, AssetEnemyFour.FROZEN_HEIGHT_METERS);
 
-            // We get the linear velocity that it had before being frozen
+            // We get the linear velocity it had before being frozen
             b2bodyLinearVelX = b2body.getLinearVelocity().x;
 
             // Audio FX
