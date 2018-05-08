@@ -132,7 +132,7 @@ public abstract class FinalEnemy extends Sprite {
                 // Fight message
                 screen.getHud().showFightMessage();
 
-                // Destroy the surviving enemies
+                // Dispose the surviving enemies
                 for (Enemy enemy : screen.getCreator().getEnemies()) {
                     enemy.dispose();
                 }
