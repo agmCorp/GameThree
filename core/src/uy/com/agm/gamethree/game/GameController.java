@@ -70,8 +70,10 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                 deltaY = -deltaY;
 
                 // Go from origin to target at constant speed
-                candidateVelocity.set(player.getB2body().getPosition().x, player.getB2body().getPosition().y);
-                Vector2Util.goToTarget(candidateVelocity, player.getB2body().getPosition().x + deltaX / PlayScreen.PPM, player.getB2body().getPosition().y + deltaY / PlayScreen.PPM, Hero.LINEAR_VELOCITY);
+                float vx = player.getB2body().getPosition().x;
+                float vy = player.getB2body().getPosition().y;
+                candidateVelocity.set(vx, vy);
+                Vector2Util.goToTarget(candidateVelocity, vx + deltaX / PlayScreen.PPM, vy + deltaY / PlayScreen.PPM, Hero.LINEAR_VELOCITY);
 
                 // Linear interpolation to avoid character shaking
                 heroVelocity.lerp(candidateVelocity, ALPHA_LERP);
