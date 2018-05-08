@@ -134,10 +134,6 @@ public abstract class Enemy extends Sprite {
         currentState = State.DEAD;
     }
 
-    public boolean isAlive() {
-        return currentState == State.ALIVE;
-    }
-
     public void quieto() { // todo
         if (currentState == State.ALIVE) {
             velocity.set(0, 0);
@@ -386,6 +382,10 @@ public abstract class Enemy extends Sprite {
 
     public boolean isSplat() {
         return currentState == State.SPLAT;
+    }
+
+    public boolean isAlive() {
+        return currentState == State.ALIVE;
     }
 
     protected abstract void defineEnemy();
