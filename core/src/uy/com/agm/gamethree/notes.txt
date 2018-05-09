@@ -1,6 +1,12 @@
 HACER PRIORIDAD 1
 -----------------
 - intentar achicar los margin en enemy haciendo que el bicho arranque primero hacia abajo.
+Confirmado, enemyfive arranca hacia arriba, va de 0 a 90.
+creo que se arregla poniendo menos:
+tmp.set((counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), @ aca poner -@radius * w * MathUtils.cos(w * elapsedTime));
+
+SI, CONFIRMADO!! FUNCIONA PERFECTO.
+
 - A grandes razgos: 1 enemigo, 1 col aabb que los explota, 1 poder aabb que los deja quietos, 1 col vida, help del boss.
 
 1 poder aabb que los deja quietos:
