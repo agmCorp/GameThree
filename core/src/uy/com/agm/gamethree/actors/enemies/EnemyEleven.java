@@ -126,14 +126,14 @@ public class EnemyEleven extends Enemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         if (isShooting) {
-            // Preserve the flip and rotation state
+            // Preserve the flip state
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
 
             setRegion((TextureRegion) enemyElevenShootAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;
 
-            // Apply previous flip and rotation state
+            // Apply previous flip state
             setFlip(isFlipX, isFlipY);
 
             shootTime += dt;

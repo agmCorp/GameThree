@@ -3,13 +3,16 @@ package uy.com.agm.gamethree.actors.enemies;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
+import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyFour;
@@ -34,8 +37,8 @@ public class EnemyFour extends Enemy {
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
     private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
     private static final int TIMES_IT_FREEZE_DEFAULT = 1;
-    private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float FROZEN_TIME_SECONDS = 4.0f;
+    private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final int SCORE = 35;
 
@@ -47,14 +50,11 @@ public class EnemyFour extends Enemy {
     private float b2bodyTargetX;
     private float b2bodyTargetY;
 
-    private enum DamageState {
-        INITIAL, FROZEN, DEFROSTED
-    }
-    private DamageState currentDamageState;
-
-    private float b2bodyLinearVelX;
-    private float damageStateTime;
+    private boolean frozen;
+    private float frozenStateTime;
     private int timesItFreeze;
+    private float velX;
+    private float velY;
 
     public EnemyFour(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -70,17 +70,16 @@ public class EnemyFour extends Enemy {
         // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
         b2bodyTargetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
         b2bodyTargetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();
-
-        // Variables initialization
-        stateTime = MathUtils.random(0, enemyFourAnimation.getAnimationDuration()); // To flap untimely with others;
         tmp.set(getX(), getY());
         Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
         velocity.set(tmp);
 
-        // Frozen state variables initialization
-        currentDamageState = DamageState.INITIAL;
-        b2bodyLinearVelX = 0;
-        damageStateTime = 0;
+        // Variables initialization
+        stateTime = MathUtils.random(0, enemyFourAnimation.getAnimationDuration()); // To flap untimely with others;
+        frozen = false;
+        frozenStateTime = 0;
+        velX = 0;
+        velY = 0;
 
         // Indicates how many times this enemy can be frozen.
         timesItFreeze = object.getProperties().get(B2WorldCreator.KEY_TIMES_IT_FREEZE, TIMES_IT_FREEZE_DEFAULT, Integer.class);
@@ -130,53 +129,87 @@ public class EnemyFour extends Enemy {
         // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
 
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyFour may have collided with sth., and therefore, it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established in the constructor of this class (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
+        // Update our Sprite to correspond with the position of our Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyFourAnimation.getKeyFrame(stateTime, true);
-        if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
-            region.flip(true, false);
-        }
-        if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
-            region.flip(true, false);
-        }
+        if (frozen) {
+            // Preserve the flip state
+            boolean isFlipX = isFlipX();
+            boolean isFlipY = isFlipY();
 
-        setRegion(region);
-        stateTime += dt;
+            setRegion((TextureRegion) enemyFourFrozenAnimation.getKeyFrame(stateTime, true));
+            stateTime += dt;
 
-        checkPath();
+            // Apply previous flip state
+            setFlip(isFlipX, isFlipY);
 
-        checkDamageState(dt);
+            frozenToNormal(dt);
+        } else {
+            TextureRegion region = (TextureRegion) enemyFourAnimation.getKeyFrame(stateTime, true);
+            if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
+                region.flip(true, false);
+            }
+            if (b2body.getLinearVelocity().x < 0 && !region.isFlipX()) {
+                region.flip(true, false);
+            }
 
-        // Shoot time!
-        super.openFire(dt);
+            setRegion(region);
+            stateTime += dt;
 
+            // Shoot time!
+            super.openFire(dt);
 
-    }
-//--------------------------------------------------------------
-    private void checkDamageState(float dt) {
-        switch (currentDamageState) {
-            case INITIAL:
-                stateTime = 0;
-                currentDamageState = DamageState.FROZEN;
-                stateFrozen(dt);
-                break;
-            case FROZEN:
-                stateFrozen(dt);
-                break;
-            case DEFROSTED:
-                stateDefrosted(dt);
-                break;
-            default:
-                break;
+            checkPath();
         }
     }
+
+    private void frozenToNormal(float dt) {
+        frozenStateTime += dt;
+        if (frozenStateTime >= FROZEN_TIME_SECONDS) {
+            stateTime = 0;
+            frozenStateTime = 0;
+            frozen = false;
+            velocity.set(velX, velY);
+
+            // Audio FX
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
+        }
+    }
+
+    private void checkPath() {
+        if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
+            if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
+                b2bodyTargetY = b2bodyTargetY - AMPLITUDE_METERS; // New targetY (down)
+            }
+        } else { // EnemyFour goes down
+            if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
+                b2bodyTargetY = b2bodyTargetY + AMPLITUDE_METERS; // New targetY (up)
+            }
+        }
+
+        if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
+            if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
+                b2bodyTargetX = b2bodyTargetX + WAVELENGTH_METERS / 2; // New targetX (right)
+            }
+        } else { // // EnemyFour goes to the left
+            if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
+                b2bodyTargetX = b2bodyTargetX - WAVELENGTH_METERS / 2; // New targetX (left)
+            }
+        }
+
+        // Go to target with constant velocity
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
+        velocity.set(tmp);
+    }
+// // TODO: 5/8/2018
+@Override
+public void renderDebug(ShapeRenderer shapeRenderer) {
+    Circle target = new Circle(b2bodyTargetX, b2bodyTargetY, 10.0f/100.0f);
+    shapeRenderer.circle(target.x, target.y, target.radius);
+    super.renderDebug(shapeRenderer);
+}
+
 
     @Override
     protected void stateInjured(float dt) {
@@ -199,77 +232,6 @@ public class EnemyFour extends Enemy {
 
         // Set the new state
         currentState = State.EXPLODING;
-    }
-
-    private void stateFrozen(float dt) {
-        // Set velocity because It could have been changed (see reverseVelocity)
-        b2body.setLinearVelocity(velocity);
-
-        if (stateTime == 0) { // Frozen state starts
-            // Determines the size of the frozen sprite on the screen
-            setBounds(getX() + getWidth() / 2 - AssetEnemyFour.FROZEN_WIDTH_METERS / 2, getY() + getHeight() / 2 - AssetEnemyFour.FROZEN_HEIGHT_METERS / 2,
-                    AssetEnemyFour.FROZEN_WIDTH_METERS, AssetEnemyFour.FROZEN_HEIGHT_METERS);
-
-            // We get the linear velocity it had before being frozen
-            b2bodyLinearVelX = b2body.getLinearVelocity().x;
-
-            // Audio FX
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
-
-            // Stop motion
-            stop();
-        }
-
-        /* Update our Sprite to correspond with the position of our Box2D body:
-        * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyFour may have collided with sth., and therefore, it has a new position after running the physical simulation.
-        * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
-        * GetWidth and getHeight was established previously (see setBounds).
-        * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
-         */
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-        // We set its frozen animation
-        TextureRegion region = (TextureRegion) enemyFourFrozenAnimation.getKeyFrame(stateTime, true);
-        if (b2bodyLinearVelX > 0 && region.isFlipX()) {
-            region.flip(true, false);
-        }
-        if (b2bodyLinearVelX < 0 && !region.isFlipX()) {
-            region.flip(true, false);
-        }
-
-        setRegion(region);
-        stateTime += dt;
-
-        // Check if it's time to defrost it
-        checkDefrost(dt);
-    }
-
-    private void checkDefrost(float dt) {
-        damageStateTime += dt;
-        if (damageStateTime >= FROZEN_TIME_SECONDS) {
-            // Audio FX
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
-
-            // Determines the size of the EnemyFour's drawing on the screen
-            setBounds(b2body.getPosition().x, b2body.getPosition().y, AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
-
-            timesItFreeze--;
-            if (timesItFreeze > 0) {
-                currentDamageState = DamageState.INITIAL;
-            } else {
-                currentDamageState = DamageState.DEFROSTED; // aca sería knockback
-            }
-            currentState = State.ALIVE;
-
-            // Return movement
-            tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-            Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
-            velocity.set(tmp);
-
-            stateTime = 0;
-            damageStateTime = 0;
-        }
     }
 
     @Override
@@ -307,35 +269,26 @@ public class EnemyFour extends Enemy {
         return SPEAK_TIME_SECONDS;
     }
 
-    private void checkPath() {
-        if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
-            if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY - AMPLITUDE_METERS; // New targetY (down)
-            }
-        } else { // EnemyFour goes down
-            if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY + AMPLITUDE_METERS; // New targetY (up)
+    @Override
+    public void onHit(Weapon weapon) {
+        if (frozen) {
+            weapon.onTarget();
+        } else {
+            timesItFreeze--;
+            if (timesItFreeze >= 0) {
+                weapon.onTarget();
+                stateTime = 0;
+                frozen = true;
+                velX = velocity.x;
+                velY = velocity.y;
+                velocity.set(0.0f, 0.0f);
+
+                // Audio FX
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFrozen());
+            } else {
+                super.onHit(weapon);
             }
         }
-
-        if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
-            if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX + WAVELENGTH_METERS / 2; // New targetX (right)
-            }
-        } else { // // EnemyFour goes to the left
-            if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX - WAVELENGTH_METERS / 2; // New targetX (left)
-            }
-        }
-
-        // Go to target with constant velocity
-        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
-        velocity.set(tmp);
-    }
-
-    private void stop() {
-        velocity.set(0.0f, 0.0f);
     }
 
     @Override
@@ -347,7 +300,7 @@ public class EnemyFour extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = currentDamageState == DamageState.DEFROSTED ? State.KNOCK_BACK : State.INJURED;
+        currentState = State.KNOCK_BACK;
     }
 
     @Override
@@ -357,6 +310,6 @@ public class EnemyFour extends Enemy {
 
     @Override
     public void onDestroy() {
-        // ANDA A LA CONCHA DE TU MADRE
+        onHit();
     }
 }

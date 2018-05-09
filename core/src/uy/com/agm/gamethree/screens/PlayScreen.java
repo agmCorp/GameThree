@@ -48,7 +48,7 @@ public class PlayScreen extends AbstractScreen {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    public static final boolean HIDE_BACKGROUND = true;
 
     // Show/hide FPS counter
     public static final boolean SHOW_FPS = true;
@@ -77,7 +77,7 @@ public class PlayScreen extends AbstractScreen {
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.304f;
+    public static final float GAMECAM_VELOCITY = 0.304f * 0; // todo
 
     // Game state
     public enum PlayScreenState {
