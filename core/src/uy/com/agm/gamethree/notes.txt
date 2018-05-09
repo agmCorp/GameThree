@@ -6,10 +6,7 @@ HACER PRIORIDAD 1
 1 poder aabb que los deja quietos:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta. Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 
-QUEDE EN QUE:
-SI LE DISPARO LO CONGELO
-SI TOUGH EXPLOTA
-SI DESTROY EXPLOTA
+- emprolijar el 4, jugar.
 
 HACER PRIORIDAD 2
 -----------------
