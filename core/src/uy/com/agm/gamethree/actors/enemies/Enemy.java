@@ -42,8 +42,8 @@ public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
     // Constants
-    private static final float MARGIN_UPPER_METERS = 3.0f;
-    private static final float MARGIN_BOTTOM_METERS = 3.0f;
+    private static final float MARGIN_UPPER_METERS = 1.1f;
+    private static final float MARGIN_BOTTOM_METERS = 1.1f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;

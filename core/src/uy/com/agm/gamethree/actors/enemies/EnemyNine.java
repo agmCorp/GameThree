@@ -134,7 +134,7 @@ public class EnemyNine extends Enemy {
             // Set new tangential speed (derivative d/dt of the parametric equation of a Circle)
             elapsedTime += dt;
             float w = 2 * MathUtils.PI / PERIOD_SECONDS;
-            velocity.set(goingLeft ? -1 : 1, RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
+            velocity.set(goingLeft ? -1 : 1, -RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
 
             // Change direction
             if (b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS <= 0 && goingLeft ||
