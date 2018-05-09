@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -32,6 +31,7 @@ public class EnemyFour extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
+    private static final float DEBUG_TARGET_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float DENSITY = 1000.0f;
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
@@ -47,8 +47,8 @@ public class EnemyFour extends Enemy {
     private Animation enemyFourFrozenAnimation;
     private Animation explosionAnimation;
 
-    private float b2bodyTargetX;
-    private float b2bodyTargetY;
+    private float targetX;
+    private float targetY;
 
     private boolean frozen;
     private float frozenStateTime;
@@ -67,11 +67,11 @@ public class EnemyFour extends Enemy {
         // Determines the size of the EnemyFour's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyFour.WIDTH_METERS, AssetEnemyFour.HEIGHT_METERS);
 
-        // Move to (b2bodyTargetX, b2bodyTargetY) at constant speed
-        b2bodyTargetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
-        b2bodyTargetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();
+        // Move to (targetX, targetY) at constant speed
+        targetX = getX() + (WAVELENGTH_METERS / 2) * MathUtils.randomSign();
+        targetY = getY() + (AMPLITUDE_METERS / 2) * MathUtils.randomSign();
         tmp.set(getX(), getY());
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY);
         velocity.set(tmp);
 
         // Variables initialization
@@ -126,7 +126,7 @@ public class EnemyFour extends Enemy {
 
     @Override
     protected void stateAlive(float dt) {
-        // Set velocity because It could have been changed (see reverseVelocity)
+        // Set velocity because It could have been changed (see reverseVelocity(), checkPath())
         b2body.setLinearVelocity(velocity);
 
         // Update our Sprite to correspond with the position of our Box2D body.
@@ -169,6 +169,8 @@ public class EnemyFour extends Enemy {
             stateTime = 0;
             frozenStateTime = 0;
             frozen = false;
+
+            // Restore velocity
             velocity.set(velX, velY);
 
             // Audio FX
@@ -178,38 +180,30 @@ public class EnemyFour extends Enemy {
 
     private void checkPath() {
         if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
-            if (b2body.getPosition().y >= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY - AMPLITUDE_METERS; // New targetY (down)
+            if (b2body.getPosition().y >= targetY) { // EnemyFour reaches target
+                targetY = targetY - AMPLITUDE_METERS; // New targetY (down)
             }
         } else { // EnemyFour goes down
-            if (b2body.getPosition().y <= b2bodyTargetY) { // EnemyFour reaches target
-                b2bodyTargetY = b2bodyTargetY + AMPLITUDE_METERS; // New targetY (up)
+            if (b2body.getPosition().y <= targetY) { // EnemyFour reaches target
+                targetY = targetY + AMPLITUDE_METERS; // New targetY (up)
             }
         }
 
         if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
-            if (b2body.getPosition().x >= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX + WAVELENGTH_METERS / 2; // New targetX (right)
+            if (b2body.getPosition().x >= targetX) { // EnemyFour reaches target
+                targetX = targetX + WAVELENGTH_METERS / 2; // New targetX (right)
             }
         } else { // // EnemyFour goes to the left
-            if (b2body.getPosition().x <= b2bodyTargetX) { // EnemyFour reaches target
-                b2bodyTargetX = b2bodyTargetX - WAVELENGTH_METERS / 2; // New targetX (left)
+            if (b2body.getPosition().x <= targetX) { // EnemyFour reaches target
+                targetX = targetX - WAVELENGTH_METERS / 2; // New targetX (left)
             }
         }
 
         // Go to target with constant velocity
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, b2bodyTargetX, b2bodyTargetY, LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, targetX, targetY, LINEAR_VELOCITY);
         velocity.set(tmp);
     }
-// // TODO: 5/8/2018
-@Override
-public void renderDebug(ShapeRenderer shapeRenderer) {
-    Circle target = new Circle(b2bodyTargetX, b2bodyTargetY, 10.0f/100.0f);
-    shapeRenderer.circle(target.x, target.y, target.radius);
-    super.renderDebug(shapeRenderer);
-}
-
 
     @Override
     protected void stateInjured(float dt) {
@@ -277,10 +271,15 @@ public void renderDebug(ShapeRenderer shapeRenderer) {
             timesItFreeze--;
             if (timesItFreeze >= 0) {
                 weapon.onTarget();
+
                 stateTime = 0;
                 frozen = true;
+
+                // We get the linear velocity that this enemy had before being frozen
                 velX = velocity.x;
                 velY = velocity.y;
+
+                // Stop motion
                 velocity.set(0.0f, 0.0f);
 
                 // Audio FX
@@ -311,5 +310,11 @@ public void renderDebug(ShapeRenderer shapeRenderer) {
     @Override
     public void onDestroy() {
         onHit();
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(targetX, targetY, DEBUG_TARGET_RADIUS_METERS);
+        super.renderDebug(shapeRenderer);
     }
 }
