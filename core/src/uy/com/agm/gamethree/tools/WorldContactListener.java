@@ -160,9 +160,9 @@ public class WorldContactListener implements ContactListener {
             case ENEMY_BIT | PATH_BIT:
             case ENEMY_BIT | POWER_BOX_BIT:
                 if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
-                    ((Enemy) fixA.getUserData()).onBump((IAvoidLandingObject) fixB);
+                    ((Enemy) fixA.getUserData()).onBump((IAvoidLandingObject) fixB.getUserData());
                 } else {
-                    ((Enemy) fixB.getUserData()).onBump((IAvoidLandingObject) fixA);
+                    ((Enemy) fixB.getUserData()).onBump((IAvoidLandingObject) fixA.getUserData());
                 }
                 break;
 

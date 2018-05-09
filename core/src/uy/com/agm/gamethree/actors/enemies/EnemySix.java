@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 import static uy.com.agm.gamethree.actors.enemies.Enemy.State.EXPLODING;
+import static uy.com.agm.gamethree.actors.enemies.Enemy.State.KNOCK_BACK;
 import static uy.com.agm.gamethree.actors.enemies.Enemy.State.SPLAT;
 
 /**
@@ -293,7 +294,8 @@ public class EnemySix extends Enemy {
          * No b2body can be removed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
-        currentState = State.KNOCK_BACK;
+        currentState = KNOCK_BACK;
+        beaming = false; // Avoid drawing the beam of energy
     }
 
     @Override
@@ -309,9 +311,7 @@ public class EnemySix extends Enemy {
     @Override
     public void draw(Batch batch) {
         if (beaming) {
-            if (!isDestroyed()) {
-                beamSprite.draw(batch);
-            }
+            beamSprite.draw(batch);
         }
         super.draw(batch);
     }
