@@ -1,18 +1,11 @@
 HACER PRIORIDAD 1
 -----------------
-- intentar achicar los margin en enemy haciendo que el bicho arranque primero hacia abajo.
-Confirmado, enemyfive arranca hacia arriba, va de 0 a 90.
-creo que se arregla poniendo menos:
-tmp.set((counterclockwise ? -1 : 1) * radius * w * MathUtils.sin(w * elapsedTime), @ aca poner -@radius * w * MathUtils.cos(w * elapsedTime));
-
-SI, CONFIRMADO!! FUNCIONA PERFECTO.
-
-- A grandes razgos: 1 enemigo, 1 col aabb que los explota, 1 poder aabb que los deja quietos, 1 col vida, help del boss.
+- A grandes razgos: 1 enemigo, 1 poder aabb que los deja quietos, 1 col vida, help del boss y help silverbullet.
 
 1 poder aabb que los deja quietos:
-Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta. Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
-
-- emprolijar el 4, jugar.
+Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
+Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no. Eso lo hago en onhit(weapon). Si esta "freeze" llamo al
+onDestroy().
 
 HACER PRIORIDAD 2
 -----------------

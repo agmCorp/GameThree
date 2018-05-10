@@ -26,6 +26,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletD;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletE;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
+import uy.com.agm.gamethree.assets.sprites.AssetColTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEleven;
@@ -90,6 +91,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_OPEN_POWER_BOX = "audio/sounds/openPowerBox.ogg";
     public static final String FX_FILE_CLOCK = "audio/sounds/clock.ogg";
     public static final String FX_FILE_PICK_UP_COL_ONE = "audio/sounds/pickUpColOne.ogg";
+    public static final String FX_FILE_PICK_UP_COL_TWO = "audio/sounds/pickUpColTwo.ogg";
     public static final String FX_FILE_PICK_UP_COL_SILVER_BULLET = "audio/sounds/pickUpColSilverBullet.ogg";
     public static final String FX_FILE_PICK_UP_POWER_ONE = "audio/sounds/pickUpPowerOne.ogg";
     public static final String FX_FILE_PICK_UP_POWER_TWO = "audio/sounds/pickUpPowerTwo.ogg";
@@ -102,6 +104,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_BEEP_B = "audio/sounds/beepB.ogg";
     public static final String FX_FILE_BEEP_C = "audio/sounds/beepC.ogg";
     public static final String FX_FILE_SHOW_UP_COL_ONE = "audio/sounds/showUpColOne.ogg";
+    public static final String FX_FILE_SHOW_UP_COL_TWO = "audio/sounds/showUpColTwo.ogg";
     public static final String FX_FILE_SHOW_UP_COL_SILVER_BULLET = "audio/sounds/showUpColSilverBullet.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_ONE = "audio/sounds/showUpPowerOne.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_TWO = "audio/sounds/showUpPowerTwo.ogg";
@@ -178,6 +181,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetSplat splat;
     private AssetPowerBox powerBox;
     private AssetColOne colOne;
+    private AssetColTwo colTwo;
     private AssetPowerOne powerOne;
     private AssetPowerTwo powerTwo;
     private AssetPowerThree powerThree;
@@ -259,6 +263,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_OPEN_POWER_BOX, Sound.class);
         assetManager.load(FX_FILE_CLOCK, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_COL_ONE, Sound.class);
+        assetManager.load(FX_FILE_PICK_UP_COL_TWO, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_COL_SILVER_BULLET, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_ONE, Sound.class);
         assetManager.load(FX_FILE_PICK_UP_POWER_TWO, Sound.class);
@@ -271,6 +276,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_BEEP_B, Sound.class);
         assetManager.load(FX_FILE_BEEP_C, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_COL_ONE, Sound.class);
+        assetManager.load(FX_FILE_SHOW_UP_COL_TWO, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_COL_SILVER_BULLET, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_ONE, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_TWO, Sound.class);
@@ -380,6 +386,7 @@ public class Assets implements Disposable, AssetErrorListener {
         splat = new AssetSplat(atlasDynamicObjects);
         powerBox = new AssetPowerBox(atlasDynamicObjects);
         colOne = new AssetColOne(atlasDynamicObjects);
+        colTwo = new AssetColTwo(atlasDynamicObjects);
         powerOne = new AssetPowerOne(atlasDynamicObjects);
         powerTwo = new AssetPowerTwo(atlasDynamicObjects);
         powerThree = new AssetPowerThree(atlasDynamicObjects);
@@ -502,6 +509,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetColOne getColOne() {
         return colOne;
+    }
+
+    public AssetColTwo getColTwo() {
+        return colTwo;
     }
 
     public AssetPowerOne getPowerOne() {

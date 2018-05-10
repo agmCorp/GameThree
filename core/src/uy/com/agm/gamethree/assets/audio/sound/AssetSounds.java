@@ -25,6 +25,7 @@ public class AssetSounds {
     private Sound openPowerBox;
     private Sound clock;
     private Sound pickUpColOne;
+    private Sound pickUpColTwo;
     private Sound pickUpColSilverBullet;
     private Sound pickUpPowerOne;
     private Sound pickUpPowerTwo;
@@ -37,6 +38,7 @@ public class AssetSounds {
     private Sound beepB;
     private Sound beepC;
     private Sound showUpColOne;
+    private Sound showUpColTwo;
     private Sound showUpColSilverBullet;
     private Sound showUpPowerOne;
     private Sound showUpPowerTwo;
@@ -87,6 +89,7 @@ public class AssetSounds {
         openPowerBox = am.get(Assets.FX_FILE_OPEN_POWER_BOX, Sound.class);
         clock = am.get(Assets.FX_FILE_CLOCK, Sound.class);
         pickUpColOne = am.get(Assets.FX_FILE_PICK_UP_COL_ONE, Sound.class);
+        pickUpColTwo = am.get(Assets.FX_FILE_PICK_UP_COL_TWO, Sound.class);
         pickUpColSilverBullet = am.get(Assets.FX_FILE_PICK_UP_COL_SILVER_BULLET, Sound.class);
         pickUpPowerOne = am.get(Assets.FX_FILE_PICK_UP_POWER_ONE, Sound.class);
         pickUpPowerTwo = am.get(Assets.FX_FILE_PICK_UP_POWER_TWO, Sound.class);
@@ -99,6 +102,7 @@ public class AssetSounds {
         beepB = am.get(Assets.FX_FILE_BEEP_B, Sound.class);
         beepC = am.get(Assets.FX_FILE_BEEP_C, Sound.class);
         showUpColOne = am.get(Assets.FX_FILE_SHOW_UP_COL_ONE, Sound.class);
+        showUpColTwo = am.get(Assets.FX_FILE_SHOW_UP_COL_TWO, Sound.class);
         showUpColSilverBullet = am.get(Assets.FX_FILE_SHOW_UP_COL_SILVER_BULLET, Sound.class);
         showUpPowerOne = am.get(Assets.FX_FILE_SHOW_UP_POWER_ONE, Sound.class);
         showUpPowerTwo = am.get(Assets.FX_FILE_SHOW_UP_POWER_TWO, Sound.class);
@@ -188,6 +192,10 @@ public class AssetSounds {
         return pickUpColOne;
     }
 
+    public Sound getPickUpColTwo() {
+        return pickUpColTwo;
+    }
+
     public Sound getPickUpColSilverBullet() {
         return pickUpColSilverBullet;
     }
@@ -234,6 +242,10 @@ public class AssetSounds {
 
     public Sound getShowUpColOne() {
         return showUpColOne;
+    }
+
+    public Sound getShowUpColTwo() {
+        return showUpColTwo;
     }
 
     public Sound getShowUpColSilverBullet() {

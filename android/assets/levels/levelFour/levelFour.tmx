@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2338">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2340">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -137,7 +137,7 @@
   </object>
   <object id="2328" x="350" y="7598" width="32" height="32">
    <properties>
-    <property name="powerFour" type="int" value="500"/>
+    <property name="colTwo" value=""/>
    </properties>
   </object>
   <object id="2329" x="395" y="7662" width="32" height="32">
@@ -162,13 +162,13 @@
  <objectgroup name="enemyFour">
   <object id="2337" x="96" y="7296" width="32" height="32">
    <properties>
-    <property name="enemyBullet" value=""/>
-    <property name="powerOne" type="int" value="0"/>
+    <property name="colTwo" value=""/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="enemyFive">
   <object id="2335" x="290" y="7106" width="27" height="27"/>
+  <object id="2338" x="192" y="7168" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemySix"/>
  <objectgroup name="enemySeven"/>
