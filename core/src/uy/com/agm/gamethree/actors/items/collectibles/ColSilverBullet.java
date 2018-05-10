@@ -127,6 +127,8 @@ public class ColSilverBullet extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyColSilverBullet();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
@@ -134,6 +136,17 @@ public class ColSilverBullet extends Item {
 
         // Set the new state
         currentState = State.FINISHED;
+    }
+
+    private void applyColSilverBullet() {
+        // Audio FX
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColSilverBullet());
+
+        // Set score
+        screen.getHud().addScore(SCORE);
+
+        // Increment the number of silver bullets
+        screen.getCreator().getHero().addSilverBullet();
     }
 
     @Override
@@ -156,15 +169,6 @@ public class ColSilverBullet extends Item {
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
-
-        // Audio FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColSilverBullet());
-
-        // Set score
-        screen.getHud().addScore(SCORE);
-
-        // Increment the number of silver bullets
-        screen.getCreator().getHero().addSilverBullet();
     }
 
     @Override

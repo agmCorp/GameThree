@@ -144,6 +144,8 @@ public class ColOne extends Item {
 
     @Override
     protected void stateTaken(float dt) {
+        applyColOne();
+
         // Destroy its b2body
         if(!world.isLocked()) {
             world.destroyBody(b2body);
@@ -151,6 +153,14 @@ public class ColOne extends Item {
 
         // Set the new state
         currentState = State.FINISHED;
+    }
+
+    private void applyColOne() {
+        // Audio FX
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColOne());
+
+        // Set score
+        screen.getHud().addScore(score);
     }
 
     @Override
@@ -173,12 +183,6 @@ public class ColOne extends Item {
          * Therefore, we use a flag (state) in order to point out this behavior to do it later.
          */
         currentState = State.TAKEN;
-
-        // Audio FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColOne());
-
-        // Set score
-        screen.getHud().addScore(score);
     }
 
     @Override
