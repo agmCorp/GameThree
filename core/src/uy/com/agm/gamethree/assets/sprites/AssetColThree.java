@@ -15,8 +15,8 @@ public class AssetColThree {
     private static final String TAG = AssetColThree.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 130.0f * 1.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 80.0f * 1.0f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 130.0f * 0.9f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 80.0f * 0.9f / PlayScreen.PPM;
 
     private TextureRegion colThreeStand;
     private Animation colThreeAnimation;
