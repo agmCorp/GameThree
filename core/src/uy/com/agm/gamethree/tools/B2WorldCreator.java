@@ -35,6 +35,7 @@ import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
+import uy.com.agm.gamethree.actors.items.collectibles.ColThree;
 import uy.com.agm.gamethree.actors.items.collectibles.ColTwo;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFive;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
@@ -81,6 +82,7 @@ public class B2WorldCreator {
     public static final String KEY_POWER_FIVE = "powerFive";
     public static final String KEY_COL_ONE = "colOne";
     public static final String KEY_COL_TWO = "colTwo";
+    public static final String KEY_COL_THREE = "colThree";
     public static final String KEY_COL_SILVER_BULLET = "colSilverBullet";
     public static final String KEY_STRENGTH = "strength";
     public static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
@@ -344,6 +346,9 @@ public class B2WorldCreator {
             if (actor instanceof ColTwo) {
                 items.add((ColTwo) actor);
             }
+            if (actor instanceof ColThree) {
+                items.add((ColThree) actor);
+            }
             if (actor instanceof ColSilverBullet) {
                 items.add((ColSilverBullet) actor);
             }
@@ -392,6 +397,9 @@ public class B2WorldCreator {
         }
         if (mp.containsKey(KEY_COL_TWO)) {
             createGameThreeActor(new ActorDef(new ColTwo(screen, x, y)));
+        }
+        if (mp.containsKey(KEY_COL_THREE)) {
+            createGameThreeActor(new ActorDef(new ColThree(screen, x, y)));
         }
         if (mp.containsKey(KEY_COL_SILVER_BULLET)) {
             createGameThreeActor(new ActorDef(new ColSilverBullet(screen, x, y)));
