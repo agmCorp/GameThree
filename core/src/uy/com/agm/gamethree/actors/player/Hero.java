@@ -755,6 +755,11 @@ public class Hero extends Sprite {
         this.lives = lives;
     }
 
+    public void addLives() {
+        lives++;
+        screen.getHud().increaseLives(1);
+    }
+
     public void addSilverBullet() {
         silverBullets++;
         screen.getHud().increaseSilverBullets(1);

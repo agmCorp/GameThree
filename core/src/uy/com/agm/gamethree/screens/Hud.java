@@ -777,6 +777,11 @@ public class Hud extends AbstractScreen {
         hideWeaponPowerInfo();
     }
 
+    public void increaseLives(int quantity) {
+        lives += quantity;
+        livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
+    }
+
     public void decreaseLives(int quantity) {
         lives -= quantity;
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));

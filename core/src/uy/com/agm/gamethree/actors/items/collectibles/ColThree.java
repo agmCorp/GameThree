@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetColTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetColThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -19,37 +19,37 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by amorales on 23/1/2018.
  */
 
-public class ColTwo extends Item {
-    private static final String TAG = ColTwo.class.getName();
+public class ColThree extends Item {
+    private static final String TAG = ColThree.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 2.0f;
-    private static final float VELOCITY_Y = 1.0f;
+    private static final float VELOCITY_Y = 2.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 2.0f;
-    private static final int SCORE = 100;
+    private static final int SCORE = 200;
 
     private float stateTime;
     private float stateWaitingTime;
     private float stateFadingTime;
-    private Animation colTwoAnimation;
+    private Animation colThreeAnimation;
 
-    public ColTwo(PlayScreen screen, float x, float y) {
+    public ColThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        colTwoAnimation = Assets.getInstance().getColTwo().getColTwoAnimation();
+        colThreeAnimation = Assets.getInstance().getColThree().getColThreeAnimation();
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), AssetColTwo.WIDTH_METERS, AssetColTwo.HEIGHT_METERS);
+        setBounds(getX(), getY(), AssetColThree.WIDTH_METERS, AssetColThree.HEIGHT_METERS);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, MathUtils.randomSign() * VELOCITY_Y);
 
         // Sound FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpColTwo());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShowUpColThree());
     }
 
     @Override
@@ -81,13 +81,13 @@ public class ColTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, ColTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, ColThree may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) colTwoAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) colThreeAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         stateWaitingTime += dt;
@@ -101,13 +101,13 @@ public class ColTwo extends Item {
         b2body.setLinearVelocity(velocity);
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, ColTwo may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, ColThree may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) colTwoAnimation.getKeyFrame(stateTime, true));
+        setRegion((TextureRegion) colThreeAnimation.getKeyFrame(stateTime, true));
         stateTime += dt;
 
         stateFadingTime += dt;
@@ -127,7 +127,7 @@ public class ColTwo extends Item {
 
     @Override
     protected void stateTaken(float dt) {
-        applyColTwo();
+        applyColThree();
 
         // Destroy its b2body
         if(!world.isLocked()) {
@@ -138,15 +138,11 @@ public class ColTwo extends Item {
         currentState = State.FINISHED;
     }
 
-    private void applyColTwo() {
-        for (Enemy enemy : screen.getCreator().getEnemies()) {
-            if (enemy.isAlive()) {
-                enemy.onDestroy();
-            }
-        }
+    private void applyColThree() {
+        screen.getCreator().getHero().addLives();
 
         // Audio FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColTwo());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColThree());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -159,7 +155,7 @@ public class ColTwo extends Item {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpColTwo();
+        return Assets.getInstance().getScene2d().getHelpColThree();
     }
 
     @Override
