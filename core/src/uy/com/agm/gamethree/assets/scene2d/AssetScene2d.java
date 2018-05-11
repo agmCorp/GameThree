@@ -66,10 +66,10 @@ public class AssetScene2d {
         helpColTwo = atlas.findRegion("helpColTwo");
         helpColSilverBulletLevelOne = atlas.findRegion("helpColSilverBulletLevelOne");
         helpColSilverBulletLevelTwo = atlas.findRegion("helpColSilverBulletLevelTwo");
-        helpColSilverBulletLevelThree = atlas.findRegion("helpColSilverBulletLevelTwo"); // todo
+        helpColSilverBulletLevelThree = atlas.findRegion("helpColSilverBulletLevelThree");
         helpFinalEnemyLevelOne = atlas.findRegion("helpFinalEnemyLevelOne");
         helpFinalEnemyLevelTwo = atlas.findRegion("helpFinalEnemyLevelTwo");
-        helpFinalEnemyLevelThree = atlas.findRegion("helpFinalEnemyLevelTwo"); // todo
+        helpFinalEnemyLevelThree = atlas.findRegion("helpFinalEnemyLevelThree");
         table = atlas.findRegion("table");
     }
 
