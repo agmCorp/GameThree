@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -141,9 +142,13 @@ public class LevelFactory {
                 break;
             case 3:
                 dynamic.put(PowerFive.class.getName(), new DynamicHelpDef());
+                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
+                dynamic.put(FinalEnemyLevelThree.class.getName(), new DynamicHelpDef(true));
                 break;
             case 4:
                 dynamic.put(PowerFive.class.getName(), new DynamicHelpDef());
+                dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
+                dynamic.put(FinalEnemyLevelThree.class.getName(), new DynamicHelpDef(true));
                 break;
             default:
                 break;
@@ -164,7 +169,7 @@ public class LevelFactory {
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelThree();
                 break;
             case 4:
-                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelOne();
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelThree();
                 break;
             default:
                 helpColSilverBullet = null;
