@@ -23,7 +23,7 @@ public class ColThree extends Item {
     private static final String TAG = ColThree.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 2.0f;
     private static final float VELOCITY_Y = 2.0f;
     private static final float WAITING_SECONDS = 5.0f;
