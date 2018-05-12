@@ -141,6 +141,8 @@ eleven - hombres de piedra
 - poderes 5 -3 de habilidad, 2 de fuego- (2 poderes por nivel)
 - 1 moneda x 3
 - 1 shuriken
+- 1 item vidas
+- 1 your soul is mine
 
 ESTIMACION
 ----------
