@@ -6,26 +6,40 @@ filter: Nearest,Nearest
 repeat: none
 helpColSilverBulletLevelOne
   rotate: false
-  xy: 1507, 404
+  xy: 484, 2
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpColSilverBulletLevelThree
+  rotate: false
+  xy: 1360, 229
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpColSilverBulletLevelTwo
   rotate: false
-  xy: 1507, 631
+  xy: 703, 229
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpEnemyThree
   rotate: false
-  xy: 703, 229
+  xy: 1690, 631
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelOne
+  rotate: false
+  xy: 1288, 456
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+helpFinalEnemyLevelThree
   rotate: false
   xy: 886, 456
   size: 400, 400
@@ -41,49 +55,49 @@ helpFinalEnemyLevelTwo
   index: -1
 helpInitialAutomatic
   rotate: false
-  xy: 922, 229
+  xy: 1141, 229
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 1288, 404
+  xy: 1690, 404
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerFive
   rotate: false
-  xy: 484, 229
+  xy: 922, 229
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerFour
   rotate: false
-  xy: 1288, 631
+  xy: 484, 229
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 484, 2
+  xy: 1141, 2
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerThree
   rotate: false
-  xy: 1726, 404
+  xy: 703, 2
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 1726, 631
+  xy: 922, 2
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
@@ -97,7 +111,7 @@ sliderBackground
   index: -1
 sliderKnob
   rotate: false
-  xy: 1945, 827
+  xy: 1909, 827
   size: 14, 29
   orig: 14, 29
   offset: 0, 0
