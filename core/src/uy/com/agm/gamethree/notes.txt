@@ -50,7 +50,6 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- nuevo item vidas
 - la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
 - agregar transitions
 - agregar credits con cuenta bancaria para donación, algo asi:
