@@ -1,12 +1,11 @@
 HACER PRIORIDAD 1
 -----------------
 - A grandes razgos: 1 enemigo, 1 poder aabb que los deja quietos.
-Test: generar scene2d y objects, probar colthree
 
 1 poder aabb que los deja quietos:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
-Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no. Eso lo hago en onhit(weapon). Si esta "freeze" llamo al
-onDestroy().
+Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
+Si esta "freeze" llamo al onDestroy().
 
 HACER PRIORIDAD 2
 -----------------

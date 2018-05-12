@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetColThree;
@@ -26,7 +25,7 @@ public class ColThree extends Item {
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 2.0f;
     private static final float VELOCITY_Y = 2.0f;
-    private static final float WAITING_SECONDS = 5.0f;
+    private static final float WAITING_SECONDS = 3.0f;
     private static final float FADING_SECONDS = 2.0f;
     private static final int SCORE = 200;
 
