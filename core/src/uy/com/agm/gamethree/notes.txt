@@ -1,30 +1,51 @@
 HACER PRIORIDAD 1
 -----------------
-- A grandes razgos: 1 enemigo, 1 poder aabb que los deja quietos.
+- A grandes razgos: 1 enemigo, escapada de bichos, 1 poder aabb que los deja quietos.
 
-1 poder aabb que los deja quietos:
+Poder aabb que los deja quietos:
+IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
 Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 Si esta "freeze" llamo al onDestroy().
 
+Escapada de bichos:
+IMPLMENTACION:
+Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente.
+Si llega a cero muero. La idea está buena para obligar a matar bichos, puede ayudar incluso con las estrellitas al final del nivel.
+
+En el hud agregar una columna más con un ícono de esqueleto o algo con el contador. Como me queda de 5 columnas, para los poderes abajo
+tengo que agregar una tabla nueva (powersTable) con expandX y que tenga 2 celdas, uno para el abilityPower y otro para el weaponPower.
+Hoy en día hice 2 tablas (abilityPowerTable y weaponPowerTable) que las ubico con colspan en la tabla padre upperTable. Lo que debo entonces
+hacer es una gran tabla (powersTable) que la ubico en la upperTable con expandX y que tenga los poderes.
+
+Cada enemigo debe saber cuando se fue del juego. Para ello Enemy debe llamar a una función abstracta de cada bicho. EnemyFive tiene un margen
+más grande que EnemyOne por ejemplo.
+En Enemy cuando va matando bichos, incrementa el contador del hud.
+
+Para indicar al usuario que se le escaparon bichos, lo que puedo hacer es poner roja la pantalla al estilo DOOM.
+Una manera ya programada de hacer eso es, cada vez que Enemy mata un bicho:
+screen.getHud().showImage(Assets.getInstance().getScene2d().getTODOROJO(), 0.5f);
+
+Cuando el contador llega a 0, game over.
+
+El numero de bichos escapados, capaz me conviene que NO se pase por los niveles, o sea, es fijo por nivel (LevelFactory).
+
+Estaría bueno tener un help para la primera vez que se me escape un bicho y avisar que hay un contador de bichos.
+
+
 HACER PRIORIDAD 2
 -----------------
-- Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente. Si llega a cero muero.
-La idea está buena para tener que matar bichos, puede ayudar incluso con las estrellitas al final del nivel.
-Tengo que pensar el tema de los limites de la pantalla, porque hay bichos que salen y entran de la pantalla.
-Capaz puedo tener un limite grande para el edge superior y otro más chico para el inferior.
-Estaría bueno tener un help para la primera vez que se me escape un bicho y avisar que hay un contador de bichos.
-Llegué a la conclusión de que cada enemigo debe tener su limite inferior y superior. EnemyOne es casi cero, enemyFour/five es otra cosa y así.
-Sería otra función abstracta o capaz mejor un override de la de Enemy que es la por defecto. Eso ultimo es jodido si me olvido de sobreescribirla
-y el enemigo anda en ciculos grandes.
-- hacer un mapa de los niveles
 - poner una intro y una historia
+- hacer un mapa de los niveles
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
 En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
 Pero capaz se podria poner al morir aplastado. Podria ademas poner un audio de aplastamiento y hasta capaz una animacion o
 parpadeo antes de dyingup.
-- hacer un hud por un lado y una pantalla superpuesta por otro (para mostrar texto y animaciones y cosas)
+- hacer un hud por un lado y una pantalla "superpuesta" (sea esta pinfo) por otro (para mostrar texto y animaciones y cosas)
+La pinfo sería idem hud, pero iría encima del hud (asi como el hud va sobre el playscreen).
+La que recibe eventos es la pinfo que tiene los botones pausa y resume.
+El hud solo tiene upperTable y FPS y energyBar.
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
@@ -49,7 +70,7 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- la pantalla de level completed debe tener los clasicos botones de volver a jugar, las estrellitas, el score y high, etc.
+- la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - agregar transitions
 - agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
