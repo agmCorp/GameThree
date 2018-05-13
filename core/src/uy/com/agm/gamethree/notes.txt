@@ -1,6 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
-- A grandes razgos: 1 enemigo, escapada de bichos, refactoring hud, 1 poder aabb que los deja quietos.
+- A grandes razgos: 1 enemigo, escapada de bichos, 1 poder aabb que los deja quietos.
 
 A) Escapada de bichos:
 IMPLMENTACION:
@@ -26,13 +26,7 @@ El numero de bichos escapados, capaz me conviene que NO se pase por los niveles,
 
 Estaría bueno tener un help para la primera vez que se me escape un bicho y avisar que hay un contador de bichos.
 
-B) Refactoring hud
-hacer un hud por un lado y una pantalla "superpuesta" (sea esta pinfo) por otro (para mostrar texto y animaciones y cosas)
-La pinfo sería idem hud, pero iría encima del hud (asi como el hud va sobre el playscreen).
-La que recibe eventos es la pinfo que tiene los botones pausa y resume. El hud no necesita recibir eventos.
-El hud solo tiene upperTable y FPS y energyBar.
-
-C) Poder aabb que los deja quietos:
+B) Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
 Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
