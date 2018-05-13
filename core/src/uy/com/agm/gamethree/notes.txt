@@ -18,8 +18,19 @@ En Enemy cuando va matando bichos, incrementa el contador del hud.
 
 Para indicar al usuario que se le escaparon bichos, lo que puedo hacer es poner roja la pantalla al estilo DOOM.
 Una manera ya programada de hacer eso es, cada vez que Enemy mata un bicho:
-screen.getHud().showImage(Assets.getInstance().getScene2d().getTODOROJO(), 0.5f);
-            screen.getInfoScreen().showImage(Assets.getInstance().getScene2d().getRed(), 0.2f);
+
+screen.getInfoScreen().showImage(Assets.getInstance().getScene2d().getRed(), 0.2f);
+
+Y esta otra manera en InfoScreen capaz es mejor aunque tiene memoryleaks no se:
+
+public void todoRojo() {
+        Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.RED);
+        pixmap.fill();
+        TextureRegion t = new TextureRegion(new Texture(pixmap));
+        pixmap.dispose();
+        showImage(t, 0.2f);
+}
 
 
 Cuando el contador llega a 0, game over.
