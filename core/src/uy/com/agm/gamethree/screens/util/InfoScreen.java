@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens.util;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -20,6 +21,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.LevelFactory;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -45,6 +47,7 @@ public class InfoScreen extends AbstractScreen {
     private Table centerTable;
     private Label messageLabel;
     private TextureRegionDrawable textureRegionDrawable;
+    private AnimatedActor animatedActor;
     private Image image;
     private float overlayTime;
     private float overlaySeconds;
@@ -101,12 +104,15 @@ public class InfoScreen extends AbstractScreen {
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyleBig);
         messageLabel.setAlignment(Align.center);
+        animatedActor = new AnimatedActor();
+        animatedActor.setAlign(Align.center);
         image = new Image();
         image.setAlign(Align.center);
 
         // Add values
         stack = new Stack();
         stack.add(messageLabel);
+        stack.add(animatedActor);
         stack.add(image);
         centerTable.add(stack);
 
@@ -115,6 +121,7 @@ public class InfoScreen extends AbstractScreen {
 
         // Initially hidden
         messageLabel.setVisible(false);
+        animatedActor.setVisible(false);
         image.setVisible(false);
         centerTable.setVisible(false);
     }
@@ -246,6 +253,7 @@ public class InfoScreen extends AbstractScreen {
     public void showMessage(String message) {
         messageLabel.setText(message);
         messageLabel.setVisible(true);
+        animatedActor.setVisible(false);
         image.setVisible(false);
         centerTable.setVisible(true);
     }
@@ -292,6 +300,7 @@ public class InfoScreen extends AbstractScreen {
         image.setScaling(Scaling.fit); // Default is Scaling.stretch.
         image.setVisible(true);
         messageLabel.setVisible(false);
+        animatedActor.setVisible(false);
         centerTable.setVisible(true);
     }
 
@@ -327,6 +336,48 @@ public class InfoScreen extends AbstractScreen {
 
     public boolean isImageVisible() {
         return image.isVisible();
+    }
+
+    public void showAnimation(Animation animation) {
+        animatedActor.setAnimation(animation);
+        animatedActor.setVisible(true);
+        image.setVisible(false);
+        messageLabel.setVisible(false);
+        centerTable.setVisible(true);
+    }
+
+    public void showAnimation(Animation animation, float seconds) {
+        overlayTime = 0;
+        overlaySeconds = seconds;
+        overlayTemporaryScreen = true;
+        showAnimation(animation);
+    }
+
+    public void showModalAnimation(Animation animation) {
+        pauseLabel.setVisible(false);
+        resumeLabel.setVisible(false);
+        gotItLabel.setVisible(true);
+        quitLabel.setVisible(false);
+        showAnimation(animation);
+        screen.setPlayScreenStatePaused(false);
+    }
+
+    public void hideModalAnimation() {
+        pauseLabel.setVisible(true);
+        resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
+        quitLabel.setVisible(false);
+        hideAnimation();
+        screen.setPlayScreenStateRunning();
+    }
+
+    public void hideAnimation() {
+        animatedActor.setVisible(false);
+        centerTable.setVisible(false);
+    }
+
+    public boolean isAnimationVisible() {
+        return animatedActor.isVisible();
     }
 
     public void update(float dt) {
