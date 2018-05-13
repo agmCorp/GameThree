@@ -40,6 +40,7 @@ public class AssetScene2d {
     private TextureRegion helpFinalEnemyLevelTwo;
     private TextureRegion helpFinalEnemyLevelThree;
     private TextureRegion table;
+    private TextureRegion red;
     private TextureRegion heroHead;
     private TextureRegion skullHead;
     private TextureRegion shuriken;
@@ -77,6 +78,7 @@ public class AssetScene2d {
         helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
         helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
         table = atlasUI.findRegion("table");
+        red = atlasUI.findRegion("red");
         heroHead = atlasUI.findRegion("heroHead");
         skullHead = atlasUI.findRegion("skullHead");
         shuriken = atlasUI.findRegion("shuriken");
@@ -201,6 +203,10 @@ public class AssetScene2d {
 
     public TextureRegion getTable() {
         return table;
+    }
+
+    public TextureRegion getRed() {
+        return red;
     }
 
     public TextureRegion getHeroHead() {
