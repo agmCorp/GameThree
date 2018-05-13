@@ -32,6 +32,9 @@ public void todoRojo() {
         showImage(t, 0.2f);
 }
 
+GUARDAR EN MEMORIA ESA T!!! HACER ESTO DE TODO ROJO EN EL CONSTRUCTOR!!!
+EN HEALTH BAR SE INVOCAN BIEN EN EL CONSTRUCTOR
+
 
 Cuando el contador llega a 0, game over.
 
