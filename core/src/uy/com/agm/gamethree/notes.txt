@@ -564,6 +564,19 @@ LECCIONES APRENDIDAS
     A veces los ogg no se escuchan, para ello debo modificar su tasa de muestreo a 44100hz.
     Para subir el volumen a un ogg, con Audacity modificar la barrita a la izquierda que dice - +.
 
+27)
+    AbstractScreen implementa Screen y extiende Stage (Scene2d).
+    Sea x una pantalla que extiende de AbstractScreen.
+    Entonces, x.buildStage arma todo los actores de esa pantalla, es como el constructor.
+    Luego si yo hago game.setScreen(x), libgdx invoca al render de Game que invoca al render de x.
+    El render de x está definido en AbstractScreen e invoca al act y al draw de Stage.
+    Yo hago game.setScreen dentro de ScreenManager y luego esta última hace x.dispose.
+    ScreenManager maneja pantallas sobre las cuales navego, como el MainMenuScreen, PlayScreen, GameOverScreen, etc.
+    El Hud la considero como una pantalla más, que extiende AbstractScreen (pues tiene camara como MainMenuScreen, GameOverScreen, etc.).
+    Pero como no es administrada por ScreenManager, jamás se hace un game.setScreen(Hud), por ende, jamás se invoca al render de AbstractScreen.
+    En este caso particular, como el Hud depende pura y exclusivamente de PlayScreen, es PlayScreen la que invoca a su buildStage, act, draw y
+    dispose. Es decir, es PlayScreen la que haría lo que haría ScreenManager para el resto de las pantallas como MainMenuScreen, GameOverScreen, etc.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
