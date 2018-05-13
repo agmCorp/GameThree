@@ -132,7 +132,7 @@ public abstract class FinalEnemy extends Sprite {
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyIntro());
 
                 // Fight message
-                screen.getHud().showFightMessage();
+                screen.getInfoScreen().showFightMessage();
 
                 // Dispose the surviving enemies
                 for (Enemy enemy : screen.getCreator().getEnemies()) {
@@ -158,7 +158,7 @@ public abstract class FinalEnemy extends Sprite {
                     if (!hero.isDead() && !isDestroyed()) {
                         AudioManager.getInstance().playMusic();
                     }
-                    screen.getHud().hideMessage();
+                    screen.getInfoScreen().hideMessage();
                     playingIntro = false;
                 }
             }
@@ -197,7 +197,7 @@ public abstract class FinalEnemy extends Sprite {
     }
 
     public void showChallengeBeginHelp() {
-        screen.getHud().showModalImage(getHelpImage());
+        screen.getInfoScreen().showModalImage(getHelpImage());
     }
 
     protected void openFire(float dt) {

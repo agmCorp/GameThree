@@ -113,7 +113,7 @@ public abstract class Item extends Sprite {
                     stateFading(dt);
                     break;
                 case TAKEN:
-                    screen.getHud().showDynamicHelp(getClassName(), getHelpImage());
+                    screen.getInfoScreen().showDynamicHelp(getClassName(), getHelpImage());
                     stateTaken(dt);
                     break;
                 case FINISHED:

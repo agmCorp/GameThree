@@ -1,28 +1,19 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 
 import java.util.Locale;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.screens.util.ScreenEnum;
-import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.DynamicHelpDef;
-import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.HealthBar;
 
 /**
@@ -33,9 +24,7 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     // Constants
-    private static final float BUTTONS_PAD = 20.0f;
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float BUTTON_WIDTH = 100.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
@@ -46,9 +35,6 @@ public class Hud extends AbstractScreen {
     private static final int LEVEL_TIMER_NOTIFICATION = 10;
 
     private PlayScreen screen;
-
-    // Track help screens depending on the object's class name
-    private ObjectMap<String, DynamicHelpDef> dynamicHelp;
 
     private I18NBundle i18NGameThreeBundle;
     private Label.LabelStyle labelStyleBig;
@@ -78,14 +64,6 @@ public class Hud extends AbstractScreen {
     private float weaponPowerTimeCount;
     private HealthBar weaponBar;
 
-    private Table centerTable;
-    private Label messageLabel;
-    private Image image;
-    private float overlayTime;
-    private float overlaySeconds;
-    private boolean overlayTemporaryScreen;
-    private boolean overlayTemporaryMessage;
-
     private Table bottomTable;
 
     private Table fpsTable;
@@ -96,15 +74,7 @@ public class Hud extends AbstractScreen {
     private Label enemyNameLabel;
     private HealthBar healthBar;
 
-    private Table buttonsTable;
-    private Label pauseLabel;
-    private Label resumeLabel;
-    private Label gotItLabel;
-    private Label quitLabel;
-
     private boolean timeIsUp; // True when the level time reaches 0
-
-    private Stack stack;
 
     public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives) {
         super();
@@ -126,16 +96,9 @@ public class Hud extends AbstractScreen {
         fps = 0;
         healthBar = new HealthBar();
         timeIsUp = false;
-        overlayTime = 0;
-        overlaySeconds = 0;
-        overlayTemporaryScreen = false;
-        overlayTemporaryMessage = false;
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
-
-        // Track help screens
-        dynamicHelp = LevelFactory.getDynamicHelp(level);
 
         // Personal fonts
         labelStyleBig = new Label.LabelStyle();
@@ -256,40 +219,6 @@ public class Hud extends AbstractScreen {
         weaponPowerTable.setVisible(false);
     }
 
-    private void defineCenterTable() {
-        // Define a new table used to display a message
-        centerTable = new Table();
-
-        // Debug lines
-        centerTable.setDebug(PlayScreen.DEBUG_MODE);
-
-        // Center-Align table
-        centerTable.center();
-
-        // Make the table fill the entire stage
-        centerTable.setFillParent(true);
-
-        // Define a label based on labelStyle
-        messageLabel = new Label("MESSAGE", labelStyleBig);
-        messageLabel.setAlignment(Align.center);
-        image = new Image();
-        image.setAlign(Align.center);
-
-        // Add values
-        stack = new Stack();
-        stack.add(messageLabel);
-        stack.add(image);
-        centerTable.add(stack);
-
-        // Add our table to the stage
-        addActor(centerTable);
-
-        // Initially hidden
-        messageLabel.setVisible(false);
-        image.setVisible(false);
-        centerTable.setVisible(false);
-    }
-
     private void defineBottomTable() {
         // Define a new table used to display a FPS counter and an Enemy's health bar
         bottomTable = new Table();
@@ -370,130 +299,10 @@ public class Hud extends AbstractScreen {
         healthBarTable.setVisible(false);
     }
 
-    private void defineButtonsTable() {
-        // Define a new table used to display pause, resume and quit buttons
-        buttonsTable = new Table();
-
-        // Debug lines
-        buttonsTable.setDebug(PlayScreen.DEBUG_MODE);
-
-        // Bottom-Align table
-        buttonsTable.bottom().padLeft(BUTTONS_PAD).padRight(BUTTONS_PAD);
-
-        // Make the container fill the entire stage
-        buttonsTable.setFillParent(true);
-
-        // Define labels based on labelStyle
-        pauseLabel = new Label(i18NGameThreeBundle.format("hud.pause"), labelStyleSmall);
-        quitLabel = new Label(i18NGameThreeBundle.format("hud.quit"), labelStyleSmall);
-        quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(i18NGameThreeBundle.format("hud.resume"), labelStyleSmall);
-        gotItLabel = new Label(i18NGameThreeBundle.format("hud.gotIt"), labelStyleSmall);
-
-        // Add values
-        stack = new Stack();
-        stack.add(pauseLabel);
-        stack.add(resumeLabel);
-        stack.add(gotItLabel);
-        buttonsTable.add(stack).width(BUTTON_WIDTH).left().expandX(); // Pause, Resume and Got it texts overlapped
-        buttonsTable.add(quitLabel).width(BUTTON_WIDTH).right().expandX();
-
-        // Events
-        pauseLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStatePaused();
-                        return true;
-                    }
-                });
-
-        resumeLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStateRunning();
-                        return true;
-                    }
-                });
-
-        gotItLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStateRunning();
-                        return true;
-                    }
-                });
-
-        quitLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        quit();
-                        return true;
-                    }
-                });
-
-        // Add the table to the stage
-        addActor(buttonsTable);
-
-        // Initially hidden
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-    }
-
-    public void setGameStatePaused() {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(true);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(true);
-        showMessage(i18NGameThreeBundle.format("hud.pauseMessage"));
-        screen.setPlayScreenStatePaused(true);
-    }
-
-    public void setGameStateRunning() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-        hideMessage();
-        screen.setPlayScreenStateRunning();
-    }
-
-    private void quit() {
-        if (getMessage().equals(i18NGameThreeBundle.format("hud.confirm"))) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-        } else {
-            showMessage(i18NGameThreeBundle.format("hud.confirm"));
-        }
-    }
-
-    public void showInitialHelp() {
-        if (level == 1) {
-            if (GameSettings.getInstance().isManualShooting()) {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-            } else {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-            }
-        }
-    }
-
     @Override
     public void buildStage() {
         defineUpperTable();
-        defineCenterTable();
         defineBottomTable();
-        defineButtonsTable();
     }
 
     public void showAbilityPowerInfo(String abilityPowerName, int maxTime) {
@@ -528,99 +337,6 @@ public class Hud extends AbstractScreen {
         return weaponPowerTable.isVisible();
     }
 
-    public void showMessage(String message) {
-        messageLabel.setText(message);
-        messageLabel.setVisible(true);
-        image.setVisible(false);
-        centerTable.setVisible(true);
-    }
-
-    public void showMessage(String message, float seconds) {
-        overlayTime = 0;
-        overlaySeconds = seconds;
-        overlayTemporaryMessage = true;
-        showMessage(message);
-    }
-
-    public String getMessage() {
-        String message = "";
-        if (messageLabel.isVisible()) {
-            message = messageLabel.getText().toString();
-        }
-        return message;
-    }
-
-    public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.hurryUp"));
-    }
-
-    public void showTimeIsUpMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.timeIsUp"));
-    }
-
-    public void showFightMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.fight"));
-    }
-
-    public void hideMessage() {
-        messageLabel.setVisible(false);
-        centerTable.setVisible(false);
-    }
-
-    public boolean isMessageVisible() {
-        return messageLabel.isVisible();
-    }
-
-    public void showImage(TextureRegion textureRegion) {
-        image.setDrawable(new TextureRegionDrawable(textureRegion));
-        image.setScaling(Scaling.fit); // Default is Scaling.stretch.
-        image.setVisible(true);
-        messageLabel.setVisible(false);
-        centerTable.setVisible(true);
-    }
-
-    public void showImage(TextureRegion textureRegion, float seconds) {
-        overlayTime = 0;
-        overlaySeconds = seconds;
-        overlayTemporaryScreen = true;
-        showImage(textureRegion);
-    }
-
-    public void showModalImage(TextureRegion textureRegion) {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(true);
-        quitLabel.setVisible(false);
-        showImage(textureRegion);
-        screen.setPlayScreenStatePaused(false);
-    }
-
-    public void hideModalImage() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-        hideImage();
-        screen.setPlayScreenStateRunning();
-    }
-
-    public void hideImage() {
-        image.setVisible(false);
-        centerTable.setVisible(false);
-    }
-
-    public boolean isImageVisible() {
-        return image.isVisible();
-    }
-
-    public void showFpsInfo() {
-        fpsTable.setVisible(true);
-    }
-
-    public void hideFpsInfo() {
-        fpsTable.setVisible(false);
-    }
-
     public boolean isFpsInfoVisible() {
         return fpsTable.isVisible();
     }
@@ -643,8 +359,6 @@ public class Hud extends AbstractScreen {
         updateWorldTime(dt);
         updatePowersTime(dt);
         updateFPS();
-        overlayTemporaryScreen(dt);
-        overlayTemporaryMessage(dt);
     }
 
     private void updateWorldTime(float dt) {
@@ -655,11 +369,11 @@ public class Hud extends AbstractScreen {
                 if (time <= LEVEL_TIMER_NOTIFICATION) {
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClock());
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepB());
-                    if (isMessageVisible()) {
-                        hideMessage();
-                    } else {
-                        showHurryUpMessage();
+                    InfoScreen infoScreen = screen.getInfoScreen();
+                    if (infoScreen.isMessageVisible()) {
+                        infoScreen.hideMessage();
                     }
+                    infoScreen.showHurryUpMessage();
                 }
             } else {
                 timeIsUp = true;
@@ -714,28 +428,6 @@ public class Hud extends AbstractScreen {
         if (isFpsInfoVisible()) {
             fps = Gdx.graphics.getFramesPerSecond();
             fpsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_FPS, fps));
-        }
-    }
-
-    private void overlayTemporaryScreen(float dt) {
-        if (overlayTemporaryScreen) {
-            overlayTime += dt;
-            if (overlayTime >= overlaySeconds) {
-                overlayTemporaryScreen = false;
-                overlayTime = 0;
-                hideImage();
-            }
-        }
-    }
-
-    private void overlayTemporaryMessage(float dt) {
-        if (overlayTemporaryMessage) {
-            overlayTime += dt;
-            if (overlayTime >= overlaySeconds) {
-                overlayTemporaryMessage = false;
-                overlayTime = 0;
-                hideMessage();
-            }
         }
     }
 
@@ -795,19 +487,6 @@ public class Hud extends AbstractScreen {
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
         silverBulletValueLablel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
-    }
-
-    // Show help screens depending on the object's class name
-    public void showDynamicHelp(String className, TextureRegion helpImage) {
-        if (dynamicHelp.containsKey(className)){
-            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
-            if (dynamicHelpDef.isModal()) {
-                screen.getHud().showModalImage(helpImage);
-            } else {
-                screen.getHud().showImage(helpImage, dynamicHelpDef.getSeconds());
-            }
-            dynamicHelp.remove(className);
-        }
     }
 
     @Override

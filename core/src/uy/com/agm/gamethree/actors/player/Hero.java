@@ -488,7 +488,7 @@ public class Hero extends Sprite {
         if (screen.getHud().isTimeIsUp()) {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getTimeIsUp());
-            screen.getHud().showTimeIsUpMessage();
+            screen.getInfoScreen().showTimeIsUpMessage();
             lives = 1; // Force game over
             onDead();
         }

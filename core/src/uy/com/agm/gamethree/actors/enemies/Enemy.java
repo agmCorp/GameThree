@@ -130,7 +130,7 @@ public abstract class Enemy extends Sprite {
                 if (bottomEdge <= getY() + getHeight() && getY() <= upperEdge) { // It's on camera
                     b2body.setActive(true);
                     currentState = State.ALIVE;
-                    screen.getHud().showDynamicHelp(getClassName(), getHelpImage()); // Show dynamic help
+                    screen.getInfoScreen().showDynamicHelp(getClassName(), getHelpImage()); // Show dynamic help
                 }
                 break;
 

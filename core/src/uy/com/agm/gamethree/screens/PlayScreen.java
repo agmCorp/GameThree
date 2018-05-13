@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
@@ -45,7 +46,7 @@ public class PlayScreen extends AbstractScreen {
     // Boxes around sprites, box2d bodies and scene2d tables
     // Debug message log enabled
     // Enable all levels
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -98,6 +99,7 @@ public class PlayScreen extends AbstractScreen {
     private OrthographicCamera gameCam;
     private Viewport gameViewPort;
     private Hud hud;
+    private InfoScreen infoScreen;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -173,12 +175,16 @@ public class PlayScreen extends AbstractScreen {
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
 
-        // Create our game HUD for scores/timers/level and info
+        // Create the game HUD for score, time, etc.
         hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level), player.getLives());
         hud.buildStage();
 
+        // Create the InfoScreen for pause, resume, help images, etc.
+        infoScreen = new InfoScreen(this, level);
+        infoScreen.buildStage();
+
         // Show how to play with the main character
-        hud.showInitialHelp();
+        infoScreen.showInitialHelp();
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
@@ -210,7 +216,7 @@ public class PlayScreen extends AbstractScreen {
          * */
 
         InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(hud); // Hud also implements InputProcessor and receives events
+        multiplexer.addProcessor(infoScreen); // InfoScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(new GestureDetector(gc));
         multiplexer.addProcessor(gc);
         return multiplexer;
@@ -247,6 +253,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Always at the end
         updateHud(dt);
+        updateInfoScreen(dt);
         updateCamera(dt);
 
         creator.printDebugStatus();
@@ -337,6 +344,12 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
+    private void updateInfoScreen(float dt) { // todo tengo duda del if si es necesario
+        if(!player.isDead() && !finalEnemy.isDestroyed()) {
+            infoScreen.update(dt);
+        }
+    }
+
     public boolean isTheEndOfTheWorld() {
         return upperEdge.getB2body().getPosition().y + Edge.HEIGHT_METERS / 2 >= gameViewPort.getWorldHeight() * WORLD_SCREENS;
     }
@@ -415,16 +428,19 @@ public class PlayScreen extends AbstractScreen {
         if (playScreenState == PlayScreenState.PAUSED) {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            game.getShapeRenderer().setProjectionMatrix(hud.getCamera().combined);
+            game.getShapeRenderer().setProjectionMatrix(infoScreen.getCamera().combined);
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
             game.getShapeRenderer().setColor(0, 0, 0, DIM_SCREEN_ALPHA);
-            game.getShapeRenderer().rect(0, 0, hud.getCamera().viewportWidth, hud.getCamera().viewportHeight);
+            game.getShapeRenderer().rect(0, 0, infoScreen.getCamera().viewportWidth, infoScreen.getCamera().viewportHeight);
             game.getShapeRenderer().end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
 
         // Render the Hud
         hud.render(delta);
+
+        // Render the InfoScreen
+        infoScreen.render(delta);
 
         // Debug
         if (DEBUG_MODE) {
@@ -575,6 +591,10 @@ public class PlayScreen extends AbstractScreen {
         return hud;
     }
 
+    public InfoScreen getInfoScreen() {
+        return infoScreen;
+    }
+
     private void gameResults(float delta) {
         boolean finish = false;
 
@@ -670,7 +690,7 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        hud.setGameStatePaused();
+        infoScreen.setGameStatePaused();
     }
 
     @Override
@@ -692,5 +712,6 @@ public class PlayScreen extends AbstractScreen {
             b2dr.dispose();
         }
         hud.dispose();
+        infoScreen.dispose();
     }
 }
