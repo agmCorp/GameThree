@@ -816,9 +816,9 @@ public class Hud extends AbstractScreen {
     }
 
     @Override
-    public void draw() {
-        act();
-        // Set our batch to now draw what the Hud camera sees.
+    public void render(float delta) {
+        // Calling to Stage methods
+        super.act(delta);
         super.draw();
     }
 }
