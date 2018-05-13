@@ -39,7 +39,6 @@ public class Hud extends AbstractScreen {
     private PlayScreen screen;
 
     private I18NBundle i18NGameThreeBundle;
-    private Label.LabelStyle labelStyleBig;
     private Label.LabelStyle labelStyleSmall;
 
     private Table upperTable;
@@ -108,9 +107,6 @@ public class Hud extends AbstractScreen {
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         // Personal fonts
-        labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
-
         labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
     }
@@ -256,15 +252,12 @@ public class Hud extends AbstractScreen {
         defineHealthBarTable();
         bottomTable.add(healthBarTable);
 
-        // FPS info
-        defineFpsTable();
+        // Add a second row to the table
+        bottomTable.row();
 
-        if (PlayScreen.SHOW_FPS) {
-            // Add a second row to the table
-            bottomTable.row();
-            // Add FPS info
-            bottomTable.add(fpsTable);
-        }
+        // Add FPS info
+        defineFpsTable();
+        bottomTable.add(fpsTable);
 
         // Add the table to the stage
         addActor(bottomTable);

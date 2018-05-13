@@ -50,7 +50,8 @@ public class InfoScreen extends AbstractScreen {
     private Image image;
     private float overlayTime;
     private float overlaySeconds;
-    private boolean overlayTemporaryScreen;
+    private boolean overlayTemporaryAnimation;
+    private boolean overlayTemporaryImage;
     private boolean overlayTemporaryMessage;
 
     private Table buttonsTable;
@@ -69,7 +70,8 @@ public class InfoScreen extends AbstractScreen {
         this.level = level;
         overlayTime = 0;
         overlaySeconds = 0;
-        overlayTemporaryScreen = false;
+        overlayTemporaryAnimation = false;
+        overlayTemporaryImage = false;
         overlayTemporaryMessage = false;
 
         // I18n
@@ -304,7 +306,7 @@ public class InfoScreen extends AbstractScreen {
     public void showImage(TextureRegion textureRegion, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
-        overlayTemporaryScreen = true;
+        overlayTemporaryImage = true;
         showImage(textureRegion);
     }
 
@@ -346,7 +348,7 @@ public class InfoScreen extends AbstractScreen {
     public void showAnimation(Animation animation, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
-        overlayTemporaryScreen = true;
+        overlayTemporaryAnimation = true;
         showAnimation(animation);
     }
 
@@ -378,15 +380,27 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void update(float dt) {
-        overlayTemporaryScreen(dt);
+        overlayTemporaryAnimation(dt);
+        overlayTemporaryImage(dt);
         overlayTemporaryMessage(dt);
     }
 
-    private void overlayTemporaryScreen(float dt) {
-        if (overlayTemporaryScreen) {
+    private void overlayTemporaryAnimation(float dt) {
+        if (overlayTemporaryAnimation) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
-                overlayTemporaryScreen = false;
+                overlayTemporaryAnimation = false;
+                overlayTime = 0;
+                hideAnimation();
+            }
+        }
+    }
+
+    private void overlayTemporaryImage(float dt) {
+        if (overlayTemporaryImage) {
+            overlayTime += dt;
+            if (overlayTime >= overlaySeconds) {
+                overlayTemporaryImage = false;
                 overlayTime = 0;
                 hideImage();
             }
