@@ -27,6 +27,10 @@ public class Hud extends AbstractScreen {
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
     private static final float SCORE_WIDTH = 120.0f;
+    private static final float TIME_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
+    private static final float LIVES_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
+    private static final float SKULLS_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
+    private static final float SILVER_BULLETS_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
@@ -135,10 +139,10 @@ public class Hud extends AbstractScreen {
 
         // Add labels to the table
         upperTable.add(scoreLabel).width(SCORE_WIDTH);
-        upperTable.add(timeLabel).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHeroHead()), Scaling.fit)).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).expandX();
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getShuriken()), Scaling.fit)).expandX();
+        upperTable.add(timeLabel).width(TIME_WIDTH);
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHeroHead()), Scaling.fit)).width(LIVES_WIDTH);
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).width(SKULLS_WIDTH);
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getShuriken()), Scaling.fit)).width(SILVER_BULLETS_WIDTH);
 
         // Add a second row to our table
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
