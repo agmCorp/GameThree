@@ -102,6 +102,27 @@ helpPowerTwo
   orig: 217, 225
   offset: 0, 0
   index: -1
+heroHead
+  rotate: false
+  xy: 1909, 769
+  size: 90, 87
+  orig: 90, 87
+  offset: 0, 0
+  index: -1
+shuriken
+  rotate: false
+  xy: 1360, 162
+  size: 72, 65
+  orig: 72, 65
+  offset: 0, 0
+  index: -1
+skullHead
+  rotate: false
+  xy: 1579, 381
+  size: 90, 73
+  orig: 90, 73
+  offset: 0, 0
+  index: -1
 sliderBackground
   rotate: false
   xy: 2, 46
@@ -111,7 +132,7 @@ sliderBackground
   index: -1
 sliderKnob
   rotate: false
-  xy: 1909, 827
+  xy: 2, 15
   size: 14, 29
   orig: 14, 29
   offset: 0, 0

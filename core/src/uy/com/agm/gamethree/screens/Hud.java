@@ -26,9 +26,11 @@ public class Hud extends AbstractScreen {
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
+    private static final float SCORE_WIDTH = 120.0f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
+    private static final String FORMAT_SKULLS = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
@@ -49,8 +51,12 @@ public class Hud extends AbstractScreen {
     private Label timeValueLabel;
     private int lives;
     private Label livesValueLabel;
+    private int skulls;
+    private Label skullsValueLabel;
     private int silverBullets;
     private Label silverBulletValueLablel;
+
+    private Table powerTable;
 
     private Table abilityPowerTable;
     private Label abilityPowerNameLabel;
@@ -86,6 +92,7 @@ public class Hud extends AbstractScreen {
         this.time = time;
         timeCount = 0;
         this.lives = lives;
+        skulls = 10; // TODO!!
         silverBullets = 0;
         abilityPowerTime = 0;
         abilityPowerTimeCount = 0;
@@ -112,9 +119,6 @@ public class Hud extends AbstractScreen {
         // Define a table used to organize our hud's labels
         upperTable = new Table();
 
-        // Defaults for all cells
-        upperTable.defaults().width(V_WIDTH / 4);
-
         // Cell height
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
 
@@ -134,10 +138,11 @@ public class Hud extends AbstractScreen {
         timeLabel.setAlignment(Align.center);
 
         // Add labels to the table
-        upperTable.add(scoreLabel);
-        upperTable.add(timeLabel);
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getHero().getHeroHead()), Scaling.fit));
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getSilverBullet().getSilverBulletStand()), Scaling.fit));
+        upperTable.add(scoreLabel).width(SCORE_WIDTH);
+        upperTable.add(timeLabel).expandX();
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHeroHead()), Scaling.fit)).expandX();
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).expandX();
+        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getShuriken()), Scaling.fit)).expandX();
 
         // Add a second row to our table
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
@@ -149,6 +154,8 @@ public class Hud extends AbstractScreen {
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
         livesValueLabel.setAlignment(Align.center);
+        skullsValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls), labelStyleSmall);
+        skullsValueLabel.setAlignment(Align.center);
         silverBulletValueLablel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
         silverBulletValueLablel.setAlignment(Align.center);
 
@@ -156,21 +163,34 @@ public class Hud extends AbstractScreen {
         upperTable.add(scoreValueLabel);
         upperTable.add(timeValueLabel);
         upperTable.add(livesValueLabel);
+        upperTable.add(skullsValueLabel);
         upperTable.add(silverBulletValueLablel);
 
         // Add a third row to our table
         upperTable.row();
 
-        // Add ability power info
-        defineAbilityPowerTable();
-        upperTable.add(abilityPowerTable).colspan(upperTable.getColumns() / 2);
-
-        // Add weapon power info
-        defineWeaponPowerTable();
-        upperTable.add(weaponPowerTable).colspan(upperTable.getColumns() / 2);
+        // Add power info
+        definePowerTable();
+        upperTable.add(powerTable).colspan(upperTable.getColumns());
 
         // Add table to the stage
         addActor(upperTable);
+    }
+
+    private void definePowerTable() {
+        // Define a new table used to display ability power info and weapon power info.
+        powerTable = new Table();
+
+        // Debug lines
+        powerTable.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Add ability power info
+        defineAbilityPowerTable();
+        powerTable.add(abilityPowerTable).width(V_WIDTH / 2);
+
+        // Add weapon power info
+        defineWeaponPowerTable();
+        powerTable.add(weaponPowerTable).width(V_WIDTH / 2);
     }
 
     private void defineAbilityPowerTable() {
@@ -190,7 +210,7 @@ public class Hud extends AbstractScreen {
         abilityPowerTable.row();
 
         // Add health bar
-        abilityPowerTable.add(abilityBar).padBottom(HEALTH_BAR_PAD_BOTTOM);
+        abilityPowerTable.add(abilityBar);
 
         // Initially hidden
         abilityPowerTable.setVisible(false);
@@ -213,7 +233,7 @@ public class Hud extends AbstractScreen {
         weaponPowerTable.row();
 
         // Add health bar
-        weaponPowerTable.add(weaponBar).padBottom(HEALTH_BAR_PAD_BOTTOM);
+        weaponPowerTable.add(weaponBar);
 
         // Initially hidden
         weaponPowerTable.setVisible(false);
@@ -477,6 +497,16 @@ public class Hud extends AbstractScreen {
     public void decreaseLives(int quantity) {
         lives -= quantity;
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
+    }
+
+    public void increaseSkulls(int quantity) {
+        skulls += quantity;
+        skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+    }
+
+    public void decreaseSkulls(int quantity) {
+        skulls -= quantity;
+        skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
     }
 
     public void increaseSilverBullets(int quantity) {

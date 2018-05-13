@@ -44,6 +44,7 @@ public class InfoScreen extends AbstractScreen {
 
     private Table centerTable;
     private Label messageLabel;
+    private TextureRegionDrawable textureRegionDrawable;
     private Image image;
     private float overlayTime;
     private float overlaySeconds;
@@ -64,6 +65,7 @@ public class InfoScreen extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         this.level = level;
+        textureRegionDrawable = new TextureRegionDrawable();
         overlayTime = 0;
         overlaySeconds = 0;
         overlayTemporaryScreen = false;
@@ -131,11 +133,11 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable.setFillParent(true);
 
         // Define labels based on labelStyle
-        pauseLabel = new Label(i18NGameThreeBundle.format("hud.pause"), labelStyleSmall);
-        quitLabel = new Label(i18NGameThreeBundle.format("hud.quit"), labelStyleSmall);
+        pauseLabel = new Label(i18NGameThreeBundle.format("infoScreen.pause"), labelStyleSmall);
+        quitLabel = new Label(i18NGameThreeBundle.format("infoScreen.quit"), labelStyleSmall);
         quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(i18NGameThreeBundle.format("hud.resume"), labelStyleSmall);
-        gotItLabel = new Label(i18NGameThreeBundle.format("hud.gotIt"), labelStyleSmall);
+        resumeLabel = new Label(i18NGameThreeBundle.format("infoScreen.resume"), labelStyleSmall);
+        gotItLabel = new Label(i18NGameThreeBundle.format("infoScreen.gotIt"), labelStyleSmall);
 
         // Add values
         stack = new Stack();
@@ -204,7 +206,7 @@ public class InfoScreen extends AbstractScreen {
         resumeLabel.setVisible(true);
         gotItLabel.setVisible(false);
         quitLabel.setVisible(true);
-        showMessage(i18NGameThreeBundle.format("hud.pauseMessage"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
     }
 
@@ -218,10 +220,10 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void quit() {
-        if (getMessage().equals(i18NGameThreeBundle.format("hud.confirm"))) {
+        if (getMessage().equals(i18NGameThreeBundle.format("infoScreen.confirm"))) {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
-            showMessage(i18NGameThreeBundle.format("hud.confirm"));
+            showMessage(i18NGameThreeBundle.format("infoScreen.confirm"));
         }
     }
 
@@ -264,15 +266,15 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.hurryUp"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));
     }
 
     public void showTimeIsUpMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.timeIsUp"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
     }
 
     public void showFightMessage() {
-        showMessage(i18NGameThreeBundle.format("hud.fight"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.fight"));
     }
 
     public void hideMessage() {
@@ -285,7 +287,8 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion) {
-        image.setDrawable(new TextureRegionDrawable(textureRegion));
+        textureRegionDrawable.setRegion(textureRegion);
+        image.setDrawable(textureRegionDrawable);
         image.setScaling(Scaling.fit); // Default is Scaling.stretch.
         image.setVisible(true);
         messageLabel.setVisible(false);
