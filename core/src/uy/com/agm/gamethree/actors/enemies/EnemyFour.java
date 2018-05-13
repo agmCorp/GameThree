@@ -41,7 +41,7 @@ public class EnemyFour extends Enemy {
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final float MARGIN_UPPER_METERS = 1.1f;
-    private static final float MARGIN_BOTTOM_METERS = 2.1f;
+    private static final float MARGIN_BOTTOM_METERS = 2.0f;
     private static final int SCORE = 35;
 
     private float stateTime;

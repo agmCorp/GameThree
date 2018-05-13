@@ -4,400 +4,393 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+helpColSilverBulletLevelOne
+  rotate: false
+  xy: 1802, 673
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
 helpColSilverBulletLevelTwo
   rotate: false
-  xy: 1818, 1791
+  xy: 1802, 1127
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelOne
   rotate: false
-  xy: 484, 1214
+  xy: 2, 33
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelThree
   rotate: false
-  xy: 2, 12
+  xy: 2, 435
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelTwo
   rotate: false
-  xy: 484, 1616
+  xy: 2, 837
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpInitialManual
   rotate: false
-  xy: 1818, 1337
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerTwo
-  rotate: false
-  xy: 1818, 1564
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-heroHead
-  rotate: false
-  xy: 1882, 1248
-  size: 90, 87
-  orig: 90, 87
-  offset: 0, 0
-  index: -1
-red
-  rotate: false
-  xy: 2, 414
-  size: 480, 800
-  orig: 480, 800
-  offset: 0, 0
-  index: -1
-shuriken
-  rotate: false
-  xy: 1974, 1270
-  size: 72, 65
-  orig: 72, 65
-  offset: 0, 0
-  index: -1
-skullHead
-  rotate: false
-  xy: 1882, 1173
-  size: 90, 73
-  orig: 90, 73
-  offset: 0, 0
-  index: -1
-sliderBackground
-  rotate: false
-  xy: 2, 2
-  size: 316, 8
-  orig: 316, 8
-  offset: 0, 0
-  index: -1
-sliderKnob
-  rotate: false
-  xy: 404, 38
-  size: 14, 29
-  orig: 14, 29
-  offset: 0, 0
-  index: -1
-table
-  rotate: false
-  xy: 2, 1216
-  size: 480, 800
-  orig: 480, 800
-  offset: 0, 0
-  index: -1
-victory
-  rotate: false
-  xy: 886, 1789
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 4
-victory
-  rotate: false
-  xy: 886, 1560
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 5
-victory
-  rotate: false
-  xy: 1352, 1789
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 6
-victory
-  rotate: false
-  xy: 886, 1331
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 7
-victory
-  rotate: false
-  xy: 1352, 1560
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 8
-victory
-  rotate: false
-  xy: 1352, 1331
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 9
-victory
-  rotate: false
-  xy: 484, 985
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 27
-victory
-  rotate: false
-  xy: 484, 756
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 10
-victory
-  rotate: false
-  xy: 484, 527
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 11
-victory
-  rotate: false
-  xy: 484, 298
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 12
-victory
-  rotate: false
-  xy: 404, 69
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 13
-victory
-  rotate: false
-  xy: 950, 1102
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 14
-victory
-  rotate: false
-  xy: 950, 873
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 16
-victory
-  rotate: false
-  xy: 950, 644
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 17
-victory
-  rotate: false
-  xy: 950, 415
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 18
-victory
-  rotate: false
-  xy: 1416, 1102
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 19
-victory
-  rotate: false
-  xy: 1416, 873
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 20
-victory
-  rotate: false
-  xy: 1416, 644
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 21
-victory
-  rotate: false
-  xy: 1416, 415
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 15
-victory
-  rotate: false
-  xy: 950, 186
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 23
-victory
-  rotate: false
-  xy: 1416, 186
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 24
-
-scene2d2.png
-size: 2048,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-helpColSilverBulletLevelOne
-  rotate: false
-  xy: 2, 229
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpColSilverBulletLevelThree
-  rotate: false
-  xy: 687, 458
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpEnemyThree
-  rotate: false
-  xy: 1400, 916
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpInitialAutomatic
-  rotate: false
-  xy: 221, 229
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerFive
-  rotate: false
-  xy: 2, 2
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerFour
-  rotate: false
-  xy: 934, 687
+  xy: 1802, 219
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 468, 458
+  xy: 1802, 446
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
-helpPowerThree
+helpPowerTwo
   rotate: false
-  xy: 1153, 687
+  xy: 1802, 900
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
+heroHead
+  rotate: false
+  xy: 484, 1265
+  size: 90, 87
+  orig: 90, 87
+  offset: 0, 0
+  index: -1
+shuriken
+  rotate: false
+  xy: 668, 1287
+  size: 72, 65
+  orig: 72, 65
+  offset: 0, 0
+  index: -1
+skullHead
+  rotate: false
+  xy: 576, 1279
+  size: 90, 73
+  orig: 90, 73
+  offset: 0, 0
+  index: -1
+sliderBackground
+  rotate: false
+  xy: 2, 23
+  size: 316, 8
+  orig: 316, 8
+  offset: 0, 0
+  index: -1
+sliderKnob
+  rotate: false
+  xy: 320, 2
+  size: 14, 29
+  orig: 14, 29
+  offset: 0, 0
+  index: -1
+table
+  rotate: false
+  xy: 2, 1239
+  size: 480, 800
+  orig: 480, 800
+  offset: 0, 0
+  index: -1
 victory
   rotate: false
-  xy: 2, 1372
+  xy: 404, 1010
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 25
+  index: 4
 victory
   rotate: false
-  xy: 2, 1143
+  xy: 484, 1812
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 26
+  index: 5
 victory
   rotate: false
-  xy: 468, 1372
+  xy: 484, 1583
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 28
+  index: 6
 victory
   rotate: false
-  xy: 2, 914
+  xy: 484, 1354
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 29
+  index: 7
 victory
   rotate: false
-  xy: 468, 1143
+  xy: 870, 1125
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 8
+victory
+  rotate: false
+  xy: 950, 1812
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 27
+victory
+  rotate: false
+  xy: 950, 1583
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 10
+victory
+  rotate: false
+  xy: 950, 1354
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 11
+victory
+  rotate: false
+  xy: 1336, 1125
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 12
+victory
+  rotate: false
+  xy: 1416, 1812
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 14
+victory
+  rotate: false
+  xy: 1416, 1583
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 15
+victory
+  rotate: false
+  xy: 1416, 1354
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 16
+victory
+  rotate: false
+  xy: 870, 896
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 17
+victory
+  rotate: false
+  xy: 404, 781
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 18
+victory
+  rotate: false
+  xy: 1336, 896
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 19
+victory
+  rotate: false
+  xy: 870, 667
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 20
+victory
+  rotate: false
+  xy: 404, 552
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 21
+victory
+  rotate: false
+  xy: 1336, 667
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 22
 victory
   rotate: false
-  xy: 934, 1372
+  xy: 870, 438
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 23
+victory
+  rotate: false
+  xy: 404, 323
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 24
+victory
+  rotate: false
+  xy: 1336, 438
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 25
+victory
+  rotate: false
+  xy: 870, 209
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 26
+victory
+  rotate: false
+  xy: 404, 94
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 28
+victory
+  rotate: false
+  xy: 1336, 209
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 29
+
+scene2d2.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+helpColSilverBulletLevelThree
+  rotate: false
+  xy: 1619, 462
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpEnemyThree
+  rotate: false
+  xy: 1400, 462
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpInitialAutomatic
+  rotate: false
+  xy: 1153, 233
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerFive
+  rotate: false
+  xy: 934, 6
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerFour
+  rotate: false
+  xy: 934, 233
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerThree
+  rotate: false
+  xy: 1153, 6
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+victory
+  rotate: false
+  xy: 2, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 9
+victory
+  rotate: false
+  xy: 2, 460
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 31
 victory
   rotate: false
-  xy: 2, 685
+  xy: 468, 689
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 32
 victory
   rotate: false
-  xy: 468, 914
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 34
-victory
-  rotate: false
-  xy: 934, 1143
-  size: 464, 227
-  orig: 464, 227
-  offset: 0, 0
-  index: 35
-victory
-  rotate: false
-  xy: 1400, 1372
+  xy: 2, 231
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 33
 victory
   rotate: false
-  xy: 468, 685
+  xy: 468, 460
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 34
+victory
+  rotate: false
+  xy: 934, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 35
+victory
+  rotate: false
+  xy: 2, 2
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 13
+victory
+  rotate: false
+  xy: 934, 460
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 1
 victory
   rotate: false
-  xy: 934, 914
+  xy: 1400, 689
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 2
 victory
   rotate: false
-  xy: 1400, 1143
+  xy: 468, 2
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
   index: 3
 victory_30.
   rotate: false
-  xy: 2, 456
+  xy: 468, 231
   size: 464, 227
   orig: 464, 227
   offset: 0, 0

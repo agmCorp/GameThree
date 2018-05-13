@@ -1,48 +1,8 @@
 HACER PRIORIDAD 1
 -----------------
-- A grandes razgos: 1 enemigo, escapada de bichos, 1 poder aabb que los deja quietos.
+- A grandes razgos: 1 enemigo, 1 poder aabb que los deja quietos.
 
-A) Escapada de bichos:
-IMPLMENTACION:
-Me sugirieron que tenga un contador descendente (por ejemplo en 10) y que cada vez que un bicho se me escapa, lo decremente.
-Si llega a cero muero. La idea está buena para obligar a matar bichos, puede ayudar incluso con las estrellitas al final del nivel.
-
-En el hud agregar una columna más con un ícono de esqueleto o algo con el contador. Como me queda de 5 columnas, para los poderes abajo
-tengo que agregar una tabla nueva (powersTable) con expandX y que tenga 2 celdas, uno para el abilityPower y otro para el weaponPower.
-Hoy en día hice 2 tablas (abilityPowerTable y weaponPowerTable) que las ubico con colspan en la tabla padre upperTable. Lo que debo entonces
-hacer es una gran tabla (powersTable) que la ubico en la upperTable con expandX y que tenga los poderes.
-
-Cada enemigo debe saber cuando se fue del juego. Para ello Enemy debe llamar a una función abstracta de cada bicho. EnemyFive tiene un margen
-más grande que EnemyOne por ejemplo.
-En Enemy cuando va matando bichos, incrementa el contador del hud.
-
-Para indicar al usuario que se le escaparon bichos, lo que puedo hacer es poner roja la pantalla al estilo DOOM.
-Una manera ya programada de hacer eso es, cada vez que Enemy mata un bicho:
-
-screen.getInfoScreen().showImage(Assets.getInstance().getScene2d().getRed(), 0.2f);
-
-Y esta otra manera en InfoScreen capaz es mejor aunque tiene memoryleaks no se:
-
-public void todoRojo() {
-        Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
-        pixmap.fill();
-        TextureRegion t = new TextureRegion(new Texture(pixmap));
-        pixmap.dispose();
-        showImage(t, 0.2f);
-}
-
-GUARDAR EN MEMORIA ESA T!!! HACER ESTO DE TODO ROJO EN EL CONSTRUCTOR!!!
-EN HEALTH BAR SE INVOCAN BIEN EN EL CONSTRUCTOR
-
-
-Cuando el contador llega a 0, game over.
-
-El numero de bichos escapados, capaz me conviene que NO se pase por los niveles, o sea, es fijo por nivel (LevelFactory).
-
-Estaría bueno tener un help para la primera vez que se me escape un bicho y avisar que hay un contador de bichos.
-
-B) Poder aabb que los deja quietos:
+Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
 Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
@@ -77,8 +37,6 @@ Y en el update si el estado es dancing, hacer una animacion graciosa.
 Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga la animacion
 y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - poner help al juego con una historia como hice con la granny.
-- Ver si es fácil hacer una animación en scen2d para poner las letras que encontré y capaz el help inicial.
-Tengo links guardados, ademas hay efectos (como fadin) que puedo usar.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
