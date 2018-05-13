@@ -1,12 +1,14 @@
 HACER PRIORIDAD 1
 -----------------
-- A grandes razgos: 1 enemigo, 1 poder aabb que los deja quietos.
-
-Poder aabb que los deja quietos:
+- 1 enemigo
+- Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
 Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 Si esta "freeze" llamo al onDestroy().
+Capaz lo que puedo hacer ademas, es usar internamente este metodo para evitar que los bichos sigan
+moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a jugar.
+- arreglar bug de enemyone
 
 HACER PRIORIDAD 2
 -----------------
