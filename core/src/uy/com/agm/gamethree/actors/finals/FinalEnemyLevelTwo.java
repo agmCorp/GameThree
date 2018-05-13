@@ -522,8 +522,8 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
 
    private void stateExploding(float dt) {
        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
-           // Audio FX
-           AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getLevelCompleted());
+           // Show victory animation and play audio FX
+           victoryFX();
 
            // Set the new state
            currentStateFinalEnemy = StateFinalEnemy.DEAD;

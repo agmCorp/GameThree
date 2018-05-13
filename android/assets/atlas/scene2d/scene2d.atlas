@@ -1,146 +1,397 @@
 
 scene2d.png
-size: 2048,1024
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 helpColSilverBulletLevelOne
   rotate: false
-  xy: 484, 2
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpColSilverBulletLevelThree
-  rotate: false
-  xy: 1360, 229
+  xy: 1802, 673
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpColSilverBulletLevelTwo
   rotate: false
-  xy: 703, 229
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpEnemyThree
-  rotate: false
-  xy: 1690, 631
+  xy: 1802, 1127
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelOne
   rotate: false
-  xy: 1288, 456
+  xy: 2, 33
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelThree
   rotate: false
-  xy: 886, 456
+  xy: 2, 435
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
 helpFinalEnemyLevelTwo
   rotate: false
-  xy: 484, 456
+  xy: 2, 837
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: -1
-helpInitialAutomatic
-  rotate: false
-  xy: 1141, 229
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
 helpInitialManual
   rotate: false
-  xy: 1690, 404
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerFive
-  rotate: false
-  xy: 922, 229
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerFour
-  rotate: false
-  xy: 484, 229
+  xy: 1802, 219
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerOne
   rotate: false
-  xy: 1141, 2
-  size: 217, 225
-  orig: 217, 225
-  offset: 0, 0
-  index: -1
-helpPowerThree
-  rotate: false
-  xy: 703, 2
+  xy: 1802, 446
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 helpPowerTwo
   rotate: false
-  xy: 922, 2
+  xy: 1802, 900
   size: 217, 225
   orig: 217, 225
   offset: 0, 0
   index: -1
 heroHead
   rotate: false
-  xy: 1909, 769
+  xy: 484, 1265
   size: 90, 87
   orig: 90, 87
   offset: 0, 0
   index: -1
 shuriken
   rotate: false
-  xy: 1360, 162
+  xy: 668, 1287
   size: 72, 65
   orig: 72, 65
   offset: 0, 0
   index: -1
 skullHead
   rotate: false
-  xy: 1579, 381
+  xy: 576, 1279
   size: 90, 73
   orig: 90, 73
   offset: 0, 0
   index: -1
 sliderBackground
   rotate: false
-  xy: 2, 46
+  xy: 2, 23
   size: 316, 8
   orig: 316, 8
   offset: 0, 0
   index: -1
 sliderKnob
   rotate: false
-  xy: 2, 15
+  xy: 320, 2
   size: 14, 29
   orig: 14, 29
   offset: 0, 0
   index: -1
 table
   rotate: false
-  xy: 2, 56
+  xy: 2, 1239
   size: 480, 800
   orig: 480, 800
+  offset: 0, 0
+  index: -1
+victory
+  rotate: false
+  xy: 404, 1010
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 4
+victory
+  rotate: false
+  xy: 484, 1812
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 5
+victory
+  rotate: false
+  xy: 484, 1583
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 6
+victory
+  rotate: false
+  xy: 484, 1354
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 7
+victory
+  rotate: false
+  xy: 870, 1125
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 8
+victory
+  rotate: false
+  xy: 950, 1812
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 27
+victory
+  rotate: false
+  xy: 950, 1583
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 10
+victory
+  rotate: false
+  xy: 950, 1354
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 11
+victory
+  rotate: false
+  xy: 1336, 1125
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 12
+victory
+  rotate: false
+  xy: 1416, 1812
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 14
+victory
+  rotate: false
+  xy: 1416, 1583
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 15
+victory
+  rotate: false
+  xy: 1416, 1354
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 16
+victory
+  rotate: false
+  xy: 870, 896
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 17
+victory
+  rotate: false
+  xy: 404, 781
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 18
+victory
+  rotate: false
+  xy: 1336, 896
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 19
+victory
+  rotate: false
+  xy: 870, 667
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 20
+victory
+  rotate: false
+  xy: 404, 552
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 22
+victory
+  rotate: false
+  xy: 1336, 667
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 23
+victory
+  rotate: false
+  xy: 870, 438
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 24
+victory
+  rotate: false
+  xy: 404, 323
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 25
+victory
+  rotate: false
+  xy: 1336, 438
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 26
+victory
+  rotate: false
+  xy: 870, 209
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 28
+victory
+  rotate: false
+  xy: 404, 94
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 29
+victory
+  rotate: false
+  xy: 1336, 209
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 21
+
+scene2d2.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+helpColSilverBulletLevelThree
+  rotate: false
+  xy: 1619, 462
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpEnemyThree
+  rotate: false
+  xy: 1400, 462
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpInitialAutomatic
+  rotate: false
+  xy: 1153, 233
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerFive
+  rotate: false
+  xy: 934, 6
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerFour
+  rotate: false
+  xy: 934, 233
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+helpPowerThree
+  rotate: false
+  xy: 1153, 6
+  size: 217, 225
+  orig: 217, 225
+  offset: 0, 0
+  index: -1
+victory
+  rotate: false
+  xy: 2, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 9
+victory
+  rotate: false
+  xy: 2, 460
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 31
+victory
+  rotate: false
+  xy: 468, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 32
+victory
+  rotate: false
+  xy: 2, 231
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 34
+victory
+  rotate: false
+  xy: 468, 460
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 35
+victory
+  rotate: false
+  xy: 934, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 33
+victory
+  rotate: false
+  xy: 2, 2
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 13
+victory
+  rotate: false
+  xy: 934, 460
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 1
+victory
+  rotate: false
+  xy: 1400, 689
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 2
+victory
+  rotate: false
+  xy: 468, 2
+  size: 464, 227
+  orig: 464, 227
+  offset: 0, 0
+  index: 3
+victory_30.
+  rotate: false
+  xy: 468, 231
+  size: 464, 227
+  orig: 464, 227
   offset: 0, 0
   index: -1

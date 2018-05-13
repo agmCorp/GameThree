@@ -43,42 +43,44 @@ public class AssetScene2d {
     private TextureRegion heroHead;
     private TextureRegion skullHead;
     private TextureRegion shuriken;
+    private AssetVictory victory;
 
-    public AssetScene2d(TextureAtlas atlas) {
-        sliderBackground = atlas.findRegion("sliderBackground");
-        sliderKnob = atlas.findRegion("sliderKnob");
+    public AssetScene2d(TextureAtlas atlasUI) {
+        sliderBackground = atlasUI.findRegion("sliderBackground");
+        sliderKnob = atlasUI.findRegion("sliderKnob");
 
-        helpInitialManual = atlas.findRegion("helpInitialManual");
-        helpInitialAutomatic = atlas.findRegion("helpInitialAutomatic");
-        helpEnemyOne = atlas.findRegion("helpEnemyOne");
-        helpEnemyTwo = atlas.findRegion("helpEnemyTwo");
-        helpEnemyThree = atlas.findRegion("helpEnemyThree");
-        helpEnemyFour = atlas.findRegion("helpEnemyFour");
-        helpEnemyFive = atlas.findRegion("helpEnemyFive");
-        helpEnemySix = atlas.findRegion("helpEnemySix");
-        helpEnemySeven = atlas.findRegion("helpEnemySeven");
-        helpEnemyEight = atlas.findRegion("helpEnemyEight");
-        helpEnemyNine = atlas.findRegion("helpEnemyNine");
-        helpEnemyTen = atlas.findRegion("helpEnemyTen");
-        helpEnemyEleven = atlas.findRegion("helpEnemyEleven");
-        helpPowerOne = atlas.findRegion("helpPowerOne");
-        helpPowerTwo = atlas.findRegion("helpPowerTwo");
-        helpPowerThree = atlas.findRegion("helpPowerThree");
-        helpPowerFour = atlas.findRegion("helpPowerFour");
-        helpPowerFive = atlas.findRegion("helpPowerFive");
-        helpColOne = atlas.findRegion("helpColOne");
-        helpColTwo = atlas.findRegion("helpColTwo");
-        helpColThree = atlas.findRegion("helpColThree");
-        helpColSilverBulletLevelOne = atlas.findRegion("helpColSilverBulletLevelOne");
-        helpColSilverBulletLevelTwo = atlas.findRegion("helpColSilverBulletLevelTwo");
-        helpColSilverBulletLevelThree = atlas.findRegion("helpColSilverBulletLevelThree");
-        helpFinalEnemyLevelOne = atlas.findRegion("helpFinalEnemyLevelOne");
-        helpFinalEnemyLevelTwo = atlas.findRegion("helpFinalEnemyLevelTwo");
-        helpFinalEnemyLevelThree = atlas.findRegion("helpFinalEnemyLevelThree");
-        table = atlas.findRegion("table");
-        heroHead = atlas.findRegion("heroHead");
-        skullHead = atlas.findRegion("skullHead");
-        shuriken = atlas.findRegion("shuriken");
+        helpInitialManual = atlasUI.findRegion("helpInitialManual");
+        helpInitialAutomatic = atlasUI.findRegion("helpInitialAutomatic");
+        helpEnemyOne = atlasUI.findRegion("helpEnemyOne");
+        helpEnemyTwo = atlasUI.findRegion("helpEnemyTwo");
+        helpEnemyThree = atlasUI.findRegion("helpEnemyThree");
+        helpEnemyFour = atlasUI.findRegion("helpEnemyFour");
+        helpEnemyFive = atlasUI.findRegion("helpEnemyFive");
+        helpEnemySix = atlasUI.findRegion("helpEnemySix");
+        helpEnemySeven = atlasUI.findRegion("helpEnemySeven");
+        helpEnemyEight = atlasUI.findRegion("helpEnemyEight");
+        helpEnemyNine = atlasUI.findRegion("helpEnemyNine");
+        helpEnemyTen = atlasUI.findRegion("helpEnemyTen");
+        helpEnemyEleven = atlasUI.findRegion("helpEnemyEleven");
+        helpPowerOne = atlasUI.findRegion("helpPowerOne");
+        helpPowerTwo = atlasUI.findRegion("helpPowerTwo");
+        helpPowerThree = atlasUI.findRegion("helpPowerThree");
+        helpPowerFour = atlasUI.findRegion("helpPowerFour");
+        helpPowerFive = atlasUI.findRegion("helpPowerFive");
+        helpColOne = atlasUI.findRegion("helpColOne");
+        helpColTwo = atlasUI.findRegion("helpColTwo");
+        helpColThree = atlasUI.findRegion("helpColThree");
+        helpColSilverBulletLevelOne = atlasUI.findRegion("helpColSilverBulletLevelOne");
+        helpColSilverBulletLevelTwo = atlasUI.findRegion("helpColSilverBulletLevelTwo");
+        helpColSilverBulletLevelThree = atlasUI.findRegion("helpColSilverBulletLevelThree");
+        helpFinalEnemyLevelOne = atlasUI.findRegion("helpFinalEnemyLevelOne");
+        helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
+        helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
+        table = atlasUI.findRegion("table");
+        heroHead = atlasUI.findRegion("heroHead");
+        skullHead = atlasUI.findRegion("skullHead");
+        shuriken = atlasUI.findRegion("shuriken");
+        victory = new AssetVictory(atlasUI);
     }
 
     public TextureRegion getSliderBackground() {
@@ -211,5 +213,9 @@ public class AssetScene2d {
 
     public TextureRegion getShuriken() {
         return shuriken;
+    }
+
+    public AssetVictory getVictory() {
+        return victory;
     }
 }

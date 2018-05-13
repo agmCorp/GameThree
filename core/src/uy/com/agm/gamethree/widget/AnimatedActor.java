@@ -32,7 +32,7 @@ public class AnimatedActor extends Image
     public void act(float delta) {
         if (animation != null) {
             stateTime += delta;
-            ((TextureRegionDrawable) getDrawable()).setRegion((TextureRegion) animation.getKeyFrame(stateTime, true));
+            ((TextureRegionDrawable) getDrawable()).setRegion((TextureRegion) animation.getKeyFrame(stateTime, false));
             super.act(delta);
         }
     }
