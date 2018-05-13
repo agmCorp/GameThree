@@ -56,7 +56,7 @@ public class Hud extends AbstractScreen {
     private int silverBullets;
     private Label silverBulletValueLablel;
 
-    private Table powerTable;
+    private Table powersTable;
 
     private Table abilityPowerTable;
     private Label abilityPowerNameLabel;
@@ -170,27 +170,27 @@ public class Hud extends AbstractScreen {
         upperTable.row();
 
         // Add power info
-        definePowerTable();
-        upperTable.add(powerTable).colspan(upperTable.getColumns());
+        definePowersTable();
+        upperTable.add(powersTable).colspan(upperTable.getColumns());
 
         // Add table to the stage
         addActor(upperTable);
     }
 
-    private void definePowerTable() {
+    private void definePowersTable() {
         // Define a new table used to display ability power info and weapon power info.
-        powerTable = new Table();
+        powersTable = new Table();
 
         // Debug lines
-        powerTable.setDebug(PlayScreen.DEBUG_MODE);
+        powersTable.setDebug(PlayScreen.DEBUG_MODE);
 
         // Add ability power info
         defineAbilityPowerTable();
-        powerTable.add(abilityPowerTable).width(V_WIDTH / 2);
+        powersTable.add(abilityPowerTable).width(V_WIDTH / 2);
 
         // Add weapon power info
         defineWeaponPowerTable();
-        powerTable.add(weaponPowerTable).width(V_WIDTH / 2);
+        powersTable.add(weaponPowerTable).width(V_WIDTH / 2);
     }
 
     private void defineAbilityPowerTable() {
