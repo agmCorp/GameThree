@@ -42,7 +42,7 @@ public class Hero extends Sprite {
     private static final float DEATH_LINEAR_VELOCITY = 5.0f;
     private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
-    private static final float GAME_OVER_DELAY_SECONDS = 3.0f;
+    private static final float GAME_OVER_DELAY_SECONDS = 5.0f;
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
     private static final float SENSOR_OFFSET_METERS = 0.1f;
@@ -168,6 +168,9 @@ public class Hero extends Sprite {
         if (!isDead()) {
             // Time is up : too late our Hero dies T_T
             checkLevelTimeUp();
+
+            // Have escaped too many enemies, Hero dies
+            checkSkulls();
 
             // If Hero is playing again, set his default filter after a few seconds.
             // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
@@ -489,9 +492,20 @@ public class Hero extends Sprite {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getTimeIsUp());
             screen.getInfoScreen().showTimeIsUpMessage();
-            lives = 1; // Force game over
-            onDead();
+            forceGameOver();
         }
+    }
+
+    private void checkSkulls() {
+        if (screen.getHud().getSkulls() <= 0) {
+            screen.getInfoScreen().showEmptySkullsMessage();
+            forceGameOver();
+        }
+    }
+
+    private void forceGameOver() {
+        lives = 1;
+        onDead();
     }
 
     private void activateBlink(float dt, Sprite sprite) {

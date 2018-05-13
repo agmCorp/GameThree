@@ -81,7 +81,7 @@ public class Hud extends AbstractScreen {
 
     private boolean timeIsUp; // True when the level time reaches 0
 
-    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives) {
+    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer skulls) {
         super();
 
         // Define tracking variables
@@ -91,7 +91,7 @@ public class Hud extends AbstractScreen {
         this.time = time;
         timeCount = 0;
         this.lives = lives;
-        skulls = 10; // TODO!!
+        this.skulls = skulls;
         silverBullets = 0;
         abilityPowerTime = 0;
         abilityPowerTimeCount = 0;
@@ -500,6 +500,10 @@ public class Hud extends AbstractScreen {
     public void decreaseSkulls(int quantity) {
         skulls -= quantity;
         skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+    }
+
+    public int getSkulls() {
+        return skulls;
     }
 
     public void increaseSilverBullets(int quantity) {

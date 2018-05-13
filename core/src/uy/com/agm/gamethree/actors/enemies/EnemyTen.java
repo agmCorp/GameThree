@@ -249,6 +249,16 @@ public class EnemyTen extends Enemy {
     }
 
     @Override
+    protected boolean isOutsideBottomEdge(float bottomEdge) {
+        return bottomEdge > getY() + getHeight();
+    }
+
+    @Override
+    protected boolean isOutsideUpperEdge(float upperEdge) {
+        return upperEdge < getY();
+    }
+
+    @Override
     protected Sound getVoice() {
         return Assets.getInstance().getSounds().getFlap();
     }

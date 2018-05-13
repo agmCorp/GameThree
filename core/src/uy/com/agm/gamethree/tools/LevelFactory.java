@@ -33,6 +33,10 @@ public class LevelFactory {
     private static final int TIMER_LEVEL_TWO = 460;
     private static final int TIMER_LEVEL_THREE = 500;
     private static final int TIMER_LEVEL_FOUR = 100;
+    private static final int SKULLS_LEVEL_ONE = 10;
+    private static final int SKULLS_LEVEL_TWO = 5;
+    private static final int SKULLS_LEVEL_THREE = 3;
+    private static final int SKULLS_LEVEL_FOUR = 1;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -74,6 +78,11 @@ public class LevelFactory {
     public static int getLevelTimer(int level) {
         int[] levelTimers = {TIMER_LEVEL_ONE, TIMER_LEVEL_TWO, TIMER_LEVEL_THREE, TIMER_LEVEL_FOUR};
         return  levelTimers[level - 1];
+    }
+
+    public static int getLevelSkulls(int level) {
+        int[] levelSkulls = {SKULLS_LEVEL_ONE, SKULLS_LEVEL_TWO, SKULLS_LEVEL_THREE, SKULLS_LEVEL_FOUR};
+        return  levelSkulls[level - 1];
     }
 
     public static Music getLevelMusic(int level) {

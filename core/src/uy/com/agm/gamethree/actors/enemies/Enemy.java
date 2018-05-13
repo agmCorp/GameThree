@@ -42,8 +42,6 @@ public abstract class Enemy extends Sprite {
     private static final String TAG = Enemy.class.getName();
 
     // Constants
-    private static final float MARGIN_UPPER_METERS = 1.1f;
-    private static final float MARGIN_BOTTOM_METERS = 1.1f;
     private static final float RANDOM_EXPLOSION_PROB = 0.2f;
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;
@@ -137,14 +135,12 @@ public abstract class Enemy extends Sprite {
             case ALIVE:
             case EXPLODING:
             case SPLAT:
-                // It's outside bottom edge + MARGIN_BOTTOM_METERS or outside upperEdge + MARGIN_UPPER_METERS
-                // Margin is important because we don't want to kill an Enemy who is flying around
-                // (going in and out of the camera) on a repetitive wide path
-                if (bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS || upperEdge < getY() - MARGIN_UPPER_METERS) {
+                if (isOutsideBottomEdge(bottomEdge) || isOutsideUpperEdge(upperEdge)) {
                     if (currentState == State.ALIVE) {
-                        if(!world.isLocked()) {
+                        if (!world.isLocked()) {
                             world.destroyBody(b2body);
                         }
+                        screen.enemyGetAway();
                     }
                     currentState = State.DEAD;
                 }
@@ -398,6 +394,8 @@ public abstract class Enemy extends Sprite {
     protected abstract float getSpeakTimeSeconds();
     protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
+    protected abstract boolean isOutsideBottomEdge(float bottomEdge);
+    protected abstract boolean isOutsideUpperEdge(float upperEdge);
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);

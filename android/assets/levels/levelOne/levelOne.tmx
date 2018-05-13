@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1391">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1392">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
@@ -181,7 +181,6 @@
   <object id="1101" x="192" y="3936" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="3"/>
    </properties>
   </object>
@@ -260,7 +259,6 @@
   </object>
   <object id="1155" x="195.333" y="2430" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="2"/>
    </properties>
   </object>
@@ -277,31 +275,26 @@
   </object>
   <object id="1197" x="270" y="2936" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>
   <object id="1198" x="219.5" y="2814.5" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>
   <object id="1252" x="334.5" y="2901.5" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>
   <object id="1253" x="165.5" y="2852.5" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>
   <object id="1254" x="174.5" y="2783.5" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="15"/>
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>

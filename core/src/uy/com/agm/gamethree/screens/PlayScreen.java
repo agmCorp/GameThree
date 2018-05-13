@@ -176,7 +176,8 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create the game HUD for score, time, etc.
-        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level), player.getLives());
+        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level),
+                player.getLives(), LevelFactory.getLevelSkulls(this.level));
         hud.buildStage();
 
         // Create the InfoScreen for pause, resume, help images, etc.
@@ -654,6 +655,13 @@ public class PlayScreen extends AbstractScreen {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();
+    }
+
+    public void enemyGetAway() {
+        if (!player.isDead()) {
+            hud.decreaseSkulls(1);
+            infoScreen.showRedFlash();
+        }
     }
 
     @Override

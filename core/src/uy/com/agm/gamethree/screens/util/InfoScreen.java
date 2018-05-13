@@ -1,5 +1,8 @@
 package uy.com.agm.gamethree.screens.util;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,6 +36,7 @@ public class InfoScreen extends AbstractScreen {
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
     private static final float BUTTON_WIDTH = 100.0f;
+    private static final float RED_FLASH_TIME = 0.1f;
 
     private PlayScreen screen;
     private int level;
@@ -62,6 +66,8 @@ public class InfoScreen extends AbstractScreen {
 
     private Stack stack;
 
+    private TextureRegion redFlash;
+
     public InfoScreen(PlayScreen screen, Integer level) {
         super();
 
@@ -86,6 +92,13 @@ public class InfoScreen extends AbstractScreen {
 
         labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
+
+        // Red flash Texture
+        Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.RED);
+        pixmap.fill();
+        redFlash = new TextureRegion(new Texture(pixmap));
+        pixmap.dispose();
     }
 
     private void defineCenterTable() {
@@ -281,6 +294,10 @@ public class InfoScreen extends AbstractScreen {
         showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
     }
 
+    public void showEmptySkullsMessage() {
+        showMessage(i18NGameThreeBundle.format("infoScreen.emptySkulls"));
+    }
+
     public void showFightMessage() {
         showMessage(i18NGameThreeBundle.format("infoScreen.fight"));
     }
@@ -429,6 +446,10 @@ public class InfoScreen extends AbstractScreen {
             }
             dynamicHelp.remove(className);
         }
+    }
+
+    public void showRedFlash() {
+        showImage(redFlash, RED_FLASH_TIME);
     }
 
     @Override
