@@ -46,7 +46,6 @@ public class InfoScreen extends AbstractScreen {
 
     private Table centerTable;
     private Label messageLabel;
-    private TextureRegionDrawable textureRegionDrawable;
     private AnimatedActor animatedActor;
     private Image image;
     private float overlayTime;
@@ -68,7 +67,6 @@ public class InfoScreen extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         this.level = level;
-        textureRegionDrawable = new TextureRegionDrawable();
         overlayTime = 0;
         overlaySeconds = 0;
         overlayTemporaryScreen = false;
@@ -295,8 +293,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion) {
-        textureRegionDrawable.setRegion(textureRegion);
-        image.setDrawable(textureRegionDrawable);
+        image.setDrawable(new TextureRegionDrawable(textureRegion));
         image.setScaling(Scaling.fit); // Default is Scaling.stretch.
         image.setVisible(true);
         messageLabel.setVisible(false);
