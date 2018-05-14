@@ -37,6 +37,8 @@ public class EnemySeven extends Enemy {
     private static final float CHANGE_HORIZONTAL_SECONDS = 2.0f;
     private static final float CHANGE_VERTICAL_SECONDS = 0.2f;
     private static final float SPEAK_TIME_SECONDS = 2.0f;
+    private static final float MARGIN_UPPER_METERS = 0.16f;
+    private static final float MARGIN_BOTTOM_METERS = 0.16f;
     private static final int SCORE = 5;
 
     private float stateTime;
@@ -202,12 +204,14 @@ public class EnemySeven extends Enemy {
 
     @Override
     protected boolean isOutsideBottomEdge(float bottomEdge) {
-        return bottomEdge > getY() + getHeight();
+        // MARGIN_BOTTOM_METERS is tolerance
+        return bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
     }
 
     @Override
     protected boolean isOutsideUpperEdge(float upperEdge) {
-        return upperEdge < getY();
+        // MARGIN_UPPER_METERS is tolerance
+        return upperEdge < getY() - MARGIN_UPPER_METERS;
     }
 
     @Override

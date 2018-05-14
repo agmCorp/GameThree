@@ -38,6 +38,8 @@ public class EnemyEleven extends Enemy {
     private static final int MIN_BULLETS = 2;
     private static final int MAX_BULLETS = 3;
     private static final float SPEAK_TIME_SECONDS = 2.0f;
+    private static final float MARGIN_UPPER_METERS = 0.16f;
+    private static final float MARGIN_BOTTOM_METERS = 0.16f;
     private static final int SCORE = 20;
 
     private float stateTime;
@@ -230,12 +232,14 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected boolean isOutsideBottomEdge(float bottomEdge) {
-        return bottomEdge > getY() + getHeight();
+        // MARGIN_BOTTOM_METERS is tolerance
+        return bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
     }
 
     @Override
     protected boolean isOutsideUpperEdge(float upperEdge) {
-        return upperEdge < getY();
+        // MARGIN_UPPER_METERS is tolerance
+        return upperEdge < getY() - MARGIN_UPPER_METERS;
     }
 
     @Override

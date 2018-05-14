@@ -43,6 +43,8 @@ public class EnemySix extends Enemy {
     private static final float BEAM_INTERVAL_SECONDS = 4.0f;
     private static final float SPEAK_TIME_SECONDS = 4.0f;
     private static final float POLYGON_SHAPE_HEIGHT_METERS = 20.0f * 1.0f / PlayScreen.PPM;
+    private static final float MARGIN_UPPER_METERS = 0.16f;
+    private static final float MARGIN_BOTTOM_METERS = 0.16f;
     private static final int SCORE = 5;
 
     private float stateTime;
@@ -276,12 +278,14 @@ public class EnemySix extends Enemy {
 
     @Override
     protected boolean isOutsideBottomEdge(float bottomEdge) {
-        return bottomEdge > getY() + getHeight();
+        // MARGIN_BOTTOM_METERS is tolerance
+        return bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
     }
 
     @Override
     protected boolean isOutsideUpperEdge(float upperEdge) {
-        return upperEdge < getY();
+        // MARGIN_UPPER_METERS is tolerance
+        return upperEdge < getY() - MARGIN_UPPER_METERS;
     }
 
     @Override
