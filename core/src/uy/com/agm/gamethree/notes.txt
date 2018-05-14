@@ -80,6 +80,12 @@ Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
     - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
       rodeados por una gran textura que es el enemigo!
     - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
+    - enemigo que al recibir disparo se parte en 2 y luego de un rato se vuelve a juntar (como el enemyfour pero
+    se parte y hay que no tocar esas partes).
+    - enemigo que viene vertical hacia abajo y cuando llega a la linea media de la pantalla, determina (en ese
+    instante) en donde esta el hero y va hacia ahi.
+    - enemigo que es como una estella (cometa). Para ese efecto agregar varias veces el sprite con distinto alpha.
+    Se mueve rapido derecho en diagonal.
 - se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
 EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
 b2worldcreator lo cree.
