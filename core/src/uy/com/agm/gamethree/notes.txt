@@ -11,7 +11,7 @@ Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 Si esta "freeze" llamo al onDestroy().
 Capaz lo que puedo hacer ademas, es usar internamente este metodo para evitar que los bichos sigan
 moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a jugar.
-- arreglar bug de enemyone
+- arreglar bug de enemyone, no dejarlo salir por arriba.
 
 HACER PRIORIDAD 2
 -----------------
