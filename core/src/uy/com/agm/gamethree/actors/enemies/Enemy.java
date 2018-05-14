@@ -313,8 +313,8 @@ public abstract class Enemy extends Sprite {
                     stateKnockBack(dt);
                     break;
                 case INJURED:
-                    // This state doesn't set a Texture to draw, instead it uses the Texture defined
-                    // in the previous state (KNOCK_BACK).
+                    // This state doesn't set a Texture to draw, it uses the Texture defined
+                    // in the previous state (KNOCK_BACK) instead.
                     // INJURED is a transition state used to remove the body from the world.
                     stateInjured(dt);
                     break;
