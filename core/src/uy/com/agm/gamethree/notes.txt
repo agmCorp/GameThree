@@ -1,6 +1,9 @@
 HACER PRIORIDAD 1
 -----------------
 - 1 enemigo
+Anda a la derecha (velocityx positiva), si llega al centro de la pantalla cambio el sentido de la velocidad.
+Si llega al borde derecho lo teletransporto al borde izquierdo.
+Ídem al revés
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
