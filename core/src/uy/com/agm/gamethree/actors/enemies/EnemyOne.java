@@ -128,8 +128,17 @@ public class EnemyOne extends Enemy {
                 velocity.x = MathUtils.randomSign() * VELOCITY_X;
                 velocity.y *= -1;
                 changeDirection = false;
-                changeDirectionTime = 0;
             }
+        }
+
+        checkPath();
+    }
+
+    private void checkPath() {
+        float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
+        boolean goingUp = velocity.y > 0;
+        if (upperEdge <= b2body.getPosition().y && goingUp) {
+                changeDirection();
         }
     }
 
@@ -217,6 +226,10 @@ public class EnemyOne extends Enemy {
 
     @Override
     public void onBump(IAvoidLandingObject obj) {
+        changeDirection();
+    }
+
+    private void changeDirection() {
         velocity.x = MathUtils.randomSign() * VELOCITY_X * BOOST_VELOCITY;
         velocity.y *= -1;
         changeDirection = true;
