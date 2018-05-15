@@ -36,8 +36,6 @@ public class EnemyNine extends Enemy {
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final float SPEAK_TIME_SECONDS = 2.5f;
-    private static final float MARGIN_UPPER_METERS = 1.1f;
-    private static final float MARGIN_BOTTOM_METERS = 2.0f;
     private static final int SCORE = 15;
 
     private float stateTime;
@@ -49,6 +47,7 @@ public class EnemyNine extends Enemy {
     private boolean goingLeft;
     private boolean damage;
     private float elapsedTime;
+    private float initialY;
 
     public EnemyNine(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -67,6 +66,7 @@ public class EnemyNine extends Enemy {
         damage = false;
         stateTime = MathUtils.random(0, enemyNineAnimation.getAnimationDuration()); // To flap untimely with others
         elapsedTime = 0;
+        initialY = getY();
     }
 
     @Override
@@ -201,17 +201,13 @@ public class EnemyNine extends Enemy {
     }
 
     @Override
-    protected boolean isOutsideBottomEdge(float bottomEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return raid ? bottomEdge > getY() + getHeight() : bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
+    protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
+        return raid ? bottomEdge > getY() + getHeight() : bottomEdge > getY() + getHeight() && velocity.y < 0 && bottomEdge - initialY > RADIUS_METERS;
     }
 
     @Override
-    protected boolean isOutsideUpperEdge(float upperEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return upperEdge < getY() - MARGIN_UPPER_METERS;
+    protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
+        return false; // I don't want to kill this Enemy if it's beyond de upper edge.
     }
 
     @Override

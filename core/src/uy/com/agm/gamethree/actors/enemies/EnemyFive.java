@@ -34,8 +34,6 @@ public class EnemyFive extends Enemy {
     private static final float MIN_RADIUS_METERS = 0.7f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
-    private static final float MARGIN_UPPER_METERS = 1.1f;
-    private static final float MARGIN_BOTTOM_METERS = 1.1f;
     private static final int SCORE = 15;
 
     private boolean damage;
@@ -44,6 +42,8 @@ public class EnemyFive extends Enemy {
     private float stateTime;
     private boolean counterclockwise;
     private float elapsedTime;
+    private float initialY;
+
     private Animation enemyFiveAnimation;
     private Animation explosionAnimation;
 
@@ -64,6 +64,7 @@ public class EnemyFive extends Enemy {
         stateTime = MathUtils.random(0, enemyFiveAnimation.getAnimationDuration()); // To flap untimely with others
         counterclockwise = MathUtils.randomBoolean();
         elapsedTime = 0;
+        initialY = getY();
         velocity.set(0.0f, 0.0f); // Initially at rest
     }
 
@@ -217,17 +218,13 @@ public class EnemyFive extends Enemy {
     }
 
     @Override
-    protected boolean isOutsideBottomEdge(float bottomEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
+    protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
+        return  bottomEdge > getY() + getHeight() && velocity.y < 0 && bottomEdge - initialY > radius;
     }
 
     @Override
-    protected boolean isOutsideUpperEdge(float upperEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return upperEdge < getY() - MARGIN_UPPER_METERS;
+    protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
+        return false; // I don't want to kill this Enemy if it's beyond de upper edge.
     }
 
     @Override

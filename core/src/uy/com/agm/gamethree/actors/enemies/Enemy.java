@@ -135,7 +135,7 @@ public abstract class Enemy extends Sprite {
             case ALIVE:
             case EXPLODING:
             case SPLAT:
-                if (isOutsideBottomEdge(bottomEdge) || isOutsideUpperEdge(upperEdge)) {
+                if (isSpriteOutsideBottomEdge(bottomEdge) || isSpriteOutsideUpperEdge(upperEdge)) {
                     if (currentState == State.ALIVE) {
                         if (!world.isLocked()) {
                             world.destroyBody(b2body);
@@ -394,8 +394,8 @@ public abstract class Enemy extends Sprite {
     protected abstract float getSpeakTimeSeconds();
     protected abstract String getClassName();
     protected abstract TextureRegion getHelpImage();
-    protected abstract boolean isOutsideBottomEdge(float bottomEdge);
-    protected abstract boolean isOutsideUpperEdge(float upperEdge);
+    protected abstract boolean isSpriteOutsideBottomEdge(float bottomEdge);
+    protected abstract boolean isSpriteOutsideUpperEdge(float upperEdge);
     protected abstract void stateAlive(float dt);
     protected abstract void stateInjured(float dt);
     protected abstract void stateExploding(float dt);

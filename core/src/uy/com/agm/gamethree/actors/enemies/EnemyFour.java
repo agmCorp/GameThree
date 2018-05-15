@@ -40,8 +40,6 @@ public class EnemyFour extends Enemy {
     private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
-    private static final float MARGIN_UPPER_METERS = 1.1f;
-    private static final float MARGIN_BOTTOM_METERS = 2.0f;
     private static final int SCORE = 35;
 
     private float stateTime;
@@ -256,17 +254,13 @@ public class EnemyFour extends Enemy {
     }
 
     @Override
-    protected boolean isOutsideBottomEdge(float bottomEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return bottomEdge > getY() + getHeight() + MARGIN_BOTTOM_METERS;
+    protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
+        return  bottomEdge > getY() + getHeight() && velocity.y < 0 && bottomEdge - targetY > AMPLITUDE_METERS;
     }
 
     @Override
-    protected boolean isOutsideUpperEdge(float upperEdge) {
-        // Margin is important because we don't want to kill this Enemy who is flying around
-        // (going in and out of the camera).
-        return upperEdge < getY() - MARGIN_UPPER_METERS;
+    protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
+        return false; // I don't want to kill this Enemy if it's beyond de upper edge.
     }
 
     @Override
