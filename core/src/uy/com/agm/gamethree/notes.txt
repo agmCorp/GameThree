@@ -68,6 +68,7 @@ Agregar en agredecimientos a Juan LLopart
 
 SOLO IDEAS
 ----------
+- Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - Animación o ruido distinto al ser aplastado.
 - Copiar la historia del juego de knightmare remake! :D
 - estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
