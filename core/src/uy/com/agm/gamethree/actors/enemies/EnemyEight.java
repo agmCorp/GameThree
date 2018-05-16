@@ -252,7 +252,7 @@ public class EnemyEight extends Enemy {
 
     @Override
     protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
-        return false; // I don't want to kill this Enemy if it's beyond de bottom edge.
+        return false; // We don't want to kill this Enemy if it's beyond the bottom edge.
     }
 
     @Override

@@ -202,12 +202,16 @@ public class EnemyNine extends Enemy {
 
     @Override
     protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
-        return raid ? bottomEdge > getY() + getHeight() : bottomEdge > getY() + getHeight() && velocity.y < 0 && bottomEdge - initialY > RADIUS_METERS;
+        return raid ?
+                bottomEdge > getY() + getHeight() : // Sprite beyond bottom edge
+                bottomEdge > getY() + getHeight() &&  // Sprite beyond bottom edge
+                        velocity.y < 0 && // Going down
+                        bottomEdge - initialY > RADIUS_METERS; // Distance between bottomEdge and initialY > radius
     }
 
     @Override
     protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
-        return false; // I don't want to kill this Enemy if it's beyond de upper edge.
+        return false; // We don't want to kill this Enemy if it's beyond the upper edge.
     }
 
     @Override

@@ -37,7 +37,7 @@ public class EnemyFour extends Enemy {
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
     private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
     private static final int TIMES_IT_FREEZE_DEFAULT = 1;
-    private static final float FROZEN_TIME_SECONDS = 4.0f;
+    private static final float FROZEN_TIME_SECONDS = 40.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final int SCORE = 35;
@@ -255,12 +255,14 @@ public class EnemyFour extends Enemy {
 
     @Override
     protected boolean isSpriteOutsideBottomEdge(float bottomEdge) {
-        return  bottomEdge > getY() + getHeight() && velocity.y < 0 && bottomEdge - targetY > AMPLITUDE_METERS;
+        return  bottomEdge > getY() + getHeight() && // Sprite beyond bottom edge
+                (velocity.y < 0 || frozen) && // Going down or frozen
+                bottomEdge - targetY > AMPLITUDE_METERS; // Distance between bottomEdge and targetY > amplitude
     }
 
     @Override
     protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
-        return false; // I don't want to kill this Enemy if it's beyond de upper edge.
+        return false; // We don't want to kill this Enemy if it's beyond the upper edge.
     }
 
     @Override
