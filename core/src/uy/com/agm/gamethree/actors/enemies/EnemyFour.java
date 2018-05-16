@@ -37,7 +37,7 @@ public class EnemyFour extends Enemy {
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
     private static final float WAVELENGTH_METERS = 100.0f / PlayScreen.PPM;
     private static final int TIMES_IT_FREEZE_DEFAULT = 1;
-    private static final float FROZEN_TIME_SECONDS = 40.0f;
+    private static final float FROZEN_TIME_SECONDS = 4.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
     private static final float SPEAK_TIME_SECONDS = 3.0f;
     private static final int SCORE = 35;

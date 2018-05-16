@@ -237,9 +237,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected boolean isSpriteOutsideUpperEdge(float upperEdge) {
-        // Although this Enemy moves only within the screen, it may happen
-        // that while it is firing (static) it goes off the screen.
-        return upperEdge < getY();
+        return false; // This Enemy never goes beyond the upper edge
     }
 
     @Override
