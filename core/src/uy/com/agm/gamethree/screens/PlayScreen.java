@@ -658,7 +658,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     public void enemyGetAway() {
-        if (!player.isDead()) {
+        if (!player.isDead() && !player.isWarmingUp()) {
             hud.decreaseSkulls(1);
             infoScreen.showRedFlash();
         }

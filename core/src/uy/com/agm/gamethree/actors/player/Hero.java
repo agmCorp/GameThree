@@ -487,6 +487,10 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
     }
 
+    public boolean isWarmingUp() {
+        return  isPlayingAgain;
+    }
+
     private void checkLevelTimeUp() {
         if (screen.getHud().isTimeIsUp()) {
             // Audio FX
