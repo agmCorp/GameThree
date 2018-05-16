@@ -11,7 +11,6 @@ Capaz que hasta queda lindo que mueran con 1 disparo, pero sino no.
 Si esta "freeze" llamo al onDestroy().
 Capaz lo que puedo hacer ademas, es usar internamente este metodo para evitar que los bichos sigan
 moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a jugar.
-- arreglar bug de enemyone, no dejarlo salir por arriba.
 
 HACER PRIORIDAD 2
 -----------------
@@ -117,11 +116,6 @@ de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro 
 - Una vez se me quedó la araña trabada en la esquina superior izquierda, luego de haber jugado todo el nivel normal.
 Intenté reproducirlo teletransportandome y dejando la araña jugar sola por varios minutos y no lo logré.
 Intenté reproducirlo teletransportandome y muriendo aplastado antes de entrar a la epic fight y tampoco.
-- EnemyOne a veces se va indefinidamente para arriba. Creo que es porque se ejecuta el onBumpwithfeint que
-por 1 segundo va hacia arriba, pero luego choca con un enemigo y ejecutra onbump y cambia de velocidad hacia abajo
-y luego de que paso ese segundo vuelve a cambiar de velocidad hacia arriba y se queda hacia arriba.
-Solucion: en el ombump si changedirection esta en true no cambiar el y..o sino en el stateAlive pensar que hacer..pero
-hay que pensarlo.
 
 TENGO
 -----
