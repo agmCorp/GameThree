@@ -14,6 +14,7 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
+- podria agregar "stage failed" animado cuando me quedo sin skulls.
 - poner una intro y una historia
 - hacer un mapa de los niveles
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
