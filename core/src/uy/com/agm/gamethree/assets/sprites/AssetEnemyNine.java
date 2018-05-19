@@ -29,12 +29,12 @@ public class AssetEnemyNine {
 
         // Animation
         regions = atlas.findRegions("enemyNine");
-        enemyNineAnimation = new Animation(0.3f / 3.0f, regions, Animation.PlayMode.LOOP);
+        enemyNineAnimation = new Animation(0.3f / 4.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("enemyNineRaid");
-        enemyNineRaidAnimation = new Animation(0.3f / 3.0f, regions, Animation.PlayMode.LOOP);
+        enemyNineRaidAnimation = new Animation(0.3f / 4.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

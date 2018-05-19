@@ -39,6 +39,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySix;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTen;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyThree;
+import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwelve;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionA;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionB;
@@ -180,6 +181,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetEnemyNine enemyNine;
     private AssetEnemyTen enemyTen;
     private AssetEnemyEleven enemyEleven;
+    private AssetEnemyTwelve enemyTwelve;
     private AssetBridge kinematicBridge;
     private AssetSplat splat;
     private AssetPowerBox powerBox;
@@ -388,6 +390,7 @@ public class Assets implements Disposable, AssetErrorListener {
         enemyNine = new AssetEnemyNine(atlasDynamicObjects);
         enemyTen = new AssetEnemyTen(atlasDynamicObjects);
         enemyEleven = new AssetEnemyEleven(atlasDynamicObjects);
+        enemyTwelve = new AssetEnemyTwelve(atlasDynamicObjects);
         kinematicBridge = new AssetBridge(atlasDynamicObjects);
         splat = new AssetSplat(atlasDynamicObjects);
         powerBox = new AssetPowerBox(atlasDynamicObjects);
@@ -500,6 +503,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetEnemyEleven getEnemyEleven() {
         return enemyEleven;
+    }
+
+    public AssetEnemyTwelve getEnemyTwelve() {
+        return enemyTwelve;
     }
 
     public AssetBridge getKinematicBridge() {

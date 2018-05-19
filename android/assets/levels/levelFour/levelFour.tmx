@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2375">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2411">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -129,13 +129,7 @@
   <object id="2026" x="226" y="954" width="30" height="30"/>
   <object id="2027" x="216" y="5634" width="40" height="40"/>
  </objectgroup>
- <objectgroup name="powerBox">
-  <object id="2374" x="229" y="7218" width="28" height="22">
-   <properties>
-    <property name="powerOne" type="int" value="500"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne"/>
  <objectgroup name="enemyTwo"/>
  <objectgroup name="enemyThree"/>
@@ -146,7 +140,41 @@
  <objectgroup name="enemyEight"/>
  <objectgroup name="enemyNine"/>
  <objectgroup name="enemyTen"/>
- <objectgroup name="enemyEleven">
-  <object id="2373" x="72" y="7111" width="31" height="22"/>
+ <objectgroup name="enemyEleven"/>
+ <objectgroup name="enemyTwelve">
+  <object id="2376" x="426" y="7182" width="32" height="32"/>
+  <object id="2378" x="297" y="7159" width="32" height="32"/>
+  <object id="2379" x="231" y="7071" width="32" height="32"/>
+  <object id="2380" x="74" y="7131" width="32" height="32"/>
+  <object id="2381" x="21" y="7073" width="32" height="32"/>
+  <object id="2382" x="131" y="7016" width="32" height="32"/>
+  <object id="2383" x="241" y="6979" width="32" height="32"/>
+  <object id="2384" x="142" y="6943" width="32" height="32"/>
+  <object id="2385" x="46" y="6948" width="32" height="32"/>
+  <object id="2386" x="291" y="6905" width="32" height="32"/>
+  <object id="2387" x="391" y="6907" width="32" height="32"/>
+  <object id="2388" x="148" y="7150" width="32" height="32"/>
+  <object id="2389" x="228" y="7155" width="32" height="32"/>
+  <object id="2390" x="166" y="7083" width="32" height="32"/>
+  <object id="2391" x="94" y="7059" width="32" height="32"/>
+  <object id="2392" x="27" y="6988" width="32" height="32"/>
+  <object id="2393" x="47" y="6888" width="32" height="32"/>
+  <object id="2394" x="148" y="6867" width="32" height="32"/>
+  <object id="2395" x="252" y="6885" width="32" height="32"/>
+  <object id="2396" x="207" y="6819" width="32" height="32"/>
+  <object id="2397" x="294" y="6812" width="32" height="32"/>
+  <object id="2398" x="407" y="6818" width="32" height="32"/>
+  <object id="2399" x="458" y="6895" width="32" height="32"/>
+  <object id="2400" x="413" y="7013" width="32" height="32"/>
+  <object id="2401" x="383" y="7098" width="32" height="32"/>
+  <object id="2402" x="328" y="7056" width="32" height="32"/>
+  <object id="2403" x="325" y="6963" width="32" height="32"/>
+  <object id="2404" x="381" y="6958" width="32" height="32"/>
+  <object id="2405" x="364" y="7171" width="32" height="32"/>
+  <object id="2406" x="310" y="7265" width="32" height="32"/>
+  <object id="2407" x="194" y="7236" width="32" height="32"/>
+  <object id="2408" x="105" y="7274" width="32" height="32"/>
+  <object id="2409" x="40" y="7243" width="32" height="32"/>
+  <object id="2410" x="117" y="7188" width="32" height="32"/>
  </objectgroup>
 </map>
