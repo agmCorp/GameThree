@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.actors.enemies;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -27,13 +28,14 @@ public class EnemyTwelve extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
+    private static final float DEBUG_TARGET_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float VELOCITY_X = 4.0f;
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
     private static final float PERIOD_SECONDS = 1.0f;
     private static final float RADIUS_METERS = 1.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
-    private static final float SPEAK_TIME_SECONDS = 2.0f;
+    private static final float SPEAK_TIME_SECONDS = 2.5f;
     private static final int SCORE = 15;
 
     private float stateTime;
@@ -45,9 +47,10 @@ public class EnemyTwelve extends Enemy {
     private boolean path2;
     private float elapsedTime;
     private float velX;
+    private float velY;
     private float targetX;
-    private boolean fromLeft;
-    private boolean fromRight;
+    private float debugTargetY;
+    private boolean targetAhead;
 
     public EnemyTwelve(PlayScreen screen, MapObject object) {
         super(screen, object);
@@ -58,24 +61,25 @@ public class EnemyTwelve extends Enemy {
         // Animations
         enemyTwelveAnimation = Assets.getInstance().getEnemyTwelve().getEnemyTwelveAnimation();
         explosionAnimation = Assets.getInstance().getExplosionJ().getExplosionJAnimation();
+        stateTime = MathUtils.random(0, enemyTwelveAnimation.getAnimationDuration()); // To flap untimely with others
 
         // Variables initialization
-        stateTime = MathUtils.random(0, enemyTwelveAnimation.getAnimationDuration()); // To flap untimely with others
         path1 = true;
         path2 = false;
         elapsedTime = 0;
-        velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
-        velX = velocity.x;
-        targetX = MathUtils.random(0 + RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - RADIUS_METERS);
-        fromLeft = false;
-        fromRight = false;
+        velX = MathUtils.randomSign() * VELOCITY_X;
+        velY = VELOCITY_Y;
+        velocity.set(velX, velY);
+        targetX = getRandomTargetX();
+        debugTargetY = b2body.getPosition().y;
+        targetAhead = false;
         if (velX > 0) {
             if (b2body.getPosition().x <= targetX) {
-                fromLeft = true;
+                targetAhead = true;
             }
         } else {
             if (b2body.getPosition().x >= targetX) {
-                fromRight = true;
+                targetAhead = true;
             }
         }
     }
@@ -198,49 +202,75 @@ public class EnemyTwelve extends Enemy {
     }
 
     private void checkPath1() {
-        float worldWidth = screen.getGameViewPort().getWorldWidth();
         if (velocity.x > 0) {
-            if (getX() >= worldWidth) {
-                // Teleported left
-                b2body.setTransform(-getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
-                fromLeft = true;
-            } else {
-                if (b2body.getPosition().x >= targetX && fromLeft) {
+            if (targetAhead) {
+                if (b2body.getPosition().x >= targetX) { // Enemy reaches targetX
+                    // We get the linear velocity that this enemy had before it changes paths
+                    velX = velocity.x;
+                    velY = velocity.y;
+
+                    // Change path
                     path1 = false;
                     path2 = true;
-                    fromLeft = false;
-                    velX = velocity.x;
                     elapsedTime = 0;
+                }
+            } else {
+                if (getX() >= screen.getGameViewPort().getWorldWidth()) { // Right border
+                    // Teleported left
+                    b2body.setTransform(-getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
+                    targetAhead = true;
                 }
             }
         } else {
-            if (getX() + getWidth() <= 0) {
-                // Teleported right
-                b2body.setTransform(worldWidth + getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
-                fromRight = true;
-            } else {
-                if (b2body.getPosition().x <= targetX && fromRight) {
+            if (targetAhead) {
+                if (b2body.getPosition().x <= targetX) { // Enemy reaches targetX
+                    // We get the linear velocity that this enemy had before it changes paths
+                    velX = velocity.x;
+                    velY = velocity.y;
+
+                    // Change path
                     path1 = false;
                     path2 = true;
-                    fromRight = false;
-                    velX = velocity.x;
                     elapsedTime = 0;
+                }
+            } else {
+                if (getX() + getWidth() <= 0) { // Left border
+                    // Teleported right
+                    b2body.setTransform(screen.getGameViewPort().getWorldWidth() + getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
+                    targetAhead = true;
                 }
             }
         }
     }
 
     private void checkPath2(float dt) {
+        float worldWidth = screen.getGameViewPort().getWorldWidth();
+        if (getX() >= worldWidth) { // Right border
+            // Teleported left
+            b2body.setTransform(-getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
+        } else {
+            if (getX() + getWidth() <= 0) { // Left border
+                // Teleported right
+                b2body.setTransform(worldWidth + getWidth() / 2, b2body.getPosition().y, b2body.getAngle());
+            }
+        }
+
         if (elapsedTime >= PERIOD_SECONDS) {
             path1 = true;
             path2 = false;
-            velocity.set(-velX, VELOCITY_Y);
-            targetX = MathUtils.random(0 + RADIUS_METERS, screen.getGameViewPort().getWorldWidth() - RADIUS_METERS);
+            velocity.set(-velX, velY);
+            targetX = getRandomTargetX();
+            debugTargetY = b2body.getPosition().y;
+            targetAhead = false;
         } else {
             elapsedTime += dt;
             float w = 2 * MathUtils.PI / PERIOD_SECONDS;
             velocity.set(RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), -RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         }
+    }
+
+    private float getRandomTargetX() {
+        return MathUtils.random(0, screen.getGameViewPort().getWorldWidth());
     }
 
     @Override
@@ -265,7 +295,7 @@ public class EnemyTwelve extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getFlap();
+        return Assets.getInstance().getSounds().getFlutter();
     }
 
     @Override
@@ -302,5 +332,11 @@ public class EnemyTwelve extends Enemy {
     @Override
     public void onDestroy() {
         onHit();
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(targetX, debugTargetY, DEBUG_TARGET_RADIUS_METERS);
+        super.renderDebug(shapeRenderer);
     }
 }
