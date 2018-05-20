@@ -20,8 +20,11 @@ public class AnimatedActor extends Image {
         textureRegionDrawable = new TextureRegionDrawable();
     }
 
-    public void setAnimation(Animation animation) {
-        textureRegionDrawable.setRegion((TextureRegion) animation.getKeyFrame(0));
+    public void setAnimation(Animation animation, int width, int height) {
+        TextureRegion region = (TextureRegion) animation.getKeyFrame(0);
+        region.setRegionWidth(width);
+        region.setRegionHeight(height);
+        textureRegionDrawable.setRegion(region);
         setDrawable(textureRegionDrawable);
         stateTime = 0;
         this.animation = animation;

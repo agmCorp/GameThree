@@ -60,7 +60,8 @@ public class GameOverScreen extends AbstractScreen {
 
         // Animation
         AnimatedActor animatedActor = new AnimatedActor();
-        animatedActor.setAnimation(Assets.getInstance().getScene2d().getGameOver().getGameOverAnimation());
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getGameOver().getGameOverAnimation(),
+                AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
         animatedActor.setAlign(Align.center);
         animatedActor.setScaling(Scaling.fit);
 
@@ -68,7 +69,7 @@ public class GameOverScreen extends AbstractScreen {
         Label backLabel = new Label(i18NGameThreeBundle.format("gameOver.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(animatedActor).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
+        table.add(animatedActor);
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 

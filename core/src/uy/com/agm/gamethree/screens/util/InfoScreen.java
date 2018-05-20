@@ -18,6 +18,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetStageFailed;
+import uy.com.agm.gamethree.assets.scene2d.AssetVictory;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -303,11 +305,11 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showEmptySkullsAnimation() {
-        showAnimation(emptySkullsAnimation);
+        showAnimation(emptySkullsAnimation, AssetStageFailed.WIDTH_PIXELS, AssetStageFailed.HEIGHT_PIXELS);
     }
 
     public void showVictoryAnimation() {
-        showAnimation(victoryAnimation);
+        showAnimation(victoryAnimation, AssetVictory.WIDTH_PIXELS, AssetVictory.HEIGHT_PIXELS);
     }
 
     public void showFightMessage() {
@@ -366,8 +368,8 @@ public class InfoScreen extends AbstractScreen {
         return image.isVisible();
     }
 
-    public void showAnimation(Animation animation) {
-        animatedActor.setAnimation(animation);
+    public void showAnimation(Animation animation, int width, int height) {
+        animatedActor.setAnimation(animation, width, height);
         animatedActor.setScaling(Scaling.none);
         animatedActor.setVisible(true);
         image.setVisible(false);
@@ -375,19 +377,19 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    public void showAnimation(Animation animation, float seconds) {
+    public void showAnimation(Animation animation,  int width, int height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryAnimation = true;
-        showAnimation(animation);
+        showAnimation(animation, width, height);
     }
 
-    public void showModalAnimation(Animation animation) {
+    public void showModalAnimation(Animation animation, int width, int height) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
         quitLabel.setVisible(false);
-        showAnimation(animation);
+        showAnimation(animation, width, height);
         screen.setPlayScreenStatePaused(false);
     }
 

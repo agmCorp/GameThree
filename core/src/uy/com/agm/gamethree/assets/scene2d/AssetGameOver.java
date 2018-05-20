@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.assets.scene2d;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -13,8 +14,8 @@ public class AssetGameOver {
     private static final String TAG = AssetGameOver.class.getName();
 
     // Constants (pixels * resizeFactor)
-    public static final float WIDTH_PIXELS = 459.0f * 0.9f;
-    public static final float HEIGHT_PIXELS = 86.0f * 0.9f;
+    public static final int WIDTH_PIXELS = MathUtils.round(459.0f * 0.9f);
+    public static final int HEIGHT_PIXELS = MathUtils.round(86.0f * 0.9f);
 
     private TextureRegion gameOverStand;
     private Animation gameOverAnimation;

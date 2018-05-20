@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -70,7 +71,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Animation
         AnimatedActor animatedActor = new AnimatedActor();
         animatedActor.setAlign(Align.center);
-        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation());
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation(),
+                AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS);
 
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
