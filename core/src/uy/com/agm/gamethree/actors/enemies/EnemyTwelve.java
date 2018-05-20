@@ -15,7 +15,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTwelve;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionJ;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionL;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -60,7 +60,7 @@ public class EnemyTwelve extends Enemy {
 
         // Animations
         enemyTwelveAnimation = Assets.getInstance().getEnemyTwelve().getEnemyTwelveAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionJ().getExplosionJAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionL().getExplosionLAnimation();
         stateTime = MathUtils.random(0, enemyTwelveAnimation.getAnimationDuration()); // To flap untimely with others
 
         // Variables initialization
@@ -183,8 +183,8 @@ public class EnemyTwelve extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionJ.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionJ.HEIGHT_METERS * expScale / 2,
-                        AssetExplosionJ.WIDTH_METERS * expScale, AssetExplosionJ.HEIGHT_METERS * expScale);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionL.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionL.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionL.WIDTH_METERS * expScale, AssetExplosionL.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

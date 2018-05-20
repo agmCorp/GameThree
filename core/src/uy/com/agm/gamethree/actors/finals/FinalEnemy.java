@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.actors.finals;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -58,7 +57,6 @@ public abstract class FinalEnemy extends Sprite {
     private ShootContext shootContext;
     private boolean knockBackStarted;
     private float knockBackTime;
-    private Animation victoryAnimation;
 
     protected enum StateFinalEnemy {
         INACTIVE, WALKING, IDLE, SHOOTING, KNOCK_BACK, INJURED, DYING, EXPLODING, DEAD
@@ -72,9 +70,6 @@ public abstract class FinalEnemy extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
-
-        // Animations
-        victoryAnimation = Assets.getInstance().getScene2d().getVictory().getVictoryAnimation();
 
         // Temporary GC friendly vector
         tmp = new Vector2();
@@ -278,7 +273,7 @@ public abstract class FinalEnemy extends Sprite {
 
     protected void victoryFX() {
         // Victory animation
-        screen.getInfoScreen().showAnimation(victoryAnimation);
+        screen.getInfoScreen().showVictoryAnimation();
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getLevelCompleted());

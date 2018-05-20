@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -10,6 +11,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -65,9 +67,13 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
+        // Animation
+        AnimatedActor animatedActor = new AnimatedActor();
+        animatedActor.setAlign(Align.center);
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation());
+
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
-        Label levelCompletedLabel = new Label(i18NGameThreeBundle.format("levelCompleted.completed"), labelStyleBig);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
@@ -76,7 +82,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(currentLevelLabel);
         table.row();
-        table.add(levelCompletedLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(animatedActor).padTop(AbstractScreen.PAD_TOP);
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();

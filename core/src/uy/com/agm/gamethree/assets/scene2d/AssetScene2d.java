@@ -45,6 +45,9 @@ public class AssetScene2d {
     private TextureRegion skullHead;
     private TextureRegion shuriken;
     private AssetVictory victory;
+    private AssetStageCleared stageCleared;
+    private AssetStageFailed stageFailed;
+    private AssetGameOver gameOver;
 
     public AssetScene2d(TextureAtlas atlasUI) {
         sliderBackground = atlasUI.findRegion("sliderBackground");
@@ -83,6 +86,9 @@ public class AssetScene2d {
         skullHead = atlasUI.findRegion("skullHead");
         shuriken = atlasUI.findRegion("shuriken");
         victory = new AssetVictory(atlasUI);
+        stageCleared = new AssetStageCleared(atlasUI);
+        stageFailed = new AssetStageFailed(atlasUI);
+        gameOver = new AssetGameOver(atlasUI);
     }
 
     public TextureRegion getSliderBackground() {
@@ -223,5 +229,17 @@ public class AssetScene2d {
 
     public AssetVictory getVictory() {
         return victory;
+    }
+
+    public AssetStageCleared getStageCleared() {
+        return stageCleared;
+    }
+
+    public AssetStageFailed getStageFailed() {
+        return stageFailed;
+    }
+
+    public AssetGameOver getGameOver() {
+        return gameOver;
     }
 }

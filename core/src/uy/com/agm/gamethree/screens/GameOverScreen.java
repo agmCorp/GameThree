@@ -3,12 +3,16 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetGameOver;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -16,6 +20,9 @@ import uy.com.agm.gamethree.tools.AudioManager;
 
 public class GameOverScreen extends AbstractScreen {
     private static final String TAG = GameOverScreen.class.getName();
+
+    // Constants
+    public static final float GAME_OVER_WIDTH = 420.0f;
 
     public GameOverScreen() {
         super();
@@ -51,12 +58,17 @@ public class GameOverScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
+        // Animation
+        AnimatedActor animatedActor = new AnimatedActor();
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getGameOver().getGameOverAnimation());
+        animatedActor.setAlign(Align.center);
+        animatedActor.setScaling(Scaling.fit);
+
         // Define our labels based on labelStyle
-        Label gameOverLabel = new Label(i18NGameThreeBundle.format("gameOver.title"), labelStyleBig);
         Label backLabel = new Label(i18NGameThreeBundle.format("gameOver.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(gameOverLabel);
+        table.add(animatedActor).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 

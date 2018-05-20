@@ -502,7 +502,7 @@ public class Hero extends Sprite {
 
     private void checkSkulls() {
         if (screen.getHud().getSkulls() <= 0) {
-            screen.getInfoScreen().showEmptySkullsMessage();
+            screen.getInfoScreen().showEmptySkullsAnimation();
             forceGameOver();
         }
     }

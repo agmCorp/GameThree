@@ -13,7 +13,7 @@ import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyThree;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionC;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionN;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
@@ -42,7 +42,7 @@ public class EnemyThree extends Enemy {
 
         // Animations
         enemyThreeAnimation = Assets.getInstance().getEnemyThree().getEnemyThreeAnimation();
-        explosionAnimation = Assets.getInstance().getExplosionC().getExplosionCAnimation();
+        explosionAnimation = Assets.getInstance().getExplosionN().getExplosionNAnimation();
 
         // Determines the size of the EnemyThree's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyThree.WIDTH_METERS, AssetEnemyThree.HEIGHT_METERS);
@@ -148,8 +148,8 @@ public class EnemyThree extends Enemy {
         } else {
             if (stateTime == 0) { // Explosion starts
                 // Determines the size of the explosion on the screen
-                setBounds(getX() + getWidth() / 2 - AssetExplosionC.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionC.HEIGHT_METERS * expScale / 2,
-                        AssetExplosionC.WIDTH_METERS * expScale, AssetExplosionC.HEIGHT_METERS * expScale);
+                setBounds(getX() + getWidth() / 2 - AssetExplosionN.WIDTH_METERS * expScale / 2, getY() + getHeight() / 2 - AssetExplosionN.HEIGHT_METERS * expScale / 2,
+                        AssetExplosionN.WIDTH_METERS * expScale, AssetExplosionN.HEIGHT_METERS * expScale);
             }
             setRegion((TextureRegion) explosionAnimation.getKeyFrame(stateTime, true));
             stateTime += dt;

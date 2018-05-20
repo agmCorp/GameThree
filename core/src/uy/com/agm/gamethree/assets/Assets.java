@@ -52,6 +52,9 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionH;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionI;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionJ;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionK;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionL;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionM;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionN;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
@@ -205,6 +208,9 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetExplosionI explosionI;
     private AssetExplosionJ explosionJ;
     private AssetExplosionK explosionK;
+    private AssetExplosionL explosionL;
+    private AssetExplosionM explosionM;
+    private AssetExplosionN explosionN;
     private AssetHeroBullet heroBullet;
     private AssetEnemyBullet enemyBullet;
     private AssetSilverBullet silverBullet;
@@ -415,6 +421,9 @@ public class Assets implements Disposable, AssetErrorListener {
         explosionI = new AssetExplosionI(atlasDynamicObjects);
         explosionJ = new AssetExplosionJ(atlasDynamicObjects);
         explosionK = new AssetExplosionK(atlasDynamicObjects);
+        explosionL = new AssetExplosionL(atlasDynamicObjects);
+        explosionM = new AssetExplosionM(atlasDynamicObjects);
+        explosionN = new AssetExplosionN(atlasDynamicObjects);
         heroBullet = new AssetHeroBullet(atlasDynamicObjects);
         enemyBullet = new AssetEnemyBullet(atlasDynamicObjects);
         silverBullet = new AssetSilverBullet(atlasDynamicObjects);
@@ -597,6 +606,18 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetExplosionK getExplosionK() {
         return explosionK;
+    }
+
+    public AssetExplosionL getExplosionL() {
+        return explosionL;
+    }
+
+    public AssetExplosionM getExplosionM() {
+        return explosionM;
+    }
+
+    public AssetExplosionN getExplosionN() {
+        return explosionN;
     }
 
     public AssetHeroBullet getHeroBullet() {

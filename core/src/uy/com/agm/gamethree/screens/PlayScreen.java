@@ -17,11 +17,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Iterator;
 
-import uy.com.agm.gamethree.game.GameController;
-import uy.com.agm.gamethree.game.GameThree;
-import uy.com.agm.gamethree.screens.util.InfoScreen;
-import uy.com.agm.gamethree.screens.util.ScreenEnum;
-import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
@@ -30,6 +25,11 @@ import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
+import uy.com.agm.gamethree.game.GameController;
+import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.screens.util.InfoScreen;
+import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.LevelFactory;
@@ -49,7 +49,7 @@ public class PlayScreen extends AbstractScreen {
     public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = true;
+    public static final boolean HIDE_BACKGROUND = false;
 
     // Show/hide FPS counter
     public static final boolean SHOW_FPS = true;
@@ -345,10 +345,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void updateInfoScreen(float dt) { // todo tengo duda del if si es necesario
-        if(!player.isDead() && !finalEnemy.isDestroyed()) {
-            infoScreen.update(dt);
-        }
+    private void updateInfoScreen(float dt) {
+        infoScreen.update(dt);
     }
 
     public boolean isTheEndOfTheWorld() {

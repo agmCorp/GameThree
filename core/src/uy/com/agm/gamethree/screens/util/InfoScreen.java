@@ -48,6 +48,10 @@ public class InfoScreen extends AbstractScreen {
     private Label.LabelStyle labelStyleBig;
     private Label.LabelStyle labelStyleSmall;
 
+    // Animations
+    private Animation emptySkullsAnimation;
+    private Animation victoryAnimation;
+
     private Table centerTable;
     private Label messageLabel;
     private AnimatedActor animatedActor;
@@ -92,6 +96,10 @@ public class InfoScreen extends AbstractScreen {
 
         labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
+
+        // Animations
+        emptySkullsAnimation = Assets.getInstance().getScene2d().getStageFailed().getStageFailedAnimation();
+        victoryAnimation = Assets.getInstance().getScene2d().getVictory().getVictoryAnimation();
 
         // Red flash Texture
         Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
@@ -294,8 +302,12 @@ public class InfoScreen extends AbstractScreen {
         showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
     }
 
-    public void showEmptySkullsMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.emptySkulls"));
+    public void showEmptySkullsAnimation() {
+        showAnimation(emptySkullsAnimation);
+    }
+
+    public void showVictoryAnimation() {
+        showAnimation(victoryAnimation);
     }
 
     public void showFightMessage() {
@@ -313,7 +325,7 @@ public class InfoScreen extends AbstractScreen {
 
     public void showImage(TextureRegion textureRegion) {
         image.setDrawable(new TextureRegionDrawable(textureRegion));
-        image.setScaling(Scaling.fit); // Default is Scaling.stretch.
+        image.setScaling(Scaling.none); // Default is Scaling.stretch.
         image.setVisible(true);
         messageLabel.setVisible(false);
         animatedActor.setVisible(false);
@@ -356,6 +368,7 @@ public class InfoScreen extends AbstractScreen {
 
     public void showAnimation(Animation animation) {
         animatedActor.setAnimation(animation);
+        animatedActor.setScaling(Scaling.none);
         animatedActor.setVisible(true);
         image.setVisible(false);
         messageLabel.setVisible(false);
