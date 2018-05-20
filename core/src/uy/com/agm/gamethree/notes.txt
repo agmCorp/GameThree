@@ -1,9 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- 1 enemigo
-Anda a la derecha (velocityx positiva), si llega al centro de la pantalla cambio el sentido de la velocidad.
-Si llega al borde derecho lo teletransporto al borde izquierdo.
-Ídem al revés
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
@@ -14,7 +10,6 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
-- podria agregar "stage failed" animado cuando me quedo sin skulls.
 - poner una intro y una historia
 - hacer un mapa de los niveles
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
