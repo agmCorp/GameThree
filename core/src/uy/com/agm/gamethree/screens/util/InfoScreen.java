@@ -370,7 +370,6 @@ public class InfoScreen extends AbstractScreen {
 
     public void showAnimation(Animation animation, int width, int height) {
         animatedActor.setAnimation(animation, width, height);
-        animatedActor.setScaling(Scaling.none);
         animatedActor.setVisible(true);
         image.setVisible(false);
         messageLabel.setVisible(false);
