@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Scaling;
 
 /**
  * Created by AGM on 5/13/2018.
  */
 
-public class AnimatedActor extends Image
-{
+public class AnimatedActor extends Image {
+    private static final String TAG = AnimatedActor.class.getName();
+
     private TextureRegionDrawable textureRegionDrawable;
     private float stateTime;
     Animation animation;
@@ -23,7 +23,6 @@ public class AnimatedActor extends Image
     public void setAnimation(Animation animation) {
         textureRegionDrawable.setRegion((TextureRegion) animation.getKeyFrame(0));
         setDrawable(textureRegionDrawable);
-        setScaling(Scaling.fit); // Default is Scaling.stretch.
         stateTime = 0;
         this.animation = animation;
     }

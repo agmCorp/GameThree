@@ -346,9 +346,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void updateInfoScreen(float dt) {
-        if(!player.isDead() && !finalEnemy.isDestroyed()) {
-            infoScreen.update(dt);
-        }
+        infoScreen.update(dt);
     }
 
     public boolean isTheEndOfTheWorld() {

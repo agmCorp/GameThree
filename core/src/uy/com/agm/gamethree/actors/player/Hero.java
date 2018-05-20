@@ -502,8 +502,10 @@ public class Hero extends Sprite {
 
     private void checkSkulls() {
         if (screen.getHud().getSkulls() <= 0) {
-            screen.getInfoScreen().showEmptySkullsAnimation();
-            forceGameOver();
+            if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
+                screen.getInfoScreen().showEmptySkullsAnimation();
+                forceGameOver();
+            }
         }
     }
 

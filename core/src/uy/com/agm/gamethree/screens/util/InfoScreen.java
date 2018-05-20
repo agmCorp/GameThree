@@ -416,7 +416,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryAnimation(float dt) {
-        if (overlayTemporaryAnimation) {
+        if (overlayTemporaryAnimation && isAnimationVisible()) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryAnimation = false;
@@ -427,7 +427,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryImage(float dt) {
-        if (overlayTemporaryImage) {
+        if (overlayTemporaryImage && isImageVisible()) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryImage = false;
@@ -438,7 +438,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryMessage(float dt) {
-        if (overlayTemporaryMessage) {
+        if (overlayTemporaryMessage && isMessageVisible()) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryMessage = false;
@@ -463,6 +463,10 @@ public class InfoScreen extends AbstractScreen {
 
     public void showRedFlash() {
         showImage(redFlash, RED_FLASH_TIME);
+    }
+
+    public boolean isRedFlashVisible() {
+        return isImageVisible() && ((TextureRegionDrawable) image.getDrawable()).getRegion() == redFlash;
     }
 
     @Override
