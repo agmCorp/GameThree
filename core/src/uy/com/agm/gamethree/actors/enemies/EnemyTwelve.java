@@ -55,7 +55,7 @@ public class EnemyTwelve extends Enemy {
     public EnemyTwelve(PlayScreen screen, MapObject object) {
         super(screen, object);
 
-        // Determines the size of the EnemyTen's drawing on the screen
+        // Determines the size of the EnemyTwelve's drawing on the screen
         setBounds(getX(), getY(), AssetEnemyTwelve.WIDTH_METERS, AssetEnemyTwelve.HEIGHT_METERS);
 
         // Animations
@@ -129,7 +129,7 @@ public class EnemyTwelve extends Enemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, EnemyTen may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, EnemyTwelve may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -280,7 +280,7 @@ public class EnemyTwelve extends Enemy {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpEnemyTen();
+        return Assets.getInstance().getScene2d().getHelpEnemyTwelve();
     }
 
     @Override

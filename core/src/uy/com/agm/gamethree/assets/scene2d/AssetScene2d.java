@@ -25,6 +25,7 @@ public class AssetScene2d {
     private TextureRegion helpEnemyNine;
     private TextureRegion helpEnemyTen;
     private TextureRegion helpEnemyEleven;
+    private TextureRegion helpEnemyTwelve;
     private TextureRegion helpPowerOne;
     private TextureRegion helpPowerTwo;
     private TextureRegion helpPowerThree;
@@ -66,6 +67,7 @@ public class AssetScene2d {
         helpEnemyNine = atlasUI.findRegion("helpEnemyNine");
         helpEnemyTen = atlasUI.findRegion("helpEnemyTen");
         helpEnemyEleven = atlasUI.findRegion("helpEnemyEleven");
+        helpEnemyTwelve = atlasUI.findRegion("helpEnemyTwelve");
         helpPowerOne = atlasUI.findRegion("helpPowerOne");
         helpPowerTwo = atlasUI.findRegion("helpPowerTwo");
         helpPowerThree = atlasUI.findRegion("helpPowerThree");
@@ -149,6 +151,10 @@ public class AssetScene2d {
 
     public TextureRegion getHelpEnemyEleven() {
         return helpEnemyEleven;
+    }
+
+    public TextureRegion getHelpEnemyTwelve() {
+        return helpEnemyTwelve;
     }
 
     public TextureRegion getHelpPowerOne() {
