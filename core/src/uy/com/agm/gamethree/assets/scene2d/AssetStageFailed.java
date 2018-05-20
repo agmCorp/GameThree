@@ -13,8 +13,8 @@ public class AssetStageFailed {
     private static final String TAG = AssetStageFailed.class.getName();
 
     // Constants (pixels * resizeFactor)
-    public static final float WIDTH_PIXELS = 282.0f * 1.0f;
-    public static final float HEIGHT_PIXELS = 154.0f * 1.0f;
+    public static final float WIDTH_PIXELS = 324.0f * 1.0f;
+    public static final float HEIGHT_PIXELS = 177.0f * 1.0f;
 
     private TextureRegion stageFailedStand;
     private Animation stageFailedAnimation;
