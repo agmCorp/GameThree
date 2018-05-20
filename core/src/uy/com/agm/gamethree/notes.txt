@@ -1,5 +1,16 @@
 HACER PRIORIDAD 1
 -----------------
+- TERMINAR EL NIVEL 3
+- poner una intro y una historia
+- incluir highscores. En la pantalla de level completed si hubo highscore se indica.
+- poner help al juego con una historia como hice con la granny.
+- la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
+- agregar credits con cuenta bancaria para donación, algo asi:
+support this game:
+(icono corazón) Support the developer by paying above the minimum price
++$1.00 +$2.00 +$5.00 +$10.00
+Pay with paypal, pay with card bitcoin
+Agregar en agredecimientos a Juan LLopart
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
@@ -10,21 +21,19 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
-- poner una intro y una historia
 - hacer un mapa de los niveles
+- Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
+pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
+la pantalla
+- hacer una bala grandota y ruidosa con shake capaz
+
+HACER PRIORIDAD 3
+-----------------
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
 En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
 Pero capaz se podria poner al morir aplastado. Podria ademas poner un audio de aplastamiento y hasta capaz una animacion o
 parpadeo antes de dyingup.
-- Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
-pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
-la pantalla
-- hacer una bala grandota y ruidosa con shake capaz
-- incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-
-HACER PRIORIDAD 3
------------------
 - Analizar si los items no deberían chocar contra edge para no irse nunca de la pantalla, ojo, creo que lo había descartado antes.
 - Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge. Intenté una
 vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
@@ -36,17 +45,9 @@ Si hero le gana al boss, puedo poner al final del hero.update(): if boss is dead
 Y en el update si el estado es dancing, hacer una animacion graciosa.
 Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga la animacion
 y llamarlo desde el método renderGame() si estoy en pausa..pero no se
-- poner help al juego con una historia como hice con la granny.
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - agregar transitions
-- agregar credits con cuenta bancaria para donación, algo asi:
-support this game:
-(icono corazón) Support the developer by paying above the minimum price
-+$1.00 +$2.00 +$5.00 +$10.00
-Pay with paypal, pay with card bitcoin
-Agregar en agredecimientos a Juan LLopart
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
     dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
