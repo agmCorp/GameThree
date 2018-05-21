@@ -59,6 +59,7 @@ public class InfoScreen extends AbstractScreen {
     private Label messageLabel;
     private AnimatedActor animatedActor;
     private Image image;
+    private TextureRegionDrawable textureRegionDrawable;
     private float overlayTime;
     private float overlaySeconds;
     private boolean overlayTemporaryAnimation;
@@ -129,9 +130,12 @@ public class InfoScreen extends AbstractScreen {
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyleBig);
         messageLabel.setAlignment(Align.center);
+
+        // Define animatedActor and image
         animatedActor = new AnimatedActor();
         animatedActor.setAlign(Align.center);
         image = new Image();
+        textureRegionDrawable = new TextureRegionDrawable();
         image.setAlign(Align.center);
 
         // Add values
@@ -262,7 +266,8 @@ public class InfoScreen extends AbstractScreen {
     public void showInitialHelp() {
         if (level == 1) {
             if (GameSettings.getInstance().isManualShooting()) {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
+               // todo showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
+                showImage(Assets.getInstance().getEnemyThree().getEnemyThreeStand(), 30 ,30, 2);
             } else {
                 showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             }
@@ -329,9 +334,17 @@ public class InfoScreen extends AbstractScreen {
         return messageLabel.isVisible();
     }
 
-    public void showImage(TextureRegion textureRegion) {
-        image.setDrawable(new TextureRegionDrawable(textureRegion));
-        image.setScaling(Scaling.none); // Default is Scaling.stretch.
+    public void  showImage(TextureRegion textureRegion) {
+        showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+    }
+
+    public void showImage(TextureRegion textureRegion, float width, float height) {
+        textureRegionDrawable.setRegion(textureRegion);
+        image.setDrawable(textureRegionDrawable);
+        image.setScaling(Scaling.fit);
+        stackCell.size(width, height);
+        centerTable.pack();
+
         image.setVisible(true);
         messageLabel.setVisible(false);
         animatedActor.setVisible(false);
@@ -339,6 +352,10 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion, float seconds) {
+        showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
+    }
+
+    public void showImage(TextureRegion textureRegion, float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryImage = true;
@@ -348,6 +365,10 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showModalImage(TextureRegion textureRegion) {
+        showModalImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+    }
+
+    public void showModalImage(TextureRegion textureRegion, float width, float height) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
@@ -374,17 +395,28 @@ public class InfoScreen extends AbstractScreen {
         return image.isVisible();
     }
 
+    public void showAnimation(Animation animation) {
+        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
+        showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+    }
+
     public void showAnimation(Animation animation, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
         animatedActor.setAnimation(animation);
+
         animatedActor.setVisible(true);
         image.setVisible(false);
         messageLabel.setVisible(false);
         centerTable.setVisible(true);
     }
 
-    public void showAnimation(Animation animation,  int width, int height, float seconds) {
+    public void showAnimation(Animation animation, float seconds) {
+        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
+        showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
+    }
+
+    public void showAnimation(Animation animation,  float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryAnimation = true;
@@ -393,7 +425,12 @@ public class InfoScreen extends AbstractScreen {
         showAnimation(animation, width, height);
     }
 
-    public void showModalAnimation(Animation animation, int width, int height) {
+    public void showModalAnimation(Animation animation) {
+        TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
+        showModalAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+    }
+
+    public void showModalAnimation(Animation animation, float width, float height) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);

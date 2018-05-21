@@ -503,7 +503,9 @@ public class Hud extends AbstractScreen {
 
     public void decreaseSkulls(int quantity) {
         skulls -= quantity;
-        skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+        if (skulls >= 0) {
+            skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+        }
     }
 
     public int getSkulls() {
@@ -512,7 +514,9 @@ public class Hud extends AbstractScreen {
 
     public void increaseSilverBullets(int quantity) {
         silverBullets += quantity;
-        silverBulletValueLablel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
+        if (silverBullets >= 0) {
+            silverBulletValueLablel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
+        }
     }
 
     public void decreaseSilverBullets(int quantity) {
