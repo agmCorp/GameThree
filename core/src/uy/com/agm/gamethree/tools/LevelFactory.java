@@ -136,7 +136,7 @@ public class LevelFactory {
 
         switch (level) {
             case 1:
-                dynamic.put(PowerOne.class.getName(), new DynamicHelpDef());
+                dynamic.put(PowerOne.class.getName(), new DynamicHelpDef(true));
                 dynamic.put(PowerThree.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(true));

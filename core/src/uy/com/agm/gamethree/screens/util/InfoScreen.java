@@ -78,10 +78,7 @@ public class InfoScreen extends AbstractScreen {
     private boolean overlayTemporaryMessage;
 
     private Table buttonsTable;
-    private Label pauseLabel;
-    private Label resumeLabel;
     private Label gotItLabel;
-    private Label quitLabel;
 
     private Stack stack;
     private Cell stackCell;
@@ -179,42 +176,10 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable.setFillParent(true);
 
         // Define labels based on labelStyle
-        pauseLabel = new Label(i18NGameThreeBundle.format("infoScreen.pause"), labelStyleSmall);
-        quitLabel = new Label(i18NGameThreeBundle.format("infoScreen.quit"), labelStyleSmall);
-        quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(i18NGameThreeBundle.format("infoScreen.resume"), labelStyleSmall);
         gotItLabel = new Label(i18NGameThreeBundle.format("infoScreen.gotIt"), labelStyleSmall);
 
         // Add values
-        stack = new Stack();
-        stack.add(pauseLabel);
-        stack.add(resumeLabel);
-        stack.add(gotItLabel);
-        buttonsTable.add(stack).width(BUTTON_WIDTH).left().expandX(); // Pause, Resume and Got it texts overlapped
-        buttonsTable.add(quitLabel).width(BUTTON_WIDTH).right().expandX();
-
-        // Events
-        pauseLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStatePaused();
-                        return true;
-                    }
-                });
-
-        resumeLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStateRunning();
-                        return true;
-                    }
-                });
+        buttonsTable.add(gotItLabel).width(BUTTON_WIDTH).right().expandX();
 
         gotItLabel.addListener(
                 new InputListener() {
@@ -227,67 +192,18 @@ public class InfoScreen extends AbstractScreen {
                     }
                 });
 
-        quitLabel.addListener(
-                new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        quit();
-                        return true;
-                    }
-                });
-
         // Add the table to the stage
         addActor(buttonsTable);
 
         // Initially hidden
-        resumeLabel.setVisible(false);
         gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-    }
-
-    public void setGameStatePaused() {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(true);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(true);
-
-        // We can't use showMessage here because we want to preserve the screen state
-        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
-        messageLabel.setVisible(true);
-        centerTable.setVisible(true);
-
-        screen.setPlayScreenStatePaused(true);
-    }
-
-    private void setGameStateRunning() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-
-        // We can't use hideInfo here because we want to preserve the screen state
-        messageLabel.setVisible(false);
-        screen.setPlayScreenStateRunning();
     }
 
     private void gotIt() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
         gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-
         hideInfo();
+        screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
-    }
-
-    private void quit() {
-        if (getMessage().equals(i18NGameThreeBundle.format("infoScreen.confirm"))) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-        } else {
-            showMessage(i18NGameThreeBundle.format("infoScreen.confirm"));
-        }
     }
 
     public void showInitialHelp() {
@@ -365,11 +281,9 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showModalImage(TextureRegion textureRegion, float width, float height) {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
-        quitLabel.setVisible(false);
         showImage(textureRegion, width, height);
+        screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
     }
 
@@ -415,11 +329,9 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showModalAnimation(Animation animation, float width, float height) {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
-        quitLabel.setVisible(false);
         showAnimation(animation, width, height);
+        screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
     }
 
@@ -437,15 +349,17 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void hideModalInfo() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
         gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
         hideInfo();
+        screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
     }
 
     // ----------- Specialized functions
+
+    public boolean isModalVisible() {
+        return gotItLabel.isVisible();
+    }
 
     public void showHurryUpMessage() {
         showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));

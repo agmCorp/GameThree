@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -27,7 +28,7 @@ public class DimScreen extends AbstractScreen {
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
     private static final float BUTTON_WIDTH = 100.0f;
-    public static final float DIM_SCREEN_ALPHA = 0.5f;
+    private static final float DIM_SCREEN_ALPHA = 0.5f;
 
     private PlayScreen screen;
 
@@ -74,6 +75,9 @@ public class DimScreen extends AbstractScreen {
     private void defineCenterTable() {
         // Define a new table used to display a message
         centerTable = new Table();
+
+        // Background color
+        centerTable.setBackground(new TextureRegionDrawable(dim));
 
         // Debug lines
         centerTable.setDebug(PlayScreen.DEBUG_MODE);
@@ -170,17 +174,26 @@ public class DimScreen extends AbstractScreen {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
-        messageLabel.setVisible(true);
-        centerTable.setVisible(true);
+        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
+    }
+
+    public void hideButtons() {
+        buttonsTable.setVisible(false);
+    }
+
+    public void showButtons() {
+        buttonsTable.setVisible(true);
     }
 
     private void setGameStateRunning() {
         pauseLabel.setVisible(true);
         resumeLabel.setVisible(false);
         quitLabel.setVisible(false);
-        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
-        screen.setPlayScreenStateRunning();
+        hideMessage();
+        if (!screen.getInfoScreen().isModalVisible()) {
+            screen.setPlayScreenStateRunning();
+        }
     }
 
     private void quit() {
@@ -199,11 +212,17 @@ public class DimScreen extends AbstractScreen {
         return message;
     }
 
-    public void showMessage(String message) {
+    private void showMessage(String message) {
         messageLabel.setText(message);
         messageLabel.setVisible(true);
         centerTable.setVisible(true);
     }
+
+    private void hideMessage() {
+        messageLabel.setVisible(false);
+        centerTable.setVisible(false);
+    }
+
 
     @Override
     public void buildStage() {

@@ -72,9 +72,6 @@ public class PlayScreen extends AbstractScreen {
     // Box2D Scale (Pixels Per Meter)
     public static final float PPM = 100;
 
-    // Dim screen
-    public static final float DIM_SCREEN_ALPHA = 0.5f;
-
     // Position (y-axis) where the epic fight against the final enemy begins
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
@@ -100,8 +97,8 @@ public class PlayScreen extends AbstractScreen {
     private OrthographicCamera gameCam;
     private Viewport gameViewPort;
     private Hud hud;
-    private DimScreen dimScreen;
     private InfoScreen infoScreen;
+    private DimScreen dimScreen;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -182,16 +179,16 @@ public class PlayScreen extends AbstractScreen {
                 player.getLives(), LevelFactory.getLevelSkulls(this.level));
         hud.buildStage();
 
-        // Create the DimScreen for pause/resume
-        dimScreen = new DimScreen(this);
-        dimScreen.buildStage();
-
         // Create the InfoScreen for messages, help images, animations, etc.
         infoScreen = new InfoScreen(this, level);
         infoScreen.buildStage();
 
+        // Create the DimScreen for pause/resume
+        dimScreen = new DimScreen(this);
+        dimScreen.buildStage();
+
         // Show how to play with the main character
-        infoScreen.showInitialHelp();
+        infoScreen.showInitialHelp(); // todo esto no deberia ir aca porque no puedo mostrar una pantalla modal por una referencia circular. deberia ir cuando comienza el juego en el update o por ahi, no en el contructor.
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
@@ -223,7 +220,7 @@ public class PlayScreen extends AbstractScreen {
          * */
 
         InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(dimScreen);   // DimScreen also implements InputProcessor and receives events
+        multiplexer.addProcessor(dimScreen);  // DimScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(infoScreen); // InfoScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(new GestureDetector(gc));
         multiplexer.addProcessor(gc);
@@ -431,25 +428,14 @@ public class PlayScreen extends AbstractScreen {
 
         game.getBatch().end();
 
-        if (playScreenState == PlayScreenState.PAUSED) {
-            Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            game.getShapeRenderer().setProjectionMatrix(infoScreen.getCamera().combined);
-            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
-            game.getShapeRenderer().setColor(0, 0, 0, DIM_SCREEN_ALPHA);
-            game.getShapeRenderer().rect(0, 0, infoScreen.getCamera().viewportWidth, infoScreen.getCamera().viewportHeight);
-            game.getShapeRenderer().end();
-            Gdx.gl.glDisable(GL20.GL_BLEND);
-        }
-
         // Render the Hud
         hud.render(delta);
 
-        // Render the DimScreen
-        dimScreen.render(delta);
-
         // Render the InfoScreen
         infoScreen.render(delta);
+
+        // Render the DimScreen
+        dimScreen.render(delta);
 
         // Debug
         if (DEBUG_MODE) {
@@ -600,12 +586,12 @@ public class PlayScreen extends AbstractScreen {
         return hud;
     }
 
-    public DimScreen getDimScreen() {
-        return dimScreen;
-    }
-
     public InfoScreen getInfoScreen() {
         return infoScreen;
+    }
+
+    public DimScreen getDimScreen() {
+        return dimScreen;
     }
 
     private void gameResults(float delta) {
