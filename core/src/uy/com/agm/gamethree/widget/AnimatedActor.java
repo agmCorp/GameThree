@@ -18,6 +18,7 @@ public class AnimatedActor extends Image {
     Animation animation;
 
     public AnimatedActor() {
+        super();
         textureRegionDrawable = new TextureRegionDrawable();
     }
 
