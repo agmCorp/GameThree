@@ -266,8 +266,7 @@ public class InfoScreen extends AbstractScreen {
     public void showInitialHelp() {
         if (level == 1) {
             if (GameSettings.getInstance().isManualShooting()) {
-                //showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), 10, 10, DynamicHelpDef.DEFAULT_HELP_SECONDS);
+                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             } else {
                 showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             }
@@ -342,7 +341,6 @@ public class InfoScreen extends AbstractScreen {
         textureRegionDrawable.setRegion(textureRegion);
         image.setDrawable(textureRegionDrawable);
         image.setScaling(Scaling.fit);
-        // todo creo que aca deberi asetar la imagen
         stackCell.size(width, height);
         centerTable.pack();
 
