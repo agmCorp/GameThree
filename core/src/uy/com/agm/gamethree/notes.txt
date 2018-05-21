@@ -2,10 +2,13 @@ HACER PRIORIDAD 1
 -----------------
 - cambiar la explosion de enemy7 y achicar capaz las de one.
 - TERMINAR EL NIVEL 3
-- poner una intro y una historia
+- poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-- poner help al juego con una historia como hice con la granny.
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
+Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
+Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
+los que se van de la pantalla).
+Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
 (icono corazón) Support the developer by paying above the minimum price
@@ -67,11 +70,6 @@ SOLO IDEAS
 ----------
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - Animación o ruido distinto al ser aplastado.
-- Copiar la historia del juego de knightmare remake! :D
-- estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
-Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
-los que se van de la pantalla).
-Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - hacer splashscreen
 - enemigos:
     - hay que dispararle mucho para matarlo.
@@ -130,6 +128,7 @@ eight - bicho verde cometa
 nine - fenix
 ten - 2 circulos
 eleven - hombres de piedra
+twelve - vampirito violeta
 - enemigos finales: 3
 - poderes 5 -3 de habilidad, 2 de fuego- (2 poderes por nivel)
 - 1 moneda x 3
