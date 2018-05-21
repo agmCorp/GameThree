@@ -70,8 +70,8 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(exitGameLabel).padTop(AbstractScreen.PAD_TOP * 2);
 
         // Events
-        startGameLabel.addListener( UIFactory.createListener(ScreenEnum.SELECT_LEVEL) );
-        settingsLabel.addListener( UIFactory.createListener(ScreenEnum.SETTINGS) );
+        startGameLabel.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
+        settingsLabel.addListener(UIFactory.createListener(ScreenEnum.SETTINGS));
         exitGameLabel.addListener(
                 new InputListener() {
                     @Override
