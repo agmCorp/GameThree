@@ -59,7 +59,6 @@ public class InfoScreen extends AbstractScreen {
     private Label messageLabel;
     private AnimatedActor animatedActor;
     private Image image;
-    private TextureRegionDrawable textureRegionDrawable;
     private float overlayTime;
     private float overlaySeconds;
     private boolean overlayTemporaryAnimation;
@@ -135,7 +134,6 @@ public class InfoScreen extends AbstractScreen {
         animatedActor = new AnimatedActor();
         animatedActor.setAlign(Align.center);
         image = new Image();
-        textureRegionDrawable = new TextureRegionDrawable();
         image.setAlign(Align.center);
 
         // Add values
@@ -365,11 +363,10 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion, float width, float height) {
-        textureRegionDrawable.setRegion(textureRegion);
-        image.setDrawable(textureRegionDrawable);
-        image.setScaling(Scaling.fit);
         stackCell.size(width, height);
         centerTable.pack();
+        image.setDrawable(new TextureRegionDrawable(textureRegion));
+        image.setScaling(Scaling.fit);
 
         image.setVisible(true);
         messageLabel.setVisible(false);
