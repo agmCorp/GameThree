@@ -27,10 +27,10 @@ public class Hud extends AbstractScreen {
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
     private static final float SCORE_WIDTH = 120.0f;
-    private static final float TIME_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
-    private static final float LIVES_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
-    private static final float SKULLS_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
-    private static final float SILVER_BULLETS_WIDTH = (V_WIDTH - SCORE_WIDTH) / 4;
+    private static final float TIME_WIDTH = 120.0f;
+    private static final float LIVES_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
+    private static final float SKULLS_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
+    private static final float SILVER_BULLETS_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
