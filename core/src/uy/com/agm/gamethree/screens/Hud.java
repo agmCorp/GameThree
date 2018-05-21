@@ -388,7 +388,7 @@ public class Hud extends AbstractScreen {
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBeepB());
                     InfoScreen infoScreen = screen.getInfoScreen();
                     if (infoScreen.isMessageVisible()) {
-                        infoScreen.hideMessage();
+                        infoScreen.hideInfo();
                     }
                     infoScreen.showHurryUpMessage();
                 }

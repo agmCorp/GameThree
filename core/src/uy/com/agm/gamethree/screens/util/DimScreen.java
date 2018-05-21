@@ -47,7 +47,7 @@ public class DimScreen extends AbstractScreen {
 
     private TextureRegion dim;
 
-    public DimScreen(PlayScreen screen, Integer level) {
+    public DimScreen(PlayScreen screen) {
         super();
 
         // Define tracking variables

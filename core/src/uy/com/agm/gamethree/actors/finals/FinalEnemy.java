@@ -158,7 +158,7 @@ public abstract class FinalEnemy extends Sprite {
                     if (!hero.isDead() && !isDestroyed()) {
                         AudioManager.getInstance().playMusic();
                     }
-                    screen.getInfoScreen().hideMessage();
+                    screen.getInfoScreen().hideInfo();
                     playingIntro = false;
                 }
             }

@@ -27,6 +27,7 @@ import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.screens.util.DimScreen;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
@@ -99,6 +100,7 @@ public class PlayScreen extends AbstractScreen {
     private OrthographicCamera gameCam;
     private Viewport gameViewPort;
     private Hud hud;
+    private DimScreen dimScreen;
     private InfoScreen infoScreen;
 
     // TiledEditor map variable
@@ -180,7 +182,11 @@ public class PlayScreen extends AbstractScreen {
                 player.getLives(), LevelFactory.getLevelSkulls(this.level));
         hud.buildStage();
 
-        // Create the InfoScreen for pause, resume, help images, etc.
+        // Create the DimScreen for pause/resume
+        dimScreen = new DimScreen(this);
+        dimScreen.buildStage();
+
+        // Create the InfoScreen for messages, help images, animations, etc.
         infoScreen = new InfoScreen(this, level);
         infoScreen.buildStage();
 
@@ -217,6 +223,7 @@ public class PlayScreen extends AbstractScreen {
          * */
 
         InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(dimScreen);   // DimScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(infoScreen); // InfoScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(new GestureDetector(gc));
         multiplexer.addProcessor(gc);
@@ -438,6 +445,9 @@ public class PlayScreen extends AbstractScreen {
         // Render the Hud
         hud.render(delta);
 
+        // Render the DimScreen
+        dimScreen.render(delta);
+
         // Render the InfoScreen
         infoScreen.render(delta);
 
@@ -590,6 +600,10 @@ public class PlayScreen extends AbstractScreen {
         return hud;
     }
 
+    public DimScreen getDimScreen() {
+        return dimScreen;
+    }
+
     public InfoScreen getInfoScreen() {
         return infoScreen;
     }
@@ -696,7 +710,7 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        infoScreen.setGameStatePaused();
+        dimScreen.setGameStatePaused();
     }
 
     @Override
@@ -718,6 +732,7 @@ public class PlayScreen extends AbstractScreen {
             b2dr.dispose();
         }
         hud.dispose();
+        dimScreen.dispose();
         infoScreen.dispose();
     }
 }
