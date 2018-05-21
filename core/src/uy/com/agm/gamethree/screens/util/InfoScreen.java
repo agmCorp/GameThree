@@ -287,6 +287,8 @@ public class InfoScreen extends AbstractScreen {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
+        overlayTemporaryImage = false;
+        overlayTemporaryAnimation = false;
         showMessage(message);
     }
 
@@ -340,6 +342,8 @@ public class InfoScreen extends AbstractScreen {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryImage = true;
+        overlayTemporaryAnimation = false;
+        overlayTemporaryMessage = false;
         showImage(textureRegion);
     }
 
@@ -384,6 +388,8 @@ public class InfoScreen extends AbstractScreen {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryAnimation = true;
+        overlayTemporaryImage = false;
+        overlayTemporaryMessage = false;
         showAnimation(animation, width, height);
     }
 
@@ -421,7 +427,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryAnimation(float dt) {
-        if (overlayTemporaryAnimation && isAnimationVisible()) {
+        if (overlayTemporaryAnimation) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryAnimation = false;
@@ -432,7 +438,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryImage(float dt) {
-        if (overlayTemporaryImage && isImageVisible()) {
+        if (overlayTemporaryImage) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryImage = false;
@@ -443,7 +449,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void overlayTemporaryMessage(float dt) {
-        if (overlayTemporaryMessage && isMessageVisible()) {
+        if (overlayTemporaryMessage) {
             overlayTime += dt;
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryMessage = false;
