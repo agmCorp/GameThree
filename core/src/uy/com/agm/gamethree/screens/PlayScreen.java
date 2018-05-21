@@ -187,8 +187,8 @@ public class PlayScreen extends AbstractScreen {
         dimScreen = new DimScreen(this);
         dimScreen.buildStage();
 
-        // Show how to play with the main character
-        infoScreen.showInitialHelp(); // todo esto no deberia ir aca porque no puedo mostrar una pantalla modal por una referencia circular. deberia ir cuando comienza el juego en el update o por ahi, no en el contructor.
+        // Show how to play with the main character (this help can't be modal)
+        infoScreen.showInitialHelp();
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
