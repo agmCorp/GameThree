@@ -26,7 +26,7 @@ public class AssetGameOver {
 
         // Animation
         regions = atlas.findRegions("gameOver");
-        gameOverAnimation = new Animation(1.0f / 35.0f, regions);
+        gameOverAnimation = new Animation(1.5f / 35.0f, regions);
         regions.clear();
     }
 
