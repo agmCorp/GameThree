@@ -116,10 +116,10 @@ public class DimScreen extends AbstractScreen {
         buttonsTable.setFillParent(true);
 
         // Define labels based on labelStyle
-        pauseLabel = new Label(i18NGameThreeBundle.format("infoScreen.pause"), labelStyleSmall);
-        quitLabel = new Label(i18NGameThreeBundle.format("infoScreen.quit"), labelStyleSmall);
+        pauseLabel = new Label(i18NGameThreeBundle.format("dimScreen.pause"), labelStyleSmall);
+        quitLabel = new Label(i18NGameThreeBundle.format("dimScreen.quit"), labelStyleSmall);
         quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(i18NGameThreeBundle.format("infoScreen.resume"), labelStyleSmall);
+        resumeLabel = new Label(i18NGameThreeBundle.format("dimScreen.resume"), labelStyleSmall);
 
         // Add values
         stack = new Stack();
@@ -175,7 +175,7 @@ public class DimScreen extends AbstractScreen {
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
         buttonsTable.setVisible(true);
-        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
+        showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
     }
 
@@ -188,10 +188,10 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void setGameStateRunning() {
+        hideMessage();
         pauseLabel.setVisible(true);
         resumeLabel.setVisible(false);
         quitLabel.setVisible(false);
-        hideMessage();
         if (!screen.getInfoScreen().isModalVisible()) {
             screen.setPlayScreenStateRunning();
         } else {
@@ -200,10 +200,10 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void quit() {
-        if (getMessage().equals(i18NGameThreeBundle.format("infoScreen.confirm"))) {
+        if (getMessage().equals(i18NGameThreeBundle.format("dimScreen.confirm"))) {
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
-            showMessage(i18NGameThreeBundle.format("infoScreen.confirm"));
+            showMessage(i18NGameThreeBundle.format("dimScreen.confirm"));
         }
     }
 
@@ -225,7 +225,6 @@ public class DimScreen extends AbstractScreen {
         messageLabel.setVisible(false);
         centerTable.setVisible(false);
     }
-
 
     @Override
     public void buildStage() {

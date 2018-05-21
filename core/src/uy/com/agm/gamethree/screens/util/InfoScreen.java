@@ -163,7 +163,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void defineButtonsTable() {
-        // Define a new table used to display pause, resume and quit buttons
+        // Define a new table used to display buttons
         buttonsTable = new Table();
 
         // Debug lines
@@ -179,7 +179,7 @@ public class InfoScreen extends AbstractScreen {
         gotItLabel = new Label(i18NGameThreeBundle.format("infoScreen.gotIt"), labelStyleSmall);
 
         // Add values
-        buttonsTable.add(gotItLabel).width(BUTTON_WIDTH).right().expandX();
+        buttonsTable.add(gotItLabel).width(BUTTON_WIDTH).left().expandX();
 
         gotItLabel.addListener(
                 new InputListener() {
@@ -200,8 +200,8 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void gotIt() {
-        gotItLabel.setVisible(false);
         hideInfo();
+        gotItLabel.setVisible(false);
         screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
     }
@@ -339,7 +339,7 @@ public class InfoScreen extends AbstractScreen {
         return animatedActor.isVisible();
     }
 
-    // ----------- Hide functions
+    // ----------- General functions
 
     public void hideInfo() {
         messageLabel.setVisible(false);
@@ -349,17 +349,17 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void hideModalInfo() {
-        gotItLabel.setVisible(false);
         hideInfo();
+        gotItLabel.setVisible(false);
         screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
     }
 
-    // ----------- Specialized functions
-
     public boolean isModalVisible() {
         return gotItLabel.isVisible();
     }
+
+    // ----------- Specialized functions
 
     public void showHurryUpMessage() {
         showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));
@@ -400,14 +400,6 @@ public class InfoScreen extends AbstractScreen {
             }
             dynamicHelp.remove(className);
         }
-    }
-
-    private String getMessage() {
-        String message = "";
-        if (messageLabel.isVisible()) {
-            message = messageLabel.getText().toString();
-        }
-        return message;
     }
 
     // ----------- InfoScreen logic functions
