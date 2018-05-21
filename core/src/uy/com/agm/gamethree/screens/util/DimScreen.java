@@ -85,7 +85,7 @@ public class DimScreen extends AbstractScreen {
         centerTable.setFillParent(true);
 
         // Define a label based on labelStyle
-        messageLabel = new Label(i18NGameThreeBundle.format("infoScreen.pauseMessage"), labelStyleBig);
+        messageLabel = new Label("MESSAGE", labelStyleBig);
         messageLabel.setAlignment(Align.center);
 
         // Add values
@@ -170,12 +170,8 @@ public class DimScreen extends AbstractScreen {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
-
-        // We can't use showMessage here because we want to preserve the screen state
-        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
         messageLabel.setVisible(true);
         centerTable.setVisible(true);
-
         screen.setPlayScreenStatePaused(true);
     }
 
@@ -183,9 +179,7 @@ public class DimScreen extends AbstractScreen {
         pauseLabel.setVisible(true);
         resumeLabel.setVisible(false);
         quitLabel.setVisible(false);
-
-        // We can't use hideMessage here because we want to preserve the screen state
-        messageLabel.setVisible(false);
+        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
         screen.setPlayScreenStateRunning();
     }
 

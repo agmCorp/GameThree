@@ -267,7 +267,7 @@ public class InfoScreen extends AbstractScreen {
         gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
 
-        // We can't use hideMessage here because we want to preserve the screen state
+        // We can't use hideInfo here because we want to preserve the screen state
         messageLabel.setVisible(false);
         screen.setPlayScreenStateRunning();
     }
