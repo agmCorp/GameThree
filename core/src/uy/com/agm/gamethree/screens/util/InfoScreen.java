@@ -372,6 +372,7 @@ public class InfoScreen extends AbstractScreen {
 
     public void showAnimation(Animation animation, float width, float height) {
         stackCell.size(width, height);
+        centerTable.pack();
         animatedActor.setAnimation(animation);
         animatedActor.setVisible(true);
         image.setVisible(false);
