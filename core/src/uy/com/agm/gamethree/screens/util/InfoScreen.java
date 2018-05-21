@@ -266,8 +266,7 @@ public class InfoScreen extends AbstractScreen {
     public void showInitialHelp() {
         if (level == 1) {
             if (GameSettings.getInstance().isManualShooting()) {
-               // todo showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-                showImage(Assets.getInstance().getEnemyThree().getEnemyThreeStand(), 30 ,30, 2);
+                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             } else {
                 showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
             }
