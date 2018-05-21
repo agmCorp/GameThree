@@ -93,12 +93,13 @@ public class PlayScreen extends AbstractScreen {
     // Time to wait after the level is completed
     private float levelCompletedTime;
 
-    // Basic playscreen variables
+    // Basic PlayScreen variables
     private OrthographicCamera gameCam;
     private Viewport gameViewPort;
     private Hud hud;
     private InfoScreen infoScreen;
     private DimScreen dimScreen;
+    private boolean levelStarts;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -140,7 +141,7 @@ public class PlayScreen extends AbstractScreen {
         map = LevelFactory.getLevelMap(this.level);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
-        // Initially set our gamcam to be centered correctly at the start (bottom) of the map
+        // Initially set our gamCam to be centered correctly at the start (bottom) of the map
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
@@ -179,7 +180,7 @@ public class PlayScreen extends AbstractScreen {
                 player.getLives(), LevelFactory.getLevelSkulls(this.level));
         hud.buildStage();
 
-        // Create the InfoScreen for messages, help images, animations, etc.
+        // Create the InfoScreen for help messages, images, animations, etc.
         infoScreen = new InfoScreen(this, level);
         infoScreen.buildStage();
 
@@ -187,8 +188,8 @@ public class PlayScreen extends AbstractScreen {
         dimScreen = new DimScreen(this);
         dimScreen.buildStage();
 
-        // Show how to play with the main character (this help can't be modal)
-        infoScreen.showInitialHelp();
+        // Indicates that the level is just beginning
+        levelStarts = true;
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
@@ -222,8 +223,8 @@ public class PlayScreen extends AbstractScreen {
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(dimScreen);  // DimScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(infoScreen); // InfoScreen also implements InputProcessor and receives events
-        multiplexer.addProcessor(new GestureDetector(gc));
-        multiplexer.addProcessor(gc);
+        multiplexer.addProcessor(new GestureDetector(gc)); // Detects gestures (tap, long press, fling, pan, zoom, pinch)
+        multiplexer.addProcessor(gc); // User input handler on PlayScreen
         return multiplexer;
     }
 
@@ -428,13 +429,13 @@ public class PlayScreen extends AbstractScreen {
 
         game.getBatch().end();
 
-        // Render the Hud
+        // Render the Hud (bottom layer)
         hud.render(delta);
 
-        // Render the InfoScreen
+        // Render the InfoScreen (middle layer)
         infoScreen.render(delta);
 
-        // Render the DimScreen
+        // Render the DimScreen (top layer)
         dimScreen.render(delta);
 
         // Debug
@@ -600,6 +601,12 @@ public class PlayScreen extends AbstractScreen {
         /* We evaluate mutual exclusion conditions.
          * A boolean value is used to avoid nested if/else sentences.
          */
+
+        finish = !finish && level == 1 && levelStarts;
+        levelStarts = false;
+        if (finish) {
+            infoScreen.showGameControllersHelp();
+        }
 
         finish = !finish && player.isTimeToPlayAgain();
         if (finish) {

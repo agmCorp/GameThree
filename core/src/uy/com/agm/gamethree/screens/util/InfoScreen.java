@@ -206,13 +206,11 @@ public class InfoScreen extends AbstractScreen {
         screen.setPlayScreenStateRunning();
     }
 
-    public void showInitialHelp() {
-        if (level == 1) {
-            if (GameSettings.getInstance().isManualShooting()) {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialManual(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-            } else {
-                showImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic(), DynamicHelpDef.DEFAULT_HELP_SECONDS);
-            }
+    public void showGameControllersHelp() {
+        if (GameSettings.getInstance().isManualShooting()) {
+            showModalImage(Assets.getInstance().getScene2d().getHelpInitialManual());
+        } else {
+            showModalImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic());
         }
     }
 

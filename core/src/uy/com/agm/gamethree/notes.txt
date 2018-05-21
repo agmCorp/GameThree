@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- cambiar la explosion de enemy7 y achicar capaz las de one.
 - TERMINAR EL NIVEL 3
 - poner una intro y una historia
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
