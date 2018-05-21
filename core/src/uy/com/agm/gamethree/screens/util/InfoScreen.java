@@ -266,17 +266,7 @@ public class InfoScreen extends AbstractScreen {
         gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
 
-        if (isMessageVisible()) {
-            hideMessage();
-        } else {
-            if (isImageVisible()) {
-                hideImage();
-            } else {
-                if (isAnimationVisible()) {
-                    hideAnimation();
-                }
-            }
-        }
+        hideInfo();
         screen.setPlayScreenStateRunning();
     }
 
@@ -321,11 +311,6 @@ public class InfoScreen extends AbstractScreen {
         overlayTemporaryImage = false;
         overlayTemporaryAnimation = false;
         showMessage(message);
-    }
-
-    public void hideMessage() {
-        messageLabel.setVisible(false);
-        centerTable.setVisible(false);
     }
 
     public boolean isMessageVisible() {
@@ -374,20 +359,6 @@ public class InfoScreen extends AbstractScreen {
         quitLabel.setVisible(false);
         showImage(textureRegion, width, height);
         screen.setPlayScreenStatePaused(false);
-    }
-
-    public void hideModalImage() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-        hideImage();
-        screen.setPlayScreenStateRunning();
-    }
-
-    public void hideImage() {
-        image.setVisible(false);
-        centerTable.setVisible(false);
     }
 
     public boolean isImageVisible() {
@@ -440,22 +411,26 @@ public class InfoScreen extends AbstractScreen {
         screen.setPlayScreenStatePaused(false);
     }
 
-    public void hideModalAnimation() {
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        gotItLabel.setVisible(false);
-        quitLabel.setVisible(false);
-        hideAnimation();
-        screen.setPlayScreenStateRunning();
+    public boolean isAnimationVisible() {
+        return animatedActor.isVisible();
     }
 
-    public void hideAnimation() {
+    // ----------- Hide functions
+
+    public void hideInfo() {
+        messageLabel.setVisible(false);
+        image.setVisible(false);
         animatedActor.setVisible(false);
         centerTable.setVisible(false);
     }
 
-    public boolean isAnimationVisible() {
-        return animatedActor.isVisible();
+    public void hideModalInfo() {
+        pauseLabel.setVisible(true);
+        resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
+        quitLabel.setVisible(false);
+        hideInfo();
+        screen.setPlayScreenStateRunning();
     }
 
     // ----------- Specialized functions
@@ -509,6 +484,8 @@ public class InfoScreen extends AbstractScreen {
         return message;
     }
 
+    // ----------- InfoScreen logic functions
+
     public void update(float dt) {
         overlayTemporaryAnimation(dt);
         overlayTemporaryImage(dt);
@@ -521,7 +498,7 @@ public class InfoScreen extends AbstractScreen {
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryAnimation = false;
                 overlayTime = 0;
-                hideAnimation();
+                hideInfo();
             }
         }
     }
@@ -532,7 +509,7 @@ public class InfoScreen extends AbstractScreen {
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryImage = false;
                 overlayTime = 0;
-                hideImage();
+                hideInfo();
             }
         }
     }
@@ -543,7 +520,7 @@ public class InfoScreen extends AbstractScreen {
             if (overlayTime >= overlaySeconds) {
                 overlayTemporaryMessage = false;
                 overlayTime = 0;
-                hideMessage();
+                hideInfo();
             }
         }
     }
