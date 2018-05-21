@@ -174,6 +174,7 @@ public class DimScreen extends AbstractScreen {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(true);
         quitLabel.setVisible(true);
+        buttonsTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
     }
@@ -193,6 +194,8 @@ public class DimScreen extends AbstractScreen {
         hideMessage();
         if (!screen.getInfoScreen().isModalVisible()) {
             screen.setPlayScreenStateRunning();
+        } else {
+            buttonsTable.setVisible(false);
         }
     }
 
