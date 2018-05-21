@@ -256,6 +256,8 @@ public class InfoScreen extends AbstractScreen {
     public void showImage(TextureRegion textureRegion, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
+        // WA: Using new each time is the only way I found to set the correct size
+        // This could be a memory leak
         image.setDrawable(new TextureRegionDrawable(textureRegion));
         image.setScaling(Scaling.fit);
 

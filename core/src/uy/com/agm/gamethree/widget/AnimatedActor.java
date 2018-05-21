@@ -13,21 +13,20 @@ import com.badlogic.gdx.utils.Scaling;
 public class AnimatedActor extends Image {
     private static final String TAG = AnimatedActor.class.getName();
 
-    private TextureRegionDrawable textureRegionDrawable;
     private float stateTime;
     Animation animation;
 
     public AnimatedActor() {
         super();
-        textureRegionDrawable = new TextureRegionDrawable();
     }
 
     public void setAnimation(Animation animation) {
         this.animation = animation;
         stateTime = 0;
         TextureRegion region = (TextureRegion) animation.getKeyFrame(stateTime, false);
-        textureRegionDrawable.setRegion(region);
-        setDrawable(textureRegionDrawable);
+        // WA: Using new each time is the only way I found to set the correct size
+        // This could be a memory leak
+        setDrawable(new TextureRegionDrawable(region));
         setScaling(Scaling.fit);
     }
 
