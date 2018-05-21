@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- cambiar la explosion de enemy7 y achicar capaz las de one.
 - TERMINAR EL NIVEL 3
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
@@ -38,7 +37,6 @@ No queda bien en el caso de recibir balas muy grandes en donde los sprites no ha
 En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
 Pero capaz se podria poner al morir aplastado. Podria ademas poner un audio de aplastamiento y hasta capaz una animacion o
 parpadeo antes de dyingup.
-- Analizar si los items no deberían chocar contra edge para no irse nunca de la pantalla, ojo, creo que lo había descartado antes.
 - Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge. Intenté una
 vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.

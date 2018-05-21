@@ -217,3 +217,9 @@ Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero
 En el powerDown debería hacer:
 if !screen.challegeBegins (pasar a public) enableshooting.
 Creo
+---------------------------------------------------------------------------------------------
+- Analizar si los items no deberían chocar contra edge para no irse nunca de la pantalla, ojo, creo que lo había descartado antes.
+Lo analice. No lo voy a hacer, los items cuando salen de la pantalla (con cierto MARGIN de tolerancia) se destruyen.
+Si los hago rebotar en los bordes tendria que borrar toda esa logica tan linda.
+Ademas si destruyo una power box en el borde superior de la pantalla, el item se crea sobre el upperedge y como choca, siempre
+seria arrastrado hacia arriba y nunca lo veria. O sea, es otro problema extra y en suma no agrega nada.
