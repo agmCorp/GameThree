@@ -602,10 +602,14 @@ public class PlayScreen extends AbstractScreen {
          * A boolean value is used to avoid nested if/else sentences.
          */
 
-        finish = !finish && level == 1 && levelStarts;
+        finish = !finish && levelStarts;
         levelStarts = false;
         if (finish) {
-            infoScreen.showGameControllersHelp();
+            if (level == 1) {
+                infoScreen.showGameControllersHelp();
+            } else {
+                infoScreen.showLetsGo();
+            }
         }
 
         finish = !finish && player.isTimeToPlayAgain();

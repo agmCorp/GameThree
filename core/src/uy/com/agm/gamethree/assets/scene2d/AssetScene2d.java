@@ -49,6 +49,7 @@ public class AssetScene2d {
     private AssetStageCleared stageCleared;
     private AssetStageFailed stageFailed;
     private AssetGameOver gameOver;
+    private AssetLetsGo letsGo;
 
     public AssetScene2d(TextureAtlas atlasUI) {
         sliderBackground = atlasUI.findRegion("sliderBackground");
@@ -91,6 +92,7 @@ public class AssetScene2d {
         stageCleared = new AssetStageCleared(atlasUI);
         stageFailed = new AssetStageFailed(atlasUI);
         gameOver = new AssetGameOver(atlasUI);
+        letsGo = new AssetLetsGo(atlasUI);
     }
 
     public TextureRegion getSliderBackground() {
@@ -247,5 +249,9 @@ public class AssetScene2d {
 
     public AssetGameOver getGameOver() {
         return gameOver;
+    }
+
+    public AssetLetsGo getLetsGo() {
+        return letsGo;
     }
 }

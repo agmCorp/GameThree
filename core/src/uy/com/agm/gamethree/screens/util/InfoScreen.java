@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetLetsGo;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageFailed;
 import uy.com.agm.gamethree.assets.scene2d.AssetVictory;
 import uy.com.agm.gamethree.game.GameSettings;
@@ -52,6 +53,7 @@ public class InfoScreen extends AbstractScreen {
     private static final float BUTTONS_PAD = 20.0f;
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float RED_FLASH_TIME = 0.1f;
+    private static final float LETS_GO_TIME = 1.5f;
 
     private PlayScreen screen;
     private int level;
@@ -66,6 +68,7 @@ public class InfoScreen extends AbstractScreen {
     // Animations
     private Animation emptySkullsAnimation;
     private Animation victoryAnimation;
+    private Animation letsGoAnimation;
 
     private Table centerTable;
     private Label messageLabel;
@@ -113,6 +116,7 @@ public class InfoScreen extends AbstractScreen {
         // Animations
         emptySkullsAnimation = Assets.getInstance().getScene2d().getStageFailed().getStageFailedAnimation();
         victoryAnimation = Assets.getInstance().getScene2d().getVictory().getVictoryAnimation();
+        letsGoAnimation = Assets.getInstance().getScene2d().getLetsGo().getStageLetsGoAnimation();
 
         // Red flash Texture
         Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
@@ -385,6 +389,10 @@ public class InfoScreen extends AbstractScreen {
 
     public boolean isRedFlashVisible() {
         return isImageVisible() && ((TextureRegionDrawable) image.getDrawable()).getRegion() == redFlash;
+    }
+
+    public void showLetsGo() {
+        showAnimation(letsGoAnimation, AssetLetsGo.WIDTH_PIXELS, AssetLetsGo.HEIGHT_PIXELS, LETS_GO_TIME);
     }
 
     // Show help screens depending on the object's class name
