@@ -485,6 +485,8 @@ public class Hero extends Sprite {
         // Set Hero active with his initial state
         b2body.setActive(true);
         currentHeroState = HeroState.STANDING;
+
+        screen.getInfoScreen().showAnimation(heroMovingDownAnimation, 70, 70, 10);
     }
 
     public boolean isWarmingUp() {

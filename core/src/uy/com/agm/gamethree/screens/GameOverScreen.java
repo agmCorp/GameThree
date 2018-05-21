@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetGameOver;
@@ -60,16 +59,14 @@ public class GameOverScreen extends AbstractScreen {
 
         // Animation
         AnimatedActor animatedActor = new AnimatedActor();
-        animatedActor.setAnimation(Assets.getInstance().getScene2d().getGameOver().getGameOverAnimation(),
-                AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getGameOver().getGameOverAnimation());
         animatedActor.setAlign(Align.center);
-        animatedActor.setScaling(Scaling.fit);
 
         // Define our labels based on labelStyle
         Label backLabel = new Label(i18NGameThreeBundle.format("gameOver.backToMenu"), labelStyleNormal);
 
         // Add values
-        table.add(animatedActor);
+        table.add(animatedActor).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 

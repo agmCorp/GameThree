@@ -22,15 +22,13 @@ public class AnimatedActor extends Image {
         textureRegionDrawable = new TextureRegionDrawable();
     }
 
-    public void setAnimation(Animation animation, int width, int height) {
-        TextureRegion region = (TextureRegion) animation.getKeyFrame(0);
-        region.setRegionWidth(width);
-        region.setRegionHeight(height);
+    public void setAnimation(Animation animation) {
+        this.animation = animation;
+        stateTime = 0;
+        TextureRegion region = (TextureRegion) animation.getKeyFrame(stateTime, false);
         textureRegionDrawable.setRegion(region);
         setDrawable(textureRegionDrawable);
-        setScaling(Scaling.none);
-        stateTime = 0;
-        this.animation = animation;
+        setScaling(Scaling.fit);
     }
 
     @Override

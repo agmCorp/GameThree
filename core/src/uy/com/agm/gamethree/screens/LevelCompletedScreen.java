@@ -71,8 +71,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Animation
         AnimatedActor animatedActor = new AnimatedActor();
         animatedActor.setAlign(Align.center);
-        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation(),
-                AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS);
+        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
@@ -84,7 +83,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(currentLevelLabel);
         table.row();
-        table.add(animatedActor).padTop(AbstractScreen.PAD_TOP);
+        table.add(animatedActor).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD_TOP);
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();

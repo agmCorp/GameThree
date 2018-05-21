@@ -3,7 +3,6 @@ package uy.com.agm.gamethree.assets.scene2d;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -14,8 +13,8 @@ public class AssetStageFailed {
     private static final String TAG = AssetStageFailed.class.getName();
 
     // Constants (pixels * resizeFactor)
-    public static final int WIDTH_PIXELS = MathUtils.round(324.0f * 1.0f);
-    public static final int HEIGHT_PIXELS = MathUtils.round(177.0f * 1.0f);
+    public static final float WIDTH_PIXELS = 324.0f * 1.0f;
+    public static final float HEIGHT_PIXELS = 177.0f * 1.0f;
 
     private TextureRegion stageFailedStand;
     private Animation stageFailedAnimation;

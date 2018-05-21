@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
@@ -71,6 +72,7 @@ public class InfoScreen extends AbstractScreen {
     private Label quitLabel;
 
     private Stack stack;
+    private Cell stackCell;
 
     private TextureRegion redFlash;
 
@@ -137,7 +139,7 @@ public class InfoScreen extends AbstractScreen {
         stack.add(messageLabel);
         stack.add(animatedActor);
         stack.add(image);
-        centerTable.add(stack);
+        stackCell = centerTable.add(stack);
 
         // Add our table to the stage
         addActor(centerTable);
@@ -368,8 +370,9 @@ public class InfoScreen extends AbstractScreen {
         return image.isVisible();
     }
 
-    public void showAnimation(Animation animation, int width, int height) {
-        animatedActor.setAnimation(animation, width, height);
+    public void showAnimation(Animation animation, float width, float height) {
+        stackCell.size(width, height);
+        animatedActor.setAnimation(animation);
         animatedActor.setVisible(true);
         image.setVisible(false);
         messageLabel.setVisible(false);
