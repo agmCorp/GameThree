@@ -140,9 +140,9 @@ public class InfoScreen extends AbstractScreen {
 
         // Add values
         stack = new Stack();
-        stack.add(messageLabel);
         stack.add(animatedActor);
         stack.add(image);
+        stack.add(messageLabel);
         stackCell = centerTable.add(stack);
 
         // Add our table to the stage
@@ -212,7 +212,7 @@ public class InfoScreen extends AbstractScreen {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        setGameStateRunning();
+                        gotIt();
                         return true;
                     }
                 });
@@ -242,7 +242,12 @@ public class InfoScreen extends AbstractScreen {
         resumeLabel.setVisible(true);
         gotItLabel.setVisible(false);
         quitLabel.setVisible(true);
-        showMessage(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
+
+        // We can't use showMessage here because we want to preserve the screen state
+        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.pauseMessage"));
+        messageLabel.setVisible(true);
+        centerTable.setVisible(true);
+
         screen.setPlayScreenStatePaused(true);
     }
 
@@ -251,7 +256,29 @@ public class InfoScreen extends AbstractScreen {
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(false);
         quitLabel.setVisible(false);
-        hideMessage();
+
+        // We can't use hideMessage here because we want to preserve the screen state
+        messageLabel.setVisible(false);
+        screen.setPlayScreenStateRunning();
+    }
+
+    public void gotIt() {
+        pauseLabel.setVisible(true);
+        resumeLabel.setVisible(false);
+        gotItLabel.setVisible(false);
+        quitLabel.setVisible(false);
+
+        if (isMessageVisible()) {
+            hideMessage();
+        } else {
+            if (isImageVisible()) {
+                hideImage();
+            } else {
+                if (isAnimationVisible()) {
+                    hideAnimation();
+                }
+            }
+        }
         screen.setPlayScreenStateRunning();
     }
 
