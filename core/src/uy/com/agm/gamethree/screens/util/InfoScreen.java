@@ -304,7 +304,9 @@ public class InfoScreen extends AbstractScreen {
         defineButtonsTable();
     }
 
-    private void showMessage(String message) {
+    // ----------- Message functions
+
+    public void showMessage(String message) {
         messageLabel.setText(message);
         messageLabel.setVisible(true);
         animatedActor.setVisible(false);
@@ -312,41 +314,13 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    private void showMessage(String message, float seconds) {
+    public void showMessage(String message, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
         overlayTemporaryImage = false;
         overlayTemporaryAnimation = false;
         showMessage(message);
-    }
-
-    private String getMessage() {
-        String message = "";
-        if (messageLabel.isVisible()) {
-            message = messageLabel.getText().toString();
-        }
-        return message;
-    }
-
-    public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));
-    }
-
-    public void showTimeIsUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
-    }
-
-    public void showEmptySkullsAnimation() {
-        showAnimation(emptySkullsAnimation, AssetStageFailed.WIDTH_PIXELS, AssetStageFailed.HEIGHT_PIXELS);
-    }
-
-    public void showVictoryAnimation() {
-        showAnimation(victoryAnimation, AssetVictory.WIDTH_PIXELS, AssetVictory.HEIGHT_PIXELS);
-    }
-
-    public void showFightMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.fight"));
     }
 
     public void hideMessage() {
@@ -358,11 +332,13 @@ public class InfoScreen extends AbstractScreen {
         return messageLabel.isVisible();
     }
 
-    private void  showImage(TextureRegion textureRegion) {
+    // ----------- Image functions
+
+    public void  showImage(TextureRegion textureRegion) {
         showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    private void showImage(TextureRegion textureRegion, float width, float height) {
+    public void showImage(TextureRegion textureRegion, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
         image.setDrawable(new TextureRegionDrawable(textureRegion));
@@ -374,11 +350,11 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    private void showImage(TextureRegion textureRegion, float seconds) {
+    public void showImage(TextureRegion textureRegion, float seconds) {
         showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
     }
 
-    private void showImage(TextureRegion textureRegion, float width, float height, float seconds) {
+    public void showImage(TextureRegion textureRegion, float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryImage = true;
@@ -391,7 +367,7 @@ public class InfoScreen extends AbstractScreen {
         showModalImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    private void showModalImage(TextureRegion textureRegion, float width, float height) {
+    public void showModalImage(TextureRegion textureRegion, float width, float height) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
@@ -418,12 +394,14 @@ public class InfoScreen extends AbstractScreen {
         return image.isVisible();
     }
 
-    private void showAnimation(Animation animation) {
+    // ----------- Animation functions
+
+    public void showAnimation(Animation animation) {
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
         showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    private void showAnimation(Animation animation, float width, float height) {
+    public void showAnimation(Animation animation, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
         animatedActor.setAnimation(animation);
@@ -434,12 +412,12 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    private void showAnimation(Animation animation, float seconds) {
+    public void showAnimation(Animation animation, float seconds) {
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
         showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
     }
 
-    private void showAnimation(Animation animation,  float width, float height, float seconds) {
+    public void showAnimation(Animation animation,  float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryAnimation = true;
@@ -453,7 +431,7 @@ public class InfoScreen extends AbstractScreen {
         showModalAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    private void showModalAnimation(Animation animation, float width, float height) {
+    public void showModalAnimation(Animation animation, float width, float height) {
         pauseLabel.setVisible(false);
         resumeLabel.setVisible(false);
         gotItLabel.setVisible(true);
@@ -478,6 +456,57 @@ public class InfoScreen extends AbstractScreen {
 
     public boolean isAnimationVisible() {
         return animatedActor.isVisible();
+    }
+
+    // ----------- Specialized functions
+
+    public void showHurryUpMessage() {
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));
+    }
+
+    public void showTimeIsUpMessage() {
+        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
+    }
+
+    public void showEmptySkullsAnimation() {
+        showAnimation(emptySkullsAnimation, AssetStageFailed.WIDTH_PIXELS, AssetStageFailed.HEIGHT_PIXELS);
+    }
+
+    public void showVictoryAnimation() {
+        showAnimation(victoryAnimation, AssetVictory.WIDTH_PIXELS, AssetVictory.HEIGHT_PIXELS);
+    }
+
+    public void showFightMessage() {
+        showMessage(i18NGameThreeBundle.format("infoScreen.fight"));
+    }
+
+    public void showRedFlash() {
+        showImage(redFlash, RED_FLASH_TIME);
+    }
+
+    public boolean isRedFlashVisible() {
+        return isImageVisible() && ((TextureRegionDrawable) image.getDrawable()).getRegion() == redFlash;
+    }
+
+    // Show help screens depending on the object's class name
+    public void showDynamicHelp(String className, TextureRegion helpImage) {
+        if (dynamicHelp.containsKey(className)){
+            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
+            if (dynamicHelpDef.isModal()) {
+                showModalImage(helpImage);
+            } else {
+                showImage(helpImage, dynamicHelpDef.getSeconds());
+            }
+            dynamicHelp.remove(className);
+        }
+    }
+
+    private String getMessage() {
+        String message = "";
+        if (messageLabel.isVisible()) {
+            message = messageLabel.getText().toString();
+        }
+        return message;
     }
 
     public void update(float dt) {
@@ -517,27 +546,6 @@ public class InfoScreen extends AbstractScreen {
                 hideMessage();
             }
         }
-    }
-
-    // Show help screens depending on the object's class name
-    public void showDynamicHelp(String className, TextureRegion helpImage) {
-        if (dynamicHelp.containsKey(className)){
-            DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
-            if (dynamicHelpDef.isModal()) {
-                showModalImage(helpImage);
-            } else {
-                showImage(helpImage, dynamicHelpDef.getSeconds());
-            }
-            dynamicHelp.remove(className);
-        }
-    }
-
-    public void showRedFlash() {
-        showImage(redFlash, RED_FLASH_TIME);
-    }
-
-    public boolean isRedFlashVisible() {
-        return isImageVisible() && ((TextureRegionDrawable) image.getDrawable()).getRegion() == redFlash;
     }
 
     @Override
