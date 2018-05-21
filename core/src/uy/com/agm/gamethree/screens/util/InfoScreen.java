@@ -31,10 +31,22 @@ import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 1/18/2018.
+ *
  */
 
 public class InfoScreen extends AbstractScreen {
     private static final String TAG = InfoScreen.class.getName();
+
+    /*
+     * Displays a message, image or animation in the center of the screen in a mutually exclusive manner.
+     * Display types:
+     *  - Normal: Always visible until hideInfo() is called
+     *  - Temporary: Just for a few seconds
+     *  - Modal: Force user interaction
+     * A message can be normal or temporary.
+     * An image can be normal, temporary or modal.
+     * An animation can be normal, temporary or modal.
+     */
 
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
