@@ -26,7 +26,7 @@ public class AssetLetsGo {
 
         // Animation
         regions = atlas.findRegions("letsGo");
-        stageLetsGoAnimation = new Animation(0.5f / 50.0f, regions);
+        stageLetsGoAnimation = new Animation(1.0f / 50.0f, regions);
         regions.clear();
     }
 
