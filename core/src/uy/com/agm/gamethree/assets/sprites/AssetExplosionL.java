@@ -15,8 +15,8 @@ public class AssetExplosionL {
     private static final String TAG = AssetExplosionL.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 320.0f * 1.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 320.0f * 1.0f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 320.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 320.0f * 0.8f / PlayScreen.PPM;
 
     private TextureRegion explosionLStand;
     private Animation explosionLAnimation;
@@ -28,7 +28,7 @@ public class AssetExplosionL {
 
         // Animation
         regions = atlas.findRegions("explosionL");
-        explosionLAnimation = new Animation(0.6f / 21.0f, regions);
+        explosionLAnimation = new Animation(1.0f / 21.0f, regions);
         regions.clear();
     }
 
