@@ -228,7 +228,7 @@ public class EnemyNine extends Enemy {
     public void onHit(Weapon weapon) {
         if (raid) {
             if (!damage) {
-                weapon.onBounce();
+                weapon.onTarget();
                 damage = true;
             } else {
                 super.onHit(weapon);
