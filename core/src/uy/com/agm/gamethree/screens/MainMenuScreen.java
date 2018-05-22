@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -48,20 +49,17 @@ public class MainMenuScreen extends AbstractScreen {
         table.setFillParent(true);
 
         // Personal fonts
-        Label.LabelStyle labelStyleBig = new Label.LabelStyle();
-        labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
-
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle
-        Label menuLabel = new Label(i18NGameThreeBundle.format("mainMenu.title"), labelStyleBig);
+        Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
         Label startGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.startGame"), labelStyleNormal);
         Label settingsLabel = new Label(i18NGameThreeBundle.format("mainMenu.settings"), labelStyleNormal);
         Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        table.add(menuLabel);
+        table.add(wipeThemOut);
         table.row();
         table.add(startGameLabel).padTop(AbstractScreen.PAD_TOP);
         table.row();
