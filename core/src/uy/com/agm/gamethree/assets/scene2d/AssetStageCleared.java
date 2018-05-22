@@ -26,7 +26,7 @@ public class AssetStageCleared {
 
         // Animation
         regions = atlas.findRegions("stageCleared");
-        stageClearedAnimation = new Animation(2.0f / 38.0f, regions);
+        stageClearedAnimation = new Animation(1.0f / 38.0f, regions);
         regions.clear();
     }
 
