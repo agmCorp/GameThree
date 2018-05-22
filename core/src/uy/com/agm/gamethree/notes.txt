@@ -194,6 +194,7 @@ https://developer.android.com/topic/performance/reduce-apk-size.html
 - Tiny png api key 7yaS9nq0e-PmOCid1k6me6gk_bjTamPq (para usar en Texture Packer)
 También lo puedo usar directo en https://tinypng.com/ para imágenes menores a 5 megas.
 Para imágenes más pesadas usar curl. Ver "lecciones aprendidas 24".
+- http://flamingtext.com/logo/Design-Cartoon Para crear fonts bonitas
 
 LECCIONES APRENDIDAS
 --------------------
