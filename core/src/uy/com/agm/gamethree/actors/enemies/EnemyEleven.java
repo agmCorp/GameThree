@@ -35,8 +35,8 @@ public class EnemyEleven extends Enemy {
     private static final float DENSITY = 1000.0f;
     private static final float SHOOT_TIME_SECONDS = 3.0f;
     private static final float FIRE_DELAY_SECONDS = 3.0f;
-    private static final int MIN_BULLETS = 2;
-    private static final int MAX_BULLETS = 3;
+    private static final int MIN_BULLETS = 1;
+    private static final int MAX_BULLETS = 2;
     private static final float SPEAK_TIME_SECONDS = 2.0f;
     private static final int SCORE = 20;
 
