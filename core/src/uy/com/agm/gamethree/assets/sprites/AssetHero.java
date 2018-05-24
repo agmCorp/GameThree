@@ -14,9 +14,13 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class AssetHero {
     private static final String TAG = AssetHero.class.getName();
 
+    // todo
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 128.0f * 0.7f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 128.0f * 0.7f / PlayScreen.PPM;
+//    public static final float WIDTH_METERS = 128.0f * 0.7f / PlayScreen.PPM;
+//    public static final float HEIGHT_METERS = 128.0f * 0.7f / PlayScreen.PPM;
+
+    public static final float WIDTH_METERS = 211.0f * 0.25f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 296.0f * 0.25f / PlayScreen.PPM;
 
     private TextureRegion heroStandUp;
     private TextureRegion heroStandDown;
@@ -33,22 +37,22 @@ public class AssetHero {
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingUpAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
+        heroMovingUpAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDown");
-        heroMovingDownAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
+        heroMovingDownAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP); // We use the same animation as heroMovingUpAnimation
+        heroMovingLeftRightAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP); // We use the same animation as heroMovingUpAnimation
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDead");
-        heroDeadAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
+        heroDeadAnimation = new Animation(0.5f / 25.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
