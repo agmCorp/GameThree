@@ -19,7 +19,7 @@ public class AssetHero {
 //    public static final float WIDTH_METERS = 128.0f * 0.7f / PlayScreen.PPM;
 //    public static final float HEIGHT_METERS = 128.0f * 0.7f / PlayScreen.PPM;
 
-    public static final float WIDTH_METERS = 211.0f * 0.25f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 296.0f * 0.25f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 296.0f * 0.25f / PlayScreen.PPM;
 
     private TextureRegion heroStandUp;
