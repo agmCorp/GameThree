@@ -14,6 +14,7 @@ import java.util.Locale;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 import uy.com.agm.gamethree.widget.HealthBar;
 
 /**
@@ -140,9 +141,14 @@ public class Hud extends AbstractScreen {
         // Add labels to the table
         upperTable.add(scoreLabel).width(SCORE_WIDTH);
         upperTable.add(timeLabel).width(TIME_WIDTH);
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHeroHead()), Scaling.fit)).width(LIVES_WIDTH);
+
+        AnimatedActor heroHead = new AnimatedActor();
+        heroHead.setAnimation(Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation());
+        upperTable.add(heroHead).width(LIVES_WIDTH);
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).width(SKULLS_WIDTH);
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getShuriken()), Scaling.fit)).width(SILVER_BULLETS_WIDTH);
+        AnimatedActor suriken = new AnimatedActor();
+        suriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
+        upperTable.add(suriken).width(SILVER_BULLETS_WIDTH);
 
         // Add a second row to our table
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
@@ -532,7 +538,9 @@ public class Hud extends AbstractScreen {
     @Override
     public void render(float delta) {
         // Calling to Stage methods
-        super.act(delta);
+        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+            super.act(delta);
+        }
         super.draw();
     }
 }

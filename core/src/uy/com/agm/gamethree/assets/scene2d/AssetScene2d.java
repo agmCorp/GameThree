@@ -41,11 +41,10 @@ public class AssetScene2d {
     private TextureRegion helpFinalEnemyLevelTwo;
     private TextureRegion helpFinalEnemyLevelThree;
     private TextureRegion table;
-    private TextureRegion red;
-    private TextureRegion heroHead;
     private TextureRegion skullHead;
     private TextureRegion shuriken;
     private TextureRegion wipeThemOut;
+    private AssetHeroHead heroHead;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
     private AssetStageFailed stageFailed;
@@ -85,11 +84,10 @@ public class AssetScene2d {
         helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
         helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
         table = atlasUI.findRegion("table");
-        red = atlasUI.findRegion("red");
-        heroHead = atlasUI.findRegion("heroHead");
         skullHead = atlasUI.findRegion("skullHead");
         shuriken = atlasUI.findRegion("shuriken");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
+        heroHead = new AssetHeroHead(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
         stageFailed = new AssetStageFailed(atlasUI);
@@ -221,14 +219,6 @@ public class AssetScene2d {
         return table;
     }
 
-    public TextureRegion getRed() {
-        return red;
-    }
-
-    public TextureRegion getHeroHead() {
-        return heroHead;
-    }
-
     public TextureRegion getSkullHead() {
         return skullHead;
     }
@@ -239,6 +229,10 @@ public class AssetScene2d {
 
     public TextureRegion getWipeThemOut() {
         return wipeThemOut;
+    }
+
+    public AssetHeroHead getHeroHead() {
+        return heroHead;
     }
 
     public AssetVictory getVictory() {
