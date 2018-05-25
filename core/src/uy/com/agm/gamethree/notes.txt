@@ -1,6 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
-- hacer los shurikens blancos, redimensionar hero.
+- hacer los shurikens blancos o ponerle un poder de fondo.
 - TERMINAR EL NIVEL 3
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.

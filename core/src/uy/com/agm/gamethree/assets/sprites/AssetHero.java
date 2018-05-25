@@ -14,13 +14,9 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 public class AssetHero {
     private static final String TAG = AssetHero.class.getName();
 
-    // todo
     // Constants (meters = pixels * resizeFactor / PPM)
-//    public static final float WIDTH_METERS = 128.0f * 0.7f / PlayScreen.PPM;
-//    public static final float HEIGHT_METERS = 128.0f * 0.7f / PlayScreen.PPM;
-
-    public static final float WIDTH_METERS = 296.0f * 0.25f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 296.0f * 0.25f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 127.0f * 0.6f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 127.0f * 0.6f / PlayScreen.PPM;
 
     private TextureRegion heroStandUp;
     private TextureRegion heroStandDown;
