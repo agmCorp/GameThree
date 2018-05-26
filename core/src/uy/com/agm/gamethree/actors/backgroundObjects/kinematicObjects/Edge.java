@@ -22,7 +22,7 @@ public class Edge {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = AbstractScreen.V_WIDTH / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 1.0f * 1.0f / PlayScreen.PPM;
-    public static final float SPEED_UP_VELOCITY = PlayScreen.GAMECAM_VELOCITY * 5;
+    public static final float SPEED_UP_VELOCITY = PlayScreen.GAME_CAMERA_VELOCITY * 5;
 
     private PlayScreen screen;
     private World world;
@@ -33,7 +33,7 @@ public class Edge {
     public Edge(PlayScreen screen, boolean isUpper) {
         this.screen = screen;
         this.world = screen.getWorld();
-        velocity = PlayScreen.GAMECAM_VELOCITY;
+        velocity = PlayScreen.GAME_CAMERA_VELOCITY;
         if (isUpper) {
             this.boundsMeters = new Rectangle(0, screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2 - HEIGHT_METERS, WIDTH_METERS, HEIGHT_METERS);
         } else {

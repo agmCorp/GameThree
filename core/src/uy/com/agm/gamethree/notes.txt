@@ -1,8 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
 - seguir trabajando con la ui
-- hacer un diario de mi edicion de hero, cambiar los helps.
-- ver las constantes de playscreen que hay muchas public.
 - Las explosiones de los vampiros están muy grandes y joden.
 Capaz que me conviene hacerlas más rápidas
 - hacer un help de skulls cuando se va el primer bicho capaz o al inicio.

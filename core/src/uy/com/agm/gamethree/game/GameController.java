@@ -56,7 +56,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 /*
@@ -89,7 +89,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 player.getB2body().setLinearVelocity(0, 0);
@@ -116,7 +116,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyDown(int keycode) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 // Control our player using linear velocity
@@ -147,7 +147,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean keyUp(int keycode) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (!player.isDead()) {
                 // Control our player using linear velocity
@@ -179,7 +179,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
                 if (!player.isDead() && !finalEnemy.isDestroyed()) {

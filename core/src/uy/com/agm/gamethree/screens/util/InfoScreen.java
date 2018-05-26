@@ -459,7 +459,7 @@ public class InfoScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         // Calling to Stage methods
-        if (screen.getPlayScreenState() == PlayScreen.PlayScreenState.RUNNING) {
+        if (screen.isPlayScreenStateRunning()) {
             super.act(delta);
         }
         super.draw();

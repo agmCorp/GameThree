@@ -76,10 +76,10 @@ public class PlayScreen extends AbstractScreen {
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
-    public static final float GAMECAM_VELOCITY = 0.304f;
+    public static final float GAME_CAMERA_VELOCITY = 0.304f;
 
     // Game state
-    public enum PlayScreenState {
+    private enum PlayScreenState {
         PAUSED, RUNNING
     }
     private PlayScreenState playScreenState;
@@ -646,8 +646,12 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    public PlayScreenState getPlayScreenState(){
-        return playScreenState;
+    public boolean isPlayScreenStateRunning() {
+        return playScreenState == PlayScreenState.RUNNING;
+    }
+
+    public boolean isPlayScreenStatePaused() {
+        return playScreenState == PlayScreenState.PAUSED;
     }
 
     public void setPlayScreenStatePaused(boolean pauseAudio){
