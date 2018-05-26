@@ -62,6 +62,7 @@ public class PlayScreen extends AbstractScreen {
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
 
     // World physics simulation parameters
+    private static final float MAX_FRAME_TIME = 0.25f;
     private static final float WORLD_TIME_STEP = 1/300.0f;
     private static final int WORLD_VELOCITY_ITERATIONS = 6;
     private static final int WORLD_POSITION_ITERATIONS = 2;
@@ -100,6 +101,7 @@ public class PlayScreen extends AbstractScreen {
     private InfoScreen infoScreen;
     private DimScreen dimScreen;
     private boolean levelStarts;
+    private boolean showRedFlashHelp;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -191,6 +193,9 @@ public class PlayScreen extends AbstractScreen {
         // Indicates that the level is just beginning
         levelStarts = true;
 
+        // Used to display a help about slippery enemies
+        showRedFlashHelp = true;
+
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
 
@@ -268,7 +273,7 @@ public class PlayScreen extends AbstractScreen {
     private void doPhysicsStep(float dt) {
         // Fixed time step
         // Max frame time to avoid spiral of death (on slow devices)
-        float frameTime = Math.min(dt, 0.25f);
+        float frameTime = Math.min(dt, MAX_FRAME_TIME);
         accumulator += frameTime;
         while (accumulator >= WORLD_TIME_STEP) {
             world.step(WORLD_TIME_STEP, WORLD_VELOCITY_ITERATIONS, WORLD_POSITION_ITERATIONS);
@@ -673,7 +678,12 @@ public class PlayScreen extends AbstractScreen {
     public void enemyGetAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
             hud.decreaseSkulls(1);
-            infoScreen.showRedFlash();
+            if (showRedFlashHelp) {
+                infoScreen.showRedFlashHelp();
+                showRedFlashHelp = false;
+            } else {
+                infoScreen.showRedFlash();
+            }
         }
     }
 

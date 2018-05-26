@@ -53,6 +53,7 @@ public class InfoScreen extends AbstractScreen {
     private static final float BUTTONS_PAD = 20.0f;
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float RED_FLASH_TIME = 0.1f;
+    private static final float LIGHT_RED_FLASH_ALPHA = 0.5f;
     private static final float LETS_GO_TIME = 1.0f;
 
     private PlayScreen screen;
@@ -87,6 +88,7 @@ public class InfoScreen extends AbstractScreen {
     private Cell stackCell;
 
     private TextureRegion redFlash;
+    private TextureRegion lightRedFlash;
 
     public InfoScreen(PlayScreen screen, Integer level) {
         super();
@@ -124,6 +126,13 @@ public class InfoScreen extends AbstractScreen {
         pixmap.fill();
         redFlash = new TextureRegion(new Texture(pixmap));
         pixmap.dispose();
+
+        // Light red flash Texture
+        pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
+        pixmap.setColor(1, 0, 0, LIGHT_RED_FLASH_ALPHA);
+        pixmap.fill();
+        lightRedFlash = new TextureRegion(new Texture(pixmap));
+        pixmap.dispose();
     }
 
     private void defineCenterTable() {
@@ -142,6 +151,7 @@ public class InfoScreen extends AbstractScreen {
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyleBig);
         messageLabel.setAlignment(Align.center);
+        messageLabel.setWrap(true);
 
         // Define animatedActor and image
         animatedActor = new AnimatedActor();
@@ -254,17 +264,21 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showImage(TextureRegion textureRegion, float width, float height) {
+        setImage(textureRegion, width, height);
+
+        image.setVisible(true);
+        messageLabel.setVisible(false);
+        animatedActor.setVisible(false);
+        centerTable.setVisible(true);
+    }
+
+    private void setImage(TextureRegion textureRegion, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
         // WA: Using new each time is the only way I found to set the correct size
         // This could be a memory leak
         image.setDrawable(new TextureRegionDrawable(textureRegion));
         image.setScaling(Scaling.fit);
-
-        image.setVisible(true);
-        messageLabel.setVisible(false);
-        animatedActor.setVisible(false);
-        centerTable.setVisible(true);
     }
 
     public void showImage(TextureRegion textureRegion, float seconds) {
@@ -387,6 +401,18 @@ public class InfoScreen extends AbstractScreen {
 
     public void showRedFlash() {
         showImage(redFlash, RED_FLASH_TIME);
+    }
+
+    public void showRedFlashHelp() {
+        gotItLabel.setVisible(true);
+        setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
+        image.setVisible(true);
+        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
+        messageLabel.setVisible(true);
+        animatedActor.setVisible(false);
+        centerTable.setVisible(true);
+        screen.getDimScreen().hideButtons();
+        screen.setPlayScreenStatePaused(false);
     }
 
     public boolean isRedFlashVisible() {

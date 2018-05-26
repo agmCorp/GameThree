@@ -3,7 +3,6 @@ HACER PRIORIDAD 1
 - seguir trabajando con la ui
 - Las explosiones de los vampiros están muy grandes y joden.
 Capaz que me conviene hacerlas más rápidas
-- hacer un help de skulls cuando se va el primer bicho capaz o al inicio.
 - TERMINAR EL NIVEL 3
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
