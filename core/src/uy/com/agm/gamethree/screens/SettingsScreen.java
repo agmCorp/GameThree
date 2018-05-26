@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -75,8 +76,8 @@ public class SettingsScreen extends AbstractScreen {
         Image soundFX = new Image(Assets.getInstance().getScene2d().getSoundFX());
         Image target = new Image(Assets.getInstance().getScene2d().getTarget());
         shootingSettingLabel = new Label("SHOOTING", labelStyleNormal);
+        shootingSettingLabel.setAlignment(Align.center);
         setTextLabelShooting();
-        Label backLabel = new Label(i18NGameThreeBundle.format("settings.backToMenu"), labelStyleNormal);
 
         //Slider style
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
@@ -94,19 +95,35 @@ public class SettingsScreen extends AbstractScreen {
         // Add values
         table.add(settingsLabel);
         table.row();
-        table.add(music).padTop(AbstractScreen.PAD_TOP);
+        table.add(music).padTop(AbstractScreen.PAD);
         table.row();
         table.add(sliderMusic).width(SLIDER_WIDTH);
         table.row();
-        table.add(soundFX).padTop(AbstractScreen.PAD_TOP);
+        table.add(soundFX).padTop(AbstractScreen.PAD);
         table.row();
         table.add(sliderSound).width(SLIDER_WIDTH);
         table.row();
-        table.add(target).padTop(AbstractScreen.PAD_TOP);;
+        table.add(target).padTop(AbstractScreen.PAD);;
         table.row();
         table.add(shootingSettingLabel);
-        table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
+
+        // Set table structure
+        Table navigation = new Table();
+
+        // Debug lines
+        navigation.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        navigation.bottom();
+
+        // Make the table fill the entire stage
+        navigation.setFillParent(true);
+
+        // Define images
+        Image back = new Image(Assets.getInstance().getScene2d().getBack());
+
+        // Add values
+        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         sliderMusic.addListener(new ChangeListener() {
@@ -157,10 +174,11 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
-        backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created table to stage
+        // Adds created tables to stage
         addActor(table);
+        addActor(navigation);
     }
 
     private void playSampleSound() {

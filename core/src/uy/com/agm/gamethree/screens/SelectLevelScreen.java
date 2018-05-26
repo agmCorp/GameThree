@@ -60,13 +60,13 @@ public class SelectLevelScreen extends AbstractScreen {
         for (int level : GameSettings.getInstance().getAvailableLevels()) {
             table.row();
             levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
-            table.add(levelLabel).padTop(AbstractScreen.PAD_TOP);
+            table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events
             levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, Hero.LIVES_START, 0));
         }
         table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

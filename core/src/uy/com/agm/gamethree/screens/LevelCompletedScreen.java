@@ -83,19 +83,19 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(currentLevelLabel);
         table.row();
-        table.add(animatedActor).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD_TOP);
+        table.add(animatedActor).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(finalScoreLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             table.row();
-            table.add(nextLevelLabel).padTop(AbstractScreen.PAD_TOP * 2);
+            table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(AbstractScreen.PAD_TOP * 2);
+            table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
         }
         table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD * 2);
 
         // Events
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {

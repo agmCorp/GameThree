@@ -68,7 +68,7 @@ public class GameOverScreen extends AbstractScreen {
         // Add values
         table.add(animatedActor).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
         table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
+        table.add(backLabel).padTop(AbstractScreen.PAD * 2);
 
         // Events
         backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

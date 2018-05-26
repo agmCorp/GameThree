@@ -42,15 +42,11 @@ public class MainMenuScreen extends AbstractScreen {
         // Debug lines
         table.setDebug(PlayScreen.DEBUG_MODE);
 
-        // Center-Align table
-        table.center();
+        // Top-Align table
+        table.top();
 
         // Make the table fill the entire stage
         table.setFillParent(true);
-
-        // Personal fonts
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Define our labels based on labelStyle and images
         Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
@@ -58,18 +54,37 @@ public class MainMenuScreen extends AbstractScreen {
         Image settings = new Image(Assets.getInstance().getScene2d().getSettings());
         Image help = new Image(Assets.getInstance().getScene2d().getHelp());
         Image credits = new Image(Assets.getInstance().getScene2d().getCredits());
-        Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        table.add(wipeThemOut).colspan(3);
+        table.add(wipeThemOut).colspan(3).padTop(AbstractScreen.PAD * 2);
         table.row();
         table.add(play).colspan(3);
         table.row();
         table.add(settings).expandX();
         table.add(help).expandX();
         table.add(credits).expandX();
-        table.row();
-        table.add(exitGameLabel).colspan(3).padTop(AbstractScreen.PAD_TOP);
+
+        // Set table structure
+        Table navigation = new Table();
+
+        // Debug lines
+        navigation.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        navigation.bottom();
+
+        // Make the table fill the entire stage
+        navigation.setFillParent(true);
+
+        // Personal fonts
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
+
+        // Define our labels based on labelStyle
+        Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
+
+        // Add values
+        navigation.add(exitGameLabel).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         play.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
@@ -85,8 +100,9 @@ public class MainMenuScreen extends AbstractScreen {
                     }
                 });
 
-        // Adds created table to stage
+        // Adds created tables to stage
         addActor(table);
+        addActor(navigation);
     }
 
     @Override
