@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -78,7 +79,6 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
-        Label backLabel = new Label(i18NGameThreeBundle.format("levelCompleted.backToMenu"), labelStyleNormal);
 
         // Add values
         table.add(currentLevelLabel);
@@ -94,17 +94,34 @@ public class LevelCompletedScreen extends AbstractScreen {
             table.row();
             table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
         }
-        table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD * 2);
+
+        // Set table structure
+        Table navigation = new Table();
+
+        // Debug lines
+        navigation.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        navigation.bottom();
+
+        // Make the table fill the entire stage
+        navigation.setFillParent(true);
+
+        // Define images
+        Image back = new Image(Assets.getInstance().getScene2d().getBack());
+
+        // Add values
+        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.lives, this.finalScore));
         }
-        backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created table to stage
+        // Adds created tables to stage
         addActor(table);
+        addActor(navigation);
     }
 
     @Override

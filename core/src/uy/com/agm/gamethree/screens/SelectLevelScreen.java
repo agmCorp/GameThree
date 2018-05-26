@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -51,7 +52,6 @@ public class SelectLevelScreen extends AbstractScreen {
 
         // Define our labels based on labelStyle
         Label selectLevelLabel = new Label(i18NGameThreeBundle.format("selectLevel.title"), labelStyleBig);
-        Label backLabel = new Label(i18NGameThreeBundle.format("selectLevel.backToMenu"), labelStyleNormal);
 
         // Add values
         table.add(selectLevelLabel);
@@ -65,14 +65,31 @@ public class SelectLevelScreen extends AbstractScreen {
             // Events
             levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, Hero.LIVES_START, 0));
         }
-        table.row();
-        table.add(backLabel).padTop(AbstractScreen.PAD * 2);
+
+        // Set table structure
+        Table navigation = new Table();
+
+        // Debug lines
+        navigation.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        navigation.bottom();
+
+        // Make the table fill the entire stage
+        navigation.setFillParent(true);
+
+        // Define images
+        Image back = new Image(Assets.getInstance().getScene2d().getBack());
+
+        // Add values
+        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        backLabel.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created table to stage
+        // Adds created tables to stage
         addActor(table);
+        addActor(navigation);
     }
 
     @Override

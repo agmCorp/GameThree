@@ -223,3 +223,25 @@ Lo analice. No lo voy a hacer, los items cuando salen de la pantalla (con cierto
 Si los hago rebotar en los bordes tendria que borrar toda esa logica tan linda.
 Ademas si destruyo una power box en el borde superior de la pantalla, el item se crea sobre el upperedge y como choca, siempre
 seria arrastrado hacia arriba y nunca lo veria. O sea, es otro problema extra y en suma no agrega nada.
+-----------------------------------------------------------------------------------------------
+PARA PROBAR PANTALLAS
+        // basura
+        credits.addListener(
+        new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                // Audio FX
+                ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, 3, 3, 33);
+                return false;
+            }
+        });
+        help.addListener(
+                new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
+                        return false;
+                    }
+                });
+        // finbasura
