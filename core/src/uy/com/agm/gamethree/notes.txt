@@ -1,6 +1,8 @@
 HACER PRIORIDAD 1
 -----------------
-- seguir trabajando con la ui
+- seguir trabajando con la ui, creo que showredflash deberia estar en dimscreen. Hay que ver
+si su help tambien. El problema es que si hay un help no modal en pantalla y se me escapa un bicho,
+la redscreen lo cierra.
 - Las explosiones de los vampiros están muy grandes y joden.
 Capaz que me conviene hacerlas más rápidas
 - TERMINAR EL NIVEL 3
