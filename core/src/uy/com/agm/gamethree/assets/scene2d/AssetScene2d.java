@@ -44,6 +44,11 @@ public class AssetScene2d {
     private TextureRegion skullHead;
     private TextureRegion shuriken;
     private TextureRegion wipeThemOut;
+    private TextureRegion play;
+    private TextureRegion settings;
+    private TextureRegion help;
+    private TextureRegion credits;
+    private TextureRegion exit;
     private AssetHeroHead heroHead;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -87,6 +92,11 @@ public class AssetScene2d {
         skullHead = atlasUI.findRegion("skullHead");
         shuriken = atlasUI.findRegion("shuriken");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
+        play = atlasUI.findRegion("play");
+        settings = atlasUI.findRegion("settings");
+        help = atlasUI.findRegion("help");
+        credits = atlasUI.findRegion("credits");
+        exit = atlasUI.findRegion("exit");
         heroHead = new AssetHeroHead(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -229,6 +239,26 @@ public class AssetScene2d {
 
     public TextureRegion getWipeThemOut() {
         return wipeThemOut;
+    }
+
+    public TextureRegion getPlay() {
+        return play;
+    }
+
+    public TextureRegion getSettings() {
+        return settings;
+    }
+
+    public TextureRegion getHelp() {
+        return help;
+    }
+
+    public TextureRegion getCredits() {
+        return credits;
+    }
+
+    public TextureRegion getExit() {
+        return exit;
     }
 
     public AssetHeroHead getHeroHead() {

@@ -52,24 +52,27 @@ public class MainMenuScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
-        // Define our labels based on labelStyle
         Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
-        Label startGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.startGame"), labelStyleNormal);
-        Label settingsLabel = new Label(i18NGameThreeBundle.format("mainMenu.settings"), labelStyleNormal);
+        Image play = new Image(Assets.getInstance().getScene2d().getPlay());
+        Image settings = new Image(Assets.getInstance().getScene2d().getSettings());
+        Image help = new Image(Assets.getInstance().getScene2d().getHelp());
+        Image credits = new Image(Assets.getInstance().getScene2d().getCredits());
         Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        table.add(wipeThemOut);
+        table.add(wipeThemOut).colspan(3);
         table.row();
-        table.add(startGameLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(play).colspan(3);
         table.row();
-        table.add(settingsLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(settings).expandX();
+        table.add(help).expandX();
+        table.add(credits).expandX();
         table.row();
-        table.add(exitGameLabel).padTop(AbstractScreen.PAD_TOP * 2);
+        table.add(exitGameLabel).colspan(3).padTop(AbstractScreen.PAD_TOP);
 
         // Events
-        startGameLabel.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
-        settingsLabel.addListener(UIFactory.createListener(ScreenEnum.SETTINGS));
+        play.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
+        settings.addListener(UIFactory.createListener(ScreenEnum.SETTINGS));
         exitGameLabel.addListener(
                 new InputListener() {
                     @Override

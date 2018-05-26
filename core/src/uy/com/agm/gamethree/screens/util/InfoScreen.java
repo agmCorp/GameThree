@@ -62,8 +62,13 @@ public class InfoScreen extends AbstractScreen {
     // Track help screens depending on the object's class name
     private ObjectMap<String, DynamicHelpDef> dynamicHelp;
 
+    private enum MessageSize {
+        BIG, NORMAL, SMALL
+    }
+
     private I18NBundle i18NGameThreeBundle;
     private Label.LabelStyle labelStyleBig;
+    private Label.LabelStyle labelStyleNormal;
     private Label.LabelStyle labelStyleSmall;
 
     // Animations
@@ -111,6 +116,9 @@ public class InfoScreen extends AbstractScreen {
         // Personal fonts
         labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
+
+        labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
@@ -236,9 +244,21 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Message functions
 
-    public void showMessage(String message, boolean big) {
+    public void showMessage(String message, MessageSize messageSize) {
         messageLabel.setText(message);
-        messageLabel.setStyle(big ? labelStyleBig : labelStyleSmall);
+        switch (messageSize) {
+            case BIG:
+                messageLabel.setStyle(labelStyleBig);
+                break;
+            case NORMAL:
+                messageLabel.setStyle(labelStyleNormal);
+                break;
+            case SMALL:
+                messageLabel.setStyle(labelStyleSmall);
+                break;
+            default:
+                break;
+        }
         messageLabel.setVisible(true);
         animatedActor.setVisible(false);
         image.setVisible(false);
@@ -251,7 +271,7 @@ public class InfoScreen extends AbstractScreen {
         overlayTemporaryMessage = true;
         overlayTemporaryImage = false;
         overlayTemporaryAnimation = false;
-        showMessage(message, big);
+        showMessage(message, MessageSize.BIG);
     }
 
     public boolean isMessageVisible() {
@@ -381,11 +401,11 @@ public class InfoScreen extends AbstractScreen {
     // ----------- Specialized functions
 
     public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), true);
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG);
     }
 
     public void showTimeIsUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), true);
+        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), MessageSize.BIG);
     }
 
     public void showEmptySkullsAnimation() {
@@ -397,7 +417,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showFightMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.fight"), true);
+        showMessage(i18NGameThreeBundle.format("infoScreen.fight"), MessageSize.BIG);
     }
 
     public void showRedFlash() {
@@ -409,6 +429,7 @@ public class InfoScreen extends AbstractScreen {
         setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
         image.setVisible(true);
         messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
+        messageLabel.setStyle(labelStyleSmall);
         messageLabel.setVisible(true);
         animatedActor.setVisible(false);
         centerTable.setVisible(true);
