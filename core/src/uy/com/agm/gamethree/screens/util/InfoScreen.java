@@ -149,7 +149,7 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setFillParent(true);
 
         // Define a label based on labelStyle
-        messageLabel = new Label("MESSAGE", labelStyleBig);
+        messageLabel = new Label("MESSAGE", labelStyleSmall);
         messageLabel.setAlignment(Align.center);
         messageLabel.setWrap(true);
 
@@ -236,21 +236,22 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Message functions
 
-    public void showMessage(String message) {
+    public void showMessage(String message, boolean big) {
         messageLabel.setText(message);
+        messageLabel.setStyle(big ? labelStyleBig : labelStyleSmall);
         messageLabel.setVisible(true);
         animatedActor.setVisible(false);
         image.setVisible(false);
         centerTable.setVisible(true);
     }
 
-    public void showMessage(String message, float seconds) {
+    public void showMessage(String message, boolean big, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
         overlayTemporaryImage = false;
         overlayTemporaryAnimation = false;
-        showMessage(message);
+        showMessage(message, big);
     }
 
     public boolean isMessageVisible() {
@@ -380,11 +381,11 @@ public class InfoScreen extends AbstractScreen {
     // ----------- Specialized functions
 
     public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), true);
     }
 
     public void showTimeIsUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), true);
     }
 
     public void showEmptySkullsAnimation() {
@@ -396,7 +397,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showFightMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.fight"));
+        showMessage(i18NGameThreeBundle.format("infoScreen.fight"), true);
     }
 
     public void showRedFlash() {
