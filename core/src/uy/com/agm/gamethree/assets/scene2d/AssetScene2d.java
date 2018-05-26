@@ -42,13 +42,15 @@ public class AssetScene2d {
     private TextureRegion helpFinalEnemyLevelThree;
     private TextureRegion table;
     private TextureRegion skullHead;
-    private TextureRegion shuriken;
     private TextureRegion wipeThemOut;
     private TextureRegion play;
     private TextureRegion settings;
     private TextureRegion help;
     private TextureRegion credits;
-    private TextureRegion exit;
+    private TextureRegion music;
+    private TextureRegion soundFX;
+    private TextureRegion target;
+    private TextureRegion back;
     private AssetHeroHead heroHead;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -90,13 +92,15 @@ public class AssetScene2d {
         helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
         table = atlasUI.findRegion("table");
         skullHead = atlasUI.findRegion("skullHead");
-        shuriken = atlasUI.findRegion("shuriken");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
         play = atlasUI.findRegion("play");
         settings = atlasUI.findRegion("settings");
         help = atlasUI.findRegion("help");
         credits = atlasUI.findRegion("credits");
-        exit = atlasUI.findRegion("exit");
+        music = atlasUI.findRegion("music");
+        soundFX = atlasUI.findRegion("soundFX");
+        target = atlasUI.findRegion("target");
+        back = atlasUI.findRegion("back");
         heroHead = new AssetHeroHead(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -233,10 +237,6 @@ public class AssetScene2d {
         return skullHead;
     }
 
-    public TextureRegion getShuriken() {
-        return shuriken;
-    }
-
     public TextureRegion getWipeThemOut() {
         return wipeThemOut;
     }
@@ -257,8 +257,20 @@ public class AssetScene2d {
         return credits;
     }
 
-    public TextureRegion getExit() {
-        return exit;
+    public TextureRegion getMusic() {
+        return music;
+    }
+
+    public TextureRegion getSoundFX() {
+        return soundFX;
+    }
+
+    public TextureRegion getTarget() {
+        return target;
+    }
+
+    public TextureRegion getBack() {
+        return back;
     }
 
     public AssetHeroHead getHeroHead() {

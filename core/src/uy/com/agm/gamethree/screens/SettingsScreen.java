@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -68,11 +69,11 @@ public class SettingsScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
-        // Define our labels based on labelStyle
+        // Define our labels based on labelStyle and images
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
-        Label musicLabel = new Label(i18NGameThreeBundle.format("settings.music"), labelStyleNormal);
-        Label soundEffectsLabel = new Label(i18NGameThreeBundle.format("settings.soundEffects"), labelStyleNormal);
-        Label shootingLabel = new Label(i18NGameThreeBundle.format("settings.shooting"), labelStyleNormal);
+        Image music = new Image(Assets.getInstance().getScene2d().getMusic());
+        Image soundFX = new Image(Assets.getInstance().getScene2d().getSoundFX());
+        Image target = new Image(Assets.getInstance().getScene2d().getTarget());
         shootingSettingLabel = new Label("SHOOTING", labelStyleNormal);
         setTextLabelShooting();
         Label backLabel = new Label(i18NGameThreeBundle.format("settings.backToMenu"), labelStyleNormal);
@@ -93,17 +94,17 @@ public class SettingsScreen extends AbstractScreen {
         // Add values
         table.add(settingsLabel);
         table.row();
-        table.add(musicLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(music).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD_TOP);
+        table.add(sliderMusic).width(SLIDER_WIDTH);
         table.row();
-        table.add(soundEffectsLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(soundFX).padTop(AbstractScreen.PAD_TOP);
         table.row();
-        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD_TOP);
+        table.add(sliderSound).width(SLIDER_WIDTH);
         table.row();
-        table.add(shootingLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(target).padTop(AbstractScreen.PAD_TOP);;
         table.row();
-        table.add(shootingSettingLabel).padTop(AbstractScreen.PAD_TOP);
+        table.add(shootingSettingLabel);
         table.row();
         table.add(backLabel).padTop(AbstractScreen.PAD_TOP * 2);
 

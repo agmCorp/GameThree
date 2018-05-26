@@ -52,6 +52,7 @@ public class MainMenuScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
+        // Define our labels based on labelStyle and images
         Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
         Image play = new Image(Assets.getInstance().getScene2d().getPlay());
         Image settings = new Image(Assets.getInstance().getScene2d().getSettings());
