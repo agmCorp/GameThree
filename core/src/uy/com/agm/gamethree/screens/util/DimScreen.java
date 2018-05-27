@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.AbstractScreen;
@@ -28,6 +29,7 @@ public class DimScreen extends AbstractScreen {
     private static final String TAG = DimScreen.class.getName();
 
     // Constants
+    private static final float BUTTON_WIDTH = 100.0f;
     private static final float DIM_SCREEN_ALPHA = 0.5f;
     private static final float BUTTON_SIZE_NORMAL = 68.0f;
     private static final float BUTTON_SIZE_SMALL = 30.0f;
@@ -115,6 +117,8 @@ public class DimScreen extends AbstractScreen {
 
         // Define images
         pause = new Image(Assets.getInstance().getScene2d().getPause());
+        pause.setScaling(Scaling.fit);
+        pause.setAlign(Align.left);
         resume = new Image(Assets.getInstance().getScene2d().getResume());
         quit = new Image(Assets.getInstance().getScene2d().getQuit());
         quit.setAlign(Align.right);
@@ -167,7 +171,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showPauseButton() {
-        stackCell.size(BUTTON_SIZE_SMALL).left().bottom();
+        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().bottom();
         buttonsTable.pack();
         pause.setVisible(true);
         resume.setVisible(false);
