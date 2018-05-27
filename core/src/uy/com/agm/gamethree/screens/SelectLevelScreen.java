@@ -57,7 +57,7 @@ public class SelectLevelScreen extends AbstractScreen {
         table.add(selectLevelLabel);
         table.row();
         Label levelLabel;
-        for (LevelState levelState : GameSettings.getInstance().getAvailableLevels().values()) {
+        for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
             table.row();
             levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", levelState.getLevel()), labelStyleNormal);
             table.add(levelLabel).padTop(AbstractScreen.PAD);
