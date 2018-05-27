@@ -117,7 +117,7 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Events
         if (nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, nextLevel, finalLives, finalScore, finalSkulls));
+            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 

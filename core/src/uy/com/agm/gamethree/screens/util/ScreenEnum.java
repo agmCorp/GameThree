@@ -37,7 +37,7 @@ public enum ScreenEnum {
         }
     },
 
-    GAME {
+    PLAY_GAME {
         public AbstractScreen getScreen(Object... params) {
             return new PlayScreen((Integer) params[0], (Integer) params[1], (Integer) params[2], (Integer) params[3]);
         }
