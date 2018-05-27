@@ -4,8 +4,8 @@ package uy.com.agm.gamethree.game;
  * Created by AGM on 5/27/2018.
  */
 
-public class GameState {
-    private static final String TAG = GameState.class.getName();
+public class LevelState {
+    private static final String TAG = LevelState.class.getName();
 
     private int level;
     private int lives;
@@ -13,7 +13,7 @@ public class GameState {
     private int skulls;
     private boolean active;
 
-    public GameState() {
+    public LevelState() {
         this.level = 0;
         this.lives = 0;
         this.score = 0;
@@ -21,7 +21,7 @@ public class GameState {
         this.active = false;
     }
 
-    public GameState(int level, int lives, int score, int skulls, boolean active) {
+    public LevelState(int level, int lives, int score, int skulls, boolean active) {
         this.level = level;
         this.lives = lives;
         this.score = score;

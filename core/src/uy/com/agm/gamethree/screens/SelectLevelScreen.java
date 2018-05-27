@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.game.GameState;
+import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -57,13 +57,13 @@ public class SelectLevelScreen extends AbstractScreen {
         table.add(selectLevelLabel);
         table.row();
         Label levelLabel;
-        for (GameState gameState : GameSettings.getInstance().getAvailableLevels().values()) {
+        for (LevelState levelState : GameSettings.getInstance().getAvailableLevels().values()) {
             table.row();
-            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", gameState.getLevel()), labelStyleNormal);
+            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", levelState.getLevel()), labelStyleNormal);
             table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events
-            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, gameState.getLevel(), gameState.getLives(), gameState.getScore(), gameState.getSkulls()));
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, levelState.getLevel(), levelState.getLives(), levelState.getScore(), levelState.getSkulls()));
         }
 
         // Set table structure

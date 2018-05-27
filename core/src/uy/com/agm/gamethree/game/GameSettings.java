@@ -23,7 +23,7 @@ public class GameSettings {
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
     private static final String MANUAL_SHOOTING = "manualShooting";
-    private static final String AVAILABLE_LEVEL = "availableLevel_";
+    private static final String LEVEL_STATE = "levelState_";
     private static final String SETTINGS = "uy.com.agm.gameThree.settings";
     private static final float DEFAULT_VOLUME = 0.5f;
     private static final float MIN_VOLUME = 0.0f;
@@ -38,13 +38,13 @@ public class GameSettings {
     private float volSound;
     private float volMusic;
     private boolean manualShooting;
-    private ArrayMap<Integer, GameState> availableLevels;
+    private ArrayMap<Integer, LevelState> availableLevels;
     private Preferences prefs;
     private Json json;
 
     // Singleton: prevent instantiation from other classes
     private GameSettings() {
-        availableLevels = new ArrayMap<Integer, GameState>();
+        availableLevels = new ArrayMap<Integer, LevelState>();
         prefs = Gdx.app.getPreferences(SETTINGS);
         json = new Json();
     }
@@ -57,12 +57,12 @@ public class GameSettings {
         return instance;
     }
 
-    private String getData(GameState gameState) {
-        return json.toJson(gameState);
+    private String getData(LevelState levelState) {
+        return json.toJson(levelState);
     }
 
-    private GameState getGameState(String data) {
-        return json.fromJson(GameState.class, data);
+    private LevelState getGameState(String data) {
+        return json.fromJson(LevelState.class, data);
     }
 
     public void load () {
@@ -73,19 +73,19 @@ public class GameSettings {
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
 
         int level = 1; // Default level
-        GameState gameState = new GameState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), true);
-        availableLevels.put(level, gameState);
+        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), true);
+        availableLevels.put(level, levelState);
 
         // Other levels
         level++;
         String data;
         boolean availableLevel;
         do {
-            data = prefs.getString(AVAILABLE_LEVEL + level, "");
+            data = prefs.getString(LEVEL_STATE + level, "");
             if (data.isEmpty()) {
                 if (PlayScreen.DEBUG_LEVELS) {
                     if (level <= MAX_AVAILABLE_LEVEL) {
-                        gameState = new GameState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
+                        levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
                         availableLevel = true;
                     } else {
                         availableLevel = false;
@@ -94,8 +94,8 @@ public class GameSettings {
                     availableLevel = false;
                 }
             } else {
-                gameState = getGameState(data);
-                if (gameState.isActive()) {
+                levelState = getGameState(data);
+                if (levelState.isActive()) {
                     availableLevel = true;
                 } else {
                     if (PlayScreen.DEBUG_LEVELS) {
@@ -106,7 +106,7 @@ public class GameSettings {
                 }
             }
             if (availableLevel) {
-                availableLevels.put(level, gameState);
+                availableLevels.put(level, levelState);
                 level++;
             }
         } while (availableLevel);
@@ -118,8 +118,8 @@ public class GameSettings {
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
-        for(GameState gameState : availableLevels.values()) {
-            prefs.putString(AVAILABLE_LEVEL + gameState.getLevel(), getData(gameState));
+        for(LevelState levelState : availableLevels.values()) {
+            prefs.putString(LEVEL_STATE + levelState.getLevel(), getData(levelState));
         }
         prefs.flush();
     }
@@ -164,12 +164,12 @@ public class GameSettings {
         this.manualShooting = manualShooting;
     }
 
-    public ArrayMap<Integer, GameState> getAvailableLevels() {
+    public ArrayMap<Integer, LevelState> getAvailableLevels() {
         return availableLevels;
     }
 
     public void addActiveLevel(int level, int lives, int score, int skulls) {
-        GameState gameState = new GameState(level, lives, score, skulls, true);
-        availableLevels.put(level, gameState);
+        LevelState levelState = new LevelState(level, lives, score, skulls, true);
+        availableLevels.put(level, levelState);
     }
 }
