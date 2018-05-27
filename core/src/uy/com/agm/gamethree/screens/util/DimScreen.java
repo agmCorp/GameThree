@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
@@ -27,14 +28,14 @@ public class DimScreen extends AbstractScreen {
     private static final String TAG = DimScreen.class.getName();
 
     // Constants
-    private static final float BUTTONS_PAD = 20.0f;
     private static final float DIM_SCREEN_ALPHA = 0.5f;
+    private static final float BUTTON_SIZE_NORMAL = 68.0f;
+    private static final float BUTTON_SIZE_SMALL = 30.0f;
 
     private PlayScreen screen;
 
     private I18NBundle i18NGameThreeBundle;
     private Label.LabelStyle labelStyleBig;
-    private Label.LabelStyle labelStyleSmall;
 
     private Table centerTable;
     private Label messageLabel;
@@ -44,6 +45,7 @@ public class DimScreen extends AbstractScreen {
     private Image resume;
     private Image quit;
     private Stack stack;
+    private Cell stackCell;
 
     private TextureRegion dim;
 
@@ -59,9 +61,6 @@ public class DimScreen extends AbstractScreen {
         // Personal fonts
         labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
-
-        labelStyleSmall = new Label.LabelStyle();
-        labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Dim Texture
         Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
@@ -109,7 +108,7 @@ public class DimScreen extends AbstractScreen {
         buttonsTable.setDebug(PlayScreen.DEBUG_MODE);
 
         // Bottom-Align table
-        buttonsTable.bottom().padLeft(BUTTONS_PAD).padRight(BUTTONS_PAD);
+        buttonsTable.bottom();
 
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);
@@ -124,7 +123,7 @@ public class DimScreen extends AbstractScreen {
         stack = new Stack();
         stack.add(pause);
         stack.add(resume);
-        buttonsTable.add(stack).size(30,30).left().bottom().expandX(); // Pause and Resume are overlapped
+        stackCell = buttonsTable.add(stack); // Pause and Resume are overlapped
         buttonsTable.add(quit).right().expandX();
 
         // Events
@@ -164,17 +163,27 @@ public class DimScreen extends AbstractScreen {
         // Add the table to the stage
         addActor(buttonsTable);
 
-        // Initially hidden
+        showPauseButton();
+    }
+
+    private void showPauseButton() {
+        stackCell.size(BUTTON_SIZE_SMALL).left().bottom();
+        buttonsTable.pack();
+        pause.setVisible(true);
         resume.setVisible(false);
         quit.setVisible(false);
     }
 
-    public void setGameStatePaused() {
+    private void showResumeButton() {
+        stackCell.size(BUTTON_SIZE_NORMAL).left();
+        buttonsTable.pack();
         pause.setVisible(false);
         resume.setVisible(true);
-
-        resume.setWidth(90);
         quit.setVisible(true);
+    }
+
+    public void setGameStatePaused() {
+        showResumeButton();
         buttonsTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
@@ -190,9 +199,7 @@ public class DimScreen extends AbstractScreen {
 
     private void setGameStateRunning() {
         hideMessage();
-        pause.setVisible(true);
-        resume.setVisible(false);
-        quit.setVisible(false);
+        showPauseButton();
         if (!screen.getInfoScreen().isModalVisible()) {
             screen.setPlayScreenStateRunning();
         } else {
