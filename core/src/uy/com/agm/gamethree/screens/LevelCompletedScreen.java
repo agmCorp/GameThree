@@ -35,7 +35,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.finalScore = finalScore;
         this.finalSkulls = finalSkulls;
         this.nextLevel = currentLevel + 1;
-        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
+        if (this.nextLevel <= GameSettings.MAX_LEVEL) {
             GameSettings.getInstance().addActiveLevel(nextLevel, finalLives, finalScore, finalSkulls);
             GameSettings.getInstance().save();
         }
@@ -89,7 +89,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        if (nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
+        if (nextLevel <= GameSettings.MAX_LEVEL) {
             table.row();
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
         } else {
@@ -116,7 +116,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        if (nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
+        if (nextLevel <= GameSettings.MAX_LEVEL) {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));

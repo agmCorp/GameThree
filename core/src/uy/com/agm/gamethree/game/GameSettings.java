@@ -28,7 +28,7 @@ public class GameSettings {
     private static final float DEFAULT_VOLUME = 0.5f;
     private static final float MIN_VOLUME = 0.0f;
     private static final float MAX_VOLUME = 1.0f;
-    public static final int MAX_AVAILABLE_LEVEL = 4;
+    public static final int MAX_LEVEL = 4;
 
     // Singleton: unique instance
     private static GameSettings instance;
@@ -84,7 +84,7 @@ public class GameSettings {
             data = prefs.getString(LEVEL_STATE + level, "");
             if (data.isEmpty()) {
                 if (PlayScreen.DEBUG_LEVELS) {
-                    if (level <= MAX_AVAILABLE_LEVEL) {
+                    if (level <= MAX_LEVEL) {
                         levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
                         availableLevel = true;
                     } else {
