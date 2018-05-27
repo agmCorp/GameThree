@@ -3,7 +3,7 @@ package uy.com.agm.gamethree.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 
 import uy.com.agm.gamethree.actors.player.Hero;
@@ -38,12 +38,13 @@ public class GameSettings {
     private float volSound;
     private float volMusic;
     private boolean manualShooting;
-    private Array<GameState> availableLevels;
+    private ArrayMap<Integer, GameState> availableLevels;
     private Preferences prefs;
     private Json json;
 
     // Singleton: prevent instantiation from other classes
     private GameSettings() {
+        availableLevels = new ArrayMap<Integer, GameState>();
         prefs = Gdx.app.getPreferences(SETTINGS);
         json = new Json();
     }
@@ -55,31 +56,15 @@ public class GameSettings {
         }
         return instance;
     }
-/*
+
     private String getData(GameState gameState) {
-        return getData(gameState.getLives(), gameState.getScore(), gameState.getSkulls(), gameState.isActive());
+        return json.toJson(gameState);
     }
 
-    private String getData(int lives, int score, int skulls, boolean debug) {
-        return lives + SEPARATOR + score + SEPARATOR + skulls + SEPARATOR + debug;
+    private GameState getGameState(String data) {
+        return json.fromJson(GameState.class, data);
     }
 
-    private int getLives(String data) {
-        return Integer.parseInt(data.split(SEPARATOR)[0]);
-    }
-
-    private int getScore(String data) {
-        return Integer.parseInt(data.split(SEPARATOR)[1]);
-    }
-
-    private int getSkulls(String data) {
-        return Integer.parseInt(data.split(SEPARATOR)[2]);
-    }
-
-    private boolean getDebug(String data) {
-        return Boolean.parseBoolean(data.split(SEPARATOR)[3]);
-    }
-*/
     public void load () {
         sound = prefs.getBoolean(SOUND, true);
         music = prefs.getBoolean(MUSIC, true);
@@ -89,8 +74,7 @@ public class GameSettings {
 
         int level = 1; // Default level
         GameState gameState = new GameState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), true);
-        availableLevels = new Array<GameState>();
-        availableLevels.add(gameState);
+        availableLevels.put(level, gameState);
 
         // Other levels
         level++;
@@ -99,19 +83,32 @@ public class GameSettings {
         do {
             data = prefs.getString(AVAILABLE_LEVEL + level, "");
             if (data.isEmpty()) {
-                if (level <= MAX_AVAILABLE_LEVEL) {
-                    gameState = new GameState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
+                if (PlayScreen.DEBUG_LEVELS) {
+                    if (level <= MAX_AVAILABLE_LEVEL) {
+                        gameState = new GameState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
+                        availableLevel = true;
+                    } else {
+                        availableLevel = false;
+                    }
+                } else {
+                    availableLevel = false;
+                }
+            } else {
+                gameState = getGameState(data);
+                if (gameState.isActive()) {
+                    availableLevel = true;
+                } else {
+                    if (PlayScreen.DEBUG_LEVELS) {
+                        availableLevel = true;
+                    } else {
+                        availableLevel = false;
+                    }
                 }
             }
-
             if (availableLevel) {
-                gameState = new GameState(level, getLives(data), getScore(data), getSkulls(data), getDebug(data));
-                availableLevels.add(gameState);
+                availableLevels.put(level, gameState);
                 level++;
             }
-
-
-
         } while (availableLevel);
    }
 
@@ -121,7 +118,7 @@ public class GameSettings {
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
-        for(GameState gameState : availableLevels) {
+        for(GameState gameState : availableLevels.values()) {
             prefs.putString(AVAILABLE_LEVEL + gameState.getLevel(), getData(gameState));
         }
         prefs.flush();
@@ -167,18 +164,12 @@ public class GameSettings {
         this.manualShooting = manualShooting;
     }
 
-    public Array<GameState> getAvailableLevels() {
+    public ArrayMap<Integer, GameState> getAvailableLevels() {
         return availableLevels;
     }
 
-    public void addAvailableLevel(int level, int lives, int score, int skulls) {
-        GameState gameState = new GameState(level, lives, score, skulls, false);
-
-        // todo debo verificar que no exista antes debo usar un hasmap o algo de eso O1 private ObjectMap<String, DynamicHelpDef> dynamicHelp;
-        //if (dynamicHelp.containsKey(className)){
-        //    // Keeps a sound filename and the last playing time in nanoseconds.
-        //private ArrayMap<String, Long> trackSounds;
-        // el put si existe actualiza
-        availableLevels.add(gameState);
+    public void addActiveLevel(int level, int lives, int score, int skulls) {
+        GameState gameState = new GameState(level, lives, score, skulls, true);
+        availableLevels.put(level, gameState);
     }
 }

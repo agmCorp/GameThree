@@ -36,7 +36,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.finalSkulls = finalSkulls;
         this.nextLevel = currentLevel + 1;
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
-            GameSettings.getInstance().addAvailableLevel(nextLevel, finalLives, finalScore, finalSkulls);
+            GameSettings.getInstance().addActiveLevel(nextLevel, finalLives, finalScore, finalSkulls);
             GameSettings.getInstance().save();
         }
 

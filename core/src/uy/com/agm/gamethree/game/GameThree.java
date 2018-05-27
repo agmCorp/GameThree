@@ -24,6 +24,7 @@ public class GameThree extends Game {
             Gdx.app.setLogLevel(Application.LOG_DEBUG);
         } else {
             Gdx.app.setLogLevel(Application.LOG_INFO);
+            Gdx.app.log(TAG, "**** Debug messages not enabled (set DEBUG_MODE = true to enable them) ****");
         }
 
         // Load preferences and settings
