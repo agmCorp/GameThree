@@ -44,10 +44,11 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
+    // ----------------- Debug settings
+
     // Boxes around sprites, box2d bodies and scene2d tables
-    // Debug message log enabled
-    // Enable all levels
-    public static final boolean DEBUG_MODE = true;
+    // Sets the log level to debug
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -57,6 +58,11 @@ public class PlayScreen extends AbstractScreen {
 
     // Print box2d bodies count
     public static final boolean DEBUG_BODY_COUNT = false;
+
+    // Enable all levels
+    public static final boolean DEBUG_LEVELS = true;
+
+    // --------------------------------
 
     // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
@@ -126,7 +132,7 @@ public class PlayScreen extends AbstractScreen {
     // Screen shaker
     private Shaker shaker;
 
-    public PlayScreen(Integer level, Integer lives, Integer score) {
+    public PlayScreen(Integer level, Integer lives, Integer score, Integer skulls) {
         this.level = level;
         levelCompletedTime = 0;
 
@@ -179,7 +185,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the game HUD for score, time, etc.
         hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level),
-                player.getLives(), LevelFactory.getLevelSkulls(this.level));
+                player.getLives(), skulls);
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -647,7 +653,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, this.level, player.getLives(), hud.getScore());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getSkulls());
         }
     }
 

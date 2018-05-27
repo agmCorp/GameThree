@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.game.GameState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 
@@ -57,13 +57,13 @@ public class SelectLevelScreen extends AbstractScreen {
         table.add(selectLevelLabel);
         table.row();
         Label levelLabel;
-        for (int level : GameSettings.getInstance().getAvailableLevels()) {
+        for (GameState gameState : GameSettings.getInstance().getAvailableLevels()) {
             table.row();
-            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
+            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", gameState.getLevel()), labelStyleNormal);
             table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events
-            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, level, Hero.LIVES_START, 0));
+            levelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, gameState.getLevel(), gameState.getLives(), gameState.getScore(), gameState.getSkulls()));
         }
 
         // Set table structure

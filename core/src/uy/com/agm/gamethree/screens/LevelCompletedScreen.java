@@ -23,18 +23,20 @@ public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
 
     private int currentLevel;
-    private int lives;
+    private int finalLives;
     private int finalScore;
+    private int finalSkulls;
     private int nextLevel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer lives, Integer finalScore) {
+    public LevelCompletedScreen(Integer currentLevel, Integer finalLives, Integer finalScore, Integer finalSkulls) {
         super();
         this.currentLevel = currentLevel;
-        this.lives = lives;
+        this.finalLives = finalLives;
         this.finalScore = finalScore;
+        this.finalSkulls = finalSkulls;
         this.nextLevel = currentLevel + 1;
         if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
-            GameSettings.getInstance().addAvailableLevel(nextLevel);
+            GameSettings.getInstance().addAvailableLevel(nextLevel, finalLives, finalScore, finalSkulls);
             GameSettings.getInstance().save();
         }
 
@@ -75,8 +77,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
-        Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", this.currentLevel), labelStyleBig);
-        Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", this.finalScore), labelStyleNormal);
+        Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
+        Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
 
@@ -87,7 +89,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
+        if (nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
             table.row();
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
         } else {
@@ -114,8 +116,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        if (this.nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, this.nextLevel, this.lives, this.finalScore));
+        if (nextLevel <= GameSettings.MAX_AVAILABLE_LEVEL) {
+            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
