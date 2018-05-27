@@ -1,24 +1,15 @@
 HACER PRIORIDAD 1
 -----------------
-- seguir trabajando con la ui, creo que showredflash deberia estar en dimscreen. Hay que ver
-si su help tambien. El problema es que si hay un help no modal en pantalla y se me escapa un bicho,
-la redscreen lo cierra.
-- Las explosiones de los vampiros están muy grandes y joden.
-Capaz que me conviene hacerlas más rápidas
 - TERMINAR EL NIVEL 3
-- poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-- la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
-Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
-Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
-los que se van de la pantalla).
-Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
-- agregar credits con cuenta bancaria para donación, algo asi:
+- Hacer pantallas de credit, help
+agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
 (icono corazón) Support the developer by paying above the minimum price
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
 Agregar en agredecimientos a Juan LLopart
+- la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
@@ -29,14 +20,16 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
+- poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - hacer un mapa de los niveles
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
-- hacer una bala grandota y ruidosa con shake capaz
 
 HACER PRIORIDAD 3
 -----------------
+- Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
+El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
 En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
@@ -71,9 +64,13 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 
 SOLO IDEAS
 ----------
+- hacer una bala grandota y ruidosa con shake capaz
+- Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
+Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
+los que se van de la pantalla).
+Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - Animación o ruido distinto al ser aplastado.
-- hacer splashscreen
 - enemigos:
     - hay que dispararle mucho para matarlo.
     - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
