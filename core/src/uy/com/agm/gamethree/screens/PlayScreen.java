@@ -715,8 +715,11 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        // Updated our game viewport
+        // Updated our game viewports
         gameViewPort.update(width, height);
+        hud.getViewport().update(width, height);
+        dimScreen.getViewport().update(width, height);
+        infoScreen.getViewport().update(width, height);
     }
 
     @Override

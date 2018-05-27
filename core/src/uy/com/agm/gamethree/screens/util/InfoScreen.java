@@ -87,7 +87,7 @@ public class InfoScreen extends AbstractScreen {
     private boolean overlayTemporaryMessage;
 
     private Table buttonsTable;
-    private Label gotItLabel;
+    private Image gotIt;
 
     private Stack stack;
     private Cell stackCell;
@@ -198,12 +198,12 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable.setFillParent(true);
 
         // Define labels based on labelStyle
-        gotItLabel = new Label(i18NGameThreeBundle.format("infoScreen.gotIt"), labelStyleSmall);
+        gotIt = new Image(Assets.getInstance().getScene2d().getGotIt());
 
         // Add values
-        buttonsTable.add(gotItLabel).width(BUTTON_WIDTH).left().expandX();
+        buttonsTable.add(gotIt);
 
-        gotItLabel.addListener(
+        gotIt.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -218,12 +218,12 @@ public class InfoScreen extends AbstractScreen {
         addActor(buttonsTable);
 
         // Initially hidden
-        gotItLabel.setVisible(false);
+        gotIt.setVisible(false);
     }
 
     private void gotIt() {
         hideInfo();
-        gotItLabel.setVisible(false);
+        gotIt.setVisible(false);
         screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
     }
@@ -320,7 +320,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showModalImage(TextureRegion textureRegion, float width, float height) {
-        gotItLabel.setVisible(true);
+        gotIt.setVisible(true);
         showImage(textureRegion, width, height);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
@@ -368,7 +368,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showModalAnimation(Animation animation, float width, float height) {
-        gotItLabel.setVisible(true);
+        gotIt.setVisible(true);
         showAnimation(animation, width, height);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
@@ -389,13 +389,13 @@ public class InfoScreen extends AbstractScreen {
 
     public void hideModalInfo() {
         hideInfo();
-        gotItLabel.setVisible(false);
+        gotIt.setVisible(false);
         screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
     }
 
     public boolean isModalVisible() {
-        return gotItLabel.isVisible();
+        return gotIt.isVisible();
     }
 
     // ----------- Specialized functions
@@ -425,7 +425,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showRedFlashHelp() {
-        gotItLabel.setVisible(true);
+        gotIt.setVisible(true);
         setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
         image.setVisible(true);
         messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));

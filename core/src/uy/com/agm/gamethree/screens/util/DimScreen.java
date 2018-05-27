@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -27,7 +28,6 @@ public class DimScreen extends AbstractScreen {
 
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
-    private static final float BUTTON_WIDTH = 100.0f;
     private static final float DIM_SCREEN_ALPHA = 0.5f;
 
     private PlayScreen screen;
@@ -40,10 +40,9 @@ public class DimScreen extends AbstractScreen {
     private Label messageLabel;
 
     private Table buttonsTable;
-    private Label pauseLabel;
-    private Label resumeLabel;
-    private Label quitLabel;
-
+    private Image pause;
+    private Image resume;
+    private Image quit;
     private Stack stack;
 
     private TextureRegion dim;
@@ -115,21 +114,21 @@ public class DimScreen extends AbstractScreen {
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);
 
-        // Define labels based on labelStyle
-        pauseLabel = new Label(i18NGameThreeBundle.format("dimScreen.pause"), labelStyleSmall);
-        quitLabel = new Label(i18NGameThreeBundle.format("dimScreen.quit"), labelStyleSmall);
-        quitLabel.setAlignment(Align.right);
-        resumeLabel = new Label(i18NGameThreeBundle.format("dimScreen.resume"), labelStyleSmall);
+        // Define images
+        pause = new Image(Assets.getInstance().getScene2d().getPause());
+        resume = new Image(Assets.getInstance().getScene2d().getResume());
+        quit = new Image(Assets.getInstance().getScene2d().getQuit());
+        quit.setAlign(Align.right);
 
         // Add values
         stack = new Stack();
-        stack.add(pauseLabel);
-        stack.add(resumeLabel);
-        buttonsTable.add(stack).width(BUTTON_WIDTH).left().expandX(); // Pause and Resume texts overlapped
-        buttonsTable.add(quitLabel).width(BUTTON_WIDTH).right().expandX();
+        stack.add(pause);
+        stack.add(resume);
+        buttonsTable.add(stack).size(30,30).left().bottom().expandX(); // Pause and Resume are overlapped
+        buttonsTable.add(quit).right().expandX();
 
         // Events
-        pauseLabel.addListener(
+        pause.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -140,7 +139,7 @@ public class DimScreen extends AbstractScreen {
                     }
                 });
 
-        resumeLabel.addListener(
+        resume.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -151,7 +150,7 @@ public class DimScreen extends AbstractScreen {
                     }
                 });
 
-        quitLabel.addListener(
+        quit.addListener(
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -166,14 +165,16 @@ public class DimScreen extends AbstractScreen {
         addActor(buttonsTable);
 
         // Initially hidden
-        resumeLabel.setVisible(false);
-        quitLabel.setVisible(false);
+        resume.setVisible(false);
+        quit.setVisible(false);
     }
 
     public void setGameStatePaused() {
-        pauseLabel.setVisible(false);
-        resumeLabel.setVisible(true);
-        quitLabel.setVisible(true);
+        pause.setVisible(false);
+        resume.setVisible(true);
+
+        resume.setWidth(90);
+        quit.setVisible(true);
         buttonsTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
         screen.setPlayScreenStatePaused(true);
@@ -189,9 +190,9 @@ public class DimScreen extends AbstractScreen {
 
     private void setGameStateRunning() {
         hideMessage();
-        pauseLabel.setVisible(true);
-        resumeLabel.setVisible(false);
-        quitLabel.setVisible(false);
+        pause.setVisible(true);
+        resume.setVisible(false);
+        quit.setVisible(false);
         if (!screen.getInfoScreen().isModalVisible()) {
             screen.setPlayScreenStateRunning();
         } else {

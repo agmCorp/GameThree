@@ -51,6 +51,10 @@ public class AssetScene2d {
     private TextureRegion soundFX;
     private TextureRegion target;
     private TextureRegion back;
+    private TextureRegion pause;
+    private TextureRegion resume;
+    private TextureRegion quit;
+    private TextureRegion gotIt;
     private AssetHeroHead heroHead;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -101,6 +105,10 @@ public class AssetScene2d {
         soundFX = atlasUI.findRegion("soundFX");
         target = atlasUI.findRegion("target");
         back = atlasUI.findRegion("back");
+        pause = atlasUI.findRegion("pause");
+        resume = atlasUI.findRegion("resume");
+        quit = atlasUI.findRegion("quit");
+        gotIt = atlasUI.findRegion("gotIt");
         heroHead = new AssetHeroHead(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -271,6 +279,22 @@ public class AssetScene2d {
 
     public TextureRegion getBack() {
         return back;
+    }
+
+    public TextureRegion getPause() {
+        return pause;
+    }
+
+    public TextureRegion getResume() {
+        return resume;
+    }
+
+    public TextureRegion getQuit() {
+        return quit;
+    }
+
+    public TextureRegion getGotIt() {
+        return gotIt;
     }
 
     public AssetHeroHead getHeroHead() {
