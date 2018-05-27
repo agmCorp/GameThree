@@ -59,7 +59,7 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(wipeThemOut).colspan(3).padTop(AbstractScreen.PAD * 2);
         table.row();
         table.add(play).colspan(3);
-        table.row();
+        table.row().padTop(AbstractScreen.PAD);
         table.add(settings).expandX();
         table.add(help).expandX();
         table.add(credits).expandX();
