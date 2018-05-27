@@ -364,8 +364,12 @@ public class Assets implements Disposable, AssetErrorListener {
         loadMusic();
 
         // Start loading assets and wait until finished
-        assetManager.finishLoading();
+        assetManager.finishLoading(); // // TODO: 5/26/2018
+        finishLoading();
 
+    }
+
+    public void finishLoading() {
         Gdx.app.debug(TAG, "***************************");
         Gdx.app.debug(TAG, "***** Number of assets loaded: " + assetManager.getAssetNames().size);
         for (String assetName : assetManager.getAssetNames()) {
