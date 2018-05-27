@@ -8,8 +8,6 @@ Capaz que me conviene hacerlas más rápidas
 - TERMINAR EL NIVEL 3
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-Creo que tendria que guardar en properties el estado de cada nivel: score, lives, skulls y que cada vez que comience un nivel saque esos datos de properties
-y si no están poner los por defecto.
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
