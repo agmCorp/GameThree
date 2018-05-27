@@ -13,6 +13,11 @@ import uy.com.agm.gamethree.screens.SettingsScreen;
  */
 
 public enum ScreenEnum {
+    SPLASH {
+        public AbstractScreen getScreen(Object... params) {
+            return new SplashScreen();
+        }
+    },
 
     MAIN_MENU {
         public AbstractScreen getScreen(Object... params) {

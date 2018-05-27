@@ -51,7 +51,6 @@ public class InfoScreen extends AbstractScreen {
 
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
-    private static final float BUTTON_WIDTH = 100.0f;
     private static final float RED_FLASH_TIME = 0.1f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
     private static final float LETS_GO_TIME = 1.0f;

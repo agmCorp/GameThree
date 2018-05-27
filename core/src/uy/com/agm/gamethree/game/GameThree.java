@@ -3,7 +3,6 @@ package uy.com.agm.gamethree.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -27,9 +26,6 @@ public class GameThree extends Game {
             Gdx.app.setLogLevel(Application.LOG_INFO);
         }
 
-        // Load assets
-        Assets.getInstance().init(new AssetManager());
-
         // Load preferences and settings
         GameSettings.getInstance().load();
 
@@ -39,9 +35,9 @@ public class GameThree extends Game {
         // Constructs a new ShapeRenderer for debugging
         shapeRenderer = new ShapeRenderer();
 
-        // Set the new Screen
+        // Set a splash screen
         ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+        ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH);
     }
 
     @Override
