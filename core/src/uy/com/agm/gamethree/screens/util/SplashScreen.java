@@ -125,8 +125,8 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // Clear screen
-        Gdx.gl.glClearColor(255, 255, 255, 1);
+        // Clear the screen with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         splashTime += delta;

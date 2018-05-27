@@ -405,7 +405,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderGame(float delta) {
-        // Clear the game screen with Black
+        // Clear the game screen with black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
