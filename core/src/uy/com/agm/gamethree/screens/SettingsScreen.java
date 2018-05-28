@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -48,11 +50,19 @@ public class SettingsScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        defineMainTable();
+        defineNavigationTable();
+    }
+
+    private void defineMainTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // Set table structure
         Table table = new Table();
 
         // Design
-        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
+        table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
         table.setDebug(PlayScreen.DEBUG_MODE);
@@ -72,17 +82,17 @@ public class SettingsScreen extends AbstractScreen {
 
         // Define our labels based on labelStyle and images
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
-        Image music = new Image(Assets.getInstance().getScene2d().getMusic());
-        Image soundFX = new Image(Assets.getInstance().getScene2d().getSoundFX());
-        Image target = new Image(Assets.getInstance().getScene2d().getTarget());
+        Image music = new Image(assetScene2d.getMusic());
+        Image soundFX = new Image(assetScene2d.getSoundFX());
+        Image target = new Image(assetScene2d.getTarget());
         shootingSettingLabel = new Label("SHOOTING", labelStyleNormal);
         shootingSettingLabel.setAlignment(Align.center);
         setTextLabelShooting();
 
         //Slider style
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
-        sliderStyle.background = new TextureRegionDrawable(Assets.getInstance().getScene2d().getSliderBackground());
-        sliderStyle.knob = new TextureRegionDrawable(Assets.getInstance().getScene2d().getSliderKnob());
+        sliderStyle.background = new TextureRegionDrawable(assetScene2d.getSliderBackground());
+        sliderStyle.knob = new TextureRegionDrawable(assetScene2d.getSliderKnob());
 
         // Music
         sliderMusic = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
@@ -106,24 +116,6 @@ public class SettingsScreen extends AbstractScreen {
         table.add(target).padTop(AbstractScreen.PAD);;
         table.row();
         table.add(shootingSettingLabel);
-
-        // Set table structure
-        Table navigation = new Table();
-
-        // Debug lines
-        navigation.setDebug(PlayScreen.DEBUG_MODE);
-
-        // Bottom-Align table
-        navigation.bottom();
-
-        // Make the table fill the entire stage
-        navigation.setFillParent(true);
-
-        // Define images
-        Image back = new Image(Assets.getInstance().getScene2d().getBack());
-
-        // Add values
-        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         sliderMusic.addListener(new ChangeListener() {
@@ -174,11 +166,38 @@ public class SettingsScreen extends AbstractScreen {
             }
         });
 
+        // Adds table to stage
+        addActor(table);
+    }
+
+    private void defineNavigationTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
+        // Set table structure
+        Table table = new Table();
+
+        // Debug lines
+        table.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        table.bottom();
+
+        // Make the table fill the entire stage
+        table.setFillParent(true);
+
+        // Define images
+        ImageButton back = new ImageButton(new TextureRegionDrawable(assetScene2d.getBack()),
+                new TextureRegionDrawable(assetScene2d.getBackPressed()));
+
+        // Add values
+        table.add(back).padBottom(AbstractScreen.PAD * 2);
+
+        // Events
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created tables to stage
+        // Adds table to stage
         addActor(table);
-        addActor(navigation);
     }
 
     private void playSampleSound() {

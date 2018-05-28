@@ -1,12 +1,13 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -25,6 +26,12 @@ public class SelectLevelScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        defineMainTable();
+        defineNavigationTable();
+
+    }
+
+    private void defineMainTable() {
         // I18n
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
@@ -66,30 +73,38 @@ public class SelectLevelScreen extends AbstractScreen {
             levelLabel.addListener(UIFactory.createListener(ScreenEnum.PLAY_GAME, levelState.getLevel(), levelState.getLives(), levelState.getScore(), levelState.getSkulls()));
         }
 
+        // Adds table to stage
+        addActor(table);
+    }
+
+    private void defineNavigationTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // Set table structure
-        Table navigation = new Table();
+        Table table = new Table();
 
         // Debug lines
-        navigation.setDebug(PlayScreen.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Bottom-Align table
-        navigation.bottom();
+        table.bottom();
 
         // Make the table fill the entire stage
-        navigation.setFillParent(true);
+        table.setFillParent(true);
 
         // Define images
-        Image back = new Image(Assets.getInstance().getScene2d().getBack());
+        ImageButton back = new ImageButton(new TextureRegionDrawable(assetScene2d.getBack()),
+                new TextureRegionDrawable(assetScene2d.getBackPressed()));
 
         // Add values
-        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
+        table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created tables to stage
+        // Adds table to stage
         addActor(table);
-        addActor(navigation);
     }
 
     @Override

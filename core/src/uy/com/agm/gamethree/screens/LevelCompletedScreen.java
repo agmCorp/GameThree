@@ -1,6 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -46,6 +47,14 @@ public class LevelCompletedScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        defineMainTable();
+        defineNavigationTable();
+    }
+
+    private void defineMainTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // I18n
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
@@ -53,7 +62,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         Table table = new Table();
 
         // Design
-        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
+        table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
         table.setDebug(PlayScreen.DEBUG_MODE);
@@ -74,7 +83,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Animation
         AnimatedActor animatedActor = new AnimatedActor();
         animatedActor.setAlign(Align.center);
-        animatedActor.setAnimation(Assets.getInstance().getScene2d().getStageCleared().getStageClearedAnimation());
+        animatedActor.setAnimation(assetScene2d.getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
@@ -97,33 +106,43 @@ public class LevelCompletedScreen extends AbstractScreen {
             table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
         }
 
-        // Set table structure
-        Table navigation = new Table();
-
-        // Debug lines
-        navigation.setDebug(PlayScreen.DEBUG_MODE);
-
-        // Bottom-Align table
-        navigation.bottom();
-
-        // Make the table fill the entire stage
-        navigation.setFillParent(true);
-
-        // Define images
-        Image back = new Image(Assets.getInstance().getScene2d().getBack());
-
-        // Add values
-        navigation.add(back).padBottom(AbstractScreen.PAD * 2);
-
         // Events
         if (nextLevel <= GameSettings.MAX_LEVEL) {
             nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
+
+        // Adds table to stage
+        addActor(table);
+    }
+
+    private void defineNavigationTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
+        // Set table structure
+        Table table = new Table();
+
+        // Debug lines
+        table.setDebug(PlayScreen.DEBUG_MODE);
+
+        // Bottom-Align table
+        table.bottom();
+
+        // Make the table fill the entire stage
+        table.setFillParent(true);
+
+        // Define images
+        ImageButton back = new ImageButton(new TextureRegionDrawable(assetScene2d.getBack()),
+                new TextureRegionDrawable(assetScene2d.getBackPressed()));
+
+        // Add values
+        table.add(back).padBottom(AbstractScreen.PAD * 2);
+
+        // Events
         back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
 
-        // Adds created tables to stage
+        // Adds table to stage
         addActor(table);
-        addActor(navigation);
     }
 
     @Override

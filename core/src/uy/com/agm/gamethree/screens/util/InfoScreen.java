@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetLetsGo;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageFailed;
 import uy.com.agm.gamethree.assets.scene2d.AssetVictory;
 import uy.com.agm.gamethree.game.GameSettings;
@@ -86,7 +88,7 @@ public class InfoScreen extends AbstractScreen {
     private boolean overlayTemporaryMessage;
 
     private Table buttonsTable;
-    private Image gotIt;
+    private ImageButton gotIt;
 
     private Stack stack;
     private Cell stackCell;
@@ -123,9 +125,10 @@ public class InfoScreen extends AbstractScreen {
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Animations
-        emptySkullsAnimation = Assets.getInstance().getScene2d().getStageFailed().getStageFailedAnimation();
-        victoryAnimation = Assets.getInstance().getScene2d().getVictory().getVictoryAnimation();
-        letsGoAnimation = Assets.getInstance().getScene2d().getLetsGo().getStageLetsGoAnimation();
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+        emptySkullsAnimation = assetScene2d.getStageFailed().getStageFailedAnimation();
+        victoryAnimation = assetScene2d.getVictory().getVictoryAnimation();
+        letsGoAnimation = assetScene2d.getLetsGo().getStageLetsGoAnimation();
 
         // Red flash Texture
         Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
@@ -184,6 +187,9 @@ public class InfoScreen extends AbstractScreen {
     }
 
     private void defineButtonsTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // Define a new table used to display buttons
         buttonsTable = new Table();
 
@@ -196,19 +202,24 @@ public class InfoScreen extends AbstractScreen {
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);
 
-        // Define labels based on labelStyle
-        gotIt = new Image(Assets.getInstance().getScene2d().getGotIt());
+        // Define button
+        gotIt = new ImageButton(new TextureRegionDrawable(assetScene2d.getGotIt()),
+                new TextureRegionDrawable(assetScene2d.getGotItPressed()));
 
         // Add values
         buttonsTable.add(gotIt);
 
         gotIt.addListener(
-                new InputListener() {
+                new InputListener(){
                     @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         gotIt();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                         return true;
                     }
                 });

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -32,10 +33,13 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
-        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+        defineMainTable();
+        defineNavigationTable();
+    }
 
-        // I18n
-        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+    private void defineMainTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
         // Set table structure
         Table table = new Table();
@@ -72,17 +76,29 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(help).width(V_WIDTH / 3);
         table.add(credits).width(V_WIDTH / 3);
 
+        // Events
+        play.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
+        settings.addListener(UIFactory.createListener(ScreenEnum.SETTINGS));
+
+        // Adds table to stage
+        addActor(table);
+    }
+
+    private void defineNavigationTable() {
+        // I18n
+        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
         // Set table structure
-        Table navigation = new Table();
+        Table table = new Table();
 
         // Debug lines
-        navigation.setDebug(PlayScreen.DEBUG_MODE);
+        table.setDebug(PlayScreen.DEBUG_MODE);
 
         // Bottom-Align table
-        navigation.bottom();
+        table.bottom();
 
         // Make the table fill the entire stage
-        navigation.setFillParent(true);
+        table.setFillParent(true);
 
         // Personal fonts
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
@@ -92,11 +108,8 @@ public class MainMenuScreen extends AbstractScreen {
         Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        navigation.add(exitGameLabel).padBottom(AbstractScreen.PAD * 2);
+        table.add(exitGameLabel).padBottom(AbstractScreen.PAD * 2);
 
-        // Events
-        play.addListener(UIFactory.createListener(ScreenEnum.SELECT_LEVEL));
-        settings.addListener(UIFactory.createListener(ScreenEnum.SETTINGS));
         exitGameLabel.addListener(
                 new InputListener() {
                     @Override
@@ -108,9 +121,8 @@ public class MainMenuScreen extends AbstractScreen {
                     }
                 });
 
-        // Adds created tables to stage
+        // Adds table to stage
         addActor(table);
-        addActor(navigation);
     }
 
     @Override

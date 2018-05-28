@@ -18,7 +18,6 @@ public class UIFactory {
 
     public static InputListener createListener(final ScreenEnum dstScreen, final Object... params) {
         return
-
                 new InputListener(){
                     @Override
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
