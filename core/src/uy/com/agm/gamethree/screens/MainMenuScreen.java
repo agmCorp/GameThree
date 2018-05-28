@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -31,6 +32,8 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // I18n
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
@@ -38,7 +41,7 @@ public class MainMenuScreen extends AbstractScreen {
         Table table = new Table();
 
         // Design
-        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
+        table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
         table.setDebug(PlayScreen.DEBUG_MODE);
@@ -49,25 +52,25 @@ public class MainMenuScreen extends AbstractScreen {
         // Make the table fill the entire stage
         table.setFillParent(true);
 
-        // Define buttons
-        Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
-        ImageButton play = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getPlay()),
-                new TextureRegionDrawable(Assets.getInstance().getScene2d().getPlayPressed()));
-        ImageButton settings = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSettings()),
-                new TextureRegionDrawable(Assets.getInstance().getScene2d().getSettingsPressed()));
-        ImageButton help = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelp()),
-                new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelpPressed()));
-        ImageButton credits = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getCredits()),
-                new TextureRegionDrawable(Assets.getInstance().getScene2d().getCreditsPressed()));
+        // Define buttons and images
+        Image wipeThemOut = new Image(assetScene2d.getWipeThemOut());
+        ImageButton play = new ImageButton(new TextureRegionDrawable(assetScene2d.getPlay()),
+                new TextureRegionDrawable(assetScene2d.getPlayPressed()));
+        ImageButton settings = new ImageButton(new TextureRegionDrawable(assetScene2d.getSettings()),
+                new TextureRegionDrawable(assetScene2d.getSettingsPressed()));
+        ImageButton help = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
+                new TextureRegionDrawable(assetScene2d.getHelpPressed()));
+        ImageButton credits = new ImageButton(new TextureRegionDrawable(assetScene2d.getCredits()),
+                new TextureRegionDrawable(assetScene2d.getCreditsPressed()));
 
         // Add values
         table.add(wipeThemOut).colspan(3).padTop(AbstractScreen.PAD * 2);
         table.row();
-        table.add(play).colspan(3);
-        table.row().padTop(AbstractScreen.PAD);
-        table.add(settings).expandX();
-        table.add(help).expandX();
-        table.add(credits).expandX();
+        table.add(play).colspan(3).height(play.getHeight());
+        table.row().height(settings.getHeight()).padTop(AbstractScreen.PAD);
+        table.add(settings).width(V_WIDTH / 3);
+        table.add(help).width(V_WIDTH / 3);
+        table.add(credits).width(V_WIDTH / 3);
 
         // Set table structure
         Table navigation = new Table();
