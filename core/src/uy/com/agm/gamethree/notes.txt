@@ -20,6 +20,11 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
+- agregar transitions
+SEGUN MI ANALISIS PARA INCLUIR TRANSITIONS:
+Mi clase GameThree es la análoga a DirectedGame.
+Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
+Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - hacer un mapa de los niveles
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
@@ -47,7 +52,6 @@ Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...cr
 y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
-- agregar transitions
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Un poder de disparo puede variar:
     dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
