@@ -187,7 +187,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showPauseButton() {
-        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().bottom();
+        stackCell.size(BUTTON_SIZE_SMALL).left().bottom();
         buttonsTable.pack();
         pause.setVisible(true);
         resume.setVisible(false);
