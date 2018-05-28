@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -48,12 +49,16 @@ public class MainMenuScreen extends AbstractScreen {
         // Make the table fill the entire stage
         table.setFillParent(true);
 
-        // Define our labels based on labelStyle and images
+        // Define buttons
         Image wipeThemOut = new Image(Assets.getInstance().getScene2d().getWipeThemOut());
-        Image play = new Image(Assets.getInstance().getScene2d().getPlay());
-        Image settings = new Image(Assets.getInstance().getScene2d().getSettings());
-        Image help = new Image(Assets.getInstance().getScene2d().getHelp());
-        Image credits = new Image(Assets.getInstance().getScene2d().getCredits());
+        ImageButton play = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getPlay()),
+                new TextureRegionDrawable(Assets.getInstance().getScene2d().getPlayPressed()));
+        ImageButton settings = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSettings()),
+                new TextureRegionDrawable(Assets.getInstance().getScene2d().getSettingsPressed()));
+        ImageButton help = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelp()),
+                new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelpPressed()));
+        ImageButton credits = new ImageButton(new TextureRegionDrawable(Assets.getInstance().getScene2d().getCredits()),
+                new TextureRegionDrawable(Assets.getInstance().getScene2d().getCreditsPressed()));
 
         // Add values
         table.add(wipeThemOut).colspan(3).padTop(AbstractScreen.PAD * 2);

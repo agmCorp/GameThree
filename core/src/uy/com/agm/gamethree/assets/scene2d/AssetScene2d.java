@@ -44,17 +44,29 @@ public class AssetScene2d {
     private TextureRegion skullHead;
     private TextureRegion wipeThemOut;
     private TextureRegion play;
+    private TextureRegion playPressed;
     private TextureRegion settings;
+    private TextureRegion settingsPressed;
     private TextureRegion help;
+    private TextureRegion helpPressed;
     private TextureRegion credits;
+    private TextureRegion creditsPressed;
     private TextureRegion music;
+    private TextureRegion musicPressed;
     private TextureRegion soundFX;
+    private TextureRegion soundFXPressed;
     private TextureRegion target;
+    private TextureRegion targetPressed;
     private TextureRegion back;
+    private TextureRegion backPressed;
     private TextureRegion pause;
+    private TextureRegion pausePressed;
     private TextureRegion resume;
+    private TextureRegion resumePressed;
     private TextureRegion quit;
+    private TextureRegion quitPressed;
     private TextureRegion gotIt;
+    private TextureRegion gotItPressed;
     private AssetHeroHead heroHead;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -98,17 +110,29 @@ public class AssetScene2d {
         skullHead = atlasUI.findRegion("skullHead");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
         play = atlasUI.findRegion("play");
+        playPressed = atlasUI.findRegion("playPressed");
         settings = atlasUI.findRegion("settings");
+        settingsPressed = atlasUI.findRegion("settingsPressed");
         help = atlasUI.findRegion("help");
+        helpPressed = atlasUI.findRegion("helpPressed");
         credits = atlasUI.findRegion("credits");
+        creditsPressed = atlasUI.findRegion("creditsPressed");
         music = atlasUI.findRegion("music");
+        musicPressed = atlasUI.findRegion("musicPressed");
         soundFX = atlasUI.findRegion("soundFX");
+        soundFXPressed = atlasUI.findRegion("soundFXPressed");
         target = atlasUI.findRegion("target");
+        targetPressed = atlasUI.findRegion("targetPressed");
         back = atlasUI.findRegion("back");
+        backPressed = atlasUI.findRegion("backPressed");
         pause = atlasUI.findRegion("pause");
+        pausePressed = atlasUI.findRegion("pausePressed");
         resume = atlasUI.findRegion("resume");
+        resumePressed = atlasUI.findRegion("resumePressed");
         quit = atlasUI.findRegion("quit");
+        quitPressed = atlasUI.findRegion("quitPressed");
         gotIt = atlasUI.findRegion("gotIt");
+        gotItPressed = atlasUI.findRegion("gotItPressed");
         heroHead = new AssetHeroHead(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -253,48 +277,96 @@ public class AssetScene2d {
         return play;
     }
 
+    public TextureRegion getPlayPressed() {
+        return playPressed;
+    }
+
     public TextureRegion getSettings() {
         return settings;
+    }
+
+    public TextureRegion getSettingsPressed() {
+        return settingsPressed;
     }
 
     public TextureRegion getHelp() {
         return help;
     }
 
+    public TextureRegion getHelpPressed() {
+        return helpPressed;
+    }
+
     public TextureRegion getCredits() {
         return credits;
+    }
+
+    public TextureRegion getCreditsPressed() {
+        return creditsPressed;
     }
 
     public TextureRegion getMusic() {
         return music;
     }
 
+    public TextureRegion getMusicPressed() {
+        return musicPressed;
+    }
+
     public TextureRegion getSoundFX() {
         return soundFX;
+    }
+
+    public TextureRegion getSoundFXPressed() {
+        return soundFXPressed;
     }
 
     public TextureRegion getTarget() {
         return target;
     }
 
+    public TextureRegion getTargetPressed() {
+        return targetPressed;
+    }
+
     public TextureRegion getBack() {
         return back;
+    }
+
+    public TextureRegion getBackPressed() {
+        return backPressed;
     }
 
     public TextureRegion getPause() {
         return pause;
     }
 
+    public TextureRegion getPausePressed() {
+        return pausePressed;
+    }
+
     public TextureRegion getResume() {
         return resume;
+    }
+
+    public TextureRegion getResumePressed() {
+        return resumePressed;
     }
 
     public TextureRegion getQuit() {
         return quit;
     }
 
+    public TextureRegion getQuitPressed() {
+        return quitPressed;
+    }
+
     public TextureRegion getGotIt() {
         return gotIt;
+    }
+
+    public TextureRegion getGotItPressed() {
+        return gotItPressed;
     }
 
     public AssetHeroHead getHeroHead() {
