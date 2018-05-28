@@ -428,7 +428,7 @@ public class InfoScreen extends AbstractScreen {
         setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
         image.setVisible(true);
         messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
-        messageLabel.setStyle(labelStyleSmall);
+        messageLabel.setStyle(labelStyleNormal);
         messageLabel.setVisible(true);
         animatedActor.setVisible(false);
         centerTable.setVisible(true);
