@@ -122,8 +122,6 @@ public class DimScreen extends AbstractScreen {
         // Define buttons
         pause = new ImageButton(new TextureRegionDrawable(assetScene2d.getPause()),
                 new TextureRegionDrawable(assetScene2d.getPausePressed()));
-        pause.setSize(10,10);
-        pause.left();
         resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getResume()),
                 new TextureRegionDrawable(assetScene2d.getResumePressed()));
         quit = new ImageButton(new TextureRegionDrawable(assetScene2d.getQuit()),
@@ -133,7 +131,7 @@ public class DimScreen extends AbstractScreen {
         stack = new Stack();
         stack.add(pause);
         stack.add(resume);
-        stackCell = buttonsTable.add(stack); // Pause and Resume are overlapped
+        stackCell = buttonsTable.add(stack).left(); // Pause and Resume are overlapped
         buttonsTable.add(quit).right().expandX();
 
         // Events
