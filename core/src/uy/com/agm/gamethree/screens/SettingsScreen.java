@@ -35,6 +35,9 @@ public class SettingsScreen extends AbstractScreen {
     private static final float SLIDER_WIDTH = 250.0f;
 
     private Label shootingSettingLabel;
+    private ImageButton music;
+    private ImageButton soundFX;
+    private ImageButton target;
     private Slider sliderMusic;
     private Slider sliderSound;
     private GameSettings prefs;
@@ -82,9 +85,13 @@ public class SettingsScreen extends AbstractScreen {
 
         // Define our labels based on labelStyle and images
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
-        Image music = new Image(assetScene2d.getMusic());
-        Image soundFX = new Image(assetScene2d.getSoundFX());
-        Image target = new Image(assetScene2d.getTarget());
+        music = new ImageButton(new TextureRegionDrawable(assetScene2d.getMusic()),
+                new TextureRegionDrawable(assetScene2d.getMusicPressed()), new TextureRegionDrawable(assetScene2d.getQuit())); // todo
+        soundFX = new ImageButton(new TextureRegionDrawable(assetScene2d.getSoundFX()),
+                new TextureRegionDrawable(assetScene2d.getSoundFXPressed()), new TextureRegionDrawable(assetScene2d.getCredits())); // todo
+        target = new ImageButton(new TextureRegionDrawable(assetScene2d.getTarget()),
+                new TextureRegionDrawable(assetScene2d.getTargetPressed()), new TextureRegionDrawable(assetScene2d.getResume())); // todo
+
         shootingSettingLabel = new Label("SHOOTING", labelStyleNormal);
         shootingSettingLabel.setAlignment(Align.center);
         setTextLabelShooting();
@@ -96,11 +103,15 @@ public class SettingsScreen extends AbstractScreen {
 
         // Music
         sliderMusic = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
-        sliderMusic.setValue(prefs.getVolMusic());
+        float value = prefs.getVolMusic();
+        music.setChecked(value <= 0.0f ? true : false);
+        sliderMusic.setValue(value);
 
         // Sound
         sliderSound = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
-        sliderSound.setValue(prefs.getVolSound());
+        value = prefs.getVolSound();
+        soundFX.setChecked(value <= 0.0f ? true : false);
+        sliderSound.setValue(value);
 
         // Add values
         table.add(settingsLabel);
@@ -219,14 +230,20 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void changeSliderMusic() {
-        prefs.setVolMusic(sliderMusic.getValue());
-        prefs.setMusic((sliderMusic.getValue() <= 0.0f)? false : true);
+        float value = sliderMusic.getValue();//
+        boolean musicOn = value <= 0.0f ? false : true;//
+        prefs.setVolMusic(value);
+        prefs.setMusic(musicOn);
+        music.setChecked(!musicOn);
         AudioManager.getInstance().onSettingsUpdated();
     }
 
     private void changeSliderSound() {
-        prefs.setVolSound(sliderSound.getValue());
-        prefs.setSound((sliderSound.getValue() <= 0.0f)? false : true);
+        float value = sliderSound.getValue();
+        boolean soundOn = value <= 0.0f ? false : true;
+        prefs.setVolSound(value);
+        prefs.setSound(soundOn);
+        soundFX.setChecked(!soundOn);
         AudioManager.getInstance().onSettingsUpdated();
     }
 
