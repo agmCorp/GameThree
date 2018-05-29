@@ -53,8 +53,8 @@ public class AssetScene2d {
     private TextureRegion creditsPressed;
     private TextureRegion music;
     private TextureRegion musicPressed;
-    private TextureRegion soundFX;
-    private TextureRegion soundFXPressed;
+    private TextureRegion sound;
+    private TextureRegion soundPressed;
     private TextureRegion target;
     private TextureRegion targetPressed;
     private TextureRegion back;
@@ -119,8 +119,8 @@ public class AssetScene2d {
         creditsPressed = atlasUI.findRegion("creditsPressed");
         music = atlasUI.findRegion("music");
         musicPressed = atlasUI.findRegion("musicPressed");
-        soundFX = atlasUI.findRegion("soundFX");
-        soundFXPressed = atlasUI.findRegion("soundFXPressed");
+        sound = atlasUI.findRegion("soundFX"); // todo llamarle a la imagen sound
+        soundPressed = atlasUI.findRegion("soundFXPressed"); // todo llamarle a la imagen soundPressed
         target = atlasUI.findRegion("target");
         targetPressed = atlasUI.findRegion("targetPressed");
         back = atlasUI.findRegion("back");
@@ -313,12 +313,12 @@ public class AssetScene2d {
         return musicPressed;
     }
 
-    public TextureRegion getSoundFX() {
-        return soundFX;
+    public TextureRegion getSound() {
+        return sound;
     }
 
-    public TextureRegion getSoundFXPressed() {
-        return soundFXPressed;
+    public TextureRegion getSoundPressed() {
+        return soundPressed;
     }
 
     public TextureRegion getTarget() {

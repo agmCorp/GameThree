@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -36,7 +35,7 @@ public class SettingsScreen extends AbstractScreen {
 
     private Label shootingSettingLabel;
     private ImageButton music;
-    private ImageButton soundFX;
+    private ImageButton sound;
     private ImageButton target;
     private Slider sliderMusic;
     private Slider sliderSound;
@@ -87,8 +86,8 @@ public class SettingsScreen extends AbstractScreen {
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
         music = new ImageButton(new TextureRegionDrawable(assetScene2d.getMusic()),
                 new TextureRegionDrawable(assetScene2d.getMusicPressed()), new TextureRegionDrawable(assetScene2d.getQuit())); // todo
-        soundFX = new ImageButton(new TextureRegionDrawable(assetScene2d.getSoundFX()),
-                new TextureRegionDrawable(assetScene2d.getSoundFXPressed()), new TextureRegionDrawable(assetScene2d.getCredits())); // todo
+        sound = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
+                new TextureRegionDrawable(assetScene2d.getSoundPressed()), new TextureRegionDrawable(assetScene2d.getCredits())); // todo
         target = new ImageButton(new TextureRegionDrawable(assetScene2d.getTarget()),
                 new TextureRegionDrawable(assetScene2d.getTargetPressed()), new TextureRegionDrawable(assetScene2d.getResume())); // todo
 
@@ -110,7 +109,7 @@ public class SettingsScreen extends AbstractScreen {
         // Sound
         sliderSound = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
         value = prefs.getVolSound();
-        soundFX.setChecked(value <= 0.0f ? true : false);
+        sound.setChecked(value <= 0.0f ? true : false);
         sliderSound.setValue(value);
 
         // Add values
@@ -120,7 +119,7 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(sliderMusic).width(SLIDER_WIDTH);
         table.row();
-        table.add(soundFX).padTop(AbstractScreen.PAD);
+        table.add(sound).padTop(AbstractScreen.PAD);
         table.row();
         table.add(sliderSound).width(SLIDER_WIDTH);
         table.row();
@@ -129,6 +128,37 @@ public class SettingsScreen extends AbstractScreen {
         table.add(shootingSettingLabel);
 
         // Events
+        music.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        toggleMusic();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+
+        // Events
+        sound.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        toggleSound();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+
         sliderMusic.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -229,6 +259,16 @@ public class SettingsScreen extends AbstractScreen {
         }
     }
 
+    private void toggleMusic() {
+        sliderMusic.setValue(music.isChecked() ? 0 : GameSettings.DEFAULT_VOLUME);
+        save();
+    }
+
+    private void toggleSound() {
+        sliderSound.setValue(sound.isChecked() ? 0 : GameSettings.DEFAULT_VOLUME);
+        save();
+    }
+
     private void changeSliderMusic() {
         float value = sliderMusic.getValue();//
         boolean musicOn = value <= 0.0f ? false : true;//
@@ -243,7 +283,7 @@ public class SettingsScreen extends AbstractScreen {
         boolean soundOn = value <= 0.0f ? false : true;
         prefs.setVolSound(value);
         prefs.setSound(soundOn);
-        soundFX.setChecked(!soundOn);
+        sound.setChecked(!soundOn);
         AudioManager.getInstance().onSettingsUpdated();
     }
 

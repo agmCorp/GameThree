@@ -25,7 +25,7 @@ public class GameSettings {
     private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String LEVEL_STATE = "levelState_";
     private static final String SETTINGS = "uy.com.agm.gameThree.settings";
-    private static final float DEFAULT_VOLUME = 0.5f;
+    public static final float DEFAULT_VOLUME = 0.5f;
     private static final float MIN_VOLUME = 0.0f;
     private static final float MAX_VOLUME = 1.0f;
     public static final int MAX_LEVEL = 4;
