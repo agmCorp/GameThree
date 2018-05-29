@@ -54,6 +54,7 @@ public class InfoScreen extends AbstractScreen {
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
     private static final float RED_FLASH_TIME = 0.1f;
+    private static final float HURRY_UP_MESSAGE_TIME = 0.5f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
     private static final float LETS_GO_TIME = 1.0f;
 
@@ -161,7 +162,6 @@ public class InfoScreen extends AbstractScreen {
         // Define a label based on labelStyle
         messageLabel = new Label("MESSAGE", labelStyleSmall);
         messageLabel.setAlignment(Align.center);
-        messageLabel.setWrap(true);
 
         // Define animatedActor and image
         animatedActor = new AnimatedActor();
@@ -275,13 +275,13 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    public void showMessage(String message, boolean big, float seconds) {
+    public void showMessage(String message, MessageSize messageSize, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
         overlayTemporaryImage = false;
         overlayTemporaryAnimation = false;
-        showMessage(message, MessageSize.BIG);
+        showMessage(message, messageSize);
     }
 
     public boolean isMessageVisible() {
@@ -411,7 +411,7 @@ public class InfoScreen extends AbstractScreen {
     // ----------- Specialized functions
 
     public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG);
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG, HURRY_UP_MESSAGE_TIME);
     }
 
     public void showTimeIsUpMessage() {
