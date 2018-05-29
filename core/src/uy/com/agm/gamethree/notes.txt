@@ -9,7 +9,7 @@ support this game:
 (icono corazón) Support the developer by paying above the minimum price
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
-Agregar en agredecimientos a Juan LLopart
+Agregar en agredecimientos a Juan LLopart, Alvaro y su amigo, Ali, Abder romero
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
