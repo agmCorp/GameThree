@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
-import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 
