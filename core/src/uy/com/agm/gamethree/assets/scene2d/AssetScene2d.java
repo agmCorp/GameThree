@@ -55,8 +55,8 @@ public class AssetScene2d {
     private TextureRegion musicPressed;
     private TextureRegion sound;
     private TextureRegion soundPressed;
-    private TextureRegion target;
-    private TextureRegion targetPressed;
+    private TextureRegion shooting;
+    private TextureRegion shootingPressed;
     private TextureRegion back;
     private TextureRegion backPressed;
     private TextureRegion pause;
@@ -121,8 +121,8 @@ public class AssetScene2d {
         musicPressed = atlasUI.findRegion("musicPressed");
         sound = atlasUI.findRegion("soundFX"); // todo llamarle a la imagen sound
         soundPressed = atlasUI.findRegion("soundFXPressed"); // todo llamarle a la imagen soundPressed
-        target = atlasUI.findRegion("target");
-        targetPressed = atlasUI.findRegion("targetPressed");
+        shooting = atlasUI.findRegion("target"); // todo
+        shootingPressed = atlasUI.findRegion("targetPressed"); // todo
         back = atlasUI.findRegion("back");
         backPressed = atlasUI.findRegion("backPressed");
         pause = atlasUI.findRegion("pause");
@@ -321,12 +321,12 @@ public class AssetScene2d {
         return soundPressed;
     }
 
-    public TextureRegion getTarget() {
-        return target;
+    public TextureRegion getShooting() {
+        return shooting;
     }
 
-    public TextureRegion getTargetPressed() {
-        return targetPressed;
+    public TextureRegion getShootingPressed() {
+        return shootingPressed;
     }
 
     public TextureRegion getBack() {
