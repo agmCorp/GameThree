@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
@@ -14,13 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
+
+import static com.badlogic.gdx.utils.Scaling.fit;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -122,6 +122,13 @@ public class DimScreen extends AbstractScreen {
         // Define buttons
         pause = new ImageButton(new TextureRegionDrawable(assetScene2d.getPause()),
                 new TextureRegionDrawable(assetScene2d.getPausePressed()));
+
+        // WA: The pause button will take the entire cell (stackCell), but its image will be placed on the
+        // bottom left corner of the screen with scaling fit.
+        pause.getImage().setScaling(fit);
+        pause.getImage().setAlign(Align.left);
+        pause.left();
+
         resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getResume()),
                 new TextureRegionDrawable(assetScene2d.getResumePressed()));
         quit = new ImageButton(new TextureRegionDrawable(assetScene2d.getQuit()),
@@ -187,7 +194,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showPauseButton() {
-        stackCell.size(BUTTON_SIZE_SMALL).left().bottom();
+        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().bottom();
         buttonsTable.pack();
         pause.setVisible(true);
         resume.setVisible(false);

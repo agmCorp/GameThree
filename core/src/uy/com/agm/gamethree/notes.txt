@@ -1,5 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
+- agregar 3 iconos para el volumen
+- poner padding al message. Ver timeisup
 - TERMINAR EL NIVEL 3
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Hacer pantallas de credit, help
