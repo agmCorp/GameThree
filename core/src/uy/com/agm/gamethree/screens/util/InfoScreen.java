@@ -54,7 +54,6 @@ public class InfoScreen extends AbstractScreen {
     // Constants
     private static final float BUTTONS_PAD = 20.0f;
     private static final float RED_FLASH_TIME = 0.1f;
-    private static final float HURRY_UP_MESSAGE_TIME = 0.5f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
     private static final float LETS_GO_TIME = 1.0f;
 
@@ -411,7 +410,7 @@ public class InfoScreen extends AbstractScreen {
     // ----------- Specialized functions
 
     public void showHurryUpMessage() {
-        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG, HURRY_UP_MESSAGE_TIME);
+        showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG);
     }
 
     public void showTimeIsUpMessage() {

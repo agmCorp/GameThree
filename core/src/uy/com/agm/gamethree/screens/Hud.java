@@ -395,8 +395,9 @@ public class Hud extends AbstractScreen {
                     InfoScreen infoScreen = screen.getInfoScreen();
                     if (infoScreen.isMessageVisible()) {
                         infoScreen.hideInfo();
+                    } else {
+                        infoScreen.showHurryUpMessage();
                     }
-                    infoScreen.showHurryUpMessage();
                 }
             } else {
                 timeIsUp = true;
