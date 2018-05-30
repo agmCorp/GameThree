@@ -1,6 +1,5 @@
 HACER PRIORIDAD 1
 -----------------
-- revisar las pantallas y cerrarlas. Ver de homologar los inputlisteners
 - TERMINAR EL NIVEL 3
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Hacer pantallas de credit, help

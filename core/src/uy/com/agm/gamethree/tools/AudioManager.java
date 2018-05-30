@@ -136,6 +136,11 @@ public class AudioManager {
                 playingMusic.pause();
             }
         }
+        if (playingSound != null) {
+            if (!GameSettings.getInstance().isSound()) {
+                playingSound.stop();
+            }
+        }
     }
 
     // Returns null if the sound was never played

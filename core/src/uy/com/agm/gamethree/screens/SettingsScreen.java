@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -34,16 +36,17 @@ public class SettingsScreen extends AbstractScreen {
     private static final float SLIDER_STEP = 0.01f;
     private static final float SLIDER_WIDTH = 250.0f;
 
-    private Label shootingLabel;
     private ImageButton music;
-    private ImageButton sound;
-    private ImageButton shooting;
     private Slider sliderMusic;
+    private ImageButton sound;
     private Slider sliderSound;
+    private ImageButton shooting;
+    private Label shootingLabel;
     private String manualShootingText;
     private String automaticShootingText;
     private GameSettings prefs;
     private I18NBundle i18NGameThreeBundle;
+    Sound[] samples;
 
     public SettingsScreen() {
         super();
@@ -51,6 +54,13 @@ public class SettingsScreen extends AbstractScreen {
 
         // I18n
         i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
+        AssetSounds assetSounds = Assets.getInstance().getSounds();
+        Sound[] samples = {assetSounds.getPickUpPowerOne(), assetSounds.getPickUpPowerTwo(),
+                assetSounds.getPickUpPowerThree(), assetSounds.getHeroShoot(),
+                assetSounds.getEnemyShoot(), assetSounds.getHit(),
+                assetSounds.getPum()};
+        this.samples = samples;
     }
 
     @Override
@@ -170,6 +180,7 @@ public class SettingsScreen extends AbstractScreen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 save();
             }
+
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -281,20 +292,8 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void playSampleSound() {
-        // Audio FX
-        switch (MathUtils.random(1, 4)) {
-            case 1:
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpPowerOne());
-                break;
-            case 2:
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShoot());
-                break;
-            case 3:
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
-                break;
-            case 4:
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHit());
-                break;
+        if (prefs.isSound()) {
+            AudioManager.getInstance().playSound(samples[MathUtils.random(0, samples.length - 1)]);
         }
     }
 
@@ -307,8 +306,8 @@ public class SettingsScreen extends AbstractScreen {
     }
 
     private void changeSliderMusic() {
-        float value = sliderMusic.getValue();//
-        boolean musicOn = value <= 0.0f ? false : true;//
+        float value = sliderMusic.getValue();
+        boolean musicOn = value <= 0.0f ? false : true;
         prefs.setVolMusic(value);
         prefs.setMusic(musicOn);
         music.setChecked(!musicOn);
