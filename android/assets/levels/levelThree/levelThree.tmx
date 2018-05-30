@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2487">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2489">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -155,6 +155,17 @@
   <object id="2486" x="64" y="2912" width="32" height="32">
    <properties>
     <property name="powerFive" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="2487" x="161" y="2960" width="32" height="32">
+   <properties>
+    <property name="colTwo" value=""/>
+   </properties>
+  </object>
+  <object id="2488" x="221" y="5860" width="32" height="32">
+   <properties>
+    <property name="powerFive" type="int" value="15"/>
+    <property name="strength" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>
