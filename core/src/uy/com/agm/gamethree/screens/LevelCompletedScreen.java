@@ -108,7 +108,7 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Events
         if (nextLevel <= GameSettings.MAX_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.createListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
+            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
 
         // Adds table to stage
@@ -139,7 +139,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.createListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
 
         // Adds table to stage
         addActor(table);
