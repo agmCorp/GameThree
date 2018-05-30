@@ -87,7 +87,7 @@ public class HeroCrossShooting implements IShootStrategy {
                             heroSilverBulletAnimation);
                     // Sound FX
                     AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getHeroShootSwish());
-                    if (i == NUMBER_BULLETS) {
+                    if (i == NUMBER_BULLETS - 1) {
                         hero.decreaseSilverBullets();
                     }
                 } else {

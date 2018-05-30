@@ -173,7 +173,10 @@ powerOne (int): ghost mode, indica el tiempo de uso
 powerTwo (int): escudo, indica el tiempo de uso
 powerThree (int): cambia el poder de disparo, indica el tiempo de uso
 powerFour (int): thogh mode, indica el tiempo de uso
+powerFive (int): espadas, indica el tiempo de uso
 colOne (string): moneda
+colTwo (string): mata a todos
+colThree (string): vida extra
 colSilverBullet (string): shuriken
 
 strength (int): dureza de la powerbox
