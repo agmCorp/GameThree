@@ -62,6 +62,9 @@ public class PlayScreen extends AbstractScreen {
     // Enable all levels
     public static final boolean DEBUG_LEVELS = true;
 
+    // The initial position of the camera is set on this value if it's greater than zero
+    public static float INITIAL_GAME_CAM_POSITION_Y_METERS = 0.0f;
+
     // --------------------------------
 
     // Time to wait till level completed screen turns up
@@ -149,8 +152,8 @@ public class PlayScreen extends AbstractScreen {
         map = LevelFactory.getLevelMap(this.level);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
-        // Initially set our gamCam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, gameViewPort.getWorldHeight() / 2, 0);
+        // Initially set our gameCam to be centered correctly at the start (bottom) of the map
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, INITIAL_GAME_CAM_POSITION_Y_METERS > 0 ? INITIAL_GAME_CAM_POSITION_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -163,15 +166,17 @@ public class PlayScreen extends AbstractScreen {
             b2dr = new Box2DDebugRenderer();
         }
 
-        final float ALTURA = 72.0f; // todo
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, ALTURA, 0); // todo
-
         creator = new B2WorldCreator(this);
 
         // Get our hero
         player = creator.getHero();
         player.setLives(lives);
-        player.getB2body().setTransform(this.getGameCam().position.x, this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4, player.getB2body().getAngle()); //todo
+
+        if (INITIAL_GAME_CAM_POSITION_Y_METERS > 0) {
+            player.getB2body().setTransform(this.getGameCam().position.x,
+                    this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4,
+                    player.getB2body().getAngle());
+        }
 
         // Boundaries
         upperEdge = creator.getUpperEdge();

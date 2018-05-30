@@ -249,7 +249,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_NINE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-               // enemies.add(new EnemyNine(screen, object)); // todo
+                enemies.add(new EnemyNine(screen, object));
             }
         }
 

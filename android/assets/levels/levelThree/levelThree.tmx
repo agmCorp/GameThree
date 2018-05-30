@@ -132,6 +132,7 @@
  <objectgroup name="powerBox">
   <object id="2481" x="160" y="5344" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="strength" type="int" value="2"/>
    </properties>
   </object>
@@ -148,6 +149,7 @@
   </object>
   <object id="2484" x="224" y="5408" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="strength" type="int" value="2"/>
    </properties>
   </object>
@@ -186,14 +188,15 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne" locked="1"/>
- <objectgroup name="enemyTwo" locked="1"/>
- <objectgroup name="enemyThree" locked="1"/>
- <objectgroup name="enemyFour" locked="1"/>
- <objectgroup name="enemyFive" locked="1"/>
+ <objectgroup name="enemyOne"/>
+ <objectgroup name="enemyTwo"/>
+ <objectgroup name="enemyThree"/>
+ <objectgroup name="enemyFour"/>
+ <objectgroup name="enemyFive"/>
  <objectgroup name="enemySix">
   <object id="2478" x="32" y="899" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
     <property name="powerFive" type="int" value="10"/>
     <property name="powerOne" type="int" value="10"/>
@@ -201,26 +204,37 @@
   </object>
   <object id="2491" x="422.667" y="822.667" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
     <property name="powerFive" type="int" value="10"/>
     <property name="powerOne" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven" locked="1"/>
- <objectgroup name="enemyEight" locked="1"/>
+ <objectgroup name="enemySeven"/>
+ <objectgroup name="enemyEight"/>
  <objectgroup name="enemyNine">
   <object id="2357" x="96" y="5888" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2358" x="192" y="5920" width="32" height="32"/>
+  <object id="2358" x="192" y="5920" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2359" x="352" y="5888" width="32" height="32"/>
-  <object id="2360" x="321.333" y="5978.67" width="32" height="32"/>
+  <object id="2360" x="321.333" y="5978.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2361" x="64" y="6048" width="32" height="32"/>
   <object id="2362" x="190.667" y="6082.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -229,24 +243,41 @@
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2364" x="436" y="6018.67" width="32" height="32"/>
+  <object id="2364" x="436" y="6018.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2365" x="53.3333" y="6150.67" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2367" x="201.333" y="6164" width="32" height="32"/>
+  <object id="2367" x="201.333" y="6164" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2368" x="376" y="6194.67" width="32" height="32"/>
-  <object id="2369" x="92" y="6233.33" width="32" height="32"/>
+  <object id="2369" x="92" y="6233.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2370" x="268" y="5789.33" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2371" x="80" y="5773.33" width="32" height="32"/>
+  <object id="2371" x="80" y="5773.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2372" x="176" y="5740" width="32" height="32"/>
   <object id="2373" x="12" y="5676" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -257,12 +288,14 @@
   </object>
   <object id="2460" x="64" y="1103" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2461" x="96" y="1167" width="32" height="32"/>
   <object id="2462" x="192" y="1167" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -273,18 +306,32 @@
   </object>
   <object id="2464" x="192" y="1295" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2465" x="96" y="1327" width="32" height="32"/>
-  <object id="2466" x="384" y="1263" width="32" height="32"/>
+  <object id="2466" x="384" y="1263" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2467" x="416" y="1199" width="32" height="32"/>
-  <object id="2468" x="416" y="1135" width="32" height="32"/>
+  <object id="2468" x="416" y="1135" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2469" x="352" y="1103" width="32" height="32"/>
-  <object id="2470" x="224" y="1103" width="32" height="32"/>
+  <object id="2470" x="224" y="1103" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2471" x="96" y="1231" width="32" height="32"/>
   <object id="2480" x="275" y="6253" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -292,46 +339,67 @@
  <objectgroup name="enemyTen">
   <object id="2377" x="435" y="5376" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2378" x="435" y="5344" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colTwo" value=""/>
    </properties>
   </object>
   <object id="2379" x="435" y="5312" width="32" height="32"/>
   <object id="2380" x="435" y="5280" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2381" x="435" y="5248" width="32" height="32"/>
   <object id="2382" x="435" y="5216" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2383" x="435" y="5184" width="32" height="32"/>
-  <object id="2384" x="435" y="5152" width="32" height="32"/>
+  <object id="2384" x="435" y="5152" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2385" x="435" y="5408" width="32" height="32"/>
-  <object id="2386" x="435" y="5440" width="32" height="32"/>
+  <object id="2386" x="435" y="5440" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2387" x="8.66667" y="4890" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2388" x="8.66667" y="4858" width="32" height="32"/>
+  <object id="2388" x="8.66667" y="4858" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2389" x="8.66667" y="4826" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
     <property name="colThree" value=""/>
    </properties>
   </object>
-  <object id="2390" x="8.66667" y="4794" width="32" height="32"/>
+  <object id="2390" x="8.66667" y="4794" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2391" x="8.66667" y="4762" width="32" height="32"/>
   <object id="2392" x="8.66667" y="4730" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colThree" value=""/>
    </properties>
   </object>
@@ -340,48 +408,97 @@
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2394" x="8.66667" y="4666" width="32" height="32"/>
+  <object id="2394" x="8.66667" y="4666" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2395" x="8.66667" y="4922" width="32" height="32"/>
-  <object id="2396" x="8.66667" y="4954" width="32" height="32"/>
+  <object id="2396" x="8.66667" y="4954" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2397" x="438.333" y="2862" width="32" height="32"/>
-  <object id="2398" x="438.333" y="2830" width="32" height="32"/>
+  <object id="2398" x="438.333" y="2830" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2399" x="438.333" y="2798" width="32" height="32"/>
   <object id="2400" x="438.333" y="2766" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2401" x="438.333" y="2734" width="32" height="32"/>
-  <object id="2402" x="438.333" y="2702" width="32" height="32"/>
+  <object id="2402" x="438.333" y="2702" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2403" x="438.333" y="2670" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2404" x="438.333" y="2638" width="32" height="32"/>
+  <object id="2404" x="438.333" y="2638" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2405" x="438.333" y="2894" width="32" height="32"/>
-  <object id="2406" x="438.333" y="2926" width="32" height="32"/>
+  <object id="2406" x="438.333" y="2926" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2407" x="9.33333" y="2381" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2408" x="9.33333" y="2349" width="32" height="32"/>
+  <object id="2408" x="9.33333" y="2349" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2409" x="9.33333" y="2317" width="32" height="32"/>
-  <object id="2410" x="9.33333" y="2285" width="32" height="32"/>
+  <object id="2410" x="9.33333" y="2285" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2411" x="9.33333" y="2253" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2412" x="9.33333" y="2221" width="32" height="32"/>
+  <object id="2412" x="9.33333" y="2221" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2413" x="9.33333" y="2189" width="32" height="32"/>
-  <object id="2414" x="9.33333" y="2157" width="32" height="32"/>
+  <object id="2414" x="9.33333" y="2157" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2415" x="9.33333" y="2413" width="32" height="32"/>
-  <object id="2416" x="9.33333" y="2445" width="32" height="32"/>
+  <object id="2416" x="9.33333" y="2445" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemyEleven">
-  <object id="2417" x="66.6667" y="3967.33" width="32" height="32"/>
+  <object id="2417" x="66.6667" y="3967.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2418" x="348" y="4450" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
@@ -389,28 +506,40 @@
   </object>
   <object id="2420" x="170.667" y="4259.33" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2421" x="65.3333" y="4354.33" width="32" height="32"/>
   <object id="2422" x="386.667" y="3754" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colThree" value=""/>
    </properties>
   </object>
   <object id="2423" x="58.6667" y="3578" width="32" height="32"/>
-  <object id="2424" x="384" y="3602" width="32" height="32"/>
+  <object id="2424" x="384" y="3602" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2425" x="342.667" y="3414" width="32" height="32"/>
   <object id="2426" x="32" y="3250" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2427" x="342.667" y="3067.33" width="32" height="32"/>
-  <object id="2429" x="353.333" y="4156.67" width="32" height="32"/>
+  <object id="2429" x="353.333" y="4156.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2430" x="64" y="4144.67" width="32" height="32"/>
   <object id="2431" x="353.333" y="3966" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -421,6 +550,7 @@
   </object>
   <object id="2433" x="194.667" y="3663.33" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -431,6 +561,7 @@
   </object>
   <object id="2435" x="77.3333" y="3396.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colThree" value=""/>
    </properties>
   </object>
@@ -441,29 +572,44 @@
   </object>
   <object id="2437" x="126.667" y="3135.33" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="powerFive" type="int" value="20"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="enemyTwelve">
-  <object id="2297" x="418.667" y="7078.67" width="32" height="32"/>
+  <object id="2297" x="418.667" y="7078.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2300" x="273.333" y="7040" width="32" height="32"/>
-  <object id="2303" x="422.667" y="6846.67" width="32" height="32"/>
+  <object id="2303" x="422.667" y="6846.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2304" x="328" y="6930.67" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2305" x="430.667" y="6945.33" width="32" height="32"/>
+  <object id="2305" x="430.667" y="6945.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2307" x="266.667" y="6842.67" width="32" height="32"/>
   <object id="2308" x="185.333" y="6776" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2311" x="18.6667" y="6949.33" width="32" height="32"/>
   <object id="2314" x="197.333" y="6950.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -474,29 +620,46 @@
   </object>
   <object id="2316" x="65.3333" y="7045.33" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2317" x="101.333" y="6866.67" width="32" height="32"/>
-  <object id="2318" x="134.667" y="6673.33" width="32" height="32"/>
+  <object id="2318" x="134.667" y="6673.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2321" x="298.667" y="6726.67" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="2327" x="384" y="6757.33" width="32" height="32"/>
+  <object id="2327" x="384" y="6757.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2342" x="34.6667" y="6737.33" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="2343" x="18.6667" y="6632" width="32" height="32"/>
+  <object id="2343" x="18.6667" y="6632" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2344" x="117.333" y="6569.33" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="2346" x="273.333" y="6617.33" width="32" height="32"/>
+  <object id="2346" x="273.333" y="6617.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2347" x="393.333" y="6637.33" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
@@ -504,6 +667,7 @@
   </object>
   <object id="2355" x="281.333" y="7142.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -512,11 +676,23 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="2438" x="425" y="1794.67" width="32" height="32"/>
+  <object id="2438" x="425" y="1794.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2439" x="279.666" y="1756" width="32" height="32"/>
-  <object id="2441" x="334.333" y="1646.67" width="32" height="32"/>
+  <object id="2441" x="334.333" y="1646.67" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2442" x="437" y="1661.33" width="32" height="32"/>
-  <object id="2445" x="24.9999" y="1665.33" width="32" height="32"/>
+  <object id="2445" x="24.9999" y="1665.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2446" x="203.666" y="1666.67" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
@@ -526,12 +702,14 @@
   </object>
   <object id="2447" x="167.666" y="1820" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
   <object id="2448" x="71.6665" y="1761.33" width="32" height="32"/>
   <object id="2458" x="287.666" y="1858.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
@@ -540,14 +718,27 @@
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
-  <object id="2472" x="213" y="1927" width="32" height="32"/>
+  <object id="2472" x="213" y="1927" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2473" x="390" y="1928" width="32" height="32"/>
-  <object id="2474" x="128" y="1579" width="32" height="32"/>
+  <object id="2474" x="128" y="1579" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2475" x="10" y="1544" width="32" height="32"/>
-  <object id="2476" x="312" y="1569" width="32" height="32"/>
+  <object id="2476" x="312" y="1569" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2477" x="430" y="1537" width="32" height="32"/>
   <object id="2479" x="255" y="6532" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
