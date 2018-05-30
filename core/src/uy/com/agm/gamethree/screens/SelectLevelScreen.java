@@ -70,7 +70,11 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events
-            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, levelState.getLevel(), levelState.getLives(), levelState.getScore(), levelState.getSkulls()));
+            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME,
+                    levelState.getLevel(),
+                    levelState.getLives(),
+                    levelState.getScore(),
+                    levelState.getSkulls()));
         }
 
         // Adds table to stage
