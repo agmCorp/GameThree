@@ -53,10 +53,13 @@ public class AssetScene2d {
     private TextureRegion creditsPressed;
     private TextureRegion music;
     private TextureRegion musicPressed;
+    private TextureRegion musicChecked;
     private TextureRegion sound;
     private TextureRegion soundPressed;
+    private TextureRegion soundChecked;
     private TextureRegion shooting;
     private TextureRegion shootingPressed;
+    private TextureRegion shootingChecked;
     private TextureRegion back;
     private TextureRegion backPressed;
     private TextureRegion pause;
@@ -119,10 +122,13 @@ public class AssetScene2d {
         creditsPressed = atlasUI.findRegion("creditsPressed");
         music = atlasUI.findRegion("music");
         musicPressed = atlasUI.findRegion("musicPressed");
-        sound = atlasUI.findRegion("soundFX"); // todo llamarle a la imagen sound
-        soundPressed = atlasUI.findRegion("soundFXPressed"); // todo llamarle a la imagen soundPressed
-        shooting = atlasUI.findRegion("target"); // todo
-        shootingPressed = atlasUI.findRegion("targetPressed"); // todo
+        musicChecked = atlasUI.findRegion("musicChecked");
+        sound = atlasUI.findRegion("sound");
+        soundPressed = atlasUI.findRegion("soundPressed");
+        soundChecked = atlasUI.findRegion("soundChecked");
+        shooting = atlasUI.findRegion("shooting");
+        shootingPressed = atlasUI.findRegion("shootingPressed");
+        shootingChecked = atlasUI.findRegion("resume");
         back = atlasUI.findRegion("back");
         backPressed = atlasUI.findRegion("backPressed");
         pause = atlasUI.findRegion("pause");
@@ -313,6 +319,10 @@ public class AssetScene2d {
         return musicPressed;
     }
 
+    public TextureRegion getMusicChecked() {
+        return musicChecked;
+    }
+
     public TextureRegion getSound() {
         return sound;
     }
@@ -321,12 +331,20 @@ public class AssetScene2d {
         return soundPressed;
     }
 
+    public TextureRegion getSoundChecked() {
+        return soundChecked;
+    }
+
     public TextureRegion getShooting() {
         return shooting;
     }
 
     public TextureRegion getShootingPressed() {
         return shootingPressed;
+    }
+
+    public TextureRegion getShootingChecked() {
+        return shootingChecked;
     }
 
     public TextureRegion getBack() {

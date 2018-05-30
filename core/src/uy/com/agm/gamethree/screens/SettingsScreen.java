@@ -93,7 +93,8 @@ public class SettingsScreen extends AbstractScreen {
         // Button music
         Label settingsLabel = new Label(i18NGameThreeBundle.format("settings.title"), labelStyleBig);
         music = new ImageButton(new TextureRegionDrawable(assetScene2d.getMusic()),
-                new TextureRegionDrawable(assetScene2d.getMusicPressed()), new TextureRegionDrawable(assetScene2d.getQuit())); // todo
+                new TextureRegionDrawable(assetScene2d.getMusicPressed()),
+                new TextureRegionDrawable(assetScene2d.getMusicChecked()));
 
         // Slide music
         sliderMusic = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
@@ -103,7 +104,8 @@ public class SettingsScreen extends AbstractScreen {
 
         // Button sound
         sound = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
-                new TextureRegionDrawable(assetScene2d.getSoundPressed()), new TextureRegionDrawable(assetScene2d.getCredits())); // todo
+                new TextureRegionDrawable(assetScene2d.getSoundPressed()),
+                new TextureRegionDrawable(assetScene2d.getSoundChecked()));
 
         // Slide sound
         sliderSound = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_STEP, false, sliderStyle);
@@ -113,7 +115,8 @@ public class SettingsScreen extends AbstractScreen {
 
         // Button shooting
         shooting = new ImageButton(new TextureRegionDrawable(assetScene2d.getShooting()),
-                new TextureRegionDrawable(assetScene2d.getShootingPressed()), new TextureRegionDrawable(assetScene2d.getResume())); // todo
+                new TextureRegionDrawable(assetScene2d.getShootingPressed()),
+                new TextureRegionDrawable(assetScene2d.getShootingChecked()));
 
         // Label shooting
         shootingLabel = new Label("SHOOTING", labelStyleNormal);
