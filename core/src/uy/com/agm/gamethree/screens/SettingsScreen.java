@@ -231,14 +231,14 @@ public class SettingsScreen extends AbstractScreen {
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        shootingLabel.getStyle().fontColor = Color.WHITE; // Default
+                        shootingLabel.setColor(Color.WHITE); // Default
                         toggleShootingLabel();
                         save();
                     }
 
                     @Override
                     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                        shootingLabel.getStyle().fontColor = COLOR_LABEL_PRESSED;
+                        shootingLabel.setColor(COLOR_LABEL_PRESSED);
                         return true;
                     }
                 });

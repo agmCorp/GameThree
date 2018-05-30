@@ -31,8 +31,9 @@ public abstract class AbstractScreen extends Stage implements Screen {
     // Visible game world is V_WIDTH / PPM meters tall
     public static final int V_HEIGHT = 800;
 
+    // GUI util
     protected static final float PAD = 30.0f;
-    protected static final Color COLOR_LABEL_PRESSED = new Color(0xad5D00ff);
+    public static final Color COLOR_LABEL_PRESSED = new Color(0xad5D00ff);
 
     protected AbstractScreen() {
         // We don't scale our viewPort (see PlayScreen constructor), so we work with pixels

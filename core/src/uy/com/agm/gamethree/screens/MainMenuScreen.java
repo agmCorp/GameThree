@@ -116,13 +116,13 @@ public class MainMenuScreen extends AbstractScreen {
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        exitGameLabel.getStyle().fontColor = Color.WHITE; // Default
+                        exitGameLabel.setColor(Color.WHITE); // Default
                         Gdx.app.exit();
                     }
 
                     @Override
                     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                        exitGameLabel.getStyle().fontColor = COLOR_LABEL_PRESSED;
+                        exitGameLabel.setColor(COLOR_LABEL_PRESSED);
                         return true;
                     }
                 });
