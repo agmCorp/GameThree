@@ -21,9 +21,9 @@ public class DebugConstants {
     // Enable all levels
     public static final boolean DEBUG_LEVELS = true;
 
-    // The initial position of the camera is set on this value if it's greater than zero
-    public static float INITIAL_GAME_CAM_POSITION_Y_METERS = 0.0f;
+    // if it's greater than zero it sets the initial position of the camera
+    public static float GAME_CAM_Y_METERS = 0.0f;
 
     // Freezes the camera
-    public static boolean STOP_GAME_CAMERA = false;
+    public static boolean STATIC_GAME_CAM = false;
 }
