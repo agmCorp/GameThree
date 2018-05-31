@@ -446,6 +446,19 @@ public class InfoScreen extends AbstractScreen {
         screen.setPlayScreenStatePaused(false);
     }
 
+    public void showRedFlashWarning() {
+        gotIt.setVisible(true);
+        setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
+        image.setVisible(true);
+        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashWarning"));
+        messageLabel.setStyle(labelStyleNormal);
+        messageLabel.setVisible(true);
+        animatedActor.setVisible(false);
+        centerTable.setVisible(true);
+        screen.getDimScreen().hideButtons();
+        screen.setPlayScreenStatePaused(false);
+    }
+
     public boolean isRedFlashVisible() {
         return isImageVisible() && ((TextureRegionDrawable) image.getDrawable()).getRegion() == redFlash;
     }

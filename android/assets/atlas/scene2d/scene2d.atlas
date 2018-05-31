@@ -24,28 +24,28 @@ gameOver
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 9
+  index: 20
 gameOver
   rotate: false
   xy: 870, 493
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 30
+  index: 9
 gameOver
   rotate: false
   xy: 1336, 561
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 34
+  index: 30
 gameOver
   rotate: false
   xy: 1400, 15
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 17
+  index: 34
 gotIt
   rotate: false
   xy: 1866, 391
@@ -181,7 +181,7 @@ musicChecked
   index: -1
 pausePressed
   rotate: false
-  xy: 870, 1102
+  xy: 1262, 1046
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -202,7 +202,7 @@ quit
   index: -1
 settingsPressed
   rotate: false
-  xy: 1262, 1046
+  xy: 870, 1102
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -262,7 +262,7 @@ victory
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 20
+  index: 15
 victory
   rotate: false
   xy: 2, 188
@@ -276,112 +276,112 @@ victory
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 28
+  index: 17
 victory
   rotate: false
   xy: 404, 934
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 35
+  index: 20
 victory
   rotate: false
   xy: 404, 705
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 1
+  index: 28
 victory
   rotate: false
   xy: 404, 476
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 5
+  index: 35
 victory
   rotate: false
   xy: 468, 247
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 12
+  index: 1
 victory
   rotate: false
   xy: 468, 18
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 16
+  index: 5
 victory
   rotate: false
   xy: 1262, 1336
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 17
+  index: 9
 victory
   rotate: false
   xy: 1262, 1107
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 31
+  index: 12
 victory
   rotate: false
   xy: 870, 810
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 23
+  index: 16
 victory
   rotate: false
   xy: 870, 581
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 27
+  index: 31
 victory
   rotate: false
   xy: 1336, 878
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 34
+  index: 23
 victory
   rotate: false
   xy: 1336, 649
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 4
+  index: 27
 victory
   rotate: false
   xy: 934, 264
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 8
+  index: 34
 victory
   rotate: false
   xy: 934, 35
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 11
+  index: 4
 victory
   rotate: false
   xy: 1400, 332
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 15
+  index: 8
 victory
   rotate: false
   xy: 1400, 103
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 19
+  index: 11
 wipeThemOut
   rotate: false
   xy: 886, 1639
@@ -411,7 +411,7 @@ credits
   index: -1
 creditsPressed
   rotate: false
-  xy: 1948, 1665
+  xy: 1948, 1604
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -422,14 +422,14 @@ gameOver
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 4
+  index: 7
 gameOver
   rotate: false
   xy: 463, 1502
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 8
+  index: 4
 gameOver
   rotate: false
   xy: 2, 936
@@ -443,192 +443,192 @@ gameOver
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 11
+  index: 19
 gameOver
   rotate: false
   xy: 2, 760
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 15
+  index: 26
 gameOver
   rotate: false
   xy: 1261, 1044
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 19
+  index: 33
 gameOver
   rotate: false
   xy: 1261, 956
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 26
+  index: 32
 gameOver
   rotate: false
   xy: 1261, 868
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 33
+  index: 3
 gameOver
   rotate: false
   xy: 790, 815
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 3
+  index: 12
 gameOver
   rotate: false
   xy: 1251, 780
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 7
+  index: 11
 gameOver
   rotate: false
   xy: 790, 727
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 12
+  index: 14
 gameOver
   rotate: false
   xy: 2, 672
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 14
+  index: 29
 gameOver
   rotate: false
   xy: 2, 584
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 18
+  index: 21
 gameOver
   rotate: false
   xy: 1251, 692
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 29
+  index: 23
 gameOver
   rotate: false
   xy: 790, 639
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 21
+  index: 25
 gameOver
   rotate: false
   xy: 2, 496
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 23
+  index: 18
 gameOver
   rotate: false
   xy: 1251, 604
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 25
+  index: 2
 gameOver
   rotate: false
   xy: 790, 551
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 32
+  index: 6
 gameOver
   rotate: false
   xy: 1251, 516
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 28
+  index: 13
 gameOver
   rotate: false
   xy: 790, 463
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 2
+  index: 17
 gameOver
   rotate: false
   xy: 2, 408
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 6
+  index: 24
 gameOver
   rotate: false
   xy: 2, 320
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 13
+  index: 28
 gameOver
   rotate: false
   xy: 1251, 428
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 20
+  index: 31
 gameOver
   rotate: false
   xy: 790, 375
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 24
+  index: 35
 gameOver
   rotate: false
   xy: 1251, 340
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 31
+  index: 5
 gameOver
   rotate: false
   xy: 790, 287
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 35
+  index: 22
 gameOver
   rotate: false
   xy: 2, 232
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 5
+  index: 16
 gameOver
   rotate: false
   xy: 2, 144
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 22
+  index: 15
 gameOver
   rotate: false
   xy: 1251, 252
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 16
+  index: 1
 gameOver
   rotate: false
   xy: 790, 199
   size: 459, 86
   orig: 459, 86
   offset: 0, 0
-  index: 1
+  index: 8
 helpPressed
   rotate: false
-  xy: 1940, 1543
+  xy: 1866, 1537
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -663,7 +663,7 @@ letsGo
   index: 22
 musicPressed
   rotate: false
-  xy: 1948, 1604
+  xy: 1866, 1598
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -684,7 +684,7 @@ playPressed
   index: -1
 quitPressed
   rotate: false
-  xy: 1866, 1598
+  xy: 1940, 1543
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -698,7 +698,7 @@ resume
   index: -1
 resumePressed
   rotate: false
-  xy: 1866, 1537
+  xy: 1940, 1482
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -719,7 +719,7 @@ shooting
   index: -1
 shootingPressed
   rotate: false
-  xy: 1940, 1482
+  xy: 1948, 1665
   size: 72, 59
   orig: 72, 59
   offset: 0, 0
@@ -765,84 +765,105 @@ stageCleared
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 29
+  index: 30
 stageCleared
   rotate: false
   xy: 463, 792
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 30
+  index: 34
 stageCleared
   rotate: false
   xy: 463, 650
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 34
+  index: 38
 stageCleared
   rotate: false
   xy: 1712, 640
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 38
+  index: 4
 stageCleared
   rotate: false
   xy: 463, 508
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 17
+  index: 8
+stageCleared
+  rotate: false
+  xy: 463, 508
+  size: 325, 140
+  orig: 325, 140
+  offset: 0, 0
+  index: 7
+stageCleared
+  rotate: false
+  xy: 463, 508
+  size: 325, 140
+  orig: 325, 140
+  offset: 0, 0
+  index: 6
+stageCleared
+  rotate: false
+  xy: 463, 508
+  size: 325, 140
+  orig: 325, 140
+  offset: 0, 0
+  index: 9
 stageCleared
   rotate: false
   xy: 1712, 498
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 4
+  index: 11
 stageCleared
   rotate: false
   xy: 463, 366
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 11
+  index: 15
 stageCleared
   rotate: false
   xy: 1712, 356
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 15
+  index: 19
 stageCleared
   rotate: false
   xy: 463, 224
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 19
+  index: 22
 stageCleared
   rotate: false
   xy: 2, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 22
+  index: 31
 stageCleared
   rotate: false
   xy: 329, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 26
+  index: 33
 stageCleared
   rotate: false
   xy: 1712, 214
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 33
+  index: 37
 stageFailed
   rotate: false
   xy: 1722, 782
@@ -863,28 +884,28 @@ victory
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 2
+  index: 19
 victory
   rotate: false
   xy: 468, 1819
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 22
+  index: 2
 victory
   rotate: false
   xy: 934, 1819
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 26
+  index: 22
 victory
   rotate: false
   xy: 1400, 1819
   size: 464, 227
   orig: 464, 227
   offset: 0, 0
-  index: 9
+  index: 26
 victory
   rotate: false
   xy: 468, 1590
@@ -981,7 +1002,7 @@ letsGo
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 17
+  index: 13
 letsGo
   rotate: false
   xy: 314, 1839
@@ -989,6 +1010,20 @@ letsGo
   orig: 310, 198
   offset: 0, 0
   index: 12
+letsGo
+  rotate: false
+  xy: 314, 1839
+  size: 310, 198
+  orig: 310, 198
+  offset: 0, 0
+  index: 10
+letsGo
+  rotate: false
+  xy: 314, 1839
+  size: 310, 198
+  orig: 310, 198
+  offset: 0, 0
+  index: 15
 letsGo
   rotate: false
   xy: 314, 1839
@@ -1009,7 +1044,7 @@ letsGo
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 10
+  index: 17
 letsGo
   rotate: false
   xy: 314, 1839
@@ -1019,193 +1054,179 @@ letsGo
   index: 11
 letsGo
   rotate: false
-  xy: 314, 1839
-  size: 310, 198
-  orig: 310, 198
-  offset: 0, 0
-  index: 15
-letsGo
-  rotate: false
-  xy: 314, 1839
-  size: 310, 198
-  orig: 310, 198
-  offset: 0, 0
-  index: 13
-letsGo
-  rotate: false
   xy: 626, 1839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 32
+  index: 20
 letsGo
   rotate: false
   xy: 938, 1839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 39
+  index: 32
 letsGo
   rotate: false
   xy: 1250, 1839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 42
+  index: 39
 letsGo
   rotate: false
   xy: 1562, 1839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 1
+  index: 42
 letsGo
   rotate: false
   xy: 2, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 46
+  index: 1
 letsGo
   rotate: false
   xy: 314, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 5
+  index: 46
 letsGo
   rotate: false
   xy: 626, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 9
+  index: 5
 letsGo
   rotate: false
   xy: 938, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 30
+  index: 9
 letsGo
   rotate: false
   xy: 1250, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 27
+  index: 30
 letsGo
   rotate: false
   xy: 1562, 1639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 35
+  index: 23
 letsGo
   rotate: false
   xy: 2, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 34
+  index: 27
 letsGo
   rotate: false
   xy: 314, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 38
+  index: 35
 letsGo
   rotate: false
   xy: 626, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 23
+  index: 34
 letsGo
   rotate: false
   xy: 938, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 31
+  index: 38
 letsGo
   rotate: false
   xy: 1250, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 41
+  index: 31
 letsGo
   rotate: false
   xy: 1562, 1439
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 45
+  index: 41
 letsGo
   rotate: false
   xy: 2, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 4
+  index: 45
 letsGo
   rotate: false
   xy: 314, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 49
+  index: 4
 letsGo
   rotate: false
   xy: 626, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 8
+  index: 49
 letsGo
   rotate: false
   xy: 938, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 33
+  index: 8
 letsGo
   rotate: false
   xy: 1250, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 19
+  index: 33
 letsGo
   rotate: false
   xy: 1562, 1239
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 26
+  index: 19
 letsGo
   rotate: false
   xy: 2, 1039
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 37
+  index: 26
 letsGo
   rotate: false
   xy: 2, 839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 21
+  index: 37
 letsGo
   rotate: false
   xy: 2, 639
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 40
+  index: 21
 letsGo
   rotate: false
   xy: 2, 439
@@ -1247,77 +1268,56 @@ letsGo
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 18
+  index: 40
 letsGo
   rotate: false
   xy: 1250, 1039
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 25
+  index: 18
 letsGo
   rotate: false
   xy: 1562, 1039
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 29
+  index: 25
 letsGo
   rotate: false
   xy: 314, 839
   size: 310, 198
   orig: 310, 198
   offset: 0, 0
-  index: 20
+  index: 29
 stageCleared
   rotate: false
   xy: 640, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 37
+  index: 3
 stageCleared
   rotate: false
   xy: 967, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 3
+  index: 10
 stageCleared
   rotate: false
   xy: 1294, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 7
-stageCleared
-  rotate: false
-  xy: 1294, 2
-  size: 325, 140
-  orig: 325, 140
-  offset: 0, 0
-  index: 8
-stageCleared
-  rotate: false
-  xy: 1294, 2
-  size: 325, 140
-  orig: 325, 140
-  offset: 0, 0
-  index: 9
-stageCleared
-  rotate: false
-  xy: 1294, 2
-  size: 325, 140
-  orig: 325, 140
-  offset: 0, 0
-  index: 6
+  index: 14
 stageCleared
   rotate: false
   xy: 1621, 2
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 10
+  index: 21
 stageFailed
   rotate: false
   xy: 314, 660
@@ -1352,161 +1352,161 @@ stageFailed
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 8
-stageFailed
-  rotate: false
-  xy: 1604, 860
-  size: 324, 177
-  orig: 324, 177
-  offset: 0, 0
-  index: 7
-stageFailed
-  rotate: false
-  xy: 1604, 860
-  size: 324, 177
-  orig: 324, 177
-  offset: 0, 0
-  index: 6
-stageFailed
-  rotate: false
-  xy: 1604, 860
-  size: 324, 177
-  orig: 324, 177
-  offset: 0, 0
-  index: 9
+  index: 11
 stageFailed
   rotate: false
   xy: 314, 481
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 47
+  index: 15
 stageFailed
   rotate: false
   xy: 314, 302
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 11
+  index: 19
 stageFailed
   rotate: false
   xy: 314, 123
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 15
+  index: 32
 stageFailed
   rotate: false
   xy: 640, 681
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 19
+  index: 22
 stageFailed
   rotate: false
   xy: 966, 681
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 32
+  index: 26
 stageFailed
   rotate: false
   xy: 1292, 681
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 22
+  index: 8
+stageFailed
+  rotate: false
+  xy: 1292, 681
+  size: 324, 177
+  orig: 324, 177
+  offset: 0, 0
+  index: 9
+stageFailed
+  rotate: false
+  xy: 1292, 681
+  size: 324, 177
+  orig: 324, 177
+  offset: 0, 0
+  index: 6
+stageFailed
+  rotate: false
+  xy: 1292, 681
+  size: 324, 177
+  orig: 324, 177
+  offset: 0, 0
+  index: 7
 stageFailed
   rotate: false
   xy: 1618, 681
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 26
+  index: 43
 stageFailed
   rotate: false
   xy: 640, 502
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 43
+  index: 33
 stageFailed
   rotate: false
   xy: 640, 323
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 33
+  index: 37
 stageFailed
   rotate: false
   xy: 640, 144
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 37
+  index: 40
 stageFailed
   rotate: false
   xy: 966, 502
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 40
+  index: 44
 stageFailed
   rotate: false
   xy: 966, 323
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 44
+  index: 3
 stageFailed
   rotate: false
   xy: 966, 144
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 3
+  index: 10
 stageFailed
   rotate: false
   xy: 1292, 502
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 10
+  index: 18
 stageFailed
   rotate: false
   xy: 1292, 323
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 14
+  index: 21
 stageFailed
   rotate: false
   xy: 1292, 144
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 18
+  index: 25
 stageFailed
   rotate: false
   xy: 1618, 502
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 21
+  index: 29
 stageFailed
   rotate: false
   xy: 1618, 323
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 25
+  index: 36
 stageFailed
   rotate: false
   xy: 1618, 144
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 29
+  index: 2
 
 scene2d4.png
 size: 2048,2048
@@ -1554,91 +1554,91 @@ stageCleared
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 14
+  index: 25
 stageCleared
   rotate: false
   xy: 2, 618
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 21
+  index: 29
 stageCleared
   rotate: false
   xy: 2, 476
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 25
+  index: 32
 stageCleared
   rotate: false
   xy: 2, 334
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 32
+  index: 36
 stageCleared
   rotate: false
   xy: 2, 192
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 36
+  index: 2
 stageCleared
   rotate: false
   xy: 2, 50
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 2
+  index: 18
 stageCleared
   rotate: false
   xy: 654, 1118
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 18
+  index: 28
 stageCleared
   rotate: false
   xy: 1306, 1476
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 28
+  index: 13
 stageCleared
   rotate: false
   xy: 328, 939
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 13
+  index: 17
 stageCleared
   rotate: false
   xy: 980, 1297
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 20
+  index: 26
 stageCleared
   rotate: false
   xy: 1632, 1655
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 24
+  index: 20
 stageCleared
   rotate: false
   xy: 329, 797
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 27
+  index: 24
 stageCleared
   rotate: false
   xy: 329, 655
   size: 325, 140
   orig: 325, 140
   offset: 0, 0
-  index: 31
+  index: 27
 stageCleared
   rotate: false
   xy: 329, 513
@@ -1666,14 +1666,14 @@ stageFailed
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 36
+  index: 47
 stageFailed
   rotate: false
   xy: 2, 1618
   size: 324, 177
   orig: 324, 177
   offset: 0, 0
-  index: 2
+  index: 14
 stageFailed
   rotate: false
   xy: 328, 1797

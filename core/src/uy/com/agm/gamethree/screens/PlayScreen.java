@@ -63,7 +63,10 @@ public class PlayScreen extends AbstractScreen {
     public static final boolean DEBUG_LEVELS = true;
 
     // The initial position of the camera is set on this value if it's greater than zero
-    public static float INITIAL_GAME_CAM_POSITION_Y_METERS = 0.0f;
+    private static float INITIAL_GAME_CAM_POSITION_Y_METERS = 0.0f;
+
+    // Freezes the camera
+    private static boolean STOP_GAME_CAMERA = false;
 
     // --------------------------------
 
@@ -86,7 +89,7 @@ public class PlayScreen extends AbstractScreen {
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
-    public static final float GAME_CAMERA_VELOCITY = 0.304f;
+    public static final float GAME_CAMERA_VELOCITY = STOP_GAME_CAMERA ? 0 : 0.304f;
 
     // Game state
     private enum PlayScreenState {
@@ -693,7 +696,11 @@ public class PlayScreen extends AbstractScreen {
                 infoScreen.showRedFlashHelp();
                 showRedFlashHelp = false;
             } else {
-                infoScreen.showRedFlash();
+                if (hud.getSkulls() == 1) {
+                    infoScreen.showRedFlashWarning();
+                } else {
+                    infoScreen.showRedFlash();
+                }
             }
         }
     }
