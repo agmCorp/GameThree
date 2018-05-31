@@ -24,6 +24,7 @@ import uy.com.agm.gamethree.assets.scene2d.AssetLetsGo;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageFailed;
 import uy.com.agm.gamethree.assets.scene2d.AssetVictory;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -150,7 +151,7 @@ public class InfoScreen extends AbstractScreen {
         centerTable = new Table();
 
         // Debug lines
-        centerTable.setDebug(PlayScreen.DEBUG_MODE);
+        centerTable.setDebug(DebugConstants.DEBUG_MODE);
 
         // Center-Align table
         centerTable.center();
@@ -193,7 +194,7 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable = new Table();
 
         // Debug lines
-        buttonsTable.setDebug(PlayScreen.DEBUG_MODE);
+        buttonsTable.setDebug(DebugConstants.DEBUG_MODE);
 
         // Bottom-Align table
         buttonsTable.bottom().padLeft(BUTTONS_PAD).padRight(BUTTONS_PAD);

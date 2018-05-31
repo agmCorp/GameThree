@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 
 import uy.com.agm.gamethree.actors.player.Hero;
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.LevelFactory;
 
 /**
@@ -83,7 +82,7 @@ public class GameSettings {
         do {
             data = prefs.getString(LEVEL_STATE + level, "");
             if (data.isEmpty()) {
-                if (PlayScreen.DEBUG_LEVELS) {
+                if (DebugConstants.DEBUG_LEVELS) {
                     if (level <= MAX_LEVEL) {
                         levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
                         availableLevel = true;
@@ -98,7 +97,7 @@ public class GameSettings {
                 if (levelState.isActive()) {
                     availableLevel = true;
                 } else {
-                    if (PlayScreen.DEBUG_LEVELS) {
+                    if (DebugConstants.DEBUG_LEVELS) {
                         availableLevel = true;
                     } else {
                         availableLevel = false;

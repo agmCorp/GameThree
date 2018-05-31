@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -81,7 +82,7 @@ public class DimScreen extends AbstractScreen {
         centerTable.setBackground(new TextureRegionDrawable(dim));
 
         // Debug lines
-        centerTable.setDebug(PlayScreen.DEBUG_MODE);
+        centerTable.setDebug(DebugConstants.DEBUG_MODE);
 
         // Center-Align table
         centerTable.center();
@@ -111,7 +112,7 @@ public class DimScreen extends AbstractScreen {
         buttonsTable = new Table();
 
         // Debug lines
-        buttonsTable.setDebug(PlayScreen.DEBUG_MODE);
+        buttonsTable.setDebug(DebugConstants.DEBUG_MODE);
 
         // Bottom-Align table
         buttonsTable.bottom();

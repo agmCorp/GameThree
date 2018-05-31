@@ -48,6 +48,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBullet;
 import uy.com.agm.gamethree.actors.weapons.hero.HeroBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemySeven;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
@@ -437,7 +438,7 @@ public class B2WorldCreator {
     }
 
     public void printDebugStatus() {
-        if (PlayScreen.DEBUG_BODY_COUNT) {
+        if (DebugConstants.DEBUG_BODY_COUNT) {
             arrayMapDebug.clear();
             String key;
             String value;

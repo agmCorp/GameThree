@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameController;
 import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.util.DimScreen;
@@ -37,38 +38,15 @@ import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.Shaker;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
+import static uy.com.agm.gamethree.game.DebugConstants.DEBUG_MODE;
+import static uy.com.agm.gamethree.game.DebugConstants.INITIAL_GAME_CAM_POSITION_Y_METERS;
+
 /**
  * Created by AGM on 12/2/2017.
  */
 
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
-
-    // ----------------- Debug settings
-
-    // Boxes around sprites, box2d bodies and scene2d tables
-    // Sets the log level to debug
-    public static final boolean DEBUG_MODE = false;
-
-    // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
-
-    // Show/hide FPS counter
-    public static final boolean SHOW_FPS = false;
-
-    // Print box2d bodies count
-    public static final boolean DEBUG_BODY_COUNT = false;
-
-    // Enable all levels
-    public static final boolean DEBUG_LEVELS = true;
-
-    // The initial position of the camera is set on this value if it's greater than zero
-    private static float INITIAL_GAME_CAM_POSITION_Y_METERS = 0.0f;
-
-    // Freezes the camera
-    private static boolean STOP_GAME_CAMERA = false;
-
-    // --------------------------------
 
     // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
@@ -89,7 +67,7 @@ public class PlayScreen extends AbstractScreen {
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
-    public static final float GAME_CAMERA_VELOCITY = STOP_GAME_CAMERA ? 0 : 0.304f;
+    public static final float GAME_CAMERA_VELOCITY = DebugConstants.STOP_GAME_CAMERA ? 0 : 0.304f;
 
     // Game state
     private enum PlayScreenState {
@@ -156,7 +134,7 @@ public class PlayScreen extends AbstractScreen {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initially set our gameCam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, INITIAL_GAME_CAM_POSITION_Y_METERS > 0 ? INITIAL_GAME_CAM_POSITION_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, DebugConstants.INITIAL_GAME_CAM_POSITION_Y_METERS > 0 ? INITIAL_GAME_CAM_POSITION_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -427,7 +405,7 @@ public class PlayScreen extends AbstractScreen {
         tiledMapRenderer.render();
 
         // Renderer our Box2DDebugLines
-        if (DEBUG_MODE) {
+        if (DebugConstants.DEBUG_MODE) {
             b2dr.render(world, gameCam.combined);
         }
 
@@ -458,7 +436,7 @@ public class PlayScreen extends AbstractScreen {
         dimScreen.render(delta);
 
         // Debug
-        if (DEBUG_MODE) {
+        if (DebugConstants.DEBUG_MODE) {
             // Set our batch to now draw what the gameCam camera sees.
             game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
@@ -760,7 +738,7 @@ public class PlayScreen extends AbstractScreen {
         map.dispose();
         tiledMapRenderer.dispose();
         world.dispose();
-        if (DEBUG_MODE) {
+        if (DebugConstants.DEBUG_MODE) {
             b2dr.dispose();
         }
         hud.dispose();

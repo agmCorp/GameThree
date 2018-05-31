@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 
@@ -20,7 +19,7 @@ public class GameThree extends Game {
     @Override
     public void create() {
         // Debug
-        if (PlayScreen.DEBUG_MODE) {
+        if (DebugConstants.DEBUG_MODE) {
             Gdx.app.setLogLevel(Application.LOG_DEBUG);
         } else {
             Gdx.app.setLogLevel(Application.LOG_INFO);

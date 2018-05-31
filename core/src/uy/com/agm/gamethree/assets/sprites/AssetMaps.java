@@ -5,7 +5,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.screens.PlayScreen;
+import uy.com.agm.gamethree.game.DebugConstants;
 
 /**
  * Created by AGM on 1/20/2018.
@@ -28,7 +28,7 @@ public class AssetMaps {
 
     private TiledMap getMap(AssetManager am, String mapFile) {
         TiledMap map = am.get(mapFile);
-        if (PlayScreen.HIDE_BACKGROUND) {
+        if (DebugConstants.HIDE_BACKGROUND) {
             MapLayer floor = map.getLayers().get("floor");
             map.getLayers().remove(floor);
         }

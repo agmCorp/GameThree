@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
@@ -65,7 +66,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
-        table.setDebug(PlayScreen.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_MODE);
 
         // Center-Align table
         table.center();
@@ -123,7 +124,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(PlayScreen.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_MODE);
 
         // Bottom-Align table
         table.bottom();
