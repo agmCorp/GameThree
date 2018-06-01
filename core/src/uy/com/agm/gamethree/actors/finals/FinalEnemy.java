@@ -225,7 +225,7 @@ public abstract class FinalEnemy extends Sprite {
             float camX = screen.getGameCam().position.x;
             float worldWidth = screen.getGameViewPort().getWorldWidth();
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
-            float borderLeft = camX - worldWidth / 2;;
+            float borderLeft = camX - worldWidth / 2;
             float borderRight = camX + worldWidth / 2;
             float circleShapeRadius = getCircleShapeRadiusMeters();
             float enemyUpperEdge = b2body.getPosition().y + circleShapeRadius;

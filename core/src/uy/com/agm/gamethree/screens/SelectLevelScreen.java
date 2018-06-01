@@ -46,7 +46,7 @@ public class SelectLevelScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_MODE);
 
         // Center-Align table
-        table.center();
+        table.center().padBottom(AbstractScreen.PAD * 2);
 
         // Make the table fill the entire stage
         table.setFillParent(true);

@@ -83,8 +83,8 @@ public class SettingsScreen extends AbstractScreen {
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_MODE);
 
-        // Center-Align table
-        table.center();
+        // Top-Align table
+        table.top().padTop(AbstractScreen.PAD * 2);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -142,13 +142,13 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(sliderMusic).width(SLIDER_WIDTH);
+        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
         table.row();
         table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(sliderSound).width(SLIDER_WIDTH);
+        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);;
+        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
         table.add(shootingLabel);
 
