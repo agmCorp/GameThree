@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- revisar el keep y las fonts como se ven en las pantallas
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Hacer pantallas de credit, help
 agregar credits con cuenta bancaria para donación, algo asi:
