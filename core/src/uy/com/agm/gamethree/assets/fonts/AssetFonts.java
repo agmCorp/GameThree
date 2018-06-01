@@ -12,9 +12,9 @@ public class AssetFonts {
     private static final String TAG = AssetFonts.class.getName();
 
     // Constants
-    private static final float FONT_SMALL = 0.6f;
-    private static final float FONT_NORMAL = 0.9f;
-    private static final float FONT_BIG = 1.4f;
+    private static final float FONT_SMALL = 0.3f;
+    private static final float FONT_NORMAL = 0.5f;
+    private static final float FONT_BIG = 0.9f;
     private static final String FONT_FILE = "fonts/fonts.fnt";
 
     private BitmapFont defaultSmall;
