@@ -1,7 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
 Poner ítem vidas en los demás niveles.
-Capaz podes poner suol mine en otros niveles. Debo hacer un col que me aumente los skulls.
+Capaz podes poner suol mine en otros niveles. Debo hacer un col que me aumente los skulls, usar la misma que la de vidas.
 capaz en el help inicial puedo poner una flecha a prepo que senale los skulls del hud.
 agregar scroll pane a seleclevel
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.

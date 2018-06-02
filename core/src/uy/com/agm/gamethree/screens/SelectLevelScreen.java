@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -21,6 +22,9 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
+    // Constants
+    public static final float SCROLL_PANE_MAX_HEIGHT = 300.0f;
+
     public SelectLevelScreen() {
         super();
     }
@@ -29,7 +33,6 @@ public class SelectLevelScreen extends AbstractScreen {
     public void buildStage() {
         defineMainTable();
         defineNavigationTable();
-
     }
 
     private void defineMainTable() {
@@ -37,33 +40,52 @@ public class SelectLevelScreen extends AbstractScreen {
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         // Set table structure
-        Table table = new Table();
+        Table container = new Table();
 
         // Design
-        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
+        container.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        container.setDebug(DebugConstants.DEBUG_MODE);
 
         // Center-Align table
-        table.center().padBottom(AbstractScreen.PAD * 2);
+        container.center().padBottom(AbstractScreen.PAD * 2);
 
         // Make the table fill the entire stage
-        table.setFillParent(true);
+        container.setFillParent(true);
 
         // Personal fonts
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
-
         // Define our labels based on labelStyle
         Label selectLevelLabel = new Label(i18NGameThreeBundle.format("selectLevel.title"), labelStyleBig);
 
         // Add values
-        table.add(selectLevelLabel);
-        table.row();
+        container.add(selectLevelLabel);
+        container.row();
+        ScrollPane scrollPane = new ScrollPane(defineLevelsTable());
+        container.add(scrollPane).top().width(AbstractScreen.V_WIDTH).maxHeight(SCROLL_PANE_MAX_HEIGHT);
+
+        // Adds table to stage
+        addActor(container);
+    }
+
+    private Table defineLevelsTable() {
+        // I18n
+        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
+        // Set table structure
+        Table table = new Table();
+
+        // Debug lines
+        table.setDebug(DebugConstants.DEBUG_MODE);
+
+        // Personal fonts
+        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
+        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
+
+        // Add values
         Label levelLabel;
         for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
             table.row();
@@ -78,8 +100,7 @@ public class SelectLevelScreen extends AbstractScreen {
                     levelState.getSkulls()));
         }
 
-        // Adds table to stage
-        addActor(table);
+        return table;
     }
 
     private void defineNavigationTable() {
