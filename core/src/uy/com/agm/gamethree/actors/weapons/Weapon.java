@@ -81,6 +81,11 @@ public abstract class Weapon extends Sprite {
     public void onBounce() {
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBoing());
         reverseVelocity(true, true);
+
+        // Set the new rotation angle
+        float angle = velocity.angle();
+        angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
+        setRotation(angle);
     }
 
     // This Weapon can be removed from our game
