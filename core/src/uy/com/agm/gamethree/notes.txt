@@ -1,9 +1,9 @@
 HACER PRIORIDAD 1
 -----------------
 Poner ítem vidas en los demás niveles.
-Capaz podes poner suol mine en otros niveles. Debo hacer un col que me aumente los skulls, usar la misma que la de vidas.
-capaz en el help inicial puedo poner una flecha a prepo que senale los skulls del hud.
-agregar scroll pane a seleclevel
+Capaz podes poner suol mine en otros niveles.
+Debo hacer un col que me aumente los skulls, usar la misma que la de vidas.
+Capaz en el help inicial puedo poner una flecha a prepo que senale los skulls del hud.
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Hacer pantallas de credit, help
 agregar credits con cuenta bancaria para donación, algo asi:
@@ -23,11 +23,6 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
-- agregar transitions
-SEGUN MI ANALISIS PARA INCLUIR TRANSITIONS:
-Mi clase GameThree es la análoga a DirectedGame.
-Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
-Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
 - poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - hacer un mapa de los niveles
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
@@ -38,6 +33,7 @@ HACER PRIORIDAD 3
 -----------------
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
+Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
 - poner una pausa al morir, para que se vea bien el impacto o camara lenta.
 No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
 En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
@@ -71,6 +67,12 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 
 SOLO IDEAS
 ----------
+- agregar transitions
+SEGUN MI ANALISIS PARA INCLUIR TRANSITIONS:
+Mi clase GameThree es la análoga a DirectedGame.
+Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
+Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
+Lo intente y no funciono. Es complicado.
 - hacer una bala grandota y ruidosa con shake capaz
 - Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o

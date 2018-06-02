@@ -150,7 +150,7 @@ public class SettingsScreen extends AbstractScreen {
         table.row();
         table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(shootingLabel);
+        table.add(shootingLabel).padTop(AbstractScreen.PAD);
 
         // Events
         music.addListener(
