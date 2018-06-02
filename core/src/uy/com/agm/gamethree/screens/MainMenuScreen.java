@@ -80,6 +80,7 @@ public class MainMenuScreen extends AbstractScreen {
         // Events
         play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));
         settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS));
+        credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS));
 
         // Adds table to stage
         addActor(table);

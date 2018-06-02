@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.screens.util;
 
 import uy.com.agm.gamethree.screens.AbstractScreen;
+import uy.com.agm.gamethree.screens.CreditsScreen;
 import uy.com.agm.gamethree.screens.GameOverScreen;
 import uy.com.agm.gamethree.screens.LevelCompletedScreen;
 import uy.com.agm.gamethree.screens.MainMenuScreen;
@@ -28,6 +29,12 @@ public enum ScreenEnum {
     SETTINGS {
         public AbstractScreen getScreen(Object... params) {
             return new SettingsScreen();
+        }
+    },
+
+    CREDITS {
+        public AbstractScreen getScreen(Object... params) {
+            return new CreditsScreen();
         }
     },
 
