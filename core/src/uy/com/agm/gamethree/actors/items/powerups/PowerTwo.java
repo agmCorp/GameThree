@@ -46,7 +46,7 @@ public class PowerTwo extends Item {
     private float stateFadingTime;
     private Animation powerTwoAnimation;
 
-    // Shield
+    // *** Shield
     public PowerTwo(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;

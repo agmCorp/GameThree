@@ -44,7 +44,7 @@ public class PowerThree extends Item {
     private Animation powerThreeAnimation;
     private int numberBullets;
 
-    // Fire power
+    // *** Fire power (fire balls)
     public PowerThree(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;

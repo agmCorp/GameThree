@@ -43,7 +43,7 @@ public class PowerOne extends Item {
     private float stateFadingTime;
     private Animation powerOneAnimation;
 
-    // Ghost mode
+    // *** Ghost mode
     public PowerOne(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;

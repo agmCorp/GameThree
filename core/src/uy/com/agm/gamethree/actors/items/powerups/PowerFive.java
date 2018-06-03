@@ -41,7 +41,7 @@ public class PowerFive extends Item {
     private float stateFadingTime;
     private Animation powerFiveAnimation;
 
-    // Fire power
+    // *** Fire power (swords)
     public PowerFive(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;

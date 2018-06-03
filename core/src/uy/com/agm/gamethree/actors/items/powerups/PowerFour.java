@@ -43,7 +43,7 @@ public class PowerFour extends Item {
     private float stateFadingTime;
     private Animation powerFourAnimation;
 
-    // Tough mode
+    // *** Tough mode
     public PowerFour(PlayScreen screen, float x, float y, int timer) {
         super(screen, x, y);
         this.timer = timer > 0 ? timer : DEFAULT_TIMER;
