@@ -5,13 +5,12 @@ Capaz podes poner suol mine en otros niveles.
 Debo hacer un col que me aumente los skulls, usar la misma que la de vidas.
 Capaz en el help inicial puedo poner una flecha a prepo que senale los skulls del hud.
 - incluir highscores. En la pantalla de level completed si hubo highscore se indica.
-- Hacer pantallas de credit, help
+- Hacer pantallas de help
 agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
 (icono corazón) Support the developer by paying above the minimum price
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
-Agregar en agredecimientos a Juan LLopart, Alvaro y su amigo, Ali, Abder romero
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
