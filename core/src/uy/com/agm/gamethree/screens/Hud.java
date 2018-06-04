@@ -29,9 +29,9 @@ public class Hud extends AbstractScreen {
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
-    private static final float SCORE_WIDTH = 110.0f;
+    private static final float SCORE_WIDTH = 100.0f;
     private static final float HIGH_SCORE_WIDTH = 130.0f;
-    private static final float TIME_WIDTH = 90.0f;
+    private static final float TIME_WIDTH = 100.0f;
     private static final float LIVES_WIDTH = 50.0f;
     private static final float SKULLS_WIDTH = 50.0f;
     private static final float SILVER_BULLETS_WIDTH = 50.0f;
