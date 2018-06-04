@@ -5,7 +5,7 @@ HACER PRIORIDAD 1
 - Capaz podes poner suol mine en otros niveles.
 - Debo hacer un col que me aumente los skulls, usar la misma que la de vidas con un parametro tile editor.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
-- Hacer pantallas de help
+- Hacer pantallas de help.
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
