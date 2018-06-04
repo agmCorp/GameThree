@@ -98,15 +98,7 @@ public class GameSettings {
                 }
             } else {
                 levelState = getLevelState(data);
-                if (levelState.isActive()) {
-                    availableLevel = true;
-                } else {
-                    if (DebugConstants.DEBUG_LEVELS) {
-                        availableLevel = true;
-                    } else {
-                        availableLevel = false;
-                    }
-                }
+                availableLevel = levelState.isActive() || DebugConstants.DEBUG_LEVELS;
             }
             if (availableLevel) {
                 levels.put(level, levelState);

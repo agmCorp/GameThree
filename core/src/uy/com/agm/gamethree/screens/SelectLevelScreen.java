@@ -95,9 +95,9 @@ public class SelectLevelScreen extends AbstractScreen {
             // Events
             levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME,
                     levelState.getLevel(),
-                    levelState.getLives(),
-                    levelState.getScore(),
-                    levelState.getSkulls()));
+                    levelState.getInitialLives(),
+                    levelState.getInitialScore(),
+                    levelState.getInitialSkulls()));
         }
 
         return table;

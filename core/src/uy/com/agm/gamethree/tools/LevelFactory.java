@@ -35,8 +35,8 @@ public class LevelFactory {
     private static final int TIMER_LEVEL_FOUR = 400;
     private static final int SKULLS_LEVEL_ONE = 10;
     private static final int SKULLS_LEVEL_TWO = 8;
-    private static final int SKULLS_LEVEL_THREE = 10;
-    private static final int SKULLS_LEVEL_FOUR = 10;
+    private static final int SKULLS_LEVEL_THREE = 6;
+    private static final int SKULLS_LEVEL_FOUR = 4;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;

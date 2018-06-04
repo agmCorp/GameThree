@@ -8,24 +8,24 @@ public class LevelState {
     private static final String TAG = LevelState.class.getName();
 
     private int level;
-    private int lives;
-    private int score;
-    private int skulls;
+    private int initialLives;
+    private int initialScore;
+    private int initialSkulls;
     private boolean active;
 
     public LevelState() {
         this.level = 0;
-        this.lives = 0;
-        this.score = 0;
-        this.skulls = 0;
+        this.initialLives = 0;
+        this.initialScore = 0;
+        this.initialSkulls = 0;
         this.active = false;
     }
 
-    public LevelState(int level, int lives, int score, int skulls, boolean active) {
+    public LevelState(int level, int initialLives, int initialScore, int initialSkulls, boolean active) {
         this.level = level;
-        this.lives = lives;
-        this.score = score;
-        this.skulls = skulls;
+        this.initialLives = initialLives;
+        this.initialScore = initialScore;
+        this.initialSkulls = initialSkulls;
         this.active = active;
     }
 
@@ -37,28 +37,28 @@ public class LevelState {
         this.level = level;
     }
 
-    public int getLives() {
-        return lives;
+    public int getInitialLives() {
+        return initialLives;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void setInitialLives(int initialLives) {
+        this.initialLives = initialLives;
     }
 
-    public int getScore() {
-        return score;
+    public int getInitialScore() {
+        return initialScore;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setInitialScore(int initialScore) {
+        this.initialScore = initialScore;
     }
 
-    public int getSkulls() {
-        return skulls;
+    public int getInitialSkulls() {
+        return initialSkulls;
     }
 
-    public void setSkulls(int skulls) {
-        this.skulls = skulls;
+    public void setInitialSkulls(int initialSkulls) {
+        this.initialSkulls = initialSkulls;
     }
 
     public boolean isActive() {
