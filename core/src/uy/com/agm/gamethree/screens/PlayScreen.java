@@ -48,6 +48,8 @@ import static uy.com.agm.gamethree.game.DebugConstants.GAME_CAM_Y_METERS;
 public class PlayScreen extends AbstractScreen {
     private static final String TAG = PlayScreen.class.getName();
 
+    // Constants
+
     // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
 
@@ -69,11 +71,15 @@ public class PlayScreen extends AbstractScreen {
     // Game cam velocity (m/s)
     public static final float GAME_CAMERA_VELOCITY = DebugConstants.STATIC_GAME_CAM ? 0 : 0.304f;
 
+    // Break duration
+    public static final float BREAK_SECONDS = 3.0f;
+
     // Game state
     private enum PlayScreenState {
-        PAUSED, RUNNING
+        PAUSED, RUNNING, BEAK
     }
     private PlayScreenState playScreenState;
+    private float breakTime;
 
     // Reference to our Game, used to set Screens
     private GameThree game;
@@ -199,6 +205,7 @@ public class PlayScreen extends AbstractScreen {
 
         // PlayScreen running
         playScreenState = PlayScreenState.RUNNING;
+        breakTime = 0;
     }
 
 
@@ -643,10 +650,6 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    public boolean isPlayScreenStateRunning() {
-        return playScreenState == PlayScreenState.RUNNING;
-    }
-
     public boolean isPlayScreenStatePaused() {
         return playScreenState == PlayScreenState.PAUSED;
     }
@@ -659,12 +662,24 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
+    public boolean isPlayScreenStateRunning() {
+        return playScreenState == PlayScreenState.RUNNING;
+    }
+
     public void setPlayScreenStateRunning(){
         this.playScreenState = PlayScreenState.RUNNING;
         if (!player.isDead() && !finalEnemy.isDestroyed()) {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();
+    }
+
+    public boolean isPlayScreenStateBreak() {
+        return playScreenState == PlayScreenState.BEAK;
+    }
+
+    public void setPlayScreenStateBreak(){
+        this.playScreenState = PlayScreenState.BEAK;
     }
 
     public void enemyGetAway() {
@@ -686,6 +701,14 @@ public class PlayScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         // Crucial: update logic (take input, creation of new game actors, do physics) -> render -> game results
+
+        if (playScreenState == PlayScreenState.BEAK) {
+            breakTime += delta;
+            if (breakTime > BREAK_SECONDS) {
+                playScreenState = PlayScreenState.RUNNING;
+                breakTime = 0;
+            }
+        }
 
         // Separate our update logic from render
         if (playScreenState == PlayScreenState.RUNNING) {

@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -197,7 +198,9 @@ public class Hero extends Sprite {
                 heroStateMovingLeftRight(dt);
                 break;
             case DYING_UP:
-                heroStateDyingUp(dt);
+                if (!screen.isPlayScreenStateBreak()) {
+                    heroStateDyingUp(dt);
+                }
                 break;
             case DYING_DOWN:
                 heroStateDyingDown(dt);
@@ -643,6 +646,11 @@ public class Hero extends Sprite {
 
             if (sensor <= edge) {
                 onDead();
+
+                // Set a little break time
+                screen.setPlayScreenStateBreak();
+
+                Gdx.app.debug(TAG, "********** OJALA SE INVOQUE UNA VEZ SOLA");
             }
         }
     }
