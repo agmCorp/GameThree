@@ -160,7 +160,7 @@
   </object>
   <object id="2486" x="64" y="2912" width="32" height="32">
    <properties>
-    <property name="powerFive" type="int" value="10"/>
+    <property name="powerFive" type="int" value="15"/>
    </properties>
   </object>
   <object id="2487" x="161" y="2960" width="32" height="32">
@@ -198,16 +198,16 @@
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
-    <property name="powerFive" type="int" value="10"/>
-    <property name="powerOne" type="int" value="10"/>
+    <property name="powerFive" type="int" value="15"/>
+    <property name="powerOne" type="int" value="15"/>
    </properties>
   </object>
   <object id="2491" x="422.667" y="822.667" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
-    <property name="powerFive" type="int" value="10"/>
-    <property name="powerOne" type="int" value="10"/>
+    <property name="powerFive" type="int" value="20"/>
+    <property name="powerOne" type="int" value="20"/>
    </properties>
   </object>
  </objectgroup>
@@ -547,7 +547,7 @@
   </object>
   <object id="2432" x="92" y="3818" width="32" height="32">
    <properties>
-    <property name="powerTwo" type="int" value="10"/>
+    <property name="powerTwo" type="int" value="20"/>
    </properties>
   </object>
   <object id="2433" x="194.667" y="3663.33" width="32" height="32">
@@ -690,7 +690,11 @@
     <property name="colThree" value=""/>
    </properties>
   </object>
-  <object id="2442" x="437" y="1661.33" width="32" height="32"/>
+  <object id="2442" x="437" y="1661.33" width="32" height="32">
+   <properties>
+    <property name="powerThree" type="int" value="15"/>
+   </properties>
+  </object>
   <object id="2445" x="24.9999" y="1665.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -700,7 +704,7 @@
    <properties>
     <property name="colSilverBullet" value=""/>
     <property name="enemyBullet" value=""/>
-    <property name="powerThree" type="int" value="15"/>
+    <property name="powerThree" type="int" value="17"/>
    </properties>
   </object>
   <object id="2447" x="167.666" y="1820" width="32" height="32">
