@@ -73,7 +73,6 @@ Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los
 los que se van de la pantalla).
 Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
-- Animación o ruido distinto al ser aplastado.
 - enemigos:
     - hay que dispararle mucho para matarlo.
     - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
