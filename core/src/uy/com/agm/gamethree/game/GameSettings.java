@@ -22,6 +22,8 @@ public class GameSettings {
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
     private static final String MANUAL_SHOOTING = "manualShooting";
+    private static final String HIGH_SCORE = "highScore";
+    private static final int DEFAULT_HIGH_SCORE = 5950;
     private static final String LEVEL_STATE = "levelState_";
     private static final String SETTINGS = "uy.com.agm.gameThree.settings";
     public static final float DEFAULT_VOLUME = 0.5f;
@@ -37,6 +39,7 @@ public class GameSettings {
     private float volSound;
     private float volMusic;
     private boolean manualShooting;
+    private int highScore;
     private ArrayMap<Integer, LevelState> levels;
     private Preferences prefs;
     private Json json;
@@ -64,12 +67,13 @@ public class GameSettings {
         return json.fromJson(LevelState.class, data);
     }
 
-    public void load () {
+    public void load() {
         sound = prefs.getBoolean(SOUND, true);
         music = prefs.getBoolean(MUSIC, true);
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
+        highScore = prefs.getInteger(HIGH_SCORE, DEFAULT_HIGH_SCORE);
 
         int level = 1; // Default level
         LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), true);
@@ -111,12 +115,13 @@ public class GameSettings {
         } while (availableLevel);
    }
 
-    public void save () {
+    public void save() {
         prefs.putBoolean(SOUND, sound);
         prefs.putBoolean(MUSIC, music);
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
+        prefs.putInteger(HIGH_SCORE, highScore);
         for(LevelState levelState : levels.values()) {
             prefs.putString(LEVEL_STATE + levelState.getLevel(), getData(levelState));
         }
@@ -161,6 +166,14 @@ public class GameSettings {
 
     public void setManualShooting(boolean manualShooting) {
         this.manualShooting = manualShooting;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 
     public ArrayMap<Integer, LevelState> getLevels() {

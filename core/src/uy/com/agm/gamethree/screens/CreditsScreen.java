@@ -20,6 +20,10 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 public class CreditsScreen extends AbstractScreen {
     private static final String TAG = CreditsScreen.class.getName();
 
+    // Constants
+    private static final float MSG_PAD_LEFT = 15.0f;
+    private static final float MSG_WIDTH = 430.0f;
+
     public CreditsScreen() {
         super();
     }
@@ -65,7 +69,7 @@ public class CreditsScreen extends AbstractScreen {
         // Add values
         table.add(creditsLabel);
         table.row();
-        table.add(msgLabel).padLeft(15.0f).width(430).fill();// todo 425
+        table.add(msgLabel).padLeft(MSG_PAD_LEFT).width(MSG_WIDTH).fill();
 
         // Adds table to stage
         addActor(table);

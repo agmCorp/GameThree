@@ -29,6 +29,8 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int finalScore;
     private int finalSkulls;
     private int nextLevel;
+    private boolean showNewHighScoreLabel;
+    private boolean showNextLevelLabel;
 
     public LevelCompletedScreen(Integer currentLevel, Integer finalLives, Integer finalScore, Integer finalSkulls) {
         super();
@@ -37,9 +39,18 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.finalScore = finalScore;
         this.finalSkulls = finalSkulls;
         this.nextLevel = currentLevel + 1;
-        if (this.nextLevel <= GameSettings.MAX_LEVEL) {
-            GameSettings.getInstance().addActiveLevel(nextLevel, finalLives, finalScore, finalSkulls);
-            GameSettings.getInstance().save();
+
+        GameSettings prefs = GameSettings.getInstance();
+        showNewHighScoreLabel = finalScore > prefs.getHighScore();
+        showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
+        if (showNewHighScoreLabel) {
+            prefs.setHighScore(finalScore);
+        }
+        if (showNextLevelLabel) {
+            prefs.addActiveLevel(nextLevel, finalLives, finalScore, finalSkulls);
+        }
+        if (showNewHighScoreLabel || showNextLevelLabel) {
+            prefs.save();
         }
 
         // Audio FX
@@ -89,6 +100,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
+        Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
 
@@ -99,17 +111,19 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        if (nextLevel <= GameSettings.MAX_LEVEL) {
+        if (showNewHighScoreLabel) {
+            table.add(newHighScoreLabel).padTop(AbstractScreen.PAD);
+            table.row();
+        }
+        if (showNextLevelLabel) {
             table.row();
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
+
+            // Events
+            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         } else {
             table.row();
             table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
-        }
-
-        // Events
-        if (nextLevel <= GameSettings.MAX_LEVEL) {
-            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
         }
 
         // Adds table to stage

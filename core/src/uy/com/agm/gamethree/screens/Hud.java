@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedActor;
@@ -28,12 +29,14 @@ public class Hud extends AbstractScreen {
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
-    private static final float SCORE_WIDTH = 120.0f;
-    private static final float TIME_WIDTH = 120.0f;
-    private static final float LIVES_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
-    private static final float SKULLS_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
-    private static final float SILVER_BULLETS_WIDTH = (V_WIDTH - SCORE_WIDTH - TIME_WIDTH) / 3;
+    private static final float SCORE_WIDTH = 110.0f;
+    private static final float HIGH_SCORE_WIDTH = 130.0f;
+    private static final float TIME_WIDTH = 90.0f;
+    private static final float LIVES_WIDTH = 50.0f;
+    private static final float SKULLS_WIDTH = 50.0f;
+    private static final float SILVER_BULLETS_WIDTH = 50.0f;
     private static final String FORMAT_SCORE = "%06d";
+    private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
     private static final String FORMAT_SKULLS = "%02d";
@@ -50,6 +53,8 @@ public class Hud extends AbstractScreen {
     private Table upperTable;
     private int score;
     private Label scoreValueLabel;
+    private int highScore;
+    private Label highScoreValueLabel;
     private int level;
     private int time;
     private float timeCount;
@@ -93,6 +98,7 @@ public class Hud extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         this.score = score;
+        this.highScore = GameSettings.getInstance().getHighScore();
         this.level = level;
         this.time = time;
         timeCount = 0;
@@ -136,20 +142,23 @@ public class Hud extends AbstractScreen {
         // Define our labels based on labelStyle
         Label scoreLabel = new Label(i18NGameThreeBundle.format("hud.score"), labelStyleSmall);
         scoreLabel.setAlignment(Align.center);
+        Label highScoreLabel = new Label(i18NGameThreeBundle.format("hud.highScore"), labelStyleSmall);
+        highScoreLabel.setAlignment(Align.center);
         Label timeLabel = new Label(i18NGameThreeBundle.format("hud.time"), labelStyleSmall);
         timeLabel.setAlignment(Align.center);
 
         // Add labels to the table
         upperTable.add(scoreLabel).width(SCORE_WIDTH);
+        upperTable.add(highScoreLabel).width(HIGH_SCORE_WIDTH);
         upperTable.add(timeLabel).width(TIME_WIDTH);
 
         AnimatedActor heroHead = new AnimatedActor();
         heroHead.setAnimation(Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation());
         upperTable.add(heroHead).width(LIVES_WIDTH);
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).width(SKULLS_WIDTH);
-        AnimatedActor suriken = new AnimatedActor();
-        suriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
-        upperTable.add(suriken).width(SILVER_BULLETS_WIDTH);
+        AnimatedActor shuriken = new AnimatedActor();
+        shuriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
+        upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
 
         // Add a second row to our table
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
@@ -157,6 +166,8 @@ public class Hud extends AbstractScreen {
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SCORE, score), labelStyleSmall);
         scoreValueLabel.setAlignment(Align.center);
+        highScoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_HIGH_SCORE, highScore), labelStyleSmall);
+        highScoreValueLabel.setAlignment(Align.center);
         timeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_TIME, time), labelStyleSmall);
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
@@ -168,6 +179,7 @@ public class Hud extends AbstractScreen {
 
         // Add values
         upperTable.add(scoreValueLabel);
+        upperTable.add(highScoreValueLabel);
         upperTable.add(timeValueLabel);
         upperTable.add(livesValueLabel);
         upperTable.add(skullsValueLabel);
