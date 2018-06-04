@@ -1,17 +1,10 @@
 HACER PRIORIDAD 1
 -----------------
-bajar los deciblees del audio de los violetas.
 Poner ítem vidas en los demás niveles.
 Capaz podes poner suol mine en otros niveles.
 Debo hacer un col que me aumente los skulls, usar la misma que la de vidas.
 Capaz en el help inicial puedo poner una flecha a prepo que senale los skulls del hud.
-- incluir highscores. En la pantalla de level completed si hubo highscore se indica.
 - Hacer pantallas de help
-agregar credits con cuenta bancaria para donación, algo asi:
-support this game:
-(icono corazón) Support the developer by paying above the minimum price
-+$1.00 +$2.00 +$5.00 +$10.00
-Pay with paypal, pay with card bitcoin
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, el score y high, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
@@ -67,12 +60,18 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 
 SOLO IDEAS
 ----------
+- Agregar credits con cuenta bancaria para donación, algo asi:
+support this game:
+(icono corazón) Support the developer by paying above the minimum price
++$1.00 +$2.00 +$5.00 +$10.00
+Pay with paypal, pay with card bitcoin
+Agregar dir de mail de contacto.
 - agregar transitions
 SEGUN MI ANALISIS PARA INCLUIR TRANSITIONS:
 Mi clase GameThree es la análoga a DirectedGame.
 Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
 Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
-Lo intente y no funciono. Es complicado.
+Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen manager tiene un if antes del setScreen por pruebas.
 - hacer una bala grandota y ruidosa con shake capaz
 - Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
 Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
