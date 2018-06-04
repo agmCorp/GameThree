@@ -15,6 +15,7 @@ public class AssetSounds {
     private Sound gameOver;
     private Sound bump;
     private Sound crack;
+    private Sound crunch;
     private Sound dead;
     private Sound enemyShoot;
     private Sound heroShoot;
@@ -82,6 +83,7 @@ public class AssetSounds {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
         bump = am.get(Assets.FX_FILE_BUMP, Sound.class);
         crack = am.get(Assets.FX_FILE_CRACK, Sound.class);
+        crunch = am.get(Assets.FX_FILE_CRUNCH, Sound.class);
         dead = am.get(Assets.FX_FILE_DEAD, Sound.class);
         enemyShoot = am.get(Assets.FX_FILE_ENEMY_SHOOT, Sound.class);
         heroShoot = am.get(Assets.FX_FILE_HERO_SHOOT, Sound.class);
@@ -156,6 +158,10 @@ public class AssetSounds {
 
     public Sound getCrack() {
         return crack;
+    }
+
+    public Sound getCrunch() {
+        return crunch;
     }
 
     public Sound getDead() {

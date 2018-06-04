@@ -27,11 +27,6 @@ HACER PRIORIDAD 3
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
-- poner una pausa al morir, para que se vea bien el impacto o camara lenta.
-No queda bien en el caso de recibir balas muy grandes en donde los sprites no hacen contacto (pero si las box2d).
-En ese caso el jugador no entenderia por que muere porque los dibujos no se tocan.
-Pero capaz se podria poner al morir aplastado. Podria ademas poner un audio de aplastamiento y hasta capaz una animacion o
-parpadeo antes de dyingup.
 - Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge. Intenté una
 vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.

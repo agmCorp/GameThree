@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -65,7 +64,7 @@ public class Hero extends Sprite {
     private Animation heroMovingLeftRightAnimation;
     private Animation heroDeadAnimation;
     private float heroStateTime;
-    private boolean applyNewFilters;
+    private boolean initDyingUp;
     private float playAgainTime;
     private float gameOverTime;
     private float setDefaultFilterTime;
@@ -124,7 +123,7 @@ public class Hero extends Sprite {
         heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
         heroDeadAnimation = Assets.getInstance().getHero().getHeroDeadAnimation();
         heroStateTime = 0;
-        applyNewFilters = false;
+        initDyingUp = false;
         playAgainTime = 0;
         gameOverTime = 0;
         setDefaultFilterTime = 0;
@@ -371,9 +370,12 @@ public class Hero extends Sprite {
     }
 
     private void heroStateDyingUp(float dt) {
-        if (applyNewFilters) {
+        if (initDyingUp) {
             // Stop motion
             stop();
+
+            // Audio FX
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getDead());
 
             // We take away all his powers and force powerTimeUp
             powersDown();
@@ -386,7 +388,7 @@ public class Hero extends Sprite {
             // We set the previous filter in every fixture
             setFilterData(filter);
 
-            applyNewFilters = false;
+            initDyingUp = false;
         }
 
        /* Update our Sprite to correspond with the position of our Box2D body:
@@ -650,7 +652,8 @@ public class Hero extends Sprite {
                 // Set a little break time
                 screen.setPlayScreenStateBreak();
 
-                Gdx.app.debug(TAG, "********** OJALA SE INVOQUE UNA VEZ SOLA");
+                // Audio FX
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getCrunch());
             }
         }
     }
@@ -663,11 +666,10 @@ public class Hero extends Sprite {
          * No b2body can be changed when the simulation is occurring, we must wait for the next update cycle.
          * Therefore, we use a flag in order to point out this behavior and change it later.
          */
-        applyNewFilters = true;
+        initDyingUp = true;
 
-        // Pause music and play sound effect
+        // Pause music
         AudioManager.getInstance().pauseMusic();
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getDead());
 
         // Reset rotation
         setRotation(0.0f);

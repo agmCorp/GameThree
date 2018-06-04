@@ -72,7 +72,7 @@ public class PlayScreen extends AbstractScreen {
     public static final float GAME_CAMERA_VELOCITY = DebugConstants.STATIC_GAME_CAM ? 0 : 0.304f;
 
     // Break duration
-    public static final float BREAK_SECONDS = 3.0f;
+    public static final float BREAK_SECONDS = 1.6f;
 
     // Game state
     private enum PlayScreenState {
