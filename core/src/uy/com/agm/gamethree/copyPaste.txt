@@ -49,7 +49,7 @@ https://mrbubblewand.files.wordpress.com/2010/02/magic_006.png puede ser
 
 -----------------------------------------------------------------------------------
 Para ir a pelear directo con el enemigo final poner en playscreen
-public static float INITIAL_GAME_CAM_POSITION_Y_METERS = 73.0f;
+public static final float INITIAL_GAME_CAM_POSITION_Y_METERS = 73.0f;
 
 
 02-02 18:00:30.905 8532-8600/uy.com.agm.gamethree D/uy.com.agm.gamethree.sprites.finals.FinalEnemyLevelOne: UPPER Y POS 79.98127 79.40.6
