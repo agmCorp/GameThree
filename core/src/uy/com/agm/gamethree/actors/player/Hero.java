@@ -198,7 +198,10 @@ public class Hero extends Sprite {
                 break;
             case DYING_UP:
                 if (!screen.isPlayScreenStateBreak()) {
+                    deactivateBlink(this);
                     heroStateDyingUp(dt);
+                } else {
+                    activateBlink(dt, this);
                 }
                 break;
             case DYING_DOWN:
@@ -673,10 +676,6 @@ public class Hero extends Sprite {
 
         // Reset rotation
         setRotation(0.0f);
-
-        // Hero could have died crushed after reviving (see playAgain()), so we must deactivate blinking (ensuring in
-        // this way alpha = 1 at the beginning of DYING_UP state).
-        deactivateBlink(this);
 
         // Start dying up
         heroStateTime = 0;

@@ -269,6 +269,18 @@ public class PlayScreen extends AbstractScreen {
         creator.printDebugStatus();
     }
 
+    private void updateGameLogicBreak(float dt) {
+        // Update Hero logic to show a blink effect
+        updateHero(dt);
+
+        // Break time count
+        breakTime += dt;
+        if (breakTime > BREAK_SECONDS) {
+            playScreenState = PlayScreenState.RUNNING;
+            breakTime = 0;
+        }
+    }
+
     private void doPhysicsStep(float dt) {
         // Fixed time step
         // Max frame time to avoid spiral of death (on slow devices)
@@ -475,7 +487,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderHero() {
-        player.draw(game.getBatch());
+       player.draw(game.getBatch());
     }
 
     private void renderKinematicBridges() {
@@ -702,17 +714,13 @@ public class PlayScreen extends AbstractScreen {
     public void render(float delta) {
         // Crucial: update logic (take input, creation of new game actors, do physics) -> render -> game results
 
-        if (playScreenState == PlayScreenState.BEAK) {
-            breakTime += delta;
-            if (breakTime > BREAK_SECONDS) {
-                playScreenState = PlayScreenState.RUNNING;
-                breakTime = 0;
-            }
-        }
-
         // Separate our update logic from render
         if (playScreenState == PlayScreenState.RUNNING) {
             updateGameLogic(delta);
+        } else {
+            if (playScreenState == PlayScreenState.BEAK) {
+                updateGameLogicBreak(delta);
+            }
         }
 
         // Render logic
