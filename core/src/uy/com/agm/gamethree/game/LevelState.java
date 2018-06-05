@@ -10,22 +10,19 @@ public class LevelState {
     private int level;
     private int initialLives;
     private int initialScore;
-    private int initialSkulls;
     private boolean active;
 
     public LevelState() {
         this.level = 0;
         this.initialLives = 0;
         this.initialScore = 0;
-        this.initialSkulls = 0;
         this.active = false;
     }
 
-    public LevelState(int level, int initialLives, int initialScore, int initialSkulls, boolean active) {
+    public LevelState(int level, int initialLives, int initialScore, boolean active) {
         this.level = level;
         this.initialLives = initialLives;
         this.initialScore = initialScore;
-        this.initialSkulls = initialSkulls;
         this.active = active;
     }
 
@@ -51,14 +48,6 @@ public class LevelState {
 
     public void setInitialScore(int initialScore) {
         this.initialScore = initialScore;
-    }
-
-    public int getInitialSkulls() {
-        return initialSkulls;
-    }
-
-    public void setInitialSkulls(int initialSkulls) {
-        this.initialSkulls = initialSkulls;
     }
 
     public boolean isActive() {

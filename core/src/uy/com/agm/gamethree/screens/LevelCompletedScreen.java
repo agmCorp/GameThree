@@ -37,7 +37,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.currentLevel = currentLevel;
         this.finalLives = finalLives;
         this.finalScore = finalScore;
-        this.finalSkulls = finalSkulls;
+        this.finalSkulls = finalSkulls; // We can calculate stars depending on this value
         this.nextLevel = currentLevel + 1;
 
         GameSettings prefs = GameSettings.getInstance();
@@ -47,7 +47,7 @@ public class LevelCompletedScreen extends AbstractScreen {
             prefs.setHighScore(finalScore);
         }
         if (showNextLevelLabel) {
-            prefs.addActiveLevel(nextLevel, finalLives, finalScore, finalSkulls);
+            prefs.addActiveLevel(nextLevel, finalLives, finalScore);
         }
         if (showNewHighScoreLabel || showNextLevelLabel) {
             prefs.save();

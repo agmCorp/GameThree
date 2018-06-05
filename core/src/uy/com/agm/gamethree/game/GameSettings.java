@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 
 import uy.com.agm.gamethree.actors.player.Hero;
-import uy.com.agm.gamethree.tools.LevelFactory;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -76,7 +75,7 @@ public class GameSettings {
         highScore = prefs.getInteger(HIGH_SCORE, DEFAULT_HIGH_SCORE);
 
         int level = 1; // Default level
-        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), true);
+        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, true);
         levels.put(level, levelState);
 
         // Other levels
@@ -88,7 +87,7 @@ public class GameSettings {
             if (data.isEmpty()) {
                 if (DebugConstants.DEBUG_LEVELS) {
                     if (level <= MAX_LEVEL) {
-                        levelState = new LevelState(level, Hero.LIVES_START, 0, LevelFactory.getLevelSkulls(level), false);
+                        levelState = new LevelState(level, Hero.LIVES_START, 0, false);
                         availableLevel = true;
                     } else {
                         availableLevel = false;
@@ -172,8 +171,7 @@ public class GameSettings {
         return levels;
     }
 
-    public void addActiveLevel(int level, int lives, int score, int skulls) {
-        LevelState levelState = new LevelState(level, lives, score, skulls, true);
-        levels.put(level, levelState);
+    public void addActiveLevel(int level, int lives, int score) {
+        levels.put(level, new LevelState(level, lives, score, true));
     }
 }
