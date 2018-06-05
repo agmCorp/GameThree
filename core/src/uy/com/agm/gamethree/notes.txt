@@ -5,7 +5,7 @@ un singleton de aplicacion).
 - los souls no se ven en level 1
 - cuando los enemy piedras me disparan y yo estoy con escudo, las balas rebotan mirando hacia abajo.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
-- Hacer pantallas de help.
+- Hacer pantallas de help, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca, lo matas con 2 disparos, etc.
 - la pantalla de level completed debe tener los clasicos botones de las estrellitas, etc.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
