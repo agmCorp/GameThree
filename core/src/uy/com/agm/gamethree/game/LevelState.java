@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.game;
 
+import uy.com.agm.gamethree.tools.LevelFactory;
+
 /**
  * Created by AGM on 5/27/2018.
  */
@@ -11,6 +13,7 @@ public class LevelState {
     private int initialLives;
     private int initialScore;
     private int initialSkulls;
+    private int defaultLevelSkulls;
     private boolean active;
 
     public LevelState() {
@@ -18,6 +21,7 @@ public class LevelState {
         this.initialLives = 0;
         this.initialScore = 0;
         this.initialSkulls = 0;
+        this.defaultLevelSkulls = 0;
         this.active = false;
     }
 
@@ -26,6 +30,7 @@ public class LevelState {
         this.initialLives = initialLives;
         this.initialScore = initialScore;
         this.initialSkulls = initialSkulls;
+        this.defaultLevelSkulls = LevelFactory.getLevelSkulls(level);
         this.active = active;
     }
 
@@ -59,6 +64,14 @@ public class LevelState {
 
     public void setInitialSkulls(int initialSkulls) {
         this.initialSkulls = initialSkulls;
+    }
+
+    public int getDefaultLevelSkulls() {
+        return defaultLevelSkulls;
+    }
+
+    public void setDefaultLevelSkulls(int defaultLevelSkulls) {
+        this.defaultLevelSkulls = defaultLevelSkulls;
     }
 
     public boolean isActive() {

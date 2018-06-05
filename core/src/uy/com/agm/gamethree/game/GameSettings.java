@@ -23,7 +23,7 @@ public class GameSettings {
     private static final String VOLUME_MUSIC = "volMusic";
     private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String HIGH_SCORE = "highScore";
-    private static final int DEFAULT_HIGH_SCORE = 5950;
+    private static final int DEFAULT_HIGH_SCORE = 20230;
     private static final String LEVEL_STATE = "levelState_";
     private static final String SETTINGS = "uy.com.agm.gameThree.settings";
     public static final float DEFAULT_VOLUME = 0.5f;
