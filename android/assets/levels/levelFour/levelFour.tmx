@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2438">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2438">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -132,27 +132,27 @@
  <objectgroup name="powerBox">
   <object id="2432" x="160" y="7552" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="555"/>
+    <property name="powerOne" type="int" value="5555"/>
    </properties>
   </object>
   <object id="2433" x="224" y="7552" width="32" height="32">
    <properties>
-    <property name="powerTwo" type="int" value="555"/>
+    <property name="powerTwo" type="int" value="5555"/>
    </properties>
   </object>
   <object id="2435" x="288" y="7552" width="32" height="32">
    <properties>
-    <property name="powerThree" type="int" value="555"/>
+    <property name="powerThree" type="int" value="5555"/>
    </properties>
   </object>
   <object id="2436" x="352" y="7552" width="32" height="32">
    <properties>
-    <property name="powerFour" type="int" value="555"/>
+    <property name="powerFour" type="int" value="5555"/>
    </properties>
   </object>
   <object id="2437" x="416" y="7552" width="32" height="32">
    <properties>
-    <property name="powerFive" type="int" value="5555"/>
+    <property name="powerFive" type="int" value="55555"/>
    </properties>
   </object>
  </objectgroup>
@@ -167,27 +167,5 @@
  <objectgroup name="enemyNine"/>
  <objectgroup name="enemyTen"/>
  <objectgroup name="enemyEleven"/>
- <objectgroup name="enemyTwelve">
-  <object id="2411" x="425" y="7075" width="32" height="32"/>
-  <object id="2412" x="403" y="7073" width="32" height="32"/>
-  <object id="2413" x="372" y="6995" width="32" height="32"/>
-  <object id="2414" x="416" y="6951" width="32" height="32"/>
-  <object id="2415" x="315" y="7052" width="32" height="32"/>
-  <object id="2416" x="264" y="7142" width="32" height="32"/>
-  <object id="2417" x="136" y="7173" width="32" height="32"/>
-  <object id="2418" x="211" y="7222" width="32" height="32"/>
-  <object id="2419" x="310" y="7186" width="32" height="32"/>
-  <object id="2420" x="127" y="7113" width="32" height="32"/>
-  <object id="2421" x="199" y="7104" width="32" height="32"/>
-  <object id="2422" x="197" y="7034" width="32" height="32"/>
-  <object id="2423" x="109" y="7032" width="32" height="32"/>
-  <object id="2424" x="36" y="7086" width="32" height="32"/>
-  <object id="2425" x="36" y="7179" width="32" height="32"/>
-  <object id="2426" x="94" y="7247" width="32" height="32"/>
-  <object id="2427" x="168" y="7260" width="32" height="32"/>
-  <object id="2428" x="66" y="7303" width="32" height="32"/>
-  <object id="2429" x="14" y="7245" width="32" height="32"/>
-  <object id="2430" x="10" y="7019" width="32" height="32"/>
-  <object id="2431" x="114" y="6952" width="32" height="32"/>
- </objectgroup>
+ <objectgroup name="enemyTwelve"/>
 </map>

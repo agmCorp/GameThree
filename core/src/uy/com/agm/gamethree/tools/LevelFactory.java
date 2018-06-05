@@ -62,11 +62,10 @@ public class LevelFactory {
                                 AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
                 break;
             case 4:
-                finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                screen.getGameViewPort().getWorldHeight() / 2 -
-                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
+                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             default:
                 finalEnemy = null;
