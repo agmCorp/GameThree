@@ -225,7 +225,7 @@ public class InfoScreen extends AbstractScreen {
 //                        } else {
 //                            return true;
 //                        }
-                        return true; // debo
+                        return true;
                     }
                 });
 
