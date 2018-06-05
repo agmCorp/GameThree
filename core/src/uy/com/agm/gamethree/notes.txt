@@ -3,8 +3,6 @@ HACER PRIORIDAD 1
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion).
 - los souls no se ven en level 1
-- si hay pantalla modal y pongo pausa (minimizando el juego) ambas pantallas (info y dim) reciben eventos y puedo
-quitar la pausa apretando infoscreen pero sin quitar la dim.
 - cuando los enemy piedras me disparan y yo estoy con escudo, las balas rebotan mirando hacia abajo.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
 - Hacer pantallas de help.

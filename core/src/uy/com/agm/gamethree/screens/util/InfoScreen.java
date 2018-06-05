@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -220,11 +221,6 @@ public class InfoScreen extends AbstractScreen {
 
                     @Override
                     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                        if (screen.isPlayScreenStatePaused()) { // todo terminar ma;ana
-//                            return false;
-//                        } else {
-//                            return true;
-//                        }
                         return true;
                     }
                 });
@@ -411,6 +407,14 @@ public class InfoScreen extends AbstractScreen {
 
     public boolean isModalVisible() {
         return gotIt.isVisible();
+    }
+
+    public void disableModal() {
+        gotIt.setTouchable(Touchable.disabled);
+    }
+
+    public void enableModal() {
+        gotIt.setTouchable(Touchable.enabled);
     }
 
     // ----------- Specialized functions

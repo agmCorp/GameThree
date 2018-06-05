@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import javax.sound.midi.MidiDevice;
+
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
@@ -214,7 +216,13 @@ public class DimScreen extends AbstractScreen {
         showResumeButton();
         buttonsTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
-        screen.setPlayScreenStatePaused(true);
+
+        InfoScreen infoScreen = screen.getInfoScreen();
+        if (infoScreen.isModalVisible()) { // Game already paused
+            infoScreen.disableModal();
+        } else {
+            screen.setPlayScreenStatePaused(true);
+        }
     }
 
     public void hideButtons() {
@@ -228,10 +236,13 @@ public class DimScreen extends AbstractScreen {
     private void setGameStateRunning() {
         hideMessage();
         showPauseButton();
-        if (!screen.getInfoScreen().isModalVisible()) {
-            screen.setPlayScreenStateRunning();
-        } else {
+
+        InfoScreen infoScreen = screen.getInfoScreen();
+        if (infoScreen.isModalVisible()) { // Game must remain on pause
             buttonsTable.setVisible(false);
+            infoScreen.enableModal();
+        } else {
+            screen.setPlayScreenStateRunning();
         }
     }
 
