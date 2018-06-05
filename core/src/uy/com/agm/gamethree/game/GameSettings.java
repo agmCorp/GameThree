@@ -85,15 +85,9 @@ public class GameSettings {
         do {
             data = prefs.getString(LEVEL_STATE + level, "");
             if (data.isEmpty()) {
-                if (DebugConstants.DEBUG_LEVELS) {
-                    if (level <= MAX_LEVEL) {
-                        levelState = new LevelState(level, Hero.LIVES_START, 0, false);
-                        availableLevel = true;
-                    } else {
-                        availableLevel = false;
-                    }
-                } else {
-                    availableLevel = false;
+                availableLevel = DebugConstants.DEBUG_LEVELS && level <= MAX_LEVEL;
+                if (availableLevel) {
+                    levelState = new LevelState(level, Hero.LIVES_START, 0, false);
                 }
             } else {
                 levelState = getLevelState(data);
