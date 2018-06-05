@@ -38,8 +38,6 @@ import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.Shaker;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
-import static uy.com.agm.gamethree.game.DebugConstants.DEBUG_MODE;
-import static uy.com.agm.gamethree.game.DebugConstants.GAME_CAM_Y_METERS;
 
 /**
  * Created by AGM on 12/2/2017.
@@ -122,7 +120,7 @@ public class PlayScreen extends AbstractScreen {
     // Screen shaker
     private Shaker shaker;
 
-    public PlayScreen(Integer level, Integer lives, Integer score, Integer skulls) {
+    public PlayScreen(Integer level, Integer lives, Integer score) {
         this.level = level;
         levelCompletedTime = 0;
 
@@ -136,11 +134,11 @@ public class PlayScreen extends AbstractScreen {
         gameViewPort = new FitViewport(AbstractScreen.V_WIDTH / PPM, AbstractScreen.V_HEIGHT / PPM, gameCam);
 
         // Get our map and setup our map renderer
-        map = LevelFactory.getLevelMap(this.level);
+        map = LevelFactory.getLevelMap(level);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initially set our gameCam to be centered correctly at the start (bottom) of the map
-        gameCam.position.set(gameViewPort.getWorldWidth() / 2, DebugConstants.GAME_CAM_Y_METERS > 0 ? GAME_CAM_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(gameViewPort.getWorldWidth() / 2, DebugConstants.GAME_CAM_Y_METERS > 0 ? DebugConstants.GAME_CAM_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
 
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
@@ -149,7 +147,7 @@ public class PlayScreen extends AbstractScreen {
         accumulator = 0;
 
         // Allows for debug lines of our box2d world.
-        if (DEBUG_MODE) {
+        if (DebugConstants.DEBUG_MODE) {
             b2dr = new Box2DDebugRenderer();
         }
 
@@ -159,7 +157,7 @@ public class PlayScreen extends AbstractScreen {
         player = creator.getHero();
         player.setLives(lives);
 
-        if (GAME_CAM_Y_METERS > 0) {
+        if (DebugConstants.GAME_CAM_Y_METERS > 0) {
             player.getB2body().setTransform(this.getGameCam().position.x,
                     this.getGameCam().position.y - this.getGameViewPort().getWorldHeight() / 4,
                     player.getB2body().getAngle());
@@ -176,8 +174,8 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create the game HUD for score, time, etc.
-        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(this.level),
-                player.getLives(), skulls);
+        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(level),
+                player.getLives(), LevelFactory.getLevelSkulls(level));
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -195,7 +193,7 @@ public class PlayScreen extends AbstractScreen {
         showRedFlashHelp = level == 1;
 
         // Start playing level music
-        AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(this.level));
+        AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level));
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
@@ -207,7 +205,6 @@ public class PlayScreen extends AbstractScreen {
         playScreenState = PlayScreenState.RUNNING;
         breakTime = 0;
     }
-
 
     private InputProcessor getInputProcessor(GameController gc) {
         /* GameController is an InputAdapter because it extends that class and

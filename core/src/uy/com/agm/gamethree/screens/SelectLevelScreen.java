@@ -14,7 +14,6 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
-import uy.com.agm.gamethree.tools.LevelFactory;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -96,11 +95,9 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events
-            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME,
-                    level,
+            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
                     levelState.getInitialLives(),
-                    levelState.getInitialScore(),
-                    LevelFactory.getLevelSkulls(level))); // We use a fixed skull value per level
+                    levelState.getInitialScore()));
         }
 
         return table;

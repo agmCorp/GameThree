@@ -120,7 +120,7 @@ public class LevelCompletedScreen extends AbstractScreen {
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
 
             // Events
-            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore, finalSkulls));
+            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore));
         } else {
             table.row();
             table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
