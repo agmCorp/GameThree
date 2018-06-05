@@ -748,9 +748,7 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-        if (playScreenState != PlayScreenState.PAUSED) {
-            dimScreen.setGameStatePaused();
-        }
+        dimScreen.setGameStatePaused();
     }
 
     @Override
