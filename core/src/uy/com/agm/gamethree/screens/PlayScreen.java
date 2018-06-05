@@ -190,7 +190,7 @@ public class PlayScreen extends AbstractScreen {
         levelStarts = true;
 
         // Used to display a help about slippery enemies
-        showRedFlashHelp = level == 1;
+        showRedFlashHelp = true;
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level));
