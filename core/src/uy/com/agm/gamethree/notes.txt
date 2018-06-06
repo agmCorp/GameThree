@@ -1,5 +1,6 @@
 HACER PRIORIDAD 1
 -----------------
+- priorizar para liberar despues veo los detalles.
 - el letsgo deberia aparecer tambien en el level1. Se me ocurre ponerlo cuando la cam se mueve un poco hacia
 arriba en todos los niveles.
 - Poner reloj de arena en el hud.
