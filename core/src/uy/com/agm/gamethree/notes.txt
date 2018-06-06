@@ -6,7 +6,7 @@ En el nivel 2 los souls están en un lugar que no se lucen.
 Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
 Level 3 muchos souls
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
-un singleton de aplicacion).
+un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - cuando los enemy piedras me disparan y yo estoy con escudo, las balas rebotan mirando hacia abajo.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
 - Hacer pantallas de help, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca, lo matas con 2 disparos, etc.
