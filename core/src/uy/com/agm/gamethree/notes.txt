@@ -1,5 +1,7 @@
 HACER PRIORIDAD 1
 -----------------
+- el letsgo deberia aparecer tambien en el level1. Se me ocurre ponerlo cuando la cam se mueve un poco hacia
+arriba en todos los niveles.
 - Poner reloj de arena en el hud.
 Salió el help de final enemy one. Puse pausa, minimice. Luego saque pausa, saque help y el bicho salió para la derecha y quedó trancado en la esquina.
 En el nivel 2 los souls están en un lugar que no se lucen.
