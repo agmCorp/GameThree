@@ -16,7 +16,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.widget.AnimatedActor;
+import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.HealthBar;
 
 /**
@@ -152,11 +152,11 @@ public class Hud extends AbstractScreen {
         upperTable.add(highScoreLabel).width(HIGH_SCORE_WIDTH);
         upperTable.add(timeLabel).width(TIME_WIDTH);
 
-        AnimatedActor heroHead = new AnimatedActor();
+        AnimatedImage heroHead = new AnimatedImage();
         heroHead.setAnimation(Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation());
         upperTable.add(heroHead).width(LIVES_WIDTH);
         upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).width(SKULLS_WIDTH);
-        AnimatedActor shuriken = new AnimatedActor();
+        AnimatedImage shuriken = new AnimatedImage();
         shuriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
         upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
 

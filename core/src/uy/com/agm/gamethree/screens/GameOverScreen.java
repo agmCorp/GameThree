@@ -12,7 +12,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.widget.AnimatedActor;
+import uy.com.agm.gamethree.widget.AnimatedImage;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -54,12 +54,12 @@ public class GameOverScreen extends AbstractScreen {
         table.setFillParent(true);
 
         // Animation
-        AnimatedActor animatedActor = new AnimatedActor();
-        animatedActor.setAnimation(assetScene2d.getGameOver().getGameOverAnimation());
-        animatedActor.setAlign(Align.center);
+        AnimatedImage animatedImage = new AnimatedImage();
+        animatedImage.setAnimation(assetScene2d.getGameOver().getGameOverAnimation());
+        animatedImage.setAlign(Align.center);
 
         // Add values
-        table.add(animatedActor).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
+        table.add(animatedImage).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
 
         // Adds table to stage
         addActor(table);

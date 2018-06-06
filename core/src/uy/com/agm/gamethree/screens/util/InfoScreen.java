@@ -32,7 +32,7 @@ import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.LevelFactory;
-import uy.com.agm.gamethree.widget.AnimatedActor;
+import uy.com.agm.gamethree.widget.AnimatedImage;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -81,7 +81,7 @@ public class InfoScreen extends AbstractScreen {
 
     private Table centerTable;
     private Label messageLabel;
-    private AnimatedActor animatedActor;
+    private AnimatedImage animatedImage;
     private Image image;
     private float overlayTime;
     private float overlaySeconds;
@@ -164,15 +164,15 @@ public class InfoScreen extends AbstractScreen {
         messageLabel = new Label("MESSAGE", labelStyleSmall);
         messageLabel.setAlignment(Align.center);
 
-        // Define animatedActor and image
-        animatedActor = new AnimatedActor();
-        animatedActor.setAlign(Align.center);
+        // Define animatedImage and image
+        animatedImage = new AnimatedImage();
+        animatedImage.setAlign(Align.center);
         image = new Image();
         image.setAlign(Align.center);
 
         // Add values
         stack = new Stack();
-        stack.add(animatedActor);
+        stack.add(animatedImage);
         stack.add(image);
         stack.add(messageLabel);
         stackCell = centerTable.add(stack);
@@ -182,7 +182,7 @@ public class InfoScreen extends AbstractScreen {
 
         // Initially hidden
         messageLabel.setVisible(false);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         image.setVisible(false);
         centerTable.setVisible(false);
     }
@@ -271,7 +271,7 @@ public class InfoScreen extends AbstractScreen {
                 break;
         }
         messageLabel.setVisible(true);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         image.setVisible(false);
         centerTable.setVisible(true);
     }
@@ -300,7 +300,7 @@ public class InfoScreen extends AbstractScreen {
 
         image.setVisible(true);
         messageLabel.setVisible(false);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         centerTable.setVisible(true);
     }
 
@@ -351,9 +351,9 @@ public class InfoScreen extends AbstractScreen {
     public void showAnimation(Animation animation, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
-        animatedActor.setAnimation(animation);
+        animatedImage.setAnimation(animation);
 
-        animatedActor.setVisible(true);
+        animatedImage.setVisible(true);
         image.setVisible(false);
         messageLabel.setVisible(false);
         centerTable.setVisible(true);
@@ -386,7 +386,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public boolean isAnimationVisible() {
-        return animatedActor.isVisible();
+        return animatedImage.isVisible();
     }
 
     // ----------- General functions
@@ -394,7 +394,7 @@ public class InfoScreen extends AbstractScreen {
     public void hideInfo() {
         messageLabel.setVisible(false);
         image.setVisible(false);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         centerTable.setVisible(false);
     }
 
@@ -450,7 +450,7 @@ public class InfoScreen extends AbstractScreen {
         messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
         messageLabel.setStyle(labelStyleNormal);
         messageLabel.setVisible(true);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         centerTable.setVisible(true);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
@@ -463,7 +463,7 @@ public class InfoScreen extends AbstractScreen {
         messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashWarning"));
         messageLabel.setStyle(labelStyleNormal);
         messageLabel.setVisible(true);
-        animatedActor.setVisible(false);
+        animatedImage.setVisible(false);
         centerTable.setVisible(true);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);

@@ -15,7 +15,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.widget.AnimatedActor;
+import uy.com.agm.gamethree.widget.AnimatedImage;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -93,9 +93,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Animation
-        AnimatedActor animatedActor = new AnimatedActor();
-        animatedActor.setAlign(Align.center);
-        animatedActor.setAnimation(assetScene2d.getStageCleared().getStageClearedAnimation());
+        AnimatedImage animatedImage = new AnimatedImage();
+        animatedImage.setAlign(Align.center);
+        animatedImage.setAnimation(assetScene2d.getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
@@ -107,7 +107,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(currentLevelLabel);
         table.row();
-        table.add(animatedActor).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
+        table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
