@@ -1,17 +1,15 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.Scaling;
 
 import java.util.Locale;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
@@ -29,12 +27,12 @@ public class Hud extends AbstractScreen {
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
-    private static final float SCORE_WIDTH = 100.0f;
+    private static final float SCORE_WIDTH = 110.0f;
     private static final float HIGH_SCORE_WIDTH = 130.0f;
-    private static final float TIME_WIDTH = 100.0f;
-    private static final float LIVES_WIDTH = 50.0f;
-    private static final float SKULLS_WIDTH = 50.0f;
-    private static final float SILVER_BULLETS_WIDTH = 50.0f;
+    private static final float TIME_WIDTH = 60.0f;
+    private static final float LIVES_WIDTH = 60.0f;
+    private static final float SKULLS_WIDTH = 60.0f;
+    private static final float SILVER_BULLETS_WIDTH = 60.0f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
@@ -124,6 +122,9 @@ public class Hud extends AbstractScreen {
     }
 
     private void defineUpperTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // Define a table used to organize our hud's labels
         upperTable = new Table();
 
@@ -144,18 +145,20 @@ public class Hud extends AbstractScreen {
         scoreLabel.setAlignment(Align.center);
         Label highScoreLabel = new Label(i18NGameThreeBundle.format("hud.highScore"), labelStyleSmall);
         highScoreLabel.setAlignment(Align.center);
-        Label timeLabel = new Label(i18NGameThreeBundle.format("hud.time"), labelStyleSmall);
-        timeLabel.setAlignment(Align.center);
 
         // Add labels to the table
         upperTable.add(scoreLabel).width(SCORE_WIDTH);
         upperTable.add(highScoreLabel).width(HIGH_SCORE_WIDTH);
-        upperTable.add(timeLabel).width(TIME_WIDTH);
 
+        AnimatedImage hourglass = new AnimatedImage();
+        hourglass.setAnimation(assetScene2d.getHourglass().getHourglassAnimation());
+        upperTable.add(hourglass).width(TIME_WIDTH);
         AnimatedImage heroHead = new AnimatedImage();
-        heroHead.setAnimation(Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation());
+        heroHead.setAnimation(assetScene2d.getHeroHead().getHeroHeadAnimation());
         upperTable.add(heroHead).width(LIVES_WIDTH);
-        upperTable.add(new Image(new TextureRegionDrawable(Assets.getInstance().getScene2d().getSkullHead()), Scaling.fit)).width(SKULLS_WIDTH);
+        AnimatedImage skullHead = new AnimatedImage();
+        skullHead.setAnimation(assetScene2d.getSkullHead().getSkullHeadAnimation());
+        upperTable.add(skullHead).width(SKULLS_WIDTH);
         AnimatedImage shuriken = new AnimatedImage();
         shuriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
         upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);

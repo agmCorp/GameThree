@@ -1,18 +1,17 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
-- Salió el help de final enemy one. Puse pausa, minimice. Luego saque pausa, saque help y el bicho salió para la derecha y quedó trancado en la esquina.
+- Salió el help de final enemy one. Puse pausa, minimice. Luego saque pausa, saque help y el bicho salió para la derecha y quedó
+trancado en la esquina.
 En el nivel 2 los souls están en un lugar que no se lucen.
 Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
 Level 3 muchos souls
-- Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca, lo matas con 2 disparos, etc.
+- Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
+ lo matas con 2 disparos, etc.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 
 HACER PRIORIDAD 1
 -----------------
-- el letsgo deberia aparecer tambien en el level1. Se me ocurre ponerlo cuando la cam se mueve un poco hacia
-arriba en todos los niveles.
-- Poner reloj de arena en el hud.
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - cuando los enemy piedras me disparan y yo estoy con escudo, las balas rebotan mirando hacia abajo.

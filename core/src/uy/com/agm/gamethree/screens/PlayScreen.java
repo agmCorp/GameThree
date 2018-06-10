@@ -95,6 +95,7 @@ public class PlayScreen extends AbstractScreen {
     private InfoScreen infoScreen;
     private DimScreen dimScreen;
     private boolean levelStarts;
+    private boolean showGameControllersHelp;
     private boolean showRedFlashHelp;
 
     // TiledEditor map variable
@@ -188,6 +189,9 @@ public class PlayScreen extends AbstractScreen {
 
         // Indicates that the level is just beginning
         levelStarts = true;
+
+        // Used to display a help about controllers
+        showGameControllersHelp = true;
 
         // Used to display a help about slippery enemies
         showRedFlashHelp = true;
@@ -616,12 +620,13 @@ public class PlayScreen extends AbstractScreen {
          */
 
         finish = !finish && levelStarts;
-        levelStarts = false;
         if (finish) {
-            if (level == 1) {
+            if (level == 1 && showGameControllersHelp) {
                 infoScreen.showGameControllersHelp();
+                showGameControllersHelp = false;
             } else {
                 infoScreen.showLetsGo();
+                levelStarts = false;
             }
         }
 

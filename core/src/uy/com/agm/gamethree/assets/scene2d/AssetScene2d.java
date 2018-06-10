@@ -41,7 +41,6 @@ public class AssetScene2d {
     private TextureRegion helpFinalEnemyLevelTwo;
     private TextureRegion helpFinalEnemyLevelThree;
     private TextureRegion table;
-    private TextureRegion skullHead;
     private TextureRegion wipeThemOut;
     private TextureRegion play;
     private TextureRegion playPressed;
@@ -71,6 +70,8 @@ public class AssetScene2d {
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
     private AssetHeroHead heroHead;
+    private AssetSkullHead skullHead;
+    private AssetHourglass hourglass;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
     private AssetStageFailed stageFailed;
@@ -110,7 +111,6 @@ public class AssetScene2d {
         helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
         helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
         table = atlasUI.findRegion("table");
-        skullHead = atlasUI.findRegion("skullHead");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
         play = atlasUI.findRegion("play");
         playPressed = atlasUI.findRegion("playPressed");
@@ -140,6 +140,8 @@ public class AssetScene2d {
         gotIt = atlasUI.findRegion("gotIt");
         gotItPressed = atlasUI.findRegion("gotItPressed");
         heroHead = new AssetHeroHead(atlasUI);
+        skullHead = new AssetSkullHead(atlasUI);
+        hourglass = new AssetHourglass(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
         stageFailed = new AssetStageFailed(atlasUI);
@@ -271,10 +273,6 @@ public class AssetScene2d {
         return table;
     }
 
-    public TextureRegion getSkullHead() {
-        return skullHead;
-    }
-
     public TextureRegion getWipeThemOut() {
         return wipeThemOut;
     }
@@ -389,6 +387,14 @@ public class AssetScene2d {
 
     public AssetHeroHead getHeroHead() {
         return heroHead;
+    }
+
+    public AssetSkullHead getSkullHead() {
+        return skullHead;
+    }
+
+    public AssetHourglass getHourglass() {
+        return hourglass;
     }
 
     public AssetVictory getVictory() {
