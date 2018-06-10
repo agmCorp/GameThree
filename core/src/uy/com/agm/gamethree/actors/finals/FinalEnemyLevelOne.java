@@ -671,7 +671,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                     }
                 }
             }
-        } else {
+        } else { // velY <= 0.0f
             if (velY < 0.0f) {
                 if (x < screen.getGameCam().position.x) {
                     // We are walking DOWN along the LEFT BORDER or along the SLASH
@@ -704,8 +704,8 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                         }
                     }
                 }
-            } else {
-                if (velX != 0.0f) { // velY == 0
+            } else { // velY == 0
+                if (velX != 0.0f) {
                     if (velX > 0.0f) {
                         if (y < screen.getGameCam().position.y) {
                             // We are walking to the RIGHT along the FLOOR EDGE
@@ -738,7 +738,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                                 }
                             }
                         }
-                    } else if (velX < 0.0f) {
+                    } else { // velX < 0
                         if (y < screen.getGameCam().position.y) {
                             // We are walking to the LEFT along the FLOOR EDGE
                             if (isBorder) { // We must collide only with a border
@@ -771,7 +771,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                             }
                         }
                     }
-                }
+                } // velY == 0, velX == 0
             }
         }
     }
