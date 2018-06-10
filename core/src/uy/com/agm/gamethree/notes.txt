@@ -34,6 +34,7 @@ la pantalla
 
 HACER PRIORIDAD 3
 -----------------
+- habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getFinalEnemyLevelOne(), etc.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
