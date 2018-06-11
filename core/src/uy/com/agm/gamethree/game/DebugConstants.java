@@ -7,7 +7,7 @@ package uy.com.agm.gamethree.game;
 public class DebugConstants {
     // Boxes around sprites, box2d bodies and scene2d tables
     // Sets the log level to debug
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
@@ -22,8 +22,8 @@ public class DebugConstants {
     public static final boolean DEBUG_LEVELS = true;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 75.0f;
+    public static final float GAME_CAM_Y_METERS = 0.0f;
 
     // Freezes the camera
-    public static final boolean STATIC_GAME_CAM = false;
+    public static final boolean STATIC_GAME_CAM = true;
 }
