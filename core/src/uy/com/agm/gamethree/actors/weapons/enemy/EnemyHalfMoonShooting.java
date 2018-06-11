@@ -21,7 +21,7 @@ public class EnemyHalfMoonShooting implements IShootStrategy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float BULLET_CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float BULLET_VELOCITY_X = 0.0f;
-    private static final float BULLET_VELOCITY_Y = -2.0f;
+    private static final float BULLET_VELOCITY_Y = 2.0f;
 
     private PlayScreen screen;
     private float openFireTime;
@@ -62,7 +62,7 @@ public class EnemyHalfMoonShooting implements IShootStrategy {
         float angle;
 
         for (int i = 1; i <= numberBullets; i++) {
-            angle = directionDegrees * i;
+            angle = (directionDegrees * i) + 180;
             angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
             createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
