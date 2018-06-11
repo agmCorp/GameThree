@@ -1,10 +1,8 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
-- Salió el help de final enemy one. Puse pausa, minimice. Luego saque pausa, saque help y el bicho salió para la derecha y quedó
-trancado en la esquina.
-En el nivel 2 los souls están en un lugar que no se lucen.
-Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
-Level 3 muchos souls
+- En el nivel 2 los souls están en un lugar que no se lucen.
+- Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
+- Level 3 muchos souls
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc.
 - Hacer pantalla de final feliz
@@ -122,9 +120,6 @@ el resto del sonido. No lo supe arreglar...
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
-- Una vez se me quedó la araña trabada en la esquina superior izquierda, luego de haber jugado todo el nivel normal.
-Intenté reproducirlo teletransportandome y dejando la araña jugar sola por varios minutos y no lo logré.
-Intenté reproducirlo teletransportandome y muriendo aplastado antes de entrar a la epic fight y tampoco.
 
 TENGO
 -----
