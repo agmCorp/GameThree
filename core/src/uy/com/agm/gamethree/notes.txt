@@ -7,6 +7,8 @@ PRIORIDADES PARA LIBERAR
  lo matas con 2 disparos, etc.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
+- hacer un nivel mas de refritos
+- agregarle avisos http://www.norakomi.com/tutorial_admob_part2_interstitial_ads.php
 
 HACER PRIORIDAD 1
 -----------------
