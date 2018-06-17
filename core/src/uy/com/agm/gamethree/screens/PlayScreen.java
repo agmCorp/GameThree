@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
+import com.admob.IAdsController;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -632,6 +633,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && player.isTimeToPlayAgain();
         if (finish) {
+            showAd();
             player.playAgain();
             startEdges();
         }
@@ -660,7 +662,22 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
+            showAd();
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getSkulls());
+        }
+    }
+
+    public void showAd() {
+        IAdsController adsController = game.getAdsController();
+        if (adsController.isWifiConnected()) {
+            adsController.showInterstitialAd(new Runnable() {
+                @Override
+                public void run() {
+                    dimScreen.setGameStateRunning();
+                }
+            });
+        } else {
+            Gdx.app.debug(TAG, "Not connected to the internet");
         }
     }
 

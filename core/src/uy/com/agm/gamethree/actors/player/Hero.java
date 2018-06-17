@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.actors.player;
 
-import com.admob.IAdsController;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,9 +22,7 @@ import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.game.GameThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -684,20 +680,6 @@ public class Hero extends Sprite {
         // Start dying up
         heroStateTime = 0;
         currentHeroState = HeroState.DYING_UP;
-
-        // TODO
-        IAdsController adsController = ((GameThree) ScreenManager.getInstance().getGame()).getAdsController();
-
-        if (adsController.isWifiConnected()) {
-            adsController.showInterstitialAd(new Runnable() {
-                @Override
-                public void run() {
-                    screen.getDimScreen().setGameStateRunning();
-                }
-            });
-        } else {
-            Gdx.app.debug(TAG, "Not connected to the internet");
-        }
     }
 
     public void draw(SpriteBatch batch) {
