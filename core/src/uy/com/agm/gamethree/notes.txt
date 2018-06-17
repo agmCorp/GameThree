@@ -12,6 +12,8 @@ PRIORIDADES PARA LIBERAR
 
 HACER PRIORIDAD 1
 -----------------
+- Poner estrellas en lugar de skulls
+- Premier pro para animacion, en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
