@@ -633,6 +633,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && player.isTimeToPlayAgain();
         if (finish) {
+            // Advertisement
             showAd();
             player.playAgain();
             startEdges();
@@ -662,6 +663,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
+            // Advertisement
             showAd();
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getSkulls());
         }
