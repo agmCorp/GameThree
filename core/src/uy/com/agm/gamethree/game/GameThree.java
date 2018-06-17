@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.game;
 
+import com.admob.IAdsController;
+import com.admob.DummyAdsController;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -15,6 +17,15 @@ public class GameThree extends Game {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+    private IAdsController adsController;
+
+    public GameThree(IAdsController adsController){
+        if (adsController != null) {
+            this.adsController = adsController;
+        } else {
+            this.adsController = new DummyAdsController();
+        }
+    }
 
     @Override
     public void create() {
@@ -59,5 +70,9 @@ public class GameThree extends Game {
 
     public ShapeRenderer getShapeRenderer() {
         return shapeRenderer;
+    }
+
+    public IAdsController getAdsController() {
+        return adsController;
     }
 }

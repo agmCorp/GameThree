@@ -14,8 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import javax.sound.midi.MidiDevice;
-
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
@@ -233,7 +231,8 @@ public class DimScreen extends AbstractScreen {
         buttonsTable.setVisible(true);
     }
 
-    private void setGameStateRunning() {
+    // TODO, ANTES ERA PRIVATE AHORA LO PUSE PUBLIC PARA LLAMARLO DESDE HERO AL CERRAR EL AVISO!
+    public void setGameStateRunning() {
         hideMessage();
         showPauseButton();
 

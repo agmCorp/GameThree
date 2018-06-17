@@ -17,6 +17,6 @@ public class DesktopLauncher {
 		config.title = TITLE;
 		config.width = AbstractScreen.V_WIDTH;
 		config.height = AbstractScreen.V_HEIGHT;
-		new LwjglApplication(new GameThree(), config);
+		new LwjglApplication(new GameThree(null), config);
 	}
 }
