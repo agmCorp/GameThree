@@ -76,12 +76,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
 
     @Override
     public boolean isWifiConnected() {
-        // todo
-//        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-//
-//        return (ni != null && ni.isConnected());
-
+        boolean isConnected = false;
         int[] networkTypes = {ConnectivityManager.TYPE_MOBILE,
                 ConnectivityManager.TYPE_WIFI};
         try {
@@ -89,12 +84,13 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
             NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
             for (int networkType : networkTypes) {
                 if (activeNetworkInfo != null && activeNetworkInfo.getType() == networkType) {
-                    return true;
+                    isConnected = true;
+                    break;
                 }
             }
         } catch (Exception e) {
-            return false;
+            isConnected = false;
         }
-        return false;
+        return isConnected;
     }
 }

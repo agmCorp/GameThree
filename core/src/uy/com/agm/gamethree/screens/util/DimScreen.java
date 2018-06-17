@@ -231,7 +231,6 @@ public class DimScreen extends AbstractScreen {
         buttonsTable.setVisible(true);
     }
 
-    // TODO, ANTES ERA PRIVATE AHORA LO PUSE PUBLIC PARA LLAMARLO DESDE HERO AL CERRAR EL AVISO!
     public void setGameStateRunning() {
         hideMessage();
         showPauseButton();
