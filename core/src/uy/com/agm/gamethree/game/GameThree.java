@@ -20,11 +20,7 @@ public class GameThree extends Game {
     private IAdsController adsController;
 
     public GameThree(IAdsController adsController){
-        if (adsController != null) {
-            this.adsController = adsController;
-        } else {
-            this.adsController = new DummyAdsController();
-        }
+        this.adsController = adsController != null ? adsController : new DummyAdsController();
     }
 
     @Override

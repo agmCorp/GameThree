@@ -64,11 +64,11 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                             interstitialAd.loadAd(new AdRequest.Builder().build());
                         }
                     });
-                    if (interstitialAd.isLoaded()) {
-                        interstitialAd.show();
-                    } else {
-                        Gdx.app.debug(TAG, "The interstitial wasn't loaded yet.");
-                    }
+                }
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                } else {
+                    Gdx.app.debug(TAG, "The interstitial wasn't loaded yet.");
                 }
             }
         });
