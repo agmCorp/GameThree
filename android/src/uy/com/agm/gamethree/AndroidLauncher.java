@@ -26,6 +26,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
 
     private InterstitialAd interstitialAd;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
