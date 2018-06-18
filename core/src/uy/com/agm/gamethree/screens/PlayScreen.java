@@ -98,6 +98,7 @@ public class PlayScreen extends AbstractScreen {
     private boolean levelStarts;
     private boolean showGameControllersHelp;
     private boolean showRedFlashHelp;
+    private boolean showAds;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -196,6 +197,9 @@ public class PlayScreen extends AbstractScreen {
 
         // Used to display a help about slippery enemies
         showRedFlashHelp = true;
+
+        // Used to display ads
+        showAds = true;
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level));
@@ -633,10 +637,15 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && player.isTimeToPlayAgain();
         if (finish) {
-            // Advertisement
-            showAd();
+            showAds = true;
             player.playAgain();
             startEdges();
+        }
+
+        finish = !finish && player.isTimeToShowAds() && showAds;
+        if (finish) {
+            showAds = false;
+            showAd();
         }
 
         finish = !finish && !player.isSilverBulletEnabled() && !player.isDead() && isChallengeBegin();

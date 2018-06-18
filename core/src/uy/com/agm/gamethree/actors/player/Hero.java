@@ -743,6 +743,12 @@ public class Hero extends Sprite {
                 playAgainTime > PLAY_AGAIN_DELAY_SECONDS;
     }
 
+    public boolean isTimeToShowAds() {
+        return currentHeroState == HeroState.DEAD &&
+                lives > 0 &&
+                playAgainTime > PLAY_AGAIN_DELAY_SECONDS / 2;
+    }
+
     public Body getB2body() {
         return b2body;
     }
