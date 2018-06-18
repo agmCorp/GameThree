@@ -98,7 +98,7 @@ public class PlayScreen extends AbstractScreen {
     private boolean levelStarts;
     private boolean showGameControllersHelp;
     private boolean showRedFlashHelp;
-    private boolean showAds;
+    private boolean allowAds;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -199,7 +199,7 @@ public class PlayScreen extends AbstractScreen {
         showRedFlashHelp = true;
 
         // Used to display ads
-        showAds = true;
+        allowAds = true;
 
         // Start playing level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level));
@@ -488,6 +488,10 @@ public class PlayScreen extends AbstractScreen {
         return isLevelCompleted;
     }
 
+    private boolean isTimeToShowAds() {
+        return levelCompletedTime > LEVEL_COMPLETED_DELAY_SECONDS - 1;
+    }
+
     private boolean isChallengeBegin() {
         return player.getB2body().getPosition().y >= LEVEL_CHALLENGE_BEGIN;
     }
@@ -637,15 +641,16 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && player.isTimeToPlayAgain();
         if (finish) {
-            showAds = true;
+            allowAds = true;
             player.playAgain();
             startEdges();
         }
 
-        finish = !finish && player.isTimeToShowAds() && showAds;
+        finish = !finish && (player.isTimeToShowAds() || isTimeToShowAds()) && allowAds;
         if (finish) {
-            showAds = false;
+            // Advertisement
             showAd();
+            allowAds = false;
         }
 
         finish = !finish && !player.isSilverBulletEnabled() && !player.isDead() && isChallengeBegin();
@@ -672,13 +677,12 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            // Advertisement
-            showAd();
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getSkulls());
         }
     }
 
     public void showAd() {
+        Gdx.app.debug(TAG, "*** MUESTRO AVISOO!!!");
         IAdsController adsController = game.getAdsController();
         if (adsController.isWifiConnected()) {
             adsController.showInterstitialAd(new Runnable() {
