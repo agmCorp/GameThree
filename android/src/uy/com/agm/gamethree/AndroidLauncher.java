@@ -45,7 +45,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         setupAds();
     }
 
-    public void setupAds() {
+    private void setupAds() {
         MobileAds.initialize(this, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(INTERSTITIAL_AD_UNIT_ID);
