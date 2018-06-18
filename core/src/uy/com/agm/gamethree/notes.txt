@@ -8,11 +8,10 @@ PRIORIDADES PARA LIBERAR
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
-- Cuando muestro aviso cambiando a islevelcomplete ejecuto dimscreen.setGameStateRunning y no hay dimscreen..no se...probarlo.
 
 HACER PRIORIDAD 1
 -----------------
-- Poner estrellas en lugar de skulls
+- Poner estrellas en lugar de skulls o premiar en positivo (no castigar).
 - Premier pro para animacion, en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
