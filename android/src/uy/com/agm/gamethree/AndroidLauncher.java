@@ -58,11 +58,11 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     }
 
     @Override
-    public void showInterstitialAd(final Runnable then) {
+    public void showInterstitialAd(final Runnable runCodeUIThreadOnAdClosed) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (then != null) {
+                if (runCodeUIThreadOnAdClosed != null) {
                     interstitialAd.setAdListener(new AdListener() {
                         @Override
                         public void onAdLoaded() {
@@ -88,7 +88,9 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                         public void onAdClosed() {
                             Gdx.app.debug(TAG, "**** Ad is closed");
 
-                            Gdx.app.postRunnable(then);
+                            // Run code on the UI Thread
+                            Gdx.app.postRunnable(runCodeUIThreadOnAdClosed);
+
                             // Load the next interstitial
                             AdRequest request = new AdRequest.Builder()
                                     .addTestDevice(TEST_DEVICE)
