@@ -51,6 +51,10 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         interstitialAd.setAdUnitId(INTERSTITIAL_AD_UNIT_ID);
 
         // Load the first interstitial
+        loadInterstitialAd();
+    }
+
+    private void loadInterstitialAd() {
         AdRequest request = new AdRequest.Builder()
                 .addTestDevice(TEST_DEVICE)
                 .build();
@@ -99,10 +103,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                             Gdx.app.postRunnable(runCodeUIThreadOnAdClosed);
 
                             // Load the next interstitial
-                            AdRequest request = new AdRequest.Builder()
-                                    .addTestDevice(TEST_DEVICE)
-                                    .build();
-                            interstitialAd.loadAd(request);
+                            loadInterstitialAd();
                         }
                     });
                 }
