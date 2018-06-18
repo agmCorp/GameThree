@@ -26,7 +26,4 @@ public class DebugConstants {
 
     // Freezes the camera
     public static final boolean STATIC_GAME_CAM = false;
-
-    // Load test ads
-    public static final boolean TEST_ADS = true;
 }
