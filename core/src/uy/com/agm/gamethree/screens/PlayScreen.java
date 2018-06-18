@@ -684,7 +684,9 @@ public class PlayScreen extends AbstractScreen {
             adsController.showInterstitialAd(new Runnable() {
                 @Override
                 public void run() {
-                    dimScreen.setGameStateRunning();
+                    if (isPlayScreenStatePaused()) {
+                        dimScreen.setGameStateRunning();
+                    }
                 }
             });
         } else {
