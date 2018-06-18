@@ -563,6 +563,11 @@ LECCIONES APRENDIDAS
     En este caso particular, como el Hud depende pura y exclusivamente de PlayScreen, es PlayScreen la que invoca a su buildStage, act, draw y
     dispose. Es decir, es PlayScreen la que haría lo que haría ScreenManager para el resto de las pantallas como MainMenuScreen, GameOverScreen, etc.
 
+28)
+    Para agregar publicidad:
+    http://www.norakomi.com/tutorial_admob_part2_interstitial_ads.php
+    https://www.youtube.com/watch?v=cwAN4LMXo58&feature=youtu.be
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
