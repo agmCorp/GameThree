@@ -14,12 +14,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameThree;
 
 public class AndroidLauncher extends AndroidApplication implements IAdsController {
     private static final String TAG = AndroidApplication.class.getName();
 
-    // TODO cargar una u otra en funcion de debug capaz
     private static final String ADMOB_APP_ID = "ca-app-pub-3296591416050248~7409810295";
     private static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3296591416050248/6643523530";
     private static final String INTERSTITIAL_TEST_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
@@ -45,7 +45,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     public void setupAds() {
         MobileAds.initialize(this, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(INTERSTITIAL_TEST_AD_UNIT_ID);
+        interstitialAd.setAdUnitId(DebugConstants.TEST_ADS ? INTERSTITIAL_TEST_AD_UNIT_ID : INTERSTITIAL_AD_UNIT_ID);
         // Load the first interstitial
         interstitialAd.loadAd(new AdRequest.Builder().build());
     }
