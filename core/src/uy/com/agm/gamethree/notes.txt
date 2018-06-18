@@ -8,6 +8,7 @@ PRIORIDADES PARA LIBERAR
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
+- Cuando muestro aviso cambiando a islevelcomplete ejecuto dimscreen.setGameStateRunning y no hay dimscreen..no se...probarlo.
 
 HACER PRIORIDAD 1
 -----------------
