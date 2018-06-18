@@ -62,6 +62,13 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // Show ad
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                } else {
+                    Gdx.app.debug(TAG, "**** The interstitial wasn't loaded yet.");
+                }
+
                 if (runCodeUIThreadOnAdClosed != null) {
                     interstitialAd.setAdListener(new AdListener() {
                         @Override
@@ -98,11 +105,6 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                             interstitialAd.loadAd(request);
                         }
                     });
-                }
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                } else {
-                    Gdx.app.debug(TAG, "**** The interstitial wasn't loaded yet.");
                 }
             }
         });
