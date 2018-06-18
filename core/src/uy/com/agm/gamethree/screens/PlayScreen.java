@@ -699,9 +699,20 @@ public class PlayScreen extends AbstractScreen {
     public void setPlayScreenStatePaused(boolean pauseAudio){
         this.playScreenState = PlayScreenState.PAUSED;
         if (pauseAudio) {
-            AudioManager.getInstance().pauseMusic();
-            AudioManager.getInstance().pauseSound();
+            pauseAudio();
         }
+    }
+
+    public void pauseAudio() {
+        AudioManager.getInstance().pauseMusic();
+        AudioManager.getInstance().pauseSound();
+    }
+
+    public void resumeAudio() {
+        if (!player.isDead() && !finalEnemy.isDestroyed()) {
+            AudioManager.getInstance().resumeMusic();
+        }
+        AudioManager.getInstance().resumeSound();
     }
 
     public boolean isPlayScreenStateRunning() {
@@ -710,10 +721,7 @@ public class PlayScreen extends AbstractScreen {
 
     public void setPlayScreenStateRunning(){
         this.playScreenState = PlayScreenState.RUNNING;
-        if (!player.isDead() && !finalEnemy.isDestroyed()) {
-            AudioManager.getInstance().resumeMusic();
-        }
-        AudioManager.getInstance().resumeSound();
+        resumeAudio();
     }
 
     public boolean isPlayScreenStateBreak() {

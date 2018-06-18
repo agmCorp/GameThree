@@ -217,6 +217,7 @@ public class DimScreen extends AbstractScreen {
 
         InfoScreen infoScreen = screen.getInfoScreen();
         if (infoScreen.isModalVisible()) { // Game already paused
+            screen.pauseAudio();
             infoScreen.disableModal();
         } else {
             screen.setPlayScreenStatePaused(true);
@@ -239,6 +240,7 @@ public class DimScreen extends AbstractScreen {
         if (infoScreen.isModalVisible()) { // Game must remain on pause
             buttonsTable.setVisible(false);
             infoScreen.enableModal();
+            screen.resumeAudio();
         } else {
             screen.setPlayScreenStateRunning();
         }
