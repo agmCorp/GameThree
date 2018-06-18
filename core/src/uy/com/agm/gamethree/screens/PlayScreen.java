@@ -682,7 +682,6 @@ public class PlayScreen extends AbstractScreen {
     }
 
     public void showAd() {
-        Gdx.app.debug(TAG, "*** MUESTRO AVISOO!!!");
         IAdsController adsController = game.getAdsController();
         if (adsController.isWifiConnected()) {
             adsController.showInterstitialAd(new Runnable() {
