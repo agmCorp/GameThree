@@ -25,7 +25,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     private static final String TEST_DEVICE = "197A3D43D6743696E99BE0EE25126FF1";
 
     private InterstitialAd interstitialAd;
-    private Runnable runOnAdClose;
+    private Runnable callbackOnAdClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         MobileAds.initialize(this, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(INTERSTITIAL_AD_UNIT_ID);
-        runOnAdClose = null;
+        callbackOnAdClose = null;
         setInterstitialAdListener();
 
         // Load the first interstitial
@@ -94,10 +94,10 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                 // To pass data from another thread to the rendering thread we must use Application.postRunnable().
                 // This will run the code in the Runnable in the rendering thread in the next frame, before
                 // ApplicationListener.render() is called.
-                if (runOnAdClose != null) {
-                    // Therefore, instead of running runOnAdClose in the UI thread (runOnAdClose.run), we run it in
+                if (callbackOnAdClose != null) {
+                    // Therefore, instead of running callbackOnAdClose in the UI thread (callbackOnAdClose.run), we run it in
                     // the badlogic rendering thread.
-                    Gdx.app.postRunnable(runOnAdClose);
+                    Gdx.app.postRunnable(callbackOnAdClose);
                 }
 
                 // Load the next interstitial
@@ -114,13 +114,13 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     }
 
     @Override
-    public void showInterstitialAd(final Runnable runOnAdClose) {
+    public void showInterstitialAd(final Runnable callbackOnAdClose) {
         // Code that is executed when the ad is closed.
-        this.runOnAdClose = runOnAdClose;
+        this.callbackOnAdClose = callbackOnAdClose;
 
         // This method (showInterstitialAd) is called from the rendering thread (com.badlogic.gdx.ApplicationListener.render() thread)
         // However, the method show() must be called on the main UI thread.
-        // To pass data from the rendering thread to the main UI thread we use Activity.runOnUiThread
+        // To pass data from the rendering thread to the main UI thread we must use Activity.runOnUiThread
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -6,7 +6,7 @@ package com.admob;
 
 public class DummyAdsController implements IAdsController {
     @Override
-    public void showInterstitialAd(Runnable runOnAdClose) {
+    public void showInterstitialAd(Runnable callbackOnAdClose) {
         // Nothing to do here
     }
 
