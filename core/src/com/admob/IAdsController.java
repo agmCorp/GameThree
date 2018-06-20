@@ -5,6 +5,6 @@ package com.admob;
  */
 
 public interface IAdsController {
-    public void showInterstitialAd(Runnable runCodeUIThreadOnAdClosed);
+    public void showInterstitialAd(Runnable runOnAdClose);
     public boolean isWifiConnected();
 }

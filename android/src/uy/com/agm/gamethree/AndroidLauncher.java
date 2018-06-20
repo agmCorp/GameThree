@@ -25,6 +25,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     private static final String TEST_DEVICE = "197A3D43D6743696E99BE0EE25126FF1";
 
     private InterstitialAd interstitialAd;
+    private Runnable runOnAdClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +50,60 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         MobileAds.initialize(this, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(INTERSTITIAL_AD_UNIT_ID);
+        runOnAdClose = null;
+        setInterstitialAdListener();
 
         // Load the first interstitial
         loadInterstitialAd();
+    }
+
+    private void setInterstitialAdListener() {
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Gdx.app.debug(TAG, "**** Ad finishes loading");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Gdx.app.debug(TAG, "**** Ad request fails with errorCode: " + errorCode);
+            }
+
+            @Override
+            public void onAdOpened() {
+                Gdx.app.debug(TAG, "**** Ad is displayed");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Gdx.app.debug(TAG, "**** User has left the app");
+            }
+
+            @Override
+            public void onAdClosed() {
+                Gdx.app.debug(TAG, "**** Ad is closed");
+
+                // All of the com.badlogic.gdx.ApplicationListener methods are called on the same thread.
+                // This thread is the rendering thread on which OpenGL calls can be made.
+                // For most games it is sufficient to implement both logic updates and rendering in the
+                // ApplicationListener.render() method, and on the rendering thread.
+                // Any graphics operations directly involving OpenGL need to be executed on the rendering thread.
+                // Doing so on a different thread results in undefined behaviour.
+                // This is due to the OpenGL context only being active on the rendering thread.
+                // Making the context current on another thread has its problems on a lot of Android devices, hence it is unsupported.
+                // To pass data from another thread to the rendering thread we must use Application.postRunnable().
+                // This will run the code in the Runnable in the rendering thread in the next frame, before
+                // ApplicationListener.render() is called.
+                if (runOnAdClose != null) {
+                    // Therefore, instead of running runOnAdClose in the UI thread (runOnAdClose.run), we run it in
+                    // the badlogic rendering thread.
+                    Gdx.app.postRunnable(runOnAdClose);
+                }
+
+                // Load the next interstitial
+                loadInterstitialAd();
+            }
+        });
     }
 
     private void loadInterstitialAd() {
@@ -62,7 +114,13 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
     }
 
     @Override
-    public void showInterstitialAd(final Runnable runCodeUIThreadOnAdClosed) {
+    public void showInterstitialAd(final Runnable runOnAdClose) {
+        // Code that is executed when the ad is closed.
+        this.runOnAdClose = runOnAdClose;
+
+        // This method (showInterstitialAd) is called from the rendering thread (com.badlogic.gdx.ApplicationListener.render() thread)
+        // However, the method show() must be called on the main UI thread.
+        // To pass data from the rendering thread to the main UI thread we use Activity.runOnUiThread
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -71,41 +129,6 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
                     interstitialAd.show();
                 } else {
                     Gdx.app.debug(TAG, "**** The interstitial wasn't loaded yet.");
-                }
-
-                if (runCodeUIThreadOnAdClosed != null) {
-                    interstitialAd.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdLoaded() {
-                            Gdx.app.debug(TAG, "**** Ad finishes loading");
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(int errorCode) {
-                            Gdx.app.debug(TAG, "**** Ad request fails with errorCode: " + errorCode);
-                        }
-
-                        @Override
-                        public void onAdOpened() {
-                            Gdx.app.debug(TAG, "**** Ad is displayed");
-                        }
-
-                        @Override
-                        public void onAdLeftApplication() {
-                            Gdx.app.debug(TAG, "**** User has left the app");
-                        }
-
-                        @Override
-                        public void onAdClosed() {
-                            Gdx.app.debug(TAG, "**** Ad is closed");
-
-                            // Run code on the UI Thread
-                            Gdx.app.postRunnable(runCodeUIThreadOnAdClosed);
-
-                            // Load the next interstitial
-                            loadInterstitialAd();
-                        }
-                    });
                 }
             }
         });
