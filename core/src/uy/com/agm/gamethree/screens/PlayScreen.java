@@ -693,7 +693,7 @@ public class PlayScreen extends AbstractScreen {
                 }
             });
         } else {
-            Gdx.app.debug(TAG, "Not connected to the internet");
+            Gdx.app.debug(TAG, "**** Not connected to the internet");
         }
     }
 
