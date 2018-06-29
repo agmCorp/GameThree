@@ -4,7 +4,7 @@ PRIORIDADES PARA LIBERAR
 - Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
 - Level 3 muchos souls
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
- lo matas con 2 disparos, etc.
+ lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
@@ -27,7 +27,6 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 HACER PRIORIDAD 2
 -----------------
-- poner una intro y una historia. Copiar la historia del juego de knightmare remake! :D
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla
