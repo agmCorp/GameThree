@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2451">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2456">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
@@ -38,44 +38,68 @@
   <object id="2024" x="232" y="3246" width="36" height="36"/>
   <object id="2025" x="262" y="3446" width="38" height="38"/>
   <object id="2026" x="226" y="954" width="30" height="30"/>
-  <object id="2027" x="216" y="5634" width="40" height="40"/>
   <object id="2442" x="221.333" y="5445.33" width="40" height="40"/>
-  <object id="2443" x="222.667" y="7879.67" width="40" height="40">
+  <object id="2443" x="293.334" y="7895" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2444" x="228" y="7691" width="40" height="40">
+  <object id="2444" x="162" y="7712" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2445" x="220" y="7494.34" width="40" height="40">
+  <object id="2445" x="108" y="7529" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2446" x="225.333" y="7305.66" width="40" height="40">
+  <object id="2446" x="319.333" y="7346" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2447" x="233.334" y="7122" width="40" height="40">
+  <object id="2447" x="55.334" y="7163" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2448" x="238.667" y="6933.33" width="40" height="40">
+  <object id="2448" x="275.667" y="6980" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2449" x="234.667" y="6686" width="40" height="40">
+  <object id="2449" x="106.667" y="6797" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2450" x="240" y="6497.33" width="40" height="40">
+  <object id="2450" x="301" y="6614" width="40" height="40">
+   <properties>
+    <property name="wood" value=""/>
+   </properties>
+  </object>
+  <object id="2451" x="45.5" y="6431" width="40" height="40">
+   <properties>
+    <property name="wood" value=""/>
+   </properties>
+  </object>
+  <object id="2452" x="335" y="6248" width="40" height="40">
+   <properties>
+    <property name="wood" value=""/>
+   </properties>
+  </object>
+  <object id="2453" x="184" y="6065" width="40" height="40">
+   <properties>
+    <property name="wood" value=""/>
+   </properties>
+  </object>
+  <object id="2454" x="386.5" y="5882" width="40" height="40">
+   <properties>
+    <property name="wood" value=""/>
+   </properties>
+  </object>
+  <object id="2455" x="227" y="5699" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
