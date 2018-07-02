@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -101,8 +102,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
-        Label nextLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
-        Label newLevelsLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
+        TypingLabel nextLevelLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
+        TypingLabel newLevelsLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
 
         // Add values
         table.add(currentLevelLabel);
