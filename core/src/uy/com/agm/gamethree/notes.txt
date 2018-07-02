@@ -25,7 +25,7 @@ HACER PRIORIDAD 2
 -----------------
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
-la pantalla
+la pantalla.
 
 HACER PRIORIDAD 3
 -----------------
