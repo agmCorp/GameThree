@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -61,8 +62,8 @@ public class CreditsScreen extends AbstractScreen {
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
-        Label creditsLabel = new Label(i18NGameThreeBundle.format("credits.title"), labelStyleBig);
-        Label msgLabel = new Label(i18NGameThreeBundle.format("credits.msg"), labelStyleSmall);
+        TypingLabel creditsLabel = new TypingLabel(i18NGameThreeBundle.format("credits.title"), labelStyleBig);
+        TypingLabel msgLabel = new TypingLabel(i18NGameThreeBundle.format("credits.msg"), labelStyleSmall);
         msgLabel.setAlignment(Align.left);
         msgLabel.setWrap(true);
 
