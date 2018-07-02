@@ -98,7 +98,7 @@ public class LevelFactory {
                 music = Assets.getInstance().getMusic().getSongLevelThree();
                 break;
             case 4:
-                music = Assets.getInstance().getMusic().getSongLevelThree();
+                music = Assets.getInstance().getMusic().getSongLevelFour();
                 break;
             default:
                 music = null;

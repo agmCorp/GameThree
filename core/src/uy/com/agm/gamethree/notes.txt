@@ -1,8 +1,5 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
-- En el nivel 2 los souls están en un lugar que no se lucen.
-- Aumentar 3 segundos powerfour de la powerbox izquierda cuando estoy casi llegando.
-- Level 3 muchos souls
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
 - Hacer pantalla de final feliz
