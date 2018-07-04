@@ -7,10 +7,13 @@ PRIORIDADES PARA LIBERAR
 - hacer un nivel mas de refritos
 
 - en assetbridge poner 2 largos, uno para wood y el otro lo dejo como estaba.
+SI USO LAS FLORES NO NECESITO HACER ESTO!!!!! SOLO NECESITO 2 FLORES, LA QUE TENGO Y OTRA.
+ES MAS, PUEDO SACAR EL WOOD QUE ES FEO DE LAS IMAGENES.
+
     // PARA EL WOOD Y ASI LOS PONGO CADA 6 CUADRADOS EN EL TILE
     public static final float WIDTH_METERS = 32.0f * 5.8f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 32.0f * 5.8f / PlayScreen.PPM;
-- poner 2 hileras de ladrillos
+- poner 2 hileras de ladrillos, SI USO FLORES NO NECESITO.
 - agrandar el margen de error de aplastamiento (VER ABAJO)
 - cambiar las explosiones de los enemigos 12.
 - al enemigo 3 definirle un parametro speedboost que multiplica su velocidad.
@@ -134,6 +137,9 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 
 DUDAS Y BUGS
 ------------
+- Cuando todo esto termine contactar a cooper de linkedin y preguntarle las dudas tecnicas y
+ademas consultar si es mejor usar box2d o arreglos para detectar colisiones. Si conoce algun
+detector de colisiones (solo que detecte, sin resolver el choque).
 - El back si lo dejo apretado hace ruido.
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2 y uso de Labels en las pantallas.
