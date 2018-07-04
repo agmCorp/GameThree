@@ -12,7 +12,7 @@
    eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
   </data>
  </layer>
- <layer name="barrier" width="15" height="250" locked="1">
+ <layer name="barrier" width="15" height="250">
   <data encoding="base64" compression="zlib">
    eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
   </data>
@@ -34,72 +34,67 @@
  </objectgroup>
  <objectgroup name="obstacle"/>
  <objectgroup name="path"/>
- <objectgroup name="bridge" locked="1">
-  <object id="2024" x="232" y="3246" width="36" height="36"/>
-  <object id="2025" x="262" y="3446" width="38" height="38"/>
-  <object id="2026" x="226" y="954" width="30" height="30"/>
-  <object id="2442" x="221.333" y="5445.33" width="40" height="40"/>
-  <object id="2443" x="293.334" y="7895" width="40" height="40">
+ <objectgroup name="bridge">
+  <object id="2024" x="232" y="3357" width="36" height="36"/>
+  <object id="2025" x="262" y="3557" width="38" height="38"/>
+  <object id="2026" x="226" y="1065" width="30" height="30"/>
+  <object id="2442" x="221.333" y="5556.33" width="40" height="40"/>
+  <object id="2444" x="162" y="7823" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2444" x="162" y="7712" width="40" height="40">
+  <object id="2445" x="108" y="7640" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2445" x="108" y="7529" width="40" height="40">
+  <object id="2446" x="319.333" y="7457" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2446" x="319.333" y="7346" width="40" height="40">
+  <object id="2447" x="55.334" y="7274" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2447" x="55.334" y="7163" width="40" height="40">
+  <object id="2448" x="275.667" y="7091" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2448" x="275.667" y="6980" width="40" height="40">
+  <object id="2449" x="106.667" y="6908" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2449" x="106.667" y="6797" width="40" height="40">
+  <object id="2450" x="301" y="6725" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2450" x="301" y="6614" width="40" height="40">
+  <object id="2451" x="45.5" y="6542" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2451" x="45.5" y="6431" width="40" height="40">
+  <object id="2452" x="335" y="6359" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2452" x="335" y="6248" width="40" height="40">
+  <object id="2453" x="184" y="6176" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2453" x="184" y="6065" width="40" height="40">
+  <object id="2454" x="386.5" y="5993" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
   </object>
-  <object id="2454" x="386.5" y="5882" width="40" height="40">
-   <properties>
-    <property name="wood" value=""/>
-   </properties>
-  </object>
-  <object id="2455" x="227" y="5699" width="40" height="40">
+  <object id="2455" x="227" y="5810" width="40" height="40">
    <properties>
     <property name="wood" value=""/>
    </properties>
