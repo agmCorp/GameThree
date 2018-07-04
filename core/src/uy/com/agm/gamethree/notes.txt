@@ -6,6 +6,29 @@ PRIORIDADES PARA LIBERAR
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
 
+- en assetbridge poner 2 largos, uno para wood y el otro lo dejo como estaba.
+    // PARA EL WOOD Y ASI LOS PONGO CADA 6 CUADRADOS EN EL TILE
+    public static final float WIDTH_METERS = 32.0f * 5.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 32.0f * 5.8f / PlayScreen.PPM;
+- poner 2 hileras de ladrillos
+- agrandar el margen de error de aplastamiento (VER ABAJO)
+- cambiar las explosiones de los enemigos 12.
+- al enemigo 3 definirle un parametro speedboost que multiplica su velocidad.
+
+HOY EN DIA EL HERO NO TIENE TOLERANCIA ANTE EL APLASTAMIENTO Y NO PUEDE TENERLA.
+CUANDO SE DISPARA EL ENDCONTACT SE CONTROLA QUE EL SENSOR ESTE DEBAJO DEL EDGE SOLO PARA CONTROLAR EL CASO DE QUE
+REBOTO SOBRE EL EDGE CUANDO JUEGO NORMALMENE.
+SI EL SENSOR ESTA DEBAJO Y HUBO ENDCONCTACT ENTONCES FUE APLASTADO.
+PARA DARLE TOLERANCIA A ESO, PUEDO PONER EL SENSOR DENTRO DEL CIRCULO DE HERO.
+ACA LE DOY ALGO DE TOLERANCIA, PERO SI LE DOY MUCHA SE TRABA TODO Y HACE BIPS.
+
+private static final float SENSOR_HEIGHT_METERS = 0.03f; // The thinner the better todo
+private static final float SENSOR_OFFSET_METERS = 0.03f;
+
+polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS + SENSOR_OFFSET_METERS), 0);
+
+float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
+
 HACER PRIORIDAD 1
 -----------------
 - Poner estrellas en lugar de skulls o premiar en positivo (no castigar).
