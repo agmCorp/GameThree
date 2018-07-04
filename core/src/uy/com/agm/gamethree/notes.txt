@@ -116,7 +116,7 @@ el resto del sonido. No lo supe arreglar...
 - A veces los sonidos no se reproducen
 - Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
-de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?
+de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
 
 TENGO
 -----
