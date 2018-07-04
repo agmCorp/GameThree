@@ -29,6 +29,8 @@ polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0,
 
 float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
 
+USAR LOS ENEMIGOS 3 5 6 11
+
 HACER PRIORIDAD 1
 -----------------
 - Poner estrellas en lugar de skulls o premiar en positivo (no castigar).
