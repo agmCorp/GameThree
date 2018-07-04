@@ -18,10 +18,12 @@ public class AssetBridge {
 
     private TextureRegion bridgeA;
     private TextureRegion bridgeB;
+    private TextureRegion bridgeC;
 
     public AssetBridge(TextureAtlas atlas) {
         bridgeA = atlas.findRegion("bridgeA");
         bridgeB = atlas.findRegion("bridgeB");
+        bridgeC = atlas.findRegion("bridgeC");
     }
 
     public TextureRegion getBridgeA() {
@@ -30,5 +32,9 @@ public class AssetBridge {
 
     public TextureRegion getBridgeB() {
         return bridgeB;
+    }
+
+    public TextureRegion getBridgeC() {
+        return bridgeC;
     }
 }

@@ -71,8 +71,8 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
         b2body.setActive(false);
 
         // Textures
-        if (object.getProperties().containsKey(B2WorldCreator.KEY_BRIDGE_WOOD)) {
-            bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeA();
+        if (object.getProperties().containsKey(B2WorldCreator.KEY_BRIDGE_WOOD)) { // TODO
+            bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeC();
         } else {
             bridgeStand = Assets.getInstance().getKinematicBridge().getBridgeB();
         }
