@@ -2,20 +2,12 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
+ Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
 
-- en assetbridge poner 2 largos, uno para wood y el otro lo dejo como estaba.
-SI USO LAS FLORES NO NECESITO HACER ESTO!!!!! SOLO NECESITO 2 FLORES, LA QUE TENGO Y OTRA.
-ES MAS, PUEDO SACAR EL WOOD QUE ES FEO DE LAS IMAGENES.
-
-    // PARA EL WOOD Y ASI LOS PONGO CADA 6 CUADRADOS EN EL TILE
-    public static final float WIDTH_METERS = 32.0f * 5.8f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 32.0f * 5.8f / PlayScreen.PPM;
-- poner 2 hileras de ladrillos, SI USO FLORES NO NECESITO.
 - agrandar el margen de error de aplastamiento (VER ABAJO)
-- cambiar las explosiones de los enemigos 12.
 - al enemigo 3 definirle un parametro speedboost que multiplica su velocidad.
 
 HOY EN DIA EL HERO NO TIENE TOLERANCIA ANTE EL APLASTAMIENTO Y NO PUEDE TENERLA.
@@ -33,8 +25,6 @@ polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0,
 float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
 
 -USAR LOS ENEMIGOS 3 5 6 11
-- EN EL TILED EL BRIDGE TIENE UNA VARIABLE NUMERICA O ALGO, QUE DICE TIPO 1, 2, 3 Y ASI
-CARGO LA ROCA, MADERA O FLOR.
 
 HACER PRIORIDAD 1
 -----------------
