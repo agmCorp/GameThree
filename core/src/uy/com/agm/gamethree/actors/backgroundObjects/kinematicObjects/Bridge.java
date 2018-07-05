@@ -30,8 +30,8 @@ public class Bridge extends Sprite implements IAvoidLandingObject {
     private static final String TAG = Bridge.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float MIN_VELOCITY_X = -1.0f;
-    private static final float MAX_VELOCITY_X = -2.0f;
+    private static final float MIN_VELOCITY_X = 1.0f;
+    private static final float MAX_VELOCITY_X = 2.0f;
     private static final float VELOCITY_Y = 0.0f;
 
     private PlayScreen screen;

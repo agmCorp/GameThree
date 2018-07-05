@@ -26,7 +26,8 @@ public class EnemyThree extends Enemy {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 29.0f / PlayScreen.PPM;
-    private static final float VELOCITY_X = 1.0f;
+    private static final float MIN_VELOCITY_X = 1.0f;
+    private static final float MAX_VELOCITY_X = 2.0f;
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
     private static final float FIRE_DELAY_SECONDS = 4.0f;
@@ -49,7 +50,7 @@ public class EnemyThree extends Enemy {
 
         // Variables initialization
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-        velocity.set(VELOCITY_X, VELOCITY_Y);
+        velocity.set(MathUtils.randomSign() * MathUtils.random(MIN_VELOCITY_X, MAX_VELOCITY_X), VELOCITY_Y);
     }
 
     @Override
