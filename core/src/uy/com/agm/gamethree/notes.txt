@@ -9,6 +9,7 @@ PRIORIDADES PARA LIBERAR
 
 - agrandar el margen de error de aplastamiento (VER ABAJO)
 - al enemigo 3 definirle un parametro speedboost que multiplica su velocidad.
+- me faltan los path del nivel refrito y los obstacles. Luego meter enemigos y luego hacer el final.
 
 HOY EN DIA EL HERO NO TIENE TOLERANCIA ANTE EL APLASTAMIENTO Y NO PUEDE TENERLA.
 CUANDO SE DISPARA EL ENDCONTACT SE CONTROLA QUE EL SENSOR ESTE DEBAJO DEL EDGE SOLO PARA CONTROLAR EL CASO DE QUE
