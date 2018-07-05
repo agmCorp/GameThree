@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2480">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2535">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="4097" source="../levelTwo/background.tsx"/>
+ <tileset firstgid="8193" source="../levelThree/background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
    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
@@ -12,9 +13,9 @@
    eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
   </data>
  </layer>
- <layer name="barrier" width="15" height="250">
+ <layer name="barrier" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
+   eJzt2LcNA0EUQ8Ef3aVyhckVdq4wuYLEUOFuKswAL2EJrAIAAAAAgP8xDVVzWtKatqF9e6RneqV3+nRsu7Fqnw7pmE5j+3ZOl3RNt3Tv2KY0pyWtaevYAAAAAH75VfwqAAAAAC2+v+RKaw==
   </data>
  </layer>
  <layer name="staticBridge" width="15" height="250" locked="1">
@@ -22,7 +23,7 @@
    eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
   </data>
  </layer>
- <objectgroup name="border" locked="1">
+ <objectgroup name="border" visible="0" locked="1">
   <object id="5" name="left1" x="0" y="0" width="1" height="2000"/>
   <object id="1833" name="left2" x="0" y="2006" width="1" height="2000"/>
   <object id="1834" name="left3" x="0" y="4011.75" width="1" height="2000"/>
@@ -32,78 +33,139 @@
   <object id="1838" name="right3" x="479" y="4012.39" width="1" height="2000"/>
   <object id="1839" name="right4" x="479" y="6018.64" width="1" height="1980.42"/>
  </objectgroup>
- <objectgroup name="obstacle"/>
- <objectgroup name="path"/>
+ <objectgroup name="obstacle" visible="0"/>
+ <objectgroup name="path" visible="0"/>
  <objectgroup name="bridge">
-  <object id="2024" x="232" y="3357" width="36" height="36"/>
-  <object id="2025" x="262" y="3557" width="38" height="38"/>
-  <object id="2026" x="226" y="1065" width="30" height="30"/>
-  <object id="2442" x="221.333" y="5556.33" width="40" height="40"/>
   <object id="2444" x="162" y="7823" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2445" x="108" y="7640" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2446" x="319.333" y="7457" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2447" x="55.334" y="7274" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2448" x="275.667" y="7091" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2449" x="106.667" y="6908" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2450" x="301" y="6725" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2451" x="45.5" y="6542" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2452" x="335" y="6359" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2453" x="184" y="6176" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2454" x="386.5" y="5993" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
   <object id="2455" x="227" y="5810" width="40" height="40">
    <properties>
-    <property name="wood" value=""/>
+    <property name="bridgeType" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="2522" x="181" y="5453.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2523" x="127" y="5270.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2524" x="338.333" y="5087.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2525" x="74.334" y="4904.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2526" x="294.667" y="4721.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2527" x="125.667" y="4538.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2528" x="320" y="4355.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2529" x="64.5" y="4172.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2530" x="354" y="3989.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2531" x="203" y="3806.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2532" x="405.5" y="3623.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2533" x="246" y="3440.5" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2534" x="246" y="8006" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox"/>
- <objectgroup name="enemyOne"/>
- <objectgroup name="enemyTwo"/>
- <objectgroup name="enemyThree">
+ <objectgroup name="powerBox" visible="0"/>
+ <objectgroup name="enemyOne" visible="0"/>
+ <objectgroup name="enemyTwo" visible="0"/>
+ <objectgroup name="enemyThree" visible="0">
   <object id="2456" x="32" y="7264" width="32" height="32"/>
   <object id="2457" x="96" y="7328" width="32" height="32"/>
   <object id="2458" x="288" y="7296" width="32" height="32"/>
@@ -114,8 +176,8 @@
   <object id="2478" x="238.667" y="7537.33" width="32" height="32"/>
   <object id="2479" x="320" y="7650.67" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyFour"/>
- <objectgroup name="enemyFive">
+ <objectgroup name="enemyFour" visible="0"/>
+ <objectgroup name="enemyFive" visible="0">
   <object id="2462" x="256" y="6816" width="32" height="32"/>
   <object id="2463" x="96" y="6880" width="32" height="32"/>
   <object id="2464" x="224" y="6912" width="32" height="32"/>
@@ -125,20 +187,20 @@
   <object id="2475" x="93.3333" y="7090.67" width="32" height="32"/>
   <object id="2476" x="277.333" y="7170.67" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySix">
+ <objectgroup name="enemySix" visible="0">
   <object id="2468" x="416" y="6560" width="32" height="32"/>
   <object id="2469" x="32" y="6496" width="32" height="32"/>
   <object id="2470" x="256" y="6336" width="32" height="32"/>
   <object id="2471" x="128" y="6176" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySeven"/>
- <objectgroup name="enemyEight"/>
- <objectgroup name="enemyNine"/>
- <objectgroup name="enemyTen"/>
- <objectgroup name="enemyEleven">
+ <objectgroup name="enemySeven" visible="0"/>
+ <objectgroup name="enemyEight" visible="0"/>
+ <objectgroup name="enemyNine" visible="0"/>
+ <objectgroup name="enemyTen" visible="0"/>
+ <objectgroup name="enemyEleven" visible="0">
   <object id="2472" x="160" y="5760" width="32" height="32"/>
   <object id="2473" x="256" y="5920" width="32" height="32"/>
   <object id="2474" x="352" y="5632" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyTwelve"/>
+ <objectgroup name="enemyTwelve" visible="0"/>
 </map>

@@ -216,6 +216,7 @@ colSilverBullet (string): shuriken
 strength (int): dureza de la powerbox
 timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
 enemyBullet (string): indica si el enemigo dispara
+bridgeType (int): imagen para el bridge 1 bridgeA, 2 bridgeB, 3 bridgeC
 
 HERRAMIENTAS
 ------------

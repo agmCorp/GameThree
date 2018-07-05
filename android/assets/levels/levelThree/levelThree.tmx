@@ -124,12 +124,28 @@
  </objectgroup>
  <objectgroup name="path" locked="1"/>
  <objectgroup name="bridge" locked="1">
-  <object id="2024" x="232" y="3246" width="36" height="36"/>
-  <object id="2025" x="262" y="3446" width="38" height="38"/>
-  <object id="2026" x="226" y="954" width="30" height="30"/>
-  <object id="2027" x="216" y="5634" width="40" height="40"/>
+  <object id="2024" x="232" y="3246" width="36" height="36">
+   <properties>
+    <property name="bridgeType" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="2025" x="262" y="3446" width="38" height="38">
+   <properties>
+    <property name="bridgeType" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="2026" x="226" y="954" width="30" height="30">
+   <properties>
+    <property name="bridgeType" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="2027" x="216" y="5634" width="40" height="40">
+   <properties>
+    <property name="bridgeType" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="powerBox">
+ <objectgroup name="powerBox" locked="1">
   <object id="2481" x="160" y="5344" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -188,12 +204,12 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne"/>
- <objectgroup name="enemyTwo"/>
- <objectgroup name="enemyThree"/>
- <objectgroup name="enemyFour"/>
- <objectgroup name="enemyFive"/>
- <objectgroup name="enemySix">
+ <objectgroup name="enemyOne" locked="1"/>
+ <objectgroup name="enemyTwo" locked="1"/>
+ <objectgroup name="enemyThree" locked="1"/>
+ <objectgroup name="enemyFour" locked="1"/>
+ <objectgroup name="enemyFive" locked="1"/>
+ <objectgroup name="enemySix" locked="1">
   <object id="2478" x="32" y="899" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -211,9 +227,9 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven"/>
- <objectgroup name="enemyEight"/>
- <objectgroup name="enemyNine">
+ <objectgroup name="enemySeven" locked="1"/>
+ <objectgroup name="enemyEight" locked="1"/>
+ <objectgroup name="enemyNine" locked="1">
   <object id="2357" x="96" y="5888" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -337,7 +353,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyTen">
+ <objectgroup name="enemyTen" locked="1">
   <object id="2377" x="435" y="5376" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -493,7 +509,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyEleven">
+ <objectgroup name="enemyEleven" locked="1">
   <object id="2417" x="66.6667" y="3967.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -585,7 +601,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyTwelve">
+ <objectgroup name="enemyTwelve" locked="1">
   <object id="2297" x="418.667" y="7078.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>

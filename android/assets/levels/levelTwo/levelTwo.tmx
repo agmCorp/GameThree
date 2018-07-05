@@ -79,7 +79,7 @@
   <object id="1310" x="290" y="801.25" width="187" height="15.8333"/>
  </objectgroup>
  <objectgroup name="bridge" locked="1"/>
- <objectgroup name="powerBox">
+ <objectgroup name="powerBox" locked="1">
   <object id="1506" x="32" y="7232" width="32" height="32">
    <properties>
     <property name="powerTwo" type="int" value="15"/>
@@ -137,10 +137,10 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne"/>
- <objectgroup name="enemyTwo"/>
- <objectgroup name="enemyThree"/>
- <objectgroup name="enemyFour">
+ <objectgroup name="enemyOne" locked="1"/>
+ <objectgroup name="enemyTwo" locked="1"/>
+ <objectgroup name="enemyThree" locked="1"/>
+ <objectgroup name="enemyFour" locked="1">
   <object id="1508" x="368" y="5619" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -231,7 +231,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyFive">
+ <objectgroup name="enemyFive" locked="1">
   <object id="1643" x="82" y="4503.67" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -428,7 +428,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySix">
+ <objectgroup name="enemySix" locked="1">
   <object id="1808" x="96" y="1088" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -484,7 +484,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven">
+ <objectgroup name="enemySeven" locked="1">
   <object id="1461" x="30.6667" y="7098.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -669,7 +669,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyEight">
+ <objectgroup name="enemyEight" locked="1">
   <object id="1653" x="0" y="3264" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -898,8 +898,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyNine"/>
- <objectgroup name="enemyTen"/>
- <objectgroup name="enemyEleven"/>
- <objectgroup name="enemyTwelve"/>
+ <objectgroup name="enemyNine" locked="1"/>
+ <objectgroup name="enemyTen" locked="1"/>
+ <objectgroup name="enemyEleven" locked="1"/>
+ <objectgroup name="enemyTwelve" locked="1"/>
 </map>
