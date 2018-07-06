@@ -68,6 +68,16 @@ public class HeroDefaultShooting implements IShootStrategy {
         }
     }
 
+    @Override
+    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds) {
+        this.openFireTime = initialOpenFireTimeSeconds;
+    }
+
+    @Override
+    public void setFireDelay(float fireDelaySeconds) {
+        this.fireDelay = fireDelaySeconds;
+    }
+
     private void shootImp(float x, float y) {
         Hero hero = screen.getCreator().getHero();
 

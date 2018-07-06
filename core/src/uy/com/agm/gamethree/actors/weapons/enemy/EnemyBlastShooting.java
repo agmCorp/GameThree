@@ -54,6 +54,16 @@ public class EnemyBlastShooting implements IShootStrategy {
         }
     }
 
+    @Override
+    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds) {
+        this.openFireTime = initialOpenFireTimeSeconds;
+    }
+
+    @Override
+    public void setFireDelay(float fireDelaySeconds) {
+        this.fireDelay = fireDelaySeconds;
+    }
+
     private void shootImp(float x, float y) {
         float angle;
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();

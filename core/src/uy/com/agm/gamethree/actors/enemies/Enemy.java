@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -86,8 +87,15 @@ public abstract class Enemy extends Sprite {
         // Temporary GC friendly vector
         tmp = new Vector2();
 
-        // Fire property
-        openFire = object.getProperties().containsKey(B2WorldCreator.KEY_ENEMY_BULLET);
+        // Shoot properties
+        MapProperties mapProperties = object.getProperties();
+        openFire = mapProperties.containsKey(B2WorldCreator.KEY_ENEMY_BULLET);
+        if (mapProperties.containsKey(B2WorldCreator.KEY_INITIAL_OPEN_FIRE_TIME)) {
+            shootContext.setInitialOpenFireTime(mapProperties.get(B2WorldCreator.KEY_INITIAL_OPEN_FIRE_TIME, 0, Integer.class));
+        }
+        if (mapProperties.containsKey(B2WorldCreator.KEY_FIRE_DELAY)) {
+            shootContext.setFireDelay(mapProperties.get(B2WorldCreator.KEY_FIRE_DELAY, 0, Integer.class));
+        }
 
         // Get the rectangle drawn in TiledEditor (pixels)
         Rectangle rect = ((RectangleMapObject) object).getRectangle();

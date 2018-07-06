@@ -7,5 +7,6 @@ package uy.com.agm.gamethree.actors.weapons;
 public interface IShootStrategy {
     public void updateShoot(float dt);
     public void shoot(float x, float y);
-    public void setFireDelaySeconds(float initialOpenFireTime, float fireDelay);
+    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds);
+    public void setFireDelay(float fireDelaySeconds);
 }

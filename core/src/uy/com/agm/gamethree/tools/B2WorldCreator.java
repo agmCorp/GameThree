@@ -90,6 +90,8 @@ public class B2WorldCreator {
     public static final String KEY_STRENGTH = "strength";
     public static final String KEY_TIMES_IT_FREEZE = "timesItFreeze";
     public static final String KEY_ENEMY_BULLET = "enemyBullet";
+    public static final String KEY_INITIAL_OPEN_FIRE_TIME = "initialOpenFireTime";
+    public static final String KEY_FIRE_DELAY = "fireDelay";
     public static final String KEY_ENEMY_SEVEN = "enemySeven";
     public static final String KEY_BRIDGE_TYPE = "bridgeType";
 

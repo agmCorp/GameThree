@@ -24,4 +24,12 @@ public class ShootContext {
     public void shoot(float x, float y) {
         shootStrategy.shoot(x, y);
     }
+
+    public void setInitialOpenFireTime(float initialOpenFireTime) {
+        shootStrategy.setInitialOpenFireTime(initialOpenFireTime);
+    }
+
+    public void setFireDelay(float fireDelay) {
+        shootStrategy.setFireDelay(fireDelay);
+    }
 }

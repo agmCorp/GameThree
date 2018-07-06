@@ -57,6 +57,16 @@ public class EnemyHalfMoonShooting implements IShootStrategy {
         }
     }
 
+    @Override
+    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds) {
+        this.openFireTime = initialOpenFireTimeSeconds;
+    }
+
+    @Override
+    public void setFireDelay(float fireDelaySeconds) {
+        this.fireDelay = fireDelaySeconds;
+    }
+
     private void shootImp(float x, float y) {
         float directionDegrees = 180.0f / (numberBullets + 1);
         float angle;

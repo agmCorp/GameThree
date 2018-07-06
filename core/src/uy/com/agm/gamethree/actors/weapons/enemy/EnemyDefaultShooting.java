@@ -55,6 +55,16 @@ public class EnemyDefaultShooting implements IShootStrategy {
         }
     }
 
+    @Override
+    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds) {
+        this.openFireTime = initialOpenFireTimeSeconds;
+    }
+
+    @Override
+    public void setFireDelay(float fireDelaySeconds) {
+        this.fireDelay = fireDelaySeconds;
+    }
+
     private void shootImp(float x, float y) {
         // Move EnemyBullet from Enemy to Hero
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
