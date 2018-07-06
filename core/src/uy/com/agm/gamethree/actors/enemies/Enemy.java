@@ -90,8 +90,8 @@ public abstract class Enemy extends Sprite {
         // Shoot properties
         MapProperties mapProperties = object.getProperties();
         openFire = mapProperties.containsKey(B2WorldCreator.KEY_ENEMY_BULLET);
-        if (mapProperties.containsKey(B2WorldCreator.KEY_INITIAL_OPEN_FIRE_TIME)) {
-            shootContext.setInitialOpenFireTime(mapProperties.get(B2WorldCreator.KEY_INITIAL_OPEN_FIRE_TIME, 0, Integer.class));
+        if (mapProperties.containsKey(B2WorldCreator.KEY_SHOOT_WHEN_VISIBLE)) {
+            shootContext.shootWhenVisible();
         }
         if (mapProperties.containsKey(B2WorldCreator.KEY_FIRE_DELAY)) {
             shootContext.setFireDelay(mapProperties.get(B2WorldCreator.KEY_FIRE_DELAY, 0, Integer.class));

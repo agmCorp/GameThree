@@ -22,7 +22,7 @@
    eJztwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAMA3OpgAAQ==
   </data>
  </layer>
- <objectgroup name="border" visible="0" locked="1">
+ <objectgroup name="border" locked="1">
   <object id="5" name="left1" x="0" y="0" width="1" height="2000"/>
   <object id="1833" name="left2" x="0" y="2006" width="1" height="2000"/>
   <object id="1834" name="left3" x="0" y="4011.75" width="1" height="2000"/>
@@ -32,7 +32,7 @@
   <object id="1838" name="right3" x="479" y="4012.39" width="1" height="2000"/>
   <object id="1839" name="right4" x="479" y="6018.64" width="1" height="1980.42"/>
  </objectgroup>
- <objectgroup name="obstacle" visible="0" locked="1">
+ <objectgroup name="obstacle" locked="1">
   <object id="2535" x="289" y="819" width="188.5" height="12"/>
   <object id="2539" x="289.5" y="801.5" width="187.5" height="14.5"/>
   <object id="2541" x="2.25" y="819.75" width="188.5" height="12"/>
@@ -47,8 +47,8 @@
   <object id="2552" x="6.5" y="1871" width="53" height="116"/>
   <object id="2553" x="5.5" y="2680" width="53" height="116"/>
  </objectgroup>
- <objectgroup name="path" visible="0" locked="1"/>
- <objectgroup name="bridge" visible="0" locked="1">
+ <objectgroup name="path" locked="1"/>
+ <objectgroup name="bridge" locked="1">
   <object id="2444" x="162" y="7823" width="40" height="40">
    <properties>
     <property name="bridgeType" type="int" value="3"/>
@@ -175,8 +175,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox" visible="0"/>
- <objectgroup name="enemyOne" visible="0">
+ <objectgroup name="powerBox"/>
+ <objectgroup name="enemyOne">
   <object id="2600" x="64" y="2912" width="32" height="32"/>
   <object id="2601" x="128" y="2880" width="32" height="32"/>
   <object id="2602" x="64" y="2816" width="32" height="32"/>
@@ -219,7 +219,7 @@
   <object id="2641" x="352" y="896" width="32" height="32"/>
   <object id="2642" x="256" y="1344" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyTwo" visible="0">
+ <objectgroup name="enemyTwo">
   <object id="2643" x="32" y="2400" width="32" height="32"/>
   <object id="2644" x="32" y="2464" width="32" height="32"/>
   <object id="2645" x="32" y="2528" width="32" height="32"/>
@@ -240,6 +240,7 @@
   <object id="2697" x="32" y="6464" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2698" x="32" y="6560" width="32" height="32"/>
@@ -253,6 +254,7 @@
   <object id="2706" x="426" y="6100" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2707" x="426" y="6196" width="32" height="32"/>
@@ -288,7 +290,7 @@
   <object id="2478" x="238.667" y="7179.33" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
-    <property name="initialOpenFireTime" type="int" value="0"/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2479" x="320" y="7292.67" width="32" height="32"/>
@@ -298,7 +300,7 @@
   <object id="2559" x="188" y="6892" width="32" height="32">
    <properties>
     <property name="enemyBulllet" value=""/>
-    <property name="initialOpenFireTime" type="int" value="0"/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2560" x="96" y="6776" width="32" height="32"/>
@@ -312,7 +314,7 @@
   <object id="2568" x="230" y="6142" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
-    <property name="initialOpenFireTime" type="int" value="0"/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2569" x="300" y="5994" width="32" height="32"/>
@@ -323,12 +325,12 @@
   <object id="2576" x="364" y="5720" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
-    <property name="initialOpenFireTime" type="int" value="0"/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyFour" visible="0"/>
- <objectgroup name="enemyFive" visible="0">
+ <objectgroup name="enemyFour"/>
+ <objectgroup name="enemyFive">
   <object id="2462" x="256" y="6411" width="32" height="32"/>
   <object id="2463" x="96" y="6475" width="32" height="32"/>
   <object id="2464" x="224" y="6507" width="32" height="32">
@@ -352,7 +354,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySix" visible="0">
+ <objectgroup name="enemySix">
   <object id="2468" x="416" y="6705" width="32" height="32"/>
   <object id="2469" x="32" y="6641" width="32" height="32"/>
   <object id="2470" x="256" y="6481" width="32" height="32"/>
@@ -362,7 +364,7 @@
   <object id="2579" x="25" y="4545" width="32" height="32"/>
   <object id="2581" x="424" y="4833" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemySeven" visible="0">
+ <objectgroup name="enemySeven">
   <object id="2658" x="96" y="1024" width="32" height="32"/>
   <object id="2659" x="192" y="1088" width="32" height="32"/>
   <object id="2660" x="160" y="1248" width="32" height="32"/>
@@ -403,16 +405,18 @@
   <object id="2744" x="448" y="1120" width="32" height="32"/>
   <object id="2745" x="448" y="1248" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyEight" visible="0">
+ <objectgroup name="enemyEight">
   <object id="2588" x="0" y="3968" width="32" height="32"/>
   <object id="2589" x="0" y="3904" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2590" x="448" y="3552" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
   <object id="2591" x="448" y="3488" width="32" height="32"/>
@@ -424,9 +428,9 @@
   <object id="2598" x="6" y="3461" width="32" height="32"/>
   <object id="2599" x="6" y="3397" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyNine" visible="0"/>
- <objectgroup name="enemyTen" visible="0"/>
- <objectgroup name="enemyEleven" visible="0">
+ <objectgroup name="enemyNine"/>
+ <objectgroup name="enemyTen"/>
+ <objectgroup name="enemyEleven">
   <object id="2472" x="160" y="4764" width="32" height="32"/>
   <object id="2473" x="256" y="4924" width="32" height="32"/>
   <object id="2474" x="352" y="4636" width="32" height="32"/>
@@ -435,7 +439,7 @@
   <object id="2582" x="85" y="4193" width="32" height="32"/>
   <object id="2587" x="93" y="5053" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="enemyTwelve" visible="0">
+ <objectgroup name="enemyTwelve">
   <object id="2677" x="128" y="1184" width="32" height="32"/>
   <object id="2678" x="384" y="1184" width="32" height="32"/>
   <object id="2679" x="320" y="1248" width="32" height="32"/>

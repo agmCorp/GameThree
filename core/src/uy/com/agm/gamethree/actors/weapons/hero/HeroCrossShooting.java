@@ -70,8 +70,8 @@ public class HeroCrossShooting implements IShootStrategy {
     }
 
     @Override
-    public void setInitialOpenFireTime(float initialOpenFireTimeSeconds) {
-        this.openFireTime = initialOpenFireTimeSeconds;
+    public void shootWhenVisible() {
+        this.openFireTime = fireDelay;
     }
 
     @Override
