@@ -3,29 +3,13 @@ PRIORIDADES PARA LIBERAR
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
  Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
+ Imprescindible explicar los skulls.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 - hacer un nivel mas de refritos
-
 - agrandar el margen de error de aplastamiento (VER ABAJO)
-- al enemigo 3 definirle un parametro speedboost que multiplica su velocidad.
-- me faltan los path del nivel refrito y los obstacles. Luego meter enemigos y luego hacer el final.
-
-HOY EN DIA EL HERO NO TIENE TOLERANCIA ANTE EL APLASTAMIENTO Y NO PUEDE TENERLA.
-CUANDO SE DISPARA EL ENDCONTACT SE CONTROLA QUE EL SENSOR ESTE DEBAJO DEL EDGE SOLO PARA CONTROLAR EL CASO DE QUE
-REBOTO SOBRE EL EDGE CUANDO JUEGO NORMALMENE.
-SI EL SENSOR ESTA DEBAJO Y HUBO ENDCONCTACT ENTONCES FUE APLASTADO.
-PARA DARLE TOLERANCIA A ESO, PUEDO PONER EL SENSOR DENTRO DEL CIRCULO DE HERO.
-ACA LE DOY ALGO DE TOLERANCIA, PERO SI LE DOY MUCHA SE TRABA TODO Y HACE BIPS.
-
-private static final float SENSOR_HEIGHT_METERS = 0.03f; // The thinner the better todo
-private static final float SENSOR_OFFSET_METERS = 0.03f;
-
-polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS + SENSOR_OFFSET_METERS), 0);
-
-float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
-
--USAR LOS ENEMIGOS 3 5 6 11
+- al enemigo 3 definirle un parametro speedboost que multiplica su velocidad o su frecuencia de disparo.
+- del nivel final falta: powerboxes, coins, vidas, shurikens y luego enemigo final.
 
 HACER PRIORIDAD 1
 -----------------
