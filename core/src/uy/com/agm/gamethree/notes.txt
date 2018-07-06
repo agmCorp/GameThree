@@ -1,5 +1,8 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
+LO QUE HICE FUE EN EL ISHOOTSTATEGY AGREGAR UN SET DE LOS TIEMPOS DE DISPARO A IMPLEMENTAR EN TODOS LADOS.
+LA IDEA ES EN ENEMY USAR ESE SET SEGUN ALGUNA PROPERTY. USAR 2 PROPERTIES SUPONGO...NOSE BIEN...
+
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
  Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
