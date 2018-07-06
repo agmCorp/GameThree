@@ -209,7 +209,7 @@ colThree (string): vida extra
 colSilverBullet (string): shuriken
 
 strength (int): dureza de la powerbox
-timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour.
+timesItFreeze (int): indica cuantas veces se puede congelar el enemyFour
 enemyBullet (string): indica si el enemigo dispara
 shootWhenVisible (string): dispara al aparecer en camara
 fireDelay (int): demora entre disparos
