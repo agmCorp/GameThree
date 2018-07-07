@@ -19,7 +19,8 @@ public class AssetSounds {
     private Sound dead;
     private Sound enemyShoot;
     private Sound heroShoot;
-    private Sound shoot;
+    private Sound blastShoot;
+    private Sound energyBallShoot;
     private Sound heroShootEmpty;
     private Sound heroShootSwish;
     private Sound hit;
@@ -87,7 +88,8 @@ public class AssetSounds {
         dead = am.get(Assets.FX_FILE_DEAD, Sound.class);
         enemyShoot = am.get(Assets.FX_FILE_ENEMY_SHOOT, Sound.class);
         heroShoot = am.get(Assets.FX_FILE_HERO_SHOOT, Sound.class);
-        shoot = am.get(Assets.FX_FILE_SHOOT, Sound.class);
+        blastShoot = am.get(Assets.FX_FILE_BLAST_SHOOT, Sound.class);
+        energyBallShoot = am.get(Assets.FX_FILE_ENERGY_BALL_SHOOT, Sound.class);
         heroShootEmpty = am.get(Assets.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         heroShootSwish = am.get(Assets.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         hit = am.get(Assets.FX_FILE_HIT, Sound.class);
@@ -176,8 +178,12 @@ public class AssetSounds {
         return heroShoot;
     }
 
-    public Sound getShoot() {
-        return shoot;
+    public Sound getBlastShoot() {
+        return blastShoot;
+    }
+
+    public Sound getEnergyBallShoot() {
+        return energyBallShoot;
     }
 
     public Sound getHeroShootEmpty() {

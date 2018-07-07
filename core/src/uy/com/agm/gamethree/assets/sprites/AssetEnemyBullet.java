@@ -15,8 +15,8 @@ public class AssetEnemyBullet {
     private static final String TAG = AssetEnemyBullet.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 192.0f * 0.3f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 192.0f  * 0.3f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 40.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 100.0f  * 0.8f / PlayScreen.PPM;
     public static final float MUZZLE_FLASH_WIDTH_METERS = 192.0f * 0.6f / PlayScreen.PPM;
     public static final float MUZZLE_FLASH_HEIGHT_METERS = 192.0f * 0.6f / PlayScreen.PPM;
 
@@ -34,7 +34,7 @@ public class AssetEnemyBullet {
 
         // Animation
         regions = atlas.findRegions("enemyBullet");
-        enemyBulletAnimation = new Animation(0.5f / 10.0f, regions, Animation.PlayMode.LOOP);
+        enemyBulletAnimation = new Animation(0.3f / 3.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

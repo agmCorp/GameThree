@@ -70,11 +70,15 @@ public class EnemyDefaultShooting implements IShootStrategy {
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
         tmp.set(x, y);
         Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, DEFAULT_BULLET_LINEAR_VELOCITY);
+
+        float angle = tmp.angle();
+        angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
+
         screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
                 AssetEnemyBullet.WIDTH_METERS,
                 AssetEnemyBullet.HEIGHT_METERS,
                 DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS,
-                0,
+                angle,
                 tmp.x,
                 tmp.y,
                 enemyBulletAnimation)));

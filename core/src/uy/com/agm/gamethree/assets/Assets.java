@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetBulletB;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletD;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletE;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletF;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetColThree;
 import uy.com.agm.gamethree.assets.sprites.AssetColTwo;
@@ -92,7 +93,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_DEAD = "audio/sounds/dead.ogg";
     public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
-    public static final String FX_FILE_SHOOT = "audio/sounds/shoot.ogg";
+    public static final String FX_FILE_BLAST_SHOOT = "audio/sounds/blastShoot.ogg";
+    public static final String FX_FILE_ENERGY_BALL_SHOOT = "audio/sounds/energyBall.ogg";
     public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/ohoh.ogg";
     public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
@@ -227,6 +229,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetBulletC bulletC;
     private AssetBulletD bulletD;
     private AssetBulletE bulletE;
+    private AssetBulletF bulletF;
     private AssetToughMode toughMode;
     private AssetFinalEnemyLevelOne finalEnemyLevelOne;
     private AssetFinalEnemyLevelTwo finalEnemyLevelTwo;
@@ -346,6 +349,7 @@ public class Assets implements Disposable, AssetErrorListener {
         bulletC = new AssetBulletC(atlasDynamicObjects);
         bulletD = new AssetBulletD(atlasDynamicObjects);
         bulletE = new AssetBulletE(atlasDynamicObjects);
+        bulletF = new AssetBulletF(atlasDynamicObjects);
         toughMode = new AssetToughMode(atlasDynamicObjects);
         finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDynamicObjects);
         finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDynamicObjects);
@@ -383,7 +387,8 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_DEAD, Sound.class);
         assetManager.load(FX_FILE_ENEMY_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT, Sound.class);
-        assetManager.load(FX_FILE_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_BLAST_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_ENERGY_BALL_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         assetManager.load(FX_FILE_HIT, Sound.class);
@@ -675,6 +680,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetBulletE getBulletE() {
         return bulletE;
+    }
+
+    public AssetBulletF getBulletF() {
+        return bulletF;
     }
 
     public AssetToughMode getToughMode() {

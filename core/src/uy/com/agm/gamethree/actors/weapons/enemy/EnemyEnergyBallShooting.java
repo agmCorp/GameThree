@@ -15,12 +15,12 @@ import uy.com.agm.gamethree.tools.Vector2Util;
  * Created by amorales on 5/3/2018.
  */
 
-public class EnemyBlastShooting implements IShootStrategy {
-    private static final String TAG = EnemyBlastShooting.class.getName();
+public class EnemyEnergyBallShooting implements IShootStrategy {
+    private static final String TAG = EnemyEnergyBallShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
-    private static final float BLAST_LINEAR_VELOCITY = 2.0f;
+    private static final float ENERGY_BALL_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
     private float openFireTime;
@@ -29,7 +29,7 @@ public class EnemyBlastShooting implements IShootStrategy {
 
     private Animation bulletAnimation;
 
-    public EnemyBlastShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
+    public EnemyEnergyBallShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
         this.screen = screen;
         this.openFireTime = initialOpenFireTime;
         this.fireDelay = fireDelay;
@@ -38,7 +38,7 @@ public class EnemyBlastShooting implements IShootStrategy {
         tmp = new Vector2();
 
         // Animations
-        bulletAnimation = Assets.getInstance().getBulletD().getBulletDAnimation();
+        bulletAnimation = Assets.getInstance().getBulletF().getBulletFAnimation();
     }
 
     @Override
@@ -65,29 +65,23 @@ public class EnemyBlastShooting implements IShootStrategy {
     }
 
     private void shootImp(float x, float y) {
-        float angle;
+        // Move EnemyBullet from Enemy to Hero
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, BLAST_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, ENERGY_BALL_LINEAR_VELOCITY);
 
-        for(int i = 0; i < 4; i++) {
-            if (i > 0) {
-                tmp.rotate(90);
-            }
-            angle = tmp.angle();
-            angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
+        float angle = tmp.angle();
+        angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
-            screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
-                    AssetBulletC.WIDTH_METERS,
-                    AssetBulletC.HEIGHT_METERS,
-                    CIRCLE_SHAPE_RADIUS_METERS,
-                    angle,
-                    tmp.x,
-                    tmp.y,
-                    bulletAnimation)));
-        }
-
+        screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
+                AssetBulletC.WIDTH_METERS,
+                AssetBulletC.HEIGHT_METERS,
+                CIRCLE_SHAPE_RADIUS_METERS,
+                angle,
+                tmp.x,
+                tmp.y,
+                bulletAnimation)));
         // Sound FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBlastShoot());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnergyBallShoot());
     }
 }

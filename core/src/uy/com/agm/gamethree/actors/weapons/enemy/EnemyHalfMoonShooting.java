@@ -85,7 +85,7 @@ public class EnemyHalfMoonShooting implements IShootStrategy {
                     bulletAnimation);
 
             // Sound FX
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getShoot());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBlastShoot());
         }
     }
 
