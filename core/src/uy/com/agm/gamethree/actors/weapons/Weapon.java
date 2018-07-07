@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.weapons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -59,12 +60,14 @@ public abstract class Weapon extends Sprite {
         if (!isDestroyed()) {
             float upperEdge = screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2;
             float bottomEdge = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 2;
+            float weaponCenter = b2body.getPosition().y;
 
-            if (!(bottomEdge <= getY() + getHeight() && getY() <= upperEdge)) {
+            if (!(bottomEdge <= weaponCenter && weaponCenter <= upperEdge)) {
                 if(!world.isLocked()) {
                     world.destroyBody(b2body);
                 }
                 currentState = State.FINISHED;
+                Gdx.app.debug(TAG, "DESTRUYO**************************");
             }
         }
     }

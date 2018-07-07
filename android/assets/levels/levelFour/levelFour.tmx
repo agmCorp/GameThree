@@ -48,7 +48,7 @@
   <object id="2553" x="5.5" y="2680" width="53" height="116"/>
  </objectgroup>
  <objectgroup name="path" visible="0" locked="1"/>
- <objectgroup name="bridge" visible="0" locked="1">
+ <objectgroup name="bridge" locked="1">
   <object id="2444" x="162" y="7823" width="40" height="40">
    <properties>
     <property name="bridgeType" type="int" value="3"/>
@@ -175,20 +175,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox">
-  <object id="2764" x="160" y="6688" width="32" height="32">
-   <properties>
-    <property name="powerFour" type="int" value="500"/>
-    <property name="powerThree" type="int" value="500"/>
-   </properties>
-  </object>
-  <object id="2765" x="288" y="7052" width="32" height="32">
-   <properties>
-    <property name="powerFour" type="int" value="500"/>
-    <property name="powerThree" type="int" value="500"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="powerBox"/>
  <objectgroup name="enemyOne" visible="0">
   <object id="2600" x="64" y="2912" width="32" height="32"/>
   <object id="2601" x="128" y="2880" width="32" height="32"/>
@@ -343,7 +330,7 @@
   </object>
  </objectgroup>
  <objectgroup name="enemyFour" visible="0"/>
- <objectgroup name="enemyFive">
+ <objectgroup name="enemyFive" visible="0">
   <object id="2462" x="256" y="6411" width="32" height="32"/>
   <object id="2463" x="96" y="6475" width="32" height="32"/>
   <object id="2464" x="224" y="6507" width="32" height="32">
@@ -370,7 +357,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySix">
+ <objectgroup name="enemySix" visible="0">
   <object id="2468" x="416" y="6705" width="32" height="32"/>
   <object id="2469" x="32" y="6641" width="32" height="32"/>
   <object id="2470" x="256" y="6481" width="32" height="32"/>
@@ -447,15 +434,31 @@
  <objectgroup name="enemyNine" visible="0"/>
  <objectgroup name="enemyTen" visible="0"/>
  <objectgroup name="enemyEleven">
-  <object id="2472" x="160" y="4764" width="32" height="32"/>
+  <object id="2472" x="160" y="4764" width="32" height="32">
+   <properties>
+    <property name="powerTwo" type="int" value="10"/>
+   </properties>
+  </object>
   <object id="2473" x="256" y="4924" width="32" height="32"/>
-  <object id="2474" x="352" y="4636" width="32" height="32"/>
+  <object id="2474" x="352" y="4636" width="32" height="32">
+   <properties>
+    <property name="powerFive" type="int" value="20"/>
+   </properties>
+  </object>
   <object id="2577" x="167" y="4505" width="32" height="32"/>
-  <object id="2578" x="251" y="4347" width="32" height="32"/>
+  <object id="2578" x="251" y="4347" width="32" height="32">
+   <properties>
+    <property name="powerTwo" type="int" value="10"/>
+   </properties>
+  </object>
   <object id="2582" x="85" y="4193" width="32" height="32"/>
-  <object id="2587" x="93" y="5053" width="32" height="32"/>
+  <object id="2587" x="93" y="5053" width="32" height="32">
+   <properties>
+    <property name="powerTwo" type="int" value="15"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="enemyTwelve">
+ <objectgroup name="enemyTwelve" visible="0">
   <object id="2677" x="128" y="1184" width="32" height="32"/>
   <object id="2678" x="384" y="1184" width="32" height="32"/>
   <object id="2679" x="320" y="1248" width="32" height="32"/>
