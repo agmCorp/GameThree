@@ -525,9 +525,11 @@ public class Hud extends AbstractScreen {
     }
 
     public void decreaseSkulls(int quantity) {
-        skulls -= quantity;
-        if (skulls >= 0) {
-            skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+        if (!DebugConstants.DISABLE_SKULL_COUNT) {
+            skulls -= quantity;
+            if (skulls >= 0) {
+                skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+            }
         }
     }
 

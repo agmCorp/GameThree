@@ -22,7 +22,10 @@ public class DebugConstants {
     public static final boolean DEBUG_LEVELS = true;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 75.0f;
+    public static final float GAME_CAM_Y_METERS = 70.0f;
+
+    // When it's true, skull count is ignored
+    public static final boolean DISABLE_SKULL_COUNT = false;
 
     // Freezes the camera
     public static final boolean STATIC_GAME_CAM = false;
