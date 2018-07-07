@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetBulletC;
+import uy.com.agm.gamethree.assets.sprites.AssetBulletF;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -19,7 +19,7 @@ public class EnemyEnergyBallShooting implements IShootStrategy {
     private static final String TAG = EnemyEnergyBallShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
     private static final float ENERGY_BALL_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
@@ -74,8 +74,8 @@ public class EnemyEnergyBallShooting implements IShootStrategy {
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
 
         screen.getCreator().createGameThreeActor(new ActorDef(new EnemyBullet(screen, x, y,
-                AssetBulletC.WIDTH_METERS,
-                AssetBulletC.HEIGHT_METERS,
+                AssetBulletF.WIDTH_METERS,
+                AssetBulletF.HEIGHT_METERS,
                 CIRCLE_SHAPE_RADIUS_METERS,
                 angle,
                 tmp.x,

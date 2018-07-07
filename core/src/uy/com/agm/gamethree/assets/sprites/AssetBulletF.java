@@ -15,8 +15,8 @@ public class AssetBulletF {
     private static final String TAG = AssetBulletF.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 192.0f * 0.5f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 192.0f  * 0.5f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 192.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 192.0f  * 0.8f / PlayScreen.PPM;
 
     private TextureRegion bulletFStand;
     private Animation bulletFAnimation;

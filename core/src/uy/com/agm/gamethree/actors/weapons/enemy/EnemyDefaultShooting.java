@@ -1,12 +1,13 @@
 package uy.com.agm.gamethree.actors.weapons.enemy;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
+import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.tools.ActorDef;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -50,6 +51,8 @@ public class EnemyDefaultShooting implements IShootStrategy {
     @Override
     public void shoot(float x, float y) {
         if (openFireTime > fireDelay) {
+            Gdx.app.debug(TAG, "*****************DISPARO"); // todo
+
             shootImp(x, y);
             openFireTime = 0;
         }
