@@ -50,7 +50,7 @@ public class EnemyThree extends Enemy {
 
         // Variables initialization
         stateTime = MathUtils.random(0, enemyThreeAnimation.getAnimationDuration()); // To blink untimely with others
-        velocity.set(MathUtils.randomSign() * MathUtils.random(MIN_VELOCITY_X, MAX_VELOCITY_X), VELOCITY_Y);
+        //todo velocity.set(MathUtils.randomSign() * MathUtils.random(MIN_VELOCITY_X, MAX_VELOCITY_X), VELOCITY_Y);
     }
 
     @Override

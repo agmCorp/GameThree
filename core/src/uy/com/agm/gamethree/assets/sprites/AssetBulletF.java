@@ -15,8 +15,8 @@ public class AssetBulletF {
     private static final String TAG = AssetBulletF.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 192.0f * 0.8f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 192.0f  * 0.8f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 40.0f * 0.8f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 100.0f  * 0.8f / PlayScreen.PPM;
 
     private TextureRegion bulletFStand;
     private Animation bulletFAnimation;
@@ -28,7 +28,7 @@ public class AssetBulletF {
 
         // Animation
         regions = atlas.findRegions("bulletF");
-        bulletFAnimation = new Animation(0.5f / 10.0f, regions, Animation.PlayMode.LOOP);
+        bulletFAnimation = new Animation(0.3f / 3.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

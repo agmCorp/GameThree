@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyEnergyBallShooting;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemyRocketShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
@@ -255,7 +255,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyEnergyBallShooting(screen, 0, FIRE_DELAY_SECONDS);
+        return new EnemyRocketShooting(screen, 0, FIRE_DELAY_SECONDS);
     }
 
     @Override

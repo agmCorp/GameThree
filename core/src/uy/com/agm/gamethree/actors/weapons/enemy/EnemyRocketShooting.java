@@ -15,12 +15,12 @@ import uy.com.agm.gamethree.tools.Vector2Util;
  * Created by amorales on 5/3/2018.
  */
 
-public class EnemyEnergyBallShooting implements IShootStrategy {
-    private static final String TAG = EnemyEnergyBallShooting.class.getName();
+public class EnemyRocketShooting implements IShootStrategy {
+    private static final String TAG = EnemyRocketShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
-    private static final float ENERGY_BALL_LINEAR_VELOCITY = 2.0f;
+    private static final float ROCKET_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
     private float openFireTime;
@@ -29,7 +29,7 @@ public class EnemyEnergyBallShooting implements IShootStrategy {
 
     private Animation bulletAnimation;
 
-    public EnemyEnergyBallShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
+    public EnemyRocketShooting(PlayScreen screen, float initialOpenFireTime, float fireDelay) {
         this.screen = screen;
         this.openFireTime = initialOpenFireTime;
         this.fireDelay = fireDelay;
@@ -68,7 +68,7 @@ public class EnemyEnergyBallShooting implements IShootStrategy {
         // Move EnemyBullet from Enemy to Hero
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
         tmp.set(x, y);
-        Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, ENERGY_BALL_LINEAR_VELOCITY);
+        Vector2Util.goToTarget(tmp, heroPosition.x, heroPosition.y, ROCKET_LINEAR_VELOCITY);
 
         float angle = tmp.angle();
         angle = (angle >= 90.0f) ? angle - 90.0f : 270.0f + angle;
@@ -82,6 +82,6 @@ public class EnemyEnergyBallShooting implements IShootStrategy {
                 tmp.y,
                 bulletAnimation)));
         // Sound FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnergyBallShoot());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getRocketShoot());
     }
 }

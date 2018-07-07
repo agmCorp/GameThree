@@ -94,7 +94,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_ENEMY_SHOOT = "audio/sounds/enemyShoot.ogg";
     public static final String FX_FILE_HERO_SHOOT = "audio/sounds/heroShoot.ogg";
     public static final String FX_FILE_BLAST_SHOOT = "audio/sounds/blastShoot.ogg";
-    public static final String FX_FILE_ENERGY_BALL_SHOOT = "audio/sounds/energyBall.ogg";
+    public static final String FX_FILE_ROCKET_SHOOT = "audio/sounds/rocket.ogg";
     public static final String FX_FILE_HERO_SHOOT_EMPTY = "audio/sounds/ohoh.ogg";
     public static final String FX_FILE_HERO_SHOOT_SWISH = "audio/sounds/multiSwish.ogg";
     public static final String FX_FILE_HIT = "audio/sounds/hit.ogg";
@@ -388,7 +388,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_ENEMY_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT, Sound.class);
         assetManager.load(FX_FILE_BLAST_SHOOT, Sound.class);
-        assetManager.load(FX_FILE_ENERGY_BALL_SHOOT, Sound.class);
+        assetManager.load(FX_FILE_ROCKET_SHOOT, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         assetManager.load(FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         assetManager.load(FX_FILE_HIT, Sound.class);
