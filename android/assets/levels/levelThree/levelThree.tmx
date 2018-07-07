@@ -144,7 +144,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox" locked="1">
+ <objectgroup name="powerBox">
   <object id="2481" x="160" y="5344" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -181,7 +181,6 @@
   <object id="2487" x="161" y="2960" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
-    <property name="colTwo" value=""/>
    </properties>
   </object>
   <object id="2488" x="221" y="5860" width="32" height="32">
@@ -512,6 +511,7 @@
   <object id="2417" x="66.6667" y="3967.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colTwo" value=""/>
    </properties>
   </object>
   <object id="2418" x="348" y="4450" width="32" height="32">
@@ -525,7 +525,11 @@
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2421" x="65.3333" y="4354.33" width="32" height="32"/>
+  <object id="2421" x="65.3333" y="4354.33" width="32" height="32">
+   <properties>
+    <property name="colTwo" value=""/>
+   </properties>
+  </object>
   <object id="2422" x="386.667" y="3754" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>

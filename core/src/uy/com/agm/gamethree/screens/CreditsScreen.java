@@ -22,7 +22,7 @@ public class CreditsScreen extends AbstractScreen {
     private static final String TAG = CreditsScreen.class.getName();
 
     // Constants
-    private static final float MSG_PAD_LEFT = 15.0f;
+    private static final float MSG_PAD_LEFT = 18.0f;
     private static final float MSG_WIDTH = 430.0f;
 
     public CreditsScreen() {
@@ -48,8 +48,8 @@ public class CreditsScreen extends AbstractScreen {
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_MODE);
 
-        // Center-Align table
-        table.center();
+        // Top-Align table
+        table.top().padTop(AbstractScreen.PAD * 3);
 
         // Make the table fill the entire stage
         table.setFillParent(true);

@@ -17,6 +17,8 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- cambiar las imagenes en hithub de mi proyecto
+- en el nivel 3 las balas siguen desapareciendo, capaz que es porque chocan contra obstaculos.
 - agregar escudo en los enemigos rocosos porque son jodidos.
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
