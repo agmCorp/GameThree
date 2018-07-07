@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelFour;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelOne;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelTwo;
@@ -61,11 +62,11 @@ public class LevelFactory {
                                 screen.getGameViewPort().getWorldHeight() / 2 -
                                 AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
                 break;
-            case 4:
-                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
+            case 4: // todo ojo poner four
+                finalEnemy = new FinalEnemyLevelFour(screen, screen.getGameCam().position.x -
+                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             default:
                 finalEnemy = null;
