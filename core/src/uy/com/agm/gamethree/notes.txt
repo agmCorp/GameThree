@@ -17,19 +17,14 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- cambiar las imagenes en hithub de mi proyecto
-- en el nivel 3 las balas siguen desapareciendo, capaz que es porque chocan contra obstaculos.
-- agregar escudo en los enemigos rocosos porque son jodidos.
+- cambiar las imagenes en hithub de mi proyecto.
+- me faltan las monedas y los silver y el enemigofinal4.
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
  Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
  Imprescindible explicar los skulls.
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
-- hacer un nivel mas de refritos
-- agrandar el margen de error de aplastamiento (VER ABAJO)
-- al enemigo 3 definirle un parametro speedboost que multiplica su velocidad o su frecuencia de disparo.
-- del nivel final falta: powerboxes, coins, vidas, shurikens y luego enemigo final.
 
 HACER PRIORIDAD 1
 -----------------

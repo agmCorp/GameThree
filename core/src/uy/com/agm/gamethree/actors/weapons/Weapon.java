@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -67,7 +66,6 @@ public abstract class Weapon extends Sprite {
                     world.destroyBody(b2body);
                 }
                 currentState = State.FINISHED;
-                Gdx.app.debug(TAG, "DESTRUYO**************************");
             }
         }
     }
