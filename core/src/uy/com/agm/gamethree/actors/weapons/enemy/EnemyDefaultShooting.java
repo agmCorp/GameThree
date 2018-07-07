@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.weapons.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,7 +19,7 @@ public class EnemyDefaultShooting implements IShootStrategy {
     private static final String TAG = EnemyDefaultShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float DEFAULT_BULLET_OFFSET_METERS = 40.0f / PlayScreen.PPM;
+    public static final float DEFAULT_BULLET_OFFSET_METERS = 80.0f / PlayScreen.PPM;
     private static final float DEFAULT_BULLET_LINEAR_VELOCITY = 2.0f;
     private static final float DEFAULT_BULLET_CIRCLE_SHAPE_RADIUS_METERS = 10.0f / PlayScreen.PPM;
 
@@ -51,8 +50,6 @@ public class EnemyDefaultShooting implements IShootStrategy {
     @Override
     public void shoot(float x, float y) {
         if (openFireTime > fireDelay) {
-            Gdx.app.debug(TAG, "*****************DISPARO"); // todo
-
             shootImp(x, y);
             openFireTime = 0;
         }
