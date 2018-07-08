@@ -23,7 +23,6 @@ PRIORIDADES PARA LIBERAR
  silvers
  movimiento del enemigo
  help del enemigo
- audio para la magia
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
  Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
