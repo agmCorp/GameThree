@@ -157,7 +157,7 @@ public class LevelFactory {
                 break;
             case 4:
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
-                dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(FinalEnemyLevelFour.class.getName(), new DynamicHelpDef(true));
                 break;
             default:
                 break;
@@ -178,7 +178,7 @@ public class LevelFactory {
                 helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelThree();
                 break;
             case 4:
-                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelThree();
+                helpColSilverBullet = Assets.getInstance().getScene2d().getHelpColSilverBulletLevelFour();
                 break;
             default:
                 helpColSilverBullet = null;
