@@ -82,6 +82,6 @@ public class EnemySwordShooting implements IShootStrategy {
                 tmp.y,
                 bulletAnimation)));
         // Sound FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getEnemyShoot());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getSwordShoot());
     }
 }
