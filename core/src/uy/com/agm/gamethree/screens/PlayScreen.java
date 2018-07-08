@@ -150,7 +150,7 @@ public class PlayScreen extends AbstractScreen {
         accumulator = 0;
 
         // Allows for debug lines of our box2d world.
-        if (DebugConstants.DEBUG_MODE) {
+        if (DebugConstants.DEBUG_LINES) {
             b2dr = new Box2DDebugRenderer();
         }
 
@@ -430,7 +430,7 @@ public class PlayScreen extends AbstractScreen {
         tiledMapRenderer.render();
 
         // Renderer our Box2DDebugLines
-        if (DebugConstants.DEBUG_MODE) {
+        if (DebugConstants.DEBUG_LINES) {
             b2dr.render(world, gameCam.combined);
         }
 
@@ -461,7 +461,7 @@ public class PlayScreen extends AbstractScreen {
         dimScreen.render(delta);
 
         // Debug
-        if (DebugConstants.DEBUG_MODE) {
+        if (DebugConstants.DEBUG_LINES) {
             // Set our batch to now draw what the gameCam camera sees.
             game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
             game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
@@ -812,7 +812,7 @@ public class PlayScreen extends AbstractScreen {
         map.dispose();
         tiledMapRenderer.dispose();
         world.dispose();
-        if (DebugConstants.DEBUG_MODE) {
+        if (DebugConstants.DEBUG_LINES) {
             b2dr.dispose();
         }
         hud.dispose();

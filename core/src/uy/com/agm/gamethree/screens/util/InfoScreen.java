@@ -152,7 +152,7 @@ public class InfoScreen extends AbstractScreen {
         centerTable = new Table();
 
         // Debug lines
-        centerTable.setDebug(DebugConstants.DEBUG_MODE);
+        centerTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Center-Align table
         centerTable.center();
@@ -195,7 +195,7 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable = new Table();
 
         // Debug lines
-        buttonsTable.setDebug(DebugConstants.DEBUG_MODE);
+        buttonsTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         buttonsTable.bottom().padLeft(BUTTONS_PAD).padRight(BUTTONS_PAD);

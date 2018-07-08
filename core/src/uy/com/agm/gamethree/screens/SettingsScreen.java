@@ -81,7 +81,7 @@ public class SettingsScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
         table.top().padTop(AbstractScreen.PAD * 2);
@@ -270,7 +270,7 @@ public class SettingsScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         table.bottom();

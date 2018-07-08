@@ -46,7 +46,7 @@ public class SelectLevelScreen extends AbstractScreen {
         container.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        container.setDebug(DebugConstants.DEBUG_MODE);
+        container.setDebug(DebugConstants.DEBUG_LINES);
 
         // Center-Align table
         container.center().padBottom(AbstractScreen.PAD * 2);
@@ -79,7 +79,7 @@ public class SelectLevelScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Personal fonts
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
@@ -111,7 +111,7 @@ public class SelectLevelScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         table.bottom();

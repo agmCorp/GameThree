@@ -132,7 +132,7 @@ public class Hud extends AbstractScreen {
         upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
 
         // Debug lines
-        upperTable.setDebug(DebugConstants.DEBUG_MODE);
+        upperTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
         upperTable.top();
@@ -204,7 +204,7 @@ public class Hud extends AbstractScreen {
         powersTable = new Table();
 
         // Debug lines
-        powersTable.setDebug(DebugConstants.DEBUG_MODE);
+        powersTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Add ability power info
         defineAbilityPowerTable();
@@ -220,7 +220,7 @@ public class Hud extends AbstractScreen {
         abilityPowerTable = new Table();
 
         // Debug lines
-        abilityPowerTable.setDebug(DebugConstants.DEBUG_MODE);
+        abilityPowerTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define a label based on labelStyle
         abilityPowerNameLabel = new Label("ABILITY_POWER_NAME", labelStyleSmall);
@@ -243,7 +243,7 @@ public class Hud extends AbstractScreen {
         weaponPowerTable = new Table();
 
         // Debug lines
-        weaponPowerTable.setDebug(DebugConstants.DEBUG_MODE);
+        weaponPowerTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define a label based on labelStyle
         weaponPowerNameLabel = new Label("WEAPON_POWER_NAME", labelStyleSmall);
@@ -266,7 +266,7 @@ public class Hud extends AbstractScreen {
         bottomTable = new Table();
 
         // Debug lines
-        bottomTable.setDebug(DebugConstants.DEBUG_MODE);
+        bottomTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         bottomTable.bottom();
@@ -294,7 +294,7 @@ public class Hud extends AbstractScreen {
         fpsTable = new Table();
 
         // Debug lines
-        fpsTable.setDebug(DebugConstants.DEBUG_MODE);
+        fpsTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define a label based on labelStyle
         Label fpsLabel = new Label(i18NGameThreeBundle.format("hud.FPS"), labelStyleSmall);
@@ -320,7 +320,7 @@ public class Hud extends AbstractScreen {
         healthBarTable = new Table();
 
         // Debug lines
-        healthBarTable.setDebug(DebugConstants.DEBUG_MODE);
+        healthBarTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define a label based on labelStyle
         enemyNameLabel = new Label("ENEMY_NAME", labelStyleSmall);

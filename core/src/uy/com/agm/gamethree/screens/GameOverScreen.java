@@ -45,7 +45,7 @@ public class GameOverScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(assetScene2d.getTable()));
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Center-Align table
         table.center();
@@ -73,7 +73,7 @@ public class GameOverScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         table.bottom();

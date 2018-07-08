@@ -82,7 +82,7 @@ public class DimScreen extends AbstractScreen {
         centerTable.setBackground(new TextureRegionDrawable(dim));
 
         // Debug lines
-        centerTable.setDebug(DebugConstants.DEBUG_MODE);
+        centerTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Center-Align table
         centerTable.center();
@@ -112,7 +112,7 @@ public class DimScreen extends AbstractScreen {
         buttonsTable = new Table();
 
         // Debug lines
-        buttonsTable.setDebug(DebugConstants.DEBUG_MODE);
+        buttonsTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         buttonsTable.bottom();

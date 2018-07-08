@@ -46,7 +46,7 @@ public class CreditsScreen extends AbstractScreen {
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getTable()));
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
         table.top().padTop(AbstractScreen.PAD * 3);
@@ -84,7 +84,7 @@ public class CreditsScreen extends AbstractScreen {
         Table table = new Table();
 
         // Debug lines
-        table.setDebug(DebugConstants.DEBUG_MODE);
+        table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
         table.bottom();

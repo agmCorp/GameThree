@@ -5,28 +5,33 @@ package uy.com.agm.gamethree.game;
  */
 
 public class DebugConstants {
-    // Boxes around sprites, box2d bodies and scene2d tables
+    // Master variable: turns debug mode on or off
+    public static final boolean TURN_ON_DEBUG = false;
+
     // Sets the log level to debug
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = false && TURN_ON_DEBUG;
 
-    // Show/hide background image
-    public static final boolean HIDE_BACKGROUND = false;
+    // Boxes around sprites, box2d bodies and scene2d tables
+    public static final boolean DEBUG_LINES = false && TURN_ON_DEBUG;
 
-    // Show/hide FPS counter
-    public static final boolean SHOW_FPS = false;
+    // Shows/hides background image
+    public static final boolean HIDE_BACKGROUND = false && TURN_ON_DEBUG;
 
-    // Print box2d bodies count
-    public static final boolean DEBUG_BODY_COUNT = false;
+    // Shows/hides FPS counter
+    public static final boolean SHOW_FPS = false && TURN_ON_DEBUG;
 
-    // Enable all levels
-    public static final boolean DEBUG_LEVELS = true;
+    // Prints box2d bodies count
+    public static final boolean DEBUG_BODY_COUNT = false && TURN_ON_DEBUG;
+
+    // Enables all levels
+    public static final boolean DEBUG_LEVELS = false && TURN_ON_DEBUG;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 0.0f;
+    public static final float GAME_CAM_Y_METERS = 0.0f * (TURN_ON_DEBUG ? 1 : 0);
 
     // When it's true, skull count is ignored
-    public static final boolean DISABLE_SKULL_COUNT = true;
+    public static final boolean DISABLE_SKULL_COUNT = false && TURN_ON_DEBUG;
 
     // Freezes the camera
-    public static final boolean STATIC_GAME_CAM = false;
+    public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;
 }
