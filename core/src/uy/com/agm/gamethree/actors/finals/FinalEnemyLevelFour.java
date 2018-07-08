@@ -314,8 +314,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
-        // todo setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        x();
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         TextureRegion region = (TextureRegion) finalEnemyLevelFourWalkAnimation.getKeyFrame(stateFinalEnemyTime);
         setRegionFlip(region);
@@ -384,10 +383,6 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         return target.overlaps(tmpCircle);
     }
 
-    private void x() {
-        setPosition(b2body.getPosition().x - getWidth() / 2, -1 + b2body.getPosition().y - getHeight() / 2);
-    }
-
     private void stateIdle(float dt) {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
@@ -398,8 +393,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
-        //todo setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        x();
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         TextureRegion region = (TextureRegion) finalEnemyLevelFourIdleAnimation.getKeyFrame(stateFinalEnemyTime);
         setRegionFlip(region);
@@ -420,8 +414,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
-        // todo setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        x();
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         TextureRegion region = (TextureRegion) finalEnemyLevelFourShootAnimation.getKeyFrame(stateFinalEnemyTime);
         setRegionFlip(region);
@@ -588,7 +581,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 
     private void drawPowers(Batch batch) {
         if (currentPowerState == PowerState.POWERFUL) {
-            powerFXSprite.draw(batch);
+            // todo powerFXSprite.draw(batch);
         }
     }
 
