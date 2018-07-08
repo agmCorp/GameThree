@@ -183,7 +183,8 @@
   </object>
   <object id="2771" x="160" y="544" width="32" height="32">
    <properties>
-    <property name="powerOne" type="int" value="5000"/>
+    <property name="powerFour" type="int" value="500"/>
+    <property name="powerTwo" type="int" value="500"/>
    </properties>
   </object>
  </objectgroup>

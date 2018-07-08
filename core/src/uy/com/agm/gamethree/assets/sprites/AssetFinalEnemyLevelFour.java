@@ -15,10 +15,10 @@ public class AssetFinalEnemyLevelFour {
     private static final String TAG = AssetFinalEnemyLevelFour.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 286.0f * 1.2f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 260.0f * 1.2f / PlayScreen.PPM;
-    public static final float POWER_WIDTH_METERS = 260.0f * 1.3f / PlayScreen.PPM;
-    public static final float POWER_HEIGHT_METERS = 260.0f * 1.3f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 286.0f * 1.1f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 260.0f * 1.1f / PlayScreen.PPM;
+    public static final float POWER_WIDTH_METERS = 260.0f * 1.2f / PlayScreen.PPM;
+    public static final float POWER_HEIGHT_METERS = 260.0f * 1.2f / PlayScreen.PPM;
 
     private TextureRegion finalEnemyLevelFourStand;
     private TextureRegion finalEnemyLevelFourPowerStand;
@@ -51,7 +51,7 @@ public class AssetFinalEnemyLevelFour {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourDeath");
-        finalEnemyLevelFourDeathAnimation = new Animation(1.5f / 12.0f, regions);
+        finalEnemyLevelFourDeathAnimation = new Animation(1.8f / 19.0f, regions);
         regions.clear();
 
         // Animation
