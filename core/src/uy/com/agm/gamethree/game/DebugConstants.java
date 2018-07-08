@@ -7,13 +7,13 @@ package uy.com.agm.gamethree.game;
 public class DebugConstants {
     // Boxes around sprites, box2d bodies and scene2d tables
     // Sets the log level to debug
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     // Show/hide background image
     public static final boolean HIDE_BACKGROUND = false;
 
     // Show/hide FPS counter
-    public static final boolean SHOW_FPS = true;
+    public static final boolean SHOW_FPS = false;
 
     // Print box2d bodies count
     public static final boolean DEBUG_BODY_COUNT = false;
@@ -22,7 +22,7 @@ public class DebugConstants {
     public static final boolean DEBUG_LEVELS = true;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 75.0f;
+    public static final float GAME_CAM_Y_METERS = 0.0f;
 
     // When it's true, skull count is ignored
     public static final boolean DISABLE_SKULL_COUNT = true;

@@ -181,12 +181,6 @@
     <property name="strength" type="int" value="4"/>
    </properties>
   </object>
-  <object id="2771" x="160" y="544" width="32" height="32">
-   <properties>
-    <property name="powerFour" type="int" value="500"/>
-    <property name="powerTwo" type="int" value="500"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="enemyOne">
   <object id="2600" x="64" y="2912" width="32" height="32"/>
