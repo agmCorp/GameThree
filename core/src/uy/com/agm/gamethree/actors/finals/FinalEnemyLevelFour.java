@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.actors.finals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -306,7 +307,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 
     private void stateWalking(float dt) {
         // Set velocity calculated to reach the target circle
-        //b2body.setLinearVelocity(velocity); todo
+        b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
@@ -316,10 +317,16 @@ public class FinalEnemyLevelFour extends FinalEnemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
         TextureRegion region = (TextureRegion) finalEnemyLevelFourWalkAnimation.getKeyFrame(stateFinalEnemyTime);
-        setRegionFlip(region);
         setRegion(region);
         stateFinalEnemyTime += dt;
+
+        // Determines where FinalEnemyLevelFour is looking
+        setFlipState(isFlipX, isFlipY);
 
         if (reachTarget()) {
             moveToNewTarget();
@@ -366,15 +373,24 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         velocity.set(tmp);
     }
 
-    private void setRegionFlip(TextureRegion region) {
+    private void setFlipState(boolean isFlipX, boolean isFlipY) {
         float heroX = screen.getCreator().getHero().getB2body().getPosition().x;
-        float pivot = b2body.getPosition().x;
+        float pivotRight = b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS;
+        float pivotLeft = b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS;
 
-        if (heroX <= pivot && !region.isFlipX()) {
-            region.flip(true, false);
+        Gdx.app.debug(TAG, "************ ESTADO DE FLIP: " + isFlipX + ", "  + isFlipY);
+
+        if (heroX < pivotLeft) {
+            Gdx.app.debug(TAG, "************ IZQ Y NO ESTA FLIP, ENTONCES FLIPEO");
+            setFlip(true, false);
         }
-        if (heroX > pivot && region.isFlipX()) {
-            region.flip(true, false);
+        if (pivotLeft <= heroX && heroX <= pivotRight) {
+            setFlip(isFlipX, isFlipY);
+            Gdx.app.debug(TAG, "************ CENTRO DEJE LO QUE TRAIA" + isFlipX + ", "  + isFlipY);
+        }
+        if (heroX > pivotRight) {
+            Gdx.app.debug(TAG, "************ IZQ Y ESTA FLIP, ENTONCES VUELVO ORIGINAL");
+            setFlip(false, false);
         }
     }
 
@@ -395,10 +411,16 @@ public class FinalEnemyLevelFour extends FinalEnemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
         TextureRegion region = (TextureRegion) finalEnemyLevelFourIdleAnimation.getKeyFrame(stateFinalEnemyTime);
-        setRegionFlip(region);
         setRegion(region);
         stateFinalEnemyTime += dt;
+
+        // Determines where FinalEnemyLevelFour is looking
+        setFlipState(isFlipX, isFlipY);
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
@@ -416,10 +438,16 @@ public class FinalEnemyLevelFour extends FinalEnemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
         TextureRegion region = (TextureRegion) finalEnemyLevelFourShootAnimation.getKeyFrame(stateFinalEnemyTime);
-        setRegionFlip(region);
         setRegion(region);
         stateFinalEnemyTime += dt;
+
+        // Determines where FinalEnemyLevelFour is looking
+        setFlipState(isFlipX, isFlipY);
 
         // Shoot time!
         openFire(dt);
@@ -581,7 +609,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 
     private void drawPowers(Batch batch) {
         if (currentPowerState == PowerState.POWERFUL) {
-            // todo powerFXSprite.draw(batch);
+            powerFXSprite.draw(batch);
         }
     }
 

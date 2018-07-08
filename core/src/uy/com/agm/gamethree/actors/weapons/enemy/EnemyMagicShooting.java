@@ -19,7 +19,7 @@ public class EnemyMagicShooting implements IShootStrategy {
     private static final String TAG = EnemyMagicShooting.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final float CIRCLE_SHAPE_RADIUS_METERS = 40.0f / PlayScreen.PPM;
+    private static final float CIRCLE_SHAPE_RADIUS_METERS = 30.0f / PlayScreen.PPM;
     private static final float MAGIC_LINEAR_VELOCITY = 2.0f;
 
     private PlayScreen screen;
