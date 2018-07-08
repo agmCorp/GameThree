@@ -15,10 +15,10 @@ public class AssetFinalEnemyLevelFour {
     private static final String TAG = AssetFinalEnemyLevelFour.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 286.0f * 1.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 222.0f * 1.0f / PlayScreen.PPM;
-    public static final float POWER_WIDTH_METERS = 192.0f * 1.6f / PlayScreen.PPM;
-    public static final float POWER_HEIGHT_METERS = 192.0f * 1.6f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 286.0f * 1.3f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 260.0f * 1.3f / PlayScreen.PPM;
+    public static final float POWER_WIDTH_METERS = 260.0f * 1.3f / PlayScreen.PPM;
+    public static final float POWER_HEIGHT_METERS = 260.0f * 1.3f / PlayScreen.PPM;
 
     private TextureRegion finalEnemyLevelFourStand;
     private TextureRegion finalEnemyLevelFourPowerStand;
@@ -36,27 +36,27 @@ public class AssetFinalEnemyLevelFour {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourIdle");
-        finalEnemyLevelFourIdleAnimation = new Animation(0.4f / 9.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourIdleAnimation = new Animation(1.5f / 13.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourWalk");
-        finalEnemyLevelFourWalkAnimation = new Animation(0.7f / 17.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourWalkAnimation = new Animation(1.5f / 17.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourShoot");
-        finalEnemyLevelFourShootAnimation = new Animation(0.5f / 13.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourShootAnimation = new Animation(1.5f / 14.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourDeath");
-        finalEnemyLevelFourDeathAnimation = new Animation(1.4f / 34.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourDeathAnimation = new Animation(1.5f / 19.0f, regions);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourPower");
-        finalEnemyLevelFourPowerAnimation = new Animation(1.0f / 30.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourPowerAnimation = new Animation(1.5f / 20.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 

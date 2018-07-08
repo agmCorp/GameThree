@@ -40,6 +40,7 @@ public class AssetScene2d {
     private TextureRegion helpFinalEnemyLevelOne;
     private TextureRegion helpFinalEnemyLevelTwo;
     private TextureRegion helpFinalEnemyLevelThree;
+    private TextureRegion helpFinalEnemyLevelFour;
     private TextureRegion table;
     private TextureRegion wipeThemOut;
     private TextureRegion play;
@@ -110,6 +111,7 @@ public class AssetScene2d {
         helpFinalEnemyLevelOne = atlasUI.findRegion("helpFinalEnemyLevelOne");
         helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
         helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
+        helpFinalEnemyLevelFour = atlasUI.findRegion("helpFinalEnemyLevelThree"); // todo
         table = atlasUI.findRegion("table");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
         play = atlasUI.findRegion("play");
@@ -267,6 +269,10 @@ public class AssetScene2d {
 
     public TextureRegion getHelpFinalEnemyLevelThree() {
         return helpFinalEnemyLevelThree;
+    }
+
+    public TextureRegion getHelpFinalEnemyLevelFour() {
+        return helpFinalEnemyLevelFour;
     }
 
     public TextureRegion getTable() {

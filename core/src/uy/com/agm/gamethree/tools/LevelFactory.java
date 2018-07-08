@@ -18,7 +18,9 @@ import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
 import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelFour;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
+import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
@@ -57,16 +59,16 @@ public class LevelFactory {
                 break;
             case 3:
                 finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        AssetFinalEnemyLevelThree.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 screen.getGameViewPort().getWorldHeight() / 2 -
-                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2);
+                                AssetFinalEnemyLevelThree.HEIGHT_METERS / 2);
                 break;
-            case 4: // todo ojo poner four
+            case 4:
                 finalEnemy = new FinalEnemyLevelFour(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                        AssetFinalEnemyLevelFour.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
+                                AssetFinalEnemyLevelFour.HEIGHT_METERS / 2 - FinalEnemyLevelFour.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             default:
                 finalEnemy = null;

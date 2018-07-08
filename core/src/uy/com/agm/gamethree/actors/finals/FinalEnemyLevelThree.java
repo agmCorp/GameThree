@@ -326,10 +326,12 @@ public class FinalEnemyLevelThree extends FinalEnemy {
 
     private void setRegionFlip(TextureRegion region) {
         float heroX = screen.getCreator().getHero().getB2body().getPosition().x;
-        if (heroX > b2body.getPosition().x && !region.isFlipX()) {
+        float pivot = b2body.getPosition().x;
+
+        if (heroX <= pivot && !region.isFlipX()) {
             region.flip(true, false);
         }
-        if (heroX <= b2body.getPosition().x && region.isFlipX()) {
+        if (heroX > pivot && region.isFlipX()) {
             region.flip(true, false);
         }
     }
