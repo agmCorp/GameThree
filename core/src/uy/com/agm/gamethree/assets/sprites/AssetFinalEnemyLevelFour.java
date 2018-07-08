@@ -51,7 +51,7 @@ public class AssetFinalEnemyLevelFour {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourDeath");
-        finalEnemyLevelFourDeathAnimation = new Animation(1.8f / 19.0f, regions);
+        finalEnemyLevelFourDeathAnimation = new Animation(3.0f / 22.0f, regions);
         regions.clear();
 
         // Animation

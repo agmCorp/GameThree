@@ -45,7 +45,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     private static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
-    private static final float DYING_STATE_TIME_SECONDS = 2.0f;
+    private static final float DYING_STATE_TIME_SECONDS = 3.5f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
     private static final int SCORE = 500;
 
