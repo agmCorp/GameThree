@@ -1,5 +1,5 @@
 # Wipe them out!
-Libgdx Android Game
+Libgdx and Box2D Android Game
  
 ![screenshot_20180708-051549](https://user-images.githubusercontent.com/9197974/42418089-83452cf2-826f-11e8-807c-35e3a779927e.png)
 ![screenshot_20180708-051514](https://user-images.githubusercontent.com/9197974/42418090-85336b8c-826f-11e8-9fc7-da430b11a5ae.png)
