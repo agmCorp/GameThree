@@ -17,7 +17,6 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- cambiar las imagenes en hithub de mi proyecto.
 - me faltan:
  monedas
  silvers
