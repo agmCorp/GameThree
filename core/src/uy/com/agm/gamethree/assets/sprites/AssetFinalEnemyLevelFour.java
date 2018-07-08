@@ -36,7 +36,7 @@ public class AssetFinalEnemyLevelFour {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelFourIdle");
-        finalEnemyLevelFourIdleAnimation = new Animation(1.5f / 13.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelFourIdleAnimation = new Animation(1.5f / 15.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation

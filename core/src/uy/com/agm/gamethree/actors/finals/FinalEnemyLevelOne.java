@@ -527,7 +527,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             boolean isFlipY = isFlipY();
             float rotation = getRotation();
 
-            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTime, true));
+            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTime));
             stateFinalEnemyTime += dt;
 
             // Apply previous flip and rotation state

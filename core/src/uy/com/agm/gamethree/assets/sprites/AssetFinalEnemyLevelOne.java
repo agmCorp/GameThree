@@ -51,7 +51,7 @@ public class AssetFinalEnemyLevelOne {
 
         // Animation
         regions = atlas.findRegions("finalEnemyLevelOneDeath");
-        finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions, Animation.PlayMode.LOOP);
+        finalEnemyLevelOneDeathAnimation = new Animation(1.4f / 34.0f, regions);
         regions.clear();
 
         // Animation
