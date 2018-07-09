@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2495">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2498">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
@@ -144,7 +144,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox">
+ <objectgroup name="powerBox" locked="1">
   <object id="2481" x="160" y="5344" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
