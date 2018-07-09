@@ -19,16 +19,17 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - me faltan para terminar el nivel 4:
  movimiento del enemigo
-- Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
- lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.
- Poner en la historia que el ejercito robaba todo el dinero y que hay que recolectarlo.
- Imprescindible explicar los skulls.
+- Hacer pantallas de help:
+    - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
+    - Imprescindible explicar los skulls.
+    - perfil de cada enemigo
+    - items y poderes
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 
 HACER PRIORIDAD 1
 -----------------
-- Poner estrellas en lugar de skulls o premiar en positivo (no castigar).
+- Poner estrellas en lugar de skulls o premiar en positivo (no castigar, investigar).
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
