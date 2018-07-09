@@ -526,6 +526,7 @@
   <object id="2457" x="118" y="6998" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2458" x="288" y="6938" width="32" height="32"/>
@@ -544,7 +545,11 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2477" x="108" y="7288.67" width="32" height="32"/>
+  <object id="2477" x="108" y="7288.67" width="32" height="32">
+   <properties>
+    <property name="colSilverBullet" value=""/>
+   </properties>
+  </object>
   <object id="2478" x="238.667" y="7179.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -556,6 +561,7 @@
   <object id="2556" x="100" y="7132" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2557" x="388" y="7194" width="32" height="32">
@@ -593,6 +599,7 @@
   <object id="2564" x="218" y="7300" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="colSilverBullet" value=""/>
    </properties>
   </object>
   <object id="2565" x="22" y="7058" width="32" height="32"/>
