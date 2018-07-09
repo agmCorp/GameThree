@@ -9,12 +9,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import uy.com.agm.gamethree.actors.backgroundObjects.IAvoidLandingObject;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
+import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.StaticBackgroundObject;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.finals.FinalEnemy;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
-import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.StaticBackgroundObject;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 
 /**
