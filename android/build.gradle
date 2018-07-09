@@ -3,7 +3,7 @@ android {
         ignoreAssetsPattern '!raw'
     }
 
-    buildToolsVersion "27.0.1"
+    buildToolsVersion "27.0.2"
     compileSdkVersion 26
     sourceSets {
         main {
