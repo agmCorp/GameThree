@@ -17,9 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- me faltan:
- monedas
- silvers
+- me faltan para terminar el nivel 4:
  movimiento del enemigo
 - Hacer pantallas de help, ahi capaz explicar la intro, capaz incluir una en donde muestro cada enemigo y digo: lo matas cuando ataca,
  lo matas con 2 disparos, etc. en chrome carpeta fonts, tengo links a fuentes que tipean y fuentes especiales.

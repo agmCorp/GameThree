@@ -641,6 +641,7 @@
   </object>
   <object id="2321" x="298.667" y="6726.67" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -656,6 +657,7 @@
   </object>
   <object id="2344" x="117.333" y="6569.33" width="32" height="32">
    <properties>
+    <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
    </properties>
   </object>
@@ -704,7 +706,11 @@
     <property name="powerThree" type="int" value="17"/>
    </properties>
   </object>
-  <object id="2448" x="71.6665" y="1761.33" width="32" height="32"/>
+  <object id="2448" x="71.6665" y="1761.33" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2459" x="38.3332" y="1888" width="32" height="32">
    <properties>
     <property name="enemyBullet" value=""/>
@@ -715,7 +721,11 @@
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2473" x="390" y="1928" width="32" height="32"/>
+  <object id="2473" x="390" y="1928" width="32" height="32">
+   <properties>
+    <property name="colOne" value=""/>
+   </properties>
+  </object>
   <object id="2475" x="10" y="1544" width="32" height="32"/>
   <object id="2476" x="312" y="1569" width="32" height="32">
    <properties>
