@@ -348,7 +348,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         float yMax = worldHeight * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
         float yHalf = worldHeight * PlayScreen.WORLD_SCREENS - worldHeight / 2;
 
-        int randomPoint = MathUtils.random(1, 5);
+        int randomPoint = MathUtils.random(1, 9);
         switch (randomPoint) {
             case 1:
                 target.setPosition(xMin, yHalf);
@@ -365,6 +365,19 @@ public class FinalEnemyLevelFour extends FinalEnemy {
             case 5:
                 target.setPosition(xHalf, yHalf);
                 break;
+            case 6:
+                target.setPosition(xMin, yMax);
+                break;
+            case 7:
+                target.setPosition(xMax, yMax);
+                break;
+            case 8:
+                target.setPosition(xMin, yMin);
+                break;
+            case 9:
+                target.setPosition(xMax, yMin);
+                break;
+
         }
 
         // Move to target
