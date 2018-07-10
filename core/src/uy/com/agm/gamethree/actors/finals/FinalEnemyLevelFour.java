@@ -377,8 +377,8 @@ public class FinalEnemyLevelFour extends FinalEnemy {
             case 9:
                 target.setPosition(xMax, yMin);
                 break;
-
         }
+        target.setPosition(0, 0);
 
         // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
@@ -391,18 +391,13 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         float pivotRight = b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS;
         float pivotLeft = b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS;
 
-        Gdx.app.debug(TAG, "************ ESTADO DE FLIP: " + isFlipX + ", "  + isFlipY);
-
         if (heroX < pivotLeft) {
-            Gdx.app.debug(TAG, "************ IZQ Y NO ESTA FLIP, ENTONCES FLIPEO");
             setFlip(true, false);
         }
         if (pivotLeft <= heroX && heroX <= pivotRight) {
             setFlip(isFlipX, isFlipY);
-            Gdx.app.debug(TAG, "************ CENTRO DEJE LO QUE TRAIA" + isFlipX + ", "  + isFlipY);
         }
         if (heroX > pivotRight) {
-            Gdx.app.debug(TAG, "************ IZQ Y ESTA FLIP, ENTONCES VUELVO ORIGINAL");
             setFlip(false, false);
         }
     }

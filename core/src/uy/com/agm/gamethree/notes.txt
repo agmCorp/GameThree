@@ -19,7 +19,11 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - me faltan para terminar el nivel 4:
  movimiento del enemigo, ya lo hice, pero agregarle que haga un círculo completo de vez en cuando.
- O sea, modalidad target o modalidad circulo. No parece complicado y queda muy bien y si se va de la pantalla el target lo trae ya que no choca contra bordes.
+ x o x
+ o x o
+ x o x
+ Cuando llega a estos puntos, según sorteo hace un círculo completo sin chocar con nada.
+
 - Hacer pantallas de help:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar los skulls.
