@@ -26,7 +26,7 @@ public abstract class Weapon extends Sprite {
     protected Vector2 velocity;
 
     protected enum State {
-        SHOOT, ONTARGET, IMPACT, FINISHED
+        SHOOT, ON_TARGET, IMPACT, FINISHED
     }
     protected State currentState;
 
@@ -99,7 +99,7 @@ public abstract class Weapon extends Sprite {
             case SHOOT:
                 stateShoot(dt);
                 break;
-            case ONTARGET:
+            case ON_TARGET:
                 stateOnTarget(dt);
                 break;
             case IMPACT:
