@@ -253,7 +253,8 @@ public class FinalEnemyLevelFour extends FinalEnemy {
                     break;
             }
         }
-        return newRandomStateFinalEnemy;
+        // todo return newRandomStateFinalEnemy;
+        return StateFinalEnemy.WALKING;
     }
 
     @Override
@@ -406,13 +407,13 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         if (circularPath) {
             if (finishCircularPath()) {
                 initCircularPath();
-                tmp = getSpeedPath(dt);
+                tmp = getNewPath(dt);
             } else {
                 tmp = getSpeedCircularPath(dt);
             }
         } else {
             if (reachTarget()) {
-                tmp = getSpeedPath(dt);
+                tmp = getNewPath(dt);
             } else {
                 tmp = getSpeedTarget();
             }
@@ -425,7 +426,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         circularPath = false;
     }
 
-    private Vector2 getSpeedPath(float dt) {
+    private Vector2 getNewPath(float dt) {
         circularPath = startCircularPath();
         if (circularPath) {
             tmp = getSpeedCircularPath(dt);
@@ -447,7 +448,8 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     }
 
     private Vector2 getSpeedCircularPath(float dt) {
-        tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        // tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime)); ESTA FORMULA SIRVE PARA PUNTO 1 Y 2
+        // tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), (counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime)); // ESTA FORMULA SIRVE PARA PUNTO 3 y 4
         elapsedTime += dt;
         return tmp;
     }
@@ -458,7 +460,11 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 //                (target.x == X_MAX && target.y == Y_HALF) ||
 //                (target.x == X_HALF && target.y == Y_MIN)) && MathUtils.randomBoolean();
 
-        return 	(target.x == X_MIN && target.y == Y_HALF) && MathUtils.randomBoolean();
+        // return 	(target.x == X_MIN && target.y == Y_HALF); counterclockwise = false; PUNTO 1
+        // return 	(target.x == X_MAX && target.y == Y_HALF); counterclockwise = true; PUNTO 2
+        // return 	(target.x == X_HALF && target.y == Y_MAX); counterclockwise = true; PUNTO 3
+        // return 	(target.x == X_HALF && target.y == Y_MIN); counterclockwise = false; PUNTO 4
+        return false;
     }
 
     private boolean reachTarget() {
