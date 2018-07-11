@@ -37,6 +37,14 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     private static final String NAME = "SKULLYHOOD";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float worldWidth = PlayScreen.V_WIDTH / PlayScreen.PPM;
+    private static final float worldHeight = PlayScreen.V_HEIGHT / PlayScreen.PPM;
+    private static final float X_MIN = TARGET_RADIUS_METERS;
+    private static final float X_MAX = worldWidth - TARGET_RADIUS_METERS;
+    private static final float X_HALF = worldWidth / 2;
+    private static final float Y_MIN = worldHeight * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
+    private static final float Y_MAX = worldHeight * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+    private static final float Y_HALF = worldHeight * PlayScreen.WORLD_SCREENS - worldHeight / 2;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 15;
@@ -350,33 +358,22 @@ public class FinalEnemyLevelTwo extends FinalEnemy {
     }
 
     private void moveToNewTarget() {
-        // We cannot use screen.getGameCam().position.x because our finalEnemy is created at the end
-        // of the level when the camera is still moving.
-        float worldWidth = screen.getGameViewPort().getWorldWidth();
-        float worldHeight = screen.getGameViewPort().getWorldHeight();
-        float xMin = TARGET_RADIUS_METERS;
-        float xMax = worldWidth - TARGET_RADIUS_METERS;
-        float xHalf = worldWidth / 2;
-        float yMin = worldHeight * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
-        float yMax = worldHeight * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
-        float yHalf = worldHeight * PlayScreen.WORLD_SCREENS - worldHeight / 2;
-
         int randomPoint = MathUtils.random(1, 5);
         switch (randomPoint) {
             case 1:
-                target.setPosition(xMin, yHalf);
+                target.setPosition(X_MIN, Y_HALF);
                 break;
             case 2:
-                target.setPosition(xHalf, yMax);
+                target.setPosition(X_HALF, Y_MAX);
                 break;
             case 3:
-                target.setPosition(xMax, yHalf);
+                target.setPosition(X_MAX, Y_HALF);
                 break;
             case 4:
-                target.setPosition(xHalf, yMin);
+                target.setPosition(X_HALF, Y_MIN);
                 break;
             case 5:
-                target.setPosition(xHalf, yHalf);
+                target.setPosition(X_HALF, Y_HALF);
                 break;
         }
 
