@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.finals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -37,7 +37,18 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final String NAME = "DARKHEART";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
+    private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
+    private static final float X_MIN = TARGET_RADIUS_METERS;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS;
+    private static final float X_HALF = WORLD_WIDTH / 2;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+    private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
     private static final float LINEAR_VELOCITY = 4.5f;
+    private static final float PERIOD_SECONDS = 4.0f;
+    private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
+    private static final float RADIUS_METERS = 4.0f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 1; //TODO
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
@@ -54,6 +65,9 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private float changeTime;
     private float timeToChange;
     private float agonyTime;
+    private float elapsedTime;
+    private boolean circularPath;
+    private boolean counterclockwise;
 
     private Animation finalEnemyLevelFourWalkAnimation;
     private Animation finalEnemyLevelFourIdleAnimation;
@@ -92,6 +106,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
+        elapsedTime = 0;
 
         // Initialize target
         target = new Circle(0, 0, TARGET_RADIUS_METERS);
@@ -100,7 +115,12 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         tmpCircle = new Circle();
 
         // Move to a new target at constant speed
-        moveToNewTarget();
+        setNewTarget();
+        tmp = getSpeedTarget();
+        velocity.set(tmp);
+        circularPath = false;
+
+        counterclockwise = false; // todo alvaro
 
         // -------------------- PowerFX --------------------
 
@@ -328,62 +348,10 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         // Determines where FinalEnemyLevelFour is looking
         setFlipState(isFlipX, isFlipY);
 
-        if (reachTarget()) {
-            moveToNewTarget();
-        }
+        velocity.set(getSpeed(dt));
 
         // New random state
         currentStateFinalEnemy = getNewRandomState(dt);
-    }
-
-    private void moveToNewTarget() {
-        // We cannot use screen.getGameCam().position.x because our finalEnemy is created at the end
-        // of the level when the camera is still moving.
-        float worldWidth = screen.getGameViewPort().getWorldWidth();
-        float worldHeight = screen.getGameViewPort().getWorldHeight();
-        float xMin = TARGET_RADIUS_METERS;
-        float xMax = worldWidth - TARGET_RADIUS_METERS;
-        float xHalf = worldWidth / 2;
-        float yMin = worldHeight * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
-        float yMax = worldHeight * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
-        float yHalf = worldHeight * PlayScreen.WORLD_SCREENS - worldHeight / 2;
-
-        int randomPoint = MathUtils.random(1, 9);
-        switch (randomPoint) {
-            case 1:
-                target.setPosition(xMin, yHalf);
-                break;
-            case 2:
-                target.setPosition(xHalf, yMax);
-                break;
-            case 3:
-                target.setPosition(xMax, yHalf);
-                break;
-            case 4:
-                target.setPosition(xHalf, yMin);
-                break;
-            case 5:
-                target.setPosition(xHalf, yHalf);
-                break;
-            case 6:
-                target.setPosition(xMin, yMax);
-                break;
-            case 7:
-                target.setPosition(xMax, yMax);
-                break;
-            case 8:
-                target.setPosition(xMin, yMin);
-                break;
-            case 9:
-                target.setPosition(xMax, yMin);
-                break;
-        }
-        target.setPosition(0, 0);
-
-        // Move to target
-        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
-        velocity.set(tmp);
     }
 
     private void setFlipState(boolean isFlipX, boolean isFlipY) {
@@ -400,6 +368,88 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         if (heroX > pivotRight) {
             setFlip(false, false);
         }
+    }
+
+    private void setNewTarget() {
+        int randomPoint = MathUtils.random(1, 9);
+        switch (randomPoint) {
+            case 1:
+                target.setPosition(X_MIN, Y_HALF);
+                break;
+            case 2:
+                target.setPosition(X_HALF, Y_MAX);
+                break;
+            case 3:
+                target.setPosition(X_MAX, Y_HALF);
+                break;
+            case 4:
+                target.setPosition(X_HALF, Y_MIN);
+                break;
+            case 5:
+                target.setPosition(X_HALF, Y_HALF);
+                break;
+            case 6:
+                target.setPosition(X_MIN, Y_MAX);
+                break;
+            case 7:
+                target.setPosition(X_MAX, Y_MAX);
+                break;
+            case 8:
+                target.setPosition(X_MIN, Y_MIN);
+                break;
+            case 9:
+                target.setPosition(X_MAX, Y_MIN);
+                break;
+        }
+    }
+
+    private Vector2 getSpeed(float dt) {
+        if (circularPath) {
+            if (elapsedTime >= PERIOD_SECONDS) {
+                elapsedTime = 0;
+                circularPath = false;
+
+                setNewTarget();
+                tmp = getSpeedTarget();
+            } else {
+                tmp = getSpeedCircularPath(dt);
+            }
+        } else {
+            if (reachTarget()) {
+                circularPath = startCircularPath();
+                if (circularPath) {
+                    elapsedTime = 0;
+                    tmp = getSpeedCircularPath(dt);
+                } else	{
+                    setNewTarget();
+                    tmp = getSpeedTarget();
+                }
+            } else {
+                tmp = getSpeedTarget();
+            }
+        }
+        return tmp;
+    }
+
+    private Vector2 getSpeedTarget() {
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
+        return tmp;
+    }
+
+    private Vector2 getSpeedCircularPath(float dt) {
+        tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        elapsedTime += dt;
+        return tmp;
+    }
+
+    private boolean startCircularPath() {
+//        return 	((target.x == X_MIN && target.y == Y_HALF) ||
+//                (target.x == X_HALF && target.y == Y_MAX) ||
+//                (target.x == X_MAX && target.y == Y_HALF) ||
+//                (target.x == X_HALF && target.y == Y_MIN)) && MathUtils.randomBoolean();
+
+        return 	(target.x == X_MIN && target.y == Y_HALF) && MathUtils.randomBoolean();
     }
 
     private boolean reachTarget() {
