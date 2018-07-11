@@ -45,10 +45,10 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
     private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
     private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
+    private static final float RADIUS_METERS = 1.5f;
     private static final float LINEAR_VELOCITY = 4.5f;
-    private static final float PERIOD_SECONDS = 4.0f;
+    private static final float PERIOD_SECONDS = 2 * MathUtils.PI * RADIUS_METERS / LINEAR_VELOCITY;
     private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
-    private static final float RADIUS_METERS = 4.0f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 1; //TODO
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
@@ -106,7 +106,6 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
-        elapsedTime = 0;
 
         // Initialize target
         target = new Circle(0, 0, TARGET_RADIUS_METERS);
@@ -118,7 +117,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         setNewTarget();
         tmp = getSpeedTarget();
         velocity.set(tmp);
-        circularPath = false;
+        initCircularPath();
 
         counterclockwise = false; // todo alvaro
 
@@ -326,7 +325,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     }
 
     private void stateWalking(float dt) {
-        // Set velocity calculated to reach the target circle
+        // Set new velocity (see getSpeed(...))
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -405,30 +404,40 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 
     private Vector2 getSpeed(float dt) {
         if (circularPath) {
-            if (elapsedTime >= PERIOD_SECONDS) {
-                elapsedTime = 0;
-                circularPath = false;
-
-                setNewTarget();
-                tmp = getSpeedTarget();
+            if (finishCircularPath()) {
+                initCircularPath();
+                tmp = getSpeedPath(dt);
             } else {
                 tmp = getSpeedCircularPath(dt);
             }
         } else {
             if (reachTarget()) {
-                circularPath = startCircularPath();
-                if (circularPath) {
-                    elapsedTime = 0;
-                    tmp = getSpeedCircularPath(dt);
-                } else	{
-                    setNewTarget();
-                    tmp = getSpeedTarget();
-                }
+                tmp = getSpeedPath(dt);
             } else {
                 tmp = getSpeedTarget();
             }
         }
         return tmp;
+    }
+
+    private void initCircularPath() {
+        elapsedTime = 0;
+        circularPath = false;
+    }
+
+    private Vector2 getSpeedPath(float dt) {
+        circularPath = startCircularPath();
+        if (circularPath) {
+            tmp = getSpeedCircularPath(dt);
+        } else	{
+            setNewTarget();
+            tmp = getSpeedTarget();
+        }
+        return tmp;
+    }
+
+    private boolean finishCircularPath() {
+        return elapsedTime >= PERIOD_SECONDS;
     }
 
     private Vector2 getSpeedTarget() {
