@@ -67,7 +67,6 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private float agonyTime;
     private float elapsedTime;
     private boolean circularPath;
-    private boolean counterclockwise;
 
     private Animation finalEnemyLevelFourWalkAnimation;
     private Animation finalEnemyLevelFourIdleAnimation;
@@ -118,8 +117,6 @@ public class FinalEnemyLevelFour extends FinalEnemy {
         tmp = getSpeedTarget();
         velocity.set(tmp);
         initCircularPath();
-
-        counterclockwise = false; // todo alvaro
 
         // -------------------- PowerFX --------------------
 
@@ -448,8 +445,15 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     }
 
     private Vector2 getSpeedCircularPath(float dt) {
-        // tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime)); ESTA FORMULA SIRVE PARA PUNTO 1 Y 2
-        // tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), (counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime)); // ESTA FORMULA SIRVE PARA PUNTO 3 y 4
+        if (target.x == X_MIN && target.y == Y_HALF) {
+            tmp.set(RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        } else if (target.x == X_MAX && target.y == Y_HALF) {
+            tmp.set(-1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        } else if (target.x == X_HALF && target.y == Y_MAX) {
+            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), -1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
+        } else if (target.x == X_HALF && target.y == Y_MIN) {
+            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
+        }
         elapsedTime += dt;
         return tmp;
     }
@@ -460,10 +464,13 @@ public class FinalEnemyLevelFour extends FinalEnemy {
 //                (target.x == X_MAX && target.y == Y_HALF) ||
 //                (target.x == X_HALF && target.y == Y_MIN)) && MathUtils.randomBoolean();
 
-        // return 	(target.x == X_MIN && target.y == Y_HALF); counterclockwise = false; PUNTO 1
-        // return 	(target.x == X_MAX && target.y == Y_HALF); counterclockwise = true; PUNTO 2
-        // return 	(target.x == X_HALF && target.y == Y_MAX); counterclockwise = true; PUNTO 3
-        // return 	(target.x == X_HALF && target.y == Y_MIN); counterclockwise = false; PUNTO 4
+        // todo
+        // return 	(target.x == X_MIN && target.y == Y_HALF); //counterclockwise = false; PUNTO 1
+        // return 	(target.x == X_MAX && target.y == Y_HALF); //counterclockwise = true; PUNTO 2
+        // return 	(target.x == X_HALF && target.y == Y_MAX); //counterclockwise = true; PUNTO 3
+        // return 	(target.x == X_HALF && target.y == Y_MIN); //counterclockwise = false; PUNTO 4
+        // tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime)); ESTA FORMULA SIRVE PARA PUNTO 1 Y 2
+        // tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), (counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime)); // ESTA FORMULA SIRVE PARA PUNTO 3 y 4
         return false;
     }
 
