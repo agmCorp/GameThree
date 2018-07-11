@@ -17,15 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- me faltan para terminar el nivel 4:
- movimiento del enemigo, ya lo hice, pero agregarle que haga un círculo completo de vez en cuando.
- x o x
- o x o
- x o x
- Cuando llega a estos puntos, según sorteo hace un círculo completo sin chocar con nada.
- La bala capaz que me conviene darla vuelta según el cuadrante.
-
-- Hacer pantallas de help:
+- Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar los skulls.
     - perfil de cada enemigo
