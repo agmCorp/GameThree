@@ -49,6 +49,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float PERIOD_SECONDS = 2 * MathUtils.PI * RADIUS_METERS / LINEAR_VELOCITY;
     private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
+    private static final float CIRCULAR_PATH_PROBABILITY = 0.3f;  // 30%
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 1; //TODO
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
@@ -459,19 +460,11 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     }
 
     private boolean startCircularPath() {
-//        return 	((target.x == X_MIN && target.y == Y_HALF) ||
-//                (target.x == X_HALF && target.y == Y_MAX) ||
-//                (target.x == X_MAX && target.y == Y_HALF) ||
-//                (target.x == X_HALF && target.y == Y_MIN)) && MathUtils.randomBoolean();
-
-        // todo
-        // return 	(target.x == X_MIN && target.y == Y_HALF); //counterclockwise = false; PUNTO 1
-        // return 	(target.x == X_MAX && target.y == Y_HALF); //counterclockwise = true; PUNTO 2
-        // return 	(target.x == X_HALF && target.y == Y_MAX); //counterclockwise = true; PUNTO 3
-        // return 	(target.x == X_HALF && target.y == Y_MIN); //counterclockwise = false; PUNTO 4
-        // tmp.set((counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime)); ESTA FORMULA SIRVE PARA PUNTO 1 Y 2
-        // tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), (counterclockwise ? -1 : 1) * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime)); // ESTA FORMULA SIRVE PARA PUNTO 3 y 4
-        return false;
+        return 	((target.x == X_MIN && target.y == Y_HALF) ||
+                (target.x == X_HALF && target.y == Y_MAX) ||
+                (target.x == X_MAX && target.y == Y_HALF) ||
+                (target.x == X_HALF && target.y == Y_MIN)) &&
+                MathUtils.random() <= CIRCULAR_PATH_PROBABILITY;
     }
 
     private boolean reachTarget() {
@@ -682,9 +675,11 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     }
 
     private boolean isDrawable() {
-        return currentStateFinalEnemy != StateFinalEnemy.INACTIVE &&
-                currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
-                currentStateFinalEnemy != StateFinalEnemy.DEAD;
+//        return currentStateFinalEnemy != StateFinalEnemy.INACTIVE &&
+//                currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
+//                currentStateFinalEnemy != StateFinalEnemy.DEAD;
+        // todo
+        return false;
     }
 
     private void drawPowers(Batch batch) {
