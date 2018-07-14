@@ -65,6 +65,8 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
+- Integrar OpenFeint (gogle play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
+libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Un poder de disparo puede variar:
     dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
     cantidad, --- contemplado en la estrategia
