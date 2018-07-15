@@ -50,7 +50,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         if (showNextLevelLabel) {
             prefs.addActiveLevel(nextLevel, finalLives, finalScore);
         }
-        if (showNewHighScoreLabel || showNextLevelLabel) {
+        if (showNewHighScoreLabel || showNextLevelLabel) { // TODO este if no va, siempre salva
             prefs.save();
         }
 
