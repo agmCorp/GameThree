@@ -91,7 +91,7 @@ public class SelectLevelScreen extends AbstractScreen {
         for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
             table.row();
             level = levelState.getLevel();
-            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
+            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level, levelState.getFinalStars()), labelStyleNormal); // todo ACA VAN IMAGENES
             table.add(levelLabel).padTop(AbstractScreen.PAD);
 
             // Events

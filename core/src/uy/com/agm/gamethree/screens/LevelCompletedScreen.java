@@ -1,5 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,6 +17,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 
 /**
@@ -25,37 +27,61 @@ import uy.com.agm.gamethree.widget.AnimatedImage;
 public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
 
+    // Constants
+    private static final int PENALTY_COST = 200;
+
     private int currentLevel;
-    private int finalLives;
-    private int finalScore;
-    private int finalGrace;
     private int nextLevel;
+    private int currentLives;
+    private int currentScore;
+    private int currentGrace;
+    private int currentPenalties;
+    private int finalScore;
+    private int currentStars;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer finalLives, Integer finalScore, Integer finalGrace) {
+    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentGrace) {
         super();
         this.currentLevel = currentLevel;
-        this.finalLives = finalLives;
-        this.finalScore = finalScore;
-        this.finalGrace = finalGrace; // We can calculate stars depending on this value
         this.nextLevel = currentLevel + 1;
+        this.currentLives = currentLives;
+        this.currentScore = currentScore;
+        this.currentGrace = currentGrace;
+        int maxGrace = LevelFactory.getLevelGrace(currentLevel);
+        this.currentPenalties = maxGrace - currentGrace;
+        this.finalScore = Math.abs(currentScore - currentPenalties * PENALTY_COST);
+        this.currentStars = getStars(currentGrace, maxGrace);
 
         GameSettings prefs = GameSettings.getInstance();
+        prefs.setStars(currentLevel, currentStars);
         showNewHighScoreLabel = finalScore > prefs.getHighScore();
         showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
         if (showNewHighScoreLabel) {
             prefs.setHighScore(finalScore);
         }
         if (showNextLevelLabel) {
-            prefs.addActiveLevel(nextLevel, finalLives, finalScore);
+            prefs.addActiveLevel(nextLevel, currentLives, finalScore);
         }
-        if (showNewHighScoreLabel || showNextLevelLabel) { // TODO este if no va, siempre salva
-            prefs.save();
-        }
+        prefs.save();
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
+    }
+
+    private int getStars(int currentGrace, int maxGrace) {
+        int stars = 0;
+
+        if (currentGrace == maxGrace) {
+            stars = 3;
+        } else {
+            if (currentGrace <= MathUtils.ceil((float)(maxGrace - 1) / 2)) {
+                stars = 1;
+            } else {
+                stars = 2;
+            }
+        }
+        return stars;
     }
 
     @Override
@@ -80,8 +106,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
 
-        // Center-Align table
-        table.center();
+        // Top-Align table
+        table.top();
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -99,18 +125,24 @@ public class LevelCompletedScreen extends AbstractScreen {
         animatedImage.setAnimation(assetScene2d.getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
-        Label currentLevelLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentLevel", currentLevel), labelStyleBig);
+        Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
+        Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
+        Label finalStarsLabel = new Label("ESTRELLAS " + currentStars, labelStyleNormal); // todo provisorio
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabel nextLevelLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         TypingLabel newLevelsLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
 
         // Add values
-        table.add(currentLevelLabel);
-        table.row();
         table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
         table.row();
+        table.add(currentScoreLabel).padTop(AbstractScreen.PAD);
+        table.row();
+        table.add(penaltiesLabel).padTop(AbstractScreen.PAD);
+        table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
+        table.row();
+        table.add(finalStarsLabel).padTop(AbstractScreen.PAD); // todo provisorio
         table.row();
         if (showNewHighScoreLabel) {
             table.add(newHighScoreLabel).padTop(AbstractScreen.PAD);
@@ -121,7 +153,7 @@ public class LevelCompletedScreen extends AbstractScreen {
             table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
 
             // Events
-            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, finalLives, finalScore));
+            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, currentLives, finalScore));
         } else {
             table.row();
             table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);

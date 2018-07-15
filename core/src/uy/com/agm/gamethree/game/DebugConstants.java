@@ -27,10 +27,10 @@ public class DebugConstants {
     public static final boolean DEBUG_LEVELS = true && TURN_ON_DEBUG;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 0.0f * (TURN_ON_DEBUG ? 1 : 0);
+    public static final float GAME_CAM_Y_METERS = 75.0f * (TURN_ON_DEBUG ? 1 : 0);
 
     // When it's true, grace count is ignored
-    public static final boolean DISABLE_GRACE_COUNT = false && TURN_ON_DEBUG;
+    public static final boolean DISABLE_GRACE_COUNT = true && TURN_ON_DEBUG;
 
     // Freezes the camera
     public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;

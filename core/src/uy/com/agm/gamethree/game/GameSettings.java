@@ -75,7 +75,7 @@ public class GameSettings {
         highScore = prefs.getInteger(HIGH_SCORE, DEFAULT_HIGH_SCORE);
 
         int level = 1; // Default level
-        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, true);
+        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, 0, true);
         levels.put(level, levelState);
 
         // Other levels
@@ -87,7 +87,7 @@ public class GameSettings {
             if (data.isEmpty()) {
                 availableLevel = DebugConstants.DEBUG_LEVELS && level <= MAX_LEVEL;
                 if (availableLevel) {
-                    levelState = new LevelState(level, Hero.LIVES_START, 0, false);
+                    levelState = new LevelState(level, Hero.LIVES_START, 0, 0, false);
                 }
             } else {
                 levelState = getLevelState(data);
@@ -161,11 +161,15 @@ public class GameSettings {
         this.highScore = highScore;
     }
 
+    public void setStars(int level, int stars) {
+        levels.get(level).setFinalStars(stars);
+    }
+
     public ArrayMap<Integer, LevelState> getLevels() {
         return levels;
     }
 
     public void addActiveLevel(int level, int lives, int score) {
-        levels.put(level, new LevelState(level, lives, score, true));
+        levels.put(level, new LevelState(level, lives, score, 0, true));
     }
 }
