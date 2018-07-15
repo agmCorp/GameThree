@@ -553,6 +553,9 @@ public class Hud extends AbstractScreen {
                 int percentage = MathUtils.round((float)(energy * 100 / initialEnergy));
                 setHeartImage(percentage);
                 energyValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENERGY, energy));
+                if (energy == 1) {
+                    screen.getInfoScreen().showFailWarning();
+                }
             }
         }
     }

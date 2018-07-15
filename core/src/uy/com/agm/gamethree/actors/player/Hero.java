@@ -704,9 +704,6 @@ public class Hero extends Sprite {
             setColor(HIT_COLOR);
             Hud hud = screen.getHud();
             hud.decreaseEnergy(1);
-            if (hud.getEnergy() == 1) {
-                screen.getInfoScreen().showFailWarning();
-            }
         }
     }
 
