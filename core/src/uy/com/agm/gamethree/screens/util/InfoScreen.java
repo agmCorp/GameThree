@@ -48,9 +48,6 @@ public class InfoScreen extends AbstractScreen {
      *  - Normal: Always visible until hideInfo() is called
      *  - Temporary: Just for a few seconds
      *  - Modal: Force user interaction
-     * A message can be normal or temporary.
-     * An image can be normal, temporary or modal.
-     * An animation can be normal, temporary or modal.
      */
 
     // Constants

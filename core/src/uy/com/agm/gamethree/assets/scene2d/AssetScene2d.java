@@ -71,8 +71,11 @@ public class AssetScene2d {
     private TextureRegion quitPressed;
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
+    private TextureRegion goldTrophy;
+    private TextureRegion star;
+    private TextureRegion emptyStar;
     private AssetHeroHead heroHead;
-    private AssetGrace grace;
+    private AssetEnergy energy;
     private AssetHourglass hourglass;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -143,8 +146,11 @@ public class AssetScene2d {
         quitPressed = atlasUI.findRegion("quitPressed");
         gotIt = atlasUI.findRegion("gotIt");
         gotItPressed = atlasUI.findRegion("gotItPressed");
+        goldTrophy = atlasUI.findRegion("goldTrophy");
+        star = atlasUI.findRegion("star");
+        emptyStar = atlasUI.findRegion("emptyStar");
         heroHead = new AssetHeroHead(atlasUI);
-        grace = new AssetGrace(atlasUI);
+        energy = new AssetEnergy(atlasUI);
         hourglass = new AssetHourglass(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -397,12 +403,24 @@ public class AssetScene2d {
         return gotItPressed;
     }
 
+    public TextureRegion getGoldTrophy() {
+        return goldTrophy;
+    }
+
+    public TextureRegion getStar() {
+        return star;
+    }
+
+    public TextureRegion getEmptyStar() {
+        return emptyStar;
+    }
+
     public AssetHeroHead getHeroHead() {
         return heroHead;
     }
 
-    public AssetGrace getGrace() {
-        return grace;
+    public AssetEnergy getEnergy() {
+        return energy;
     }
 
     public AssetHourglass getHourglass() {

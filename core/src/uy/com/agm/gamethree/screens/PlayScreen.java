@@ -178,7 +178,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the game HUD for score, time, etc.
         hud = new Hud(this, level, score, LevelFactory.getLevelTimer(level),
-                player.getLives(), LevelFactory.getLevelGrace(level));
+                player.getLives(), LevelFactory.getLevelEnergy(level));
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -681,7 +681,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getGrace());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getEnergy());
         }
     }
 
@@ -744,7 +744,7 @@ public class PlayScreen extends AbstractScreen {
 
     public void enemyGetAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
-            hud.decreaseGrace(1);
+            hud.decreaseEnergy(1);
             if (showRedFlashHelp) {
                 infoScreen.showRedFlashHelp();
                 showRedFlashHelp = false;

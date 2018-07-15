@@ -20,23 +20,19 @@ PRIORIDADES PARA LIBERAR
 - PONERLE UN BORDE NEGRO A LOS PERSONAJES MISTERIOSOS QUE SE MUESTRAN AL AGARRAR SHURIKEN POR PRIMERA VEZ.
 - MI JUEGO: SACARLE SOULS AL ENEMIGO 11 DEL NIVEL 3
 - SACAR LAS POWERBOXES CON PODERES DEL NIVEL 3 Y DEL  NIVEL 4 pues ahora tengo el beep.
-- PONER UN TROFEO CUANDO TENES HIGHSCORE
-- CAMBIAR EL SKULL POR UN CORAZON AL 100% QUE SE ACTUALIZA A 75%, 50%, 25% A MEDIDA QUE SE DECREMENTA LEVEL_GRACE
 - Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
-    - Imprescindible explicar los skulls.
-    - perfil de cada enemigo
+    - Imprescindible explicar la energy.
+    - perfil de cada enemigo?
     - items y poderes
 - Hacer pantalla de final feliz
 - hacer un mapa de los niveles
 
 HACER PRIORIDAD 1
 -----------------
-- Poner estrellas en lugar de skulls o premiar en positivo (no castigar, investigar).
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
-- Capaz en el help inicial del red puedo poner una flecha a prepo que senale los skulls del hud.
-- la pantalla de level completed debe tener los clasicos botones de las estrellitas, etc.
+- Capaz en el help inicial del red puedo poner una flecha a prepo que senale la energy del hud.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
@@ -72,18 +68,11 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
 - Integrar OpenFeint (gogle play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
-- Un poder de disparo puede variar:
-    dibujo y tamano de la bala (sprite y b2body) --- contemplado en la estrategia
-    cantidad, --- contemplado en la estrategia
-    delay, --- contemplado en la estrategia
-    animacion, --- contemplado en la estrategia
-    tipo de movimiento (boomerang):
+- Poder de disparo con tipo de movimiento (boomerang):
         se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
         y luego en el stateShoot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
-        definir una clase nueva FancyBullet que herede de Weapon y tenga toda su lógica loca adentro (como la tiene HeroBullet o EnemyBullet).
-        Luego el B2WorldCreator la contemplaría.
-    velocidad --- contemplado en la estrategia
-    sonido --- contemplado en la estrategia
+        definir una clase nueva FancyBullet (o BoomerangBullet) que herede de Weapon y tenga toda su lógica loca adentro (como la tiene HeroBullet o EnemyBullet).
+        Luego una strategy nueva que cree el objeto pasando FancyBullet para que el b2worldcreator lo cree.
 
 SOLO IDEAS
 ----------
@@ -100,10 +89,6 @@ Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGa
 Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
 Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen manager tiene un if antes del setScreen por pruebas.
 - hacer una bala grandota y ruidosa con shake capaz
-- Estadisticas: contar los disparos y contar los muertos, hacer porcentaje de efectividad y mostar en level completed.
-Esto lo tengo que contabilizar a medida que voy matando y NO al final viendo los arreglos (porque yo liquido los enemigos restantes o
-los que se van de la pantalla).
-Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
     - hay que dispararle mucho para matarlo.
@@ -119,9 +104,6 @@ Puedo relacionarlo con la otra idea del contador de bichos que se me escapan.
     instante) en donde esta el hero y va hacia ahi.
     - enemigo que es como una estella (cometa). Para ese efecto agregar varias veces el sprite con distinto alpha.
     Se mueve rapido derecho en diagonal.
-- se puede hacer un arma para enemigo final que vaya medio boomerang o en circulos, para ello debería crear otra
-EnemyBullet (BoomerangBullet) que contemple el movimiento y una strategy nueva que cree el objeto pasando BoomerangBullet para que el
-b2worldcreator lo cree.
 - minuto 33.43 puentes dinámicos
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.

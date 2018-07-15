@@ -16,7 +16,7 @@ public class AssetBulletG {
 
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = 74.0f * 1.3f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 153.0f  * 1.3f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 230.0f  * 1.3f / PlayScreen.PPM;
 
     private TextureRegion bulletGStand;
     private Animation bulletGAnimation;

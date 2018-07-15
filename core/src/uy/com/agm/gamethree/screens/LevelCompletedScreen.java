@@ -1,12 +1,15 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -34,24 +37,24 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int nextLevel;
     private int currentLives;
     private int currentScore;
-    private int currentGrace;
+    private int currentEnergy;
     private int currentPenalties;
     private int finalScore;
     private int currentStars;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentGrace) {
+    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentEnergy) {
         super();
         this.currentLevel = currentLevel;
         this.nextLevel = currentLevel + 1;
         this.currentLives = currentLives;
         this.currentScore = currentScore;
-        this.currentGrace = currentGrace;
-        int maxGrace = LevelFactory.getLevelGrace(currentLevel);
-        this.currentPenalties = maxGrace - currentGrace;
+        this.currentEnergy = currentEnergy;
+        int maxEnergy = LevelFactory.getLevelEnergy(currentLevel);
+        this.currentPenalties = maxEnergy - currentEnergy;
         this.finalScore = Math.abs(currentScore - currentPenalties * PENALTY_COST);
-        this.currentStars = getStars(currentGrace, maxGrace);
+        this.currentStars = getStars(currentEnergy, maxEnergy);
 
         GameSettings prefs = GameSettings.getInstance();
         prefs.setStars(currentLevel, currentStars);
@@ -69,13 +72,13 @@ public class LevelCompletedScreen extends AbstractScreen {
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
     }
 
-    private int getStars(int currentGrace, int maxGrace) {
+    private int getStars(int currentEnergy, int maxEnergy) {
         int stars = 0;
 
-        if (currentGrace == maxGrace) {
+        if (currentEnergy == maxEnergy) {
             stars = 3;
         } else {
-            if (currentGrace <= MathUtils.ceil((float)(maxGrace - 1) / 2)) {
+            if (currentEnergy <= MathUtils.ceil((float)(maxEnergy - 1) / 2)) {
                 stars = 1;
             } else {
                 stars = 2;
@@ -128,7 +131,6 @@ public class LevelCompletedScreen extends AbstractScreen {
         Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
         Label finalScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
-        Label finalStarsLabel = new Label("ESTRELLAS " + currentStars, labelStyleNormal); // todo provisorio
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabel nextLevelLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         TypingLabel newLevelsLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
@@ -142,22 +144,25 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(finalStarsLabel).padTop(AbstractScreen.PAD); // todo provisorio
+        table.add(getStarsTable(assetScene2d.getStar(), assetScene2d.getEmptyStar(), currentStars)).padTop(AbstractScreen.PAD);
         table.row();
+        float padTop = AbstractScreen.PAD * 2;
         if (showNewHighScoreLabel) {
-            table.add(newHighScoreLabel).padTop(AbstractScreen.PAD);
+            padTop = AbstractScreen.PAD;
+            table.add(getNewHighScoreTable(assetScene2d.getGoldTrophy(), newHighScoreLabel)).padTop(AbstractScreen.PAD);
             table.row();
         }
         if (showNextLevelLabel) {
             table.row();
-            table.add(nextLevelLabel).padTop(AbstractScreen.PAD * 2);
+            table.add(nextLevelLabel).padTop(padTop);
 
             // Events
             nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, currentLives, finalScore));
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(AbstractScreen.PAD * 2);
+            table.add(newLevelsLabel).padTop(padTop);
         }
+        table.padTop(padTop);
 
         // Adds table to stage
         addActor(table);
@@ -191,6 +196,32 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Adds table to stage
         addActor(table);
+    }
+
+    private Table getNewHighScoreTable(TextureRegion goldTrophy, Label highScoreLabel) {
+        Image image = new Image();
+        image.setDrawable(new TextureRegionDrawable(goldTrophy));
+        image.setScaling(Scaling.fit);
+
+        Table table = new Table();
+        table.setDebug(DebugConstants.DEBUG_LINES);
+        table.add(image);
+        table.add(highScoreLabel).padLeft(AbstractScreen.PAD / 2);
+
+        return table;
+    }
+
+    private Table getStarsTable(TextureRegion star, TextureRegion emptyStar, int stars) {
+        Table table = new Table();
+        table.setDebug(DebugConstants.DEBUG_LINES);
+        Image image;
+        for (int i = 1; i <= 3; i++) {
+            image = new Image();
+            image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
+            image.setScaling(Scaling.fit);
+            table.add(image);
+        }
+        return table;
     }
 
     @Override

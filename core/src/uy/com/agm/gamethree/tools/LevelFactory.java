@@ -36,10 +36,10 @@ public class LevelFactory {
     private static final int TIMER_LEVEL_TWO = 460;
     private static final int TIMER_LEVEL_THREE = 500;
     private static final int TIMER_LEVEL_FOUR = 400;
-    private static final int GRACE_LEVEL_ONE = 10 * 0 + 10; // todo
-    private static final int GRACE_LEVEL_TWO = 8 * 0 + 4;
-    private static final int GRACE_LEVEL_THREE = 6 * 0 + 4;
-    private static final int GRACE_LEVEL_FOUR = 4 * 0 + 4;
+    private static final int ENERGY_LEVEL_ONE = 14;
+    private static final int ENERGY_LEVEL_TWO = 10;
+    private static final int ENERGY_LEVEL_THREE = 8;
+    private static final int ENERGY_LEVEL_FOUR = 6;
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -82,9 +82,9 @@ public class LevelFactory {
         return  levelTimers[level - 1];
     }
 
-    public static int getLevelGrace(int level) {
-        int[] levelGrace = {GRACE_LEVEL_ONE, GRACE_LEVEL_TWO, GRACE_LEVEL_THREE, GRACE_LEVEL_FOUR};
-        return  levelGrace[level - 1];
+    public static int getLevelEnergy(int level) {
+        int[] levelEnergy = {ENERGY_LEVEL_ONE, ENERGY_LEVEL_TWO, ENERGY_LEVEL_THREE, ENERGY_LEVEL_FOUR};
+        return  levelEnergy[level - 1];
     }
 
     public static Music getLevelMusic(int level) {

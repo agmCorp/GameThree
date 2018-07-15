@@ -181,7 +181,7 @@ public class Hero extends Sprite {
             checkLevelTimeUp();
 
             // Have escaped too many enemies, Hero dies
-            checkGrace();
+            checkEnergy();
 
             // If Hero is playing again, set his default filter after a few seconds.
             // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
@@ -523,8 +523,8 @@ public class Hero extends Sprite {
         }
     }
 
-    private void checkGrace() {
-        if (screen.getHud().getGrace() <= 0) {
+    private void checkEnergy() {
+        if (screen.getHud().getEnergy() <= 0) {
             if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
                 screen.getInfoScreen().showStageFailedAnimation();
                 forceGameOver();
@@ -703,8 +703,8 @@ public class Hero extends Sprite {
             ouch();
             setColor(HIT_COLOR);
             Hud hud = screen.getHud();
-            hud.decreaseGrace(1);
-            if (hud.getGrace() == 1) {
+            hud.decreaseEnergy(1);
+            if (hud.getEnergy() == 1) {
                 screen.getInfoScreen().showFailWarning();
             }
         }

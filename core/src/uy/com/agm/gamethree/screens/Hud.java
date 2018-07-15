@@ -42,7 +42,7 @@ public class Hud extends AbstractScreen {
     private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
-    private static final String FORMAT_GRACE = "%02d";
+    private static final String FORMAT_ENERGY = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
@@ -64,10 +64,10 @@ public class Hud extends AbstractScreen {
     private Label timeValueLabel;
     private int lives;
     private Label livesValueLabel;
-    private int initialGrace;
+    private int initialEnergy;
     private Image heart;
-    private int grace;
-    private Label graceValueLabel;
+    private int energy;
+    private Label energyValueLabel;
     private int silverBullets;
     private Label silverBulletValueLablel;
 
@@ -97,7 +97,7 @@ public class Hud extends AbstractScreen {
 
     private boolean timeIsUp; // True when the level time reaches 0
 
-    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer grace) {
+    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer energy) {
         super();
 
         // Define tracking variables
@@ -108,8 +108,8 @@ public class Hud extends AbstractScreen {
         this.time = time;
         timeCount = 0;
         this.lives = lives;
-        this.initialGrace = grace;
-        this.grace = grace;
+        this.initialEnergy = energy;
+        this.energy = energy;
         silverBullets = 0;
         abilityPowerTime = 0;
         abilityPowerTimeCount = 0;
@@ -183,8 +183,8 @@ public class Hud extends AbstractScreen {
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
         livesValueLabel.setAlignment(Align.center);
-        graceValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_GRACE, this.grace), labelStyleSmall);
-        graceValueLabel.setAlignment(Align.center);
+        energyValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_ENERGY, this.energy), labelStyleSmall);
+        energyValueLabel.setAlignment(Align.center);
         silverBulletValueLablel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
         silverBulletValueLablel.setAlignment(Align.center);
 
@@ -193,7 +193,7 @@ public class Hud extends AbstractScreen {
         upperTable.add(highScoreValueLabel);
         upperTable.add(timeValueLabel);
         upperTable.add(livesValueLabel);
-        upperTable.add(graceValueLabel);
+        upperTable.add(energyValueLabel);
         upperTable.add(silverBulletValueLablel);
 
         // Add a third row to our table
@@ -210,19 +210,19 @@ public class Hud extends AbstractScreen {
     private void setHeartImage(float percentage) {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-        TextureRegion grace = assetScene2d.getGrace().getGrace0();
+        TextureRegion energy = assetScene2d.getEnergy().getEnergy0();
 
         if (0 < percentage && percentage <= 25) {
-            grace = assetScene2d.getGrace().getGrace25();
+            energy = assetScene2d.getEnergy().getEnergy25();
         } else if (25 < percentage && percentage <= 50) {
-            grace = assetScene2d.getGrace().getGrace50();
+            energy = assetScene2d.getEnergy().getEnergy50();
         } else if (50 < percentage && percentage <= 75) {
-            grace = assetScene2d.getGrace().getGrace75();
+            energy = assetScene2d.getEnergy().getEnergy75();
         } else if (75 < percentage && percentage <= 100) {
-            grace = assetScene2d.getGrace().getGrace100();
+            energy = assetScene2d.getEnergy().getEnergy100();
         }
 
-        heart.setDrawable(new TextureRegionDrawable(grace));
+        heart.setDrawable(new TextureRegionDrawable(energy));
         heart.setScaling(Scaling.fit);
     }
 
@@ -546,19 +546,19 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
     }
 
-    public void decreaseGrace(int quantity) {
-        if (!DebugConstants.DISABLE_GRACE_COUNT) {
-            grace -= quantity;
-            if (grace >= 0) {
-                int percentage = MathUtils.round((float)(grace * 100 / initialGrace));
+    public void decreaseEnergy(int quantity) {
+        if (!DebugConstants.DISABLE_ENERGY_COUNT) {
+            energy -= quantity;
+            if (energy >= 0) {
+                int percentage = MathUtils.round((float)(energy * 100 / initialEnergy));
                 setHeartImage(percentage);
-                graceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_GRACE, grace));
+                energyValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENERGY, energy));
             }
         }
     }
 
-    public int getGrace() {
-        return grace;
+    public int getEnergy() {
+        return energy;
     }
 
     public void increaseSilverBullets(int quantity) {
