@@ -17,6 +17,10 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- MI JUEGO: SACARLE SOULS AL ENEMIGO 11 DEL NIVEL 3
+- SACAR LAS POWERBOXES CON PODERES DEL NIVEL 3 Y DEL  NIVEL 4 pues ahora tengo el beep.
+- PONER UN TROFEO CUANDO TENES HIGHSCORE
+- CAMBIAR EL SKULL POR UN CORAZON AL 100% QUE SE ACTUALIZA A 75%, 50%, 25% A MEDIDA QUE SE DECREMENTA LEVEL_GRACE
 - Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar los skulls.
