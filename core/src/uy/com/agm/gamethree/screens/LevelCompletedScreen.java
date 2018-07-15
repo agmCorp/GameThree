@@ -54,7 +54,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         int maxEnergy = LevelFactory.getLevelEnergy(currentLevel);
         this.currentPenalties = maxEnergy - currentEnergy;
         this.finalScore = Math.abs(currentScore - currentPenalties * PENALTY_COST);
-        this.currentStars = getStars(currentEnergy, maxEnergy);
+        this.currentStars = getStarsValue(currentEnergy, maxEnergy);
 
         GameSettings prefs = GameSettings.getInstance();
         prefs.setStars(currentLevel, currentStars);
@@ -70,21 +70,6 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
-    }
-
-    private int getStars(int currentEnergy, int maxEnergy) {
-        int stars = 0;
-
-        if (currentEnergy == maxEnergy) {
-            stars = 3;
-        } else {
-            if (currentEnergy <= MathUtils.ceil((float)(maxEnergy - 1) / 2)) {
-                stars = 1;
-            } else {
-                stars = 2;
-            }
-        }
-        return stars;
     }
 
     @Override
@@ -209,6 +194,21 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(highScoreLabel).padLeft(AbstractScreen.PAD / 2);
 
         return table;
+    }
+
+    private int getStarsValue(int currentEnergy, int maxEnergy) {
+        int stars = 0;
+
+        if (currentEnergy == maxEnergy) {
+            stars = 3;
+        } else {
+            if (currentEnergy <= MathUtils.ceil((float)(maxEnergy - 1) / 2)) {
+                stars = 1;
+            } else {
+                stars = 2;
+            }
+        }
+        return stars;
     }
 
     private Table getStarsTable(TextureRegion star, TextureRegion emptyStar, int stars) {

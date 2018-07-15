@@ -1,11 +1,14 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -23,7 +26,7 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
     // Constants
-    public static final float SCROLL_PANE_MAX_HEIGHT = 300.0f;
+    public static final float SCROLL_PANE_MAX_HEIGHT = 330.0f;
 
     public SelectLevelScreen() {
         super();
@@ -72,6 +75,9 @@ public class SelectLevelScreen extends AbstractScreen {
     }
 
     private Table defineLevelsTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // I18n
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
@@ -88,14 +94,18 @@ public class SelectLevelScreen extends AbstractScreen {
         // Add values
         int level;
         Label levelLabel;
+        Table levelTable;
+        TextureRegion star = assetScene2d.getStar();
+        TextureRegion emptyStar = assetScene2d.getEmptyStar();
         for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
             table.row();
             level = levelState.getLevel();
-            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level, levelState.getFinalStars()), labelStyleNormal); // todo ACA VAN IMAGENES
-            table.add(levelLabel).padTop(AbstractScreen.PAD);
+            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
+            levelTable = getStarsTable(levelLabel, star, emptyStar, levelState.getFinalStars());
+            table.add(levelTable).padTop(AbstractScreen.PAD);
 
             // Events
-            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
+            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
                     levelState.getInitialLives(),
                     levelState.getInitialScore()));
         }
@@ -131,6 +141,20 @@ public class SelectLevelScreen extends AbstractScreen {
 
         // Adds table to stage
         addActor(table);
+    }
+
+    private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
+        Table table = new Table();
+        table.setDebug(DebugConstants.DEBUG_LINES);
+        table.add(levelLabel).padRight(AbstractScreen.PAD / 2);
+        Image image;
+        for (int i = 1; i <= 3; i++) {
+            image = new Image();
+            image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
+            image.setScaling(Scaling.fit);
+            table.add(image);
+        }
+        return table;
     }
 
     @Override
