@@ -1,10 +1,15 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 
 import java.util.Locale;
 
@@ -31,13 +36,13 @@ public class Hud extends AbstractScreen {
     private static final float HIGH_SCORE_WIDTH = 130.0f;
     private static final float TIME_WIDTH = 60.0f;
     private static final float LIVES_WIDTH = 60.0f;
-    private static final float SKULLS_WIDTH = 60.0f;
+    private static final float HEART_WIDTH = 60.0f;
     private static final float SILVER_BULLETS_WIDTH = 60.0f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
-    private static final String FORMAT_SKULLS = "%02d";
+    private static final String FORMAT_GRACE = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
@@ -59,8 +64,10 @@ public class Hud extends AbstractScreen {
     private Label timeValueLabel;
     private int lives;
     private Label livesValueLabel;
-    private int skulls;
-    private Label skullsValueLabel;
+    private int initialGrace;
+    private Image heart;
+    private int grace;
+    private Label graceValueLabel;
     private int silverBullets;
     private Label silverBulletValueLablel;
 
@@ -90,7 +97,7 @@ public class Hud extends AbstractScreen {
 
     private boolean timeIsUp; // True when the level time reaches 0
 
-    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer skulls) {
+    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer grace) {
         super();
 
         // Define tracking variables
@@ -101,7 +108,8 @@ public class Hud extends AbstractScreen {
         this.time = time;
         timeCount = 0;
         this.lives = lives;
-        this.skulls = skulls;
+        this.initialGrace = grace;
+        this.grace = grace;
         silverBullets = 0;
         abilityPowerTime = 0;
         abilityPowerTimeCount = 0;
@@ -156,9 +164,9 @@ public class Hud extends AbstractScreen {
         AnimatedImage heroHead = new AnimatedImage();
         heroHead.setAnimation(assetScene2d.getHeroHead().getHeroHeadAnimation());
         upperTable.add(heroHead).width(LIVES_WIDTH);
-        AnimatedImage skullHead = new AnimatedImage();
-        skullHead.setAnimation(assetScene2d.getSkullHead().getSkullHeadAnimation());
-        upperTable.add(skullHead).width(SKULLS_WIDTH);
+        heart = new Image();
+        setHeartImage(100);
+        upperTable.add(heart).width(HEART_WIDTH);
         AnimatedImage shuriken = new AnimatedImage();
         shuriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
         upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
@@ -175,8 +183,8 @@ public class Hud extends AbstractScreen {
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
         livesValueLabel.setAlignment(Align.center);
-        skullsValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls), labelStyleSmall);
-        skullsValueLabel.setAlignment(Align.center);
+        graceValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_GRACE, this.grace), labelStyleSmall);
+        graceValueLabel.setAlignment(Align.center);
         silverBulletValueLablel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
         silverBulletValueLablel.setAlignment(Align.center);
 
@@ -185,7 +193,7 @@ public class Hud extends AbstractScreen {
         upperTable.add(highScoreValueLabel);
         upperTable.add(timeValueLabel);
         upperTable.add(livesValueLabel);
-        upperTable.add(skullsValueLabel);
+        upperTable.add(graceValueLabel);
         upperTable.add(silverBulletValueLablel);
 
         // Add a third row to our table
@@ -197,6 +205,25 @@ public class Hud extends AbstractScreen {
 
         // Add table to the stage
         addActor(upperTable);
+    }
+
+    private void setHeartImage(float percentage) {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+        TextureRegion grace = assetScene2d.getGrace().getGrace0();
+
+        if (0 < percentage && percentage <= 25) {
+            grace = assetScene2d.getGrace().getGrace25();
+        } else if (25 < percentage && percentage <= 50) {
+            grace = assetScene2d.getGrace().getGrace50();
+        } else if (50 < percentage && percentage <= 75) {
+            grace = assetScene2d.getGrace().getGrace75();
+        } else if (75 < percentage && percentage <= 100) {
+            grace = assetScene2d.getGrace().getGrace100();
+        }
+
+        heart.setDrawable(new TextureRegionDrawable(grace));
+        heart.setScaling(Scaling.fit);
     }
 
     private void definePowersTable() {
@@ -519,22 +546,19 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
     }
 
-    public void increaseSkulls(int quantity) {
-        skulls += quantity;
-        skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
-    }
-
-    public void decreaseSkulls(int quantity) {
-        if (!DebugConstants.DISABLE_SKULL_COUNT) {
-            skulls -= quantity;
-            if (skulls >= 0) {
-                skullsValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SKULLS, skulls));
+    public void decreaseGrace(int quantity) {
+        if (!DebugConstants.DISABLE_GRACE_COUNT) {
+            grace -= quantity;
+            if (grace >= 0) {
+                int percentage = MathUtils.round((float)(grace * 100 / initialGrace));
+                setHeartImage(percentage);
+                graceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_GRACE, grace));
             }
         }
     }
 
-    public int getSkulls() {
-        return skulls;
+    public int getGrace() {
+        return grace;
     }
 
     public void increaseSilverBullets(int quantity) {

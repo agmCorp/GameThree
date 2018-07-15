@@ -28,17 +28,17 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int currentLevel;
     private int finalLives;
     private int finalScore;
-    private int finalSkulls;
+    private int finalGrace;
     private int nextLevel;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer finalLives, Integer finalScore, Integer finalSkulls) {
+    public LevelCompletedScreen(Integer currentLevel, Integer finalLives, Integer finalScore, Integer finalGrace) {
         super();
         this.currentLevel = currentLevel;
         this.finalLives = finalLives;
         this.finalScore = finalScore;
-        this.finalSkulls = finalSkulls; // We can calculate stars depending on this value
+        this.finalGrace = finalGrace; // We can calculate stars depending on this value
         this.nextLevel = currentLevel + 1;
 
         GameSettings prefs = GameSettings.getInstance();

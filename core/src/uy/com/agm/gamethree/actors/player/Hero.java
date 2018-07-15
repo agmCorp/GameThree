@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.actors.player;
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
@@ -22,6 +25,7 @@ import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
@@ -46,6 +50,9 @@ public class Hero extends Sprite {
     private static final float PLAY_AGAIN_DELAY_SECONDS = 4.0f;
     private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
     private static final float SENSOR_OFFSET_METERS = 0.1f;
+    private static final Color HIT_COLOR = Color.RED;
+    private static final float HIT_COLOR_TIME_SECONDS = 1.0f;
+    private static final float IGNORE_HIT_SECONDS = 0.5f;
 
     private enum HeroState {
         STANDING, MOVING_UP, MOVING_DOWN, MOVING_LEFT_RIGHT, DYING_UP, DYING_DOWN, DEAD
@@ -68,6 +75,8 @@ public class Hero extends Sprite {
     private float playAgainTime;
     private float gameOverTime;
     private float setDefaultFilterTime;
+    private float hitTime;
+    private long lastHitTime;
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
@@ -127,6 +136,8 @@ public class Hero extends Sprite {
         playAgainTime = 0;
         gameOverTime = 0;
         setDefaultFilterTime = 0;
+        hitTime = 0;
+        lastHitTime = 0;
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = LIVES_START;
@@ -170,13 +181,16 @@ public class Hero extends Sprite {
             checkLevelTimeUp();
 
             // Have escaped too many enemies, Hero dies
-            checkSkulls();
+            checkGrace();
 
             // If Hero is playing again, set his default filter after a few seconds.
             // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
             // could have died crushed.
             // If Hero is dead we don't set default filters.
             timeToSetDefaultFilter(dt);
+
+            // If Hero was hit set default tint
+            checkHitColor(dt);
         }
 
         switch (currentHeroState) {
@@ -380,8 +394,9 @@ public class Hero extends Sprite {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getDead());
 
-            // We take away all his powers and force powerTimeUp
+            // We take away all his powers, set default color and force powerTimeUp
             powersDown();
+            setColor(Color.WHITE);
             screen.getHud().forcePowersTimeUp();
 
             // Hero can't collide with anything
@@ -508,12 +523,20 @@ public class Hero extends Sprite {
         }
     }
 
-    private void checkSkulls() {
-        if (screen.getHud().getSkulls() <= 0) {
+    private void checkGrace() {
+        if (screen.getHud().getGrace() <= 0) {
             if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
-                screen.getInfoScreen().showEmptySkullsAnimation();
+                screen.getInfoScreen().showStageFailedAnimation();
                 forceGameOver();
             }
+        }
+    }
+
+    private void checkHitColor(float dt) {
+        hitTime += dt;
+        if (hitTime > HIT_COLOR_TIME_SECONDS) {
+            hitTime = 0;
+            setColor(Color.WHITE); // Default
         }
     }
 
@@ -635,6 +658,15 @@ public class Hero extends Sprite {
         }
     }
 
+    private void ouch() {
+        Sound ouch = Assets.getInstance().getSounds().getHeroHit();
+        Long lastPlayingTime = AudioManager.getInstance().getLastPlayingTime(ouch);
+        if (lastPlayingTime == null ||
+                TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= IGNORE_HIT_SECONDS * 1000) {
+            AudioManager.getInstance().playSound(ouch);
+        }
+    }
+
     public void setFilterData(Filter filter) {
         for (Fixture fixture : b2body.getFixtureList()) {
             if (!fixture.isSensor()) {
@@ -659,6 +691,27 @@ public class Hero extends Sprite {
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getCrunch());
             }
         }
+    }
+
+    public void onEnemyHit() {
+        long nanoTime = TimeUtils.nanoTime();
+        if (TimeUtils.nanosToMillis(nanoTime - lastHitTime) >=
+                IGNORE_HIT_SECONDS * 1000) {
+            lastHitTime = nanoTime;
+
+            // Enemy hit logic
+            ouch();
+            setColor(HIT_COLOR);
+            Hud hud = screen.getHud();
+            hud.decreaseGrace(1);
+            if (hud.getGrace() == 1) {
+                screen.getInfoScreen().showFailWarning();
+            }
+        }
+    }
+
+    public void resume() {
+        lastHitTime = TimeUtils.nanoTime();
     }
 
     public void onDead() {

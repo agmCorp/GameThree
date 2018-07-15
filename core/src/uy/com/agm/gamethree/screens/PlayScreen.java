@@ -178,7 +178,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the game HUD for score, time, etc.
         hud = new Hud(this, level, score, LevelFactory.getLevelTimer(level),
-                player.getLives(), LevelFactory.getLevelSkulls(level));
+                player.getLives(), LevelFactory.getLevelGrace(level));
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -593,6 +593,10 @@ public class PlayScreen extends AbstractScreen {
         bottomEdge.speedUp();
     }
 
+    private void resumeHero() {
+        player.resume();
+    }
+
     public TiledMap getMap() {
         return map;
     }
@@ -677,7 +681,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getSkulls());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getGrace());
         }
     }
 
@@ -727,6 +731,7 @@ public class PlayScreen extends AbstractScreen {
     public void setPlayScreenStateRunning(){
         this.playScreenState = PlayScreenState.RUNNING;
         resumeAudio();
+        resumeHero();
     }
 
     public boolean isPlayScreenStateBreak() {
@@ -739,16 +744,12 @@ public class PlayScreen extends AbstractScreen {
 
     public void enemyGetAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
-            hud.decreaseSkulls(1);
+            hud.decreaseGrace(1);
             if (showRedFlashHelp) {
                 infoScreen.showRedFlashHelp();
                 showRedFlashHelp = false;
             } else {
-                if (hud.getSkulls() == 1) {
-                    infoScreen.showRedFlashWarning();
-                } else {
-                    infoScreen.showRedFlash();
-                }
+                infoScreen.showRedFlash();
             }
         }
     }

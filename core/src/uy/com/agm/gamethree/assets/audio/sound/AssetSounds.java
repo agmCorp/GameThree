@@ -26,6 +26,7 @@ public class AssetSounds {
     private Sound heroShootEmpty;
     private Sound heroShootSwish;
     private Sound hit;
+    private Sound heroHit;
     private Sound openPowerBox;
     private Sound clock;
     private Sound pickUpColOne;
@@ -97,6 +98,7 @@ public class AssetSounds {
         heroShootEmpty = am.get(Assets.FX_FILE_HERO_SHOOT_EMPTY, Sound.class);
         heroShootSwish = am.get(Assets.FX_FILE_HERO_SHOOT_SWISH, Sound.class);
         hit = am.get(Assets.FX_FILE_HIT, Sound.class);
+        heroHit = am.get(Assets.FX_FILE_HERO_HIT, Sound.class);
         openPowerBox = am.get(Assets.FX_FILE_OPEN_POWER_BOX, Sound.class);
         clock = am.get(Assets.FX_FILE_CLOCK, Sound.class);
         pickUpColOne = am.get(Assets.FX_FILE_PICK_UP_COL_ONE, Sound.class);
@@ -208,6 +210,10 @@ public class AssetSounds {
 
     public Sound getHit() {
         return hit;
+    }
+
+    public Sound getHeroHit() {
+        return heroHit;
     }
 
     public Sound getOpenPowerBox() {

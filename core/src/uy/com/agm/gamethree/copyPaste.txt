@@ -200,3 +200,30 @@ private static final float SENSOR_OFFSET_METERS = 0.03f;
 polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0, -CIRCLE_SHAPE_RADIUS_METERS + SENSOR_OFFSET_METERS), 0);
 
 float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
+
+------------------------------------------------------------------------------------------------
+
+Probé poner una pausa al recibir un disparo y no queda lindo en el caso de las balas especiales de los finales.
+Para las balas comunes queda bien.
+
+La única solución es ponerle un cacho extra a las imágenes de manera que la parte que tiene sentido haga contacto quede en el centro de la imagen.
+Igual no me convence, se ve medio feo, ademas se ve el muzzle flash congelado durante la pausa.
+De todos modos, para hacerlo debo crear un método nuevo en hero parecido a esto:
+
+    public void onBalazo() {
+        screen.setPlayScreenStateBreak();
+        onDead();
+    }
+
+Y luego en WorldContactListener
+
+	// Hero - Enemy's weapon
+	case HERO_BIT | ENEMY_WEAPON_BIT:
+		if (fixA.getFilterData().categoryBits == HERO_BIT) {
+			((Hero) fixA.getUserData()).onBalazo();
+			((Weapon) fixB.getUserData()).onTarget();
+		} else {
+			((Hero) fixB.getUserData()).onBalazo();
+			((Weapon) fixA.getUserData()).onTarget();
+		}
+		break;

@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -225,12 +224,9 @@ public abstract class Enemy extends Sprite {
         Sound voice = getVoice();
         if (voice != null) {
             Long lastPlayingTime = AudioManager.getInstance().getLastPlayingTime(voice);
-            if (lastPlayingTime == null) {
+            if (lastPlayingTime == null ||
+                    TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= getSpeakTimeSeconds() * 1000) {
                 AudioManager.getInstance().playSound(voice);
-            } else {
-                if (TimeUtils.nanosToMillis(TimeUtils.nanoTime() - lastPlayingTime) >= getSpeakTimeSeconds() * 1000) {
-                    AudioManager.getInstance().playSound(voice);
-                }
             }
         }
     }

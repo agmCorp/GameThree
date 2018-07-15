@@ -94,8 +94,22 @@ public class WorldContactListener implements ContactListener {
 
             // Hero - Enemies
             case HERO_BIT | ENEMY_BIT:
-                fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
-                ((Hero) fixC.getUserData()).onDead();
+                // Collision logic
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
+                    Enemy enemy = ((Enemy) fixA.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixB.getUserData()).onDead();
+                    } else {
+                        ((Hero) fixB.getUserData()).onEnemyHit();
+                    }
+                } else {
+                    Enemy enemy = ((Enemy) fixB.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixA.getUserData()).onDead();
+                    } else {
+                        ((Hero) fixA.getUserData()).onEnemyHit();
+                    }
+                }
                 break;
 
             // HeroGhost - Enemies
@@ -255,8 +269,9 @@ public class WorldContactListener implements ContactListener {
 
             // Final enemy - Hero
             case FINAL_ENEMY_BIT | HERO_BIT:
+                // Collision logic
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
-                ((Hero) fixC.getUserData()).onDead();
+                ((Hero) fixC.getUserData()).onEnemyHit();
                 break;
 
             // Shield - Enemy's weapon
@@ -284,9 +299,11 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Hero - Item
+            // Hero - Item/Enemy/FinalEnemy
             // Avoid bouncing
             case HERO_BIT | ITEM_BIT:
+            case HERO_BIT | ENEMY_BIT:
+            case HERO_BIT | FINAL_ENEMY_BIT:
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;

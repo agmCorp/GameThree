@@ -75,7 +75,7 @@ public class InfoScreen extends AbstractScreen {
     private Label.LabelStyle labelStyleSmall;
 
     // Animations
-    private Animation emptySkullsAnimation;
+    private Animation stageFailedAnimation;
     private Animation victoryAnimation;
     private Animation letsGoAnimation;
 
@@ -128,7 +128,7 @@ public class InfoScreen extends AbstractScreen {
 
         // Animations
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-        emptySkullsAnimation = assetScene2d.getStageFailed().getStageFailedAnimation();
+        stageFailedAnimation = assetScene2d.getStageFailed().getStageFailedAnimation();
         victoryAnimation = assetScene2d.getVictory().getVictoryAnimation();
         letsGoAnimation = assetScene2d.getLetsGo().getStageLetsGoAnimation();
 
@@ -285,6 +285,13 @@ public class InfoScreen extends AbstractScreen {
         showMessage(message, messageSize);
     }
 
+    public void showModalMessage(String message, MessageSize messageSize) {
+        gotIt.setVisible(true);
+        showMessage(message, messageSize);
+        screen.getDimScreen().hideButtons();
+        screen.setPlayScreenStatePaused(false);
+    }
+
     public boolean isMessageVisible() {
         return messageLabel.isVisible();
     }
@@ -427,8 +434,8 @@ public class InfoScreen extends AbstractScreen {
         showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), MessageSize.BIG);
     }
 
-    public void showEmptySkullsAnimation() {
-        showAnimation(emptySkullsAnimation, AssetStageFailed.WIDTH_PIXELS, AssetStageFailed.HEIGHT_PIXELS);
+    public void showStageFailedAnimation() {
+        showAnimation(stageFailedAnimation, AssetStageFailed.WIDTH_PIXELS, AssetStageFailed.HEIGHT_PIXELS);
     }
 
     public void showVictoryAnimation() {
@@ -467,6 +474,10 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
+    }
+
+    public void showFailWarning() {
+        showModalMessage(i18NGameThreeBundle.format("infoScreen.failWarning"), MessageSize.NORMAL);
     }
 
     public boolean isRedFlashVisible() {
