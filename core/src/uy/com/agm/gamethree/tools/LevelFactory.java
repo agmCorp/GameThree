@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.tools;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
@@ -40,6 +41,10 @@ public class LevelFactory {
     private static final int ENERGY_LEVEL_TWO = 10;
     private static final int ENERGY_LEVEL_THREE = 8;
     private static final int ENERGY_LEVEL_FOUR = 6;
+    private static final String NAME_LEVEL_ONE = "levelFactory.nameLevelOne";
+    private static final String NAME_LEVEL_TWO = "levelFactory.nameLevelTwo";
+    private static final String NAME_LEVEL_THREE = "levelFactory.nameLevelThree";
+    private static final String NAME_LEVEL_FOUR = "levelFactory.nameLevelFour";
 
     public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
         FinalEnemy finalEnemy;
@@ -85,6 +90,14 @@ public class LevelFactory {
     public static int getLevelEnergy(int level) {
         int[] levelEnergy = {ENERGY_LEVEL_ONE, ENERGY_LEVEL_TWO, ENERGY_LEVEL_THREE, ENERGY_LEVEL_FOUR};
         return  levelEnergy[level - 1];
+    }
+
+    public static String getLevelName(int level) {
+        // I18n
+        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+
+        String[] levelName = {NAME_LEVEL_ONE, NAME_LEVEL_TWO, NAME_LEVEL_THREE, NAME_LEVEL_FOUR};
+        return  i18NGameThreeBundle.format(levelName[level - 1]);
     }
 
     public static Music getLevelMusic(int level) {

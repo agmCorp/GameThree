@@ -17,6 +17,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.LevelFactory;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -100,7 +101,7 @@ public class SelectLevelScreen extends AbstractScreen {
         for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
             table.row();
             level = levelState.getLevel();
-            levelLabel = new Label(i18NGameThreeBundle.format("selectLevel.playLevel", level), labelStyleNormal);
+            levelLabel = new Label(LevelFactory.getLevelName(level), labelStyleNormal);
             levelTable = getStarsTable(levelLabel, star, emptyStar, levelState.getFinalStars());
             table.add(levelTable).padTop(AbstractScreen.PAD);
 

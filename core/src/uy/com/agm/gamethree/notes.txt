@@ -17,6 +17,9 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- El levelFactory quedo tan lleno de cosas que capaz me serviria tener un objeto levelALGO con toda las cosas
+dentro e inicializado por algun lado.
+- La tabla de select level quedo chueca.
 - PONERLE UN BORDE NEGRO A LOS PERSONAJES MISTERIOSOS QUE SE MUESTRAN AL AGARRAR SHURIKEN POR PRIMERA VEZ.
 - MI JUEGO: SACARLE SOULS AL ENEMIGO 11 DEL NIVEL 3
 - SACAR LAS POWERBOXES CON PODERES DEL NIVEL 3 Y DEL  NIVEL 4 pues ahora tengo el beep.
@@ -111,7 +114,10 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
     - Humans are the real monsters
     - La que anoté por ahí en el papel: You were the monster all along
 - Nombre para niveles:
-    the forest
+    The forest
+    Wreckage
+    Underworld
+    Frontiers
 
 DUDAS Y BUGS
 ------------
