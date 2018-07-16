@@ -25,7 +25,7 @@ public class DynamicHelpDef {
 
     public DynamicHelpDef(boolean modal) {
         this.modal = modal;
-        this.seconds = 0;
+        this.seconds = modal ? 0 : DEFAULT_HELP_SECONDS;
     }
 
     public boolean isModal() {
