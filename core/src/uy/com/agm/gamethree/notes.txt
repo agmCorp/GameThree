@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- Analizar eso de sobreescribir las estrellas al rejugar si está bien o no.
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 - La tabla de select level quedo chueca.
 - Hacer pantallas de help con fondo lindo:
