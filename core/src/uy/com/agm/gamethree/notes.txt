@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 - El levelFactory quedo tan lleno de cosas que capaz me serviria tener un objeto levelALGO con toda las cosas
 dentro e inicializado por algun lado.
 - La tabla de select level quedo chueca.
