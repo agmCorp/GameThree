@@ -19,6 +19,9 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 - Un congelado me quedo eternamente yendo a la derecha trabado.
+- jugue el primer nivel y gane 2 estrellas, jugue el segundo y gane 2 estrellas, luego di back y vi todo bien.
+Luego cerre el juego, lo volvi a abrir y las estrellas del nivel 1 se perdieron.
+El probelma es que en gamesettings no las estoy levantado!
 - El levelFactory quedo tan lleno de cosas que capaz me serviria tener un objeto levelALGO con toda las cosas
 dentro e inicializado por algun lado.
 - La tabla de select level quedo chueca.
