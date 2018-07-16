@@ -3,7 +3,6 @@ package uy.com.agm.gamethree.tools;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
@@ -33,9 +32,9 @@ public class LevelFactory {
     private static final String TAG = LevelFactory.class.getName();
 
     // Constants
-    private static final int TIMER_LEVEL_ONE = 400;
-    private static final int TIMER_LEVEL_TWO = 460;
-    private static final int TIMER_LEVEL_THREE = 500;
+    private static final int TIMER_LEVEL_ONE = 300;
+    private static final int TIMER_LEVEL_TWO = 350;
+    private static final int TIMER_LEVEL_THREE = 380;
     private static final int TIMER_LEVEL_FOUR = 400;
     private static final int ENERGY_LEVEL_ONE = 14;
     private static final int ENERGY_LEVEL_TWO = 10;
@@ -93,11 +92,8 @@ public class LevelFactory {
     }
 
     public static String getLevelName(int level) {
-        // I18n
-        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
-
         String[] levelName = {NAME_LEVEL_ONE, NAME_LEVEL_TWO, NAME_LEVEL_THREE, NAME_LEVEL_FOUR};
-        return  i18NGameThreeBundle.format(levelName[level - 1]);
+        return  Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle().format(levelName[level - 1]);
     }
 
     public static Music getLevelMusic(int level) {
@@ -169,6 +165,8 @@ public class LevelFactory {
                 dynamic.put(FinalEnemyLevelThree.class.getName(), new DynamicHelpDef(true));
                 break;
             case 4:
+                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(true));
+
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(FinalEnemyLevelFour.class.getName(), new DynamicHelpDef(true));
                 break;

@@ -74,20 +74,19 @@ public class GameSettings {
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
         highScore = prefs.getInteger(HIGH_SCORE, DEFAULT_HIGH_SCORE);
 
-        int level = 1; // Default level
-        LevelState levelState = new LevelState(level, Hero.LIVES_START, 0, 0, true);
-        levels.put(level, levelState);
-
         // Other levels
-        level++;
+        int level = 1;
         String data;
         boolean availableLevel;
+        boolean levelDefault;
+        LevelState levelState = null;
         do {
             data = prefs.getString(LEVEL_STATE + level, "");
             if (data.isEmpty()) {
-                availableLevel = DebugConstants.DEBUG_LEVELS && level <= MAX_LEVEL;
+                levelDefault = level == 1;
+                availableLevel = (DebugConstants.DEBUG_LEVELS && level <= MAX_LEVEL) || levelDefault;
                 if (availableLevel) {
-                    levelState = new LevelState(level, Hero.LIVES_START, 0, 0, false);
+                    levelState = new LevelState(level, Hero.LIVES_START, 0, 0, levelDefault);
                 }
             } else {
                 levelState = getLevelState(data);
