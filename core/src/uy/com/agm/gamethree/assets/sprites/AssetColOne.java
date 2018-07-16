@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.assets.sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -17,58 +18,91 @@ public class AssetColOne {
     // Constants (meters = pixels * resizeFactor / PPM)
     public static final float WIDTH_METERS = 85.0f * 0.5f / PlayScreen.PPM;
     public static final float HEIGHT_METERS = 85.0f * 0.5f / PlayScreen.PPM;
+    public static final int MAX_TEXTURES = 2;
 
-    private TextureRegion goldStand;
-    private TextureRegion silverStand;
-    private TextureRegion bronzeStand;
-    private Animation goldAnimation;
-    private Animation silverAnimation;
-    private Animation bronzeAnimation;
+    private Array<TextureRegion> goldStand;
+    private Array<TextureRegion> silverStand;
+    private Array<TextureRegion> bronzeStand;
+    private Array<Animation> goldAnimation;
+    private Array<Animation> silverAnimation;
+    private Array<Animation> bronzeAnimation;
 
     public AssetColOne(TextureAtlas atlas) {
+        goldStand = new Array<TextureRegion>();
+        silverStand = new Array<TextureRegion>();
+        bronzeStand = new Array<TextureRegion>();
         Array<TextureAtlas.AtlasRegion> regions;
+        goldAnimation = new Array<Animation>();
+        silverAnimation = new Array<Animation>();
+        bronzeAnimation = new Array<Animation>();
 
-        goldStand = atlas.findRegion("gold", 1);
-        silverStand  = atlas.findRegion("silver", 1);
-        bronzeStand = atlas.findRegion("bronze", 1);
+        goldStand.add(atlas.findRegion("coinGold", 1));
+        goldStand.add(atlas.findRegion("diamond", 1));
 
-        // Animation
-        regions = atlas.findRegions("gold");
-        goldAnimation = new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP);
+        silverStand.add(atlas.findRegion("coinSilver", 1));
+        silverStand.add(atlas.findRegion("jewelOrange", 1));
+
+        bronzeStand.add(atlas.findRegion("coinBronze", 1));
+        bronzeStand.add(atlas.findRegion("jewelFuchsia", 1));
+
+        // Animation Gold
+        regions = atlas.findRegions("coinGold");
+        goldAnimation.add(new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP));
+        regions.clear();
+        regions = atlas.findRegions("diamond");
+        goldAnimation.add(new Animation(0.3f / 6.0f, regions, Animation.PlayMode.LOOP));
         regions.clear();
 
-        // Animation
-        regions = atlas.findRegions("silver");
-        silverAnimation = new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP);
+        // Animation Silver
+        regions = atlas.findRegions("coinSilver");
+        silverAnimation.add(new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP));
+        regions.clear();
+        regions = atlas.findRegions("jewelOrange");
+        silverAnimation.add(new Animation(0.3f / 8.0f, regions, Animation.PlayMode.LOOP));
         regions.clear();
 
-        // Animation
-        regions = atlas.findRegions("bronze");
-        bronzeAnimation = new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP);
+        // Animation Bronze
+        regions = atlas.findRegions("coinBronze");
+        bronzeAnimation.add(new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP));
+        regions.clear();
+        regions = atlas.findRegions("jewelFuchsia");
+        bronzeAnimation.add(new Animation(0.3f / 4.0f, regions, Animation.PlayMode.LOOP));
         regions.clear();
     }
 
-    public TextureRegion getGoldStand() {
-        return goldStand;
+    public int getRandomIndexGold() {
+        return MathUtils.random(MAX_TEXTURES - 1);
     }
 
-    public TextureRegion getSilverStand() {
-        return silverStand;
+    public int getRandomIndexSilver() {
+        return MathUtils.random(MAX_TEXTURES - 1);
     }
 
-    public TextureRegion getBronzeStand() {
-        return bronzeStand;
+    public int getRandomIndexBronze() {
+        return MathUtils.random(MAX_TEXTURES - 1);
     }
 
-    public Animation getGoldAnimation() {
-        return goldAnimation;
+    public TextureRegion getGoldStand(int index) {
+        return goldStand.get(index);
     }
 
-    public Animation getSilverAnimation() {
-        return silverAnimation;
+    public TextureRegion getSilverStand(int index) {
+        return silverStand.get(index);
     }
 
-    public Animation getBronzeAnimation() {
-        return bronzeAnimation;
+    public TextureRegion getBronzeStand(int index) {
+        return bronzeStand.get(index);
+    }
+
+    public Animation getGoldAnimation(int index) {
+        return goldAnimation.get(index);
+    }
+
+    public Animation getSilverAnimation(int index) {
+        return silverAnimation.get(index);
+    }
+
+    public Animation getBronzeAnimation(int index) {
+        return bronzeAnimation.get(index);
     }
 }

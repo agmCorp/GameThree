@@ -30,8 +30,8 @@ public class ColOne extends Item {
     private static final int GOLD_SCORE = 50;
     private static final int SILVER_SCORE = 25;
     private static final int BRONZE_SCORE = 10;
-    private static final float GOLD_PROBABILITY = 0.1f; // 10%
-    private static final float SILVER_PROBABILITY = 0.3f;  // 30%
+    private static final float GOLD_PROBABILITY = 0.2f; // 20%
+    private static final float SILVER_PROBABILITY = 0.35f;  // 35%
 
     private float stateTime;
     private float stateWaitingTime;
@@ -42,16 +42,17 @@ public class ColOne extends Item {
     public ColOne(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
+        AssetColOne assetColOne = Assets.getInstance().getColOne();
         float rnd = MathUtils.random();
         if (rnd <= GOLD_PROBABILITY) {
-            colOneAnimation = Assets.getInstance().getColOne().getGoldAnimation();
+            colOneAnimation = assetColOne.getGoldAnimation(assetColOne.getRandomIndexGold());
             score = GOLD_SCORE;
         } else {
             if (rnd <= GOLD_PROBABILITY + SILVER_PROBABILITY) {
-                colOneAnimation = Assets.getInstance().getColOne().getSilverAnimation();
+                colOneAnimation = assetColOne.getSilverAnimation(assetColOne.getRandomIndexSilver());
                 score = SILVER_SCORE;
             } else {
-                colOneAnimation = Assets.getInstance().getColOne().getBronzeAnimation();
+                colOneAnimation = assetColOne.getBronzeAnimation(assetColOne.getRandomIndexBronze());
                 score = BRONZE_SCORE;
             }
         }
