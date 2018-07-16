@@ -25,7 +25,6 @@ import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
@@ -51,7 +50,7 @@ public class Hero extends Sprite {
     private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
     private static final float SENSOR_OFFSET_METERS = 0.1f;
     private static final Color HIT_COLOR = Color.RED;
-    private static final float HIT_COLOR_TIME_SECONDS = 1.0f;
+    private static final float HIT_COLOR_TIME_SECONDS = 0.5f;
     private static final float IGNORE_HIT_SECONDS = 0.5f;
 
     private enum HeroState {
@@ -183,15 +182,15 @@ public class Hero extends Sprite {
             // Have escaped too many enemies, Hero dies
             checkEnergy();
 
-            // If Hero is playing again, set his default filter after a few seconds.
+            // If Hero is playing again, sets his default filter after a few seconds.
             // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
             // could have died crushed.
             // If Hero is dead we don't set default filters.
             timeToSetDefaultFilter(dt);
-
-            // If Hero was hit set default tint
-            checkHitColor(dt);
         }
+
+        // Sets default tint regardless of currentHeroState
+        checkHitColor(dt);
 
         switch (currentHeroState) {
             case STANDING:
@@ -394,9 +393,8 @@ public class Hero extends Sprite {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getDead());
 
-            // We take away all his powers, set default color and force powerTimeUp
+            // We take away all his powers and force powerTimeUp
             powersDown();
-            setColor(Color.WHITE);
             screen.getHud().forcePowersTimeUp();
 
             // Hero can't collide with anything
@@ -702,8 +700,8 @@ public class Hero extends Sprite {
             // Enemy hit logic
             ouch();
             setColor(HIT_COLOR);
-            Hud hud = screen.getHud();
-            hud.decreaseEnergy(1);
+            hitTime = 0;
+            screen.getHud().decreaseEnergy(1);
         }
     }
 
