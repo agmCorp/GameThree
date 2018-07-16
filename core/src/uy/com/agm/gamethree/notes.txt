@@ -19,7 +19,6 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 - La tabla de select level quedo chueca.
-- PONERLE UN BORDE NEGRO A LOS PERSONAJES MISTERIOSOS QUE SE MUESTRAN AL AGARRAR SHURIKEN POR PRIMERA VEZ.
 - Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar la energy.
