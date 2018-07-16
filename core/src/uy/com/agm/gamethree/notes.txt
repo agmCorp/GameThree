@@ -25,7 +25,7 @@ PRIORIDADES PARA LIBERAR
     - perfil de cada enemigo?
     - items y poderes
 - Hacer pantalla de final feliz
-- hacer un mapa de los niveles
+- hacer un mapa de los niveles (opcional)
 
 HACER PRIORIDAD 1
 -----------------
