@@ -18,12 +18,8 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
-- El levelFactory quedo tan lleno de cosas que capaz me serviria tener un objeto levelALGO con toda las cosas
-dentro e inicializado por algun lado.
 - La tabla de select level quedo chueca.
 - PONERLE UN BORDE NEGRO A LOS PERSONAJES MISTERIOSOS QUE SE MUESTRAN AL AGARRAR SHURIKEN POR PRIMERA VEZ.
-- MI JUEGO: SACARLE SOULS AL ENEMIGO 11 DEL NIVEL 3
-- SACAR LAS POWERBOXES CON PODERES DEL NIVEL 3 Y DEL  NIVEL 4 pues ahora tengo el beep.
 - Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar la energy.

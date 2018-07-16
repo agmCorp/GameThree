@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2775">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="2775">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
@@ -174,7 +174,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerBox">
+ <objectgroup name="powerBox" locked="1">
   <object id="2770" x="96" y="3168" width="32" height="32">
    <properties>
     <property name="colThree" value=""/>
@@ -192,7 +192,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyOne">
+ <objectgroup name="enemyOne" locked="1">
   <object id="2600" x="64" y="2912" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -339,7 +339,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyTwo">
+ <objectgroup name="enemyTwo" locked="1">
   <object id="2643" x="32" y="2400" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
@@ -531,89 +531,95 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyThree">
-  <object id="2456" x="32" y="6906" width="32" height="32"/>
-  <object id="2457" x="118" y="6998" width="32" height="32">
+ <objectgroup name="enemyThree" locked="1">
+  <object id="2456" x="32" y="6733" width="32" height="32"/>
+  <object id="2457" x="118" y="6825" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2458" x="288" y="6938" width="32" height="32"/>
-  <object id="2459" x="224" y="7066" width="32" height="32">
+  <object id="2458" x="288" y="6765" width="32" height="32"/>
+  <object id="2459" x="224" y="6893" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2460" x="384" y="7066" width="32" height="32">
+  <object id="2460" x="384" y="6893" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
+    <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
-  <object id="2461" x="416" y="6874" width="32" height="32">
+  <object id="2461" x="416" y="6701" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2477" x="108" y="7288.67" width="32" height="32">
+  <object id="2477" x="108" y="7115.67" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
+    <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
-  <object id="2478" x="238.667" y="7179.33" width="32" height="32">
+  <object id="2478" x="238.667" y="7006.33" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="enemyBullet" value=""/>
     <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
-  <object id="2479" x="320" y="7292.67" width="32" height="32"/>
-  <object id="2556" x="100" y="7132" width="32" height="32">
+  <object id="2479" x="320" y="7119.67" width="32" height="32"/>
+  <object id="2556" x="100" y="6959" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2557" x="388" y="7194" width="32" height="32">
+  <object id="2557" x="388" y="7021" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2558" x="332" y="6800" width="32" height="32">
+  <object id="2558" x="332" y="6627" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
+    <property name="enemyBullet" value=""/>
+    <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
-  <object id="2559" x="188" y="6892" width="32" height="32">
+  <object id="2559" x="188" y="6719" width="32" height="32">
    <properties>
     <property name="enemyBulllet" value=""/>
     <property name="shootWhenVisible" value=""/>
    </properties>
   </object>
-  <object id="2560" x="96" y="6776" width="32" height="32">
+  <object id="2560" x="96" y="6603" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2561" x="214" y="6762" width="32" height="32">
+  <object id="2561" x="214" y="6589" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2562" x="366" y="6712" width="32" height="32">
+  <object id="2562" x="366" y="6539" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
   </object>
-  <object id="2563" x="164" y="6658" width="32" height="32"/>
-  <object id="2564" x="218" y="7300" width="32" height="32">
+  <object id="2563" x="164" y="6485" width="32" height="32"/>
+  <object id="2564" x="218" y="7127" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
     <property name="colSilverBullet" value=""/>
    </properties>
   </object>
-  <object id="2565" x="22" y="7058" width="32" height="32"/>
-  <object id="2566" x="392" y="6982" width="32" height="32">
+  <object id="2565" x="22" y="6885" width="32" height="32"/>
+  <object id="2566" x="392" y="6809" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
    </properties>
@@ -652,8 +658,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyFour"/>
- <objectgroup name="enemyFive">
+ <objectgroup name="enemyFour" locked="1"/>
+ <objectgroup name="enemyFive" locked="1">
   <object id="2462" x="256" y="6411" width="32" height="32">
    <properties>
     <property name="colSilverBullet" value=""/>
@@ -704,7 +710,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySix">
+ <objectgroup name="enemySix" locked="1">
   <object id="2468" x="416" y="6705" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -750,7 +756,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemySeven">
+ <objectgroup name="enemySeven" locked="1">
   <object id="2658" x="96" y="1024" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -885,7 +891,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyEight">
+ <objectgroup name="enemyEight" locked="1">
   <object id="2588" x="0" y="3968" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -952,9 +958,9 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyNine"/>
- <objectgroup name="enemyTen"/>
- <objectgroup name="enemyEleven">
+ <objectgroup name="enemyNine" locked="1"/>
+ <objectgroup name="enemyTen" locked="1"/>
+ <objectgroup name="enemyEleven" locked="1">
   <object id="2472" x="160" y="4764" width="32" height="32">
    <properties>
     <property name="colOne" value=""/>
@@ -998,7 +1004,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemyTwelve">
+ <objectgroup name="enemyTwelve" locked="1">
   <object id="2677" x="128" y="1184" width="32" height="32">
    <properties>
     <property name="colTwo" value=""/>

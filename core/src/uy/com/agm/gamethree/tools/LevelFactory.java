@@ -165,8 +165,7 @@ public class LevelFactory {
                 dynamic.put(FinalEnemyLevelThree.class.getName(), new DynamicHelpDef(true));
                 break;
             case 4:
-                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(true));
-
+                dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(FinalEnemyLevelFour.class.getName(), new DynamicHelpDef(true));
                 break;
