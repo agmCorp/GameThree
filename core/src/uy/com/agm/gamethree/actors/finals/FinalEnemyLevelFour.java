@@ -46,7 +46,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
     private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
     private static final float RADIUS_METERS = 1.5f;
-    private static final float LINEAR_VELOCITY = 3.0f;
+    private static final float LINEAR_VELOCITY = 4.5f;
     private static final float PERIOD_SECONDS = 2 * MathUtils.PI * RADIUS_METERS / LINEAR_VELOCITY;
     private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
     private static final float CIRCULAR_PATH_PROBABILITY = 0.3f;  // 30%

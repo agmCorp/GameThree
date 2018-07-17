@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
+import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -80,9 +81,9 @@ public class HighScoresScreen extends AbstractScreen {
         int style = DateFormat.MEDIUM;
         DateFormat df = DateFormat.getDateInstance(style, Locale.getDefault());
         Label highScoresLabel = new Label(i18NGameThreeBundle.format("highScores.title"), labelStyleBig);
-        Label goldHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
-        Label silverHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
-        Label bronzeHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
+        TypingLabel goldHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
+        TypingLabel silverHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
+        TypingLabel bronzeHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
 
         // Gold trophy image
         Image goldTrophyImage = new Image();
