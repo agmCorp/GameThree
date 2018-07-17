@@ -7,8 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -59,7 +64,7 @@ public class HighScoresScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(AbstractScreen.PAD * 2);
+        table.top().padTop(AbstractScreen.PAD * 4);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -68,18 +73,21 @@ public class HighScoresScreen extends AbstractScreen {
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
 
-        Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
-        labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
+        Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
+        labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
+        int style = DateFormat.MEDIUM;
+        DateFormat df = DateFormat.getDateInstance(style, Locale.getDefault());
         Label highScoresLabel = new Label(i18NGameThreeBundle.format("highScores.title"), labelStyleBig);
-        Label goldHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), prefs.getGoldHighScoreMillis()), labelStyleNormal);
-        Label silverHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), prefs.getSilverHighScoreMillis()), labelStyleNormal);
-        Label bronzeHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), prefs.getBronzeHighScoreMillis()), labelStyleNormal);
+        Label goldHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
+        Label silverHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
+        Label bronzeHighScoreLabel = new Label(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
 
         // Gold trophy image
         Image goldTrophyImage = new Image();
         goldTrophyImage.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
+        goldTrophyImage.setAlign(Align.top);
         goldTrophyImage.setScaling(Scaling.fit);
 
         // Silver trophy image
@@ -93,16 +101,16 @@ public class HighScoresScreen extends AbstractScreen {
         bronzeTrophyImage.setScaling(Scaling.fit);
 
         // Add values
-        table.add(highScoresLabel).colspan(COLUMNS);
+        table.add(highScoresLabel).padBottom(AbstractScreen.PAD * 2).colspan(COLUMNS);
         table.row();
-        table.add(goldTrophyImage).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
-        table.add(goldHighScoreLabel);
+        table.add(goldTrophyImage).padTop(AbstractScreen.PAD);
+        table.add(goldHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
         table.row();
-        table.add(silverTrophyImage).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
-        table.add(silverHighScoreLabel);
+        table.add(silverTrophyImage).padTop(AbstractScreen.PAD);
+        table.add(silverHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
         table.row();
-        table.add(bronzeTrophyImage).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
-        table.add(bronzeHighScoreLabel);
+        table.add(bronzeTrophyImage).padTop(AbstractScreen.PAD);
+        table.add(bronzeHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
 
         // Adds table to stage
         addActor(table);

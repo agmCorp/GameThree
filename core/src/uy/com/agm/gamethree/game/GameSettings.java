@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import java.util.Date;
+
 import uy.com.agm.gamethree.actors.player.Hero;
 
 /**
@@ -33,12 +35,12 @@ public class GameSettings {
     private static final String GOLD_HIGH_SCORE = "goldHighScore";
     private static final String GOLD_HIGH_SCORE_MILLIS = "goldHighScoreMillis";
     private static final int DEFAULT_GOLD_HIGH_SCORE = 21365;
-    private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 257565600000L; // 15/01/1977
+    private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 257565600000L; // 01/03/1978
 
     private static final String SILVER_HIGH_SCORE = "silverHighScore";
     private static final String SILVER_HIGH_SCORE_MILLIS = "silverHighScoreMillis";
     private static final int DEFAULT_SILVER_HIGH_SCORE = 18491;
-    private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 1547262000000L; // 25/12/2017
+    private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 1547262000000L; // 12/01/2019
 
     private static final String BRONZE_HIGH_SCORE = "bronzeHighScore";
     private static final String BRONZE_HIGH_SCORE_MILLIS = "bronzeHighScoreMillis";
@@ -55,10 +57,13 @@ public class GameSettings {
     private boolean manualShooting;
     private int goldHighScore;
     private long goldHighScoreMillis;
+    private Date goldHighScoreDate;
     private int silverHighScore;
     private long silverHighScoreMillis;
+    private Date silverHighScoreDate;
     private int bronzeHighScore;
     private long bronzeHighScoreMillis;
+    private Date bronzeHighScoreDate;
     private ArrayMap<Integer, LevelState> levels;
     private Preferences prefs;
     private Json json;
@@ -94,10 +99,13 @@ public class GameSettings {
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
         goldHighScore = prefs.getInteger(GOLD_HIGH_SCORE, DEFAULT_GOLD_HIGH_SCORE);
         goldHighScoreMillis = prefs.getLong(GOLD_HIGH_SCORE_MILLIS, DEFAULT_GOLD_HIGH_SCORE_MILLIS);
+        goldHighScoreDate = new Date(goldHighScoreMillis);
         silverHighScore = prefs.getInteger(SILVER_HIGH_SCORE, DEFAULT_SILVER_HIGH_SCORE);
         silverHighScoreMillis = prefs.getLong(SILVER_HIGH_SCORE_MILLIS, DEFAULT_SILVER_HIGH_SCORE_MILLIS);
+        silverHighScoreDate = new Date(silverHighScoreMillis);
         bronzeHighScore = prefs.getInteger(BRONZE_HIGH_SCORE, DEFAULT_BRONZE_HIGH_SCORE);
         bronzeHighScoreMillis = prefs.getLong(BRONZE_HIGH_SCORE_MILLIS, DEFAULT_BRONZE_HIGH_SCORE_MILLIS);
+        bronzeHighScoreDate = new Date(bronzeHighScoreMillis);
 
         // Other levels
         int level = 1;
@@ -191,8 +199,8 @@ public class GameSettings {
         this.goldHighScoreMillis = TimeUtils.millis();
     }
 
-    public long getGoldHighScoreMillis() {
-        return goldHighScoreMillis;
+    public Date getGoldHighScoreDate() {
+        return goldHighScoreDate;
     }
 
     public int getSilverHighScore() {
@@ -204,8 +212,8 @@ public class GameSettings {
         this.silverHighScoreMillis = TimeUtils.millis();
     }
 
-    public long getSilverHighScoreMillis() {
-        return silverHighScoreMillis;
+    public Date getSilverHighScoreDate() {
+        return silverHighScoreDate;
     }
 
     public int getBronzeHighScore() {
@@ -217,8 +225,8 @@ public class GameSettings {
         this.bronzeHighScoreMillis = TimeUtils.millis();
     }
 
-    public long getBronzeHighScoreMillis() {
-        return bronzeHighScoreMillis;
+    public Date getBronzeHighScoreDate() {
+        return bronzeHighScoreDate;
     }
 
     public void setStars(int level, int stars) {
