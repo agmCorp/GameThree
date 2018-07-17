@@ -18,9 +18,7 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata. Me pasó algo parecido en el nivel 3.
-- Corazones que renueven energy? puede ser random...un corazón renueva 1 energy (con probabilidad muy baja) y una cara de hero una vida.
 - Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente), bumps, shurikens remanentes.
-- La tabla de select level quedo chueca.
 - Hacer pantallas de help con fondo lindo:
     - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
     - Imprescindible explicar la energy.

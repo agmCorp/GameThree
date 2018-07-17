@@ -28,6 +28,7 @@ public class SelectLevelScreen extends AbstractScreen {
 
     // Constants
     public static final float SCROLL_PANE_MAX_HEIGHT = 330.0f;
+    public static final float NAME_LEVEL_WIDTH = 200.0f;
 
     public SelectLevelScreen() {
         super();
@@ -147,13 +148,13 @@ public class SelectLevelScreen extends AbstractScreen {
     private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
         Table table = new Table();
         table.setDebug(DebugConstants.DEBUG_LINES);
-        table.add(levelLabel).padRight(AbstractScreen.PAD / 2);
+        table.add(levelLabel).width(NAME_LEVEL_WIDTH);
         Image image;
         for (int i = 1; i <= 3; i++) {
             image = new Image();
             image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
             image.setScaling(Scaling.fit);
-            table.add(image);
+            table.add(image).width(NAME_LEVEL_WIDTH / 3);
         }
         return table;
     }
