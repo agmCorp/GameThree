@@ -196,9 +196,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         addActor(table);
     }
 
-    private Table getNewHighScoreTable(TextureRegion goldTrophy, Label highScoreLabel) {
+    private Table getNewHighScoreTable(TextureRegion trophy, Label highScoreLabel) {
         Image image = new Image();
-        image.setDrawable(new TextureRegionDrawable(goldTrophy));
+        image.setDrawable(new TextureRegionDrawable(trophy));
         image.setScaling(Scaling.fit);
 
         Table table = new Table();
