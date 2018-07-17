@@ -58,13 +58,26 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         GameSettings prefs = GameSettings.getInstance();
         prefs.setStars(currentLevel, currentStars);
-        showNewHighScoreLabel = finalScore > prefs.getHighScore();
+
+
+
+
+        showNewHighScoreLabel = true;// finalScore > prefs.getHighScore(); todo
+
+
+
+
         showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
         if (showNewHighScoreLabel) {
-            prefs.setHighScore(finalScore);
+            //prefs.setHighScore(finalScore); todo
         }
         if (showNextLevelLabel) {
             prefs.addActiveLevel(nextLevel, currentLives, finalScore);
+
+            // Removes levels from nextLevel + 1 to MAX_LEVEL
+            for(int i = nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+                prefs.removeLevel(i);
+            }
         }
         prefs.save();
 

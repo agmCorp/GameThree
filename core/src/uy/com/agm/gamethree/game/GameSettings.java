@@ -21,8 +21,18 @@ public class GameSettings {
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
     private static final String MANUAL_SHOOTING = "manualShooting";
-    private static final String HIGH_SCORE = "highScore";
-    private static final int DEFAULT_HIGH_SCORE = 21365;
+    private static final String GOLD_HIGH_SCORE = "goldHighScore";
+    private static final String GOLD_HIGH_SCORE_MILLIS = "goldHighScoreMillis";
+    private static final int DEFAULT_GOLD_HIGH_SCORE = 21365;
+    private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 2323; // TODO
+    private static final String SILVER_HIGH_SCORE = "silverHighScore";
+    private static final String SILVER_HIGH_SCORE_MILLIS = "silverHighScoreMillis";
+    private static final int DEFAULT_SILVER_HIGH_SCORE = 18491;
+    private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 2323; // TODO
+    private static final String BRONZE_HIGH_SCORE = "bronzeHighScore";
+    private static final String BRONZE_HIGH_SCORE_MILLIS = "bronzeHighScoreMillis";
+    private static final int DEFAULT_BRONZE_HIGH_SCORE = 75273;
+    private static final long DEFAULT_BRONZE_HIGH_SCORE_MILLIS = 2323; // TODO
     private static final String LEVEL_STATE = "levelState_";
     private static final String SETTINGS = "uy.com.agm.gameThree.settings";
     public static final float DEFAULT_VOLUME = 0.5f;
@@ -38,7 +48,12 @@ public class GameSettings {
     private float volSound;
     private float volMusic;
     private boolean manualShooting;
-    private int highScore;
+    private int goldHighScore;
+    private long goldHighScoreMillis;
+    private int silverHighScore;
+    private long silverHighScoreMillis;
+    private int bronzeHighScore;
+    private long bronzeHighScoreMillis;
     private ArrayMap<Integer, LevelState> levels;
     private Preferences prefs;
     private Json json;
@@ -72,7 +87,12 @@ public class GameSettings {
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
-        highScore = prefs.getInteger(HIGH_SCORE, DEFAULT_HIGH_SCORE);
+        goldHighScore = prefs.getInteger(GOLD_HIGH_SCORE, DEFAULT_GOLD_HIGH_SCORE);
+        goldHighScoreMillis = prefs.getLong(GOLD_HIGH_SCORE_MILLIS, DEFAULT_GOLD_HIGH_SCORE_MILLIS);
+        silverHighScore = prefs.getInteger(SILVER_HIGH_SCORE, DEFAULT_SILVER_HIGH_SCORE);
+        silverHighScoreMillis = prefs.getLong(SILVER_HIGH_SCORE_MILLIS, DEFAULT_SILVER_HIGH_SCORE_MILLIS);
+        bronzeHighScore = prefs.getInteger(BRONZE_HIGH_SCORE, DEFAULT_BRONZE_HIGH_SCORE);
+        bronzeHighScoreMillis = prefs.getLong(BRONZE_HIGH_SCORE_MILLIS, DEFAULT_BRONZE_HIGH_SCORE_MILLIS);
 
         // Other levels
         int level = 1;
@@ -105,7 +125,12 @@ public class GameSettings {
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
-        prefs.putInteger(HIGH_SCORE, highScore);
+        prefs.putInteger(GOLD_HIGH_SCORE, goldHighScore);
+        prefs.putLong(GOLD_HIGH_SCORE_MILLIS, goldHighScoreMillis);
+        prefs.putInteger(SILVER_HIGH_SCORE, silverHighScore);
+        prefs.putLong(SILVER_HIGH_SCORE_MILLIS, silverHighScoreMillis);
+        prefs.putInteger(BRONZE_HIGH_SCORE, bronzeHighScore);
+        prefs.putLong(BRONZE_HIGH_SCORE_MILLIS, bronzeHighScoreMillis);
         for(LevelState levelState : levels.values()) {
             prefs.putString(LEVEL_STATE + levelState.getLevel(), getData(levelState));
         }
@@ -152,12 +177,52 @@ public class GameSettings {
         this.manualShooting = manualShooting;
     }
 
-    public int getHighScore() {
-        return highScore;
+    public int getGoldHighScore() {
+        return goldHighScore;
     }
 
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
+    public void setGoldHighScore(int goldHighScore) {
+        this.goldHighScore = goldHighScore;
+    }
+
+    public long getGoldHighScoreMillis() {
+        return goldHighScoreMillis;
+    }
+
+    public void setGoldHighScoreMillis(long goldHighScoreMillis) {
+        this.goldHighScoreMillis = goldHighScoreMillis;
+    }
+
+    public int getSilverHighScore() {
+        return silverHighScore;
+    }
+
+    public void setSilverHighScore(int silverHighScore) {
+        this.silverHighScore = silverHighScore;
+    }
+
+    public long getSilverHighScoreMillis() {
+        return silverHighScoreMillis;
+    }
+
+    public void setSilverHighScoreMillis(long silverHighScoreMillis) {
+        this.silverHighScoreMillis = silverHighScoreMillis;
+    }
+
+    public int getBronzeHighScore() {
+        return bronzeHighScore;
+    }
+
+    public void setBronzeHighScore(int bronzeHighScore) {
+        this.bronzeHighScore = bronzeHighScore;
+    }
+
+    public long getBronzeHighScoreMillis() {
+        return bronzeHighScoreMillis;
+    }
+
+    public void setBronzeHighScoreMillis(long bronzeHighScoreMillis) {
+        this.bronzeHighScoreMillis = bronzeHighScoreMillis;
     }
 
     public void setStars(int level, int stars) {
@@ -170,5 +235,21 @@ public class GameSettings {
 
     public void addActiveLevel(int level, int lives, int score) {
         levels.put(level, new LevelState(level, lives, score, 0, true));
+    }
+
+    public void removeLevel(int level) {
+        levels.removeKey(level);
+    }
+
+    public boolean isNewGoldHighScore(int score) {
+        return score > goldHighScore;
+    }
+
+    public boolean isNewSilverHighScore(int score) {
+        return score > silverHighScore;
+    }
+
+    public boolean isNewBronzeHighScore(int score) {
+        return score > bronzeHighScore;
     }
 }

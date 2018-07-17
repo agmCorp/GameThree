@@ -25,6 +25,10 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class MainMenuScreen extends AbstractScreen {
     private static final String TAG = MainMenuScreen.class.getName();
 
+    // Constants
+    private static final int COLUMNS = 4;
+    private static final float BUTTON_WIDTH = 400 / COLUMNS;
+
     public MainMenuScreen() {
         super();
 
@@ -63,19 +67,22 @@ public class MainMenuScreen extends AbstractScreen {
                 new TextureRegionDrawable(assetScene2d.getPlayPressed()));
         ImageButton settings = new ImageButton(new TextureRegionDrawable(assetScene2d.getSettings()),
                 new TextureRegionDrawable(assetScene2d.getSettingsPressed()));
+        ImageButton highScores = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
+                new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
         ImageButton help = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
                 new TextureRegionDrawable(assetScene2d.getHelpPressed()));
         ImageButton credits = new ImageButton(new TextureRegionDrawable(assetScene2d.getCredits()),
                 new TextureRegionDrawable(assetScene2d.getCreditsPressed()));
 
         // Add values
-        table.add(wipeThemOut).colspan(3).padTop(AbstractScreen.PAD * 2);
+        table.add(wipeThemOut).colspan(COLUMNS).padTop(AbstractScreen.PAD * 2);
         table.row();
-        table.add(play).colspan(3).height(play.getHeight());
+        table.add(play).colspan(COLUMNS).height(play.getHeight());
         table.row().height(settings.getHeight()).padTop(AbstractScreen.PAD);
-        table.add(settings).width(V_WIDTH / 3);
-        table.add(help).width(V_WIDTH / 3);
-        table.add(credits).width(V_WIDTH / 3);
+        table.add(settings).width(BUTTON_WIDTH);
+        table.add(highScores).width(BUTTON_WIDTH);
+        table.add(help).width(BUTTON_WIDTH);
+        table.add(credits).width(BUTTON_WIDTH);
 
         // Events
         play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));

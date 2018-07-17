@@ -48,6 +48,8 @@ public class AssetScene2d {
     private TextureRegion playPressed;
     private TextureRegion settings;
     private TextureRegion settingsPressed;
+    private TextureRegion highScores;
+    private TextureRegion highScoresPressed;
     private TextureRegion help;
     private TextureRegion helpPressed;
     private TextureRegion credits;
@@ -72,6 +74,8 @@ public class AssetScene2d {
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
     private TextureRegion goldTrophy;
+    private TextureRegion silverTrophy;
+    private TextureRegion bronzeTrophy;
     private TextureRegion star;
     private TextureRegion emptyStar;
     private AssetHeroHead heroHead;
@@ -123,6 +127,8 @@ public class AssetScene2d {
         playPressed = atlasUI.findRegion("playPressed");
         settings = atlasUI.findRegion("settings");
         settingsPressed = atlasUI.findRegion("settingsPressed");
+        highScores = atlasUI.findRegion("highScores");
+        highScoresPressed = atlasUI.findRegion("highScoresPressed");
         help = atlasUI.findRegion("help");
         helpPressed = atlasUI.findRegion("helpPressed");
         credits = atlasUI.findRegion("credits");
@@ -147,6 +153,8 @@ public class AssetScene2d {
         gotIt = atlasUI.findRegion("gotIt");
         gotItPressed = atlasUI.findRegion("gotItPressed");
         goldTrophy = atlasUI.findRegion("goldTrophy");
+        silverTrophy = atlasUI.findRegion("silverTrophy");
+        bronzeTrophy = atlasUI.findRegion("bronzeTrophy");
         star = atlasUI.findRegion("star");
         emptyStar = atlasUI.findRegion("emptyStar");
         heroHead = new AssetHeroHead(atlasUI);
@@ -311,6 +319,14 @@ public class AssetScene2d {
         return settingsPressed;
     }
 
+    public TextureRegion getHighScores() {
+        return highScores;
+    }
+
+    public TextureRegion getHighScoresPressed() {
+        return highScoresPressed;
+    }
+
     public TextureRegion getHelp() {
         return help;
     }
@@ -405,6 +421,14 @@ public class AssetScene2d {
 
     public TextureRegion getGoldTrophy() {
         return goldTrophy;
+    }
+
+    public TextureRegion getSilverTrophy() {
+        return silverTrophy;
+    }
+
+    public TextureRegion getBronzeTrophy() {
+        return bronzeTrophy;
     }
 
     public TextureRegion getStar() {

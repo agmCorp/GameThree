@@ -17,8 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- Analizar eso de sobreescribir las estrellas al rejugar si está bien o no. Lo único que se me ocurre es que cada nivel arranque con score 0, vidas fijas y tenga su propio highscore.
-Tendría un high por nivel. Los high o mi puntaje total no se debería listar por algún lado?
+- Tener un boton que liste los highscores
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 - La tabla de select level quedo chueca.
 - Hacer pantallas de help con fondo lindo:
