@@ -13,8 +13,8 @@ public class AssetHeroHead {
     private static final String TAG = AssetHeroHead.class.getName();
 
     // Constants (pixels * resizeFactor)
-    public static final float WIDTH_PIXELS = 90.0f * 1.0f;
-    public static final float HEIGHT_PIXELS = 88.0f * 1.0f;
+    public static final float WIDTH_PIXELS = 90.0f * 0.55f;
+    public static final float HEIGHT_PIXELS = 88.0f * 0.55f;
 
     private TextureRegion heroHeadStand;
     private Animation heroHeadAnimation;

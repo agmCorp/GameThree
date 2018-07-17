@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetHeroHead;
 import uy.com.agm.gamethree.assets.sprites.AssetColThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -27,8 +28,10 @@ public class ColThree extends Item {
     private static final float VELOCITY_Y = -2.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 3.0f;
+    private static final float ENERGY_PROBABILITY = 0.2f;
     private static final int SCORE = 200;
 
+    private boolean isEnergy;
     private float stateTime;
     private float stateWaitingTime;
     private float stateFadingTime;
@@ -37,13 +40,16 @@ public class ColThree extends Item {
     public ColThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        colThreeAnimation = Assets.getInstance().getColThree().getColThreeAnimation();
+        isEnergy = MathUtils.random() <= ENERGY_PROBABILITY;
+        colThreeAnimation = isEnergy ? Assets.getInstance().getColThree().getColThreeAnimation() : Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation();
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Determines the size of the Item's drawing on the screen
-        setBounds(getX(), getY(), AssetColThree.WIDTH_METERS, AssetColThree.HEIGHT_METERS);
+        setBounds(getX(), getY(),
+                isEnergy ? AssetColThree.WIDTH_METERS : AssetHeroHead.WIDTH_PIXELS / PlayScreen.PPM,
+                isEnergy ? AssetColThree.HEIGHT_METERS : AssetHeroHead.HEIGHT_PIXELS / PlayScreen.PPM);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
@@ -138,7 +144,11 @@ public class ColThree extends Item {
     }
 
     private void applyColThree() {
-        screen.getCreator().getHero().addLives();
+        if (isEnergy) {
+            screen.getCreator().getHero().addEnergy();
+        } else {
+            screen.getCreator().getHero().addLives();
+        }
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPickUpColThree());

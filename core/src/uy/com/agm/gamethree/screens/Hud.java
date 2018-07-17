@@ -560,6 +560,17 @@ public class Hud extends AbstractScreen {
         }
     }
 
+    public void increaseEnergy(int quantity) {
+        if (!DebugConstants.DISABLE_ENERGY_COUNT) {
+            if (energy < initialEnergy) {
+                energy += quantity;
+                int percentage = MathUtils.round((float) (energy * 100 / initialEnergy));
+                setHeartImage(percentage);
+                energyValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENERGY, energy));
+            }
+        }
+    }
+
     public int getEnergy() {
         return energy;
     }

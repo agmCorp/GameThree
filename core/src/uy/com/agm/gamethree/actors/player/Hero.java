@@ -843,6 +843,10 @@ public class Hero extends Sprite {
         screen.getHud().increaseLives(1);
     }
 
+    public void addEnergy() {
+        screen.getHud().increaseEnergy(1);
+    }
+
     public void addSilverBullet() {
         silverBullets++;
         screen.getHud().increaseSilverBullets(1);
