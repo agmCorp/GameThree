@@ -103,7 +103,7 @@ public class Hud extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         this.score = score;
-        this.highScore = GameSettings.getInstance().getHighScore();
+        this.highScore = GameSettings.getInstance().getGoldHighScore();
         this.level = level;
         this.time = time;
         timeCount = 0;
