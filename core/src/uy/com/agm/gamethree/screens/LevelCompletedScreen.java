@@ -78,8 +78,10 @@ public class LevelCompletedScreen extends AbstractScreen {
             prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
 
             // Removes levels from nextLevel + 1 to MAX_LEVEL
-            for(int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-                prefs.removeLevel(i);
+            if (!DebugConstants.DEBUG_LEVELS) {
+                for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+                    prefs.removeLevel(i);
+                }
             }
         }
         prefs.save();
