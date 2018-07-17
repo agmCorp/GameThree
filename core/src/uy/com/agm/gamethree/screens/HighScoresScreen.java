@@ -87,7 +87,6 @@ public class HighScoresScreen extends AbstractScreen {
         // Gold trophy image
         Image goldTrophyImage = new Image();
         goldTrophyImage.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        goldTrophyImage.setAlign(Align.top);
         goldTrophyImage.setScaling(Scaling.fit);
 
         // Silver trophy image
@@ -104,13 +103,13 @@ public class HighScoresScreen extends AbstractScreen {
         table.add(highScoresLabel).padBottom(AbstractScreen.PAD * 2).colspan(COLUMNS);
         table.row();
         table.add(goldTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(goldHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
+        table.add(goldHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
         table.row();
         table.add(silverTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(silverHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
+        table.add(silverHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
         table.row();
         table.add(bronzeTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(bronzeHighScoreLabel).padLeft(AbstractScreen.PAD / 2);
+        table.add(bronzeHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
 
         // Adds table to stage
         addActor(table);

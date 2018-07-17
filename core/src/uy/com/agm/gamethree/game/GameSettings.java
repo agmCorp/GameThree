@@ -44,7 +44,7 @@ public class GameSettings {
 
     private static final String BRONZE_HIGH_SCORE = "bronzeHighScore";
     private static final String BRONZE_HIGH_SCORE_MILLIS = "bronzeHighScoreMillis";
-    private static final int DEFAULT_BRONZE_HIGH_SCORE = 75273;
+    private static final int DEFAULT_BRONZE_HIGH_SCORE = 7273;
     private static final long DEFAULT_BRONZE_HIGH_SCORE_MILLIS = 1531794009758L; // 16/07/2018
 
     // Singleton: unique instance

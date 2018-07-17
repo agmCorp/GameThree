@@ -176,7 +176,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private StateFinalEnemy getNewRandomState(float dt) {
         boolean blnOption;
         StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
-        float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4;
+        float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 8; // Arbitrary
 
         // Set a new currentStateFinalEnemy
         changeTime += dt;
