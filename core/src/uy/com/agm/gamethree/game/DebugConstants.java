@@ -33,5 +33,5 @@ public class DebugConstants {
     public static final boolean DISABLE_ENERGY_COUNT = false && TURN_ON_DEBUG;
 
     // Freezes the camera
-    public static final boolean STATIC_GAME_CAM = true && TURN_ON_DEBUG;
+    public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;
 }
