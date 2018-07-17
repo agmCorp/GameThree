@@ -41,6 +41,7 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int currentPenalties;
     private int finalScore;
     private int currentStars;
+    private TextureRegion trophy;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
@@ -51,31 +52,33 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.currentLives = currentLives;
         this.currentScore = currentScore;
         this.currentEnergy = currentEnergy;
-        int maxEnergy = LevelFactory.getLevelEnergy(currentLevel);
-        this.currentPenalties = maxEnergy - currentEnergy;
-        this.finalScore = Math.abs(currentScore - currentPenalties * PENALTY_COST);
-        this.currentStars = getStarsValue(currentEnergy, maxEnergy);
+        int maxEnergy = LevelFactory.getLevelEnergy(this.currentLevel);
+        this.currentPenalties = maxEnergy - this.currentEnergy;
+        this.finalScore = Math.abs(this.currentScore - this.currentPenalties * PENALTY_COST);
+        this.currentStars = getStarsValue(this.currentEnergy, maxEnergy);
 
         GameSettings prefs = GameSettings.getInstance();
-        prefs.setStars(currentLevel, currentStars);
+        prefs.setStars(this.currentLevel, this.currentStars);
 
-
-
-
-        showNewHighScoreLabel = true;// finalScore > prefs.getHighScore(); todo
-
-
-
-
-        showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
-        if (showNewHighScoreLabel) {
-            //prefs.setHighScore(finalScore); todo
+        if (prefs.isNewGoldHighScore(this.finalScore)) {
+            this.trophy = Assets.getInstance().getScene2d().getGoldTrophy();
+            prefs.setGoldHighScore(this.finalScore);
+        } else if (prefs.isNewSilverHighScore(this.finalScore)) {
+            this.trophy = Assets.getInstance().getScene2d().getSilverTrophy();
+            prefs.setSilverHighScore(this.finalScore);
+        } else if (prefs.isNewBronzeHighScore(this.finalScore)) {
+            this.trophy = Assets.getInstance().getScene2d().getBronzeTrophy();
+            prefs.setBronzeHighScore(this.finalScore);
+        } else {
+            this.trophy = null;
         }
-        if (showNextLevelLabel) {
-            prefs.addActiveLevel(nextLevel, currentLives, finalScore);
+        this.showNewHighScoreLabel = this.trophy != null;
+        this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
+        if (this.showNextLevelLabel) {
+            prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
 
             // Removes levels from nextLevel + 1 to MAX_LEVEL
-            for(int i = nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+            for(int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
                 prefs.removeLevel(i);
             }
         }
@@ -147,7 +150,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         float padTop = AbstractScreen.PAD * 2;
         if (showNewHighScoreLabel) {
             padTop = AbstractScreen.PAD;
-            table.add(getNewHighScoreTable(assetScene2d.getGoldTrophy(), newHighScoreLabel)).padTop(AbstractScreen.PAD);
+            table.add(getNewHighScoreTable(trophy, newHighScoreLabel)).padTop(AbstractScreen.PAD);
             table.row();
         }
         if (showNextLevelLabel) {

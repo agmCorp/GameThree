@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import uy.com.agm.gamethree.actors.player.Hero;
 
@@ -16,29 +17,33 @@ public class GameSettings {
     private static final String TAG = GameSettings.class.getName();
 
     // Constants
+    private static final String SETTINGS = "uy.com.agm.gameThree.settings";
+    private static final String MANUAL_SHOOTING = "manualShooting";
+    private static final String LEVEL_STATE = "levelState_";
+    public static final int MAX_LEVEL = 4;
+
     private static final String SOUND = "sound";
     private static final String MUSIC = "music";
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
-    private static final String MANUAL_SHOOTING = "manualShooting";
+    public static final float DEFAULT_VOLUME = 0.5f;
+    private static final float MIN_VOLUME = 0.0f;
+    private static final float MAX_VOLUME = 1.0f;
+
     private static final String GOLD_HIGH_SCORE = "goldHighScore";
     private static final String GOLD_HIGH_SCORE_MILLIS = "goldHighScoreMillis";
     private static final int DEFAULT_GOLD_HIGH_SCORE = 21365;
     private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 257565600000L; // 15/01/1977
+
     private static final String SILVER_HIGH_SCORE = "silverHighScore";
     private static final String SILVER_HIGH_SCORE_MILLIS = "silverHighScoreMillis";
     private static final int DEFAULT_SILVER_HIGH_SCORE = 18491;
     private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 1547262000000L; // 25/12/2017
+
     private static final String BRONZE_HIGH_SCORE = "bronzeHighScore";
     private static final String BRONZE_HIGH_SCORE_MILLIS = "bronzeHighScoreMillis";
     private static final int DEFAULT_BRONZE_HIGH_SCORE = 75273;
     private static final long DEFAULT_BRONZE_HIGH_SCORE_MILLIS = 1531794009758L; // 16/07/2018
-    private static final String LEVEL_STATE = "levelState_";
-    private static final String SETTINGS = "uy.com.agm.gameThree.settings";
-    public static final float DEFAULT_VOLUME = 0.5f;
-    private static final float MIN_VOLUME = 0.0f;
-    private static final float MAX_VOLUME = 1.0f;
-    public static final int MAX_LEVEL = 4;
 
     // Singleton: unique instance
     private static GameSettings instance;
@@ -183,14 +188,11 @@ public class GameSettings {
 
     public void setGoldHighScore(int goldHighScore) {
         this.goldHighScore = goldHighScore;
+        this.goldHighScoreMillis = TimeUtils.millis();
     }
 
     public long getGoldHighScoreMillis() {
         return goldHighScoreMillis;
-    }
-
-    public void setGoldHighScoreMillis(long goldHighScoreMillis) {
-        this.goldHighScoreMillis = goldHighScoreMillis;
     }
 
     public int getSilverHighScore() {
@@ -199,14 +201,11 @@ public class GameSettings {
 
     public void setSilverHighScore(int silverHighScore) {
         this.silverHighScore = silverHighScore;
+        this.silverHighScoreMillis = TimeUtils.millis();
     }
 
     public long getSilverHighScoreMillis() {
         return silverHighScoreMillis;
-    }
-
-    public void setSilverHighScoreMillis(long silverHighScoreMillis) {
-        this.silverHighScoreMillis = silverHighScoreMillis;
     }
 
     public int getBronzeHighScore() {
@@ -215,14 +214,11 @@ public class GameSettings {
 
     public void setBronzeHighScore(int bronzeHighScore) {
         this.bronzeHighScore = bronzeHighScore;
+        this.bronzeHighScoreMillis = TimeUtils.millis();
     }
 
     public long getBronzeHighScoreMillis() {
         return bronzeHighScoreMillis;
-    }
-
-    public void setBronzeHighScoreMillis(long bronzeHighScoreMillis) {
-        this.bronzeHighScoreMillis = bronzeHighScoreMillis;
     }
 
     public void setStars(int level, int stars) {
