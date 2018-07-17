@@ -313,13 +313,13 @@ LECCIONES APRENDIDAS
     gradlew -Dhttp.proxyHost=proxy.bse.com.uy -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.bse.com.uy -Dhttps.proxyPort=8080 build
     Si es para supermario, puede ser que me falte alguna cosa de android, ahí tengo que abrir el sdk manager y bajarla.
     */
-    - abrir andoid studio, darle luego open y seleccionar el archivo build.grandle, ahí pide proxy meter el del bse.
+    - abrir andoid studio, darle luego open y seleccionar el archivo build.gradle, ahí pide proxy meter el del bse.
     - en settings deshabilitar configuration on demand
     - luego view/windows tools/gradle
     - luego dalre sincronizar, esperar que finalice  la indexacion
     Si le falta alguna librería de andoid, en el error da un link en donde pinchás y te la instala en shootStrategy\users\amorales\appdata\local\android\sdk.
     Sino el sdk Manager está en el menú tools/Android y ahí las cargo yo a mano hasta resolver todos los problemas.
-    Tuve que editar el build.grandle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
+    Tuve que editar el build.gradle de super mario y poner com.android.tools.build:gradle:2.3.0 en lugar de com.android.tools.build:gradle:2.3.0-beta1
     - cerrar el android studio, abrir el proyecto, crear el run deskotp, luego darle run y pide module, ponerle desktop.
     - la pc de mi trabajo no soporta opengl2.0 así que solo puedo ejecutar en android.
 
@@ -403,20 +403,20 @@ LECCIONES APRENDIDAS
 
 18)
     No estoy seguro, pero para generar un apk release no firmado:
-    Abrir el archivo android/build.grandle y clickear adentro.
+    Abrir el archivo android/build.gradle y clickear adentro.
     Se me habilita en el menu build la opcion Select Build Variant...
     Alli elijo Release, luego en el menu Build selecciono Build APK.
 
-    Si hago cambios en los archivos .grandle, debo luego hacer un Rebuild project para que sean tomados en cuenta.
+    Si hago cambios en los archivos .gradle, debo luego hacer un Rebuild project para que sean tomados en cuenta.
     Esto es para usar el ide, sino seria ejecutar las tareas gradle:
     Information:Gradle tasks [:android:assembleRelease, :core:assemble, :desktop:assemble]
 
-    Para quitar el folder raw de los apk (tanto en debug como release), agregue en android/build.grandle:
+    Para quitar el folder raw de los apk (tanto en debug como release), agregue en android/build.gradle:
     android {
         aaptOptions {
             ignoreAssetsPattern '!raw'
         }
-    Para quitar el folder raw del jar (desktop) agregue en desktop/build.grandle:
+    Para quitar el folder raw del jar (desktop) agregue en desktop/build.gradle:
     task dist(type: Jar) {
         ...
         exclude '**/raw/**'
@@ -425,7 +425,7 @@ LECCIONES APRENDIDAS
     https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline
     salida ejemplo: gameThree-1.0-build-20180220_223045.jar
 
-    Para generar los apks renombrados con informacion de version agregue en android/build.grandle:
+    Para generar los apks renombrados con informacion de version agregue en android/build.gradle:
     android {
     ...
         // Rename all output artifacts to include version information
@@ -446,7 +446,7 @@ LECCIONES APRENDIDAS
     Finalmente, para optimizar el tamaño del apk leí la info de esta guía:
     https://developer.android.com/topic/performance/reduce-apk-size.html
 
-    Agregué en android/build.grandle:
+    Agregué en android/build.gradle:
         buildTypes {
             debug {
                 minifyEnabled true

@@ -3,6 +3,7 @@ package uy.com.agm.gamethree.screens.util;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.CreditsScreen;
 import uy.com.agm.gamethree.screens.GameOverScreen;
+import uy.com.agm.gamethree.screens.HighScoresScreen;
 import uy.com.agm.gamethree.screens.LevelCompletedScreen;
 import uy.com.agm.gamethree.screens.MainMenuScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -29,6 +30,12 @@ public enum ScreenEnum {
     SETTINGS {
         public AbstractScreen getScreen(Object... params) {
             return new SettingsScreen();
+        }
+    },
+
+    HIGH_SCORES {
+        public AbstractScreen getScreen(Object... params) {
+            return new HighScoresScreen();
         }
     },
 
