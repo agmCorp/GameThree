@@ -6,7 +6,7 @@ package uy.com.agm.gamethree.game;
 
 public class DebugConstants {
     // Master variable: turns debug mode on or off
-    public static final boolean TURN_ON_DEBUG = true;
+    public static final boolean TURN_ON_DEBUG = false;
 
     // Sets the log level to debug
     public static final boolean DEBUG_MODE = true && TURN_ON_DEBUG;
@@ -36,5 +36,5 @@ public class DebugConstants {
     public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;
 
     // Allows to destroy the FinalEnemies with one hit
-    public static final boolean DESTROY_BOSSES_ONE_HIT = false && TURN_ON_DEBUG;
+    public static final boolean DESTROY_BOSSES_ONE_HIT = true && TURN_ON_DEBUG;
 }
