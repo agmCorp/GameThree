@@ -12,7 +12,7 @@ import java.util.Date;
 import uy.com.agm.gamethree.actors.player.Hero;
 
 /**
- * Created by AGM on 1/18/2018.
+ * Created by AGM on 16/07/2018.
  */
 
 public class GameSettings {
@@ -35,17 +35,17 @@ public class GameSettings {
     private static final String GOLD_HIGH_SCORE = "goldHighScore";
     private static final String GOLD_HIGH_SCORE_MILLIS = "goldHighScoreMillis";
     private static final int DEFAULT_GOLD_HIGH_SCORE = 21365;
-    private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 257565600000L; // 01/03/1978
+    private static final long DEFAULT_GOLD_HIGH_SCORE_MILLIS = 222134400000L; // 15/01/1977 Mi cumple \(^-^)/
 
     private static final String SILVER_HIGH_SCORE = "silverHighScore";
     private static final String SILVER_HIGH_SCORE_MILLIS = "silverHighScoreMillis";
     private static final int DEFAULT_SILVER_HIGH_SCORE = 18491;
-    private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 1547262000000L; // 12/01/2019
+    private static final long DEFAULT_SILVER_HIGH_SCORE_MILLIS = 327715200000L; // 21/05/1980 Pac-Man
 
     private static final String BRONZE_HIGH_SCORE = "bronzeHighScore";
     private static final String BRONZE_HIGH_SCORE_MILLIS = "bronzeHighScoreMillis";
     private static final int DEFAULT_BRONZE_HIGH_SCORE = 7273;
-    private static final long DEFAULT_BRONZE_HIGH_SCORE_MILLIS = 1531794009758L; // 16/07/2018
+    private static final long DEFAULT_BRONZE_HIGH_SCORE_MILLIS = 1531794009758L; // 16/07/2018 When this class was coded
 
     // Singleton: unique instance
     private static GameSettings instance;
