@@ -17,11 +17,6 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-   // Final enemy - Hero's weapon
-            case FINAL_ENEMY_BIT | HERO_WEAPON_BIT:
-
-            revisar eso que esta programado ineficiente.
-
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
