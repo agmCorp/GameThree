@@ -19,8 +19,6 @@ PRIORIDADES PARA LIBERAR
 ------------------------
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 Me pasó algo parecido en el nivel 3.
-- me seteo mal la fecha cuando hice record bronce.
-Sin embargo al parecer grabo bien la property en el disco, es en memoria en el momento que no actualiza.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo porque es lo unico que me puede matar.
 - Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente), bumps, shurikens remanentes.
