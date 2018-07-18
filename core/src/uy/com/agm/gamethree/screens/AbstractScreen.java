@@ -54,11 +54,18 @@ public abstract class AbstractScreen extends Stage implements Screen {
         super.draw();
 
         // Back button Android
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
             // Audio FX
             AudioManager.getInstance().stopSound();
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+
+            // On the MainMenu pressing the back button will exit the app.
+            // On other screens the back button will switch the app back to the MainMenu
+            if (this instanceof MainMenuScreen) {
+                Gdx.app.exit();
+            } else {
+                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+            }
         }
     }
 
@@ -67,10 +74,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
         Gdx.input.setInputProcessor(this);
 
         // Back button Android
-        // On the MainMenu pressing the back button will exit the app.
-        // On other screens the back button will switch the app back to the MainMenu
-        boolean catchBAckKey = !(this instanceof MainMenuScreen);
-        Gdx.input.setCatchBackKey(catchBAckKey);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override

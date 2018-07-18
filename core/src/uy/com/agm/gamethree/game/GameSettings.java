@@ -197,6 +197,7 @@ public class GameSettings {
     public void setGoldHighScore(int goldHighScore) {
         this.goldHighScore = goldHighScore;
         this.goldHighScoreMillis = TimeUtils.millis();
+        this.goldHighScoreDate.setTime(this.goldHighScoreMillis);
     }
 
     public Date getGoldHighScoreDate() {
@@ -210,6 +211,7 @@ public class GameSettings {
     public void setSilverHighScore(int silverHighScore) {
         this.silverHighScore = silverHighScore;
         this.silverHighScoreMillis = TimeUtils.millis();
+        this.silverHighScoreDate.setTime(this.silverHighScoreMillis);
     }
 
     public Date getSilverHighScoreDate() {
@@ -223,6 +225,7 @@ public class GameSettings {
     public void setBronzeHighScore(int bronzeHighScore) {
         this.bronzeHighScore = bronzeHighScore;
         this.bronzeHighScoreMillis = TimeUtils.millis();
+        this.bronzeHighScoreDate.setTime(this.bronzeHighScoreMillis);
     }
 
     public Date getBronzeHighScoreDate() {
