@@ -50,7 +50,7 @@ public class AssetColOne {
         goldAnimation.add(new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP));
         regions.clear();
         regions = atlas.findRegions("diamond");
-        goldAnimation.add(new Animation(0.3f / 6.0f, regions, Animation.PlayMode.LOOP));
+        goldAnimation.add(new Animation(0.5f / 6.0f, regions, Animation.PlayMode.LOOP));
         regions.clear();
 
         // Animation Silver
