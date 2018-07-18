@@ -21,6 +21,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelFour;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -51,7 +52,7 @@ public class FinalEnemyLevelFour extends FinalEnemy {
     private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
     private static final float CIRCULAR_PATH_PROBABILITY = 0.3f;  // 30%
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 25;
+    private static final int MAX_DAMAGE = 25 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;

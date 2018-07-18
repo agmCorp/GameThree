@@ -241,6 +241,16 @@ public class GameSettings {
         levels.put(level, new LevelState(level, lives, score, 0, true));
     }
 
+    public void resetLevel(int level) {
+        LevelState levelState = levels.get(level);
+        if (levelState != null) {
+            levelState.setInitialScore(0);
+            levelState.setInitialLives(Hero.LIVES_START);
+            levelState.setFinalStars(0);
+            levelState.setActive(false);
+        }
+    }
+
     public void removeLevel(int level) {
         levels.removeKey(level);
     }

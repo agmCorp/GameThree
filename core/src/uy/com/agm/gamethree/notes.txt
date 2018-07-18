@@ -25,6 +25,11 @@ probar esto:
     - jugar nivel 2 y ganar.
     - poner debug = false, deberia ver nivel 1, 2, y 3.
 
+
+debug false, activos 1, 2, 3. Jugar 1 y ganar. Quedan activos 1, 2.
+Debug true, jugar 3 y ganar. Quedan activos 1, 2, 4
+debug false, deberia ver 1, 2
+
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata. Me pasó algo parecido en el nivel 3.
 - Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente), bumps, shurikens remanentes.
 - Hacer pantallas de help con fondo lindo:

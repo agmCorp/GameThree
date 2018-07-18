@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
@@ -39,7 +40,7 @@ public class FinalEnemyLevelThree extends FinalEnemy {
     private static final float HORIZONTAL_RADIUS_METERS = 1.0f;
     private static final float VERTICAL_RADIUS_METERS = 2.0f;
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 20;
+    private static final int MAX_DAMAGE = 20 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;

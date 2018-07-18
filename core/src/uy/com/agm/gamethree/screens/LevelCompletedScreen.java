@@ -77,14 +77,22 @@ public class LevelCompletedScreen extends AbstractScreen {
         if (this.showNextLevelLabel) {
             prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
 
-            // Removes levels from nextLevel + 1 to MAX_LEVEL
-            if (!DebugConstants.DEBUG_LEVELS) {
-                for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-                    prefs.removeLevel(i);
-                }
+            // Resets levels from nextLevel + 1 to MAX_LEVEL
+            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+                prefs.resetLevel(i);
             }
         }
+
+        // Saves preferences
+        // We can't delete keys, only change values
         prefs.save();
+
+        // Removes keys from memory
+        if (!DebugConstants.DEBUG_LEVELS) {
+            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+                prefs.removeLevel(i);
+            }
+        }
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
