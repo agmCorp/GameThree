@@ -18,6 +18,7 @@ public class AssetMusic {
     private Music songLevelTwo;
     private Music songLevelThree;
     private Music songLevelFour;
+    private Music songBigBoss;
 
     public AssetMusic(AssetManager am) {
         songMainMenu = am.get(Assets.MUSIC_FILE_MAIN_MENU, Music.class);
@@ -26,6 +27,7 @@ public class AssetMusic {
         songLevelTwo = am.get(Assets.MUSIC_FILE_LEVEL_TWO, Music.class);
         songLevelThree = am.get(Assets.MUSIC_FILE_LEVEL_THREE, Music.class);
         songLevelFour = am.get(Assets.MUSIC_FILE_LEVEL_FOUR, Music.class);
+        songBigBoss = am.get(Assets.MUSIC_FILE_BIG_BOSS, Music.class);
     }
 
     public Music getSongMainMenu() {
@@ -50,5 +52,9 @@ public class AssetMusic {
 
     public Music getSongLevelFour() {
         return songLevelFour;
+    }
+
+    public Music getSongBigBoss() {
+        return songBigBoss;
     }
 }
