@@ -167,7 +167,7 @@ public class AssetSounds {
         blade = am.get(Assets.FX_FILE_BLADE, Sound.class);
         flutter = am.get(Assets.FX_FILE_FLUTTER, Sound.class);
         threat = am.get(Assets.FX_FILE_THREAT, Sound.class);
-        tale01 = am.get(Assets.FX_FILE_TALE_01, Sound.class);
+        tale01 = am.get(Assets.FX_FILE_TALE, Sound.class);
         tale02 = am.get(Assets.FX_FILE_TALE_02, Sound.class);
         tale03 = am.get(Assets.FX_FILE_TALE_03, Sound.class);
         tale04 = am.get(Assets.FX_FILE_TALE_04, Sound.class);
