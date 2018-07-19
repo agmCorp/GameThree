@@ -82,6 +82,7 @@ public class AssetSounds {
     private Sound pebbles;
     private Sound blade;
     private Sound flutter;
+    private Sound threat;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -154,6 +155,7 @@ public class AssetSounds {
         pebbles = am.get(Assets.FX_FILE_PEBBLES, Sound.class);
         blade = am.get(Assets.FX_FILE_BLADE, Sound.class);
         flutter = am.get(Assets.FX_FILE_FLUTTER, Sound.class);
+        threat = am.get(Assets.FX_FILE_THREAT, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -434,5 +436,9 @@ public class AssetSounds {
 
     public Sound getFlutter() {
         return flutter;
+    }
+
+    public Sound getThreat() {
+        return threat;
     }
 }

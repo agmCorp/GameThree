@@ -1,6 +1,7 @@
 package uy.com.agm.gamethree.screens.util;
 
 import uy.com.agm.gamethree.screens.AbstractScreen;
+import uy.com.agm.gamethree.screens.BigBossScreen;
 import uy.com.agm.gamethree.screens.CreditsScreen;
 import uy.com.agm.gamethree.screens.GameOverScreen;
 import uy.com.agm.gamethree.screens.HighScoresScreen;
@@ -36,6 +37,12 @@ public enum ScreenEnum {
     HIGH_SCORES {
         public AbstractScreen getScreen(Object... params) {
             return new HighScoresScreen();
+        }
+    },
+
+    GRAND_FINALE {
+        public AbstractScreen getScreen(Object... params) {
+            return new BigBossScreen();
         }
     },
 

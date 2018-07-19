@@ -29,4 +29,10 @@ public class LoadingBar extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(reg, getX(), getY());
     }
+
+    // TODO borrar este metodo
+    public void setAnimation(Animation animation) {
+        stateTime = 0;
+        this.animation = animation;
+    }
 }

@@ -78,6 +78,7 @@ public class AssetScene2d {
     private TextureRegion bronzeTrophy;
     private TextureRegion star;
     private TextureRegion emptyStar;
+    private TextureRegion bigBossBackground;
     private AssetHeroHead heroHead;
     private AssetEnergy energy;
     private AssetHourglass hourglass;
@@ -86,6 +87,7 @@ public class AssetScene2d {
     private AssetStageFailed stageFailed;
     private AssetGameOver gameOver;
     private AssetLetsGo letsGo;
+    private AssetBigBoss bigBoss;
 
     public AssetScene2d(TextureAtlas atlasUI) {
         sliderBackground = atlasUI.findRegion("sliderBackground");
@@ -157,6 +159,7 @@ public class AssetScene2d {
         bronzeTrophy = atlasUI.findRegion("bronzeTrophy");
         star = atlasUI.findRegion("star");
         emptyStar = atlasUI.findRegion("emptyStar");
+        bigBossBackground = atlasUI.findRegion("bigBossBackground");
         heroHead = new AssetHeroHead(atlasUI);
         energy = new AssetEnergy(atlasUI);
         hourglass = new AssetHourglass(atlasUI);
@@ -165,6 +168,7 @@ public class AssetScene2d {
         stageFailed = new AssetStageFailed(atlasUI);
         gameOver = new AssetGameOver(atlasUI);
         letsGo = new AssetLetsGo(atlasUI);
+        bigBoss = new AssetBigBoss(atlasUI);
     }
 
     public TextureRegion getSliderBackground() {
@@ -439,6 +443,10 @@ public class AssetScene2d {
         return emptyStar;
     }
 
+    public TextureRegion getBigBossBackground() {
+        return bigBossBackground;
+    }
+
     public AssetHeroHead getHeroHead() {
         return heroHead;
     }
@@ -469,5 +477,9 @@ public class AssetScene2d {
 
     public AssetLetsGo getLetsGo() {
         return letsGo;
+    }
+
+    public AssetBigBoss getBigBoss() {
+        return bigBoss;
     }
 }

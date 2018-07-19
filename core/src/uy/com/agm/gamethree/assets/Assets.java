@@ -158,6 +158,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_PEBBLES = "audio/sounds/pebbles.ogg";
     public static final String FX_FILE_BLADE = "audio/sounds/blade.ogg";
     public static final String FX_FILE_FLUTTER = "audio/sounds/flutter.ogg";
+    public static final String FX_FILE_THREAT = "audio/sounds/threat.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -458,6 +459,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_PEBBLES, Sound.class);
         assetManager.load(FX_FILE_BLADE, Sound.class);
         assetManager.load(FX_FILE_FLUTTER, Sound.class);
+        assetManager.load(FX_FILE_THREAT, Sound.class);
     }
 
     private void loadMusic() {
