@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.AbstractScreen;
-import uy.com.agm.gamethree.widget.LoadingBar;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -69,7 +69,7 @@ public class SplashScreen extends AbstractScreen {
 
         // Add the loading bar animation
         Animation anim = new Animation(0.05f, atlas.findRegions("loadingBarAnim"), Animation.PlayMode.LOOP_REVERSED);
-        loadingBar = new LoadingBar(anim);
+        loadingBar = new AnimatedActor(anim);
 
         // Or if you only need a static bar, you can use loadingBar1 or loadingBar2
         // loadingBar = new Image(atlas.findRegion("loadingBar2"));

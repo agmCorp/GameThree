@@ -15,7 +15,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.widget.LoadingBar;
+import uy.com.agm.gamethree.widget.AnimatedActor;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -36,7 +36,7 @@ public class BigBossScreen extends AbstractScreen {
     private Animation bigBossHitOneAnimation;
     private Animation bigBossHitTwoAnimation;
     private Animation bigBossIdleAnimation;
-    private LoadingBar bigBossActor;
+    private AnimatedActor bigBossActor;
 
     // basura // TODO: 7/18/2018
     boolean isA = true;
@@ -102,7 +102,7 @@ public class BigBossScreen extends AbstractScreen {
 
     private void defineBigBoss() { // todo
         // Add the loading bar animation
-        bigBossActor = new LoadingBar(bigBossIdleAnimation);
+        bigBossActor = new AnimatedActor(bigBossIdleAnimation);
 
         // Place the loading bar at the same spot as the frame
         bigBossActor.setX(37);

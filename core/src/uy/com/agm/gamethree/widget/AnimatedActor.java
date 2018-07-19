@@ -9,28 +9,27 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by AGM on 5/27/2018.
  */
 
-public class LoadingBar extends Actor {
+public class AnimatedActor extends Actor {
     Animation animation;
-    TextureRegion reg;
+    TextureRegion textureRegion;
     float stateTime;
 
-    public LoadingBar(Animation animation) {
+    public AnimatedActor(Animation animation) {
         this.animation = animation;
-        reg = (TextureRegion) animation.getKeyFrame(0);
+        textureRegion = (TextureRegion) animation.getKeyFrame(0);
     }
 
     @Override
     public void act(float delta) {
         stateTime += delta;
-        reg = (TextureRegion) animation.getKeyFrame(stateTime);
+        textureRegion = (TextureRegion) animation.getKeyFrame(stateTime);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(reg, getX(), getY());
+        batch.draw(textureRegion, getX(), getY());
     }
 
-    // TODO borrar este metodo
     public void setAnimation(Animation animation) {
         stateTime = 0;
         this.animation = animation;
