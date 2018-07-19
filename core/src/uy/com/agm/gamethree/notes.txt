@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- podria mostar un aviso (random) cuando entrás al nivel, al comienzo de playscreen.
 - En la pantalla de creditos poner donación y rank
 - LEERLE LOS ISSUES https://github.com/rafaskb/typing-label/issues/3
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
