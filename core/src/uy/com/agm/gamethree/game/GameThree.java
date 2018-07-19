@@ -1,12 +1,13 @@
 package uy.com.agm.gamethree.game;
 
-import com.admob.IAdsController;
 import com.admob.DummyAdsController;
+import com.admob.IAdsController;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.rafaskoberg.gdx.typinglabel.TypingConfig;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
@@ -35,6 +36,9 @@ public class GameThree extends Game {
 
         // Load preferences and settings
         GameSettings.getInstance().load();
+
+        // Set TypingConfig new line character interval multiplier
+        TypingConfig.INTERVAL_MULTIPLIERS_BY_CHAR.put('\n', 0);
 
         // Constructs a new SpriteBatch
         batch = new SpriteBatch();
