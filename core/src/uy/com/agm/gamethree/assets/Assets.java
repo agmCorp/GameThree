@@ -159,6 +159,17 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_BLADE = "audio/sounds/blade.ogg";
     public static final String FX_FILE_FLUTTER = "audio/sounds/flutter.ogg";
     public static final String FX_FILE_THREAT = "audio/sounds/threat.ogg";
+    public static final String FX_FILE_TALE_01 = "audio/sounds/tale_01.ogg";
+    public static final String FX_FILE_TALE_02 = "audio/sounds/tale_02.ogg";
+    public static final String FX_FILE_TALE_03 = "audio/sounds/tale_03.ogg";
+    public static final String FX_FILE_TALE_04 = "audio/sounds/tale_04.ogg";
+    public static final String FX_FILE_TALE_05 = "audio/sounds/tale_05.ogg";
+    public static final String FX_FILE_TALE_06 = "audio/sounds/tale_06.ogg";
+    public static final String FX_FILE_TALE_07 = "audio/sounds/tale_07.ogg";
+    public static final String FX_FILE_TALE_08 = "audio/sounds/tale_08.ogg";
+    public static final String FX_FILE_TALE_09 = "audio/sounds/tale_09.ogg";
+    public static final String FX_FILE_TALE_10 = "audio/sounds/tale_10.ogg";
+    public static final String FX_FILE_TALE_11 = "audio/sounds/tale_11.ogg";
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
@@ -461,6 +472,17 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_BLADE, Sound.class);
         assetManager.load(FX_FILE_FLUTTER, Sound.class);
         assetManager.load(FX_FILE_THREAT, Sound.class);
+        assetManager.load(FX_FILE_TALE_01, Sound.class);
+        assetManager.load(FX_FILE_TALE_02, Sound.class);
+        assetManager.load(FX_FILE_TALE_03, Sound.class);
+        assetManager.load(FX_FILE_TALE_04, Sound.class);
+        assetManager.load(FX_FILE_TALE_05, Sound.class);
+        assetManager.load(FX_FILE_TALE_06, Sound.class);
+        assetManager.load(FX_FILE_TALE_07, Sound.class);
+        assetManager.load(FX_FILE_TALE_08, Sound.class);
+        assetManager.load(FX_FILE_TALE_09, Sound.class);
+        assetManager.load(FX_FILE_TALE_10, Sound.class);
+        assetManager.load(FX_FILE_TALE_11, Sound.class);
     }
 
     private void loadMusic() {

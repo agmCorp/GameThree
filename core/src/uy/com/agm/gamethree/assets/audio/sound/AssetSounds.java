@@ -83,6 +83,17 @@ public class AssetSounds {
     private Sound blade;
     private Sound flutter;
     private Sound threat;
+    private Sound tale01;
+    private Sound tale02;
+    private Sound tale03;
+    private Sound tale04;
+    private Sound tale05;
+    private Sound tale06;
+    private Sound tale07;
+    private Sound tale08;
+    private Sound tale09;
+    private Sound tale10;
+    private Sound tale11;
 
     public AssetSounds(AssetManager am) {
         gameOver = am.get(Assets.FX_FILE_GAME_OVER, Sound.class);
@@ -156,6 +167,17 @@ public class AssetSounds {
         blade = am.get(Assets.FX_FILE_BLADE, Sound.class);
         flutter = am.get(Assets.FX_FILE_FLUTTER, Sound.class);
         threat = am.get(Assets.FX_FILE_THREAT, Sound.class);
+        tale01 = am.get(Assets.FX_FILE_TALE_01, Sound.class);
+        tale02 = am.get(Assets.FX_FILE_TALE_02, Sound.class);
+        tale03 = am.get(Assets.FX_FILE_TALE_03, Sound.class);
+        tale04 = am.get(Assets.FX_FILE_TALE_04, Sound.class);
+        tale05 = am.get(Assets.FX_FILE_TALE_05, Sound.class);
+        tale06 = am.get(Assets.FX_FILE_TALE_06, Sound.class);
+        tale07 = am.get(Assets.FX_FILE_TALE_07, Sound.class);
+        tale08 = am.get(Assets.FX_FILE_TALE_08, Sound.class);
+        tale09 = am.get(Assets.FX_FILE_TALE_09, Sound.class);
+        tale10 = am.get(Assets.FX_FILE_TALE_10, Sound.class);
+        tale11 = am.get(Assets.FX_FILE_TALE_11, Sound.class);
     }
 
     public Sound getGameOver() {
@@ -440,5 +462,49 @@ public class AssetSounds {
 
     public Sound getThreat() {
         return threat;
+    }
+
+    public Sound getTale01() {
+        return tale01;
+    }
+
+    public Sound getTale02() {
+        return tale02;
+    }
+
+    public Sound getTale03() {
+        return tale03;
+    }
+
+    public Sound getTale04() {
+        return tale04;
+    }
+
+    public Sound getTale05() {
+        return tale05;
+    }
+
+    public Sound getTale06() {
+        return tale06;
+    }
+
+    public Sound getTale07() {
+        return tale07;
+    }
+
+    public Sound getTale08() {
+        return tale08;
+    }
+
+    public Sound getTale09() {
+        return tale09;
+    }
+
+    public Sound getTale10() {
+        return tale10;
+    }
+
+    public Sound getTale11() {
+        return tale11;
     }
 }
