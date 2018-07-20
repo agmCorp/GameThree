@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- En el hud en lugar de score poner una moneda y en lugar de highscore poner la copa. Se pueden usar puntos para comprar poderes.
 - Podria mostar un aviso (random) cuando entrás al nivel, al comienzo de playscreen.
 - En la pantalla de creditos poner donación y rank
 - LEERLE LOS ISSUES https://github.com/rafaskb/typing-label/issues/3
