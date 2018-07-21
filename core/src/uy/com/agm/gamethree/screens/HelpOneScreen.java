@@ -61,7 +61,7 @@ public class HelpOneScreen extends AbstractScreen {
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
-        TypingLabel msgLabel = new TypingLabel(i18NGameThreeBundle.format("credits.msg"), labelStyleSmall);
+        TypingLabel msgLabel = new TypingLabel(i18NGameThreeBundle.format("helpOne.msg"), labelStyleSmall);
         msgLabel.setAlignment(Align.left);
         msgLabel.setWrap(true);
 

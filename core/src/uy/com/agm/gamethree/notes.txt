@@ -17,9 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- Podria mostar un aviso (random) cuando entrás al nivel, al comienzo de playscreen.
 - En la pantalla de creditos poner donación y rank
-- LEERLE LOS ISSUES https://github.com/rafaskb/typing-label/issues/3
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
@@ -30,7 +28,6 @@ Se me ocurre que solo se dibujen los bordes de las balas del enemigo porque es l
     - Imprescindible explicar la energy.
     - perfil de cada enemigo?
     - items y poderes
-- Hacer pantalla de final feliz
 - hacer un mapa de los niveles (opcional)
 
 HACER PRIORIDAD 1
