@@ -27,6 +27,8 @@ public class BigBossScreen extends AbstractScreen {
     // Constants
     private static final float MSG_PAD_LEFT = 18.0f;
     private static final float MSG_WIDTH = 430.0f;
+
+    // todo tiempos que marco
     private static final float INITIAL_DELAY_SECONDS = 3.0f;
     private static final float FINALE_DURATION_SECONDS = 12.0f;
 
