@@ -79,6 +79,7 @@ public class AssetScene2d {
     private TextureRegion star;
     private TextureRegion emptyStar;
     private TextureRegion bigBossBackground;
+    private TextureRegion helpOne;
     private AssetHeroHead heroHead;
     private AssetEnergy energy;
     private AssetHourglass hourglass;
@@ -160,6 +161,7 @@ public class AssetScene2d {
         star = atlasUI.findRegion("star");
         emptyStar = atlasUI.findRegion("emptyStar");
         bigBossBackground = atlasUI.findRegion("bigBossBackground");
+        helpOne = atlasUI.findRegion("helpOne");
         heroHead = new AssetHeroHead(atlasUI);
         energy = new AssetEnergy(atlasUI);
         hourglass = new AssetHourglass(atlasUI);
@@ -445,6 +447,10 @@ public class AssetScene2d {
 
     public TextureRegion getBigBossBackground() {
         return bigBossBackground;
+    }
+
+    public TextureRegion getHelpOne() {
+        return helpOne;
     }
 
     public AssetHeroHead getHeroHead() {

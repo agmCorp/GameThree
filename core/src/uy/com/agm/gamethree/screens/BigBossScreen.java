@@ -66,7 +66,7 @@ public class BigBossScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         // Play music
-        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongBigBoss());
+        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongBigBoss(), false);
 
         defineMainTable();
         defineBigBoss();

@@ -144,7 +144,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         TypingLabel finalScoreLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabel nextLevelLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
-        TypingLabel newLevelsLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.newLevels"), labelStyleNormal);
+        TypingLabel grandFinaleLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.grandFinale"), labelStyleNormal);
 
         // Add values
         table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
@@ -171,7 +171,10 @@ public class LevelCompletedScreen extends AbstractScreen {
             nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, currentLives, finalScore));
         } else {
             table.row();
-            table.add(newLevelsLabel).padTop(padTop);
+            table.add(grandFinaleLabel).padTop(padTop);
+
+            // Events
+            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
         }
         table.padTop(padTop);
 

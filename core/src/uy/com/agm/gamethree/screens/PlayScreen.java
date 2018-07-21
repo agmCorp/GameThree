@@ -202,7 +202,7 @@ public class PlayScreen extends AbstractScreen {
         allowAds = true;
 
         // Start playing level music
-        AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level));
+        AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level), true);
 
         // User input handler
         Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));

@@ -21,10 +21,12 @@ public class AudioManager {
     private static  AudioManager instance;
     private Sound playingSound;
     private Music playingMusic;
+    private boolean looping;
 
     // Singleton: prevent instantiation from other classes
     private AudioManager() {
         trackSounds = new ArrayMap<String, Long>();
+        looping = true;
     }
 
     // Singleton: retrieve instance
@@ -76,23 +78,24 @@ public class AudioManager {
         }
     }
 
-    public void setMusic(Music music) {
+    public void setMusic(Music music, boolean loop) {
         playingMusic = music;
+        looping = loop;
         if (GameSettings.getInstance().isMusic()) {
-            playingMusic.setLooping(true);
+            playingMusic.setLooping(looping);
             playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
         }
     }
 
     public void playMusic() {
         if (GameSettings.getInstance().isMusic()) {
-            playingMusic.setLooping(true);
+            playingMusic.setLooping(looping);
             playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
             playingMusic.play();
         }
     }
 
-    public void playMusic(Music music) {
+    public void playMusic(Music music, boolean loop) {
         // Stop previous music
         if (playingMusic != null) {
             if (playingMusic != music) {
@@ -102,6 +105,7 @@ public class AudioManager {
 
         // Play new music
         playingMusic = music;
+        looping = loop;
         playMusic();
     }
 

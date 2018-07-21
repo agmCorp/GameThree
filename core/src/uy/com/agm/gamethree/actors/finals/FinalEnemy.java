@@ -124,7 +124,7 @@ public abstract class FinalEnemy extends Sprite {
                 AudioManager.getInstance().stopMusic();
 
                 // Set new Music (without playing it yet)
-                AudioManager.getInstance().setMusic(Assets.getInstance().getMusic().getSongFinalEnemyFight());
+                AudioManager.getInstance().setMusic(Assets.getInstance().getMusic().getSongFinalEnemyFight(), true);
 
                 // Intro FX
                 introTime = 0;
