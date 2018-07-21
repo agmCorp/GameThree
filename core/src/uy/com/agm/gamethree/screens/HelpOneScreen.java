@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -105,5 +107,16 @@ public class HelpOneScreen extends AbstractScreen {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    // todo, el negro queda muy bien, ver si queda esto aca
+    @Override
+    public void render(float delta) {
+        // Clear the screen with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        act();
+        draw();
     }
 }
