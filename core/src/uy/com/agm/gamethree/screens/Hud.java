@@ -31,6 +31,7 @@ public class Hud extends AbstractScreen {
 
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
+    private static final float UPPER_TABLE_PAD_TOP = 5.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
     private static final float SCORE_WIDTH = 80.0f;
     private static final float HIGH_SCORE_WIDTH = 80.0f;
@@ -140,7 +141,7 @@ public class Hud extends AbstractScreen {
         upperTable = new Table();
 
         // Cell height
-        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
+        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT).padTop(UPPER_TABLE_PAD_TOP);
 
         // Debug lines
         upperTable.setDebug(DebugConstants.DEBUG_LINES);
