@@ -32,12 +32,12 @@ public class Hud extends AbstractScreen {
     // Constants
     private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
-    private static final float SCORE_WIDTH = 110.0f;
-    private static final float HIGH_SCORE_WIDTH = 130.0f;
-    private static final float TIME_WIDTH = 60.0f;
-    private static final float LIVES_WIDTH = 60.0f;
-    private static final float HEART_WIDTH = 60.0f;
-    private static final float SILVER_BULLETS_WIDTH = 60.0f;
+    private static final float SCORE_WIDTH = 80.0f;
+    private static final float HIGH_SCORE_WIDTH = 80.0f;
+    private static final float TIME_WIDTH = 80.0f;
+    private static final float LIVES_WIDTH = 80.0f;
+    private static final float HEART_WIDTH = 80.0f;
+    private static final float SILVER_BULLETS_WIDTH = 80.0f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
@@ -133,6 +133,9 @@ public class Hud extends AbstractScreen {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
+        // Game assets
+        Assets assetGame = Assets.getInstance();
+
         // Define a table used to organize our hud's labels
         upperTable = new Table();
 
@@ -148,27 +151,28 @@ public class Hud extends AbstractScreen {
         // Make the table fill the entire stage
         upperTable.setFillParent(true);
 
-        // Define our labels based on labelStyle
-        Label scoreLabel = new Label(i18NGameThreeBundle.format("hud.score"), labelStyleSmall);
-        scoreLabel.setAlignment(Align.center);
-        Label highScoreLabel = new Label(i18NGameThreeBundle.format("hud.highScore"), labelStyleSmall);
-        highScoreLabel.setAlignment(Align.center);
-
-        // Add labels to the table
-        upperTable.add(scoreLabel).width(SCORE_WIDTH);
-        upperTable.add(highScoreLabel).width(HIGH_SCORE_WIDTH);
+        // Define images
+        AnimatedImage coin = new AnimatedImage();
+        coin.setAnimation(assetGame.getColOne().getCoinAnimation());
+        Image trophy = new AnimatedImage();
+        trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
+        trophy.setScaling(Scaling.fit);
 
         AnimatedImage hourglass = new AnimatedImage();
         hourglass.setAnimation(assetScene2d.getHourglass().getHourglassAnimation());
-        upperTable.add(hourglass).width(TIME_WIDTH);
         AnimatedImage heroHead = new AnimatedImage();
         heroHead.setAnimation(assetScene2d.getHeroHead().getHeroHeadAnimation());
-        upperTable.add(heroHead).width(LIVES_WIDTH);
         heart = new Image();
         setHeartImage(100);
-        upperTable.add(heart).width(HEART_WIDTH);
         AnimatedImage shuriken = new AnimatedImage();
-        shuriken.setAnimation(Assets.getInstance().getSilverBullet().getSilverBulletAnimation());
+        shuriken.setAnimation(assetGame.getSilverBullet().getSilverBulletAnimation());
+
+        // Add images to the table
+        upperTable.add(coin).width(SCORE_WIDTH);
+        upperTable.add(trophy).width(HIGH_SCORE_WIDTH);
+        upperTable.add(hourglass).width(TIME_WIDTH);
+        upperTable.add(heroHead).width(LIVES_WIDTH);
+        upperTable.add(heart).width(HEART_WIDTH);
         upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
 
         // Add a second row to our table

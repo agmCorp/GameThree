@@ -26,6 +26,7 @@ public class AssetColOne {
     private Array<Animation> goldAnimation;
     private Array<Animation> silverAnimation;
     private Array<Animation> bronzeAnimation;
+    private Animation coinAnimation;
 
     public AssetColOne(TextureAtlas atlas) {
         goldStand = new Array<TextureRegion>();
@@ -47,7 +48,8 @@ public class AssetColOne {
 
         // Animation Gold
         regions = atlas.findRegions("coinGold");
-        goldAnimation.add(new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP));
+        coinAnimation = new Animation(0.3f / 10.0f, regions, Animation.PlayMode.LOOP);
+        goldAnimation.add(coinAnimation);
         regions.clear();
         regions = atlas.findRegions("diamond");
         goldAnimation.add(new Animation(0.5f / 6.0f, regions, Animation.PlayMode.LOOP));
@@ -104,5 +106,9 @@ public class AssetColOne {
 
     public Animation getBronzeAnimation(int index) {
         return bronzeAnimation.get(index);
+    }
+
+    public Animation getCoinAnimation() {
+        return coinAnimation;
     }
 }

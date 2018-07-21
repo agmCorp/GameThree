@@ -17,7 +17,6 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- En el hud en lugar de score poner una moneda y en lugar de highscore poner la copa. Se pueden usar puntos para comprar poderes.
 - Podria mostar un aviso (random) cuando entrás al nivel, al comienzo de playscreen.
 - En la pantalla de creditos poner donación y rank
 - LEERLE LOS ISSUES https://github.com/rafaskb/typing-label/issues/3
@@ -82,6 +81,7 @@ libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 
 SOLO IDEAS
 ----------
+- Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vida o lo que se me ocurra.
 - Agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
 (icono corazón) Support the developer by paying above the minimum price
