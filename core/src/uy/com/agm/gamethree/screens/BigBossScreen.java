@@ -25,37 +25,42 @@ public class BigBossScreen extends AbstractScreen {
     private static final String TAG = BigBossScreen.class.getName();
 
     // Constants
-    private static final float MSG_PAD_LEFT = 18.0f;
     private static final float MSG_WIDTH = 430.0f;
-
-    // todo tiempos que marco
-    private static final float INITIAL_DELAY_SECONDS = 3.0f;
+    private static final float BIG_BOSS_X = 37.0f;
+    private static final float BIG_BOSS_Y = 100.0f;
+    private static final float THREAT_TIME_SECONDS = 3.0f;
+    private static final float HIT_TWO_ANIMATION_TIME_SECONDS = 3.0f; //todo
+    private static final float FX_HIT_TIME_SECONDS = 3.8f;
+    private static final float HIT_INTERVAL_TIME_SECONDS = 1.0f;
+    private static final float HIT_ONE_ANIMATION_TIME_SECONDS = 6.0f;
+    private static final float IDLE_ANIMATION_TIME_SECONDS = 9.0f;
     private static final float FINALE_DURATION_SECONDS = 12.0f;
 
-    private float initialDelayTime;
-    private float finaleDelayTime;
-    private boolean threat;
+    private float timeBeat;
+    private float hitTime;
     private Animation bigBossHitOneAnimation;
     private Animation bigBossHitTwoAnimation;
     private Animation bigBossIdleAnimation;
     private AnimatedActor bigBossActor;
 
-    // basura // TODO: 7/18/2018
-    boolean isA = true;
-    boolean isB = true;
-    boolean isC = true;
-    boolean isD = true;
-    boolean isF = false;
-    float golpes = 0;
+    private boolean threat;
+    private boolean hitTwoAnimation;
+    private boolean hit;
+    private boolean hitOneAnimation;
+    private boolean idleAnimation;
 
     public BigBossScreen() {
         super();
         bigBossHitOneAnimation = Assets.getInstance().getScene2d().getBigBoss().getBigBossHitOneAnimation();
         bigBossHitTwoAnimation = Assets.getInstance().getScene2d().getBigBoss().getBigBossHitTwoAnimation();
         bigBossIdleAnimation = Assets.getInstance().getScene2d().getBigBoss().getBigBossIdleAnimation();
-        initialDelayTime = 0;
-        finaleDelayTime = 0;
-        threat = true;
+        timeBeat = 0;
+        hitTime = 0;
+        threat = false;
+        hitTwoAnimation = false;
+        hit = false;
+        hitOneAnimation = false;
+        idleAnimation =  false;
     }
 
     @Override
@@ -96,20 +101,16 @@ public class BigBossScreen extends AbstractScreen {
         msgLabel.setWrap(true);
 
         // Add values
-        table.add(msgLabel).padLeft(MSG_PAD_LEFT).width(MSG_WIDTH).fill();
+        table.add(msgLabel).width(MSG_WIDTH).fill();
 
         // Adds table to stage
         addActor(table);
     }
 
-    private void defineBigBoss() { // todo
-        // Add the loading bar animation
+    private void defineBigBoss() {
         bigBossActor = new AnimatedActor(bigBossIdleAnimation);
-
-        // Place the loading bar at the same spot as the frame
-        bigBossActor.setX(37);
-        bigBossActor.setY(100);
-
+        bigBossActor.setX(BIG_BOSS_X);
+        bigBossActor.setY(BIG_BOSS_Y);
         addActor(bigBossActor);
     }
 
@@ -126,52 +127,34 @@ public class BigBossScreen extends AbstractScreen {
 
         act();
         draw();
-        if (initialDelayTime >= INITIAL_DELAY_SECONDS && threat) {
-            threat = false;
 
-            // Play voice
+        // Global timer
+        timeBeat += delta;
+
+        if (timeBeat >= THREAT_TIME_SECONDS && !threat) {
+            threat = true;
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getThreat());
-        } else {
-            initialDelayTime += delta;
-        }
-
-        finaleDelayTime += delta;
-        if (finaleDelayTime >= FINALE_DURATION_SECONDS) {
-            // Display screen
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-        } else {
-            if (finaleDelayTime >= 3 && isA) {
-                isA = false;
-                bigBossActor.setAnimation(bigBossHitTwoAnimation);
-                Gdx.app.debug(TAG, "CAMBIO ANIMACION A HIT 2");
-            } else {
-                if (finaleDelayTime >= 6 && isB) {
-                    isB = false;
-                    bigBossActor.setAnimation(bigBossHitOneAnimation);
-                    Gdx.app.debug(TAG, "CAMBIO ANIMACION A IDLE");
-                } else {
-                    if (finaleDelayTime >= 9 && isC) {
-                        isC = false;
-                        bigBossActor.setAnimation(bigBossIdleAnimation);
-                        Gdx.app.debug(TAG, "CAMBIO ANIMACION A IDLE");
-                    }
-                }
-            }
-        }
-
-        // goles
-        if (finaleDelayTime > 3.8 && isD) {
-            isD = false;
-            // Play voice
+        } else if (timeBeat >= HIT_TWO_ANIMATION_TIME_SECONDS && !hitTwoAnimation) {
+            hitTwoAnimation = true;
+            bigBossActor.setAnimation(bigBossHitTwoAnimation);
+        } else if (timeBeat >= FX_HIT_TIME_SECONDS && !hit) {
+            hit = true;
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPum());
-            isF = true;
+        } else if (timeBeat >= HIT_ONE_ANIMATION_TIME_SECONDS && !hitOneAnimation) {
+            hitOneAnimation = true;
+            bigBossActor.setAnimation(bigBossHitOneAnimation);
+        } else if (timeBeat >= IDLE_ANIMATION_TIME_SECONDS && !idleAnimation) {
+            idleAnimation = true;
+            bigBossActor.setAnimation(bigBossIdleAnimation);
+        } else if (timeBeat >= FINALE_DURATION_SECONDS) {
+            // Return to Menu screen
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
 
-        if (isF && finaleDelayTime <= 9) { // el mismo nueve de arriba
-            golpes += delta;
-            if (golpes >= 1) {
-                golpes = 0;
-                // Play voice
+        if (hit && timeBeat <= IDLE_ANIMATION_TIME_SECONDS) {
+            hitTime += delta;
+            if (hitTime >= HIT_INTERVAL_TIME_SECONDS) {
+                hitTime = 0;
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPum());
             }
         }

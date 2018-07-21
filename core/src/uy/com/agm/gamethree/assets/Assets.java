@@ -472,7 +472,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(MUSIC_FILE_LEVEL_THREE, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_FOUR, Music.class);
         assetManager.load(MUSIC_FILE_BIG_BOSS, Music.class);
-        assetManager.load(MUSIC_FILE_TALE, Sound.class);
+        assetManager.load(MUSIC_FILE_TALE, Music.class);
     }
 
     @Override
