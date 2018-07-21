@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
-import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import java.text.DateFormat;
 import java.util.Locale;
@@ -18,6 +17,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -75,9 +75,9 @@ public class HighScoresScreen extends AbstractScreen {
         int style = DateFormat.MEDIUM;
         DateFormat df = DateFormat.getDateInstance(style, Locale.getDefault());
         Label highScoresLabel = new Label(i18NGameThreeBundle.format("highScores.title"), labelStyleBig);
-        TypingLabel goldHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
-        TypingLabel silverHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
-        TypingLabel bronzeHighScoreLabel = new TypingLabel(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
+        TypingLabelWorkaround goldHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
+        TypingLabelWorkaround silverHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
+        TypingLabelWorkaround bronzeHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
 
         // Gold trophy image
         Image goldTrophyImage = new Image();

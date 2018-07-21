@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
-import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -22,6 +21,7 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
+import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -141,10 +141,10 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Define our labels based on labelStyle
         Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
-        TypingLabel finalScoreLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
+        TypingLabelWorkaround finalScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
-        TypingLabel nextLevelLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
-        TypingLabel grandFinaleLabel = new TypingLabel(i18NGameThreeBundle.format("levelCompleted.grandFinale"), labelStyleNormal);
+        TypingLabelWorkaround nextLevelLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
+        TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.grandFinale"), labelStyleNormal);
 
         // Add values
         table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);

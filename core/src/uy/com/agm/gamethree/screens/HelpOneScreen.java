@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -16,6 +15,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -27,7 +27,7 @@ public class HelpOneScreen extends AbstractScreen {
     // Constants
     private static final float MSG_WIDTH = 430.0f;
 
-    TypingLabel msgLabel;
+    TypingLabelWorkaround msgLabel;
     I18NBundle i18NGameThreeBundle;
 boolean puto = false;
     public HelpOneScreen() {
@@ -66,7 +66,7 @@ boolean puto = false;
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
-        msgLabel = new TypingLabel(i18NGameThreeBundle.format("helpOne.talePartOne"), labelStyleSmall);
+        msgLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpOne.talePartOne"), labelStyleSmall);
         msgLabel.setAlignment(Align.left);
         msgLabel.setWrap(true);
 

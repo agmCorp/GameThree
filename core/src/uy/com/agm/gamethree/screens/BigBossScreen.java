@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.DebugConstants;
@@ -16,6 +15,7 @@ import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedActor;
+import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -96,7 +96,7 @@ public class BigBossScreen extends AbstractScreen {
         labelStyleGrandFinale.font = Assets.getInstance().getFonts().getDefaultGrandFinale();
 
         // Define our labels based on labelStyle
-        TypingLabel msgLabel = new TypingLabel(i18NGameThreeBundle.format("bigBoss.threat"), labelStyleGrandFinale);
+        TypingLabelWorkaround msgLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("bigBoss.threat"), labelStyleGrandFinale);
         msgLabel.setAlignment(Align.center);
         msgLabel.setWrap(true);
 
