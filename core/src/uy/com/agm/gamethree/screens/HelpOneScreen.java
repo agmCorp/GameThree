@@ -27,6 +27,9 @@ public class HelpOneScreen extends AbstractScreen {
     // Constants
     private static final float MSG_WIDTH = 430.0f;
 
+    TypingLabel msgLabel;
+    I18NBundle i18NGameThreeBundle;
+boolean puto = false;
     public HelpOneScreen() {
         super();
     }
@@ -42,7 +45,7 @@ public class HelpOneScreen extends AbstractScreen {
 
     private void defineMainTable() {
         // I18n
-        I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         // Set table structure
         Table table = new Table();
@@ -54,7 +57,7 @@ public class HelpOneScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(AbstractScreen.PAD * 3);
+        table.top().padTop(AbstractScreen.PAD * 2);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -63,7 +66,7 @@ public class HelpOneScreen extends AbstractScreen {
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
         // Define our labels based on labelStyle
-        TypingLabel msgLabel = new TypingLabel(i18NGameThreeBundle.format("helpOne.msg"), labelStyleSmall);
+        msgLabel = new TypingLabel(i18NGameThreeBundle.format("helpOne.talePartOne"), labelStyleSmall);
         msgLabel.setAlignment(Align.left);
         msgLabel.setWrap(true);
 
@@ -109,7 +112,6 @@ public class HelpOneScreen extends AbstractScreen {
         super.dispose();
     }
 
-    // todo, el negro queda muy bien, ver si queda esto aca
     @Override
     public void render(float delta) {
         // Clear the screen with Black
@@ -118,5 +120,10 @@ public class HelpOneScreen extends AbstractScreen {
 
         act();
         draw();
+
+        if (msgLabel.hasEnded() && !puto) {
+            puto = true;
+            msgLabel.restart(i18NGameThreeBundle.format("helpOne.talePartTwo"));
+        }
     }
 }
