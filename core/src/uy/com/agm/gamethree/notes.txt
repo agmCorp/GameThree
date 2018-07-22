@@ -17,6 +17,9 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- el back de las pantallas de help y de aquellas que redefinieron el render, deberian volver al menu principal.
+La manera que se me ocurre es o programando el back en cada una de ellas o en abstract screen poner una
+funcion abstracta que le diga como pintar el fondo.
 - habilitar el final cuando lo doy vuelta..me costo tanto...
 - Me paso que deje ir a un bicho y me aparecio solo la manito de ok, sin el mensaje de "no dejes ir
 a tus enemigos" y sin el fondo lightred. Raro. El "ten cuidado un traspie mas y perdes" no tiene
