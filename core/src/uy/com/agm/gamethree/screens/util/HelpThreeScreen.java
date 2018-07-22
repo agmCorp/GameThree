@@ -213,13 +213,10 @@ public class HelpThreeScreen extends AbstractScreen {
         // Define images and labels based on labelStyle
         ImageButton back = new ImageButton(new TextureRegionDrawable(assetScene2d.getBack()),
                 new TextureRegionDrawable(assetScene2d.getBackPressed()));
-        ImageButton forward = new ImageButton(new TextureRegionDrawable(assetScene2d.getForward()),
-                new TextureRegionDrawable(assetScene2d.getForwardPressed()));
         Label backMenuLabel = new Label(i18NGameThreeBundle.format("helpTwo.backMenu"), labelStyleSmall);
 
         // Add values
         table.add(back);
-        table.add(forward);
         table.row();
         table.add(backMenuLabel).height(AbstractScreen.PAD * 2).colspan(COLUMNS);
 
