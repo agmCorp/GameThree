@@ -51,7 +51,7 @@ public class InfoScreen extends AbstractScreen {
      */
 
     // Constants
-    private static final float BUTTONS_PAD = 20.0f;
+    private static final float BUTTONS_PAD = 65.0f;
     private static final float RED_FLASH_TIME = 0.1f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
     private static final float LETS_GO_TIME = 1.0f;
@@ -195,7 +195,7 @@ public class InfoScreen extends AbstractScreen {
         buttonsTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Bottom-Align table
-        buttonsTable.bottom().padLeft(BUTTONS_PAD).padRight(BUTTONS_PAD);
+        buttonsTable.bottom().padBottom(BUTTONS_PAD);
 
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);

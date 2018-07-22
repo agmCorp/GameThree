@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -20,8 +21,6 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
-
-import static com.badlogic.gdx.utils.Scaling.fit;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -34,7 +33,7 @@ public class DimScreen extends AbstractScreen {
     // Constants
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float BUTTON_SIZE_SMALL = 30.0f;
-    private static final float DIM_SCREEN_ALPHA = 0.5f;
+    private static final float DIM_ALPHA = 0.5f;
 
     private PlayScreen screen;
 
@@ -68,7 +67,7 @@ public class DimScreen extends AbstractScreen {
 
         // Dim Texture
         Pixmap pixmap = new Pixmap(V_WIDTH, V_HEIGHT, Pixmap.Format.RGBA8888);
-        pixmap.setColor(0, 0, 0, DIM_SCREEN_ALPHA);
+        pixmap.setColor(0, 0, 0, DIM_ALPHA);
         pixmap.fill();
         dim = new TextureRegion(new Texture(pixmap));
         pixmap.dispose();
@@ -114,8 +113,8 @@ public class DimScreen extends AbstractScreen {
         // Debug lines
         buttonsTable.setDebug(DebugConstants.DEBUG_LINES);
 
-        // Bottom-Align table
-        buttonsTable.bottom();
+        // Top-Align table
+        buttonsTable.top();
 
         // Make the container fill the entire stage
         buttonsTable.setFillParent(true);
@@ -125,9 +124,9 @@ public class DimScreen extends AbstractScreen {
                 new TextureRegionDrawable(assetScene2d.getPausePressed()));
 
         // WA: The pause button will take the entire cell (stackCell), but its image will be placed on the
-        // bottom left corner of the screen with scaling fit.
-        pause.getImage().setScaling(fit);
-        pause.getImage().setAlign(Align.left);
+        // top left corner of the cell with scaling fit.
+        pause.getImage().setAlign(Align.topLeft);
+        pause.getImage().setScaling(Scaling.fit);
         pause.left();
 
         resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getResume()),
@@ -195,7 +194,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showPauseButton() {
-        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().bottom();
+        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().top();
         buttonsTable.pack();
         pause.setVisible(true);
         resume.setVisible(false);

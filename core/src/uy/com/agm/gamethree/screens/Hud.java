@@ -30,9 +30,9 @@ public class Hud extends AbstractScreen {
     private static final String TAG = Hud.class.getName();
 
     // Constants
-    private static final float UPPER_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float UPPER_TABLE_PAD_TOP = 5.0f;
-    private static final float HEALTH_BAR_PAD_BOTTOM = 30.0f;
+    private static final float POWERS_TABLE_PAD_BOTTOM = 5.0f;
+    private static final float STATE_INFO_TABLE_CELL_HEIGHT = 30.0f;
+    private static final float HEALTH_BAR_PAD_TOP = 30.0f;
     private static final float SCORE_WIDTH = 80.0f;
     private static final float HIGH_SCORE_WIDTH = 80.0f;
     private static final float TIME_WIDTH = 80.0f;
@@ -54,7 +54,24 @@ public class Hud extends AbstractScreen {
     private I18NBundle i18NGameThreeBundle;
     private Label.LabelStyle labelStyleSmall;
 
-    private Table upperTable;
+    private Table bottomTable;
+
+    private Table powersTable;
+
+    private Table abilityPowerTable;
+    private Label abilityPowerNameLabel;
+    private int abilityPowerTime;
+    private float abilityPowerTimeCount;
+    private HealthBar abilityBar;
+
+    private Table weaponPowerTable;
+    private Label weaponPowerNameLabel;
+    private int weaponPowerTime;
+    private float weaponPowerTimeCount;
+    private HealthBar weaponBar;
+
+    private Table stateInfoTable;
+
     private int score;
     private Label scoreValueLabel;
     private int highScore;
@@ -72,21 +89,7 @@ public class Hud extends AbstractScreen {
     private int silverBullets;
     private Label silverBulletValueLablel;
 
-    private Table powersTable;
-
-    private Table abilityPowerTable;
-    private Label abilityPowerNameLabel;
-    private int abilityPowerTime;
-    private float abilityPowerTimeCount;
-    private HealthBar abilityBar;
-
-    private Table weaponPowerTable;
-    private Label weaponPowerNameLabel;
-    private int weaponPowerTime;
-    private float weaponPowerTimeCount;
-    private HealthBar weaponBar;
-
-    private Table bottomTable;
+    private Table upperTable;
 
     private Table fpsTable;
     private int fps;
@@ -107,77 +110,103 @@ public class Hud extends AbstractScreen {
         this.highScore = GameSettings.getInstance().getGoldHighScore();
         this.level = level;
         this.time = time;
-        timeCount = 0;
+        this.timeCount = 0;
         this.lives = lives;
         this.initialEnergy = energy;
         this.energy = energy;
-        silverBullets = 0;
-        abilityPowerTime = 0;
-        abilityPowerTimeCount = 0;
-        abilityBar = new HealthBar();
-        weaponPowerTime = 0;
-        weaponPowerTimeCount = 0;
-        weaponBar = new HealthBar();
-        fps = 0;
-        healthBar = new HealthBar();
-        timeIsUp = false;
+        this.silverBullets = 0;
+        this.abilityPowerTime = 0;
+        this.abilityPowerTimeCount = 0;
+        this.abilityBar = new HealthBar();
+        this.weaponPowerTime = 0;
+        this.weaponPowerTimeCount = 0;
+        this.weaponBar = new HealthBar();
+        this.fps = 0;
+        this.healthBar = new HealthBar();
+        this.timeIsUp = false;
 
         // I18n
-        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+        this.i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
         // Personal fonts
-        labelStyleSmall = new Label.LabelStyle();
-        labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
+        this.labelStyleSmall = new Label.LabelStyle();
+        this.labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
     }
 
-    private void defineUpperTable() {
+    private void defineBottomTable() {
+        // Define a table used to organize the HUD
+        bottomTable = new Table();
+
+        // Debug lines
+        bottomTable.setDebug(DebugConstants.DEBUG_LINES);
+
+        // Bottom-Align table
+        bottomTable.bottom();
+
+        // Make the table fill the entire stage
+        bottomTable.setFillParent(true);
+
+        // Add power info
+        definePowersTable();
+        bottomTable.add(powersTable).padBottom(POWERS_TABLE_PAD_BOTTOM);
+
+        // Add a second row to the table
+        bottomTable.row();
+
+        // Add state info
+        defineStateInfoTable();
+        bottomTable.add(stateInfoTable).colspan(bottomTable.getColumns());
+
+        // Add bottomTable to the stage
+        addActor(bottomTable);
+    }
+
+    private void defineStateInfoTable() {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
         // Game assets
         Assets assetGame = Assets.getInstance();
 
-        // Define a table used to organize our hud's labels
-        upperTable = new Table();
+        // Define a new table used to display score, high score, time, lives, heart and shurikens.
+        stateInfoTable = new Table();
 
         // Cell height
-        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT).padTop(UPPER_TABLE_PAD_TOP);
+        stateInfoTable.row().height(STATE_INFO_TABLE_CELL_HEIGHT);
 
         // Debug lines
-        upperTable.setDebug(DebugConstants.DEBUG_LINES);
-
-        // Top-Align table
-        upperTable.top();
-
-        // Make the table fill the entire stage
-        upperTable.setFillParent(true);
+        stateInfoTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define images
         AnimatedImage coin = new AnimatedImage();
         coin.setAnimation(assetGame.getColOne().getCoinAnimation());
+
         Image trophy = new AnimatedImage();
         trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
         trophy.setScaling(Scaling.fit);
 
         AnimatedImage hourglass = new AnimatedImage();
         hourglass.setAnimation(assetScene2d.getHourglass().getHourglassAnimation());
+
         AnimatedImage heroHead = new AnimatedImage();
         heroHead.setAnimation(assetScene2d.getHeroHead().getHeroHeadAnimation());
+
         heart = new Image();
         setHeartImage(100);
+
         AnimatedImage shuriken = new AnimatedImage();
         shuriken.setAnimation(assetGame.getSilverBullet().getSilverBulletAnimation());
 
         // Add images to the table
-        upperTable.add(coin).width(SCORE_WIDTH);
-        upperTable.add(trophy).width(HIGH_SCORE_WIDTH);
-        upperTable.add(hourglass).width(TIME_WIDTH);
-        upperTable.add(heroHead).width(LIVES_WIDTH);
-        upperTable.add(heart).width(HEART_WIDTH);
-        upperTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
+        stateInfoTable.add(coin).width(SCORE_WIDTH);
+        stateInfoTable.add(trophy).width(HIGH_SCORE_WIDTH);
+        stateInfoTable.add(hourglass).width(TIME_WIDTH);
+        stateInfoTable.add(heroHead).width(LIVES_WIDTH);
+        stateInfoTable.add(heart).width(HEART_WIDTH);
+        stateInfoTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
 
-        // Add a second row to our table
-        upperTable.row().height(UPPER_TABLE_CELL_HEIGHT);
+        // Add a second row
+        stateInfoTable.row();
 
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SCORE, score), labelStyleSmall);
@@ -194,22 +223,12 @@ public class Hud extends AbstractScreen {
         silverBulletValueLablel.setAlignment(Align.center);
 
         // Add values
-        upperTable.add(scoreValueLabel);
-        upperTable.add(highScoreValueLabel);
-        upperTable.add(timeValueLabel);
-        upperTable.add(livesValueLabel);
-        upperTable.add(energyValueLabel);
-        upperTable.add(silverBulletValueLablel);
-
-        // Add a third row to our table
-        upperTable.row();
-
-        // Add power info
-        definePowersTable();
-        upperTable.add(powersTable).colspan(upperTable.getColumns());
-
-        // Add table to the stage
-        addActor(upperTable);
+        stateInfoTable.add(scoreValueLabel);
+        stateInfoTable.add(highScoreValueLabel);
+        stateInfoTable.add(timeValueLabel);
+        stateInfoTable.add(livesValueLabel);
+        stateInfoTable.add(energyValueLabel);
+        stateInfoTable.add(silverBulletValueLablel);
     }
 
     private void setHeartImage(float percentage) {
@@ -260,7 +279,7 @@ public class Hud extends AbstractScreen {
         // Add values
         abilityPowerTable.add(abilityPowerNameLabel);
 
-        // Add a second row to our table
+        // Add a second row to the table
         abilityPowerTable.row();
 
         // Add health bar
@@ -283,7 +302,7 @@ public class Hud extends AbstractScreen {
         // Add values
         weaponPowerTable.add(weaponPowerNameLabel);
 
-        // Add a second row to our table
+        // Add a second row to the table
         weaponPowerTable.row();
 
         // Add health bar
@@ -293,32 +312,32 @@ public class Hud extends AbstractScreen {
         weaponPowerTable.setVisible(false);
     }
 
-    private void defineBottomTable() {
+    private void defineUpperTable() {
         // Define a new table used to display a FPS counter and an Enemy's health bar
-        bottomTable = new Table();
+        upperTable = new Table();
 
         // Debug lines
-        bottomTable.setDebug(DebugConstants.DEBUG_LINES);
+        upperTable.setDebug(DebugConstants.DEBUG_LINES);
 
-        // Bottom-Align table
-        bottomTable.bottom();
+        // Top-Align table
+        upperTable.top();
 
         // Make the table fill the entire stage
-        bottomTable.setFillParent(true);
-
-        // Add health bar info
-        defineHealthBarTable();
-        bottomTable.add(healthBarTable);
-
-        // Add a second row to the table
-        bottomTable.row();
+        upperTable.setFillParent(true);
 
         // Add FPS info
         defineFpsTable();
-        bottomTable.add(fpsTable);
+        upperTable.add(fpsTable);
+
+        // Add a second row to the table
+        upperTable.row();
+
+        // Add health bar info
+        defineHealthBarTable();
+        upperTable.add(healthBarTable);
 
         // Add the table to the stage
-        addActor(bottomTable);
+        addActor(upperTable);
     }
 
     private void defineFpsTable() {
@@ -334,7 +353,7 @@ public class Hud extends AbstractScreen {
         // Add a label to the table
         fpsTable.add(fpsLabel);
 
-        // Add a second row to our table
+        // Add a second row to the table
         fpsTable.row();
 
         // Define a label value based on labelStyle
@@ -360,11 +379,11 @@ public class Hud extends AbstractScreen {
         // Add value
         healthBarTable.add(enemyNameLabel);
 
-        // Add a second row to our table
+        // Add a second row to the table
         healthBarTable.row();
 
         // Add health bar
-        healthBarTable.add(healthBar).padBottom(HEALTH_BAR_PAD_BOTTOM);
+        healthBarTable.add(healthBar).padBottom(HEALTH_BAR_PAD_TOP);
 
         // Initially hidden
         healthBarTable.setVisible(false);

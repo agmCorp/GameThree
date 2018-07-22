@@ -17,8 +17,8 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
-- poner un banner en la interfase scene2d?
-- poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
+- poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
+poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 Me pasó algo parecido en el nivel 3.
