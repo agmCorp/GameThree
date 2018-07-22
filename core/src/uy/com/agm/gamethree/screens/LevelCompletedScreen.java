@@ -134,9 +134,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
         // Animation
-        AnimatedImage animatedImage = new AnimatedImage();
+        AnimatedImage animatedImage = new AnimatedImage(assetScene2d.getStageCleared().getStageClearedAnimation());
         animatedImage.setAlign(Align.center);
-        animatedImage.setAnimation(assetScene2d.getStageCleared().getStageClearedAnimation());
 
         // Define our labels based on labelStyle
         Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);

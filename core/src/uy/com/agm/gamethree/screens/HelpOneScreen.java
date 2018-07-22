@@ -53,7 +53,7 @@ public class HelpOneScreen extends AbstractScreen {
         Table table = new Table();
 
         // Design
-        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelpOne()));
+        table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelpBackground()));
 
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);

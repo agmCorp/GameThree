@@ -54,8 +54,7 @@ public class GameOverScreen extends AbstractScreen {
         table.setFillParent(true);
 
         // Animation
-        AnimatedImage animatedImage = new AnimatedImage();
-        animatedImage.setAnimation(assetScene2d.getGameOver().getGameOverAnimation());
+        AnimatedImage animatedImage = new AnimatedImage(assetScene2d.getGameOver().getGameOverAnimation());
         animatedImage.setAlign(Align.center);
 
         // Add values

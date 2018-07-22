@@ -21,6 +21,8 @@ PRIORIDADES PARA LIBERAR
 a tus enemigos" y sin el fondo lightred. Raro. El "ten cuidado un traspie mas y perdes" no tiene
 fondo lightred como la primer escapada de bicho. Esta bien porque yo no se que provoco que este
 a 1 punto de perder, pero deberia saber si es por choque o por escapada de bicho.
+- En el nivel 3, quedo un audio de enemigo 8 siempre. Eso significa que el enemigo quedo trancado fuera
+de la visual. Cuando agarre un soul recien ahi desaparecio.
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.

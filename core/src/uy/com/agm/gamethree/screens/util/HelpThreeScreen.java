@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.screens;
+package uy.com.agm.gamethree.screens.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,10 +13,9 @@ import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
+import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.game.DebugConstants;
-import uy.com.agm.gamethree.screens.util.ScreenEnum;
-import uy.com.agm.gamethree.screens.util.UIFactory;
-import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -24,14 +23,14 @@ import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
  * Created by AGM on 12/23/2017.
  */
 
-public class HelpTwoScreen extends AbstractScreen {
-    private static final String TAG = HelpTwoScreen.class.getName();
+public class HelpThreeScreen extends AbstractScreen {
+    private static final String TAG = HelpThreeScreen.class.getName();
 
     // Constants
     private static final float MSG_WIDTH = 350.0f;
     private static final int COLUMNS = 2;
-    private static final float FAKE_HUD_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float FAKE_HUD_TABLE_CELL_WIDTH = 80.0f;
+    private static final float COL_ONE_TABLE_CELL_HEIGHT = 30.0f;
+    private static final float COL_ONE_TABLE_CELL_WIDTH = 80.0f;
     private static final float MAIN_TABLE_CELL_HEIGHT = 60.0f;
 
     private AssetScene2d assetScene2d;
@@ -40,7 +39,7 @@ public class HelpTwoScreen extends AbstractScreen {
     private Label.LabelStyle labelStyleBig;
     private Label.LabelStyle labelStyleSmall;
 
-    public HelpTwoScreen() {
+    public HelpThreeScreen() {
         super();
         // UI assets
         assetScene2d = Assets.getInstance().getScene2d();
@@ -56,9 +55,6 @@ public class HelpTwoScreen extends AbstractScreen {
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
         labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
-
-        // Play music
-        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongHelp(), true);
     }
 
     @Override
@@ -84,7 +80,7 @@ public class HelpTwoScreen extends AbstractScreen {
         table.setFillParent(true);
 
         // Define our images and labels based on labelStyle
-        Label statusBarLabel = new Label(i18NGameThreeBundle.format("helpTwo.title"), labelStyleBig);
+        Label itemsLabel = new Label(i18NGameThreeBundle.format("helpTwo.title"), labelStyleBig);
 
         AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
         TypingLabelWorkaround coinDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.coinDsc"), labelStyleSmall);
@@ -121,9 +117,9 @@ public class HelpTwoScreen extends AbstractScreen {
         shurikenDsc.setWrap(true);
 
         // Add values
-        table.add(statusBarLabel).colspan(COLUMNS);
+        table.add(itemsLabel).colspan(COLUMNS);
         table.row();
-        table.add(getFakeHudTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
+        table.add(getColOneTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
         table.row();
         table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
         table.add(coinDsc).padTop(AbstractScreen.PAD).width(MSG_WIDTH).fill();
@@ -147,20 +143,27 @@ public class HelpTwoScreen extends AbstractScreen {
         addActor(table);
     }
 
-    private Table getFakeHudTable() {
+    private Table getColOneTable() {
         // Set table structure
         Table table = new Table();
 
         // Cell height
-        table.row().height(FAKE_HUD_TABLE_CELL_HEIGHT);
+        table.row().height(COL_ONE_TABLE_CELL_HEIGHT);
 
         // Cell defaults
-        table.defaults().width(FAKE_HUD_TABLE_CELL_WIDTH);
+        table.defaults().width(COL_ONE_TABLE_CELL_WIDTH);
 
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define images
+        AnimatedImage colOne;
+        for(int i = 1; i < AssetColOne.MAX_TEXTURES; i++) {
+            colOne = new AnimatedImage();
+
+        }
+
+
         AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
 
         Image trophy = new AnimatedImage();

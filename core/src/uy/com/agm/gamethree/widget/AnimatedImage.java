@@ -20,6 +20,11 @@ public class AnimatedImage extends Image {
         super();
     }
 
+    public AnimatedImage(Animation animation) {
+        super();
+        setAnimation(animation);
+    }
+
     public void setAnimation(Animation animation) {
         this.animation = animation;
         stateTime = 0;

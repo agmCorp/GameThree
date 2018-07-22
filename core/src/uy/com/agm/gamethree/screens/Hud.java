@@ -178,24 +178,20 @@ public class Hud extends AbstractScreen {
         statusBarTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define images
-        AnimatedImage coin = new AnimatedImage();
-        coin.setAnimation(assetGame.getColOne().getCoinAnimation());
+        AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
 
         Image trophy = new AnimatedImage();
         trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
         trophy.setScaling(Scaling.fit);
 
-        AnimatedImage hourglass = new AnimatedImage();
-        hourglass.setAnimation(assetScene2d.getHourglass().getHourglassAnimation());
+        AnimatedImage hourglass = new AnimatedImage(assetScene2d.getHourglass().getHourglassAnimation());
 
-        AnimatedImage heroHead = new AnimatedImage();
-        heroHead.setAnimation(assetScene2d.getHeroHead().getHeroHeadAnimation());
+        AnimatedImage heroHead = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
 
         heart = new Image();
         setHeartImage(100);
 
-        AnimatedImage shuriken = new AnimatedImage();
-        shuriken.setAnimation(assetGame.getSilverBullet().getSilverBulletAnimation());
+        AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
 
         // Add images to the table
         statusBarTable.add(coin).width(SCORE_WIDTH);
