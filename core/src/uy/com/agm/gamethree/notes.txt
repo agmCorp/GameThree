@@ -201,7 +201,7 @@ powerFour (int): thogh mode, indica el tiempo de uso
 powerFive (int): espadas, indica el tiempo de uso
 colOne (string): moneda
 colTwo (string): mata a todos
-colThree (string): vida extra
+colThree (string): vida extra / energy extra
 colSilverBullet (string): shuriken
 
 strength (int): dureza de la powerbox
