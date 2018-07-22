@@ -244,6 +244,7 @@ public class HelpTwoScreen extends AbstractScreen {
 
         // Events
         back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE));
+        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_THREE));
         backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
 
         // Adds table to stage

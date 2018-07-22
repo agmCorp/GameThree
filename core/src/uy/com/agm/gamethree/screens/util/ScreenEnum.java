@@ -54,6 +54,12 @@ public enum ScreenEnum {
         }
     },
 
+    HELP_THREE {
+        public AbstractScreen getScreen(Object... params) {
+            return new HelpThreeScreen();
+        }
+    },
+
     CREDITS {
         public AbstractScreen getScreen(Object... params) {
             return new CreditsScreen();

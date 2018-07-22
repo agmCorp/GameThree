@@ -2,14 +2,12 @@ package uy.com.agm.gamethree.screens.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.Scaling;
 
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
@@ -27,11 +25,10 @@ public class HelpThreeScreen extends AbstractScreen {
     private static final String TAG = HelpThreeScreen.class.getName();
 
     // Constants
-    private static final float MSG_WIDTH = 350.0f;
+    private static final float MSG_WIDTH = 250.0f;
     private static final int COLUMNS = 2;
-    private static final float COL_ONE_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float COL_ONE_TABLE_CELL_WIDTH = 80.0f;
-    private static final float MAIN_TABLE_CELL_HEIGHT = 60.0f;
+    private static final float CELL_WIDTH = 40.0f;
+    private static final float CELL_HEIGHT = 50.0f;
 
     private AssetScene2d assetScene2d;
     private Assets assetGame;
@@ -67,6 +64,9 @@ public class HelpThreeScreen extends AbstractScreen {
         // Set table structure
         Table table = new Table();
 
+        // Cell defaults
+        table.defaults().height(CELL_HEIGHT);
+
         // Design
         table.setBackground(new TextureRegionDrawable(Assets.getInstance().getScene2d().getHelpBackground()));
 
@@ -74,70 +74,90 @@ public class HelpThreeScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(AbstractScreen.PAD * 2);
+        table.top().padTop(AbstractScreen.PAD * 3);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
 
         // Define our images and labels based on labelStyle
-        Label itemsLabel = new Label(i18NGameThreeBundle.format("helpTwo.title"), labelStyleBig);
+        Label itemsLabel = new Label(i18NGameThreeBundle.format("helpThree.title"), labelStyleBig);
 
-        AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
-        TypingLabelWorkaround coinDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.coinDsc"), labelStyleSmall);
-        coinDsc.setAlignment(Align.left);
-        coinDsc.setWrap(true);
+        AnimatedImage powerOne = new AnimatedImage(assetGame.getPowerOne().getPowerOneAnimation());
+        TypingLabelWorkaround powerOneDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.powerOneDsc"), labelStyleSmall);
+        powerOneDsc.setAlignment(Align.left);
+        powerOneDsc.setWrap(true);
 
-        Image trophy = new AnimatedImage();
-        trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        trophy.setScaling(Scaling.fit);
-        TypingLabelWorkaround trophyDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.trophyDsc"), labelStyleSmall);
-        trophyDsc.setAlignment(Align.left);
-        trophyDsc.setWrap(true);
+        AnimatedImage powerTwo = new AnimatedImage(assetGame.getPowerTwo().getPowerTwoAnimation());
+        TypingLabelWorkaround powerTwoDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.powerTwoDsc"), labelStyleSmall);
+        powerTwoDsc.setAlignment(Align.left);
+        powerTwoDsc.setWrap(true);
 
-        AnimatedImage hourglass = new AnimatedImage(assetScene2d.getHourglass().getHourglassAnimation());
-        TypingLabelWorkaround hourglassDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.hourglassDsc"), labelStyleSmall);
-        hourglassDsc.setAlignment(Align.left);
-        hourglassDsc.setWrap(true);
+        AnimatedImage powerThree = new AnimatedImage(assetGame.getPowerThree().getPowerThreeAnimation());
+        TypingLabelWorkaround powerThreeDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.powerThreeDsc"), labelStyleSmall);
+        powerThreeDsc.setAlignment(Align.left);
+        powerThreeDsc.setWrap(true);
 
-        AnimatedImage heroHead = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
-        TypingLabelWorkaround heroHeadDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.heroHeadDsc"), labelStyleSmall);
-        heroHeadDsc.setAlignment(Align.left);
-        heroHeadDsc.setWrap(true);
+        AnimatedImage powerFour = new AnimatedImage(assetGame.getPowerFour().getPowerFourAnimation());
+        TypingLabelWorkaround powerFourDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.powerFourDsc"), labelStyleSmall);
+        powerFourDsc.setAlignment(Align.left);
+        powerFourDsc.setWrap(true);
 
-        Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEnergy().getEnergy75()));
-        heart.setScaling(Scaling.fit);
-        TypingLabelWorkaround heartDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.heartDsc"), labelStyleSmall);
-        heartDsc.setAlignment(Align.left);
-        heartDsc.setWrap(true);
+        AnimatedImage powerFive = new AnimatedImage(assetGame.getPowerFive().getPowerFiveAnimation());
+        TypingLabelWorkaround powerFiveDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.powerFiveDsc"), labelStyleSmall);
+        powerFiveDsc.setAlignment(Align.left);
+        powerFiveDsc.setWrap(true);
 
-        AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
-        TypingLabelWorkaround shurikenDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.shurikenDsc"), labelStyleSmall);
-        shurikenDsc.setAlignment(Align.left);
-        shurikenDsc.setWrap(true);
+        AnimatedImage colTwo = new AnimatedImage(assetGame.getColTwo().getColTwoAnimation());
+        TypingLabelWorkaround colTwoDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.colTwoDsc"), labelStyleSmall);
+        powerFiveDsc.setAlignment(Align.left);
+        powerFiveDsc.setWrap(true);
+
+        AnimatedImage colThreeHeart = new AnimatedImage(assetGame.getColThree().getColThreeAnimation());
+        TypingLabelWorkaround colThreeHeartDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.colThreeHeartDsc"), labelStyleSmall);
+        colThreeHeartDsc.setAlignment(Align.left);
+        colThreeHeartDsc.setWrap(true);
+
+        AnimatedImage colThreeLives = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
+        TypingLabelWorkaround colThreeLivesDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.colThreeLivesDsc"), labelStyleSmall);
+        colThreeLivesDsc.setAlignment(Align.left);
+        colThreeLivesDsc.setWrap(true);
+
+        AnimatedImage colSilverBullet = new AnimatedImage(assetGame.getSilverBullet().getColSilverBulletAnimation());
+        TypingLabelWorkaround colSilverBulletDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.colSilverBulletDsc"), labelStyleSmall);
+        powerFiveDsc.setAlignment(Align.left);
+        powerFiveDsc.setWrap(true);
 
         // Add values
         table.add(itemsLabel).colspan(COLUMNS);
         table.row();
-        table.add(getColOneTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
+        table.add(getColOneTable()).align(Align.left).padTop(AbstractScreen.PAD).colspan(COLUMNS);
         table.row();
-        table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(coinDsc).padTop(AbstractScreen.PAD).width(MSG_WIDTH).fill();
+        table.add(colThreeLives).align(Align.left).width(CELL_WIDTH);
+        table.add(colThreeLivesDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(trophy).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(trophyDsc).width(MSG_WIDTH).fill();
+        table.add(powerOne).align(Align.left).width(CELL_WIDTH);
+        table.add(powerOneDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(hourglass).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(hourglassDsc).width(MSG_WIDTH).fill();
+        table.add(powerTwo).align(Align.left).width(CELL_WIDTH);
+        table.add(powerTwoDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(heroHead).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(heroHeadDsc).width(MSG_WIDTH).fill();
+        table.add(powerThree).align(Align.left).width(CELL_WIDTH);
+        table.add(powerThreeDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(heart).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(heartDsc).width(MSG_WIDTH).fill();
+        table.add(powerFour).align(Align.left).width(CELL_WIDTH);
+        table.add(powerFourDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(shuriken).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
-        table.add(shurikenDsc).width(MSG_WIDTH).fill();
+        table.add(powerFive).align(Align.left).width(CELL_WIDTH);
+        table.add(powerFiveDsc).width(MSG_WIDTH).fill();
+        table.row();
+        table.add(colTwo).align(Align.left).width(CELL_WIDTH);
+        table.add(colTwoDsc).width(MSG_WIDTH).fill();
+        table.row();
+        table.add(colSilverBullet).align(Align.left).width(CELL_WIDTH);
+        table.add(colSilverBulletDsc).width(MSG_WIDTH).fill();
+        table.row();
+        table.add(colThreeHeart).align(Align.left).width(CELL_WIDTH);
+        table.add(colThreeHeartDsc).width(MSG_WIDTH).fill();
 
         // Adds table to stage
         addActor(table);
@@ -147,71 +167,29 @@ public class HelpThreeScreen extends AbstractScreen {
         // Set table structure
         Table table = new Table();
 
-        // Cell height
-        table.row().height(COL_ONE_TABLE_CELL_HEIGHT);
-
-        // Cell defaults
-        table.defaults().width(COL_ONE_TABLE_CELL_WIDTH);
-
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define images
-        AnimatedImage colOne;
-        for(int i = 1; i < AssetColOne.MAX_TEXTURES; i++) {
-            colOne = new AnimatedImage();
+        AnimatedImage gold;
+        AnimatedImage silver;
+        AnimatedImage bronze;
+        for(int i = 0; i < AssetColOne.MAX_TEXTURES; i++) {
+            gold = new AnimatedImage(assetGame.getColOne().getGoldAnimation(i));
+            silver = new AnimatedImage(assetGame.getColOne().getSilverAnimation(i));
+            bronze = new AnimatedImage(assetGame.getColOne().getBronzeAnimation(i));
 
+            // Add values
+            table.add(gold).width(CELL_WIDTH);
+            table.add(silver).width(CELL_WIDTH);
+            table.add(bronze).width(CELL_WIDTH);
         }
 
-
-        AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
-
-        Image trophy = new AnimatedImage();
-        trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        trophy.setScaling(Scaling.fit);
-
-        AnimatedImage hourglass = new AnimatedImage(assetScene2d.getHourglass().getHourglassAnimation());
-
-        AnimatedImage heroHead = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
-
-        Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEnergy().getEnergy75()));
-        heart.setScaling(Scaling.fit);
-
-        AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
+        // Define labels based on labelStyle
+        Label colOneDscLabel = new Label(i18NGameThreeBundle.format("helpThree.colOneDsc"), labelStyleSmall);
 
         // Add values
-        table.add(coin);
-        table.add(trophy);
-        table.add(hourglass);
-        table.add(heroHead);
-        table.add(heart);
-        table.add(shuriken);
-
-        // Add a second row
-        table.row();
-
-        // Define label values based on labelStyle
-        Label scoreValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeScore"), labelStyleSmall);
-        scoreValueLabel.setAlignment(Align.center);
-        Label highScoreValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeHighScore"), labelStyleSmall);
-        highScoreValueLabel.setAlignment(Align.center);
-        Label timeValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeTime"), labelStyleSmall);
-        timeValueLabel.setAlignment(Align.center);
-        Label livesValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeLives"), labelStyleSmall);
-        livesValueLabel.setAlignment(Align.center);
-        Label energyValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeEnergy"), labelStyleSmall);
-        energyValueLabel.setAlignment(Align.center);
-        Label silverBulletValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeSilverBullet"), labelStyleSmall);
-        silverBulletValueLabel.setAlignment(Align.center);
-
-        // Add values
-        table.add(scoreValueLabel);
-        table.add(highScoreValueLabel);
-        table.add(timeValueLabel);
-        table.add(livesValueLabel);
-        table.add(energyValueLabel);
-        table.add(silverBulletValueLabel);
+        table.add(colOneDscLabel).padLeft(AbstractScreen.PAD);
 
         return table;
     }
@@ -246,7 +224,7 @@ public class HelpThreeScreen extends AbstractScreen {
         table.add(backMenuLabel).height(AbstractScreen.PAD * 2).colspan(COLUMNS);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO));
         backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
 
         // Adds table to stage

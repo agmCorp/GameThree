@@ -115,7 +115,7 @@ public class MainMenuScreen extends AbstractScreen {
         Label.LabelStyle labelStyleNormal = new Label.LabelStyle();
         labelStyleNormal.font = Assets.getInstance().getFonts().getDefaultNormal();
 
-        // Define our labels based on labelStyle
+        // Define labels based on labelStyle
         final Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
