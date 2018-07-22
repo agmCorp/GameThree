@@ -17,6 +17,10 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- Me paso que deje ir a un bicho y me aparecio solo la manito de ok, sin el mensaje de "no dejes ir
+a tus enemigos" y sin el fondo lightred. Raro. El "ten cuidado un traspie mas y perdes" no tiene
+fondo lightred como la primer escapada de bicho. Esta bien porque yo no se que provoco que este
+a 1 punto de perder, pero deberia saber si es por choque o por escapada de bicho.
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
