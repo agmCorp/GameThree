@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.scene2d.AssetHeroHead;
+import uy.com.agm.gamethree.assets.scene2d.AssetGoldenHeroHead;
 import uy.com.agm.gamethree.assets.sprites.AssetColThree;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -41,15 +41,15 @@ public class ColThree extends Item {
         super(screen, x, y);
 
         isEnergy = MathUtils.random() <= ENERGY_PROBABILITY;
-        colThreeAnimation = isEnergy ? Assets.getInstance().getColThree().getColThreeAnimation() : Assets.getInstance().getScene2d().getHeroHead().getHeroHeadAnimation();
+        colThreeAnimation = isEnergy ? Assets.getInstance().getColThree().getColThreeAnimation() : Assets.getInstance().getScene2d().getGoldenHeroHead().getGoldenHeroHeadAnimation();
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(),
-                isEnergy ? AssetColThree.WIDTH_METERS : AssetHeroHead.WIDTH_PIXELS / PlayScreen.PPM,
-                isEnergy ? AssetColThree.HEIGHT_METERS : AssetHeroHead.HEIGHT_PIXELS / PlayScreen.PPM);
+                isEnergy ? AssetColThree.WIDTH_METERS : AssetGoldenHeroHead.WIDTH_PIXELS / PlayScreen.PPM,
+                isEnergy ? AssetColThree.HEIGHT_METERS : AssetGoldenHeroHead.HEIGHT_PIXELS / PlayScreen.PPM);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 

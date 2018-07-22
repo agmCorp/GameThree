@@ -117,7 +117,7 @@ public class HelpThreeScreen extends AbstractScreen {
         colThreeHeartDsc.setAlignment(Align.left);
         colThreeHeartDsc.setWrap(true);
 
-        AnimatedImage colThreeLives = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
+        AnimatedImage colThreeLives = new AnimatedImage(assetScene2d.getGoldenHeroHead().getGoldenHeroHeadAnimation());
         TypingLabelWorkaround colThreeLivesDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpThree.colThreeLivesDsc"), labelStyleSmall);
         colThreeLivesDsc.setAlignment(Align.left);
         colThreeLivesDsc.setWrap(true);
