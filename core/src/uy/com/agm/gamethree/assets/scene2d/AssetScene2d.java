@@ -65,6 +65,8 @@ public class AssetScene2d {
     private TextureRegion shootingChecked;
     private TextureRegion back;
     private TextureRegion backPressed;
+    private TextureRegion forward;
+    private TextureRegion forwardPressed;
     private TextureRegion pause;
     private TextureRegion pausePressed;
     private TextureRegion resume;
@@ -147,6 +149,8 @@ public class AssetScene2d {
         shootingChecked = atlasUI.findRegion("resume");
         back = atlasUI.findRegion("back");
         backPressed = atlasUI.findRegion("backPressed");
+        forward = atlasUI.findRegion("forward");
+        forwardPressed = atlasUI.findRegion("forwardPressed");
         pause = atlasUI.findRegion("pause");
         pausePressed = atlasUI.findRegion("pausePressed");
         resume = atlasUI.findRegion("resume");
@@ -391,6 +395,14 @@ public class AssetScene2d {
 
     public TextureRegion getBackPressed() {
         return backPressed;
+    }
+
+    public TextureRegion getForward() {
+        return forward;
+    }
+
+    public TextureRegion getForwardPressed() {
+        return forwardPressed;
     }
 
     public TextureRegion getPause() {

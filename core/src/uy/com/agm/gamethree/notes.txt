@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- escribir en que he aprendido el tema de las voces y organizar los audios e imagenes.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank

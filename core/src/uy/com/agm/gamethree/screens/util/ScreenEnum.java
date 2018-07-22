@@ -5,6 +5,7 @@ import uy.com.agm.gamethree.screens.BigBossScreen;
 import uy.com.agm.gamethree.screens.CreditsScreen;
 import uy.com.agm.gamethree.screens.GameOverScreen;
 import uy.com.agm.gamethree.screens.HelpOneScreen;
+import uy.com.agm.gamethree.screens.HelpTwoScreen;
 import uy.com.agm.gamethree.screens.HighScoresScreen;
 import uy.com.agm.gamethree.screens.LevelCompletedScreen;
 import uy.com.agm.gamethree.screens.MainMenuScreen;
@@ -41,9 +42,15 @@ public enum ScreenEnum {
         }
     },
 
-    HELP {
+    HELP_ONE {
         public AbstractScreen getScreen(Object... params) {
             return new HelpOneScreen();
+        }
+    },
+
+    HELP_TWO {
+        public AbstractScreen getScreen(Object... params) {
+            return new HelpTwoScreen();
         }
     },
 

@@ -27,18 +27,20 @@ public class HelpOneScreen extends AbstractScreen {
     // Constants
     private static final float MSG_WIDTH = 430.0f;
 
-    TypingLabelWorkaround msgLabel;
-    I18NBundle i18NGameThreeBundle;
-boolean puto = false;
+    private TypingLabelWorkaround msgLabel;
+    private I18NBundle i18NGameThreeBundle;
+    private boolean talePartTwo;
+
     public HelpOneScreen() {
         super();
+        talePartTwo = false;
+
+        // Play music
+        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongTale(), false);
     }
 
     @Override
     public void buildStage() {
-        // Play music
-        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongTale(), false);
-
         defineMainTable();
         defineNavigationTable();
     }
@@ -96,12 +98,16 @@ boolean puto = false;
         // Define images
         ImageButton back = new ImageButton(new TextureRegionDrawable(assetScene2d.getBack()),
                 new TextureRegionDrawable(assetScene2d.getBackPressed()));
+        ImageButton forward = new ImageButton(new TextureRegionDrawable(assetScene2d.getForward()),
+                new TextureRegionDrawable(assetScene2d.getForwardPressed()));
 
         // Add values
         table.add(back).padBottom(AbstractScreen.PAD * 2);
+        table.add(forward).padBottom(AbstractScreen.PAD * 2);
 
         // Events
         back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO));
 
         // Adds table to stage
         addActor(table);
@@ -121,8 +127,8 @@ boolean puto = false;
         act();
         draw();
 
-        if (msgLabel.hasEnded() && !puto) {
-            puto = true;
+        if (msgLabel.hasEnded() && !talePartTwo) {
+            talePartTwo = true;
             msgLabel.restart(i18NGameThreeBundle.format("helpOne.talePartTwo"));
         }
     }

@@ -169,6 +169,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String MUSIC_FILE_LEVEL_FOUR = "audio/music/levelFour.ogg";
     public static final String MUSIC_FILE_BIG_BOSS = "audio/music/bigBoss.ogg";
     public static final String MUSIC_FILE_TALE = "audio/music/tale.ogg";
+    public static final String MUSIC_FILE_HELP = "audio/music/help.ogg";
 
     // Location of description file for texture atlas (dynamic game objects)
     private static final String TEXTURE_ATLAS_OBJECTS = "atlas/dynamicObjects/dynamicObjects.atlas";
@@ -473,6 +474,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(MUSIC_FILE_LEVEL_FOUR, Music.class);
         assetManager.load(MUSIC_FILE_BIG_BOSS, Music.class);
         assetManager.load(MUSIC_FILE_TALE, Music.class);
+        assetManager.load(MUSIC_FILE_HELP, Music.class);
     }
 
     @Override

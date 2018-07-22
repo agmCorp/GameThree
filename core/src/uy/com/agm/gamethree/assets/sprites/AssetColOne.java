@@ -23,6 +23,7 @@ public class AssetColOne {
     private Array<TextureRegion> goldStand;
     private Array<TextureRegion> silverStand;
     private Array<TextureRegion> bronzeStand;
+    private TextureRegion coinStand;
     private Array<Animation> goldAnimation;
     private Array<Animation> silverAnimation;
     private Array<Animation> bronzeAnimation;
@@ -45,6 +46,8 @@ public class AssetColOne {
 
         bronzeStand.add(atlas.findRegion("coinBronze", 1));
         bronzeStand.add(atlas.findRegion("jewelFuchsia", 1));
+
+        coinStand = atlas.findRegion("coinGold", 1);
 
         // Animation Gold
         regions = atlas.findRegions("coinGold");
@@ -94,6 +97,10 @@ public class AssetColOne {
 
     public TextureRegion getBronzeStand(int index) {
         return bronzeStand.get(index);
+    }
+
+    public TextureRegion getCoinStand() {
+        return coinStand;
     }
 
     public Animation getGoldAnimation(int index) {

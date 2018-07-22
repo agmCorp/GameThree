@@ -70,7 +70,7 @@ public class Hud extends AbstractScreen {
     private float weaponPowerTimeCount;
     private HealthBar weaponBar;
 
-    private Table stateInfoTable;
+    private Table statusBarTable;
 
     private int score;
     private Label scoreValueLabel;
@@ -87,7 +87,7 @@ public class Hud extends AbstractScreen {
     private int energy;
     private Label energyValueLabel;
     private int silverBullets;
-    private Label silverBulletValueLablel;
+    private Label silverBulletValueLabel;
 
     private Table upperTable;
 
@@ -154,14 +154,14 @@ public class Hud extends AbstractScreen {
         bottomTable.row();
 
         // Add state info
-        defineStateInfoTable();
-        bottomTable.add(stateInfoTable).colspan(bottomTable.getColumns());
+        defineStatusBarTable();
+        bottomTable.add(statusBarTable).colspan(bottomTable.getColumns());
 
         // Add bottomTable to the stage
         addActor(bottomTable);
     }
 
-    private void defineStateInfoTable() {
+    private void defineStatusBarTable() {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
@@ -169,13 +169,13 @@ public class Hud extends AbstractScreen {
         Assets assetGame = Assets.getInstance();
 
         // Define a new table used to display score, high score, time, lives, heart and shurikens.
-        stateInfoTable = new Table();
+        statusBarTable = new Table();
 
         // Cell height
-        stateInfoTable.row().height(STATE_INFO_TABLE_CELL_HEIGHT);
+        statusBarTable.row().height(STATE_INFO_TABLE_CELL_HEIGHT);
 
         // Debug lines
-        stateInfoTable.setDebug(DebugConstants.DEBUG_LINES);
+        statusBarTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Define images
         AnimatedImage coin = new AnimatedImage();
@@ -198,15 +198,15 @@ public class Hud extends AbstractScreen {
         shuriken.setAnimation(assetGame.getSilverBullet().getSilverBulletAnimation());
 
         // Add images to the table
-        stateInfoTable.add(coin).width(SCORE_WIDTH);
-        stateInfoTable.add(trophy).width(HIGH_SCORE_WIDTH);
-        stateInfoTable.add(hourglass).width(TIME_WIDTH);
-        stateInfoTable.add(heroHead).width(LIVES_WIDTH);
-        stateInfoTable.add(heart).width(HEART_WIDTH);
-        stateInfoTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
+        statusBarTable.add(coin).width(SCORE_WIDTH);
+        statusBarTable.add(trophy).width(HIGH_SCORE_WIDTH);
+        statusBarTable.add(hourglass).width(TIME_WIDTH);
+        statusBarTable.add(heroHead).width(LIVES_WIDTH);
+        statusBarTable.add(heart).width(HEART_WIDTH);
+        statusBarTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
 
         // Add a second row
-        stateInfoTable.row();
+        statusBarTable.row();
 
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SCORE, score), labelStyleSmall);
@@ -219,16 +219,16 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setAlignment(Align.center);
         energyValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_ENERGY, this.energy), labelStyleSmall);
         energyValueLabel.setAlignment(Align.center);
-        silverBulletValueLablel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
-        silverBulletValueLablel.setAlignment(Align.center);
+        silverBulletValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
+        silverBulletValueLabel.setAlignment(Align.center);
 
         // Add values
-        stateInfoTable.add(scoreValueLabel);
-        stateInfoTable.add(highScoreValueLabel);
-        stateInfoTable.add(timeValueLabel);
-        stateInfoTable.add(livesValueLabel);
-        stateInfoTable.add(energyValueLabel);
-        stateInfoTable.add(silverBulletValueLablel);
+        statusBarTable.add(scoreValueLabel);
+        statusBarTable.add(highScoreValueLabel);
+        statusBarTable.add(timeValueLabel);
+        statusBarTable.add(livesValueLabel);
+        statusBarTable.add(energyValueLabel);
+        statusBarTable.add(silverBulletValueLabel);
     }
 
     private void setHeartImage(float percentage) {
@@ -602,13 +602,13 @@ public class Hud extends AbstractScreen {
     public void increaseSilverBullets(int quantity) {
         silverBullets += quantity;
         if (silverBullets >= 0) {
-            silverBulletValueLablel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
+            silverBulletValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
         }
     }
 
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
-        silverBulletValueLablel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
+        silverBulletValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
     }
 
     @Override
