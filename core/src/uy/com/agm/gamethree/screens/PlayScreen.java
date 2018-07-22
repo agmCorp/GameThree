@@ -745,12 +745,15 @@ public class PlayScreen extends AbstractScreen {
     public void enemyGetAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
             if (showRedFlashHelp) {
-                infoScreen.showRedFlashHelp();
                 showRedFlashHelp = false;
+                infoScreen.showRedFlashHelp();
+                hud.decreaseEnergy(1);
             } else {
-                infoScreen.showRedFlash();
+                if (!infoScreen.isModalVisible()) {
+                    infoScreen.showRedFlash();
+                    hud.decreaseEnergy(1);
+                }
             }
-            hud.decreaseEnergy(1);
         }
     }
 
