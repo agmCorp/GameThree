@@ -749,6 +749,8 @@ public class PlayScreen extends AbstractScreen {
                 infoScreen.showRedFlashHelp();
                 hud.decreaseEnergy(1);
             } else {
+                // If two enemies are running away at the same time, this method is called twice.
+                // Only show redFlash if redFlashHelp is not visible.
                 if (!infoScreen.isModalVisible()) {
                     infoScreen.showRedFlash();
                     hud.decreaseEnergy(1);
