@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- habilitar el final cuando lo doy vuelta..me costo tanto...
 - Me paso que deje ir a un bicho y me aparecio solo la manito de ok, sin el mensaje de "no dejes ir
 a tus enemigos" y sin el fondo lightred. Raro. El "ten cuidado un traspie mas y perdes" no tiene
 fondo lightred como la primer escapada de bicho. Esta bien porque yo no se que provoco que este
