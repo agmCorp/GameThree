@@ -1,60 +1,23 @@
-******
-    A long time ago, the Matsumoto clan was attacked by four indescribable monsters and their evil army.
- In order to stop the invaders, Sensei-Matsumoto joined forces with the Queen of the Forest, the Sorceress Marlena.
- Combining the most powerful spells with the secrets of the ancestral martial arts, the monsters were defeated and the whole army was seized and locked in cages in deep underground dungeons.
- As the years passed, friendship between Matsumoto and Marlena blossomed into romance and a baby boy named Drako was born as the fruit and bond of their marriage.
- Anticipating the worst, both parents trained their son in all manner of combat and sorcery skills.
- Today this nightmare has come true and the forces of darkness are free again. You and Drako are the only hope.
- Your mission is to travel around the four worlds to destroy this army and its commanders.
- Throughout this dangerous adventure, you will be able to pick up different items left there by Matsumoto and Marlena to help you:
-
- (***picture with items and powers)
-
- Let strength and courage guide you both to succeed.
- Good luck brave warriors!
-*******
-
-
 PRIORIDADES PARA LIBERAR
 ------------------------
 - renombrar en todos lados energy por endurance, ojo que ya existe energy en la heathbar.
-- anotar por ahi lo de las voces y de como hacer los audios estéreo.
 - deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
-- cuando disparo con half moon a los bichos verdes, algunos suben pegados al borde. Nivel 2. Probar si eso se arregla con el threesholdvelociyt.
 - el back de las pantallas de help y de aquellas que redefinieron el render, deberian volver al menu principal.
-La manera que se me ocurre es o programando el back en cada una de ellas o en abstract screen poner una
-funcion abstracta que le diga como pintar el fondo.
 NO, QUE ABSTRACT IMPLEMENTE UNA FUNCION PROTEGIDA GETCOLOR Y QUE CADA PANTALLA VEA SI LA REESCRIBE O NO.
 LO MISMO CON LA NAVEGACION. QUE ABSTRACT LLAME A SU FUNCION PROTEGIDA VOLVER Y QUE CADA PANTALLA LA IMPLEMENTE SI QUIERE.
 SINO, ABSTRACT VUELVE A MAIN MENU.
-- habilitar el final cuando lo doy vuelta..me costo tanto...
-- Me paso que deje ir a un bicho y me aparecio solo la manito de ok, sin el mensaje de "no dejes ir
-a tus enemigos" y sin el fondo lightred. Raro. El "ten cuidado un traspie mas y perdes" no tiene
-fondo lightred como la primer escapada de bicho. Esta bien porque yo no se que provoco que este
-a 1 punto de perder, pero deberia saber si es por choque o por escapada de bicho.
-- En el nivel 3, quedo un audio de enemigo 8 siempre. Eso significa que el enemigo quedo trancado fuera
-de la visual. Cuando agarre un soul recien ahi desaparecio.
-- escribir en que he aprendido el tema de las voces y organizar los audios e imagenes.
+- habilitar el final cuando lo doy vuelta..me costo tanto y lo hice con tanto amor...
+- El "ten cuidado un traspie mas y perdes" no tiene fondo lightred como la primer escapada de enemigos. Esta bien porque yo no se que provoco que este a 1 punto de perder, pero deberia saber si es por choque o por escapada de bicho.
+- escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank
-- En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
-Me pasó algo parecido en el nivel 3.
-Confirmado que es un bug.
-Se me ocurre que solo se dibujen los bordes de las balas del enemigo porque es lo unico que me puede matar.
 - Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente), bumps, shurikens remanentes.
-- Hacer pantallas de help con fondo lindo:
-    - intro (poner en la historia que el ejercito robaba, recuperar el dinero del clan)
-    - Imprescindible explicar la energy.
-    - perfil de cada enemigo?
-    - items y poderes
-- hacer un mapa de los niveles (opcional)
 
 HACER PRIORIDAD 1
 -----------------
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
-- Capaz en el help inicial del red puedo poner una flecha a prepo que senale la energy del hud.
 - Poder aabb que los deja quietos:
 IMPLEMENTACION:
 Cada enemigo deberia tener un metodo freeze() y asegurarme que no disparen y ta.
@@ -71,6 +34,7 @@ la pantalla.
 
 HACER PRIORIDAD 3
 -----------------
+- hacer un mapa de los niveles (opcional)
 - habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getFinalEnemyLevelOne(), etc.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
@@ -88,7 +52,7 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
-- Integrar OpenFeint (gogle play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
+- Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Poder de disparo con tipo de movimiento (boomerang):
         se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
@@ -133,11 +97,7 @@ Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
 - Frases:
     - Humans are the real monsters
     - La que anoté por ahí en el papel: You were the monster all along
-- Nombre para niveles:
-    The forest
-    Wreckage
-    Underworld
-    Frontiers
+
 
 DUDAS Y BUGS
 ------------
@@ -154,6 +114,14 @@ el resto del sonido. No lo supe arreglar...
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
+- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2. Probar si eso se arregla con el velocity threshold de world.
+- Me paso que deje ir a un enemigo y me aparecio solo la manito de ok, sin el mensaje de "WATCH OUT! Don't let your enemies flee!" y sin el fondo lightred.
+Lo intenté solucionar, fijarse si vuelve a pasar, más que nada en el nivel 2.
+- En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual. Cuando agarré un colTwo recien ahi desaparecio.
+- En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
+Me pasó algo parecido en el nivel 3.
+Confirmado que es un bug.
+Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico que me puede matar.
 
 TENGO
 -----
