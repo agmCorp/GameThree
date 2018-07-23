@@ -7,7 +7,11 @@ NO, QUE ABSTRACT IMPLEMENTE UNA FUNCION PROTEGIDA GETCOLOR Y QUE CADA PANTALLA V
 LO MISMO CON LA NAVEGACION. QUE ABSTRACT LLAME A SU FUNCION PROTEGIDA VOLVER Y QUE CADA PANTALLA LA IMPLEMENTE SI QUIERE.
 SINO, ABSTRACT VUELVE A MAIN MENU.
 - habilitar el final cuando lo doy vuelta..me costo tanto y lo hice con tanto amor...
-- El "ten cuidado un traspie mas y perdes" no tiene fondo lightred como la primer escapada de enemigos. Esta bien porque yo no se que provoco que este a 1 punto de perder, pero deberia saber si es por choque o por escapada de bicho.
+- El "ten cuidado un traspie mas y perdes" no tiene fondo lightred como la primer escapada de enemigos. Esta bien porque yo no se que provoco que este a 1 punto de perder,
+pero deberia saber si es por choque o por escapada de bicho.
+IMPLEMENTACION: TENER 2 FUNCIONES, LA QUE TENGO (SIN FONDO) Y UNA NUEVA CON FONDO QUE RECIBA STRING COMO PARAMETRO PARA MOSTRAR. INVOCARLA TAMBIÉN EN showRedFlashWarning.
+DECREASEENERGY RECIBE UN BOOLEANO QUE ES LA CAUSA Y EN BASE A ESO DECIDE QUE MOSTRAR. VA A QUEDAR BIEN. LA OTRA ES DEJARSE DE JODER Y USAR SIEMPRE FONDO ROSA LO CUAL ESTARIA MUY BIEN IGUAL. CREO QUE ESO ULTIMO
+ES LO MEJOR.
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
