@@ -32,7 +32,8 @@ public class HelpTwoScreen extends AbstractScreen {
     private static final int COLUMNS = 2;
     private static final float FAKE_HUD_TABLE_CELL_HEIGHT = 30.0f;
     private static final float FAKE_HUD_TABLE_CELL_WIDTH = 80.0f;
-    private static final float MAIN_TABLE_CELL_HEIGHT = 60.0f;
+    private static final float CELL_HEIGHT = 60.0f;
+    private static final float CELL_WIDTH = 40.0f;
 
     private AssetScene2d assetScene2d;
     private Assets assetGame;
@@ -125,22 +126,22 @@ public class HelpTwoScreen extends AbstractScreen {
         table.row();
         table.add(getFakeHudTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
         table.row();
-        table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(coinDsc).padTop(AbstractScreen.PAD).width(MSG_WIDTH).fill();
         table.row();
-        table.add(trophy).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(trophy).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(trophyDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(hourglass).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(hourglass).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(hourglassDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(heroHead).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(heroHead).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(heroHeadDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(heart).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(heart).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(heartDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(shuriken).padLeft(AbstractScreen.PAD).height(MAIN_TABLE_CELL_HEIGHT);
+        table.add(shuriken).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(shurikenDsc).width(MSG_WIDTH).fill();
 
         // Adds table to stage

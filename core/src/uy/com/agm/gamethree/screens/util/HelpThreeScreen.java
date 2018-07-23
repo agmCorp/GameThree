@@ -27,6 +27,7 @@ public class HelpThreeScreen extends AbstractScreen {
     // Constants
     private static final float MSG_WIDTH = 250.0f;
     private static final int COLUMNS = 2;
+    private static final float COL_ONE_TABLE_HEIGHT = 30.0f;
     private static final float CELL_WIDTH = 40.0f;
     private static final float CELL_HEIGHT = 50.0f;
 
@@ -168,7 +169,7 @@ public class HelpThreeScreen extends AbstractScreen {
         Table table = new Table();
 
         // Cell defaults
-        table.defaults().height(30);
+        table.defaults().height(COL_ONE_TABLE_HEIGHT);
 
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
