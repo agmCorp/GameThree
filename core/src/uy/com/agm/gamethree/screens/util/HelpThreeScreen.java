@@ -167,6 +167,9 @@ public class HelpThreeScreen extends AbstractScreen {
         // Set table structure
         Table table = new Table();
 
+        // Cell defaults
+        table.defaults().height(30);
+
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
 
