@@ -17,6 +17,8 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- anotar por ahi lo de las voces y de como hacer los audios estéreo.
+- deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
 - cuando disparo con half moon a los bichos verdes, algunos suben pegados al borde. Nivel 2. Probar si eso se arregla con el threesholdvelociyt.
 - el back de las pantallas de help y de aquellas que redefinieron el render, deberian volver al menu principal.
 La manera que se me ocurre es o programando el back en cada una de ellas o en abstract screen poner una
