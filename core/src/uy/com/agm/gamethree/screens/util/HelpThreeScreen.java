@@ -25,11 +25,15 @@ public class HelpThreeScreen extends AbstractScreen {
     private static final String TAG = HelpThreeScreen.class.getName();
 
     // Constants
-    private static final float MSG_WIDTH = 250.0f;
-    private static final int COLUMNS = 2;
-    private static final float COL_ONE_TABLE_HEIGHT = 30.0f;
     private static final float CELL_WIDTH = 40.0f;
     private static final float CELL_HEIGHT = 50.0f;
+    private static final float MSG_WIDTH = 250.0f;
+    private static final float COL_ONE_TABLE_HEIGHT = 30.0f;
+    private static final float POWER_THREE_SCALE = 0.8f;
+    private static final float COL_THREE_HEART_SCALE = 1.4f;
+    private static final float COL_SILVER_BULLET_SCALE = 1.3f;
+    private static final float COL_TWO_SCALE = 1.5f;
+    private static final int COLUMNS = 2;
 
     private AssetScene2d assetScene2d;
     private Assets assetGame;
@@ -128,6 +132,14 @@ public class HelpThreeScreen extends AbstractScreen {
         powerFiveDsc.setAlignment(Align.left);
         powerFiveDsc.setWrap(true);
 
+        // Scales and align ad hoc for some items
+        powerThree.setScale(POWER_THREE_SCALE);
+        powerThree.setAlign(Align.topLeft);
+        colThreeHeart.setScale(COL_THREE_HEART_SCALE);
+        colSilverBullet.setScale(COL_SILVER_BULLET_SCALE);
+        colSilverBullet.setAlign(Align.bottomLeft);
+        colTwo.setScale(COL_TWO_SCALE);
+
         // Add values
         table.add(itemsLabel).colspan(COLUMNS);
         table.row();
@@ -151,14 +163,15 @@ public class HelpThreeScreen extends AbstractScreen {
         table.add(powerFive).align(Align.left).width(CELL_WIDTH);
         table.add(powerFiveDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(colTwo).align(Align.left).width(CELL_WIDTH);
-        table.add(colTwoDsc).width(MSG_WIDTH).fill();
+        table.add(colThreeHeart).align(Align.left).width(CELL_WIDTH);
+        table.add(colThreeHeartDsc).width(MSG_WIDTH).fill();
         table.row();
         table.add(colSilverBullet).align(Align.left).width(CELL_WIDTH);
         table.add(colSilverBulletDsc).width(MSG_WIDTH).fill();
         table.row();
-        table.add(colThreeHeart).align(Align.left).width(CELL_WIDTH);
-        table.add(colThreeHeartDsc).width(MSG_WIDTH).fill();
+        colTwo.setAlign(Align.bottomLeft);
+        table.add(colTwo).align(Align.topLeft).width(CELL_WIDTH);
+        table.add(colTwoDsc).width(MSG_WIDTH).fill();
 
         // Adds table to stage
         addActor(table);

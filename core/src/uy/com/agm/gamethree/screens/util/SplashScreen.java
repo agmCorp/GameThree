@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import uy.com.agm.gamethree.assets.Assets;
@@ -41,7 +40,7 @@ public class SplashScreen extends AbstractScreen {
     private float startX, endX;
     private float percent;
 
-    private Actor loadingBar;
+    private AnimatedActor loadingBar;
 
     public SplashScreen() {
         super();
