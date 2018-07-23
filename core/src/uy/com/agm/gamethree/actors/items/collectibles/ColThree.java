@@ -28,7 +28,7 @@ public class ColThree extends Item {
     private static final float VELOCITY_Y = -2.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 3.0f;
-    private static final float ENERGY_PROBABILITY = 0.3f;
+    private static final float ENERGY_PROBABILITY = 0.4f;
     private static final int SCORE = 200;
 
     private boolean isEnergy;
