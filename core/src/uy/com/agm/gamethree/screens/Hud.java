@@ -238,7 +238,7 @@ public class Hud extends AbstractScreen {
             energy = assetScene2d.getEnergy().getEnergy50();
         } else if (50 < percentage && percentage <= 75) {
             energy = assetScene2d.getEnergy().getEnergy75();
-        } else if (75 < percentage && percentage <= 100) {
+        } else if (75 < percentage && percentage <= 100) { // todo aca deberia sacar la cota superior
             energy = assetScene2d.getEnergy().getEnergy100();
         }
 
@@ -582,7 +582,7 @@ public class Hud extends AbstractScreen {
 
     public void increaseEnergy(int quantity) {
         if (!DebugConstants.DISABLE_ENERGY_COUNT) {
-            if (energy < initialEnergy) {
+            if (energy < initialEnergy) { // todo aca deberia sacar este if
                 energy += quantity;
                 int percentage = MathUtils.round((float) (energy * 100 / initialEnergy));
                 setHeartImage(percentage);

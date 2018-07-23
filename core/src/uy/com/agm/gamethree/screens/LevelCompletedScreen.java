@@ -53,7 +53,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.currentScore = currentScore;
         this.currentEnergy = currentEnergy;
         int maxEnergy = LevelFactory.getLevelEnergy(this.currentLevel);
-        this.currentPenalties = maxEnergy - this.currentEnergy;
+        this.currentPenalties = maxEnergy - this.currentEnergy; // todo aca deberia ser 0 si la cuenta de negativa (currentEnergy >= maxEnergy)? 0 : maxEnergy - this.currentEnergy;
         this.finalScore = Math.abs(this.currentScore - this.currentPenalties * PENALTY_COST);
         this.currentStars = getStarsValue(this.currentEnergy, maxEnergy);
 
@@ -227,7 +227,7 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int getStarsValue(int currentEnergy, int maxEnergy) {
         int stars = 0;
 
-        if (currentEnergy == maxEnergy) {
+        if (currentEnergy == maxEnergy) {  // todo aca deberia ser >=
             stars = 3;
         } else {
             if (currentEnergy <= MathUtils.ceil((float)(maxEnergy - 1) / 2)) {
