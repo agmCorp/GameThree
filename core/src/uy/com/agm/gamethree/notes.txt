@@ -17,6 +17,7 @@
 
 PRIORIDADES PARA LIBERAR
 ------------------------
+- renombrar en todos lados energy por endurance, ojo que ya existe energy en la heathbar.
 - anotar por ahi lo de las voces y de como hacer los audios estéreo.
 - deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
 - cuando disparo con half moon a los bichos verdes, algunos suben pegados al borde. Nivel 2. Probar si eso se arregla con el threesholdvelociyt.
