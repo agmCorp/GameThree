@@ -55,7 +55,7 @@ y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Poder de disparo con tipo de movimiento (boomerang):
-        se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
+        Se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
         y luego en el stateShoot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
         definir una clase nueva FancyBullet (o BoomerangBullet) que herede de Weapon y tenga toda su lógica loca adentro (como la tiene HeroBullet o EnemyBullet).
         Luego una strategy nueva que cree el objeto pasando FancyBullet para que el b2worldcreator lo cree.
