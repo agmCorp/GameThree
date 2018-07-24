@@ -29,11 +29,11 @@ public class DebugConstants {
     // if it's greater than zero it sets the initial position of the camera
     public static final float GAME_CAM_Y_METERS = 0.0f * (TURN_ON_DEBUG ? 1 : 0);
 
-    // When it's true, energy count is ignored
-    public static final boolean DISABLE_ENERGY_COUNT = false && TURN_ON_DEBUG;
+    // When it's true, endurance count is ignored
+    public static final boolean DISABLE_ENDURANCE_COUNT = false && TURN_ON_DEBUG;
 
     // Freezes the camera
-    public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;
+    public static final boolean STATIC_GAME_CAM = true && TURN_ON_DEBUG;
 
     // Allows to destroy the FinalEnemies with one hit
     public static final boolean DESTROY_BOSSES_ONE_HIT = true && TURN_ON_DEBUG;

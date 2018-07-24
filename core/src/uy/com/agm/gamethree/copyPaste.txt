@@ -136,7 +136,6 @@ MOVIMIENTOS COMPLEJOS:
 para reconocer con queryAABB el objeto que clickeo:
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-        // todo borrar
 
         Gdx.app.debug(TAG, "YO CLICKEO EN " + x + " " + y);
 

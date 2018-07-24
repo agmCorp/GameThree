@@ -180,7 +180,7 @@ public class Hero extends Sprite {
             checkLevelTimeUp();
 
             // Have escaped too many enemies, Hero dies
-            checkEnergy();
+            checkEndurance();
 
             // If Hero is playing again, sets his default filter after a few seconds.
             // Hero can collide with powerBoxes, borders, edges, paths and obstacles after reviving, so at this moment he
@@ -521,8 +521,8 @@ public class Hero extends Sprite {
         }
     }
 
-    private void checkEnergy() {
-        if (screen.getHud().getEnergy() <= 0) {
+    private void checkEndurance() {
+        if (screen.getHud().getEndurance() <= 0) {
             if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
                 screen.getInfoScreen().showStageFailedAnimation();
                 forceGameOver();
@@ -701,7 +701,7 @@ public class Hero extends Sprite {
             ouch();
             setColor(HIT_COLOR);
             hitTime = 0;
-            screen.getHud().decreaseEnergy(1);
+            screen.getHud().decreaseEndurance(1);
         }
     }
 
@@ -843,8 +843,8 @@ public class Hero extends Sprite {
         screen.getHud().increaseLives(1);
     }
 
-    public void addEnergy() {
-        screen.getHud().increaseEnergy(1);
+    public void addEndurance() {
+        screen.getHud().increaseEndurance(1);
     }
 
     public void addSilverBullet() {

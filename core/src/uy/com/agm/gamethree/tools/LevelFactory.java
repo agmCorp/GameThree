@@ -36,10 +36,10 @@ public class LevelFactory {
     private static final int TIMER_LEVEL_TWO = 400;
     private static final int TIMER_LEVEL_THREE = 450;
     private static final int TIMER_LEVEL_FOUR = 450;
-    private static final int ENERGY_LEVEL_ONE = 14;
-    private static final int ENERGY_LEVEL_TWO = 10;
-    private static final int ENERGY_LEVEL_THREE = 8;
-    private static final int ENERGY_LEVEL_FOUR = 6;
+    private static final int ENDURANCE_LEVEL_ONE = 14;
+    private static final int ENDURANCE_LEVEL_TWO = 10;
+    private static final int ENDURANCE_LEVEL_THREE = 8;
+    private static final int ENDURANCE_LEVEL_FOUR = 6;
     private static final String NAME_LEVEL_ONE = "levelFactory.nameLevelOne";
     private static final String NAME_LEVEL_TWO = "levelFactory.nameLevelTwo";
     private static final String NAME_LEVEL_THREE = "levelFactory.nameLevelThree";
@@ -86,9 +86,9 @@ public class LevelFactory {
         return  levelTimers[level - 1];
     }
 
-    public static int getLevelEnergy(int level) {
-        int[] levelEnergy = {ENERGY_LEVEL_ONE, ENERGY_LEVEL_TWO, ENERGY_LEVEL_THREE, ENERGY_LEVEL_FOUR};
-        return  levelEnergy[level - 1];
+    public static int getLevelEndurance(int level) {
+        int[] levelEndurance = {ENDURANCE_LEVEL_ONE, ENDURANCE_LEVEL_TWO, ENDURANCE_LEVEL_THREE, ENDURANCE_LEVEL_FOUR};
+        return  levelEndurance[level - 1];
     }
 
     public static String getLevelName(int level) {

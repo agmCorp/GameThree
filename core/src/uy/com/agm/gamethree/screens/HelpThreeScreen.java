@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.screens.util;
+package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,7 +13,9 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.game.DebugConstants;
-import uy.com.agm.gamethree.screens.AbstractScreen;
+import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -251,12 +253,15 @@ public class HelpThreeScreen extends AbstractScreen {
     }
 
     @Override
-    public void render(float delta) {
+    protected void clearScreen() {
         // Clear the screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
 
-        act();
-        draw();
+    @Override
+    protected void goBack() {
+        playClick();
+        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_TWO);
     }
 }

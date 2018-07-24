@@ -124,9 +124,7 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // Clear the screen with Black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        super.render(delta);
 
         splashTime += delta;
         if (assetManager.update() && splashTime >= MIN_SPLASH_TIME) { // Load some, will return true if done loading
@@ -142,9 +140,17 @@ public class SplashScreen extends AbstractScreen {
             loadingBg.setWidth(PIVOT - PIVOT * percent);
             loadingBg.invalidate();
         }
+    }
 
-        // Show the loading screen
-        act();
-        draw();
+    @Override
+    protected void clearScreen() {
+        // Clear the screen with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    @Override
+    protected void goBack() {
+        // Nothing to do here
     }
 }

@@ -148,7 +148,7 @@ public abstract class Enemy extends Sprite {
                         if (!world.isLocked()) {
                             world.destroyBody(b2body);
                         }
-                        screen.enemyGetAway();
+                        screen.enemyGetsAway();
                     }
                     currentState = State.DEAD;
                 }

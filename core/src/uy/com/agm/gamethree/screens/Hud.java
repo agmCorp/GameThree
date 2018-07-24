@@ -43,7 +43,7 @@ public class Hud extends AbstractScreen {
     private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
-    private static final String FORMAT_ENERGY = "%02d";
+    private static final String FORMAT_ENDURANCE = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
@@ -82,10 +82,10 @@ public class Hud extends AbstractScreen {
     private Label timeValueLabel;
     private int lives;
     private Label livesValueLabel;
-    private int initialEnergy;
+    private int initialEndurance;
     private Image heart;
-    private int energy;
-    private Label energyValueLabel;
+    private int endurance;
+    private Label enduranceValueLabel;
     private int silverBullets;
     private Label silverBulletValueLabel;
 
@@ -101,7 +101,7 @@ public class Hud extends AbstractScreen {
 
     private boolean timeIsUp; // True when the level time reaches 0
 
-    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer energy) {
+    public Hud(PlayScreen screen, Integer level, Integer score, Integer time, Integer lives, Integer endurance) {
         super();
 
         // Define tracking variables
@@ -112,8 +112,8 @@ public class Hud extends AbstractScreen {
         this.time = time;
         this.timeCount = 0;
         this.lives = lives;
-        this.initialEnergy = energy;
-        this.energy = energy;
+        this.initialEndurance = endurance;
+        this.endurance = endurance;
         this.silverBullets = 0;
         this.abilityPowerTime = 0;
         this.abilityPowerTimeCount = 0;
@@ -213,8 +213,8 @@ public class Hud extends AbstractScreen {
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
         livesValueLabel.setAlignment(Align.center);
-        energyValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_ENERGY, this.energy), labelStyleSmall);
-        energyValueLabel.setAlignment(Align.center);
+        enduranceValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_ENDURANCE, this.endurance), labelStyleSmall);
+        enduranceValueLabel.setAlignment(Align.center);
         silverBulletValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
         silverBulletValueLabel.setAlignment(Align.center);
 
@@ -223,26 +223,26 @@ public class Hud extends AbstractScreen {
         statusBarTable.add(highScoreValueLabel);
         statusBarTable.add(timeValueLabel);
         statusBarTable.add(livesValueLabel);
-        statusBarTable.add(energyValueLabel);
+        statusBarTable.add(enduranceValueLabel);
         statusBarTable.add(silverBulletValueLabel);
     }
 
     private void setHeartImage(float percentage) {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-        TextureRegion energy = assetScene2d.getEnergy().getEnergy0();
+        TextureRegion endurance = assetScene2d.getEndurance().getEndurance0();
 
         if (0 < percentage && percentage <= 25) {
-            energy = assetScene2d.getEnergy().getEnergy25();
+            endurance = assetScene2d.getEndurance().getEndurance25();
         } else if (25 < percentage && percentage <= 50) {
-            energy = assetScene2d.getEnergy().getEnergy50();
+            endurance = assetScene2d.getEndurance().getEndurance50();
         } else if (50 < percentage && percentage <= 75) {
-            energy = assetScene2d.getEnergy().getEnergy75();
-        } else if (75 < percentage && percentage <= 100) { // todo aca deberia sacar la cota superior
-            energy = assetScene2d.getEnergy().getEnergy100();
+            endurance = assetScene2d.getEndurance().getEndurance75();
+        } else if (75 < percentage) {
+            endurance = assetScene2d.getEndurance().getEndurance100();
         }
 
-        heart.setDrawable(new TextureRegionDrawable(energy));
+        heart.setDrawable(new TextureRegionDrawable(endurance));
         heart.setScaling(Scaling.fit);
     }
 
@@ -566,33 +566,31 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
     }
 
-    public void decreaseEnergy(int quantity) {
-        if (!DebugConstants.DISABLE_ENERGY_COUNT) {
-            energy -= quantity;
-            if (energy >= 0) {
-                int percentage = MathUtils.round((float)(energy * 100 / initialEnergy));
+    public void decreaseEndurance(int quantity) {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance -= quantity;
+            if (endurance >= 0) {
+                int percentage = MathUtils.round((float)(endurance * 100 / initialEndurance));
                 setHeartImage(percentage);
-                energyValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENERGY, energy));
-                if (energy == 1) {
-                    screen.getInfoScreen().showFailWarning();
+                enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
+                if (endurance == 1) {
+                    screen.getInfoScreen().showModalFailWarning();
                 }
             }
         }
     }
 
-    public void increaseEnergy(int quantity) {
-        if (!DebugConstants.DISABLE_ENERGY_COUNT) {
-            if (energy < initialEnergy) { // todo aca deberia sacar este if
-                energy += quantity;
-                int percentage = MathUtils.round((float) (energy * 100 / initialEnergy));
-                setHeartImage(percentage);
-                energyValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENERGY, energy));
-            }
+    public void increaseEndurance(int quantity) {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance += quantity;
+            int percentage = MathUtils.round((float) (endurance * 100 / initialEndurance));
+            setHeartImage(percentage);
+            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
         }
     }
 
-    public int getEnergy() {
-        return energy;
+    public int getEndurance() {
+        return endurance;
     }
 
     public void increaseSilverBullets(int quantity) {

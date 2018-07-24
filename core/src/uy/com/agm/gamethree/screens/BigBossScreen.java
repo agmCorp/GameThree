@@ -121,12 +121,7 @@ public class BigBossScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // Clear the screen with Black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        act();
-        draw();
+        super.render(delta);
 
         // Global timer
         timeBeat += delta;
@@ -158,5 +153,17 @@ public class BigBossScreen extends AbstractScreen {
                 AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getPum());
             }
         }
+    }
+
+    @Override
+    protected void clearScreen() {
+        // Clear the screen with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    @Override
+    protected void goBack() {
+        // Nothing to do here
     }
 }

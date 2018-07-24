@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
@@ -110,7 +111,7 @@ public class HelpTwoScreen extends AbstractScreen {
         heroHeadDsc.setWrap(true);
 
         Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEnergy().getEnergy75()));
+        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEndurance75()));
         heart.setScaling(Scaling.fit);
         TypingLabelWorkaround heartDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.heartDsc"), labelStyleSmall);
         heartDsc.setAlignment(Align.left);
@@ -173,7 +174,7 @@ public class HelpTwoScreen extends AbstractScreen {
         AnimatedImage heroHead = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
 
         Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEnergy().getEnergy75()));
+        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEndurance75()));
         heart.setScaling(Scaling.fit);
 
         AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
@@ -198,8 +199,8 @@ public class HelpTwoScreen extends AbstractScreen {
         timeValueLabel.setAlignment(Align.center);
         Label livesValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeLives"), labelStyleSmall);
         livesValueLabel.setAlignment(Align.center);
-        Label energyValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeEnergy"), labelStyleSmall);
-        energyValueLabel.setAlignment(Align.center);
+        Label enduranceValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeEndurance"), labelStyleSmall);
+        enduranceValueLabel.setAlignment(Align.center);
         Label silverBulletValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeSilverBullet"), labelStyleSmall);
         silverBulletValueLabel.setAlignment(Align.center);
 
@@ -208,7 +209,7 @@ public class HelpTwoScreen extends AbstractScreen {
         table.add(highScoreValueLabel);
         table.add(timeValueLabel);
         table.add(livesValueLabel);
-        table.add(energyValueLabel);
+        table.add(enduranceValueLabel);
         table.add(silverBulletValueLabel);
 
         return table;
@@ -258,12 +259,15 @@ public class HelpTwoScreen extends AbstractScreen {
     }
 
     @Override
-    public void render(float delta) {
+    protected void clearScreen() {
         // Clear the screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
 
-        act();
-        draw();
+    @Override
+    protected void goBack() {
+        playClick();
+        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_ONE);
     }
 }

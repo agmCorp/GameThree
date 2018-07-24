@@ -143,6 +143,12 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     @Override
+    public void goBack() {
+        playClick();
+        Gdx.app.exit();
+    }
+
+    @Override
     public void dispose() {
         super.dispose();
     }

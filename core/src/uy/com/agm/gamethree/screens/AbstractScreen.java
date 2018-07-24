@@ -45,9 +45,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     @Override
     public void render(float delta) {
-        // Clear the screen with white
-        Gdx.gl.glClearColor(255, 255, 255, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        clearScreen();
 
         // Calling to Stage methods
         super.act(delta);
@@ -55,18 +53,25 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
         // Back button Android
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
-            // Audio FX
-            AudioManager.getInstance().stopSound();
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-
-            // On the MainMenu pressing the back button will exit the app.
-            // On other screens the back button will switch the app back to the MainMenu
-            if (this instanceof MainMenuScreen) {
-                Gdx.app.exit();
-            } else {
-                ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-            }
+            goBack();
         }
+    }
+
+    protected void clearScreen() {
+        // Clear the screen with white
+        Gdx.gl.glClearColor(255, 255, 255, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    protected void goBack() {
+        playClick();
+        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+    }
+
+    protected void playClick() {
+        // Audio FX
+        AudioManager.getInstance().stopSound();
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
     }
 
     @Override

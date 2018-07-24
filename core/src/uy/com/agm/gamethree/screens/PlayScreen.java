@@ -178,7 +178,7 @@ public class PlayScreen extends AbstractScreen {
 
         // Create the game HUD for score, time, etc.
         hud = new Hud(this, level, score, LevelFactory.getLevelTimer(level),
-                player.getLives(), LevelFactory.getLevelEnergy(level));
+                player.getLives(), LevelFactory.getLevelEndurance(level));
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -681,7 +681,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getEnergy());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getEndurance());
         }
     }
 
@@ -742,20 +742,19 @@ public class PlayScreen extends AbstractScreen {
         this.playScreenState = PlayScreenState.BEAK;
     }
 
-    public void enemyGetAway() {
+    public void enemyGetsAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
-            if (showRedFlashHelp) {
-                showRedFlashHelp = false;
-                infoScreen.showRedFlashHelp();
-                hud.decreaseEnergy(1);
-            } else {
-                // If two enemies are running away at the same time, this method is called twice.
-                // Only show redFlash if redFlashHelp is not visible.
-                if (!infoScreen.isModalVisible()) {
+            if (hud.getEndurance() > 1) {
+                if (showRedFlashHelp) {
+                    showRedFlashHelp = false;
+                    infoScreen.showModalRedFlashHelp();
+                } else {
                     infoScreen.showRedFlash();
-                    hud.decreaseEnergy(1);
                 }
+            } else {
+                infoScreen.showRedFlash();
             }
+            hud.decreaseEndurance(1);
         }
     }
 

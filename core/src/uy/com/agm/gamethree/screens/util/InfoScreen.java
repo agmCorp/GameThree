@@ -447,34 +447,29 @@ public class InfoScreen extends AbstractScreen {
         showImage(redFlash, RED_FLASH_TIME);
     }
 
-    public void showRedFlashHelp() {
+    public void showModalRedFlashHelp() {
+        if (!isModalVisible()) {
+            showLightRedFlash(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
+        }
+    }
+
+    public void showModalFailWarning() {
+        if (!isModalVisible()) {
+            showLightRedFlash(i18NGameThreeBundle.format("infoScreen.failWarning"));
+        }
+    }
+
+    private void showLightRedFlash(String text) {
         gotIt.setVisible(true);
         setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
         image.setVisible(true);
-        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
+        messageLabel.setText(text);
         messageLabel.setStyle(labelStyleNormal);
         messageLabel.setVisible(true);
         animatedImage.setVisible(false);
         centerTable.setVisible(true);
         screen.getDimScreen().hideButtons();
         screen.setPlayScreenStatePaused(false);
-    }
-
-    public void showRedFlashWarning() {
-        gotIt.setVisible(true);
-        setImage(lightRedFlash, lightRedFlash.getRegionWidth(), lightRedFlash.getRegionHeight());
-        image.setVisible(true);
-        messageLabel.setText(i18NGameThreeBundle.format("infoScreen.redFlashWarning"));
-        messageLabel.setStyle(labelStyleNormal);
-        messageLabel.setVisible(true);
-        animatedImage.setVisible(false);
-        centerTable.setVisible(true);
-        screen.getDimScreen().hideButtons();
-        screen.setPlayScreenStatePaused(false);
-    }
-
-    public void showFailWarning() {
-        showModalMessage(i18NGameThreeBundle.format("infoScreen.failWarning"), MessageSize.NORMAL);
     }
 
     public boolean isRedFlashVisible() {

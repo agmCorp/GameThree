@@ -37,7 +37,7 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int nextLevel;
     private int currentLives;
     private int currentScore;
-    private int currentEnergy;
+    private int currentEndurance;
     private int currentPenalties;
     private int finalScore;
     private int currentStars;
@@ -45,17 +45,17 @@ public class LevelCompletedScreen extends AbstractScreen {
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentEnergy) {
+    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentEndurance) {
         super();
         this.currentLevel = currentLevel;
         this.nextLevel = currentLevel + 1;
         this.currentLives = currentLives;
         this.currentScore = currentScore;
-        this.currentEnergy = currentEnergy;
-        int maxEnergy = LevelFactory.getLevelEnergy(this.currentLevel);
-        this.currentPenalties = maxEnergy - this.currentEnergy; // todo aca deberia ser 0 si la cuenta de negativa (currentEnergy >= maxEnergy)? 0 : maxEnergy - this.currentEnergy;
+        this.currentEndurance = currentEndurance;
+        int maxEndurance = LevelFactory.getLevelEndurance(this.currentLevel);
+        this.currentPenalties = this.currentEndurance >= maxEndurance ? 0 : maxEndurance - this.currentEndurance;
         this.finalScore = Math.abs(this.currentScore - this.currentPenalties * PENALTY_COST);
-        this.currentStars = getStarsValue(this.currentEnergy, maxEnergy);
+        this.currentStars = getStarsValue(this.currentEndurance, maxEndurance);
 
         GameSettings prefs = GameSettings.getInstance();
         prefs.setStars(this.currentLevel, this.currentStars);
@@ -224,13 +224,13 @@ public class LevelCompletedScreen extends AbstractScreen {
         return table;
     }
 
-    private int getStarsValue(int currentEnergy, int maxEnergy) {
+    private int getStarsValue(int currentEndurance, int maxEndurance) {
         int stars = 0;
 
-        if (currentEnergy == maxEnergy) {  // todo aca deberia ser >=
+        if (currentEndurance >= maxEndurance) {
             stars = 3;
         } else {
-            if (currentEnergy <= MathUtils.ceil((float)(maxEnergy - 1) / 2)) {
+            if (currentEndurance <= MathUtils.ceil((float)(maxEndurance - 1) / 2)) {
                 stars = 1;
             } else {
                 stars = 2;

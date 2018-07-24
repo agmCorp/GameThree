@@ -84,7 +84,7 @@ public class AssetScene2d {
     private TextureRegion helpBackground;
     private AssetHeroHead heroHead;
     private AssetGoldenHeroHead goldenHeroHead;
-    private AssetEnergy energy;
+    private AssetEndurance endurance;
     private AssetHourglass hourglass;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
@@ -169,7 +169,7 @@ public class AssetScene2d {
         helpBackground = atlasUI.findRegion("helpBackground");
         heroHead = new AssetHeroHead(atlasUI);
         goldenHeroHead = new AssetGoldenHeroHead(atlasUI);
-        energy = new AssetEnergy(atlasUI);
+        endurance = new AssetEndurance(atlasUI);
         hourglass = new AssetHourglass(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
@@ -475,8 +475,8 @@ public class AssetScene2d {
         return goldenHeroHead;
     }
 
-    public AssetEnergy getEnergy() {
-        return energy;
+    public AssetEndurance getEndurance() {
+        return endurance;
     }
 
     public AssetHourglass getHourglass() {

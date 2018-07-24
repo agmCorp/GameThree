@@ -28,10 +28,10 @@ public class ColThree extends Item {
     private static final float VELOCITY_Y = -2.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 3.0f;
-    private static final float ENERGY_PROBABILITY = 0.4f;
+    private static final float ENDURANCE_PROBABILITY = 0.4f;
     private static final int SCORE = 200;
 
-    private boolean isEnergy;
+    private boolean isEndurance;
     private float stateTime;
     private float stateWaitingTime;
     private float stateFadingTime;
@@ -40,16 +40,16 @@ public class ColThree extends Item {
     public ColThree(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
-        isEnergy = MathUtils.random() <= ENERGY_PROBABILITY;
-        colThreeAnimation = isEnergy ? Assets.getInstance().getColThree().getColThreeAnimation() : Assets.getInstance().getScene2d().getGoldenHeroHead().getGoldenHeroHeadAnimation();
+        isEndurance = MathUtils.random() <= ENDURANCE_PROBABILITY;
+        colThreeAnimation = isEndurance ? Assets.getInstance().getColThree().getColThreeAnimation() : Assets.getInstance().getScene2d().getGoldenHeroHead().getGoldenHeroHeadAnimation();
         stateTime = 0;
         stateWaitingTime = 0;
         stateFadingTime = 0;
 
         // Determines the size of the Item's drawing on the screen
         setBounds(getX(), getY(),
-                isEnergy ? AssetColThree.WIDTH_METERS : AssetGoldenHeroHead.WIDTH_PIXELS / PlayScreen.PPM,
-                isEnergy ? AssetColThree.HEIGHT_METERS : AssetGoldenHeroHead.HEIGHT_PIXELS / PlayScreen.PPM);
+                isEndurance ? AssetColThree.WIDTH_METERS : AssetGoldenHeroHead.WIDTH_PIXELS / PlayScreen.PPM,
+                isEndurance ? AssetColThree.HEIGHT_METERS : AssetGoldenHeroHead.HEIGHT_PIXELS / PlayScreen.PPM);
 
         velocity.set(MathUtils.randomSign() * VELOCITY_X, VELOCITY_Y);
 
@@ -144,8 +144,8 @@ public class ColThree extends Item {
     }
 
     private void applyColThree() {
-        if (isEnergy) {
-            screen.getCreator().getHero().addEnergy();
+        if (isEndurance) {
+            screen.getCreator().getHero().addEndurance();
         } else {
             screen.getCreator().getHero().addLives();
         }

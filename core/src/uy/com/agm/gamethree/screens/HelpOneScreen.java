@@ -120,16 +120,18 @@ public class HelpOneScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // Clear the screen with Black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        act();
-        draw();
+        super.render(delta);
 
         if (msgLabel.hasEnded() && !talePartTwo) {
             talePartTwo = true;
             msgLabel.restart(i18NGameThreeBundle.format("helpOne.talePartTwo"));
         }
+    }
+
+    @Override
+    protected void clearScreen() {
+        // Clear the screen with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 }
