@@ -14,7 +14,12 @@ Se me ocurre que esa propiedad no exista en ningun lado de nada nunca. Y que la 
 En selectLevel:
 Si estoy en debug, se agrega a la tabla.
 Sino
-Si el ultimo nivel que cargue es max level y tiene estrellas, habilito el gran. Mas nada, nada de properties.
+Si el ultimo nivel que cargue es max level y tiene estrellas, habilito el gran. Mas nada, nada de properties. LA DESVENTAJA ES QUE
+ESTOY LEYENDO DEBUGSLEVELS EN LOADLEVELSSCREEN CUANDO NO QUERIA.
+
+SE ME OCURRE QUE LA PROPERTY EXISTA PERO QUE NO SE GRAVE NUNCA EN DISCO, SINO QUE SE CALCULE EN EL LOAD Y EN EL LEVEL COMPLETE DE VUELTA.
+
+LA OTRA PUEDE SER CONSIDERAR EL GRAN FINAL COMO UN NIVEL CUALQUIERA MAS.
 
 - resolver el tema de que el arrastrar el panel activa los niveles.!
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.

@@ -110,6 +110,10 @@ public class SelectLevelScreen extends AbstractScreen {
             levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
                     levelState.getInitialLives(),
                     levelState.getInitialScore()));
+         // TODO
+//            showGrandFinale = level == GameSettings.MAX_LEVEL &&
+//                    levelState.isActive() &&
+//                    levelState.getFinalStars() > 0 || DEBUG_LEVELS;
         }
 
         // todo
