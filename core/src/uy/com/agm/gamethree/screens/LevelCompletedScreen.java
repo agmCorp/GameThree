@@ -82,7 +82,7 @@ public class LevelCompletedScreen extends AbstractScreen {
                 prefs.resetLevel(i);
             }
         }
-        prefs.setShowGrandFinale(!showNextLevelLabel); // Always save real value
+        prefs.setShowGrandFinale(!showNextLevelLabel);
 
         // Saves preferences
         // We can't delete keys, only change values
