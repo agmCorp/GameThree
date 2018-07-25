@@ -3,6 +3,9 @@ PRIORIDADES PARA LIBERAR
 *- deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
 - habilitar el final cuando lo doy vuelta..me costo tanto y lo hice con tanto amor...llamarle to be continued...porque
 sino solo ves el final cuando le das en level complete a tap here.
+El caso seria, activo juego normal, paso el nivel 1, activo debug, paso el ultimo nivel (granf se activa). Luego vuelvo a normal,
+deberia ver nivel 1 y 2 y mas nada sin embargo veo el gran finale.
+para mi deberia tener un indicador de progreso: voy por level x; nada de activo, desactivo...
 - resolver el tema de que el arrastrar el panel activa los niveles.!
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
