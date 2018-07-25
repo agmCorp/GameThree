@@ -95,7 +95,7 @@ public class LevelCompletedScreen extends AbstractScreen {
             }
 
             // If a level is removed then the grand finale is hidden
-            prefs.setShowGrandFinale(this.nextLevel + 1 <= GameSettings.MAX_LEVEL);
+            prefs.setShowGrandFinale(!(this.nextLevel + 1 <= GameSettings.MAX_LEVEL));
         } else {
             // Enables grand finale
             prefs.setShowGrandFinale(true);
