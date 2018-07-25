@@ -6,6 +6,16 @@ sino solo ves el final cuando le das en level complete a tap here.
 El caso seria, activo juego normal, paso el nivel 1, activo debug, paso el ultimo nivel (granf se activa). Luego vuelvo a normal,
 deberia ver nivel 1 y 2 y mas nada sin embargo veo el gran finale.
 para mi deberia tener un indicador de progreso: voy por level x; nada de activo, desactivo...
+
+conclusion: no se puede hacer asi, porque el estado del booleano se pelea con debug/nodebug. CRC
+
+Se me ocurre que esa propiedad no exista en ningun lado de nada nunca. Y que la aparecion del gran final se deba solo a esto:
+
+En selectLevel:
+Si estoy en debug, se agrega a la tabla.
+Sino
+Si el ultimo nivel que cargue es max level y tiene estrellas, habilito el gran. Mas nada, nada de properties.
+
 - resolver el tema de que el arrastrar el panel activa los niveles.!
 - escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.
 - poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.

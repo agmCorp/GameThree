@@ -23,7 +23,6 @@ public class GameSettings {
     private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String LEVEL_STATE = "levelState_";
     public static final int MAX_LEVEL = 4;
-    private static final String SHOW_GRAND_FINALE = "showGrandFinale";
 
     private static final String SOUND = "sound";
     private static final String MUSIC = "music";
@@ -66,7 +65,6 @@ public class GameSettings {
     private long bronzeHighScoreMillis;
     private Date bronzeHighScoreDate;
     private ArrayMap<Integer, LevelState> levels;
-    private boolean showGrandFinale;
     private Preferences prefs;
     private Json json;
 
@@ -132,8 +130,6 @@ public class GameSettings {
                 level++;
             }
         } while (availableLevel);
-
-        showGrandFinale =  DebugConstants.DEBUG_LEVELS || prefs.getBoolean(SHOW_GRAND_FINALE, false);
    }
 
     public void save() {
@@ -151,7 +147,6 @@ public class GameSettings {
         for(LevelState levelState : levels.values()) {
             prefs.putString(LEVEL_STATE + levelState.getLevel(), getData(levelState));
         }
-        prefs.putBoolean(SHOW_GRAND_FINALE, showGrandFinale);
         prefs.flush();
     }
 
@@ -273,13 +268,5 @@ public class GameSettings {
 
     public boolean isNewBronzeHighScore(int score) {
         return score > bronzeHighScore;
-    }
-
-    public boolean isShowGrandFinale() {
-        return showGrandFinale;
-    }
-
-    public void setShowGrandFinale(boolean showGrandFinale) {
-        this.showGrandFinale = showGrandFinale;
     }
 }

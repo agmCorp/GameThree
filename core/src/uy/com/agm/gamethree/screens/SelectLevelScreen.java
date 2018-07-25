@@ -18,7 +18,6 @@ import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.LevelFactory;
-import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -112,14 +111,16 @@ public class SelectLevelScreen extends AbstractScreen {
                     levelState.getInitialLives(),
                     levelState.getInitialScore()));
         }
-        if (GameSettings.getInstance().isShowGrandFinale()) {
-            table.row();
-            TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("selectLevel.grandFinale"), labelStyleNormal);
-            table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
 
-            // Events
-            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
-        }
+        // todo
+//        if (GameSettings.getInstance().isShowGrandFinale()) {
+//            table.row();
+//            TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("selectLevel.grandFinale"), labelStyleNormal);
+//            table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
+//
+//            // Events
+//            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
+//        }
 
         return table;
     }

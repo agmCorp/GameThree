@@ -82,7 +82,6 @@ public class LevelCompletedScreen extends AbstractScreen {
                 prefs.resetLevel(i);
             }
         }
-        prefs.setShowGrandFinale(!showNextLevelLabel);
 
         // Saves preferences
         // We can't delete keys, only change values
@@ -93,12 +92,6 @@ public class LevelCompletedScreen extends AbstractScreen {
             for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
                 prefs.removeLevel(i);
             }
-
-            // If a level is removed then the grand finale is hidden
-            prefs.setShowGrandFinale(!(this.nextLevel + 1 <= GameSettings.MAX_LEVEL));
-        } else {
-            // Enables grand finale
-            prefs.setShowGrandFinale(true);
         }
 
         // Audio FX
