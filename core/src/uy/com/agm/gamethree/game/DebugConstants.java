@@ -6,7 +6,7 @@ package uy.com.agm.gamethree.game;
 
 public class DebugConstants {
     // Master variable: turns debug mode on or off
-    public static final boolean TURN_ON_DEBUG = false;
+    public static final boolean TURN_ON_DEBUG = true;
 
     // Sets the log level to debug
     public static final boolean DEBUG_MODE = true && TURN_ON_DEBUG;
@@ -24,10 +24,10 @@ public class DebugConstants {
     public static final boolean DEBUG_BODY_COUNT = false && TURN_ON_DEBUG;
 
     // Enables all levels
-    public static final boolean DEBUG_LEVELS = true && TURN_ON_DEBUG;
+    public static final boolean DEBUG_LEVELS = false && TURN_ON_DEBUG;
 
     // if it's greater than zero it sets the initial position of the camera
-    public static final float GAME_CAM_Y_METERS = 0.0f * (TURN_ON_DEBUG ? 1 : 0);
+    public static final float GAME_CAM_Y_METERS = 75.0f * (TURN_ON_DEBUG ? 1 : 0);
 
     // When it's true, endurance count is ignored
     public static final boolean DISABLE_ENDURANCE_COUNT = false && TURN_ON_DEBUG;

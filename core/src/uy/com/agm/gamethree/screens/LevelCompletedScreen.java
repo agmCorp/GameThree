@@ -82,7 +82,8 @@ public class LevelCompletedScreen extends AbstractScreen {
                 prefs.resetLevel(i);
             }
         }
-//TODO ACA DEBO GUARDAR EN LAS PREFERENCES !SHOWNEXTLEVEL Y ESO HABILITA EL GRAN FINAL, LUEGO EN LA PANTALLA DE SELECT LEVEL LO CARGO
+        prefs.setShowGrandFinale(!showNextLevelLabel); // Always save real value
+
         // Saves preferences
         // We can't delete keys, only change values
         prefs.save();
@@ -92,6 +93,9 @@ public class LevelCompletedScreen extends AbstractScreen {
             for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
                 prefs.removeLevel(i);
             }
+        } else {
+            // Enables grand finale
+            prefs.setShowGrandFinale(true);
         }
 
         // Audio FX
