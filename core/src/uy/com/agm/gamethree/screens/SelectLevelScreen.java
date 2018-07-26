@@ -18,6 +18,7 @@ import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.LevelFactory;
+import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -99,7 +100,8 @@ public class SelectLevelScreen extends AbstractScreen {
         Table levelTable;
         TextureRegion star = assetScene2d.getStar();
         TextureRegion emptyStar = assetScene2d.getEmptyStar();
-        for (LevelState levelState : GameSettings.getInstance().getLevels().values()) {
+        GameSettings prefs = GameSettings.getInstance();
+        for (LevelState levelState : prefs.getLevels().values()) {
             table.row();
             level = levelState.getLevel();
             levelLabel = new Label(LevelFactory.getLevelName(level), labelStyleNormal);
@@ -107,24 +109,19 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelTable).padTop(AbstractScreen.PAD);
 
             // Events
-            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
+            levelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
                     levelState.getInitialLives(),
                     levelState.getInitialScore()));
-         // TODO
-//            showGrandFinale = level == GameSettings.MAX_LEVEL &&
-//                    levelState.isActive() &&
-//                    levelState.getFinalStars() > 0 || DEBUG_LEVELS;
         }
 
-        // todo
-//        if (GameSettings.getInstance().isShowGrandFinale()) {
-//            table.row();
-//            TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("selectLevel.grandFinale"), labelStyleNormal);
-//            table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
-//
-//            // Events
-//            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
-//        }
+        if (prefs.isGameComplete()) {
+            table.row();
+            TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("selectLevel.grandFinale"), labelStyleNormal);
+            table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
+
+            // Events
+            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
+        }
 
         return table;
     }

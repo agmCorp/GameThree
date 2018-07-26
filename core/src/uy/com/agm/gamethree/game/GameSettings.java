@@ -254,6 +254,14 @@ public class GameSettings {
         }
     }
 
+    public boolean isGameComplete() {
+        LevelState levelState = levels.get(MAX_LEVEL);
+        return levelState != null ? levelState.isActive() &&
+                levelState.getFinalStars() > 0 ||
+                DebugConstants.DEBUG_LEVELS
+                : false;
+    }
+
     public void removeLevel(int level) {
         levels.removeKey(level);
     }

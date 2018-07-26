@@ -1,5 +1,12 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
+- ver de hacer una skin capaz...ver el doc de las skins en donde explica que se puede crear una skin programando.
+- agregar scrollsbars usando orange: https://github.com/czyzby/gdx-skins/tree/master/orange/raw
+- ver el evento de las tablas de estrellas
+- ver de crear el algoritmo de levels, no quiero.
+
+for (int i = 0, n = size; i < n; i++)
+
 *- deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
 - habilitar el final cuando lo doy vuelta..me costo tanto y lo hice con tanto amor...llamarle to be continued...porque
 sino solo ves el final cuando le das en level complete a tap here.
