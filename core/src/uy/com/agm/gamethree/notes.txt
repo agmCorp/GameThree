@@ -1,5 +1,7 @@
 PRIORIDADES PARA LIBERAR
 ------------------------
+- guardar la url de orange
+- hacer una skin con el skin composer
 - ver de hacer una skin capaz...ver el doc de las skins en donde explica que se puede crear una skin programando.
 - agregar scrollsbars usando orange: https://github.com/czyzby/gdx-skins/tree/master/orange/raw
 - ver el evento de las tablas de estrellas

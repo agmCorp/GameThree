@@ -80,6 +80,10 @@ public class AssetScene2d {
     private TextureRegion bronzeTrophy;
     private TextureRegion star;
     private TextureRegion emptyStar;
+    private TextureRegion vScrollbar9;
+    private TextureRegion vScrollbarKnob9;
+    private TextureRegion hScrollbar9;
+    private TextureRegion hScrollbarKnob9;
     private TextureRegion bigBossBackground;
     private TextureRegion helpBackground;
     private AssetHeroHead heroHead;
@@ -165,6 +169,10 @@ public class AssetScene2d {
         bronzeTrophy = atlasUI.findRegion("bronzeTrophy");
         star = atlasUI.findRegion("star");
         emptyStar = atlasUI.findRegion("emptyStar");
+        vScrollbar9 = atlasUI.findRegion("vScrollbar9");
+        vScrollbarKnob9 = atlasUI.findRegion("vScrollbarKnob9");
+        hScrollbar9 = atlasUI.findRegion("hScrollbar9");
+        hScrollbarKnob9 = atlasUI.findRegion("hScrollbarKnob9");
         bigBossBackground = atlasUI.findRegion("bigBossBackground");
         helpBackground = atlasUI.findRegion("helpBackground");
         heroHead = new AssetHeroHead(atlasUI);
@@ -457,6 +465,22 @@ public class AssetScene2d {
 
     public TextureRegion getEmptyStar() {
         return emptyStar;
+    }
+
+    public TextureRegion getvScrollbar9() {
+        return vScrollbar9;
+    }
+
+    public TextureRegion getvScrollbarKnob9() {
+        return vScrollbarKnob9;
+    }
+
+    public TextureRegion gethScrollbar9() {
+        return hScrollbar9;
+    }
+
+    public TextureRegion gethScrollbarKnob9() {
+        return hScrollbarKnob9;
     }
 
     public TextureRegion getBigBossBackground() {

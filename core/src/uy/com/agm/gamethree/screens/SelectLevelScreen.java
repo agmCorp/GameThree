@@ -1,11 +1,13 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
@@ -28,7 +30,7 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
     // Constants
-    public static final float SCROLL_PANE_MAX_HEIGHT = 330.0f;
+    public static final float SCROLL_PANE_MAX_HEIGHT = 400.0f;
     public static final float NAME_LEVEL_WIDTH = 200.0f;
 
     public SelectLevelScreen() {
@@ -67,11 +69,24 @@ public class SelectLevelScreen extends AbstractScreen {
         // Define our labels based on labelStyle
         Label selectLevelLabel = new Label(i18NGameThreeBundle.format("selectLevel.title"), labelStyleBig);
 
+        // Define a ScrollPane with scrollbars
+        ScrollPane.ScrollPaneStyle scrollStyle = new ScrollPane.ScrollPaneStyle();
+        NinePatch vScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbarKnob9(), 2, 2, 2, 2);
+        NinePatch vScrollNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbar9(), 2, 2, 2, 2);
+        NinePatch hScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbarKnob9(), 2, 2, 2, 2);
+        NinePatch hScrollNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbar9(), 2, 2, 2, 2);
+
+        scrollStyle.vScrollKnob = new NinePatchDrawable(vScrollKnobNine);
+        scrollStyle.vScroll = new NinePatchDrawable(vScrollNine);
+        scrollStyle.hScrollKnob = new NinePatchDrawable(hScrollKnobNine);
+        scrollStyle.hScroll = new NinePatchDrawable(hScrollNine);
+
+        ScrollPane scrollPane = new ScrollPane(defineLevelsTable(), scrollStyle);
+
         // Add values
         container.add(selectLevelLabel);
         container.row();
-        ScrollPane scrollPane = new ScrollPane(defineLevelsTable());
-        container.add(scrollPane).top().width(AbstractScreen.V_WIDTH).maxHeight(SCROLL_PANE_MAX_HEIGHT);
+        container.add(scrollPane).top().maxHeight(SCROLL_PANE_MAX_HEIGHT);
 
         // Adds table to stage
         addActor(container);
