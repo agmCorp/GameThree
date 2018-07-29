@@ -1,44 +1,20 @@
-PRIORIDADES PARA LIBERAR
-------------------------
-- guardar la url de orange
-- hacer una skin con el skin composer
-- ver de hacer una skin capaz...ver el doc de las skins en donde explica que se puede crear una skin programando.
-- agregar scrollsbars usando orange: https://github.com/czyzby/gdx-skins/tree/master/orange/raw
-- ver el evento de las tablas de estrellas
-- ver de crear el algoritmo de levels, no quiero.
-
-for (int i = 0, n = size; i < n; i++)
-
-*- deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
-- habilitar el final cuando lo doy vuelta..me costo tanto y lo hice con tanto amor...llamarle to be continued...porque
-sino solo ves el final cuando le das en level complete a tap here.
-El caso seria, activo juego normal, paso el nivel 1, activo debug, paso el ultimo nivel (granf se activa). Luego vuelvo a normal,
-deberia ver nivel 1 y 2 y mas nada sin embargo veo el gran finale.
-para mi deberia tener un indicador de progreso: voy por level x; nada de activo, desactivo...
-
-conclusion: no se puede hacer asi, porque el estado del booleano se pelea con debug/nodebug. CRC
-
-Se me ocurre que esa propiedad no exista en ningun lado de nada nunca. Y que la aparecion del gran final se deba solo a esto:
-
-En selectLevel:
-Si estoy en debug, se agrega a la tabla.
-Sino
-Si el ultimo nivel que cargue es max level y tiene estrellas, habilito el gran. Mas nada, nada de properties. LA DESVENTAJA ES QUE
-ESTOY LEYENDO DEBUGSLEVELS EN LOADLEVELSSCREEN CUANDO NO QUERIA.
-
-SE ME OCURRE QUE LA PROPERTY EXISTA PERO QUE NO SE GRAVE NUNCA EN DISCO, SINO QUE SE CALCULE EN EL LOAD Y EN EL LEVEL COMPLETE DE VUELTA.
-
-LA OTRA PUEDE SER CONSIDERAR EL GRAN FINAL COMO UN NIVEL CUALQUIERA MAS.
-
-- resolver el tema de que el arrastrar el panel activa los niveles.!
-- escribir en que he aprendido el tema de las voces y organizar los audios e imagenes y de como hacer los audios estéreo.
-- poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
-poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
+PROXIMAS VERSIONES
+------------------
+- Ver si vale la pena cambiar el algoritmo de los niveles usando un arreglo con tope.
+- Testear: Deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
+- Ver el evento de las tablas de estrellas
+- Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
+Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank
-- Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente), bumps, shurikens remanentes.
+- Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente),
+bumps, shurikens remanentes.
+- Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
+libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
+- Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vida o lo que se me ocurra.
 
-HACER PRIORIDAD 1
------------------
+PRIORIDAD 1
+-----------
+- Hacer una skin con el skin composer para aprender. También se puede crear programando.
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - Poder aabb que los deja quietos:
@@ -49,16 +25,16 @@ Si esta "freeze" llamo al onDestroy().
 Capaz lo que puedo hacer ademas, es usar internamente este metodo para evitar que los bichos sigan
 moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a jugar.
 
-HACER PRIORIDAD 2
------------------
+PRIORIDAD 2
+-----------
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla.
 
-HACER PRIORIDAD 3
------------------
-- hacer un mapa de los niveles (opcional)
-- habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getFinalEnemyLevelOne(), etc.
+PRIORIDAD 3
+-----------
+- Hacer un mapa de los niveles (opcional)
+- Habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getFinalEnemyLevelOne(), etc.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
@@ -72,17 +48,15 @@ Otra que puedo hacer, es que la aparecion de la red screen sea siempre que no ha
 vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.
 Esa interfaz la puedo usar ademas dentro de ActorDef.
-- poner particulas parece facil, capaz lluvia.
-- poner alguna animacion linda de hero cuando mata al enemigo final y gana el nivel.
+- Poner particulas parece facil, capaz lluvia.
+- Poner alguna animacion linda de hero cuando mata al enemigo final y gana el nivel.
 Si hero le gana al boss, puedo poner al final del hero.update(): if boss is dead, then currentstate = dancing.
 Y en el update si el estado es dancing, hacer una animacion graciosa.
-Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga la animacion
-y llamarlo desde el método renderGame() si estoy en pausa..pero no se
+Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga
+la animacion y llamarlo desde el método renderGame() si estoy en pausa..pero no se
 - Ver si puedo reducir el tamano de la musica (sonido no ocupa nada).
 - Ver si en los metodos criticos de update y draw (render) no estoy haciendo muchos new.
 - Los tiempos y cantidad de imagenes en las clases Assetxx no estan en constantes, creo no interesa.
-- Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
-libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Poder de disparo con tipo de movimiento (boomerang):
         Se me ocurre modelarlo solo con un enumerado recibido en el constructor de heroBullet o EnemyBullet
         y luego en el stateShoot de HeroBullet o EnemyBullet. Aunque lo más prolijo que se me ocurre sería
@@ -91,7 +65,6 @@ libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 
 SOLO IDEAS
 ----------
-- Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vida o lo que se me ocurra.
 - Agregar credits con cuenta bancaria para donación, algo asi:
 support this game:
 (icono corazón) Support the developer by paying above the minimum price
@@ -108,7 +81,7 @@ Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen 
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
     - hay que dispararle mucho para matarlo.
-    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.terminate().
+    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.onDestroy().
     - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire.
     - enemigofinal que me sigue
     - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
@@ -143,14 +116,17 @@ el resto del sonido. No lo supe arreglar...
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
-- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2. Probar si eso se arregla con el velocity threshold de world.
+- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
+Probar si eso se arregla con el velocity threshold de world.
 - Me paso que deje ir a un enemigo y me aparecio solo la manito de ok, sin el mensaje de "WATCH OUT! Don't let your enemies flee!" y sin el fondo lightred.
 Lo intenté solucionar, fijarse si vuelve a pasar, más que nada en el nivel 2.
-- En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual. Cuando agarré un colTwo recien ahi desaparecio.
+- En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
+Cuando agarré un colTwo recien ahi desaparecio.
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
 Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
-Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico que me puede matar.
+Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
+que me puede matar.
 
 TENGO
 -----
@@ -263,7 +239,7 @@ LECCIONES APRENDIDAS
     of (0,–10), which means that the velocity will increase by 1 m/s on the y axis. There will be no
     movement on the x axis. Before we enter the integration loop, our object is standing still. Within the
     loop, we first update the velocity, based on the acceleration multiplied by the delta time, and
-    then update the position, based on the velocity multiplied by the delta time. That’s all there is to
+    then update the position, based on the velocity multiplied by the delta time. That's all there is to
     the big, scary word integration.
 
 2)
@@ -271,12 +247,15 @@ LECCIONES APRENDIDAS
     - Agarrar un gif animado y separarlo en frames con https://ezgif.com/split.
     - Abrir cada imagen con Paint.net y ponerle fondo transparente.
     - Abrir cada imagen con ShoeBox, y con la funcionalidad "Extract Sprites" extraer el dibujo quitando asi fondo innecesario.
-    - Renombrar cada imagen como una secuencia: img_01.png, img_02.png, etc.
-    - Usar el TexturePacker para unirlas todas.
+    - Usar Paint.net, canvas size para darle a todas el mismo tamaño.
+    - Renombrar cada imagen como una secuencia: img_01.png, img_02.png, etc. Usar C:\Alvaro\Develop\Android\20171202\RenameFiles
+    - Usar el TexturePacker para agregarlas al atlas.
 
     Personaje a partir de un gran archivo en donde estan las imagenes todas juntas:
     - Abrir la imagen con ShoeBox y usar la funcionalidad "Extract Sprites".
-    - Usar el TexturePacker para unirlas todas.
+    - Usar Paint.net, canvas size para darle a todas el mismo tamaño.
+    - Renombrar cada imagen como una secuencia: img_01.png, img_02.png, etc. Usar C:\Alvaro\Develop\Android\20171202\RenameFiles
+    - Usar el TexturePacker para agregarlas al atlas.
 
 3)
     Manejo de memoria: https://github.com/libgdx/libgdx/wiki/Memory-management
@@ -294,7 +273,7 @@ LECCIONES APRENDIDAS
     SPRITE:
     setPosition(x,y) indica el vertice inferior izquierdo de un rectangulo definido con setBounds.
     setBounds(x, y, width, hegiht) indica un rectangulo cuyo vertice inferior izquierdo esta en x, y.
-    Siempre debo trabajar con coordenadas del mundo (no pixels).
+    Siempre debo trabajar con coordenadas del mundo, es decir, metros (no pixels).
     En otras palabras, el origen de coordenadas esta en su vertice inferior izquierdo.
 
     CAMARA:
@@ -302,8 +281,9 @@ LECCIONES APRENDIDAS
     El origen (0, 0) está en el vértice inferior izquierdo.
 
     BOX2D
-    Los objetos de box2d (b2body) tienen como origen de coordenadas su centro.
+    Los objetos de box2d (b2body) tienen como origen de coordenadas en su centro.
     Es decir su centro es (b2body.getPosition().x, b2body.getPosition().y).
+    Aca también se trabaja con metros.
 
     MUNDO
     Su origen de coordenadas esta en su esquina inferior izquierda.
@@ -315,6 +295,8 @@ LECCIONES APRENDIDAS
 
     TEXTURAS
     Tienen un u y v. No recuerdo exactamente. Es otro caso distinto.
+
+    En resumen, siempre trabajar con metros en todo.
 
 7)
     Para levantar proyecto github:
@@ -385,8 +367,9 @@ LECCIONES APRENDIDAS
     el ancho a veces se convierte en altura y viceversa. De igual manera rota el vértice inferior izquierdo y la verdad resulta muy muy complejo
     determinar el nuevo sistema de coordenadas.
     Lo que hice en esos casos fue definir un nuevo sprite (en una variable), seteando su setBoundaries, que la dibujo finalmente sobre el sprite
-    del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite). Esto lo hice así
-    porque es imposible deducir el ancho y altura del sprite FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
+    del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite) aplicando
+    la rotación y flip del sprite del personaje. Esto lo hice así porque es imposible deducir el ancho y altura del sprite
+    FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
 
 12)
    There are also the following methods that alter the bounding rectangle of a sprite (modifies the sprite's vertices):
@@ -415,13 +398,14 @@ LECCIONES APRENDIDAS
     es mi responsabilidad (es la responsabilidad del assetManager).
 
 17)
-    Within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled by the distance
+    Within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled
+    by the distance
     traveled in time "delta" (it doesn't render them, just moves their position variables).
     Then I call entityManageCollisions(delta), which resolves all of the collisions caused by the update, then I finally call entityDraw(batch, delta),
     which uses delta to get the right frames for sprite animations, and actually draws everything on the screen.
 
 18)
-    No estoy seguro, pero para generar un apk release no firmado:
+    No estoy seguro, pero para generar un apk release no firmado (o firmado con un keystore por defecto de android studio):
     Abrir el archivo android/build.gradle y clickear adentro.
     Se me habilita en el menu build la opcion Select Build Variant...
     Alli elijo Release, luego en el menu Build selecciono Build APK.
@@ -489,7 +473,8 @@ LECCIONES APRENDIDAS
     integrado el TexturePacker, basta con hacerse una cuenta en TinyPng y obtener una clave para usar sus
     servicios. Eligiendo TinyPng en el combo del TexturePacker, reduzco todos los dynamicObjects. Para backgroud.png
     debo usar el curl (para invocar al servicio) porque la imagen es mayor a 5 megas (sino podria usar directo el
-    sitio web).
+    sitio web). Para ello mando la imagen con C:\Alvaro\Develop\Android\20171202\Texturepacker\curl-7.59.0\I386\enviarImagen.bat.
+    Luego de un rato reviso la respuesta en DOS y alli aparece una url la cual pego en cualquier browser y bajo mi imagen liviana.
 
 19)
     A dynamic body is a body which is affected by world forces and react to collisions. And you already met a million of them.
@@ -498,7 +483,8 @@ LECCIONES APRENDIDAS
     with a linear velocity like a dynamic body.
 
 20)
-   Mi criterio es el siguiente: En los eventos invocados por WorldContactListener.beginContact solo seteo estados. No toco velocidades ni nada, ni mucho menos toco el box2d.
+   Mi criterio es el siguiente: En los eventos invocados por WorldContactListener.beginContact solo seteo estados.
+   No toco velocidades ni nada, ni mucho menos toco el box2d. Todos arrancan con el prefio "on" (ej: onUse(), onHit(), onDead()).
    "No b2body can be changed when the simulation is occurring, we must wait for the next update cycle."
    En los update, según el estado es que cambio velocidades, posiciones, box2d, etc. Ese es mi criterio.
    Por eso por ejemplo en EnemyOne aparecen cosas como b2body.setLinearVelocity(velocity) dentro de stateAlive(float dt).

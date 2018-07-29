@@ -132,7 +132,8 @@ MOVIMIENTOS COMPLEJOS:
 
         pero me niego...no lo voy a hacer asi...lo voy a hacer componiendo y listo porque no tengo control.
 
-----------------------------------------------------
+-----------------------------------------------------------------------------------
+
 para reconocer con queryAABB el objeto que clickeo:
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
@@ -152,18 +153,21 @@ para reconocer con queryAABB el objeto que clickeo:
 
         return false;
     }
---------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 Si quisiera deshabilitar el disparo en powerFour, en el apply deberia hacer hero.disbleshooting.
 En el powerDown debería hacer:
 if !screen.challegeBegins (pasar a public) enableshooting.
 Creo
------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 - Analizar si los items no deberían chocar contra edge para no irse nunca de la pantalla, ojo, creo que lo había descartado antes.
 Lo analice. No lo voy a hacer, los items cuando salen de la pantalla (con cierto MARGIN de tolerancia) se destruyen.
 Si los hago rebotar en los bordes tendria que borrar toda esa logica tan linda.
 Ademas si destruyo una power box en el borde superior de la pantalla, el item se crea sobre el upperedge y como choca, siempre
 seria arrastrado hacia arriba y nunca lo veria. O sea, es otro problema extra y en suma no agrega nada.
-------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 PARA PROBAR PANTALLAS
         // basura
         credits.addListener(
@@ -185,7 +189,8 @@ PARA PROBAR PANTALLAS
                     }
                 });
         // finbasura
-------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 HOY EN DIA EL HERO NO TIENE TOLERANCIA ANTE EL APLASTAMIENTO Y NO PUEDE TENERLA.
 CUANDO SE DISPARA EL ENDCONTACT SE CONTROLA QUE EL SENSOR ESTE DEBAJO DEL EDGE SOLO PARA CONTROLAR EL CASO DE QUE
 REBOTO SOBRE EL EDGE CUANDO JUEGO NORMALMENE.
@@ -200,7 +205,7 @@ polygonShape.setAsBox(SENSOR_OFFSET_METERS, SENSOR_OFFSET_METERS, new Vector2(0,
 
 float sensor = b2body.getPosition().y - CIRCLE_SHAPE_RADIUS_METERS + SENSOR_HEIGHT_METERS / 2; // Center of the sensor
 
-------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 Probé poner una pausa al recibir un disparo y no queda lindo en el caso de las balas especiales de los finales.
 Para las balas comunes queda bien.
@@ -226,3 +231,8 @@ Y luego en WorldContactListener
 			((Weapon) fixA.getUserData()).onTarget();
 		}
 		break;
+
+-----------------------------------------------------------------------------------
+
+Para definir hasta donde se hace un for de manera elegante:
+for (int i = 0, n = size; i < n; i++)
