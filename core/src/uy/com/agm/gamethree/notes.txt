@@ -603,6 +603,31 @@ LECCIONES APRENDIDAS
         avisos push al celular, sitios web propios, etc.
     Alquien que se encargue del diseño de niveles y sobre todas las cosas de la jubabilidad
 
+30) Text to speech
+    Para leer la historia inicial utilice:
+    https://www.naturalreaders.com/online/ English Amanda
+    Para la amenaza final utilice:
+    http://www.oddcast.com/home/demos/tts/tts_example.php Daniel (UK). Effect Pitch lower.
+
+    Para bajar los audios de ambos, con f12/Networks abri las urls que dicen Media. A veces si el texto
+    es corto no aparecen, basta con hacer un texto más largo. Al abrir esas urls en otra tab, puedo bajar el audio.
+
+    Para fusionar varios mp3s en uno solo, con audacity los abro todos. Supongamos que tengo track1 y track2, para
+    fusionarlos (track1track2):
+        - abro ambos
+        - selecciono todo el track2 tocando el área donde dice el nombre del archivo (bien a la izquierda)
+        - hago copy
+        - hago paste al final de track1. Para seleccionar el punto final de track1 lo puedo hacer
+          con el cursor del teclado (o sea, clickeo cualquier parte del track y luego muevo hacia la derecha
+          con el teclado)
+
+    Para poner background de fondo a un audio:
+        - abro el primer audio, por ejemplo la voz que habla
+        - hago drag and drop sobre ese audio con la musica background
+        - ahi si doy play voy a ver que ambos se reproducen a la vez.
+        - ajusto el volumen del background (con + -)
+        - luego voy a file y le doy export, allí me avisa que va a fusionar todo en un track stereo.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
