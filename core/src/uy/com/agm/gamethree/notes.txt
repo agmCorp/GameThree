@@ -475,6 +475,7 @@ LECCIONES APRENDIDAS
     debo usar el curl (para invocar al servicio) porque la imagen es mayor a 5 megas (sino podria usar directo el
     sitio web). Para ello mando la imagen con C:\Alvaro\Develop\Android\20171202\Texturepacker\curl-7.59.0\I386\enviarImagen.bat.
     Luego de un rato reviso la respuesta en DOS y alli aparece una url la cual pego en cualquier browser y bajo mi imagen liviana.
+    Ver lecciones aprendidas 24.
 
 19)
     A dynamic body is a body which is affected by world forces and react to collisions. And you already met a million of them.
@@ -495,7 +496,8 @@ LECCIONES APRENDIDAS
    para alinearla con su box2d después de la simulación física.
 
 22) setRotation, angle() y lpmqtrmpc:
-    Si tengo un vector y hago vector.angle() eso me devuelve el ángulo que forma el vector puesto en el punto (0, 0) con respecto al eje x, medido en sentido antihorario. Punto, se acabó.
+    Si tengo un vector y hago vector.angle() eso me devuelve el ángulo que forma el vector puesto en el punto (0, 0) con respecto al eje x,
+    medido en sentido antihorario. Punto, se acabó.
     Este es el sistema de coordenadas:
                     90
                     |
@@ -525,8 +527,10 @@ LECCIONES APRENDIDAS
     anguloAGirarTextura = vel.angle() - 90 (cuadrante I);
     sprite.setRotation(anguloAGirarTextura)
 
-    Libgdx no trabaja con ángulos negativos aunque al parecer es robusto y los giros de ángulos negativos lo hace en sentido horario. No usar ángulos negativos porque es impredecible para mi.
-    No se si alguna vez vector.angle() retorna exactamente cero o exactamente 360. Creo que puede llegar a retornar cero pero no 360. Es decir, no conozco ese valor borde.
+    Libgdx no trabaja con ángulos negativos aunque al parecer es robusto y los giros de ángulos negativos lo hace en sentido horario.
+    No usar ángulos negativos porque es impredecible para mi.
+    No se si alguna vez vector.angle() retorna exactamente cero o exactamente 360. Creo que puede llegar a retornar cero pero no 360.
+    Es decir, no conozco ese valor borde.
 
 23)
     Given a range between Max and Min, the following is the general formula for generating random numbers between a given minimum and maximum number:
@@ -537,7 +541,7 @@ LECCIONES APRENDIDAS
     El tamaño grande del apk se debe principalmente a las imágenes y al audio.
     Para comprimir las imágenes usar Texture Packer seleccionando "Compression TinyPNG".
     Para usarlo debo tener una key de developer (7yaS9nq0e-PmOCid1k6me6gk_bjTamPq). La conseguí yendo
-    al sitio https://tinypng.com/developers y registrando mi direccion de correo. Te envian un mail
+    al sitio https://tinypng.com/developers y registrando mi direccion de correo alvaro.gabriel.morales@gmail.com. Te envian un mail
     en donde podes ver cuantas imágenes llevas comprimidas (maximo 500 por mes): https://tinypng.com/dashboard/developers
     Para reducir background.png no lo puedo hacer por la web de tinypng.com porque es muy pesada.
     Utilizo curl para poder usar la api como servicio:
@@ -565,7 +569,11 @@ LECCIONES APRENDIDAS
 
 26)
     A veces los ogg no se escuchan, para ello debo modificar su tasa de muestreo (sampling rate) a 44100hz.
-    Para subir el volumen a un ogg, con Audacity modificar la barrita a la izquierda que dice - +.
+    Para subir el volumen a un ogg, con Audacity modificar la barrita a la izquierda que dice - + (no tocar la que dice L R).
+    Para hacer estereo un ogg en audacity:
+        Abriendo un audio por vez, elegir Edit/Duplicate.
+        Luego ir al pequeño menusito que aparece al lado del nombre del archivo, que se muestra al apretar la
+        flechita (bien a la izquierda) y elegir Make Stereo Track.
 
 27)
     AbstractScreen implementa Screen y extiende Stage (Scene2d).
@@ -584,6 +592,8 @@ LECCIONES APRENDIDAS
     Para agregar publicidad:
     http://www.norakomi.com/tutorial_admob_part2_interstitial_ads.php
     https://www.youtube.com/watch?v=cwAN4LMXo58&feature=youtu.be
+29)
+
 
 IOS
 ---
