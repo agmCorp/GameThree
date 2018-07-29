@@ -1,6 +1,6 @@
 # Wipe them out!
 Libgdx and Box2D Android Game
-<span style="width:200px">hola</span>
+<p><span style="width:200px">hola</span>
 ![wipethemout](https://user-images.githubusercontent.com/9197974/43360272-5001941e-9289-11e8-962b-3a4e67cd57d7.png)
         ![device-2018-07-28-013622](https://user-images.githubusercontent.com/9197974/43360603-c2b233c4-928e-11e8-8350-ee0dfc08bb7d.png)  ![device-2018-07-28-013958](https://user-images.githubusercontent.com/9197974/43360604-c2d65c7c-928e-11e8-8593-0de873ba45e8.png)
         ![device-2018-07-28-020009](https://user-images.githubusercontent.com/9197974/43360605-c2faf28a-928e-11e8-9a6b-5de2b46887ad.png)  ![device-2018-07-28-020059](https://user-images.githubusercontent.com/9197974/43360606-c32160aa-928e-11e8-9ff3-afd223783fb1.png)
