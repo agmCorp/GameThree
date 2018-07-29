@@ -1,5 +1,6 @@
 PROXIMAS VERSIONES
 ------------------
+- Conviene hacer un video mostrando como jugar.
 - Ver si vale la pena cambiar el algoritmo de los niveles usando un arreglo con tope.
 - Testear: Deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
 - Ver el evento de las tablas de estrellas
@@ -592,8 +593,15 @@ LECCIONES APRENDIDAS
     Para agregar publicidad:
     http://www.norakomi.com/tutorial_admob_part2_interstitial_ads.php
     https://www.youtube.com/watch?v=cwAN4LMXo58&feature=youtu.be
-29)
 
+29) Para hacer un juego necesito:
+    Programadores
+    Diseñador gráfico: estetica de pantallas y personajes
+    Animador para personajes
+    Audio: Musica de fondo, efectos
+    Campañas y recursos externos: para adMob, openFeint, redes sociales, playstore,
+        avisos push al celular, sitios web propios, etc.
+    Alquien que se encargue del diseño de niveles y sobre todas las cosas de la jubabilidad
 
 IOS
 ---
@@ -601,3 +609,4 @@ xcode para programar en objectiveC o en swift.
 xcode funciona en mac, se usa un emulador para probar iphone o sino enchufar un iphone.
 La licencia al parecer ahora es gratis.
 Tengo links en bookmarks libgdx en donde habla de las opciones libgdx ios.
+Bajar una maquina virtual, no comprar mac.
