@@ -5,7 +5,7 @@ Libgdx and Box2D Android Game
     <tbody>
         <tr>
             <td colspan="2">
-            <input type="image" scr="https://user-images.githubusercontent.com/9197974/43360272-5001941e-9289-11e8-962b-3a4e67cd57d7.png"/>
+                dd<input type="image" scr="https://user-images.githubusercontent.com/9197974/43360272-5001941e-9289-11e8-962b-3a4e67cd57d7.png"/>
             </td>
         </tr>
         <tr>
