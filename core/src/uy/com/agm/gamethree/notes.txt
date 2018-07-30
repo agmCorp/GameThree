@@ -16,6 +16,7 @@ libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 PRIORIDAD 1
 -----------
 - Hacer una skin con el skin composer para aprender. También se puede crear programando.
+utilice orange: https://github.com/czyzby/gdx-skins/tree/master/orange
 - Que la help screen red aparezca la primera vez que se va un bicho independiente del nivel (no puedo, necesitaria
 un singleton de aplicacion). En ese singleton ademas puede estar el gamecontrollerhelp.
 - Poder aabb que los deja quietos:
