@@ -24,7 +24,7 @@ android {
         applicationId "uy.com.agm.gamethree"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 1
+        versionCode 2
         versionName "1.0-build-" + getDate()
     }
     buildTypes {
