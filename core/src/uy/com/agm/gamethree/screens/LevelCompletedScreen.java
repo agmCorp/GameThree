@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
 
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
@@ -37,7 +37,6 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int nextLevel;
     private int currentLives;
     private int currentScore;
-    private int currentEndurance;
     private int currentPenalties;
     private int finalScore;
     private int currentStars;
@@ -45,17 +44,15 @@ public class LevelCompletedScreen extends AbstractScreen {
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentEndurance) {
+    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentPenalties) {
         super();
         this.currentLevel = currentLevel;
         this.nextLevel = currentLevel + 1;
         this.currentLives = currentLives;
         this.currentScore = currentScore;
-        this.currentEndurance = currentEndurance;
-        int maxEndurance = LevelFactory.getLevelEndurance(this.currentLevel);
-        this.currentPenalties = this.currentEndurance >= maxEndurance ? 0 : maxEndurance - this.currentEndurance;
-        this.finalScore = Math.abs(this.currentScore - this.currentPenalties * PENALTY_COST);
-        this.currentStars = getStarsValue(this.currentEndurance, maxEndurance);
+        this.currentPenalties = currentPenalties;
+        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
+        this.currentStars = getStarsValue();
 
         GameSettings prefs = GameSettings.getInstance();
         prefs.setStars(this.currentLevel, this.currentStars);
@@ -224,18 +221,20 @@ public class LevelCompletedScreen extends AbstractScreen {
         return table;
     }
 
-    private int getStarsValue(int currentEndurance, int maxEndurance) {
+    private int getStarsValue() {
+        int averageLevelPenalty = ( Hero.LIVES_START * LevelFactory.getLevelEndurance(this.currentLevel) + Hero.LIVES_START ) / 2;
         int stars = 0;
 
-        if (currentEndurance >= maxEndurance) {
+        if (this.currentPenalties == 0) {
             stars = 3;
         } else {
-            if (currentEndurance <= MathUtils.ceil((float)(maxEndurance - 1) / 2)) {
-                stars = 1;
-            } else {
+            if (this.currentPenalties < averageLevelPenalty) {
                 stars = 2;
+            } else {
+                stars = 1;
             }
         }
+
         return stars;
     }
 

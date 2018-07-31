@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
@@ -79,6 +80,7 @@ public class Hero extends Sprite {
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
+    private int penalties;
 
     // Silver bullets
     private int silverBullets;
@@ -140,6 +142,7 @@ public class Hero extends Sprite {
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = LIVES_START;
+        penalties = 0;
 
         // SilverBullets variables initialization
         silverBullets = 0;
@@ -404,6 +407,11 @@ public class Hero extends Sprite {
             // We set the previous filter in every fixture
             setFilterData(filter);
 
+            // If game over, show a stage failed image
+            if (lives - 1 <= 0 ) {
+                screen.getInfoScreen().showStageFailedAnimation();
+            }
+
             initDyingUp = false;
         }
 
@@ -457,9 +465,11 @@ public class Hero extends Sprite {
 
         // Beyond bottom edge
         if (camBottomEdge > heroUpperEdge) {
+            Hud hud = screen.getHud();
             b2body.setActive(false);
             lives--;
-            screen.getHud().decreaseLives(1);
+            hud.decreaseLives(1);
+            hud.emptyEndurance();
             playAgainTime = 0;
             currentHeroState = Hero.HeroState.DEAD;
         }
@@ -506,6 +516,9 @@ public class Hero extends Sprite {
         // Set Hero active with his initial state
         b2body.setActive(true);
         currentHeroState = HeroState.STANDING;
+
+        // Refill endurance
+        refillEndurance();
     }
 
     public boolean isWarmingUp() {
@@ -524,8 +537,7 @@ public class Hero extends Sprite {
     private void checkEndurance() {
         if (screen.getHud().getEndurance() <= 0) {
             if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
-                screen.getInfoScreen().showStageFailedAnimation();
-                forceGameOver();
+                onDead();
             }
         }
     }
@@ -699,9 +711,14 @@ public class Hero extends Sprite {
 
             // Enemy hit logic
             ouch();
+
+            // Change color
             setColor(HIT_COLOR);
             hitTime = 0;
+
+            // Decrease endurance and increase penalties count
             screen.getHud().decreaseEndurance(1);
+            penalties++;
         }
     }
 
@@ -728,6 +745,9 @@ public class Hero extends Sprite {
         // Start dying up
         heroStateTime = 0;
         currentHeroState = HeroState.DYING_UP;
+
+        // Increase penalties count
+        penalties++;
     }
 
     public void draw(SpriteBatch batch) {
@@ -843,8 +863,16 @@ public class Hero extends Sprite {
         screen.getHud().increaseLives(1);
     }
 
-    public void addEndurance() {
-        screen.getHud().increaseEndurance(1);
+    public void addPenalty() {
+        penalties++;
+    }
+
+    public int getPenalties() {
+        return penalties;
+    }
+
+    public void refillEndurance() {
+        screen.getHud().refillEndurance();
     }
 
     public void addSilverBullet() {

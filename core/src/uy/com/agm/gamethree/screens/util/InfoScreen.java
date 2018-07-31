@@ -453,9 +453,9 @@ public class InfoScreen extends AbstractScreen {
         }
     }
 
-    public void showModalFailWarning() {
+    public void showModalLoseLifeWarning() {
         if (!isModalVisible()) {
-            showLightRedFlash(i18NGameThreeBundle.format("infoScreen.failWarning"));
+            showLightRedFlash(i18NGameThreeBundle.format("infoScreen.loseLifeWarning"));
         }
     }
 

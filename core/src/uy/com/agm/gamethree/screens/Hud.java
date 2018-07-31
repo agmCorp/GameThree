@@ -574,7 +574,7 @@ public class Hud extends AbstractScreen {
                 setHeartImage(percentage);
                 enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
                 if (endurance == 1) {
-                    screen.getInfoScreen().showModalFailWarning();
+                    screen.getInfoScreen().showModalLoseLifeWarning();
                 }
             }
         }
@@ -585,6 +585,22 @@ public class Hud extends AbstractScreen {
             endurance += quantity;
             int percentage = MathUtils.round((float) (endurance * 100 / initialEndurance));
             setHeartImage(percentage);
+            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
+        }
+    }
+
+    public void refillEndurance() {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance = initialEndurance;
+            setHeartImage(100);
+            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
+        }
+    }
+
+    public void emptyEndurance() {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance = 0;
+            setHeartImage(0);
             enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
         }
     }

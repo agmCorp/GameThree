@@ -1,5 +1,28 @@
 PROXIMAS VERSIONES
 ------------------
+
+- Llantada sugernecias: Score top molesta
+"cuando te tocan que muestre arriba". Cuando te baja un porcentaje que aparezca arriba del macaco para que se vea lo que te va quedando.
+Como que no ves mucho la vida que vas teniendo.
+El corazon item te recarga todo.
+Me dijo algo de pintar el corazon para tener 8 posiciones en el corazon.
+
+- La cosa es asi: cada nivel tiene sus corazones, cuanto mas alto el nivel menos corazones.
+Cuando los corazones quedan en cero, te mato (te saco una vida) y te los reseteo al revivir.
+Si morís por disparo, te LOS RESETEO TAMBIEN.
+Cuando moris (tu ultima vida) te muestro stage failed.
+El colThree corazon te hace refill, su prob es del 60%
+
+formas de morir:
+- por disparo
+- aplastado
+- por agotamiento del corazon
+- por tocar enemyThree
+
+penalties:
+- al morir es 1
+- al ser tocado es otra
+- ES MUY COMPLICADO ESTO, EL QUE TIENE QUE CONTABILIZAR LA ENDURANCE ES EL HERO NO EL HUD, ES COMO LAS VIDAS.
 - Conviene hacer un video mostrando como jugar.
 - Ver si vale la pena cambiar el algoritmo de los niveles usando un arreglo con tope.
 - Testear: Deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.

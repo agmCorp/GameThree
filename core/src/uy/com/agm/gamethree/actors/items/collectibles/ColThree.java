@@ -28,7 +28,7 @@ public class ColThree extends Item {
     private static final float VELOCITY_Y = -2.0f;
     private static final float WAITING_SECONDS = 5.0f;
     private static final float FADING_SECONDS = 3.0f;
-    private static final float ENDURANCE_PROBABILITY = 0.4f;
+    private static final float ENDURANCE_PROBABILITY = 0.6f;
     private static final int SCORE = 200;
 
     private boolean isEndurance;
@@ -145,7 +145,7 @@ public class ColThree extends Item {
 
     private void applyColThree() {
         if (isEndurance) {
-            screen.getCreator().getHero().addEndurance();
+            screen.getCreator().getHero().refillEndurance();
         } else {
             screen.getCreator().getHero().addLives();
         }

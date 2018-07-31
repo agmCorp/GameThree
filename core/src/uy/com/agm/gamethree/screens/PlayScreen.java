@@ -681,7 +681,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), hud.getEndurance());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), player.getPenalties());
         }
     }
 
@@ -755,6 +755,7 @@ public class PlayScreen extends AbstractScreen {
                 infoScreen.showRedFlash();
             }
             hud.decreaseEndurance(1);
+            player.addPenalty();
         }
     }
 
