@@ -1,6 +1,7 @@
 PROXIMAS VERSIONES
 ------------------
-
+- una cosa que se podria hacer es ponerle una pequeña barrita de energia a los enemigos que mueren
+por varios disparos.
 - Llantada sugernecias: Score top molesta
 "cuando te tocan que muestre arriba". Cuando te baja un porcentaje que aparezca arriba del macaco para que se vea lo que te va quedando.
 Como que no ves mucho la vida que vas teniendo.
