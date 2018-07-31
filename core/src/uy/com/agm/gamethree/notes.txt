@@ -1,12 +1,9 @@
 PROXIMAS VERSIONES
 ------------------
-- una cosa que se podria hacer es ponerle una pequeña barrita de energia a los enemigos que mueren
-por varios disparos.
-- Llantada sugernecias: Score top molesta
-"cuando te tocan que muestre arriba". Cuando te baja un porcentaje que aparezca arriba del macaco para que se vea lo que te va quedando.
-Como que no ves mucho la vida que vas teniendo.
-El corazon item te recarga todo.
-Me dijo algo de pintar el corazon para tener 8 posiciones en el corazon.
+- Leer la conversación con Llantada, pero no hay nada util.
+- Capaz conviene que la cantidad de corazones por vida se mantenga constante por nivel. Es menos raro y más razonable.
+Las vidas serían las limitantes.
+- implementé: refill de corazones, penalties.
 
 - La cosa es asi: cada nivel tiene sus corazones, cuanto mas alto el nivel menos corazones.
 Cuando los corazones quedan en cero, te mato (te saco una vida) y te los reseteo al revivir.
@@ -15,24 +12,25 @@ Cuando moris (tu ultima vida) te muestro stage failed.
 El colThree corazon te hace refill, su prob es del 60%
 
 formas de morir:
-- por disparo
-- aplastado
-- por agotamiento del corazon
-- por tocar enemyThree
+* por disparo
+* aplastado
+* por agotamiento del corazon
+* por tocar enemyThree
 
 penalties:
-- al morir es 1
-- al ser tocado es otra
-- ES MUY COMPLICADO ESTO, EL QUE TIENE QUE CONTABILIZAR LA ENDURANCE ES EL HERO NO EL HUD, ES COMO LAS VIDAS.
+* al morir es 1
+* al ser tocado es otra
+* se te va un bicho es 1
+
+ES MUY COMPLICADO ESTO, EL QUE TIENE QUE CONTABILIZAR LA ENDURANCE ES EL HERO NO EL HUD, ES COMO LAS VIDAS.
+Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente),
+bumps, shurikens remanentes.
+
 - Conviene hacer un video mostrando como jugar.
 - Ver si vale la pena cambiar el algoritmo de los niveles usando un arreglo con tope.
-- Testear: Deberia dejar que la energía suba infinitamente cuando agarro corazones y no topearla. Usar desigualdades.
-- Ver el evento de las tablas de estrellas
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank
-- Para calcular el final Score ver una función mejor capaz, en funcion del tiempo gastado (no el remanente), vidas perdidas (no remanente),
-bumps, shurikens remanentes.
 - Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vida o lo que se me ocurra.
@@ -56,6 +54,9 @@ PRIORIDAD 2
 - Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
 pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
 la pantalla.
+- una cosa que se podria hacer es ponerle una pequeña barrita de energia a los enemigos que mueren
+por varios disparos.
+
 
 PRIORIDAD 3
 -----------
