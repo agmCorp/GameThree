@@ -2,8 +2,9 @@ PROXIMAS VERSIONES
 ------------------
 - Leer la conversación con Llantada, pero no hay nada util.
 - Capaz conviene que la cantidad de corazones por vida se mantenga constante por nivel. Es menos raro y más razonable.
-Las vidas serían las limitantes.
+Las vidas serían las limitantes. Creo que 10 o 15 está bien.
 - implementé: refill de corazones, penalties.
+- Constantino: Hacer el juego más fácil menos bichos?. Poner corazines fijos. Select level mas claro. No deben haber estrellas en los niveles no pasados aún.
 
 - La cosa es asi: cada nivel tiene sus corazones, cuanto mas alto el nivel menos corazones.
 Cuando los corazones quedan en cero, te mato (te saco una vida) y te los reseteo al revivir.
