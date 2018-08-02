@@ -6,9 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
 
@@ -31,7 +33,8 @@ public class SelectLevelScreen extends AbstractScreen {
 
     // Constants
     public static final float SCROLL_PANE_MAX_HEIGHT = 400.0f;
-    public static final float NAME_LEVEL_WIDTH = 200.0f;
+    public static final float STAR_WIDTH = 20.0f;
+    public static final float STAR_HEIGHT = 80.0f;
 
     public SelectLevelScreen() {
         super();
@@ -121,7 +124,7 @@ public class SelectLevelScreen extends AbstractScreen {
             level = levelState.getLevel();
             levelLabel = new Label(LevelFactory.getLevelName(level), labelStyleNormal);
             levelTable = getStarsTable(levelLabel, star, emptyStar, levelState.getFinalStars());
-            table.add(levelTable).padTop(AbstractScreen.PAD);
+            table.add(levelTable);
 
             // Events
             levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
@@ -171,17 +174,40 @@ public class SelectLevelScreen extends AbstractScreen {
         addActor(table);
     }
 
+//    private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
+//        Table table = new Table();
+//        table.setDebug(DebugConstants.DEBUG_LINES);
+//        table.add(levelLabel).width(NAME_LEVEL_WIDTH);
+//        Image image;
+//        for (int i = 1; i <= 3; i++) {
+//            image = new Image();
+//            image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
+//            image.setScaling(Scaling.fit);
+//            table.add(image).width(NAME_LEVEL_WIDTH / 3);
+//        }
+//        return table;
+//    }
+
     private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
-        Table table = new Table();
-        table.setDebug(DebugConstants.DEBUG_LINES);
-        table.add(levelLabel).width(NAME_LEVEL_WIDTH);
+        Stack stack = new Stack();
+        Table starsTable = new Table();
         Image image;
-        for (int i = 1; i <= 3; i++) {
-            image = new Image();
-            image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
-            image.setScaling(Scaling.fit);
-            table.add(image).width(NAME_LEVEL_WIDTH / 3);
+        if (stars > 0) {
+            for (int i = 1; i <= 3; i++) {
+                image = new Image();
+                image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
+                image.setAlign(Align.bottom);
+                image.setScaling(Scaling.fit);
+                starsTable.add(image).size(STAR_WIDTH, STAR_HEIGHT);
+            }
+            stack.add(starsTable);
         }
+        stack.add(levelLabel);
+
+        Table table = new Table();
+        starsTable.setDebug(DebugConstants.DEBUG_LINES);
+        table.add(stack).height(STAR_HEIGHT);
+
         return table;
     }
 
