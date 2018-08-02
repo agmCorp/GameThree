@@ -1,5 +1,6 @@
 PROXIMAS VERSIONES
 ------------------
+- reseteo las vidas o no? pasa entre niveles solo el score lo cual es una cagada tambien.
 - Leer la conversación con Llantada, pero no hay nada util.
 - Capaz conviene que la cantidad de corazones por vida se mantenga constante por nivel. Es menos raro y más razonable.
 Las vidas serían las limitantes. Creo que 10 o 15 está bien.
