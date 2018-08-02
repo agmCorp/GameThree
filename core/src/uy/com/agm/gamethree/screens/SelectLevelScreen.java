@@ -32,9 +32,10 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
     // Constants
-    public static final float SCROLL_PANE_MAX_HEIGHT = 400.0f;
-    public static final float STAR_WIDTH = 20.0f;
-    public static final float STAR_HEIGHT = 80.0f;
+    public static final float SCROLL_PANE_MAX_HEIGHT = 430.0f;
+    public static final float STAR_WIDTH = 25.0f;
+    public static final float STAR_HEIGHT = 85.0f;
+    public static final float STARS_TABLE_WIDTH = 450.0f;
 
     public SelectLevelScreen() {
         super();
@@ -174,23 +175,11 @@ public class SelectLevelScreen extends AbstractScreen {
         addActor(table);
     }
 
-//    private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
-//        Table table = new Table();
-//        table.setDebug(DebugConstants.DEBUG_LINES);
-//        table.add(levelLabel).width(NAME_LEVEL_WIDTH);
-//        Image image;
-//        for (int i = 1; i <= 3; i++) {
-//            image = new Image();
-//            image.setDrawable(new TextureRegionDrawable(i <= stars ? star : emptyStar));
-//            image.setScaling(Scaling.fit);
-//            table.add(image).width(NAME_LEVEL_WIDTH / 3);
-//        }
-//        return table;
-//    }
-
     private Table getStarsTable(Label levelLabel, TextureRegion star, TextureRegion emptyStar, int stars) {
         Stack stack = new Stack();
         Table starsTable = new Table();
+        starsTable.center();
+        levelLabel.setAlignment(Align.center);
         Image image;
         if (stars > 0) {
             for (int i = 1; i <= 3; i++) {
@@ -206,7 +195,7 @@ public class SelectLevelScreen extends AbstractScreen {
 
         Table table = new Table();
         starsTable.setDebug(DebugConstants.DEBUG_LINES);
-        table.add(stack).height(STAR_HEIGHT);
+        table.add(stack).size(STARS_TABLE_WIDTH, STAR_HEIGHT);
 
         return table;
     }
