@@ -32,10 +32,11 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
     // Constants
-    public static final float SCROLL_PANE_MAX_HEIGHT = 430.0f;
-    public static final float STAR_WIDTH = 25.0f;
-    public static final float STAR_HEIGHT = 85.0f;
-    public static final float STARS_TABLE_WIDTH = 450.0f;
+    public static final float SCROLL_PANE_MAX_HEIGHT = 650.0f;
+    public static final float CONTAINER_WIDTH = 400.0f;
+    public static final float STAR_WIDTH = 30.0f;
+    public static final float STAR_HEIGHT = 100.0f;
+    public static final float STARS_TABLE_WIDTH = 300.0f;
 
     public SelectLevelScreen() {
         super();
@@ -90,7 +91,7 @@ public class SelectLevelScreen extends AbstractScreen {
         // Add values
         container.add(selectLevelLabel);
         container.row();
-        container.add(scrollPane).top().maxHeight(SCROLL_PANE_MAX_HEIGHT);
+        container.add(scrollPane).top().maxHeight(SCROLL_PANE_MAX_HEIGHT).width(CONTAINER_WIDTH);
 
         // Adds table to stage
         addActor(container);
