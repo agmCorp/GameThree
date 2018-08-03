@@ -1,5 +1,7 @@
 PROXIMAS VERSIONES
 ------------------
+- Yo contabilizo los records cuando pasas de nivel. Voy a ver de contabilizarlo siempre. Gracias!
+Poner botón de pausa y de salir? O capaz solo pausa y menú para música
 - reseteo las vidas o no? pasa entre niveles solo el score lo cual es una cagada tambien.
 - Leer la conversación con Llantada, pero no hay nada util.
 - Capaz conviene que la cantidad de corazones por vida se mantenga constante por nivel. Es menos raro y más razonable.
