@@ -261,3 +261,22 @@ Throughout this dangerous adventure, you will be able to pick up different items
 Let strength and courage guide you both to succeed.
 
 Good luck brave warriors!!
+
+-----------------------------------------------------------------------------------
+
+- La cosa es asi: cada nivel tiene sus corazones, cuanto mas alto el nivel menos corazones.
+Cuando los corazones quedan en cero, te mato (te saco una vida) y te los reseteo al revivir.
+Si morís por disparo, te LOS RESETEO TAMBIEN.
+Cuando moris (tu ultima vida) te muestro stage failed.
+El colThree corazon te hace refill, su prob es del 60%
+
+formas de morir:
+* por disparo
+* aplastado
+* por agotamiento del corazon
+* por tocar enemyThree
+
+penalties:
+* al morir es 1
+* al ser tocado es otra
+* se te va un bicho es 1
