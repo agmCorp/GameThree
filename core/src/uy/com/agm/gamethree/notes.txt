@@ -3,7 +3,7 @@ PROXIMAS VERSIONES
 - Contabilizar siempre los records, al alcanzarlo tirar en infoscreen new highscore con copita.
 - Definir el corazon fijo en 15, tener 15 imagenes de corazon.
 - revisar las penalties, puedo tener 3 x 15 penalties por vidas en total, mas las escapadas de bichos. Ver las estrellas.
-- rehacer los select stage. Usar arreglos con tope.
+- rehacer los select stage. Usar arreglos con tope. Usar una manito para senalar donde tocar.
 - implementé: refill de corazones, penalties.
 - hacer videos cuando termine los corazones.
 - El que tiene que contabilizar la endurance es el hero no el hud. El hero tiene vidas, endurance, penalties.
