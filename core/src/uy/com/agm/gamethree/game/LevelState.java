@@ -8,25 +8,13 @@ public class LevelState {
     private static final String TAG = LevelState.class.getName();
 
     private int level;
-    private int initialLives;
-    private int initialScore;
+    private int finalScore;
     private int finalStars;
-    private boolean active;
 
-    public LevelState() {
-        this.level = 0;
-        this.initialLives = 0;
-        this.initialScore = 0;
-        this.finalStars = 0;
-        this.active = false;
-    }
-
-    public LevelState(int level, int initialLives, int initialScore, int finalStars, boolean active) {
+    public LevelState(int level, int finalScore, int finalStars) {
         this.level = level;
-        this.initialLives = initialLives;
-        this.initialScore = initialScore;
+        this.finalScore = finalScore;
         this.finalStars = finalStars;
-        this.active = active;
     }
 
     public int getLevel() {
@@ -37,20 +25,12 @@ public class LevelState {
         this.level = level;
     }
 
-    public int getInitialLives() {
-        return initialLives;
+    public int getFinalScore() {
+        return finalScore;
     }
 
-    public void setInitialLives(int initialLives) {
-        this.initialLives = initialLives;
-    }
-
-    public int getInitialScore() {
-        return initialScore;
-    }
-
-    public void setInitialScore(int initialScore) {
-        this.initialScore = initialScore;
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
     }
 
     public int getFinalStars() {
@@ -59,13 +39,5 @@ public class LevelState {
 
     public void setFinalStars(int finalStars) {
         this.finalStars = finalStars;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }

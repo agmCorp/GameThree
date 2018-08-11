@@ -16,7 +16,7 @@ public class AudioManager {
     private static final String TAG = AudioManager.class.getName();
 
     // Keeps a sound filename and the last playing time in nanoseconds.
-    private ArrayMap<String, Long> trackSounds;
+    private ArrayMap<String, Long> trackSounds;  // Ordered map
 
     private static  AudioManager instance;
     private Sound playingSound;
@@ -72,7 +72,7 @@ public class AudioManager {
 
     public void playSound(Sound sound, float volume, float pitch, float pan) {
         playingSound = sound;
-        trackSounds.put(Assets.getInstance().getAssetFileName(playingSound), TimeUtils.nanoTime());
+        trackSounds.put(Assets.getInstance().getAssetFileName(playingSound), TimeUtils.nanoTime()); // If the key exists, it overwrites its value.
         if (GameSettings.getInstance().isSound()) {
             sound.play(GameSettings.getInstance().getVolSound() * volume, pitch, pan);
         }

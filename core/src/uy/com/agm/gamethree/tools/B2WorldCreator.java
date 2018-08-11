@@ -111,7 +111,7 @@ public class B2WorldCreator {
     private Array<Weapon> weapons;
 
     private LinkedBlockingQueue<ActorDef> actorsToCreate;
-    private ArrayMap<String, String> arrayMapDebug;
+    private ArrayMap<String, String> arrayMapDebug;  // Ordered map
 
     public B2WorldCreator(PlayScreen screen) {
         MapLayer layer;
@@ -452,7 +452,7 @@ public class B2WorldCreator {
                 value = arrayMapDebug.get(key);
                 data = bridge.getTiledMapId() + " (" + bridge.getCurrentState() + ")";
                 value = value == null ? data : value + ", " + data;
-                arrayMapDebug.put(key, value);
+                arrayMapDebug.put(key, value); // If the key exists, it overwrites its value.
             }
 
             for (Enemy enemy : getEnemies()) {
@@ -460,7 +460,7 @@ public class B2WorldCreator {
                 value = arrayMapDebug.get(key);
                 data = enemy.getTiledMapId() + " (" + enemy.getNameCurrentState() + ")";
                 value = value == null ? data : value + ", " + data;
-                arrayMapDebug.put(key, value);
+                arrayMapDebug.put(key, value); // If the key exists, it overwrites its value.
             }
 
             for (PowerBox powerBox : getPowerBoxes()) {
@@ -468,7 +468,7 @@ public class B2WorldCreator {
                 value = arrayMapDebug.get(key);
                 data = powerBox.getTiledMapId() + " (" + powerBox.getCurrentState() + ")";
                 value = value == null ? data : value + ", " + data;
-                arrayMapDebug.put(key, value);
+                arrayMapDebug.put(key, value); // If the key exists, it overwrites its value.
             }
 
             for (Item item : getItems()) {
@@ -476,7 +476,7 @@ public class B2WorldCreator {
                 value = arrayMapDebug.get(key);
                 data = item.getCurrentState();
                 value = value == null ? data : value + ", " + data;
-                arrayMapDebug.put(key, value);
+                arrayMapDebug.put(key, value); // If the key exists, it overwrites its value.
             }
 
             for (Weapon weapon : getWeapons()) {
@@ -484,7 +484,7 @@ public class B2WorldCreator {
                 value = arrayMapDebug.get(key);
                 data = weapon.getCurrentState();
                 value = value == null ? data : value + ", " + data;
-                arrayMapDebug.put(key, value);
+                arrayMapDebug.put(key, value); // If the key exists, it overwrites its value.
             }
 
             Gdx.app.debug(TAG, "***** World.bodyCount: " + screen.getWorld().getBodyCount());
