@@ -10,12 +10,16 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
 
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -31,70 +35,45 @@ public class LevelCompletedScreen extends AbstractScreen {
 
     private int currentLevel;
     private int nextLevel;
-    private int currentLives;
     private int currentScore;
     private int currentPenalties;
     private int finalScore;
-    private int currentStars;
-    private TextureRegion trophy;
+    private int finalStars;
+    private int gameScore;
+    private TextureRegion highScoreImage;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentPenalties) {
-//        super();
-//        this.currentLevel = currentLevel;
-//        this.nextLevel = currentLevel + 1;
-//        this.currentLives = currentLives;
-//        this.currentScore = currentScore;
-//        this.currentPenalties = currentPenalties;
-//        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
-//        this.currentStars = getStarsValue();
-//
-//        GameSettings prefs = GameSettings.getInstance();
-//        prefs.setStars(this.currentLevel, this.currentStars);
-//
-//        if (prefs.isNewGoldHighScore(this.finalScore)) {
-//            this.trophy = Assets.getInstance().getScene2d().getGoldTrophy();
-//            prefs.setGoldHighScore(this.finalScore);
-//        } else if (prefs.isNewSilverHighScore(this.finalScore)) {
-//            this.trophy = Assets.getInstance().getScene2d().getSilverTrophy();
-//            prefs.setSilverHighScore(this.finalScore);
-//        } else if (prefs.isNewBronzeHighScore(this.finalScore)) {
-//            this.trophy = Assets.getInstance().getScene2d().getBronzeTrophy();
-//            prefs.setBronzeHighScore(this.finalScore);
-//        } else {
-//            this.trophy = null;
-//        }
-//        this.showNewHighScoreLabel = this.trophy != null;
-//        this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
-//        if (this.showNextLevelLabel) {
-//            prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
-//
-//            // Resets levels from nextLevel + 1 to MAX_LEVEL
-//            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-//                prefs.resetLevel(i);
-//            }
-//        }
-//
-//        // Saves preferences
-//        // We can't delete keys, only change values
-//        prefs.save();
-//
-//        // Removes keys from memory
-//        if (!DebugConstants.DEBUG_LEVELS) {
-//            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-//                prefs.removeLevel(i);
-//            }
-//        }
-//
-//        // Audio FX
-//        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
+    public LevelCompletedScreen(Integer currentLevel, Integer currentScore, Integer currentPenalties) {
+        super();
+        GameSettings prefs = GameSettings.getInstance();
+
+        this.currentLevel = currentLevel;
+        this.nextLevel = currentLevel + 1;
+        this.currentScore = currentScore;
+        this.currentPenalties = currentPenalties;
+        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
+        this.finalStars = getFinalStars(this.currentPenalties);
+        prefs.setLevelStateInfo(this.currentLevel, this.finalScore, this.finalStars);
+        this.gameScore = getGameScore();
+        this.highScoreImage = Assets.getInstance().getScene2d().getRankingImage(prefs.updateRanking(this.gameScore));
+        this.showNewHighScoreLabel = this.highScoreImage != null;
+        this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
+        if (this.showNextLevelLabel) {
+            prefs.addNextLevel(this.nextLevel);
+        }
+
+        // Saves preferences
+        prefs.save();
+
+        // Audio FX
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
     }
 
     @Override
     public void buildStage() {
-//        defineMainTable();
-//        defineNavigationTable();
+        defineMainTable();
+        defineNavigationTable();
     }
 
     private void defineMainTable() {
@@ -133,7 +112,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Define our labels based on labelStyle
         Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
-        TypingLabelWorkaround finalScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.finalScore", finalScore), labelStyleNormal);
+        TypingLabelWorkaround gameScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.gameScore", gameScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabelWorkaround nextLevelLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
         TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.grandFinale"), labelStyleNormal);
@@ -145,14 +124,14 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.row();
         table.add(penaltiesLabel).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(finalScoreLabel).padTop(AbstractScreen.PAD);
+        table.add(gameScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(getStarsTable(assetScene2d.getStar(), assetScene2d.getEmptyStar(), currentStars)).padTop(AbstractScreen.PAD);
+        table.add(getStarsTable(assetScene2d.getStar(), assetScene2d.getEmptyStar(), finalStars)).padTop(AbstractScreen.PAD);
         table.row();
         float padTop = AbstractScreen.PAD * 2;
         if (showNewHighScoreLabel) {
             padTop = AbstractScreen.PAD;
-            table.add(getNewHighScoreTable(trophy, newHighScoreLabel)).padTop(AbstractScreen.PAD);
+            table.add(getNewHighScoreTable(highScoreImage, newHighScoreLabel)).padTop(AbstractScreen.PAD);
             table.row();
         }
         if (showNextLevelLabel) {
@@ -160,7 +139,7 @@ public class LevelCompletedScreen extends AbstractScreen {
             table.add(nextLevelLabel).padTop(padTop);
 
             // Events
-            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel, currentLives, finalScore));
+            nextLevelLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, nextLevel));
         } else {
             table.row();
             table.add(grandFinaleLabel).padTop(padTop);
@@ -204,9 +183,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         addActor(table);
     }
 
-    private Table getNewHighScoreTable(TextureRegion trophy, Label highScoreLabel) {
+    private Table getNewHighScoreTable(TextureRegion highScoreImage, Label highScoreLabel) {
         Image image = new Image();
-        image.setDrawable(new TextureRegionDrawable(trophy));
+        image.setDrawable(new TextureRegionDrawable(highScoreImage));
         image.setScaling(Scaling.fit);
 
         Table table = new Table();
@@ -217,22 +196,30 @@ public class LevelCompletedScreen extends AbstractScreen {
         return table;
     }
 
-//    private int getStarsValue() {
-//        int averageLevelPenalty = ( Hero.LIVES_START * LevelFactory.getLevelEndurance(this.currentLevel) + Hero.LIVES_START ) / 2;
-//        int stars = 0;
-//
-//        if (this.currentPenalties == 0) {
-//            stars = 3;
-//        } else {
-//            if (this.currentPenalties < averageLevelPenalty) {
-//                stars = 2;
-//            } else {
-//                stars = 1;
-//            }
-//        }
-//
-//        return stars;
-//    }
+    private int getGameScore() {
+        int gameScore = 0;
+        for(LevelState levelState : GameSettings.getInstance().getLevels()) {
+            gameScore += levelState.getFinalScore();
+        }
+        return gameScore;
+    }
+
+    private int getFinalStars(int currentPenalties) {
+        int averageLevelPenalty = Hero.LIVES_START * Hero.ENDURANCE_START / 2;
+        int stars = 0;
+
+        if (currentPenalties == 0) {
+            stars = 3;
+        } else {
+            if (currentPenalties < averageLevelPenalty) {
+                stars = 2;
+            } else {
+                stars = 1;
+            }
+        }
+
+        return stars;
+    }
 
     private Table getStarsTable(TextureRegion star, TextureRegion emptyStar, int stars) {
         Table table = new Table();

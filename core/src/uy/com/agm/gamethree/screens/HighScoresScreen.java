@@ -44,9 +44,6 @@ public class HighScoresScreen extends AbstractScreen {
     }
 
     private void defineMainTable() {
-        // UI assets
-        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-
         // I18n
         I18NBundle i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
 
@@ -87,22 +84,7 @@ public class HighScoresScreen extends AbstractScreen {
         Image highScoreImage;
         for (HighScore highScore : prefs.getHighScores()) {
             highScoreImage = new Image();
-
-            switch (highScore.getRanking()) {
-                case 1:
-                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-                    break;
-                case 2:
-                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getSilverTrophy()));
-                    break;
-                case 3:
-                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getBronzeTrophy()));
-                    break;
-                default:
-                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getBadge()));
-                    break;
-            }
-
+            highScoreImage.setDrawable(new TextureRegionDrawable(Assets.getInstance().getScene2d().getRankingImage(highScore.getRanking())));
             highScoreImage.setScaling(Scaling.fit);
             highScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore",
                     highScore.getScore(), df.format(highScore.getDate())), labelStyleSmall);

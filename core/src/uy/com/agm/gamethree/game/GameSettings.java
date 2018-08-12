@@ -2,10 +2,14 @@ package uy.com.agm.gamethree.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.TimeUtils;
+
+import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 
 /**
  * Created by AGM on 16/07/2018.
@@ -96,6 +100,7 @@ public class GameSettings {
 
     private void loadHighScores() {
         highScores = getDefaultHighScores();
+
         String data;
         for (int i = 0; i < MAX_RANKING; i++) {
             data = prefs.getString(HIGH_SCORE + i, "");
@@ -113,6 +118,19 @@ public class GameSettings {
             highScores.add(new HighScore(i + 1, scores[i], millis[i]));
         }
         return highScores;
+    }
+
+    private Array<TextureRegion> getHighScoreImages() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
+        Array<TextureRegion> highScoreImages = new Array<TextureRegion>();
+        highScoreImages.add(assetScene2d.getGoldTrophy());
+        highScoreImages.add(assetScene2d.getSilverTrophy());
+        highScoreImages.add(assetScene2d.getBronzeTrophy());
+        highScoreImages.add(assetScene2d.getBadge());
+
+        return highScoreImages;
     }
 
     private void loadLevels() {
@@ -187,7 +205,7 @@ public class GameSettings {
         this.manualShooting = manualShooting;
     }
 
-    public int getRanking(int score) {
+    public int updateRanking(int score) {
         int ranking = -1;
         HighScore highScore;
         for (int i = 0; i < MAX_RANKING; i++) {
@@ -205,9 +223,12 @@ public class GameSettings {
         return ranking;
     }
 
-    public void setStars(int level, int stars) {
+    public void setLevelStateInfo(int level, int finalScore, int finalStars) {
+        LevelState levelState;
         if (level <= levels.size) {
-            levels.get(level - 1).setFinalStars(stars);
+            levelState = levels.get(level - 1);
+            levelState.setFinalScore(finalScore);
+            levelState.setFinalStars(finalStars);
         }
     }
 
@@ -219,10 +240,12 @@ public class GameSettings {
         return levels;
     }
 
-    public void addNewLevel(int level) {
-        if (level > progress) {
-            progress = level;
-            levels.add(new LevelState(level, 0, 0));
+    public void addNextLevel(int level) {
+        if (!DebugConstants.DEBUG_LEVELS) {
+            if (level > progress) {
+                progress = level;
+                levels.add(new LevelState(level, 0, 0));
+            }
         }
     }
 

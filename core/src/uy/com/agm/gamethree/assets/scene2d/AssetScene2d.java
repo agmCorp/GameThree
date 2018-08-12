@@ -75,7 +75,7 @@ public class AssetScene2d {
     private TextureRegion quitPressed;
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
-    private TextureRegion goldTrophy;
+        private TextureRegion goldTrophy;
     private TextureRegion silverTrophy;
     private TextureRegion bronzeTrophy;
     private TextureRegion badge;
@@ -465,6 +465,27 @@ public class AssetScene2d {
 
     public TextureRegion getBadge() {
         return badge;
+    }
+
+    public TextureRegion getRankingImage(int ranking) {
+        TextureRegion rankingImage = null;
+        if (ranking > 0) {
+            switch (ranking) {
+                case 1:
+                    rankingImage = goldTrophy;
+                    break;
+                case 2:
+                    rankingImage = silverTrophy;
+                    break;
+                case 3:
+                    rankingImage = bronzeTrophy;
+                    break;
+                default:
+                    rankingImage = badge;
+                    break;
+            }
+        }
+        return rankingImage;
     }
 
     public TextureRegion getStar() {

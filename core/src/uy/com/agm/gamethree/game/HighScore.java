@@ -49,6 +49,9 @@ public class HighScore {
     }
 
     public Date getDate() {
+        if (date == null) {
+            date = new Date(millis);
+        }
         return date;
     }
 }
