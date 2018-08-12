@@ -64,6 +64,8 @@ public class SelectLevelScreen extends AbstractScreen {
             Image hand = new Image(Assets.getInstance().getScene2d().getHand());
             hand.setScale(HAND_SCALE);
             hand.setX(HAND_X);
+
+            // WA: actor.localToStageCoordinates(new Vector2(0,0)) didn't work
             GameSettings prefs = GameSettings.getInstance();
             if (prefs.isGameComplete()) {
                 hand.setY(HAND_GAME_COMPLETED);
