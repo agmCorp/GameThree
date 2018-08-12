@@ -1,6 +1,7 @@
 PROXIMAS VERSIONES
 ------------------
-- implementé: refill de corazones, penalties. Revisar esto.
+- Es muy doloroso, pero tengo que hacer la arana de vuelta. Ojo con los rotation y eso.
+Liberar asi por ahora, capaz hacer los videos.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
