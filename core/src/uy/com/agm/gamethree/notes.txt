@@ -631,6 +631,10 @@ LECCIONES APRENDIDAS
         - ajusto el volumen del background (con + -)
         - luego voy a file y le doy export, allí me avisa que va a fusionar todo en un track stereo.
 
+31)
+    Cada vez que libere un nuevo apk (Build/Generate Signed APK) para la playStore, debo
+    incrementar versionCode de android/build.gradle.
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
