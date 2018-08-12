@@ -2,7 +2,6 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,7 +15,6 @@ import java.util.Locale;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
-import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
@@ -33,14 +31,12 @@ public class Hud extends AbstractScreen {
     private static final float POWERS_TABLE_PAD_BOTTOM = 5.0f;
     private static final float STATE_INFO_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_TOP = 30.0f;
-    private static final float SCORE_WIDTH = 80.0f;
-    private static final float HIGH_SCORE_WIDTH = 80.0f;
-    private static final float TIME_WIDTH = 80.0f;
-    private static final float LIVES_WIDTH = 80.0f;
-    private static final float HEART_WIDTH = 80.0f;
-    private static final float SILVER_BULLETS_WIDTH = 80.0f;
+    private static final float SCORE_WIDTH = 96.0f;
+    private static final float TIME_WIDTH = 96.0f;
+    private static final float LIVES_WIDTH = 96.0f;
+    private static final float HEART_WIDTH = 96.0f;
+    private static final float SILVER_BULLETS_WIDTH = 96.0f;
     private static final String FORMAT_SCORE = "%06d";
-    private static final String FORMAT_HIGH_SCORE = "%d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
     private static final String FORMAT_ENDURANCE = "%02d";
@@ -74,8 +70,6 @@ public class Hud extends AbstractScreen {
 
     private int score;
     private Label scoreValueLabel;
-    private int highScore;
-    private Label highScoreValueLabel;
     private int level;
     private int time;
     private float timeCount;
@@ -107,7 +101,6 @@ public class Hud extends AbstractScreen {
         // Define tracking variables
         this.screen = screen;
         this.score = score;
-        this.highScore = GameSettings.getInstance().getGoldHighScore();
         this.level = level;
         this.time = time;
         this.timeCount = 0;
@@ -195,7 +188,6 @@ public class Hud extends AbstractScreen {
 
         // Add images to the table
         statusBarTable.add(coin).width(SCORE_WIDTH);
-        statusBarTable.add(trophy).width(HIGH_SCORE_WIDTH);
         statusBarTable.add(hourglass).width(TIME_WIDTH);
         statusBarTable.add(heroHead).width(LIVES_WIDTH);
         statusBarTable.add(heart).width(HEART_WIDTH);
@@ -207,8 +199,6 @@ public class Hud extends AbstractScreen {
         // Define label values based on labelStyle
         scoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SCORE, score), labelStyleSmall);
         scoreValueLabel.setAlignment(Align.center);
-        highScoreValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_HIGH_SCORE, highScore), labelStyleSmall);
-        highScoreValueLabel.setAlignment(Align.center);
         timeValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_TIME, time), labelStyleSmall);
         timeValueLabel.setAlignment(Align.center);
         livesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_LIVES, lives), labelStyleSmall);
@@ -220,28 +210,14 @@ public class Hud extends AbstractScreen {
 
         // Add values
         statusBarTable.add(scoreValueLabel);
-        statusBarTable.add(highScoreValueLabel);
         statusBarTable.add(timeValueLabel);
         statusBarTable.add(livesValueLabel);
         statusBarTable.add(enduranceValueLabel);
         statusBarTable.add(silverBulletValueLabel);
     }
 
-    private void setHeartImage(float percentage) {
-        // UI assets
-        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-        TextureRegion endurance = assetScene2d.getEndurance().getEndurance0();
-
-        if (0 < percentage && percentage <= 25) {
-            endurance = assetScene2d.getEndurance().getEndurance25();
-        } else if (25 < percentage && percentage <= 50) {
-            endurance = assetScene2d.getEndurance().getEndurance50();
-        } else if (50 < percentage && percentage <= 75) {
-            endurance = assetScene2d.getEndurance().getEndurance75();
-        } else if (75 < percentage) {
-            endurance = assetScene2d.getEndurance().getEndurance100();
-        }
-
+    private void setHeartImage(int index) {
+        TextureRegion endurance = Assets.getInstance().getScene2d().getEndurance().getEnduranceStand(index);
         heart.setDrawable(new TextureRegionDrawable(endurance));
         heart.setScaling(Scaling.fit);
     }
@@ -566,47 +542,28 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
     }
 
+// todo aca iban los metoso de endurance
     public void decreaseEndurance(int quantity) {
-        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
-            endurance -= quantity;
-            if (endurance >= 0) {
-                int percentage = MathUtils.round((float)(endurance * 100 / initialEndurance));
-                setHeartImage(percentage);
-                enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
-                if (endurance == 1) {
-                    screen.getInfoScreen().showModalLoseLifeWarning();
-                }
+        endurance -= quantity;
+        if (endurance >= 0) {
+            setHeartImage(endurance);
+            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
+            if (endurance == 1) {
+                screen.getInfoScreen().showModalLoseLifeWarning();
             }
         }
     }
 
-    public void increaseEndurance(int quantity) {
-        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
-            endurance += quantity;
-            int percentage = MathUtils.round((float) (endurance * 100 / initialEndurance));
-            setHeartImage(percentage);
-            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
-        }
-    }
-
     public void refillEndurance() {
-        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
-            endurance = initialEndurance;
-            setHeartImage(100);
-            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
-        }
+        endurance = initialEndurance;
+        setHeartImage(endurance);
+        enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
     }
 
     public void emptyEndurance() {
-        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
-            endurance = 0;
-            setHeartImage(0);
-            enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
-        }
-    }
-
-    public int getEndurance() {
-        return endurance;
+        endurance = 0;
+        setHeartImage(endurance);
+        enduranceValueLabel.setText(String.format(Locale.getDefault(), FORMAT_ENDURANCE, endurance));
     }
 
     public void increaseSilverBullets(int quantity) {

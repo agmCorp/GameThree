@@ -123,7 +123,7 @@ public class PlayScreen extends AbstractScreen {
     // Screen shaker
     private Shaker shaker;
 
-    public PlayScreen(Integer level, Integer lives, Integer score) {
+    public PlayScreen(Integer level) {
         this.level = level;
         levelCompletedTime = 0;
 
@@ -158,7 +158,6 @@ public class PlayScreen extends AbstractScreen {
 
         // Get our hero
         player = creator.getHero();
-        player.setLives(lives);
 
         if (DebugConstants.GAME_CAM_Y_METERS > 0) {
             player.getB2body().setTransform(this.getGameCam().position.x,
@@ -177,8 +176,7 @@ public class PlayScreen extends AbstractScreen {
         world.setContactListener(new WorldContactListener());
 
         // Create the game HUD for score, time, etc.
-        hud = new Hud(this, level, score, LevelFactory.getLevelTimer(level),
-                player.getLives(), LevelFactory.getLevelEndurance(level));
+        hud = new Hud(this, level, 0, LevelFactory.getLevelTimer(level), Hero.LIVES_START, Hero.ENDURANCE_START);
         hud.buildStage();
 
         // Create the InfoScreen for help messages, images, animations, etc.
@@ -681,7 +679,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, player.getLives(), hud.getScore(), player.getPenalties());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, Hero.LIVES_START, hud.getScore(), player.getPenalties()); // TODO ESTO VA A CAMBIAR
         }
     }
 
@@ -744,7 +742,7 @@ public class PlayScreen extends AbstractScreen {
 
     public void enemyGetsAway() {
         if (!player.isDead() && !player.isWarmingUp()) {
-            if (hud.getEndurance() > 1) {
+            if (player.getEndurance() > 1) {
                 if (showRedFlashHelp) {
                     showRedFlashHelp = false;
                     infoScreen.showModalRedFlashHelp();
@@ -754,7 +752,7 @@ public class PlayScreen extends AbstractScreen {
             } else {
                 infoScreen.showRedFlash();
             }
-            hud.decreaseEndurance(1);
+            player.decreaseEndurance();
             player.addPenalty();
         }
     }

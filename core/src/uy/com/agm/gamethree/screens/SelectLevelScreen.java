@@ -121,7 +121,7 @@ public class SelectLevelScreen extends AbstractScreen {
         TextureRegion star = assetScene2d.getStar();
         TextureRegion emptyStar = assetScene2d.getEmptyStar();
         GameSettings prefs = GameSettings.getInstance();
-        for (LevelState levelState : prefs.getLevels().values()) {
+        for (LevelState levelState : prefs.getLevels()) {
             table.row();
             level = levelState.getLevel();
             levelLabel = new Label(LevelFactory.getLevelName(level), labelStyleNormal);
@@ -129,9 +129,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelTable);
 
             // Events
-            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level,
-                    levelState.getInitialLives(),
-                    levelState.getInitialScore()));
+            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level));
         }
 
         if (prefs.isGameComplete()) {

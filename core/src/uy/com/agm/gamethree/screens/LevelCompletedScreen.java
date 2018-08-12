@@ -10,16 +10,12 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.Scaling;
 
-import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
 import uy.com.agm.gamethree.game.DebugConstants;
-import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
-import uy.com.agm.gamethree.tools.AudioManager;
-import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -45,60 +41,60 @@ public class LevelCompletedScreen extends AbstractScreen {
     private boolean showNextLevelLabel;
 
     public LevelCompletedScreen(Integer currentLevel, Integer currentLives, Integer currentScore, Integer currentPenalties) {
-        super();
-        this.currentLevel = currentLevel;
-        this.nextLevel = currentLevel + 1;
-        this.currentLives = currentLives;
-        this.currentScore = currentScore;
-        this.currentPenalties = currentPenalties;
-        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
-        this.currentStars = getStarsValue();
-
-        GameSettings prefs = GameSettings.getInstance();
-        prefs.setStars(this.currentLevel, this.currentStars);
-
-        if (prefs.isNewGoldHighScore(this.finalScore)) {
-            this.trophy = Assets.getInstance().getScene2d().getGoldTrophy();
-            prefs.setGoldHighScore(this.finalScore);
-        } else if (prefs.isNewSilverHighScore(this.finalScore)) {
-            this.trophy = Assets.getInstance().getScene2d().getSilverTrophy();
-            prefs.setSilverHighScore(this.finalScore);
-        } else if (prefs.isNewBronzeHighScore(this.finalScore)) {
-            this.trophy = Assets.getInstance().getScene2d().getBronzeTrophy();
-            prefs.setBronzeHighScore(this.finalScore);
-        } else {
-            this.trophy = null;
-        }
-        this.showNewHighScoreLabel = this.trophy != null;
-        this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
-        if (this.showNextLevelLabel) {
-            prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
-
-            // Resets levels from nextLevel + 1 to MAX_LEVEL
-            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-                prefs.resetLevel(i);
-            }
-        }
-
-        // Saves preferences
-        // We can't delete keys, only change values
-        prefs.save();
-
-        // Removes keys from memory
-        if (!DebugConstants.DEBUG_LEVELS) {
-            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
-                prefs.removeLevel(i);
-            }
-        }
-
-        // Audio FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
+//        super();
+//        this.currentLevel = currentLevel;
+//        this.nextLevel = currentLevel + 1;
+//        this.currentLives = currentLives;
+//        this.currentScore = currentScore;
+//        this.currentPenalties = currentPenalties;
+//        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
+//        this.currentStars = getStarsValue();
+//
+//        GameSettings prefs = GameSettings.getInstance();
+//        prefs.setStars(this.currentLevel, this.currentStars);
+//
+//        if (prefs.isNewGoldHighScore(this.finalScore)) {
+//            this.trophy = Assets.getInstance().getScene2d().getGoldTrophy();
+//            prefs.setGoldHighScore(this.finalScore);
+//        } else if (prefs.isNewSilverHighScore(this.finalScore)) {
+//            this.trophy = Assets.getInstance().getScene2d().getSilverTrophy();
+//            prefs.setSilverHighScore(this.finalScore);
+//        } else if (prefs.isNewBronzeHighScore(this.finalScore)) {
+//            this.trophy = Assets.getInstance().getScene2d().getBronzeTrophy();
+//            prefs.setBronzeHighScore(this.finalScore);
+//        } else {
+//            this.trophy = null;
+//        }
+//        this.showNewHighScoreLabel = this.trophy != null;
+//        this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
+//        if (this.showNextLevelLabel) {
+//            prefs.addActiveLevel(this.nextLevel, this.currentLives, this.finalScore);
+//
+//            // Resets levels from nextLevel + 1 to MAX_LEVEL
+//            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+//                prefs.resetLevel(i);
+//            }
+//        }
+//
+//        // Saves preferences
+//        // We can't delete keys, only change values
+//        prefs.save();
+//
+//        // Removes keys from memory
+//        if (!DebugConstants.DEBUG_LEVELS) {
+//            for (int i = this.nextLevel + 1; i <= GameSettings.MAX_LEVEL; i++) {
+//                prefs.removeLevel(i);
+//            }
+//        }
+//
+//        // Audio FX
+//        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());
     }
 
     @Override
     public void buildStage() {
-        defineMainTable();
-        defineNavigationTable();
+//        defineMainTable();
+//        defineNavigationTable();
     }
 
     private void defineMainTable() {
@@ -221,22 +217,22 @@ public class LevelCompletedScreen extends AbstractScreen {
         return table;
     }
 
-    private int getStarsValue() {
-        int averageLevelPenalty = ( Hero.LIVES_START * LevelFactory.getLevelEndurance(this.currentLevel) + Hero.LIVES_START ) / 2;
-        int stars = 0;
-
-        if (this.currentPenalties == 0) {
-            stars = 3;
-        } else {
-            if (this.currentPenalties < averageLevelPenalty) {
-                stars = 2;
-            } else {
-                stars = 1;
-            }
-        }
-
-        return stars;
-    }
+//    private int getStarsValue() {
+//        int averageLevelPenalty = ( Hero.LIVES_START * LevelFactory.getLevelEndurance(this.currentLevel) + Hero.LIVES_START ) / 2;
+//        int stars = 0;
+//
+//        if (this.currentPenalties == 0) {
+//            stars = 3;
+//        } else {
+//            if (this.currentPenalties < averageLevelPenalty) {
+//                stars = 2;
+//            } else {
+//                stars = 1;
+//            }
+//        }
+//
+//        return stars;
+//    }
 
     private Table getStarsTable(TextureRegion star, TextureRegion emptyStar, int stars) {
         Table table = new Table();

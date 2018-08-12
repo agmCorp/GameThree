@@ -78,6 +78,7 @@ public class AssetScene2d {
     private TextureRegion goldTrophy;
     private TextureRegion silverTrophy;
     private TextureRegion bronzeTrophy;
+    private TextureRegion badge;
     private TextureRegion star;
     private TextureRegion emptyStar;
     private TextureRegion vScrollbar9;
@@ -167,6 +168,7 @@ public class AssetScene2d {
         goldTrophy = atlasUI.findRegion("goldTrophy");
         silverTrophy = atlasUI.findRegion("silverTrophy");
         bronzeTrophy = atlasUI.findRegion("bronzeTrophy");
+        badge = atlasUI.findRegion("badge");
         star = atlasUI.findRegion("star");
         emptyStar = atlasUI.findRegion("emptyStar");
         vScrollbar9 = atlasUI.findRegion("vScrollbar9");
@@ -457,6 +459,10 @@ public class AssetScene2d {
 
     public TextureRegion getBronzeTrophy() {
         return bronzeTrophy;
+    }
+
+    public TextureRegion getBadge() {
+        return badge;
     }
 
     public TextureRegion getStar() {

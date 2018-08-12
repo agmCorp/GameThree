@@ -32,9 +32,10 @@ public class HelpTwoScreen extends AbstractScreen {
     private static final float MSG_WIDTH = 350.0f;
     private static final int COLUMNS = 2;
     private static final float FAKE_HUD_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float FAKE_HUD_TABLE_CELL_WIDTH = 80.0f;
+    private static final float FAKE_HUD_TABLE_CELL_WIDTH = 96.0f;
     private static final float CELL_HEIGHT = 60.0f;
     private static final float CELL_WIDTH = 40.0f;
+    private static final int ENDURANCE_INDEX = 14;
 
     private AssetScene2d assetScene2d;
     private Assets assetGame;
@@ -93,13 +94,6 @@ public class HelpTwoScreen extends AbstractScreen {
         coinDsc.setAlignment(Align.left);
         coinDsc.setWrap(true);
 
-        Image trophy = new AnimatedImage();
-        trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        trophy.setScaling(Scaling.fit);
-        TypingLabelWorkaround trophyDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.trophyDsc"), labelStyleSmall);
-        trophyDsc.setAlignment(Align.left);
-        trophyDsc.setWrap(true);
-
         AnimatedImage hourglass = new AnimatedImage(assetScene2d.getHourglass().getHourglassAnimation());
         TypingLabelWorkaround hourglassDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.hourglassDsc"), labelStyleSmall);
         hourglassDsc.setAlignment(Align.left);
@@ -111,7 +105,7 @@ public class HelpTwoScreen extends AbstractScreen {
         heroHeadDsc.setWrap(true);
 
         Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEndurance75()));
+        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEnduranceStand(ENDURANCE_INDEX)));
         heart.setScaling(Scaling.fit);
         TypingLabelWorkaround heartDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.heartDsc"), labelStyleSmall);
         heartDsc.setAlignment(Align.left);
@@ -129,9 +123,6 @@ public class HelpTwoScreen extends AbstractScreen {
         table.row();
         table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(coinDsc).padTop(AbstractScreen.PAD).width(MSG_WIDTH).fill();
-        table.row();
-        table.add(trophy).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
-        table.add(trophyDsc).width(MSG_WIDTH).fill();
         table.row();
         table.add(hourglass).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(hourglassDsc).width(MSG_WIDTH).fill();
@@ -165,23 +156,18 @@ public class HelpTwoScreen extends AbstractScreen {
         // Define images
         AnimatedImage coin = new AnimatedImage(assetGame.getColOne().getCoinAnimation());
 
-        Image trophy = new AnimatedImage();
-        trophy.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        trophy.setScaling(Scaling.fit);
-
         AnimatedImage hourglass = new AnimatedImage(assetScene2d.getHourglass().getHourglassAnimation());
 
         AnimatedImage heroHead = new AnimatedImage(assetScene2d.getHeroHead().getHeroHeadAnimation());
 
         Image heart = new Image();
-        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEndurance75()));
+        heart.setDrawable(new TextureRegionDrawable(assetScene2d.getEndurance().getEnduranceStand(ENDURANCE_INDEX)));
         heart.setScaling(Scaling.fit);
 
         AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
 
         // Add values
         table.add(coin);
-        table.add(trophy);
         table.add(hourglass);
         table.add(heroHead);
         table.add(heart);
@@ -193,8 +179,6 @@ public class HelpTwoScreen extends AbstractScreen {
         // Define label values based on labelStyle
         Label scoreValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeScore"), labelStyleSmall);
         scoreValueLabel.setAlignment(Align.center);
-        Label highScoreValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeHighScore"), labelStyleSmall);
-        highScoreValueLabel.setAlignment(Align.center);
         Label timeValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeTime"), labelStyleSmall);
         timeValueLabel.setAlignment(Align.center);
         Label livesValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeLives"), labelStyleSmall);
@@ -206,7 +190,6 @@ public class HelpTwoScreen extends AbstractScreen {
 
         // Add values
         table.add(scoreValueLabel);
-        table.add(highScoreValueLabel);
         table.add(timeValueLabel);
         table.add(livesValueLabel);
         table.add(enduranceValueLabel);

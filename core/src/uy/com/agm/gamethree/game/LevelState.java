@@ -11,6 +11,12 @@ public class LevelState {
     private int finalScore;
     private int finalStars;
 
+    public LevelState() {
+        this.level = 0;
+        this.finalScore = 0;
+        this.finalStars = 0;
+    }
+
     public LevelState(int level, int finalScore, int finalStars) {
         this.level = level;
         this.finalScore = finalScore;

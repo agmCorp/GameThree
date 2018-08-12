@@ -1,5 +1,7 @@
 package uy.com.agm.gamethree.game;
 
+import java.util.Date;
+
 /**
  * Created by AGM on 5/27/2018.
  */
@@ -10,11 +12,20 @@ public class HighScore {
     private int ranking;
     private int score;
     private long millis;
+    transient private Date date; // Avoid serializing (see GameSettings.getData(...)).
+
+    public HighScore() {
+        this.ranking = 0;
+        this.score = 0;
+        this.millis = 0;
+        this.date = null;
+    }
 
     public HighScore(int ranking, int score, long millis) {
         this.ranking = ranking;
         this.score = score;
         this.millis = millis;
+        this.date = new Date(millis);
     }
 
     public int getRanking() {
@@ -37,7 +48,7 @@ public class HighScore {
         return millis;
     }
 
-    public void setMillis(long millis) {
-        this.millis = millis;
+    public Date getDate() {
+        return date;
     }
 }

@@ -1,15 +1,23 @@
 PROXIMAS VERSIONES
 ------------------
+// HACER
+- atencion cuando haga la pantalla de level complete, ojo con el progress.
+Si debuglevels esta activo no debo actualizarlo. El addNewLevel de GameSettings puede agregar repetidos...por eso
+antes era un map. Creo que es alli donde debo poner el if de debuglevels para que no de bola si esta activa la flag.
+- HACER LA PANTALLA DE LEVEL COMPLETE. Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
+- revisar las penalties, puedo tener 3 x 15 penalties por vidas en total, mas las escapadas de bichos. Ver las estrellas.
+-Usar una manito para senalar donde tocar.
+// FIN HACER
+
 - cada nivel arranca con 3 vidas y el score arranca en cero y se calcula por nivel.
 Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
 Esto me obliga a tener que sacar el highscore del hud y por ende arreglar el help.
+- El que tiene que contabilizar la endurance es el hero no el hud. El hero tiene vidas, endurance, penalties.
 - No puedo contabilizar siempre los highscores porque necesito conocer las penalties.
 - Definir el corazon fijo en 15, tener 15 imagenes de corazon.
-- revisar las penalties, puedo tener 3 x 15 penalties por vidas en total, mas las escapadas de bichos. Ver las estrellas.
 - rehacer los select stage. Usar arreglos con tope. Usar una manito para senalar donde tocar.
 - implementé: refill de corazones, penalties. Revisar esto.
-- hacer videos cuando termine los corazones.
-- El que tiene que contabilizar la endurance es el hero no el hud. El hero tiene vidas, endurance, penalties.
+- hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank

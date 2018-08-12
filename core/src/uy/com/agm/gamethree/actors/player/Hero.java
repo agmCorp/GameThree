@@ -24,8 +24,8 @@ import uy.com.agm.gamethree.actors.weapons.ShootContext;
 import uy.com.agm.gamethree.actors.weapons.hero.HeroDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.Landing;
@@ -43,6 +43,7 @@ public class Hero extends Sprite {
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 32.0f / PlayScreen.PPM;
     public static final float LINEAR_VELOCITY = 5.2f;
     public static final int LIVES_START = 3;
+    public static final int ENDURANCE_START = 15;
     private static final float DEATH_LINEAR_VELOCITY = 5.0f;
     private static final float PLAY_AGAIN_WARM_UP_TIME = 2.0f;
     private static final float SPRITE_BLINKING_INTERVAL_SECONDS = 0.1f;
@@ -80,6 +81,7 @@ public class Hero extends Sprite {
     private boolean isPlayingAgain;
     private boolean shootingEnabled;
     private int lives;
+    private int endurance;
     private int penalties;
 
     // Silver bullets
@@ -142,6 +144,7 @@ public class Hero extends Sprite {
         isPlayingAgain = false;
         shootingEnabled = true;
         lives = LIVES_START;
+        endurance = ENDURANCE_START;
         penalties = 0;
 
         // SilverBullets variables initialization
@@ -465,13 +468,23 @@ public class Hero extends Sprite {
 
         // Beyond bottom edge
         if (camBottomEdge > heroUpperEdge) {
-            Hud hud = screen.getHud();
             b2body.setActive(false);
-            lives--;
-            hud.decreaseLives(1);
-            hud.emptyEndurance();
+            decreaseLives();
+            emptyEndurance();
             playAgainTime = 0;
             currentHeroState = Hero.HeroState.DEAD;
+        }
+    }
+
+    private void decreaseLives() {
+        lives--;
+        screen.getHud().decreaseLives(1);
+    }
+
+    private void emptyEndurance() {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance = 0;
+            screen.getHud().emptyEndurance();
         }
     }
 
@@ -535,7 +548,7 @@ public class Hero extends Sprite {
     }
 
     private void checkEndurance() {
-        if (screen.getHud().getEndurance() <= 0) {
+        if (endurance <= 0) {
             if (!screen.getInfoScreen().isRedFlashVisible()) { // We wait until red flash finishes
                 onDead();
             }
@@ -717,7 +730,7 @@ public class Hero extends Sprite {
             hitTime = 0;
 
             // Decrease endurance and increase penalties count
-            screen.getHud().decreaseEndurance(1);
+            decreaseEndurance();
             penalties++;
         }
     }
@@ -850,14 +863,6 @@ public class Hero extends Sprite {
         b2body.setLinearVelocity(0.0f, 0.0f);
     }
 
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-
     public void addLives() {
         lives++;
         screen.getHud().increaseLives(1);
@@ -872,7 +877,21 @@ public class Hero extends Sprite {
     }
 
     public void refillEndurance() {
-        screen.getHud().refillEndurance();
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance = ENDURANCE_START;
+            screen.getHud().refillEndurance();
+        }
+    }
+
+    public void decreaseEndurance() {
+        if (!DebugConstants.DISABLE_ENDURANCE_COUNT) {
+            endurance--;
+            screen.getHud().decreaseEndurance(1);
+        }
+    }
+
+    public int getEndurance() {
+        return endurance;
     }
 
     public void addSilverBullet() {

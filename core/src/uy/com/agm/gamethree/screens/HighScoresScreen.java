@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.game.HighScore;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
@@ -64,6 +65,10 @@ public class HighScoresScreen extends AbstractScreen {
         // Make the table fill the entire stage
         table.setFillParent(true);
 
+        // Date format
+        int style = DateFormat.MEDIUM;
+        DateFormat df = DateFormat.getDateInstance(style, Locale.getDefault());
+
         // Personal fonts
         Label.LabelStyle labelStyleBig = new Label.LabelStyle();
         labelStyleBig.font = Assets.getInstance().getFonts().getDefaultBig();
@@ -71,40 +76,40 @@ public class HighScoresScreen extends AbstractScreen {
         Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
         labelStyleSmall.font = Assets.getInstance().getFonts().getDefaultSmall();
 
-        // Define our labels based on labelStyle
-        int style = DateFormat.MEDIUM;
-        DateFormat df = DateFormat.getDateInstance(style, Locale.getDefault());
+        // Define labels based on labelStyle
         Label highScoresLabel = new Label(i18NGameThreeBundle.format("highScores.title"), labelStyleBig);
-        TypingLabelWorkaround goldHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getGoldHighScore(), df.format(prefs.getGoldHighScoreDate())), labelStyleSmall);
-        TypingLabelWorkaround silverHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getSilverHighScore(), df.format(prefs.getSilverHighScoreDate())), labelStyleSmall);
-        TypingLabelWorkaround bronzeHighScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore", prefs.getBronzeHighScore(), df.format(prefs.getBronzeHighScoreDate())), labelStyleSmall);
-
-        // Gold trophy image
-        Image goldTrophyImage = new Image();
-        goldTrophyImage.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
-        goldTrophyImage.setScaling(Scaling.fit);
-
-        // Silver trophy image
-        Image silverTrophyImage = new Image();
-        silverTrophyImage.setDrawable(new TextureRegionDrawable(assetScene2d.getSilverTrophy()));
-        silverTrophyImage.setScaling(Scaling.fit);
-
-        // Bronze trophy image
-        Image bronzeTrophyImage = new Image();
-        bronzeTrophyImage.setDrawable(new TextureRegionDrawable(assetScene2d.getBronzeTrophy()));
-        bronzeTrophyImage.setScaling(Scaling.fit);
 
         // Add values
-        table.add(highScoresLabel).padBottom(AbstractScreen.PAD * 2).colspan(COLUMNS);
-        table.row();
-        table.add(goldTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(goldHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
-        table.row();
-        table.add(silverTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(silverHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
-        table.row();
-        table.add(bronzeTrophyImage).padTop(AbstractScreen.PAD);
-        table.add(bronzeHighScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
+        table.add(highScoresLabel).colspan(COLUMNS);
+
+        // Add scores
+        TypingLabelWorkaround highScoreLabel;
+        Image highScoreImage;
+        for (HighScore highScore : prefs.getHighScores()) {
+            highScoreImage = new Image();
+
+            switch (highScore.getRanking()) {
+                case 1:
+                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getGoldTrophy()));
+                    break;
+                case 2:
+                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getSilverTrophy()));
+                    break;
+                case 3:
+                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getBronzeTrophy()));
+                    break;
+                default:
+                    highScoreImage.setDrawable(new TextureRegionDrawable(assetScene2d.getBadge()));
+                    break;
+            }
+
+            highScoreImage.setScaling(Scaling.fit);
+            highScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("highScores.highScore",
+                    highScore.getScore(), df.format(highScore.getDate())), labelStyleSmall);
+            table.row();
+            table.add(highScoreImage).padTop(AbstractScreen.PAD);
+            table.add(highScoreLabel).padLeft(AbstractScreen.PAD / 2).padTop(AbstractScreen.PAD);
+        }
 
         // Adds table to stage
         addActor(table);

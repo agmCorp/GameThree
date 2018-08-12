@@ -3,11 +3,9 @@ package uy.com.agm.gamethree.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.TimeUtils;
-
-import java.util.Date;
 
 /**
  * Created by AGM on 16/07/2018.
@@ -33,16 +31,16 @@ public class GameSettings {
     public static final float DEFAULT_VOLUME = 0.5f;
 
     // High scores
-    private static final int GOLD_HIGH_SCORE = 21365;
-    private static final long GOLD_HIGH_SCORE_MILLIS = 222168600000L; // 15/01/1977 Mi cumple \(^-^)/
-    private static final int SILVER_HIGH_SCORE = 18491;
-    private static final long SILVER_HIGH_SCORE_MILLIS = 327751800000L; // 21/05/1980 Pac-Man
-    private static final int BRONZE_HIGH_SCORE = 7273;
-    private static final long BRONZE_HIGH_SCORE_MILLIS = 1531794009758L; // 16/07/2018 When this class was coded
-    private static final int FOURTH_HIGH_SCORE = 6500;
-    private static final long FOURTH_HIGH_SCORE_MILLIS = 1532746800000L; // 28/07/2018 First release of this game
-    private static final int FIVETH_HIGH_SCORE = 5800;
-    private static final long FIVETH_HIGH_SCORE_MILLIS = 1533956400000L; // 11/08/2018 When this class was refactored
+    private static final int FIRST = 21365;
+    private static final long FIRST_MILLIS = 222168600000L; // 15/01/1977 Mi cumple \(^-^)/
+    private static final int SECOND = 18491;
+    private static final long SECOND_MILLIS = 327751800000L; // 21/05/1980 Pac-Man
+    private static final int THIRD = 7273;
+    private static final long THIRD_MILLIS = 1531794009758L; // 16/07/2018 When this class was coded
+    private static final int FOURTH = 6500;
+    private static final long FOURTH_MILLIS = 1532746800000L; // 28/07/2018 First release of this game
+    private static final int FIFTH = 5800;
+    private static final long FIFTH_MILLIS = 1533956400000L; // 11/08/2018 When this class was refactored
 
     // Singleton: unique instance
     private static GameSettings instance;
@@ -54,16 +52,16 @@ public class GameSettings {
     private float volSound;
     private float volMusic;
     private boolean manualShooting;
-    private ArrayMap<Integer, HighScore> highScores; // Ordered map, starts from 0 to MAX_RANKING - 1
-    private ArrayMap<Integer, LevelState> levels;   // Ordered map, starts from 0 to MAX_LEVEL - 1
+    private Array<HighScore> highScores;
+    private Array<LevelState> levels;
     private int progress;
 
     // Singleton: prevent instantiation from other classes
     private GameSettings() {
         prefs = Gdx.app.getPreferences(SETTINGS);
         json = new Json();
-        highScores = new ArrayMap<Integer, HighScore>();
-        levels = new ArrayMap<Integer, LevelState>();
+        highScores = new Array<HighScore>();
+        levels = new Array<LevelState>();
     }
 
     // Singleton: retrieve instance
@@ -102,18 +100,17 @@ public class GameSettings {
         for (int i = 0; i < MAX_RANKING; i++) {
             data = prefs.getString(HIGH_SCORE + i, "");
             if (!data.isEmpty()) {
-                highScores.put(i, getHighScore(data)); // If the key exists, it overwrites its value.
+                highScores.set(i, getHighScore(data));
             }
         }
     }
 
-    private ArrayMap<Integer, HighScore> getDefaultHighScores() {
-        int scores[] = {GOLD_HIGH_SCORE, SILVER_HIGH_SCORE, BRONZE_HIGH_SCORE, FOURTH_HIGH_SCORE, FIVETH_HIGH_SCORE};
-        long millis[] = {GOLD_HIGH_SCORE_MILLIS, SILVER_HIGH_SCORE_MILLIS,
-                BRONZE_HIGH_SCORE_MILLIS, FOURTH_HIGH_SCORE_MILLIS, FIVETH_HIGH_SCORE_MILLIS};
-        ArrayMap<Integer, HighScore> highScores = new ArrayMap<Integer, HighScore>();
-        for(int i = 0; i < MAX_RANKING; i++) {
-            highScores.put(i, new HighScore(i + 1, scores[i], millis[i]));
+    private Array<HighScore> getDefaultHighScores() {
+        int scores[] = {FIRST, SECOND, THIRD, FOURTH, FIFTH};
+        long millis[] = {FIRST_MILLIS, SECOND_MILLIS, THIRD_MILLIS, FOURTH_MILLIS, FIFTH_MILLIS};
+        Array<HighScore> highScores = new Array<HighScore>();
+        for (int i = 0; i < MAX_RANKING; i++) {
+            highScores.add(new HighScore(i + 1, scores[i], millis[i]));
         }
         return highScores;
     }
@@ -121,15 +118,16 @@ public class GameSettings {
     private void loadLevels() {
         String data;
         LevelState levelState;
-        progress = prefs.getInteger(PROGRESS, DebugConstants.DEBUG_LEVELS ? MAX_LEVEL : 1);
-        for (int i = 0; i < progress; i++) {
+        progress = prefs.getInteger(PROGRESS, 1);
+        int n = DebugConstants.DEBUG_LEVELS ? MAX_LEVEL : progress;
+        for (int i = 0; i < n; i++) {
             data = prefs.getString(LEVEL_STATE + i, "");
             if (data.isEmpty()) {
                 levelState = new LevelState(i + 1, 0, 0);
             } else {
                 levelState = getLevelState(data);
             }
-            levels.put(i, levelState); // If the key exists, it overwrites its value.
+            levels.add(levelState);
         }
     }
 
@@ -139,10 +137,10 @@ public class GameSettings {
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
-        for (int i = 0; i < MAX_RANKING; i++) {
+        for (int i = 0, n = highScores.size; i < n; i++) {
             prefs.putString(HIGH_SCORE + i, getData(highScores.get(i)));
         }
-        for (int i = 0; i < MAX_LEVEL; i++) {
+        for (int i = 0, n = levels.size; i < n; i++) {
             prefs.putString(LEVEL_STATE + i, getData(levels.get(i)));
         }
         prefs.putInteger(PROGRESS, progress);
@@ -189,80 +187,49 @@ public class GameSettings {
         this.manualShooting = manualShooting;
     }
 
-    // ---------------------------------------------- TODO
-    public int getGoldHighScore() {
-        return goldHighScore;
-    }
-
-    public void setGoldHighScore(int goldHighScore) {
-        this.goldHighScore = goldHighScore;
-        this.goldHighScoreMillis = TimeUtils.millis();
-        this.goldHighScoreDate.setTime(this.goldHighScoreMillis);
-    }
-
-    public Date getGoldHighScoreDate() {
-        return goldHighScoreDate;
-    }
-
-    public int getSilverHighScore() {
-        return silverHighScore;
-    }
-
-    public void setSilverHighScore(int silverHighScore) {
-        this.silverHighScore = silverHighScore;
-        this.silverHighScoreMillis = TimeUtils.millis();
-        this.silverHighScoreDate.setTime(this.silverHighScoreMillis);
-    }
-
-    public Date getSilverHighScoreDate() {
-        return silverHighScoreDate;
-    }
-
-    public int getBronzeHighScore() {
-        return bronzeHighScore;
-    }
-
-    public void setBronzeHighScore(int bronzeHighScore) {
-        this.bronzeHighScore = bronzeHighScore;
-        this.bronzeHighScoreMillis = TimeUtils.millis();
-        this.bronzeHighScoreDate.setTime(this.bronzeHighScoreMillis);
-    }
-
-    public Date getBronzeHighScoreDate() {
-        return bronzeHighScoreDate;
+    public int getRanking(int score) {
+        int ranking = -1;
+        HighScore highScore;
+        for (int i = 0; i < MAX_RANKING; i++) {
+            if (highScores.get(i).getScore() < score) {
+                for (int j = MAX_RANKING - 1; j > i; j--) {
+                    highScore = highScores.get(j - 1);
+                    highScore.setRanking(j + 1);
+                    highScores.set(j, highScore);
+                }
+                highScores.set(i, new HighScore(i + 1, score, TimeUtils.millis()));
+                ranking = i + 1;
+                break;
+            }
+        }
+        return ranking;
     }
 
     public void setStars(int level, int stars) {
-        levels.get(level).setFinalStars(stars);
+        if (level <= levels.size) {
+            levels.get(level - 1).setFinalStars(stars);
+        }
     }
 
-    public ArrayMap<Integer, LevelState> getLevels() {
+    public Array<HighScore> getHighScores() {
+        return highScores;
+    }
+
+    public Array<LevelState> getLevels() {
         return levels;
     }
 
     public void addNewLevel(int level) {
-        levels.put(level, new LevelState(level, 0, 0));
         if (level > progress) {
             progress = level;
+            levels.add(new LevelState(level, 0, 0));
         }
     }
 
     public boolean isGameComplete() {
-        LevelState levelState = levels.get(MAX_LEVEL);
+        LevelState levelState = levels.size == MAX_LEVEL ? levels.get(MAX_LEVEL - 1) : null;
         return levelState != null ? levelState.getFinalStars() > 0 ||
                 DebugConstants.DEBUG_LEVELS
                 : false;
-    }
-
-    public boolean isNewGoldHighScore(int score) {
-        return score > goldHighScore;
-    }
-
-    public boolean isNewSilverHighScore(int score) {
-        return score > silverHighScore;
-    }
-
-    public boolean isNewBronzeHighScore(int score) {
-        return score > bronzeHighScore;
     }
 }
