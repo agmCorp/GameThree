@@ -1,9 +1,7 @@
 package uy.com.agm.gamethree.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -37,13 +35,18 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final String TAG = SelectLevelScreen.class.getName();
 
     // Constants
-    public static final float SCROLL_PANE_MAX_HEIGHT = 650.0f;
-    public static final float CONTAINER_WIDTH = 400.0f;
-    public static final float STAR_WIDTH = 30.0f;
-    public static final float STAR_HEIGHT = 100.0f;
-    public static final float STARS_TABLE_WIDTH = 300.0f;
-
-    Table levelsTable;
+    private static final float SCROLL_PANE_MAX_HEIGHT = 650.0f;
+    private static final float CONTAINER_WIDTH = 400.0f;
+    private static final float STAR_WIDTH = 30.0f;
+    private static final float STAR_HEIGHT = 100.0f;
+    private static final float STARS_TABLE_WIDTH = 300.0f;
+    private static final int NINE_PATCH_PIXELS = 2;
+    private static final float HAND_SCALE = 0.4f;
+    private static final float HAND_X = 340.0f;
+    private static final float HAND_Y = 350.0f;
+    private static final float HAND_OFFSET = 50.0f;
+    private static final float HAND_GAME_COMPLETED = 70.0f;
+    private static final float HAND_DURATION = 2.0f;
 
     public SelectLevelScreen() {
         super();
@@ -53,28 +56,31 @@ public class SelectLevelScreen extends AbstractScreen {
     public void buildStage() {
         defineMainTable();
         defineNavigationTable();
-
-        MANITO();
+        setHand();
     }
 
-    private void MANITO() {
-        Image hand = new Image(Assets.getInstance().getScene2d().getHand());
-        hand.setScale(0.4f);
-        hand.setX(380);
-        //hand.setY(500);
-        addActor(hand);
+    private void setHand() {
+        if (!DebugConstants.DEBUG_LEVELS) {
+            Image hand = new Image(Assets.getInstance().getScene2d().getHand());
+            hand.setScale(HAND_SCALE);
+            hand.setX(HAND_X);
+            GameSettings prefs = GameSettings.getInstance();
+            if (prefs.isGameComplete()) {
+                hand.setY(HAND_GAME_COMPLETED);
+            } else {
+                hand.setY(HAND_Y - prefs.getLevels().size * HAND_OFFSET);
+            }
+            addActor(hand);
 
-        Vector2 v = levelsTable.localToStageCoordinates(new Vector2(levelsTable.getWidth() / 2, levelsTable.getHeight() / 2));
-        Gdx.app.debug(TAG, "***---****" + v);
+            SequenceAction overallSequence = new SequenceAction();
+            overallSequence.addAction(Actions.fadeIn(HAND_DURATION));
+            overallSequence.addAction(Actions.fadeOut(HAND_DURATION));
 
-        SequenceAction overallSequence = new SequenceAction();
-        overallSequence.addAction(Actions.fadeIn(2)); // llega a alfa 1
-        overallSequence.addAction(Actions.fadeOut(2));
-
-        RepeatAction infiniteLoop = new RepeatAction();
-        infiniteLoop.setCount(RepeatAction.FOREVER);
-        infiniteLoop.setAction(overallSequence);
-        hand.addAction(infiniteLoop);
+            RepeatAction infiniteLoop = new RepeatAction();
+            infiniteLoop.setCount(RepeatAction.FOREVER);
+            infiniteLoop.setAction(overallSequence);
+            hand.addAction(infiniteLoop);
+        }
     }
 
     private void defineMainTable() {
@@ -105,17 +111,20 @@ public class SelectLevelScreen extends AbstractScreen {
 
         // Define a ScrollPane with scrollbars
         ScrollPane.ScrollPaneStyle scrollStyle = new ScrollPane.ScrollPaneStyle();
-        NinePatch vScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbarKnob9(), 2, 2, 2, 2);
-        NinePatch vScrollNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbar9(), 2, 2, 2, 2);
-        NinePatch hScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbarKnob9(), 2, 2, 2, 2);
-        NinePatch hScrollNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbar9(), 2, 2, 2, 2);
+        NinePatch vScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbarKnob9(),
+                NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS);
+        NinePatch vScrollNine = new NinePatch(Assets.getInstance().getScene2d().getvScrollbar9(),
+                NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS);
+        NinePatch hScrollKnobNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbarKnob9(),
+                NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS);
+        NinePatch hScrollNine = new NinePatch(Assets.getInstance().getScene2d().gethScrollbar9(),
+                NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS, NINE_PATCH_PIXELS);
 
         scrollStyle.vScrollKnob = new NinePatchDrawable(vScrollKnobNine);
         scrollStyle.vScroll = new NinePatchDrawable(vScrollNine);
         scrollStyle.hScrollKnob = new NinePatchDrawable(hScrollKnobNine);
         scrollStyle.hScroll = new NinePatchDrawable(hScrollNine);
 
-        levelsTable = defineLevelsTable();
         ScrollPane scrollPane = new ScrollPane(defineLevelsTable(), scrollStyle);
 
         // Add values
