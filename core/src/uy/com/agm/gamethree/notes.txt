@@ -6,8 +6,8 @@ Si debuglevels esta activo no debo actualizarlo. El addNewLevel de GameSettings 
 antes era un map. Creo que es alli donde debo poner el if de debuglevels para que no de bola si esta activa la flag.
 - HACER LA PANTALLA DE LEVEL COMPLETE. Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
 - revisar las penalties, puedo tener 3 x 15 penalties por vidas en total, mas las escapadas de bichos. Ver las estrellas.
--Usar una manito para senalar donde tocar.
 // FIN HACER
+
 
 - cada nivel arranca con 3 vidas y el score arranca en cero y se calcula por nivel.
 Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
