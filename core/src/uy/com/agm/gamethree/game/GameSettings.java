@@ -15,7 +15,7 @@ public class GameSettings {
     private static final String TAG = GameSettings.class.getName();
 
     // Constants
-    private static final String SETTINGS = "uy.com.agm.gameThree.settings";
+    private static final String SETTINGS = "wipeThemOutSettings";
     private static final String SOUND = "sound";
     private static final String MUSIC = "music";
     private static final String VOLUME_SOUND = "volSound";

@@ -64,6 +64,9 @@ public class SelectLevelScreen extends AbstractScreen {
         //hand.setY(500);
         addActor(hand);
 
+        Vector2 v = levelsTable.localToStageCoordinates(new Vector2(levelsTable.getWidth() / 2, levelsTable.getHeight() / 2));
+        Gdx.app.debug(TAG, "***---****" + v);
+
         SequenceAction overallSequence = new SequenceAction();
         overallSequence.addAction(Actions.fadeIn(2)); // llega a alfa 1
         overallSequence.addAction(Actions.fadeOut(2));
