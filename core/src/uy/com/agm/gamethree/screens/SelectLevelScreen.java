@@ -63,15 +63,12 @@ public class SelectLevelScreen extends AbstractScreen {
         if (!DebugConstants.DEBUG_LEVELS) {
             Image hand = new Image(Assets.getInstance().getScene2d().getHand());
             hand.setScale(HAND_SCALE);
-            hand.setX(HAND_X);
 
             // WA: actor.localToStageCoordinates(new Vector2(0,0)) didn't work
             GameSettings prefs = GameSettings.getInstance();
-            if (prefs.isGameComplete()) {
-                hand.setY(HAND_GAME_COMPLETED);
-            } else {
-                hand.setY(HAND_Y - prefs.getLevels().size * HAND_OFFSET);
-            }
+            hand.setY(prefs.isGameComplete() ? HAND_GAME_COMPLETED : HAND_Y - prefs.getLevels().size * HAND_OFFSET);
+            hand.setX(HAND_X);
+
             addActor(hand);
 
             SequenceAction overallSequence = new SequenceAction();
