@@ -87,6 +87,7 @@ public class AssetScene2d {
     private TextureRegion hScrollbarKnob9;
     private TextureRegion bigBossBackground;
     private TextureRegion helpBackground;
+    private TextureRegion hand;
     private AssetHeroHead heroHead;
     private AssetGoldenHeroHead goldenHeroHead;
     private AssetEndurance endurance;
@@ -177,6 +178,7 @@ public class AssetScene2d {
         hScrollbarKnob9 = atlasUI.findRegion("hScrollbarKnob9");
         bigBossBackground = atlasUI.findRegion("bigBossBackground");
         helpBackground = atlasUI.findRegion("helpBackground");
+        hand = atlasUI.findRegion("hand");
         heroHead = new AssetHeroHead(atlasUI);
         goldenHeroHead = new AssetGoldenHeroHead(atlasUI);
         endurance = new AssetEndurance(atlasUI);
@@ -495,6 +497,10 @@ public class AssetScene2d {
 
     public TextureRegion getHelpBackground() {
         return helpBackground;
+    }
+
+    public TextureRegion getHand() {
+        return hand;
     }
 
     public AssetHeroHead getHeroHead() {

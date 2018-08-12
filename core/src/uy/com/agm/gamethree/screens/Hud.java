@@ -542,7 +542,6 @@ public class Hud extends AbstractScreen {
         livesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_LIVES, lives));
     }
 
-// todo aca iban los metoso de endurance
     public void decreaseEndurance(int quantity) {
         endurance -= quantity;
         if (endurance >= 0) {

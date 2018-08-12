@@ -679,7 +679,7 @@ public class PlayScreen extends AbstractScreen {
 
         finish = !finish && isLevelCompleted(delta);
         if (finish) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, Hero.LIVES_START, hud.getScore(), player.getPenalties()); // TODO ESTO VA A CAMBIAR
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, Hero.LIVES_START, hud.getScore(), player.getPenalties()); // TODO ESTO VA A CAMBIAR porque los parametros no los necesito
         }
     }
 

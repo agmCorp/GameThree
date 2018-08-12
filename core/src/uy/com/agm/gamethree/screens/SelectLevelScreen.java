@@ -1,7 +1,12 @@
 package uy.com.agm.gamethree.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -38,6 +43,8 @@ public class SelectLevelScreen extends AbstractScreen {
     public static final float STAR_HEIGHT = 100.0f;
     public static final float STARS_TABLE_WIDTH = 300.0f;
 
+    Table levelsTable;
+
     public SelectLevelScreen() {
         super();
     }
@@ -46,6 +53,25 @@ public class SelectLevelScreen extends AbstractScreen {
     public void buildStage() {
         defineMainTable();
         defineNavigationTable();
+
+        MANITO();
+    }
+
+    private void MANITO() {
+        Image hand = new Image(Assets.getInstance().getScene2d().getHand());
+        hand.setScale(0.4f);
+        hand.setX(380);
+        //hand.setY(500);
+        addActor(hand);
+
+        SequenceAction overallSequence = new SequenceAction();
+        overallSequence.addAction(Actions.fadeIn(2)); // llega a alfa 1
+        overallSequence.addAction(Actions.fadeOut(2));
+
+        RepeatAction infiniteLoop = new RepeatAction();
+        infiniteLoop.setCount(RepeatAction.FOREVER);
+        infiniteLoop.setAction(overallSequence);
+        hand.addAction(infiniteLoop);
     }
 
     private void defineMainTable() {
@@ -86,6 +112,7 @@ public class SelectLevelScreen extends AbstractScreen {
         scrollStyle.hScrollKnob = new NinePatchDrawable(hScrollKnobNine);
         scrollStyle.hScroll = new NinePatchDrawable(hScrollNine);
 
+        levelsTable = defineLevelsTable();
         ScrollPane scrollPane = new ScrollPane(defineLevelsTable(), scrollStyle);
 
         // Add values
