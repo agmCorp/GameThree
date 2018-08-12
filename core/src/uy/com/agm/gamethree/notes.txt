@@ -1,22 +1,5 @@
 PROXIMAS VERSIONES
 ------------------
-// HACER
-- atencion cuando haga la pantalla de level complete, ojo con el progress.
-Si debuglevels esta activo no debo actualizarlo. El addNewLevel de GameSettings puede agregar repetidos...por eso
-antes era un map. Creo que es alli donde debo poner el if de debuglevels para que no de bola si esta activa la flag.
-- HACER LA PANTALLA DE LEVEL COMPLETE. Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
-- revisar las penalties, puedo tener 3 x 15 penalties por vidas en total, mas las escapadas de bichos. Ver las estrellas.
-- poner la manito en nextlevel
-// FIN HACER
-
-
-- cada nivel arranca con 3 vidas y el score arranca en cero y se calcula por nivel.
-Para calcular el final score y el highscore, sumo los scores de los niveles que pase.
-Esto me obliga a tener que sacar el highscore del hud y por ende arreglar el help.
-- El que tiene que contabilizar la endurance es el hero no el hud. El hero tiene vidas, endurance, penalties.
-- No puedo contabilizar siempre los highscores porque necesito conocer las penalties.
-- Definir el corazon fijo en 15, tener 15 imagenes de corazon.
-- rehacer los select stage. Usar arreglos con tope. Usar una manito para senalar donde tocar.
 - implementé: refill de corazones, penalties. Revisar esto.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
@@ -136,8 +119,6 @@ de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro 
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
 - Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
 Probar si eso se arregla con el velocity threshold de world.
-- Me paso que deje ir a un enemigo y me aparecio solo la manito de ok, sin el mensaje de "WATCH OUT! Don't let your enemies flee!" y sin el fondo lightred.
-Lo intenté solucionar, fijarse si vuelve a pasar, más que nada en el nivel 2.
 - En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
 Cuando agarré un colTwo recien ahi desaparecio.
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
@@ -145,6 +126,10 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
+- Si por ejemplo interrumpo el movimiento del FinalEnemyLevelOne, se descoordina y queda atrapado en una esquina.
+Para interrumpir su movimiento puedo por ejemplo ponerme en la esquina superior derecha y que la arana venga desde abajo por
+el lado derecho. Ahi nos chocamos y por mas peso que ella tenga la detengo. Luego ella dispara y me mata y queda boba.
+Hubiera sido bueno programar la arana con el mismo mecanismo del FinalEnemyLevelTwo, pero bueno, yo quise originalidad en cada enemigo final.
 
 TENGO
 -----

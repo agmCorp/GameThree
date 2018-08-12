@@ -1,6 +1,9 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -32,6 +35,10 @@ public class LevelCompletedScreen extends AbstractScreen {
 
     // Constants
     private static final int PENALTY_COST = 200;
+    private static final float HAND_SCALE = 0.4f;
+    private static final float HAND_X = 340.0f;
+    private static final float HAND_Y = 70.0f;
+    private static final float HAND_DURATION = 2.0f;
 
     private int currentLevel;
     private int nextLevel;
@@ -74,6 +81,7 @@ public class LevelCompletedScreen extends AbstractScreen {
     public void buildStage() {
         defineMainTable();
         defineNavigationTable();
+        setHand();
     }
 
     private void defineMainTable() {
@@ -110,8 +118,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         animatedImage.setAlign(Align.center);
 
         // Define our labels based on labelStyle
-        Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
+        Label levelScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.levelScore", finalScore), labelStyleNormal);
         TypingLabelWorkaround gameScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.gameScore", gameScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabelWorkaround nextLevelLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
@@ -120,9 +128,9 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(currentScoreLabel).padTop(AbstractScreen.PAD);
-        table.row();
         table.add(penaltiesLabel).padTop(AbstractScreen.PAD);
+        table.row();
+        table.add(levelScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
         table.add(gameScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
@@ -181,6 +189,24 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Adds table to stage
         addActor(table);
+    }
+
+    private void setHand() {
+        Image hand = new Image(Assets.getInstance().getScene2d().getHand());
+        hand.setScale(HAND_SCALE);
+        hand.setY(HAND_Y);
+        hand.setX(HAND_X);
+
+        addActor(hand);
+
+        SequenceAction overallSequence = new SequenceAction();
+        overallSequence.addAction(Actions.fadeIn(HAND_DURATION));
+        overallSequence.addAction(Actions.fadeOut(HAND_DURATION));
+
+        RepeatAction infiniteLoop = new RepeatAction();
+        infiniteLoop.setCount(RepeatAction.FOREVER);
+        infiniteLoop.setAction(overallSequence);
+        hand.addAction(infiniteLoop);
     }
 
     private Table getNewHighScoreTable(TextureRegion highScoreImage, Label highScoreLabel) {
