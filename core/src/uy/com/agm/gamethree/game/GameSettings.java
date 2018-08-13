@@ -99,9 +99,14 @@ public class GameSettings {
     }
 
     private void loadHighScores() {
+        // Gdx.app.exit() schedules an exit from the application (see MainMenuScreen).
+        // On android, this will cause a call to pause() and dispose() some time in the future,
+        // it will not immediately finish the application. Therefore, sometimes this singleton remains
+        // on memory when the app runs a second time.
+        // To avoid duplication of all its elements, we must empty the array.
         highScores.clear();
-        highScores = getDefaultHighScores();
 
+        highScores = getDefaultHighScores();
         String data;
         for (int i = 0; i < MAX_RANKING; i++) {
             data = prefs.getString(HIGH_SCORE + i, "");
@@ -135,6 +140,11 @@ public class GameSettings {
     }
 
     private void loadLevels() {
+        // Gdx.app.exit() schedules an exit from the application (see MainMenuScreen).
+        // On android, this will cause a call to pause() and dispose() some time in the future,
+	    // it will not immediately finish the application. Therefore, sometimes this singleton remains
+        // on memory when the app runs a second time.
+        // To avoid duplication of all its elements, we must empty the array.
         levels.clear();
 
         String data;
