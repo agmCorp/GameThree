@@ -32,7 +32,7 @@ import uy.com.agm.gamethree.actors.enemies.EnemyTen;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwelve;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwo;
-import uy.com.agm.gamethree.actors.finals.Boss;
+import uy.com.agm.gamethree.actors.bosses.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;

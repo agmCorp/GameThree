@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.actors.finals;
+package uy.com.agm.gamethree.actors.bosses;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;

@@ -1,6 +1,5 @@
 PROXIMAS VERSIONES
 ------------------
-- buscar que no haya puesto "bosslevel"
 - Es muy doloroso, pero tengo que hacer la arana de vuelta. Ojo con los rotation y eso.
 Liberar asi por ahora, capaz hacer los videos.
 Probar si al BossTwo puedo hacerle perder el rumbo como al One.
@@ -53,7 +52,7 @@ vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObj
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.
 Esa interfaz la puedo usar ademas dentro de ActorDef.
 - Poner particulas parece facil, capaz lluvia.
-- Poner alguna animacion linda de hero cuando mata al enemigo final y gana el nivel.
+- Poner alguna animacion linda de hero cuando mata al boss y gana el nivel.
 Si hero le gana al boss, puedo poner al final del hero.update(): if boss is dead, then currentstate = dancing.
 Y en el update si el estado es dancing, hacer una animacion graciosa.
 Si pongo pausa en el juego podría poder alguna animación graciosa de Hero...creo que basta con hacerle a hero un método drawEspecial() que haga
@@ -85,10 +84,10 @@ Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen 
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
     - hay que dispararle mucho para matarlo.
-    - el enemigo final puede estar acompanado de otros simples, ojo con el metodo Enemy.onDestroy().
+    - el boss puede estar acompanado de otros simples, ojo con el metodo Enemy.onDestroy().
     - se mueva en 8 horizontal y dispare abanico de balas como mi poder fire.
-    - enemigofinal que me sigue
-    - enemigofinal son varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
+    - boss que me sigue
+    - boss con varios ojos (circulos box2d) que cambian de color y en un estado disparan. Se mueven juntos y están
       rodeados por una gran textura que es el enemigo!
     - luego de un rato hace blink y desaparece y vuelve a aparecer. Disparando siempre.
     - enemigo que al recibir disparo se parte en 2 y luego de un rato se vuelve a juntar (como el enemyfour pero
@@ -99,11 +98,10 @@ Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen 
     Se mueve rapido derecho en diagonal.
 - minuto 33.43 puentes dinámicos
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
-Con el enemigo final 2 no se...no logro visualizar esos cambios en perspectiva.
+Con el boss 2 no se...no logro visualizar esos cambios en perspectiva.
 - Frases:
     - Humans are the real monsters
     - La que anoté por ahí en el papel: You were the monster all along
-
 
 DUDAS Y BUGS
 ------------
@@ -120,7 +118,7 @@ el resto del sonido. No lo supe arreglar...
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
-- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
+- ***PENDIENTE DE COMPROBAR: Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
 Probar si eso se arregla con el velocity threshold de world.
 - En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
 Cuando agarré un colTwo recien ahi desaparecio.
@@ -132,11 +130,11 @@ que me puede matar.
 - Si por ejemplo interrumpo el movimiento del BossOne, se descoordina y queda atrapado en una esquina.
 Para interrumpir su movimiento puedo por ejemplo ponerme en la esquina superior derecha y que la arana venga desde abajo por
 el lado derecho. Ahi nos chocamos y por mas peso que ella tenga la detengo. Luego ella dispara y me mata y queda boba.
-Hubiera sido bueno programar la arana con el mismo mecanismo del BossTwo, pero bueno, yo quise originalidad en cada enemigo final.
+Hubiera sido bueno programar la arana con el mismo mecanismo del BossTwo, pero bueno, yo quise originalidad en cada boss.
 
 TENGO
 -----
-- borders, edges, paths, obstacles, powerboxes, enemies, finals, items, weapons
+- borders, edges, paths, obstacles, powerboxes, enemies, bosses, items, weapons
 - enemigos comunes 11 (uso 3 o 4 enemigos por nivel):
 one - amarillo
 two - murcielago
@@ -150,11 +148,12 @@ nine - fenix
 ten - 2 circulos
 eleven - hombres de piedra
 twelve - vampirito violeta
-- enemigos finales: 3
+- bosses: 4
 - poderes 5 -3 de habilidad, 2 de fuego- (2 poderes por nivel)
-- 1 moneda x 3
+- 1 moneda x 6
 - 1 shuriken
 - 1 item vidas
+- 1 item endurance (resistencia)
 - 1 your soul is mine
 
 ESTIMACION
@@ -224,6 +223,7 @@ https://developer.android.com/topic/performance/reduce-apk-size.html
 También lo puedo usar directo en https://tinypng.com/ para imágenes menores a 5 megas.
 Para imágenes más pesadas usar curl. Ver "lecciones aprendidas 24".
 - http://flamingtext.com/logo/Design-Cartoon Para crear fonts bonitas
+- Bulk Rename Utility (Windows) para renombrar archivos.
 
 LECCIONES APRENDIDAS
 --------------------

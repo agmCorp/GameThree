@@ -1,4 +1,4 @@
-package uy.com.agm.gamethree.actors.finals;
+package uy.com.agm.gamethree.actors.bosses;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,10 +16,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyMagicShooting;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemySwordShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
-import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
+import uy.com.agm.gamethree.assets.sprites.AssetBossTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -31,11 +31,11 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/30/2017.
  */
 
-public class BossFour extends Boss {
-    private static final String TAG = BossFour.class.getName();
+public class BossTwo extends Boss {
+    private static final String TAG = BossTwo.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final String NAME = "DARKHEART";
+    private static final String NAME = "SKULLYHOOD";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
     private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
@@ -46,19 +46,15 @@ public class BossFour extends Boss {
     private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
     private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
     private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
-    private static final float RADIUS_METERS = 1.5f;
     private static final float LINEAR_VELOCITY = 4.5f;
-    private static final float PERIOD_SECONDS = 2 * MathUtils.PI * RADIUS_METERS / LINEAR_VELOCITY;
-    private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
-    private static final float CIRCULAR_PATH_PROBABILITY = 0.3f;  // 30%
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 20 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
+    private static final int MAX_DAMAGE = 12 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     private static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
-    private static final float DYING_STATE_TIME_SECONDS = 3.5f;
+    private static final float DYING_STATE_TIME_SECONDS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
     private static final int SCORE = 500;
 
@@ -67,15 +63,16 @@ public class BossFour extends Boss {
     private float changeTime;
     private float timeToChange;
     private float agonyTime;
-    private float elapsedTime;
-    private boolean circularPath;
 
-    private Animation bossFourWalkAnimation;
-    private Animation bossFourIdleAnimation;
-    private Animation bossFourShootAnimation;
-    private Animation bossFourDyingAnimation;
+    private Animation bossTwoMovingUpAnimation;
+    private Animation bossTwoMovingDownAnimation;
+    private Animation bossTwoMovingLeftRightAnimation;
+    private Animation bossTwoIdleAnimation;
+    private Animation bossTwoShootingUpAnimation;
+    private Animation bossTwoShootingDownAnimation;
+    private Animation bossTwoDyingAnimation;
 
-    // Circle on the screen where BossFour must go
+    // Circle on the screen where BossTwo must go
     private Circle target;
     private Circle tmpCircle; // Temporary GC friendly circle
 
@@ -92,21 +89,27 @@ public class BossFour extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossFour(PlayScreen screen, float x, float y) {
-        super(screen, x, y, AssetBossFour.WIDTH_METERS, AssetBossFour.HEIGHT_METERS);
+    public BossTwo(PlayScreen screen, float x, float y) {
+        super(screen, x, y, AssetBossTwo.WIDTH_METERS, AssetBossTwo.HEIGHT_METERS);
 
         // Animations
-        bossFourWalkAnimation = Assets.getInstance().getBossFour().getBossFourWalkAnimation();
-        bossFourIdleAnimation = Assets.getInstance().getBossFour().getBossFourIdleAnimation();
-        bossFourShootAnimation = Assets.getInstance().getBossFour().getBossFourShootAnimation();
-        bossFourDyingAnimation = Assets.getInstance().getBossFour().getBossFourDeathAnimation();
+        bossTwoMovingUpAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingUpAnimation();
+        bossTwoMovingDownAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingDownAnimation();
+        bossTwoMovingLeftRightAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingLeftRightAnimation();
+        bossTwoIdleAnimation = Assets.getInstance().getBossTwo().getBossTwoIdleAnimation();
+        bossTwoShootingUpAnimation = Assets.getInstance().getBossTwo().getBossTwoShootingUpAnimation();
+        bossTwoShootingDownAnimation = Assets.getInstance().getBossTwo().getBossTwoShootingDownAnimation();
+        bossTwoDyingAnimation = Assets.getInstance().getBossTwo().getBossTwoDeathAnimation();
 
-        // BossFour variables initialization
+        // BossTwo variables initialization
         damage = MAX_DAMAGE;
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
+
+        // Place origin of rotation in the center of the Sprite
+        setOriginCenter();
 
         // Initialize target
         target = new Circle(0, 0, TARGET_RADIUS_METERS);
@@ -115,22 +118,22 @@ public class BossFour extends Boss {
         tmpCircle = new Circle();
 
         // Move to a new target at constant speed
-        setNewTarget();
-        tmp = getSpeedTarget();
-        velocity.set(tmp);
-        initCircularPath();
+        moveToNewTarget();
 
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
-        powerFXAnimation = Assets.getInstance().getBossFour().getBossFourPowerAnimation();
+        powerFXAnimation = Assets.getInstance().getBossTwo().getBossTwoPowerAnimation();
         powerFXStateTime = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.getInstance().getBossFour().getBossFourPowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getBossTwo().getBossTwoPowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        powerFXSprite.setBounds(getX(), getY(), AssetBossFour.POWER_WIDTH_METERS, AssetBossFour.POWER_HEIGHT_METERS);
+        powerFXSprite.setBounds(getX(), getY(), AssetBossTwo.POWER_WIDTH_METERS, AssetBossTwo.POWER_HEIGHT_METERS);
+
+        // Place origin of rotation in the center of the Sprite
+        powerFXSprite.setOriginCenter();
 
         // -------------------- ExplosionFX --------------------
 
@@ -147,6 +150,9 @@ public class BossFour extends Boss {
         // Explosion FX Sprite
         explosionFXSprite = new Sprite(spriteExplosion);
 
+        // Place origin of rotation in the center of the Sprite
+        explosionFXSprite.setOriginCenter();
+
         // -------------------- SplatFX --------------------
 
         // Set the splat's texture
@@ -157,6 +163,9 @@ public class BossFour extends Boss {
 
         // Splat FX Sprite
         splatFXSprite = new Sprite(spriteSplat);
+
+        // Place origin of rotation in the center of the Sprite
+        splatFXSprite.setOriginCenter();
     }
 
     @Override
@@ -257,7 +266,7 @@ public class BossFour extends Boss {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyMagicShooting(screen, 0, FIRE_DELAY_SECONDS);
+        return new EnemySwordShooting(screen, 0, FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -267,7 +276,7 @@ public class BossFour extends Boss {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) bossFourIdleAnimation.getKeyFrame(stateBossTime, true);
+        TextureRegion region = (TextureRegion) bossTwoIdleAnimation.getKeyFrame(stateBossTime, true);
         stateBossTime += dt;
         return region;
     }
@@ -304,7 +313,7 @@ public class BossFour extends Boss {
                 break;
         }
 
-        // BossFour could have been destroyed
+        // BossTwo could have been destroyed
         if (!isDestroyed()) {
             switchPowerState(dt);
         }
@@ -324,7 +333,7 @@ public class BossFour extends Boss {
     }
 
     private void stateWalking(float dt) {
-        // Set new velocity (see getSpeed(...))
+        // Set velocity calculated to reach the target circle
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -335,41 +344,22 @@ public class BossFour extends Boss {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // Preserve the flip state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
+        // Depending on the velocity, set the sprite's rotation angle
+        setRotationAngle();
 
-        TextureRegion region = (TextureRegion) bossFourWalkAnimation.getKeyFrame(stateBossTime);
-        setRegion(region);
-        stateBossTime += dt;
+        // Depending on the velocity, set the appropriate sprite animation
+        setAnimation(dt);
 
-        // Determines where BossFour is looking
-        setFlipState(isFlipX, isFlipY);
-
-        velocity.set(getSpeed(dt));
+        if (reachTarget()) {
+            moveToNewTarget();
+        }
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
     }
 
-    private void setFlipState(boolean isFlipX, boolean isFlipY) {
-        float heroX = screen.getCreator().getHero().getB2body().getPosition().x;
-        float pivotRight = b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS;
-        float pivotLeft = b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS;
-
-        if (heroX < pivotLeft) {
-            setFlip(true, false);
-        }
-        if (pivotLeft <= heroX && heroX <= pivotRight) {
-            setFlip(isFlipX, isFlipY);
-        }
-        if (heroX > pivotRight) {
-            setFlip(false, false);
-        }
-    }
-
-    private void setNewTarget() {
-        int randomPoint = MathUtils.random(1, 9);
+    private void moveToNewTarget() {
+        int randomPoint = MathUtils.random(1, 5);
         switch (randomPoint) {
             case 1:
                 target.setPosition(X_MIN, Y_HALF);
@@ -386,85 +376,37 @@ public class BossFour extends Boss {
             case 5:
                 target.setPosition(X_HALF, Y_HALF);
                 break;
-            case 6:
-                target.setPosition(X_MIN, Y_MAX);
-                break;
-            case 7:
-                target.setPosition(X_MAX, Y_MAX);
-                break;
-            case 8:
-                target.setPosition(X_MIN, Y_MIN);
-                break;
-            case 9:
-                target.setPosition(X_MAX, Y_MIN);
-                break;
         }
-    }
 
-    private Vector2 getSpeed(float dt) {
-        if (circularPath) {
-            if (finishCircularPath()) {
-                initCircularPath();
-                tmp = getNewPath(dt);
-            } else {
-                tmp = getSpeedCircularPath(dt);
-            }
-        } else {
-            if (reachTarget()) {
-                tmp = getNewPath(dt);
-            } else {
-                tmp = getSpeedTarget();
-            }
-        }
-        return tmp;
-    }
-
-    private void initCircularPath() {
-        elapsedTime = 0;
-        circularPath = false;
-    }
-
-    private Vector2 getNewPath(float dt) {
-        circularPath = startCircularPath();
-        if (circularPath) {
-            tmp = getSpeedCircularPath(dt);
-        } else	{
-            setNewTarget();
-            tmp = getSpeedTarget();
-        }
-        return tmp;
-    }
-
-    private boolean finishCircularPath() {
-        return elapsedTime >= PERIOD_SECONDS;
-    }
-
-    private Vector2 getSpeedTarget() {
+        // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
-        return tmp;
+        velocity.set(tmp);
     }
 
-    private Vector2 getSpeedCircularPath(float dt) {
-        if (target.x == X_MIN && target.y == Y_HALF) {
-            tmp.set(RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
-        } else if (target.x == X_MAX && target.y == Y_HALF) {
-            tmp.set(-1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
-        } else if (target.x == X_HALF && target.y == Y_MAX) {
-            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), -1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
-        } else if (target.x == X_HALF && target.y == Y_MIN) {
-            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
+    private void setRotationAngle() {
+        if (b2body.getLinearVelocity().len() > 0.0f) {
+            setRotation(90.0f);
+            float velAngle = this.b2body.getLinearVelocity().angle();
+            if (0 <= velAngle && velAngle <= 180.0f) {
+                setRotation(270.0f);
+            }
+            rotate(velAngle);
         }
-        elapsedTime += dt;
-        return tmp;
     }
 
-    private boolean startCircularPath() {
-        return 	((target.x == X_MIN && target.y == Y_HALF) ||
-                (target.x == X_HALF && target.y == Y_MAX) ||
-                (target.x == X_MAX && target.y == Y_HALF) ||
-                (target.x == X_HALF && target.y == Y_MIN)) &&
-                MathUtils.random() <= CIRCULAR_PATH_PROBABILITY;
+    private void setAnimation(float dt) {
+        float vy = b2body.getLinearVelocity().y;
+        if (vy > 0.0f) {
+            setRegion((TextureRegion) bossTwoMovingUpAnimation.getKeyFrame(stateBossTime, true));
+        } else {
+            if (vy < 0.0f) {
+                setRegion((TextureRegion) bossTwoMovingDownAnimation.getKeyFrame(stateBossTime, true));
+            } else { // vy == 0
+                setRegion((TextureRegion) bossTwoMovingLeftRightAnimation.getKeyFrame(stateBossTime, true));
+            }
+        }
+        stateBossTime += dt;
     }
 
     private boolean reachTarget() {
@@ -476,6 +418,9 @@ public class BossFour extends Boss {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
+        // Preserve the rotation state
+        float rotation = getRotation();
+
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -483,17 +428,11 @@ public class BossFour extends Boss {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-
-        // Preserve the flip state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
-
-        TextureRegion region = (TextureRegion) bossFourIdleAnimation.getKeyFrame(stateBossTime);
-        setRegion(region);
+        setRegion((TextureRegion) bossTwoIdleAnimation.getKeyFrame(stateBossTime, true));
         stateBossTime += dt;
 
-        // Determines where BossFour is looking
-        setFlipState(isFlipX, isFlipY);
+        // Apply previous rotation state
+        setRotation(rotation);
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
@@ -511,16 +450,21 @@ public class BossFour extends Boss {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        // Preserve the flip state
-        boolean isFlipX = isFlipX();
-        boolean isFlipY = isFlipY();
+        // Calculate shooting angle
+        Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
+        float angle = tmp.set(heroPosition.x, heroPosition.y)
+                .sub(b2body.getPosition().x, b2body.getPosition().y).angle();
 
-        TextureRegion region = (TextureRegion) bossFourShootAnimation.getKeyFrame(stateBossTime);
-        setRegion(region);
+        // Depending on the angle, set the sprite's rotation angle and animation
+        setRotation(90.0f);
+        if (0 <= angle && angle <= 180.0f) {
+            setRegion((TextureRegion) bossTwoShootingUpAnimation.getKeyFrame(stateBossTime, true));
+            setRotation(270.0f);
+        } else {
+            setRegion((TextureRegion) bossTwoShootingDownAnimation.getKeyFrame(stateBossTime, true));
+        }
+        rotate(angle);
         stateBossTime += dt;
-
-        // Determines where BossFour is looking
-        setFlipState(isFlipX, isFlipY);
 
         // Shoot time!
         openFire(dt);
@@ -563,39 +507,45 @@ public class BossFour extends Boss {
             // Set the new state
             currentStateBoss = StateBoss.EXPLODING;
         } else {
-            // Preserve the flip state
-            boolean isFlipX = isFlipX();
-            boolean isFlipY = isFlipY();
+            // Preserve the rotation state
+            float rotation = getRotation();
 
-            setRegion((TextureRegion) bossFourDyingAnimation.getKeyFrame(stateBossTime));
+            setRegion((TextureRegion) bossTwoDyingAnimation.getKeyFrame(stateBossTime, true));
             stateBossTime += dt;
 
-            // Apply previous flip state
-            setFlip(isFlipX, isFlipY);
+            // Apply previous rotation state
+            setRotation(rotation);
         }
     }
 
-   private void stateExploding(float dt) {
-       if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
-           // Show victory animation and play audio FX
-           victoryFX();
+    private void stateExploding(float dt) {
+        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
+            // Show victory animation and play audio FX
+            victoryFX();
 
-           // Set the new state
-           currentStateBoss = StateBoss.DEAD;
-       } else {
-           // Animation
-           explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTime, true));
-           explosionFXStateTime += dt;
+            // Set the new state
+            currentStateBoss = StateBoss.DEAD;
+        } else {
+            // Animation
+            explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTime, true));
+            explosionFXStateTime += dt;
 
-           // Get center of its bounding rectangle
-           getBoundingRectangle().getCenter(tmp);
+            // Apply rotation of the main character
+            explosionFXSprite.setRotation(getRotation());
 
-           // Center the Sprite in tmp
-           explosionFXSprite.setPosition(tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
-       }
+            // Get center of its bounding rectangle
+            getBoundingRectangle().getCenter(tmp);
+
+            // Center the Sprite in tmp
+            explosionFXSprite.setPosition(tmp.x - explosionFXSprite.getWidth() / 2, tmp.y - explosionFXSprite.getHeight() / 2);
+        }
     }
 
     private void stateDead() {
+        // Apply rotation and flip of the explosion
+        splatFXSprite.setRotation(explosionFXSprite.getRotation());
+        splatFXSprite.setFlip(explosionFXSprite.isFlipX(), explosionFXSprite.isFlipY());
+
         // Get center of the bounding rectangle of the explosion
         explosionFXSprite.getBoundingRectangle().getCenter(tmp);
 
@@ -614,7 +564,10 @@ public class BossFour extends Boss {
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
             powerFXStateTime += dt;
 
-            // Update our Sprite to correspond with the position of our BossFour's Box2D body
+            // Apply rotation of the main character
+            powerFXSprite.setRotation(getRotation());
+
+            // Update our Sprite to correspond with the position of our bossTwo's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
@@ -671,7 +624,7 @@ public class BossFour extends Boss {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpBossFour();
+        return Assets.getInstance().getScene2d().getHelpBossTwo();
     }
 
     private boolean isDrawable() {
@@ -699,7 +652,7 @@ public class BossFour extends Boss {
 
     @Override
     public void draw(Batch batch) {
-        // We draw BossFour in these states: WALKING IDLE SHOOTING INJURED DYING
+        // We draw BossTwo in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
             super.draw(batch);

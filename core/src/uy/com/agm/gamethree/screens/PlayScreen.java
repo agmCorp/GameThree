@@ -22,7 +22,7 @@ import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
-import uy.com.agm.gamethree.actors.finals.Boss;
+import uy.com.agm.gamethree.actors.bosses.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;

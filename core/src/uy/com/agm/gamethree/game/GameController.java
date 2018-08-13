@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-import uy.com.agm.gamethree.actors.finals.Boss;
+import uy.com.agm.gamethree.actors.bosses.Boss;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;

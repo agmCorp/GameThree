@@ -1,10 +1,11 @@
-package uy.com.agm.gamethree.actors.finals;
+package uy.com.agm.gamethree.actors.bosses;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -15,38 +16,49 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
-import uy.com.agm.gamethree.actors.weapons.enemy.EnemyBlastShooting;
+import uy.com.agm.gamethree.actors.weapons.enemy.EnemyMagicShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
-import uy.com.agm.gamethree.assets.sprites.AssetBossThree;
+import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
+import uy.com.agm.gamethree.tools.Vector2Util;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
 /**
  * Created by AGM on 12/30/2017.
  */
 
-public class BossThree extends Boss {
-    private static final String TAG = BossThree.class.getName();
+public class BossFour extends Boss {
+    private static final String TAG = BossFour.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    private static final String NAME = "THE BEHOLDER";
+    private static final String NAME = "DARKHEART";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
-    private static final float HORIZONTAL_PERIOD_SECONDS = 2.0f;
-    private static final float VERTICAL_PERIOD_SECONDS = 3.0f;
-    private static final float HORIZONTAL_RADIUS_METERS = 1.0f;
-    private static final float VERTICAL_RADIUS_METERS = 2.0f;
+    private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
+    private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
+    private static final float X_MIN = TARGET_RADIUS_METERS;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS;
+    private static final float X_HALF = WORLD_WIDTH / 2;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+    private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
+    private static final float RADIUS_METERS = 1.5f;
+    private static final float LINEAR_VELOCITY = 4.5f;
+    private static final float PERIOD_SECONDS = 2 * MathUtils.PI * RADIUS_METERS / LINEAR_VELOCITY;
+    private static final float W = 2 * MathUtils.PI / PERIOD_SECONDS;
+    private static final float CIRCULAR_PATH_PROBABILITY = 0.3f;  // 30%
     private static final float DENSITY = 1000.0f;
-    private static final int MAX_DAMAGE = 16 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
+    private static final int MAX_DAMAGE = 20 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
     private static final float EXPLOSION_SHAKE_DURATION = 2.0f;
     private static final float HIT_SHAKE_DURATION = 1.0f;
     private static final float CHANGE_STATE_MIN_TIME_SECONDS = 2.0f;
     private static final float CHANGE_STATE_MAX_TIME_SECONDS = 4.0f;
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
-    private static final float DYING_STATE_TIME_SECONDS = 2.0f;
+    private static final float DYING_STATE_TIME_SECONDS = 3.5f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
     private static final int SCORE = 500;
 
@@ -56,14 +68,16 @@ public class BossThree extends Boss {
     private float timeToChange;
     private float agonyTime;
     private float elapsedTime;
-    private boolean horizontalCounterclockwise;
-    private boolean verticalCounterclockwise;
-    private boolean movingHorizontal;
+    private boolean circularPath;
 
-    private Animation bossThreeWalkAnimation;
-    private Animation bossThreeIdleAnimation;
-    private Animation bossThreeShootAnimation;
-    private Animation bossThreeDyingAnimation;
+    private Animation bossFourWalkAnimation;
+    private Animation bossFourIdleAnimation;
+    private Animation bossFourShootAnimation;
+    private Animation bossFourDyingAnimation;
+
+    // Circle on the screen where BossFour must go
+    private Circle target;
+    private Circle tmpCircle; // Temporary GC friendly circle
 
     // Power FX
     private Animation powerFXAnimation;
@@ -78,38 +92,45 @@ public class BossThree extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossThree(PlayScreen screen, float x, float y) {
-        super(screen, x, y, AssetBossThree.WIDTH_METERS, AssetBossThree.HEIGHT_METERS);
+    public BossFour(PlayScreen screen, float x, float y) {
+        super(screen, x, y, AssetBossFour.WIDTH_METERS, AssetBossFour.HEIGHT_METERS);
 
         // Animations
-        bossThreeWalkAnimation = Assets.getInstance().getBossThree().getBossThreeWalkAnimation();
-        bossThreeIdleAnimation = Assets.getInstance().getBossThree().getBossThreeIdleAnimation();
-        bossThreeShootAnimation = Assets.getInstance().getBossThree().getBossThreeShootAnimation();
-        bossThreeDyingAnimation = Assets.getInstance().getBossThree().getBossThreeDeathAnimation();
+        bossFourWalkAnimation = Assets.getInstance().getBossFour().getBossFourWalkAnimation();
+        bossFourIdleAnimation = Assets.getInstance().getBossFour().getBossFourIdleAnimation();
+        bossFourShootAnimation = Assets.getInstance().getBossFour().getBossFourShootAnimation();
+        bossFourDyingAnimation = Assets.getInstance().getBossFour().getBossFourDeathAnimation();
 
-        // BossThree variables initialization
+        // BossFour variables initialization
         damage = MAX_DAMAGE;
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
         agonyTime = 0;
-        elapsedTime = 0;
-        horizontalCounterclockwise = MathUtils.randomBoolean();
-        verticalCounterclockwise = MathUtils.randomBoolean();
-        movingHorizontal = MathUtils.randomBoolean();
-        velocity.set(0.0f, 0.0f); // Initially at rest
+
+        // Initialize target
+        target = new Circle(0, 0, TARGET_RADIUS_METERS);
+
+        // Temporary GC friendly circle
+        tmpCircle = new Circle();
+
+        // Move to a new target at constant speed
+        setNewTarget();
+        tmp = getSpeedTarget();
+        velocity.set(tmp);
+        initCircularPath();
 
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
-        powerFXAnimation = Assets.getInstance().getBossThree().getBossThreePowerAnimation();
+        powerFXAnimation = Assets.getInstance().getBossFour().getBossFourPowerAnimation();
         powerFXStateTime = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.getInstance().getBossThree().getBossThreePowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getBossFour().getBossFourPowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        powerFXSprite.setBounds(getX(), getY(), AssetBossThree.POWER_WIDTH_METERS, AssetBossThree.POWER_HEIGHT_METERS);
+        powerFXSprite.setBounds(getX(), getY(), AssetBossFour.POWER_WIDTH_METERS, AssetBossFour.POWER_HEIGHT_METERS);
 
         // -------------------- ExplosionFX --------------------
 
@@ -236,7 +257,7 @@ public class BossThree extends Boss {
 
     @Override
     protected IShootStrategy getShootStrategy() {
-        return new EnemyBlastShooting(screen, 0, FIRE_DELAY_SECONDS);
+        return new EnemyMagicShooting(screen, 0, FIRE_DELAY_SECONDS);
     }
 
     @Override
@@ -246,7 +267,7 @@ public class BossThree extends Boss {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) bossThreeIdleAnimation.getKeyFrame(stateBossTime, true);
+        TextureRegion region = (TextureRegion) bossFourIdleAnimation.getKeyFrame(stateBossTime, true);
         stateBossTime += dt;
         return region;
     }
@@ -283,7 +304,7 @@ public class BossThree extends Boss {
                 break;
         }
 
-        // BossThree could have been destroyed
+        // BossFour could have been destroyed
         if (!isDestroyed()) {
             switchPowerState(dt);
         }
@@ -303,7 +324,7 @@ public class BossThree extends Boss {
     }
 
     private void stateWalking(float dt) {
-        // Set new velocity (see getNewTangentialSpeed(...))
+        // Set new velocity (see getSpeed(...))
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -314,70 +335,141 @@ public class BossThree extends Boss {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) bossThreeWalkAnimation.getKeyFrame(stateBossTime);
-        setRegionFlip(region);
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
+        TextureRegion region = (TextureRegion) bossFourWalkAnimation.getKeyFrame(stateBossTime);
         setRegion(region);
         stateBossTime += dt;
 
-        velocity.set(getNewTangentialSpeed(dt));
+        // Determines where BossFour is looking
+        setFlipState(isFlipX, isFlipY);
+
+        velocity.set(getSpeed(dt));
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
     }
 
-    private void setRegionFlip(TextureRegion region) {
+    private void setFlipState(boolean isFlipX, boolean isFlipY) {
         float heroX = screen.getCreator().getHero().getB2body().getPosition().x;
-        float pivot = b2body.getPosition().x;
+        float pivotRight = b2body.getPosition().x + CIRCLE_SHAPE_RADIUS_METERS;
+        float pivotLeft = b2body.getPosition().x - CIRCLE_SHAPE_RADIUS_METERS;
 
-        if (heroX <= pivot && !region.isFlipX()) {
-            region.flip(true, false);
+        if (heroX < pivotLeft) {
+            setFlip(true, false);
         }
-        if (heroX > pivot && region.isFlipX()) {
-            region.flip(true, false);
+        if (pivotLeft <= heroX && heroX <= pivotRight) {
+            setFlip(isFlipX, isFlipY);
+        }
+        if (heroX > pivotRight) {
+            setFlip(false, false);
         }
     }
 
-    private Vector2 getNewTangentialSpeed(float dt) {
-        /* Parametric equation of a Circle:
-         * x = center_x + radius * cos(angle)
-         * y = center_y + radius * sin(angle)
-         *
-         * Here 'angle' is the fraction of angular velocity (w) traveled in deltaTime (t).
-         * Therefore:
-         * w = 2 * PI / PERIOD
-         *
-         * Thus:
-         * x = center_x + radius * cos(w * t)
-         * y = center_y + radius * sin(w * t)
-         *
-         * Velocity (derivative d/dt)
-         * x = -r * w * sin(w * t)
-         * y = r * w * cos(w * t)
-         *
-         * Here, the negative sign indicates counterclockwise movement.
-         * We play with counterclockwise, tmp.set(x, y) and tmp.set(y, x) to decorate this movement.
-         */
+    private void setNewTarget() {
+        int randomPoint = MathUtils.random(1, 9);
+        switch (randomPoint) {
+            case 1:
+                target.setPosition(X_MIN, Y_HALF);
+                break;
+            case 2:
+                target.setPosition(X_HALF, Y_MAX);
+                break;
+            case 3:
+                target.setPosition(X_MAX, Y_HALF);
+                break;
+            case 4:
+                target.setPosition(X_HALF, Y_MIN);
+                break;
+            case 5:
+                target.setPosition(X_HALF, Y_HALF);
+                break;
+            case 6:
+                target.setPosition(X_MIN, Y_MAX);
+                break;
+            case 7:
+                target.setPosition(X_MAX, Y_MAX);
+                break;
+            case 8:
+                target.setPosition(X_MIN, Y_MIN);
+                break;
+            case 9:
+                target.setPosition(X_MAX, Y_MIN);
+                break;
+        }
+    }
 
-        float w;
-        if (movingHorizontal) {
-            if (elapsedTime >= HORIZONTAL_PERIOD_SECONDS) {
-                elapsedTime = 0;
-                horizontalCounterclockwise = MathUtils.randomBoolean();
-                movingHorizontal = MathUtils.randomBoolean();
+    private Vector2 getSpeed(float dt) {
+        if (circularPath) {
+            if (finishCircularPath()) {
+                initCircularPath();
+                tmp = getNewPath(dt);
+            } else {
+                tmp = getSpeedCircularPath(dt);
             }
-            w = 2 * MathUtils.PI / HORIZONTAL_PERIOD_SECONDS;
-            tmp.set((horizontalCounterclockwise ? -1 : 1) * HORIZONTAL_RADIUS_METERS * w * MathUtils.sin(w * elapsedTime), HORIZONTAL_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime));
         } else {
-            if (elapsedTime >= VERTICAL_PERIOD_SECONDS) {
-                elapsedTime = 0;
-                verticalCounterclockwise = MathUtils.randomBoolean();
-                movingHorizontal = MathUtils.randomBoolean();
+            if (reachTarget()) {
+                tmp = getNewPath(dt);
+            } else {
+                tmp = getSpeedTarget();
             }
-            w = 2 * MathUtils.PI / VERTICAL_PERIOD_SECONDS;
-            tmp.set(VERTICAL_RADIUS_METERS * w * MathUtils.cos(w * elapsedTime), (verticalCounterclockwise ? -1 : 1) * VERTICAL_RADIUS_METERS * w * MathUtils.sin(w * elapsedTime));
+        }
+        return tmp;
+    }
+
+    private void initCircularPath() {
+        elapsedTime = 0;
+        circularPath = false;
+    }
+
+    private Vector2 getNewPath(float dt) {
+        circularPath = startCircularPath();
+        if (circularPath) {
+            tmp = getSpeedCircularPath(dt);
+        } else	{
+            setNewTarget();
+            tmp = getSpeedTarget();
+        }
+        return tmp;
+    }
+
+    private boolean finishCircularPath() {
+        return elapsedTime >= PERIOD_SECONDS;
+    }
+
+    private Vector2 getSpeedTarget() {
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
+        return tmp;
+    }
+
+    private Vector2 getSpeedCircularPath(float dt) {
+        if (target.x == X_MIN && target.y == Y_HALF) {
+            tmp.set(RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        } else if (target.x == X_MAX && target.y == Y_HALF) {
+            tmp.set(-1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime), -RADIUS_METERS * W * MathUtils.cos(W * elapsedTime));
+        } else if (target.x == X_HALF && target.y == Y_MAX) {
+            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), -1 * RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
+        } else if (target.x == X_HALF && target.y == Y_MIN) {
+            tmp.set(-RADIUS_METERS * W * MathUtils.cos(W * elapsedTime), RADIUS_METERS * W * MathUtils.sin(W * elapsedTime));
         }
         elapsedTime += dt;
         return tmp;
+    }
+
+    private boolean startCircularPath() {
+        return 	((target.x == X_MIN && target.y == Y_HALF) ||
+                (target.x == X_HALF && target.y == Y_MAX) ||
+                (target.x == X_MAX && target.y == Y_HALF) ||
+                (target.x == X_HALF && target.y == Y_MIN)) &&
+                MathUtils.random() <= CIRCULAR_PATH_PROBABILITY;
+    }
+
+    private boolean reachTarget() {
+        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
+        return target.overlaps(tmpCircle);
     }
 
     private void stateIdle(float dt) {
@@ -392,10 +484,16 @@ public class BossThree extends Boss {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) bossThreeIdleAnimation.getKeyFrame(stateBossTime);
-        setRegionFlip(region);
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
+        TextureRegion region = (TextureRegion) bossFourIdleAnimation.getKeyFrame(stateBossTime);
         setRegion(region);
         stateBossTime += dt;
+
+        // Determines where BossFour is looking
+        setFlipState(isFlipX, isFlipY);
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
@@ -413,10 +511,16 @@ public class BossThree extends Boss {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) bossThreeShootAnimation.getKeyFrame(stateBossTime);
-        setRegionFlip(region);
+        // Preserve the flip state
+        boolean isFlipX = isFlipX();
+        boolean isFlipY = isFlipY();
+
+        TextureRegion region = (TextureRegion) bossFourShootAnimation.getKeyFrame(stateBossTime);
         setRegion(region);
         stateBossTime += dt;
+
+        // Determines where BossFour is looking
+        setFlipState(isFlipX, isFlipY);
 
         // Shoot time!
         openFire(dt);
@@ -463,7 +567,7 @@ public class BossThree extends Boss {
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
 
-            setRegion((TextureRegion) bossThreeDyingAnimation.getKeyFrame(stateBossTime, true));
+            setRegion((TextureRegion) bossFourDyingAnimation.getKeyFrame(stateBossTime));
             stateBossTime += dt;
 
             // Apply previous flip state
@@ -510,7 +614,7 @@ public class BossThree extends Boss {
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
             powerFXStateTime += dt;
 
-            // Update our Sprite to correspond with the position of our BossThree's Box2D body
+            // Update our Sprite to correspond with the position of our BossFour's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
@@ -567,7 +671,7 @@ public class BossThree extends Boss {
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpBossThree();
+        return Assets.getInstance().getScene2d().getHelpBossFour();
     }
 
     private boolean isDrawable() {
@@ -595,7 +699,7 @@ public class BossThree extends Boss {
 
     @Override
     public void draw(Batch batch) {
-        // We draw BossThree in these states: WALKING IDLE SHOOTING INJURED DYING
+        // We draw BossFour in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
             super.draw(batch);
@@ -606,6 +710,7 @@ public class BossThree extends Boss {
 
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(target.x, target.y, target.radius);
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 }

@@ -264,7 +264,7 @@ Good luck brave warriors!!
 
 -----------------------------------------------------------------------------------
 
-- La cosa es asi: cada nivel tiene sus corazones, cuanto mas alto el nivel menos corazones.
+- La cosa es asi: los corazones estan fijos a 15 en todos los niveles. Cada nivel lo comienzo con 3 vidas.
 Cuando los corazones quedan en cero, te mato (te saco una vida) y te los reseteo al revivir.
 Si morís por disparo, te LOS RESETEO TAMBIEN.
 Cuando moris (tu ultima vida) te muestro stage failed.

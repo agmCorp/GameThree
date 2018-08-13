@@ -6,11 +6,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
-import uy.com.agm.gamethree.actors.finals.Boss;
-import uy.com.agm.gamethree.actors.finals.BossFour;
-import uy.com.agm.gamethree.actors.finals.BossOne;
-import uy.com.agm.gamethree.actors.finals.BossTwo;
-import uy.com.agm.gamethree.actors.finals.BossThree;
+import uy.com.agm.gamethree.actors.bosses.Boss;
+import uy.com.agm.gamethree.actors.bosses.BossFour;
+import uy.com.agm.gamethree.actors.bosses.BossOne;
+import uy.com.agm.gamethree.actors.bosses.BossTwo;
+import uy.com.agm.gamethree.actors.bosses.BossThree;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFive;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
