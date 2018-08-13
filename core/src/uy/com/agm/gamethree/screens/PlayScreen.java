@@ -146,7 +146,7 @@ public class PlayScreen extends AbstractScreen {
         // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
 
-        // Avoid sticking to walls
+        // Avoid sticking to walls when velocity is less than 1
         world.setVelocityThreshold(0.0f);
 
         // Set accumulator for world.step

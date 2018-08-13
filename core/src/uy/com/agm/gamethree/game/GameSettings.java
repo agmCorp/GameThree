@@ -99,6 +99,7 @@ public class GameSettings {
     }
 
     private void loadHighScores() {
+        highScores.clear();
         highScores = getDefaultHighScores();
 
         String data;
@@ -134,6 +135,8 @@ public class GameSettings {
     }
 
     private void loadLevels() {
+        levels.clear();
+
         String data;
         LevelState levelState;
         progress = prefs.getInteger(PROGRESS, 1);
