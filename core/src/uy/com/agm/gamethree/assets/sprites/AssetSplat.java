@@ -18,20 +18,20 @@ public class AssetSplat {
     public static final float ENEMY_SPLAT_WIDTH_METERS = 100.0f * 0.6f / PlayScreen.PPM;
     public static final float ENEMY_SPLAT_HEIGHT_METERS = 100.0f * 0.6f / PlayScreen.PPM;
     public static final int ENEMY_SPLAT_MAX_TEXTURES = 16;
-    public static final float FINAL_ENEMY_SPLAT_WIDTH_METERS = 190.0f * 1.0f / PlayScreen.PPM;
-    public static final float FINAL_ENEMY_SPLAT_HEIGHT_METERS = 190.0f * 1.0f / PlayScreen.PPM;
-    public static final int FINAL_ENEMY_SPLAT_MAX_TEXTURES = 4;
+    public static final float BOSS_SPLAT_WIDTH_METERS = 190.0f * 1.0f / PlayScreen.PPM;
+    public static final float BOSS_SPLAT_HEIGHT_METERS = 190.0f * 1.0f / PlayScreen.PPM;
+    public static final int BOSS_SPLAT_MAX_TEXTURES = 4;
     private Array<TextureRegion> enemySplats;
-    private Array<TextureRegion> finalEnemySplats;
+    private Array<TextureRegion> bossSplats;
 
     public AssetSplat(TextureAtlas atlas) {
         enemySplats = new Array<TextureRegion>();
         for(int i = 1; i <= ENEMY_SPLAT_MAX_TEXTURES; i++) {
             enemySplats.add(atlas.findRegion("enemySplat", i));
         }
-        finalEnemySplats = new Array<TextureRegion>();
-        for(int i = 1; i <= FINAL_ENEMY_SPLAT_MAX_TEXTURES; i++) {
-            finalEnemySplats.add(atlas.findRegion("finalEnemySplat", i));
+        bossSplats = new Array<TextureRegion>();
+        for(int i = 1; i <= BOSS_SPLAT_MAX_TEXTURES; i++) {
+            bossSplats.add(atlas.findRegion("bossSplat", i));
         }
     }
 
@@ -39,7 +39,7 @@ public class AssetSplat {
         return enemySplats.get(MathUtils.random(0, ENEMY_SPLAT_MAX_TEXTURES - 1));
     }
 
-    public TextureRegion getRandomFinalEnemySplat() {
-        return finalEnemySplats.get(MathUtils.random(0, FINAL_ENEMY_SPLAT_MAX_TEXTURES - 1));
+    public TextureRegion getRandomBossSplat() {
+        return bossSplats.get(MathUtils.random(0, BOSS_SPLAT_MAX_TEXTURES - 1));
     }
 }

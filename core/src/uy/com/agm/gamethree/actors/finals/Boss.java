@@ -30,8 +30,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 1/20/2018.
  */
 
-public abstract class FinalEnemy extends Sprite {
-    private static final String TAG = FinalEnemy.class.getName();
+public abstract class Boss extends Sprite {
+    private static final String TAG = Boss.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float INTRO_TIME_SECONDS = 5.0f;
@@ -49,7 +49,7 @@ public abstract class FinalEnemy extends Sprite {
     protected Body b2body;
     protected Vector2 velocity;
     protected Vector2 tmp; // Temporary GC friendly vector
-    protected StateFinalEnemy currentStateFinalEnemy;
+    protected StateBoss currentStateBoss;
     protected PowerState currentPowerState;
     private float introTime;
     private boolean playingIntro;
@@ -58,7 +58,7 @@ public abstract class FinalEnemy extends Sprite {
     private boolean knockBackStarted;
     private float knockBackTime;
 
-    protected enum StateFinalEnemy {
+    protected enum StateBoss {
         INACTIVE, WALKING, IDLE, SHOOTING, KNOCK_BACK, INJURED, DYING, EXPLODING, DEAD
     }
 
@@ -66,7 +66,7 @@ public abstract class FinalEnemy extends Sprite {
         NORMAL, POWERFUL
     }
 
-    public FinalEnemy(PlayScreen screen, float x, float y, float width, float height) {
+    public Boss(PlayScreen screen, float x, float y, float width, float height) {
         this.world = screen.getWorld();
         this.screen = screen;
         this.velocity = new Vector2();
@@ -75,11 +75,11 @@ public abstract class FinalEnemy extends Sprite {
         tmp = new Vector2();
 
         /* Set this Sprite's bounds on the lower left vertex of a Rectangle.
-        * This point will be used by defineFinalEnemy() calling getX(), getY() to center its b2body.
+        * This point will be used by defineBoss() calling getX(), getY() to center its b2body.
         * SetBounds always receives world coordinates.
         */
         setBounds(x, y, width, height);
-        defineFinalEnemy();
+        defineBoss();
 
         introTime = 0;
         playingIntro = false;
@@ -88,24 +88,24 @@ public abstract class FinalEnemy extends Sprite {
         // Shooting strategy initialization
         shootContext = new ShootContext(getShootStrategy());
 
-        // By default this FinalEnemy doesn't interact in our world
+        // By default this Boss doesn't interact in our world
         b2body.setActive(false);
-        currentStateFinalEnemy = StateFinalEnemy.INACTIVE;
+        currentStateBoss = StateBoss.INACTIVE;
         currentPowerState = PowerState.NORMAL;
         knockBackStarted = false;
         knockBackTime = 0;
     }
 
-    // This FinalEnemy can be removed from our game
+    // This Boss can be removed from our game
     public boolean isDisposable() {
-        return currentStateFinalEnemy == StateFinalEnemy.DEAD;
+        return currentStateBoss == StateBoss.DEAD;
     }
 
-    // This FinalEnemy doesn't have any b2body inside these states
+    // This Boss doesn't have any b2body inside these states
     public boolean isDestroyed() {
-        return currentStateFinalEnemy == StateFinalEnemy.DYING ||
-                currentStateFinalEnemy == StateFinalEnemy.EXPLODING ||
-                currentStateFinalEnemy == StateFinalEnemy.DEAD;
+        return currentStateBoss == StateBoss.DYING ||
+                currentStateBoss == StateBoss.EXPLODING ||
+                currentStateBoss == StateBoss.DEAD;
     }
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
@@ -115,7 +115,7 @@ public abstract class FinalEnemy extends Sprite {
     public void update(float dt) {
         Hero hero = screen.getCreator().getHero();
 
-        if (currentStateFinalEnemy == StateFinalEnemy.INACTIVE) {
+        if (currentStateBoss == StateBoss.INACTIVE) {
             // When our final enemy is on camera, it activates
             if (screen.isTheEndOfTheWorld()) {
                 b2body.setActive(true);
@@ -124,12 +124,12 @@ public abstract class FinalEnemy extends Sprite {
                 AudioManager.getInstance().stopMusic();
 
                 // Set new Music (without playing it yet)
-                AudioManager.getInstance().setMusic(Assets.getInstance().getMusic().getSongFinalEnemyFight(), true);
+                AudioManager.getInstance().setMusic(Assets.getInstance().getMusic().getSongBossFight(), true);
 
                 // Intro FX
                 introTime = 0;
                 playingIntro = true;
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyIntro());
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossIntro());
 
                 // Fight message
                 screen.getInfoScreen().showFightMessage();
@@ -143,7 +143,7 @@ public abstract class FinalEnemy extends Sprite {
                 hero.enableShooting();
 
                 // HealthBar
-                screen.getHud().showHealthBarInfo(getFinalEnemyName(), getFinalEnemyDamage());
+                screen.getHud().showHealthBarInfo(getBossName(), getBossDamage());
 
                 // Initial state
                 setInitialState();
@@ -208,7 +208,7 @@ public abstract class FinalEnemy extends Sprite {
     @Override
     public void draw(Batch batch) {
         // Set the tint
-        setColor(currentStateFinalEnemy == StateFinalEnemy.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
+        setColor(currentStateBoss == StateBoss.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
         super.draw(batch);
     }
 
@@ -219,9 +219,9 @@ public abstract class FinalEnemy extends Sprite {
 
         knockBackTime += dt;
         if (knockBackTime > KNOCK_BACK_SECONDS) {
-            currentStateFinalEnemy = StateFinalEnemy.INJURED;
+            currentStateBoss = StateBoss.INJURED;
         } else {
-            // We don't let this FinalEnemy go beyond the screen
+            // We don't let this Boss go beyond the screen
             float camX = screen.getGameCam().position.x;
             float worldWidth = screen.getGameViewPort().getWorldWidth();
             float upperEdge = screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2; //  Bottom edge of the upperEdge :)
@@ -257,7 +257,7 @@ public abstract class FinalEnemy extends Sprite {
         b2body.applyForce(MathUtils.randomSign() * KNOCK_BACK_FORCE_X, KNOCK_BACK_FORCE_Y,
                 b2body.getPosition().x, b2body.getPosition().y, true);
 
-        // FinalEnemy can't collide with anything
+        // Boss can't collide with anything
         Filter filter = new Filter();
         filter.maskBits = WorldContactListener.NOTHING_BIT;
 
@@ -279,15 +279,15 @@ public abstract class FinalEnemy extends Sprite {
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getLevelCompleted());
     }
 
-    protected abstract void defineFinalEnemy();
+    protected abstract void defineBoss();
     protected abstract IShootStrategy getShootStrategy();
     protected abstract float getCircleShapeRadiusMeters();
     protected abstract TextureRegion getKnockBackFrame(float dt);
     protected abstract void updateLogic(float dt);
     public abstract void onHit(Weapon weapon);
     public abstract void onHitWall(boolean isBorder);
-    protected abstract String getFinalEnemyName();
-    protected abstract int getFinalEnemyDamage();
+    protected abstract String getBossName();
+    protected abstract int getBossDamage();
     protected abstract void setInitialState();
     protected abstract TextureRegion getHelpImage();
 }

@@ -55,7 +55,7 @@ public class Edge {
         shape.setAsBox(boundsMeters.getWidth() / 2, boundsMeters.getHeight() / 2);
 
         fdef.filter.categoryBits = WorldContactListener.EDGE_BIT; // Depicts what this fixture is
-        fdef.filter.maskBits = WorldContactListener.FINAL_ENEMY_BIT |
+        fdef.filter.maskBits = WorldContactListener.BOSS_BIT |
                             WorldContactListener.HERO_BIT |
                             WorldContactListener.HERO_GHOST_BIT |
                             WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)

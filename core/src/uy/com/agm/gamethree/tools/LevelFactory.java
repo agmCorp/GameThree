@@ -6,11 +6,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
-import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelFour;
-import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelOne;
-import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelThree;
-import uy.com.agm.gamethree.actors.finals.FinalEnemyLevelTwo;
+import uy.com.agm.gamethree.actors.finals.Boss;
+import uy.com.agm.gamethree.actors.finals.BossFour;
+import uy.com.agm.gamethree.actors.finals.BossOne;
+import uy.com.agm.gamethree.actors.finals.BossTwo;
+import uy.com.agm.gamethree.actors.finals.BossThree;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFive;
 import uy.com.agm.gamethree.actors.items.powerups.PowerFour;
@@ -18,10 +18,10 @@ import uy.com.agm.gamethree.actors.items.powerups.PowerOne;
 import uy.com.agm.gamethree.actors.items.powerups.PowerThree;
 import uy.com.agm.gamethree.actors.items.powerups.PowerTwo;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelFour;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
+import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
+import uy.com.agm.gamethree.assets.sprites.AssetBossThree;
+import uy.com.agm.gamethree.assets.sprites.AssetBossTwo;
 import uy.com.agm.gamethree.screens.PlayScreen;
 
 /**
@@ -41,40 +41,40 @@ public class LevelFactory {
     private static final String NAME_LEVEL_THREE = "levelFactory.nameLevelThree";
     private static final String NAME_LEVEL_FOUR = "levelFactory.nameLevelFour";
 
-    public static FinalEnemy getFinalEnemy(PlayScreen screen, int level) {
-        FinalEnemy finalEnemy;
+    public static Boss getBoss(PlayScreen screen, int level) {
+        Boss boss;
 
         switch (level) {
             case 1:
-                finalEnemy = new FinalEnemyLevelOne(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelOne.WIDTH_METERS / 2,
+                boss = new BossOne(screen, screen.getGameCam().position.x -
+                        AssetBossOne.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelOne.HEIGHT_METERS / 2 - FinalEnemyLevelOne.CIRCLE_SHAPE_RADIUS_METERS);
+                                AssetBossOne.HEIGHT_METERS / 2 - BossOne.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             case 2:
-                finalEnemy = new FinalEnemyLevelTwo(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelTwo.WIDTH_METERS / 2,
+                boss = new BossTwo(screen, screen.getGameCam().position.x -
+                        AssetBossTwo.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelTwo.HEIGHT_METERS / 2 - FinalEnemyLevelTwo.CIRCLE_SHAPE_RADIUS_METERS);
+                                AssetBossTwo.HEIGHT_METERS / 2 - BossTwo.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             case 3:
-                finalEnemy = new FinalEnemyLevelThree(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelThree.WIDTH_METERS / 2,
+                boss = new BossThree(screen, screen.getGameCam().position.x -
+                        AssetBossThree.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 screen.getGameViewPort().getWorldHeight() / 2 -
-                                AssetFinalEnemyLevelThree.HEIGHT_METERS / 2);
+                                AssetBossThree.HEIGHT_METERS / 2);
                 break;
             case 4:
-                finalEnemy = new FinalEnemyLevelFour(screen, screen.getGameCam().position.x -
-                        AssetFinalEnemyLevelFour.WIDTH_METERS / 2,
+                boss = new BossFour(screen, screen.getGameCam().position.x -
+                        AssetBossFour.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
-                                AssetFinalEnemyLevelFour.HEIGHT_METERS / 2 - FinalEnemyLevelFour.CIRCLE_SHAPE_RADIUS_METERS);
+                                AssetBossFour.HEIGHT_METERS / 2 - BossFour.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             default:
-                finalEnemy = null;
+                boss = null;
                 break;
         }
-        return finalEnemy;
+        return boss;
     }
 
     public static int getLevelTimer(int level) {
@@ -142,23 +142,23 @@ public class LevelFactory {
                 dynamic.put(PowerThree.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
                 dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef(true));
-                dynamic.put(FinalEnemyLevelOne.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(BossOne.class.getName(), new DynamicHelpDef(true));
                 break;
             case 2:
                 dynamic.put(PowerTwo.class.getName(), new DynamicHelpDef());
                 dynamic.put(PowerFour.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
-                dynamic.put(FinalEnemyLevelTwo.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(BossTwo.class.getName(), new DynamicHelpDef(true));
                 break;
             case 3:
                 dynamic.put(PowerFive.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
-                dynamic.put(FinalEnemyLevelThree.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(BossThree.class.getName(), new DynamicHelpDef(true));
                 break;
             case 4:
                 dynamic.put(EnemyThree.class.getName(), new DynamicHelpDef());
                 dynamic.put(ColSilverBullet.class.getName(), new DynamicHelpDef());
-                dynamic.put(FinalEnemyLevelFour.class.getName(), new DynamicHelpDef(true));
+                dynamic.put(BossFour.class.getName(), new DynamicHelpDef(true));
                 break;
             default:
                 break;

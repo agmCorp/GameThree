@@ -12,7 +12,7 @@ import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.StaticBackgroundObject;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
@@ -46,7 +46,7 @@ public class WorldContactListener implements ContactListener {
     public static final short ITEM_BIT = 1024;
     public static final short ENEMY_BIT = 2048;
     public static final short ENEMY_WEAPON_BIT = 4096;
-    public static final short FINAL_ENEMY_BIT = 8192;
+    public static final short BOSS_BIT = 8192;
 
     @Override
     public void beginContact(Contact contact) {
@@ -247,28 +247,28 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             // Final enemy - Border
-            case FINAL_ENEMY_BIT | BORDER_BIT:
-                fixC = fixA.getFilterData().categoryBits == FINAL_ENEMY_BIT ? fixA : fixB;
-                ((FinalEnemy) fixC.getUserData()).onHitWall(true);
+            case BOSS_BIT | BORDER_BIT:
+                fixC = fixA.getFilterData().categoryBits == BOSS_BIT ? fixA : fixB;
+                ((Boss) fixC.getUserData()).onHitWall(true);
                 break;
 
             // Final enemy - Edges
-            case FINAL_ENEMY_BIT | EDGE_BIT:
-                fixC = fixA.getFilterData().categoryBits == FINAL_ENEMY_BIT ? fixA : fixB;
-                ((FinalEnemy) fixC.getUserData()).onHitWall(false);
+            case BOSS_BIT | EDGE_BIT:
+                fixC = fixA.getFilterData().categoryBits == BOSS_BIT ? fixA : fixB;
+                ((Boss) fixC.getUserData()).onHitWall(false);
                 break;
 
             // Final enemy - Hero's weapon
-            case FINAL_ENEMY_BIT | HERO_WEAPON_BIT:
+            case BOSS_BIT | HERO_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
-                    ((FinalEnemy) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
+                    ((Boss) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
                 } else {
-                    ((FinalEnemy) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
+                    ((Boss) fixA.getUserData()).onHit(((Weapon) fixB.getUserData()));
                 }
                 break;
 
             // Final enemy - Hero
-            case FINAL_ENEMY_BIT | HERO_BIT:
+            case BOSS_BIT | HERO_BIT:
                 // Collision logic
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).onEnemyHit();
@@ -299,11 +299,11 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Hero - Item/Enemy/FinalEnemy
+            // Hero - Item/Enemy/Boss
             // Avoid bouncing
             case HERO_BIT | ITEM_BIT:
             case HERO_BIT | ENEMY_BIT:
-            case HERO_BIT | FINAL_ENEMY_BIT:
+            case HERO_BIT | BOSS_BIT:
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;
                 ((Hero) fixC.getUserData()).stop();
                 break;

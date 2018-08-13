@@ -22,7 +22,7 @@ import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Bridge;
 import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
@@ -118,7 +118,7 @@ public class PlayScreen extends AbstractScreen {
     private Edge bottomEdge;
 
     // Final Enemy
-    private FinalEnemy finalEnemy;
+    private Boss boss;
 
     // Screen shaker
     private Shaker shaker;
@@ -170,7 +170,7 @@ public class PlayScreen extends AbstractScreen {
         bottomEdge = creator.getBottomEdge();
 
         // Get the final enemy
-        finalEnemy = creator.getFinalEnemy();
+        boss = creator.getBoss();
 
         // Create our collision listener
         world.setContactListener(new WorldContactListener());
@@ -262,7 +262,7 @@ public class PlayScreen extends AbstractScreen {
         updateItems(dt);
         updateWeapons(dt);
         updateEnemies(dt);
-        updateFinalEnemy(dt);
+        updateBoss(dt);
         updateHero(dt);
 
         // Always at the end
@@ -360,12 +360,12 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void updateFinalEnemy(float dt) {
-        finalEnemy.update(dt);
+    private void updateBoss(float dt) {
+        boss.update(dt);
     }
 
     private void updateHud(float dt) {
-        if(!player.isDead() && !finalEnemy.isDestroyed()) {
+        if(!player.isDead() && !boss.isDestroyed()) {
             hud.update(dt);
         }
     }
@@ -399,8 +399,8 @@ public class PlayScreen extends AbstractScreen {
         return creator;
     }
 
-    public FinalEnemy getFinalEnemy() {
-        return finalEnemy;
+    public Boss getBoss() {
+        return boss;
     }
 
     public Edge getBottomEdge() {
@@ -444,7 +444,7 @@ public class PlayScreen extends AbstractScreen {
         renderItems();
         renderWeapons();
         renderEnemies();
-        renderFinalEnemy();
+        renderBoss();
         renderHero();
 
         game.getBatch().end();
@@ -468,7 +468,7 @@ public class PlayScreen extends AbstractScreen {
             renderDebugPowerBoxes();
             renderDebugItems();
             renderDebugWeapons();
-            renderDebugFinalEnemy();
+            renderDebugBoss();
             renderDebugEnemies();
             renderDebugHero();
 
@@ -479,7 +479,7 @@ public class PlayScreen extends AbstractScreen {
     private boolean isLevelCompleted(float delta) {
         boolean isLevelCompleted = false;
 
-        if (finalEnemy.isDisposable()) {
+        if (boss.isDisposable()) {
             levelCompletedTime += delta;
             isLevelCompleted = levelCompletedTime > LEVEL_COMPLETED_DELAY_SECONDS;
         }
@@ -538,8 +538,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void renderFinalEnemy() {
-        finalEnemy.draw(game.getBatch());
+    private void renderBoss() {
+        boss.draw(game.getBatch());
     }
 
     private void renderDebugHero() {
@@ -570,8 +570,8 @@ public class PlayScreen extends AbstractScreen {
         }
     }
 
-    private void renderDebugFinalEnemy() {
-        finalEnemy.renderDebug(game.getShapeRenderer());
+    private void renderDebugBoss() {
+        boss.renderDebug(game.getShapeRenderer());
     }
 
     private void stopEdges() {
@@ -658,7 +658,7 @@ public class PlayScreen extends AbstractScreen {
         finish = !finish && !player.isSilverBulletEnabled() && !player.isDead() && isChallengeBegin();
         if (finish) {
             // Show help
-            finalEnemy.showChallengeBeginHelp();
+            boss.showChallengeBeginHelp();
 
             // Disable shooting
             player.disableShooting();
@@ -716,7 +716,7 @@ public class PlayScreen extends AbstractScreen {
     }
 
     public void resumeAudio() {
-        if (!player.isDead() && !finalEnemy.isDestroyed()) {
+        if (!player.isDead() && !boss.isDestroyed()) {
             AudioManager.getInstance().resumeMusic();
         }
         AudioManager.getInstance().resumeSound();

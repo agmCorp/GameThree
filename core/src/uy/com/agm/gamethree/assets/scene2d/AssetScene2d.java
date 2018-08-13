@@ -38,10 +38,10 @@ public class AssetScene2d {
     private TextureRegion helpColSilverBulletLevelTwo;
     private TextureRegion helpColSilverBulletLevelThree;
     private TextureRegion helpColSilverBulletLevelFour;
-    private TextureRegion helpFinalEnemyLevelOne;
-    private TextureRegion helpFinalEnemyLevelTwo;
-    private TextureRegion helpFinalEnemyLevelThree;
-    private TextureRegion helpFinalEnemyLevelFour;
+    private TextureRegion helpBossOne;
+    private TextureRegion helpBossTwo;
+    private TextureRegion helpBossThree;
+    private TextureRegion helpBossFour;
     private TextureRegion table;
     private TextureRegion wipeThemOut;
     private TextureRegion play;
@@ -129,10 +129,10 @@ public class AssetScene2d {
         helpColSilverBulletLevelTwo = atlasUI.findRegion("helpColSilverBulletLevelTwo");
         helpColSilverBulletLevelThree = atlasUI.findRegion("helpColSilverBulletLevelThree");
         helpColSilverBulletLevelFour = atlasUI.findRegion("helpColSilverBulletLevelFour");
-        helpFinalEnemyLevelOne = atlasUI.findRegion("helpFinalEnemyLevelOne");
-        helpFinalEnemyLevelTwo = atlasUI.findRegion("helpFinalEnemyLevelTwo");
-        helpFinalEnemyLevelThree = atlasUI.findRegion("helpFinalEnemyLevelThree");
-        helpFinalEnemyLevelFour = atlasUI.findRegion("helpFinalEnemyLevelFour");
+        helpBossOne = atlasUI.findRegion("helpBossOne");
+        helpBossTwo = atlasUI.findRegion("helpBossTwo");
+        helpBossThree = atlasUI.findRegion("helpBossThree");
+        helpBossFour = atlasUI.findRegion("helpBossFour");
         table = atlasUI.findRegion("table");
         wipeThemOut = atlasUI.findRegion("wipeThemOut");
         play = atlasUI.findRegion("play");
@@ -303,20 +303,20 @@ public class AssetScene2d {
         return helpColSilverBulletLevelFour;
     }
 
-    public TextureRegion getHelpFinalEnemyLevelOne() {
-        return helpFinalEnemyLevelOne;
+    public TextureRegion getHelpBossOne() {
+        return helpBossOne;
     }
 
-    public TextureRegion getHelpFinalEnemyLevelTwo() {
-        return helpFinalEnemyLevelTwo;
+    public TextureRegion getHelpBossTwo() {
+        return helpBossTwo;
     }
 
-    public TextureRegion getHelpFinalEnemyLevelThree() {
-        return helpFinalEnemyLevelThree;
+    public TextureRegion getHelpBossThree() {
+        return helpBossThree;
     }
 
-    public TextureRegion getHelpFinalEnemyLevelFour() {
-        return helpFinalEnemyLevelFour;
+    public TextureRegion getHelpBossFour() {
+        return helpBossFour;
     }
 
     public TextureRegion getTable() {

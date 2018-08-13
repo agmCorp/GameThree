@@ -32,7 +32,7 @@ import uy.com.agm.gamethree.actors.enemies.EnemyTen;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwelve;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwo;
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
@@ -97,7 +97,7 @@ public class B2WorldCreator {
 
     private PlayScreen screen;
     private Hero hero;
-    private FinalEnemy finalEnemy;
+    private Boss boss;
     private Array<Border> borders;
     private Array<Edge> edges;
     private Edge upperEdge;
@@ -140,7 +140,7 @@ public class B2WorldCreator {
         hero = new Hero(screen, screen.getGameCam().position.x, screen.getGameCam().position.y / 2);
 
         // Create the final enemy in our game world
-        finalEnemy = LevelFactory.getFinalEnemy(screen, screen.getLevel());
+        boss = LevelFactory.getBoss(screen, screen.getLevel());
 
         // Layer: border
         layer = map.getLayers().get(LAYER_BORDER);
@@ -294,8 +294,8 @@ public class B2WorldCreator {
         return hero;
     }
 
-    public FinalEnemy getFinalEnemy() {
-        return finalEnemy;
+    public Boss getBoss() {
+        return boss;
     }
 
     public Array<Border> getBorders() {
@@ -497,7 +497,7 @@ public class B2WorldCreator {
             Gdx.app.debug(TAG, "***** Power boxes: " + powerBoxes.size);
             Gdx.app.debug(TAG, "***** Items: " + items.size);
             Gdx.app.debug(TAG, "***** Weapons: " + weapons.size);
-            Gdx.app.debug(TAG, "***** FinalEnemy: " + (screen.getFinalEnemy().isDisposable() ? 0 : 1));
+            Gdx.app.debug(TAG, "***** Boss: " + (screen.getBoss().isDisposable() ? 0 : 1));
             Gdx.app.debug(TAG, "***** Hero always 1");
             Gdx.app.debug(TAG, "***** Objects not disposables detail (Bridge, Enemy, PowerBox, Item, Weapon) ****");
             for (ObjectMap.Entry<String, String> entry : arrayMapDebug.entries()) {

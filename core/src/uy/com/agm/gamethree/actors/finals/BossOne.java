@@ -18,7 +18,7 @@ import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyRocketShooting;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
+import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -30,8 +30,8 @@ import uy.com.agm.gamethree.tools.WorldContactListener;
  * Created by AGM on 12/30/2017.
  */
 
-public class FinalEnemyLevelOne extends FinalEnemy {
-    private static final String TAG = FinalEnemyLevelOne.class.getName();
+public class BossOne extends Boss {
+    private static final String TAG = BossOne.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final String NAME = "ASTROBITSY";
@@ -61,14 +61,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     private StateWalking currentStateWalking;
     private int damage;
-    private float stateFinalEnemyTime;
+    private float stateBossTime;
     private float changeTime;
     private float timeToChange;
 
-    private Animation finalEnemyLevelOneWalkAnimation;
-    private Animation finalEnemyLevelOneIdleAnimation;
-    private Animation finalEnemyLevelOneShootAnimation;
-    private Animation finalEnemyLevelOneDyingAnimation;
+    private Animation bossOneWalkAnimation;
+    private Animation bossOneIdleAnimation;
+    private Animation bossOneShootAnimation;
+    private Animation bossOneDyingAnimation;
 
     // Power FX
     private Animation powerFXAnimation;
@@ -83,18 +83,18 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public FinalEnemyLevelOne(PlayScreen screen, float x, float y) {
-        super(screen, x, y, AssetFinalEnemyLevelOne.WIDTH_METERS, AssetFinalEnemyLevelOne.HEIGHT_METERS);
+    public BossOne(PlayScreen screen, float x, float y) {
+        super(screen, x, y, AssetBossOne.WIDTH_METERS, AssetBossOne.HEIGHT_METERS);
 
         // Animations
-        finalEnemyLevelOneWalkAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneWalkAnimation();
-        finalEnemyLevelOneIdleAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneIdleAnimation();
-        finalEnemyLevelOneShootAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneShootAnimation();
-        finalEnemyLevelOneDyingAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOneDeathAnimation();
+        bossOneWalkAnimation = Assets.getInstance().getBossOne().getBossOneWalkAnimation();
+        bossOneIdleAnimation = Assets.getInstance().getBossOne().getBossOneIdleAnimation();
+        bossOneShootAnimation = Assets.getInstance().getBossOne().getBossOneShootAnimation();
+        bossOneDyingAnimation = Assets.getInstance().getBossOne().getBossOneDeathAnimation();
 
-        // FinalEnemyLevelOne variables initialization
+        // BossOne variables initialization
         damage = MAX_DAMAGE;
-        stateFinalEnemyTime = 0;
+        stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
 
@@ -113,14 +113,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // -------------------- PowerFX --------------------
 
         // PowerFX variables initialization
-        powerFXAnimation = Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerAnimation();
+        powerFXAnimation = Assets.getInstance().getBossOne().getBossOnePowerAnimation();
         powerFXStateTime = 0;
 
         // Set the power's texture
-        powerFXSprite = new Sprite(Assets.getInstance().getFinalEnemyLevelOne().getFinalEnemyLevelOnePowerStand());
+        powerFXSprite = new Sprite(Assets.getInstance().getBossOne().getBossOnePowerStand());
 
         // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
-        powerFXSprite.setBounds(getX(), getY(), AssetFinalEnemyLevelOne.POWER_WIDTH_METERS, AssetFinalEnemyLevelOne.POWER_HEIGHT_METERS);
+        powerFXSprite.setBounds(getX(), getY(), AssetBossOne.POWER_WIDTH_METERS, AssetBossOne.POWER_HEIGHT_METERS);
 
         // Place origin of rotation in the center of the Sprite
         powerFXSprite.setOriginCenter();
@@ -146,10 +146,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         // -------------------- SplatFX --------------------
 
         // Set the splat's texture
-        Sprite spriteSplat = new Sprite(Assets.getInstance().getSplat().getRandomFinalEnemySplat());
+        Sprite spriteSplat = new Sprite(Assets.getInstance().getSplat().getRandomBossSplat());
 
         // Only to set width and height of our spriteSplat (in stateDead(...) we set its position)
-        spriteSplat.setBounds(getX(), getY(), AssetSplat.FINAL_ENEMY_SPLAT_WIDTH_METERS, AssetSplat.FINAL_ENEMY_SPLAT_HEIGHT_METERS);
+        spriteSplat.setBounds(getX(), getY(), AssetSplat.BOSS_SPLAT_WIDTH_METERS, AssetSplat.BOSS_SPLAT_HEIGHT_METERS);
 
         // Splat FX Sprite
         splatFXSprite = new Sprite(spriteSplat);
@@ -159,7 +159,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     @Override
-    protected void defineFinalEnemy() {
+    protected void defineBoss() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX() + getWidth() / 2 , getY() + getHeight() / 2); // In b2box the origin is at the center of the body
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -177,7 +177,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     private void setDefaultFilter() {
         Filter filter = new Filter();
-        filter.categoryBits = WorldContactListener.FINAL_ENEMY_BIT; // Depicts what this fixture is
+        filter.categoryBits = WorldContactListener.BOSS_BIT; // Depicts what this fixture is
         filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.EDGE_BIT |
                 WorldContactListener.OBSTACLE_BIT |
@@ -194,54 +194,54 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         return MathUtils.random(CHANGE_STATE_MIN_TIME_SECONDS, CHANGE_STATE_MAX_TIME_SECONDS);
     }
 
-    private StateFinalEnemy getNewRandomState(float dt) {
+    private StateBoss getNewRandomState(float dt) {
         boolean blnOption;
-        StateFinalEnemy newRandomStateFinalEnemy = currentStateFinalEnemy;
+        StateBoss newRandomStateBoss = currentStateBoss;
         float limit = screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 8; // Arbitrary
 
-        // Set a new currentStateFinalEnemy
+        // Set a new currentStateBoss
         changeTime += dt;
         if (changeTime >= timeToChange) {
             // Reset random state variables
             changeTime = 0;
 
             // Reset variable animation
-            stateFinalEnemyTime = 0;
+            stateBossTime = 0;
 
             // Random option
             blnOption = MathUtils.randomBoolean();
 
             // Decide which state must return
-            switch (currentStateFinalEnemy) {
+            switch (currentStateBoss) {
                 case WALKING:
                     if (blnOption) {
                         if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
-                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            newRandomStateBoss = StateBoss.IDLE;
                             timeToChange = IDLE_STATE_TIME_SECONDS;
                         } else {
                             // Continues with the same state
                             timeToChange = getNextTimeToChange();
                         }
                     } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        newRandomStateBoss = StateBoss.SHOOTING;
                         timeToChange = getNextTimeToChange();
                     }
                     break;
                 case IDLE:
                     if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        newRandomStateBoss = StateBoss.WALKING;
                     } else {
-                        newRandomStateFinalEnemy = StateFinalEnemy.SHOOTING;
+                        newRandomStateBoss = StateBoss.SHOOTING;
                     }
                     timeToChange = getNextTimeToChange();
                     break;
                 case SHOOTING:
                     if (blnOption) {
-                        newRandomStateFinalEnemy = StateFinalEnemy.WALKING;
+                        newRandomStateBoss = StateBoss.WALKING;
                         timeToChange = getNextTimeToChange();
                     } else {
                         if (b2body.getPosition().y >= limit) { // IDLE state is only allowed above this position
-                            newRandomStateFinalEnemy = StateFinalEnemy.IDLE;
+                            newRandomStateBoss = StateBoss.IDLE;
                             timeToChange = IDLE_STATE_TIME_SECONDS;
                         } else {
                             // Continues with the same state
@@ -251,7 +251,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                     break;
             }
         }
-        return newRandomStateFinalEnemy;
+        return newRandomStateBoss;
     }
 
     @Override
@@ -266,14 +266,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     protected TextureRegion getKnockBackFrame(float dt) {
-        TextureRegion region = (TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTime, true);
-        stateFinalEnemyTime += dt;
+        TextureRegion region = (TextureRegion) bossOneIdleAnimation.getKeyFrame(stateBossTime, true);
+        stateBossTime += dt;
         return region;
     }
 
     @Override
     public void updateLogic(float dt) {
-        switch (currentStateFinalEnemy) {
+        switch (currentStateBoss) {
             case WALKING:
                 stateWalking(dt);
                 break;
@@ -303,7 +303,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
                 break;
         }
 
-        // FinalEnemyLevelOne could have been destroyed
+        // BossOne could have been destroyed
         if (!isDestroyed()) {
             switchPowerState(dt);
         }
@@ -328,14 +328,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneWalkAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        stateFinalEnemyTime += dt;
+        setRegion((TextureRegion) bossOneWalkAnimation.getKeyFrame(stateBossTime, true));
+        stateBossTime += dt;
 
         // Depending on the direction, we set the angle and the flip
         switch (currentStateWalking) {
@@ -430,7 +430,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
 
         // New random state
-        currentStateFinalEnemy = getNewRandomState(dt);
+        currentStateBoss = getNewRandomState(dt);
     }
 
     private void stateIdle(float dt) {
@@ -444,21 +444,21 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneIdleAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        stateFinalEnemyTime += dt;
+        setRegion((TextureRegion) bossOneIdleAnimation.getKeyFrame(stateBossTime, true));
+        stateBossTime += dt;
 
         // Apply previous flip and rotation state
         setFlip(isFlipX, isFlipY);
         setRotation(rotation);
 
         // New random state
-        currentStateFinalEnemy = getNewRandomState(dt);
+        currentStateBoss = getNewRandomState(dt);
     }
 
     private void stateShooting(float dt) {
@@ -467,14 +467,14 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, FinalEnemyLevelOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
+        * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) finalEnemyLevelOneShootAnimation.getKeyFrame(stateFinalEnemyTime, true));
-        stateFinalEnemyTime += dt;
+        setRegion((TextureRegion) bossOneShootAnimation.getKeyFrame(stateBossTime, true));
+        stateBossTime += dt;
 
         // Calculate shooting angle
         Vector2 heroPosition = screen.getCreator().getHero().getB2body().getPosition();
@@ -487,7 +487,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         openFire(dt);
 
         // New random state
-        currentStateFinalEnemy = getNewRandomState(dt);
+        currentStateBoss = getNewRandomState(dt);
     }
 
     private void stateInjured(float dt) {
@@ -495,10 +495,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         AudioManager.getInstance().stopMusic();
 
         // Death animation
-        stateFinalEnemyTime = 0;
+        stateBossTime = 0;
 
         // Audio FX
-        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyExplosion());
+        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossExplosion());
 
         // Set score
         screen.getHud().addScore(SCORE);
@@ -509,27 +509,27 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         }
 
         // Set the new state
-        currentStateFinalEnemy = StateFinalEnemy.DYING;
+        currentStateBoss = StateBoss.DYING;
     }
 
     private void stateDying(float dt) {
-        if (finalEnemyLevelOneDyingAnimation.isAnimationFinished(stateFinalEnemyTime)) {
+        if (bossOneDyingAnimation.isAnimationFinished(stateBossTime)) {
             // Exploding animation
             explosionFXStateTime = 0;
 
             // Audio FX
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyExplosion());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossExplosion());
 
             // Set the new state
-            currentStateFinalEnemy = StateFinalEnemy.EXPLODING;
+            currentStateBoss = StateBoss.EXPLODING;
         } else {
             // Preserve the flip and rotation state
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
             float rotation = getRotation();
 
-            setRegion((TextureRegion) finalEnemyLevelOneDyingAnimation.getKeyFrame(stateFinalEnemyTime));
-            stateFinalEnemyTime += dt;
+            setRegion((TextureRegion) bossOneDyingAnimation.getKeyFrame(stateBossTime));
+            stateBossTime += dt;
 
             // Apply previous flip and rotation state
             setFlip(isFlipX, isFlipY);
@@ -543,7 +543,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
            victoryFX();
 
            // Set the new state
-           currentStateFinalEnemy = StateFinalEnemy.DEAD;
+           currentStateBoss = StateBoss.DEAD;
        } else {
            // Animation
            explosionFXSprite.setRegion((TextureRegion) explosionFXAnimation.getKeyFrame(explosionFXStateTime, true));
@@ -575,10 +575,10 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     private void powerStatePowerfulToNormal(float dt) {
         // If our final enemy is not walking nor shooting, he becomes weak
-        if (currentStateFinalEnemy != StateFinalEnemy.WALKING && currentStateFinalEnemy != StateFinalEnemy.SHOOTING) {
+        if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyPowerDown());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossPowerDown());
         } else {
             // Animation
             powerFXSprite.setRegion((TextureRegion) powerFXAnimation.getKeyFrame(powerFXStateTime, true));
@@ -588,32 +588,32 @@ public class FinalEnemyLevelOne extends FinalEnemy {
             powerFXSprite.setRotation(getRotation());
             powerFXSprite.setFlip(isFlipX(), isFlipY());
 
-            // Update our Sprite to correspond with the position of our finalEnemyLevelOne's Box2D body
+            // Update our Sprite to correspond with the position of our bossOne's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }
 
     private void powerStateNormalToPowerful() {
         // If our final enemy is walking or shooting, he becomes powerful
-        if (currentStateFinalEnemy == StateFinalEnemy.WALKING || currentStateFinalEnemy == StateFinalEnemy.SHOOTING) {
+        if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
-            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyPowerUp());
+            AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossPowerUp());
         }
     }
 
     @Override
     public void onHit(Weapon weapon) {
         if (screen.getCreator().getHero().isSilverBulletEnabled()) {
-            if (currentStateFinalEnemy == StateFinalEnemy.IDLE) {
+            if (currentStateBoss == StateBoss.IDLE) {
                 weapon.onTarget();
                 damage--;
                 screen.getHud().decreaseHealth();
-                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getFinalEnemyHit(), FinalEnemy.HIT_MAX_VOLUME);
+                AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBossHit(), Boss.HIT_MAX_VOLUME);
                 screen.getShaker().shake(HIT_SHAKE_DURATION);
                 if (damage <= 0) {
                     screen.getHud().hideHealthBarInfo();
-                    currentStateFinalEnemy = StateFinalEnemy.KNOCK_BACK;
+                    currentStateBoss = StateBoss.KNOCK_BACK;
                 }
             } else {
                 weapon.onBounce();
@@ -628,11 +628,11 @@ public class FinalEnemyLevelOne extends FinalEnemy {
         /* Please don't use currentStateWalking to decide which one is the new currentStateWalking.
         * That logic is a bit cheating because onHitWall can execute anytime.
         * See this example below:
-        * Suppose currentStateWalking = SLASH_UP and FinalEnemyLevelOne collides against the upper edge, but immediately
+        * Suppose currentStateWalking = SLASH_UP and BossOne collides against the upper edge, but immediately
         * (because the circle shape radius is too big) against the right border.
         * 1) After onHitWall(false), for instance, currentStateWalking = CEILING_LEFT.
         * 2) But after onHitWall(true) executes, for instance, currentStateWalking = BACKSLASH_DOWN.
-         * That is incorrect because FinalEnemyLevelOne is still on the right-upper corner and it gets stuck!
+         * That is incorrect because BossOne is still on the right-upper corner and it gets stuck!
         */
         float velY = b2body.getLinearVelocity().y;
         float velX = b2body.getLinearVelocity().x;
@@ -794,29 +794,29 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     @Override
-    protected String getFinalEnemyName() {
+    protected String getBossName() {
         return NAME;
     }
 
     @Override
-    protected int getFinalEnemyDamage() {
+    protected int getBossDamage() {
         return damage;
     }
 
     @Override
     protected void setInitialState() {
-        currentStateFinalEnemy = StateFinalEnemy.WALKING;
+        currentStateBoss = StateBoss.WALKING;
     }
 
     @Override
     protected TextureRegion getHelpImage() {
-        return Assets.getInstance().getScene2d().getHelpFinalEnemyLevelOne();
+        return Assets.getInstance().getScene2d().getHelpBossOne();
     }
 
     private boolean isDrawable() {
-        return currentStateFinalEnemy != StateFinalEnemy.INACTIVE &&
-                currentStateFinalEnemy != StateFinalEnemy.EXPLODING &&
-                currentStateFinalEnemy != StateFinalEnemy.DEAD;
+        return currentStateBoss != StateBoss.INACTIVE &&
+                currentStateBoss != StateBoss.EXPLODING &&
+                currentStateBoss != StateBoss.DEAD;
     }
 
     private void drawPowers(Batch batch) {
@@ -826,7 +826,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
     }
 
     private void drawFxs(Batch batch) {
-        switch (currentStateFinalEnemy) {
+        switch (currentStateBoss) {
             case EXPLODING:
                 explosionFXSprite.draw(batch);
                 break;
@@ -838,7 +838,7 @@ public class FinalEnemyLevelOne extends FinalEnemy {
 
     @Override
     public void draw(Batch batch) {
-        // We draw FinalEnemyLevelOne in these states: WALKING IDLE SHOOTING INJURED DYING
+        // We draw BossOne in these states: WALKING IDLE SHOOTING INJURED DYING
         if (isDrawable()) {
             drawPowers(batch);
             super.draw(batch);

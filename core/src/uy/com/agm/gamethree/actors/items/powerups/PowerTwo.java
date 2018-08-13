@@ -219,7 +219,7 @@ public class PowerTwo extends Item {
             fdef.shape = shield;
             fdef.filter.categoryBits = WorldContactListener.HERO_SHIELD_BIT;  // Depicts what this fixture is
             fdef.filter.maskBits = WorldContactListener.ENEMY_BIT |
-                    WorldContactListener.FINAL_ENEMY_BIT |
+                    WorldContactListener.BOSS_BIT |
                     WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
             hero.getB2body().createFixture(fdef).setUserData(hero);
 

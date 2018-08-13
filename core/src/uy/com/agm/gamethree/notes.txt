@@ -1,8 +1,9 @@
 PROXIMAS VERSIONES
 ------------------
+- buscar que no haya puesto "bosslevel"
 - Es muy doloroso, pero tengo que hacer la arana de vuelta. Ojo con los rotation y eso.
 Liberar asi por ahora, capaz hacer los videos.
-Probar si al FinalEnemyLevelTwo puedo hacerle perder el rumbo como al One.
+Probar si al BossTwo puedo hacerle perder el rumbo como al One.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -37,7 +38,7 @@ por varios disparos.
 PRIORIDAD 3
 -----------
 - Hacer un mapa de los niveles (opcional)
-- Habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getFinalEnemyLevelOne(), etc.
+- Habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getBossOne(), etc.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
@@ -128,10 +129,10 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
-- Si por ejemplo interrumpo el movimiento del FinalEnemyLevelOne, se descoordina y queda atrapado en una esquina.
+- Si por ejemplo interrumpo el movimiento del BossOne, se descoordina y queda atrapado en una esquina.
 Para interrumpir su movimiento puedo por ejemplo ponerme en la esquina superior derecha y que la arana venga desde abajo por
 el lado derecho. Ahi nos chocamos y por mas peso que ella tenga la detengo. Luego ella dispara y me mata y queda boba.
-Hubiera sido bueno programar la arana con el mismo mecanismo del FinalEnemyLevelTwo, pero bueno, yo quise originalidad en cada enemigo final.
+Hubiera sido bueno programar la arana con el mismo mecanismo del BossTwo, pero bueno, yo quise originalidad en cada enemigo final.
 
 TENGO
 -----
@@ -372,9 +373,9 @@ LECCIONES APRENDIDAS
     el ancho a veces se convierte en altura y viceversa. De igual manera rota el vértice inferior izquierdo y la verdad resulta muy muy complejo
     determinar el nuevo sistema de coordenadas.
     Lo que hice en esos casos fue definir un nuevo sprite (en una variable), seteando su setBoundaries, que la dibujo finalmente sobre el sprite
-    del personaje en el método draw (ver por ejemplo FinalEnemyLevelOne, los sprites powerFXSprite y explosionFXSprite) aplicando
+    del personaje en el método draw (ver por ejemplo BossOne, los sprites powerFXSprite y explosionFXSprite) aplicando
     la rotación y flip del sprite del personaje. Esto lo hice así porque es imposible deducir el ancho y altura del sprite
-    FinalEnemyLevelOne ya que este se pasa rotando por la pantalla.
+    BossOne ya que este se pasa rotando por la pantalla.
 
 12)
    There are also the following methods that alter the bounding rectangle of a sprite (modifies the sprite's vertices):

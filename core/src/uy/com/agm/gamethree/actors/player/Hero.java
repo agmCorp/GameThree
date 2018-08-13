@@ -250,7 +250,7 @@ public class Hero extends Sprite {
 
     private void openFireAutomatic() {
         if (!GameSettings.getInstance().isManualShooting() && !isSilverBulletEnabled()) {
-            if (!isDead() && !screen.getFinalEnemy().isDestroyed()) {
+            if (!isDead() && !screen.getBoss().isDestroyed()) {
                 openFire();
             }
         }
@@ -665,7 +665,7 @@ public class Hero extends Sprite {
                 WorldContactListener.POWER_BOX_BIT |
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.FINAL_ENEMY_BIT |
+                WorldContactListener.BOSS_BIT |
                 WorldContactListener.ENEMY_WEAPON_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
         setFilterData(filter);
     }

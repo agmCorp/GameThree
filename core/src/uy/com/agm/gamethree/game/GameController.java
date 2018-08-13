@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-import uy.com.agm.gamethree.actors.finals.FinalEnemy;
+import uy.com.agm.gamethree.actors.finals.Boss;
 import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.Vector2Util;
@@ -24,14 +24,14 @@ public class GameController implements GestureDetector.GestureListener, InputPro
     private Vector2 heroVelocity;
     private PlayScreen screen;
     private Hero player;
-    private FinalEnemy finalEnemy;
+    private Boss boss;
 
     public GameController(PlayScreen screen) {
         candidateVelocity = new Vector2(0.0f, 0.0f);
         heroVelocity = new Vector2(0.0f, 0.0f);
         this.screen = screen;
         this.player = screen.getCreator().getHero();
-        this.finalEnemy = screen.getFinalEnemy();
+        this.boss = screen.getBoss();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
                         player.getB2body().setLinearVelocity(Hero.LINEAR_VELOCITY, player.getB2body().getLinearVelocity().y);
                         break;
                     case Input.Keys.SPACE:
-                        if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !finalEnemy.isDestroyed()) {
+                        if ((GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) && !boss.isDestroyed()) {
                             player.openFire();
                         }
                         break;
@@ -182,7 +182,7 @@ public class GameController implements GestureDetector.GestureListener, InputPro
         if (screen.isPlayScreenStateRunning()) {
             // If Hero is dead, we don't handle any input
             if (GameSettings.getInstance().isManualShooting() || player.isSilverBulletEnabled()) {
-                if (!player.isDead() && !finalEnemy.isDestroyed()) {
+                if (!player.isDead() && !boss.isDestroyed()) {
                     player.openFire();
                 }
             }

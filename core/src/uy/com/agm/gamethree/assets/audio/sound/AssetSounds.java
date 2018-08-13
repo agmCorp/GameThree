@@ -53,11 +53,11 @@ public class AssetSounds {
     private Sound showUpPowerFour;
     private Sound showUpPowerFive;
     private Sound timeIsUp;
-    private Sound finalEnemyIntro;
-    private Sound finalEnemyPowerUp;
-    private Sound finalEnemyPowerDown;
-    private Sound finalEnemyExplosion;
-    private Sound finalEnemyHit;
+    private Sound bossIntro;
+    private Sound bossPowerUp;
+    private Sound bossPowerDown;
+    private Sound bossExplosion;
+    private Sound bossHit;
     private Sound levelCompleted;
     private Sound boing;
     private Sound click;
@@ -126,11 +126,11 @@ public class AssetSounds {
         showUpPowerFour = am.get(Assets.FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
         showUpPowerFive = am.get(Assets.FX_FILE_SHOW_UP_POWER_FIVE, Sound.class);
         timeIsUp = am.get(Assets.FX_FILE_TIME_IS_UP, Sound.class);
-        finalEnemyPowerUp = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
-        finalEnemyPowerDown = am.get(Assets.FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
-        finalEnemyExplosion = am.get(Assets.FX_FILE_FINAL_ENEMY_EXPLOSION, Sound.class);
-        finalEnemyHit = am.get(Assets.FX_FILE_FINAL_ENEMY_HIT, Sound.class);
-        finalEnemyIntro = am.get(Assets.FX_FILE_FINAL_ENEMY_INTRO, Sound.class);
+        bossPowerUp = am.get(Assets.FX_FILE_BOSS_POWER_UP, Sound.class);
+        bossPowerDown = am.get(Assets.FX_FILE_BOSS_POWER_DOWN, Sound.class);
+        bossExplosion = am.get(Assets.FX_FILE_BOSS_EXPLOSION, Sound.class);
+        bossHit = am.get(Assets.FX_FILE_BOSS_HIT, Sound.class);
+        bossIntro = am.get(Assets.FX_FILE_BOSS_INTRO, Sound.class);
         levelCompleted = am.get(Assets.FX_FILE_LEVEL_COMPLETED, Sound.class);
         boing = am.get(Assets.FX_FILE_BOUNCE, Sound.class);
         click = am.get(Assets.FX_FILE_CLICK, Sound.class);
@@ -322,24 +322,24 @@ public class AssetSounds {
         return timeIsUp;
     }
 
-    public Sound getFinalEnemyPowerUp() {
-        return finalEnemyPowerUp;
+    public Sound getBossPowerUp() {
+        return bossPowerUp;
     }
 
-    public Sound getFinalEnemyPowerDown() {
-        return finalEnemyPowerDown;
+    public Sound getBossPowerDown() {
+        return bossPowerDown;
     }
 
-    public Sound getFinalEnemyExplosion() {
-        return finalEnemyExplosion;
+    public Sound getBossExplosion() {
+        return bossExplosion;
     }
 
-    public Sound getFinalEnemyHit() {
-        return finalEnemyHit;
+    public Sound getBossHit() {
+        return bossHit;
     }
 
-    public Sound getFinalEnemyIntro() {
-        return finalEnemyIntro;
+    public Sound getBossIntro() {
+        return bossIntro;
     }
 
     public Sound getLevelCompleted() {

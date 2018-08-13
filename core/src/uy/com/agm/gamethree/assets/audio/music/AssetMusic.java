@@ -13,7 +13,7 @@ public class AssetMusic {
     private static final String TAG = AssetMusic.class.getName();
 
     private Music songMainMenu;
-    private Music songFinalEnemyFight;
+    private Music songBossFight;
     private Music songLevelOne;
     private Music songLevelTwo;
     private Music songLevelThree;
@@ -24,7 +24,7 @@ public class AssetMusic {
 
     public AssetMusic(AssetManager am) {
         songMainMenu = am.get(Assets.MUSIC_FILE_MAIN_MENU, Music.class);
-        songFinalEnemyFight = am.get(Assets.MUSIC_FILE_FINAL_ENEMY_FIGHT, Music.class);
+        songBossFight = am.get(Assets.MUSIC_FILE_BOSS_FIGHT, Music.class);
         songLevelOne = am.get(Assets.MUSIC_FILE_LEVEL_ONE, Music.class);
         songLevelTwo = am.get(Assets.MUSIC_FILE_LEVEL_TWO, Music.class);
         songLevelThree = am.get(Assets.MUSIC_FILE_LEVEL_THREE, Music.class);
@@ -38,8 +38,8 @@ public class AssetMusic {
         return songMainMenu;
     }
 
-    public Music getSongFinalEnemyFight() {
-        return songFinalEnemyFight;
+    public Music getSongBossFight() {
+        return songBossFight;
     }
 
     public Music getSongLevelOne() {

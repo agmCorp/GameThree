@@ -59,10 +59,10 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionM;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionN;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionO;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionP;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelFour;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelOne;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelThree;
-import uy.com.agm.gamethree.assets.sprites.AssetFinalEnemyLevelTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
+import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
+import uy.com.agm.gamethree.assets.sprites.AssetBossThree;
+import uy.com.agm.gamethree.assets.sprites.AssetBossTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
@@ -129,18 +129,18 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String FX_FILE_SHOW_UP_POWER_FOUR = "audio/sounds/showUpPowerFour.ogg";
     public static final String FX_FILE_SHOW_UP_POWER_FIVE = "audio/sounds/showUpPowerFive.ogg";
     public static final String FX_FILE_TIME_IS_UP = "audio/sounds/timeIsUp.ogg";
-    public static final String FX_FILE_FINAL_ENEMY_POWER_UP = "audio/sounds/finalEnemyPowerUp.ogg";
-    public static final String FX_FILE_FINAL_ENEMY_POWER_DOWN = "audio/sounds/finalEnemyPowerDown.ogg";
-    public static final String FX_FILE_FINAL_ENEMY_EXPLOSION = "audio/sounds/finalEnemyExplosion.ogg";
-    public static final String FX_FILE_FINAL_ENEMY_HIT = "audio/sounds/finalEnemyHit.ogg";
-    public static final String FX_FILE_FINAL_ENEMY_INTRO = "audio/sounds/fear.ogg";
+    public static final String FX_FILE_BOSS_POWER_UP = "audio/sounds/bossPowerUp.ogg";
+    public static final String FX_FILE_BOSS_POWER_DOWN = "audio/sounds/bossPowerDown.ogg";
+    public static final String FX_FILE_BOSS_EXPLOSION = "audio/sounds/bossExplosion.ogg";
+    public static final String FX_FILE_BOSS_HIT = "audio/sounds/bossHit.ogg";
+    public static final String FX_FILE_BOSS_INTRO = "audio/sounds/fear.ogg";
     public static final String FX_FILE_LEVEL_COMPLETED = "audio/sounds/levelCompleted.ogg";
     public static final String FX_FILE_BOUNCE = "audio/sounds/boing.ogg";
     public static final String FX_FILE_CLICK = "audio/sounds/click.ogg";
     public static final String FX_FILE_APPLAUSE = "audio/sounds/applause.ogg";
     public static final String FX_FILE_SQUISH = "audio/sounds/squish.ogg";
     public static final String FX_FILE_FROZEN = "audio/sounds/frozen.ogg";
-    public static final String FX_FILE_BEAM = "audio/sounds/finalEnemyPowerUp.ogg";
+    public static final String FX_FILE_BEAM = "audio/sounds/bossPowerUp.ogg";
     public static final String FX_FILE_PUM = "audio/sounds/pum.ogg";
     public static final String FX_FILE_CHIRP = "audio/sounds/chirp.ogg";
     public static final String FX_FILE_SQUEAK = "audio/sounds/squeak.ogg";
@@ -162,7 +162,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     // Music
     public static final String MUSIC_FILE_MAIN_MENU = "audio/music/mainMenu.ogg";
-    public static final String MUSIC_FILE_FINAL_ENEMY_FIGHT = "audio/music/finalEnemyFight.ogg";
+    public static final String MUSIC_FILE_BOSS_FIGHT = "audio/music/bossFight.ogg";
     public static final String MUSIC_FILE_LEVEL_ONE = "audio/music/levelOne.ogg";
     public static final String MUSIC_FILE_LEVEL_TWO = "audio/music/levelTwo.ogg";
     public static final String MUSIC_FILE_LEVEL_THREE = "audio/music/levelThree.ogg";
@@ -241,10 +241,10 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetBulletF bulletF;
     private AssetBulletG bulletG;
     private AssetToughMode toughMode;
-    private AssetFinalEnemyLevelOne finalEnemyLevelOne;
-    private AssetFinalEnemyLevelTwo finalEnemyLevelTwo;
-    private AssetFinalEnemyLevelThree finalEnemyLevelThree;
-    private AssetFinalEnemyLevelFour finalEnemyLevelFour;
+    private AssetBossOne bossOne;
+    private AssetBossTwo bossTwo;
+    private AssetBossThree bossThree;
+    private AssetBossFour bossFour;
 
     private AssetMaps maps;
     private AssetSounds sounds;
@@ -363,10 +363,10 @@ public class Assets implements Disposable, AssetErrorListener {
         bulletF = new AssetBulletF(atlasDynamicObjects);
         bulletG = new AssetBulletG(atlasDynamicObjects);
         toughMode = new AssetToughMode(atlasDynamicObjects);
-        finalEnemyLevelOne = new AssetFinalEnemyLevelOne(atlasDynamicObjects);
-        finalEnemyLevelTwo = new AssetFinalEnemyLevelTwo(atlasDynamicObjects);
-        finalEnemyLevelThree = new AssetFinalEnemyLevelThree(atlasDynamicObjects);
-        finalEnemyLevelFour = new AssetFinalEnemyLevelFour(atlasDynamicObjects);
+        bossOne = new AssetBossOne(atlasDynamicObjects);
+        bossTwo = new AssetBossTwo(atlasDynamicObjects);
+        bossThree = new AssetBossThree(atlasDynamicObjects);
+        bossFour = new AssetBossFour(atlasDynamicObjects);
         maps = new AssetMaps(assetManager);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);
@@ -434,11 +434,11 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_SHOW_UP_POWER_FOUR, Sound.class);
         assetManager.load(FX_FILE_SHOW_UP_POWER_FIVE, Sound.class);
         assetManager.load(FX_FILE_TIME_IS_UP, Sound.class);
-        assetManager.load(FX_FILE_FINAL_ENEMY_POWER_UP, Sound.class);
-        assetManager.load(FX_FILE_FINAL_ENEMY_POWER_DOWN, Sound.class);
-        assetManager.load(FX_FILE_FINAL_ENEMY_EXPLOSION, Sound.class);
-        assetManager.load(FX_FILE_FINAL_ENEMY_HIT, Sound.class);
-        assetManager.load(FX_FILE_FINAL_ENEMY_INTRO, Sound.class);
+        assetManager.load(FX_FILE_BOSS_POWER_UP, Sound.class);
+        assetManager.load(FX_FILE_BOSS_POWER_DOWN, Sound.class);
+        assetManager.load(FX_FILE_BOSS_EXPLOSION, Sound.class);
+        assetManager.load(FX_FILE_BOSS_HIT, Sound.class);
+        assetManager.load(FX_FILE_BOSS_INTRO, Sound.class);
         assetManager.load(FX_FILE_LEVEL_COMPLETED, Sound.class);
         assetManager.load(FX_FILE_BOUNCE, Sound.class);
         assetManager.load(FX_FILE_CLICK, Sound.class);
@@ -467,7 +467,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     private void loadMusic() {
         assetManager.load(MUSIC_FILE_MAIN_MENU, Music.class);
-        assetManager.load(MUSIC_FILE_FINAL_ENEMY_FIGHT, Music.class);
+        assetManager.load(MUSIC_FILE_BOSS_FIGHT, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_ONE, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_TWO, Music.class);
         assetManager.load(MUSIC_FILE_LEVEL_THREE, Music.class);
@@ -714,20 +714,20 @@ public class Assets implements Disposable, AssetErrorListener {
         return toughMode;
     }
 
-    public AssetFinalEnemyLevelOne getFinalEnemyLevelOne() {
-        return finalEnemyLevelOne;
+    public AssetBossOne getBossOne() {
+        return bossOne;
     }
 
-    public AssetFinalEnemyLevelTwo getFinalEnemyLevelTwo() {
-        return finalEnemyLevelTwo;
+    public AssetBossTwo getBossTwo() {
+        return bossTwo;
     }
 
-    public AssetFinalEnemyLevelThree getFinalEnemyLevelThree() {
-        return finalEnemyLevelThree;
+    public AssetBossThree getBossThree() {
+        return bossThree;
     }
 
-    public AssetFinalEnemyLevelFour getFinalEnemyLevelFour() {
-        return finalEnemyLevelFour;
+    public AssetBossFour getBossFour() {
+        return bossFour;
     }
 
     public AssetMaps getMaps() {
