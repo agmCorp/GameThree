@@ -59,7 +59,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.nextLevel = currentLevel + 1;
         this.currentScore = currentScore;
         this.currentPenalties = currentPenalties;
-        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, 0);
+        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, this.currentScore / 2); // At most we take away half of your level score. We are good people :)
         this.finalStars = getFinalStars(this.currentPenalties);
         prefs.setLevelStateInfo(this.currentLevel, this.finalScore, this.finalStars);
         this.gameScore = getGameScore();
