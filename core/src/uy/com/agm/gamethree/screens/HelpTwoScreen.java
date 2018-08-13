@@ -35,7 +35,7 @@ public class HelpTwoScreen extends AbstractScreen {
     private static final float FAKE_HUD_TABLE_CELL_WIDTH = 96.0f;
     private static final float CELL_HEIGHT = 60.0f;
     private static final float CELL_WIDTH = 40.0f;
-    private static final int ENDURANCE_INDEX = 14;
+    private static final int ENDURANCE_INDEX = 10; // see i18NGameThreeBundle.helpTwo.fakeEndurance
 
     private AssetScene2d assetScene2d;
     private Assets assetGame;
