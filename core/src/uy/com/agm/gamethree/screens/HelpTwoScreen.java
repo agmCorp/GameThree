@@ -120,19 +120,19 @@ public class HelpTwoScreen extends AbstractScreen {
         table.add(statusBarLabel).colspan(COLUMNS);
         table.row();
         table.add(getFakeHudTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
-        table.row();
-        table.add(coin).padTop(AbstractScreen.PAD).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
-        table.add(coinDsc).padTop(AbstractScreen.PAD).width(MSG_WIDTH).fill();
-        table.row();
+        table.row().padTop(AbstractScreen.PAD);
+        table.add(coin).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
+        table.add(coinDsc).width(MSG_WIDTH).fill();
+        table.row().padTop(AbstractScreen.PAD / 2);
         table.add(hourglass).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(hourglassDsc).width(MSG_WIDTH).fill();
-        table.row();
+        table.row().padTop(AbstractScreen.PAD / 2);
         table.add(heroHead).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(heroHeadDsc).width(MSG_WIDTH).fill();
-        table.row();
+        table.row().padTop(AbstractScreen.PAD / 2);
         table.add(heart).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(heartDsc).width(MSG_WIDTH).fill();
-        table.row();
+        table.row().padTop(AbstractScreen.PAD / 2);
         table.add(shuriken).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(shurikenDsc).width(MSG_WIDTH).fill();
 
