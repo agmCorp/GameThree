@@ -1,6 +1,5 @@
 package uy.com.agm.gamethree.actors.bosses;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -41,11 +40,15 @@ public class BossOne extends Boss {
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
     private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
     private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
-    private static final float X_MIN = TARGET_RADIUS_METERS;
-    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS;
+
+    // // TODO: 8/13/2018
+    private static final float MARGEN = 30 / PlayScreen.PPM;
+
+    private static final float X_MIN = TARGET_RADIUS_METERS + MARGEN;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS - MARGEN;
     private static final float X_HALF = WORLD_WIDTH / 2;
-    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
-    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS + MARGEN;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS - MARGEN;
     private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
@@ -70,6 +73,7 @@ public class BossOne extends Boss {
 
     // Circle on the screen where BossTwo must go
     private Circle target;
+    private Circle previousTarget;
     private Circle tmpCircle; // Temporary GC friendly circle
 
     // Power FX
@@ -103,8 +107,9 @@ public class BossOne extends Boss {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Initialize target
-        target = new Circle(0, 0, TARGET_RADIUS_METERS);
+        // Initialize target and previousTarget
+        target = new Circle(b2body.getPosition().x, b2body.getPosition().y, TARGET_RADIUS_METERS);
+        previousTarget = new Circle(0, 0, TARGET_RADIUS_METERS);
 
         // Temporary GC friendly circle
         tmpCircle = new Circle();
@@ -354,32 +359,38 @@ public class BossOne extends Boss {
     }
 
     // todo creo que aca yo deberia ver el target viejo, ver el nuevo y determinar hacia donde voy seteando un estado como antes.
+    // ATENCION: ESTOY DEBERIA HACERLO EN BOSS2 PERO ME EMBOLA TENER EL PREVIOUS EN BOSS2 QUE CONFUNDE. IGUAL EN BOSS2 PERDERIA
+    // UN CICLO SI JUSTO EMBOCO EL MISMO TARGET. ACA ES CAPAZ MAS IMPORTANTE PORQUE ME VA A DETERMINAR EL ESTADO DE WALKING.
+    // ME TENGO QUE IR LPMQLRMVPC
     private void getNewTarget() {
-        int randomPoint = MathUtils.random(1, 5);
-        switch (randomPoint) {
-            case 1:
-                target.setPosition(X_MIN, Y_MAX);
-                break;
-            case 2:
-                target.setPosition(X_MAX, Y_MAX);
-                break;
-            case 3:
-                target.setPosition(X_MIN, Y_MIN);
-                break;
-            case 4:
-                target.setPosition(X_MAX, Y_MIN);
-                break;
-            case 5:
-                target.setPosition(X_HALF, Y_HALF);
-                break;
-        }
+        previousTarget.setPosition(target.x, target.y);
+
+        do {
+            int randomPoint = MathUtils.random(1, 5);
+            switch (randomPoint) {
+                case 1:
+                    target.setPosition(X_MIN, Y_MAX);
+                    break;
+                case 2:
+                    target.setPosition(X_MAX, Y_MAX);
+                    break;
+                case 3:
+                    target.setPosition(X_MIN, Y_MIN);
+                    break;
+                case 4:
+                    target.setPosition(X_MAX, Y_MIN);
+                    break;
+                case 5:
+                    target.setPosition(X_HALF, Y_HALF);
+                    break;
+            }
+        } while (previousTarget.x == target.x && previousTarget.y == target.y);
     }
 
     private Vector2 getSpeedTarget() {
         // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
-        Gdx.app.debug(TAG, "tmp " + tmp); // TODO
         return tmp;
     }
 
@@ -403,7 +414,8 @@ public class BossOne extends Boss {
 
     private boolean reachTarget() {
         tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
-        return target.overlaps(tmpCircle);
+        //return target.overlaps(tmpCircle); // TODO
+        return tmpCircle.contains(target);
     }
 
     private void stateIdle(float dt) {
