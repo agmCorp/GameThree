@@ -373,7 +373,7 @@ public abstract class Enemy extends Sprite {
         return currentState == EXPLODING || currentState == State.SPLAT || currentState == State.DEAD;
     }
 
-    // This Enemy can be removed from our game
+    // This Enemy can be removed from the game
     public boolean isDisposable() {
         return currentState == State.DEAD;
     }

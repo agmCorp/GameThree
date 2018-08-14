@@ -55,7 +55,7 @@ public class PowerBox extends StaticBackgroundObject {
         fixture.setFilterData(filter);
         fixture.setUserData(this);
 
-        // Set this Sprite's bounds to correspond with the position of our Box2D body
+        // Set this Sprite's bounds to correspond with the position of the Box2D body
         setBounds(b2body.getPosition().x - AssetPowerBox.WIDTH_METERS / 2, b2body.getPosition().y - AssetPowerBox.HEIGHT_METERS / 2, AssetPowerBox.WIDTH_METERS, AssetPowerBox.HEIGHT_METERS);
 
         // Me must redefine its boundsMeters to correspond with the size of the sprite instead of the size of the
@@ -225,7 +225,7 @@ public class PowerBox extends StaticBackgroundObject {
         }
     }
 
-    // This PowerBox can be removed from our game
+    // This PowerBox can be removed from the game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }

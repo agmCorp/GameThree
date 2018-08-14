@@ -124,7 +124,7 @@ public class EnemyEleven extends Enemy {
         // Set velocity because It could have been changed in this method
         b2body.setLinearVelocity(velocity);
 
-        // Update our Sprite to correspond with the position of our Box2D body.
+        // Update this Sprite to correspond with the position of our Box2D body.
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         if (isShooting) {

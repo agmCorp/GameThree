@@ -122,7 +122,7 @@ public class BossOne extends Boss {
         // Set the power's texture
         powerFXSprite = new Sprite(Assets.getInstance().getBossOne().getBossOnePowerStand());
 
-        // Only to set width and height of our spritePower (in powerStatePowerful(...) we set its position)
+        // Only to set width and height of spritePower (in powerStatePowerful(...) we set its position)
         powerFXSprite.setBounds(getX(), getY(), AssetBossOne.POWER_WIDTH_METERS, AssetBossOne.POWER_HEIGHT_METERS);
 
         // Place origin of rotation in the center of the Sprite
@@ -137,7 +137,7 @@ public class BossOne extends Boss {
         // Set the explosion's texture
         Sprite spriteExplosion = new Sprite(Assets.getInstance().getExplosionE().getExplosionEStand());
 
-        // Only to set width and height of our spriteExplosion (in stateExploding(...) we set its position)
+        // Only to set width and height of spriteExplosion (in stateExploding(...) we set its position)
         spriteExplosion.setBounds(getX(), getY(), AssetExplosionE.WIDTH_METERS, AssetExplosionE.HEIGHT_METERS);
 
         // Explosion FX Sprite
@@ -151,7 +151,7 @@ public class BossOne extends Boss {
         // Set the splat's texture
         Sprite spriteSplat = new Sprite(Assets.getInstance().getSplat().getRandomBossSplat());
 
-        // Only to set width and height of our spriteSplat (in stateDead(...) we set its position)
+        // Only to set width and height of spriteSplat (in stateDead(...) we set its position)
         spriteSplat.setBounds(getX(), getY(), AssetSplat.BOSS_SPLAT_WIDTH_METERS, AssetSplat.BOSS_SPLAT_HEIGHT_METERS);
 
         // Splat FX Sprite
@@ -329,7 +329,7 @@ public class BossOne extends Boss {
         // Set velocity calculated to reach the target circle (see getSpeedTarget())
         b2body.setLinearVelocity(velocity);
 
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
@@ -415,7 +415,7 @@ public class BossOne extends Boss {
         boolean isFlipY = isFlipY();
         float rotation = getRotation();
 
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -438,7 +438,7 @@ public class BossOne extends Boss {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -561,7 +561,7 @@ public class BossOne extends Boss {
             powerFXSprite.setRotation(getRotation());
             powerFXSprite.setFlip(isFlipX(), isFlipY());
 
-            // Update our Sprite to correspond with the position of our bossOne's Box2D body
+            // Update this Sprite to correspond with the position of our bossOne's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }

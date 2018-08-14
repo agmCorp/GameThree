@@ -96,7 +96,7 @@ public abstract class Boss extends Sprite {
         knockBackTime = 0;
     }
 
-    // This Boss can be removed from our game
+    // This Boss can be removed from the game
     public boolean isDisposable() {
         return currentStateBoss == StateBoss.DEAD;
     }
@@ -116,7 +116,7 @@ public abstract class Boss extends Sprite {
         Hero hero = screen.getCreator().getHero();
 
         if (currentStateBoss == StateBoss.INACTIVE) {
-            // When our boss is on camera, it activates
+            // When the boss is on camera, it activates
             if (screen.isTheEndOfTheWorld()) {
                 b2body.setActive(true);
 

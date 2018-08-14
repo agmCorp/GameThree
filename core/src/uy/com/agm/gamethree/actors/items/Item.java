@@ -92,7 +92,7 @@ public abstract class Item extends Sprite {
         }
     }
 
-    // This Item can be removed from our game
+    // This Item can be removed from the game
     public boolean isDisposable() {
         return currentState == State.FINISHED;
     }
