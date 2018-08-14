@@ -38,18 +38,13 @@ public class BossOne extends Boss {
     private static final String NAME = "ASTROBITSY";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float OFFSET = 30.0f / PlayScreen.PPM;
     private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
     private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
-
-    // // TODO: 8/13/2018
-    private static final float MARGEN = 30 / PlayScreen.PPM;
-
-    private static final float X_MIN = TARGET_RADIUS_METERS + MARGEN;
-    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS - MARGEN;
-    private static final float X_HALF = WORLD_WIDTH / 2;
-    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS + MARGEN;
-    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS - MARGEN;
-    private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
+    private static final float X_MIN = TARGET_RADIUS_METERS + OFFSET;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS - OFFSET;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS + OFFSET;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS - OFFSET;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 8 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
@@ -259,8 +254,7 @@ public class BossOne extends Boss {
                     break;
             }
         }
-        // todo return newRandomStateBoss;
-        return StateBoss.WALKING;
+        return newRandomStateBoss;
     }
 
     @Override
@@ -366,7 +360,7 @@ public class BossOne extends Boss {
         previousTarget.setPosition(target.x, target.y);
 
         do {
-            int randomPoint = MathUtils.random(1, 5);
+            int randomPoint = MathUtils.random(1, 4);
             switch (randomPoint) {
                 case 1:
                     target.setPosition(X_MIN, Y_MAX);
@@ -380,9 +374,6 @@ public class BossOne extends Boss {
                 case 4:
                     target.setPosition(X_MAX, Y_MIN);
                     break;
-                case 5:
-                    target.setPosition(X_HALF, Y_HALF);
-                    break;
             }
         } while (previousTarget.x == target.x && previousTarget.y == target.y);
     }
@@ -394,27 +385,29 @@ public class BossOne extends Boss {
         return tmp;
     }
 
+    // todo
     private void setRotationAngleAndFlip() {
-//        if (b2body.getLinearVelocity().len() > 0.0f) {
-//            setRotation(90.0f);
-//            float velAngle = this.b2body.getLinearVelocity().angle();
-//            if (0 <= velAngle && velAngle <= 180.0f) {
-//                setRotation(270.0f);
-//            }
-//            rotate(velAngle);
-//        }
-            setRotation(this.b2body.getLinearVelocity().angle());
-            setFlip(true, true);
+        boolean ceilingLeft = previousTarget.x == X_MAX && previousTarget.y == Y_MAX &&
+                target.x == X_MIN && target.y == Y_MAX;
 
-            boolean algo = this.b2body.getLinearVelocity().x > 0 && this.b2body.getPosition().y < Y_HALF;
-            if (algo) {
-                //flip(false, true);
-            }
+        boolean leftDown = previousTarget.x == X_MIN && previousTarget.y == Y_MAX &&
+                target.x == X_MIN && target.y == Y_MIN;
+
+        boolean floorRight = previousTarget.x == X_MIN && previousTarget.y == Y_MIN &&
+                target.x == X_MAX && target.y == Y_MIN;
+
+        boolean rightUp = previousTarget.x == X_MAX && previousTarget.y == Y_MIN &&
+                target.x == X_MAX && target.y == Y_MAX;
+
+        setRotation(b2body.getLinearVelocity().angle());
+        setFlip(true, true);
+        if (ceilingLeft || leftDown || floorRight || rightUp) {
+            setFlip(true, false);
+        }
     }
 
     private boolean reachTarget() {
         tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
-        //return target.overlaps(tmpCircle); // TODO
         return tmpCircle.contains(target);
     }
 
