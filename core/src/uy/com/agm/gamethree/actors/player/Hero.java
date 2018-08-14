@@ -260,7 +260,7 @@ public class Hero extends Sprite {
         abilityPowerFXSprite.setRegion((TextureRegion) abilityPowerFXAnimation.getKeyFrame(abilityPowerFXStateTime, true));
         abilityPowerFXStateTime += dt;
 
-        // Update our Sprite to correspond with the position of our Hero's Box2D body
+        // Update this Sprite to correspond with the position of the Hero's Box2D body
         abilityPowerFXSprite.setPosition(b2body.getPosition().x - abilityPowerFXSprite.getWidth() / 2, b2body.getPosition().y - abilityPowerFXSprite.getHeight() / 2);
 
         // Apply rotation of the main character
@@ -305,7 +305,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateStanding(float dt) {
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -320,7 +320,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateMovingLeftRight(float dt) {
-       /* Update our Sprite to correspond with the position of our Box2D body:
+       /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -344,7 +344,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateMovingUp(float dt) {
-       /* Update our Sprite to correspond with the position of our Box2D body:
+       /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -368,7 +368,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateMovingDown(float dt) {
-       /* Update our Sprite to correspond with the position of our Box2D body:
+       /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -418,7 +418,7 @@ public class Hero extends Sprite {
             initDyingUp = false;
         }
 
-       /* Update our Sprite to correspond with the position of our Box2D body:
+       /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -446,7 +446,7 @@ public class Hero extends Sprite {
     }
 
     private void heroStateDyingDown(float dt) {
-       /* Update our Sprite to correspond with the position of our Box2D body:
+       /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, Hero may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -500,7 +500,7 @@ public class Hero extends Sprite {
         // Play music again
         AudioManager.getInstance().resumeMusic();
 
-        // Our Hero can collide with powerBoxes, borders, edges, paths and obstacles only.
+        // Hero can collide with powerBoxes, borders, edges, paths and obstacles only.
         // However, he could die crushed.
         Filter filter = new Filter();
         filter.categoryBits = WorldContactListener.HERO_BIT; // Depicts what this fixture is

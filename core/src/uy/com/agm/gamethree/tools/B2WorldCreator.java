@@ -136,10 +136,10 @@ public class B2WorldCreator {
         // TiledEditor map
         TiledMap map = screen.getMap();
 
-        // Create the hero in our game world
+        // Create the hero in the game world
         hero = new Hero(screen, screen.getGameCam().position.x, screen.getGameCam().position.y / 2);
 
-        // Create the boss in our game world
+        // Create the boss in the game world
         boss = LevelFactory.getBoss(screen, screen.getLevel());
 
         // Layer: border

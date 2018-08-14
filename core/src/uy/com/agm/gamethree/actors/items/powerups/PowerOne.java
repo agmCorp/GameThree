@@ -93,7 +93,7 @@ public class PowerOne extends Item {
     @Override
     protected void stateWaiting(float dt) {
         b2body.setLinearVelocity(velocity);
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -113,7 +113,7 @@ public class PowerOne extends Item {
     @Override
     protected void stateFading(float dt) {
         b2body.setLinearVelocity(velocity);
-        /* Update our Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, PowerOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
@@ -195,7 +195,7 @@ public class PowerOne extends Item {
             // Set the power's texture
             Sprite spriteAbilityPower = new Sprite(Assets.getInstance().getGhostMode().getGhostModeStand());
 
-            // Only to set width and height of our spriteAbilityPower
+            // Only to set width and height of spriteAbilityPower
             spriteAbilityPower.setBounds(hero.getX(), hero.getY(), AssetGhostMode.WIDTH_METERS, AssetGhostMode.HEIGHT_METERS);
 
             // Apply effect

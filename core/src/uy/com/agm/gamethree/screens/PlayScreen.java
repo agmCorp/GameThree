@@ -136,14 +136,14 @@ public class PlayScreen extends AbstractScreen {
         // We use the convention 100 pixels = 1 meter to work with meters and therefore meters per seconds in velocity and so on.
         gameViewPort = new FitViewport(AbstractScreen.V_WIDTH / PPM, AbstractScreen.V_HEIGHT / PPM, gameCam);
 
-        // Get our map and setup our map renderer
+        // Get the map and setup our map renderer
         map = LevelFactory.getLevelMap(level);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
-        // Initially set our gameCam to be centered correctly at the start (bottom) of the map
+        // Initially set the gameCam to be centered correctly at the start (bottom) of the map
         gameCam.position.set(gameViewPort.getWorldWidth() / 2, DebugConstants.GAME_CAM_Y_METERS > 0 ? DebugConstants.GAME_CAM_Y_METERS : gameViewPort.getWorldHeight() / 2, 0);
 
-        // Create our Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
+        // Create the Box2D world, setting no gravity in x and no gravity in y, and allow bodies to sleep
         world = new World(new Vector2(0, 0), true);
 
         // Avoid sticking to walls when velocity is less than 1
@@ -152,7 +152,7 @@ public class PlayScreen extends AbstractScreen {
         // Set accumulator for world.step
         accumulator = 0;
 
-        // Allows for debug lines of our box2d world.
+        // Allows for debug lines of the box2d world.
         if (DebugConstants.DEBUG_LINES) {
             b2dr = new Box2DDebugRenderer();
         }
@@ -175,7 +175,7 @@ public class PlayScreen extends AbstractScreen {
         // Get the boss
         boss = creator.getBoss();
 
-        // Create our collision listener
+        // Create the collision listener
         world.setContactListener(new WorldContactListener());
 
         // Create the game HUD for score, time, etc.
@@ -427,10 +427,10 @@ public class PlayScreen extends AbstractScreen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Render our game map
+        // Render the game map
         tiledMapRenderer.render();
 
-        // Renderer our Box2DDebugLines
+        // Render Box2DDebugLines
         if (DebugConstants.DEBUG_LINES) {
             b2dr.render(world, gameCam.combined);
         }
@@ -792,7 +792,7 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        // Updated our game viewports
+        // Updated the game viewports
         gameViewPort.update(width, height);
         hud.getViewport().update(width, height);
         dimScreen.getViewport().update(width, height);

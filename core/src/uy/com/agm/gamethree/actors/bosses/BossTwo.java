@@ -337,7 +337,7 @@ public class BossTwo extends Boss {
         // Set velocity calculated to reach the target circle (see getSpeedTarget())
         b2body.setLinearVelocity(velocity);
 
-        /* Update this Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
@@ -429,7 +429,7 @@ public class BossTwo extends Boss {
         // Preserve the rotation state
         float rotation = getRotation();
 
-        /* Update this Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
@@ -450,7 +450,7 @@ public class BossTwo extends Boss {
         // Stop
         b2body.setLinearVelocity(0.0f, 0.0f);
 
-        /* Update this Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
@@ -575,7 +575,7 @@ public class BossTwo extends Boss {
             // Apply rotation of the main character
             powerFXSprite.setRotation(getRotation());
 
-            // Update this Sprite to correspond with the position of our bossTwo's Box2D body
+            // Update this Sprite to correspond with the position of the bossTwo's Box2D body
             powerFXSprite.setPosition(b2body.getPosition().x - powerFXSprite.getWidth() / 2, b2body.getPosition().y - powerFXSprite.getHeight() / 2);
         }
     }

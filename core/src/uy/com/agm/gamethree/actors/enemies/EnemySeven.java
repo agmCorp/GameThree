@@ -121,7 +121,7 @@ public class EnemySeven extends Enemy {
         // Set velocity because It could have been changed (see reverseVelocity)
         b2body.setLinearVelocity(velocity);
 
-        /* Update this Sprite to correspond with the position of our Box2D body:
+        /* Update this Sprite to correspond with the position of the Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
         * At this time, EnemyOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.

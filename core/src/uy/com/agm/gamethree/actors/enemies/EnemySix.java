@@ -180,7 +180,7 @@ public class EnemySix extends Enemy {
     }
 
     private void beamToNormal(float dt) {
-        // Update this Sprite to correspond with the position of our Box2D body
+        // Update this Sprite to correspond with the position of the Box2D body
         float offset = offsetXMeters >= 0 ? 0 : offsetXMeters;
         beamSprite.setPosition(b2body.getPosition().x + offset, b2body.getPosition().y - beamSprite.getHeight() / 2);
 

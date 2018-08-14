@@ -86,7 +86,7 @@ public class EnemyBullet extends Weapon {
         // Get the bounding rectangle that could have been changed after applying setRotation
         getBoundingRectangle().getCenter(tmp);
 
-        // Update our Sprite to correspond with the position of our Box2D body
+        // Update this Sprite to correspond with the position of the Box2D body
         translate(b2body.getPosition().x - tmp.x, b2body.getPosition().y - tmp.y);
 
         if (showMuzzleFlashShoot) {

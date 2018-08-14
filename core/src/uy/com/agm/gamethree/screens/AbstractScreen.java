@@ -36,7 +36,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     public static final Color COLOR_LABEL_PRESSED = new Color(0xad5D00ff);
 
     protected AbstractScreen() {
-        // We don't scale our viewPort (see PlayScreen constructor), so we work with pixels
+        // We don't scale the viewPort (see PlayScreen constructor), so we work with pixels
         super(new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera()));
     }
 
