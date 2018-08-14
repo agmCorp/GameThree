@@ -56,7 +56,7 @@ public class BossTwo extends Boss {
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
     private static final float DYING_STATE_TIME_SECONDS = 2.0f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
-    private static final int SCORE = 500;
+    private static final int SCORE = 1000;
 
     private int damage;
     private float stateBossTime;
@@ -64,13 +64,13 @@ public class BossTwo extends Boss {
     private float timeToChange;
     private float agonyTime;
 
-    private Animation bossTwoMovingUpAnimation;
-    private Animation bossTwoMovingDownAnimation;
-    private Animation bossTwoMovingLeftRightAnimation;
+    private Animation bossTwoWalkUpAnimation;
+    private Animation bossTwoWalkDownAnimation;
+    private Animation bossTwoWalkLeftRightAnimation;
     private Animation bossTwoIdleAnimation;
-    private Animation bossTwoShootingUpAnimation;
-    private Animation bossTwoShootingDownAnimation;
-    private Animation bossTwoDyingAnimation;
+    private Animation bossTwoShootUpAnimation;
+    private Animation bossTwoShootDownAnimation;
+    private Animation bossTwoDeathAnimation;
 
     // Circle on the screen where BossTwo must go
     private Circle target;
@@ -93,13 +93,13 @@ public class BossTwo extends Boss {
         super(screen, x, y, AssetBossTwo.WIDTH_METERS, AssetBossTwo.HEIGHT_METERS);
 
         // Animations
-        bossTwoMovingUpAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingUpAnimation();
-        bossTwoMovingDownAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingDownAnimation();
-        bossTwoMovingLeftRightAnimation = Assets.getInstance().getBossTwo().getBossTwoMovingLeftRightAnimation();
+        bossTwoWalkUpAnimation = Assets.getInstance().getBossTwo().getBossTwoWalkUpAnimation();
+        bossTwoWalkDownAnimation = Assets.getInstance().getBossTwo().getBossTwoWalkDownAnimation();
+        bossTwoWalkLeftRightAnimation = Assets.getInstance().getBossTwo().getBossTwoWalkLeftRightAnimation();
         bossTwoIdleAnimation = Assets.getInstance().getBossTwo().getBossTwoIdleAnimation();
-        bossTwoShootingUpAnimation = Assets.getInstance().getBossTwo().getBossTwoShootingUpAnimation();
-        bossTwoShootingDownAnimation = Assets.getInstance().getBossTwo().getBossTwoShootingDownAnimation();
-        bossTwoDyingAnimation = Assets.getInstance().getBossTwo().getBossTwoDeathAnimation();
+        bossTwoShootUpAnimation = Assets.getInstance().getBossTwo().getBossTwoShootUpAnimation();
+        bossTwoShootDownAnimation = Assets.getInstance().getBossTwo().getBossTwoShootDownAnimation();
+        bossTwoDeathAnimation = Assets.getInstance().getBossTwo().getBossTwoDeathAnimation();
 
         // BossTwo variables initialization
         damage = MAX_DAMAGE;
@@ -362,24 +362,29 @@ public class BossTwo extends Boss {
     }
 
     private void getNewTarget() {
-        int randomPoint = MathUtils.random(1, 5);
-        switch (randomPoint) {
-            case 1:
-                target.setPosition(X_MIN, Y_HALF);
-                break;
-            case 2:
-                target.setPosition(X_HALF, Y_MAX);
-                break;
-            case 3:
-                target.setPosition(X_MAX, Y_HALF);
-                break;
-            case 4:
-                target.setPosition(X_HALF, Y_MIN);
-                break;
-            case 5:
-                target.setPosition(X_HALF, Y_HALF);
-                break;
-        }
+        float targetX = target.x;
+        float targetY = target.y;
+
+        do {
+            int randomPoint = MathUtils.random(1, 5);
+            switch (randomPoint) {
+                case 1:
+                    target.setPosition(X_MIN, Y_HALF);
+                    break;
+                case 2:
+                    target.setPosition(X_HALF, Y_MAX);
+                    break;
+                case 3:
+                    target.setPosition(X_MAX, Y_HALF);
+                    break;
+                case 4:
+                    target.setPosition(X_HALF, Y_MIN);
+                    break;
+                case 5:
+                    target.setPosition(X_HALF, Y_HALF);
+                    break;
+            }
+        } while (targetX == target.x && targetY == target.y);
     }
 
     private Vector2 getSpeedTarget() {
@@ -401,12 +406,12 @@ public class BossTwo extends Boss {
     private void setAnimation(float dt) {
         float vy = b2body.getLinearVelocity().y;
         if (vy > 0.0f) {
-            setRegion((TextureRegion) bossTwoMovingUpAnimation.getKeyFrame(stateBossTime, true));
+            setRegion((TextureRegion) bossTwoWalkUpAnimation.getKeyFrame(stateBossTime, true));
         } else {
             if (vy < 0.0f) {
-                setRegion((TextureRegion) bossTwoMovingDownAnimation.getKeyFrame(stateBossTime, true));
+                setRegion((TextureRegion) bossTwoWalkDownAnimation.getKeyFrame(stateBossTime, true));
             } else { // vy == 0
-                setRegion((TextureRegion) bossTwoMovingLeftRightAnimation.getKeyFrame(stateBossTime, true));
+                setRegion((TextureRegion) bossTwoWalkLeftRightAnimation.getKeyFrame(stateBossTime, true));
             }
         }
         stateBossTime += dt;
@@ -461,10 +466,10 @@ public class BossTwo extends Boss {
         // Depending on the angle, set the sprite's rotation angle and animation
         setRotation(90.0f);
         if (0 <= angle && angle <= 180.0f) {
-            setRegion((TextureRegion) bossTwoShootingUpAnimation.getKeyFrame(stateBossTime, true));
+            setRegion((TextureRegion) bossTwoShootUpAnimation.getKeyFrame(stateBossTime, true));
             setRotation(270.0f);
         } else {
-            setRegion((TextureRegion) bossTwoShootingDownAnimation.getKeyFrame(stateBossTime, true));
+            setRegion((TextureRegion) bossTwoShootDownAnimation.getKeyFrame(stateBossTime, true));
         }
         rotate(angle);
         stateBossTime += dt;
@@ -513,7 +518,7 @@ public class BossTwo extends Boss {
             // Preserve the rotation state
             float rotation = getRotation();
 
-            setRegion((TextureRegion) bossTwoDyingAnimation.getKeyFrame(stateBossTime, true));
+            setRegion((TextureRegion) bossTwoDeathAnimation.getKeyFrame(stateBossTime, true));
             stateBossTime += dt;
 
             // Apply previous rotation state
@@ -557,7 +562,7 @@ public class BossTwo extends Boss {
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our boss is not walking nor shooting, he becomes weak
+        // If the boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -576,7 +581,7 @@ public class BossTwo extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our boss is walking or shooting, he becomes powerful
+        // If the boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;

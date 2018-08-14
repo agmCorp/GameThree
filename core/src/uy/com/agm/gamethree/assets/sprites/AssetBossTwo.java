@@ -22,12 +22,12 @@ public class AssetBossTwo {
     private TextureRegion bossTwoStand;
     private TextureRegion bossTwoPowerStand;
     private Animation bossTwoIdleAnimation;
-    private Animation bossTwoMovingUpAnimation;
-    private Animation bossTwoMovingDownAnimation;
-    private Animation bossTwoMovingLeftRightAnimation;
-    private Animation bossTwoShootingUpAnimation;
-    private Animation bossTwoShootingDownAnimation;
-    private Animation bossTwoShootingLeftRightAnimation;
+    private Animation bossTwoWalkUpAnimation;
+    private Animation bossTwoWalkDownAnimation;
+    private Animation bossTwoWalkLeftRightAnimation;
+    private Animation bossTwoShootUpAnimation;
+    private Animation bossTwoShootDownAnimation;
+    private Animation bossTwoShootLeftRightAnimation;
     private Animation bossTwoDeathAnimation;
     private Animation bossTwoPowerAnimation;
 
@@ -44,32 +44,32 @@ public class AssetBossTwo {
 
         // Animation
         regions = atlas.findRegions("bossTwoUp");
-        bossTwoMovingUpAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoWalkUpAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("bossTwoDown");
-        bossTwoMovingDownAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoWalkDownAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("bossTwoUp");
-        bossTwoMovingLeftRightAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoWalkLeftRightAnimation = new Animation(0.5f / 18.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("bossTwoSlashingUp");
-        bossTwoShootingUpAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoShootUpAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("bossTwoSlashingDown");
-        bossTwoShootingDownAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoShootDownAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("bossTwoSlashingDown");
-        bossTwoShootingLeftRightAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
+        bossTwoShootLeftRightAnimation = new Animation(0.5f / 12.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
@@ -95,28 +95,28 @@ public class AssetBossTwo {
         return bossTwoIdleAnimation;
     }
 
-    public Animation getBossTwoMovingUpAnimation() {
-        return bossTwoMovingUpAnimation;
+    public Animation getBossTwoWalkUpAnimation() {
+        return bossTwoWalkUpAnimation;
     }
 
-    public Animation getBossTwoMovingDownAnimation() {
-        return bossTwoMovingDownAnimation;
+    public Animation getBossTwoWalkDownAnimation() {
+        return bossTwoWalkDownAnimation;
     }
 
-    public Animation getBossTwoMovingLeftRightAnimation() {
-        return bossTwoMovingLeftRightAnimation;
+    public Animation getBossTwoWalkLeftRightAnimation() {
+        return bossTwoWalkLeftRightAnimation;
     }
 
-    public Animation getBossTwoShootingUpAnimation() {
-        return bossTwoShootingUpAnimation;
+    public Animation getBossTwoShootUpAnimation() {
+        return bossTwoShootUpAnimation;
     }
 
-    public Animation getBossTwoShootingDownAnimation() {
-        return bossTwoShootingDownAnimation;
+    public Animation getBossTwoShootDownAnimation() {
+        return bossTwoShootDownAnimation;
     }
 
-    public Animation getBossTwoShootingLeftRightAnimation() {
-        return bossTwoShootingLeftRightAnimation;
+    public Animation getBossTwoShootLeftRightAnimation() {
+        return bossTwoShootLeftRightAnimation;
     }
 
     public Animation getBossTwoDeathAnimation() {

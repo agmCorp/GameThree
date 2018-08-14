@@ -60,7 +60,7 @@ public class BossFour extends Boss {
     private static final float IDLE_STATE_TIME_SECONDS = 5.0f;
     private static final float DYING_STATE_TIME_SECONDS = 3.5f;
     private static final float FIRE_DELAY_SECONDS = 0.7f;
-    private static final int SCORE = 500;
+    private static final int SCORE = 2000;
 
     private int damage;
     private float stateBossTime;
@@ -73,7 +73,7 @@ public class BossFour extends Boss {
     private Animation bossFourWalkAnimation;
     private Animation bossFourIdleAnimation;
     private Animation bossFourShootAnimation;
-    private Animation bossFourDyingAnimation;
+    private Animation bossFourDeathAnimation;
 
     // Circle on the screen where BossFour must go
     private Circle target;
@@ -99,7 +99,7 @@ public class BossFour extends Boss {
         bossFourWalkAnimation = Assets.getInstance().getBossFour().getBossFourWalkAnimation();
         bossFourIdleAnimation = Assets.getInstance().getBossFour().getBossFourIdleAnimation();
         bossFourShootAnimation = Assets.getInstance().getBossFour().getBossFourShootAnimation();
-        bossFourDyingAnimation = Assets.getInstance().getBossFour().getBossFourDeathAnimation();
+        bossFourDeathAnimation = Assets.getInstance().getBossFour().getBossFourDeathAnimation();
 
         // BossFour variables initialization
         damage = MAX_DAMAGE;
@@ -567,7 +567,7 @@ public class BossFour extends Boss {
             boolean isFlipX = isFlipX();
             boolean isFlipY = isFlipY();
 
-            setRegion((TextureRegion) bossFourDyingAnimation.getKeyFrame(stateBossTime));
+            setRegion((TextureRegion) bossFourDeathAnimation.getKeyFrame(stateBossTime));
             stateBossTime += dt;
 
             // Apply previous flip state
@@ -604,7 +604,7 @@ public class BossFour extends Boss {
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our boss is not walking nor shooting, he becomes weak
+        // If the boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -620,7 +620,7 @@ public class BossFour extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our boss is walking or shooting, he becomes powerful
+        // If the boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;

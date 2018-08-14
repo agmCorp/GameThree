@@ -38,13 +38,13 @@ public class BossOne extends Boss {
     private static final String NAME = "ASTROBITSY";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
-    private static final float OFFSET = 30.0f / PlayScreen.PPM;
+    private static final float OFFSET_TARGET = 30.0f / PlayScreen.PPM;
     private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
     private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
-    private static final float X_MIN = TARGET_RADIUS_METERS + OFFSET;
-    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS - OFFSET;
-    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS + OFFSET;
-    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS - OFFSET;
+    private static final float X_MIN = TARGET_RADIUS_METERS + OFFSET_TARGET;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS - OFFSET_TARGET;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS + OFFSET_TARGET;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS - OFFSET_TARGET;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 8 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
@@ -64,7 +64,7 @@ public class BossOne extends Boss {
     private Animation bossOneWalkAnimation;
     private Animation bossOneIdleAnimation;
     private Animation bossOneShootAnimation;
-    private Animation bossOneDyingAnimation;
+    private Animation bossOneDeathAnimation;
 
     // Circle on the screen where BossTwo must go
     private Circle target;
@@ -91,7 +91,7 @@ public class BossOne extends Boss {
         bossOneWalkAnimation = Assets.getInstance().getBossOne().getBossOneWalkAnimation();
         bossOneIdleAnimation = Assets.getInstance().getBossOne().getBossOneIdleAnimation();
         bossOneShootAnimation = Assets.getInstance().getBossOne().getBossOneShootAnimation();
-        bossOneDyingAnimation = Assets.getInstance().getBossOne().getBossOneDeathAnimation();
+        bossOneDeathAnimation = Assets.getInstance().getBossOne().getBossOneDeathAnimation();
 
         // BossOne variables initialization
         damage = MAX_DAMAGE;
@@ -352,10 +352,6 @@ public class BossOne extends Boss {
         currentStateBoss = getNewRandomState(dt);
     }
 
-    // todo creo que aca yo deberia ver el target viejo, ver el nuevo y determinar hacia donde voy seteando un estado como antes.
-    // ATENCION: ESTOY DEBERIA HACERLO EN BOSS2 PERO ME EMBOLA TENER EL PREVIOUS EN BOSS2 QUE CONFUNDE. IGUAL EN BOSS2 PERDERIA
-    // UN CICLO SI JUSTO EMBOCO EL MISMO TARGET. ACA ES CAPAZ MAS IMPORTANTE PORQUE ME VA A DETERMINAR EL ESTADO DE WALKING.
-    // ME TENGO QUE IR LPMQLRMVPC
     private void getNewTarget() {
         previousTarget.setPosition(target.x, target.y);
 
@@ -385,7 +381,6 @@ public class BossOne extends Boss {
         return tmp;
     }
 
-    // todo
     private void setRotationAngleAndFlip() {
         boolean ceilingLeft = previousTarget.x == X_MAX && previousTarget.y == Y_MAX &&
                 target.x == X_MIN && target.y == Y_MAX;
@@ -491,7 +486,7 @@ public class BossOne extends Boss {
     }
 
     private void stateDying(float dt) {
-        if (bossOneDyingAnimation.isAnimationFinished(stateBossTime)) {
+        if (bossOneDeathAnimation.isAnimationFinished(stateBossTime)) {
             // Exploding animation
             explosionFXStateTime = 0;
 
@@ -506,7 +501,7 @@ public class BossOne extends Boss {
             boolean isFlipY = isFlipY();
             float rotation = getRotation();
 
-            setRegion((TextureRegion) bossOneDyingAnimation.getKeyFrame(stateBossTime));
+            setRegion((TextureRegion) bossOneDeathAnimation.getKeyFrame(stateBossTime));
             stateBossTime += dt;
 
             // Apply previous flip and rotation state
@@ -540,19 +535,19 @@ public class BossOne extends Boss {
     }
 
     private void stateDead() {
-            // Apply rotation and flip of the explosion
-            splatFXSprite.setRotation(explosionFXSprite.getRotation());
-            splatFXSprite.setFlip(explosionFXSprite.isFlipX(), explosionFXSprite.isFlipY());
+        // Apply rotation and flip of the explosion
+        splatFXSprite.setRotation(explosionFXSprite.getRotation());
+        splatFXSprite.setFlip(explosionFXSprite.isFlipX(), explosionFXSprite.isFlipY());
 
-            // Get center of the bounding rectangle of the explosion
-            explosionFXSprite.getBoundingRectangle().getCenter(tmp);
+        // Get center of the bounding rectangle of the explosion
+        explosionFXSprite.getBoundingRectangle().getCenter(tmp);
 
-            // Center the Sprite in tmp
-            splatFXSprite.setPosition(tmp.x - splatFXSprite.getWidth() / 2, tmp.y - splatFXSprite.getHeight() / 2);
+        // Center the Sprite in tmp
+        splatFXSprite.setPosition(tmp.x - splatFXSprite.getWidth() / 2, tmp.y - splatFXSprite.getHeight() / 2);
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our boss is not walking nor shooting, he becomes weak
+        // If the boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -572,7 +567,7 @@ public class BossOne extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our boss is walking or shooting, he becomes powerful
+        // If the boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
@@ -657,6 +652,7 @@ public class BossOne extends Boss {
 
     @Override
     public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(previousTarget.x, previousTarget.y, previousTarget.radius);
         shapeRenderer.circle(target.x, target.y, target.radius);
         shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
