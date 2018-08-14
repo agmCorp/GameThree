@@ -64,7 +64,7 @@ public class PlayScreen extends AbstractScreen {
     // Box2D Scale (Pixels Per Meter)
     public static final float PPM = 100;
 
-    // Position (y-axis) where the epic fight against the final enemy begins
+    // Position (y-axis) where the epic fight against the boss begins
     private static final float LEVEL_CHALLENGE_BEGIN = V_HEIGHT * (WORLD_SCREENS - 1) / PPM;
 
     // Game cam velocity (m/s)
@@ -117,7 +117,7 @@ public class PlayScreen extends AbstractScreen {
     private Edge upperEdge;
     private Edge bottomEdge;
 
-    // Final Enemy
+    // The boss
     private Boss boss;
 
     // Screen shaker
@@ -172,7 +172,7 @@ public class PlayScreen extends AbstractScreen {
         upperEdge = creator.getUpperEdge();
         bottomEdge = creator.getBottomEdge();
 
-        // Get the final enemy
+        // Get the boss
         boss = creator.getBoss();
 
         // Create our collision listener

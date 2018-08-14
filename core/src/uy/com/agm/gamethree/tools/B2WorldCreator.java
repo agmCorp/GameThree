@@ -139,7 +139,7 @@ public class B2WorldCreator {
         // Create the hero in our game world
         hero = new Hero(screen, screen.getGameCam().position.x, screen.getGameCam().position.y / 2);
 
-        // Create the final enemy in our game world
+        // Create the boss in our game world
         boss = LevelFactory.getBoss(screen, screen.getLevel());
 
         // Layer: border

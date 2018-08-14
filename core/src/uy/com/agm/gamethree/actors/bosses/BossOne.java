@@ -1,9 +1,12 @@
 package uy.com.agm.gamethree.actors.bosses;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,13 +15,12 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import uy.com.agm.gamethree.actors.backgroundObjects.kinematicObjects.Edge;
 import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyRocketShooting;
 import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
+import uy.com.agm.gamethree.assets.sprites.AssetExplosionE;
 import uy.com.agm.gamethree.assets.sprites.AssetSplat;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -36,6 +38,15 @@ public class BossOne extends Boss {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final String NAME = "ASTROBITSY";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
+    private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
+    private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
+    private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
+    private static final float X_MIN = TARGET_RADIUS_METERS;
+    private static final float X_MAX = WORLD_WIDTH - TARGET_RADIUS_METERS;
+    private static final float X_HALF = WORLD_WIDTH / 2;
+    private static final float Y_MIN = WORLD_HEIGHT * (PlayScreen.WORLD_SCREENS - 1) + TARGET_RADIUS_METERS;
+    private static final float Y_MAX = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - TARGET_RADIUS_METERS;
+    private static final float Y_HALF = WORLD_HEIGHT * PlayScreen.WORLD_SCREENS - WORLD_HEIGHT / 2;
     private static final float LINEAR_VELOCITY = 4.5f;
     private static final float DENSITY = 1000.0f;
     private static final int MAX_DAMAGE = 8 * (DebugConstants.DESTROY_BOSSES_ONE_HIT ? 0 : 1);
@@ -47,19 +58,6 @@ public class BossOne extends Boss {
     private static final float FIRE_DELAY_SECONDS = 0.7f;
     private static final int SCORE = 500;
 
-    private enum StateWalking {
-        CEILING_LEFT, CEILING_RIGHT,
-        LEFT_UP, LEFT_DOWN,
-        FLOOR_LEFT, FLOOR_RIGHT,
-        RIGHT_UP, RIGHT_DOWN,
-        SLASH_UP, SLASH_DOWN,
-        BACKSLASH_UP, BACKSLASH_DOWN
-    }
-    // This is a slash: /
-    // This is a backslash: \
-    // This is a happy guy \(^-^)/
-
-    private StateWalking currentStateWalking;
     private int damage;
     private float stateBossTime;
     private float changeTime;
@@ -69,6 +67,10 @@ public class BossOne extends Boss {
     private Animation bossOneIdleAnimation;
     private Animation bossOneShootAnimation;
     private Animation bossOneDyingAnimation;
+
+    // Circle on the screen where BossTwo must go
+    private Circle target;
+    private Circle tmpCircle; // Temporary GC friendly circle
 
     // Power FX
     private Animation powerFXAnimation;
@@ -101,14 +103,15 @@ public class BossOne extends Boss {
         // Place origin of rotation in the center of the Sprite
         setOriginCenter();
 
-        // Initial movement (left or right)
-        int direction = MathUtils.randomSign();
-        velocity.set(direction * LINEAR_VELOCITY, 0);
-        if (direction < 0) {
-            currentStateWalking = StateWalking.CEILING_LEFT;
-        } else {
-            currentStateWalking = StateWalking.CEILING_RIGHT;
-        }
+        // Initialize target
+        target = new Circle(0, 0, TARGET_RADIUS_METERS);
+
+        // Temporary GC friendly circle
+        tmpCircle = new Circle();
+
+        // Move to a new target at constant speed
+        getNewTarget();
+        velocity.set(getSpeedTarget());
 
         // -------------------- PowerFX --------------------
 
@@ -251,7 +254,8 @@ public class BossOne extends Boss {
                     break;
             }
         }
-        return newRandomStateBoss;
+        // todo return newRandomStateBoss;
+        return StateBoss.WALKING;
     }
 
     @Override
@@ -323,12 +327,11 @@ public class BossOne extends Boss {
     }
 
     private void stateWalking(float dt) {
-        // Set velocity because It could have been changed (see onHitWall)
+        // Set velocity calculated to reach the target circle (see getSpeedTarget())
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
         * Set this Sprite's position on the lower left vertex of a Rectangle determined by its b2body to draw it correctly.
-        * At this time, BossOne may have collided with sth., and therefore, it has a new position after running the physical simulation.
         * In b2box the origin is at the center of the body, so we must recalculate the new lower left vertex of its bounds.
         * GetWidth and getHeight was established in the constructor of this class (see setBounds).
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
@@ -338,99 +341,69 @@ public class BossOne extends Boss {
         stateBossTime += dt;
 
         // Depending on the direction, we set the angle and the flip
-        switch (currentStateWalking) {
-            case CEILING_LEFT:
-                setRotation(0);
-                setFlip(false, true);
-                velocity.set(-LINEAR_VELOCITY, 0);
-                break;
-            case CEILING_RIGHT:
-                setRotation(0);
-                setFlip(true, true);
-                velocity.set(LINEAR_VELOCITY, 0);
-                break;
-            case LEFT_DOWN:
-                setRotation(90);
-                setFlip(false, true);
-                velocity.set(0, -LINEAR_VELOCITY);
-                break;
-            case LEFT_UP:
-                setRotation(90);
-                setFlip(true, true);
-                velocity.set(0, LINEAR_VELOCITY);
-                break;
-            case RIGHT_DOWN:
-                setRotation(90);
-                setFlip(false, false);
-                velocity.set(0, -LINEAR_VELOCITY);
-                break;
-            case RIGHT_UP:
-                setRotation(90);
-                setFlip(true, false);
-                velocity.set(0, LINEAR_VELOCITY);
-                break;
-            case FLOOR_LEFT:
-                setRotation(0);
-                setFlip(false, false);
-                velocity.set(-LINEAR_VELOCITY, 0);
-                break;
-            case FLOOR_RIGHT:
-                setRotation(0);
-                setFlip(true, false);
-                velocity.set(LINEAR_VELOCITY, 0);
-                break;
-            case SLASH_DOWN:
-                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
-                // But it does the trick
-                setRotation(45);
-                setFlip(false, false);
-                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x - Edge.WIDTH_METERS / 2 +
-                                CIRCLE_SHAPE_RADIUS_METERS / 2,
-                                screen.getBottomEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2,
-                        LINEAR_VELOCITY);
-                velocity.set(tmp);
-                break;
-            case SLASH_UP:
-                // It's not exactly 45 degrees because we are walking along the diagonal of a rectangle
-                // But it does the trick
-                setRotation(45);
-                setFlip(true, true);
-                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x + Edge.WIDTH_METERS / 2 -
-                                CIRCLE_SHAPE_RADIUS_METERS / 2,
-                                screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2,
-                        LINEAR_VELOCITY);
-                velocity.set(tmp);
-                break;
-            case BACKSLASH_DOWN:
-                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
-                // But it does the trick
-                setRotation(135);
-                setFlip(false, false);
-                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getBottomEdge().getB2body().getPosition().x + Edge.WIDTH_METERS / 2 -
-                                CIRCLE_SHAPE_RADIUS_METERS / 2,
-                                screen.getBottomEdge().getB2body().getPosition().y + Edge.HEIGHT_METERS / 2,
-                        LINEAR_VELOCITY);
-                velocity.set(tmp);
-                break;
-            case BACKSLASH_UP:
-                // It's not exactly 135 degrees because we are walking along the diagonal of a rectangle
-                // But it does the trick
-                setRotation(135);
-                setFlip(true, true);
-                tmp.set(b2body.getPosition().x, b2body.getPosition().y);
-                Vector2Util.goToTarget(tmp, screen.getUpperEdge().getB2body().getPosition().x - Edge.WIDTH_METERS / 2 +
-                                CIRCLE_SHAPE_RADIUS_METERS / 2,
-                                screen.getUpperEdge().getB2body().getPosition().y - Edge.HEIGHT_METERS / 2,
-                        LINEAR_VELOCITY);
-                velocity.set(tmp);
-                break;
+        setRotationAngleAndFlip();
+
+        if (reachTarget()) {
+            getNewTarget();
         }
+
+        velocity.set(getSpeedTarget());
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
+    }
+
+    // todo creo que aca yo deberia ver el target viejo, ver el nuevo y determinar hacia donde voy seteando un estado como antes.
+    private void getNewTarget() {
+        int randomPoint = MathUtils.random(1, 5);
+        switch (randomPoint) {
+            case 1:
+                target.setPosition(X_MIN, Y_MAX);
+                break;
+            case 2:
+                target.setPosition(X_MAX, Y_MAX);
+                break;
+            case 3:
+                target.setPosition(X_MIN, Y_MIN);
+                break;
+            case 4:
+                target.setPosition(X_MAX, Y_MIN);
+                break;
+            case 5:
+                target.setPosition(X_HALF, Y_HALF);
+                break;
+        }
+    }
+
+    private Vector2 getSpeedTarget() {
+        // Move to target
+        tmp.set(b2body.getPosition().x, b2body.getPosition().y);
+        Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
+        Gdx.app.debug(TAG, "tmp " + tmp); // TODO
+        return tmp;
+    }
+
+    private void setRotationAngleAndFlip() {
+//        if (b2body.getLinearVelocity().len() > 0.0f) {
+//            setRotation(90.0f);
+//            float velAngle = this.b2body.getLinearVelocity().angle();
+//            if (0 <= velAngle && velAngle <= 180.0f) {
+//                setRotation(270.0f);
+//            }
+//            rotate(velAngle);
+//        }
+            setRotation(this.b2body.getLinearVelocity().angle());
+            setFlip(true, true);
+
+            boolean algo = this.b2body.getLinearVelocity().x > 0 && this.b2body.getPosition().y < Y_HALF;
+            if (algo) {
+                //flip(false, true);
+            }
+    }
+
+    private boolean reachTarget() {
+        tmpCircle.set(b2body.getPosition().x, b2body.getPosition().y, CIRCLE_SHAPE_RADIUS_METERS);
+        return target.overlaps(tmpCircle);
     }
 
     private void stateIdle(float dt) {
@@ -574,7 +547,7 @@ public class BossOne extends Boss {
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our final enemy is not walking nor shooting, he becomes weak
+        // If our boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -594,7 +567,7 @@ public class BossOne extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our final enemy is walking or shooting, he becomes powerful
+        // If our boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
@@ -620,176 +593,6 @@ public class BossOne extends Boss {
             }
         } else {
             weapon.onBounce();
-        }
-    }
-
-    @Override
-    public void onHitWall(boolean isBorder) {
-        /* Please don't use currentStateWalking to decide which one is the new currentStateWalking.
-        * That logic is a bit cheating because onHitWall can execute anytime.
-        * See this example below:
-        * Suppose currentStateWalking = SLASH_UP and BossOne collides against the upper edge, but immediately
-        * (because the circle shape radius is too big) against the right border.
-        * 1) After onHitWall(false), for instance, currentStateWalking = CEILING_LEFT.
-        * 2) But after onHitWall(true) executes, for instance, currentStateWalking = BACKSLASH_DOWN.
-         * That is incorrect because BossOne is still on the right-upper corner and it gets stuck!
-        */
-        float velY = b2body.getLinearVelocity().y;
-        float velX = b2body.getLinearVelocity().x;
-        float x = b2body.getPosition().x;
-        float y = b2body.getPosition().y;
-        int option = MathUtils.random(1, 3);
-
-        if (velY > 0.0f) {
-            velYGT0(x, isBorder, option);
-        } else { // velY <= 0.0f
-            if (velY < 0.0f) {
-                velYLT0(x, isBorder, option);
-            } else { // velY == 0
-                if (velX != 0.0f) {
-                    if (velX > 0.0f) {
-                        velY0VelXGT0(y, isBorder, option);
-                    } else { // velX < 0
-                        velY0VelXLT0(y, isBorder, option);
-                    }
-                } // velY == 0, velX == 0
-            }
-        }
-    }
-
-    private void velYGT0(float x, boolean isBorder, int option) {
-        if (x < screen.getGameCam().position.x) {
-            // We are walking UP along the LEFT BORDER or along the BACKSLASH
-            if (!isBorder) { // We must collide only with an edge
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.LEFT_DOWN;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.CEILING_RIGHT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                        break;
-                }
-            }
-        } else {
-            // We are walking UP along the RIGHT BORDER or along the SLASH
-            if (!isBorder) { // We must collide only with an edge
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.RIGHT_DOWN;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.CEILING_LEFT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.SLASH_DOWN;
-                        break;
-                }
-            }
-        }
-    }
-
-    private void velYLT0(float x, boolean isBorder, int option) {
-        if (x < screen.getGameCam().position.x) {
-            // We are walking DOWN along the LEFT BORDER or along the SLASH
-            if (!isBorder) { // We must collide only with an edge
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.LEFT_UP;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.FLOOR_RIGHT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.SLASH_UP;
-                        break;
-                }
-            }
-        } else {
-            // We are walking DOWN along the RIGHT BORDER or along the BACKSLASH
-            if (!isBorder) { // We must collide only with an edge
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.RIGHT_UP;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.FLOOR_LEFT;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.BACKSLASH_UP;
-                        break;
-                }
-            }
-        }
-    }
-
-    private void velY0VelXGT0(float y, boolean isBorder, int option) {
-        if (y < screen.getGameCam().position.y) {
-            // We are walking to the RIGHT along the FLOOR EDGE
-            if (isBorder) { // We must collide only with a border
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.FLOOR_LEFT;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.RIGHT_UP;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.BACKSLASH_UP;
-                        break;
-                }
-            }
-        } else {
-            // We are walking to the RIGHT along the CEILING EDGE
-            if (isBorder) { // We must collide only with a border
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.CEILING_LEFT;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.RIGHT_DOWN;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.SLASH_DOWN;
-                        break;
-                }
-            }
-        }
-    }
-
-    private void velY0VelXLT0(float y, boolean isBorder, int option) {
-        if (y < screen.getGameCam().position.y) {
-            // We are walking to the LEFT along the FLOOR EDGE
-            if (isBorder) { // We must collide only with a border
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.FLOOR_RIGHT;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.LEFT_UP;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.SLASH_UP;
-                        break;
-                }
-            }
-        } else {
-            // We are walking to the LEFT along the CEILING EDGE
-            if (isBorder) { // We must collide only with a border
-                switch (option) {
-                    case 1: // go back
-                        currentStateWalking = StateWalking.CEILING_RIGHT;
-                        break;
-                    case 2:
-                        currentStateWalking = StateWalking.LEFT_DOWN;
-                        break;
-                    case 3:
-                        currentStateWalking = StateWalking.BACKSLASH_DOWN;
-                        break;
-                }
-            }
         }
     }
 
@@ -845,5 +648,11 @@ public class BossOne extends Boss {
         } else {
             drawFxs(batch);
         }
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(target.x, target.y, target.radius);
+        shapeRenderer.rect(getBoundingRectangle().x, getBoundingRectangle().y, getBoundingRectangle().width, getBoundingRectangle().height);
     }
 }

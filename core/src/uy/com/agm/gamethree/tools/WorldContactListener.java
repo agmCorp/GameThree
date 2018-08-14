@@ -246,19 +246,7 @@ public class WorldContactListener implements ContactListener {
                 ((Weapon) fixC.getUserData()).onTarget();
                 break;
 
-            // Final enemy - Border
-            case BOSS_BIT | BORDER_BIT:
-                fixC = fixA.getFilterData().categoryBits == BOSS_BIT ? fixA : fixB;
-                ((Boss) fixC.getUserData()).onHitWall(true);
-                break;
-
-            // Final enemy - Edges
-            case BOSS_BIT | EDGE_BIT:
-                fixC = fixA.getFilterData().categoryBits == BOSS_BIT ? fixA : fixB;
-                ((Boss) fixC.getUserData()).onHitWall(false);
-                break;
-
-            // Final enemy - Hero's weapon
+            // Boss - Hero's weapon
             case BOSS_BIT | HERO_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_WEAPON_BIT) {
                     ((Boss) fixB.getUserData()).onHit(((Weapon) fixA.getUserData()));
@@ -267,7 +255,7 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Final enemy - Hero
+            // Boss - Hero
             case BOSS_BIT | HERO_BIT:
                 // Collision logic
                 fixC = fixA.getFilterData().categoryBits == HERO_BIT ? fixA : fixB;

@@ -118,7 +118,8 @@ public class BossTwo extends Boss {
         tmpCircle = new Circle();
 
         // Move to a new target at constant speed
-        moveToNewTarget();
+        getNewTarget();
+        velocity.set(getSpeedTarget());
 
         // -------------------- PowerFX --------------------
 
@@ -333,7 +334,7 @@ public class BossTwo extends Boss {
     }
 
     private void stateWalking(float dt) {
-        // Set velocity calculated to reach the target circle
+        // Set velocity calculated to reach the target circle (see getSpeedTarget())
         b2body.setLinearVelocity(velocity);
 
         /* Update our Sprite to correspond with the position of our Box2D body:
@@ -351,14 +352,16 @@ public class BossTwo extends Boss {
         setAnimation(dt);
 
         if (reachTarget()) {
-            moveToNewTarget();
+            getNewTarget();
         }
+
+        velocity.set(getSpeedTarget());
 
         // New random state
         currentStateBoss = getNewRandomState(dt);
     }
 
-    private void moveToNewTarget() {
+    private void getNewTarget() {
         int randomPoint = MathUtils.random(1, 5);
         switch (randomPoint) {
             case 1:
@@ -377,22 +380,22 @@ public class BossTwo extends Boss {
                 target.setPosition(X_HALF, Y_HALF);
                 break;
         }
+    }
 
+    private Vector2 getSpeedTarget() {
         // Move to target
         tmp.set(b2body.getPosition().x, b2body.getPosition().y);
         Vector2Util.goToTarget(tmp, target.x, target.y, LINEAR_VELOCITY);
-        velocity.set(tmp);
+        return tmp;
     }
 
     private void setRotationAngle() {
-        if (b2body.getLinearVelocity().len() > 0.0f) {
-            setRotation(90.0f);
-            float velAngle = this.b2body.getLinearVelocity().angle();
-            if (0 <= velAngle && velAngle <= 180.0f) {
-                setRotation(270.0f);
-            }
-            rotate(velAngle);
+        setRotation(90.0f);
+        float velAngle = this.b2body.getLinearVelocity().angle();
+        if (0 <= velAngle && velAngle <= 180.0f) {
+            setRotation(270.0f);
         }
+        rotate(velAngle);
     }
 
     private void setAnimation(float dt) {
@@ -554,7 +557,7 @@ public class BossTwo extends Boss {
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our final enemy is not walking nor shooting, he becomes weak
+        // If our boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -573,7 +576,7 @@ public class BossTwo extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our final enemy is walking or shooting, he becomes powerful
+        // If our boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
@@ -600,11 +603,6 @@ public class BossTwo extends Boss {
         } else {
             weapon.onBounce();
         }
-    }
-
-    @Override
-    public void onHitWall(boolean isBorder) {
-        // Nothing to do here
     }
 
     @Override

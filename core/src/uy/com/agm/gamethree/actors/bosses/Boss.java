@@ -116,7 +116,7 @@ public abstract class Boss extends Sprite {
         Hero hero = screen.getCreator().getHero();
 
         if (currentStateBoss == StateBoss.INACTIVE) {
-            // When our final enemy is on camera, it activates
+            // When our boss is on camera, it activates
             if (screen.isTheEndOfTheWorld()) {
                 b2body.setActive(true);
 
@@ -285,7 +285,6 @@ public abstract class Boss extends Sprite {
     protected abstract TextureRegion getKnockBackFrame(float dt);
     protected abstract void updateLogic(float dt);
     public abstract void onHit(Weapon weapon);
-    public abstract void onHitWall(boolean isBorder);
     protected abstract String getBossName();
     protected abstract int getBossDamage();
     protected abstract void setInitialState();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1423">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="250" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1424">
  <tileset firstgid="1" source="background.tsx"/>
  <layer name="floor" width="15" height="250" locked="1">
   <data encoding="base64" compression="zlib">
@@ -141,7 +141,7 @@
   <object id="1389" x="2.5" y="804.67" width="124" height="18.1666"/>
  </objectgroup>
  <objectgroup name="bridge" locked="1"/>
- <objectgroup name="powerBox" locked="1">
+ <objectgroup name="powerBox">
   <object id="1024" x="288" y="5312" width="32" height="32">
    <properties>
     <property name="powerThree" type="int" value="10"/>
@@ -296,6 +296,11 @@
   <object id="1254" x="174.5" y="2783.5" width="32" height="32">
    <properties>
     <property name="strength" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="1423" x="224" y="576" width="32" height="32">
+   <properties>
+    <property name="powerOne" type="int" value="5000"/>
    </properties>
   </object>
  </objectgroup>

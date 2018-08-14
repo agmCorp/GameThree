@@ -604,7 +604,7 @@ public class BossFour extends Boss {
     }
 
     private void powerStatePowerfulToNormal(float dt) {
-        // If our final enemy is not walking nor shooting, he becomes weak
+        // If our boss is not walking nor shooting, he becomes weak
         if (currentStateBoss != StateBoss.WALKING && currentStateBoss != StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.NORMAL;
@@ -620,7 +620,7 @@ public class BossFour extends Boss {
     }
 
     private void powerStateNormalToPowerful() {
-        // If our final enemy is walking or shooting, he becomes powerful
+        // If our boss is walking or shooting, he becomes powerful
         if (currentStateBoss == StateBoss.WALKING || currentStateBoss == StateBoss.SHOOTING) {
             powerFXStateTime = 0;
             currentPowerState = PowerState.POWERFUL;
@@ -647,11 +647,6 @@ public class BossFour extends Boss {
         } else {
             weapon.onBounce();
         }
-    }
-
-    @Override
-    public void onHitWall(boolean isBorder) {
-        // Nothing to do here
     }
 
     @Override
