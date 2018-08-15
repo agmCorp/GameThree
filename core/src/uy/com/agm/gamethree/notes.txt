@@ -3,7 +3,7 @@ PROXIMAS VERSIONES
 - RECORD 6405, QUEDE POSICION 5 Y EN LA PANTALLA DE LEVEL COMPLETE NO ME TRAJO LA IMAGEN
 - EL THERESHOLD VELOCITY NO ARREGLO NADA
 - LAS BALAS NO DEBERIAN BOUNCE CADA VEZ QUE CHOCAN CONMIGO, SINO SIMPLEMENTE CHOCAR NATURAL. PORQUE ESO LES
-INVIERTE EL MOVIMIENTO OTRA VEZ Y QUEDA MAL.
+INVIERTE EL MOVIMIENTO OTRA VEZ Y QUEDA MAL. OJO QUE PUEDE QUEDAR LA BALA FLOTANDO QUIETA.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
