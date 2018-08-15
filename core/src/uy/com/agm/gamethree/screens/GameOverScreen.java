@@ -54,10 +54,16 @@ public class GameOverScreen extends AbstractScreen {
         table.setFillParent(true);
 
         // Animation
+        AnimatedImage heroDeath = new AnimatedImage(Assets.getInstance().getHero().getHeroDeathAnimation());
+        heroDeath.setAlign(Align.center);
+
+        // Animation
         AnimatedImage animatedImage = new AnimatedImage(assetScene2d.getGameOver().getGameOverAnimation());
         animatedImage.setAlign(Align.center);
 
         // Add values
+        table.add(heroDeath);
+        table.row();
         table.add(animatedImage).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
 
         // Adds table to stage

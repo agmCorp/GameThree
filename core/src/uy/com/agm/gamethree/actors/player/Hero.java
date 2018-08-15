@@ -67,10 +67,10 @@ public class Hero extends Sprite {
     private HeroState currentHeroState;
     private HeroState previousHeroState;
     private TextureRegion heroStandUp;
-    private Animation heroMovingUpAnimation;
-    private Animation heroMovingDownAnimation;
-    private Animation heroMovingLeftRightAnimation;
-    private Animation heroDeadAnimation;
+    private Animation heroWalkUpAnimation;
+    private Animation heroWalkDownAnimation;
+    private Animation heroWalkLeftRightAnimation;
+    private Animation heroDeathAnimation;
     private float heroStateTime;
     private boolean initDyingUp;
     private float playAgainTime;
@@ -130,10 +130,10 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.STANDING;
         previousHeroState = HeroState.STANDING;
         heroStandUp = Assets.getInstance().getHero().getHeroStandUp();
-        heroMovingUpAnimation = Assets.getInstance().getHero().getHeroMovingUpAnimation();
-        heroMovingDownAnimation = Assets.getInstance().getHero().getHeroMovingDownAnimation();
-        heroMovingLeftRightAnimation = Assets.getInstance().getHero().getHeroMovingLeftRightAnimation();
-        heroDeadAnimation = Assets.getInstance().getHero().getHeroDeadAnimation();
+        heroWalkUpAnimation = Assets.getInstance().getHero().getHeroWalkUpAnimation();
+        heroWalkDownAnimation = Assets.getInstance().getHero().getHeroWalkDownAnimation();
+        heroWalkLeftRightAnimation = Assets.getInstance().getHero().getHeroWalkLeftRightAnimation();
+        heroDeathAnimation = Assets.getInstance().getHero().getHeroDeathAnimation();
         heroStateTime = 0;
         initDyingUp = false;
         playAgainTime = 0;
@@ -337,7 +337,7 @@ public class Hero extends Sprite {
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingLeftRightAnimation.getKeyFrame(heroStateTime, true));
+        setRegion((TextureRegion) heroWalkLeftRightAnimation.getKeyFrame(heroStateTime, true));
 
         // Reset rotation
         setRotation(0.0f);
@@ -361,7 +361,7 @@ public class Hero extends Sprite {
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingUpAnimation.getKeyFrame(heroStateTime, true));
+        setRegion((TextureRegion) heroWalkUpAnimation.getKeyFrame(heroStateTime, true));
 
         // Calculate rotation
         setRotationAngle();
@@ -385,7 +385,7 @@ public class Hero extends Sprite {
         previousHeroState = currentHeroState;
 
         // Update Hero with the correct frame
-        setRegion((TextureRegion) heroMovingDownAnimation.getKeyFrame(heroStateTime, true));
+        setRegion((TextureRegion) heroWalkDownAnimation.getKeyFrame(heroStateTime, true));
 
         // Calculate rotation
         setRotationAngle();
@@ -426,7 +426,7 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTime, true));
+        setRegion((TextureRegion) heroDeathAnimation.getKeyFrame(heroStateTime, true));
         heroStateTime += dt;
 
         // We reach the center of the screen
@@ -454,7 +454,7 @@ public class Hero extends Sprite {
         * Once its position is established correctly, the Sprite can be drawn at the exact point it should be.
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        setRegion((TextureRegion) heroDeadAnimation.getKeyFrame(heroStateTime, true));
+        setRegion((TextureRegion) heroDeathAnimation.getKeyFrame(heroStateTime, true));
         heroStateTime += dt;
 
         // We move Hero from the actual position to the bottom of the screen.

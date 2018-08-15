@@ -20,10 +20,10 @@ public class AssetHero {
 
     private TextureRegion heroStandUp;
     private TextureRegion heroStandDown;
-    private Animation heroDeadAnimation;
-    private Animation heroMovingUpAnimation;
-    private Animation heroMovingDownAnimation;
-    private Animation heroMovingLeftRightAnimation;
+    private Animation heroDeathAnimation;
+    private Animation heroWalkUpAnimation;
+    private Animation heroWalkDownAnimation;
+    private Animation heroWalkLeftRightAnimation;
 
     public AssetHero(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -33,22 +33,22 @@ public class AssetHero {
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingUpAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
+        heroWalkUpAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDown");
-        heroMovingDownAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
+        heroWalkDownAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroUp");
-        heroMovingLeftRightAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP); // We use the same animation as heroMovingUpAnimation
+        heroWalkLeftRightAnimation = new Animation(0.5f / 37.0f, regions, Animation.PlayMode.LOOP); // We use the same animation as heroWalkUpAnimation
         regions.clear();
 
         // Animation
         regions = atlas.findRegions("heroDead");
-        heroDeadAnimation = new Animation(0.5f / 25.0f, regions, Animation.PlayMode.LOOP);
+        heroDeathAnimation = new Animation(0.5f / 25.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
@@ -60,19 +60,19 @@ public class AssetHero {
         return heroStandDown;
     }
 
-    public Animation getHeroDeadAnimation() {
-        return heroDeadAnimation;
+    public Animation getHeroDeathAnimation() {
+        return heroDeathAnimation;
     }
 
-    public Animation getHeroMovingUpAnimation() {
-        return heroMovingUpAnimation;
+    public Animation getHeroWalkUpAnimation() {
+        return heroWalkUpAnimation;
     }
 
-    public Animation getHeroMovingDownAnimation() {
-        return heroMovingDownAnimation;
+    public Animation getHeroWalkDownAnimation() {
+        return heroWalkDownAnimation;
     }
 
-    public Animation getHeroMovingLeftRightAnimation() {
-        return heroMovingLeftRightAnimation;
+    public Animation getHeroWalkLeftRightAnimation() {
+        return heroWalkLeftRightAnimation;
     }
 }

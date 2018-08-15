@@ -1,8 +1,5 @@
 PROXIMAS VERSIONES
 ------------------
-- Es muy doloroso, pero tengo que hacer la arana de vuelta. Ojo con los rotation y eso.
-Liberar asi por ahora, capaz hacer los videos.
-Probar si al BossTwo puedo hacerle perder el rumbo como al One.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -127,10 +124,6 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
-- Si por ejemplo interrumpo el movimiento del BossOne, se descoordina y queda atrapado en una esquina.
-Para interrumpir su movimiento puedo por ejemplo ponerme en la esquina superior derecha y que la arana venga desde abajo por
-el lado derecho. Ahi nos chocamos y por mas peso que ella tenga la detengo. Luego ella dispara y me mata y queda boba.
-Hubiera sido bueno programar la arana con el mismo mecanismo del BossTwo, pero bueno, yo quise originalidad en cada boss.
 
 TENGO
 -----
