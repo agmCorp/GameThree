@@ -3,6 +3,8 @@ PROXIMAS VERSIONES
 - EL THERESHOLD VELOCITY NO ARREGLO NADA
 - LAS BALAS NO DEBERIAN BOUNCE CADA VEZ QUE CHOCAN CONMIGO, SINO SIMPLEMENTE CHOCAR NATURAL. PORQUE ESO LES
 INVIERTE EL MOVIMIENTO OTRA VEZ Y QUEDA MAL. OJO QUE PUEDE QUEDAR LA BALA FLOTANDO QUIETA.
+- Al menos en los bichos del nivel 2, que resisten 2 disparos, podría probar cambiarles el color cuando reciben 1 disparo.
+En los bichos que quedan expuestos un cierto tiempo, puedo probar cambiarles el color cuando quedan expuestos.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
