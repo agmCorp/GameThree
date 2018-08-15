@@ -445,6 +445,7 @@ public class Assets implements Disposable, AssetErrorListener {
         assetManager.load(FX_FILE_APPLAUSE, Sound.class);
         assetManager.load(FX_FILE_SQUISH, Sound.class);
         assetManager.load(FX_FILE_FROZEN, Sound.class);
+        assetManager.load(FX_FILE_BEAM, Sound.class);
         assetManager.load(FX_FILE_PUM, Sound.class);
         assetManager.load(FX_FILE_CHIRP, Sound.class);
         assetManager.load(FX_FILE_SQUEAK, Sound.class);
