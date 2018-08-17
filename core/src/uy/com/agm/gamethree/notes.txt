@@ -1,7 +1,8 @@
 PROXIMAS VERSIONES
 ------------------
 - El puto highscore en levelcomplete no aparece. Para mi es porque la imagen está en alguna variable global que no sobrevive a algún dispose. Hay que pedirla siempre
-al assets.
+al assets. Lo único que se me ocurre es no cargar la imagen acá: LevelCompletedScreen.
+Sino solo el numerito del ranking y obtener la imagen al armar la tabla, que se yo.
 - enemigos 8 verde  11 roca  5 dragon 10 fenix circulos 12 fantasmitas
 private static final float VELOCITY_X = 3.0f;
 private static final float PERIOD_SECONDS = 2.0f;
