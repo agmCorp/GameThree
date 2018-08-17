@@ -47,7 +47,7 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int finalScore;
     private int finalStars;
     private int gameScore;
-    private TextureRegion highScoreImage;
+    private int ranking;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
@@ -63,8 +63,8 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.finalStars = getFinalStars(this.currentPenalties);
         prefs.setLevelStateInfo(this.currentLevel, this.finalScore, this.finalStars);
         this.gameScore = getGameScore();
-        this.highScoreImage = Assets.getInstance().getScene2d().getRankingImage(prefs.updateRanking(this.gameScore));
-        this.showNewHighScoreLabel = this.highScoreImage != null;
+        this.ranking = prefs.updateRanking(this.gameScore);
+        this.showNewHighScoreLabel = this.ranking >= 0;
         this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
         if (this.showNextLevelLabel) {
             prefs.addNextLevel(this.nextLevel);
@@ -139,7 +139,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         float padTop = AbstractScreen.PAD * 2;
         if (showNewHighScoreLabel) {
             padTop = AbstractScreen.PAD;
-            table.add(getNewHighScoreTable(highScoreImage, newHighScoreLabel)).padTop(AbstractScreen.PAD);
+            table.add(getNewHighScoreTable(assetScene2d.getRankingImage(ranking), newHighScoreLabel)).padTop(AbstractScreen.PAD);
             table.row();
         }
         if (showNextLevelLabel) {
