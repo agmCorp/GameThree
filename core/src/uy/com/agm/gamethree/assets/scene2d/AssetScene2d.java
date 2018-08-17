@@ -75,7 +75,7 @@ public class AssetScene2d {
     private TextureRegion quitPressed;
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
-        private TextureRegion goldTrophy;
+    private TextureRegion goldTrophy;
     private TextureRegion silverTrophy;
     private TextureRegion bronzeTrophy;
     private TextureRegion badge;
