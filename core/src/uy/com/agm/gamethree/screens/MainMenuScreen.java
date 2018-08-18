@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -127,7 +126,7 @@ public class MainMenuScreen extends AbstractScreen {
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        exitGameLabel.setColor(Color.WHITE); // Default
+                        exitGameLabel.setColor(DEFAULT_COLOR);
                         Gdx.app.exit();
                     }
 

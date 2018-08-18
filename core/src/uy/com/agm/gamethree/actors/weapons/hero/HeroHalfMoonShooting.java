@@ -122,8 +122,8 @@ public class HeroHalfMoonShooting implements IShootStrategy {
                             heroBulletAnimation);
                 } else {
                     createBullet(x, y + HeroDefaultShooting.DEFAULT_BULLET_OFFSET_METERS,
-                            AssetBulletA.BULLET_WIDTH_METERS,
-                            AssetBulletA.BULLET_HEIGHT_METERS,
+                            AssetBulletA.WIDTH_METERS,
+                            AssetBulletA.HEIGHT_METERS,
                             BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
                             BULLET_VELOCITY_X + (MathUtils.randomBoolean() ? MathUtils.randomSign() * RANDOM_OFFSET : 0), // Less accuracy is more fun

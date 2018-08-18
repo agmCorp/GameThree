@@ -52,6 +52,7 @@ public class Hero extends Sprite {
     private static final float SENSOR_HEIGHT_METERS = 0.1f; // The thinner the better
     private static final float SENSOR_OFFSET_METERS = 0.1f;
     private static final Color HIT_COLOR = Color.RED;
+    private static final Color DEFAULT_COLOR = Color.WHITE;
     private static final float HIT_COLOR_TIME_SECONDS = 0.5f;
     private static final float IGNORE_HIT_SECONDS = 0.5f;
 
@@ -559,7 +560,7 @@ public class Hero extends Sprite {
         hitTime += dt;
         if (hitTime > HIT_COLOR_TIME_SECONDS) {
             hitTime = 0;
-            setColor(Color.WHITE); // Default
+            setColor(DEFAULT_COLOR);
         }
     }
 

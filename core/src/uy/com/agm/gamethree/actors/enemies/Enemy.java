@@ -47,6 +47,7 @@ public abstract class Enemy extends Sprite {
     private static final float SHAKE_DURATION = 1.0f;
     private static final float EXPLOSION_SCALE = 3.0f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
+    private static final Color DEFAULT_COLOR = Color.WHITE;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
@@ -350,7 +351,7 @@ public abstract class Enemy extends Sprite {
                 setColor(KNOCK_BACK_COLOR); // Knock back
             } else {
                 if (currentState == State.EXPLODING) {
-                    setColor(Color.WHITE); // Default
+                    setColor(DEFAULT_COLOR);
                 }
             }
 

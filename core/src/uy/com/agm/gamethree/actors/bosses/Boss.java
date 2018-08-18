@@ -40,6 +40,7 @@ public abstract class Boss extends Sprite {
     private static final float AID_SILVER_BULLET_OFFSET_METERS = 100.0f / PlayScreen.PPM;
     protected static final float HIT_MAX_VOLUME = 0.3f;
     private static final Color KNOCK_BACK_COLOR = Color.BLACK;
+    private static final Color DEFAULT_COLOR = Color.WHITE;
     private static final float KNOCK_BACK_SECONDS = 0.2f;
     private static final float KNOCK_BACK_FORCE_X = 1000.0f;
     private static final float KNOCK_BACK_FORCE_Y = 1000.0f;
@@ -208,7 +209,7 @@ public abstract class Boss extends Sprite {
     @Override
     public void draw(Batch batch) {
         // Set the tint
-        setColor(currentStateBoss == StateBoss.KNOCK_BACK ? KNOCK_BACK_COLOR : Color.WHITE);
+        setColor(currentStateBoss == StateBoss.KNOCK_BACK ? KNOCK_BACK_COLOR : DEFAULT_COLOR);
         super.draw(batch);
     }
 

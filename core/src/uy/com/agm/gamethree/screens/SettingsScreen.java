@@ -1,7 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -246,7 +245,7 @@ public class SettingsScreen extends AbstractScreen {
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        shootingLabel.setColor(Color.WHITE); // Default
+                        shootingLabel.setColor(DEFAULT_COLOR);
                         toggleShootingLabel();
                         save();
                     }

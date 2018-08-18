@@ -116,8 +116,8 @@ public class HeroCrossShooting implements IShootStrategy {
                             heroBulletAnimation);
                 } else {
                     createBullet(x, y,
-                            AssetBulletA.BULLET_WIDTH_METERS,
-                            AssetBulletA.BULLET_HEIGHT_METERS,
+                            AssetBulletA.WIDTH_METERS,
+                            AssetBulletA.HEIGHT_METERS,
                             BULLET_CIRCLE_SHAPE_RADIUS_METERS,
                             angle,
                             BULLET_VELOCITY_X,

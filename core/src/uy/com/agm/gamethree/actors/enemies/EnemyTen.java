@@ -2,6 +2,8 @@ package uy.com.agm.gamethree.actors.enemies;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
@@ -13,6 +15,7 @@ import uy.com.agm.gamethree.actors.weapons.IShootStrategy;
 import uy.com.agm.gamethree.actors.weapons.Weapon;
 import uy.com.agm.gamethree.actors.weapons.enemy.EnemyDefaultShooting;
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.assets.sprites.AssetBubble;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyTen;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionJ;
 import uy.com.agm.gamethree.screens.PlayScreen;
@@ -49,11 +52,16 @@ public class EnemyTen extends Enemy {
     private int sign;
     private float elapsedTime;
 
+    // Bubble
+    private float bubbleStateTime;
+    private float bubblePopStateTime;
+    private boolean hasBubble;
+    private Animation bubbleAnimation;
+    private Animation bubblePopAnimation;
+    private Sprite bubbleSprite;
+
     public EnemyTen(PlayScreen screen, MapObject object) {
         super(screen, object);
-
-        // Determines the size of the EnemyTen's drawing on the screen
-        setBounds(getX(), getY(), AssetEnemyTen.WIDTH_METERS, AssetEnemyTen.HEIGHT_METERS);
 
         // Animations
         enemyTenAnimation = Assets.getInstance().getEnemyTen().getEnemyTenAnimation();
@@ -66,6 +74,20 @@ public class EnemyTen extends Enemy {
         path3 = false;
         sign = b2body.getPosition().x < screen.getGameCam().position.x ? -1 : 1;
         elapsedTime = 0;
+
+        // Bubble variables initialization
+        bubbleStateTime = 0;
+        bubblePopStateTime = 0;
+        hasBubble = true;
+        bubbleAnimation = Assets.getInstance().getBubble().getBubbleAnimation();
+        bubblePopAnimation = Assets.getInstance().getBubble().getBubblePopAnimation();
+        bubbleSprite = new Sprite(new Sprite(Assets.getInstance().getBubble().getBubbleStand()));
+
+        // Determines the size of the EnemyTen's drawing on the screen
+        setBounds(getX(), getY(), AssetEnemyTen.WIDTH_METERS, AssetEnemyTen.HEIGHT_METERS);
+
+        // Determines the size of the bubble drawing on the screen
+        bubbleSprite.setBounds(getX(), getY(), AssetBubble.WIDTH_METERS, AssetBubble.HEIGHT_METERS);
     }
 
     @Override
@@ -120,6 +142,7 @@ public class EnemyTen extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
+        // Enemy's animation
         TextureRegion region = (TextureRegion) enemyTenAnimation.getKeyFrame(stateTime, true);
         if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
@@ -130,6 +153,22 @@ public class EnemyTen extends Enemy {
 
         setRegion(region);
         stateTime += dt;
+
+        // Bubble's animation
+        hasBubble = path1 || path2 && !bubblePopAnimation.isAnimationFinished(bubblePopStateTime);
+        if (hasBubble) {
+            // Update this Sprite to correspond with the position of the EnemyTen's Box2D body
+            bubbleSprite.setPosition(b2body.getPosition().x - bubbleSprite.getWidth() / 2, b2body.getPosition().y - bubbleSprite.getHeight() / 2);
+            if (path1) {
+                // Bubble's animation
+                bubbleSprite.setRegion((TextureRegion) bubbleAnimation.getKeyFrame(bubbleStateTime, true));
+                bubbleStateTime += dt;
+            } else {
+                // BubblePop's animation
+                bubbleSprite.setRegion((TextureRegion) bubblePopAnimation.getKeyFrame(bubblePopStateTime));
+                bubblePopStateTime += dt;
+            }
+        }
 
         // Shoot time!
         super.openFire(dt);
@@ -287,6 +326,7 @@ public class EnemyTen extends Enemy {
          * Therefore, we use a flag (state) in order to point out this behavior and remove it later.
          */
         currentState = State.KNOCK_BACK;
+        hasBubble = false; // Avoid drawing the bubble
     }
 
     @Override
@@ -297,5 +337,13 @@ public class EnemyTen extends Enemy {
     @Override
     public void onDestroy() {
         onHit();
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        if (hasBubble) {
+            bubbleSprite.draw(batch);
+        }
+        super.draw(batch);
     }
 }

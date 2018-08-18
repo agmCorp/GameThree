@@ -34,6 +34,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     // GUI util
     protected static final float PAD = 30.0f;
     public static final Color COLOR_LABEL_PRESSED = new Color(0xad5D00ff);
+    public static final Color DEFAULT_COLOR = Color.WHITE;
 
     protected AbstractScreen() {
         // We don't scale the viewPort (see PlayScreen constructor), so we work with pixels

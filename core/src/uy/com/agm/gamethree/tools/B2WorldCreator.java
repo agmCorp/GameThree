@@ -19,12 +19,12 @@ import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Border;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Obstacle;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.Path;
 import uy.com.agm.gamethree.actors.backgroundObjects.staticObjects.PowerBox;
+import uy.com.agm.gamethree.actors.bosses.Boss;
 import uy.com.agm.gamethree.actors.enemies.Enemy;
 import uy.com.agm.gamethree.actors.enemies.EnemyEight;
 import uy.com.agm.gamethree.actors.enemies.EnemyEleven;
 import uy.com.agm.gamethree.actors.enemies.EnemyFive;
 import uy.com.agm.gamethree.actors.enemies.EnemyFour;
-import uy.com.agm.gamethree.actors.enemies.EnemyNine;
 import uy.com.agm.gamethree.actors.enemies.EnemyOne;
 import uy.com.agm.gamethree.actors.enemies.EnemySeven;
 import uy.com.agm.gamethree.actors.enemies.EnemySix;
@@ -32,7 +32,6 @@ import uy.com.agm.gamethree.actors.enemies.EnemyTen;
 import uy.com.agm.gamethree.actors.enemies.EnemyThree;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwelve;
 import uy.com.agm.gamethree.actors.enemies.EnemyTwo;
-import uy.com.agm.gamethree.actors.bosses.Boss;
 import uy.com.agm.gamethree.actors.items.Item;
 import uy.com.agm.gamethree.actors.items.collectibles.ColOne;
 import uy.com.agm.gamethree.actors.items.collectibles.ColSilverBullet;
@@ -253,7 +252,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_NINE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                enemies.add(new EnemyNine(screen, object));
+                //enemies.add(new EnemyNine(screen, object)); todo
             }
         }
 

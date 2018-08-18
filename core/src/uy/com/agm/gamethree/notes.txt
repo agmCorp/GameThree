@@ -1,5 +1,10 @@
 PROXIMAS VERSIONES
 ------------------
+- para mi el enemigo8 se va por un lado porque no actualiza continuamente su velocidad hacia el vertice de la pantlla.
+-Select levels no se mostro
+Usar un map como antes?
+No usar iteradores en hihgscoresvreen ni sekevtlevelscreeb
+Mato todo. Entro, voy a high rápido, vuelvo, voy a help y rapido vuelvo, voy a selectkevel
 - El puto highscore en levelcomplete no aparece. Para mi es porque la imagen está en alguna variable global que no sobrevive a algún dispose. Hay que pedirla siempre
 al assets. Lo único que se me ocurre es no cargar la imagen acá: LevelCompletedScreen.
 Sino solo el numerito del ranking y obtener la imagen al armar la tabla, que se yo.
