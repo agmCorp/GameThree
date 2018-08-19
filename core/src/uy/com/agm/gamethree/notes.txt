@@ -1,13 +1,5 @@
 PROXIMAS VERSIONES
 ------------------
--Select levels no se mostro
-Usar un map como antes?
-No usar iteradores en highscorescreen ni selectlevelscreen
-Caso de prueba: Mato todas las apps. Entro, voy a high rápido, vuelvo, voy a help y rapido vuelvo, voy a selectlevel.
-El puto highscore en levelcomplete no aparece.
-- EL THERESHOLD VELOCITY NO ARREGLO NADA
-- LAS BALAS NO DEBERIAN BOUNCE CADA VEZ QUE CHOCAN CONMIGO, SINO SIMPLEMENTE CHOCAR NATURAL. PORQUE ESO LES
-INVIERTE EL MOVIMIENTO OTRA VEZ Y QUEDA MAL. OJO QUE PUEDE QUEDAR LA BALA FLOTANDO QUIETA.
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -123,8 +115,8 @@ el resto del sonido. No lo supe arreglar...
 movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
 de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
-- ***PENDIENTE DE COMPROBAR: Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
-Probar si eso se arregla con el velocity threshold de world.
+- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
+No se arreglo seteando velocity threshold de world.
 - En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
 Cuando agarré un colTwo recien ahi desaparecio.
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.
@@ -132,6 +124,15 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
+- En una version de la PlayStore (version 5) me pasaba que a veces no aparecia el trofeo en la pantalla levelComplete pero
+si aprecian las etiquetas de highscore y demas. Tambien me pasaba que a veces la pantalla de highscores aparecia con espacios
+chicos entre filas de la tabla. Lo peor es que a veces no cargaba los niveles en selectlevels y aprecia todo vacio.
+Para reproducir esto ultimo: Mato todas las apps de android, entro al juego, voy a highscores rapido, vuelvo, voy a help rapido,
+vuelvo, voy a select level y se ven todos vacios.
+- Las balas no deberian rebotar cambiando su velocidad a mano, sino box2d deberia calcular como rebotan naturalmente.
+Si tengo una bala de enemigo que va de norte a sur y yo con mi escudo (powertwo) la choco viniendo desde el norte, la bala
+cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede quedar la bala flotando quieta si programo un rebote
+natural.
 
 TENGO
 -----
