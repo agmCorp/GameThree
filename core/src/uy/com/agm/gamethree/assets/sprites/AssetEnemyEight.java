@@ -20,6 +20,7 @@ public class AssetEnemyEight {
 
     private TextureRegion enemyEightStand;
     private Animation enemyEightAnimation;
+    private Animation enemyEightWeakAnimation;
 
     public AssetEnemyEight(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -30,6 +31,11 @@ public class AssetEnemyEight {
         regions = atlas.findRegions("enemyEight");
         enemyEightAnimation = new Animation(0.7f / 8.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
+
+        // Animation
+        regions = atlas.findRegions("enemyEightWeak");
+        enemyEightWeakAnimation = new Animation(0.7f / 8.0f, regions, Animation.PlayMode.LOOP);
+        regions.clear();
     }
 
     public TextureRegion getEnemyEightStand() {
@@ -38,5 +44,9 @@ public class AssetEnemyEight {
 
     public Animation getEnemyEightAnimation() {
         return enemyEightAnimation;
+    }
+
+    public Animation getEnemyEightWeakAnimation() {
+        return enemyEightWeakAnimation;
     }
 }

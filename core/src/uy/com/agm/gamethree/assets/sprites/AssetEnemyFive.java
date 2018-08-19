@@ -20,6 +20,7 @@ public class AssetEnemyFive {
 
     private TextureRegion enemyFiveStand;
     private Animation enemyFiveAnimation;
+    private Animation enemyFiveWeakAnimation;
 
     public AssetEnemyFive(TextureAtlas atlas) {
         Array<TextureAtlas.AtlasRegion> regions;
@@ -30,6 +31,11 @@ public class AssetEnemyFive {
         regions = atlas.findRegions("enemyFive");
         enemyFiveAnimation = new Animation(0.5f / 6.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
+
+        // Animation
+        regions = atlas.findRegions("enemyFiveWeak");
+        enemyFiveWeakAnimation = new Animation(0.5f / 6.0f, regions, Animation.PlayMode.LOOP);
+        regions.clear();
     }
 
     public TextureRegion getEnemyFiveStand() {
@@ -38,5 +44,9 @@ public class AssetEnemyFive {
 
     public Animation getEnemyFiveAnimation() {
         return enemyFiveAnimation;
+    }
+
+    public Animation getEnemyFiveWeakAnimation() {
+        return enemyFiveWeakAnimation;
     }
 }

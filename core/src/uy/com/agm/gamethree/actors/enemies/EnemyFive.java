@@ -45,6 +45,7 @@ public class EnemyFive extends Enemy {
     private float initialY;
 
     private Animation enemyFiveAnimation;
+    private Animation enemyFiveWeakAnimation;
     private Animation explosionAnimation;
 
     public EnemyFive(PlayScreen screen, MapObject object) {
@@ -52,6 +53,7 @@ public class EnemyFive extends Enemy {
 
         // Animations
         enemyFiveAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveAnimation();
+        enemyFiveWeakAnimation = Assets.getInstance().getEnemyFive().getEnemyFiveWeakAnimation();
         explosionAnimation = Assets.getInstance().getExplosionI().getExplosionIAnimation();
 
         // Determines the size of the EnemyFive's drawing on the screen
@@ -120,7 +122,10 @@ public class EnemyFive extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true);
+        // Enemy's animation
+        TextureRegion region = !damage ? (TextureRegion) enemyFiveAnimation.getKeyFrame(stateTime, true) :
+                (TextureRegion) enemyFiveWeakAnimation.getKeyFrame(stateTime, true);
+
         if (b2body.getLinearVelocity().x > 0 && !region.isFlipX()) {
             region.flip(true, false);
         }
@@ -242,7 +247,7 @@ public class EnemyFive extends Enemy {
     @Override
     public void onHit(Weapon weapon) {
         if (!damage) {
-            weapon.onBounce();
+            weapon.onTarget();
             counterclockwise = !counterclockwise;
             damage = true;
         } else {

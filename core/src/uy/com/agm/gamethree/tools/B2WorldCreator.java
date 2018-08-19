@@ -25,6 +25,7 @@ import uy.com.agm.gamethree.actors.enemies.EnemyEight;
 import uy.com.agm.gamethree.actors.enemies.EnemyEleven;
 import uy.com.agm.gamethree.actors.enemies.EnemyFive;
 import uy.com.agm.gamethree.actors.enemies.EnemyFour;
+import uy.com.agm.gamethree.actors.enemies.EnemyNine;
 import uy.com.agm.gamethree.actors.enemies.EnemyOne;
 import uy.com.agm.gamethree.actors.enemies.EnemySeven;
 import uy.com.agm.gamethree.actors.enemies.EnemySix;
@@ -252,7 +253,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_NINE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                //enemies.add(new EnemyNine(screen, object)); todo
+                enemies.add(new EnemyNine(screen, object));
             }
         }
 
