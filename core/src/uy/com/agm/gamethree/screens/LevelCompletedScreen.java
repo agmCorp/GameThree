@@ -1,8 +1,7 @@
 package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -26,6 +25,13 @@ import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 /**
  * Created by AGM on 12/23/2017.
  */
@@ -38,7 +44,9 @@ public class LevelCompletedScreen extends AbstractScreen {
     private static final float HAND_SCALE = 0.4f;
     private static final float HAND_X = 340.0f;
     private static final float HAND_Y = 70.0f;
-    private static final float HAND_DURATION = 2.0f;
+    private static final float HAND_FADE_DURATION = 2.0f;
+    private static final float HAND_MOVE_DURATION = 0.5f;
+    private static final float HAND_MOVE_BY = 15.0f;
 
     private int currentLevel;
     private int nextLevel;
@@ -194,19 +202,18 @@ public class LevelCompletedScreen extends AbstractScreen {
     private void setHand() {
         Image hand = new Image(Assets.getInstance().getScene2d().getHand());
         hand.setScale(HAND_SCALE);
+
+        // WA: actor.localToStageCoordinates(new Vector2(0,0)) didn't work
         hand.setY(HAND_Y);
         hand.setX(HAND_X);
 
+        // Actions
+        SequenceAction sequenceOne = sequence(fadeIn(HAND_FADE_DURATION), fadeOut(HAND_FADE_DURATION));
+        SequenceAction sequenceTwo = sequence(moveBy(HAND_MOVE_BY, -HAND_MOVE_BY, HAND_MOVE_DURATION, Interpolation.smooth),
+                moveBy(-HAND_MOVE_BY, HAND_MOVE_BY, HAND_MOVE_DURATION, Interpolation.smooth));
+        hand.addAction(parallel(forever(sequenceOne), forever(sequenceTwo)));
+
         addActor(hand);
-
-        SequenceAction overallSequence = new SequenceAction();
-        overallSequence.addAction(Actions.fadeIn(HAND_DURATION));
-        overallSequence.addAction(Actions.fadeOut(HAND_DURATION));
-
-        RepeatAction infiniteLoop = new RepeatAction();
-        infiniteLoop.setCount(RepeatAction.FOREVER);
-        infiniteLoop.setAction(overallSequence);
-        hand.addAction(infiniteLoop);
     }
 
     private Table getNewHighScoreTable(TextureRegion highScoreImage, Label highScoreLabel) {

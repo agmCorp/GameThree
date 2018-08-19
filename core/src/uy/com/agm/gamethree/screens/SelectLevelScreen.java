@@ -2,8 +2,7 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -27,6 +26,13 @@ import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 /**
  * Created by AGM on 12/23/2017.
  */
@@ -46,7 +52,9 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final float HAND_Y = 350.0f;
     private static final float HAND_OFFSET = 50.0f;
     private static final float HAND_GAME_COMPLETED = 70.0f;
-    private static final float HAND_DURATION = 2.0f;
+    private static final float HAND_FADE_DURATION = 2.0f;
+    private static final float HAND_MOVE_DURATION = 0.5f;
+    private static final float HAND_MOVE_BY = 15.0f;
 
     public SelectLevelScreen() {
         super();
@@ -69,16 +77,13 @@ public class SelectLevelScreen extends AbstractScreen {
             hand.setY(prefs.isGameComplete() ? HAND_GAME_COMPLETED : HAND_Y - prefs.getLevels().size * HAND_OFFSET);
             hand.setX(HAND_X);
 
+            // Actions
+            SequenceAction sequenceOne = sequence(fadeIn(HAND_FADE_DURATION), fadeOut(HAND_FADE_DURATION));
+            SequenceAction sequenceTwo = sequence(moveBy(HAND_MOVE_BY, -HAND_MOVE_BY, HAND_MOVE_DURATION, Interpolation.smooth),
+                    moveBy(-HAND_MOVE_BY, HAND_MOVE_BY, HAND_MOVE_DURATION, Interpolation.smooth));
+            hand.addAction(parallel(forever(sequenceOne), forever(sequenceTwo)));
+
             addActor(hand);
-
-            SequenceAction overallSequence = new SequenceAction();
-            overallSequence.addAction(Actions.fadeIn(HAND_DURATION));
-            overallSequence.addAction(Actions.fadeOut(HAND_DURATION));
-
-            RepeatAction infiniteLoop = new RepeatAction();
-            infiniteLoop.setCount(RepeatAction.FOREVER);
-            infiniteLoop.setAction(overallSequence);
-            hand.addAction(infiniteLoop);
         }
     }
 
