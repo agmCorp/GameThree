@@ -6,9 +6,6 @@ No usar iteradores en hihgscoresvreen ni sekevtlevelscreeb
 Mato todo. Entro, voy a high rápido, vuelvo, voy a help y rapido vuelvo, voy a selectkevel
 El puto highscore en levelcomplete no aparece.
 - enemigos 8 verde  11 roca  5 dragon x10 fenix circulos 12 fantasmitas
-private static final float VELOCITY_X = 3.0f;
-private static final float PERIOD_SECONDS = 2.0f;
-ALIVE: setColor(!path2 ? Color.SKY : Color.WHITE);
 - EL THERESHOLD VELOCITY NO ARREGLO NADA
 - LAS BALAS NO DEBERIAN BOUNCE CADA VEZ QUE CHOCAN CONMIGO, SINO SIMPLEMENTE CHOCAR NATURAL. PORQUE ESO LES
 INVIERTE EL MOVIMIENTO OTRA VEZ Y QUEDA MAL. OJO QUE PUEDE QUEDAR LA BALA FLOTANDO QUIETA.

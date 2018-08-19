@@ -32,7 +32,7 @@ public class EnemyTwelve extends Enemy {
     private static final float VELOCITY_X = 4.0f;
     private static final float VELOCITY_Y = 0.0f;
     private static final float DENSITY = 1000.0f;
-    private static final float PERIOD_SECONDS = 1.0f;
+    private static final float PERIOD_SECONDS = 2.0f;
     private static final float RADIUS_METERS = 1.0f;
     private static final float FIRE_DELAY_SECONDS = 2.0f;
     private static final float SPEAK_TIME_SECONDS = 2.5f;
@@ -40,6 +40,7 @@ public class EnemyTwelve extends Enemy {
 
     private float stateTime;
     private Animation enemyTwelveAnimation;
+    private Animation enemyTwelveWeakAnimation;
     private Animation explosionAnimation;
 
     // The whole path is divided into two sections
@@ -60,6 +61,7 @@ public class EnemyTwelve extends Enemy {
 
         // Animations
         enemyTwelveAnimation = Assets.getInstance().getEnemyTwelve().getEnemyTwelveAnimation();
+        enemyTwelveWeakAnimation = Assets.getInstance().getEnemyTwelve().getEnemyTwelveWeakAnimation();
         explosionAnimation = Assets.getInstance().getExplosionP().getExplosionPAnimation();
         stateTime = MathUtils.random(0, enemyTwelveAnimation.getAnimationDuration()); // To flap untimely with others
 
@@ -136,7 +138,10 @@ public class EnemyTwelve extends Enemy {
          */
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
-        TextureRegion region = (TextureRegion) enemyTwelveAnimation.getKeyFrame(stateTime, true);
+        // Enemy's animation
+        TextureRegion region = !path2 ? (TextureRegion) enemyTwelveAnimation.getKeyFrame(stateTime, true) :
+                (TextureRegion) enemyTwelveWeakAnimation.getKeyFrame(stateTime, true);
+
         if (b2body.getLinearVelocity().x > 0 && region.isFlipX()) {
             region.flip(true, false);
         }
