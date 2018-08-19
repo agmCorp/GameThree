@@ -19,6 +19,10 @@ import uy.com.agm.gamethree.assets.audio.sound.AssetSounds;
 import uy.com.agm.gamethree.assets.fonts.AssetFonts;
 import uy.com.agm.gamethree.assets.i18n.AssetI18NGameThree;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
+import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
+import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
+import uy.com.agm.gamethree.assets.sprites.AssetBossThree;
+import uy.com.agm.gamethree.assets.sprites.AssetBossTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetBridge;
 import uy.com.agm.gamethree.assets.sprites.AssetBubble;
 import uy.com.agm.gamethree.assets.sprites.AssetBulletA;
@@ -31,6 +35,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetBulletG;
 import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.assets.sprites.AssetColThree;
 import uy.com.agm.gamethree.assets.sprites.AssetColTwo;
+import uy.com.agm.gamethree.assets.sprites.AssetDizzy;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyBullet;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEight;
 import uy.com.agm.gamethree.assets.sprites.AssetEnemyEleven;
@@ -60,10 +65,6 @@ import uy.com.agm.gamethree.assets.sprites.AssetExplosionM;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionN;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionO;
 import uy.com.agm.gamethree.assets.sprites.AssetExplosionP;
-import uy.com.agm.gamethree.assets.sprites.AssetBossFour;
-import uy.com.agm.gamethree.assets.sprites.AssetBossOne;
-import uy.com.agm.gamethree.assets.sprites.AssetBossThree;
-import uy.com.agm.gamethree.assets.sprites.AssetBossTwo;
 import uy.com.agm.gamethree.assets.sprites.AssetGhostMode;
 import uy.com.agm.gamethree.assets.sprites.AssetHero;
 import uy.com.agm.gamethree.assets.sprites.AssetHeroBullet;
@@ -190,6 +191,7 @@ public class Assets implements Disposable, AssetErrorListener {
     private AssetScene2d scene2d;
     private AssetFonts fonts;
     private AssetHero hero;
+    private AssetDizzy dizzy;
     private AssetEnemyOne enemyOne;
     private AssetEnemyTwo enemyTwo;
     private AssetEnemyThree enemyThree;
@@ -313,6 +315,7 @@ public class Assets implements Disposable, AssetErrorListener {
         scene2d = new AssetScene2d(atlasUI);
         fonts = new AssetFonts();
         hero = new AssetHero(atlasDynamicObjects);
+        dizzy = new AssetDizzy(atlasDynamicObjects);
         enemyOne = new AssetEnemyOne(atlasDynamicObjects);
         enemyTwo = new AssetEnemyTwo(atlasDynamicObjects);
         enemyThree = new AssetEnemyThree(atlasDynamicObjects);
@@ -508,6 +511,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public AssetHero getHero() {
         return hero;
+    }
+
+    public AssetDizzy getDizzy() {
+        return dizzy;
     }
 
     public AssetEnemyOne getEnemyOne() {

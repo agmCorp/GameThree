@@ -38,6 +38,9 @@ public class GameOverScreen extends AbstractScreen {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
+        // Game assets
+        Assets assetGame = Assets.getInstance();
+
         // Set table structure
         Table table = new Table();
 
@@ -47,14 +50,18 @@ public class GameOverScreen extends AbstractScreen {
         // Debug lines
         table.setDebug(DebugConstants.DEBUG_LINES);
 
-        // Center-Align table
-        table.center();
+        // Align table
+        table.padBottom(AbstractScreen.PAD * 4);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
 
         // Animation
-        AnimatedImage heroDeath = new AnimatedImage(Assets.getInstance().getHero().getHeroDeathAnimation());
+        AnimatedImage dizzy = new AnimatedImage(assetGame.getDizzy().getDizzyAnimation());
+        dizzy.setAlign(Align.center);
+
+        // Animation
+        AnimatedImage heroDeath = new AnimatedImage(assetGame.getHero().getHeroDeathAnimation());
         heroDeath.setAlign(Align.center);
 
         // Animation
@@ -62,6 +69,8 @@ public class GameOverScreen extends AbstractScreen {
         animatedImage.setAlign(Align.center);
 
         // Add values
+        table.add(dizzy);
+        table.row();
         table.add(heroDeath);
         table.row();
         table.add(animatedImage).size(AssetGameOver.WIDTH_PIXELS, AssetGameOver.HEIGHT_PIXELS);
