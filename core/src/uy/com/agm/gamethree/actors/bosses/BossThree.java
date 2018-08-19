@@ -538,10 +538,10 @@ public class BossThree extends Boss {
                     currentStateBoss = StateBoss.KNOCK_BACK;
                 }
             } else {
-                weapon.onBounce();
+                weapon.onBounce(b2body.getLinearVelocity());
             }
         } else {
-            weapon.onBounce();
+            weapon.onBounce(b2body.getLinearVelocity());
         }
     }
 

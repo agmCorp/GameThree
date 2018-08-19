@@ -180,7 +180,7 @@ public class PowerOne extends Item {
             // Disable previous ability power (if any)
             hero.abilityPowerDown();
 
-            // Hero can't collide with bullets and some types of enemies
+            // Hero can't collide with bullets and some types of enemies (see WorldContactListener, case HERO_GHOST_BIT | ENEMY_BIT)
             Filter filter = new Filter();
             filter.categoryBits = WorldContactListener.HERO_GHOST_BIT;  // Depicts what this fixture is
             filter.maskBits = WorldContactListener.BORDER_BIT |

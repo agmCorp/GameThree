@@ -201,8 +201,8 @@ public class PowerTwo extends Item {
             vertices[7] = new Vector2(-cos45 * SHIELD_RADIUS_METERS, -sin45 * SHIELD_RADIUS_METERS);
             shield.set(vertices);
 
-            // Hero can't collide with enemies nor bullets.
-            // This is a work around: although the shield surrounds Hero, if he is in the path of EnemySix's beam (when its beam begins) he dies.
+            // Hero can't collide with bullets.
+            // This is a work around: although the shield surrounds Hero, if he is in the path of EnemySix's beam (when its beam begins) he collides.
             // To avoid this behavior, we also give him invulnerability.
             Filter filter = new Filter();
             filter.categoryBits = WorldContactListener.HERO_GHOST_BIT;  // Depicts what this fixture is
@@ -211,7 +211,8 @@ public class PowerTwo extends Item {
                     WorldContactListener.OBSTACLE_BIT |
                     WorldContactListener.PATH_BIT |
                     WorldContactListener.POWER_BOX_BIT |
-                    WorldContactListener.ITEM_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)
+                    WorldContactListener.ITEM_BIT |
+                    WorldContactListener.ENEMY_BIT;// Depicts what this Fixture can collide with (see WorldContactListener)
             hero.setFilterData(filter);
 
             // Shield only collide with enemies' bullets

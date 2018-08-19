@@ -64,6 +64,8 @@ public class EnemyThree extends Enemy {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(CIRCLE_SHAPE_RADIUS_METERS);
+        // EnemyThree doesn't collide with HERO_SHIELD_BIT, because the shield is too big.
+        // EnemyThree only collides with Hero (HERO_BIT, HERO_GHOST_BIT and HERO_TOUGH_BIT).
         fdef.filter.categoryBits = WorldContactListener.ENEMY_BIT; // Depicts what this fixture is
         fdef.filter.maskBits = WorldContactListener.BORDER_BIT |
                 WorldContactListener.OBSTACLE_BIT |
@@ -71,7 +73,6 @@ public class EnemyThree extends Enemy {
                 WorldContactListener.ITEM_BIT |
                 WorldContactListener.HERO_WEAPON_BIT |
                 WorldContactListener.ENEMY_BIT |
-                WorldContactListener.HERO_SHIELD_BIT |
                 WorldContactListener.HERO_BIT |
                 WorldContactListener.HERO_GHOST_BIT |
                 WorldContactListener.HERO_TOUGH_BIT; // Depicts what this Fixture can collide with (see WorldContactListener)

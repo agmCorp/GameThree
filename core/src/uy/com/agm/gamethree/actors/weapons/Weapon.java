@@ -79,9 +79,11 @@ public abstract class Weapon extends Sprite {
         }
     }
 
-    public void onBounce() {
+    public void onBounce(Vector2 barrierVelocity) {
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getBoing());
-        reverseVelocity(true, true);
+
+        reverseVelocity((barrierVelocity.x >= 0 && velocity.x < 0) || (barrierVelocity.x <= 0 && velocity.x > 0) ? true : false,
+                (barrierVelocity.y >= 0 && velocity.y < 0) || (barrierVelocity.y <= 0 && velocity.y > 0) ? true : false);
 
         // Set the new rotation angle
         float angle = velocity.angle();

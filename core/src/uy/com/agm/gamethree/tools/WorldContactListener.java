@@ -114,6 +114,7 @@ public class WorldContactListener implements ContactListener {
 
             // HeroGhost - Enemies
             case HERO_GHOST_BIT | ENEMY_BIT:
+                // Hero only collides with enemyThree
                 if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
                     Enemy enemy = ((Enemy) fixA.getUserData());
                     if (enemy instanceof EnemyThree) {
@@ -146,21 +147,6 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
-            // Shield - Enemies
-            case HERO_SHIELD_BIT | ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
-                    Enemy enemy = ((Enemy) fixA.getUserData());
-                    if (enemy instanceof EnemyThree) {
-                        ((Hero) fixB.getUserData()).onDead();
-                    }
-                } else {
-                    Enemy enemy = ((Enemy) fixB.getUserData());
-                    if (enemy instanceof EnemyThree) {
-                        ((Hero) fixA.getUserData()).onDead();
-                    }
-                }
-                break;
-
             // Hero - Enemy's weapon
             case HERO_BIT | ENEMY_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_BIT) {
@@ -174,8 +160,11 @@ public class WorldContactListener implements ContactListener {
 
             // HeroTough - Enemy's weapon
             case HERO_TOUGH_BIT | ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == ENEMY_WEAPON_BIT ? fixA : fixB;
-                ((Weapon) fixC.getUserData()).onBounce();
+                if (fixA.getFilterData().categoryBits == HERO_TOUGH_BIT) {
+                    ((Weapon) fixB.getUserData()).onBounce(((Hero) fixA.getUserData()).getB2body().getLinearVelocity());
+                } else {
+                    ((Weapon) fixA.getUserData()).onBounce(((Hero) fixB.getUserData()).getB2body().getLinearVelocity());
+                }
                 break;
 
             // Enemy - Border
@@ -279,8 +268,11 @@ public class WorldContactListener implements ContactListener {
 
             // Shield - Enemy's weapon
             case HERO_SHIELD_BIT | ENEMY_WEAPON_BIT:
-                fixC = fixA.getFilterData().categoryBits == ENEMY_BIT ? fixA : fixB;
-                ((Weapon) fixC.getUserData()).onBounce();
+                if (fixA.getFilterData().categoryBits == HERO_SHIELD_BIT) {
+                    ((Weapon) fixB.getUserData()).onBounce(((Hero) fixA.getUserData()).getB2body().getLinearVelocity());
+                } else {
+                    ((Weapon) fixA.getUserData()).onBounce(((Hero) fixB.getUserData()).getB2body().getLinearVelocity());
+                }
                 break;
         }
     }

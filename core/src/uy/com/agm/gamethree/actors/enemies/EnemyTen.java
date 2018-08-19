@@ -310,7 +310,7 @@ public class EnemyTen extends Enemy {
     @Override
     public void onHit(Weapon weapon) {
         if (!path2) {
-            weapon.onBounce();
+            weapon.onBounce(b2body.getLinearVelocity());
         } else {
             super.onHit(weapon);
         }
