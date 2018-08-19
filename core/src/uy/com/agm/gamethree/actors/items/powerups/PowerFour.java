@@ -10,13 +10,13 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import uy.com.agm.gamethree.actors.items.Item;
+import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.sprites.AssetPowerFour;
 import uy.com.agm.gamethree.assets.sprites.AssetToughMode;
 import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
-import uy.com.agm.gamethree.actors.items.Item;
-import uy.com.agm.gamethree.actors.player.Hero;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
