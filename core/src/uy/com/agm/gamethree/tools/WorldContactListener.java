@@ -146,6 +146,21 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
 
+            // HeroGhost - Enemies
+            case HERO_SHIELD_BIT | ENEMY_BIT:
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
+                    Enemy enemy = ((Enemy) fixA.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixB.getUserData()).onDead();
+                    }
+                } else {
+                    Enemy enemy = ((Enemy) fixB.getUserData());
+                    if (enemy instanceof EnemyThree) {
+                        ((Hero) fixA.getUserData()).onDead();
+                    }
+                }
+                break;
+
             // Hero - Enemy's weapon
             case HERO_BIT | ENEMY_WEAPON_BIT:
                 if (fixA.getFilterData().categoryBits == HERO_BIT) {
