@@ -78,7 +78,7 @@ public class AssetSounds {
     private Sound marching;
     private Sound flap;
     private Sound bite;
-    private Sound rockScrape;
+    private Sound roar;
     private Sound pebbles;
     private Sound blade;
     private Sound flutter;
@@ -151,7 +151,7 @@ public class AssetSounds {
         marching = am.get(Assets.FX_FILE_MARCHING, Sound.class);
         flap = am.get(Assets.FX_FILE_FLAP, Sound.class);
         bite = am.get(Assets.FX_FILE_BITE, Sound.class);
-        rockScrape = am.get(Assets.FX_FILE_ROCK_SCRAPE, Sound.class);
+        roar = am.get(Assets.FX_FILE_ROAR, Sound.class);
         pebbles = am.get(Assets.FX_FILE_PEBBLES, Sound.class);
         blade = am.get(Assets.FX_FILE_BLADE, Sound.class);
         flutter = am.get(Assets.FX_FILE_FLUTTER, Sound.class);
@@ -422,8 +422,8 @@ public class AssetSounds {
         return bite;
     }
 
-    public Sound getRockScrape() {
-        return rockScrape;
+    public Sound getRoar() {
+        return roar;
     }
 
     public Sound getPebbles() {

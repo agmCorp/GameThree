@@ -242,7 +242,7 @@ public class EnemyEleven extends Enemy {
 
     @Override
     protected Sound getVoice() {
-        return Assets.getInstance().getSounds().getRockScrape();
+        return Assets.getInstance().getSounds().getRoar();
     }
 
     @Override
