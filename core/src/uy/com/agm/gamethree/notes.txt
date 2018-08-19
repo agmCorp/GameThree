@@ -132,7 +132,7 @@ vuelvo, voy a select level y se ven todos vacios.
 - Las balas no deberian rebotar cambiando su velocidad a mano, sino box2d deberia calcular como rebotan naturalmente.
 Si tengo una bala de enemigo que va de norte a sur y yo con mi escudo (powertwo) la choco viniendo desde el norte, la bala
 cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede quedar la bala flotando quieta si programo un rebote
-natural.
+natural. Intente corregir esto, ver Weapon.onbounce(). Hice lo que pude, parece estar bien.
 
 TENGO
 -----
