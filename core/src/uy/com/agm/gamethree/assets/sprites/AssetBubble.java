@@ -15,8 +15,8 @@ public class AssetBubble {
     private static final String TAG = AssetBubble.class.getName();
 
     // Constants (meters = pixels * resizeFactor / PPM)
-    public static final float WIDTH_METERS = 108.0f * 1.0f / PlayScreen.PPM;
-    public static final float HEIGHT_METERS = 108.0f * 1.0f / PlayScreen.PPM;
+    public static final float WIDTH_METERS = 108.0f * 1.3f / PlayScreen.PPM;
+    public static final float HEIGHT_METERS = 108.0f * 1.3f / PlayScreen.PPM;
 
     private TextureRegion bubbleStand;
     private TextureRegion bubblePopStand;

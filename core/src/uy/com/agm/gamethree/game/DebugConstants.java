@@ -27,7 +27,7 @@ public class DebugConstants {
     public static final boolean DEBUG_LEVELS = true && TURN_ON_DEBUG;
 
     // if it's greater than zero it sets the initial position of the camera (75.0f to reach the end of the stage)
-    public static final float GAME_CAM_Y_METERS = 30.0f * (TURN_ON_DEBUG ? 1 : 0);
+    public static final float GAME_CAM_Y_METERS = 0.0f * (TURN_ON_DEBUG ? 1 : 0);
 
     // When it's true, endurance count is ignored
     public static final boolean DISABLE_ENDURANCE_COUNT = false && TURN_ON_DEBUG;
