@@ -28,7 +28,7 @@ public class AssetDizzy {
 
         // Animation
         regions = atlas.findRegions("dizzy");
-        dizzyAnimation = new Animation(2.0f / 25.0f, regions, Animation.PlayMode.LOOP);
+        dizzyAnimation = new Animation(1.6f / 20.0f, regions, Animation.PlayMode.LOOP);
         regions.clear();
     }
 
