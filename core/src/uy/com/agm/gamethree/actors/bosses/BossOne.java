@@ -38,7 +38,7 @@ public class BossOne extends Boss {
     private static final String NAME = "ASTROBITSY";
     public static final float CIRCLE_SHAPE_RADIUS_METERS = 60.0f / PlayScreen.PPM;
     private static final float TARGET_RADIUS_METERS = 30.0f / PlayScreen.PPM;
-    private static final float OFFSET_TARGET = 30.0f / PlayScreen.PPM;
+    private static final float OFFSET_TARGET = 25.0f / PlayScreen.PPM;
     private static final float WORLD_WIDTH = PlayScreen.V_WIDTH / PlayScreen.PPM;
     private static final float WORLD_HEIGHT = PlayScreen.V_HEIGHT / PlayScreen.PPM;
     private static final float X_MIN = TARGET_RADIUS_METERS + OFFSET_TARGET;
