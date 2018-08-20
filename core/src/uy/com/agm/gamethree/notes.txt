@@ -643,6 +643,11 @@ LECCIONES APRENDIDAS
     Cada vez que libere un nuevo apk (Build/Generate Signed APK) para la playStore, debo
     incrementar versionCode de android/build.gradle.
 
+32)
+    Para saber donde esta el adb ir a Android studio/settings/Appearance & behavior/System Settings/Android SDK:
+    C:\Alvaro\Develop\Android\20171202\AndroidSDK
+    El adb esta en C:\Alvaro\Develop\Android\20171202\AndroidSDK\platform-tools
+
 IOS
 ---
 xcode para programar en objectiveC o en swift.
