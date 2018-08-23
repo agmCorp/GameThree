@@ -4,6 +4,7 @@ estudiar:
 - Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
 - enemigo 8 se queda pegado
 
+- hacer la pantalla de pausa de veulta
 - hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
