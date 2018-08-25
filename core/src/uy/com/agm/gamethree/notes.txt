@@ -5,7 +5,7 @@ estudiar:
 - enemigo 8 se queda pegado
 
 - hacer la pantalla de pausa de veulta
-- hacer videos cuando termine los corazones, cambiar las imagenes porque cambio el hud.
+- hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank
@@ -133,7 +133,7 @@ que me puede matar.
 si aprecian las etiquetas de highscore y demas. Tambien me pasaba que a veces la pantalla de highscores aparecia con espacios
 chicos entre filas de la tabla. Lo peor es que a veces no cargaba los niveles en selectlevels y aprecia todo vacio.
 Para reproducir esto ultimo: Mato todas las apps de android, entro al juego, voy a highscores rapido, vuelvo, voy a help rapido,
-vuelvo, voy a select level y se ven todos vacios.
+vuelvo, voy a select level y se ven todos vacios. Al parecer solo pasa en mi celular, supongo yo por tanta instalación de debug.
 - Las balas no deberian rebotar cambiando su velocidad a mano, sino box2d deberia calcular como rebotan naturalmente.
 Si tengo una bala de enemigo que va de norte a sur y yo con mi escudo (powertwo) la choco viniendo desde el norte, la bala
 cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede quedar la bala flotando quieta si programo un rebote

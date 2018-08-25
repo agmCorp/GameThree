@@ -199,7 +199,7 @@ public class EnemyEight extends Enemy {
 
     private void checkPath1() {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y <= screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+        if (b2body.getPosition().y < screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
             path1 = false;
             path2 = true;
         } else {
@@ -215,7 +215,7 @@ public class EnemyEight extends Enemy {
 
     private void checkPath2(float dt) {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y >= screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
+        if (b2body.getPosition().y > screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4) { // EnemyEight reaches target
             path2 = false;
             path3 = true;
         } else {
@@ -227,7 +227,7 @@ public class EnemyEight extends Enemy {
 
     private void checkPath3() {
         // We don't use a variable (targetY) because the cam is always moving and we want a "dynamic" targetY
-        if (b2body.getPosition().y >= screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2) { // EnemyEight reaches target
+        if (b2body.getPosition().y > screen.getGameCam().position.y + screen.getGameViewPort().getWorldHeight() / 2) { // EnemyEight reaches target
             path3 = false;
         } else {
             // Move to (targetX, targetY) at constant speed
