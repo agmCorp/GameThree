@@ -39,7 +39,7 @@ public class DimScreen extends AbstractScreen {
     // Constants
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float BUTTON_SIZE_SMALL = 30.0f;
-    private static final float DIM_ALPHA = 0.5f;
+    private static final float DIM_ALPHA = 0.7f;
     private static final int COLUMNS = 3;
     private static final float RESIZE_FACTOR = 0.8f;
     private static final float FADE_DURATION = 0.5f;
@@ -367,6 +367,11 @@ public class DimScreen extends AbstractScreen {
                 centerTable.setTouchable(Touchable.enabled);
             }
         })));
+    }
+
+    private void showPauseFast() {
+        centerTable.getColor().a = 1;
+        centerTable.setTouchable(Touchable.enabled);
     }
 
     private void hidePause() {
