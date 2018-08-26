@@ -1,9 +1,9 @@
 PROXIMAS VERSIONES
 ------------------
-- hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
+- hacer videos cuando termine los corazones, cambiar las imagenes de la playStore y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
-- En la pantalla de creditos poner donación y rank
+- En la pantalla de creditos poner donación y rank, capaz en una segunda pantalla.
 - Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
@@ -75,6 +75,8 @@ Mi clase GameThree es la análoga a DirectedGame.
 Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
 Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
 Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen manager tiene un if antes del setScreen por pruebas.
+Lo que pasa es que no logro hacer la transicion a playScreen. Las demas pantallas si la hacen. Una vez que se rompe
+la transicion, queda rota.
 - hacer una bala grandota y ruidosa con shake capaz
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
@@ -91,7 +93,7 @@ Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen 
     instante) en donde esta el hero y va hacia ahi.
     - enemigo que es como una estella (cometa). Para ese efecto agregar varias veces el sprite con distinto alpha.
     Se mueve rapido derecho en diagonal.
-- minuto 33.43 puentes dinámicos
+- minuto 33.43 puentes dinámicos https://www.youtube.com/watch?v=SJM6mxXgW50&t=1843s
 - para la version escritorio creo me conviene usar heroLeft y heroRight porque tengo las animaciones y es facil incluirlas.
 Con el boss 2 no se...no logro visualizar esos cambios en perspectiva.
 - Frases:
@@ -167,6 +169,7 @@ twelve - vampirito violeta
 
 ESTIMACION
 ----------
+https://www.youtube.com/watch?v=SJM6mxXgW50&t=1843s
 En youtube el knight se desplaza 10 pixels por segundo aprox.
 El primer nivel dura 5 minutos (300 segundos).
 En youtube el knight tiene 260 pixels de alto.
