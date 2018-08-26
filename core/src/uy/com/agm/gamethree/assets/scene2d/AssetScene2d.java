@@ -73,6 +73,14 @@ public class AssetScene2d {
     private TextureRegion tickPressed;
     private TextureRegion cross;
     private TextureRegion crossPressed;
+    private TextureRegion levels;
+    private TextureRegion levelsPressed;
+    private TextureRegion reload;
+    private TextureRegion reloadPressed;
+    private TextureRegion playSmall;
+    private TextureRegion playSmallPressed;
+    private TextureRegion home;
+    private TextureRegion homePressed;
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
     private TextureRegion goldTrophy;
@@ -164,6 +172,14 @@ public class AssetScene2d {
         tickPressed = atlasUI.findRegion("tickPressed");
         cross = atlasUI.findRegion("cross");
         crossPressed = atlasUI.findRegion("crossPressed");
+        levels = atlasUI.findRegion("levels");
+        levelsPressed = atlasUI.findRegion("levelsPressed");
+        reload = atlasUI.findRegion("reload");
+        reloadPressed = atlasUI.findRegion("reloadPressed");
+        playSmall = atlasUI.findRegion("playSmall");
+        playSmallPressed = atlasUI.findRegion("playSmallPressed");
+        home = atlasUI.findRegion("home");
+        homePressed = atlasUI.findRegion("homePressed");
         gotIt = atlasUI.findRegion("gotIt");
         gotItPressed = atlasUI.findRegion("gotItPressed");
         goldTrophy = atlasUI.findRegion("goldTrophy");
@@ -441,6 +457,38 @@ public class AssetScene2d {
 
     public TextureRegion getCrossPressed() {
         return crossPressed;
+    }
+
+    public TextureRegion getLevels() {
+        return levels;
+    }
+
+    public TextureRegion getLevelsPressed() {
+        return levelsPressed;
+    }
+
+    public TextureRegion getReload() {
+        return reload;
+    }
+
+    public TextureRegion getReloadPressed() {
+        return reloadPressed;
+    }
+
+    public TextureRegion getPlaySmall() {
+        return playSmall;
+    }
+
+    public TextureRegion getPlaySmallPressed() {
+        return playSmallPressed;
+    }
+
+    public TextureRegion getHome() {
+        return home;
+    }
+
+    public TextureRegion getHomePressed() {
+        return homePressed;
     }
 
     public TextureRegion getGotIt() {

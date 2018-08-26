@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -18,6 +17,7 @@ import com.badlogic.gdx.utils.Scaling;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -34,6 +34,7 @@ public class DimScreen extends AbstractScreen {
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float BUTTON_SIZE_SMALL = 30.0f;
     private static final float DIM_ALPHA = 0.5f;
+    private static final int COLUMNS = 3;
 
     private PlayScreen screen;
 
@@ -45,10 +46,13 @@ public class DimScreen extends AbstractScreen {
 
     private Table buttonsTable;
     private ImageButton pause;
-    private ImageButton resume;
-    private ImageButton quit;
-    private Stack stack;
-    private Cell stackCell;
+    private ImageButton close;
+    private ImageButton music;
+    private ImageButton sound;
+    private Cell pauseCell;
+    private GameSettings prefs;
+    private float defaultVolMusic;
+    private float defaultVolSound;
 
     private TextureRegion dim;
 
@@ -71,9 +75,17 @@ public class DimScreen extends AbstractScreen {
         pixmap.fill();
         dim = new TextureRegion(new Texture(pixmap));
         pixmap.dispose();
+
+        // Preferences
+        prefs = GameSettings.getInstance();
+        defaultVolMusic = prefs.isMusic() ? prefs.getVolMusic() : GameSettings.DEFAULT_VOLUME;
+        defaultVolSound = prefs.isSound() ? prefs.getVolSound() : GameSettings.DEFAULT_VOLUME;
     }
 
     private void defineCenterTable() {
+        // UI assets
+        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
+
         // Define a new table used to display a message
         centerTable = new Table();
 
@@ -93,8 +105,83 @@ public class DimScreen extends AbstractScreen {
         messageLabel = new Label("MESSAGE", labelStyleBig);
         messageLabel.setAlignment(Align.center);
 
+        // Define buttons and images
+        ImageButton levels = new ImageButton(new TextureRegionDrawable(assetScene2d.getLevels()),
+                new TextureRegionDrawable(assetScene2d.getLevelsPressed()));
+        ImageButton reload = new ImageButton(new TextureRegionDrawable(assetScene2d.getReload()),
+                new TextureRegionDrawable(assetScene2d.getReloadPressed()));
+        ImageButton playSmall = new ImageButton(new TextureRegionDrawable(assetScene2d.getPlaySmall()),
+                new TextureRegionDrawable(assetScene2d.getPlaySmallPressed()));
+        ImageButton home = new ImageButton(new TextureRegionDrawable(assetScene2d.getHome()),
+                new TextureRegionDrawable(assetScene2d.getHomePressed()));
+        music = new ImageButton(new TextureRegionDrawable(assetScene2d.getMusic()),
+                new TextureRegionDrawable(assetScene2d.getMusicPressed()),
+                new TextureRegionDrawable(assetScene2d.getMusicChecked()));
+        music.setChecked(!prefs.isMusic());
+        sound = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
+                new TextureRegionDrawable(assetScene2d.getSoundPressed()),
+                new TextureRegionDrawable(assetScene2d.getSoundChecked()));
+        sound.setChecked(!prefs.isSound());
+
         // Add values
-        centerTable.add(messageLabel);
+        centerTable.add(messageLabel).colspan(COLUMNS);
+        centerTable.row().pad(AbstractScreen.PAD / 2);
+        centerTable.add(levels);
+        centerTable.add(reload);
+        centerTable.add(playSmall);
+        centerTable.row().pad(AbstractScreen.PAD / 2);
+        centerTable.add(home);
+        centerTable.add(music);
+        centerTable.add(sound);
+
+        // Events
+        levels.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));
+        reload.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, screen.getLevel()));
+        playSmall.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        setGameStateRunning();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        home.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        music.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        toggleMusic();
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        sound.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        toggleSound();
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
 
         // Add our table to the stage
         addActor(centerTable);
@@ -103,11 +190,27 @@ public class DimScreen extends AbstractScreen {
         centerTable.setVisible(false);
     }
 
+    private void toggleMusic() {
+        boolean musicOn = !music.isChecked();
+        prefs.setVolMusic(musicOn ? defaultVolMusic : 0);
+        prefs.setMusic(musicOn);
+    }
+
+    private void toggleSound() {
+        boolean soundOn = !sound.isChecked();
+        prefs.setVolSound(soundOn ? defaultVolSound : 0);;
+        prefs.setSound(soundOn);
+    }
+
+    private void save() {
+        GameSettings.getInstance().save();
+    }
+
     private void defineButtonsTable() {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
-        // Define a new table used to display pause, resume and quit buttons
+        // Define a new table used to display pause and close buttons
         buttonsTable = new Table();
 
         // Debug lines
@@ -129,17 +232,12 @@ public class DimScreen extends AbstractScreen {
         pause.getImage().setScaling(Scaling.fit);
         pause.left();
 
-        resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getTick()),
-                new TextureRegionDrawable(assetScene2d.getTickPressed()));
-        quit = new ImageButton(new TextureRegionDrawable(assetScene2d.getCross()),
+        close = new ImageButton(new TextureRegionDrawable(assetScene2d.getCross()),
                 new TextureRegionDrawable(assetScene2d.getCrossPressed()));
 
         // Add values
-        stack = new Stack();
-        stack.add(pause);
-        stack.add(resume);
-        stackCell = buttonsTable.add(stack).left(); // Pause and Resume are overlapped
-        buttonsTable.add(quit).right().expandX();
+        pauseCell = buttonsTable.add(pause).left().expandX();
+        buttonsTable.add(close).right().expandX();
 
         // Events
         pause.addListener(
@@ -157,28 +255,13 @@ public class DimScreen extends AbstractScreen {
                     }
                 });
 
-        resume.addListener(
+        close.addListener(
                 new InputListener(){
                     @Override
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         setGameStateRunning();
-                    }
-
-                    @Override
-                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                        return true;
-                    }
-                });
-
-        quit.addListener(
-                new InputListener(){
-                    @Override
-                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                        // Audio FX
-                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-                        quit();
                     }
 
                     @Override
@@ -194,23 +277,21 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showPauseButton() {
-        stackCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().top();
+        pauseCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().top();
         buttonsTable.pack();
         pause.setVisible(true);
-        resume.setVisible(false);
-        quit.setVisible(false);
+        close.setVisible(false);
     }
 
-    private void showResumeButton() {
-        stackCell.size(quit.getWidth(), quit.getHeight()).left();
+    private void showCloseButton() {
+        pauseCell.size(close.getWidth(), close.getHeight()).left();
         buttonsTable.pack();
         pause.setVisible(false);
-        resume.setVisible(true);
-        quit.setVisible(true);
+        close.setVisible(true);
     }
 
     public void setGameStatePaused() {
-        showResumeButton();
+        showCloseButton();
         buttonsTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
 
@@ -243,22 +324,6 @@ public class DimScreen extends AbstractScreen {
         } else {
             screen.setPlayScreenStateRunning();
         }
-    }
-
-    private void quit() {
-        if (getMessage().equals(i18NGameThreeBundle.format("dimScreen.confirm"))) {
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
-        } else {
-            showMessage(i18NGameThreeBundle.format("dimScreen.confirm"));
-        }
-    }
-
-    private String getMessage() {
-        String message = "";
-        if (messageLabel.isVisible()) {
-            message = messageLabel.getText().toString();
-        }
-        return message;
     }
 
     private void showMessage(String message) {
