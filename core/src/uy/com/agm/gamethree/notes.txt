@@ -137,6 +137,9 @@ vuelvo, voy a select level y se ven todos vacios. Al parecer solo pasa en mi cel
 Si tengo una bala de enemigo que va de norte a sur y yo con mi escudo (powertwo) la choco viniendo desde el norte, la bala
 cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede quedar la bala flotando quieta si programo un rebote
 natural. Intente corregir esto, ver Weapon.onbounce(). Hice lo que pude, parece estar bien.
+- Hay situaciones en donde me aparece redScreen (todo rojo) y encima alguna de las pantallas modales (solo se ve el pulgar). Creo que
+es la pantalla que dice infoScreen.redFlashHelp=WATCH OUT!\nDon't let your enemies\nflee! That hurts you!. No se puede leer, solo
+se ve el pulgar.
 
 TENGO
 -----

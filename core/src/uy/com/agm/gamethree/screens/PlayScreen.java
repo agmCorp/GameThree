@@ -202,7 +202,10 @@ public class PlayScreen extends AbstractScreen {
         // Used to display ads
         allowAds = true;
 
-        // Start playing level music
+        // Start playing level music from the beginning (if we arrive from DimScreen/reload)
+        AudioManager.getInstance().stopMusic();
+
+        // Play level music
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level), true);
 
         // User input handler
