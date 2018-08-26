@@ -23,7 +23,6 @@ import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
@@ -220,13 +219,11 @@ public class DimScreen extends AbstractScreen {
         // Add our table to the stage
         addActor(centerTable);
 
-        // Initially hidden with alpha 0
-        centerTable.addAction(sequence(alpha(0.0f), run(new Runnable() {
-            public void run () {
-                centerTable.setTouchable(Touchable.disabled);
-            }
-        })));
+        // Initially hidden with alpha 0 and touch events disabled
+        centerTable.getColor().a = 0;
+        centerTable.setTouchable(Touchable.disabled);
     }
+
 
     private void toggleMusic() {
         boolean musicOn = !music.isChecked();
@@ -373,11 +370,11 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void hidePause() {
-        centerTable.addAction(sequence(fadeOut(FADE_DURATION), run(new Runnable() {
+        centerTable.addAction(sequence(run(new Runnable() {
             public void run () {
                 centerTable.setTouchable(Touchable.disabled);
             }
-        })));
+        }), fadeOut(FADE_DURATION)));
     }
 
     @Override
