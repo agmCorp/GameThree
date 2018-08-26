@@ -105,9 +105,4 @@ public class CreditsScreen extends AbstractScreen {
         // Adds table to stage
         addActor(table);
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

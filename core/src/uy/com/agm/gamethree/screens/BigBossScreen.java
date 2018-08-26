@@ -115,11 +115,6 @@ public class BigBossScreen extends AbstractScreen {
     }
 
     @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-    @Override
     public void render(float delta) {
         super.render(delta);
 

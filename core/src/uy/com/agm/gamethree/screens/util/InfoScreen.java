@@ -543,7 +543,7 @@ public class InfoScreen extends AbstractScreen {
     public void render(float delta) {
         // Calling to Stage methods
         if (screen.isPlayScreenStateRunning()) {
-            super.act(delta);
+            super.act(delta);  // Don't animate if PlayScreen is on pause
         }
         super.draw();
     }

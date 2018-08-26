@@ -248,11 +248,6 @@ public class HelpThreeScreen extends AbstractScreen {
     }
 
     @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-    @Override
     protected void clearScreen() {
         // Clear the screen with Black
         Gdx.gl.glClearColor(0, 0, 0, 1);

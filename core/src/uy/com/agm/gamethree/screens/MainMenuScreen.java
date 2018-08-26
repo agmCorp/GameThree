@@ -146,9 +146,4 @@ public class MainMenuScreen extends AbstractScreen {
         playClick();
         Gdx.app.exit();
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

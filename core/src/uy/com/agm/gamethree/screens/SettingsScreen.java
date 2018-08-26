@@ -338,9 +338,4 @@ public class SettingsScreen extends AbstractScreen {
     private void save() {
         prefs.save();
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

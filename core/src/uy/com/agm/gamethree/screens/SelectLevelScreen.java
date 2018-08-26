@@ -245,9 +245,4 @@ public class SelectLevelScreen extends AbstractScreen {
 
         return table;
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

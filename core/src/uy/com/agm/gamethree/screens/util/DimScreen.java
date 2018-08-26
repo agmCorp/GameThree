@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -22,6 +23,12 @@ import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 /**
  * Created by AGM on 1/18/2018.
  *
@@ -36,6 +43,7 @@ public class DimScreen extends AbstractScreen {
     private static final float DIM_ALPHA = 0.5f;
     private static final int COLUMNS = 3;
     private static final float RESIZE_FACTOR = 0.8f;
+    private static final float FADE_DURATION = 0.5f;
 
     private PlayScreen screen;
 
@@ -103,7 +111,7 @@ public class DimScreen extends AbstractScreen {
         centerTable.setFillParent(true);
 
         // Define a label based on labelStyle
-        messageLabel = new Label("MESSAGE", labelStyleBig);
+        messageLabel = new Label(i18NGameThreeBundle.format("dimScreen.pauseMessage"), labelStyleBig);
         messageLabel.setAlignment(Align.center);
 
         // Define buttons and images
@@ -212,8 +220,12 @@ public class DimScreen extends AbstractScreen {
         // Add our table to the stage
         addActor(centerTable);
 
-        // Initially hidden
-        centerTable.setVisible(false);
+        // Initially hidden with alpha 0
+        centerTable.addAction(sequence(alpha(0.0f), run(new Runnable() {
+            public void run () {
+                centerTable.setTouchable(Touchable.disabled);
+            }
+        })));
     }
 
     private void toggleMusic() {
@@ -319,7 +331,7 @@ public class DimScreen extends AbstractScreen {
     public void setGameStatePaused() {
         showCloseButton();
         upperTable.setVisible(true);
-        showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
+        showPause();
 
         InfoScreen infoScreen = screen.getInfoScreen();
         if (infoScreen.isModalVisible()) { // Game already paused
@@ -339,7 +351,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     public void setGameStateRunning() {
-        hideMessage();
+        hidePause();
         showPauseButton();
 
         InfoScreen infoScreen = screen.getInfoScreen();
@@ -352,15 +364,20 @@ public class DimScreen extends AbstractScreen {
         }
     }
 
-    private void showMessage(String message) {
-        messageLabel.setText(message);
-        messageLabel.setVisible(true);
-        centerTable.setVisible(true);
+    private void showPause() {
+        centerTable.addAction(sequence(fadeIn(FADE_DURATION), run(new Runnable() {
+            public void run () {
+                centerTable.setTouchable(Touchable.enabled);
+            }
+        })));
     }
 
-    private void hideMessage() {
-        messageLabel.setVisible(false);
-        centerTable.setVisible(false);
+    private void hidePause() {
+        centerTable.addAction(sequence(fadeOut(FADE_DURATION), run(new Runnable() {
+            public void run () {
+                centerTable.setTouchable(Touchable.disabled);
+            }
+        })));
     }
 
     @Override
@@ -370,16 +387,12 @@ public class DimScreen extends AbstractScreen {
     }
 
     @Override
-    public void dispose() {
-        super.dispose();
+    protected void clearScreen() {
+        // Nothing to do here
     }
 
     @Override
-    public void render(float delta) {
-        // Calling to Stage methods
-        if (screen.isPlayScreenStateRunning()) {
-            super.act(delta);
-        }
-        super.draw();
+    protected void goBack() {
+        // Nothing to do here
     }
 }

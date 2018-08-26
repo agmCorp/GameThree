@@ -787,10 +787,12 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void buildStage() {
+        // Nothing to do here
     }
 
     @Override
     public void show() {
+        // Nothing to do here
     }
 
     @Override
@@ -805,14 +807,6 @@ public class PlayScreen extends AbstractScreen {
     @Override
     public void pause() {
         dimScreen.setGameStatePaused();
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
     }
 
     @Override

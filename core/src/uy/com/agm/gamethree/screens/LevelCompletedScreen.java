@@ -266,9 +266,4 @@ public class LevelCompletedScreen extends AbstractScreen {
         }
         return table;
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }
