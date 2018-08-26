@@ -69,10 +69,10 @@ public class AssetScene2d {
     private TextureRegion forwardPressed;
     private TextureRegion pause;
     private TextureRegion pausePressed;
-    private TextureRegion resume;
-    private TextureRegion resumePressed;
-    private TextureRegion quit;
-    private TextureRegion quitPressed;
+    private TextureRegion tick;
+    private TextureRegion tickPressed;
+    private TextureRegion cross;
+    private TextureRegion crossPressed;
     private TextureRegion gotIt;
     private TextureRegion gotItPressed;
     private TextureRegion goldTrophy;
@@ -153,17 +153,17 @@ public class AssetScene2d {
         soundChecked = atlasUI.findRegion("soundChecked");
         shooting = atlasUI.findRegion("shooting");
         shootingPressed = atlasUI.findRegion("shootingPressed");
-        shootingChecked = atlasUI.findRegion("resume");
+        shootingChecked = atlasUI.findRegion("tick");
         back = atlasUI.findRegion("back");
         backPressed = atlasUI.findRegion("backPressed");
         forward = atlasUI.findRegion("forward");
         forwardPressed = atlasUI.findRegion("forwardPressed");
         pause = atlasUI.findRegion("pause");
         pausePressed = atlasUI.findRegion("pausePressed");
-        resume = atlasUI.findRegion("resume");
-        resumePressed = atlasUI.findRegion("resumePressed");
-        quit = atlasUI.findRegion("quit");
-        quitPressed = atlasUI.findRegion("quitPressed");
+        tick = atlasUI.findRegion("tick");
+        tickPressed = atlasUI.findRegion("tickPressed");
+        cross = atlasUI.findRegion("cross");
+        crossPressed = atlasUI.findRegion("crossPressed");
         gotIt = atlasUI.findRegion("gotIt");
         gotItPressed = atlasUI.findRegion("gotItPressed");
         goldTrophy = atlasUI.findRegion("goldTrophy");
@@ -427,20 +427,20 @@ public class AssetScene2d {
         return pausePressed;
     }
 
-    public TextureRegion getResume() {
-        return resume;
+    public TextureRegion getTick() {
+        return tick;
     }
 
-    public TextureRegion getResumePressed() {
-        return resumePressed;
+    public TextureRegion getTickPressed() {
+        return tickPressed;
     }
 
-    public TextureRegion getQuit() {
-        return quit;
+    public TextureRegion getCross() {
+        return cross;
     }
 
-    public TextureRegion getQuitPressed() {
-        return quitPressed;
+    public TextureRegion getCrossPressed() {
+        return crossPressed;
     }
 
     public TextureRegion getGotIt() {

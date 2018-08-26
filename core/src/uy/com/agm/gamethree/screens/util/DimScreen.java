@@ -129,10 +129,10 @@ public class DimScreen extends AbstractScreen {
         pause.getImage().setScaling(Scaling.fit);
         pause.left();
 
-        resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getResume()),
-                new TextureRegionDrawable(assetScene2d.getResumePressed()));
-        quit = new ImageButton(new TextureRegionDrawable(assetScene2d.getQuit()),
-                new TextureRegionDrawable(assetScene2d.getQuitPressed()));
+        resume = new ImageButton(new TextureRegionDrawable(assetScene2d.getTick()),
+                new TextureRegionDrawable(assetScene2d.getTickPressed()));
+        quit = new ImageButton(new TextureRegionDrawable(assetScene2d.getCross()),
+                new TextureRegionDrawable(assetScene2d.getCrossPressed()));
 
         // Add values
         stack = new Stack();
