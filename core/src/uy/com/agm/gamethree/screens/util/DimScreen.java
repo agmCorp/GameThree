@@ -39,7 +39,7 @@ public class DimScreen extends AbstractScreen {
     // Constants
     private static final float BUTTON_WIDTH = 100.0f;
     private static final float BUTTON_SIZE_SMALL = 30.0f;
-    private static final float DIM_ALPHA = 0.7f;
+    private static final float DIM_ALPHA = 0.5f;
     private static final int COLUMNS = 3;
     private static final float RESIZE_FACTOR = 0.8f;
     private static final float FADE_DURATION = 0.5f;
@@ -328,7 +328,7 @@ public class DimScreen extends AbstractScreen {
     public void setGameStatePaused() {
         showCloseButton();
         upperTable.setVisible(true);
-        showPause();
+        showPausePanel();
 
         InfoScreen infoScreen = screen.getInfoScreen();
         if (infoScreen.isModalVisible()) { // Game already paused
@@ -348,7 +348,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     public void setGameStateRunning() {
-        hidePause();
+        hidePausePanel();
         showPauseButton();
 
         InfoScreen infoScreen = screen.getInfoScreen();
@@ -361,7 +361,9 @@ public class DimScreen extends AbstractScreen {
         }
     }
 
-    private void showPause() {
+    private void showPausePanel() {
+        centerTable.clearActions();
+        centerTable.setTouchable(Touchable.disabled);
         centerTable.addAction(sequence(fadeIn(FADE_DURATION), run(new Runnable() {
             public void run () {
                 centerTable.setTouchable(Touchable.enabled);
@@ -369,17 +371,10 @@ public class DimScreen extends AbstractScreen {
         })));
     }
 
-    private void showPauseFast() {
-        centerTable.getColor().a = 1;
-        centerTable.setTouchable(Touchable.enabled);
-    }
-
-    private void hidePause() {
-        centerTable.addAction(sequence(run(new Runnable() {
-            public void run () {
-                centerTable.setTouchable(Touchable.disabled);
-            }
-        }), fadeOut(FADE_DURATION)));
+    private void hidePausePanel() {
+        centerTable.clearActions();
+        centerTable.setTouchable(Touchable.disabled);
+        centerTable.addAction(fadeOut(FADE_DURATION));
     }
 
     @Override
