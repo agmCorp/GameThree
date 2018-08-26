@@ -35,6 +35,7 @@ public class DimScreen extends AbstractScreen {
     private static final float BUTTON_SIZE_SMALL = 30.0f;
     private static final float DIM_ALPHA = 0.5f;
     private static final int COLUMNS = 3;
+    private static final float RESIZE_FACTOR = 0.8f;
 
     private PlayScreen screen;
 
@@ -129,10 +130,13 @@ public class DimScreen extends AbstractScreen {
         centerTable.add(levels);
         centerTable.add(reload);
         centerTable.add(playSmall);
-        centerTable.row().pad(AbstractScreen.PAD / 2);
-        centerTable.add(home);
-        centerTable.add(music);
-        centerTable.add(sound);
+        centerTable.row();
+        Table aux = new Table();
+        aux.defaults().size(home.getWidth() * RESIZE_FACTOR, home.getHeight() * RESIZE_FACTOR).pad(AbstractScreen.PAD / 4);
+        aux.add(home);
+        aux.add(music);
+        aux.add(sound);
+        centerTable.add(aux).colspan(COLUMNS);
 
         // Events
         levels.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));
@@ -284,7 +288,7 @@ public class DimScreen extends AbstractScreen {
     }
 
     private void showCloseButton() {
-        pauseCell.size(close.getWidth(), close.getHeight()).left();
+        pauseCell.size(close.getWidth(), close.getHeight()).right();
         upperTable.pack();
         pause.setVisible(false);
         close.setVisible(true);
