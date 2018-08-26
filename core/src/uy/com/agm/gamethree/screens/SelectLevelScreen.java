@@ -23,6 +23,7 @@ import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
+import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -58,6 +59,9 @@ public class SelectLevelScreen extends AbstractScreen {
 
     public SelectLevelScreen() {
         super();
+
+        // Play menu music
+        AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongMainMenu(), true);
     }
 
     @Override

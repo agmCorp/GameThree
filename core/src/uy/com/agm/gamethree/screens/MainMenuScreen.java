@@ -31,7 +31,7 @@ public class MainMenuScreen extends AbstractScreen {
     public MainMenuScreen() {
         super();
 
-        // Play menu music
+        // Play menu music (if we arrive at this screen from DimScreen)
         AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongMainMenu(), true);
     }
 
