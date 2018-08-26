@@ -44,7 +44,7 @@ public class DimScreen extends AbstractScreen {
     private Table centerTable;
     private Label messageLabel;
 
-    private Table buttonsTable;
+    private Table upperTable;
     private ImageButton pause;
     private ImageButton close;
     private ImageButton music;
@@ -206,21 +206,21 @@ public class DimScreen extends AbstractScreen {
         GameSettings.getInstance().save();
     }
 
-    private void defineButtonsTable() {
+    private void defineUpperTable() {
         // UI assets
         AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
 
         // Define a new table used to display pause and close buttons
-        buttonsTable = new Table();
+        upperTable = new Table();
 
         // Debug lines
-        buttonsTable.setDebug(DebugConstants.DEBUG_LINES);
+        upperTable.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        buttonsTable.top();
+        upperTable.top();
 
         // Make the container fill the entire stage
-        buttonsTable.setFillParent(true);
+        upperTable.setFillParent(true);
 
         // Define buttons
         pause = new ImageButton(new TextureRegionDrawable(assetScene2d.getPause()),
@@ -236,8 +236,8 @@ public class DimScreen extends AbstractScreen {
                 new TextureRegionDrawable(assetScene2d.getCrossPressed()));
 
         // Add values
-        pauseCell = buttonsTable.add(pause).left().expandX();
-        buttonsTable.add(close).right().expandX();
+        pauseCell = upperTable.add(pause).left().expandX();
+        upperTable.add(close).right().expandX();
 
         // Events
         pause.addListener(
@@ -271,28 +271,28 @@ public class DimScreen extends AbstractScreen {
                 });
 
         // Add the table to the stage
-        addActor(buttonsTable);
+        addActor(upperTable);
 
         showPauseButton();
     }
 
     private void showPauseButton() {
         pauseCell.size(BUTTON_WIDTH, BUTTON_SIZE_SMALL).left().top();
-        buttonsTable.pack();
+        upperTable.pack();
         pause.setVisible(true);
         close.setVisible(false);
     }
 
     private void showCloseButton() {
         pauseCell.size(close.getWidth(), close.getHeight()).left();
-        buttonsTable.pack();
+        upperTable.pack();
         pause.setVisible(false);
         close.setVisible(true);
     }
 
     public void setGameStatePaused() {
         showCloseButton();
-        buttonsTable.setVisible(true);
+        upperTable.setVisible(true);
         showMessage(i18NGameThreeBundle.format("dimScreen.pauseMessage"));
 
         InfoScreen infoScreen = screen.getInfoScreen();
@@ -305,11 +305,11 @@ public class DimScreen extends AbstractScreen {
     }
 
     public void hideButtons() {
-        buttonsTable.setVisible(false);
+        upperTable.setVisible(false);
     }
 
     public void showButtons() {
-        buttonsTable.setVisible(true);
+        upperTable.setVisible(true);
     }
 
     public void setGameStateRunning() {
@@ -318,7 +318,7 @@ public class DimScreen extends AbstractScreen {
 
         InfoScreen infoScreen = screen.getInfoScreen();
         if (infoScreen.isModalVisible()) { // Game must remain on pause
-            buttonsTable.setVisible(false);
+            upperTable.setVisible(false);
             infoScreen.enableModal();
             screen.resumeAudio();
         } else {
@@ -340,7 +340,7 @@ public class DimScreen extends AbstractScreen {
     @Override
     public void buildStage() {
         defineCenterTable();
-        defineButtonsTable();
+        defineUpperTable();
     }
 
     @Override
