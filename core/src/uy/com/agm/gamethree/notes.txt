@@ -1,10 +1,8 @@
 PROXIMAS VERSIONES
 ------------------
 estudiar:
-- Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
-- enemigo 8 se queda pegado
-
 - hacer la pantalla de pausa de veulta
+- hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
 - hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -110,18 +108,24 @@ DUDAS Y BUGS
 - Cuando todo esto termine contactar a cooper de linkedin y preguntarle las dudas tecnicas y
 ademas consultar si es mejor usar box2d o arreglos para detectar colisiones. Si conoce algun
 detector de colisiones (solo que detecte, sin resolver el choque).
+Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
+movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
+de cruzamientos). Hay algún otro enfoque?.
 - No se donde tengo que hacer Assets.dispose(), lo puse en gamethree
 - Manejo de memoria y uso de Vector2 y uso de Labels en las pantallas.
 El vector2 no tiene dispose, las labels tampoco...
 - Queda el bug de que si reproducis un sonido y luego cambias de aplicacion, al volver (el juego esta en pausa) reproduce
 el resto del sonido. No lo supe arreglar...
 - A veces los sonidos no se reproducen
-- Quisiera la opinion de alguien que sepa sobre si es mejor usar box2d para detectar colisiones (y luchar con los
-movimientos no pudiendo cambiar la posición) o es mejor usar overlaps (donde capaz tengo que hacer miles de combinaciones
-de cruzamientos). Capaz le puedo preguntar al loco de linkedin. Hay algún otro enfoque?.
-- Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde.
-- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
-No se arreglo seteando velocity threshold de world.
+*- Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde. Programe que el targetX este siempre
+antes de un limitederecho o limiteizquierdo. No deberia volver a pasar.
+*- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
+No se arreglo seteando velocity threshold de world. El error se debe a que el movimiento de enemyEight se ve un poquito afectado
+ya sea por el disparo o porque yo lo empujo y se cumple la condición de salida de path2:
+b2body.getPosition().y > screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4
+Luego de eso, viene path3 que es ir a la esquina (justamente la esquina que está exactamente arriba, subiendo por el borde).
+Solucione eso cambiando la condicion de salida de path1, path2 y path3. Ahora tabien considera la posicion x del bicho.
+Deberia haber quedado solucionado.
 - En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
 Cuando agarré un colTwo recien ahi desaparecio.
 - En el nivel1, una pantalla antes del segundo puente, sobre la derecha, para mi queda una bala oculta que te mata.

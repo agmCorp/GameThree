@@ -32,6 +32,7 @@ public class EnemyFour extends Enemy {
     // Constants (meters = pixels * resizeFactor / PPM)
     private static final float CIRCLE_SHAPE_RADIUS_METERS = 20.0f / PlayScreen.PPM;
     private static final float DEBUG_TARGET_RADIUS_METERS = 10.0f / PlayScreen.PPM;
+    private static final float MARGIN_X = 10.0f / PlayScreen.PPM;
     private static final float LINEAR_VELOCITY = 3.0f;
     private static final float DENSITY = 1000.0f;
     private static final float AMPLITUDE_METERS = 200.0f / PlayScreen.PPM;
@@ -179,23 +180,34 @@ public class EnemyFour extends Enemy {
     }
 
     private void checkPath() {
-        if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
-            if (b2body.getPosition().y >= targetY) { // EnemyFour reaches target
-                targetY = targetY - AMPLITUDE_METERS; // New targetY (down)
+        if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
+            if (b2body.getPosition().x >= targetX) { // EnemyFour reaches targetX
+                targetX = targetX + WAVELENGTH_METERS / 2; // New targetX (right)
+
+                float rightLimit = screen.getGameCam().position.x + screen.getGameViewPort().getWorldWidth() / 2 -
+                        CIRCLE_SHAPE_RADIUS_METERS - MARGIN_X;
+                if (targetX > rightLimit) {
+                    targetX = rightLimit;
+                }
             }
-        } else { // EnemyFour goes down
-            if (b2body.getPosition().y <= targetY) { // EnemyFour reaches target
-                targetY = targetY + AMPLITUDE_METERS; // New targetY (up)
+        } else { // // EnemyFour goes to the left
+            if (b2body.getPosition().x <= targetX) { // EnemyFour reaches targetX
+                targetX = targetX - WAVELENGTH_METERS / 2; // New targetX (left)
+
+                float leftLimit = CIRCLE_SHAPE_RADIUS_METERS + MARGIN_X;
+                if (targetX < leftLimit) {
+                    targetX = leftLimit;
+                }
             }
         }
 
-        if (b2body.getLinearVelocity().x > 0) { // EnemyFour goes to the right
-            if (b2body.getPosition().x >= targetX) { // EnemyFour reaches target
-                targetX = targetX + WAVELENGTH_METERS / 2; // New targetX (right)
+        if (b2body.getLinearVelocity().y > 0) { // EnemyFour goes up
+            if (b2body.getPosition().y >= targetY) { // EnemyFour reaches targetY
+                targetY = targetY - AMPLITUDE_METERS; // New targetY (down)
             }
-        } else { // // EnemyFour goes to the left
-            if (b2body.getPosition().x <= targetX) { // EnemyFour reaches target
-                targetX = targetX - WAVELENGTH_METERS / 2; // New targetX (left)
+        } else { // EnemyFour goes down
+            if (b2body.getPosition().y <= targetY) { // EnemyFour reaches targetY
+                targetY = targetY + AMPLITUDE_METERS; // New targetY (up)
             }
         }
 
