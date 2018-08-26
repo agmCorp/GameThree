@@ -1,12 +1,17 @@
+project.ext {
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 6
+}
+
+// Returns date (String)
 def getDate() {
     def date = new Date()
-    def formattedDate = date.format('yyyyMMdd_HHmmss')
+    def formattedDate = date.format('yyyyMMddHHmmss')
     return formattedDate
 }
 
 buildscript {
-
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -15,8 +20,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-
-
     }
 }
 
@@ -24,7 +27,7 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = "1.0.6-build-" + getDate()
+    version = "build-" + getDate() + "-$project.versionMajor.$project.versionMinor.$project.versionPatch"
     ext {
         appName = "GameThree"
         gdxVersion = '1.9.8'
@@ -48,14 +51,12 @@ allprojects {
 project(":desktop") {
     apply plugin: "java"
 
-
     dependencies {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-
     }
 }
 
@@ -84,7 +85,6 @@ project(":android") {
 
 project(":core") {
     apply plugin: "java"
-
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"

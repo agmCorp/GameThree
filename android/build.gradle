@@ -24,8 +24,8 @@ android {
         applicationId "uy.com.agm.gamethree"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.0.6-build-" + getDate()
+        versionCode project.versionMajor * 100 + project.versionMinor * 10 + project.versionPatch
+        versionName "gameThree-build-" + getDate() + "-$project.versionMajor.$project.versionMinor.$project.versionPatch"
     }
     buildTypes {
         debug {
@@ -43,10 +43,8 @@ android {
     // Rename all output artifacts to include version information
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            def apkName = "gameThree_" + android.defaultConfig.versionName;
-            if (variant.buildType.name.equals("release")) {
-                apkName += "_" + variant.buildType.name;
-            }
+            def apkName = android.defaultConfig.versionName;
+            apkName += "_" + variant.buildType.name;
             apkName += ".apk";
             output.outputFile = file("$project.buildDir/apk/" + apkName)
         }
