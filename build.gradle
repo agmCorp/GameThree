@@ -1,7 +1,8 @@
+// We must increase these values to publish the apk in PlayStore
 project.ext {
     versionMajor = 1
     versionMinor = 0
-    versionPatch = 6
+    versionPatch = 7
 }
 
 // Returns date (String)
