@@ -1,8 +1,5 @@
 PROXIMAS VERSIONES
 ------------------
-estudiar:
-- hacer la pantalla de pausa de veulta
-- hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
 - hacer videos cuando termine los corazones, cambiar las imagenes de la play y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -10,6 +7,7 @@ Poner un adv al volver en el boton de la pantalla game over. Es importante, da p
 - Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
+puedo poner un boton para dar puntos si ves un anuncio.
 - ver el video nuevamente del bobito de los efectos en youtube.
 
 PRIORIDAD 1
@@ -28,9 +26,6 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 
 PRIORIDAD 2
 -----------
-- Seguir viendo las mejoras del video (como slow motion) https://www.youtube.com/watch?v=AJdEqssNZ-U. Si en mi juego
-pongo las explosiones enormes (resizeFactor = 10 por ejemplo) queda un lindo efecto que abarca toda
-la pantalla.
 - una cosa que se podria hacer es ponerle una pequeña barrita de energia a los enemigos que mueren
 por varios disparos.
 
