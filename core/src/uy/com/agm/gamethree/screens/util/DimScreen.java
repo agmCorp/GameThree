@@ -109,43 +109,55 @@ public class DimScreen extends AbstractScreen {
         // Define buttons and images
         ImageButton levels = new ImageButton(new TextureRegionDrawable(assetScene2d.getLevels()),
                 new TextureRegionDrawable(assetScene2d.getLevelsPressed()));
+
         ImageButton reload = new ImageButton(new TextureRegionDrawable(assetScene2d.getReload()),
                 new TextureRegionDrawable(assetScene2d.getReloadPressed()));
+
         ImageButton playSmall = new ImageButton(new TextureRegionDrawable(assetScene2d.getPlaySmall()),
                 new TextureRegionDrawable(assetScene2d.getPlaySmallPressed()));
+
         ImageButton home = new ImageButton(new TextureRegionDrawable(assetScene2d.getHome()),
                 new TextureRegionDrawable(assetScene2d.getHomePressed()));
-
+        // WA: To reduce the size of the button without losing the pressed effect,
+        // we resize its image but not its cell.
         home.getImage().setScale(RESIZE_FACTOR);
-
-
-
-
-
 
         music = new ImageButton(new TextureRegionDrawable(assetScene2d.getMusic()),
                 new TextureRegionDrawable(assetScene2d.getMusicPressed()),
                 new TextureRegionDrawable(assetScene2d.getMusicChecked()));
         music.setChecked(!prefs.isMusic());
+        // WA: To reduce the size of the button without losing the pressed effect,
+        // we resize its image but not its cell.
         music.getImage().setScale(RESIZE_FACTOR);
+
         sound = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
                 new TextureRegionDrawable(assetScene2d.getSoundPressed()),
                 new TextureRegionDrawable(assetScene2d.getSoundChecked()));
         sound.setChecked(!prefs.isSound());
+        // WA: To reduce the size of the button without losing the pressed effect,
+        // we resize its image but not its cell.
         sound.getImage().setScale(RESIZE_FACTOR);
 
         // Add values
         centerTable.add(messageLabel).colspan(COLUMNS);
         centerTable.row().pad(AbstractScreen.PAD / 2);
         centerTable.add(levels).size(levels.getWidth(), levels.getHeight());
-        centerTable.add(reload).size(reload.getWidth(), reload.getHeight());;
-        centerTable.add(playSmall).size(playSmall.getWidth(), playSmall.getHeight());;
+        centerTable.add(reload).size(reload.getWidth(), reload.getHeight());
+        centerTable.add(playSmall).size(playSmall.getWidth(), playSmall.getHeight());
         centerTable.row();
+
+        // Auxiliary table
         Table aux = new Table();
         aux.setDebug(DebugConstants.DEBUG_LINES);
-        aux.add(home).size(home.getWidth(), home.getHeight());;
-        aux.add(music).size(music.getWidth(), music.getHeight());;
-        aux.add(sound).size(sound.getWidth(), sound.getHeight());;
+
+        // WA: Center alignment
+        float width = home.getWidth();
+        aux.defaults().padLeft(width - RESIZE_FACTOR * width);
+
+        // Add values
+        aux.add(home).size(home.getWidth(), home.getHeight());
+        aux.add(music).size(music.getWidth(), music.getHeight());
+        aux.add(sound).size(sound.getWidth(), sound.getHeight());
         centerTable.add(aux).colspan(COLUMNS);
 
         // Events
@@ -212,7 +224,7 @@ public class DimScreen extends AbstractScreen {
 
     private void toggleSound() {
         boolean soundOn = !sound.isChecked();
-        prefs.setVolSound(soundOn ? defaultVolSound : 0);;
+        prefs.setVolSound(soundOn ? defaultVolSound : 0);
         prefs.setSound(soundOn);
     }
 

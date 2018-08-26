@@ -139,7 +139,7 @@ cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede queda
 natural. Intente corregir esto, ver Weapon.onbounce(). Hice lo que pude, parece estar bien.
 - Hay situaciones en donde me aparece redScreen (todo rojo) y encima alguna de las pantallas modales (solo se ve el pulgar). Creo que
 es la pantalla que dice infoScreen.redFlashHelp=WATCH OUT!\nDon't let your enemies\nflee! That hurts you!. No se puede leer, solo
-se ve el pulgar.
+se ve el pulgar. No se si es un bug o es que aparece solo cuando seteo DISABLE_ENDURANCE_COUNT = true;
 
 TENGO
 -----
