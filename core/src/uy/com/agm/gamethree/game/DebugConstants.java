@@ -5,7 +5,7 @@ package uy.com.agm.gamethree.game;
  */
 
 public class DebugConstants {
-    // Master variable: turns debug mode on or offc
+    // Master variable: turns debug mode on or off
     public static final boolean TURN_ON_DEBUG = false;
 
     // Sets the log level to debug
