@@ -91,6 +91,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+        compile fileTree(dir: '../libs', include: ['*.jar'])
     }
 }
 
