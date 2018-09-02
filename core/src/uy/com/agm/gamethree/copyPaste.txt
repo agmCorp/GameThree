@@ -314,3 +314,8 @@ Luego, en el render, luego de game.getBatch().end(); y antes de  "Render the Hud
 Mirar esto https://www.reddit.com/r/libgdx/comments/4zdo03/what_is_the_proper_way_to_fade_inout_of_screens/
 
 -----------------------------------------------------------------------------------
+Para animar las pantallas usando el stage, puedo usar esto (animacion de chico a grande):
+	  getRoot().setScale(0);
+      getRoot().setX(240);
+      getRoot().setY(400);
+      getRoot().addAction(parallel(scaleTo(1, 1, 0.2f, Interpolation.smooth), moveTo(0, 0, 0.2f, Interpolation.smooth)));

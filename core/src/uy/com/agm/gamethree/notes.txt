@@ -69,14 +69,6 @@ support this game:
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
 Agregar dir de mail de contacto.
-- agregar transitions
-SEGUN MI ANALISIS PARA INCLUIR TRANSITIONS:
-Mi clase GameThree es la análoga a DirectedGame.
-Entonces en mi GameThree debo definir las funciones y cosas que tiene DirectedGame.
-Una vez hecho eso, en el screenManager puedo usar la nueva funcion setScreen que recibe una transición.
-Lo intente y no funciono. Es complicado. El poyecto quedo backupeado. El screen manager tiene un if antes del setScreen por pruebas.
-Lo que pasa es que no logro hacer la transicion a playScreen. Las demas pantallas si la hacen. Una vez que se rompe
-la transicion, queda rota.
 - hacer una bala grandota y ruidosa con shake capaz
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
