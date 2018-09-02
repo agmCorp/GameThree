@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -34,6 +35,10 @@ import uy.com.agm.gamethree.tools.DynamicHelpDef;
 import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 /**
  * Created by AGM on 1/18/2018.
  *
@@ -55,6 +60,13 @@ public class InfoScreen extends AbstractScreen {
     private static final float RED_FLASH_TIME = 0.1f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
     private static final float LETS_GO_TIME = 1.0f;
+    private static final float ANIMATION_DURATION = 1.0f;
+
+    // InfoScreen state
+    private enum InfoScreenState {
+        PAUSED, RUNNING
+    }
+    private InfoScreenState infoScreenState;
 
     private PlayScreen screen;
     private int level;
@@ -142,6 +154,9 @@ public class InfoScreen extends AbstractScreen {
         pixmap.fill();
         lightRedFlash = new TextureRegion(new Texture(pixmap));
         pixmap.dispose();
+
+        // InfoScreen running
+        infoScreenState = InfoScreenState.RUNNING;
     }
 
     private void defineCenterTable() {
@@ -234,14 +249,6 @@ public class InfoScreen extends AbstractScreen {
         gotIt.setVisible(false);
         screen.getDimScreen().showButtons();
         screen.setPlayScreenStateRunning();
-    }
-
-    public void showGameControllersHelp() {
-        if (GameSettings.getInstance().isManualShooting()) {
-            showModalImage(Assets.getInstance().getScene2d().getHelpInitialManual());
-        } else {
-            showModalImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic());
-        }
     }
 
     @Override
@@ -423,11 +430,21 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Specialized functions
 
+    public void showGameControllersHelp() {
+        setNewAnimation();
+        if (GameSettings.getInstance().isManualShooting()) {
+            showModalImage(Assets.getInstance().getScene2d().getHelpInitialManual());
+        } else {
+            showModalImage(Assets.getInstance().getScene2d().getHelpInitialAutomatic());
+        }
+    }
+
     public void showHurryUpMessage() {
         showMessage(i18NGameThreeBundle.format("infoScreen.hurryUp"), MessageSize.BIG);
     }
 
     public void showTimeIsUpMessage() {
+        setNewAnimation();
         showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), MessageSize.BIG);
     }
 
@@ -440,6 +457,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showFightMessage() {
+        setNewAnimation();
         showMessage(i18NGameThreeBundle.format("infoScreen.fight"), MessageSize.BIG);
     }
 
@@ -449,12 +467,14 @@ public class InfoScreen extends AbstractScreen {
 
     public void showModalRedFlashHelp() {
         if (!isModalVisible()) {
+            setNewAnimation();
             showLightRedFlash(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
         }
     }
 
     public void showModalLoseLifeWarning() {
         if (!isModalVisible()) {
+            setNewAnimation();
             showLightRedFlash(i18NGameThreeBundle.format("infoScreen.loseLifeWarning"));
         }
     }
@@ -484,6 +504,7 @@ public class InfoScreen extends AbstractScreen {
     public void showDynamicHelp(String className, TextureRegion helpImage) {
         if (dynamicHelp.containsKey(className)){
             DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
+            setNewAnimation();
             if (dynamicHelpDef.isModal()) {
                 showModalImage(helpImage);
             } else {
@@ -491,6 +512,17 @@ public class InfoScreen extends AbstractScreen {
             }
             dynamicHelp.remove(className);
         }
+    }
+
+    private void setNewAnimation() {
+        getRoot().clearActions();
+        getRoot().setY(AbstractScreen.V_HEIGHT);
+        getRoot().setTouchable(Touchable.disabled);
+        getRoot().addAction(sequence(moveBy(0, -AbstractScreen.V_HEIGHT, ANIMATION_DURATION, Interpolation.bounceOut), run(new Runnable() {
+            public void run () {
+                getRoot().setTouchable(Touchable.enabled);
+            }
+        })));
     }
 
     // ----------- InfoScreen logic functions
@@ -534,6 +566,18 @@ public class InfoScreen extends AbstractScreen {
         }
     }
 
+    public void setInfoScreenStatePaused() {
+        this.infoScreenState = InfoScreenState.PAUSED;
+    }
+
+    public boolean isInfoScreenStateRunning() {
+        return infoScreenState == InfoScreenState.RUNNING;
+    }
+
+    public void setInfoScreenStateRunning(){
+        this.infoScreenState = InfoScreenState.RUNNING;
+    }
+
     @Override
     public void dispose() {
         super.dispose();
@@ -542,8 +586,8 @@ public class InfoScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         // Calling to Stage methods
-        if (screen.isPlayScreenStateRunning()) {
-            super.act(delta);  // Don't animate if PlayScreen is on pause
+        if (isInfoScreenStateRunning()) {
+            super.act(delta);  // Don't animate if InfoScreen is on pause
         }
         super.draw();
     }

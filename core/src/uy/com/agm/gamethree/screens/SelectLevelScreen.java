@@ -177,7 +177,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelTable);
 
             // Events
-            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.SLIDE_DOWN, level));
+            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.FADE, level));
         }
 
         if (prefs.isGameComplete()) {

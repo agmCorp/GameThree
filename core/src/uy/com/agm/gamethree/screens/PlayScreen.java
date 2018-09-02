@@ -716,7 +716,7 @@ public class PlayScreen extends AbstractScreen {
         return playScreenState == PlayScreenState.PAUSED;
     }
 
-    public void setPlayScreenStatePaused(boolean pauseAudio){
+    public void setPlayScreenStatePaused(boolean pauseAudio) {
         this.playScreenState = PlayScreenState.PAUSED;
         if (pauseAudio) {
             pauseAudio();
