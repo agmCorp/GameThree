@@ -37,6 +37,7 @@ public class BigBossScreen extends AbstractScreen {
     private static final float FINALE_DURATION_SECONDS = 12.0f;
 
     private float timeBeat;
+    private boolean finish;
     private float hitTime;
     private Animation bigBossHitOneAnimation;
     private Animation bigBossHitTwoAnimation;
@@ -55,6 +56,7 @@ public class BigBossScreen extends AbstractScreen {
         bigBossHitTwoAnimation = Assets.getInstance().getScene2d().getBigBoss().getBigBossHitTwoAnimation();
         bigBossIdleAnimation = Assets.getInstance().getScene2d().getBigBoss().getBigBossIdleAnimation();
         timeBeat = 0;
+        finish = false;
         hitTime = 0;
         threat = false;
         hitTwoAnimation = false;
@@ -136,8 +138,9 @@ public class BigBossScreen extends AbstractScreen {
         } else if (timeBeat >= IDLE_ANIMATION_TIME_SECONDS && !idleAnimation) {
             idleAnimation = true;
             bigBossActor.setAnimation(bigBossIdleAnimation);
-        } else if (timeBeat >= FINALE_DURATION_SECONDS) {
+        } else if (timeBeat >= FINALE_DURATION_SECONDS && !finish) {
             // Return to Menu screen
+            finish = true;
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         }
 

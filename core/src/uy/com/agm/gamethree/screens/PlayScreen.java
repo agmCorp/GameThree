@@ -99,6 +99,7 @@ public class PlayScreen extends AbstractScreen {
     private boolean showGameControllersHelp;
     private boolean showRedFlashHelp;
     private boolean allowAds;
+    private boolean newScreen;
 
     // TiledEditor map variable
     private TiledMap map;
@@ -127,7 +128,7 @@ public class PlayScreen extends AbstractScreen {
         this.level = level;
         levelCompletedTime = 0;
 
-        this.game = (GameThree) ScreenManager.getInstance().getGame();
+        this.game = ScreenManager.getInstance().getGame();
 
         // Create a cam used to move up through our world
         gameCam = new OrthographicCamera();
@@ -201,6 +202,9 @@ public class PlayScreen extends AbstractScreen {
 
         // Used to display ads
         allowAds = true;
+
+        // True if we change the screen (see ScreenManager.showScreen(...))
+        newScreen = false;
 
         // Start playing level music from the beginning (if we arrive from DimScreen/reload)
         AudioManager.getInstance().stopMusic();
@@ -439,8 +443,8 @@ public class PlayScreen extends AbstractScreen {
         }
 
         // Set our batch to now draw what the gameCam camera sees.
-        game.getBatch().setProjectionMatrix(gameCam.combined);
-        game.getBatch().begin();
+        game.getGameBatch().setProjectionMatrix(gameCam.combined);
+        game.getGameBatch().begin();
 
         // This order is important
         // This determine if a sprite has to be drawn in front or behind another sprite
@@ -453,7 +457,7 @@ public class PlayScreen extends AbstractScreen {
         renderBoss();
         renderHero();
 
-        game.getBatch().end();
+        game.getGameBatch().end();
 
         // Render the Hud (bottom layer)
         hud.render(delta);
@@ -467,9 +471,9 @@ public class PlayScreen extends AbstractScreen {
         // Debug
         if (DebugConstants.DEBUG_LINES) {
             // Set our batch to now draw what the gameCam camera sees.
-            game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
-            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
-            game.getShapeRenderer().setColor(1, 1, 0, 1);
+            game.getGameShapeRenderer().setProjectionMatrix(gameCam.combined);
+            game.getGameShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
+            game.getGameShapeRenderer().setColor(1, 1, 0, 1);
 
             renderDebugPowerBoxes();
             renderDebugItems();
@@ -478,7 +482,7 @@ public class PlayScreen extends AbstractScreen {
             renderDebugEnemies();
             renderDebugHero();
 
-            game.getShapeRenderer().end();
+            game.getGameShapeRenderer().end();
         }
     }
 
@@ -501,19 +505,19 @@ public class PlayScreen extends AbstractScreen {
     }
 
     private void renderHero() {
-       player.draw(game.getBatch());
+       player.draw(game.getGameBatch());
     }
 
     private void renderKinematicBridges() {
         for (Bridge bridge : creator.getBridges()) {
-            bridge.draw(game.getBatch());
+            bridge.draw(game.getGameBatch());
         }
     }
 
     private void renderSplats() {
         for (Enemy enemy : creator.getEnemies()) {
             if (enemy.isSplat()) {
-                enemy.draw(game.getBatch());
+                enemy.draw(game.getGameBatch());
             }
         }
     }
@@ -521,63 +525,63 @@ public class PlayScreen extends AbstractScreen {
     private void renderEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
             if (!enemy.isSplat()) {
-                enemy.draw(game.getBatch());
+                enemy.draw(game.getGameBatch());
             }
         }
     }
 
     private void renderPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.draw(game.getBatch());
+            powerBox.draw(game.getGameBatch());
         }
     }
 
     private void renderItems() {
         for (Item item : creator.getItems())  {
-            item.draw(game.getBatch());
+            item.draw(game.getGameBatch());
         }
     }
 
     private void renderWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.draw(game.getBatch());
+            weapon.draw(game.getGameBatch());
         }
     }
 
     private void renderBoss() {
-        boss.draw(game.getBatch());
+        boss.draw(game.getGameBatch());
     }
 
     private void renderDebugHero() {
-        player.renderDebug(game.getShapeRenderer());
+        player.renderDebug(game.getGameShapeRenderer());
     }
 
     private void renderDebugEnemies() {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.renderDebug(game.getShapeRenderer());
+            enemy.renderDebug(game.getGameShapeRenderer());
         }
     }
 
     private void renderDebugPowerBoxes() {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.renderDebug(game.getShapeRenderer());
+            powerBox.renderDebug(game.getGameShapeRenderer());
         }
     }
 
     private void renderDebugItems() {
         for (Item item : creator.getItems()) {
-            item.renderDebug(game.getShapeRenderer());
+            item.renderDebug(game.getGameShapeRenderer());
         }
     }
 
     private void renderDebugWeapons() {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.renderDebug(game.getShapeRenderer());
+            weapon.renderDebug(game.getGameShapeRenderer());
         }
     }
 
     private void renderDebugBoss() {
-        boss.renderDebug(game.getShapeRenderer());
+        boss.renderDebug(game.getGameShapeRenderer());
     }
 
     private void stopEdges() {
@@ -678,13 +682,15 @@ public class PlayScreen extends AbstractScreen {
 
         // New Screens are evaluated at the end, because they call playScreen.dispose.
         // Dispose method destroys the world among other objects, so b2bodies (like player.getB2body()) are no longer available
-        finish = !finish && player.isGameOver();
+        finish = !finish && player.isGameOver() && !newScreen;
         if (finish) {
+            newScreen = true;
             ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
         }
 
-        finish = !finish && isLevelCompleted(delta);
+        finish = !finish && isLevelCompleted(delta) && !newScreen;
         if (finish) {
+            newScreen = true;
             ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, hud.getScore(), player.getPenalties());
         }
     }
@@ -761,6 +767,11 @@ public class PlayScreen extends AbstractScreen {
             player.decreaseEndurance();
             player.addPenalty();
         }
+    }
+
+    @Override
+    public InputProcessor getInputProcessor() {
+        return getInputProcessor(new GameController(this));
     }
 
     @Override

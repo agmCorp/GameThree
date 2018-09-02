@@ -30,6 +30,7 @@ public class SplashScreen extends AbstractScreen {
 
     private AssetManager assetManager;
     private float splashTime;
+    private boolean finishLoading;
 
     private Image logo;
     private Image loadingFrame;
@@ -46,6 +47,7 @@ public class SplashScreen extends AbstractScreen {
         super();
         this.assetManager = new AssetManager();
         splashTime = 0;
+        finishLoading = false;
     }
 
     @Override
@@ -127,8 +129,9 @@ public class SplashScreen extends AbstractScreen {
         super.render(delta);
 
         splashTime += delta;
-        if (assetManager.update() && splashTime >= MIN_SPLASH_TIME) { // Load some, will return true if done loading
+        if (assetManager.update() && splashTime >= MIN_SPLASH_TIME && !finishLoading) { // Load some, will return true if done loading
             Assets.getInstance().finishLoading();
+            finishLoading = true;
             ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
         } else {
             // Interpolate the percentage to make it more smooth

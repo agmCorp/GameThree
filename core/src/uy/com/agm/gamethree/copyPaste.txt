@@ -280,3 +280,37 @@ penalties:
 * al morir es 1
 * al ser tocado es otra
 * se te va un bicho es 1
+
+-----------------------------------------------------------------------------------
+
+Ahora logré hacer andar las transitions, pero una manera artesanal de lograr un efecto fade en PlayScreen sería:
+
+definir como variables de clase
+private float stateFadingTime = 0;
+private float alpha = 1;
+
+definir como constantes
+private static final float FADING_TIME_SECONDS = 1.5f;
+
+Luego, en el render, luego de game.getBatch().end(); y antes de  "Render the Hud (bottom layer)":
+
+		  if (alpha != 0) {
+            stateFadingTime += delta;
+            alpha = 1 - stateFadingTime / FADING_TIME_SECONDS;
+            if (alpha < 0) {
+                alpha = 0;
+            }
+
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            //game.getShapeRenderer().setProjectionMatrix(gameCam.combined);
+            game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
+            game.getShapeRenderer().setColor(0, 0, 0, alpha);
+            game.getShapeRenderer().rect(0, 0, AbstractScreen.V_WIDTH, AbstractScreen.V_HEIGHT);
+            game.getShapeRenderer().end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
+
+Mirar esto https://www.reddit.com/r/libgdx/comments/4zdo03/what_is_the_proper_way_to_fade_inout_of_screens/
+
+-----------------------------------------------------------------------------------

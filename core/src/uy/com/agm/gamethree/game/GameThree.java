@@ -3,7 +3,6 @@ package uy.com.agm.gamethree.game;
 import com.admob.DummyAdsController;
 import com.admob.IAdsController;
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,11 +12,11 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 
-public class GameThree extends Game {
+public class GameThree extends DirectedGame {
     private static final String TAG = GameThree.class.getName();
 
-    private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
+    private SpriteBatch gameBatch;
+    private ShapeRenderer gameShapeRenderer;
     private IAdsController adsController;
 
     public GameThree(IAdsController adsController){
@@ -41,10 +40,10 @@ public class GameThree extends Game {
         TypingConfig.INTERVAL_MULTIPLIERS_BY_CHAR.put('\n', 0);
 
         // Constructs a new SpriteBatch
-        batch = new SpriteBatch();
+        gameBatch = new SpriteBatch();
 
         // Constructs a new ShapeRenderer for debugging
-        shapeRenderer = new ShapeRenderer();
+        gameShapeRenderer = new ShapeRenderer();
 
         // Set a splash screen
         ScreenManager.getInstance().initialize(this);
@@ -60,16 +59,16 @@ public class GameThree extends Game {
     public void dispose() {
         super.dispose();
         Assets.getInstance().dispose();
-        batch.dispose();
-        shapeRenderer.dispose();
+        gameBatch.dispose();
+        gameShapeRenderer.dispose();
     }
 
-    public SpriteBatch getBatch() {
-        return batch;
+    public SpriteBatch getGameBatch() {
+        return gameBatch;
     }
 
-    public ShapeRenderer getShapeRenderer() {
-        return shapeRenderer;
+    public ShapeRenderer getGameShapeRenderer() {
+        return gameShapeRenderer;
     }
 
     public IAdsController getAdsController() {

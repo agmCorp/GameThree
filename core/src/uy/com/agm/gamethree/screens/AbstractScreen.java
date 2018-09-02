@@ -2,6 +2,7 @@ package uy.com.agm.gamethree.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -73,6 +74,10 @@ public abstract class AbstractScreen extends Stage implements Screen {
         // Audio FX
         AudioManager.getInstance().stopSound();
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+    }
+
+    public InputProcessor getInputProcessor() {
+        return this;
     }
 
     @Override
