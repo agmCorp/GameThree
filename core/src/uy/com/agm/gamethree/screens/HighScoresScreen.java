@@ -17,6 +17,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.HighScore;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -121,7 +122,7 @@ public class HighScoresScreen extends AbstractScreen {
         table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);

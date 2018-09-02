@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.screens.transitions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -10,8 +8,8 @@ import com.badlogic.gdx.math.Interpolation;
  * Created by AGM on 10/02/2018.
  */
 
-public class ScreenTransitionSlide implements ScreenTransition {
-    private static final String TAG = ScreenTransitionSlide.class.getName();
+public class SlideTransition implements ScreenTransition {
+    private static final String TAG = SlideTransition.class.getName();
 
     // Constants
     public static final int LEFT = 1;
@@ -19,13 +17,13 @@ public class ScreenTransitionSlide implements ScreenTransition {
     public static final int UP = 3;
     public static final int DOWN = 4;
 
-    private static final ScreenTransitionSlide instance = new ScreenTransitionSlide();
+    private static final SlideTransition instance = new SlideTransition();
     private float duration;
     private int direction;
     private boolean slideOut;
     private Interpolation easing;
 
-    public static ScreenTransitionSlide init(float duration, int direction, boolean slideOut, Interpolation easing) {
+    public static SlideTransition init(float duration, int direction, boolean slideOut, Interpolation easing) {
         instance.duration = duration;
         instance.direction = direction;
         instance.slideOut = slideOut;
@@ -81,9 +79,6 @@ public class ScreenTransitionSlide implements ScreenTransition {
         Texture texTop = slideOut ? currScreen : nextScreen;
 
         // Finally, draw both screens
-        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(texBottom, 0, 0, 0, 0, w, h, 1, 1, 0, 0, 0, currScreen.getWidth(), currScreen.getHeight(), false, true);
         batch.draw(texTop, x, y, 0, 0, w, h, 1, 1, 0, 0, 0, nextScreen.getWidth(), nextScreen.getHeight(), false, true);

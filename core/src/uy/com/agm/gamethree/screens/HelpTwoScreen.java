@@ -16,6 +16,7 @@ import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
@@ -228,9 +229,9 @@ public class HelpTwoScreen extends AbstractScreen {
         table.add(backMenuLabel).height(AbstractScreen.PAD * 2).colspan(COLUMNS);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE));
-        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_THREE));
-        backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_DOWN));
+        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_THREE, ScreenTransitionEnum.SLIDE_DOWN));
+        backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);
@@ -246,6 +247,6 @@ public class HelpTwoScreen extends AbstractScreen {
     @Override
     protected void goBack() {
         playClick();
-        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_ONE);
+        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_DOWN);
     }
 }

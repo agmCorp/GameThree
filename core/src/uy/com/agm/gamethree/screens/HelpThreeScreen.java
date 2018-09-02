@@ -15,6 +15,7 @@ import uy.com.agm.gamethree.assets.sprites.AssetColOne;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.widget.AnimatedImage;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
@@ -240,8 +241,8 @@ public class HelpThreeScreen extends AbstractScreen {
         table.add(backMenuLabel).height(AbstractScreen.PAD * 2).colspan(COLUMNS);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO));
-        backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO, ScreenTransitionEnum.SLIDE_DOWN));
+        backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);
@@ -257,6 +258,6 @@ public class HelpThreeScreen extends AbstractScreen {
     @Override
     protected void goBack() {
         playClick();
-        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_TWO);
+        ScreenManager.getInstance().showScreen(ScreenEnum.HELP_TWO, ScreenTransitionEnum.SLIDE_DOWN);
     }
 }

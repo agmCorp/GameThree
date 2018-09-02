@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.tools.AudioManager;
 
 /**
@@ -67,7 +68,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
     protected void goBack() {
         playClick();
-        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN);
     }
 
     protected void playClick() {

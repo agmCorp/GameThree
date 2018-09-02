@@ -168,8 +168,8 @@ public class DimScreen extends AbstractScreen {
         centerTable.add(aux).colspan(COLUMNS);
 
         // Events
-        levels.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));
-        reload.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, screen.getLevel()));
+        levels.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_DOWN));
+        reload.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.SLIDE_DOWN, screen.getLevel()));
         playSmall.addListener(
                 new InputListener(){
                     @Override
@@ -184,7 +184,7 @@ public class DimScreen extends AbstractScreen {
                         return true;
                     }
                 });
-        home.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        home.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
         music.addListener(
                 new InputListener(){
                     @Override

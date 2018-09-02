@@ -14,6 +14,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -84,11 +85,11 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(credits).width(BUTTON_WIDTH);
 
         // Events
-        play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL));
-        settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS));
-        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES));
-        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE));
-        credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS));
+        play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_DOWN));
+        settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS, ScreenTransitionEnum.SLIDE_DOWN));
+        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES, ScreenTransitionEnum.SLIDE_DOWN));
+        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_DOWN));
+        credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);

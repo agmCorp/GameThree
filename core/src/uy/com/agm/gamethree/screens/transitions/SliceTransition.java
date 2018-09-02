@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.screens.transitions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -11,21 +9,21 @@ import com.badlogic.gdx.utils.Array;
  * Created by AGM on 10/02/2018.
  */
 
-public class ScreenTransitionSlice implements ScreenTransition {
-    private static final String TAG = ScreenTransitionSlice.class.getName();
+public class SliceTransition implements ScreenTransition {
+    private static final String TAG = SliceTransition.class.getName();
 
     // Constants
     public static final int UP = 1;
     public static final int DOWN = 2;
     public static final int UP_DOWN = 3;
 
-    private static final ScreenTransitionSlice instance = new ScreenTransitionSlice();
+    private static final SliceTransition instance = new SliceTransition();
     private float duration;
     private int direction;
     private Interpolation easing;
     private Array<Integer> sliceIndex = new Array<Integer>();
 
-    public static ScreenTransitionSlice init(float duration, int direction, int numSlices, Interpolation easing) {
+    public static SliceTransition init(float duration, int direction, int numSlices, Interpolation easing) {
         instance.duration = duration;
         instance.direction = direction;
         instance.easing = easing;
@@ -51,8 +49,6 @@ public class ScreenTransitionSlice implements ScreenTransition {
         float y = 0;
         int sliceWidth = (int) (w / sliceIndex.size);
 
-        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(currScreen, 0, 0, 0, 0, w, h, 1, 1, 0, 0, 0, currScreen.getWidth(), currScreen.getHeight(), false, true);
         if (easing != null) {

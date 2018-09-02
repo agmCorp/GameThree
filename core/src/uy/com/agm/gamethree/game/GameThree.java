@@ -11,6 +11,7 @@ import com.rafaskoberg.gdx.typinglabel.TypingConfig;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 
 public class GameThree extends DirectedGame {
     private static final String TAG = GameThree.class.getName();
@@ -47,7 +48,7 @@ public class GameThree extends DirectedGame {
 
         // Set a splash screen
         ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH);
+        ScreenManager.getInstance().showScreen(ScreenEnum.SPLASH, ScreenTransitionEnum.ROTATING);
     }
 
     @Override

@@ -16,7 +16,7 @@ import uy.com.agm.gamethree.tools.AudioManager;
 public class UIFactory {
     private static final String TAG = UIFactory.class.getName();
 
-    public static InputListener screenNavigationListener(final ScreenEnum dstScreen, final Object... params) {
+    public static InputListener screenNavigationListener(final ScreenEnum screenEnum, final ScreenTransitionEnum screenTransitionEnum, final Object... params) {
         return
                 new InputListener(){
                     @Override
@@ -31,7 +31,7 @@ public class UIFactory {
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
 
                         // Display screen
-                        ScreenManager.getInstance().showScreen(dstScreen, params);
+                        ScreenManager.getInstance().showScreen(screenEnum, screenTransitionEnum, params);
                     }
 
                     @Override

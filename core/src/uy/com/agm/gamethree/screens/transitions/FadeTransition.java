@@ -1,7 +1,5 @@
 package uy.com.agm.gamethree.screens.transitions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -10,13 +8,13 @@ import com.badlogic.gdx.math.Interpolation;
  * Created by AGM on 10/02/2018.
  */
 
-public class ScreenTransitionFade implements ScreenTransition {
-    private static final String TAG = ScreenTransitionFade.class.getName();
+public class FadeTransition implements ScreenTransition {
+    private static final String TAG = FadeTransition.class.getName();
 
-    private static final ScreenTransitionFade instance = new ScreenTransitionFade();
+    private static final FadeTransition instance = new FadeTransition();
     private float duration;
 
-    public static ScreenTransitionFade init(float duration) {
+    public static FadeTransition init(float duration) {
         instance.duration = duration;
         return instance;
     }
@@ -32,8 +30,6 @@ public class ScreenTransitionFade implements ScreenTransition {
         float h = currScreen.getHeight();
         alpha = Interpolation.fade.apply(alpha);
 
-        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.setColor(1, 1, 1, 1);
         batch.draw(currScreen, 0, 0, 0, 0, w, h, 1, 1, 0, 0, 0, currScreen.getWidth(), currScreen.getHeight(), false, true);

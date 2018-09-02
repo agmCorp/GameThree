@@ -11,6 +11,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
 
@@ -100,7 +101,7 @@ public class CreditsScreen extends AbstractScreen {
         table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);

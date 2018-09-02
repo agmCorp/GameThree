@@ -1,11 +1,6 @@
 package uy.com.agm.gamethree.screens.util;
 
-import com.badlogic.gdx.math.Interpolation;
-
 import uy.com.agm.gamethree.game.GameThree;
-import uy.com.agm.gamethree.screens.AbstractScreen;
-import uy.com.agm.gamethree.screens.transitions.RotatingTransition;
-import uy.com.agm.gamethree.screens.transitions.ScreenTransition;
 
 /**
  * Created by AGM on 1/18/2018.
@@ -43,12 +38,12 @@ public class ScreenManager {
     }
 
     // Show in the game the screen which enum type is received
-    public void showScreen(ScreenEnum screenEnum, Object... params) {
-        // TODO
-        ScreenTransition transition = RotatingTransition.init(2, Interpolation.pow2Out, 720, RotatingTransition.TransitionScaling.IN);
-
+    public void showScreen(ScreenEnum screenEnum, ScreenTransitionEnum screenTransitionEnum, Object... params) {
         // Show new screen
-        AbstractScreen newScreen = screenEnum.getScreen(params);
-        game.setScreen(newScreen, transition);
+        if (screenTransitionEnum != null) {
+            game.setScreen(screenEnum.getScreen(params), screenTransitionEnum.getScreenTransition());
+        } else {
+            game.setScreen(screenEnum.getScreen(params));
+        }
     }
 }

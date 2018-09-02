@@ -22,6 +22,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.LevelFactory;
@@ -176,7 +177,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(levelTable);
 
             // Events
-            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, level));
+            levelTable.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.SLIDE_DOWN, level));
         }
 
         if (prefs.isGameComplete()) {
@@ -185,7 +186,7 @@ public class SelectLevelScreen extends AbstractScreen {
             table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
 
             // Events
-            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE));
+            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE, ScreenTransitionEnum.SLICE_UP_DOWN_80));
         }
 
         return table;
@@ -215,7 +216,7 @@ public class SelectLevelScreen extends AbstractScreen {
         table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage
         addActor(table);

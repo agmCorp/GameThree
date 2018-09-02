@@ -13,6 +13,7 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedActor;
 import uy.com.agm.gamethree.widget.TypingLabelWorkaround;
@@ -141,7 +142,7 @@ public class BigBossScreen extends AbstractScreen {
         } else if (timeBeat >= FINALE_DURATION_SECONDS && !finish) {
             // Return to Menu screen
             finish = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.COLOR_FADE_BLACK);
         }
 
         if (hit && timeBeat <= IDLE_ANIMATION_TIME_SECONDS) {

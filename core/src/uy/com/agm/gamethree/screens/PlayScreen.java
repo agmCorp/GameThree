@@ -33,6 +33,7 @@ import uy.com.agm.gamethree.screens.util.DimScreen;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
+import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.tools.B2WorldCreator;
 import uy.com.agm.gamethree.tools.LevelFactory;
@@ -685,13 +686,13 @@ public class PlayScreen extends AbstractScreen {
         finish = !finish && player.isGameOver() && !newScreen;
         if (finish) {
             newScreen = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER);
+            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER, ScreenTransitionEnum.COLOR_FADE_BLACK);
         }
 
         finish = !finish && isLevelCompleted(delta) && !newScreen;
         if (finish) {
             newScreen = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, level, hud.getScore(), player.getPenalties());
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, ScreenTransitionEnum.SLICE_UP_DOWN_10, level, hud.getScore(), player.getPenalties());
         }
     }
 
