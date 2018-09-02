@@ -6,7 +6,7 @@ package uy.com.agm.gamethree.game;
 
 public class DebugConstants {
     // Master variable: turns debug mode on or off
-    public static final boolean TURN_ON_DEBUG = false;
+    public static final boolean TURN_ON_DEBUG = true;
 
     // Sets the log level to debug
     public static final boolean DEBUG_MODE = true && TURN_ON_DEBUG;
@@ -18,7 +18,7 @@ public class DebugConstants {
     public static final boolean HIDE_BACKGROUND = false && TURN_ON_DEBUG;
 
     // Shows/hides FPS counter
-    public static final boolean SHOW_FPS = false && TURN_ON_DEBUG;
+    public static final boolean SHOW_FPS = true && TURN_ON_DEBUG;
 
     // Prints box2d bodies count
     public static final boolean DEBUG_BODY_COUNT = false && TURN_ON_DEBUG;
