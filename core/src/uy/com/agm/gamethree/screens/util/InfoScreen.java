@@ -403,7 +403,7 @@ public class InfoScreen extends AbstractScreen {
     // ----------- General functions
 
     public void hideInfo() {
-        getRoot().clearActions(); // todo
+        clearTransition();
         messageLabel.setVisible(false);
         image.setVisible(false);
         animatedImage.setVisible(false);
@@ -528,6 +528,7 @@ public class InfoScreen extends AbstractScreen {
     private void clearTransition() {
         getRoot().clearActions();
     }
+
     private void setNewTransition() {
         clearTransition();
         getRoot().setY(AbstractScreen.V_HEIGHT);
