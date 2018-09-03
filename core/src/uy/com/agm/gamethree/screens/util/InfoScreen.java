@@ -442,7 +442,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showGameControllersHelp() {
-        setNewAnimation();
+        setNewTransition();
         if (GameSettings.getInstance().isManualShooting()) {
             showModalImage(Assets.getInstance().getScene2d().getHelpInitialManual());
         } else {
@@ -455,7 +455,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showTimeIsUpMessage() {
-        setNewAnimation();
+        setNewTransition();
         showMessage(i18NGameThreeBundle.format("infoScreen.timeIsUp"), MessageSize.BIG);
     }
 
@@ -468,7 +468,7 @@ public class InfoScreen extends AbstractScreen {
     }
 
     public void showFightMessage() {
-        setNewAnimation();
+        setNewTransition();
         showMessage(i18NGameThreeBundle.format("infoScreen.fight"), MessageSize.BIG);
     }
 
@@ -478,14 +478,14 @@ public class InfoScreen extends AbstractScreen {
 
     public void showModalRedFlashHelp() {
         if (!isModalVisible()) {
-            setNewAnimation();
+            setNewTransition();
             showLightRedFlash(i18NGameThreeBundle.format("infoScreen.redFlashHelp"));
         }
     }
 
     public void showModalLoseLifeWarning() {
         if (!isModalVisible()) {
-            setNewAnimation();
+            setNewTransition();
             showLightRedFlash(i18NGameThreeBundle.format("infoScreen.loseLifeWarning"));
         }
     }
@@ -515,7 +515,7 @@ public class InfoScreen extends AbstractScreen {
     public void showDynamicHelp(String className, TextureRegion helpImage) {
         if (dynamicHelp.containsKey(className)){
             DynamicHelpDef dynamicHelpDef = dynamicHelp.get(className);
-            setNewAnimation();
+            setNewTransition();
             if (dynamicHelpDef.isModal()) {
                 showModalImage(helpImage);
             } else {
@@ -525,8 +525,11 @@ public class InfoScreen extends AbstractScreen {
         }
     }
 
-    private void setNewAnimation() {
+    private void clearTransition() {
         getRoot().clearActions();
+    }
+    private void setNewTransition() {
+        clearTransition();
         getRoot().setY(AbstractScreen.V_HEIGHT);
         getRoot().setTouchable(Touchable.disabled);
         getRoot().addAction(sequence(moveBy(0, -AbstractScreen.V_HEIGHT, ANIMATION_DURATION, Interpolation.bounceOut), run(new Runnable() {
