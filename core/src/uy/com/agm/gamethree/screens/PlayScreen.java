@@ -41,6 +41,8 @@ import uy.com.agm.gamethree.tools.LevelFactory;
 import uy.com.agm.gamethree.tools.Shaker;
 import uy.com.agm.gamethree.tools.WorldContactListener;
 
+import static com.badlogic.gdx.Gdx.input;
+
 
 /**
  * Created by AGM on 12/2/2017.
@@ -215,7 +217,7 @@ public class PlayScreen extends AbstractScreen {
         AudioManager.getInstance().playMusic(LevelFactory.getLevelMusic(level), true);
 
         // User input handler
-        Gdx.input.setInputProcessor(getInputProcessor(new GameController(this)));
+        input.setInputProcessor(getInputProcessor(new GameController(this)));
 
         // Screen shaker
         shaker = new Shaker();
@@ -250,6 +252,17 @@ public class PlayScreen extends AbstractScreen {
     // Key control
     private void handleInput(float dt) {
         // We use GameController instead of input.isKeyPressed.
+    }
+
+    private void gameLogic(float delta) {
+        // Update logic (take input, creation of new game actors, do physics)
+        if (playScreenState == PlayScreenState.RUNNING) {
+            updateGameLogic(delta);
+        } else {
+            if (playScreenState == PlayScreenState.BEAK) {
+                updateGameLogicBreak(delta);
+            }
+        }
     }
 
     private void updateGameLogic(float dt) {
@@ -779,16 +792,10 @@ public class PlayScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // Crucial: update logic (take input, creation of new game actors, do physics) -> render -> game results
+        // Separate our update logic from render: game logic -> render -> game results
 
-        // Separate our update logic from render
-        if (playScreenState == PlayScreenState.RUNNING) {
-            updateGameLogic(delta);
-        } else {
-            if (playScreenState == PlayScreenState.BEAK) {
-                updateGameLogicBreak(delta);
-            }
-        }
+        // Update logic
+        gameLogic(delta);
 
         // Render logic
         renderGame(delta);
