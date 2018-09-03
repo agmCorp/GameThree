@@ -13,8 +13,8 @@ public class AssetLetsGo {
     private static final String TAG = AssetLetsGo.class.getName();
 
     // Constants (pixels * resizeFactor)
-    public static final float WIDTH_PIXELS = 310.0f * 1.0f;
-    public static final float HEIGHT_PIXELS = 198.0f * 1.0f;
+    public static final float WIDTH_PIXELS = 310.0f * 1.5f;
+    public static final float HEIGHT_PIXELS = 198.0f * 1.5f;
 
     private TextureRegion stageLetsGoStand;
     private Animation stageLetsGoAnimation;
@@ -26,7 +26,7 @@ public class AssetLetsGo {
 
         // Animation
         regions = atlas.findRegions("letsGo");
-        stageLetsGoAnimation = new Animation(1.0f / 50.0f, regions);
+        stageLetsGoAnimation = new Animation(1.3f / 50.0f, regions);
         regions.clear();
     }
 

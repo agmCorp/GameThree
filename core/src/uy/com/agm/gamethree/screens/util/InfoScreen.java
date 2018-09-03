@@ -59,7 +59,7 @@ public class InfoScreen extends AbstractScreen {
     private static final float BUTTONS_PAD = 65.0f;
     private static final float RED_FLASH_TIME = 0.1f;
     private static final float LIGHT_RED_FLASH_ALPHA = 0.2f;
-    private static final float LETS_GO_TIME = 1.0f;
+    private static final float LETS_GO_TIME = 1.3f;
     private static final float ANIMATION_DURATION = 1.0f;
 
     // InfoScreen state
