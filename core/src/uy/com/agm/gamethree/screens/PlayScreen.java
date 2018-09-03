@@ -56,6 +56,9 @@ public class PlayScreen extends AbstractScreen {
     // Time to wait till level completed screen turns up
     private static final float LEVEL_COMPLETED_DELAY_SECONDS = 6.0f;
 
+    // Time to wait till game starts
+    private static final float INITIAL_DELAY_SECONDS = 1.5f;
+
     // World physics simulation parameters
     private static final float MAX_FRAME_TIME = 0.25f;
     private static final float WORLD_TIME_STEP = 1/300.0f;
@@ -100,6 +103,8 @@ public class PlayScreen extends AbstractScreen {
     private InfoScreen infoScreen;
     private DimScreen dimScreen;
     private boolean levelStarts;
+    private float initialPauseTime;
+    private boolean gameStarts;
     private boolean showGameControllersHelp;
     private boolean showRedFlashHelp;
     private boolean allowAds;
@@ -197,6 +202,10 @@ public class PlayScreen extends AbstractScreen {
 
         // Indicates that the level is just beginning
         levelStarts = true;
+
+        // Initial game pause
+        initialPauseTime = 0;
+        gameStarts = false;
 
         // Used to display a help about controllers
         showGameControllersHelp = true;
@@ -656,14 +665,14 @@ public class PlayScreen extends AbstractScreen {
          * A boolean value is used to avoid nested if/else sentences.
          */
 
-        finish = !finish && levelStarts;
+        finish = !finish && gameStarts;
         if (finish) {
             if (level == 1 && showGameControllersHelp) {
                 infoScreen.showGameControllersHelp();
                 showGameControllersHelp = false;
             } else {
                 infoScreen.showLetsGo();
-                levelStarts = false;
+                gameStarts = false;
             }
         }
 
@@ -739,8 +748,9 @@ public class PlayScreen extends AbstractScreen {
     }
 
     public void pauseAudio() {
-        AudioManager.getInstance().pauseMusic();
-        AudioManager.getInstance().pauseSound();
+        AudioManager audioManager = AudioManager.getInstance();
+        audioManager.pauseMusic();
+        audioManager.pauseSound();
     }
 
     public void resumeAudio() {
@@ -799,6 +809,17 @@ public class PlayScreen extends AbstractScreen {
 
         // Render logic
         renderGame(delta);
+
+        // Initial pause to avoid starting the game rudely
+        if (levelStarts) {
+            infoScreen.justBeginning();
+            initialPauseTime += delta;
+            if (initialPauseTime > INITIAL_DELAY_SECONDS) {
+                infoScreen.startPlaying();
+                levelStarts = false;
+                gameStarts = true;
+            }
+        }
 
         // Analyze game results
         if (playScreenState == PlayScreenState.RUNNING) {

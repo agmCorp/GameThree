@@ -430,6 +430,16 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Specialized functions
 
+    public void justBeginning() {
+        screen.getDimScreen().hideButtons();
+        screen.setPlayScreenStatePaused(false);
+    }
+
+    public void startPlaying() {
+        screen.getDimScreen().showButtons();
+        screen.setPlayScreenStateRunning();
+    }
+
     public void showGameControllersHelp() {
         setNewAnimation();
         if (GameSettings.getInstance().isManualShooting()) {
