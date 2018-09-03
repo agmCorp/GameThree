@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -238,7 +239,6 @@ public class PlayScreen extends AbstractScreen {
          * First I registered GestureDetector so that fling is executed before touchUp and as they are related,
          * when I return true in the fling event the touchUp is canceled. If I return false both are executed.
          * */
-
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(dimScreen);  // DimScreen also implements InputProcessor and receives events
         multiplexer.addProcessor(infoScreen); // InfoScreen also implements InputProcessor and receives events
@@ -444,21 +444,22 @@ public class PlayScreen extends AbstractScreen {
         }
 
         // Set our batch to now draw what the gameCam camera sees.
-        game.getGameBatch().setProjectionMatrix(gameCam.combined);
-        game.getGameBatch().begin();
+        SpriteBatch batch = game.getGameBatch();
+        batch.setProjectionMatrix(gameCam.combined);
+        batch.begin();
 
         // This order is important
         // This determine if a sprite has to be drawn in front or behind another sprite
-        renderSplats();
-        renderKinematicBridges();
-        renderPowerBoxes();
-        renderItems();
-        renderWeapons();
-        renderEnemies();
-        renderBoss();
-        renderHero();
+        renderSplats(batch);
+        renderKinematicBridges(batch);
+        renderPowerBoxes(batch);
+        renderItems(batch);
+        renderWeapons(batch);
+        renderEnemies(batch);
+        renderBoss(batch);
+        renderHero(batch);
 
-        game.getGameBatch().end();
+        batch.end();
 
         // Render the Hud (bottom layer)
         hud.render(delta);
@@ -472,18 +473,19 @@ public class PlayScreen extends AbstractScreen {
         // Debug
         if (DebugConstants.DEBUG_LINES) {
             // Set our batch to now draw what the gameCam camera sees.
-            game.getGameShapeRenderer().setProjectionMatrix(gameCam.combined);
-            game.getGameShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
-            game.getGameShapeRenderer().setColor(1, 1, 0, 1);
+            ShapeRenderer shapeRenderer = game.getGameShapeRenderer();
+            shapeRenderer.setProjectionMatrix(gameCam.combined);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.setColor(1, 1, 0, 1);
 
-            renderDebugPowerBoxes();
-            renderDebugItems();
-            renderDebugWeapons();
-            renderDebugBoss();
-            renderDebugEnemies();
-            renderDebugHero();
+            renderDebugPowerBoxes(shapeRenderer);
+            renderDebugItems(shapeRenderer);
+            renderDebugWeapons(shapeRenderer);
+            renderDebugBoss(shapeRenderer);
+            renderDebugEnemies(shapeRenderer);
+            renderDebugHero(shapeRenderer);
 
-            game.getGameShapeRenderer().end();
+            shapeRenderer.end();
         }
     }
 
@@ -505,84 +507,84 @@ public class PlayScreen extends AbstractScreen {
         return player.getB2body().getPosition().y >= LEVEL_CHALLENGE_BEGIN;
     }
 
-    private void renderHero() {
-       player.draw(game.getGameBatch());
+    private void renderHero(SpriteBatch batch) {
+       player.draw(batch);
     }
 
-    private void renderKinematicBridges() {
+    private void renderKinematicBridges(SpriteBatch batch) {
         for (Bridge bridge : creator.getBridges()) {
-            bridge.draw(game.getGameBatch());
+            bridge.draw(batch);
         }
     }
 
-    private void renderSplats() {
+    private void renderSplats(SpriteBatch batch) {
         for (Enemy enemy : creator.getEnemies()) {
             if (enemy.isSplat()) {
-                enemy.draw(game.getGameBatch());
+                enemy.draw(batch);
             }
         }
     }
 
-    private void renderEnemies() {
+    private void renderEnemies(SpriteBatch batch) {
         for (Enemy enemy : creator.getEnemies()) {
             if (!enemy.isSplat()) {
-                enemy.draw(game.getGameBatch());
+                enemy.draw(batch);
             }
         }
     }
 
-    private void renderPowerBoxes() {
+    private void renderPowerBoxes(SpriteBatch batch) {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.draw(game.getGameBatch());
+            powerBox.draw(batch);
         }
     }
 
-    private void renderItems() {
+    private void renderItems(SpriteBatch batch) {
         for (Item item : creator.getItems())  {
-            item.draw(game.getGameBatch());
+            item.draw(batch);
         }
     }
 
-    private void renderWeapons() {
+    private void renderWeapons(SpriteBatch batch) {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.draw(game.getGameBatch());
+            weapon.draw(batch);
         }
     }
 
-    private void renderBoss() {
-        boss.draw(game.getGameBatch());
+    private void renderBoss(SpriteBatch batch) {
+        boss.draw(batch);
     }
 
-    private void renderDebugHero() {
-        player.renderDebug(game.getGameShapeRenderer());
+    private void renderDebugHero(ShapeRenderer shapeRenderer) {
+        player.renderDebug(shapeRenderer);
     }
 
-    private void renderDebugEnemies() {
+    private void renderDebugEnemies(ShapeRenderer shapeRenderer) {
         for (Enemy enemy : creator.getEnemies()) {
-            enemy.renderDebug(game.getGameShapeRenderer());
+            enemy.renderDebug(shapeRenderer);
         }
     }
 
-    private void renderDebugPowerBoxes() {
+    private void renderDebugPowerBoxes(ShapeRenderer shapeRenderer) {
         for (PowerBox powerBox : creator.getPowerBoxes()) {
-            powerBox.renderDebug(game.getGameShapeRenderer());
+            powerBox.renderDebug(shapeRenderer);
         }
     }
 
-    private void renderDebugItems() {
+    private void renderDebugItems(ShapeRenderer shapeRenderer) {
         for (Item item : creator.getItems()) {
-            item.renderDebug(game.getGameShapeRenderer());
+            item.renderDebug(shapeRenderer);
         }
     }
 
-    private void renderDebugWeapons() {
+    private void renderDebugWeapons(ShapeRenderer shapeRenderer) {
         for (Weapon weapon : creator.getWeapons()) {
-            weapon.renderDebug(game.getGameShapeRenderer());
+            weapon.renderDebug(shapeRenderer);
         }
     }
 
-    private void renderDebugBoss() {
-        boss.renderDebug(game.getGameShapeRenderer());
+    private void renderDebugBoss(ShapeRenderer shapeRenderer) {
+        boss.renderDebug(shapeRenderer);
     }
 
     private void stopEdges() {
