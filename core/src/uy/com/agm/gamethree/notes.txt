@@ -1,5 +1,13 @@
 PROXIMAS VERSIONES
 ------------------
+- NO SALE EL CARTEL DE TIME IS UP, ME LO TAPA EL STAGE FAILED.
+CREO QUE SIEMPRE ESTUVO ASI DE MAL DESDE LLANTADA.
+creo que deberia usar magnitudes absolutas para mover de arriba hacia abajo con bounce.
+porque el clear actions me lo deja tirado en cualquier lado y no se corrige nunca mas.
+Si pongo magnitudes absolutas se corrige la proxima vez.
+no entiendo -AbstractScreen.V_HEIGHT de moveby
+CREO QUE LA SOLUCION ES SACAR TIMEISUP.
+
 - hacer videos cuando termine los corazones, cambiar las imagenes de la playStore y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.

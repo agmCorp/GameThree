@@ -36,5 +36,5 @@ public class DebugConstants {
     public static final boolean STATIC_GAME_CAM = false && TURN_ON_DEBUG;
 
     // Allows to destroy the FinalEnemies with one hit
-    public static final boolean DESTROY_BOSSES_ONE_HIT = false && TURN_ON_DEBUG;
+    public static final boolean DESTROY_BOSSES_ONE_HIT = true && TURN_ON_DEBUG;
 }

@@ -34,6 +34,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.forever;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static uy.com.agm.gamethree.screens.util.ScreenEnum.GRAND_FINALE;
 
 /**
  * Created by AGM on 12/23/2017.
@@ -48,6 +49,7 @@ public class SelectLevelScreen extends AbstractScreen {
     private static final float STAR_WIDTH = 30.0f;
     private static final float STAR_HEIGHT = 100.0f;
     private static final float STARS_TABLE_WIDTH = 300.0f;
+    private static final float GRAND_FINALE_HEIGHT = 80.0f;
     private static final int NINE_PATCH_PIXELS = 2;
     private static final float HAND_SCALE = 0.4f;
     private static final float HAND_X = 340.0f;
@@ -183,10 +185,10 @@ public class SelectLevelScreen extends AbstractScreen {
         if (prefs.isGameComplete()) {
             table.row();
             TypingLabelWorkaround grandFinaleLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("selectLevel.grandFinale"), labelStyleNormal);
-            table.add(grandFinaleLabel).padTop(AbstractScreen.PAD);
+            table.add(grandFinaleLabel).height(GRAND_FINALE_HEIGHT).padTop(AbstractScreen.PAD);
 
             // Events
-            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE, ScreenTransitionEnum.SLICE_UP_DOWN_80));
+            grandFinaleLabel.addListener(UIFactory.screenNavigationListener(GRAND_FINALE, ScreenTransitionEnum.SLICE_UP_DOWN_80));
         }
 
         return table;

@@ -403,6 +403,7 @@ public class InfoScreen extends AbstractScreen {
     // ----------- General functions
 
     public void hideInfo() {
+        getRoot().clearActions(); // todo
         messageLabel.setVisible(false);
         image.setVisible(false);
         animatedImage.setVisible(false);
