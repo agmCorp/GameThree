@@ -411,9 +411,13 @@ public class Hero extends Sprite {
             // We set the previous filter in every fixture
             setFilterData(filter);
 
-            // If game over, show a stage failed image
+            // If game over, show a time's up message or stage failed image
             if (lives - 1 <= 0 ) {
-                screen.getInfoScreen().showStageFailedAnimation();
+                if (screen.getHud().isTimeIsUp()) {
+                    screen.getInfoScreen().showTimeIsUpMessage();
+                } else {
+                    screen.getInfoScreen().showStageFailedAnimation();
+                }
             }
 
             initDyingUp = false;
@@ -543,7 +547,6 @@ public class Hero extends Sprite {
         if (screen.getHud().isTimeIsUp()) {
             // Audio FX
             AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getTimeIsUp());
-            screen.getInfoScreen().showTimeIsUpMessage();
             forceGameOver();
         }
     }
