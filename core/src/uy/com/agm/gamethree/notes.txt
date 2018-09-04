@@ -1,5 +1,20 @@
 PROXIMAS VERSIONES
 ------------------
+- Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
+El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
+Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
+Otra que puedo hacer, es que la aparecion de la red screen sea siempre que no haya alguna imagen en pantalla, o sea
+  public void showRedFlash() {
+  if (!isImageVisible()) {
+        showImage(redFlash, RED_FLASH_TIME);
+        }
+    }
+- Agregar credits con cuenta bancaria para donación, algo asi:
+support this game:
+(icono corazón) Support the developer by paying above the minimum price
++$1.00 +$2.00 +$5.00 +$10.00
+Pay with paypal, pay with card bitcoin
+Agregar dir de mail de contacto.
 - hacer videos cuando termine los corazones, cambiar las imagenes de la playStore y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
@@ -33,15 +48,6 @@ PRIORIDAD 3
 -----------
 - Hacer un mapa de los niveles (opcional)
 - Habria que optimizar evitando llamar mil veces a los gets Assets.getInstance().getBossOne(), etc.
-- Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
-El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
-Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
-Otra que puedo hacer, es que la aparecion de la red screen sea siempre que no haya alguna imagen en pantalla, o sea
-  public void showRedFlash() {
-  if (!isImageVisible()) {
-        showImage(redFlash, RED_FLASH_TIME);
-        }
-    }
 - Deberia hacer una clase KinematicBackgroundObject analoga a StaticBackgroundObject y heredar de ella en Edge y en Bridge. Intenté una
 vez y me resultó complicado. Tambien deberia hacer una interfaz llamada GameObject que tenga metodos generales a TODOS mis objetos del juego.
 Candidatos whoami, getcurrentstate, getboundingmeters...pero hay que estudiarlo.
@@ -63,12 +69,6 @@ la animacion y llamarlo desde el método renderGame() si estoy en pausa..pero no
 
 SOLO IDEAS
 ----------
-- Agregar credits con cuenta bancaria para donación, algo asi:
-support this game:
-(icono corazón) Support the developer by paying above the minimum price
-+$1.00 +$2.00 +$5.00 +$10.00
-Pay with paypal, pay with card bitcoin
-Agregar dir de mail de contacto.
 - hacer una bala grandota y ruidosa con shake capaz
 - Para nivel 4 hacer un puente que rote con las junturas esas de motor
 - enemigos:
@@ -107,7 +107,7 @@ El vector2 no tiene dispose, las labels tampoco...
 el resto del sonido. No lo supe arreglar...
 - A veces los sonidos no se reproducen
 *- Un enemyFour en el nivel 2 me quedo eternamente yendo a la derecha trabado contra el borde. Programe que el targetX este siempre
-antes de un limitederecho o limiteizquierdo. No deberia volver a pasar.
+antes de un limitederecho o limiteizquierdo. Deberia haber quedado solucionado.
 *- Cuando disparo con fire balls a los bichos verdes (enemyEight), algunos suben pegados al borde en el nivel 2.
 No se arreglo seteando velocity threshold de world. El error se debe a que el movimiento de enemyEight se ve un poquito afectado
 ya sea por el disparo o porque yo lo empujo y se cumple la condición de salida de path2:
@@ -122,7 +122,7 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
-- En una version de la PlayStore (version 5) me pasaba que a veces no aparecia el trofeo en la pantalla levelComplete pero
+- En una version de la PlayStore (version 5 y posteriores) me pasaba que a veces no aparecia el trofeo en la pantalla levelComplete pero
 si aprecian las etiquetas de highscore y demas. Tambien me pasaba que a veces la pantalla de highscores aparecia con espacios
 chicos entre filas de la tabla. Lo peor es que a veces no cargaba los niveles en selectlevels y aprecia todo vacio.
 Para reproducir esto ultimo: Mato todas las apps de android, entro al juego, voy a highscores rapido, vuelvo, voy a help rapido,
@@ -306,7 +306,8 @@ LECCIONES APRENDIDAS
     TEXTURAS
     Tienen un u y v. No recuerdo exactamente. Es otro caso distinto.
 
-    En resumen, siempre trabajar con metros en todo.
+    En resumen, siempre trabajar con metros en todo EL JUEGO.
+    Para la GUI usar una cámara en pixels.
 
 7)
     Para levantar proyecto github:
@@ -372,7 +373,7 @@ LECCIONES APRENDIDAS
     Luego puedo definir su posición con setPosition.
     Puedo hacer todo en un paso y definir tamaño y posición con setBoundaries.
     Si durante el ciclo de vida del personaje (Sprite) quiero cambiar su tramaño, puedo setear nuevamente setBoundaries y lo cambio.
-    Esto lo hice por ejemplo en EnemyOne, EnemyTwo, PowerBox, etc. cuando cambio su animación para que exploten.
+    Esto lo hice por ejemplo en BossOne, BossTwo, PowerBox, etc. cuando cambio su animación para que exploten.
     Lo anterior funciona bien si el sprite no fue rotado, sino es muy complejo setear bien el tamaño nuevamente ya que si está rotado
     el ancho a veces se convierte en altura y viceversa. De igual manera rota el vértice inferior izquierdo y la verdad resulta muy muy complejo
     determinar el nuevo sistema de coordenadas.
@@ -408,6 +409,7 @@ LECCIONES APRENDIDAS
     es mi responsabilidad (es la responsabilidad del assetManager).
 
 17)
+    IDEA GENERAL PARA EL METODO RENDER DE UN JUEGO CUALQUIERA:
     Within my game's render(), I first call my entityUpdate(delta), which updates and moves all of the objects in my game scaled
     by the distance
     traveled in time "delta" (it doesn't render them, just moves their position variables).
