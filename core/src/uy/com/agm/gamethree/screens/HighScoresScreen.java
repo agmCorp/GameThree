@@ -122,7 +122,7 @@ public class HighScoresScreen extends AbstractScreen {
         table.add(back).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_RIGHT_EXP));
 
         // Adds table to stage
         addActor(table);

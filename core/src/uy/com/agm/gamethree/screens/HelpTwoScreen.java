@@ -229,8 +229,8 @@ public class HelpTwoScreen extends AbstractScreen {
         table.add(backMenuLabel).height(AbstractScreen.PAD * 2).colspan(COLUMNS);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_DOWN));
-        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_THREE, ScreenTransitionEnum.SLIDE_DOWN));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_RIGHT_EXP));
+        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_THREE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         backMenuLabel.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
 
         // Adds table to stage

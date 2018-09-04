@@ -85,11 +85,11 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(credits).width(BUTTON_WIDTH);
 
         // Events
-        play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_DOWN));
-        settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS, ScreenTransitionEnum.SLIDE_DOWN));
-        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES, ScreenTransitionEnum.SLIDE_DOWN));
-        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_DOWN));
-        credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS, ScreenTransitionEnum.SLIDE_DOWN));
+        play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS, ScreenTransitionEnum.SLIDE_LEFT_EXP));
 
         // Adds table to stage
         addActor(table);

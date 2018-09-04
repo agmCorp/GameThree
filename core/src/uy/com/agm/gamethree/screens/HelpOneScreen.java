@@ -107,8 +107,8 @@ public class HelpOneScreen extends AbstractScreen {
         table.add(forward).padBottom(AbstractScreen.PAD * 2);
 
         // Events
-        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
-        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO, ScreenTransitionEnum.SLIDE_DOWN));
+        back.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_RIGHT_EXP));
+        forward.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_TWO, ScreenTransitionEnum.SLIDE_LEFT_EXP));
 
         // Adds table to stage
         addActor(table);
