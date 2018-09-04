@@ -132,7 +132,7 @@ public class SplashScreen extends AbstractScreen {
         if (assetManager.update() && splashTime >= MIN_SPLASH_TIME && !finishLoading) { // Load some, will return true if done loading
             Assets.getInstance().finishLoading();
             finishLoading = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_LEFT);
+            ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_LEFT_LINEAR);
         } else {
             // Interpolate the percentage to make it more smooth
             percent = Interpolation.linear.apply(percent, assetManager.getProgress(), 0.1f);

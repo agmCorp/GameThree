@@ -63,9 +63,21 @@ public enum ScreenTransitionEnum {
         }
     },
 
-    SLIDE_LEFT {
+    SLIDE_LEFT_LINEAR {
         public ScreenTransition getScreenTransition() {
             return SlideTransition.init(0.75f, SlideTransition.LEFT, true, Interpolation.linear);
+        }
+    },
+
+    SLIDE_LEFT_EXP {
+        public ScreenTransition getScreenTransition() {
+            return SlideTransition.init(0.5f, SlideTransition.LEFT, true, Interpolation.exp10Out);
+        }
+    },
+
+    SLIDE_RIGHT_EXP {
+        public ScreenTransition getScreenTransition() {
+            return SlideTransition.init(0.5f, SlideTransition.RIGHT, true, Interpolation.exp10Out);
         }
     },
 

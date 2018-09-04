@@ -32,8 +32,8 @@ public class LevelFactory {
     private static final String TAG = LevelFactory.class.getName();
 
     // Constants
-    private static final int TIMER_LEVEL_ONE = 350 * 0 + 20;  // It takes 220s to face the boss // todo
-    private static final int TIMER_LEVEL_TWO = 400 * 0 + 20; // todo
+    private static final int TIMER_LEVEL_ONE = 350;  // It takes 220s to face the boss
+    private static final int TIMER_LEVEL_TWO = 400;
     private static final int TIMER_LEVEL_THREE = 450;
     private static final int TIMER_LEVEL_FOUR = 450;
     private static final String NAME_LEVEL_ONE = "levelFactory.nameLevelOne";
