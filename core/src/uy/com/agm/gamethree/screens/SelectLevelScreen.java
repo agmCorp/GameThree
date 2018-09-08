@@ -141,7 +141,8 @@ public class SelectLevelScreen extends AbstractScreen {
         // Add values
         container.add(selectLevelLabel);
         container.row();
-        container.add(scrollPane).top().maxHeight(SCROLL_PANE_MAX_HEIGHT).width(CONTAINER_WIDTH);
+        container.add(scrollPane).top().width(CONTAINER_WIDTH).maxHeight(SCROLL_PANE_MAX_HEIGHT);
+        container.pack();
 
         // Adds table to stage
         addActor(container);
