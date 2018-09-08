@@ -111,9 +111,7 @@ public class AudioManager {
 
     public void resumeMusic() {
         if (playingMusic != null) {
-            if (GameSettings.getInstance().isMusic()) {
-                playingMusic.play();
-            }
+            playMusic();
         }
     }
 
@@ -132,6 +130,7 @@ public class AudioManager {
     public void onSettingsUpdated() {
         if (playingMusic != null) {
             playingMusic.setVolume(GameSettings.getInstance().getVolMusic());
+            playingMusic.setLooping(looping);
             if (GameSettings.getInstance().isMusic()) {
                 if (!playingMusic.isPlaying()) {
                     playingMusic.play();
