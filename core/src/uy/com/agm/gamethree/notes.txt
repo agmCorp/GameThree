@@ -1,6 +1,7 @@
 PROXIMAS VERSIONES
 ------------------
 - buscar algun popup automatico para pedir ranking y opinion.
+- ver algún robot para aumentar bajadas.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
