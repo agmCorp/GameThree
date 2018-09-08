@@ -1,5 +1,6 @@
 PROXIMAS VERSIONES
 ------------------
+- buscar algun popup automatico para pedir ranking y opinion.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
 El problema es que si hay un help no modal en pantalla y se me escapa un enemigo, la redscreen cierra ese help para mostrarse.
 Capaz que se arregla poniendo en el stack ademas de image una nueva capa llamada redscreen.
@@ -23,7 +24,6 @@ Poner un adv al volver en el boton de la pantalla game over. Es importante, da p
 libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
 puedo poner un boton para dar puntos si ves un anuncio.
-- ver el video nuevamente del bobito de los efectos en youtube.
 
 PRIORIDAD 1
 -----------
@@ -122,11 +122,12 @@ Me pasó algo parecido en el nivel 3.
 Confirmado que es un bug.
 Se me ocurre que solo se dibujen los bordes de las balas del enemigo (para así poder debuguear y distinguirlas) porque es lo unico
 que me puede matar.
-- En una version de la PlayStore (version 5 y posteriores) me pasaba que a veces no aparecia el trofeo en la pantalla levelComplete pero
+*- En una version de la PlayStore (version 5 y posteriores) me pasaba que a veces no aparecia el trofeo en la pantalla levelComplete pero
 si aprecian las etiquetas de highscore y demas. Tambien me pasaba que a veces la pantalla de highscores aparecia con espacios
 chicos entre filas de la tabla. Lo peor es que a veces no cargaba los niveles en selectlevels y aprecia todo vacio.
-Para reproducir esto ultimo: Mato todas las apps de android, entro al juego, voy a highscores rapido, vuelvo, voy a help rapido,
+Para reproducir esto ultimo: Mato todas las apps de android, entro al juego, voy a highscores rapido, vuelvo, voy a help rapido (o credits),
 vuelvo, voy a select level y se ven todos vacios. Al parecer solo pasa en mi celular, supongo yo por tanta instalación de debug.
+Deberia haber quedado solucionado.
 - Las balas no deberian rebotar cambiando su velocidad a mano, sino box2d deberia calcular como rebotan naturalmente.
 Si tengo una bala de enemigo que va de norte a sur y yo con mi escudo (powertwo) la choco viniendo desde el norte, la bala
 cambia de direccion hacia mi y vuelve a rebotar y queda mal. Ojo que puede quedar la bala flotando quieta si programo un rebote
