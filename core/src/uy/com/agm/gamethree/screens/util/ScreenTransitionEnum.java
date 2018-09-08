@@ -71,7 +71,7 @@ public enum ScreenTransitionEnum {
 
     SLIDE_LEFT_EXP {
         public ScreenTransition getScreenTransition() {
-            return SlideTransition.init(0.5f, SlideTransition.LEFT, true, Interpolation.exp10Out);
+            return SlideTransition.init(0.5f, SlideTransition.LEFT, false, Interpolation.exp10Out);
         }
     },
 
