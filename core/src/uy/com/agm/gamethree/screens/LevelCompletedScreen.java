@@ -166,6 +166,10 @@ public class LevelCompletedScreen extends AbstractScreen {
         }
         table.padTop(padTop);
 
+        // WA: Sometimes the ranking image doesn't turn up. It happens only the first time this screen is shown and only on release version.
+        // It seems that scene2d can't assign a size in some situations so the ranking image gets size zero.
+        table.pack();
+
         // Adds table to stage
         addActor(table);
     }

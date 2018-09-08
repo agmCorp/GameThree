@@ -142,6 +142,9 @@ public class SelectLevelScreen extends AbstractScreen {
         container.add(selectLevelLabel);
         container.row();
         container.add(scrollPane).top().width(CONTAINER_WIDTH).maxHeight(SCROLL_PANE_MAX_HEIGHT);
+
+        // WA: Sometimes the levels table doesn't turn up. It happens only the first time this screen is shown and only on release version.
+        // It seems that scene2d can't assign a size in some situations so the levels table gets size zero.
         container.pack();
 
         // Adds table to stage
