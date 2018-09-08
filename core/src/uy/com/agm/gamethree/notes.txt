@@ -310,6 +310,10 @@ LECCIONES APRENDIDAS
     En resumen, siempre trabajar con metros en todo EL JUEGO.
     Para la GUI usar una cámara en pixels.
 
+    Acá explica muy bien the Separation of concerns entre logica y render. Así como la necesidad de usar metros para el modelo,
+    pixels para el render y PPM para relacionarlos:
+    http://www.aurelienribon.com/post/2011-04-logic-vs-render-separation-of-concerns
+
 7)
     Para levantar proyecto github:
     - instalar java 8 y definir JAVA_HOME
