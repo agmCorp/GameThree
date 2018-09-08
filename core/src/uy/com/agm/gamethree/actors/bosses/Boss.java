@@ -198,7 +198,7 @@ public abstract class Boss extends Sprite {
     }
 
     public void showChallengeBeginHelp() {
-        screen.getInfoScreen().showModalImage(getHelpImage());
+        screen.getInfoScreen().showChallengeBeginHelp(getHelpImage());
     }
 
     protected void openFire(float dt) {

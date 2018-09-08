@@ -472,6 +472,11 @@ public class InfoScreen extends AbstractScreen {
         showMessage(i18NGameThreeBundle.format("infoScreen.fight"), MessageSize.BIG);
     }
 
+    public void showChallengeBeginHelp(TextureRegion helpImage) {
+        setNewTransition();
+        showModalImage(helpImage);
+    }
+
     public void showRedFlash() {
         showImage(redFlash, RED_FLASH_TIME);
     }
