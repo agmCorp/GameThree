@@ -259,7 +259,7 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Message functions
 
-    public void showMessage(String message, MessageSize messageSize) {
+    private void showMessage(String message, MessageSize messageSize) {
         messageLabel.setText(message);
         switch (messageSize) {
             case BIG:
@@ -280,7 +280,7 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    public void showMessage(String message, MessageSize messageSize, float seconds) {
+    private void showMessage(String message, MessageSize messageSize, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryMessage = true;
@@ -289,7 +289,7 @@ public class InfoScreen extends AbstractScreen {
         showMessage(message, messageSize);
     }
 
-    public void showModalMessage(String message, MessageSize messageSize) {
+    private void showModalMessage(String message, MessageSize messageSize) {
         gotIt.setVisible(true);
         showMessage(message, messageSize);
         screen.getDimScreen().hideButtons();
@@ -302,11 +302,11 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Image functions
 
-    public void  showImage(TextureRegion textureRegion) {
+    private void  showImage(TextureRegion textureRegion) {
         showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    public void showImage(TextureRegion textureRegion, float width, float height) {
+    private void showImage(TextureRegion textureRegion, float width, float height) {
         setImage(textureRegion, width, height);
 
         image.setVisible(true);
@@ -324,11 +324,11 @@ public class InfoScreen extends AbstractScreen {
         image.setScaling(Scaling.fit);
     }
 
-    public void showImage(TextureRegion textureRegion, float seconds) {
+    private void showImage(TextureRegion textureRegion, float seconds) {
         showImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
     }
 
-    public void showImage(TextureRegion textureRegion, float width, float height, float seconds) {
+    private void showImage(TextureRegion textureRegion, float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryImage = true;
@@ -337,11 +337,11 @@ public class InfoScreen extends AbstractScreen {
         showImage(textureRegion, width, height);
     }
 
-    public void showModalImage(TextureRegion textureRegion) {
+    private void showModalImage(TextureRegion textureRegion) {
         showModalImage(textureRegion, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    public void showModalImage(TextureRegion textureRegion, float width, float height) {
+    private void showModalImage(TextureRegion textureRegion, float width, float height) {
         gotIt.setVisible(true);
         showImage(textureRegion, width, height);
         screen.getDimScreen().hideButtons();
@@ -354,12 +354,12 @@ public class InfoScreen extends AbstractScreen {
 
     // ----------- Animation functions
 
-    public void showAnimation(Animation animation) {
+    private void showAnimation(Animation animation) {
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
         showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    public void showAnimation(Animation animation, float width, float height) {
+    private void showAnimation(Animation animation, float width, float height) {
         stackCell.size(width, height);
         centerTable.pack();
         animatedImage.setAnimation(animation);
@@ -370,12 +370,12 @@ public class InfoScreen extends AbstractScreen {
         centerTable.setVisible(true);
     }
 
-    public void showAnimation(Animation animation, float seconds) {
+    private void showAnimation(Animation animation, float seconds) {
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
         showAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight(), seconds);
     }
 
-    public void showAnimation(Animation animation,  float width, float height, float seconds) {
+    private void showAnimation(Animation animation,  float width, float height, float seconds) {
         overlayTime = 0;
         overlaySeconds = seconds;
         overlayTemporaryAnimation = true;
@@ -384,12 +384,12 @@ public class InfoScreen extends AbstractScreen {
         showAnimation(animation, width, height);
     }
 
-    public void showModalAnimation(Animation animation) {
+    private void showModalAnimation(Animation animation) {
         TextureRegion textureRegion = (TextureRegion) animation.getKeyFrame(0, false);
         showModalAnimation(animation, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 
-    public void showModalAnimation(Animation animation, float width, float height) {
+    private void showModalAnimation(Animation animation, float width, float height) {
         gotIt.setVisible(true);
         showAnimation(animation, width, height);
         screen.getDimScreen().hideButtons();
