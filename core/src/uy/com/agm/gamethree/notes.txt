@@ -1,3 +1,12 @@
+CUANDO HAGA UN PROXIMO JUEGO
+----------------------------
+COSAS:
+- Tener un singleton de aplicacion con cosas, como un puntero al game.
+- screenmanager para las pantallas y transiciones
+- una interface o clase madre para todos los objetos de mi juego
+- una interface o clase madre para todas las pantallas
+-  usar sensores siempre para todo
+
 PROXIMAS VERSIONES
 ------------------
 - buscar algun popup automatico para pedir ranking y opinion.
