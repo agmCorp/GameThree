@@ -17,7 +17,7 @@ import com.google.android.gms.ads.MobileAds;
 import uy.com.agm.gamethree.game.GameThree;
 
 public class AndroidLauncher extends AndroidApplication implements IAdsController {
-    private static final String TAG = AndroidApplication.class.getName();
+    private static final String TAG = AndroidLauncher.class.getName();
 
     // Constants
     private static final String ADMOB_APP_ID = "ca-app-pub-3296591416050248~7409810295";
