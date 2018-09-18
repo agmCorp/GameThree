@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 public class AnimatedActor extends Actor {
-    Animation animation;
-    TextureRegion textureRegion;
-    float stateTime;
+    private Animation animation;
+    private TextureRegion textureRegion;
+    private float stateTime;
 
     public AnimatedActor(Animation animation) {
         this.animation = animation;
