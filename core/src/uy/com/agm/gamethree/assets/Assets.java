@@ -492,9 +492,7 @@ public class Assets implements Disposable, AssetErrorListener {
     @Override
     public void dispose() {
         assetManager.dispose();
-        fonts.getDefaultSmall().dispose();
-        fonts.getDefaultNormal().dispose();
-        fonts.getDefaultBig().dispose();
+        fonts.dispose();
     }
 
     public AssetI18NGameThree getI18NGameThree() {

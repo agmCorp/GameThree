@@ -3,13 +3,14 @@ package uy.com.agm.gamethree.assets.fonts;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.Disposable;
 
 
 /**
  * Created by AGM on 12/22/2017.
  */
 
-public class AssetFonts {
+public class AssetFonts implements Disposable {
     private static final String TAG = AssetFonts.class.getName();
 
     // Constants
@@ -58,6 +59,14 @@ public class AssetFonts {
 
     public BitmapFont getDefaultGrandFinale() {
         return defaultGrandFinale;
+    }
+
+    @Override
+    public void dispose() {
+        defaultSmall.dispose();
+        defaultNormal.dispose();
+        defaultBig.dispose();
+        defaultGrandFinale.dispose();
     }
 }
 
