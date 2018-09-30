@@ -145,7 +145,7 @@ natural. Intente corregir esto, ver Weapon.onbounce(). Hice lo que pude, parece 
 - Hay situaciones en donde me aparece redScreen (todo rojo) y encima alguna de las pantallas modales (solo se ve el pulgar). Creo que
 es la pantalla que dice infoScreen.redFlashHelp=WATCH OUT!\nDon't let your enemies\nflee! That hurts you!. No se puede leer, solo
 se ve el pulgar. No se si es un bug o es que aparece solo cuando seteo DISABLE_ENDURANCE_COUNT = true;
-- Problema:
+*- Problema:
 Aparece hurry up. Le tiro el ultimo shuriken al boss y aparece Time is up (con una espera de 3 segundos para cambiar de pantalla a gameOverScreen).
 Ese shuriken mata al malo entonces aparece victory con su musica (y una espera de 6 segundos para cambiar de pantalla a levelCompletedScreen)
 Luego aparece la pantalla game over.
@@ -161,6 +161,7 @@ En esta implementación, game over tiene prioridad...pero solo por esos 3 segund
 Lo que hice fue: en cada boss, si el heroe está en estado "game over" (o sea, muerto y sin vidas disponibles), no mostrar el victoryFX.
 Ahí lo que pasaría es que ambos contadores (el de game over y el de victory) comienzan a correr, pero gana el de game over.
 Al menos no te apareceria el cartel de victory y aplausos.
+Deberia haber quedado solucionado.
 
 TENGO
 -----
