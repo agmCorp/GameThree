@@ -817,9 +817,12 @@ public class Hero extends Sprite {
     }
 
     public boolean isGameOver() {
-        return currentHeroState == HeroState.DEAD &&
-                lives <= 0 &&
+        return isGameOverState() &&
                 gameOverTime > GAME_OVER_DELAY_SECONDS;
+    }
+
+    public boolean isGameOverState() {
+        return currentHeroState == HeroState.DEAD && lives <= 0;
     }
 
     public boolean isTimeToPlayAgain() {

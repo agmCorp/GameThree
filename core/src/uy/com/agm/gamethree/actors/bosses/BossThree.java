@@ -473,8 +473,11 @@ public class BossThree extends Boss {
 
    private void stateExploding(float dt) {
        if (explosionFXAnimation.isAnimationFinished(explosionFXStateTime)) {
-           // Show victory animation and play audio FX
-           victoryFX();
+           // Bug 30/09/2018 reported by Constantino Thamnopoulos (game over and boss death at the same second)
+           if (!screen.getCreator().getHero().isGameOverState()) {
+               // Show victory animation and play audio FX
+               victoryFX();
+           }
 
            // Set the new state
            currentStateBoss = StateBoss.DEAD;

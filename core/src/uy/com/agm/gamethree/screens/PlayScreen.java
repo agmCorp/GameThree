@@ -707,6 +707,9 @@ public class PlayScreen extends AbstractScreen {
 
         // New Screens are evaluated at the end, because they call playScreen.dispose.
         // Dispose method destroys the world among other objects, so b2bodies (like player.getB2body()) are no longer available
+
+        // Game over has priority over level completed due to GAME_OVER_DELAY_SECONDS is less than
+        // LEVEL_COMPLETED_DELAY_SECONDS. See Bug 30/09/2018 in each Boss class.
         finish = !finish && player.isGameOver() && !newScreen;
         if (finish) {
             newScreen = true;
