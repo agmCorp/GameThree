@@ -2,14 +2,10 @@ package uy.com.agm.gamethree.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.TimeUtils;
-
-import uy.com.agm.gamethree.assets.Assets;
-import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 
 /**
  * Created by AGM on 16/07/2018.
@@ -124,19 +120,6 @@ public class GameSettings {
             highScores.add(new HighScore(i + 1, scores[i], millis[i]));
         }
         return highScores;
-    }
-
-    private Array<TextureRegion> getHighScoreImages() {
-        // UI assets
-        AssetScene2d assetScene2d = Assets.getInstance().getScene2d();
-
-        Array<TextureRegion> highScoreImages = new Array<TextureRegion>();
-        highScoreImages.add(assetScene2d.getGoldTrophy());
-        highScoreImages.add(assetScene2d.getSilverTrophy());
-        highScoreImages.add(assetScene2d.getBronzeTrophy());
-        highScoreImages.add(assetScene2d.getBadge());
-
-        return highScoreImages;
     }
 
     private void loadLevels() {
