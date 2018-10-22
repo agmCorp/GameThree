@@ -9,6 +9,8 @@ COSAS:
 
 PROXIMAS VERSIONES
 ------------------
+- Lo que puedo hacer para que la gente no se queje mas de lo dificil, es poner un
+nivel easy...y hacer el juego muy muy facil.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
