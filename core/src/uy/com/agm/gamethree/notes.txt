@@ -679,8 +679,8 @@ LECCIONES APRENDIDAS
 
 32)
     Para saber donde esta el adb ir a Android studio/settings/Appearance & behavior/System Settings/Android SDK:
-    C:\Alvaro\Develop\Android\20171202\AndroidSDK
-    El adb esta en C:\Alvaro\Develop\Android\20171202\AndroidSDK\platform-tools
+    C:\Alvaro\Develop\Android\AndroidSDK
+    El adb esta en C:\Alvaro\Develop\Android\AndroidSDK\platform-tools
     Lo anterior tambien lo puedo ver en el archivo local.properties que esta dentro de mi proyecto (GameThree).
 
 IOS
