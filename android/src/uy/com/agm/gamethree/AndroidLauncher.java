@@ -21,7 +21,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
 
     // Constants
     private static final String ADMOB_APP_ID = "ca-app-pub-3296591416050248~7409810295";
-    private static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3296591416050248/6643523530";
+    private static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3296591416050248/6643523530"; // TEST ca-app-pub-3940256099942544/1033173712
     private static final String TEST_DEVICE = "197A3D43D6743696E99BE0EE25126FF1";
 
     private InterstitialAd interstitialAd;
