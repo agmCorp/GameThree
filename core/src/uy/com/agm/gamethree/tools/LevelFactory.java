@@ -41,32 +41,32 @@ public class LevelFactory {
     private static final String NAME_LEVEL_THREE = "levelFactory.nameLevelThree";
     private static final String NAME_LEVEL_FOUR = "levelFactory.nameLevelFour";
 
-    public static Boss getBoss(PlayScreen screen, int level) {
+    public static Boss getBoss(PlayScreen screen, int level, float handicap) {
         Boss boss;
 
         switch (level) {
             case 1:
-                boss = new BossOne(screen, screen.getGameCam().position.x -
-                        AssetBossOne.WIDTH_METERS / 2,
+                boss = new BossOne(screen, handicap,
+                        screen.getGameCam().position.x - AssetBossOne.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 AssetBossOne.HEIGHT_METERS / 2 - BossOne.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             case 2:
-                boss = new BossTwo(screen, screen.getGameCam().position.x -
-                        AssetBossTwo.WIDTH_METERS / 2,
+                boss = new BossTwo(screen, handicap,
+                        screen.getGameCam().position.x - AssetBossTwo.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 AssetBossTwo.HEIGHT_METERS / 2 - BossTwo.CIRCLE_SHAPE_RADIUS_METERS);
                 break;
             case 3:
-                boss = new BossThree(screen, screen.getGameCam().position.x -
-                        AssetBossThree.WIDTH_METERS / 2,
+                boss = new BossThree(screen, handicap,
+                        screen.getGameCam().position.x - AssetBossThree.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 screen.getGameViewPort().getWorldHeight() / 2 -
                                 AssetBossThree.HEIGHT_METERS / 2);
                 break;
             case 4:
-                boss = new BossFour(screen, screen.getGameCam().position.x -
-                        AssetBossFour.WIDTH_METERS / 2,
+                boss = new BossFour(screen, handicap,
+                        screen.getGameCam().position.x - AssetBossFour.WIDTH_METERS / 2,
                         screen.getGameViewPort().getWorldHeight() * PlayScreen.WORLD_SCREENS -
                                 AssetBossFour.HEIGHT_METERS / 2 - BossFour.CIRCLE_SHAPE_RADIUS_METERS);
                 break;

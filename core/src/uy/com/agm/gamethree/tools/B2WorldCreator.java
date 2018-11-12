@@ -113,7 +113,7 @@ public class B2WorldCreator {
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
     private Array<Weapon> weapons;
-    private float difficultyProb;
+    private float handicap;
 
     private LinkedBlockingQueue<ActorDef> actorsToCreate;
     private ArrayMap<String, String> arrayMapDebug;  // Ordered map
@@ -135,13 +135,13 @@ public class B2WorldCreator {
         // Difficulty
         switch (GameSettings.getInstance().getDifficulty()) {
             case EASY:
-                difficultyProb = EASY_PROB;
+                handicap = EASY_PROB;
                 break;
             case MEDIUM:
-                difficultyProb = MEDIUM_PROB;
+                handicap = MEDIUM_PROB;
                 break;
             case HARD:
-                difficultyProb = HARD_PROB;
+                handicap = HARD_PROB;
                 break;
         }
 
@@ -202,7 +202,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_ONE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyOne(screen, object));
                 }
             }
@@ -212,7 +212,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_TWO);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyTwo(screen, object));
                 }
             }
@@ -222,7 +222,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_THREE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyThree(screen, object));
                 }
             }
@@ -232,7 +232,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_FOUR);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyFour(screen, object));
                 }
             }
@@ -242,7 +242,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_FIVE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyFive(screen, object));
                 }
             }
@@ -252,7 +252,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_SIX);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemySix(screen, object));
                 }
             }
@@ -267,7 +267,7 @@ public class B2WorldCreator {
                 if (!mp.containsKey(B2WorldCreator.KEY_ENEMY_SEVEN)) {
                     mp.put(B2WorldCreator.KEY_ENEMY_SEVEN, "");
                 }
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemySeven(screen, object));
                 }
             }
@@ -277,7 +277,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_EIGHT);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyEight(screen, object));
                 }
             }
@@ -287,7 +287,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_NINE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyNine(screen, object));
                 }
             }
@@ -297,7 +297,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_TEN);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyTen(screen, object));
                 }
             }
@@ -307,7 +307,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_ELEVEN);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyEleven(screen, object));
                 }
             }
@@ -317,7 +317,7 @@ public class B2WorldCreator {
         layer = map.getLayers().get(LAYER_ENEMY_TWELVE);
         if (layer != null) {
             for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                if (MathUtils.random() < difficultyProb) {
+                if (MathUtils.random() < handicap) {
                     enemies.add(new EnemyTwelve(screen, object));
                 }
             }
@@ -382,10 +382,6 @@ public class B2WorldCreator {
 
     public Array<Weapon> getWeapons() {
         return weapons;
-    }
-
-    public float getDifficultyProb() {
-        return difficultyProb;
     }
 
     public void createGameThreeActor(ActorDef actorDef) {

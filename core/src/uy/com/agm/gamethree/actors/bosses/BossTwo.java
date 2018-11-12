@@ -89,7 +89,7 @@ public class BossTwo extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossTwo(PlayScreen screen, float x, float y) {
+    public BossTwo(PlayScreen screen, float handicap, float x, float y) {
         super(screen, x, y, AssetBossTwo.WIDTH_METERS, AssetBossTwo.HEIGHT_METERS);
 
         // Animations
@@ -102,7 +102,7 @@ public class BossTwo extends Boss {
         bossTwoDeathAnimation = Assets.getInstance().getBossTwo().getBossTwoDeathAnimation();
 
         // BossTwo variables initialization
-        damage = MathUtils.ceil(MAX_DAMAGE * screen.getCreator().getDifficultyProb());
+        damage = MathUtils.ceil(MAX_DAMAGE * handicap);
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();

@@ -78,7 +78,7 @@ public class BossThree extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossThree(PlayScreen screen, float x, float y) {
+    public BossThree(PlayScreen screen, float handicap, float x, float y) {
         super(screen, x, y, AssetBossThree.WIDTH_METERS, AssetBossThree.HEIGHT_METERS);
 
         // Animations
@@ -88,7 +88,7 @@ public class BossThree extends Boss {
         bossThreeDeathAnimation = Assets.getInstance().getBossThree().getBossThreeDeathAnimation();
 
         // BossThree variables initialization
-        damage = MathUtils.ceil(MAX_DAMAGE * screen.getCreator().getDifficultyProb());
+        damage = MathUtils.ceil(MAX_DAMAGE * handicap);
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();

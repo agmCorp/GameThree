@@ -84,7 +84,7 @@ public class BossOne extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossOne(PlayScreen screen, float x, float y) {
+    public BossOne(PlayScreen screen, float handicap, float x, float y) {
         super(screen, x, y, AssetBossOne.WIDTH_METERS, AssetBossOne.HEIGHT_METERS);
 
         // Animations
@@ -94,7 +94,7 @@ public class BossOne extends Boss {
         bossOneDeathAnimation = Assets.getInstance().getBossOne().getBossOneDeathAnimation();
 
         // BossOne variables initialization
-        damage = MathUtils.ceil(MAX_DAMAGE * screen.getCreator().getDifficultyProb());
+        damage = MathUtils.ceil(MAX_DAMAGE * handicap);
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();

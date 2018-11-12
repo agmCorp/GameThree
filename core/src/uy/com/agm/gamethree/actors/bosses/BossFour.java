@@ -92,7 +92,7 @@ public class BossFour extends Boss {
     // Splat FX
     private Sprite splatFXSprite;
 
-    public BossFour(PlayScreen screen, float x, float y) {
+    public BossFour(PlayScreen screen, float handicap, float x, float y) {
         super(screen, x, y, AssetBossFour.WIDTH_METERS, AssetBossFour.HEIGHT_METERS);
 
         // Animations
@@ -102,7 +102,7 @@ public class BossFour extends Boss {
         bossFourDeathAnimation = Assets.getInstance().getBossFour().getBossFourDeathAnimation();
 
         // BossFour variables initialization
-        damage = MathUtils.ceil(MAX_DAMAGE * screen.getCreator().getDifficultyProb());
+        damage = MathUtils.ceil(MAX_DAMAGE * handicap);
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();
