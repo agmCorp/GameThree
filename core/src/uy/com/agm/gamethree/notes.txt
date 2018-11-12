@@ -5,7 +5,7 @@ COSAS:
 - screenmanager para las pantallas y transiciones
 - una interface o clase madre para todos los objetos de mi juego
 - una interface o clase madre para todas las pantallas
-- usar sensores siempre para todo
+- usar sensores siempre para todo.
 
 PROXIMAS VERSIONES
 ------------------
