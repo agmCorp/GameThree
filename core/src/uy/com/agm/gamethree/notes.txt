@@ -16,6 +16,8 @@ Se me ocurren 2 maneras de implementarlo, una es haciendo a mano cada nivel y la
 dependiendo del seteo uso probabilidad 100%, 50% y 30%. Listo. Así no joden más.
 Usar las probabilidades para los enemigos finales tambien.
 En settings llamarle a los seteos: boring, pretty good, insane!
+Se me ocurre poner el icono de estrellita siempre fijo (estrellita y estrellita pressed).
+Cuando lo apretas cambia el texto de abajo a boring, pretty good, insane!
 - Los highscores estaria bueno que siempre esten todos en cero y que el usuario los vaya definiendo.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.

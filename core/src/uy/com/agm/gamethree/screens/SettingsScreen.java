@@ -84,7 +84,7 @@ public class SettingsScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(AbstractScreen.PAD * 2);
+        table.top().padTop(45); // todo
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -138,19 +138,41 @@ public class SettingsScreen extends AbstractScreen {
         shooting.setChecked(!prefs.isManualShooting());
 
         // Add values
+//        table.add(settingsLabel);
+//        table.row();
+//        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD);
+//        table.row();
+//        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
+//        table.row();
+//        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD);
+//        table.row();
+//        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
+//        table.row();
+//        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
+//        table.row();
+//        table.add(shootingLabel).padTop(AbstractScreen.PAD);
         table.add(settingsLabel);
         table.row();
-        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD);
+        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD / 2);
         table.row();
-        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
+        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD / 2);
         table.row();
-        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD);
+        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD / 2);
         table.row();
-        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
+        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD / 2);
         table.row();
-        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
+
+        ImageButton b = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
+                new TextureRegionDrawable(assetScene2d.getSoundPressed()),
+                new TextureRegionDrawable(assetScene2d.getSoundChecked()));
+        Label l = new Label("insane!", labelStyleNormal);
+        table.add(b).height(b.getHeight()).padTop(AbstractScreen.PAD / 2);
         table.row();
-        table.add(shootingLabel).padTop(AbstractScreen.PAD);
+        table.add(l).padTop(AbstractScreen.PAD / 2);
+        table.row();
+        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.row();
+        table.add(shootingLabel).padTop(AbstractScreen.PAD / 2);
 
         // Events
         music.addListener(
