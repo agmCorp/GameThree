@@ -102,7 +102,7 @@ public class BossTwo extends Boss {
         bossTwoDeathAnimation = Assets.getInstance().getBossTwo().getBossTwoDeathAnimation();
 
         // BossTwo variables initialization
-        damage = MAX_DAMAGE;
+        damage = MathUtils.ceil(MAX_DAMAGE * screen.getCreator().getDifficultyProb());
         stateBossTime = 0;
         changeTime = 0;
         timeToChange = getNextTimeToChange();

@@ -32,9 +32,9 @@ public class GameSettings {
     public static final float DEFAULT_VOLUME = 0.5f;
 
     // High scores
-    private static final int FIRST = 21365;
+    private static final int FIRST = 9900;
     private static final long FIRST_MILLIS = 222168600000L; // 15/01/1977 Mi cumple \(^-^)/
-    private static final int SECOND = 18491;
+    private static final int SECOND = 8400;
     private static final long SECOND_MILLIS = 327751800000L; // 21/05/1980 Pac-Man
     private static final int THIRD = 7273;
     private static final long THIRD_MILLIS = 1531794009758L; // 16/07/2018 When this class was coded
