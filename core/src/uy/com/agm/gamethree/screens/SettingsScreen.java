@@ -92,7 +92,7 @@ public class SettingsScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(45); // todo
+        table.top().padTop(AbstractScreen.PAD + AbstractScreen.PAD / 2);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -144,24 +144,21 @@ public class SettingsScreen extends AbstractScreen {
         hard = new ImageButton(new TextureRegionDrawable(assetScene2d.getHard()),
                 new TextureRegionDrawable(assetScene2d.getHardPressed()));
 
-        // Difficulty buttons visibility
-        // todo aca es segun proppiedad
+        // Difficulty buttons
         Stack stack = new Stack();
         stack.add(easy);
         stack.add(medium);
         stack.add(hard);
-        easy.setVisible(true);
-        medium.setVisible(false);
-        hard.setVisible(false);
 
         // Label difficulty
-        // todo, aca es segun las propiedades!!!
         difficultyLabel = new Label("DIFFICULTY", labelStyleNormal);
         difficultyLabel.setAlignment(Align.center);
         easyDifficultyText = i18NGameThreeBundle.format("settings.easyDifficulty");
         mediumDifficultyText = i18NGameThreeBundle.format("settings.mediumDifficulty");
         hardDifficultyText = i18NGameThreeBundle.format("settings.hardDifficulty");
-        difficultyLabel.setText(easyDifficultyText);
+
+        // Difficulty visibility and text
+        setDifficulty();
 
         // Button shooting
         shooting = new ImageButton(new TextureRegionDrawable(assetScene2d.getShooting()),
@@ -273,12 +270,8 @@ public class SettingsScreen extends AbstractScreen {
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-
-                        // todo debo setear la propiedad
-                        easy.setVisible(false);
-                        medium.setVisible(true);
-                        hard.setVisible(false);
-                        difficultyLabel.setText(mediumDifficultyText);
+                        prefs.setDifficulty(GameSettings.Difficulty.MEDIUM);
+                        setDifficulty();
                         save();
                     }
 
@@ -287,18 +280,15 @@ public class SettingsScreen extends AbstractScreen {
                         return true;
                     }
                 });
+
         medium.addListener(
                 new InputListener(){
                     @Override
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-
-                        // todo debo setear la propiedad
-                        easy.setVisible(false);
-                        medium.setVisible(false);
-                        hard.setVisible(true);
-                        difficultyLabel.setText(hardDifficultyText);
+                        prefs.setDifficulty(GameSettings.Difficulty.HARD);
+                        setDifficulty();
                         save();
                     }
 
@@ -307,18 +297,15 @@ public class SettingsScreen extends AbstractScreen {
                         return true;
                     }
                 });
+
         hard.addListener(
                 new InputListener(){
                     @Override
                     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
-
-                        // todo debo setear la propiedad
-                        easy.setVisible(true);
-                        medium.setVisible(false);
-                        hard.setVisible(false);
-                        difficultyLabel.setText(easyDifficultyText);
+                        prefs.setDifficulty(GameSettings.Difficulty.EASY);
+                        setDifficulty();
                         save();
                     }
 
@@ -335,15 +322,25 @@ public class SettingsScreen extends AbstractScreen {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         difficultyLabel.setColor(DEFAULT_COLOR);
-                        // todo, voy por acá, no defini estoy aun pero seria leer la propiedad y en base a eso discriminar texto y botones
-                        // creo que podría hacer 3 metodos seteasy, sethard, setmedim que lean la propety (seteada antes) y cambien texto y botones.
-                        toggleShootingLabel();
+                        GameSettings.Difficulty difficulty = prefs.getDifficulty();
+                        switch (difficulty) {
+                            case EASY:
+                                prefs.setDifficulty(GameSettings.Difficulty.MEDIUM);
+                                break;
+                            case MEDIUM:
+                                prefs.setDifficulty(GameSettings.Difficulty.HARD);
+                                break;
+                            case HARD:
+                                prefs.setDifficulty(GameSettings.Difficulty.EASY);
+                                break;
+                        }
+                        setDifficulty();
                         save();
                     }
 
                     @Override
                     public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                        shootingLabel.setColor(COLOR_LABEL_PRESSED);
+                        difficultyLabel.setColor(COLOR_LABEL_PRESSED);
                         return true;
                     }
                 });
@@ -446,6 +443,24 @@ public class SettingsScreen extends AbstractScreen {
         prefs.setSound(soundOn);
         sound.setChecked(!soundOn);
         AudioManager.getInstance().onSettingsUpdated();
+    }
+
+    private void setDifficulty() {
+        GameSettings.Difficulty difficulty = prefs.getDifficulty();
+        easy.setVisible(difficulty == GameSettings.Difficulty.EASY);
+        medium.setVisible(difficulty == GameSettings.Difficulty.MEDIUM);
+        hard.setVisible(difficulty == GameSettings.Difficulty.HARD);
+        switch (difficulty) {
+            case EASY:
+                difficultyLabel.setText(easyDifficultyText);
+                break;
+            case MEDIUM:
+                difficultyLabel.setText(mediumDifficultyText);
+                break;
+            case HARD:
+                difficultyLabel.setText(hardDifficultyText);
+                break;
+        }
     }
 
     private void toggleShooting() {

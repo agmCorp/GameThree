@@ -20,6 +20,7 @@ public class GameSettings {
     private static final String MUSIC = "music";
     private static final String VOLUME_SOUND = "volSound";
     private static final String VOLUME_MUSIC = "volMusic";
+    private static final String DIFFICULTY = "difficulty";
     private static final String MANUAL_SHOOTING = "manualShooting";
     private static final String HIGH_SCORE = "highScore_";
     private static final String LEVEL_STATE = "levelState_";
@@ -42,6 +43,10 @@ public class GameSettings {
     private static final int FIFTH = 5800;
     private static final long FIFTH_MILLIS = 1533956400000L; // 11/08/2018 When this class was refactored
 
+    public enum Difficulty {
+        EASY, MEDIUM, HARD
+    }
+
     // Singleton: unique instance
     private static GameSettings instance;
 
@@ -51,6 +56,7 @@ public class GameSettings {
     private boolean music;
     private float volSound;
     private float volMusic;
+    private Difficulty difficulty;
     private boolean manualShooting;
     private Array<HighScore> highScores;
     private Array<LevelState> levels;
@@ -89,6 +95,7 @@ public class GameSettings {
         music = prefs.getBoolean(MUSIC, true);
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
+        difficulty = Difficulty.valueOf(prefs.getString(DIFFICULTY, Difficulty.MEDIUM.toString()));;
         manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
         loadHighScores();
         loadLevels();
@@ -150,6 +157,7 @@ public class GameSettings {
         prefs.putBoolean(MUSIC, music);
         prefs.putFloat(VOLUME_SOUND, volSound);
         prefs.putFloat(VOLUME_MUSIC, volMusic);
+        prefs.putString(DIFFICULTY, difficulty.toString());
         prefs.putBoolean(MANUAL_SHOOTING, manualShooting);
         for (int i = 0, n = highScores.size; i < n; i++) {
             prefs.putString(HIGH_SCORE + i, getData(highScores.get(i)));
@@ -191,6 +199,14 @@ public class GameSettings {
 
     public void setVolMusic(float volMusic) {
         this.volMusic = volMusic;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public boolean isManualShooting() {
