@@ -166,11 +166,11 @@ public class AssetScene2d {
         soundPressed = atlasUI.findRegion("soundPressed");
         soundChecked = atlasUI.findRegion("soundChecked");
         easy = atlasUI.findRegion("easy");
-        easyPressed = atlasUI.findRegion("difficultyPressed"); // todo
+        easyPressed = atlasUI.findRegion("easyPressed");
         medium = atlasUI.findRegion("medium");
-        mediumPressed = atlasUI.findRegion("difficultyPressed"); // todo
+        mediumPressed = atlasUI.findRegion("mediumPressed");
         hard = atlasUI.findRegion("hard");
-        hardPressed = atlasUI.findRegion("difficultyPressed"); // todo
+        hardPressed = atlasUI.findRegion("hardPressed");
         shooting = atlasUI.findRegion("shooting");
         shootingPressed = atlasUI.findRegion("shootingPressed");
         shootingChecked = atlasUI.findRegion("tick");
