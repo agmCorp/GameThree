@@ -14,6 +14,8 @@ Lo que puedo hacer para que la gente no se queje mas de lo dificil, es poner un
 nivel easy/medium/hard en settings...
 Se me ocurren 2 maneras de implementarlo, una es haciendo a mano cada nivel y la otra es en el creator cada vez que creo un enemigo
 dependiendo del seteo uso probabilidad 100%, 50% y 30%. Listo. Así no joden más.
+Usar las probabilidades para los enemigos finales tambien.
+En settings llamarle a los seteos: boring, pretty good, insane!
 - Los highscores estaria bueno que siempre esten todos en cero y que el usuario los vaya definiendo.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.
@@ -129,7 +131,7 @@ No se arreglo seteando velocity threshold de world. El error se debe a que el mo
 ya sea por el disparo o porque yo lo empujo y se cumple la condición de salida de path2:
 b2body.getPosition().y > screen.getGameCam().position.y - screen.getGameViewPort().getWorldHeight() / 4
 Luego de eso, viene path3 que es ir a la esquina (justamente la esquina que está exactamente arriba, subiendo por el borde).
-Solucione eso cambiando la condicion de salida de path1, path2 y path3. Ahora tabien considera la posicion x del bicho.
+Solucione eso cambiando la condicion de salida de path1, path2 y path3. Ahora tambien considera la posicion x del bicho.
 Deberia haber quedado solucionado.
 - En el nivel 3, quedo un audio de enemigo 8 siempre escuchándose. Eso significa que el enemigo quedo trancado fuera de la visual.
 Cuando agarré un colTwo recien ahi desaparecio.
