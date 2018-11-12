@@ -158,7 +158,7 @@ public class B2WorldCreator {
         hero = new Hero(screen, screen.getGameCam().position.x, screen.getGameCam().position.y / 2);
 
         // Create the boss in the game world
-        boss = LevelFactory.getBoss(screen, screen.getLevel());
+        boss = LevelFactory.getBoss(screen, screen.getLevel(), handicap);
 
         // Layer: border
         layer = map.getLayers().get(LAYER_BORDER);
