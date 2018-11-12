@@ -9,7 +9,7 @@ COSAS:
 
 PROXIMAS VERSIONES
 ------------------
-- ESTOY CANSADO DE QUE ME DIGAN QUE ES MUY DIFICIL.
+- ESTOY CANSADO DE QUE ME DIGAN QUE ES MUY DIFICIL!
 Lo que puedo hacer para que la gente no se queje mas de lo dificil, es poner un
 nivel easy/medium/hard en settings...
 Se me ocurren 2 maneras de implementarlo, una es haciendo a mano cada nivel y la otra es en el creator cada vez que creo un enemigo
