@@ -60,6 +60,12 @@ public class AssetScene2d {
     private TextureRegion sound;
     private TextureRegion soundPressed;
     private TextureRegion soundChecked;
+    private TextureRegion easy;
+    private TextureRegion easyPressed;
+    private TextureRegion medium;
+    private TextureRegion mediumPressed;
+    private TextureRegion hard;
+    private TextureRegion hardPressed;
     private TextureRegion shooting;
     private TextureRegion shootingPressed;
     private TextureRegion shootingChecked;
@@ -159,6 +165,12 @@ public class AssetScene2d {
         sound = atlasUI.findRegion("sound");
         soundPressed = atlasUI.findRegion("soundPressed");
         soundChecked = atlasUI.findRegion("soundChecked");
+        easy = atlasUI.findRegion("easy");
+        easyPressed = atlasUI.findRegion("difficultyPressed"); // todo
+        medium = atlasUI.findRegion("medium");
+        mediumPressed = atlasUI.findRegion("difficultyPressed"); // todo
+        hard = atlasUI.findRegion("hard");
+        hardPressed = atlasUI.findRegion("difficultyPressed"); // todo
         shooting = atlasUI.findRegion("shooting");
         shootingPressed = atlasUI.findRegion("shootingPressed");
         shootingChecked = atlasUI.findRegion("tick");
@@ -405,6 +417,30 @@ public class AssetScene2d {
 
     public TextureRegion getSoundChecked() {
         return soundChecked;
+    }
+
+    public TextureRegion getEasy() {
+        return easy;
+    }
+
+    public TextureRegion getEasyPressed() {
+        return easyPressed;
+    }
+
+    public TextureRegion getMedium() {
+        return medium;
+    }
+
+    public TextureRegion getMediumPressed() {
+        return mediumPressed;
+    }
+
+    public TextureRegion getHard() {
+        return hard;
+    }
+
+    public TextureRegion getHardPressed() {
+        return hardPressed;
     }
 
     public TextureRegion getShooting() {

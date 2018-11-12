@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -41,6 +42,13 @@ public class SettingsScreen extends AbstractScreen {
     private Slider sliderMusic;
     private ImageButton sound;
     private Slider sliderSound;
+    private ImageButton easy;
+    private ImageButton medium;
+    private ImageButton hard;
+    private Label difficultyLabel;
+    private String easyDifficultyText;
+    private String mediumDifficultyText;
+    private String hardDifficultyText;
     private ImageButton shooting;
     private Label shootingLabel;
     private String manualShootingText;
@@ -124,6 +132,37 @@ public class SettingsScreen extends AbstractScreen {
         sound.setChecked(value <= 0.0f ? true : false);
         sliderSound.setValue(value);
 
+        // Button easy
+        easy = new ImageButton(new TextureRegionDrawable(assetScene2d.getEasy()),
+                new TextureRegionDrawable(assetScene2d.getEasyPressed()));
+
+        // Button medium
+        medium = new ImageButton(new TextureRegionDrawable(assetScene2d.getMedium()),
+                new TextureRegionDrawable(assetScene2d.getMediumPressed()));
+
+        // Button hard
+        hard = new ImageButton(new TextureRegionDrawable(assetScene2d.getHard()),
+                new TextureRegionDrawable(assetScene2d.getHardPressed()));
+
+        // Difficulty buttons visibility
+        // todo aca es segun proppiedad
+        Stack stack = new Stack();
+        stack.add(easy);
+        stack.add(medium);
+        stack.add(hard);
+        easy.setVisible(true);
+        medium.setVisible(false);
+        hard.setVisible(false);
+
+        // Label difficulty
+        // todo, aca es segun las propiedades!!!
+        difficultyLabel = new Label("DIFFICULTY", labelStyleNormal);
+        difficultyLabel.setAlignment(Align.center);
+        easyDifficultyText = i18NGameThreeBundle.format("settings.easyDifficulty");
+        mediumDifficultyText = i18NGameThreeBundle.format("settings.mediumDifficulty");
+        hardDifficultyText = i18NGameThreeBundle.format("settings.hardDifficulty");
+        difficultyLabel.setText(easyDifficultyText);
+
         // Button shooting
         shooting = new ImageButton(new TextureRegionDrawable(assetScene2d.getShooting()),
                 new TextureRegionDrawable(assetScene2d.getShootingPressed()),
@@ -138,41 +177,23 @@ public class SettingsScreen extends AbstractScreen {
         shooting.setChecked(!prefs.isManualShooting());
 
         // Add values
-//        table.add(settingsLabel);
-//        table.row();
-//        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD);
-//        table.row();
-//        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
-//        table.row();
-//        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD);
-//        table.row();
-//        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD);
-//        table.row();
-//        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
-//        table.row();
-//        table.add(shootingLabel).padTop(AbstractScreen.PAD);
         table.add(settingsLabel);
         table.row();
-        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.add(music).height(music.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(sliderMusic).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD / 2);
+        table.add(sliderMusic).width(SLIDER_WIDTH);
         table.row();
-        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.add(sound).height(sound.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(sliderSound).width(SLIDER_WIDTH).padTop(AbstractScreen.PAD / 2);
+        table.add(sliderSound).width(SLIDER_WIDTH);
         table.row();
-
-        ImageButton b = new ImageButton(new TextureRegionDrawable(assetScene2d.getSound()),
-                new TextureRegionDrawable(assetScene2d.getSoundPressed()),
-                new TextureRegionDrawable(assetScene2d.getSoundChecked()));
-        Label l = new Label("insane!", labelStyleNormal);
-        table.add(b).height(b.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.add(stack).height(easy.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(l).padTop(AbstractScreen.PAD / 2);
+        table.add(difficultyLabel);
         table.row();
-        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.add(shooting).height(shooting.getHeight()).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(shootingLabel).padTop(AbstractScreen.PAD / 2);
+        table.add(shootingLabel);
 
         // Events
         music.addListener(
@@ -245,6 +266,87 @@ public class SettingsScreen extends AbstractScreen {
                 return true;
             }
         });
+
+        easy.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+
+                        // todo debo setear la propiedad
+                        easy.setVisible(false);
+                        medium.setVisible(true);
+                        hard.setVisible(false);
+                        difficultyLabel.setText(mediumDifficultyText);
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        medium.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+
+                        // todo debo setear la propiedad
+                        easy.setVisible(false);
+                        medium.setVisible(false);
+                        hard.setVisible(true);
+                        difficultyLabel.setText(hardDifficultyText);
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        hard.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+
+                        // todo debo setear la propiedad
+                        easy.setVisible(true);
+                        medium.setVisible(false);
+                        hard.setVisible(false);
+                        difficultyLabel.setText(easyDifficultyText);
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+
+        difficultyLabel.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        difficultyLabel.setColor(DEFAULT_COLOR);
+                        // todo, voy por acá, no defini estoy aun pero seria leer la propiedad y en base a eso discriminar texto y botones
+                        // creo que podría hacer 3 metodos seteasy, sethard, setmedim que lean la propety (seteada antes) y cambien texto y botones.
+                        toggleShootingLabel();
+                        save();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        shootingLabel.setColor(COLOR_LABEL_PRESSED);
+                        return true;
+                    }
+                });
 
         shooting.addListener(
                 new InputListener(){
