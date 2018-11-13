@@ -113,7 +113,6 @@ public class B2WorldCreator {
     private Array<PowerBox> powerBoxes;
     private Array<Item> items;
     private Array<Weapon> weapons;
-    private float handicap;
 
     private LinkedBlockingQueue<ActorDef> actorsToCreate;
     private ArrayMap<String, String> arrayMapDebug;  // Ordered map
@@ -133,6 +132,7 @@ public class B2WorldCreator {
         weapons = new Array<Weapon>();
 
         // Difficulty
+        float handicap;
         switch (GameSettings.getInstance().getDifficulty()) {
             case EASY:
                 handicap = EASY_PROB;
@@ -142,6 +142,9 @@ public class B2WorldCreator {
                 break;
             case HARD:
                 handicap = HARD_PROB;
+                break;
+            default:
+                handicap = MEDIUM_PROB;
                 break;
         }
 

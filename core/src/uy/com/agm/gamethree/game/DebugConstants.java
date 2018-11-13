@@ -18,7 +18,7 @@ public class DebugConstants {
     public static final boolean HIDE_BACKGROUND = false && TURN_ON_DEBUG;
 
     // Shows/hides FPS counter
-    public static final boolean SHOW_FPS = true && TURN_ON_DEBUG;
+    public static final boolean SHOW_FPS = false && TURN_ON_DEBUG;
 
     // Prints box2d bodies count
     public static final boolean DEBUG_BODY_COUNT = false && TURN_ON_DEBUG;
