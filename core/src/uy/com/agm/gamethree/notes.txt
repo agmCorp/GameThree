@@ -9,6 +9,7 @@ COSAS:
 
 PROXIMAS VERSIONES
 ------------------
+- hacer videos, cambiar las imagenes de la playStore y github porque cambio el hud.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.
 - Creo que showRedFlash debería estar en dimScreen. Hay que ver si su help también.
@@ -26,7 +27,6 @@ support this game:
 +$1.00 +$2.00 +$5.00 +$10.00
 Pay with paypal, pay with card bitcoin
 Agregar dir de mail de contacto.
-- hacer videos cuando termine los corazones, cambiar las imagenes de la playStore y github porque cambio el hud.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank, capaz en una segunda pantalla.
