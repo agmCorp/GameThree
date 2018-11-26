@@ -9,6 +9,8 @@ COSAS:
 
 PROXIMAS VERSIONES
 ------------------
+- agregar google play game services
+- agregar rate this game
 - hacer videos, cambiar las imagenes de la playStore y github porque cambio el hud.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.
