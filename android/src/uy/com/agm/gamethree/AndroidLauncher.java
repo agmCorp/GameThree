@@ -1,11 +1,15 @@
 package uy.com.agm.gamethree;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
-import com.admob.IAdsController;
+import uy.com.agm.gamethree.admob.IAdsController;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -13,19 +17,49 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.LeaderboardsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
+import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.playservices.IPlayServices;
 
-public class AndroidLauncher extends AndroidApplication implements IAdsController {
+import static com.badlogic.gdx.Gdx.app;
+
+public class AndroidLauncher extends AndroidApplication implements IAdsController, IPlayServices {
     private static final String TAG = AndroidLauncher.class.getName();
 
-    // Constants
-    private static final String ADMOB_APP_ID = "ca-app-pub-3296591416050248~7409810295";
-    private static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3296591416050248/6643523530"; // TEST ca-app-pub-3940256099942544/1033173712
-    private static final String TEST_DEVICE = "197A3D43D6743696E99BE0EE25126FF1";
+    // Request codes we use when invoking an external activity
+    private static final int RC_UNUSED = 5001;
+    private static final int RC_SIGN_IN = 9001;
 
+    // URL on PlayStore
+    private static final String URL_PLAY_STORE = "https://play.google.com/store/apps/details?id=uy.com.agm.gamethree";
+
+    // AdMob
     private InterstitialAd interstitialAd;
+
+    // AdMob callback
     private Runnable callbackOnAdClose;
+
+    // Google play game services
+    private GoogleSignInClient googleSignInClient;
+    private LeaderboardsClient leaderboardsClient;
+
+    // GPGS Callbacks
+    private Runnable callbackOnSilentlyConnected;
+    private Runnable callbackOnSilentlyDisconnected;
+    private Runnable callbackOnConnected;
+    private Runnable callbackOnDisconnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +74,39 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
         config.useWakelock = true;
         config.hideStatusBar = true;
 
-        initialize(new GameThree(this), config);
+        initialize(new GameThree(this, this), config);
 
-        // Initialize Ads
-        setupAds();
+        // Advertisements
+        adMobSetup();
+
+        // Google play game services
+        gpgsSetup();
     }
 
-    private void setupAds() {
-        MobileAds.initialize(this, ADMOB_APP_ID);
+    private void adMobSetup() {
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(INTERSTITIAL_AD_UNIT_ID);
+        interstitialAd.setAdUnitId(DebugConstants.TEST_ADS ? getString(R.string.admob_interstitial_unit_id_test) : getString(R.string.admob_interstitial_unit_id));
         callbackOnAdClose = null;
         setInterstitialAdListener();
 
         // Load the first interstitial
         loadInterstitialAd();
+    }
+
+    private void gpgsSetup() {
+        // Create the client used to sign in to Google services.
+        googleSignInClient = GoogleSignIn.getClient(this,
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
+
+        // Client variable
+        leaderboardsClient = null;
+
+        // GPGS Callbacks
+        callbackOnSilentlyConnected = null;
+        callbackOnSilentlyDisconnected = null;
+        callbackOnConnected = null;
+        callbackOnDisconnected = null;
     }
 
     private void setInterstitialAdListener() {
@@ -108,7 +160,7 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
 
     private void loadInterstitialAd() {
         AdRequest request = new AdRequest.Builder()
-                .addTestDevice(TEST_DEVICE)
+                .addTestDevice(getString(R.string.admob_test_device))
                 .build();
         interstitialAd.loadAd(request);
     }
@@ -152,5 +204,247 @@ public class AndroidLauncher extends AndroidApplication implements IAdsControlle
             isConnected = false;
         }
         return isConnected;
+    }
+
+
+    @Override
+    public void showToast(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(AndroidLauncher.this, message, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    @Override
+    public void signInSilently(Runnable callbackOnSilentlyConnected, Runnable callbackOnSilentlyDisconnected) {
+        // Code that is executed on connection success or on connection failure
+        this.callbackOnSilentlyConnected = callbackOnSilentlyConnected;
+        this.callbackOnSilentlyDisconnected = callbackOnSilentlyDisconnected;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startSignInSilently();
+            }
+        });
+    }
+
+    private void startSignInSilently() {
+        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleSignInAccount != null) {
+            Gdx.app.debug(TAG, "**** signInSilently(): already signed in");
+            onSilentlyConnected(googleSignInAccount);
+        } else {
+            googleSignInClient.silentSignIn().addOnCompleteListener(this,
+                    new OnCompleteListener<GoogleSignInAccount>() {
+                        @Override
+                        public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                            if (task.isSuccessful()) {
+                                Gdx.app.debug(TAG, "**** signInSilently(): success");
+                                onSilentlyConnected(task.getResult());
+                            } else {
+                                Gdx.app.debug(TAG, "**** signInSilently(): failure " + task.getException());
+                                onSilentlyDisconnected();
+                            }
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void signIn(Runnable callbackOnConnected, Runnable callbackOnDisconnected) {
+        // Code that is executed on connection success or on connection failure
+        this.callbackOnConnected = callbackOnConnected;
+        this.callbackOnDisconnected = callbackOnDisconnected;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startSignInIntent();
+            }
+        });
+    }
+
+    private void startSignInIntent() {
+        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleSignInAccount != null) {
+            Gdx.app.debug(TAG, "**** startSignInIntent(): already signed in");
+            onConnected(googleSignInAccount);
+        } else {
+            startActivityForResult(googleSignInClient.getSignInIntent(), RC_SIGN_IN);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task =
+                    GoogleSignIn.getSignedInAccountFromIntent(intent);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Gdx.app.debug(TAG, "**** onActivityResult(): success");
+                onConnected(account);
+            } catch (ApiException apiException) {
+                String message = apiException.getMessage();
+                if (message == null || message.isEmpty()) {
+                    message = getString(R.string.signin_other_error);
+                }
+                Gdx.app.debug(TAG, "**** onActivityResult(): failure " + message);
+                onDisconnected();
+            }
+        }
+    }
+    private void onSilentlyConnected(GoogleSignInAccount googleSignInAccount) {
+        getLeaderboardsClient(googleSignInAccount);
+        doSilentlyCallback();
+    }
+
+    private void onConnected(GoogleSignInAccount googleSignInAccount) {
+        getLeaderboardsClient(googleSignInAccount);
+        doCallback();
+    }
+
+    private void getLeaderboardsClient(GoogleSignInAccount googleSignInAccount) {
+        leaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
+    }
+
+    private void doSilentlyCallback() {
+        if (callbackOnSilentlyConnected != null) {
+            // Instead of running callbackOnSilentlyConnected in the UI thread (callbackOnSilentlyConnected.run), we run it in
+            // the badlogic rendering thread.
+            app.postRunnable(callbackOnSilentlyConnected);
+        }
+    }
+
+    private void doCallback() {
+        if (callbackOnConnected != null) {
+            // Instead of running callbackOnConnected in the UI thread (callbackOnConnected.run), we run it in
+            // the badlogic rendering thread.
+            app.postRunnable(callbackOnConnected);
+        }
+    }
+
+    private void onSilentlyDisconnected() {
+        leaderboardsClient = null;
+
+        if (callbackOnSilentlyDisconnected != null) {
+            // Instead of running callbackOnSilentlyDisconnected in the UI thread (callbackOnSilentlyDisconnected.run), we run it in
+            // the badlogic rendering thread.
+            app.postRunnable(callbackOnSilentlyDisconnected);
+        }
+    }
+
+    private void onDisconnected() {
+        leaderboardsClient = null;
+
+        if (callbackOnDisconnected != null) {
+            // Instead of running callbackOnDisconnected in the UI thread (callbackOnDisconnected.run), we run it in
+            // the badlogic rendering thread.
+            app.postRunnable(callbackOnDisconnected);
+        }
+    }
+
+    @Override
+    public boolean isSignedIn() {
+        return GoogleSignIn.getLastSignedInAccount(this) != null;
+    }
+
+    @Override
+    public void signOut() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                signOutImp();
+            }
+        });
+    }
+
+    private void signOutImp() {
+        if (isSignedIn()) {
+            googleSignInClient.signOut().addOnCompleteListener(this,
+                    new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            boolean successful = task.isSuccessful();
+                            Gdx.app.debug(TAG, "**** signOut(): " + (successful ? "success" : "failed"));
+                            onDisconnected();
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void rateGame() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rateGameImp();
+            }
+        });
+    }
+
+    private void rateGameImp() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URL_PLAY_STORE)));
+    }
+
+    @Override
+    public void submitScore(final int highScore) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                submitScoreImp(highScore);
+            }
+        });
+    }
+
+    private void submitScoreImp(int highScore) {
+        if (isSignedIn()) {
+            leaderboardsClient.submitScore(getString(R.string.gpgs_leaderboard), highScore);
+        }
+    }
+
+    @Override
+    public void showLeaderboards() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showLeaderboardsImp();
+            }
+        });
+    }
+
+    private void showLeaderboardsImp() {
+        if (isSignedIn()) {
+            leaderboardsClient.getAllLeaderboardsIntent()
+                    .addOnSuccessListener(new OnSuccessListener<Intent>() {
+                        @Override
+                        public void onSuccess(Intent intent) {
+                            startActivityForResult(intent, RC_UNUSED);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            handleException(e, getString(R.string.leaderboards_exception));
+                        }
+                    });
+        }
+    }
+
+    private void handleException(Exception e, String details) {
+        int status = 0;
+
+        if (e instanceof ApiException) {
+            ApiException apiException = (ApiException) e;
+            status = apiException.getStatusCode();
+        }
+
+        String message = getString(R.string.status_exception_error, details, status, e);
+
+        Gdx.app.debug(TAG, "**** handleException(): " + message);
     }
 }

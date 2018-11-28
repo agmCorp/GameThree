@@ -114,6 +114,9 @@ public class SplashScreen extends AbstractScreen {
 
         // Load the rest of assets asynchronously
         Assets.getInstance().init(assetManager);
+
+        // Sign in silently on Google play game services
+        ScreenManager.getInstance().getGame().getPlayServices().signInSilently(null, null);
     }
 
     @Override

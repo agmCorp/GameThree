@@ -1,7 +1,7 @@
 package uy.com.agm.gamethree.game;
 
-import com.admob.DummyAdsController;
-import com.admob.IAdsController;
+import uy.com.agm.gamethree.admob.DummyAdsController;
+import uy.com.agm.gamethree.admob.IAdsController;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.rafaskoberg.gdx.typinglabel.TypingConfig;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.playservices.IPlayServices;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
@@ -19,9 +20,11 @@ public class GameThree extends DirectedGame {
     private SpriteBatch gameBatch;
     private ShapeRenderer gameShapeRenderer;
     private IAdsController adsController;
+    private IPlayServices playServices;
 
-    public GameThree(IAdsController adsController){
-        this.adsController = adsController != null ? adsController : new DummyAdsController();
+    public GameThree(IAdsController adsController, IPlayServices playServices){
+        this.adsController = adsController;
+        this.playServices = playServices;
     }
 
     @Override
@@ -74,5 +77,9 @@ public class GameThree extends DirectedGame {
 
     public IAdsController getAdsController() {
         return adsController;
+    }
+
+    public IPlayServices getPlayServices() {
+        return playServices;
     }
 }

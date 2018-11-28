@@ -1,4 +1,4 @@
-package com.admob;
+package uy.com.agm.gamethree.admob;
 
 /**
  * Created by AGM on 6/17/2018.

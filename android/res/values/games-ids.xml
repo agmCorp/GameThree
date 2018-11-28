@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3296591416050248~7409810295</string>
+    <string name="admob_test_device" translatable="false">197A3D43D6743696E99BE0EE25126FF1</string>
+    <string name="admob_interstitial_unit_id" translatable="false">ca-app-pub-3296591416050248/6643523530</string>
+    <string name="admob_interstitial_unit_id_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="gpgs_app_id" translatable="false">46945550264</string>
+    <string name="gpgs_package_name" translatable="false">uy.com.agm.gamethree</string>
+    <string name="gpgs_leaderboard" translatable="false">CgkIuP-w8a4BEAIQAw</string>
+</resources>

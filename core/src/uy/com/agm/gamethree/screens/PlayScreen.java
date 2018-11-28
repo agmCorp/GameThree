@@ -1,6 +1,6 @@
 package uy.com.agm.gamethree.screens;
 
-import com.admob.IAdsController;
+import uy.com.agm.gamethree.admob.IAdsController;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;

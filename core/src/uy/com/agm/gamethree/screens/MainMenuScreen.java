@@ -13,7 +13,10 @@ import com.badlogic.gdx.utils.I18NBundle;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.playservices.IPlayServices;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -26,11 +29,21 @@ public class MainMenuScreen extends AbstractScreen {
     private static final String TAG = MainMenuScreen.class.getName();
 
     // Constants
-    private static final int COLUMNS = 4;
-    private static final float BUTTON_WIDTH = 400 / COLUMNS;
+    private static final int COLUMNS = 3;
+    private static final float BUTTON_WIDTH = 300 / COLUMNS;
+
+    private I18NBundle i18NGameThreeBundle;
+    private GameSettings prefs;
+    protected IPlayServices playServices;
 
     public MainMenuScreen() {
         super();
+
+        i18NGameThreeBundle = Assets.getInstance().getI18NGameThree().getI18NGameThreeBundle();
+        prefs = GameSettings.getInstance();
+
+        // Google play game services
+        playServices = ScreenManager.getInstance().getGame().getPlayServices();
 
         // Play menu music
         AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongMainMenu(), true);
@@ -65,30 +78,66 @@ public class MainMenuScreen extends AbstractScreen {
         Image wipeThemOut = new Image(assetScene2d.getWipeThemOut());
         ImageButton play = new ImageButton(new TextureRegionDrawable(assetScene2d.getPlay()),
                 new TextureRegionDrawable(assetScene2d.getPlayPressed()));
+
         ImageButton settings = new ImageButton(new TextureRegionDrawable(assetScene2d.getSettings()),
                 new TextureRegionDrawable(assetScene2d.getSettingsPressed()));
-        ImageButton highScores = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
-                new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
         ImageButton help = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
                 new TextureRegionDrawable(assetScene2d.getHelpPressed()));
+        final ImageButton rateGame = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
+                new TextureRegionDrawable(assetScene2d.getHelpPressed()));
+        ImageButton showLeaderboards = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
+                new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
+        ImageButton highScores = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
+                new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
         ImageButton credits = new ImageButton(new TextureRegionDrawable(assetScene2d.getCredits()),
                 new TextureRegionDrawable(assetScene2d.getCreditsPressed()));
 
         // Add values
-        table.add(wipeThemOut).colspan(COLUMNS).padTop(AbstractScreen.PAD * 2);
+        table.add(wipeThemOut).colspan(COLUMNS).padTop(AbstractScreen.PAD * 5 / 3);
         table.row();
         table.add(play).colspan(COLUMNS).height(play.getHeight());
-        table.row().height(settings.getHeight()).padTop(AbstractScreen.PAD);
+        table.row().height(settings.getHeight()).padTop(AbstractScreen.PAD / 2);
         table.add(settings).width(BUTTON_WIDTH);
-        table.add(highScores).width(BUTTON_WIDTH);
         table.add(help).width(BUTTON_WIDTH);
+        table.add(rateGame).width(BUTTON_WIDTH);
+        table.row().height(settings.getHeight()).padTop(AbstractScreen.PAD / 2);
+        table.add(showLeaderboards).width(BUTTON_WIDTH);
+        table.add(highScores).width(BUTTON_WIDTH);
         table.add(credits).width(BUTTON_WIDTH);
 
         // Events
         play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS, ScreenTransitionEnum.SLIDE_LEFT_EXP));
-        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        rateGame.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        rateGame();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        showLeaderboards.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        showLeaderboards();
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        highScores.addListener(UIFactory.screenNavigationListener(ScreenEnum.HIGH_SCORES, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         credits.addListener(UIFactory.screenNavigationListener(ScreenEnum.CREDITS, ScreenTransitionEnum.SLIDE_LEFT_EXP));
 
         // Adds table to stage
@@ -119,7 +168,7 @@ public class MainMenuScreen extends AbstractScreen {
         final Label exitGameLabel = new Label(i18NGameThreeBundle.format("mainMenu.exitGame"), labelStyleNormal);
 
         // Add values
-        table.add(exitGameLabel).padBottom(AbstractScreen.PAD * 2);
+        table.add(exitGameLabel).padBottom(AbstractScreen.PAD * 4 / 3);
 
         exitGameLabel.addListener(
                 new InputListener(){
@@ -146,5 +195,31 @@ public class MainMenuScreen extends AbstractScreen {
     public void goBack() {
         playClick();
         Gdx.app.exit();
+    }
+
+    private void showLeaderboards() {
+        if (playServices.isWifiConnected()) {
+            if (playServices.isSignedIn()) {
+                playServices.showLeaderboards();
+            } else {
+                playServices.signIn(new Runnable() {
+                    @Override
+                    public void run() {
+                        playServices.submitScore(prefs.getHighScore());
+                        playServices.showLeaderboards();
+                    }
+                }, null);
+            }
+        } else {
+            playServices.showToast(i18NGameThreeBundle.format("mainMenu.wifiError"));
+        }
+    }
+
+    private void rateGame() {
+        playServices.rateGame();
+    }
+
+    private void signOut() {
+        playServices.signOut();
     }
 }

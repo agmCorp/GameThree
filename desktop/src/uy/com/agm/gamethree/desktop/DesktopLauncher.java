@@ -3,7 +3,9 @@ package uy.com.agm.gamethree.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
+import uy.com.agm.gamethree.admob.DummyAdsController;
 import uy.com.agm.gamethree.game.GameThree;
+import uy.com.agm.gamethree.playservices.DummyPlayServices;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 
 public class DesktopLauncher {
@@ -17,6 +19,6 @@ public class DesktopLauncher {
 		config.title = TITLE;
 		config.width = AbstractScreen.V_WIDTH;
 		config.height = AbstractScreen.V_HEIGHT;
-		new LwjglApplication(new GameThree(null), config);
+		new LwjglApplication(new GameThree(new DummyAdsController(), new DummyPlayServices()), config);
 	}
 }
