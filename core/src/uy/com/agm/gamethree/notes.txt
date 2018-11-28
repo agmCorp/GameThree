@@ -2,6 +2,7 @@ actualizar en google play de wipe que tiene google play services y que podes set
 falta subir el scrore cuando paso de nivel
 falta dar de alta en la consola
 hacer los botones
+ligut en exit
 
 
 
