@@ -1,3 +1,10 @@
+actualizar en google play de wipe que tiene google play services y que podes setear el nivel de dificultad
+falta subir el scrore cuando paso de nivel
+falta dar de alta en la consola
+hacer los botones
+
+
+
 CUANDO HAGA UN PROXIMO JUEGO
 ----------------------------
 COSAS:
