@@ -48,10 +48,14 @@ public class AssetScene2d {
     private TextureRegion playPressed;
     private TextureRegion settings;
     private TextureRegion settingsPressed;
-    private TextureRegion highScores;
-    private TextureRegion highScoresPressed;
     private TextureRegion help;
     private TextureRegion helpPressed;
+    private TextureRegion rateGame;
+    private TextureRegion rateGamePressed;
+    private TextureRegion showLeaderboards;
+    private TextureRegion showLeaderboardsPressed;
+    private TextureRegion highScores;
+    private TextureRegion highScoresPressed;
     private TextureRegion credits;
     private TextureRegion creditsPressed;
     private TextureRegion music;
@@ -153,10 +157,14 @@ public class AssetScene2d {
         playPressed = atlasUI.findRegion("playPressed");
         settings = atlasUI.findRegion("settings");
         settingsPressed = atlasUI.findRegion("settingsPressed");
-        highScores = atlasUI.findRegion("highScores");
-        highScoresPressed = atlasUI.findRegion("highScoresPressed");
         help = atlasUI.findRegion("help");
         helpPressed = atlasUI.findRegion("helpPressed");
+        rateGame = atlasUI.findRegion("rateGame");
+        rateGamePressed = atlasUI.findRegion("rateGamePressed");
+        showLeaderboards = atlasUI.findRegion("showLeaderboards");
+        showLeaderboardsPressed = atlasUI.findRegion("showLeaderboardsPressed");
+        highScores = atlasUI.findRegion("highScores");
+        highScoresPressed = atlasUI.findRegion("highScoresPressed");
         credits = atlasUI.findRegion("credits");
         creditsPressed = atlasUI.findRegion("creditsPressed");
         music = atlasUI.findRegion("music");
@@ -371,20 +379,36 @@ public class AssetScene2d {
         return settingsPressed;
     }
 
-    public TextureRegion getHighScores() {
-        return highScores;
-    }
-
-    public TextureRegion getHighScoresPressed() {
-        return highScoresPressed;
-    }
-
     public TextureRegion getHelp() {
         return help;
     }
 
     public TextureRegion getHelpPressed() {
         return helpPressed;
+    }
+
+    public TextureRegion getRateGame() {
+        return rateGame;
+    }
+
+    public TextureRegion getRateGamePressed() {
+        return rateGamePressed;
+    }
+
+    public TextureRegion getShowLeaderboards() {
+        return showLeaderboards;
+    }
+
+    public TextureRegion getShowLeaderboardsPressed() {
+        return showLeaderboardsPressed;
+    }
+
+    public TextureRegion getHighScores() {
+        return highScores;
+    }
+
+    public TextureRegion getHighScoresPressed() {
+        return highScoresPressed;
     }
 
     public TextureRegion getCredits() {

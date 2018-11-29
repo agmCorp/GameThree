@@ -83,10 +83,10 @@ public class MainMenuScreen extends AbstractScreen {
                 new TextureRegionDrawable(assetScene2d.getSettingsPressed()));
         ImageButton help = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
                 new TextureRegionDrawable(assetScene2d.getHelpPressed()));
-        final ImageButton rateGame = new ImageButton(new TextureRegionDrawable(assetScene2d.getHelp()),
-                new TextureRegionDrawable(assetScene2d.getHelpPressed()));
-        ImageButton showLeaderboards = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
-                new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
+        final ImageButton rateGame = new ImageButton(new TextureRegionDrawable(assetScene2d.getRateGame()),
+                new TextureRegionDrawable(assetScene2d.getRateGamePressed()));
+        ImageButton showLeaderboards = new ImageButton(new TextureRegionDrawable(assetScene2d.getShowLeaderboards()),
+                new TextureRegionDrawable(assetScene2d.getShowLeaderboardsPressed()));
         ImageButton highScores = new ImageButton(new TextureRegionDrawable(assetScene2d.getHighScores()),
                 new TextureRegionDrawable(assetScene2d.getHighScoresPressed()));
         ImageButton credits = new ImageButton(new TextureRegionDrawable(assetScene2d.getCredits()),
@@ -177,6 +177,7 @@ public class MainMenuScreen extends AbstractScreen {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         exitGameLabel.setColor(DEFAULT_COLOR);
+                        signOut();
                         Gdx.app.exit();
                     }
 

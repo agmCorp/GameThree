@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -81,6 +82,9 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Saves preferences
         prefs.save();
+
+        // Leaderboards (always submit score)
+        ScreenManager.getInstance().getGame().getPlayServices().submitScore(this.gameScore);
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getApplause());

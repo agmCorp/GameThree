@@ -1,11 +1,3 @@
-actualizar en google play de wipe que tiene google play services y que podes setear el nivel de dificultad
-falta subir el scrore cuando paso de nivel
-falta dar de alta en la consola
-hacer los botones
-ligut en exit
-
-
-
 CUANDO HAGA UN PROXIMO JUEGO
 ----------------------------
 COSAS:
@@ -17,8 +9,6 @@ COSAS:
 
 PROXIMAS VERSIONES
 ------------------
-- agregar google play game services
-- agregar rate this game
 - hacer videos, cambiar las imagenes de la playStore y github porque cambio el hud.
 - buscar algun popup automatico para pedir ranking y opinion.
 - ver algún robot para aumentar bajadas.
@@ -40,8 +30,6 @@ Agregar dir de mail de contacto.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - En la pantalla de creditos poner donación y rank, capaz en una segunda pantalla.
-- Integrar OpenFeint (google play services) a mi juego. Necesito al menos 5 logros. Tengo buenos tutoriales en bookmarks
-libgdx/googlePlayServicesOpenFeint. No se si vale la pena el esfuerzo.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
 puedo poner un boton para dar puntos si ves un anuncio.
 
@@ -652,7 +640,7 @@ LECCIONES APRENDIDAS
     Diseñador gráfico: estetica de pantallas y personajes
     Animador para personajes
     Audio: Musica de fondo, efectos
-    Campañas y recursos externos: para adMob, openFeint, redes sociales, playstore,
+    Campañas y recursos externos: para adMob, google play game services, redes sociales, playstore,
         avisos push al celular, sitios web propios, etc.
     Alquien que se encargue del diseño de niveles y sobre todas las cosas de la jubabilidad
 

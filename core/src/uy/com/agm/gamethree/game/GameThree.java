@@ -1,13 +1,12 @@
 package uy.com.agm.gamethree.game;
 
-import uy.com.agm.gamethree.admob.DummyAdsController;
-import uy.com.agm.gamethree.admob.IAdsController;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.rafaskoberg.gdx.typinglabel.TypingConfig;
 
+import uy.com.agm.gamethree.admob.IAdsController;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.playservices.IPlayServices;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
