@@ -29,7 +29,6 @@ Pay with paypal, pay with card bitcoin
 Agregar dir de mail de contacto.
 - Poner un banner en la interfase scene2d? En algunas pantallas se puede, no en todas.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
-- En la pantalla de creditos poner donación y rank, capaz en una segunda pantalla.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
 puedo poner un boton para dar puntos si ves un anuncio.
 
@@ -50,7 +49,7 @@ moviendose cuando estoy dyingup/down...que retomen el movimiento cuando volvi a 
 PRIORIDAD 2
 -----------
 - una cosa que se podria hacer es ponerle una pequeña barrita de energia a los enemigos que mueren
-por varios disparos.
+por varios disparos o agregar un sprite con el puntaje que se mueva hacia arriba desapareciendo al matarlo.
 
 PRIORIDAD 3
 -----------
@@ -678,6 +677,14 @@ LECCIONES APRENDIDAS
     C:\Alvaro\Develop\Android\AndroidSDK
     El adb esta en C:\Alvaro\Develop\Android\AndroidSDK\platform-tools
     Lo anterior tambien lo puedo ver en el archivo local.properties que esta dentro de mi proyecto (GameThree).
+33)
+    Google play game services
+    utilicé este manual: https://www.versionpb.com/tutorials/step-step-tutorials-libgdx-basic-setup-libgdx/implementing-google-play-services-leaderboards-in-libgdx/
+    Me sirve más que nada para la parte de la Google Play Console porque la parte de implementación cambió totalmente.
+    Linked applications:
+    	8A:14:9F:36:36:91:AC:2D:9D:21:32:30:C9:0E:C3:61:A0:F0:AD:8D <- wipe them out! debug work (clave sha1 de la maquina del trabajo)
+    	C4:9C:EB:0B:FE:14:98:2C:68:D5:06:74:16:29:FC:AA:66:42:C6:F6 <- wipe them out! debug casa (clave sha1 de la maquina de casa)
+    	11:62:B5:B0:18:0F:A8:15:83:C0:11:70:2E:B9:F4:C7:15:FA:3D:D2 <- esta fue la que trae google por defecto que es igual a la de mi jks release
 
 IOS
 ---
