@@ -31,6 +31,8 @@ Agregar dir de mail de contacto.
 Poner un adv al volver en el boton de la pantalla game over. Es importante, da plata.
 - Con los puntos que voy generando (monedas recogidas), se pueden comprar nuevos poderes o mas vidas o lo que se me ocurra.
 puedo poner un boton para dar puntos si ves un anuncio.
+- En la versión escritorio, los botones rateGame y showLeaderboards como no los puedo desaparecer, deberían tirar un dialog scene2d para avisar que no
+están funcionales.
 
 PRIORIDAD 1
 -----------
