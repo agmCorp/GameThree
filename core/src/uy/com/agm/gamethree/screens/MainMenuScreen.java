@@ -201,19 +201,23 @@ public class MainMenuScreen extends AbstractScreen {
     private void showLeaderboards() {
         if (playServices.isWifiConnected()) {
             if (playServices.isSignedIn()) {
-                playServices.showLeaderboards();
+                showLeaderboardsImp();
             } else {
                 playServices.signIn(new Runnable() {
                     @Override
                     public void run() {
-                        playServices.submitScore(prefs.getHighScore());
-                        playServices.showLeaderboards();
+                        showLeaderboards();
                     }
                 }, null);
             }
         } else {
             playServices.showToast(i18NGameThreeBundle.format("mainMenu.wifiError"));
         }
+    }
+
+    private void showLeaderboardsImp() {
+        playServices.submitScore(prefs.getHighScore());
+        playServices.showLeaderboards();
     }
 
     private void rateGame() {

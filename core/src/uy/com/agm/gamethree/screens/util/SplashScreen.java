@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import uy.com.agm.gamethree.assets.Assets;
+import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.playservices.IPlayServices;
 import uy.com.agm.gamethree.screens.AbstractScreen;
 import uy.com.agm.gamethree.widget.AnimatedActor;
 
@@ -115,8 +117,29 @@ public class SplashScreen extends AbstractScreen {
         // Load the rest of assets asynchronously
         Assets.getInstance().init(assetManager);
 
-        // Sign in silently on Google play game services
-        ScreenManager.getInstance().getGame().getPlayServices().signInSilently(null, null);
+        // Sign in on Google play game services
+        IPlayServices playServices = ScreenManager.getInstance().getGame().getPlayServices();
+        if (playServices.isWifiConnected()) {
+            playServices.signInSilently(new Runnable() {
+                @Override
+                public void run() {
+                    submitScore();
+                }
+            }, null);
+
+            if (!playServices.isSignedIn()) {
+                playServices.signIn(new Runnable() {
+                    @Override
+                    public void run() {
+                        submitScore();
+                    }
+                }, null);
+            }
+        } // I18NGameFourBundle probably hasn't been loaded yet
+    }
+
+    private void submitScore() {
+        ScreenManager.getInstance().getGame().getPlayServices().submitScore(GameSettings.getInstance().getHighScore());
     }
 
     @Override
