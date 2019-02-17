@@ -96,7 +96,7 @@ public class GameSettings {
         volSound = MathUtils.clamp(prefs.getFloat(VOLUME_SOUND, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         volMusic = MathUtils.clamp(prefs.getFloat(VOLUME_MUSIC, DEFAULT_VOLUME), MIN_VOLUME, MAX_VOLUME);
         difficulty = Difficulty.valueOf(prefs.getString(DIFFICULTY, Difficulty.MEDIUM.toString()));;
-        manualShooting = prefs.getBoolean(MANUAL_SHOOTING, true);
+        manualShooting = prefs.getBoolean(MANUAL_SHOOTING, false);
         loadHighScores();
         loadLevels();
     }

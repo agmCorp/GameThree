@@ -653,10 +653,12 @@ LECCIONES APRENDIDAS
 
     Para bajar los audios de ambos, con f12/Networks abri las urls que dicen Media. A veces si el texto
     es corto no aparecen, basta con hacer un texto más largo. Al abrir esas urls en otra tab, puedo bajar el audio.
+    En la página principal de f12 puedo filtrar por media (botón al lado de filters) para que sea más sencillo.
+    Para borrar la pantalla hay un botón de "clear" a la izquierda del botón de "cámara".
 
     Para fusionar varios mp3s en uno solo, con audacity los abro todos. Supongamos que tengo track1 y track2, para
     fusionarlos (track1track2):
-        - abro ambos
+        - abro ambos (file/Import/Audio)
         - selecciono todo el track2 tocando el área donde dice el nombre del archivo (bien a la izquierda)
         - hago copy
         - hago paste al final de track1. Para seleccionar el punto final de track1 lo puedo hacer
@@ -667,7 +669,10 @@ LECCIONES APRENDIDAS
         - abro el primer audio, por ejemplo la voz que habla
         - hago drag and drop sobre ese audio con la musica background
         - ahi si doy play voy a ver que ambos se reproducen a la vez.
-        - ajusto el volumen del background (con + -)
+        - ajusto el volumen del background (con + -) (le puse -8db)
+        - para agergar una pequeña pausa al comienzo del audio de la historia, selecciono alguna parte del silencio
+        y luego selecciono el comienzo del audio y le doy paste.
+        - para que termine "en bajada", seleccionar una parte final del audio y en efectos, elegir fade out.
         - luego voy a file y le doy export, allí me avisa que va a fusionar todo en un track stereo.
 
 31)

@@ -238,29 +238,37 @@ Para definir hasta donde se hace un for de manera elegante:
 for (int i = 0, n = size; i < n; i++)
 
 -----------------------------------------------------------------------------------
-HISTORIA PARA SER LEIDA (con comas para hacer pausas). Cada renglon un audio.
+HISTORIA PARA SER LEIDA (con comas para hacer pausas).
+Si bien la voz puede leeer todo el texto de corrido, mejor hacer cada renglón un audio.
 
-A long time ago, the Matsumoto clan was attacked by four indescribable monsters and their evil army.
+A long time ago, the Mochizuki clan was attacked by four indescribable monsters and their evil army.
 
-In order to stop the invaders, Sensei Matsumoto joined forces with the Queen of the Forest, the Sorceress Marlena.
+To stop the invaders, Sensei Mochizuki joined forces with the Queen of the Forest, the Sorceress Marlena.
 
 Combining the most powerful spells with the secrets of the ancestral martial arts, the monsters were defeated and the whole army was seized and locked in cages in deep underground dungeons.
 
-As the years passed, friendship between Matsumoto and Marlena blossomed into romance, and a baby boy named Drako was born as the fruit and bond of their marriage.
+As the years passed, friendship between Mochizuki and Marlena blossomed into romance, and a baby boy named Drako was born as the fruit and bond of their marriage.
 
 Anticipating the worst, both parents trained their son in all manner of combat and sorcery skills.
 
 Today, this nightmare has come true, and the forces of darkness are free again.
 
-You and Drako are the only hope!
+Drako is the only hope!
 
-Your mission is to travel around the four worlds to destroy this army and its commanders.
+His mission is to travel around the four worlds to destroy this army and its commanders.
 
-Throughout this dangerous adventure, you will be able to pick up different items left there by Matsumoto and Marlena to help you.
+Throughout this dangerous adventure, he will be able to pick up different items left there by Mochizuki and Marlena to help him.
 
-Let strength and courage guide you both to succeed.
+Let strength and courage guide Drako to succeed.
 
-Good luck brave warriors!!
+Good luck brave warrior!!
+
+AMENAZA PARA SER LEÍDA (con comas para hacer pausas).
+Cada renglón un audio.
+
+You have destroyed my army! You listen to me scum! There won't be any place on earth you can hide! I'll find whatever hole you crawl into and pull you out!
+
+Then I'll destroy you with my bare hands!
 
 -----------------------------------------------------------------------------------
 
