@@ -35,7 +35,7 @@ public class BigBossScreen extends AbstractScreen {
     private static final float HIT_INTERVAL_TIME_SECONDS = 1.0f;
     private static final float HIT_ONE_ANIMATION_TIME_SECONDS = 6.0f;
     private static final float IDLE_ANIMATION_TIME_SECONDS = 9.0f;
-    private static final float FINALE_DURATION_SECONDS = 12.0f;
+    private static final float FINALE_DURATION_SECONDS = 21.0f;
 
     private float timeBeat;
     private boolean finish;

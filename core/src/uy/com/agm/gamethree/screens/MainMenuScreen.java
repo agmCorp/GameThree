@@ -108,8 +108,7 @@ public class MainMenuScreen extends AbstractScreen {
         // Events
         play.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         settings.addListener(UIFactory.screenNavigationListener(ScreenEnum.SETTINGS, ScreenTransitionEnum.SLIDE_LEFT_EXP));
-        //help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
-        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.GRAND_FINALE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
+        help.addListener(UIFactory.screenNavigationListener(ScreenEnum.HELP_ONE, ScreenTransitionEnum.SLIDE_LEFT_EXP));
         rateGame.addListener(
                 new InputListener(){
                     @Override

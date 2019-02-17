@@ -675,6 +675,8 @@ LECCIONES APRENDIDAS
         - para que termine "en bajada", seleccionar una parte final del audio y en efectos, elegir fade out.
         - luego voy a file y le doy export, allí me avisa que va a fusionar todo en un track stereo.
 
+        obs: a thread.ogg le tuve que aumentar 10 decibeles porque se escuchaba bajo.
+
 31)
     Cada vez que libere un nuevo apk (Build/Generate Signed APK) para la playStore, debo
     incrementar versionCode de android/build.gradle.
