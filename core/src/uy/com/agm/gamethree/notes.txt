@@ -164,27 +164,29 @@ Deberia haber quedado solucionado.
 
 TENGO
 -----
-- borders, edges, paths, obstacles, powerboxes, enemies, bosses, items, weapons
-- enemigos comunes 11 (uso 3 o 4 enemigos por nivel):
-one - amarillo
-two - murcielago
-three - bola negra
-four - congelados
-five - dragon en circulos
-six - rayo
-seven - se multiplica
-eight - bicho verde cometa
-nine - fenix
-ten - 2 circulos
-eleven - hombres de piedra
-twelve - vampirito violeta
-- bosses: 4
+- borders, edges, paths, obstacles, powerboxes (explosionB), enemies, bosses, items, weapons
+- enemigos comunes 12 (uso 3 o 4 enemigos por nivel):
+one (explosionH) - amarillo
+two (explosionA) - murcielago
+three (explosionN) - bola negra
+four (explosionD) - congelados
+five (explosionI) - dragon en circulos
+six (explosionG) - rayo
+seven (explosionO) - se multiplica
+eight (explosionF) - bicho verde cometa
+nine (explosionH) - fenix
+ten (explosionJ) - 2 circulos
+eleven (explosionK) - hombres de piedra
+twelve (explosionP) - vampirito violeta
+- bosses (explosionE): 4
 - poderes 5 -3 de habilidad, 2 de fuego- (2 poderes por nivel)
 - 1 moneda x 6
 - 1 shuriken
 - 1 item vidas
 - 1 item endurance (resistencia)
 - 1 your soul is mine
+
+Explosiones sin usar: L, M, C (la C debería centrarla en la imagen capaz)
 
 ESTIMACION
 ----------
