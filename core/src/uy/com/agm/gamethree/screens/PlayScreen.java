@@ -713,13 +713,14 @@ public class PlayScreen extends AbstractScreen {
         finish = !finish && player.isGameOver() && !newScreen;
         if (finish) {
             newScreen = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER, ScreenTransitionEnum.COLOR_FADE_BLACK);
+            ScreenManager.getInstance().showScreen(ScreenEnum.GAME_OVER, ScreenTransitionEnum.COLOR_FADE_BLACK, hud.getFinalScore(player.getPenalties()), hud.getPartialGameScore());
         }
 
         finish = !finish && isLevelCompleted(delta) && !newScreen;
         if (finish) {
             newScreen = true;
-            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, ScreenTransitionEnum.SLICE_UP_DOWN_10, level, hud.getScore(), player.getPenalties());
+            int penalties = player.getPenalties();
+            ScreenManager.getInstance().showScreen(ScreenEnum.LEVEL_COMPLETED, ScreenTransitionEnum.SLICE_UP_DOWN_10, level, hud.getScore(), penalties, hud.getFinalScore(penalties), hud.getPartialGameScore());
         }
     }
 

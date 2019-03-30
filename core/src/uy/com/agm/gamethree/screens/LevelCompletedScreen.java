@@ -18,7 +18,6 @@ import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.assets.scene2d.AssetStageCleared;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
-import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
 import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
@@ -42,7 +41,6 @@ public class LevelCompletedScreen extends AbstractScreen {
     private static final String TAG = LevelCompletedScreen.class.getName();
 
     // Constants
-    private static final int PENALTY_COST = 200;
     private static final float HAND_SCALE = 0.4f;
     private static final float HAND_X = 340.0f;
     private static final float HAND_Y = 70.0f;
@@ -54,14 +52,14 @@ public class LevelCompletedScreen extends AbstractScreen {
     private int nextLevel;
     private int currentScore;
     private int currentPenalties;
-    private int finalScore;
+    private int currentFinalScore;
     private int finalStars;
     private int gameScore;
     private int ranking;
     private boolean showNewHighScoreLabel;
     private boolean showNextLevelLabel;
 
-    public LevelCompletedScreen(Integer currentLevel, Integer currentScore, Integer currentPenalties) {
+    public LevelCompletedScreen(Integer currentLevel, Integer currentScore, Integer currentPenalties, Integer currentFinalScore, Integer partialGameScore) {
         super();
         GameSettings prefs = GameSettings.getInstance();
 
@@ -69,21 +67,17 @@ public class LevelCompletedScreen extends AbstractScreen {
         this.nextLevel = currentLevel + 1;
         this.currentScore = currentScore;
         this.currentPenalties = currentPenalties;
-        this.finalScore = Math.max(this.currentScore - this.currentPenalties * PENALTY_COST, this.currentScore / 2); // At most we take away half of your level score. We are good people :)
+        this.currentFinalScore = currentFinalScore;
         this.finalStars = getFinalStars(this.currentPenalties);
-        prefs.setLevelStateInfo(this.currentLevel, this.finalScore, this.finalStars);
-        this.gameScore = getGameScore();
+        this.gameScore = partialGameScore + currentFinalScore;
         this.ranking = prefs.updateRanking(this.gameScore);
         this.showNewHighScoreLabel = this.ranking >= 0;
         this.showNextLevelLabel = this.nextLevel <= GameSettings.MAX_LEVEL;
         if (this.showNextLevelLabel) {
             prefs.addNextLevel(this.nextLevel);
         }
-
-        // Saves preferences
+        prefs.setLevelStateInfo(this.currentLevel, this.currentFinalScore, this.finalStars);
         prefs.save();
-
-        // Leaderboards (always submit score)
         ScreenManager.getInstance().getGame().getPlayServices().submitScore(this.gameScore);
 
         // Audio FX
@@ -132,7 +126,7 @@ public class LevelCompletedScreen extends AbstractScreen {
 
         // Define our labels based on labelStyle
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
-        Label levelScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.levelScore", finalScore), labelStyleNormal);
+        Label levelScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.levelScore", currentFinalScore), labelStyleNormal);
         TypingLabelWorkaround gameScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.gameScore", gameScore), labelStyleNormal);
         Label newHighScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.newHighScore"), labelStyleNormal);
         TypingLabelWorkaround nextLevelLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.nextLevel"), labelStyleNormal);
@@ -236,14 +230,6 @@ public class LevelCompletedScreen extends AbstractScreen {
         table.add(highScoreLabel).padLeft(AbstractScreen.PAD / 2);
 
         return table;
-    }
-
-    private int getGameScore() {
-        int gameScore = 0;
-        for(LevelState levelState : GameSettings.getInstance().getLevels()) {
-            gameScore += levelState.getFinalScore();
-        }
-        return gameScore;
     }
 
     private int getFinalStars(int currentPenalties) {

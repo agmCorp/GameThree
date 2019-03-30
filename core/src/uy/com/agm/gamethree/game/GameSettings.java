@@ -27,21 +27,10 @@ public class GameSettings {
     private static final String PROGRESS = "progress";
     private static final float MIN_VOLUME = 0.0f;
     private static final float MAX_VOLUME = 1.0f;
+    private static final long TODAY = TimeUtils.millis();
     public static final int MAX_LEVEL = 4;
     public static final int MAX_RANKING = 5;
     public static final float DEFAULT_VOLUME = 0.5f;
-
-    // High scores
-    private static final int FIRST = 0;
-    private static final long FIRST_MILLIS = 222168600000L; // 15/01/1977 Mi cumple \(^-^)/
-    private static final int SECOND = 0;
-    private static final long SECOND_MILLIS = 327751800000L; // 21/05/1980 Pac-Man
-    private static final int THIRD = 0;
-    private static final long THIRD_MILLIS = 1531794009758L; // 16/07/2018 When this class was coded
-    private static final int FOURTH = 0;
-    private static final long FOURTH_MILLIS = 1532746800000L; // 28/07/2018 First release of this game
-    private static final int FIFTH = 0;
-    private static final long FIFTH_MILLIS = 1533956400000L; // 11/08/2018 When this class was refactored
 
     public enum Difficulty {
         EASY, MEDIUM, HARD
@@ -120,8 +109,8 @@ public class GameSettings {
     }
 
     private Array<HighScore> getDefaultHighScores() {
-        int scores[] = {FIRST, SECOND, THIRD, FOURTH, FIFTH};
-        long millis[] = {FIRST_MILLIS, SECOND_MILLIS, THIRD_MILLIS, FOURTH_MILLIS, FIFTH_MILLIS};
+        int scores[] = {0, 0, 0, 0, 0};
+        long millis[] = {TODAY, TODAY, TODAY, TODAY, TODAY};
         Array<HighScore> highScores = new Array<HighScore>();
         for (int i = 0; i < MAX_RANKING; i++) {
             highScores.add(new HighScore(i + 1, scores[i], millis[i]));

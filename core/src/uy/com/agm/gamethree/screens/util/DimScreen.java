@@ -20,6 +20,7 @@ import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
 import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.AbstractScreen;
+import uy.com.agm.gamethree.screens.Hud;
 import uy.com.agm.gamethree.screens.PlayScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 
@@ -168,8 +169,40 @@ public class DimScreen extends AbstractScreen {
         centerTable.add(aux).colspan(COLUMNS);
 
         // Events
-        levels.addListener(UIFactory.screenNavigationListener(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_DOWN));
-        reload.addListener(UIFactory.screenNavigationListener(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.SLIDE_DOWN, screen.getLevel()));
+        levels.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        updateRankings();
+
+                        // Display screen
+                        ScreenManager.getInstance().showScreen(ScreenEnum.SELECT_LEVEL, ScreenTransitionEnum.SLIDE_DOWN);
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
+        reload.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        updateRankings();
+
+                        // Display screen
+                        ScreenManager.getInstance().showScreen(ScreenEnum.PLAY_GAME, ScreenTransitionEnum.SLIDE_DOWN, screen.getLevel());
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
         playSmall.addListener(
                 new InputListener(){
                     @Override
@@ -184,7 +217,23 @@ public class DimScreen extends AbstractScreen {
                         return true;
                     }
                 });
-        home.addListener(UIFactory.screenNavigationListener(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN));
+        home.addListener(
+                new InputListener(){
+                    @Override
+                    public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                        // Audio FX
+                        AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
+                        updateRankings();
+
+                        // Display screen
+                        ScreenManager.getInstance().showScreen(ScreenEnum.MAIN_MENU, ScreenTransitionEnum.SLIDE_DOWN);
+                    }
+
+                    @Override
+                    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                        return true;
+                    }
+                });
         music.addListener(
                 new InputListener(){
                     @Override
@@ -192,7 +241,6 @@ public class DimScreen extends AbstractScreen {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         toggleMusic();
-                        save();
                     }
 
                     @Override
@@ -207,7 +255,6 @@ public class DimScreen extends AbstractScreen {
                         // Audio FX
                         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getClick());
                         toggleSound();
-                        save();
                     }
 
                     @Override
@@ -224,21 +271,28 @@ public class DimScreen extends AbstractScreen {
         centerTable.setTouchable(Touchable.disabled);
     }
 
+    private void updateRankings() {
+        Hud hud = screen.getHud();
+        int partialGameScore = hud.getPartialGameScore();
+        int currentFinalScore = hud.getFinalScore(screen.getCreator().getHero().getPenalties());
+        int gameScore = partialGameScore + currentFinalScore;
+        prefs.updateRanking(gameScore);
+        prefs.save();
+        ScreenManager.getInstance().getGame().getPlayServices().submitScore(gameScore);
+    }
 
     private void toggleMusic() {
         boolean musicOn = !music.isChecked();
         prefs.setVolMusic(musicOn ? defaultVolMusic : 0);
         prefs.setMusic(musicOn);
+        prefs.save();
     }
 
     private void toggleSound() {
         boolean soundOn = !sound.isChecked();
         prefs.setVolSound(soundOn ? defaultVolSound : 0);
         prefs.setSound(soundOn);
-    }
-
-    private void save() {
-        GameSettings.getInstance().save();
+        prefs.save();
     }
 
     private void defineUpperTable() {

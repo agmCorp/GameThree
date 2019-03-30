@@ -9,7 +9,9 @@ import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetGameOver;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
 import uy.com.agm.gamethree.screens.util.ScreenEnum;
+import uy.com.agm.gamethree.screens.util.ScreenManager;
 import uy.com.agm.gamethree.screens.util.ScreenTransitionEnum;
 import uy.com.agm.gamethree.screens.util.UIFactory;
 import uy.com.agm.gamethree.tools.AudioManager;
@@ -22,8 +24,14 @@ import uy.com.agm.gamethree.widget.AnimatedImage;
 public class GameOverScreen extends AbstractScreen {
     private static final String TAG = GameOverScreen.class.getName();
 
-    public GameOverScreen() {
+    public GameOverScreen(Integer currentFinalScore, Integer partialGameScore) {
         super();
+        GameSettings prefs = GameSettings.getInstance();
+
+        int gameScore = partialGameScore + currentFinalScore;
+        prefs.updateRanking(gameScore);
+        prefs.save();
+        ScreenManager.getInstance().getGame().getPlayServices().submitScore(gameScore);
 
         // Audio FX
         AudioManager.getInstance().playSound(Assets.getInstance().getSounds().getGameOver());

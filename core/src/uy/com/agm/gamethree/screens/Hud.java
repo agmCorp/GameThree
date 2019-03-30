@@ -15,6 +15,8 @@ import java.util.Locale;
 import uy.com.agm.gamethree.assets.Assets;
 import uy.com.agm.gamethree.assets.scene2d.AssetScene2d;
 import uy.com.agm.gamethree.game.DebugConstants;
+import uy.com.agm.gamethree.game.GameSettings;
+import uy.com.agm.gamethree.game.LevelState;
 import uy.com.agm.gamethree.screens.util.InfoScreen;
 import uy.com.agm.gamethree.tools.AudioManager;
 import uy.com.agm.gamethree.widget.AnimatedImage;
@@ -44,6 +46,7 @@ public class Hud extends AbstractScreen {
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
     private static final int LEVEL_TIMER_NOTIFICATION = 10;
+    private static final int PENALTY_COST = 200;
 
     private PlayScreen screen;
 
@@ -501,6 +504,19 @@ public class Hud extends AbstractScreen {
 
     public int getScore() {
         return score;
+    }
+
+    public int getFinalScore(int currentPenalties) {
+        // At most we take away half of your level score. We are good people :)
+        return Math.max(score - currentPenalties * PENALTY_COST, score / 2);
+    }
+
+    public int getPartialGameScore() {
+        int gameScore = 0;
+        for(LevelState levelState : GameSettings.getInstance().getLevels()) {
+            gameScore += levelState.getFinalScore();
+        }
+        return gameScore;
     }
 
     public void decreaseHealth() {
