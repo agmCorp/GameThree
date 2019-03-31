@@ -44,6 +44,7 @@ public class MainMenuScreen extends AbstractScreen {
 
         // Google play game services
         playServices = ScreenManager.getInstance().getGame().getPlayServices();
+        playServices.submitScore(prefs.getHighScore());
 
         // Play menu music
         AudioManager.getInstance().playMusic(Assets.getInstance().getMusic().getSongMainMenu(), true);
@@ -216,7 +217,6 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     private void showLeaderboardsImp() {
-        playServices.submitScore(prefs.getHighScore());
         playServices.showLeaderboards();
     }
 
