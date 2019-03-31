@@ -125,6 +125,7 @@ public class LevelCompletedScreen extends AbstractScreen {
         animatedImage.setAlign(Align.center);
 
         // Define our labels based on labelStyle
+        Label currentScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.currentScore", currentScore), labelStyleNormal);
         Label penaltiesLabel = new Label(i18NGameThreeBundle.format("levelCompleted.penalties", currentPenalties), labelStyleNormal);
         Label levelScoreLabel = new Label(i18NGameThreeBundle.format("levelCompleted.levelScore", currentFinalScore), labelStyleNormal);
         TypingLabelWorkaround gameScoreLabel = new TypingLabelWorkaround(i18NGameThreeBundle.format("levelCompleted.gameScore", gameScore), labelStyleNormal);
@@ -135,13 +136,15 @@ public class LevelCompletedScreen extends AbstractScreen {
         // Add values
         table.add(animatedImage).size(AssetStageCleared.WIDTH_PIXELS, AssetStageCleared.HEIGHT_PIXELS).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(penaltiesLabel).padTop(AbstractScreen.PAD);
+        table.add(currentScoreLabel).padTop(AbstractScreen.PAD);
+        table.row();
+        table.add(penaltiesLabel);
         table.row();
         table.add(levelScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
         table.add(gameScoreLabel).padTop(AbstractScreen.PAD);
         table.row();
-        table.add(getStarsTable(assetScene2d.getStar(), assetScene2d.getEmptyStar(), finalStars)).padTop(AbstractScreen.PAD);
+        table.add(getStarsTable(assetScene2d.getStar(), assetScene2d.getEmptyStar(), finalStars));
         table.row();
         float padTop = AbstractScreen.PAD * 2;
         if (showNewHighScoreLabel) {

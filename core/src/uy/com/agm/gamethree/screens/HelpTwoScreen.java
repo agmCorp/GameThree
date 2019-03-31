@@ -33,7 +33,7 @@ public class HelpTwoScreen extends AbstractScreen {
     private static final float MSG_WIDTH = 350.0f;
     private static final int COLUMNS = 2;
     private static final float FAKE_HUD_TABLE_CELL_HEIGHT = 30.0f;
-    private static final float FAKE_HUD_TABLE_CELL_WIDTH = 96.0f;
+    private static final float FAKE_HUD_TABLE_CELL_WIDTH = 80.0f;
     private static final float CELL_HEIGHT = 60.0f;
     private static final float CELL_WIDTH = 40.0f;
     private static final int ENDURANCE_INDEX = 10; // see i18NGameThreeBundle.helpTwo.fakeEndurance
@@ -82,7 +82,7 @@ public class HelpTwoScreen extends AbstractScreen {
         table.setDebug(DebugConstants.DEBUG_LINES);
 
         // Top-Align table
-        table.top().padTop(AbstractScreen.PAD * 2);
+        table.top().padTop(AbstractScreen.PAD);
 
         // Make the table fill the entire stage
         table.setFillParent(true);
@@ -117,10 +117,15 @@ public class HelpTwoScreen extends AbstractScreen {
         shurikenDsc.setAlignment(Align.left);
         shurikenDsc.setWrap(true);
 
+        AnimatedImage skull = new AnimatedImage(assetScene2d.getPenalties().getPenaltiesAnimation());
+        TypingLabelWorkaround skullDsc = new TypingLabelWorkaround(i18NGameThreeBundle.format("helpTwo.skullDsc"), labelStyleSmall);
+        skullDsc.setAlignment(Align.left);
+        skullDsc.setWrap(true);
+
         // Add values
         table.add(statusBarLabel).colspan(COLUMNS);
         table.row();
-        table.add(getFakeHudTable()).padTop(AbstractScreen.PAD).colspan(COLUMNS);
+        table.add(getFakeHudTable()).colspan(COLUMNS);
         table.row().padTop(AbstractScreen.PAD);
         table.add(coin).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(coinDsc).width(MSG_WIDTH).fill();
@@ -136,6 +141,9 @@ public class HelpTwoScreen extends AbstractScreen {
         table.row().padTop(AbstractScreen.PAD / 2);
         table.add(shuriken).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
         table.add(shurikenDsc).width(MSG_WIDTH).fill();
+        table.row().padTop(AbstractScreen.PAD / 2);
+        table.add(skull).padLeft(AbstractScreen.PAD).height(CELL_HEIGHT).width(CELL_WIDTH);
+        table.add(skullDsc).width(MSG_WIDTH).fill();
 
         // Adds table to stage
         addActor(table);
@@ -167,12 +175,15 @@ public class HelpTwoScreen extends AbstractScreen {
 
         AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
 
+        AnimatedImage skull = new AnimatedImage(assetScene2d.getPenalties().getPenaltiesAnimation());
+
         // Add values
         table.add(coin);
         table.add(hourglass);
         table.add(heroHead);
         table.add(heart);
         table.add(shuriken);
+        table.add(skull);
 
         // Add a second row
         table.row();
@@ -188,6 +199,8 @@ public class HelpTwoScreen extends AbstractScreen {
         enduranceValueLabel.setAlignment(Align.center);
         Label silverBulletValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakeSilverBullet"), labelStyleSmall);
         silverBulletValueLabel.setAlignment(Align.center);
+        Label penaltiesValueLabel = new Label(i18NGameThreeBundle.format("helpTwo.fakePenalties"), labelStyleSmall);
+        penaltiesValueLabel.setAlignment(Align.center);
 
         // Add values
         table.add(scoreValueLabel);
@@ -195,6 +208,7 @@ public class HelpTwoScreen extends AbstractScreen {
         table.add(livesValueLabel);
         table.add(enduranceValueLabel);
         table.add(silverBulletValueLabel);
+        table.add(penaltiesValueLabel);
 
         return table;
     }

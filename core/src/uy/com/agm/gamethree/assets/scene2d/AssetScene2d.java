@@ -110,6 +110,7 @@ public class AssetScene2d {
     private AssetGoldenHeroHead goldenHeroHead;
     private AssetEndurance endurance;
     private AssetHourglass hourglass;
+    private AssetPenalties penalties;
     private AssetVictory victory;
     private AssetStageCleared stageCleared;
     private AssetStageFailed stageFailed;
@@ -219,6 +220,7 @@ public class AssetScene2d {
         goldenHeroHead = new AssetGoldenHeroHead(atlasUI);
         endurance = new AssetEndurance(atlasUI);
         hourglass = new AssetHourglass(atlasUI);
+        penalties = new AssetPenalties(atlasUI);
         victory = new AssetVictory(atlasUI);
         stageCleared = new AssetStageCleared(atlasUI);
         stageFailed = new AssetStageFailed(atlasUI);
@@ -646,6 +648,10 @@ public class AssetScene2d {
 
     public AssetHourglass getHourglass() {
         return hourglass;
+    }
+
+    public AssetPenalties getPenalties() {
+        return penalties;
     }
 
     public AssetVictory getVictory() {

@@ -33,16 +33,18 @@ public class Hud extends AbstractScreen {
     private static final float POWERS_TABLE_PAD_BOTTOM = 5.0f;
     private static final float STATE_INFO_TABLE_CELL_HEIGHT = 30.0f;
     private static final float HEALTH_BAR_PAD_TOP = 30.0f;
-    private static final float SCORE_WIDTH = 96.0f;
-    private static final float TIME_WIDTH = 96.0f;
-    private static final float LIVES_WIDTH = 96.0f;
-    private static final float HEART_WIDTH = 96.0f;
-    private static final float SILVER_BULLETS_WIDTH = 96.0f;
+    private static final float SCORE_WIDTH = 80.0f;
+    private static final float TIME_WIDTH = 80.0f;
+    private static final float LIVES_WIDTH = 80.0f;
+    private static final float HEART_WIDTH = 80.0f;
+    private static final float SILVER_BULLETS_WIDTH = 80.0f;
+    private static final float PENALTIES_WIDTH = 80f;
     private static final String FORMAT_SCORE = "%06d";
     private static final String FORMAT_TIME = "%03d";
     private static final String FORMAT_LIVES = "%02d";
     private static final String FORMAT_ENDURANCE = "%02d";
     private static final String FORMAT_SILVER_BULLETS = "%02d";
+    private static final String FORMAT_PENALTIES = "%02d";
     private static final String FORMAT_FPS = "%02d";
     private static final int POWER_TIMER_NOTIFICATION = 3;
     private static final int LEVEL_TIMER_NOTIFICATION = 10;
@@ -85,6 +87,8 @@ public class Hud extends AbstractScreen {
     private Label enduranceValueLabel;
     private int silverBullets;
     private Label silverBulletValueLabel;
+    private int penalties;
+    private Label penaltiesValueLabel;
 
     private Table upperTable;
 
@@ -111,6 +115,7 @@ public class Hud extends AbstractScreen {
         this.initialEndurance = endurance;
         this.endurance = endurance;
         this.silverBullets = 0;
+        this.penalties = 0;
         this.abilityPowerTime = 0;
         this.abilityPowerTimeCount = 0;
         this.abilityBar = new HealthBar();
@@ -189,12 +194,15 @@ public class Hud extends AbstractScreen {
 
         AnimatedImage shuriken = new AnimatedImage(assetGame.getSilverBullet().getSilverBulletAnimation());
 
+        AnimatedImage skull = new AnimatedImage(assetScene2d.getPenalties().getPenaltiesAnimation());
+
         // Add images to the table
         statusBarTable.add(coin).width(SCORE_WIDTH);
         statusBarTable.add(hourglass).width(TIME_WIDTH);
         statusBarTable.add(heroHead).width(LIVES_WIDTH);
         statusBarTable.add(heart).width(HEART_WIDTH);
         statusBarTable.add(shuriken).width(SILVER_BULLETS_WIDTH);
+        statusBarTable.add(skull).width(PENALTIES_WIDTH);
 
         // Add a second row
         statusBarTable.row();
@@ -210,6 +218,8 @@ public class Hud extends AbstractScreen {
         enduranceValueLabel.setAlignment(Align.center);
         silverBulletValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets), labelStyleSmall);
         silverBulletValueLabel.setAlignment(Align.center);
+        penaltiesValueLabel = new Label(String.format(Locale.getDefault(), FORMAT_PENALTIES, penalties), labelStyleSmall);
+        penaltiesValueLabel.setAlignment(Align.center);
 
         // Add values
         statusBarTable.add(scoreValueLabel);
@@ -217,6 +227,7 @@ public class Hud extends AbstractScreen {
         statusBarTable.add(livesValueLabel);
         statusBarTable.add(enduranceValueLabel);
         statusBarTable.add(silverBulletValueLabel);
+        statusBarTable.add(penaltiesValueLabel);
     }
 
     private void setHeartImage(int index) {
@@ -514,7 +525,9 @@ public class Hud extends AbstractScreen {
     public int getPartialGameScore() {
         int gameScore = 0;
         for(LevelState levelState : GameSettings.getInstance().getLevels()) {
-            gameScore += levelState.getFinalScore();
+            if (levelState.getLevel() < level) {
+                gameScore += levelState.getFinalScore();
+            }
         }
         return gameScore;
     }
@@ -591,6 +604,11 @@ public class Hud extends AbstractScreen {
     public void decreaseSilverBullets(int quantity) {
         silverBullets -= quantity;
         silverBulletValueLabel.setText(String.format(Locale.getDefault(), FORMAT_SILVER_BULLETS, silverBullets));
+    }
+
+    public void addPenalty(int value) {
+        penalties += value;
+        penaltiesValueLabel.setText(String.format(Locale.getDefault(), FORMAT_PENALTIES, penalties));
     }
 
     @Override

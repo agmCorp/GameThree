@@ -735,7 +735,7 @@ public class Hero extends Sprite {
 
             // Decrease endurance and increase penalties count
             decreaseEndurance();
-            penalties++;
+            addPenalty();
         }
     }
 
@@ -764,7 +764,7 @@ public class Hero extends Sprite {
         currentHeroState = HeroState.DYING_UP;
 
         // Increase penalties count
-        penalties++;
+        addPenalty();
     }
 
     public void draw(SpriteBatch batch) {
@@ -877,6 +877,7 @@ public class Hero extends Sprite {
 
     public void addPenalty() {
         penalties++;
+        screen.getHud().addPenalty(1);
     }
 
     public int getPenalties() {
