@@ -1,5 +1,6 @@
 # Wipe them out!
 Libgdx and Box2D Android Game
+<br/><a href="https://play.google.com/store/apps/details?id=uy.com.agm.gamethree">Get it on Google Play Store!</a>
 
 <img src="https://user-images.githubusercontent.com/9197974/43371454-eb8144b8-9368-11e8-9c33-a5ee62f54feb.png"/>
 
